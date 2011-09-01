@@ -2099,94 +2099,94 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="ComponentBase"
+				Name="(Module)"
 				>
 				<File
-					RelativePath=".\ComponentBase\Bibim\CloningContext.cpp"
+					RelativePath=".\Module\Bibim\CloningContext.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\CloningContext.h"
+					RelativePath=".\Module\Bibim\CloningContext.h"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\CloningContext.inl"
+					RelativePath=".\Module\Bibim\CloningContext.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\GameComponent.cpp"
+					RelativePath=".\Module\Bibim\GameComponent.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\GameComponent.h"
+					RelativePath=".\Module\Bibim\GameComponent.h"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\GameComponent.inl"
+					RelativePath=".\Module\Bibim\GameComponent.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\GameComponentFactory.cpp"
+					RelativePath=".\Module\Bibim\GameComponentFactory.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\GameComponentFactory.h"
+					RelativePath=".\Module\Bibim\GameComponentFactory.h"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\GameComponentFactory.inl"
+					RelativePath=".\Module\Bibim\GameComponentFactory.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\GameModule.cpp"
+					RelativePath=".\Module\Bibim\GameModule.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\GameModule.h"
+					RelativePath=".\Module\Bibim\GameModule.h"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\GameModule.inl"
+					RelativePath=".\Module\Bibim\GameModule.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\GameNode.cpp"
+					RelativePath=".\Module\Bibim\GameNode.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\GameNode.h"
+					RelativePath=".\Module\Bibim\GameNode.h"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\GameNode.inl"
+					RelativePath=".\Module\Bibim\GameNode.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\GameStructure.cpp"
+					RelativePath=".\Module\Bibim\GameStructure.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\GameStructure.h"
+					RelativePath=".\Module\Bibim\GameStructure.h"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\GameStructure.inl"
+					RelativePath=".\Module\Bibim\GameStructure.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\IClassQueryable.cpp"
+					RelativePath=".\Module\Bibim\IClassQueryable.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\IClassQueryable.h"
+					RelativePath=".\Module\Bibim\IClassQueryable.h"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\ICloneable.cpp"
+					RelativePath=".\Module\Bibim\ICloneable.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\ComponentBase\Bibim\ICloneable.h"
+					RelativePath=".\Module\Bibim\ICloneable.h"
 					>
 				</File>
 			</Filter>
