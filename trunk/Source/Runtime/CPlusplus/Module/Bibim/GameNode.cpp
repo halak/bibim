@@ -72,6 +72,7 @@ namespace Bibim
         }
 
         item->parent = this;
+        item->structure = structure;
         children.push_back(item);
 
         // GameStructure::OnGameNodeAttached의 명세대로 GameStructure가 바뀌었을 때만 호출합니다.
@@ -105,12 +106,18 @@ namespace Bibim
         NodeCollection temporaryChildren;
         temporaryChildren.swap(children);
 
-        for (NodeCollection::reverse_iterator it = temporaryChildren.rbegin(); it != temporaryChildren.rend(); it++)
+        if (structure)
         {
-            if (structure)
+            for (NodeCollection::reverse_iterator it = temporaryChildren.rbegin(); it != temporaryChildren.rend(); it++)
+            {
                 structure->OnGameNodeDetached(this, *it);
-
-            delete (*it);
+                delete (*it);
+            }
+        }
+        else
+        {
+            for (NodeCollection::reverse_iterator it = temporaryChildren.rbegin(); it != temporaryChildren.rend(); it++)
+                delete (*it);
         }
     }
 

@@ -92,7 +92,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FOURCC.cs" />
     <Compile Include="GameModule.cs" />
+    <Compile Include="GameModuleAttribute.cs" />
+    <Compile Include="GameModuleFactory.cs" />
     <Compile Include="GameModuleStatus.cs" />
     <Compile Include="GameNode.cs" />
     <Compile Include="GameStructure.cs" />
