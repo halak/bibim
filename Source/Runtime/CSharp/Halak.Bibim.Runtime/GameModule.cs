@@ -27,7 +27,7 @@ namespace Halak.Bibim
                 {
                     if (id != UnspecifiedID && Node != null && Node.Structure != null)
                     {
-                        if (Node.Structure.Find(value))
+                        if (Node.Structure.Find(value) != null)
                             throw new Exception("");
                     }
 
@@ -88,6 +88,11 @@ namespace Halak.Bibim
                 else
                     return GameModuleStatus.Dead;
             }
+        }
+
+        public abstract uint ClassID
+        {
+            get;
         }
 
         internal GameNode Node
