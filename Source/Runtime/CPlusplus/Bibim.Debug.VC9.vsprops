@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ks_c_5601-1987"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="Bibim.Debug.VC9"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories=""
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalDependencies="Bibim.Runtime.Debug.VC9.lib winmm.lib d3d9.lib d3dx9d.lib freetype244_D.lib"
+	/>
+</VisualStudioPropertySheet>
