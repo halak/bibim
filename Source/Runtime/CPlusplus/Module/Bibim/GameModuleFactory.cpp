@@ -1,7 +1,7 @@
 #include <Bibim/PCH.h>
-#include <Bibim/GameComponentFactory.h>
+#include <Bibim/GameModuleFactory.h>
 #include <Bibim/Assert.h>
-#include <Bibim/GameComponent.h>
+#include <Bibim/GameModule.h>
 #include <algorithm>
 #include <vector>
 
@@ -10,9 +10,9 @@ namespace Bibim
     struct Entry
     {
         uint32 ID;
-        GameComponentFactory::CreateFunction Function;
+        GameModuleFactory::CreateFunction Function;
 
-        Entry(uint32 id, GameComponentFactory::CreateFunction function)
+        Entry(uint32 id, GameModuleFactory::CreateFunction function)
             : ID(id),
               Function(function)
         {
@@ -21,12 +21,12 @@ namespace Bibim
 
     static std::vector<Entry> Entries;
 
-    void GameComponentFactory::AddEntry(uint32 id, CreateFunction function)
+    void GameModuleFactory::AddEntry(uint32 id, CreateFunction function)
     {
         Entries.push_back(Entry(id, function));
     }
 
-    void GameComponentFactory::SortEntries()
+    void GameModuleFactory::SortEntries()
     {
         struct Compare
         {
@@ -39,7 +39,7 @@ namespace Bibim
         std::sort(Entries.begin(), Entries.end(), Compare());
     }
 
-    GameComponent* GameComponentFactory::Create(uint32 id)
+    GameModule* GameModuleFactory::Create(uint32 id)
     {
         BBAssertDebug(Entries.empty() == false);
 

@@ -1,19 +1,19 @@
 #pragma once
-#ifndef __BIBIM_GAMECOMPONENTFACTORY_H__
-#define __BIBIM_GAMECOMPONENTFACTORY_H__
+#ifndef __BIBIM_GAMEMODULEFACTORY_H__
+#define __BIBIM_GAMEMODULEFACTORY_H__
 
 #    include <Bibim/FWD.h>
 
     namespace Bibim
     {
-        class GameComponentFactory
+        class GameModuleFactory
         {
-            BBThisIsStaticClass(GameComponentFactory);
+            BBThisIsStaticClass(GameModuleFactory);
             public:
-                typedef GameComponent* (*CreateFunction)();
+                typedef GameModule* (*CreateFunction)();
 
             public:
-                static GameComponent* Create(uint32 id);
+                static GameModule* Create(uint32 id);
 
                 template <typename T> static void AddEntry();
                 static void AddEntry(uint32 id, CreateFunction function);
@@ -21,6 +21,6 @@
         };
     }
 
-#    include <Bibim/GameComponentFactory.inl>
+#    include <Bibim/GameModuleFactory.inl>
 
 #endif

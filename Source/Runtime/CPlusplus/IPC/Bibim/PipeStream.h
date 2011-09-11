@@ -2,14 +2,11 @@
 #ifndef __BIBIM_PIPESTREAM_H__
 #define __BIBIM_PIPESTREAM_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/Stream.h>
+#   include <Bibim/Foundation.h>
 
-    namespace Bibim
-    {
-        class PipeStream : public Stream
-        {
-        };
-    }
+#   if (defined(BIBIM_PLATFORM_WINDOWS))
+#       include <Bibim/PipeStream.Windows.h>
+#   else
+#   endif
 
 #endif

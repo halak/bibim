@@ -1,6 +1,6 @@
 namespace Bibim
 {
-    GameNode* GameStructure::GetRoot() const
+    GameModuleNode* GameModuleTree::GetRoot() const
     {
         return root;
     }

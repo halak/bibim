@@ -14,9 +14,7 @@
                 virtual ~Stream();
 
                 virtual int Read(void* buffer, int size) = 0;
-                virtual bool ReadAsync();
                 virtual int Write(const void* buffer, int size) = 0;
-                virtual bool WriteAsync();
                 virtual void Flush() = 0;
 
                 virtual String ReadText();

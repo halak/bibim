@@ -3,36 +3,56 @@
 #define __BIBIM_GAMEMODULE_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/GameComponent.h>
-#   include <Bibim/ICloneable.h>
-#   include <Bibim/String.h>
 
     namespace Bibim
     {
-        class GameModule : public GameComponent, public ICloneable
+        /// Game이란 Program을 구성하는 요소의 기반 class.
+        class GameModule
         {
-            BBClassFOURCC('G', 'M', 'D', 'L');
+            BBClassFOURCC('G', 'M', 'O', 'D');
+            BBThisIsNoncopyableClass(GameModule);
             public:
-                GameModule();
-                explicit GameModule(uint32 id);
-                GameModule(const GameModule& original, CloningContext& context);
+                enum Status
+                {
+                    DeadStatus,
+                    AliveStatus,
+                    ActiveStatus
+                };
+
+            public:
+                static const uint UnspecifiedID;
+
+            public:
                 virtual ~GameModule();
 
-                virtual GameModule* CloneWith(CloningContext& context) const;
+                inline uint32 GetID() const;
+                       void SetID(uint32 value);
 
-                inline const String& GetName() const;
-                inline void SetName(const String& value);
-                inline const String& GetFilename() const;
-                inline void SetFilename(const String& value);
-                inline const String& GetDescription() const;
-                inline void SetDescription(const String& value);
+                inline Status GetStatus() const;
 
-                virtual ICloneable* QueryCloneableInterface();
+                inline bool GetAlive() const;
+                       void SetAlive(bool value);
+
+                inline bool GetActive() const;
+                       void SetActive(bool value);
+
+                virtual void* QueryClass(uint32 classID);
+
+            protected:
+                GameModule();
+                GameModule(uint32 id);
+
+                virtual void OnStatusChanged(Status old);
 
             private:
-                String name;
-                String filename;
-                String description;
+                GameModuleNode* node;
+                uint32 id;
+                bool alive;
+                bool active;
+
+            private:
+                friend class GameModuleNode;
+                friend class GameModuleTree;
         };
     }
 
