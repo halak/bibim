@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Pipes;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -11,13 +13,17 @@ namespace Halak.Bibim.Toolkit.Console
     {
         static void Main(string[] args)
         {
+            C.Title = "Halak Bibim Console > AssetServer";
             C.WriteLine("================================");
             C.WriteLine("Halak Bibim Asset Server");
             C.WriteLine("================================");
             C.WriteLine("Ready");
 
-            C.WriteLine("Started!");
+            NamedPipeServerStream pipe = new NamedPipeServerStream("Echo");
+            NamedPipeClientStream client = new NamedPipeClientStream();
+            pipe.WaitForConnection();
 
+            C.WriteLine("Started!");
             for (; ; )
             {
                 C.Write("> ");
@@ -36,9 +42,13 @@ namespace Halak.Bibim.Toolkit.Console
                         break;
                 }
 
+                C.WriteLine("IsConnected {0}", pipe.IsConnected);
+
                 if (command == "exit")
                     break;
             }
+
+            pipe.Close();
 
             C.WriteLine("Ended!");
         }

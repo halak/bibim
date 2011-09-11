@@ -1,32 +1,30 @@
 namespace Bibim
 {
-    const String& GameModule::GetName() const
+    uint32 GameModule::GetID() const
     {
-        return name;
+        return id;
     }
 
-    void GameModule::SetName(const String& value)
+    GameModule::Status GameModule::GetStatus() const
     {
-        name = value;
+        if (alive)
+        {
+            if (active)
+                return ActiveStatus;
+            else
+                return AliveStatus;
+        }
+        else
+            return DeadStatus;
     }
 
-    const String& GameModule::GetFilename() const
+    bool GameModule::GetAlive() const
     {
-        return filename;
-    }
-    
-    void GameModule::SetFilename(const String& value)
-    {
-        filename = value;
-    }
-    
-    const String& GameModule::GetDescription() const
-    {
-        return description;
+        return alive;
     }
 
-    void GameModule::SetDescription(const String& value)
+    bool GameModule::GetActive() const
     {
-        description = value;
+        return active;
     }
 }

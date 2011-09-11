@@ -18,7 +18,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="..\..\..\Product\Windows\Tools"
 			IntermediateDirectory="(Build)\Bibim.TestBed.$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets=".\Bibim.VC9.vsprops;.\Bibim.Debug.VC9.vsprops"
@@ -42,12 +42,12 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\TestBed&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
-				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
 			<Tool
@@ -63,7 +63,7 @@
 				Name="VCLinkerTool"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
-				SubSystem="2"
+				SubSystem="1"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -116,11 +116,11 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\TestBed&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
 			<Tool
@@ -168,11 +168,19 @@
 	</References>
 	<Files>
 		<File
-			RelativePath=".\TestBed\Hub.cpp"
+			RelativePath=".\TestBed\Bibim\Hub.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\TestBed\UI.cpp"
+			RelativePath=".\TestBed\Bibim\PipeStream.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\TestBed\Bibim\TestBed.h"
+			>
+		</File>
+		<File
+			RelativePath=".\TestBed\Bibim\UI.cpp"
 			>
 		</File>
 	</Files>

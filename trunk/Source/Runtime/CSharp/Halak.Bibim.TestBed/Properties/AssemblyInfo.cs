@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Halakui.TestBed")]
-[assembly: AssemblyProduct("Halakui")]
-[assembly: AssemblyDescription("Halak UI TestBed")]
+[assembly: AssemblyTitle("Halak.Bibim.TestBed")]
+[assembly: AssemblyProduct("Bibim")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("Halak")]
 [assembly: AssemblyCopyright("Copyright © Halak 2011")]
 [assembly: AssemblyTrademark("")]

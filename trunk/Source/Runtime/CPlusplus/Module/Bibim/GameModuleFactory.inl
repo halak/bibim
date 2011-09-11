@@ -1,10 +1,10 @@
 namespace Bibim
 {
-    template <typename T> void GameComponentFactory::AddEntry()
+    template <typename T> void GameModuleFactory::AddEntry()
     {
         struct Create
         {
-            static GameComponent* Do()
+            static GameModule* Do()
             {
                 return new T();
             }

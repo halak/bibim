@@ -25,18 +25,18 @@ namespace Halak.Bibim
             {
                 if (id != value)
                 {
-                    if (id != UnspecifiedID && Node != null && Node.Structure != null)
+                    if (id != UnspecifiedID && Node != null && Node.Tree != null)
                     {
-                        if (Node.Structure.Find(value) != null)
-                            throw new Exception("");
+                        if (Node.Tree.Find(value) != null)
+                            throw new ArgumentException(string.Empty, "value");
                     }
 
                     uint oldID = id;
 
                     id = value;
 
-                    if (Node != null && Node.Structure != null)
-                        Node.Structure.OnModuleIDChanged(this, oldID);
+                    if (Node != null && Node.Tree != null)
+                        Node.Tree.OnModuleIDChanged(this, oldID);
                 }
             }
         }
@@ -68,6 +68,8 @@ namespace Halak.Bibim
 
                     active = value;
 
+                    // DeadStatus에선 Active가 바뀌어도 Status가 바뀌지 않듯
+                    // Active는 Status에 무조건적으로 영향을 주지 않습니다.
                     if (alive)
                         OnStatusChanged(old);
                 }
@@ -95,7 +97,7 @@ namespace Halak.Bibim
             get;
         }
 
-        internal GameNode Node
+        internal GameModuleNode Node
         {
             get;
             set;

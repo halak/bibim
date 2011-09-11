@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bibim.Runtime.VC9", "Bibim.Runtime.VC9.vcproj", "{96CD7385-7B7D-4469-A86D-B19D660C595E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bibim.TestBed.VC9", "Bibim.TestBed.VC9.vcproj", "{05C9CFBF-20F3-4CB4-BE8D-B4A824D9EB46}"
+	ProjectSection(ProjectDependencies) = postProject
+		{96CD7385-7B7D-4469-A86D-B19D660C595E} = {96CD7385-7B7D-4469-A86D-B19D660C595E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
