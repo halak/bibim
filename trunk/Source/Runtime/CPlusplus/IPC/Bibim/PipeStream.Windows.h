@@ -30,7 +30,7 @@
                 inline const String& GetName() const;
                 inline AccessMode GetAccessMode() const;
 
-                inline bool IsOpen() const;
+                inline bool IsConnected() const;
 
                 virtual bool CanRead() const;
                 virtual bool CanWrite() const;
