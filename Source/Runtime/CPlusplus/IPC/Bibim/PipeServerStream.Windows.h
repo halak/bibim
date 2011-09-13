@@ -14,7 +14,11 @@
                 PipeServerStream(const String& name, AccessMode accessMode);
                 virtual ~PipeServerStream();
 
-            private:
+                bool WaitForConnection();
+
+                virtual void Disconnect();
+
+                virtual bool IsConnected() const;
 
             private:
         };

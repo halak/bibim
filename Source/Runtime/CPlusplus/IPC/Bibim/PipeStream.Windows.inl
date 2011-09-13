@@ -10,13 +10,13 @@ namespace Bibim
         return accessMode;
     }
 
-    bool PipeStream::IsOpen() const
-    {
-        return handle != INVALID_HANDLE_VALUE;
-    }
-
     HANDLE PipeStream::GetHandle() const
     {
         return handle;
+    }
+
+    void PipeStream::SetHandle(HANDLE value)
+    {
+        handle = value;
     }
 }

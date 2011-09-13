@@ -4,85 +4,80 @@
 
 namespace Bibim
 {
-    PipeClientStream::PipeClientStream()
-    {
-    }
-
     PipeClientStream::PipeClientStream(const String& name, AccessMode accessMode)
+        : PipeStream(name, accessMode)
     {
-        Open(name, accessMode);
     }
 
-    PipeClientStream::PipeClientStream(const String& machineName, const String& name, AccessMode accessMode)
+    PipeClientStream::PipeClientStream(const String& serverName, const String& name, AccessMode accessMode)
+        : PipeStream(name, accessMode),
+          serverName(serverName)
     {
-        Open(machineName, name, accessMode);
     }
 
     PipeClientStream::~PipeClientStream()
     {
-        if (IsOpen())
-            Close();
     }
 
-    bool PipeClientStream::Open(const String& name, AccessMode accessMode)
+    void PipeClientStream::Connect()
     {
-        if (IsOpen())
-            Close();
+        if (IsConnected())
+            Disconnect();
 
-        String fullName = "\\\\.\\pipe\\";
-        fullName.Append(name);
-        return OpenActually(fullName, name, accessMode);
+        HANDLE newHandle = ::CreateFile(GetFullName().CStr(),
+                                        GetPlatformAccessMode(),
+                                        0x00000000,
+                                        NULL,
+                                        OPEN_EXISTING,
+                                        0x00000000,
+                                        NULL);
+        if (newHandle != INVALID_HANDLE_VALUE)
+            SetHandle(newHandle);
     }
 
-    bool PipeClientStream::Open(const String& machineName, const String& name, AccessMode accessMode)
+    void PipeClientStream::Disconnect()
     {
-        if (IsOpen())
-            Close();
+        BBAssertDebug(IsConnected());
 
-        if (machineName.IsEmpty() == false)
-        {
-            String fullName = "\\\\";
-            fullName.Append(machineName);
-            fullName.Append("\\pipe\\");
-            fullName.Append(name);
-            return OpenActually(fullName, name, accessMode);
-        }
+        ::CloseHandle(GetHandle());
+        SetHandle(NULL);
+    }
+
+    bool PipeClientStream::IsConnected() const
+    {
+        return GetHandle() != NULL;
+    }
+
+    String PipeClientStream::GetFullName() const
+    {
+        String result;
+        if (serverName.IsEmpty())
+            result = "\\\\.\\pipe\\";
         else
-            return Open(name, accessMode);
+        {
+            result = "\\\\";
+            result.Append(serverName);
+            result.Append("\\pipe\\");
+        }
+
+        result.Append(GetName());
+
+        return result;
     }
 
-    void PipeClientStream::Close()
+    DWORD PipeClientStream::GetPlatformAccessMode() const
     {
-        BBAssertDebug(IsOpen());
-        PipeStream::Finalize();
-    }
-
-    bool PipeClientStream::OpenActually(const String& fullName, const String& name, AccessMode accessMode)
-    {
-        DWORD win32AccessMode = 0x00000000;
-        switch (accessMode)
+        switch (GetAccessMode())
         {
             case ReadOnly:
-                win32AccessMode = GENERIC_READ;
-                break;
+                return GENERIC_READ;
             case WriteOnly:
-                win32AccessMode = GENERIC_WRITE;
-                break;
+                return GENERIC_WRITE;
             case ReadAndWrite:
-                win32AccessMode = GENERIC_READ | GENERIC_WRITE;
-                break;
-        }
-
-        HANDLE handle = ::CreateFile(fullName.CStr(), win32AccessMode, 0x00000000, NULL, OPEN_EXISTING, 0x00000000, NULL);
-        if (handle != INVALID_HANDLE_VALUE)
-        {
-            PipeStream::Initialize(handle, name, accessMode);
-            return true;
-        }
-        else
-        {
-            PipeStream::Initialize(INVALID_HANDLE_VALUE, String::Empty, ReadOnly);
-            return false;
+                return GENERIC_READ | GENERIC_WRITE;
+            default:
+                BBBreak();
+                return 0x00000000;
         }
     }
 }

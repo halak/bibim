@@ -1,7 +1,7 @@
 namespace Bibim
 {
-    const String& PipeClientStream::GetMachineName() const
+    const String& PipeClientStream::GetServerName() const
     {
-        return machineName;
+        return serverName;
     }
 }

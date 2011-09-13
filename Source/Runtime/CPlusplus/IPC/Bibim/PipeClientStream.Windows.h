@@ -11,22 +11,23 @@
         {
             BBThisIsNoncopyableClass(PipeClientStream);
             public:
-                PipeClientStream();
                 PipeClientStream(const String& name, AccessMode accessMode);
-                PipeClientStream(const String& machineName, const String& name, AccessMode accessMode);
+                PipeClientStream(const String& serverName, const String& name, AccessMode accessMode);
                 virtual ~PipeClientStream();
 
-                bool Open(const String& name, AccessMode accessMode);
-                bool Open(const String& machineName, const String& name, AccessMode accessMode);
-                void Close();
+                void Connect();
+                virtual void Disconnect();
 
-                inline const String& GetMachineName() const;
+                inline const String& GetServerName() const;
 
-            private:
-                bool OpenActually(const String& fullName, const String& name, AccessMode accessMode);
+                virtual bool IsConnected() const;
 
             private:
-                String machineName;
+                String GetFullName() const;
+                DWORD GetPlatformAccessMode() const;
+
+            private:
+                String serverName;
         };
     }
 

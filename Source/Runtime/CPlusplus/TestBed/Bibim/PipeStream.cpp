@@ -5,13 +5,12 @@ using namespace Bibim;
 
 void Bibim::TestBed::PipeStream(CommandLines commands)
 {
-    PipeClientStreamPtr pipe = new PipeClientStream();
-
-    pipe->Open("Echo", PipeStream::ReadAndWrite);
-    if (pipe->IsOpen())
+    PipeClientStreamPtr pipe = new PipeClientStream("Echo", PipeStream::ReadAndWrite);
+    pipe->Connect();
+    if (pipe->IsConnected())
     {
         std::cout << "열렸다!" << std::endl;
-        pipe->Close();
+        pipe->Disconnect();
     }
     else
         std::cout << "열어라-" << std::endl;

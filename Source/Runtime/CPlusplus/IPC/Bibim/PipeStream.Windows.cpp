@@ -3,15 +3,20 @@
 
 namespace Bibim
 {
-    PipeStream::PipeStream()
-        : handle(INVALID_HANDLE_VALUE),
-          name(String::Empty),
-          accessMode(ReadOnly)
+    PipeStream::PipeStream(const String& name, AccessMode accessMode)
+        : handle(NULL),
+          name(name),
+          accessMode(accessMode)
     {
     }
 
     PipeStream::~PipeStream()
     {
+        if (handle != NULL)
+        {
+            ::CloseHandle(handle);
+            handle = NULL;
+        }
     }
 
     int PipeStream::Read(void* buffer, int size)
@@ -37,22 +42,5 @@ namespace Bibim
     bool PipeStream::CanWrite() const
     {
         return accessMode == WriteOnly || accessMode == ReadAndWrite;
-    }
-
-    void PipeStream::Initialize(HANDLE handle, const String& name, AccessMode accessMode)
-    {
-        this->handle = handle;
-        this->name = name;
-        this->accessMode = accessMode;
-    }
-
-    void PipeStream::Finalize()
-    {
-        if (handle != INVALID_HANDLE_VALUE && handle != NULL)
-            ::CloseHandle(handle);
-
-        handle = INVALID_HANDLE_VALUE;
-        name = String::Empty;
-        accessMode = ReadOnly;
     }
 }

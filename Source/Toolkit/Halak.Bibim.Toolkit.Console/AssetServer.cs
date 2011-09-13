@@ -19,6 +19,7 @@ namespace Halak.Bibim.Toolkit.Console
             C.WriteLine("================================");
             C.WriteLine("Ready");
 
+
             NamedPipeServerStream pipe = new NamedPipeServerStream("Echo");
             pipe.WaitForConnection();
 

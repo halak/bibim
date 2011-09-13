@@ -23,6 +23,8 @@
             public:
                 virtual ~PipeStream();
 
+                virtual void Disconnect() = 0;
+
                 virtual int Read(void* buffer, int size);
                 virtual int Write(const void* buffer, int size);
                 virtual void Flush();
@@ -30,18 +32,16 @@
                 inline const String& GetName() const;
                 inline AccessMode GetAccessMode() const;
 
-                inline bool IsConnected() const;
+                virtual bool IsConnected() const = 0;
 
                 virtual bool CanRead() const;
                 virtual bool CanWrite() const;
 
             protected:
-                PipeStream();
-
-                void Initialize(HANDLE handle, const String& name, AccessMode accessMode);
-                void Finalize();
+                PipeStream(const String& name, AccessMode accessMode);
 
                 inline HANDLE GetHandle() const;
+                inline void SetHandle(HANDLE value);
 
             private:
                 HANDLE handle;
