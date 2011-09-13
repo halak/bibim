@@ -37,6 +37,7 @@ namespace Halak.TestBed
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            base.TargetElapsedTime = TimeSpan.FromSeconds(0.05);
         }
 
         /// <summary>
@@ -70,8 +71,6 @@ namespace Halak.TestBed
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
-            // TODO: Add your update logic here
 
             base.Update(gameTime);
         }

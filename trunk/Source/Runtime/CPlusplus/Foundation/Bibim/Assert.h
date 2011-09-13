@@ -6,6 +6,8 @@
 
     namespace Bibim
     {
+#       define BBBreak() { __asm int 3 }
+
         /// Run-time에 식을 평가하여 식이 거짓일 경우 알려줍니다.
 #       define BBAssert(exp) if (!(exp)) { Bibim::Assert(#exp, __FILE__, __LINE__); }
 
