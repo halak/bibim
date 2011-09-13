@@ -90,7 +90,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="..\..\..\Product\Windows\Tools"
 			IntermediateDirectory="(Build)\Bibim.TestBed.$(ConfigurationName)"
 			ConfigurationType="1"
 			InheritedPropertySheets=".\Bibim.VC9.vsprops;.\Bibim.Release.VC9.vsprops"
@@ -136,7 +136,7 @@
 				Name="VCLinkerTool"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
-				SubSystem="2"
+				SubSystem="1"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
