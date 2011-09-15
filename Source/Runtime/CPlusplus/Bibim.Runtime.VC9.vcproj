@@ -762,19 +762,19 @@
 				Name="Framework"
 				>
 				<File
-					RelativePath=".\Framework\Bibim\GameFramework.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\Framework\Bibim\GameFramework.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\GameFramework.inl"
+					RelativePath=".\Framework\Bibim\GameFramework.Windows.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\GameFramework.Windows.cpp"
+					RelativePath=".\Framework\Bibim\GameFramework.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\GameFramework.Windows.inl"
 					>
 				</File>
 				<File
