@@ -1,30 +1,12 @@
 namespace Bibim
 {
-    Timeline::Item::Item()
-        : RawPointer(nullptr),
-          SharedPointer()
+    const Timeline::ItemCollection& Timeline::GetItems() const
     {
+        return items;
     }
 
-    Timeline::Item::Item(IUpdateable* item)
-        : RawPointer(item),
-          SharedPointer()
+    float Timeline::GetSpeed() const
     {
-    }
-
-    Timeline::Item::Item(IUpdateablePtr item)
-        : RawPointer(item.GetPointee()),
-          SharedPointer(item)
-    {
-    }
-
-    bool Timeline::Item::operator == (const Item& right) const
-    {
-        return RawPointer == right.RawPointer;
-    }
-
-    bool Timeline::Item::operator != (const Item& right) const
-    {
-        return !operator == (right);
+        return speed;
     }
 }

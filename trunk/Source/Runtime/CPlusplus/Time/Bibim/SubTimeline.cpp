@@ -8,14 +8,10 @@ namespace Bibim
     {
     }
 
-    SubTimeline::SubTimeline(uint32 id)
-        : Timeline(id),
-          parent(nullptr)
-    {
-    }
-
     SubTimeline::~SubTimeline()
     {
+        if (parent)
+            parent->Remove(this);
     }
 
     void SubTimeline::SetParent(Timeline* value)

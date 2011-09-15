@@ -794,6 +794,66 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Time"
+				>
+				<File
+					RelativePath=".\Time\Bibim\Clock.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\Clock.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\SubTimeline.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\SubTimeline.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\SubTimeline.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\Timeline.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\Timeline.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\Timeline.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\TimelineGameModule.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\TimelineGameModule.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\TimelineGameModule.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\UpdateableGameModule.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\UpdateableGameModule.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\UpdateableGameModule.inl"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath=".\Foundation\Bibim\All.h"

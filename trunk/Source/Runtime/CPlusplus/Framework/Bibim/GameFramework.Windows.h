@@ -3,22 +3,20 @@
 #define __BIBIM_GAMEFRAMEWORK_WINDOWS_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/IDrawable.h>
-#   include <Bibim/IUpdateable.h>
 #   include <deque>
 
 #   if (defined(BIBIM_PLATFORM_WINDOWS))
 
         namespace Bibim
         {
-            class GameFramework : public IUpdateable
+            class GameFramework
             {
                 public:
                     virtual ~GameFramework();
 
                     void Run();
 
-                    inline GameStructure*  GetStructure() const;
+                    inline GameModuleTree* GetModules() const;
                     inline GameWindow*     GetWindow() const;
                     inline GraphicsDevice* GetGraphicsDevice() const;
                     inline Timeline*       GetMainTimeline() const;
@@ -45,11 +43,6 @@
 
                     virtual void BeginDraw();
                     virtual void EndDraw();
-
-                    void ForceUpdateAllComponents(float dt, uint timestamp);
-
-                private:
-                    static void ForceUpdateComponent(GameNode* node, float dt, uint timestamp);
 
                 private:
                     GameStructure* structure;

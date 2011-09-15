@@ -3,59 +3,41 @@
 #define __BIBIM_TIMELINE_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/GameComponent.h>
-#   include <Bibim/IUpdateable.h>
+#   include <Bibim/UpdateableGameModule.h>
 #   include <vector>
 
     namespace Bibim
     {
-        class Timeline : public GameComponent, public IUpdateable
+        class Timeline : public UpdateableGameModule
         {
-            BBClassFOURCC('T', 'M', 'L', 'N');
+            BBGameModuleClass('T', 'M', 'L', 'N');
             public:
-                struct Item
-                {
-                    IUpdateable*   RawPointer;
-                    IUpdateablePtr SharedPointer;
-
-                    inline Item();
-                    inline Item(IUpdateable* item);
-                    inline Item(IUpdateablePtr item);
-
-                    inline bool operator == (const Item& right) const;
-                    inline bool operator != (const Item& right) const;
-                };
-
-            public:
-                typedef std::vector<Item> ItemCollection;
-                typedef std::vector<IUpdateable*> UpdateableCollection;
+                typedef std::vector<UpdateableGameModule*> ItemCollection;
 
             public:
                 Timeline();
-                explicit Timeline(uint32 id);
                 virtual ~Timeline();
 
                 virtual void Update(float dt, uint timestamp);
 
-                void Add(IUpdateable* item);
-                void Add(IUpdateablePtr item);
-                bool Remove(IUpdateable* item);
-                bool Remove(IUpdateablePtr item);
+                void Add(UpdateableGameModule* item);
+                bool Remove(UpdateableGameModule* item);
                 void RemoveAt(int index);
                 void Clear();
+                bool Contains(UpdateableGameModule* item) const;
 
-                const ItemCollection& GetItems() const;
+                inline const ItemCollection& GetItems() const;
 
-                float GetSpeed() const;
-                void  SetSpeed(float value);
-
-                virtual IUpdateable* QueryUpdateableInterface();
+                inline float GetSpeed() const;
+                void         SetSpeed(float value);
 
             private:
                 ItemCollection items;
-                UpdateableCollection temporaryItems;
+                ItemCollection temporaryItems;
                 float speed;
-                uint lastTimestamp;
+
+                friend class SubTimeline;
+                friend class TimelineGameModule;
         };
     }
 
