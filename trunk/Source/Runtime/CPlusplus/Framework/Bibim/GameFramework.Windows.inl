@@ -1,8 +1,8 @@
 namespace Bibim
 {
-    GameStructure* GameFramework::GetStructure() const
+    GameModuleTree* GameFramework::GetModules() const
     {
-        return structure;
+        return modules;
     }
 
     GameWindow* GameFramework::GetWindow() const

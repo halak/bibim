@@ -734,6 +734,18 @@
 				Name="Asset"
 				>
 				<File
+					RelativePath=".\Asset\Bibim\AssetReader.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Asset\Bibim\AssetReader.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Asset\Bibim\AssetReader.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Asset\Bibim\GameAsset.cpp"
 					>
 				</File>
@@ -757,6 +769,46 @@
 					RelativePath=".\Asset\Bibim\GameAssetStorage.inl"
 					>
 				</File>
+				<Filter
+					Name="Providers"
+					>
+					<File
+						RelativePath=".\Asset\Bibim\AssetProvider.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\AssetProvider.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\AssetProvider.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\FileAssetProvider.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\FileAssetProvider.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\FileAssetProvider.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\PipedAssetProvider.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\PipedAssetProvider.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\PipedAssetProvider.inl"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Framework"

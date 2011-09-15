@@ -92,6 +92,10 @@
                 class GameModuleTree;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Asset
+                class AssetProvider;
+                    class PipedAssetProvider;
+                    class FileAssetProvider;
+                class AssetReader;
                 BBForwardDeclareSmartPointerClass(GameAsset);
                 class GameAssetStorage;
             ////////////////////////////////////////////////////////////////////////////////////////////////////

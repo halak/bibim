@@ -63,7 +63,7 @@
 				Name="VCLinkerTool"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
-				SubSystem="1"
+				SubSystem="2"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -136,7 +136,7 @@
 				Name="VCLinkerTool"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
-				SubSystem="1"
+				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
@@ -173,6 +173,10 @@
 		</File>
 		<File
 			RelativePath=".\TestBed\Bibim\PipeStream.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\TestBed\Bibim\Sprite.cpp"
 			>
 		</File>
 		<File

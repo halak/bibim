@@ -45,7 +45,7 @@
                     virtual void EndDraw();
 
                 private:
-                    GameStructure* structure;
+                    GameModuleTree* modules;
                     GameWindow* window;
                     GraphicsDevice* graphicsDevice;
                     Timeline* mainTimeline;

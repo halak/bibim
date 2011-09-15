@@ -32,4 +32,6 @@
         };
     }
 
+#   include <Bibim/StreamReader.inl>
+
 #endif
