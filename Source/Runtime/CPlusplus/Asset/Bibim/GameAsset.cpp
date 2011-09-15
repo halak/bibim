@@ -1,19 +1,19 @@
 #include <Bibim/PCH.h>
-#include <Bibim/Asset.h>
+#include <Bibim/GameAsset.h>
 
 namespace Bibim
 {
-    Asset::Asset()
+    GameAsset::GameAsset()
         : uri(URI::Empty)
     {
     }
 
-    Asset::Asset(const URI& uri)
+    GameAsset::GameAsset(const URI& uri)
         : uri(uri)
     {
     }
 
-    Asset::~Asset()
+    GameAsset::~GameAsset()
     {
     }
 }

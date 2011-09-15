@@ -27,7 +27,7 @@
             inline Vector2  operator + () const;
             inline Vector2  operator - () const;
 
-            inline Vector2& operator = (const Vector2& original);
+            inline Vector2& operator = (const Vector2& right);
             inline Vector2& operator += (const Vector2& right);
             inline Vector2& operator -= (const Vector2& right);
             inline Vector2& operator *= (float right);

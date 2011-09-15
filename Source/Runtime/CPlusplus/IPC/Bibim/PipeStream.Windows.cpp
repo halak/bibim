@@ -21,10 +21,27 @@ namespace Bibim
 
     int PipeStream::Read(void* buffer, int size)
     {
-        return 0;
+        BBAssertDebug(size >= 0);
+
+        DWORD read = 0;
+        if (handle && size > 0 && ::ReadFile(handle, buffer, size, &read, NULL))
+            return static_cast<int>(read);
+        else
+            return 0;
     }
 
     int PipeStream::Write(const void* buffer, int size)
+    {
+        BBAssertDebug(size >= 0);
+
+        DWORD written = 0;
+        if (handle && size > 0 && ::WriteFile(handle, buffer, size, &written, NULL))
+            return static_cast<int>(written);
+        else
+            return 0;
+    }
+
+    int PipeStream::Seek(int /*offset*/, SeekOrigin /*origin*/)
     {
         return 0;
     }
@@ -42,5 +59,10 @@ namespace Bibim
     bool PipeStream::CanWrite() const
     {
         return accessMode == WriteOnly || accessMode == ReadAndWrite;
+    }
+
+    bool PipeStream::CanSeek() const
+    {
+        return false;
     }
 }

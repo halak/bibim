@@ -10,8 +10,6 @@
     {
         class GameWindow : public Window
         {
-            friend struct GameWindowFields;
-
             public:
                 GameWindow();
 
@@ -44,14 +42,19 @@
                 virtual void OnMouseWheel(int delta);
 
             private:
-                struct Fields;
-                Fields* mPointer;
-                Fields& m;
+                void CreateHandle();
+
+            private:
+                void* handle;
                 String title;
                 Point position;
                 Point size;
                 bool visible;
+
+                struct Internal;
         };
     }
+
+#   include <Bibim/GameWindow.Windows.inl>
 
 #endif

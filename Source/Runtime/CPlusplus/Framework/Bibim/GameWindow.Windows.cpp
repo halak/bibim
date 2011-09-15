@@ -8,27 +8,15 @@
 
     namespace Bibim
     {
-        struct GameWindow::Fields
+        static const char* ClassName = "Halak.Bibim.GameWindow";
+
+        struct GameWindow::Internal
         {
-            static const char* ClassName;
-
-            HWND Handle;
-
-            Fields()
-                : Handle(nullptr)
-            {
-            }
-            
-            void CreateHandle(GameWindow* owner);
-
             static LRESULT CALLBACK WindowProcedure(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam);
         };
 
-        const char* GameWindow::Fields::ClassName = "Halak.Bibim.GameWindow";
-
         GameWindow::GameWindow()
-            : mPointer(new Fields()),
-              m(*mPointer),
+            : handle(nullptr),
               visible(false)
         {
         }
@@ -36,16 +24,15 @@
         GameWindow::~GameWindow()
         {
             Close();
-            delete mPointer;
         }
 
         void GameWindow::MoveToScreenCenter()
         {
-            if (m.Handle == nullptr)
-                m.CreateHandle(this);
+            if (handle == nullptr)
+                CreateHandle();
 
             RECT windowRect = { 0, 0, 0, 0 };
-            if (GetWindowRect(m.Handle, &windowRect))
+            if (::GetWindowRect(static_cast<HWND>(handle), &windowRect))
             {
                 const SIZE screenSize = { GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN) };
                 const SIZE windowSize = { windowRect.right - windowRect.left, windowRect.bottom - windowRect.top };
@@ -57,10 +44,10 @@
 
         void GameWindow::Close()
         {
-            if (m.Handle == nullptr)
+            if (handle == nullptr)
                 return;
 
-            DestroyWindow(m.Handle);
+            DestroyWindow(static_cast<HWND>(handle));
         }
 
         const String& GameWindow::GetTitle() const
@@ -70,14 +57,14 @@
 
         void GameWindow::SetTitle(const String& value)
         {
-            if (m.Handle == nullptr)
-                m.CreateHandle(this);
+            if (handle == nullptr)
+                CreateHandle();
 
             if (title != value)
             {
                 title = value;
                 
-                ::SetWindowText(m.Handle, title.CStr());
+                ::SetWindowText(static_cast<HWND>(handle), title.CStr());
             }
         }
 
@@ -88,14 +75,14 @@
 
         void GameWindow::SetPosition(Point value)
         {
-            if (m.Handle == nullptr)
-                m.CreateHandle(this);
+            if (handle == nullptr)
+                CreateHandle();
 
-            if (GetPosition() != value)
+            if (position != value)
             {
                 position = value;
                 
-                ::SetWindowPos(m.Handle, NULL, position.X, position.Y, 0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_NOACTIVATE);
+                ::SetWindowPos(static_cast<HWND>(handle), NULL, position.X, position.Y, 0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_NOACTIVATE);
             }
         }
 
@@ -106,21 +93,21 @@
 
         void GameWindow::SetSize(Point value)
         {
-            if (m.Handle == nullptr)
-                m.CreateHandle(this);
+            if (handle == nullptr)
+                CreateHandle();
 
             if (GetSize() != value)
             {
                 size = value;
 
-                const DWORD exWindowStyle = static_cast<DWORD>(GetWindowLong(m.Handle, GWL_EXSTYLE));
-                const DWORD windowStyle = static_cast<DWORD>(GetWindowLong(m.Handle, GWL_STYLE));
-                const BOOL hasMenu = GetMenu(m.Handle) != NULL ? TRUE : FALSE;
+                const DWORD exWindowStyle = static_cast<DWORD>(GetWindowLong(static_cast<HWND>(handle), GWL_EXSTYLE));
+                const DWORD windowStyle = static_cast<DWORD>(GetWindowLong(static_cast<HWND>(handle), GWL_STYLE));
+                const BOOL hasMenu = GetMenu(static_cast<HWND>(handle)) != NULL ? TRUE : FALSE;
                 RECT windowRect = { 0, 0, size.X, size.Y };
                 ::AdjustWindowRectEx(&windowRect, windowStyle, hasMenu, exWindowStyle);
 
                 const SIZE windowSize = { windowRect.right - windowRect.left, windowRect.bottom - windowRect.top };
-                ::SetWindowPos(m.Handle, NULL, 0, 0, windowSize.cx, windowSize.cy, SWP_NOZORDER | SWP_NOMOVE | SWP_NOACTIVATE);
+                ::SetWindowPos(static_cast<HWND>(handle), NULL, 0, 0, windowSize.cx, windowSize.cy, SWP_NOZORDER | SWP_NOMOVE | SWP_NOACTIVATE);
             }
         }
 
@@ -131,8 +118,8 @@
 
         void GameWindow::SetVisible(bool value)
         {
-            if (m.Handle == nullptr)
-                m.CreateHandle(this);
+            if (handle == nullptr)
+                CreateHandle();
 
             if (visible != value)
             {
@@ -142,18 +129,18 @@
                 if (visible)
                     showCommand = SW_SHOW;
 
-                ::ShowWindow(m.Handle, showCommand);
+                ::ShowWindow(static_cast<HWND>(handle), showCommand);
             }
         }
 
         bool GameWindow::GetActive() const
         {
-            return ::GetForegroundWindow() == m.Handle;
+            return ::GetForegroundWindow() == static_cast<HWND>(handle);
         }
 
         void* GameWindow::GetHandle() const
         {
-            return m.Handle;
+            return handle;
         }
 
         void GameWindow::OnCreated()
@@ -169,14 +156,14 @@
             MouseWheel().Emit(delta);
         }
 
-        void GameWindow::Fields::CreateHandle(GameWindow* owner)
+        void GameWindow::CreateHandle()
         {
             WNDCLASSEX windowClass;
             windowClass.cbSize = sizeof(windowClass);
             windowClass.style = CS_DBLCLKS;
-            windowClass.lpfnWndProc = &WindowProcedure;
+            windowClass.lpfnWndProc = &Internal::WindowProcedure;
             windowClass.cbClsExtra = 0;
-            windowClass.cbWndExtra = sizeof(owner);
+            windowClass.cbWndExtra = sizeof(this);
             windowClass.hInstance = GetModuleHandle(NULL);
             windowClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
             windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
@@ -186,16 +173,15 @@
             windowClass.hIconSm = windowClass.hIcon;
             RegisterClassEx(&windowClass);
 
-            Handle = ::CreateWindowEx(0x00000000, ClassName, ClassName, WS_OVERLAPPEDWINDOW,
-                                      CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
-                                      NULL, NULL, GetModuleHandle(NULL), owner);
+            handle = static_cast<void*>(::CreateWindowEx(0x00000000, ClassName, ClassName, WS_OVERLAPPEDWINDOW,
+                                                         CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+                                                         NULL, NULL, GetModuleHandle(NULL), this));
         }
 
-        LRESULT CALLBACK GameWindow::Fields::WindowProcedure(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam)
+        LRESULT CALLBACK GameWindow::Internal::WindowProcedure(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam)
         {
             static const char* instanceName = "inst";
-
-            GameWindow* gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
+            GameWindow* gameWindow = nullptr;
 
             switch (message)
             {
@@ -209,9 +195,11 @@
                     }
                     break;
                 case WM_MOUSEWHEEL:
+                    gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
                     gameWindow->OnMouseWheel(GET_WHEEL_DELTA_WPARAM(wParam) / WHEEL_DELTA);
                     break;
                 case WM_DESTROY:
+                    gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
                     gameWindow->OnDestroy();
                     RemoveProp(windowHandle, instanceName);
                     PostQuitMessage(0);

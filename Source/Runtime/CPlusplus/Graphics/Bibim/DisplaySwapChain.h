@@ -3,13 +3,16 @@
 #define __BIBIM_DISPLAYSWAPCHAIN_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/GameComponent.h>
+#   include <Bibim/GameModule.h>
+#   include <Bibim/Point.h>
+#   include <Bibim/Rectangle.h>
+#   include <d3d9.h>
 
     namespace Bibim
     {
-        class DisplaySwapChain : public GameComponent
+        class DisplaySwapChain : public GameModule
         {
-            BBClassFOURCC('S', 'W', 'C', 'H');
+            BBGameModuleClass('S', 'W', 'C', 'H');
             public:
                 DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window);
                 DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window, Point size);
@@ -19,13 +22,13 @@
                 void EndDraw();
                 void Present();
 
-                GraphicsDevice* GetGraphicsDevice() const;
-                Window* GetWindow() const;
+                inline GraphicsDevice* GetGraphicsDevice() const;
+                inline Window* GetWindow() const;
 
-                Point GetBackbufferSize() const;
+                inline Point GetBackbufferSize() const;
 
-                const Rectangle& GetViewport() const;
-                void SetViewport(const Rectangle& value);
+                inline const Rectangle& GetViewport() const;
+                inline void SetViewport(const Rectangle& value);
 
             protected:
                 DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window, void* swapChainInterface);
@@ -33,12 +36,18 @@
                 void Construct(Window* window, Point size);
 
             private:
-                struct Fields;
-                Fields* mPointer;
-                Fields& m;
+                GraphicsDevice* graphicsDevice;
+                Window* window;
+                Point backbufferSize;
+                Rectangle viewport;
+
+                IDirect3DSwapChain9* swapChain;
+                IDirect3DSurface9* backBuffer;
 
                 friend class GraphicsDevice;
         };
     }
+
+#   include <Bibim/DisplaySwapChain.inl>
 
 #endif

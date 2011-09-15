@@ -149,7 +149,7 @@
                         int index;
 
                     private:
-                        CharRef& operator = (const CharRef& original);
+                        CharRef& operator = (const CharRef& right);
                 };
 
                 class UTF8CharEnumerator
@@ -208,7 +208,7 @@
                     StringBuffer(InsertTag, const char* s1, int length1, int index, const char* s2, int length2);
                     inline virtual ~StringBuffer();
 
-                    inline StringBuffer& operator = (const StringBuffer& original);
+                    inline StringBuffer& operator = (const StringBuffer& right);
 
                     void Initialize(const char* s, int length);
 

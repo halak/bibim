@@ -7,54 +7,45 @@
 
 namespace Bibim
 {
-    struct DisplaySwapChain::Fields
-    {
-        GraphicsDevice* graphicsDevice;
-        Window* window;
-        Point backbufferSize;
-        Rectangle viewport;
-
-        IDirect3DSwapChain9* swapChain;
-        IDirect3DSurface9* backBuffer;
-
-        Fields(GraphicsDevice* graphicsDevice, Window* window)
-            : graphicsDevice(graphicsDevice),
-              window(window),
-              backbufferSize(Point::Zero),
-              viewport(Rectangle::Empty),
-              swapChain(nullptr),
-              backBuffer(nullptr)
-        {
-        }
-    };
-
     DisplaySwapChain::DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window)
-        : mPointer(new Fields(graphicsDevice, window)),
-          m(*mPointer)
+        : graphicsDevice(graphicsDevice),
+          window(window),
+          backbufferSize(Point::Zero),
+          viewport(Rectangle::Empty),
+          swapChain(nullptr),
+          backBuffer(nullptr)
     {
         BBAssertDebug(window);
         Construct(window, window->GetSize());
     }
 
     DisplaySwapChain::DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window, Point size)
-        : mPointer(new Fields(graphicsDevice, window)),
-          m(*mPointer)
+         : graphicsDevice(graphicsDevice),
+           window(window),
+           backbufferSize(Point::Zero),
+           viewport(Rectangle::Empty),
+           swapChain(nullptr),
+           backBuffer(nullptr)
     {
         BBAssertDebug(size.X > 0 && size.Y > 0);
         Construct(window, size);
     }
 
     DisplaySwapChain::DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window, void* swapChainInterface)
-        : mPointer(new Fields(graphicsDevice, window)),
-          m(*mPointer)
+         : graphicsDevice(graphicsDevice),
+           window(window),
+           backbufferSize(Point::Zero),
+           viewport(Rectangle::Empty),
+           swapChain(nullptr),
+           backBuffer(nullptr)
     {
         // GraphicsDevice에서 생성하므로 알아서 추가합니다.
 
-        m.swapChain = static_cast<IDirect3DSwapChain9*>(swapChainInterface);
+        swapChain = static_cast<IDirect3DSwapChain9*>(swapChainInterface);
 
         HRESULT result = D3D_OK;
         
-        result = m.swapChain->GetBackBuffer(0, D3DBACKBUFFER_TYPE_MONO, &m.backBuffer);
+        result = swapChain->GetBackBuffer(0, D3DBACKBUFFER_TYPE_MONO, &backBuffer);
         if (result != D3D_OK)
             return;
 
@@ -63,17 +54,16 @@ namespace Bibim
 
     DisplaySwapChain::~DisplaySwapChain()
     {
-        CheckedRelease(m.backBuffer);
-        CheckedRelease(m.swapChain);
-        m.graphicsDevice->Remove(this);
-        delete mPointer;
+        CheckedRelease(backBuffer);
+        CheckedRelease(swapChain);
+        graphicsDevice->Remove(this);
     }
 
     void DisplaySwapChain::Construct(Window* window, Point size)
     {
-        m.graphicsDevice->Add(this);
+        graphicsDevice->Add(this);
 
-        IDirect3DDevice9* d3dDevice = m.graphicsDevice->GetD3DDevice();
+        IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
         if (d3dDevice == nullptr)
             return;
 
@@ -95,58 +85,33 @@ namespace Bibim
 
         HRESULT result = D3D_OK;
 
-        result = d3dDevice->CreateAdditionalSwapChain(&d3dParameters, &m.swapChain);
+        result = d3dDevice->CreateAdditionalSwapChain(&d3dParameters, &swapChain);
         if (result != D3D_OK)
             return;
 
-        result = m.swapChain->GetBackBuffer(0, D3DBACKBUFFER_TYPE_MONO, &m.backBuffer);
+        result = swapChain->GetBackBuffer(0, D3DBACKBUFFER_TYPE_MONO, &backBuffer);
         if (result != D3D_OK)
             return;
 
-        m.backbufferSize = size;
+        backbufferSize = size;
         SetViewport(Rectangle(0, 0, size.X, size.Y));
     }
 
     void DisplaySwapChain::BeginDraw()
     {
-        m.graphicsDevice->SetViewport(m.viewport);
-        m.graphicsDevice->GetD3DDevice()->SetRenderTarget(0, m.backBuffer);
-        m.graphicsDevice->GetD3DDevice()->BeginScene();
+        graphicsDevice->SetViewport(viewport);
+        graphicsDevice->GetD3DDevice()->SetRenderTarget(0, backBuffer);
+        graphicsDevice->GetD3DDevice()->BeginScene();
     }
 
     void DisplaySwapChain::EndDraw()
     {
-        m.graphicsDevice->GetD3DDevice()->EndScene();
+        graphicsDevice->GetD3DDevice()->EndScene();
     }
 
     void DisplaySwapChain::Present()
     {
-        m.swapChain->Present(NULL, NULL, static_cast<HWND>(m.window->GetHandle()), NULL, 0x00000000);
-        m.backBuffer->Release();
-    }
-
-    GraphicsDevice* DisplaySwapChain::GetGraphicsDevice() const
-    {
-        return m.graphicsDevice;
-    }
-
-    Window* DisplaySwapChain::GetWindow() const
-    {
-        return m.window;
-    }
-
-    Point DisplaySwapChain::GetBackbufferSize() const
-    {
-        return m.backbufferSize;
-    }
-
-    const Rectangle& DisplaySwapChain::GetViewport() const
-    {
-        return m.viewport;
-    }
-
-    void DisplaySwapChain::SetViewport(const Rectangle& value)
-    {
-        m.viewport = value;
+        swapChain->Present(NULL, NULL, static_cast<HWND>(window->GetHandle()), NULL, 0x00000000);
+        backBuffer->Release();
     }
 }

@@ -38,7 +38,7 @@
 
             inline bool IsEmpty() const;
 
-            inline RectangleF& operator = (const RectangleF& original);
+            inline RectangleF& operator = (const RectangleF& right);
             
             inline bool operator == (const RectangleF& right) const;
             inline bool operator != (const RectangleF& right) const;

@@ -63,11 +63,6 @@ namespace Bibim
         return surfaceHeight;
     }
 
-    GraphicsDevice* Texture2D::GetGraphicsDevice()
-    {
-        return graphicsDevice;
-    }
-
     IDirect3DTexture9* Texture2D::GetD3DTexture()
     {
         if (GetTextureChanged())
@@ -77,16 +72,6 @@ namespace Bibim
         }
 
         return d3dTexture;
-    }
-
-    bool Texture2D::GetTextureChanged() const
-    {
-        return textureChanged;
-    }
-
-    void Texture2D::SetTextureChanged(bool value)
-    {
-        textureChanged = value;
     }
 
     void Texture2D::UpdateTexture()

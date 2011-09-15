@@ -23,7 +23,7 @@
             inline Vector4  operator + () const;
             inline Vector4  operator - () const;
 
-            inline Vector4& operator = (const Vector4& original);
+            inline Vector4& operator = (const Vector4& right);
             inline Vector4& operator += (const Vector4& right);
             inline Vector4& operator -= (const Vector4& right);
             inline Vector4& operator *= (float right);

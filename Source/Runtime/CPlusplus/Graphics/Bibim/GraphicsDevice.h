@@ -3,64 +3,66 @@
 #define __BIBIM_GRAPHICSDEVICE_H__
 
 #   include <Bibim/FWD.h>
+#   include <Bibim/GameModule.h>
 #   include <Bibim/Color.h>
 #   include <Bibim/Rectangle.h>
-#   include <Bibim/GameComponent.h>
 #   include <vector>
 #   include <d3d9.h>
 
-namespace Bibim
-{
-    class GraphicsDevice : public GameComponent
+    namespace Bibim
     {
-        BBClassFOURCC('G', 'R', 'P', 'D');
-        public:
-            GraphicsDevice();
-            virtual ~GraphicsDevice();
+        class GraphicsDevice : public GameModule
+        {
+            BBGameModuleClass('G', 'R', 'P', 'D');
+            public:
+                GraphicsDevice();
+                virtual ~GraphicsDevice();
 
-            void Clear();
-            void Clear(Color color);
+                void Clear();
+                void Clear(Color color);
 
-            void BeginDraw();
-            void EndDraw();
-            void Present();
+                void BeginDraw();
+                void EndDraw();
+                void Present();
 
-            Window* GetWindow() const;
-            void SetWindow(Window* value);
+                inline Window* GetWindow() const;
+                void SetWindow(Window* value);
 
-            bool GetFullscreen() const;
-            void SetFullscreen(bool value);
+                inline bool GetFullscreen() const;
+                void SetFullscreen(bool value);
 
-            const Rectangle& GetViewport() const;
-            void SetViewport(const Rectangle& value);
+                inline const Rectangle& GetViewport() const;
+                void SetViewport(const Rectangle& value);
 
-            DisplaySwapChain* GetDefaultSwapChain();
+                DisplaySwapChain* GetDefaultSwapChain();
 
-            IDirect3D9*       GetD3DObject();
-            IDirect3DDevice9* GetD3DDevice();
+                inline IDirect3D9*       GetD3DObject();
+                inline IDirect3DDevice9* GetD3DDevice();
 
-        private:
-            void InitializeDevice();
-            void FinalizeDevice();
+            private:
+                void InitializeDevice();
+                void FinalizeDevice();
 
-            void AcquireDefaultSwapChain();
+                void AcquireDefaultSwapChain();
 
-            void Add(DisplaySwapChain* item);
-            void Remove(DisplaySwapChain* item);
+                void Add(DisplaySwapChain* item);
+                void Remove(DisplaySwapChain* item);
 
-        private:
-            IDirect3D9*       d3dObject;
-            IDirect3DDevice9* d3dDevice;
-            Window* window;
+            private:
+                IDirect3D9*       d3dObject;
+                IDirect3DDevice9* d3dDevice;
+                Window* window;
 
-            DisplaySwapChain* defaultSwapChain;
-            std::vector<DisplaySwapChain*> swapChains;
+                DisplaySwapChain* defaultSwapChain;
+                std::vector<DisplaySwapChain*> swapChains;
 
-            Rectangle viewport;
-            bool fullscreen;
+                Rectangle viewport;
+                bool fullscreen;
 
-            friend class DisplaySwapChain;
-    };
-}
+                friend class DisplaySwapChain;
+        };
+    }
+
+#   include <Bibim/GraphicsDevice.inl>
 
 #endif

@@ -20,12 +20,12 @@ namespace Bibim
     {
     }
 
-    Quaternion& Quaternion::operator = (const Quaternion& original)
+    Quaternion& Quaternion::operator = (const Quaternion& right)
     {
-        X = original.X;
-        Y = original.Y;
-        Z = original.Z;
-        W = original.W;
+        X = right.X;
+        Y = right.Y;
+        Z = right.Z;
+        W = right.W;
         return *this;
     }
 

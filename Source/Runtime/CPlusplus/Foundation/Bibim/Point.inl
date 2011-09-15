@@ -15,10 +15,10 @@ namespace Bibim
     {
     }
 
-    Point& Point::operator = (const Point& original)
+    Point& Point::operator = (const Point& right)
     {
-        X = original.X;
-        Y = original.Y;
+        X = right.X;
+        Y = right.Y;
         return *this;
     }
 

@@ -28,7 +28,7 @@
             inline Vector3  operator + () const;
             inline Vector3  operator - () const;
 
-            inline Vector3& operator = (const Vector3& original);
+            inline Vector3& operator = (const Vector3& right);
             inline Vector3& operator += (const Vector3& right);
             inline Vector3& operator -= (const Vector3& right);
             inline Vector3& operator *= (float right);

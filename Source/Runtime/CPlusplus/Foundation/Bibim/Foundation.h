@@ -68,15 +68,6 @@
 #       define BBThisIsNoncopyableClass(classname)  private: \
                                                         classname(const classname&); \
                                                         classname& operator = (const classname&);
-#       define BBClassID(id)    public: \
-                                    static const uint32 ClassID = id; \
-                                    virtual uint32 GetClassID() const { return ClassID; } \
-                                private:
-#       define BBClassFOURCC(a, b, c, d) BBClassID(BBMakeFOURCC(a, b, c, d))
-#       define BBInterfaceID(id)    public: \
-                                        static const uint32 ClassID = id; \
-                                    private:
-#       define BBInterfaceFOURCC(a, b, c, d) BBInterfaceID(BBMakeFOURCC(a, b, c, d))
     }
 
 #endif

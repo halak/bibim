@@ -47,11 +47,11 @@ namespace Bibim
         return Vector3(-X, -Y, -Z);
     }
 
-    Vector3& Vector3::operator = (const Vector3& original)
+    Vector3& Vector3::operator = (const Vector3& right)
     {
-        X = original.X;
-        Y = original.Y;
-        Z = original.Z;
+        X = right.X;
+        Y = right.Y;
+        Z = right.Z;
         return *this;
     }
 

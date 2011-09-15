@@ -18,7 +18,7 @@
             inline Quaternion(float x, float y, float z, float w);
             inline Quaternion(const Quaternion& original);
 
-            inline Quaternion& operator = (const Quaternion& original);
+            inline Quaternion& operator = (const Quaternion& right);
             
             inline bool operator == (const Quaternion& right) const;
             inline bool operator != (const Quaternion& right) const;

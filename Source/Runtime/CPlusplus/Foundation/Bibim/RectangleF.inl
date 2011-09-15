@@ -100,12 +100,12 @@ namespace Bibim
         return Width == 0.0f || Height == 0.0f;
     }
 
-    RectangleF& RectangleF::operator = (const RectangleF& original)
+    RectangleF& RectangleF::operator = (const RectangleF& right)
     {
-        X      = original.X;
-        Y      = original.Y;
-        Width  = original.Width;
-        Height = original.Height;
+        X      = right.X;
+        Y      = right.Y;
+        Width  = right.Width;
+        Height = right.Height;
         return *this;
     }
 
