@@ -51,12 +51,12 @@ namespace Bibim
                        -M30, -M31, -M32, -M33);
     }
 
-    Matrix4& Matrix4::operator = (const Matrix4& original)
+    Matrix4& Matrix4::operator = (const Matrix4& right)
     {
-        M00 = original.M00; M01 = original.M01; M02 = original.M02; M03 = original.M03;
-        M10 = original.M10; M11 = original.M11; M12 = original.M12; M13 = original.M13;
-        M20 = original.M20; M21 = original.M21; M22 = original.M22; M23 = original.M23;
-        M30 = original.M30; M31 = original.M31; M32 = original.M32; M33 = original.M33;
+        M00 = right.M00; M01 = right.M01; M02 = right.M02; M03 = right.M03;
+        M10 = right.M10; M11 = right.M11; M12 = right.M12; M13 = right.M13;
+        M20 = right.M20; M21 = right.M21; M22 = right.M22; M23 = right.M23;
+        M30 = right.M30; M31 = right.M31; M32 = right.M32; M33 = right.M33;
         return *this;
     }
 

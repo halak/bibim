@@ -3,15 +3,15 @@
 #define __BIBIM_WINDOW_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/GameComponent.h>
+#   include <Bibim/GameModule.h>
 #   include <Bibim/Point.h>
 #   include <Bibim/Signal.h>
 
     namespace Bibim
     {
-        class Window : public GameComponent
+        class Window : public GameModule
         {
-            BBClassFOURCC('W', 'I', 'N', 'D');
+            BBGameModuleClass('W', 'I', 'N', 'D');
             public:
                 virtual ~Window();
 

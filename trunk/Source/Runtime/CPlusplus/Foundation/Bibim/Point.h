@@ -15,7 +15,7 @@
             inline Point(int x, int y);
             inline Point(const Point& original);
 
-            inline Point& operator = (const Point& original);
+            inline Point& operator = (const Point& right);
             inline Point& operator += (const Point& right);
             inline Point& operator -= (const Point& right);
 

@@ -1,6 +1,6 @@
 namespace Bibim
 {
-    const URI& Asset::GetURI() const
+    const URI& GameAsset::GetURI() const
     {
         return uri;
     }

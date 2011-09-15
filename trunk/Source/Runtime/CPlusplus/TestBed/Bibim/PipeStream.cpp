@@ -9,6 +9,11 @@ void Bibim::TestBed::PipeStream(CommandLines commands)
     pipe->Connect();
     if (pipe->IsConnected())
     {
+        const char* s = "Hello";
+        pipe->Write(s, strlen(s) + 1);
+
+        char r[100];
+        int c = pipe->Read(r, 100);
         std::cout << "¿­·È´Ù!" << std::endl;
         pipe->Disconnect();
     }

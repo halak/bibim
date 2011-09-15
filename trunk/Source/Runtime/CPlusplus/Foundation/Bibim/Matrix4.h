@@ -25,7 +25,7 @@
             Matrix4 operator + () const;
             Matrix4 operator - () const;
 
-            Matrix4& operator = (const Matrix4& original);
+            Matrix4& operator = (const Matrix4& right);
             Matrix4& operator += (const Matrix4& right);
             Matrix4& operator -= (const Matrix4& right);
             Matrix4& operator *= (const Matrix4& right);

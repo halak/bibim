@@ -28,7 +28,7 @@
             inline unsigned long ToRGBA() const;
             inline unsigned long ToARGB() const;
 
-            inline Color& operator = (const Color& original);
+            inline Color& operator = (const Color& right);
             inline Color& operator += (Color right);
             inline Color& operator -= (Color right);
             inline Color& operator *= (Color right);

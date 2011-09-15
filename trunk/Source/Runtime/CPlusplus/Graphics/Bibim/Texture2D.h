@@ -3,12 +3,12 @@
 #define __BIBIM_TEXTURE2D_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/Asset.h>
+#   include <Bibim/GameAsset.h>
 #   include <d3dx9.h>
 
     namespace Bibim
     {
-        class Texture2D : public Asset
+        class Texture2D : public GameAsset
         {
             public:
                 enum PixelFormat
@@ -26,12 +26,12 @@
                 int GetSurfaceWidth();
                 int GetSurfaceHeight();
 
-                GraphicsDevice* GetGraphicsDevice();
+                inline GraphicsDevice* GetGraphicsDevice();
                 IDirect3DTexture9* GetD3DTexture();
 
             protected:
-                bool GetTextureChanged() const;
-                void SetTextureChanged(bool value = true);
+                inline bool GetTextureChanged() const;
+                inline void SetTextureChanged(bool value = true);
 
                 struct D3DTextureInfo
                 {

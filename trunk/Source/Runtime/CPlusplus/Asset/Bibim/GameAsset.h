@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __BIBIM_ASSET_H__
-#define __BIBIM_ASSET_H__
+#ifndef __BIBIM_GAMEASSET_H__
+#define __BIBIM_GAMEASSET_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/SharedObject.h>
@@ -8,23 +8,23 @@
 
     namespace Bibim
     {
-        class Asset : public SharedObject
+        class GameAsset : public SharedObject
         {
-            BBThisIsNoncopyableClass(Asset);
+            BBThisIsNoncopyableClass(GameAsset);
             public:
-                virtual ~Asset();
+                virtual ~GameAsset();
 
                 inline const URI& GetURI() const;
 
             protected:
-                Asset();
-                Asset(const URI& uri);
+                GameAsset();
+                GameAsset(const URI& uri);
 
             private:
                 URI uri;
         };
     }
 
-#   include <Bibim/Asset.inl>
+#   include <Bibim/GameAsset.inl>
 
 #endif

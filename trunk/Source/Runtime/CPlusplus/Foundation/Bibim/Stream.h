@@ -10,24 +10,32 @@
     {
         class Stream : public SharedObject
         {
+            BBThisIsNoncopyableClass(Stream);
+            public:
+                enum SeekOrigin
+                {
+                    FromBegin,
+                    FromEnd,
+                    FromCurrent,
+                };
+
             public:
                 virtual ~Stream();
 
                 virtual int Read(void* buffer, int size) = 0;
                 virtual int Write(const void* buffer, int size) = 0;
                 virtual void Flush() = 0;
+                virtual int Seek(int offset, SeekOrigin origin) = 0;
 
-                virtual String ReadText();
+                virtual int GetPosition();
+                virtual int GetLength();
 
                 virtual bool CanRead() const = 0;
                 virtual bool CanWrite() const = 0;
+                virtual bool CanSeek() const = 0;
 
             protected:
                 Stream();
-
-            private:
-                Stream(const Stream&);
-                Stream& operator = (const Stream&);
         };
     }
 

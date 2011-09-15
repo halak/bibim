@@ -59,11 +59,6 @@ namespace Bibim
             defaultSwapChain->Present();
     }
 
-    Window* GraphicsDevice::GetWindow() const
-    {
-        return window;
-    }
-
     void GraphicsDevice::SetWindow(Window* value)
     {
         if (GetWindow() != value)
@@ -77,23 +72,14 @@ namespace Bibim
         }
     }
 
-    bool GraphicsDevice::GetFullscreen() const
-    {
-        return fullscreen;
-    }
-
     void GraphicsDevice::SetFullscreen(bool value)
     {
         if (GetFullscreen() != value)
         {
             fullscreen = value;
-            // Reinitialize Device
-        }
-    }
 
-    const Rectangle& GraphicsDevice::GetViewport() const
-    {
-        return viewport;
+            // TODO: Reinitialize Device
+        }
     }
 
     void GraphicsDevice::SetViewport(const Rectangle& value)
@@ -124,16 +110,6 @@ namespace Bibim
             AcquireDefaultSwapChain();
 
         return defaultSwapChain;
-    }
-
-    IDirect3D9* GraphicsDevice::GetD3DObject()
-    {
-        return d3dObject;
-    }
-
-    IDirect3DDevice9* GraphicsDevice::GetD3DDevice()
-    {
-        return d3dDevice;
     }
 
     void GraphicsDevice::InitializeDevice()

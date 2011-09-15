@@ -90,12 +90,12 @@ namespace Bibim
                (static_cast<unsigned long>(B) << 0);
     }
 
-    Color& Color::operator = (const Color& original)
+    Color& Color::operator = (const Color& right)
     {
-        R = original.R;
-        G = original.G;
-        B = original.B;
-        A = original.A;
+        R = right.R;
+        G = right.G;
+        B = right.B;
+        A = right.A;
         return *this;
     }
 

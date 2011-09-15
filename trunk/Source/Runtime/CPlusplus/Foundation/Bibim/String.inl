@@ -427,10 +427,10 @@ namespace Bibim
         delete [] s;
     }
 
-    String::StringBuffer& String::StringBuffer::operator = (const StringBuffer& original)
+    String::StringBuffer& String::StringBuffer::operator = (const StringBuffer& right)
     {
         delete [] s;
-        Initialize(original.s, original.length);
+        Initialize(right.s, right.length);
         return *this;
     }
 }

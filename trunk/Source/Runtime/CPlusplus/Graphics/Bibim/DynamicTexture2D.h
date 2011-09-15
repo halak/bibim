@@ -1,7 +1,7 @@
 #pragma once
 #ifndef __BIBIM_DYNAMICTEXTURE2D_H__
 #define __BIBIM_DYNAMICTEXTURE2D_H__
-
+asset system
 #   include <Bibim/FWD.h>
 #   include <Bibim/Texture2D.h>
 #   include <Bibim/Rectangle.h>

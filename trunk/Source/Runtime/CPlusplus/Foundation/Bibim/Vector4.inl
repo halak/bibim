@@ -35,12 +35,12 @@ namespace Bibim
         return Vector4(-X, -Y, -Z, -W);
     }
 
-    Vector4& Vector4::operator = (const Vector4& original)
+    Vector4& Vector4::operator = (const Vector4& right)
     {
-        X = original.X;
-        Y = original.Y;
-        Z = original.Z;
-        W = original.W;
+        X = right.X;
+        Y = right.Y;
+        Z = right.Z;
+        W = right.W;
         return *this;
     }
 

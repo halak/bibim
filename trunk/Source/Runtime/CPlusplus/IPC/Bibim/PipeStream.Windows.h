@@ -28,6 +28,7 @@
                 virtual int Read(void* buffer, int size);
                 virtual int Write(const void* buffer, int size);
                 virtual void Flush();
+                virtual int Seek(int offset, SeekOrigin origin);
 
                 inline const String& GetName() const;
                 inline AccessMode GetAccessMode() const;
@@ -36,6 +37,7 @@
 
                 virtual bool CanRead() const;
                 virtual bool CanWrite() const;
+                virtual bool CanSeek() const;
 
             protected:
                 PipeStream(const String& name, AccessMode accessMode);

@@ -35,10 +35,10 @@ namespace Bibim
         return Vector2(-X, -Y);
     }
 
-    Vector2& Vector2::operator = (const Vector2& original)
+    Vector2& Vector2::operator = (const Vector2& right)
     {
-        X = original.X;
-        Y = original.Y;
+        X = right.X;
+        Y = right.Y;
         return *this;
     }
 

@@ -22,7 +22,10 @@ namespace Halak.Bibim.Toolkit.Console
 
             NamedPipeServerStream pipe = new NamedPipeServerStream("Echo");
             pipe.WaitForConnection();
-
+            byte[] data = new byte[128];
+            int result = pipe.Read(data, 0, 128);
+            string s = System.Text.Encoding.ASCII.GetString(data, 0, result);
+            C.WriteLine(s); 
             C.WriteLine("Started!");
             for (; ; )
             {
@@ -41,6 +44,9 @@ namespace Halak.Bibim.Toolkit.Console
                         C.Clear();
                         break;
                 }
+
+                byte[] response = Encoding.ASCII.GetBytes("GoodBye");
+                pipe.Write(response, 0, response.Length);
 
                 C.WriteLine("IsConnected {0}", pipe.IsConnected);
 

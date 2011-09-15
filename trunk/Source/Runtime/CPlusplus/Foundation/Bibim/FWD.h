@@ -74,6 +74,8 @@
             // IO
                 BBForwardDeclareSmartPointerClass(Stream);
                     BBForwardDeclareSmartPointerClass(MemoryStream);
+                class StreamReader;
+                class StreamWriter;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Mathematics
             ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -88,6 +90,24 @@
                 class GameModuleFactory;
                 class GameModuleNode;
                 class GameModuleTree;
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Asset
+                BBForwardDeclareSmartPointerClass(GameAsset);
+                class GameAssetStorage;
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Framework
+                class GameFrameworkBase;
+                class GameFramework;
+                class GameWindow;
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Graphics
+                class DisplaySwapChain;
+                class GraphicsDevice;
+                BBForwardDeclareSmartPointerClass(Texture2D);
+                    BBForwardDeclareSmartPointerClass(DynamicTexture2D);
+                    BBForwardDeclareSmartPointerClass(MemoryTexture2D);
+                    BBForwardDeclareSmartPointerClass(SourceTexture2D);
+                class Window;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // IPC
                 BBForwardDeclareSmartPointerClass(PipeStream);
