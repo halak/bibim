@@ -2,8 +2,8 @@
 #include <Bibim/GameFramework.Windows.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Clock.h>
-#include <Bibim/GameStructure.h>
-#include <Bibim/GameNode.h>
+#include <Bibim/GameModuleTree.h>
+#include <Bibim/GameModuleNode.h>
 #include <Bibim/GameWindow.h>
 #include <Bibim/GraphicsDevice.h>
 #include <Bibim/Math.h>
@@ -16,7 +16,7 @@
         static const uint GeneralFPS = 60;
 
         GameFramework::GameFramework()
-            : structure(new GameStructure()),
+            : modules(new GameModuleTree()),
               window(new GameWindow()),
               graphicsDevice(new GraphicsDevice()),
               mainTimeline(new Timeline()),
@@ -25,9 +25,9 @@
               maxTimeInOneFrame(1.0f),
               desiredFPS(GeneralFPS)
         {
-            structure->GetRoot()->AttachChild(window);
-            structure->GetRoot()->AttachChild(graphicsDevice);
-            structure->GetRoot()->AttachChild(mainTimeline);
+            modules->GetRoot()->AttachChild(window);
+            modules->GetRoot()->AttachChild(graphicsDevice);
+            modules->GetRoot()->AttachChild(mainTimeline);
 
             //SYSTEM_INFO systemInfo = { 0, };
             //GetSystemInfo(&systemInfo);
@@ -40,7 +40,7 @@
 
         GameFramework::~GameFramework()
         {
-            delete structure;
+            delete modules;
         }
 
         void GameFramework::Run()
@@ -160,23 +160,23 @@
             graphicsDevice->Present();
         }
 
-        void GameFramework::ForceUpdateAllComponents(float dt, uint timestamp)
-        {
-            ForceUpdateComponent(structure->GetRoot(), dt, timestamp);
-        }
+        //void GameFramework::ForceUpdateAllComponents(float dt, uint timestamp)
+        //{
+        //    ForceUpdateComponent(structure->GetRoot(), dt, timestamp);
+        //}
 
-        void GameFramework::ForceUpdateComponent(GameNode* node, float dt, uint timestamp)
-        {
-            if (node->GetComponent())
-            {
-                if (IUpdateable* updateableComponent = node->GetComponent()->QueryUpdateableInterface())
-                    updateableComponent->Update(dt, timestamp);
-            }
+        //void GameFramework::ForceUpdateComponent(GameNode* node, float dt, uint timestamp)
+        //{
+        //    if (node->GetComponent())
+        //    {
+        //        if (IUpdateable* updateableComponent = node->GetComponent()->QueryUpdateableInterface())
+        //            updateableComponent->Update(dt, timestamp);
+        //    }
 
-            const GameNode::NodeCollection& children = node->GetChildren();
-            for (GameNode::NodeCollection::const_iterator it = children.begin(); it != children.end(); it++)
-                ForceUpdateComponent(*it, dt, timestamp);
-        }
+        //    const GameNode::NodeCollection& children = node->GetChildren();
+        //    for (GameNode::NodeCollection::const_iterator it = children.begin(); it != children.end(); it++)
+        //        ForceUpdateComponent(*it, dt, timestamp);
+        //}
     }
 
 #endif
