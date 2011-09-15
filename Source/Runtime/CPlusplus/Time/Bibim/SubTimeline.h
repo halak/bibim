@@ -9,10 +9,9 @@
     {
         class SubTimeline : public Timeline
         {
-            BBClassFOURCC('S', 'B', 'T', 'L');
+            BBGameModuleClass('S', 'B', 'T', 'L');
             public:
                 SubTimeline();
-                explicit SubTimeline(uint32 id);
                 virtual ~SubTimeline();
 
                 inline Timeline* GetParent() const;

@@ -113,6 +113,13 @@
                 BBForwardDeclareSmartPointerClass(PipeStream);
                     BBForwardDeclareSmartPointerClass(PipeClientStream);
                     BBForwardDeclareSmartPointerClass(PipeServerStream);
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Time
+                class Clock;
+                class UpdateableGameModule;
+                    class Timeline;
+                        class SubTimeline;
+                    class TimelineGameModule;
     }
 
 #endif

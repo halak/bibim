@@ -1,11 +1,6 @@
 namespace Bibim
 {
-    Timeline* UpdateableObject::GetTimeline() const
-    {
-        return timeline;
-    }
-
-    bool UpdateableObject::Seal(uint timestamp)
+    bool UpdateableGameModule::Seal(uint timestamp)
     {
         if (lastTimestamp != timestamp)
         {
