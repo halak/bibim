@@ -11,7 +11,7 @@ namespace Bibim
     {
     }
 
-    GameAsset* FileAssetProvider::Load(const String& name)
+    GameAsset* FileAssetProvider::Load(const String& /*name*/)
     {
         return nullptr;
     }

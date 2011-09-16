@@ -72,10 +72,10 @@
                     class InvalidOperationException;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // IO
+                class BinaryReader;
+                class BinaryWriter;
                 BBForwardDeclareSmartPointerClass(Stream);
                     BBForwardDeclareSmartPointerClass(MemoryStream);
-                class StreamReader;
-                class StreamWriter;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Mathematics
             ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,6 +97,7 @@
                     class FileAssetProvider;
                 class AssetReader;
                 BBForwardDeclareSmartPointerClass(GameAsset);
+                class GameAssetFactory;
                 class GameAssetStorage;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Framework

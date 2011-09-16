@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.IO.Pipes;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using C = System.Console;
+using Halak.Bibim.Asset;
+using Halak.Bibim.IO;
 
 namespace Halak.Bibim.Toolkit.Console
 {
     public sealed class AssetServer
     {
+        static string pipeName;
+        static string assetDirectory;
+
         static void Main(string[] args)
         {
             C.Title = "Halak Bibim Console > AssetServer";
@@ -19,44 +26,81 @@ namespace Halak.Bibim.Toolkit.Console
             C.WriteLine("================================");
             C.WriteLine("Ready");
 
+            pipeName = GetArgument("Pipe Name", args, 0);
+            assetDirectory = GetArgument("Asset Directory", args, 1);
 
-            NamedPipeServerStream pipe = new NamedPipeServerStream("Echo");
-            pipe.WaitForConnection();
-            byte[] data = new byte[128];
-            int result = pipe.Read(data, 0, 128);
-            string s = System.Text.Encoding.ASCII.GetString(data, 0, result);
-            C.WriteLine(s); 
-            C.WriteLine("Started!");
+            NamedPipeServerStream serverPipe = new NamedPipeServerStream(pipeName, PipeDirection.InOut);
+            BinaryReader serverPipeReader = new BinaryReader(serverPipe);
+
+            byte[] buffer = new byte[4096];
             for (; ; )
             {
-                C.Write("> ");
+                if (serverPipe.IsConnected == false)
+                    serverPipe.WaitForConnection();
 
-                string command = C.ReadLine();
-                if (string.IsNullOrEmpty(command) == false)
-                    command = command.ToLower();
-                else
-                    command = string.Empty;
-
-                switch (command)
+                uint id = serverPipeReader.ReadUInt32();
+                switch (id)
                 {
-                    case "cls":
-                    case "clear":
-                        C.Clear();
+                    case 1000:
+                        LoadAsset(serverPipeReader.ReadBibimString());
+                        break;
+                    default:
                         break;
                 }
-
-                byte[] response = Encoding.ASCII.GetBytes("GoodBye");
-                pipe.Write(response, 0, response.Length);
-
-                C.WriteLine("IsConnected {0}", pipe.IsConnected);
-
-                if (command == "exit")
-                    break;
             }
+        }
 
-            pipe.Close();
+        static string GetArgument(string argumentName, string[] args, int index)
+        {
+            if (args.Length >= index+1 && string.IsNullOrEmpty(args[index]) == false)
+            {
+                C.WriteLine("{0} : {1}", argumentName, args[index]);
+                return args[index];
+            }
+            else
+            {
+                string result = string.Empty;
+                C.Write("{0} : ", argumentName);
+                result = C.ReadLine().Trim();
 
-            C.WriteLine("Ended!");
+                if (string.IsNullOrEmpty(result))
+                {
+                    C.WriteLine("{0} is empty. byebye", argumentName);
+                    throw new ArgumentException(string.Empty, argumentName);
+                }
+
+                return result;
+            }
+        }
+
+        static void LoadAsset(string assetName)
+        {
+            using (Bitmap image = (Bitmap)Bitmap.FromFile(Path.Combine(assetDirectory, assetName)))
+            {
+                NamedPipeServerStream assetStream = new NamedPipeServerStream(pipeName + "_" + assetName, PipeDirection.Out);
+                BinaryWriter assetStreamWriter = new BinaryWriter(assetStream);
+                assetStream.WaitForConnection();
+
+                BitmapData bitmapData = image.LockBits(new Rectangle(0, 0, 256, 256), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb, new BitmapData());
+
+                assetStreamWriter.Write(FOURCC.Make('S', 'T', 'X', '2'));
+                assetStreamWriter.Write((uint)0);
+                assetStreamWriter.Write((short)bitmapData.Width);
+                assetStreamWriter.Write((short)bitmapData.Height);
+                assetStreamWriter.Write(bitmapData.Stride);
+
+                byte[] destination = new byte[bitmapData.Stride * bitmapData.Height];
+                unsafe
+                {
+                    byte* source = (byte*)bitmapData.Scan0.ToPointer();
+                    for (int i = 0; i < destination.Length; i++)
+                        destination[i] = source[i];
+                }
+                assetStreamWriter.Write(destination);
+
+                image.UnlockBits(bitmapData);
+                assetStream.Dispose();
+            }
         }
     }
 }

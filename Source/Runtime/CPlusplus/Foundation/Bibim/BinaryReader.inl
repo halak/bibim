@@ -1,16 +1,16 @@
 namespace Bibim
 {
-    Stream* StreamReader::GetSource() const
+    Stream* BinaryReader::GetSource() const
     {
         return sourceStream;
     }
 
-    bool StreamReader::operator == (const StreamReader& right) const
+    bool BinaryReader::operator == (const BinaryReader& right) const
     {
         return sourceStream == right.sourceStream;
     }
 
-    bool StreamReader::operator != (const StreamReader& right) const
+    bool BinaryReader::operator != (const BinaryReader& right) const
     {
         return !operator == (right);
     }

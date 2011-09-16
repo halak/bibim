@@ -6,16 +6,22 @@
 
     namespace Bibim
     {
-        class StreamWriter
+        class BinaryWriter
         {
             public:
-                explicit StreamWriter(Stream* sourceStream);
-                StreamWriter(const StreamWriter& original);
-                ~StreamWriter();
+                explicit BinaryWriter(Stream* sourceStream);
+                BinaryWriter(const BinaryWriter& original);
+                ~BinaryWriter();
 
                 void Write(bool value);
+                void Write(int8 value);
+                void Write(uint8 value);
+                void Write(int16 value);
+                void Write(uint16 value);
                 void Write(int32 value);
                 void Write(uint32 value);
+                void Write(int64 value);
+                void Write(uint64 value);
                 void Write(float value);
                 void Write(const char* value);
                 void Write(const char* value, int length);
@@ -23,9 +29,9 @@
 
                 inline Stream* GetSource() const;
 
-                StreamWriter& operator = (const StreamWriter& right);
-                inline bool operator == (const StreamWriter& right) const;
-                inline bool operator != (const StreamWriter& right) const;
+                BinaryWriter& operator = (const BinaryWriter& right);
+                inline bool operator == (const BinaryWriter& right) const;
+                inline bool operator != (const BinaryWriter& right) const;
 
             private:
                 template <typename T> inline void WriteTemplate(T value);
@@ -35,6 +41,6 @@
         };
     }
 
-#   include <Bibim/StreamWriter.inl>
+#   include <Bibim/BinaryWriter.inl>
 
 #endif

@@ -1,10 +1,11 @@
 #include <Bibim/TestBed.h>
+#include <Bibim/Startup.h>
 #include <windows.h>
 #include <crtdbg.h>
 using namespace Bibim;
 using namespace Bibim::TestBed;
 
-int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE, LPSTR commands, int showCommand)
+int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
@@ -14,6 +15,7 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE, LPSTR commands, int sh
     //for (int i = 0; i < argc; i++)
     //    args.push_back(argv[i]);
 
+    Bibim::Startup::All();
     Bibim::TestBed::Sprite(args);
 
     return 0;

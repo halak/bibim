@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Halak.Bibim
+namespace Halak.Bibim.Asset
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class GameModuleAttribute : Attribute
+    public class GameAssetAttribute : Attribute
     {
         #region Properties
         public uint ClassID
@@ -17,12 +17,12 @@ namespace Halak.Bibim
         #endregion
 
         #region Constructors
-        public GameModuleAttribute(char a, char b, char c, char d)
+        public GameAssetAttribute(char a, char b, char c, char d)
             : this(FOURCC.Make(a, b, c, d))
         {
         }
 
-        public GameModuleAttribute(uint classID)
+        public GameAssetAttribute(uint classID)
         {
             ClassID = classID;
         }

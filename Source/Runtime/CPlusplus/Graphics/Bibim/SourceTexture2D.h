@@ -9,7 +9,9 @@
     {
         class SourceTexture2D : public Texture2D
         {
+            BBReadableGameAssetClass('S', 'T', 'X', '2');
             public:
+                SourceTexture2D();
                 SourceTexture2D(GraphicsDevice* graphicsDevice, const URI& uri);
                 virtual ~SourceTexture2D();
 

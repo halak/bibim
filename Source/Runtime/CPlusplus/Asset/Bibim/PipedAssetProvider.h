@@ -4,7 +4,6 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/AssetProvider.h>
-#   include <Bibim/PipeClientStream.h>
 #   include <Bibim/String.h>
 
     namespace Bibim
@@ -14,6 +13,9 @@
             BBGameModuleClass('P', 'A', 'S', 'P');
             public:
                 PipedAssetProvider();
+                PipedAssetProvider(GameAssetStorage* storage);
+                PipedAssetProvider(GameAssetStorage* storage, const String& pipeName);
+                PipedAssetProvider(GameAssetStorage* storage, const String& serverName, const String& pipeName);
                 virtual ~PipedAssetProvider();
 
                 virtual GameAsset* Load(const String& name);

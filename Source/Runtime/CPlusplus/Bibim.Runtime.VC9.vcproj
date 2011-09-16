@@ -502,6 +502,30 @@
 				Name="IO"
 				>
 				<File
+					RelativePath=".\Foundation\Bibim\BinaryReader.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\BinaryReader.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\BinaryReader.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\BinaryWriter.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\BinaryWriter.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\BinaryWriter.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Foundation\Bibim\MemoryStream.cpp"
 					>
 				</File>
@@ -519,30 +543,6 @@
 				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\Stream.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\StreamReader.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\StreamReader.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\StreamReader.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\StreamWriter.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\StreamWriter.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\StreamWriter.inl"
 					>
 				</File>
 			</Filter>
@@ -758,6 +758,18 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Asset\Bibim\GameAssetFactory.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Asset\Bibim\GameAssetFactory.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Asset\Bibim\GameAssetFactory.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Asset\Bibim\GameAssetStorage.cpp"
 					>
 				</File>
@@ -906,6 +918,18 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="03. Startup"
+			>
+			<File
+				RelativePath=".\Startup\Bibim\Startup.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Startup\Bibim\Startup.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\Foundation\Bibim\All.h"

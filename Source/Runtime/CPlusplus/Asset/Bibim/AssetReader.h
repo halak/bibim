@@ -3,11 +3,11 @@
 #define __BIBIM_ASSETREADER_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/StreamReader.h>
+#   include <Bibim/BinaryReader.h>
 
     namespace Bibim
     {
-        class AssetReader : public StreamReader
+        class AssetReader : public BinaryReader
         {
             public:
                 AssetReader(Stream* sourceStream, GameModuleTree* modules);
@@ -15,7 +15,9 @@
                 ~AssetReader();
 
                 GameModule* ReadModule();
+                GameModule* ReadModule(uint32 defaultModuleClassID);
 
+                GameModule* FindModuleByClassID(uint32 classID);
                 inline GameModuleTree* GetModules() const;
 
                 AssetReader& operator = (const AssetReader& right);

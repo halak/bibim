@@ -92,7 +92,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Asset\GameAssetFactory.cs" />
     <Compile Include="Asset\Pipeline\AssetImporter.cs" />
     <Compile Include="Asset\Pipeline\AssetProcessor.cs" />
     <Compile Include="Asset\Pipeline\AssetProcess.cs" />

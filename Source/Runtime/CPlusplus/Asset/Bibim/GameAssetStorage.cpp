@@ -7,6 +7,12 @@
 namespace Bibim
 {
     GameAssetStorage::GameAssetStorage()
+        : modules(nullptr)
+    {
+    }
+
+    GameAssetStorage::GameAssetStorage(GameModuleTree* modules)
+        : modules(modules)
     {
     }
 
