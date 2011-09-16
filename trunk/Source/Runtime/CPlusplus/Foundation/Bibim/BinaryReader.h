@@ -13,6 +13,7 @@
                 BinaryReader(const BinaryReader& original);
                 ~BinaryReader();
 
+                void*  Read(void* buffer, int length);
                 bool   ReadBool();
                 int8   ReadInt8();
                 uint8  ReadUInt8();

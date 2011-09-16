@@ -69,9 +69,7 @@ namespace Bibim
         /*const int sourcePitch = pitch;*/
         for (int y = 0; y < height; y++)
         {
-            for (int x = 0; x < pitch; x++)
-                destination[x] = reader.ReadUInt8();
-
+            reader.Read(destination, pitch);
             destination += destinationPitch;
         }
         d3dSysMemTexture->UnlockRect(0);
