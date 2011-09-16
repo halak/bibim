@@ -5,7 +5,12 @@ using System.Text;
 
 namespace Halak.Bibim.Asset
 {
-    class PipedAssetProvider
+    [GameModule('P', 'A', 'S', 'P')]
+    public sealed class PipedAssetProvider : AssetProvider
     {
+        public override GameAsset Load(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

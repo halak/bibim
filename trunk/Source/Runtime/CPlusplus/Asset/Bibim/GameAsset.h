@@ -12,6 +12,11 @@
                                                 static const uint32 ClassID = BBMakeFOURCC(a, b, c, d); \
                                                 virtual uint32 GetClassID() const { return ClassID; } \
                                             private:
+#       define BBReadableGameAssetClass(a, b, c, d) BBGameAssetClass(a, b, c, d); \
+                                                    public: \
+                                                        static GameAsset* Read(AssetReader& reader, GameAsset* existingInstance); \
+                                                    private:
+                                                    
 
         class GameAsset : public SharedObject
         {

@@ -62,4 +62,6 @@
         };
     }
 
+#   include <Bibim/Texture2D.inl>
+
 #endif

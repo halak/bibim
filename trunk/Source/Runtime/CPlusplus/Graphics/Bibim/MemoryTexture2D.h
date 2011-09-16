@@ -10,6 +10,7 @@
     {
         class MemoryTexture2D : public Texture2D
         {
+            BBGameAssetClass('M', 'T', 'X', '2');
             public:
                 MemoryTexture2D(GraphicsDevice* graphicsDevice, int width, int height, int pitch, const std::vector<byte>& red, const std::vector<byte>& green, const std::vector<byte>& blue);
                 MemoryTexture2D(GraphicsDevice* graphicsDevice, int width, int height, int pitch, const std::vector<byte>& red, const std::vector<byte>& green, const std::vector<byte>& blue, const std::vector<byte>& alpha);

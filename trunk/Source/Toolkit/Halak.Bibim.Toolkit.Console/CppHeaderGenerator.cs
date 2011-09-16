@@ -76,7 +76,7 @@ namespace Halak.Bibim.Toolkit.Console
             w.Write("#define ");
             w.WriteLine(definition);
             w.WriteLine();
-            w.WriteLine("   // This file was \"AUTOMATICALLY GENERATED\" by Bibim Console.");
+            w.WriteLine("   // This file was \"AUTOMATICALLY GENERATED\" by Bibim Console ({0})", DateTime.Now);
             w.WriteLine("   // > Halak.Bibim.Toolkit.Console.exe CppHeaderGenerator full [Library-Name] [Source-Directory] [Header-File]");
             w.WriteLine();
 

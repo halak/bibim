@@ -92,9 +92,9 @@ namespace Halak.Bibim
             }
         }
 
-        public abstract uint ClassID
+        public uint ClassID
         {
-            get;
+            get { return GameModuleAttribute.GetClassID(GetType()); }
         }
 
         internal GameModuleNode Node

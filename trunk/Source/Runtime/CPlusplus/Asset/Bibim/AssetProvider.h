@@ -13,11 +13,16 @@
             BBGameModuleClass('A', 'S', 'P', 'V');
             public:
                 AssetProvider();
+                AssetProvider(GameAssetStorage* storage);
                 virtual ~AssetProvider();
 
                 virtual GameAsset* Load(const String& name) = 0;
 
+                inline GameAssetStorage* GetStorage() const;
+                void SetStorage(GameAssetStorage* value);
+
             private:
+                GameAssetStorage* storage;
         };
     }
 

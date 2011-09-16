@@ -1,10 +1,32 @@
 #include <Bibim/PCH.h>
 #include <Bibim/PipedAssetProvider.h>
-#include <Bibim/StreamWriter.h>
+#include <Bibim/AssetReader.h>
+#include <BIbim/GameAssetFactory.h>
+#include <BIbim/GameAssetStorage.h>
+#include <Bibim/PipeClientStream.h>
+#include <Bibim/BinaryWriter.h>
 
 namespace Bibim
 {
     PipedAssetProvider::PipedAssetProvider()
+    {
+    }
+
+    PipedAssetProvider::PipedAssetProvider(GameAssetStorage* storage)
+        : AssetProvider(storage)
+    {
+    }
+
+    PipedAssetProvider::PipedAssetProvider(GameAssetStorage* storage, const String& pipeName)
+        : AssetProvider(storage),
+          pipeName(pipeName)
+    {
+    }
+
+    PipedAssetProvider::PipedAssetProvider(GameAssetStorage* storage, const String& serverName, const String& pipeName)
+        : AssetProvider(storage),
+          serverName(serverName),
+          pipeName(pipeName)
     {
     }
 
@@ -16,6 +38,8 @@ namespace Bibim
 
     GameAsset* PipedAssetProvider::Load(const String& name)
     {
+        BBAssertDebug(GetStorage() != nullptr);
+
         if (queryStream == nullptr && pipeName.IsEmpty() == false)
         {
             queryStream = new PipeClientStream(serverName, pipeName, PipeStream::ReadAndWrite);
@@ -23,19 +47,20 @@ namespace Bibim
         }
 
         if (queryStream == nullptr || queryStream->IsConnected() == false)
-            return false;
+            return nullptr;
 
-        StreamWriter writer(queryStream);
-        writer.Write("Request Asset Stream");
+        BinaryWriter writer(queryStream);
+        writer.Write(static_cast<uint32>(1000));
         writer.Write(name);
 
-        PipeClientStreamPtr assetStream = new PipeClientStream();
+        PipeClientStreamPtr assetStream = new PipeClientStream(serverName, pipeName + "_" + name, PipeStream::ReadOnly);
         do
         {
             assetStream->Connect();
-        } while (assetStream->IsConnected());
+        } while (assetStream->IsConnected() == false);
 
-        return nullptr;
+        AssetReader reader(assetStream, GetStorage()->GetModules());
+        return GameAssetFactory::Create(reader);
     }
 
     void PipedAssetProvider::SetServerName(const String& value)

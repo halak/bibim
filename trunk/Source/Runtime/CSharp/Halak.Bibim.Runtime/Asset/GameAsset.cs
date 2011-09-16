@@ -7,5 +7,11 @@ namespace Halak.Bibim.Asset
 {
     public abstract class GameAsset
     {
+        #region Properties
+        public uint ClassID
+        {
+            get { return GameAssetAttribute.GetClassID(GetType()); }
+        }
+        #endregion
     }
 }

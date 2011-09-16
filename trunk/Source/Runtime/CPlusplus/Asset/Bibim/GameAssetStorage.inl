@@ -1,5 +1,15 @@
 namespace Bibim
 {
+    GameModuleTree* GameAssetStorage::GetModules() const
+    {
+        return modules;
+    }
+
+    void GameAssetStorage::SetModules(GameModuleTree* value)
+    {
+        modules = value;
+    }
+
     const GameAssetStorage::AssetTable& GameAssetStorage::GetAssets() const
     {
         return assets;
