@@ -32,6 +32,16 @@ namespace Bibim
         }
     }
 
+    void* BinaryReader::Read(void* buffer, int length)
+    {
+        BBAssertDebug(sourceStream != nullptr);
+
+        if (sourceStream->Read(buffer, length) == length)
+            return buffer;
+        else
+            return nullptr;
+    }
+
     bool BinaryReader::ReadBool()
     {
         return ReadTemplate<bool>();
