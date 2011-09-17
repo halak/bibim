@@ -3,14 +3,14 @@
 #define __BIBIM_UIASYNCEVENTQUEUE_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/UpdateableGameComponent.h>
+#   include <Bibim/TimelineGameModule.h>
 #   include <vector>
 
     namespace Bibim
     {
-        class UIAsyncEventQueue : public UpdateableGameComponent
+        class UIAsyncEventQueue : public TimelineGameModule
         {
-            BBClassFOURCC('U', 'A', 'E', 'Q');
+            BBGameModuleClass('U', 'A', 'E', 'Q');
             public:
                 typedef std::pair<UIEventHandlerPtr, UIEventArgsPtr> EventHandlerArgsPair;
                 typedef std::vector<EventHandlerArgsPair> ItemCollection;

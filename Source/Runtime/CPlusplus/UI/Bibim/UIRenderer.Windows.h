@@ -3,7 +3,7 @@
 #define __BIBIM_UIRENDERER_WINDOWS_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/GameComponent.h>
+#   include <Bibim/GameModule.h>
 #   include <Bibim/Matrix4.h>
 #   include <Bibim/Rectangle.h>
 #   include <Bibim/RectangleF.h>
@@ -14,9 +14,9 @@
 
     namespace Bibim
     {
-        class UIRenderer : public GameComponent
+        class UIRenderer : public GameModule
         {
-            BBClassFOURCC('U', 'I', 'R', 'R');
+            BBGameModuleClass('U', 'I', 'R', 'R');
             public:
                 UIRenderer();
                 UIRenderer(GraphicsDevice* graphicsDevice);

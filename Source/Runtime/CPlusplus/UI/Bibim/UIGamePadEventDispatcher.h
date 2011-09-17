@@ -9,7 +9,7 @@
     {
         class UIGamePadEventDispatcher : public UIEventDispatcher
         {
-            BBClassFOURCC('U', 'I', 'G', 'P');
+            BBGameModuleClass('U', 'I', 'G', 'P');
             public:
                 UIGamePadEventDispatcher();
                 virtual ~UIGamePadEventDispatcher();

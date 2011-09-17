@@ -3,13 +3,13 @@
 #define __BIBIM_UIDOMAIN_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/GameComponent.h>
+#   include <Bibim/GameModule.h>
 
     namespace Bibim
     {
-        class UIDomain : public GameComponent
+        class UIDomain : public GameModule
         {
-            BBClassFOURCC('U', 'I', 'D', 'M');
+            BBGameModuleClass('U', 'I', 'D', 'M');
             public:
                 UIDomain();
                 UIDomain(UIWindow* root);

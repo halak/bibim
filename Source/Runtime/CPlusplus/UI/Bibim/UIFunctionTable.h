@@ -3,14 +3,15 @@
 #define __BIBIM_UIFUNCTIONTABLE_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/GameComponent.h>
+#   include <Bibim/GameModule.h>
 #   include <Bibim/String.h>
 #   include <map>
 
     namespace Bibim
     {
-        class UIFunctionTable : public GameComponent
+        class UIFunctionTable : public GameModule
         {
+            BBGameModuleClass('U', 'F', 'C', 'T');
             public:
                 typedef bool (*GlobalFunctionType)(const UIEventArgs&);
                 typedef GlobalFunctionType FunctionType;

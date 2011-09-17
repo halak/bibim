@@ -3,13 +3,13 @@
 #define __BIBIM_UIEVENTDISPATCHER_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/GameComponent.h>
+#   include <Bibim/GameModule.h>
 
     namespace Bibim
     {
-        class UIEventDispatcher : public GameComponent
+        class UIEventDispatcher : public GameModule
         {
-            BBClassFOURCC('U', 'I', 'E', 'D');
+            BBGameModuleClass('U', 'I', 'E', 'D');
             public:
                 UIEventDispatcher();
                 virtual ~UIEventDispatcher();
