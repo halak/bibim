@@ -158,6 +158,65 @@
                 class TypingContext;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // UI
+                class UIDomain;
+                    class UISimpleDomain;
+                BBForwardDeclareSmartPointerClass(UIElement);
+                    BBForwardDeclareSmartPointerClass(UIImage);
+                class UIMarkupText;
+                class UIRenderer;
+                ////////////////////////////////////////////////////////////////////////////////////////////////////
+                // Effect
+                    BBForwardDeclareSmartPointerClass(UIEffect);
+                        BBForwardDeclareSmartPointerClass(UITintEffect);
+                    BBForwardDeclareSmartPointerClass(UIEffectMap);
+                ////////////////////////////////////////////////////////////////////////////////////////////////////
+                // Event
+                    class UIAsyncEventQueue;
+                    BBForwardDeclareSmartPointerClass(UIEventArgs);
+                        BBForwardDeclareSmartPointerClass(UIGamePadEventArgs);
+                        BBForwardDeclareSmartPointerClass(UIKeyboardEventArgs);
+                        BBForwardDeclareSmartPointerClass(UIMouseEventArgs);
+                            BBForwardDeclareSmartPointerClass(UIMouseButtonEventArgs);
+                            BBForwardDeclareSmartPointerClass(UIMouseWheelEventArgs);
+                    class UIEventDispatcher;
+                        class UIAppEventDispatcher;
+                        class UIGamePadEventDispatcher;
+                        class UIKeyboardEventDispatcher;
+                        class UIMouseEventDispatcher;
+                    class UIEventID;
+                    BBForwardDeclareSmartPointerClass(UIEventHandler);
+                        BBForwardDeclareSmartPointerClass(UIFunctionEventHandler);
+                        BBForwardDeclareSmartPointerClass(UISequentialEventHandler);
+                    BBForwardDeclareSmartPointerClass(UIEventMap);
+                    class UIFunctionTable;
+                ////////////////////////////////////////////////////////////////////////////////////////////////////
+                // Frame
+                    BBForwardDeclareSmartPointerClass(UIFrame);
+                        BBForwardDeclareSmartPointerClass(UIAlignedFrame);
+                        BBForwardDeclareSmartPointerClass(UIAnchoredFrame);
+                        BBForwardDeclareSmartPointerClass(UIFittedFrame);
+                        BBForwardDeclareSmartPointerClass(UIFixedFrame);
+                ////////////////////////////////////////////////////////////////////////////////////////////////////
+                // Transform
+                    BBForwardDeclareSmartPointerClass(UITransform);
+                        BBForwardDeclareSmartPointerClass(UITransform3D);
+                ////////////////////////////////////////////////////////////////////////////////////////////////////
+                // Visitor
+                    class UIVisualVisitor;
+                        class UIDrawingContext;
+                            class UIHandledDrawingContext;
+                        class UIPickingContext;
+                ////////////////////////////////////////////////////////////////////////////////////////////////////
+                // Visual
+                    BBForwardDeclareSmartPointerClass(UIVisual);
+                        BBForwardDeclareSmartPointerClass(UILabel);
+                        BBForwardDeclareSmartPointerClass(UIMarkupTextBox);
+                        BBForwardDeclareSmartPointerClass(UIPanel);
+                            BBForwardDeclareSmartPointerClass(UIButton);
+                                BBForwardDeclareSmartPointerClass(UICheckBox);
+                            BBForwardDeclareSmartPointerClass(UIWindow);
+                        BBForwardDeclareSmartPointerClass(UISprite);
+                        BBForwardDeclareSmartPointerClass(UIVideo);
     }
 
 #endif

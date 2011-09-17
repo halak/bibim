@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -37,7 +38,8 @@ namespace Halak.Bibim.Toolkit.Console
                         string libraryName = args[1];
                         string sourceDirectoryPath = Environment.ExpandEnvironmentVariables(args[2]);
                         string destinationFilePath = Environment.ExpandEnvironmentVariables(args[3]);
-                        GenerateFullHeader(libraryName, sourceDirectoryPath, destinationFilePath);
+                        string[] excludedCategories = FindOptionalParameters(args, 4, "excluded");
+                        GenerateFullHeader(libraryName, sourceDirectoryPath, destinationFilePath, excludedCategories);
                     }
                     break;
                 case "fwd":
@@ -62,7 +64,7 @@ namespace Halak.Bibim.Toolkit.Console
         /// <param name="name">Library의 이름</param>
         /// <param name="sourceDirectoryPath">Header-file들이 들어있는 Directory 경로</param>
         /// <param name="destinationFilePath">모든 Header-file들을 include하는 Header-file 경로</param>
-        static void GenerateFullHeader(string libraryName, string sourceDirectoryPath, string destinationFilePath)
+        static void GenerateFullHeader(string libraryName, string sourceDirectoryPath, string destinationFilePath, string[] excludedCategories)
         {
             List<string> headerFiles = FindAllHeaderFiles(libraryName, sourceDirectoryPath);
 
@@ -76,17 +78,20 @@ namespace Halak.Bibim.Toolkit.Console
             w.Write("#define ");
             w.WriteLine(definition);
             w.WriteLine();
-            w.WriteLine("   // This file was \"AUTOMATICALLY GENERATED\" by Bibim Console ({0})", DateTime.Now);
+            w.WriteLine("   // This file was \"AUTOMATICALLY GENERATED\" by Bibim Console ({0})", DateTime.Now.ToString(new CultureInfo("en-us")));
             w.WriteLine("   // > Halak.Bibim.Toolkit.Console.exe CppHeaderGenerator full [Library-Name] [Source-Directory] [Header-File]");
             w.WriteLine();
 
             string lastCategory = string.Empty;
             foreach (string item in headerFiles)
             {
-                if (string.Compare(item, sourceDirectoryPath) == 0)
+                if (string.Compare(item, sourceDirectoryPath, true) == 0)
                     continue;
 
                 string category = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(item)));
+                if (excludedCategories.Contains(category))
+                    continue;
+
                 if (category != lastCategory)
                 {
                     w.WriteLine();
@@ -132,6 +137,20 @@ namespace Halak.Bibim.Toolkit.Console
             result.Sort();
 
             return result;
+        }
+
+        static string[] FindOptionalParameters(string[] args, int index, string optionName)
+        {
+            if (optionName.EndsWith(":") == false)
+                optionName += ":";
+
+            for (int i = index; i < args.Length; i++)
+            {
+                if (args[i].StartsWith(optionName, true, CultureInfo.CurrentCulture))
+                    return args[i].Substring(optionName.Length).Split(';');
+            }
+
+            return new string[] { };
         }
 
         static void GenerateForwardDeclarationHeader(string sourceDirectoryPath, string destinationFilePath)

@@ -3,14 +3,14 @@
 #define __BIBIM_UIKEYBOARDEVENTDISPATCHER_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/UpdateableGameComponent.h>
+#   include <Bibim/TimelineGameModule.h>
 #   include <Bibim/KeyboardState.h>
 
     namespace Bibim
     {
-        class UIKeyboardEventDispatcher : public UpdateableGameComponent
+        class UIKeyboardEventDispatcher : public TimelineGameModule
         {
-            BBClassFOURCC('U', 'I', 'K', 'B');
+            BBGameModuleClass('U', 'I', 'K', 'B');
             public:
                 UIKeyboardEventDispatcher();
                 virtual ~UIKeyboardEventDispatcher();

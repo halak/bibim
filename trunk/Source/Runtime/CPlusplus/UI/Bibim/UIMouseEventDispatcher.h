@@ -3,15 +3,15 @@
 #define __BIBIM_UIMOUSEEVENTDISPATCHER_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/UpdateableGameComponent.h>
+#   include <Bibim/UpdateableGameModule.h>
 #   include <Bibim/MouseState.h>
 #   include <vector>
 
     namespace Bibim
     {
-        class UIMouseEventDispatcher : public UpdateableGameComponent
+        class UIMouseEventDispatcher : public UpdateableGameModule
         {
-            BBClassFOURCC('U', 'I', 'M', 'S');
+            BBGameModuleClass('U', 'I', 'M', 'S');
             public:
                 UIMouseEventDispatcher();
                 virtual ~UIMouseEventDispatcher();
