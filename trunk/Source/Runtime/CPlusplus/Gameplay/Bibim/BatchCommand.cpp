@@ -1,36 +1,23 @@
 #include <Bibim/PCH.h>
 #include <Bibim/BatchCommand.h>
 #include <Bibim/Assert.h>
-#include <Bibim/CloningContext.h>
 #include <Bibim/Delete.h>
 
 namespace Bibim
 {
+    BatchCommand::BatchCommand()
+    {
+    }
+
     BatchCommand::BatchCommand(const CommandCollection commands)
     {
         SetCommands(commands);
-    }
-
-    BatchCommand::BatchCommand(const BatchCommand& original, CloningContext& context)
-    {
-        commands.reserve(original.commands.size());
-        for (CommandCollection::const_iterator it = original.commands.begin(); it != original.commands.end(); it++)
-            commands.push_back(context.Clone(*it));
-
-        restorableCommands.reserve(original.restorableCommands.size());
-        for (RestorableCommandCollection::const_iterator it = original.restorableCommands.begin(); it != original.restorableCommands.end(); it++)
-            restorableCommands.push_back(context.Clone(*it));
     }
 
     BatchCommand::~BatchCommand()
     {
         restorableCommands.clear();
         DeleteAll(commands);
-    }
-
-    BatchCommand* BatchCommand::CloneWith(CloningContext& context) const
-    {
-        return new BatchCommand(*this, context);
     }
 
     void BatchCommand::Execute()
@@ -93,7 +80,7 @@ namespace Bibim
         for (CommandCollection::iterator it = commands.begin(); it != commands.end(); it++)
         {
             if ((*it)->IsRestorable())
-                restorableCommands.push_back(static_cast<RestorableCommand*>(*it));
+                restorableCommands.push_back(StaticCast<RestorableCommand>(*it));
         }
     }
 }

@@ -4,12 +4,7 @@
 namespace Bibim
 {
     GameAsset::GameAsset()
-        : uri(URI::Empty)
-    {
-    }
-
-    GameAsset::GameAsset(const URI& uri)
-        : uri(uri)
+        : revision(0)
     {
     }
 

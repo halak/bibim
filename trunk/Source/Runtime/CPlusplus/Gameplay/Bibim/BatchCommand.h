@@ -4,23 +4,20 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/RestorableCommand.h>
-#   include <Bibim/ICloneable.h>
 #   include <vector>
 
     namespace Bibim
     {
-        class BatchCommand : public RestorableCommand, public ICloneable
+        class BatchCommand : public RestorableCommand
         {
             public:
-                typedef std::vector<Command*> CommandCollection;
-                typedef std::vector<RestorableCommand*> RestorableCommandCollection;
+                typedef std::vector<CommandPtr> CommandCollection;
+                typedef std::vector<RestorableCommandPtr> RestorableCommandCollection;
 
             public:
+                BatchCommand();
                 BatchCommand(const CommandCollection commands);
-                BatchCommand(const BatchCommand& original, CloningContext& context);
                 virtual ~BatchCommand();
-
-                virtual BatchCommand* CloneWith(CloningContext& context) const;
 
                 virtual void Execute();
                 virtual void Undo();
@@ -35,10 +32,6 @@
             private:
                 CommandCollection commands;
                 RestorableCommandCollection restorableCommands;
-
-            private:
-                friend void __Startup__();
-                static void __Startup__();
         };
     }
 

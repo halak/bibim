@@ -1,7 +1,12 @@
 namespace Bibim
 {
-    const URI& GameAsset::GetURI() const
+    uint GameAsset::GetRevision() const
     {
-        return uri;
+        return revision;
+    }
+
+    void GameAsset::IncreaseRevision()
+    {
+        revision++;
     }
 }

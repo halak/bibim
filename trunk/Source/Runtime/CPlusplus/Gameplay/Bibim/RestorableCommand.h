@@ -22,10 +22,6 @@
 
             protected:
                 RestorableCommand();
-
-            private:
-                friend void __Startup__();
-                static void __Startup__();
         };
     }
 

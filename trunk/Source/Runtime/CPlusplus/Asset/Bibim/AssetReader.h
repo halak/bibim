@@ -4,15 +4,18 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/BinaryReader.h>
+#   include <Bibim/GameAssetStorage.h>
 
     namespace Bibim
     {
         class AssetReader : public BinaryReader
         {
             public:
-                AssetReader(Stream* sourceStream, GameModuleTree* modules);
+                AssetReader(Stream* sourceStream, GameAssetStorage* storage);
                 AssetReader(const AssetReader& original);
                 ~AssetReader();
+
+                void ReadAsync(GameAssetLoadingTask* task);
 
                 GameModule* ReadModule();
                 GameModule* ReadModule(uint32 defaultModuleClassID);
@@ -25,6 +28,7 @@
                 inline bool operator != (const AssetReader& right) const;
 
             private:
+                GameAssetStorage* storage;
                 GameModuleTree* modules;
         };
     }

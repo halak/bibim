@@ -25,14 +25,15 @@
             public:
                 virtual ~GameAsset();
 
-                inline const URI& GetURI() const;
+                inline uint GetRevision() const;
 
             protected:
                 GameAsset();
-                GameAsset(const URI& uri);
+
+                inline void IncreaseRevision();
 
             private:
-                URI uri;
+                uint revision;
         };
     }
 

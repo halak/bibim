@@ -3,10 +3,11 @@
 #define __BIBIM_COMMAND_H__
 
 #   include <Bibim/FWD.h>
+#   include <Bibim/SharedObject.h>
 
     namespace Bibim
     {
-        class Command
+        class Command : public SharedObject
         {
             public:
                 virtual ~Command();
@@ -17,10 +18,6 @@
 
             protected:
                 Command();
-
-            private:
-                friend void __Startup__();
-                static void __Startup__();
         };
     }
 

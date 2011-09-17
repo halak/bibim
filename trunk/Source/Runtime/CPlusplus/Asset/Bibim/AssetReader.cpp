@@ -1,26 +1,36 @@
 #include <Bibim/AssetReader.h>
 #include <Bibim/Assert.h>
+#include <Bibim/GameAssetStorage.h>
 #include <Bibim/GameModule.h>
 #include <Bibim/GameModuleNode.h>
 #include <Bibim/GameModuleTree.h>
 
 namespace Bibim
 {
-    AssetReader::AssetReader(Stream* sourceStream, GameModuleTree* modules)
+    AssetReader::AssetReader(Stream* sourceStream, GameAssetStorage* storage)
         : BinaryReader(sourceStream),
-          modules(modules)
+          storage(storage),
+          modules(storage->GetModules())
     {
+        BBAssert(storage);
         BBAssert(modules);
     }
 
     AssetReader::AssetReader(const AssetReader& original)
         : BinaryReader(original),
+          storage(original.storage),
           modules(original.modules)
     {
     }
 
     AssetReader::~AssetReader()
     {
+    }
+
+    void AssetReader::ReadAsync(GameAssetLoadingTask* task)
+    {
+        BBAssertDebug(task);
+        storage->Add(task);
     }
 
     GameModule* AssetReader::ReadModule()
@@ -54,6 +64,7 @@ namespace Bibim
     AssetReader& AssetReader::operator = (const AssetReader& right)
     {
         BinaryReader::operator = (right);
+        storage = right.storage;
         modules = right.modules;
         return *this;
     }

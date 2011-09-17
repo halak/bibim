@@ -98,12 +98,20 @@
                 class AssetReader;
                 BBForwardDeclareSmartPointerClass(GameAsset);
                 class GameAssetFactory;
+                class GameAssetLoadingTask;
                 class GameAssetStorage;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Framework
                 class GameFrameworkBase;
                     class GameFramework;
                 class GameWindow;
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Gameplay
+                BBForwardDeclareSmartPointerClass(Command);
+                    BBForwardDeclareSmartPointerClass(RestorableCommand);
+                        BBForwardDeclareSmartPointerClass(BatchCommand);
+                class CommandHistory;
+                class CommandQueue;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Graphics
                 class DisplaySwapChain;
@@ -118,6 +126,12 @@
                 BBForwardDeclareSmartPointerClass(PipeStream);
                     BBForwardDeclareSmartPointerClass(PipeClientStream);
                     BBForwardDeclareSmartPointerClass(PipeServerStream);
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Threading
+                class AutoLocker;
+                class Lock;
+                class ManualLocker;
+                class Thread;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Time
                 class Clock;
