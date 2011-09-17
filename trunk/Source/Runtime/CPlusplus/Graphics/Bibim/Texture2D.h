@@ -13,52 +13,35 @@
             public:
                 enum PixelFormat
                 {
-                    ARGB32Pixels,
+                    A8G8B8A8Pixels,
                     A8Pixels,
                 };
 
             public:
-                Texture2D(GraphicsDevice* graphicsDevice);
                 virtual ~Texture2D();
 
-                int GetWidth();
-                int GetHeight();
-                int GetSurfaceWidth();
-                int GetSurfaceHeight();
+                inline GraphicsDevice* GetGraphicsDevice() const;
 
-                inline GraphicsDevice* GetGraphicsDevice();
-                IDirect3DTexture9* GetD3DTexture();
+                inline int GetWidth() const;
+                inline int GetHeight() const;
+                inline int GetSurfaceWidth() const;
+                inline int GetSurfaceHeight() const;
+
+                inline IDirect3DTexture9* GetD3DTexture() const;
 
             protected:
-                inline bool GetTextureChanged() const;
-                inline void SetTextureChanged(bool value = true);
+                Texture2D(GraphicsDevice* graphicsDevice);
+                Texture2D(GraphicsDevice* graphicsDevice, int width, int height, int surfaceWidth, int surfaceHeight);
 
-                struct D3DTextureInfo
-                {
-                    IDirect3DTexture9* Texture;
-                    int Width;
-                    int Height;
-                    int SurfaceWidth;
-                    int SurfaceHeight;
-
-                    D3DTextureInfo();
-                    D3DTextureInfo(IDirect3DTexture9* texture, int width, int height);
-                    D3DTextureInfo(IDirect3DTexture9* texture, int width, int height, int surfaceWidth, int surfaceHeight);
-                };
-                virtual D3DTextureInfo CreateD3DTexture() = 0;
-
-            private:
-                void UpdateTexture();
+                void Setup(IDirect3DTexture9* d3dTexture, int width, int height, int surfaceWidth, int surfaceHeight);
 
             private:
                 GraphicsDevice* graphicsDevice;
-
-                IDirect3DTexture9* d3dTexture;
                 int width;
                 int height;
                 int surfaceWidth;
                 int surfaceHeight;
-                bool textureChanged;
+                IDirect3DTexture9* d3dTexture;
         };
     }
 
