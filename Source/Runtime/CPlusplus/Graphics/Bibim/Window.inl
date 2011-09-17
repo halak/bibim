@@ -4,9 +4,19 @@
 
 namespace Bibim
 {
-    Signal<int>& Window::MouseWheel()
+    Window::Window()
+        : wheelValue(0)
     {
-        return mouseWheel;
+    }
+
+    int Window::GetWheel() const
+    {
+        return wheelValue;
+    }
+
+    void Window::SetWheel(int value)
+    {
+        wheelValue = value;
     }
 }
 

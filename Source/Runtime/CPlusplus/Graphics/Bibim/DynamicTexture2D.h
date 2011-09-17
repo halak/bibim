@@ -12,17 +12,18 @@
         {
             BBGameAssetClass('D', 'T', 'X', '2');
             public:
-                class Locker
+                class LockedInfo
                 {
+                    BBThisIsNoncopyableClass(LockedInfo);
                     public:
-                        Locker();
-                        ~Locker();
+                        LockedInfo();
+                        ~LockedInfo();
 
-                        void* GetBuffer();
-                        int   GetPitch() const;
+                        inline void* GetBuffer();
+                        inline int GetPitch() const;
 
                     private:
-                        void SetData(DynamicTexture2DPtr texture, void* buffer, int pitch);
+                        void SetData(DynamicTexture2D* texture, void* buffer, int pitch);
 
                     private:
                         DynamicTexture2DPtr texture;
@@ -30,9 +31,6 @@
                         int   pitch;
 
                     private:
-                        Locker(const Locker&);
-                        Locker& operator = (const Locker&);
-
                         friend class DynamicTexture2D;
                 };
 
@@ -40,16 +38,13 @@
                 DynamicTexture2D(GraphicsDevice* graphicsDevice, int width, int height, PixelFormat format);
                 virtual ~DynamicTexture2D();
 
-                bool Lock(Locker& outLocker);
-                bool Lock(Locker& outLocker, const Rectangle& rectangle);
-                void Unlock(Locker& outLocker);
+                bool Lock(LockedInfo& outLockedInfo);
+                bool Lock(LockedInfo& outLockedInfo, const Rectangle& rectangle);
+                void Unlock(LockedInfo& outLockedInfo);
 
-                bool IsLocked() const;
+                inline bool IsLocked() const;
 
-                PixelFormat GetFormat() const;
-
-            protected:
-                virtual D3DTextureInfo CreateD3DTexture();
+                inline PixelFormat GetFormat() const;
 
             private:
                 int width;
@@ -58,5 +53,7 @@
                 bool isLocked;
         };
     }
+
+#   include <Bibim/DynamicTexture2D.inl>
 
 #endif

@@ -28,10 +28,14 @@
 
                 virtual void* GetHandle() const = 0;
 
-                inline Signal<int>& MouseWheel();
+                inline int GetWheel() const;
+
+            protected:
+                inline Window();
+                inline void SetWheel(int value);
 
             private:
-                Signal<int> mouseWheel;
+                int wheelValue;
         };
     }
 

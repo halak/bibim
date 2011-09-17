@@ -4,7 +4,8 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/Texture2D.h>
-#   include <Bibim/GameAssetLoadingTask.h>
+#   include <Bibim/AssetLoadingTask.h>
+#   include <Bibim/AssetReader.h>
 
     namespace Bibim
     {
@@ -12,20 +13,14 @@
         {
             BBReadableGameAssetClass('S', 'T', 'X', '2');
             public:
-                SourceTexture2D();
-                SourceTexture2D(GraphicsDevice* graphicsDevice, const URI& uri);
+                SourceTexture2D(GraphicsDevice* graphicsDevice);
                 virtual ~SourceTexture2D();
 
-                virtual const URI& GetURI() const;
-
-            protected:
-                virtual Texture2D::D3DTextureInfo CreateD3DTexture();
+            private:
+                SourceTexture2D(GraphicsDevice* graphicsDevice, int width, int height);
 
             private:
-                URI uri;
-
-            private:
-                class LoadingTask : public GameAssetLoadingTask
+                class LoadingTask : public AssetLoadingTask
                 {
                     public:
                         LoadingTask(SourceTexture2D* texture, const AssetReader& reader);

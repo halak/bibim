@@ -1,17 +1,32 @@
 namespace Bibim
 {
-    GraphicsDevice* Texture2D::GetGraphicsDevice()
+    GraphicsDevice* Texture2D::GetGraphicsDevice() const
     {
         return graphicsDevice;
     }
-
-    bool Texture2D::GetTextureChanged() const
+    
+    int Texture2D::GetWidth() const
     {
-        return textureChanged;
+        return width;
     }
 
-    void Texture2D::SetTextureChanged(bool value)
+    int Texture2D::GetHeight() const
     {
-        textureChanged = value;
+        return height;
+    }
+
+    int Texture2D::GetSurfaceWidth() const
+    {
+        return surfaceWidth;
+    }
+
+    int Texture2D::GetSurfaceHeight() const
+    {
+        return surfaceHeight;
+    }
+
+    IDirect3DTexture9* Texture2D::GetD3DTexture() const
+    {
+        return d3dTexture;
     }
 }
