@@ -1,37 +1,22 @@
 #include <Bibim/PCH.h>
 #include <Bibim/Keyboard.h>
-#include <Bibim/KeyboardState.h>
 
 namespace Bibim
 {
     Keyboard::Keyboard()
-        : state(new KeyboardState()),
-          window(nullptr)
+        : window(nullptr)
     {
         AllowDefaultKeys();
     }
 
     Keyboard::Keyboard(Window* window)
-        : state(new KeyboardState()),
-          window(nullptr)
+        : window(window)
     {
         AllowDefaultKeys();
-        SetWindow(window);
     }
 
     Keyboard::~Keyboard()
     {
-        delete state;
-    }
-
-    Window* Keyboard::GetWindow() const
-    {
-        return window;
-    }
-
-    void Keyboard::SetWindow(Window* value)
-    {
-        window = value;
     }
 
     void Keyboard::AllowDefaultKeys()

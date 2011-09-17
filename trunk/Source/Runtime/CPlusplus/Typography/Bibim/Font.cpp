@@ -5,7 +5,7 @@
 #include <Bibim/FontLibrary.h>
 #include <Bibim/FontString.h>
 #include <Bibim/Math.h>
-#include <Bibim/Number.h>
+#include <Bibim/Numerics.h>
 #include <Bibim/String.h>
 #include <Bibim/Glyph.h>
 #include <Bibim/GlyphTable.h>
@@ -17,7 +17,6 @@ namespace Bibim
 
     Font::Font()
         : library(nullptr),
-          revision(0),
           color(Color(0, 0, 0, 255)),
           strokeColor(Color(0, 0, 0, 255)),
           glowColor(Color(0, 0, 255)),
@@ -30,7 +29,6 @@ namespace Bibim
 
     Font::Font(FontLibrary* library)
         : library(library),
-          revision(0),
           color(Color(0, 0, 0, 255)),
           strokeColor(Color(0, 0, 0, 255)),
           glowColor(Color(0, 0, 255)),
@@ -43,7 +41,6 @@ namespace Bibim
 
     Font::Font(const Font& original)
         : library(original.library),
-          revision(original.revision),
           color(original.color),
           strokeColor(original.strokeColor),
           glowColor(original.glowColor),
@@ -61,7 +58,7 @@ namespace Bibim
 
     Vector2 Font::Measure(const String& text)
     {
-        return Measure(text, Number::MaxFloat);
+        return Measure(text, Float::Max);
     }
 
     Vector2 Font::Measure(const String& text, float boundary)
@@ -71,7 +68,7 @@ namespace Bibim
 
     Vector2 Font::Measure(const FontString& fontString)
     {
-        return Measure(fontString, Number::MaxFloat);
+        return Measure(fontString, Float::Max);
     }
     
     Vector2 Font::Measure(const FontString& fontString, float boundary)
@@ -97,7 +94,7 @@ namespace Bibim
         {
             library = value;
             cache.Reset();
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -112,7 +109,7 @@ namespace Bibim
         {
             parameters.Face = value;
             cache.Reset();
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -128,7 +125,7 @@ namespace Bibim
         {
             parameters.FontSize = value;
             cache.Reset();
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -144,7 +141,7 @@ namespace Bibim
         {
             parameters.StrokeSize = value;
             cache.Reset();
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -160,7 +157,7 @@ namespace Bibim
         {
             parameters.Weights = value;
             cache.Reset();
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -175,7 +172,7 @@ namespace Bibim
         {
             parameters.Weights = value ? 1.0f : 0.0f;
             cache.Reset();
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -191,7 +188,7 @@ namespace Bibim
         {
             parameters.Shear = value;
             cache.Reset();
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -206,7 +203,7 @@ namespace Bibim
         {
             parameters.Shear = value ? 0.2f : 0.0f;
             cache.Reset();
-            revision++;
+            IncreaseRevision();
         }
     }
     
@@ -222,7 +219,7 @@ namespace Bibim
         {
             parameters.GlowSize = value;
             cache.Reset();
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -238,7 +235,7 @@ namespace Bibim
         {
             parameters.GlowSpread = value;
             cache.Reset();
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -254,7 +251,7 @@ namespace Bibim
         {
             parameters.GlowThickness = value;
             cache.Reset();
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -270,7 +267,7 @@ namespace Bibim
         {
             parameters.Scale = value;
             cache.Reset();
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -285,7 +282,7 @@ namespace Bibim
         {
             parameters.Hinting = value;
             cache.Reset();
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -300,7 +297,7 @@ namespace Bibim
         {
             parameters.IgnoreBitmap = value;
             cache.Reset();
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -309,7 +306,7 @@ namespace Bibim
         if (color != value)
         {
             color = value;
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -318,7 +315,7 @@ namespace Bibim
         if (strokeColor != value)
         {
             strokeColor = value;
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -327,7 +324,7 @@ namespace Bibim
         if (glowColor != value)
         {
             glowColor = value;
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -337,7 +334,7 @@ namespace Bibim
         if (spacing != value)
         {
             spacing = value;
-            revision++;
+            IncreaseRevision();
         }
     }
 
@@ -410,5 +407,10 @@ namespace Bibim
             cache = library->GetCache(parameters);
 
         return cache;
+    }
+
+    GameAsset* Font::Read(AssetReader& /*reader*/, GameAsset* /*existingInstance*/)
+    {
+        return nullptr;
     }
 }

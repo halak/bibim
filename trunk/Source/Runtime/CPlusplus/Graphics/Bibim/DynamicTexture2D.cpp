@@ -57,10 +57,14 @@ namespace Bibim
             else
                 Setup(newD3DTexture, width, height, width, height);
             
+            IncreaseRevision();
             SetStatus(CompletedStatus);
         }
         else
+        {
+            IncreaseRevision();
             SetStatus(IncompletedStatus);
+        }
     }
 
     DynamicTexture2D::~DynamicTexture2D()

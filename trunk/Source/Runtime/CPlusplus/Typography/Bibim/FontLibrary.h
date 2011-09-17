@@ -3,15 +3,15 @@
 #define __BIBIM_FONTLIBRARY_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/GameComponent.h>
+#   include <Bibim/GameModule.h>
 #   include <Bibim/String.h>
 #   include <vector>
 
     namespace Bibim
     {
-        class FontLibrary : public GameComponent
+        class FontLibrary : public GameModule
         {
-            BBClassFOURCC('F', 'T', 'L', 'B');
+            BBGameModuleClass('F', 'T', 'L', 'B');
             public:
                 typedef std::pair<unsigned int, FontCachePtr> CachePair;
                 typedef std::vector<CachePair> CacheCollection;
@@ -31,7 +31,7 @@
                 FontCache* GetCache(const FontCacheParameters& parameters);
 
                 // ResultType: FT_Library
-                void* GetFTLibrary() const;
+                inline void* GetFTLibrary() const;
 
             private:
                 void Construct();
@@ -41,9 +41,7 @@
                 String osFontDirectory;
                 String alternativeFace;
                 CacheCollection caches;
-
-                struct Fields;
-                Fields* m;
+                void* ftLibrary;
         };
     }
 

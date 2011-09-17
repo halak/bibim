@@ -710,6 +710,14 @@
 				Name="Asset"
 				>
 				<File
+					RelativePath=".\Asset\Bibim\AssetLoadingTask.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Asset\Bibim\AssetLoadingTask.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Asset\Bibim\AssetReader.cpp"
 					>
 				</File>
@@ -743,14 +751,6 @@
 				</File>
 				<File
 					RelativePath=".\Asset\Bibim\GameAssetFactory.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Asset\Bibim\GameAssetLoadingTask.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Asset\Bibim\GameAssetLoadingTask.h"
 					>
 				</File>
 				<File
@@ -982,6 +982,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Graphics\Bibim\DynamicTexture2D.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Graphics\Bibim\GraphicsDevice.cpp"
 					>
 				</File>
@@ -991,14 +995,6 @@
 				</File>
 				<File
 					RelativePath=".\Graphics\Bibim\GraphicsDevice.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\MemoryTexture2D.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\MemoryTexture2D.h"
 					>
 				</File>
 				<File
@@ -1033,6 +1029,178 @@
 					RelativePath=".\Graphics\Bibim\Window.inl"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="Input"
+				>
+				<File
+					RelativePath=".\Input\Bibim\Key.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Key.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Keyboard.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Keyboard.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Keyboard.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Keyboard.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\KeyboardState.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\KeyboardState.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\KeyboardState.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Mouse.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Mouse.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Mouse.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Mouse.Window.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\MouseState.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\MouseState.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\MouseState.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Typography"
+				>
+				<File
+					RelativePath=".\Typography\Bibim\Font.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\Font.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\Font.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontCache.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontCache.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontCache.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontLibrary.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontLibrary.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontLibrary.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontString.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontString.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontString.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\Glyph.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\Glyph.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\Glyph.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\GlyphSurface.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\GlyphSurface.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\GlyphSurface.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\GlyphTable.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\GlyphTable.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\GlyphTable.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\TypingContext.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\TypingContext.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\TypingContext.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="UI"
+				>
 			</Filter>
 		</Filter>
 		<Filter

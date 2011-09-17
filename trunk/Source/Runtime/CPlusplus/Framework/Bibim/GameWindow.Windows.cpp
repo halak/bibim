@@ -153,7 +153,7 @@
 
         void GameWindow::OnMouseWheel(int delta)
         {
-            MouseWheel().Emit(delta);
+            SetWheel(GetWheel() + delta);
         }
 
         void GameWindow::CreateHandle()

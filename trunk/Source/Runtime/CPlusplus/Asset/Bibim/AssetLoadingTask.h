@@ -6,11 +6,11 @@
 
     namespace Bibim
     {
-        class GameAssetLoadingTask
+        class AssetLoadingTask
         {
             public:
-                GameAssetLoadingTask();
-                virtual ~GameAssetLoadingTask();
+                AssetLoadingTask();
+                virtual ~AssetLoadingTask();
 
                 virtual void Execute() = 0;
         };

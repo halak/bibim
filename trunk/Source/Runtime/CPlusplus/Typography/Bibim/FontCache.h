@@ -3,7 +3,7 @@
 #define __BIBIM_FONTCACHE_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/Asset.h>
+#   include <Bibim/GameAsset.h>
 #   include <Bibim/String.h>
 #   include <ft2build.h>
 #   include FT_FREETYPE_H
@@ -30,15 +30,18 @@
             FontCacheParameters(const String& face, float fontSize, float strokeSize, float weights, float shear, 
                                 int glowSize, float glowSpread, float glowThickness,
                                 float scale, bool hinting, bool ignoreBitmap);
+            FontCacheParameters(const FontCacheParameters& original);
 
             unsigned int GetHashCode() const;
 
+            FontCacheParameters& operator = (const FontCacheParameters& right);
             bool operator == (const FontCacheParameters& right) const;
             inline bool operator != (const FontCacheParameters& right) const;
         };
 
-        class FontCache : public Asset
+        class FontCache : public GameAsset
         {
+            BBGameAssetClass('F', 'N', 'T', 'C');
             public:
                 virtual ~FontCache();
 

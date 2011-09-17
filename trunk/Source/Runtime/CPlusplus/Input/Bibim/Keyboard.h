@@ -3,14 +3,15 @@
 #define __BIBIM_KEYBOARD_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/GameComponent.h>
+#   include <Bibim/GameModule.h>
 #   include <Bibim/Key.h>
+#   include <Bibim/KeyboardState.h>
 
     namespace Bibim
     {
-        class Keyboard : public GameComponent
+        class Keyboard : public GameModule
         {
-            BBClassFOURCC('K', 'B', 'D', '_');
+            BBGameModuleClass('K', 'B', 'D', '_');
             public:
                 Keyboard();
                 Keyboard(Window* window);
@@ -21,15 +22,15 @@
 
                 const KeyboardState& GetState();
 
-                Window* GetWindow() const;
-                void SetWindow(Window* value);
+                inline Window* GetWindow() const;
+                inline void SetWindow(Window* value);
 
             private:
                 void AllowDefaultKeys();
 
             private:
                 Window* window;
-                KeyboardState* state;
+                KeyboardState state;
                 dword allowedKeys[Key::Count / (sizeof(dword) * 8)];
         };
     }

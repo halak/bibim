@@ -65,6 +65,21 @@ namespace Bibim
     {
     }
 
+    FontCacheParameters::FontCacheParameters(const FontCacheParameters& original)
+        : Face(original.Face),
+          FontSize(original.FontSize),
+          StrokeSize(original.StrokeSize),
+          Weights(original.Weights),
+          Shear(original.Shear),
+          GlowSize(original.GlowSize),
+          GlowSpread(original.GlowSpread),
+          GlowThickness(original.GlowThickness),
+          Scale(original.Scale),
+          Hinting(original.Hinting),
+          IgnoreBitmap(original.IgnoreBitmap)
+    {
+    }
+
     unsigned int FontCacheParameters::GetHashCode() const
     {
         unsigned int result = 0;
@@ -80,6 +95,22 @@ namespace Bibim
         result += static_cast<unsigned int>(Hinting ? 0x08000000 : 0x00000000);
         result += static_cast<unsigned int>(IgnoreBitmap ? 0x00800000 : 0x00000000);
         return result;
+    }
+
+    FontCacheParameters& FontCacheParameters::operator = (const FontCacheParameters& right)
+    {
+        Face = right.Face;
+        FontSize = right.FontSize;
+        StrokeSize = right.StrokeSize;
+        Weights = right.Weights;
+        Shear = right.Shear;
+        GlowSize = right.GlowSize;
+        GlowSpread = right.GlowSpread;
+        GlowThickness = right.GlowThickness;
+        Scale = right.Scale;
+        Hinting = right.Hinting;
+        IgnoreBitmap = right.IgnoreBitmap;
+        return *this;
     }
 
     bool FontCacheParameters::operator == (const FontCacheParameters& right) const

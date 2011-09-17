@@ -10,6 +10,7 @@
     {
         class Glyph
         {
+            BBThisIsNoncopyableClass(Glyph);
             public:
                 inline uint32 GetCode() const;
                 inline Vector2 GetAdvance() const;
@@ -32,10 +33,6 @@
                 GlyphSurface* surface;
                 Texture2DPtr texture;
                 Rectangle clippingRectangle;
-
-            private:
-                Glyph(const Glyph&);
-                Glyph& operator = (const Glyph&);
 
                 friend class GlyphTable;
         };

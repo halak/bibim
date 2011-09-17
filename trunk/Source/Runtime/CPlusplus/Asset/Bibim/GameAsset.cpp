@@ -4,7 +4,8 @@
 namespace Bibim
 {
     GameAsset::GameAsset()
-        : revision(0)
+        : status(EmptyStatus),
+          revision(0)
     {
     }
 

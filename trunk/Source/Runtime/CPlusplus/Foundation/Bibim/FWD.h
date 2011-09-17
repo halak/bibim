@@ -92,13 +92,13 @@
                 class GameModuleTree;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Asset
+                class AssetLoadingTask;
                 class AssetProvider;
                     class PipedAssetProvider;
                     class FileAssetProvider;
                 class AssetReader;
                 BBForwardDeclareSmartPointerClass(GameAsset);
                 class GameAssetFactory;
-                class GameAssetLoadingTask;
                 class GameAssetStorage;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Framework
@@ -118,9 +118,15 @@
                 class GraphicsDevice;
                 BBForwardDeclareSmartPointerClass(Texture2D);
                     BBForwardDeclareSmartPointerClass(DynamicTexture2D);
-                    BBForwardDeclareSmartPointerClass(MemoryTexture2D);
                     BBForwardDeclareSmartPointerClass(SourceTexture2D);
                 class Window;
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Input
+                class GamePad;
+                class Keyboard;
+                struct KeyboardState;
+                class Mouse;
+                struct MouseState;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // IPC
                 BBForwardDeclareSmartPointerClass(PipeStream);
@@ -139,6 +145,19 @@
                     class Timeline;
                         class SubTimeline;
                     class TimelineGameModule;
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Typography
+                BBForwardDeclareSmartPointerClass(Font);
+                BBForwardDeclareSmartPointerClass(FontCache);
+                struct FontCacheParameters;
+                class FontLibrary;
+                class FontString;
+                class Glyph;
+                class GlyphSurface;
+                class GlyphTable;
+                class TypingContext;
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // UI
     }
 
 #endif

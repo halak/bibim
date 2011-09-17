@@ -24,9 +24,4 @@ namespace Bibim
     {
         return spacing;
     }
-
-    uint Font::GetRevision() const
-    {
-        return revision;
-    }
 }

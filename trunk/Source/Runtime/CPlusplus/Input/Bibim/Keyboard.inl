@@ -16,4 +16,14 @@ namespace Bibim
         else
             allowedKeys[index] &= ~(0x80000000 >> bit);
     }
+
+    Window* Keyboard::GetWindow() const
+    {
+        return window;
+    }
+
+    void Keyboard::SetWindow(Window* value)
+    {
+        window = value;
+    }
 }

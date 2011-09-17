@@ -3,15 +3,16 @@
 #define __BIBIM_FONT_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/Asset.h>
+#   include <Bibim/GameAsset.h>
 #   include <Bibim/Color.h>
 #   include <map>
 #   include <vector>
 
     namespace Bibim
     {
-        class Font : public Asset
+        class Font : public GameAsset
         {
+            BBReadableGameAssetClass('F', 'O', 'N', 'T');
             public:
                 typedef std::map<uint32, const Glyph*> GlyphDictionary;
 
@@ -88,8 +89,6 @@
                 float GetDescender() const;
                 float GetLineHeight() const;
 
-                inline uint GetRevision() const;
-
                 const GlyphDictionary& GetCachedRegularGlyphs() const;
                 const GlyphDictionary& GetCachedStrokedGlyphs() const;
                 const GlyphDictionary& GetCachedGlowGlyphs() const;
@@ -99,7 +98,6 @@
 
             private:
                 FontLibrary* library;
-                unsigned int revision;
 
                 float spacing;
                 Color color;
@@ -110,9 +108,6 @@
                 mutable FontCachePtr cache;
 
                 static const GlyphDictionary EmptyGlyphs;
-
-            private:
-                Font& operator = (const Font&);
         };
     }
 

@@ -14,4 +14,9 @@ namespace Bibim
     {
         return alternativeFace;
     }
+
+    void* FontLibrary::GetFTLibrary() const
+    {
+        return ftLibrary;
+    }
 }
