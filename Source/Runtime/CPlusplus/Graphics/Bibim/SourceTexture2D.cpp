@@ -76,6 +76,7 @@ namespace Bibim
         d3dSysMemTexture->Release();
 
         texture->Setup(d3dTexture, width, height, width, height);
+        texture->IncreaseRevision();
         texture->SetStatus(CompletedStatus);
     }
 }

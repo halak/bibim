@@ -23,16 +23,28 @@
             BBGameAssetClass('G', 'A', 'S', 'T');
             BBThisIsNoncopyableClass(GameAsset);
             public:
+                enum Status
+                {
+                    EmptyStatus,
+                    LoadingStatus,
+                    CompletedStatus,
+                    IncompletedStatus,
+                };
+
+            public:
                 virtual ~GameAsset();
 
+                inline Status GetStatus() const;
                 inline uint GetRevision() const;
 
             protected:
                 GameAsset();
 
+                inline void SetStatus(Status value);
                 inline void IncreaseRevision();
 
             private:
+                Status status;
                 uint revision;
         };
     }

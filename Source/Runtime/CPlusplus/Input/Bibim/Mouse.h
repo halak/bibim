@@ -3,14 +3,15 @@
 #define __BIBIM_MOUSE_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/GameComponent.h>
+#   include <Bibim/GameModule.h>
+#   include <Bibim/MouseState.h>
 #   include <Bibim/Point.h>
 
     namespace Bibim
     {
-        class Mouse : public GameComponent
+        class Mouse : public GameModule
         {
-            BBClassFOURCC('M', 'O', 'U', 'S');
+            BBGameModuleClass('M', 'O', 'U', 'S');
             public:
                 Mouse();
                 Mouse(Window* window);
@@ -20,16 +21,15 @@
 
                 void SetPosition(Point value);
 
-                Window* GetWindow();
-                void SetWindow(Window* value);
-                
-            private:
-                void OnMouseWheel(int delta);
+                inline Window* GetWindow();
+                inline void SetWindow(Window* value);
 
             private:
                 Window* window;
-                MouseState* state;
+                MouseState state;
         };
     }
+
+#   include <Bibim/Mouse.inl>
 
 #endif

@@ -27,7 +27,7 @@ namespace Bibim
     {
     }
 
-    void AssetReader::ReadAsync(GameAssetLoadingTask* task)
+    void AssetReader::ReadAsync(AssetLoadingTask* task)
     {
         BBAssertDebug(task);
         storage->Add(task);

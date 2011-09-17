@@ -71,7 +71,6 @@
                 MouseRightButton = 0x02,
                 MouseMiddleButton = 0x04,
 
-                /*
                 GamePadA = 0xF0,
                 GamePadB = 0xF1,
                 GamePadX = 0xF2,
@@ -87,7 +86,6 @@
                 GamePadRightThumb = 0xFC,
                 GamePadLeftShoulder = 0xFD,
                 GamePadRightShoulder = 0xFE,
-                */
             };
 
             static const int Count = 256;

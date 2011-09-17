@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/Rectangle.h>
+#   include <Bibim/DynamicTexture2D.h>
 
     namespace Bibim
     {
@@ -13,8 +14,8 @@
                 Rectangle Allocate(const void* buffer, int width, int height, int pitch);
                 void Deallocate(const Rectangle& rectangle);
 
-                const RectangleStorage& GetStorage() const;
-                Texture2D* GetTexture() const;
+                inline const RectangleStorage& GetStorage() const;
+                inline Texture2D* GetTexture() const;
 
             private:
                 GlyphSurface(GraphicsDevice* graphicsDevice, int width, int height);
@@ -27,5 +28,7 @@
                 friend class GlyphTable;
         };
     }
+
+#   include <Bibim/GlyphSurface.inl>
 
 #endif  

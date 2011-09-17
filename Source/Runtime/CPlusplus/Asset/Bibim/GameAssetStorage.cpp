@@ -3,7 +3,7 @@
 #include <Bibim/Assert.h>
 #include <Bibim/AssetProvider.h>
 #include <Bibim/AutoLocker.h>
-#include <Bibim/GameAssetLoadingTask.h>
+#include <Bibim/AssetLoadingTask.h>
 #include <algorithm>
 
 namespace Bibim
@@ -58,7 +58,7 @@ namespace Bibim
         }
     }
 
-    void GameAssetStorage::Add(GameAssetLoadingTask* item)
+    void GameAssetStorage::Add(AssetLoadingTask* item)
     {
         loadingThread.AddTask(item);
     }
@@ -89,7 +89,7 @@ namespace Bibim
     {
     }
 
-    void GameAssetStorage::LoadingThread::AddTask(GameAssetLoadingTask* item)
+    void GameAssetStorage::LoadingThread::AddTask(AssetLoadingTask* item)
     {
         AutoLocker locker(taskQueueLock);
         taskQueue.push(item);
@@ -101,7 +101,7 @@ namespace Bibim
         {
             if (taskQueue.empty() == false)
             {
-                GameAssetLoadingTask* task = nullptr;
+                AssetLoadingTask* task = nullptr;
                 {
                     AutoLocker locker(taskQueueLock);
                     task = taskQueue.front();

@@ -6,21 +6,16 @@
 
 namespace Bibim
 {
-    struct FontLibrary::Fields
-    {
-        FT_Library library;
-    };
-
     FontLibrary::FontLibrary()
         : graphicsDevice(nullptr),
-          m(new Fields())
+          ftLibrary(nullptr)
     {
         Construct();
     }
 
     FontLibrary::FontLibrary(GraphicsDevice* graphicsDevice)
         : graphicsDevice(graphicsDevice),
-          m(new Fields())
+          ftLibrary(nullptr)
     {
         Construct();
     }
@@ -28,8 +23,7 @@ namespace Bibim
     FontLibrary::~FontLibrary()
     {
         caches.clear();
-        FT_Done_FreeType(m->library);
-        delete m;
+        FT_Done_FreeType(static_cast<FT_Library>(ftLibrary));
     }
 
     FontCache* FontLibrary::GetCache(const FontCacheParameters& parameters)
@@ -46,14 +40,11 @@ namespace Bibim
         return caches.back().second;
     }
 
-    void* FontLibrary::GetFTLibrary() const
-    {
-        return static_cast<void*>(m->library);
-    }
-
     void FontLibrary::Construct()
     {
-        FT_Init_FreeType(&m->library);
+        FT_Library library = nullptr;
+        FT_Init_FreeType(&library);
+        ftLibrary = static_cast<void*>(library);
 
         // TODO: 글꼴 폴더 / 기본 글꼴
         std::vector<char> windowsDirectory;

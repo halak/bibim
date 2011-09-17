@@ -39,13 +39,13 @@
                 class LoadingThread : public Thread
                 {
                     public:
-                        typedef std::queue<GameAssetLoadingTask*> TaskQueue;
+                        typedef std::queue<AssetLoadingTask*> TaskQueue;
 
                     public:
                         LoadingThread();
                         virtual ~LoadingThread();
 
-                        void AddTask(GameAssetLoadingTask* item);
+                        void AddTask(AssetLoadingTask* item);
 
                         inline void RequestClose();
 
@@ -59,7 +59,7 @@
                 };
 
             private:
-                void Add(GameAssetLoadingTask* item); // call in AssetReader
+                void Add(AssetLoadingTask* item); // call in AssetReader
                 void Add(AssetProvider* item); // call in AssetProvider
                 void Remove(AssetProvider* item); // call in AssetProvider
 

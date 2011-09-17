@@ -15,7 +15,7 @@
                 AssetReader(const AssetReader& original);
                 ~AssetReader();
 
-                void ReadAsync(GameAssetLoadingTask* task);
+                void ReadAsync(AssetLoadingTask* task);
 
                 GameModule* ReadModule();
                 GameModule* ReadModule(uint32 defaultModuleClassID);
