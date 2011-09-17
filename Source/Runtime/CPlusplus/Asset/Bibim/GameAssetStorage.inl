@@ -19,4 +19,11 @@ namespace Bibim
     {
         return providers;
     }
+
+     ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    void GameAssetStorage::LoadingThread::RequestClose()
+    {
+        closed = true;
+    }
 }

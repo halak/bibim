@@ -26,14 +26,9 @@ namespace Bibim
         CommandCollection temporaryCancelledCommands;
         temporaryCancelledCommands.swap(cancelledCommands);
 
-        executed.Emit(this, command, temporaryCancelledCommands);
+        OnExecuted(command, temporaryCancelledCommands);
 
         DeleteAll(temporaryCancelledCommands);
-    }
-
-    void CommandHistory::Undo()
-    {
-        Undo(1);
     }
 
     void CommandHistory::Undo(int level)
@@ -42,14 +37,13 @@ namespace Bibim
             return;
 
         CommandCollection undoneCommands;
-        const bool signalAlive = undone.GetNumberOfSlots() > 0;
 
         for (CommandCollection::reverse_iterator it = commands.rbegin(); it != commands.rend() && level > 0; level--)
         {
             if ((*it)->IsRestorable() == false)
-                continue;
+                break;
 
-            RestorableCommand* command = dynamic_cast<RestorableCommand*>(*it);
+            RestorableCommand* command = StaticCast<RestorableCommand>(*it);
 
             command->Undo();
             cancelledCommands.push_front(command);
@@ -57,17 +51,11 @@ namespace Bibim
             commands.pop_back();
             it = commands.rbegin();
 
-            if (signalAlive)
-                undoneCommands.push_back(command);
+            undoneCommands.push_back(command);
         }
 
-        if (signalAlive && undoneCommands.empty() == false)
-            undone.Emit(this, undoneCommands);
-    }
-
-    void CommandHistory::Redo()
-    {
-        Redo(1);
+        if (undoneCommands.empty() == false)
+            OnUndone(undoneCommands);
     }
 
     void CommandHistory::Redo(int level)
@@ -76,23 +64,21 @@ namespace Bibim
             return;
 
         CommandCollection redoneCommands;
-        const bool signalAlive = redone.GetNumberOfSlots() > 0;
 
         for (CommandCollection::iterator it = cancelledCommands.begin(); it != cancelledCommands.end() && level > 0; level--)
         {
             BBAssertDebug((*it)->IsRestorable());
 
-            RestorableCommand* command = static_cast<RestorableCommand*>(*it);
+            RestorableCommand* command = StaticCast<RestorableCommand>(*it);
             command->Redo();
             commands.push_back(*it);
             cancelledCommands.erase(it++);
 
-            if (signalAlive)
-                redoneCommands.push_back(command);
+            redoneCommands.push_back(command);
         }
 
-        if (signalAlive && redoneCommands.empty() == false)
-            redone.Emit(this, redoneCommands);
+        if (redoneCommands.empty() == false)
+            OnRedone(redoneCommands);
     }
 
     void CommandHistory::ProgressTo(Command* command)
@@ -127,11 +113,6 @@ namespace Bibim
         }
     }
 
-    bool CommandHistory::CanUndo() const
-    {
-        return CanUndo(1);
-    }
-
     bool CommandHistory::CanUndo(int level) const
     {
         if (level <= 0)
@@ -139,16 +120,11 @@ namespace Bibim
 
         for (CommandCollection::const_reverse_iterator it = commands.rbegin(); it != commands.rend() && level > 0; it++, level--)
         {
-            if ((*it)->IsRestorable() && static_cast<RestorableCommand*>(*it)->CanUndo() == false)
+            if ((*it)->IsRestorable() && StaticCast<RestorableCommand>(*it)->CanUndo() == false)
                 return false;
         }
 
         return true;
-    }
-
-    bool CommandHistory::CanRedo() const
-    {
-        return CanRedo(1);
     }
 
     bool CommandHistory::CanRedo(int level) const
@@ -158,7 +134,7 @@ namespace Bibim
 
         for (CommandCollection::const_iterator it = cancelledCommands.begin(); it != cancelledCommands.end() && level > 0; it++, level--)
         {
-            if ((*it)->IsRestorable() && static_cast<RestorableCommand*>(*it)->CanRedo() == false)
+            if ((*it)->IsRestorable() && StaticCast<RestorableCommand>(*it)->CanRedo() == false)
                 return false;
         }
 
@@ -171,28 +147,15 @@ namespace Bibim
                 std::find(cancelledCommands.begin(), cancelledCommands.end(), command) != cancelledCommands.end());
     }
 
-    const CommandHistory::CommandCollection& CommandHistory::GetCommands() const
+    void CommandHistory::OnExecuted(Command* /*command*/, const CommandCollection& /*cancelledCommands*/)
     {
-        return commands;
     }
 
-    const CommandHistory::CommandCollection& CommandHistory::GetCancelledCommands() const
+    void CommandHistory::OnUndone(const CommandCollection& /*commands*/)
     {
-        return cancelledCommands;
     }
 
-    Signal<CommandHistory*, Command*, const CommandHistory::CommandCollection&>& CommandHistory::Executed()
+    void CommandHistory::OnRedone(const CommandCollection& /*commands*/)
     {
-        return executed;
-    }
-
-    Signal<CommandHistory*, const CommandHistory::CommandCollection&>& CommandHistory::Undone()
-    {
-        return undone;
-    }
-
-    Signal<CommandHistory*, const CommandHistory::CommandCollection&>& CommandHistory::Redone()
-    {
-        return redone;
     }
 }

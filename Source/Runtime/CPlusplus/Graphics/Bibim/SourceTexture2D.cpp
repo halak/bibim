@@ -1,6 +1,7 @@
 #include <Bibim/PCH.h>
 #include <Bibim/SourceTexture2D.h>
 #include <Bibim/AssetReader.h>
+#include <Bibim/GameAssetStorage.h>
 #include <Bibim/GraphicsDevice.h>
 
 namespace Bibim
@@ -78,5 +79,21 @@ namespace Bibim
         d3dSysMemTexture->Release();
 
         return nullptr;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    SourceTexture2D::LoadingTask::LoadingTask(SourceTexture2D* texture, const AssetReader& reader)
+        : texture(texture),
+          reader(reader)
+    {
+    }
+
+    SourceTexture2D::LoadingTask::~LoadingTask()
+    {
+    }
+
+    void SourceTexture2D::LoadingTask::Execute()
+    {
     }
 }

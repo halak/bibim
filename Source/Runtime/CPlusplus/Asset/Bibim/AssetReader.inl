@@ -7,7 +7,7 @@ namespace Bibim
 
     bool AssetReader::operator == (const AssetReader& right) const
     {
-        return BinaryReader::operator == (right) && modules == right.modules;
+        return BinaryReader::operator == (right) && storage == right.storage && modules == right.modules;
     }
 
     bool AssetReader::operator != (const AssetReader& right) const

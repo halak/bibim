@@ -142,7 +142,12 @@ namespace Bibim
 
         HRESULT result = D3D_OK;
 
-        result = GetD3DObject()->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, d3dParameters.hDeviceWindow, D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dParameters, &d3dDevice);
+        result = GetD3DObject()->CreateDevice(D3DADAPTER_DEFAULT,
+                                              D3DDEVTYPE_HAL,
+                                              d3dParameters.hDeviceWindow,
+                                              D3DCREATE_HARDWARE_VERTEXPROCESSING | D3DCREATE_MULTITHREADED,
+                                              &d3dParameters,
+                                              &d3dDevice);
         if (result != D3D_OK)
             throw new std::runtime_error("d3dObject->CreateDevice != D3D_OK");
 

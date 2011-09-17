@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/Texture2D.h>
+#   include <Bibim/GameAssetLoadingTask.h>
 
     namespace Bibim
     {
@@ -22,6 +23,20 @@
 
             private:
                 URI uri;
+
+            private:
+                class LoadingTask : public GameAssetLoadingTask
+                {
+                    public:
+                        LoadingTask(SourceTexture2D* texture, const AssetReader& reader);
+                        virtual ~LoadingTask();
+
+                        virtual void Execute();
+
+                    private:
+                        SourceTexture2DPtr texture;
+                        AssetReader reader;
+                };
         };
     }
 

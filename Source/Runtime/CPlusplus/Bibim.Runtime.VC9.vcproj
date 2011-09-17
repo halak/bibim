@@ -655,78 +655,54 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="Graphics"
+				Name="Threading"
 				>
 				<File
-					RelativePath=".\Graphics\Bibim\DisplaySwapChain.cpp"
+					RelativePath=".\Threading\Bibim\AutoLocker.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\DisplaySwapChain.h"
+					RelativePath=".\Threading\Bibim\AutoLocker.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\DisplaySwapChain.inl"
+					RelativePath=".\Threading\Bibim\Lock.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\DynamicTexture2D.cpp"
+					RelativePath=".\Threading\Bibim\Lock.Windows.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\DynamicTexture2D.h"
+					RelativePath=".\Threading\Bibim\Lock.Windows.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\GraphicsDevice.cpp"
+					RelativePath=".\Threading\Bibim\ManualLocker.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\GraphicsDevice.h"
+					RelativePath=".\Threading\Bibim\ManualLocker.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\GraphicsDevice.inl"
+					RelativePath=".\Threading\Bibim\ManualLocker.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\MemoryTexture2D.cpp"
+					RelativePath=".\Threading\Bibim\Thread.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\MemoryTexture2D.h"
+					RelativePath=".\Threading\Bibim\Thread.Windows.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\SourceTexture2D.cpp"
+					RelativePath=".\Threading\Bibim\Thread.Windows.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\SourceTexture2D.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\Texture2D.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\Texture2D.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\Texture2D.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\Window.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\Window.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\Window.inl"
+					RelativePath=".\Threading\Bibim\Thread.Windows.inl"
 					>
 				</File>
 			</Filter>
@@ -767,6 +743,14 @@
 				</File>
 				<File
 					RelativePath=".\Asset\Bibim\GameAssetFactory.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Asset\Bibim\GameAssetLoadingTask.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Asset\Bibim\GameAssetLoadingTask.h"
 					>
 				</File>
 				<File
@@ -915,6 +899,138 @@
 				</File>
 				<File
 					RelativePath=".\Time\Bibim\UpdateableGameModule.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Gameplay"
+				>
+				<File
+					RelativePath=".\Gameplay\Bibim\BatchCommand.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\BatchCommand.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\BatchCommand.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\Command.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\Command.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\CommandHistory.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\CommandHistory.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\CommandHistory.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\CommandQueue.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\CommandQueue.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\CommandQueue.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\RestorableCommand.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\RestorableCommand.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Graphics"
+				>
+				<File
+					RelativePath=".\Graphics\Bibim\DisplaySwapChain.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\DisplaySwapChain.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\DisplaySwapChain.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\DynamicTexture2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\DynamicTexture2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\GraphicsDevice.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\GraphicsDevice.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\GraphicsDevice.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\MemoryTexture2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\MemoryTexture2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\SourceTexture2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\SourceTexture2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\Texture2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\Texture2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\Texture2D.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\Window.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\Window.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\Window.inl"
 					>
 				</File>
 			</Filter>
