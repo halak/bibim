@@ -10,7 +10,7 @@
     {
         const Matrix4& UITransform3D::ComputeMatrix(UIVisualVisitor& visitor)
         {
-            const RectangleF bounds = visitor.GetCurrentBounds();
+            const RectF bounds = visitor.GetCurrentBounds();
 
             if (matrixChanged || lastBounds != bounds)
             {

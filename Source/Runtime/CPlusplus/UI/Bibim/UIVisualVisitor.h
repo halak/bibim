@@ -4,8 +4,8 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/Matrix4.h>
-#   include <Bibim/Rectangle.h>
-#   include <Bibim/RectangleF.h>
+#   include <Bibim/Rect.h>
+#   include <Bibim/RectF.h>
 
     namespace Bibim
     {
@@ -24,14 +24,14 @@
                 void Project(Vector2& inOutPoint0, Vector2& inOutPoint1, Vector2& inOutPoint2, Vector2& inOutPoint3) const;
                 void Project(Vector2* inOutPoints, int count) const;
 
-                inline const RectangleF& GetViewport() const;
+                inline const RectF& GetViewport() const;
                 inline float GetFieldOfView() const;
                 inline bool GetVisibleOnly() const;
 
                 inline UIVisual* GetCurrentVisual() const;
                 inline float GetCurrentOpacity() const; 
-                inline const RectangleF& GetCurrentBounds() const;
-                inline const RectangleF& GetCurrentClippedBounds() const;
+                inline const RectF& GetCurrentBounds() const;
+                inline const RectF& GetCurrentClippedBounds() const;
                 inline const Matrix4& GetCurrentTransform() const;
 
                 inline const Matrix4& GetViewTransform() const;
@@ -50,8 +50,8 @@
 
                 UIVisualPtr currentVisual;
                 float currentOpacity;
-                RectangleF currentBounds;
-                RectangleF currentClippedBounds;
+                RectF currentBounds;
+                RectF currentClippedBounds;
                 Matrix4 currentTransform;
                 Matrix4 currentTransformInv;
                 Matrix4 parentTransform;

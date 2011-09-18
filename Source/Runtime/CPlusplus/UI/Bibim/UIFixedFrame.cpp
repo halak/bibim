@@ -5,13 +5,13 @@ namespace Bibim
 {
     UIFixedFrame::UIFixedFrame()
         : UIFrame(),
-          rectangle(RectangleF::Empty)
+          Rect(RectF::Empty)
     {
     }
 
-    UIFixedFrame::UIFixedFrame(const RectangleF& rectangle)
+    UIFixedFrame::UIFixedFrame(const RectF& Rect)
         : UIFrame(),
-          rectangle(rectangle)
+          Rect(Rect)
     {
     }
 
@@ -19,14 +19,14 @@ namespace Bibim
     {
     }
 
-    bool UIFixedFrame::Setup(const RectangleF& bounds, const RectangleF& referenceBounds)
+    bool UIFixedFrame::Setup(const RectF& bounds, const RectF& referenceBounds)
     {
         return true;
     }
 
-    RectangleF UIFixedFrame::ComputeBounds(UIVisualVisitor& /*visitor*/, Vector2 desiredSize)
+    RectF UIFixedFrame::ComputeBounds(UIVisualVisitor& /*visitor*/, Vector2 desiredSize)
     {
-        RectangleF result = rectangle;
+        RectF result = Rect;
         if (desiredSize.X >= 0.0f)
             result.Width = desiredSize.X;
         if (desiredSize.Y >= 0.0f)
@@ -37,8 +37,8 @@ namespace Bibim
 
     void UIFixedFrame::Move(Vector2 displacement)
     {
-        rectangle.X += displacement.X;
-        rectangle.Y += displacement.Y;
+        Rect.X += displacement.X;
+        Rect.Y += displacement.Y;
     }
 
     bool UIFixedFrame::IsMovable() const
@@ -48,17 +48,17 @@ namespace Bibim
 
     void UIFixedFrame::Resize(float left, float top, float right, float bottom)
     {
-        const float boundsLeft   = rectangle.GetLeft() - left;
-        const float boundsTop    = rectangle.GetTop() - top;
-        const float boundsRight  = rectangle.GetRight() + right;
-        const float boundsBottom = rectangle.GetBottom() + bottom;
-        rectangle = RectangleF(boundsLeft, boundsTop, boundsRight - boundsLeft, boundsBottom - boundsTop);
+        const float boundsLeft   = Rect.GetLeft() - left;
+        const float boundsTop    = Rect.GetTop() - top;
+        const float boundsRight  = Rect.GetRight() + right;
+        const float boundsBottom = Rect.GetBottom() + bottom;
+        Rect = RectF(boundsLeft, boundsTop, boundsRight - boundsLeft, boundsBottom - boundsTop);
     }
 
     void UIFixedFrame::ResizeTo(Vector2 size)
     {
-        rectangle.Width  = size.X;
-        rectangle.Height = size.Y;
+        Rect.Width  = size.X;
+        Rect.Height = size.Y;
     }
 
     bool UIFixedFrame::IsResizable() const

@@ -11,7 +11,7 @@ namespace Bibim
         : graphicsDevice(graphicsDevice),
           window(window),
           backbufferSize(Point::Zero),
-          viewport(Rectangle::Empty),
+          viewport(Rect::Empty),
           swapChain(nullptr),
           backBuffer(nullptr)
     {
@@ -23,7 +23,7 @@ namespace Bibim
          : graphicsDevice(graphicsDevice),
            window(window),
            backbufferSize(Point::Zero),
-           viewport(Rectangle::Empty),
+           viewport(Rect::Empty),
            swapChain(nullptr),
            backBuffer(nullptr)
     {
@@ -35,7 +35,7 @@ namespace Bibim
          : graphicsDevice(graphicsDevice),
            window(window),
            backbufferSize(Point::Zero),
-           viewport(Rectangle::Empty),
+           viewport(Rect::Empty),
            swapChain(nullptr),
            backBuffer(nullptr)
     {
@@ -49,7 +49,7 @@ namespace Bibim
         if (result != D3D_OK)
             return;
 
-        SetViewport(Rectangle(0, 0, window->GetSize().X, window->GetSize().Y));
+        SetViewport(Rect(0, 0, window->GetSize().X, window->GetSize().Y));
     }
 
     DisplaySwapChain::~DisplaySwapChain()
@@ -94,7 +94,7 @@ namespace Bibim
             return;
 
         backbufferSize = size;
-        SetViewport(Rectangle(0, 0, size.X, size.Y));
+        SetViewport(Rect(0, 0, size.X, size.Y));
     }
 
     void DisplaySwapChain::BeginDraw()

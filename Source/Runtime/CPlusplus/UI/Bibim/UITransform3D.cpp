@@ -12,7 +12,7 @@ namespace Bibim
           scaleCenter(Vector2(0.5f, 0.5f)),
           scale(Vector2::One),
           matrix(),
-          lastBounds(RectangleF::Empty),
+          lastBounds(RectF::Empty),
           matrixChanged(true)
     {
     }

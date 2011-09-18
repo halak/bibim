@@ -117,15 +117,15 @@ namespace Bibim
     {
     }
 
-    Any::Any(Rectangle value)
-        : type(RectangleType),
-          value(reinterpret_cast<void*>(new SmallStorage<Rectangle>(value)))
+    Any::Any(Rect value)
+        : type(RectType),
+          value(reinterpret_cast<void*>(new SmallStorage<Rect>(value)))
     {
     }
 
-    Any::Any(RectangleF value)
-        : type(RectangleFType),
-          value(reinterpret_cast<void*>(new SmallStorage<RectangleF>(value)))
+    Any::Any(RectF value)
+        : type(RectFType),
+          value(reinterpret_cast<void*>(new SmallStorage<RectF>(value)))
     {
     }
 
@@ -297,16 +297,16 @@ namespace Bibim
         return reinterpret_cast<SmallStorage<Quaternion>*>(value)->Value;
     }
 
-    Rectangle Any::GetRectangle() const
+    Rect Any::GetRect() const
     {
-        BBAssertDebug(type == RectangleType);
-        return reinterpret_cast<SmallStorage<Rectangle>*>(value)->Value;
+        BBAssertDebug(type == RectType);
+        return reinterpret_cast<SmallStorage<Rect>*>(value)->Value;
     }
 
-    RectangleF Any::GetRectangleF() const
+    RectF Any::GetRectF() const
     {
-        BBAssertDebug(type == RectangleFType);
-        return reinterpret_cast<SmallStorage<RectangleF>*>(value)->Value;
+        BBAssertDebug(type == RectFType);
+        return reinterpret_cast<SmallStorage<RectF>*>(value)->Value;
     }
 
     const String& Any::GetString() const
@@ -494,18 +494,18 @@ namespace Bibim
             BBThrow(BadCastException());
     }
 
-    template <> inline Rectangle Any::CastTo<Rectangle>() const
+    template <> inline Rect Any::CastTo<Rect>() const
     {
-        if (type == RectangleType)
-            return GetRectangle();
+        if (type == RectType)
+            return GetRect();
         else
             BBThrow(BadCastException());
     }
 
-    template <> inline RectangleF Any::CastTo<RectangleF>() const
+    template <> inline RectF Any::CastTo<RectF>() const
     {
-        if (type == RectangleFType)
-            return GetRectangleF();
+        if (type == RectFType)
+            return GetRectF();
         else
             BBThrow(BadCastException());
     }

@@ -1,12 +1,12 @@
 #include <Bibim/PCH.h>
 #include <Bibim/GlyphSurface.h>
 #include <Bibim/DynamicTexture2D.h>
-#include <Bibim/RectangleStorage.h>
+#include <Bibim/RectStorage.h>
 
 namespace Bibim
 {
     GlyphSurface::GlyphSurface(GraphicsDevice* graphicsDevice, int width, int height)
-        : storage(new RectangleStorage(width, height)),
+        : storage(new RectStorage(width, height)),
           texture(new DynamicTexture2D(graphicsDevice, width, height, Texture2D::A8Pixels))
     {
     }
@@ -16,28 +16,28 @@ namespace Bibim
         delete storage;
     }
 
-    Rectangle GlyphSurface::Allocate(const void* buffer, int width, int height, int pitch)
+    Rect GlyphSurface::Allocate(const void* buffer, int width, int height, int pitch)
     {
         // Texture Filtering의 이유로 상하좌우 1Pixel씩을 비워둡니다.
-        Rectangle allocatedRectangle = storage->Allocate(width + 2, height + 2);
-        if (allocatedRectangle != Rectangle::Empty)
+        Rect allocatedRect = storage->Allocate(width + 2, height + 2);
+        if (allocatedRect != Rect::Empty)
         {
             DynamicTexture2D::LockedInfo lockedInfo;
-            if (texture->Lock(lockedInfo, allocatedRectangle))
+            if (texture->Lock(lockedInfo, allocatedRect))
             {
                 // 비워둔 외곽을 투명한 Pixel로 채웁니다.
                 {
                     byte* destination = static_cast<byte*>(lockedInfo.GetBuffer());
                     const int destinationPitch = lockedInfo.GetPitch() / sizeof(*destination);
 
-                    for (int x = 0; x < allocatedRectangle.Width; x++)
+                    for (int x = 0; x < allocatedRect.Width; x++)
                         destination[x] = 0x00;
 
                     destination += destinationPitch;
                     const int yFirst = 1;
-                    const int yLast  = allocatedRectangle.Height - 1;
+                    const int yLast  = allocatedRect.Height - 1;
                     const int xFirst = 0;
-                    const int xLast  = allocatedRectangle.Width - 1;
+                    const int xLast  = allocatedRect.Width - 1;
                     for (int y = yFirst; y < yLast; y++)
                     {
                         destination[xFirst] = 0x00;
@@ -45,7 +45,7 @@ namespace Bibim
                         destination += destinationPitch;
                     }
 
-                    for (int x = 0; x < allocatedRectangle.Width; x++)
+                    for (int x = 0; x < allocatedRect.Width; x++)
                         destination[x] = 0x00;
                 }
 
@@ -72,15 +72,15 @@ namespace Bibim
                 texture->Unlock(lockedInfo);
             }
 
-            return Rectangle(allocatedRectangle.X + 1, allocatedRectangle.Y + 1,
-                             allocatedRectangle.Width - 2, allocatedRectangle.Height - 2);
+            return Rect(allocatedRect.X + 1, allocatedRect.Y + 1,
+                             allocatedRect.Width - 2, allocatedRect.Height - 2);
         }
         else
-            return Rectangle::Empty;
+            return Rect::Empty;
     }
 
-    void GlyphSurface::Deallocate(const Rectangle& rectangle)
+    void GlyphSurface::Deallocate(const Rect& Rect)
     {
-        storage->Deallocate(rectangle);
+        storage->Deallocate(Rect);
     }
 }

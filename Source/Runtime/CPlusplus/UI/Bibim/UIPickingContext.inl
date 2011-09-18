@@ -1,6 +1,6 @@
 namespace Bibim
 {
-    bool UIPickingContext::Contains(const RectangleF& bounds)
+    bool UIPickingContext::Contains(const RectF& bounds)
     {
         return bounds.Contains(currentPoint);
     }

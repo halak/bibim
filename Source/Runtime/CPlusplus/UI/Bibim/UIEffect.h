@@ -3,10 +3,11 @@
 #define __BIBIM_UIEFFECT_H__
 
 #   include <Bibim/FWD.h>
+#   include <Bibim/UIElement.h>
 
     namespace Bibim
     {
-        class UIEffect
+        class UIEffect : public UIElement
         {
             public:
                 UIEffect();

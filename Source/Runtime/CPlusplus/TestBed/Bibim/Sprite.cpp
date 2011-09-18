@@ -6,12 +6,18 @@
 #include <Bibim/GameWindow.h>
 #include <Bibim/GraphicsDevice.h>
 #include <Bibim/PipedAssetProvider.h>
+#include <Bibim/FileAssetProvider.h>
 #include <Bibim/SourceTexture2D.h>
+#include <Bibim/UI.h>
 using namespace Bibim;
 
 class SpriteTest : public GameFramework
 {
-    SourceTexture2DPtr texture;
+    GameAssetStorage* storage;
+    UIDomain* uiDomain;
+    UIRenderer* uiRenderer;
+    SourceTexture2DPtr texture1;
+    SourceTexture2DPtr texture2;
 
     protected:
         virtual void Initialize()
@@ -21,23 +27,62 @@ class SpriteTest : public GameFramework
 
             GameAssetStorage*   gas = new GameAssetStorage(GetModules());
             PipedAssetProvider* pap = new PipedAssetProvider(gas, "TestAssets");
+            FileAssetProvider*  fap = new FileAssetProvider(gas, "Asset");
+            
+            UIWindowPtr window = new UIWindow();
+            window->SetFrame(new UIFixedFrame(RectF(0, 0, 800, 600)));
+
+            UIDomain*           uid = new UISimpleDomain(window);
+            UIRenderer*         uir = new UIRenderer(GetGraphicsDevice());
 
             GameModuleNode* gasNode = GetModules()->GetRoot()->AttachChild(gas);
             gasNode->AttachChild(pap);
+            gasNode->AttachChild(fap);
 
-            texture = static_cast<SourceTexture2D*>(gas->Load("Hello.png"));
+            GameModuleNode* uiNode = GetModules()->GetRoot()->AttachChild(uid);
+            uiNode->AttachChild(uir);
+
+            texture1 = static_cast<SourceTexture2D*>(gas->Load("Hello.png"));
+            texture2 = static_cast<SourceTexture2D*>(gas->Load("BigHello.jpg"));
+
+            storage = gas;
+            uiDomain = uid;
+            uiRenderer = uir;
         }
 
         virtual void Finalize()
         {
-            texture.Reset();
+            texture1.Reset();
+            texture2.Reset();
 
             GameFramework::Finalize();
         }
 
         virtual void Draw()
         {
+            GameAssetStorage::LoadingStatus status = storage->GetBackgroundLoadingStatus();
+            char title[128];
+            sprintf(title, "%d/%d", status.LoadedBytes, status.TotalBytes);
+            GetWindow()->SetTitle(title);
+
             GetGraphicsDevice()->Clear();
+            struct Handler : UIHandledDrawingContext::IHandler
+            {
+                SpriteTest* app;
+                Handler(SpriteTest* app)
+                    : app(app)
+                {
+                }
+
+                virtual void OnBegan(UIHandledDrawingContext& context)
+                {
+                    context.Draw(Vector2(0.0f, 0.0f),   app->texture1);
+                    context.Draw(Vector2(256.0f, 0.0f), app->texture2);
+                }
+            };
+            Handler handler(this);
+            UIHandledDrawingContext context(uiRenderer, &handler);
+            context.Draw(uiDomain->GetRoot());
         }
 };
 

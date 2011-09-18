@@ -1,12 +1,12 @@
 namespace Bibim
 {
-    const RectangleF& UIFixedFrame::GetRectangle() const
+    const RectF& UIFixedFrame::GetRect() const
     {
-        return rectangle;
+        return Rect;
     }
 
-    void UIFixedFrame::SetRectangle(const RectangleF& value)
+    void UIFixedFrame::SetRect(const RectF& value)
     {
-        rectangle = value;
+        Rect = value;
     }
 }

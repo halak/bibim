@@ -24,11 +24,11 @@ namespace Bibim
     {
         if (GetAutoResize() && GetImage())
         {
-            Rectangle clippingRectangle = GetImage()->GetClippingRectangle();
-            if (clippingRectangle.IsEmpty())
-                clippingRectangle = GetImage()->GetRealClippingRectangle();
-            if (clippingRectangle.IsEmpty() == false)
-                return Vector2(clippingRectangle.Width, clippingRectangle.Height);
+            Rect clippingRect = GetImage()->GetClippingRect();
+            if (clippingRect.IsEmpty())
+                clippingRect = GetImage()->GetRealClippingRect();
+            if (clippingRect.IsEmpty() == false)
+                return Vector2(clippingRect.Width, clippingRect.Height);
         }
 
         return UIVisual::GetDesiredSize();

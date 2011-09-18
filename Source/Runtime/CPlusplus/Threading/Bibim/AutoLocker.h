@@ -17,6 +17,8 @@
             private:
                 Lock& lock;
         };
+
+#       define BBAutoLock(lock) Bibim::AutoLocker lock##Locker(lock);
     }
 
 #   include <Bibim/AutoLocker.inl>

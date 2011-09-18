@@ -12,11 +12,17 @@
             BBGameModuleClass('F', 'A', 'S', 'P');
             public:
                 FileAssetProvider();
+                FileAssetProvider(GameAssetStorage* storage);
+                FileAssetProvider(GameAssetStorage* storage, const String& directory);
                 virtual ~FileAssetProvider();
 
                 virtual GameAsset* Load(const String& name);
 
+                inline const String& GetDirectory() const;
+                void SetDirectory(const String& value);
+
             private:
+                String directory;
         };
     }
 

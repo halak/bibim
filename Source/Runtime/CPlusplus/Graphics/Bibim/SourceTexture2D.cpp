@@ -28,15 +28,16 @@ namespace Bibim
         const int height = static_cast<int>(reader.ReadInt16());
 
         SourceTexture2D* texture = new SourceTexture2D(graphicsDevice, width, height);
-        reader.ReadAsync(new LoadingTask(texture, reader));
+        reader.ReadAsync(new LoadingTask(String::Empty, height, texture, reader));
 
         return texture;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    SourceTexture2D::LoadingTask::LoadingTask(SourceTexture2D* texture, const AssetReader& reader)
-        : texture(texture),
+    SourceTexture2D::LoadingTask::LoadingTask(const String& name, uint totalBytes, SourceTexture2D* texture, const AssetReader& reader)
+        : AssetLoadingTask(name, totalBytes),
+          texture(texture),
           reader(reader)
     {
     }
@@ -69,6 +70,7 @@ namespace Bibim
         {
             reader.Read(destination, pitch);
             destination += destinationPitch;
+            AddLoadedBytes(1);
         }
         d3dSysMemTexture->UnlockRect(0);
 

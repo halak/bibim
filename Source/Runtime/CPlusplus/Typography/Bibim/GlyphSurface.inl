@@ -1,6 +1,6 @@
 namespace Bibim
 {
-    const RectangleStorage& GlyphSurface::GetStorage() const
+    const RectStorage& GlyphSurface::GetStorage() const
     {
         return *storage;
     }

@@ -3,7 +3,7 @@
 #define __BIBIM_UITRANSFORM3D_H__
 
 #   include <Bibim/UITransform.h>
-#   include <Bibim/RectangleF.h>
+#   include <Bibim/RectF.h>
 #   include <Bibim/Vector2.h>
 #   include <Bibim/Vector3.h>
 
@@ -45,7 +45,7 @@
                 Vector2 scaleCenter;
                 Vector2 scale;
                 Matrix4 matrix;
-                RectangleF lastBounds;
+                RectF lastBounds;
                 bool matrixChanged;
         };
     }

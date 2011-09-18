@@ -28,7 +28,7 @@
                 virtual int Read(void* buffer, int size);
                 virtual int Write(const void* buffer, int size);
                 virtual void Flush();
-                virtual int Seek(int offset, SeekOrigin origin);
+                virtual int64 Seek(int64 offset, SeekOrigin origin);
 
                 inline const String& GetName() const;
                 inline AccessMode GetAccessMode() const;

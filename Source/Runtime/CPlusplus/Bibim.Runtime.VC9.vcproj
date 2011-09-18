@@ -238,27 +238,27 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Rectangle.cpp"
+					RelativePath=".\Foundation\Bibim\Rect.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Rectangle.h"
+					RelativePath=".\Foundation\Bibim\Rect.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Rectangle.inl"
+					RelativePath=".\Foundation\Bibim\Rect.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\RectangleF.cpp"
+					RelativePath=".\Foundation\Bibim\RectF.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\RectangleF.h"
+					RelativePath=".\Foundation\Bibim\RectF.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\RectangleF.inl"
+					RelativePath=".\Foundation\Bibim\RectF.inl"
 					>
 				</File>
 				<File
@@ -454,11 +454,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\RectangleStorage.cpp"
+					RelativePath=".\Foundation\Bibim\RectStorage.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\RectangleStorage.h"
+					RelativePath=".\Foundation\Bibim\RectStorage.h"
 					>
 				</File>
 				<File
@@ -715,6 +715,10 @@
 				</File>
 				<File
 					RelativePath=".\Asset\Bibim\AssetLoadingTask.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Asset\Bibim\AssetLoadingTask.inl"
 					>
 				</File>
 				<File
@@ -1797,6 +1801,26 @@
 						>
 					</File>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="FileSystem"
+				>
+				<File
+					RelativePath=".\FileSystem\Bibim\FileStream.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\FileStream.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\FileStream.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\FileStream.Windows.inl"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

@@ -5,7 +5,7 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
 #   include <Bibim/Point.h>
-#   include <Bibim/Rectangle.h>
+#   include <Bibim/Rect.h>
 #   include <d3d9.h>
 
     namespace Bibim
@@ -27,8 +27,8 @@
 
                 inline Point GetBackbufferSize() const;
 
-                inline const Rectangle& GetViewport() const;
-                inline void SetViewport(const Rectangle& value);
+                inline const Rect& GetViewport() const;
+                inline void SetViewport(const Rect& value);
 
             protected:
                 DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window, void* swapChainInterface);
@@ -39,7 +39,7 @@
                 GraphicsDevice* graphicsDevice;
                 Window* window;
                 Point backbufferSize;
-                Rectangle viewport;
+                Rect viewport;
 
                 IDirect3DSwapChain9* swapChain;
                 IDirect3DSurface9* backBuffer;

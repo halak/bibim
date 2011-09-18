@@ -30,8 +30,8 @@ namespace Bibim
         return texture;
     }
 
-    Rectangle Glyph::GetClippingRectangle() const
+    Rect Glyph::GetClippingRect() const
     {
-        return clippingRectangle;
+        return clippingRect;
     }
 }

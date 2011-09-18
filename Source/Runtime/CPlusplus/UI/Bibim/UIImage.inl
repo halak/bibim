@@ -5,9 +5,9 @@ namespace Bibim
         return textureURI;
     }
 
-    const Rectangle& UIImage::GetClippingRectangle() const
+    const Rect& UIImage::GetClippingRect() const
     {
-        return clippingRectangle;
+        return clippingRect;
     }
 
     Texture2D* UIImage::GetRealTexture() const
@@ -15,14 +15,14 @@ namespace Bibim
         return realTexture;
     }
 
-    const Rectangle& UIImage::GetRealClippingRectangle() const
+    const Rect& UIImage::GetRealClippingRect() const
     {
-        return realClippingRectangle;
+        return realClippingRect;
     }
 
-    const RectangleF& UIImage::GetNormalizedRealClippingRectangle() const
+    const RectF& UIImage::GetNormalizedRealClippingRect() const
     {
-        return normalizedRealClippingRectangle;
+        return normalizedRealClippingRect;
     }
 
     uint UIImage::GetRevision() const

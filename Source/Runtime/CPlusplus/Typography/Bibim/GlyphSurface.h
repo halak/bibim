@@ -3,7 +3,7 @@
 #define __BIBIM_GLYPHSURFACE_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/Rectangle.h>
+#   include <Bibim/Rect.h>
 #   include <Bibim/DynamicTexture2D.h>
 
     namespace Bibim
@@ -11,10 +11,10 @@
         class GlyphSurface
         {
             public:
-                Rectangle Allocate(const void* buffer, int width, int height, int pitch);
-                void Deallocate(const Rectangle& rectangle);
+                Rect Allocate(const void* buffer, int width, int height, int pitch);
+                void Deallocate(const Rect& Rect);
 
-                inline const RectangleStorage& GetStorage() const;
+                inline const RectStorage& GetStorage() const;
                 inline Texture2D* GetTexture() const;
 
             private:
@@ -22,7 +22,7 @@
                 ~GlyphSurface();
 
             private:
-                RectangleStorage* storage;
+                RectStorage* storage;
                 DynamicTexture2DPtr texture;
 
                 friend class GlyphTable;

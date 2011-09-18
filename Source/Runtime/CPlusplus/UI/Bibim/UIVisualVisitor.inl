@@ -15,12 +15,12 @@ namespace Bibim
         return currentOpacity;
     }
 
-    const RectangleF& UIVisualVisitor::GetCurrentBounds() const
+    const RectF& UIVisualVisitor::GetCurrentBounds() const
     {
         return currentBounds;
     }
 
-    const RectangleF& UIVisualVisitor::GetCurrentClippedBounds() const
+    const RectF& UIVisualVisitor::GetCurrentClippedBounds() const
     {
         return currentClippedBounds;
     }

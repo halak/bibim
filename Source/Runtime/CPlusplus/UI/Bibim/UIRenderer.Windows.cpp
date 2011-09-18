@@ -260,9 +260,9 @@
             FlushAndLock();
         }
 
-        void UIRenderer::Draw(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3, const RectangleF& clippingRectangle, Texture2D* texture, Color color)
+        void UIRenderer::Draw(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3, const RectF& clippingRect, Texture2D* texture, Color color)
         {
-            const RectangleF bounds = RectangleF(Vector2(Math::Min(p0.X, p1.X, p2.X, p3.X), Math::Min(p0.Y, p1.Y, p2.Y, p3.Y)),
+            const RectF bounds = RectF(Vector2(Math::Min(p0.X, p1.X, p2.X, p3.X), Math::Min(p0.Y, p1.Y, p2.Y, p3.Y)),
                                                  Vector2(Math::Max(p0.X, p1.X, p2.X, p3.X), Math::Max(p0.Y, p1.Y, p2.Y, p3.Y)));
 
             int quadSetIndex = numberOfActiveQuadSets;
@@ -306,7 +306,7 @@
                 cachedQuadSets[quadSetIndex].Bounds = bounds;
             }
             else
-                cachedQuadSets[quadSetIndex].Bounds = RectangleF::Union(cachedQuadSets[quadSetIndex].Bounds, bounds);
+                cachedQuadSets[quadSetIndex].Bounds = RectF::Union(cachedQuadSets[quadSetIndex].Bounds, bounds);
 
             QuadSet& quadSet = cachedQuadSets[quadSetIndex];
 
@@ -314,10 +314,10 @@
 
             const D3DCOLOR d3dColor = color.ToARGB();
             Vertex* localLockedVertices = &lockedVertices[quadSet.StartIndex + quadSet.Count * VerticesPerQuad];
-            localLockedVertices[0] = Vertex(D3DXVECTOR3(p0.X, p0.Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRectangle.GetLeft(),  clippingRectangle.GetTop()));
-            localLockedVertices[1] = Vertex(D3DXVECTOR3(p1.X, p1.Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRectangle.GetRight(), clippingRectangle.GetTop()));
-            localLockedVertices[2] = Vertex(D3DXVECTOR3(p2.X, p2.Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRectangle.GetLeft(),  clippingRectangle.GetBottom()));
-            localLockedVertices[3] = Vertex(D3DXVECTOR3(p3.X, p3.Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRectangle.GetRight(), clippingRectangle.GetBottom()));
+            localLockedVertices[0] = Vertex(D3DXVECTOR3(p0.X, p0.Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetLeft(),  clippingRect.GetTop()));
+            localLockedVertices[1] = Vertex(D3DXVECTOR3(p1.X, p1.Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetRight(), clippingRect.GetTop()));
+            localLockedVertices[2] = Vertex(D3DXVECTOR3(p2.X, p2.Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetLeft(),  clippingRect.GetBottom()));
+            localLockedVertices[3] = Vertex(D3DXVECTOR3(p3.X, p3.Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetRight(), clippingRect.GetBottom()));
             quadSet.Count++;
         }
 
@@ -341,7 +341,7 @@
             if (fieldOfView != value)
             {
                 fieldOfView = value;
-                lastViewport = Rectangle(-1, -1, -1, -1);
+                lastViewport = Rect(-1, -1, -1, -1);
             }
         }
 
@@ -451,7 +451,7 @@
                 return;
             }
 
-            const Rectangle currentViewport = graphicsDevice->GetViewport();
+            const Rect currentViewport = graphicsDevice->GetViewport();
             if (currentViewport != lastViewport)
             {
                 const D3DXVECTOR2 viewportSize = D3DXVECTOR2(static_cast<float>(currentViewport.Width), static_cast<float>(currentViewport.Height));

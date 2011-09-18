@@ -15,12 +15,12 @@ namespace Bibim
         return backbufferSize;
     }
 
-    const Rectangle& DisplaySwapChain::GetViewport() const
+    const Rect& DisplaySwapChain::GetViewport() const
     {
         return viewport;
     }
 
-    void DisplaySwapChain::SetViewport(const Rectangle& value)
+    void DisplaySwapChain::SetViewport(const Rect& value)
     {
         viewport = value;
     }

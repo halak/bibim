@@ -5,8 +5,8 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
 #   include <Bibim/Matrix4.h>
-#   include <Bibim/Rectangle.h>
-#   include <Bibim/RectangleF.h>
+#   include <Bibim/Rect.h>
+#   include <Bibim/RectF.h>
 #   include <Bibim/Vector2.h>
 #   include <Bibim/Vector3.h>
 #   include <deque>
@@ -28,7 +28,7 @@
                 void EnterStringRenderMode();
                 void LeaveStringRenderMode();
 
-                void Draw(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3, const RectangleF& clippingRectangle, Texture2D* texture, Color color);
+                void Draw(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3, const RectF& clippingRect, Texture2D* texture, Color color);
                 void Draw(int count, const Vector2* points, Color color);
 
                 inline GraphicsDevice* GetGraphicsDevice() const;
@@ -43,7 +43,7 @@
                 inline const Matrix4& GetInversedProjectionTransform();
 
             private:
-                int PrepareCache(const RectangleF bounds, Texture2D* texture);
+                int PrepareCache(const RectF bounds, Texture2D* texture);
 
             private:
                 struct Vertex
@@ -79,7 +79,7 @@
                     int Count;
                     Texture2DPtr Texture;
                     void* Effect;
-                    RectangleF Bounds;
+                    RectF Bounds;
 
                     inline QuadSet();
                 };
@@ -107,7 +107,7 @@
                 int vbSize;
                 int capacityPerQuad;
 
-                Rectangle lastViewport;
+                Rect lastViewport;
 
                 static const unsigned short TrianglesPerQuad;
                 static const unsigned short VerticesPerQuad;

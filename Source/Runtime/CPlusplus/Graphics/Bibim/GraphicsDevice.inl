@@ -10,7 +10,7 @@ namespace Bibim
         return fullscreen;
     }
 
-    const Rectangle& GraphicsDevice::GetViewport() const
+    const Rect& GraphicsDevice::GetViewport() const
     {
         return viewport;
     }

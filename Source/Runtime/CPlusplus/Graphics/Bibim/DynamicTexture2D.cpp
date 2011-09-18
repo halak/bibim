@@ -73,16 +73,16 @@ namespace Bibim
 
     bool DynamicTexture2D::Lock(LockedInfo& outLockedInfo)
     {
-        return Lock(outLockedInfo, Rectangle(0, 0, GetWidth(), GetHeight()));
+        return Lock(outLockedInfo, Rect(0, 0, GetWidth(), GetHeight()));
     }
 
-    bool DynamicTexture2D::Lock(LockedInfo& outLockedInfo, const Rectangle& rectangle)
+    bool DynamicTexture2D::Lock(LockedInfo& outLockedInfo, const Rect& Rect)
     {
         if (IsLocked())
             return false;
 
         D3DLOCKED_RECT lockInfo = { 0, };
-        RECT d3dLockingRect = { rectangle.GetLeft(), rectangle.GetTop(), rectangle.GetRight(), rectangle.GetBottom() };
+        RECT d3dLockingRect = { Rect.GetLeft(), Rect.GetTop(), Rect.GetRight(), Rect.GetBottom() };
 
         HRESULT result = GetD3DTexture()->LockRect(0, &lockInfo, &d3dLockingRect, 0x00000000);
         if (result == D3D_OK)

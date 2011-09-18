@@ -71,7 +71,8 @@ namespace Halak.Bibim.Toolkit.Console
             FileStream fileStream = new FileStream(destinationFilePath, FileMode.Create, FileAccess.Write);
             StreamWriter w = new StreamWriter(fileStream);
 
-            string definition = string.Format("__{0}_ALL_H__", libraryName.ToUpper());
+            string guid = Guid.NewGuid().ToString();
+            string definition = string.Format("__{0}_{1}_ALL_H__", libraryName.ToUpper(), guid.Replace('-', '_').ToUpper());
             w.WriteLine("#pragma once");
             w.Write("#ifndef ");
             w.WriteLine(definition);

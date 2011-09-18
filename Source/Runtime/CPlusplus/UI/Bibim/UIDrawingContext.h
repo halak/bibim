@@ -18,17 +18,17 @@
 
                 inline void Draw(UIImage* image);
                 inline void Draw(UIImage* image, bool horizontalFlip, bool verticalFlip);
-                void Draw(const RectangleF& bounds, const RectangleF& clippedBounds, UIImage* image, bool horizontalFlip, bool verticalFlip);
+                void Draw(const RectF& bounds, const RectF& clippedBounds, UIImage* image, bool horizontalFlip, bool verticalFlip);
                 void Draw(Vector2 position, Texture2D* texture);
 
                 inline void DrawString(Font* font, const String& text);
                 inline void DrawString(const FontString& fontString);
                 inline void DrawString(Vector2 position, Font* font, const String& text);
-                void DrawString(const RectangleF& bounds, const RectangleF& clippedBounds, Font* font, const String& text);
-                void DrawString(const RectangleF& bounds, const RectangleF& clippedBounds, const FontString& fontString);
-                void DrawRectangle(const RectangleF& bounds, float width, Color color);
+                void DrawString(const RectF& bounds, const RectF& clippedBounds, Font* font, const String& text);
+                void DrawString(const RectF& bounds, const RectF& clippedBounds, const FontString& fontString);
+                void DrawRect(const RectF& bounds, float width, Color color);
 
-                void FillRectangle(const RectangleF& bounds, float width, Color color);
+                void FillRect(const RectF& bounds, float width, Color color);
 
             protected:
                 inline void DrawChild(UIVisual* target);

@@ -24,8 +24,8 @@
                 struct Point;
                 struct Quaternion;
                 template <typename T> struct Range;
-                struct Rectangle;
-                struct RectangleF;
+                struct Rect;
+                struct RectF;
                 class String;
                 class URI;
                 struct UUID;
@@ -47,8 +47,8 @@
                 typedef Range<Color>      ColorRange;
                 typedef Range<Point>      PointRange;
                 typedef Range<Quaternion> QuaternionRange;
-                typedef Range<Rectangle>  RectangleRange;
-                typedef Range<RectangleF> RectangleFRange;
+                typedef Range<Rect>       RectRange;
+                typedef Range<RectF> RectFRange;
                 typedef Range<Vector2>    Vector2Range;
                 typedef Range<Vector3>    Vector3Range;
                 typedef Range<Vector4>    Vector4Range;
@@ -81,7 +81,7 @@
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Utility
                 template <typename T> class Property;
-                class RectangleStorage;
+                class RectStorage;
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // 02. Framework
             ////////////////////////////////////////////////////////////////////////////////////////////////////
