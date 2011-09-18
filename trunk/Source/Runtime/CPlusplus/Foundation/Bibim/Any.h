@@ -7,8 +7,8 @@
 #   include <Bibim/Matrix4.h>
 #   include <Bibim/Point.h>
 #   include <Bibim/Quaternion.h>
-#   include <Bibim/Rectangle.h>
-#   include <Bibim/RectangleF.h>
+#   include <Bibim/Rect.h>
+#   include <Bibim/RectF.h>
 #   include <Bibim/String.h>
 #   include <Bibim/URI.h>
 #   include <Bibim/UUID.h>
@@ -44,8 +44,8 @@
                     Matrix4Type,
                     PointType,
                     QuaternionType,
-                    RectangleType,
-                    RectangleFType,
+                    RectType,
+                    RectFType,
                     StringType,
                     URIType,
                     UUIDType,
@@ -75,8 +75,8 @@
                 inline Any(const Matrix4& value);
                 inline Any(Point value);
                 inline Any(Quaternion value);
-                inline Any(Rectangle value);
-                inline Any(RectangleF value);
+                inline Any(Rect value);
+                inline Any(RectF value);
                 inline Any(const char* value);
                 inline Any(const String& value);
                 inline Any(const URI& value);
@@ -107,8 +107,8 @@
                 inline const Matrix4& GetMatrix4() const;
                 inline Point GetPoint() const;
                 inline Quaternion GetQuaternion() const;
-                inline Rectangle GetRectangle() const;
-                inline RectangleF GetRectangleF() const;
+                inline Rect GetRect() const;
+                inline RectF GetRectF() const;
                 inline const String& GetString() const;
                 inline const URI& GetURI() const;
                 inline UUID GetUUID() const;

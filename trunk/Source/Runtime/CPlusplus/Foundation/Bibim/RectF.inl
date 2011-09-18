@@ -1,21 +1,21 @@
 namespace Bibim
 {
-    RectangleF::RectangleF()
+    RectF::RectF()
         : X(0.0f), Y(0.0f), Width(0.0f), Height(0.0f)
     {
     }
 
-    RectangleF::RectangleF(float x, float y, float width, float height)
+    RectF::RectF(float x, float y, float width, float height)
         : X(x), Y(y), Width(width), Height(height)
     {
     }
 
-    RectangleF::RectangleF(int x, int y, int width, int height)
+    RectF::RectF(int x, int y, int width, int height)
         : X(static_cast<float>(x)), Y(static_cast<float>(y)), Width(static_cast<float>(width)), Height(static_cast<float>(height))
     {
     }
 
-    RectangleF::RectangleF(Vector2 leftTop, Vector2 rightBottom)
+    RectF::RectF(Vector2 leftTop, Vector2 rightBottom)
         : X(leftTop.X),
           Y(leftTop.Y),
           Width(rightBottom.X - leftTop.X),
@@ -23,47 +23,47 @@ namespace Bibim
     {
     }
 
-    RectangleF::RectangleF(const RectangleF& original)
+    RectF::RectF(const RectF& original)
         : X(original.X), Y(original.Y), Width(original.Width), Height(original.Height)
     {
     }
 
-    float RectangleF::GetLeft() const
+    float RectF::GetLeft() const
     {
         return X;
     }
 
-    float RectangleF::GetTop() const
+    float RectF::GetTop() const
     {
         return Y;
     }
 
-    float RectangleF::GetRight() const
+    float RectF::GetRight() const
     {
         return X + Width;
     }
 
-    float RectangleF::GetBottom() const
+    float RectF::GetBottom() const
     {
         return Y + Height;
     }
 
-    float RectangleF::GetCenter() const
+    float RectF::GetCenter() const
     {
         return X + Width * 0.5f;
     }
 
-    float RectangleF::GetMiddle() const
+    float RectF::GetMiddle() const
     {
         return Y + Height * 0.5f;
     }
 
-    Vector2 RectangleF::GetCenterPoint() const
+    Vector2 RectF::GetCenterPoint() const
     {
         return Vector2(GetCenter(), GetMiddle());
     }
 
-    void RectangleF::SetLeft(float value)
+    void RectF::SetLeft(float value)
     {
         const float right = GetRight();
 
@@ -71,7 +71,7 @@ namespace Bibim
         Width = right - X;
     }
 
-    void RectangleF::SetTop(float value)
+    void RectF::SetTop(float value)
     {
         const float bottom = GetBottom();
 
@@ -79,28 +79,28 @@ namespace Bibim
         Height = bottom - Y;
     }
 
-    void RectangleF::SetRight(float value)
+    void RectF::SetRight(float value)
     {
         Width = value - X;
     }
 
-    void RectangleF::SetBottom(float value)
+    void RectF::SetBottom(float value)
     {
         Height = value - Y;
     }
 
-    bool RectangleF::Contains(Vector2 p) const
+    bool RectF::Contains(Vector2 p) const
     {
         return GetLeft() <= p.X && p.X <= GetRight() &&
                GetTop()  <= p.Y && p.Y <= GetBottom();
     }
 
-    bool RectangleF::IsEmpty() const
+    bool RectF::IsEmpty() const
     {
         return Width == 0.0f || Height == 0.0f;
     }
 
-    RectangleF& RectangleF::operator = (const RectangleF& right)
+    RectF& RectF::operator = (const RectF& right)
     {
         X      = right.X;
         Y      = right.Y;
@@ -109,12 +109,12 @@ namespace Bibim
         return *this;
     }
 
-    bool RectangleF::operator == (const RectangleF& right) const
+    bool RectF::operator == (const RectF& right) const
     {
         return X == right.X && Y == right.Y && Width == right.Width && Height == right.Height;
     }
 
-    bool RectangleF::operator != (const RectangleF& right) const
+    bool RectF::operator != (const RectF& right) const
     {
         return !operator == (right);
     }

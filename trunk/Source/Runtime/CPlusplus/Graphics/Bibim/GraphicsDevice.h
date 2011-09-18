@@ -5,7 +5,7 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
 #   include <Bibim/Color.h>
-#   include <Bibim/Rectangle.h>
+#   include <Bibim/Rect.h>
 #   include <vector>
 #   include <d3d9.h>
 
@@ -31,8 +31,8 @@
                 inline bool GetFullscreen() const;
                 void SetFullscreen(bool value);
 
-                inline const Rectangle& GetViewport() const;
-                void SetViewport(const Rectangle& value);
+                inline const Rect& GetViewport() const;
+                void SetViewport(const Rect& value);
 
                 DisplaySwapChain* GetDefaultSwapChain();
 
@@ -56,7 +56,7 @@
                 DisplaySwapChain* defaultSwapChain;
                 std::vector<DisplaySwapChain*> swapChains;
 
-                Rectangle viewport;
+                Rect viewport;
                 bool fullscreen;
 
                 friend class DisplaySwapChain;

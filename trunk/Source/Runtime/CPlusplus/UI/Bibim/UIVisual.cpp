@@ -43,7 +43,7 @@ namespace Bibim
             parent->SendChildToBack(this);
     }
 
-    RectangleF UIVisual::ComputeBounds(UIVisualVisitor& visitor)
+    RectF UIVisual::ComputeBounds(UIVisualVisitor& visitor)
     {
         return GetFrame()->ComputeBounds(visitor, GetDesiredSize());
     }

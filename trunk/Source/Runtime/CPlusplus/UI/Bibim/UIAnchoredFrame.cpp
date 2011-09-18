@@ -11,13 +11,13 @@ namespace Bibim
     {
     }
 
-    bool UIAnchoredFrame::Setup(const RectangleF& bounds, const RectangleF& referenceBounds)
+    bool UIAnchoredFrame::Setup(const RectF& bounds, const RectF& referenceBounds)
     {
         return true;
     }
 
-    RectangleF UIAnchoredFrame::ComputeBounds(UIVisualVisitor& /*visitor*/, Vector2 /*desiredSize*/)
+    RectF UIAnchoredFrame::ComputeBounds(UIVisualVisitor& /*visitor*/, Vector2 /*desiredSize*/)
     {
-        return RectangleF::Empty;
+        return RectF::Empty;
     }
 }

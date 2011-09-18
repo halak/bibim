@@ -1,16 +1,16 @@
 namespace Bibim
 {
-    Rectangle::Rectangle()
+    Rect::Rect()
         : X(0), Y(0), Width(0), Height(0)
     {
     }
 
-    Rectangle::Rectangle(int x, int y, int width, int height)
+    Rect::Rect(int x, int y, int width, int height)
         : X(x), Y(y), Width(width), Height(height)
     {
     }
 
-    Rectangle::Rectangle(Point leftTop, Point rightBottom)
+    Rect::Rect(Point leftTop, Point rightBottom)
         : X(leftTop.X),
           Y(leftTop.Y),
           Width(rightBottom.X - leftTop.X),
@@ -18,47 +18,47 @@ namespace Bibim
     {
     }
 
-    Rectangle::Rectangle(const Rectangle& original)
+    Rect::Rect(const Rect& original)
         : X(original.X), Y(original.Y), Width(original.Width), Height(original.Height)
     {
     }
 
-    int Rectangle::GetLeft() const
+    int Rect::GetLeft() const
     {
         return X;
     }
 
-    int Rectangle::GetTop() const
+    int Rect::GetTop() const
     {
         return Y;
     }
 
-    int Rectangle::GetRight() const
+    int Rect::GetRight() const
     {
         return X + Width;
     }
 
-    int Rectangle::GetBottom() const
+    int Rect::GetBottom() const
     {
         return Y + Height;
     }
 
-    int Rectangle::GetCenter() const
+    int Rect::GetCenter() const
     {
         return X + Width / 2;
     }
 
-    int Rectangle::GetMiddle() const
+    int Rect::GetMiddle() const
     {
         return Y + Height / 2;
     }
 
-    Point Rectangle::GetCenterPoint() const
+    Point Rect::GetCenterPoint() const
     {
         return Point(GetCenter(), GetMiddle());
     }
 
-    void Rectangle::SetLeft(int value)
+    void Rect::SetLeft(int value)
     {
         const int right = GetRight();
 
@@ -66,7 +66,7 @@ namespace Bibim
         Width = right - X;
     }
 
-    void Rectangle::SetTop(int value)
+    void Rect::SetTop(int value)
     {
         const int bottom = GetBottom();
 
@@ -74,28 +74,28 @@ namespace Bibim
         Height = bottom - Y;
     }
 
-    void Rectangle::SetRight(int value)
+    void Rect::SetRight(int value)
     {
         Width = value - X;
     }
 
-    void Rectangle::SetBottom(int value)
+    void Rect::SetBottom(int value)
     {
         Height = value - Y;
     }
 
-    bool Rectangle::Contains(Point p) const
+    bool Rect::Contains(Point p) const
     {
         return GetLeft() <= p.X && p.X <= GetRight() &&
                GetTop()  <= p.Y && p.Y <= GetBottom();
     }
 
-    bool Rectangle::IsEmpty() const
+    bool Rect::IsEmpty() const
     {
         return Width == 0 || Height == 0;
     }
 
-    Rectangle& Rectangle::operator = (const Rectangle& right)
+    Rect& Rect::operator = (const Rect& right)
     {
         X      = right.X;
         Y      = right.Y;
@@ -104,12 +104,12 @@ namespace Bibim
         return *this;
     }
 
-    bool Rectangle::operator == (const Rectangle& right) const
+    bool Rect::operator == (const Rect& right) const
     {
         return X == right.X && Y == right.Y && Width == right.Width && Height == right.Height;
     }
 
-    bool Rectangle::operator != (const Rectangle& right) const
+    bool Rect::operator != (const Rect& right) const
     {
         return !operator == (right);
     }

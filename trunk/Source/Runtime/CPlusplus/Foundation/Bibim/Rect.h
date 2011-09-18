@@ -1,23 +1,23 @@
 #pragma once
-#ifndef __BIBIM_RECTANGLE_H__
-#define __BIBIM_RECTANGLE_H__
+#ifndef __BIBIM_RECT_H__
+#define __BIBIM_RECT_H__
 
 #   include <Bibim/Foundation.h>
 #   include <Bibim/Point.h>
 
     namespace Bibim
     {
-        struct Rectangle
+        struct Rect
         {
             int X;
             int Y;
             int Width;
             int Height;
 
-            inline Rectangle();
-            inline Rectangle(int x, int y, int width, int height);
-            inline Rectangle(Point leftTop, Point rightBottom);
-            inline Rectangle(const Rectangle& original);
+            inline Rect();
+            inline Rect(int x, int y, int width, int height);
+            inline Rect(Point leftTop, Point rightBottom);
+            inline Rect(const Rect& original);
 
             inline int GetLeft() const;
             inline int GetTop() const;
@@ -36,18 +36,18 @@
 
             inline bool IsEmpty() const;
 
-            inline Rectangle& operator = (const Rectangle& right);
+            inline Rect& operator = (const Rect& right);
             
-            inline bool operator == (const Rectangle& right) const;
-            inline bool operator != (const Rectangle& right) const;
+            inline bool operator == (const Rect& right) const;
+            inline bool operator != (const Rect& right) const;
 
-            static Rectangle Intersect(const Rectangle& a, const Rectangle& b);
-            static Rectangle Union(const Rectangle& a, const Rectangle& b);
+            static Rect Intersect(const Rect& a, const Rect& b);
+            static Rect Union(const Rect& a, const Rect& b);
 
-            static const Rectangle Empty;
+            static const Rect Empty;
         };
     }
 
-#   include <Bibim/Rectangle.inl>
+#   include <Bibim/Rect.inl>
 
 #endif

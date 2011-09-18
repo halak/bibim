@@ -16,7 +16,7 @@
 
                 bool Pick(UIVisual* target);
 
-                inline bool Contains(const RectangleF& bounds);
+                inline bool Contains(const RectF& bounds);
 
                 inline Vector2 GetPoint() const;
                 inline Vector2 GetCurrentPoint() const;

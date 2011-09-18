@@ -37,7 +37,7 @@ namespace Bibim
         isDrawing = false;
     }
 
-    void UIDrawingContext::Draw(const RectangleF& bounds, const RectangleF& clippedBounds, UIImage* image, bool horizontalFlip, bool verticalFlip)
+    void UIDrawingContext::Draw(const RectF& bounds, const RectF& clippedBounds, UIImage* image, bool horizontalFlip, bool verticalFlip)
     {
         BBAssertDebug(image && image->GetRealTexture() && renderer);
 
@@ -46,16 +46,16 @@ namespace Bibim
         const float boundsClippedRight  = (bounds.GetRight() - clippedBounds.GetRight()) / bounds.Width;
         const float boundsClippedBottom = (bounds.GetBottom() - clippedBounds.GetBottom()) / bounds.Height;
 
-        RectangleF clippingRectangle = image->GetNormalizedRealClippingRectangle();
-        const float clippingLeft   = clippingRectangle.GetLeft() + boundsClippedLeft;
-        const float clippingTop    = clippingRectangle.GetTop() + boundsClippedTop;
-        const float clippingRight  = clippingRectangle.GetRight() - boundsClippedRight;
-        const float clippingBottom = clippingRectangle.GetBottom() - boundsClippedBottom;
+        RectF clippingRect = image->GetNormalizedRealClippingRect();
+        const float clippingLeft   = clippingRect.GetLeft() + boundsClippedLeft;
+        const float clippingTop    = clippingRect.GetTop() + boundsClippedTop;
+        const float clippingRight  = clippingRect.GetRight() - boundsClippedRight;
+        const float clippingBottom = clippingRect.GetBottom() - boundsClippedBottom;
 
-        clippingRectangle.X = clippingLeft;
-        clippingRectangle.Y = clippingTop;
-        clippingRectangle.Width  = (horizontalFlip == false) ? clippingRight - clippingLeft : clippingLeft - clippingRight;
-        clippingRectangle.Height = (verticalFlip   == false) ? clippingBottom - clippingTop : clippingTop - clippingBottom;
+        clippingRect.X = clippingLeft;
+        clippingRect.Y = clippingTop;
+        clippingRect.Width  = (horizontalFlip == false) ? clippingRight - clippingLeft : clippingLeft - clippingRight;
+        clippingRect.Height = (verticalFlip   == false) ? clippingBottom - clippingTop : clippingTop - clippingBottom;
 
         Vector2 points[] =
         {
@@ -66,36 +66,36 @@ namespace Bibim
         };
         Project(points[0], points[1], points[2], points[3]);
 
-        renderer->Draw(points[0], points[1], points[2], points[3], clippingRectangle, image->GetRealTexture(), Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())));
+        renderer->Draw(points[0], points[1], points[2], points[3], clippingRect, image->GetRealTexture(), Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())));
     }
 
     void UIDrawingContext::Draw(Vector2 position, Texture2D* texture)
     {
         BBAssertDebug(texture && renderer);
 
-        const RectangleF drawingRectangle = RectangleF(position.X,
+        const RectF drawingRect = RectF(position.X,
                                                        position.Y,
                                                        static_cast<float>(texture->GetWidth()),
                                                        static_cast<float>(texture->GetHeight()));
 
         Vector2 points[] =
         {
-            Vector2(drawingRectangle.GetLeft()  - 0.5f, drawingRectangle.GetTop() - 0.5f),
-            Vector2(drawingRectangle.GetRight() - 0.5f, drawingRectangle.GetTop() - 0.5f),
-            Vector2(drawingRectangle.GetLeft()  - 0.5f, drawingRectangle.GetBottom() - 0.5f),
-            Vector2(drawingRectangle.GetRight() - 0.5f, drawingRectangle.GetBottom() - 0.5f),
+            Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetTop() - 0.5f),
+            Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetTop() - 0.5f),
+            Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetBottom() - 0.5f),
+            Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetBottom() - 0.5f),
         };
         Project(points[0], points[1], points[2], points[3]);
 
-        renderer->Draw(points[0], points[1], points[2], points[3], RectangleF(0.0f, 0.0f, 1.0f, 1.0f), texture, Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())));
+        renderer->Draw(points[0], points[1], points[2], points[3], RectF(0.0f, 0.0f, 1.0f, 1.0f), texture, Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())));
     }
 
-    void UIDrawingContext::DrawString(const RectangleF& bounds, const RectangleF& clippedBounds, Font* font, const String& text)
+    void UIDrawingContext::DrawString(const RectF& bounds, const RectF& clippedBounds, Font* font, const String& text)
     {
         DrawString(bounds, clippedBounds, FontString(font, text));
     }
 
-    void UIDrawingContext::DrawString(const RectangleF& bounds, const RectangleF& clippedBounds, const FontString& fontString)
+    void UIDrawingContext::DrawString(const RectF& bounds, const RectF& clippedBounds, const FontString& fontString)
     {
         BBAssertDebug(renderer);
 
@@ -108,7 +108,7 @@ namespace Bibim
 
         struct DrawGlyphs
         {
-            static void Do(UIDrawingContext* self, TypingContext& context, UIRenderer* renderer, const RectangleF& bounds, const RectangleF& clippedBounds, const FontString::GlyphCollection& glyphs, Color color)
+            static void Do(UIDrawingContext* self, TypingContext& context, UIRenderer* renderer, const RectF& bounds, const RectF& clippedBounds, const FontString::GlyphCollection& glyphs, Color color)
             {
                 while (context.MoveNext())
                 {
@@ -116,25 +116,25 @@ namespace Bibim
 
                     const float tw = 1.0f / static_cast<float>(glyph->GetTexture()->GetWidth());
                     const float th = 1.0f / static_cast<float>(glyph->GetTexture()->GetHeight());
-                    RectangleF clippingRectangle = RectangleF(glyph->GetClippingRectangle().X, glyph->GetClippingRectangle().Y, glyph->GetClippingRectangle().Width, glyph->GetClippingRectangle().Height);
-                    clippingRectangle.X *= tw;
-                    clippingRectangle.Y *= th;
-                    clippingRectangle.Width  *= tw;
-                    clippingRectangle.Height *= th;
+                    RectF clippingRect = RectF(glyph->GetClippingRect().X, glyph->GetClippingRect().Y, glyph->GetClippingRect().Width, glyph->GetClippingRect().Height);
+                    clippingRect.X *= tw;
+                    clippingRect.Y *= th;
+                    clippingRect.Width  *= tw;
+                    clippingRect.Height *= th;
 
-                    const RectangleF drawingRectangle = RectangleF(bounds.X + context.GetPosition().X + glyph->GetBitmapOffset().X,
+                    const RectF drawingRect = RectF(bounds.X + context.GetPosition().X + glyph->GetBitmapOffset().X,
                                                                    bounds.Y + context.GetPosition().Y + glyph->GetBitmapOffset().Y,
                                                                    glyph->GetBitmapSize().X,
                                                                    glyph->GetBitmapSize().Y);
                     Vector2 points[4] = 
                     {
-                        Vector2(drawingRectangle.GetLeft()  - 0.5f, drawingRectangle.GetTop() - 0.5f),
-                        Vector2(drawingRectangle.GetRight() - 0.5f, drawingRectangle.GetTop() - 0.5f),
-                        Vector2(drawingRectangle.GetLeft()  - 0.5f, drawingRectangle.GetBottom() - 0.5f),
-                        Vector2(drawingRectangle.GetRight() - 0.5f, drawingRectangle.GetBottom() - 0.5f),
+                        Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetTop() - 0.5f),
+                        Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetTop() - 0.5f),
+                        Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetBottom() - 0.5f),
+                        Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetBottom() - 0.5f),
                     };
                     self->Project(points[0], points[1], points[2], points[3]);
-                    renderer->Draw(points[0], points[1], points[2], points[3], clippingRectangle, glyph->GetTexture(), color);
+                    renderer->Draw(points[0], points[1], points[2], points[3], clippingRect, glyph->GetTexture(), color);
                 }
             }
         };
@@ -156,13 +156,13 @@ namespace Bibim
         renderer->LeaveStringRenderMode();
     }
 
-    void UIDrawingContext::DrawRectangle(const RectangleF& bounds, float width, Color color)
+    void UIDrawingContext::DrawRect(const RectF& bounds, float width, Color color)
     {
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
-        //renderer->DrawRectangle(bounds, color);
+        //renderer->DrawRect(bounds, color);
     }
 
-    void UIDrawingContext::FillRectangle(const RectangleF& bounds, float width, Color color)
+    void UIDrawingContext::FillRect(const RectF& bounds, float width, Color color)
     {
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
     }

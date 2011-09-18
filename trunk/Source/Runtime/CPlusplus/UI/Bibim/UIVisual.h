@@ -24,7 +24,7 @@
                 void BringToFront();
                 void SendToBack();
 
-                RectangleF ComputeBounds(UIVisualVisitor& visitor);
+                RectF ComputeBounds(UIVisualVisitor& visitor);
 
                 inline float GetOpacity() const;
                 void SetOpacity(float value);

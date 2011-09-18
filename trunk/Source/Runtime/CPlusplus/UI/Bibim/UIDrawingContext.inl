@@ -22,7 +22,7 @@ namespace Bibim
 
     void UIDrawingContext::DrawString(Vector2 position, Font* font, const String& text)
     {
-        DrawString(RectangleF(position.X, position.Y, 10000.0f, 10000.0f), RectangleF(-10000.0f, -10000.0f, 20000.0f, 20000.0f), font, text);
+        DrawString(RectF(position.X, position.Y, 10000.0f, 10000.0f), RectF(-10000.0f, -10000.0f, 20000.0f, 20000.0f), font, text);
     }
 
     void UIDrawingContext::DrawChild(UIVisual* target)

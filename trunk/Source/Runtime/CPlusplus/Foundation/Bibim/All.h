@@ -1,8 +1,8 @@
 #pragma once
-#ifndef __BIBIM_ALL_H__
-#define __BIBIM_ALL_H__
+#ifndef __BIBIM_59E3271E_6D1A_4213_A50E_B6B62BB74027_ALL_H__
+#define __BIBIM_59E3271E_6D1A_4213_A50E_B6B62BB74027_ALL_H__
 
-   // This file was "AUTOMATICALLY GENERATED" by Bibim Console (9/18/2011 12:02:05 AM)
+   // This file was "AUTOMATICALLY GENERATED" by Bibim Console (9/18/2011 1:06:12 PM)
    // > Halak.Bibim.Toolkit.Console.exe CppHeaderGenerator full [Library-Name] [Source-Directory] [Header-File]
 
 
@@ -48,9 +48,9 @@
 #  include <Bibim/Property.h>
 #  include <Bibim/Quaternion.h>
 #  include <Bibim/Range.h>
-#  include <Bibim/Rectangle.h>
-#  include <Bibim/RectangleF.h>
-#  include <Bibim/RectangleStorage.h>
+#  include <Bibim/Rect.h>
+#  include <Bibim/RectF.h>
+#  include <Bibim/RectStorage.h>
 #  include <Bibim/SequenceDictionary.h>
 #  include <Bibim/SharedObject.h>
 #  include <Bibim/SharedObjectLife.h>

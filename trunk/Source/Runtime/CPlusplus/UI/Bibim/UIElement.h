@@ -9,6 +9,11 @@
 
     namespace Bibim
     {
+#       define BBUIElementClass(a, b, c, d) public: \
+                                                static const uint32 ClassID = BBMakeFOURCC(a, b, c, d); \
+                                                virtual uint32 GetClassID() const { return ClassID; } \
+                                            private:
+
         class UIElement : public SharedObject
         {
             BBThisIsNoncopyableClass(UIElement);

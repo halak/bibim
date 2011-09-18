@@ -10,13 +10,13 @@
 namespace Bibim
 {
     static const float BigFloat = 10000.0f;
-    static const RectangleF BigRectangle = RectangleF(-BigFloat, -BigFloat, BigFloat + BigFloat, BigFloat + BigFloat);
+    static const RectF BigRect = RectF(-BigFloat, -BigFloat, BigFloat + BigFloat, BigFloat + BigFloat);
 
     UIVisualVisitor::UIVisualVisitor(const Matrix4& viewTransform, const Matrix4& projectionTransform, bool visibleOnly)
         : visibleOnly(visibleOnly),
           currentOpacity(1.0f),
-          currentBounds(BigRectangle),
-          currentClippedBounds(BigRectangle),
+          currentBounds(BigRect),
+          currentClippedBounds(BigRect),
           currentTransform(Matrix4::Identity),
           currentTransformInv(Matrix4::Identity),
           parentTransform(Matrix4::Identity),
@@ -30,8 +30,8 @@ namespace Bibim
     UIVisualVisitor::UIVisualVisitor(const Matrix4& viewTransform, const Matrix4& viewTransformInv, const Matrix4& projectionTransform, bool visibleOnly)
         : visibleOnly(visibleOnly),
           currentOpacity(1.0f),
-          currentBounds(BigRectangle),
-          currentClippedBounds(BigRectangle),
+          currentBounds(BigRect),
+          currentClippedBounds(BigRect),
           currentTransform(Matrix4::Identity),
           currentTransformInv(Matrix4::Identity),
           parentTransform(Matrix4::Identity),
@@ -114,19 +114,19 @@ namespace Bibim
 
         UIVisual*const oldVisual = currentVisual;
         const float oldOpacity = currentOpacity;
-        const RectangleF oldBounds = currentBounds;
-        const RectangleF oldClippedBounds = currentClippedBounds;
+        const RectF oldBounds = currentBounds;
+        const RectF oldClippedBounds = currentClippedBounds;
         const Matrix4 oldTransform = currentTransform;
         const Matrix4 oldTransformInv = currentTransformInv;
         const Matrix4 oldParentTransform = parentTransform;
         const Matrix4 oldParentTransformInv = parentTransformInv;
 
-        const RectangleF bounds = target->ComputeBounds(*this);
+        const RectF bounds = target->ComputeBounds(*this);
 
         currentVisual = target;
         currentOpacity *= target->GetOpacity();
         currentBounds = bounds;
-        currentClippedBounds = RectangleF::Intersect(currentClippedBounds, currentBounds);
+        currentClippedBounds = RectF::Intersect(currentClippedBounds, currentBounds);
         parentTransform = currentTransform;
         parentTransformInv = currentTransformInv;
         if (target->GetTransform())

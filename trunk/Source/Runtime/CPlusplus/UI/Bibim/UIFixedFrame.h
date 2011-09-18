@@ -11,11 +11,11 @@
         {
             public:
                 UIFixedFrame();
-                explicit UIFixedFrame(const RectangleF& rectangle);
+                explicit UIFixedFrame(const RectF& Rect);
                 virtual ~UIFixedFrame();
 
-                virtual bool Setup(const RectangleF& bounds, const RectangleF& referenceBounds);
-                virtual RectangleF ComputeBounds(UIVisualVisitor& visitor, Vector2 desiredSize);
+                virtual bool Setup(const RectF& bounds, const RectF& referenceBounds);
+                virtual RectF ComputeBounds(UIVisualVisitor& visitor, Vector2 desiredSize);
 
                 virtual void Move(Vector2 displacement);
                 virtual bool IsMovable() const;
@@ -24,11 +24,11 @@
                 virtual void ResizeTo(Vector2 size);
                 virtual bool IsResizable() const;
 
-                inline const RectangleF& GetRectangle() const;
-                inline void SetRectangle(const RectangleF& value);
+                inline const RectF& GetRect() const;
+                inline void SetRect(const RectF& value);
 
             private:
-                RectangleF rectangle;
+                RectF Rect;
         };
     }
 

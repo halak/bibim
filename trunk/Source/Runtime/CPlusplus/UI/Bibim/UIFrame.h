@@ -4,7 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/UIElement.h>
-#   include <Bibim/RectangleF.h>
+#   include <Bibim/RectF.h>
 
     namespace Bibim
     {
@@ -14,8 +14,8 @@
                 UIFrame();
                 virtual ~UIFrame();
 
-                virtual bool Setup(const RectangleF& bounds, const RectangleF& referenceBounds) = 0;
-                virtual RectangleF ComputeBounds(UIVisualVisitor& visitor, Vector2 desiredSize) = 0;
+                virtual bool Setup(const RectF& bounds, const RectF& referenceBounds) = 0;
+                virtual RectF ComputeBounds(UIVisualVisitor& visitor, Vector2 desiredSize) = 0;
 
                 virtual void Move(Vector2 displacement);
                 virtual bool IsMovable() const;

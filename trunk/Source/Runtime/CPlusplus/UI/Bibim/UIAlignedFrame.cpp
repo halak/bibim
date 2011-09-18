@@ -9,8 +9,8 @@ namespace Bibim
           align(LeftTop),
           offset(Vector2::Zero),
           size(Vector2::Zero),
-          lastBounds(RectangleF::Empty),
-          lastReferenceBounds(RectangleF::Empty),
+          lastBounds(RectF::Empty),
+          lastReferenceBounds(RectF::Empty),
           boundsChanged(true)
     {
     }
@@ -20,8 +20,8 @@ namespace Bibim
           align(LeftTop),
           offset(offset),
           size(size),
-          lastBounds(RectangleF::Empty),
-          lastReferenceBounds(RectangleF::Empty),
+          lastBounds(RectF::Empty),
+          lastReferenceBounds(RectF::Empty),
           boundsChanged(true)
     {
     }
@@ -31,8 +31,8 @@ namespace Bibim
           align(align),
           offset(offset),
           size(size),
-          lastBounds(RectangleF::Empty),
-          lastReferenceBounds(RectangleF::Empty),
+          lastBounds(RectF::Empty),
+          lastReferenceBounds(RectF::Empty),
           lastDesiredSize(Vector2::Zero),
           boundsChanged(true)
     {
@@ -42,7 +42,7 @@ namespace Bibim
     {
     }
 
-    bool UIAlignedFrame::Setup(const RectangleF& bounds, const RectangleF& referenceBounds)
+    bool UIAlignedFrame::Setup(const RectF& bounds, const RectF& referenceBounds)
     {
         Vector2 offset = Vector2::Zero;
 
@@ -90,12 +90,12 @@ namespace Bibim
         return true;
     }
 
-    RectangleF UIAlignedFrame::ComputeBounds(UIVisualVisitor& visitor, Vector2 desiredSize)
+    RectF UIAlignedFrame::ComputeBounds(UIVisualVisitor& visitor, Vector2 desiredSize)
     {
-        const RectangleF referenceBounds = visitor.GetCurrentBounds();
+        const RectF referenceBounds = visitor.GetCurrentBounds();
         if (boundsChanged || lastReferenceBounds != referenceBounds || lastDesiredSize != desiredSize)
         {
-            RectangleF bounds = RectangleF(0.0f, 0.0f, size.X, size.Y);
+            RectF bounds = RectF(0.0f, 0.0f, size.X, size.Y);
             if (desiredSize.X >= 0.0f)
                 bounds.Width = desiredSize.X;
             if (desiredSize.Y >= 0.0f)

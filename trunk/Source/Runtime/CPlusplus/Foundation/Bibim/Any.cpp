@@ -18,8 +18,8 @@ namespace Bibim
             case Matrix4Type:
             case PointType:
             case QuaternionType:
-            case RectangleType:
-            case RectangleFType:
+            case RectType:
+            case RectFType:
             case StringType:
             case URIType:
             case UUIDType:
@@ -58,8 +58,8 @@ namespace Bibim
             case Matrix4Type:
             case PointType:
             case QuaternionType:
-            case RectangleType:
-            case RectangleFType:
+            case RectType:
+            case RectFType:
             case StringType:
             case URIType:
             case UUIDType:
@@ -96,8 +96,8 @@ namespace Bibim
             case Matrix4Type:
             case PointType:
             case QuaternionType:
-            case RectangleType:
-            case RectangleFType:
+            case RectType:
+            case RectFType:
             case StringType:
             case URIType:
             case UUIDType:
@@ -140,8 +140,8 @@ namespace Bibim
             case Matrix4Type:
             case PointType:
             case QuaternionType:
-            case RectangleType:
-            case RectangleFType:
+            case RectType:
+            case RectFType:
             case StringType:
             case URIType:
             case UUIDType:

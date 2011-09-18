@@ -79,6 +79,6 @@ namespace Bibim
 
     void UIHandledDrawingContext::BoundsVisualizer::OnVisualBegan(UIHandledDrawingContext& context)
     {
-        context.DrawRectangle(context.GetCurrentBounds(), LineWidth, LineColor);
+        context.DrawRect(context.GetCurrentBounds(), LineWidth, LineColor);
     }
 }

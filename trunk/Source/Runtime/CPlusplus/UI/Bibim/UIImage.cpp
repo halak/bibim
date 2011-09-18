@@ -4,9 +4,9 @@
 
 namespace Bibim
 {
-    UIImage::UIImage(const URI& textureURI, const Rectangle& clippingRectangle)
+    UIImage::UIImage(const URI& textureURI, const Rect& clippingRect)
         : textureURI(textureURI),
-          clippingRectangle(clippingRectangle),
+          clippingRect(clippingRect),
           revision(1)
     {
     }
@@ -17,44 +17,44 @@ namespace Bibim
 
     void UIImage::SetRealTextureData(Texture2D* texture)
     {
-        if (realTexture != texture || realClippingRectangle != clippingRectangle)
+        if (realTexture != texture || realClippingRect != clippingRect)
         {
             realTexture = texture;
             
             if (texture)
             {
-                realClippingRectangle = Rectangle(0, 0, texture->GetWidth(), texture->GetHeight());
-                normalizedRealClippingRectangle = RectangleF(0.0f, 0.0f, 1.0f, 1.0f);
+                realClippingRect = Rect(0, 0, texture->GetWidth(), texture->GetHeight());
+                normalizedRealClippingRect = RectF(0.0f, 0.0f, 1.0f, 1.0f);
             }
             else
             {
-                realClippingRectangle = Rectangle::Empty;
-                normalizedRealClippingRectangle = RectangleF::Empty;
+                realClippingRect = Rect::Empty;
+                normalizedRealClippingRect = RectF::Empty;
             }
 
             revision++;
         }
     }
 
-    void UIImage::SetRealTextureData(Texture2D* texture, const Rectangle& clippingRectangle)
+    void UIImage::SetRealTextureData(Texture2D* texture, const Rect& clippingRect)
     {
-        if (realTexture != texture || realClippingRectangle != clippingRectangle)
+        if (realTexture != texture || realClippingRect != clippingRect)
         {
             realTexture = texture;
-            realClippingRectangle = clippingRectangle;
+            realClippingRect = clippingRect;
             
             if (texture)
             {
                 const float textureWidth  = static_cast<float>(texture->GetWidth());
                 const float textureHeight = static_cast<float>(texture->GetHeight());
-                const float left   = static_cast<float>(clippingRectangle.GetLeft()) / textureWidth;
-                const float top    = static_cast<float>(clippingRectangle.GetTop()) / textureHeight;
-                const float right  = static_cast<float>(clippingRectangle.GetRight()) / textureWidth;
-                const float bottom = static_cast<float>(clippingRectangle.GetBottom()) / textureHeight;
-                normalizedRealClippingRectangle = RectangleF(left, top, right - left, bottom - top);
+                const float left   = static_cast<float>(clippingRect.GetLeft()) / textureWidth;
+                const float top    = static_cast<float>(clippingRect.GetTop()) / textureHeight;
+                const float right  = static_cast<float>(clippingRect.GetRight()) / textureWidth;
+                const float bottom = static_cast<float>(clippingRect.GetBottom()) / textureHeight;
+                normalizedRealClippingRect = RectF(left, top, right - left, bottom - top);
             }
             else
-                normalizedRealClippingRectangle = RectangleF::Empty;
+                normalizedRealClippingRect = RectF::Empty;
 
             revision++;
         }

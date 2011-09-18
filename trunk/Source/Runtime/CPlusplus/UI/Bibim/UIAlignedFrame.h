@@ -30,8 +30,8 @@
                 UIAlignedFrame(Alignment align, Vector2 offset, Vector2 size);
                 virtual ~UIAlignedFrame();
 
-                virtual bool Setup(const RectangleF& bounds, const RectangleF& referenceBounds);
-                virtual RectangleF ComputeBounds(UIVisualVisitor& visitor, Vector2 desiredSize);
+                virtual bool Setup(const RectF& bounds, const RectF& referenceBounds);
+                virtual RectF ComputeBounds(UIVisualVisitor& visitor, Vector2 desiredSize);
 
                 virtual void Move(Vector2 displacement);
                 virtual bool IsMovable() const;
@@ -53,8 +53,8 @@
                 Alignment align;
                 Vector2 offset;
                 Vector2 size;
-                RectangleF lastBounds;
-                RectangleF lastReferenceBounds;
+                RectF lastBounds;
+                RectF lastReferenceBounds;
                 Vector2 lastDesiredSize;
                 bool boundsChanged;
         };

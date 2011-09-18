@@ -11,24 +11,24 @@ namespace Bibim
           bitmapOffset(Vector2::Zero),
           bitmapSize(Vector2::Zero),
           surface(nullptr),
-          clippingRectangle(Rectangle::Empty)
+          clippingRect(Rect::Empty)
     {
     }
 
-    Glyph::Glyph(uint32 code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, GlyphSurface* surface, Rectangle clippingRectangle)
+    Glyph::Glyph(uint32 code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, GlyphSurface* surface, Rect clippingRect)
         : code(code),
           advance(advance),
           bitmapOffset(bitmapOffset),
           bitmapSize(bitmapSize),
           surface(surface),
           texture(surface->GetTexture()),
-          clippingRectangle(clippingRectangle)
+          clippingRect(clippingRect)
     {
     }
 
     Glyph::~Glyph()
     {
         if (surface)
-            surface->Deallocate(clippingRectangle);
+            surface->Deallocate(clippingRect);
     }
 }

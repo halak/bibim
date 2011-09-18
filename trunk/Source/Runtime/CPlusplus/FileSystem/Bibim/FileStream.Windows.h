@@ -5,33 +5,21 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/Stream.h>
 #   include <Bibim/String.h>
+#   include <vector>
 
     namespace Bibim
     {
-        struct FileAccess
-        {
-            enum E
-            {
-                Read,
-                Write
-            };
-        };
-
-        struct FileShare
-        {
-            enum E
-            {
-                None   = 0,
-                Read   = (1 << 0),
-                Write  = (1 << 1),
-                Delete = (1 << 2),
-            };
-        };
-
         class FileStream : public Stream
         {
             public:
-                FileStream(const String& path, FileAccess::E access, FileShare::E shareMode);
+                enum AccessMode
+                {
+                    ReadOnly,
+                    WriteOnly,
+                };
+
+            public:
+                FileStream(const String& path, AccessMode accessMode);
                 virtual ~FileStream();
 
                 void Close();
@@ -52,10 +40,22 @@
                 void StoreCache();
 
             private:
-                struct Fields;
-                Fields* mPointer;
-                Fields& m;
+                void* handle;
+
+                int position;
+                int size;
+                uint64 position64;
+                uint64 size64;
+
+                std::vector<byte> cache;
+                int cacheOffset;
+                int cacheSize;
+
+                bool canRead;
+                bool canWrite;
         };
     }
+
+#   include <Bibim/FileStream.Windows.inl>
 
 #endif

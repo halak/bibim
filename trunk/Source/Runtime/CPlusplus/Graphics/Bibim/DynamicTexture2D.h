@@ -4,7 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/Texture2D.h>
-#   include <Bibim/Rectangle.h>
+#   include <Bibim/Rect.h>
 
     namespace Bibim
     {
@@ -39,7 +39,7 @@
                 virtual ~DynamicTexture2D();
 
                 bool Lock(LockedInfo& outLockedInfo);
-                bool Lock(LockedInfo& outLockedInfo, const Rectangle& rectangle);
+                bool Lock(LockedInfo& outLockedInfo, const Rect& Rect);
                 void Unlock(LockedInfo& outLockedInfo);
 
                 inline bool IsLocked() const;

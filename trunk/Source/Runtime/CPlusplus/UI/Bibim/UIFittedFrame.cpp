@@ -14,12 +14,12 @@ namespace Bibim
     {
     }
 
-    bool UIFittedFrame::Setup(const RectangleF& /*bounds*/, const RectangleF& /*referenceBounds*/)
+    bool UIFittedFrame::Setup(const RectF& /*bounds*/, const RectF& /*referenceBounds*/)
     {
         return false;
     }
 
-    RectangleF UIFittedFrame::ComputeBounds(UIVisualVisitor& visitor, Vector2 /*desiredSize*/)
+    RectF UIFittedFrame::ComputeBounds(UIVisualVisitor& visitor, Vector2 /*desiredSize*/)
     {
         return visitor.GetCurrentBounds();
     }

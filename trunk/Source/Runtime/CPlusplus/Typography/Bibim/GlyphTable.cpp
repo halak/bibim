@@ -22,7 +22,7 @@ namespace Bibim
 
     const Glyph* GlyphTable::Add(uint32 code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, const void* buffer, int width, int height, int pitch)
     {
-        std::pair<GlyphSurface*, Rectangle> allocated = AllocateSurface(buffer, width, height, pitch);
+        std::pair<GlyphSurface*, Rect> allocated = AllocateSurface(buffer, width, height, pitch);
         Glyph* newGlyph = nullptr;
         if (allocated.first)
             newGlyph = new Glyph(code, advance, bitmapOffset, bitmapSize, allocated.first, allocated.second);
@@ -90,28 +90,28 @@ namespace Bibim
             return nullptr;
     }
 
-    std::pair<GlyphSurface*, Rectangle> GlyphTable::AllocateSurface(const void* buffer, int width, int height, int pitch)
+    std::pair<GlyphSurface*, Rect> GlyphTable::AllocateSurface(const void* buffer, int width, int height, int pitch)
     {
         if (buffer == nullptr || width <= 0 || height <= 0)
-            return std::pair<GlyphSurface*, Rectangle>(nullptr, Rectangle::Empty);
+            return std::pair<GlyphSurface*, Rect>(nullptr, Rect::Empty);
 
         for (SurfaceCollection::iterator it = surfaces.begin(); it != surfaces.end(); ++it)
         {
-            Rectangle allocated = (*it)->Allocate(buffer, width, height, pitch);
-            if (allocated != Rectangle::Empty)
-                return std::pair<GlyphSurface*, Rectangle>(*it, allocated);
+            Rect allocated = (*it)->Allocate(buffer, width, height, pitch);
+            if (allocated != Rect::Empty)
+                return std::pair<GlyphSurface*, Rect>(*it, allocated);
         }
 
         const Point surfaceSize = GetAdaptiveSurfaceSize(surfaces.size(), width, height);
         BBAssert(surfaceSize != Point::Zero);
 
         GlyphSurface* glyphSurface = new GlyphSurface(graphicsDevice, surfaceSize.X, surfaceSize.Y);
-        Rectangle allocated = glyphSurface->Allocate(buffer, width, height, pitch);
-        BBAssert(allocated != Rectangle::Empty);
+        Rect allocated = glyphSurface->Allocate(buffer, width, height, pitch);
+        BBAssert(allocated != Rect::Empty);
 
         surfaces.push_back(glyphSurface);
 
-        return std::pair<GlyphSurface*, Rectangle>(glyphSurface, allocated);
+        return std::pair<GlyphSurface*, Rect>(glyphSurface, allocated);
     }
 
     Point GlyphTable::GetAdaptiveSurfaceSize(int numberOfExisting, int width, int height)

@@ -32,7 +32,7 @@
                 inline const SurfaceCollection& GetSurfaces() const;
 
             private:
-                std::pair<GlyphSurface*, Rectangle> AllocateSurface(const void* buffer, int width, int height, int pitch);
+                std::pair<GlyphSurface*, Rect> AllocateSurface(const void* buffer, int width, int height, int pitch);
                 static Point GetAdaptiveSurfaceSize(int numberOfExisting, int width, int height);
 
             private:

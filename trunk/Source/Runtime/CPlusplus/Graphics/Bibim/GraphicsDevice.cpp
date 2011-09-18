@@ -14,7 +14,7 @@ namespace Bibim
           d3dDevice(nullptr),
           window(nullptr),
           defaultSwapChain(nullptr),
-          viewport(Rectangle::Empty),
+          viewport(Rect::Empty),
           fullscreen(false)
     {
     }
@@ -82,7 +82,7 @@ namespace Bibim
         }
     }
 
-    void GraphicsDevice::SetViewport(const Rectangle& value)
+    void GraphicsDevice::SetViewport(const Rect& value)
     {
         if (GetViewport() != value)
         {
@@ -151,7 +151,7 @@ namespace Bibim
         if (result != D3D_OK)
             throw new std::runtime_error("d3dObject->CreateDevice != D3D_OK");
 
-        SetViewport(Rectangle(Point::Zero, GetWindow()->GetSize()));
+        SetViewport(Rect(Point::Zero, GetWindow()->GetSize()));
     }
 
     void GraphicsDevice::FinalizeDevice()
