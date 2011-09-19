@@ -149,6 +149,14 @@ namespace Bibim
 
     GameAssetStorage::LoadingThread::~LoadingThread()
     {
+        TaskQueue temporaryQueue;
+        {
+            BBAutoLock(taskQueueLock);
+            taskQueue.swap(temporaryQueue);
+        }
+
+        for (TaskQueue::const_iterator it = temporaryQueue.begin(); it != temporaryQueue.end(); it++)
+            delete (*it);
     }
 
     void GameAssetStorage::LoadingThread::AddTask(AssetLoadingTask* item)
@@ -156,6 +164,17 @@ namespace Bibim
         totalBytes += item->GetTotalBytes();
         AutoLocker locker(taskQueueLock);
         taskQueue.push_back(item);
+    }
+
+    void GameAssetStorage::LoadingThread::RequestClose()
+    {
+        closed = true;
+        Suspend();
+
+        if (currentTask)
+            currentTask->Cancel();
+
+        Resume();
     }
 
     void GameAssetStorage::LoadingThread::ResetBackgroundLoadingStatus()

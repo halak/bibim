@@ -92,6 +92,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asset\Pipeline\Adobe\PhotoshopDocument.cs" />
+    <Compile Include="Asset\Pipeline\Adobe\PhotoshopDocumentBaker.cs" />
+    <Compile Include="Asset\Pipeline\Adobe\PhotoshopDocumentImporter.cs" />
+    <Compile Include="Asset\Pipeline\AssetBakingContext.cs" />
+    <Compile Include="Asset\Pipeline\AssetBakery.cs" />
+    <Compile Include="Asset\Pipeline\AssetImporter.cs" />
+    <Compile Include="Asset\Pipeline\AssetBaker.cs" />
+    <Compile Include="Asset\Pipeline\AssetRecipe.cs" />
+    <Compile Include="Asset\Pipeline\Bitmap\ImageBaker.cs" />
+    <Compile Include="Asset\Pipeline\Bitmap\ImageImporter.cs" />
+    <Compile Include="Asset\Pipeline\Xml\XmlDocumentBaker.cs" />
+    <Compile Include="Asset\Pipeline\Xml\XmlDocumentImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -100,9 +112,7 @@
       <Name>Halak.Bibim.Runtime for Windows</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Asset\Pipeline\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

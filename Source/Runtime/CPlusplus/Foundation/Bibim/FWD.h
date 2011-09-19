@@ -101,6 +101,9 @@
                 class GameAssetFactory;
                 class GameAssetStorage;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // FileSystem
+                BBForwardDeclareSmartPointerClass(FileStream);
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Framework
                 class GameFrameworkBase;
                     class GameFramework;

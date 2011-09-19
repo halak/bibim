@@ -171,6 +171,25 @@
             }
         }
 
+        int FileStream::Seek(int offset, SeekOrigin origin)
+        {
+            DWORD moveMethod = 0;
+            switch (origin)
+            {
+                case FromBegin:
+                    moveMethod = FILE_BEGIN;
+                    break;
+                case FromEnd:
+                    moveMethod = FILE_END;
+                    break;
+                case FromCurrent:
+                    moveMethod = FILE_CURRENT;
+                    break;
+            }
+
+            return static_cast<int>(SetFilePointer(handle, offset, NULL, moveMethod));
+        }
+
         int FileStream::GetPosition() const
         {
             return position;
@@ -199,6 +218,11 @@
         bool FileStream::CanWrite() const
         {
             return canWrite;
+        }
+
+        bool FileStream::CanSeek() const
+        {
+            return true;
         }
 
         void FileStream::StoreCache()

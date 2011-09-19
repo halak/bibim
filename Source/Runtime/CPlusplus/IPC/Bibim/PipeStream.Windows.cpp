@@ -41,7 +41,7 @@ namespace Bibim
             return 0;
     }
 
-    int64 PipeStream::Seek(int64 /*offset*/, SeekOrigin /*origin*/)
+    int PipeStream::Seek(int /*offset*/, SeekOrigin /*origin*/)
     {
         return 0;
     }

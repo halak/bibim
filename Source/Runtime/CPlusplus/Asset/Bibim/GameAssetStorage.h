@@ -69,7 +69,7 @@
 
                         void AddTask(AssetLoadingTask* item);
 
-                        inline void RequestClose();
+                        void RequestClose();
 
                         void ResetBackgroundLoadingStatus();
                         LoadingStatus GetBackgroundLoadingStatus();
