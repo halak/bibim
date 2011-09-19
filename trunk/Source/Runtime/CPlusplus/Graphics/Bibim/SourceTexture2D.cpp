@@ -38,7 +38,8 @@ namespace Bibim
     SourceTexture2D::LoadingTask::LoadingTask(const String& name, uint totalBytes, SourceTexture2D* texture, const AssetReader& reader)
         : AssetLoadingTask(name, totalBytes),
           texture(texture),
-          reader(reader)
+          reader(reader),
+          cancelled(false)
     {
     }
 
@@ -66,11 +67,12 @@ namespace Bibim
         d3dSysMemTexture->LockRect(0, &d3dLockedRect, NULL, 0);
         byte* destination = static_cast<byte*>(d3dLockedRect.pBits);
         const int destinationPitch = static_cast<int>(d3dLockedRect.Pitch);
-        for (int y = 0; y < height; y++)
+        for (int y = 0; y < height && cancelled == false; y++)
         {
             reader.Read(destination, pitch);
             destination += destinationPitch;
             AddLoadedBytes(1);
+            Thread::Sleep(10);
         }
         d3dSysMemTexture->UnlockRect(0);
 
@@ -80,5 +82,10 @@ namespace Bibim
         texture->Setup(d3dTexture, width, height, width, height);
         texture->IncreaseRevision();
         texture->SetStatus(CompletedStatus);
+    }
+
+    void SourceTexture2D::LoadingTask::Cancel()
+    {
+        cancelled = true;
     }
 }

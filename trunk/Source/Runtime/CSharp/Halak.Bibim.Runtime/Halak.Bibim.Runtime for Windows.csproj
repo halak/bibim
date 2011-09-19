@@ -115,7 +115,12 @@
     <Compile Include="UI\UIElement.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="FileSystem\" />
+    <Folder Include="Framework\" />
+    <Folder Include="Gameplay\" />
     <Folder Include="Graphics\" />
+    <Folder Include="Input\" />
+    <Folder Include="Typography\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

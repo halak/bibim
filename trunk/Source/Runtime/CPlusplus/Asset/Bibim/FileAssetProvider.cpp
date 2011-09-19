@@ -1,5 +1,10 @@
 #include <Bibim/PCH.h>
 #include <Bibim/FileAssetProvider.h>
+#include <Bibim/AssetReader.h>
+#include <Bibim/BinaryWriter.h>
+#include <Bibim/FileStream.h>
+#include <BIbim/GameAssetFactory.h>
+#include <BIbim/GameAssetStorage.h>
 
 namespace Bibim
 {
@@ -13,9 +18,9 @@ namespace Bibim
     }
 
     FileAssetProvider::FileAssetProvider(GameAssetStorage* storage, const String& directory)
-        : AssetProvider(storage),
-          directory(directory)
+        : AssetProvider(storage)
     {
+        SetDirectory(directory);
     }
 
     FileAssetProvider::~FileAssetProvider()
@@ -24,7 +29,11 @@ namespace Bibim
 
     GameAsset* FileAssetProvider::Load(const String& name)
     {
-        return nullptr;
+        BBAssertDebug(GetStorage() != nullptr);
+
+        FileStreamPtr assetStream = new FileStream(directory + name, FileStream::ReadOnly);
+        AssetReader reader(assetStream, GetStorage());
+        return GameAssetFactory::Create(reader);
     }
 
     void FileAssetProvider::SetDirectory(const String& value)

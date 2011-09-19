@@ -36,11 +36,4 @@ namespace Bibim
     {
         return !operator == (right);
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    void GameAssetStorage::LoadingThread::RequestClose()
-    {
-        closed = true;
-    }
 }

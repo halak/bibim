@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.IO.Compression;
 using System.IO.Pipes;
 using System.Linq;
 using System.Text;
@@ -73,39 +74,90 @@ namespace Halak.Bibim.Toolkit.Console
             }
         }
 
-        static void LoadAsset(string assetName_)
+        static void LoadAsset(string assetName)
         {
-            Thread th = new Thread(delegate(object assetNameObject)
+            using (Bitmap asset = (Bitmap)Bitmap.FromFile(Path.Combine(assetDirectory, assetName)))
+            {
+                MemoryStream assetStream = new MemoryStream();
+                BinaryWriter assetStreamWriter = new BinaryWriter(assetStream);
+                Rectangle wholeBitmapRect = new Rectangle(0, 0, asset.Width, asset.Height);
+                BitmapData bitmapData = asset.LockBits(wholeBitmapRect, ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb, new BitmapData());
+
+                assetStreamWriter.Write(FOURCC.Make('S', 'T', 'X', '2'));
+                assetStreamWriter.Write((uint)0);
+                assetStreamWriter.Write((short)bitmapData.Width);
+                assetStreamWriter.Write((short)bitmapData.Height);
+                assetStreamWriter.Write(bitmapData.Stride);
+
+                byte[] destination = new byte[bitmapData.Stride * bitmapData.Height];
+                unsafe
                 {
-                    string assetName = (string)assetNameObject;
-                    using (Bitmap image = (Bitmap)Bitmap.FromFile(Path.Combine(assetDirectory, assetName)))
-                    {
-                        NamedPipeServerStream assetStream = new NamedPipeServerStream(pipeName + "_" + assetName, PipeDirection.Out);
-                        BinaryWriter assetStreamWriter = new BinaryWriter(assetStream);
-                        assetStream.WaitForConnection();
+                    byte* source = (byte*)bitmapData.Scan0.ToPointer();
+                    for (int i = 0; i < destination.Length; i++)
+                        destination[i] = source[i];
+                }
+                assetStreamWriter.Write(destination);
 
-                        BitmapData bitmapData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb, new BitmapData());
+                asset.UnlockBits(bitmapData);
+                
+                byte[] buffer = assetStream.GetBuffer();
 
-                        assetStreamWriter.Write(FOURCC.Make('S', 'T', 'X', '2'));
-                        assetStreamWriter.Write((uint)0);
-                        assetStreamWriter.Write((short)bitmapData.Width);
-                        assetStreamWriter.Write((short)bitmapData.Height);
-                        assetStreamWriter.Write(bitmapData.Stride);
+                NamedPipeServerStream serverStream = new NamedPipeServerStream(pipeName + "_" + assetName,
+                                                                               PipeDirection.Out,
+                                                                               NamedPipeServerStream.MaxAllowedServerInstances,
+                                                                               PipeTransmissionMode.Byte,
+                                                                               PipeOptions.Asynchronous);
+                serverStream.WaitForConnection();
+                serverStream.BeginWrite(buffer, 0, buffer.Length, new AsyncCallback(AssetWriteCompleted), serverStream);
 
-                        byte[] destination = new byte[bitmapData.Stride * bitmapData.Height];
-                        unsafe
-                        {
-                            byte* source = (byte*)bitmapData.Scan0.ToPointer();
-                            for (int i = 0; i < destination.Length; i++)
-                                destination[i] = source[i];
-                        }
-                        assetStreamWriter.Write(destination);
+                FileStream stream = new FileStream(Path.ChangeExtension(Path.Combine(assetDirectory, assetName), "cas"), FileMode.Create, FileAccess.Write);
+                stream.Write(buffer, 0, buffer.Length);
+                stream.Close();
+                
+                assetStream.Close();
 
-                        image.UnlockBits(bitmapData);
-                        assetStream.Dispose();
-                    }
-                });
-            th.Start(assetName_);
+            }
         }
+
+            static void AssetWriteCompleted(IAsyncResult ar)
+            {
+                NamedPipeServerStream stream = (NamedPipeServerStream)ar.AsyncState;
+                stream.Disconnect();
+                stream.Close();
+            }
+
+            //Thread th = new Thread(delegate(object assetNameObject)
+            //{
+            //    string assetName = assetName_;// (string)assetNameObject;
+            //    using (Bitmap image = (Bitmap)Bitmap.FromFile(Path.Combine(assetDirectory, assetName)))
+            //    {
+            //        NamedPipeServerStream assetStream = new NamedPipeServerStream(pipeName + "_" + assetName, PipeDirection.Out);
+            //        BinaryWriter assetStreamWriter = new BinaryWriter(assetStream);
+            //        assetStream.WaitForConnection();
+
+            //        BitmapData bitmapData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb, new BitmapData());
+
+            //        assetStreamWriter.Write(FOURCC.Make('S', 'T', 'X', '2'));
+            //        assetStreamWriter.Write((uint)0);
+            //        assetStreamWriter.Write((short)bitmapData.Width);
+            //        assetStreamWriter.Write((short)bitmapData.Height);
+            //        assetStreamWriter.Write(bitmapData.Stride);
+
+            //        byte[] destination = new byte[bitmapData.Stride * bitmapData.Height];
+            //        unsafe
+            //        {
+            //            byte* source = (byte*)bitmapData.Scan0.ToPointer();
+            //            for (int i = 0; i < destination.Length; i++)
+            //                destination[i] = source[i];
+            //        }
+            //        assetStreamWriter.Write(destination);
+
+            //        image.UnlockBits(bitmapData);
+            //        assetStream.Dispose();
+            //    }
+            //}
+            //    });
+            //th.Start(assetName_);
+       // }
     }
 }

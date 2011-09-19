@@ -14,4 +14,8 @@ namespace Bibim
     {
         BBAssertDebug(totalBytes >= loadedBytes);
     }
+
+    void AssetLoadingTask::Cancel()
+    {
+    }
 }

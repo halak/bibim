@@ -27,10 +27,12 @@
                         virtual ~LoadingTask();
 
                         virtual void Execute();
+                        virtual void Cancel();
 
                     private:
                         SourceTexture2DPtr texture;
                         AssetReader reader;
+                        bool cancelled;
                 };
         };
     }

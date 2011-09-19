@@ -1,10 +1,10 @@
 #include <Bibim/PCH.h>
 #include <Bibim/PipedAssetProvider.h>
 #include <Bibim/AssetReader.h>
+#include <Bibim/BinaryWriter.h>
 #include <BIbim/GameAssetFactory.h>
 #include <BIbim/GameAssetStorage.h>
 #include <Bibim/PipeClientStream.h>
-#include <Bibim/BinaryWriter.h>
 
 namespace Bibim
 {
