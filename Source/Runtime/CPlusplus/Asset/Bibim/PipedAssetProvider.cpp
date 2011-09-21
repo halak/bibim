@@ -59,7 +59,7 @@ namespace Bibim
             assetStream->Connect();
         } while (assetStream->IsConnected() == false);
 
-        AssetReader reader(assetStream, GetStorage());
+        AssetReader reader(name, assetStream, GetStorage());
         return GameAssetFactory::Create(reader);
     }
 

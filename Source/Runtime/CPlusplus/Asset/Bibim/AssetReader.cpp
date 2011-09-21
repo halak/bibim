@@ -7,8 +7,9 @@
 
 namespace Bibim
 {
-    AssetReader::AssetReader(Stream* sourceStream, GameAssetStorage* storage)
+    AssetReader::AssetReader(const String& name, Stream* sourceStream, GameAssetStorage* storage)
         : BinaryReader(sourceStream),
+          name(name),
           storage(storage),
           modules(storage->GetModules())
     {
@@ -18,6 +19,7 @@ namespace Bibim
 
     AssetReader::AssetReader(const AssetReader& original)
         : BinaryReader(original),
+          name(original.name),
           storage(original.storage),
           modules(original.modules)
     {
@@ -64,6 +66,7 @@ namespace Bibim
     AssetReader& AssetReader::operator = (const AssetReader& right)
     {
         BinaryReader::operator = (right);
+        name = right.name;
         storage = right.storage;
         modules = right.modules;
         return *this;

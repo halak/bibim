@@ -10,7 +10,11 @@ using System.Text;
 using System.Threading;
 using C = System.Console;
 using Halak.Bibim.Asset;
+using Halak.Bibim.Asset.Pipeline;
+using Halak.Bibim.Asset.Pipeline.Cook;
 using Halak.Bibim.IO;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Halak.Bibim.Toolkit.Console
 {
@@ -18,9 +22,29 @@ namespace Halak.Bibim.Toolkit.Console
     {
         static string pipeName;
         static string assetDirectory;
-
+        
         static void Main(string[] args)
         {
+            AssetRecipe recipe = new AssetRecipe();
+            recipe.Result = "Main";
+            recipe.Directions.Add(new ImportBitmap("$(self.filename).psd", "Main"));
+            recipe.Directions.Add(new BitmapToTexture2D("Main", "Main"));
+
+            XmlSerializer xml = new XmlSerializer(recipe.GetType(), new Type[]{typeof(ImportBitmap),typeof(BitmapToTexture2D)})
+            {
+              
+            };
+            FileStream fs = new FileStream("AAA.txt", FileMode.Create, FileAccess.Write);
+            XmlTextWriter w = new XmlTextWriter(fs, Encoding.UTF8)
+            {
+                Formatting = Formatting.Indented,
+                Indentation = 1,
+                IndentChar = '\t',
+            };
+            xml.Serialize(w, recipe);
+            w.Close();
+
+
             C.Title = "Halak Bibim Console > AssetServer";
             C.WriteLine("================================");
             C.WriteLine("Halak Bibim Asset Server");
@@ -38,7 +62,7 @@ namespace Halak.Bibim.Toolkit.Console
             {
                 if (serverPipe.IsConnected == false)
                     serverPipe.WaitForConnection();
-
+                
                 uint id = serverPipeReader.ReadUInt32();
                 switch (id)
                 {

@@ -11,7 +11,7 @@
         class AssetReader : public BinaryReader
         {
             public:
-                AssetReader(Stream* sourceStream, GameAssetStorage* storage);
+                AssetReader(const String& name, Stream* sourceStream, GameAssetStorage* storage);
                 AssetReader(const AssetReader& original);
                 ~AssetReader();
 
@@ -21,6 +21,8 @@
                 GameModule* ReadModule(uint32 defaultModuleClassID);
 
                 GameModule* FindModuleByClassID(uint32 classID);
+
+                inline const String& GetName() const;
                 inline GameModuleTree* GetModules() const;
 
                 AssetReader& operator = (const AssetReader& right);
@@ -28,6 +30,7 @@
                 inline bool operator != (const AssetReader& right) const;
 
             private:
+                String name;
                 GameAssetStorage* storage;
                 GameModuleTree* modules;
         };
