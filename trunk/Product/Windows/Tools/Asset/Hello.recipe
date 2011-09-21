@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Halak.BibimRecipe Result="Main">
+    <ImportBitmap File="$(self.filename).png" Output="Main"/>
+    <BitmapToTexture Input="Main" Output="Main"/>
+</Halak.BibimRecipe>

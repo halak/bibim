@@ -26,17 +26,19 @@ namespace Bibim
         GraphicsDevice* graphicsDevice = static_cast<GraphicsDevice*>(reader.ReadModule(GraphicsDevice::ClassID));
         const int width = static_cast<int>(reader.ReadInt16());
         const int height = static_cast<int>(reader.ReadInt16());
+        if (graphicsDevice == nullptr || width == 0 || height == 0)
+            return nullptr;
 
         SourceTexture2D* texture = new SourceTexture2D(graphicsDevice, width, height);
-        reader.ReadAsync(new LoadingTask(String::Empty, height, texture, reader));
+        reader.ReadAsync(new LoadingTask(reader, texture, height));
 
         return texture;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    SourceTexture2D::LoadingTask::LoadingTask(const String& name, uint totalBytes, SourceTexture2D* texture, const AssetReader& reader)
-        : AssetLoadingTask(name, totalBytes),
+    SourceTexture2D::LoadingTask::LoadingTask(const AssetReader& reader, SourceTexture2D* texture, uint totalBytes)
+        : AssetLoadingTask(reader.GetName(), totalBytes),
           texture(texture),
           reader(reader),
           cancelled(false)
@@ -50,6 +52,8 @@ namespace Bibim
     void SourceTexture2D::LoadingTask::Execute()
     {
         const int pitch = reader.ReadInt32();
+        if (pitch == 0)
+            texture->SetStatus(IncompletedStatus);
 
         IDirect3DDevice9* d3dDevice = texture->GetGraphicsDevice()->GetD3DDevice();
         const int width  = texture->GetWidth();

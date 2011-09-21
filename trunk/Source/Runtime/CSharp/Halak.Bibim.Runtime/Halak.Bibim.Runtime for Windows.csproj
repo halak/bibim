@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asset\AssetProvider.cs" />
+    <Compile Include="Collections\Generic\ReadOnlyDictionary.cs" />
     <Compile Include="IO\BinaryReaderExtension.cs" />
     <Compile Include="Asset\FileAssetProvider.cs" />
     <Compile Include="Asset\GameAsset.cs" />

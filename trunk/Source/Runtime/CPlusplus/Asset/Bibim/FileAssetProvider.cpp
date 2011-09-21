@@ -32,7 +32,7 @@ namespace Bibim
         BBAssertDebug(GetStorage() != nullptr);
 
         FileStreamPtr assetStream = new FileStream(directory + name, FileStream::ReadOnly);
-        AssetReader reader(assetStream, GetStorage());
+        AssetReader reader(name, assetStream, GetStorage());
         return GameAssetFactory::Create(reader);
     }
 

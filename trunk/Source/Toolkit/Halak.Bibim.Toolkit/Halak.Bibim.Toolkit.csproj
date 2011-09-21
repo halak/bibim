@@ -7,7 +7,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Halak.Bibim.Toolkit</RootNamespace>
+    <RootNamespace>Halak.Bibim</RootNamespace>
     <AssemblyName>Halak.Bibim.Toolkit</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -76,6 +76,7 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -92,18 +93,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Asset\Pipeline\Adobe\PhotoshopDocument.cs" />
-    <Compile Include="Asset\Pipeline\Adobe\PhotoshopDocumentBaker.cs" />
-    <Compile Include="Asset\Pipeline\Adobe\PhotoshopDocumentImporter.cs" />
-    <Compile Include="Asset\Pipeline\AssetBakingContext.cs" />
-    <Compile Include="Asset\Pipeline\AssetBakery.cs" />
-    <Compile Include="Asset\Pipeline\AssetImporter.cs" />
-    <Compile Include="Asset\Pipeline\AssetBaker.cs" />
+    <Compile Include="Asset\PhotoshopDocument.cs" />
+    <Compile Include="Asset\Pipeline\CookingContext.cs" />
+    <Compile Include="Asset\Pipeline\AssetKitchen.cs" />
+    <Compile Include="Asset\Pipeline\CookingDirection.cs" />
     <Compile Include="Asset\Pipeline\AssetRecipe.cs" />
-    <Compile Include="Asset\Pipeline\Bitmap\ImageBaker.cs" />
-    <Compile Include="Asset\Pipeline\Bitmap\ImageImporter.cs" />
-    <Compile Include="Asset\Pipeline\Xml\XmlDocumentBaker.cs" />
-    <Compile Include="Asset\Pipeline\Xml\XmlDocumentImporter.cs" />
+    <Compile Include="Asset\Pipeline\Cook\BitmapToTexture2D.cs" />
+    <Compile Include="Asset\Pipeline\Cook\ImportBitmap.cs" />
+    <Compile Include="Asset\Pipeline\Cook\ImportPhotoshopDocument.cs" />
+    <Compile Include="Asset\Pipeline\Cook\PhotoshopDocumentToBitmap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
