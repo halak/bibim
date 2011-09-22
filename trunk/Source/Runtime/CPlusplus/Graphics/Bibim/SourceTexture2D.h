@@ -5,7 +5,7 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/Texture2D.h>
 #   include <Bibim/AssetLoadingTask.h>
-#   include <Bibim/AssetReader.h>
+#   include <Bibim/AssetStreamReader.h>
 
     namespace Bibim
     {
@@ -23,7 +23,7 @@
                 class LoadingTask : public AssetLoadingTask
                 {
                     public:
-                        LoadingTask(const AssetReader& reader, SourceTexture2D* texture, uint totalBytes);
+                        LoadingTask(const AssetStreamReader& reader, SourceTexture2D* texture, uint totalBytes);
                         virtual ~LoadingTask();
 
                         virtual void Execute();
@@ -31,7 +31,7 @@
 
                     private:
                         SourceTexture2DPtr texture;
-                        AssetReader reader;
+                        AssetStreamReader reader;
                         bool cancelled;
                 };
         };

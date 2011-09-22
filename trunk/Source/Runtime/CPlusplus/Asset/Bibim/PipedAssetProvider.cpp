@@ -1,6 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/PipedAssetProvider.h>
-#include <Bibim/AssetReader.h>
+#include <Bibim/AssetStreamReader.h>
 #include <Bibim/BinaryWriter.h>
 #include <BIbim/GameAssetFactory.h>
 #include <BIbim/GameAssetStorage.h>
@@ -59,7 +59,7 @@ namespace Bibim
             assetStream->Connect();
         } while (assetStream->IsConnected() == false);
 
-        AssetReader reader(name, assetStream, GetStorage());
+        AssetStreamReader reader(name, assetStream, GetStorage());
         return GameAssetFactory::Create(reader);
     }
 

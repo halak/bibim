@@ -1,21 +1,21 @@
 namespace Bibim
 {
-    const String& AssetReader::GetName() const
+    const String& AssetStreamReader::GetName() const
     {
         return name;
     }
 
-    GameModuleTree* AssetReader::GetModules() const
+    GameModuleTree* AssetStreamReader::GetModules() const
     {
         return modules;
     }
 
-    bool AssetReader::operator == (const AssetReader& right) const
+    bool AssetStreamReader::operator == (const AssetStreamReader& right) const
     {
         return BinaryReader::operator == (right) && name == right.name && storage == right.storage && modules == right.modules;
     }
 
-    bool AssetReader::operator != (const AssetReader& right) const
+    bool AssetStreamReader::operator != (const AssetStreamReader& right) const
     {
         return !operator == (right);
     }

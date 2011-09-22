@@ -5,7 +5,15 @@ using System.Text;
 
 namespace Halak.Bibim.Asset
 {
-    class GameAssetFactory
+    public static class GameAssetFactory
     {
+        #region Constructors
+        static GameAssetFactory()
+        {
+        }
+        #endregion
+
+        #region Methods
+        #endregion
     }
 }

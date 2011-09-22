@@ -120,8 +120,8 @@
 
                 static inline int Wrap(int value, int upper);
 
-                static int  GetNearestMorePowerOfTwo(int value);
-                static uint GetNearestMorePowerOfTwo(uint value);
+                static int  GetNearestPowerOfTwo(int value);
+                static uint GetNearestPowerOfTwo(uint value);
 
                 static bool Equals(float a, float b);
                 static bool Equals(Vector2 a, Vector2 b);

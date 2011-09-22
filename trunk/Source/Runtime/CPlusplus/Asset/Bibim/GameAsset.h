@@ -14,7 +14,7 @@
                                             private:
 #       define BBReadableGameAssetClass(a, b, c, d) BBGameAssetClass(a, b, c, d); \
                                                     public: \
-                                                        static GameAsset* Read(AssetReader& reader, GameAsset* existingInstance); \
+                                                        static GameAsset* Read(AssetStreamReader& reader, GameAsset* existingInstance); \
                                                     private:
                                                     
 
@@ -25,10 +25,10 @@
             public:
                 enum Status
                 {
-                    EmptyStatus,
-                    LoadingStatus,
-                    CompletedStatus,
-                    IncompletedStatus,
+                    EmptyStatus = 0,
+                    LoadingStatus = 1,
+                    CompletedStatus = 2,
+                    FaultStatus = 3,
                 };
 
             public:

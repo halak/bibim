@@ -8,11 +8,11 @@ using System.Xml.Serialization;
 
 namespace Halak.Bibim.Asset.Pipeline.Recipes
 {
-    public sealed class ImportPhotoshopDocument : CookableItem<PhotoshopDocument>
+    public sealed class ImportPhotoshopDocument : CookingNode<PhotoshopDocument>
     {
         #region Properties
         [XmlElement]
-        public ICookable<Stream> Input
+        public CookingNode<Stream> Input
         {
             get;
             set;
@@ -24,7 +24,7 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
         {
         }
 
-        public ImportPhotoshopDocument(ICookable<Stream> input)
+        public ImportPhotoshopDocument(CookingNode<Stream> input)
         {
             Input = input;
         }

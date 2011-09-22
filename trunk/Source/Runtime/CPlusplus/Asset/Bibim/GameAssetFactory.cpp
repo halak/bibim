@@ -1,7 +1,7 @@
 #include <Bibim/PCH.h>
 #include <Bibim/GameAssetFactory.h>
 #include <Bibim/Assert.h>
-#include <Bibim/AssetReader.h>
+#include <Bibim/AssetStreamReader.h>
 #include <Bibim/GameAsset.h>
 #include <algorithm>
 #include <vector>
@@ -62,7 +62,7 @@ namespace Bibim
         std::sort(Entries.begin(), Entries.end(), Compare());
     }
 
-    GameAsset* GameAssetFactory::Create(AssetReader& reader, GameAsset* existingInstance)
+    GameAsset* GameAssetFactory::Create(AssetStreamReader& reader, GameAsset* existingInstance)
     {
         const uint32 id = reader.ReadUInt32();
 

@@ -63,7 +63,7 @@ namespace Bibim
         else
         {
             IncreaseRevision();
-            SetStatus(IncompletedStatus);
+            SetStatus(FaultStatus);
         }
     }
 

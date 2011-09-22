@@ -96,7 +96,7 @@
                 class AssetProvider;
                     class PipedAssetProvider;
                     class FileAssetProvider;
-                class AssetReader;
+                class AssetStreamReader;
                 BBForwardDeclareSmartPointerClass(GameAsset);
                 class GameAssetFactory;
                 class GameAssetStorage;

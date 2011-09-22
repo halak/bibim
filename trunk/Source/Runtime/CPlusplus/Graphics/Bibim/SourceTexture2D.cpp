@@ -1,6 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/SourceTexture2D.h>
-#include <Bibim/AssetReader.h>
+#include <Bibim/AssetStreamReader.h>
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/GraphicsDevice.h>
 
@@ -21,7 +21,7 @@ namespace Bibim
     {
     }
 
-    GameAsset* SourceTexture2D::Read(AssetReader& reader, GameAsset* /*existingInstance*/)
+    GameAsset* SourceTexture2D::Read(AssetStreamReader& reader, GameAsset* /*existingInstance*/)
     {
         GraphicsDevice* graphicsDevice = static_cast<GraphicsDevice*>(reader.ReadModule(GraphicsDevice::ClassID));
         const int width = static_cast<int>(reader.ReadInt16());
@@ -37,7 +37,7 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    SourceTexture2D::LoadingTask::LoadingTask(const AssetReader& reader, SourceTexture2D* texture, uint totalBytes)
+    SourceTexture2D::LoadingTask::LoadingTask(const AssetStreamReader& reader, SourceTexture2D* texture, uint totalBytes)
         : AssetLoadingTask(reader.GetName(), totalBytes),
           texture(texture),
           reader(reader),
@@ -53,7 +53,7 @@ namespace Bibim
     {
         const int pitch = reader.ReadInt32();
         if (pitch == 0)
-            texture->SetStatus(IncompletedStatus);
+            texture->SetStatus(FaultStatus);
 
         IDirect3DDevice9* d3dDevice = texture->GetGraphicsDevice()->GetD3DDevice();
         const int width  = texture->GetWidth();

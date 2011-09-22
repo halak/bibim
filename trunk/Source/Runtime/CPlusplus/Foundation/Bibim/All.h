@@ -10,7 +10,7 @@
    // Asset
 #  include <Bibim/AssetLoadingTask.h>
 #  include <Bibim/AssetProvider.h>
-#  include <Bibim/AssetReader.h>
+#  include <Bibim/AssetStreamReader.h>
 #  include <Bibim/FileAssetProvider.h>
 #  include <Bibim/GameAsset.h>
 #  include <Bibim/GameAssetFactory.h>
