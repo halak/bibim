@@ -11,7 +11,7 @@ using System.Threading;
 using C = System.Console;
 using Halak.Bibim.Asset;
 using Halak.Bibim.Asset.Pipeline;
-using Halak.Bibim.Asset.Pipeline.Cook;
+using Halak.Bibim.Asset.Pipeline.Recipes;
 using Halak.Bibim.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -25,15 +25,12 @@ namespace Halak.Bibim.Toolkit.Console
         
         static void Main(string[] args)
         {
-            AssetRecipe recipe = new AssetRecipe();
-            recipe.Result = "Main";
-            recipe.Directions.Add(new ImportBitmap("$(self.filename).psd", "Main"));
-            recipe.Directions.Add(new BitmapToTexture2D("Main", "Main"));
+            FileToStream fts = new FileToStream() { Input = "$(self.filename).png" };
+            ImportBitmap ib = new ImportBitmap() { Input = fts };
+            BitmapToTexture2D btt2d = new BitmapToTexture2D() { Input = ib };
 
-            XmlSerializer xml = new XmlSerializer(recipe.GetType(), new Type[]{typeof(ImportBitmap),typeof(BitmapToTexture2D)})
-            {
-              
-            };
+            GameAssetRecipe recipe = new GameAssetRecipe(btt2d);
+            XmlSerializer xml = new XmlSerializer(recipe.GetType(), GameAssetRecipe.RecipeTypes);
             FileStream fs = new FileStream("AAA.txt", FileMode.Create, FileAccess.Write);
             XmlTextWriter w = new XmlTextWriter(fs, Encoding.UTF8)
             {

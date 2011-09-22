@@ -94,10 +94,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Asset\PhotoshopDocument.cs" />
+    <Compile Include="Asset\Pipeline\CookableItem.cs" />
     <Compile Include="Asset\Pipeline\CookingContext.cs" />
-    <Compile Include="Asset\Pipeline\AssetKitchen.cs" />
-    <Compile Include="Asset\Pipeline\AssetRecipe.cs" />
+    <Compile Include="Asset\Pipeline\GameAssetKitchen.cs" />
+    <Compile Include="Asset\Pipeline\GameAssetRecipe.cs" />
+    <Compile Include="Asset\Pipeline\ICookable.cs" />
+    <Compile Include="Asset\Pipeline\ICookableT.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToTexture2D.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\FileToStream.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ImportBitmap.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ImportPhotoshopDocument.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToBitmap.cs" />

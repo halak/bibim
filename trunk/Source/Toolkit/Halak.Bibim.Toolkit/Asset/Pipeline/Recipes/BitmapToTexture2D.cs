@@ -6,53 +6,32 @@ using System.Text;
 
 namespace Halak.Bibim.Asset.Pipeline.Recipes
 {
-    public sealed class BitmapToTexture2D : AssetRecipe
+    public sealed class BitmapToTexture2D : CookableItem<object>
     {
-        #region Fields
-        private string input;
-        private string output;
-        #endregion
-
         #region Properties
-        public string Input
+        public ICookable<Bitmap> Input
         {
-            get { return input; }
-            set
-            {
-                input = value ?? string.Empty;
-            }
-        }
-
-        public string Output
-        {
-            get { return output; }
-            set
-            {
-                output = value ?? string.Empty;
-            }
+            get;
+            set;
         }
         #endregion
 
         #region Constructors
         public BitmapToTexture2D()
-            : this(string.Empty, string.Empty)
+            : this(null)
         {
         }
 
-        public BitmapToTexture2D(string input, string output)
+        public BitmapToTexture2D(ICookable<Bitmap> input)
         {
-            this.input = input ?? string.Empty;
-            this.output = output ?? string.Empty;
+            Input = input;
         }
         #endregion
 
         #region Methods
-        public override void Cook(CookingContext context)
+        public override object Cook(CookingContext context)
         {
-            string actualInput = context.ExpandVariables(Input);
-            string actualOutput = context.ExpandVariables(Output);
-
-            Bitmap inputBitmap = (Bitmap)context.GetIngredient(actualInput);
+            throw new NotImplementedException();
         }
         #endregion
     }
