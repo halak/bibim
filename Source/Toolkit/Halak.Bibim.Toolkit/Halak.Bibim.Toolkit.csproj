@@ -96,12 +96,11 @@
     <Compile Include="Asset\PhotoshopDocument.cs" />
     <Compile Include="Asset\Pipeline\CookingContext.cs" />
     <Compile Include="Asset\Pipeline\AssetKitchen.cs" />
-    <Compile Include="Asset\Pipeline\CookingDirection.cs" />
     <Compile Include="Asset\Pipeline\AssetRecipe.cs" />
-    <Compile Include="Asset\Pipeline\Cook\BitmapToTexture2D.cs" />
-    <Compile Include="Asset\Pipeline\Cook\ImportBitmap.cs" />
-    <Compile Include="Asset\Pipeline\Cook\ImportPhotoshopDocument.cs" />
-    <Compile Include="Asset\Pipeline\Cook\PhotoshopDocumentToBitmap.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\BitmapToTexture2D.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\ImportBitmap.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\ImportPhotoshopDocument.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToBitmap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

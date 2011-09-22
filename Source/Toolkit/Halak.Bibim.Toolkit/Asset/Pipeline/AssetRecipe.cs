@@ -8,12 +8,10 @@ using System.Xml.Serialization;
 
 namespace Halak.Bibim.Asset.Pipeline
 {
-    [XmlRoot("Halak.BibimRecipe")]
-    public sealed class AssetRecipe// : IList<CookingDirection>
+    public abstract class AssetRecipe// : IList<CookingDirection>
     {
         #region Fields
         private string result;
-        
         private List<CookingDirection> directions;
         #endregion
 
