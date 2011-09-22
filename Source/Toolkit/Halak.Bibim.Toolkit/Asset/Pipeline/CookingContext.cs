@@ -9,20 +9,12 @@ namespace Halak.Bibim.Asset.Pipeline
     public sealed class CookingContext
     {
         #region Fields
-        private Dictionary<string, object> ingredients;
         private Dictionary<string, string> variables;
         private Dictionary<string, string> expandableVariables;
-
-        private ReadOnlyDictionary<string, object> readonlyIngredients;
         private ReadOnlyDictionary<string, string> readonlyVariables;
         #endregion
 
         #region Properties
-        public ReadOnlyDictionary<string, object> Ingredients
-        {
-            get { return readonlyIngredients; }
-        }
-
         public ReadOnlyDictionary<string, string> Variables
         {
             get { return readonlyVariables; }
@@ -31,24 +23,16 @@ namespace Halak.Bibim.Asset.Pipeline
 
         #region Constructors
         public CookingContext()
-            : this(null, null)
+            : this(null)
         {
         }
 
-        public CookingContext(IDictionary<string, object> ingredients, IDictionary<string, string> variables)
+        public CookingContext(ICollection<KeyValuePair<string, string>> variables)
         {
-            int ingredientCapacity = (ingredients != null) ? ingredients.Count : 0;
             int variableCapacity = (variables != null) ? variables.Count : 0;
 
-            this.ingredients = new Dictionary<string, object>(ingredientCapacity);
             this.variables = new Dictionary<string, string>(variableCapacity);
             this.expandableVariables = new Dictionary<string, string>(variableCapacity);
-
-            if (ingredients != null)
-            {
-                foreach (KeyValuePair<string, object> item in ingredients)
-                    SetIngredient(item.Key, item.Value);
-            }
 
             if (variables != null)
             {
@@ -56,26 +40,12 @@ namespace Halak.Bibim.Asset.Pipeline
                     SetVariable(item.Key, item.Value);
             }
             
-            readonlyIngredients = new ReadOnlyDictionary<string, object>(ingredients);
-            readonlyVariables = new ReadOnlyDictionary<string, string>(variables);
+            readonlyVariables = new ReadOnlyDictionary<string, string>(this.variables);
         }
         #endregion
 
         #region Methods
-        public object GetIngredient(string name)
-        {
-            object result = null;
-            if (ingredients.TryGetValue(name, out result))
-                return result;
-            else
-                return null;
-        }
-
-        public void SetIngredient(string name, object value)
-        {
-            ingredients[name] = value;
-        }
-
+        #region Variable Manipulation
         public string GetVariable(string name)
         {
             string result = null;
@@ -102,6 +72,7 @@ namespace Halak.Bibim.Asset.Pipeline
 
             return value;
         }
+        #endregion
         #endregion
     }
 }

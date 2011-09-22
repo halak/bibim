@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
@@ -9,63 +10,33 @@ using System.Xml.Schema;
 
 namespace Halak.Bibim.Asset.Pipeline.Recipes
 {
-    public sealed class ImportBitmap : AssetRecipe
+    public sealed class ImportBitmap : CookableItem<Bitmap>
     {
-        #region Fields
-        private string file;
-        private string output;
-        #endregion
-
         #region Properties
-        [XmlAttribute]
-        public string File
+        [XmlElement]
+        public ICookable<Stream> Input
         {
-            get { return file; }
-            set
-            {
-                file = value ?? string.Empty;
-            }
-        }
-
-        [XmlAttribute]
-        public string Output
-        {
-            get { return output; }
-            set
-            {
-                output = value ?? string.Empty;
-            }
+            get;
+            set;
         }
         #endregion
 
         #region Constructors
         public ImportBitmap()
-            : this(string.Empty, string.Empty)
+            : this(null)
         {
         }
 
-        public ImportBitmap(string file, string output)
+        public ImportBitmap(ICookable<Stream> input)
         {
-            this.file = file ?? string.Empty;
-            this.output = output ?? string.Empty;
+            Input = input;
         }
         #endregion
 
         #region Methods
-        public override void Cook(CookingContext context)
+        public override Bitmap Cook(CookingContext context)
         {
-            string actualFile = context.ExpandVariables(File);
-            string actualOutput = context.ExpandVariables(Output);
-
-            try
-            {
-                Bitmap bitmap = new Bitmap(actualFile);
-                context.SetIngredient(actualOutput, bitmap);
-            }
-            catch (Exception e)
-            {
-                context.SetIngredient(actualOutput, null);
-            }
+            return new Bitmap(Input.Cook(context));
         }
         #endregion
     }
