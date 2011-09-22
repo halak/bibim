@@ -88,7 +88,7 @@
                 };
 
             private:
-                void Add(AssetLoadingTask* item); // call in AssetReader
+                void Add(AssetLoadingTask* item); // call in AssetStreamReader
                 void Add(AssetProvider* item); // call in AssetProvider
                 void Remove(AssetProvider* item); // call in AssetProvider
 
@@ -100,7 +100,7 @@
                 LoadingThread loadingThread;
 
                 friend class AssetProvider;
-                friend class AssetReader;
+                friend class AssetStreamReader;
         };
     }
 

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __BIBIM_ASSETREADER_H__
-#define __BIBIM_ASSETREADER_H__
+#ifndef __BIBIM_ASSETSTREAMREADER_H__
+#define __BIBIM_ASSETSTREAMREADER_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/BinaryReader.h>
@@ -8,12 +8,12 @@
 
     namespace Bibim
     {
-        class AssetReader : public BinaryReader
+        class AssetStreamReader : public BinaryReader
         {
             public:
-                AssetReader(const String& name, Stream* sourceStream, GameAssetStorage* storage);
-                AssetReader(const AssetReader& original);
-                ~AssetReader();
+                AssetStreamReader(const String& name, Stream* sourceStream, GameAssetStorage* storage);
+                AssetStreamReader(const AssetStreamReader& original);
+                ~AssetStreamReader();
 
                 void ReadAsync(AssetLoadingTask* task);
 
@@ -25,9 +25,9 @@
                 inline const String& GetName() const;
                 inline GameModuleTree* GetModules() const;
 
-                AssetReader& operator = (const AssetReader& right);
-                inline bool operator == (const AssetReader& right) const;
-                inline bool operator != (const AssetReader& right) const;
+                AssetStreamReader& operator = (const AssetStreamReader& right);
+                inline bool operator == (const AssetStreamReader& right) const;
+                inline bool operator != (const AssetStreamReader& right) const;
 
             private:
                 String name;
@@ -36,6 +36,6 @@
         };
     }
 
-#   include <Bibim/AssetReader.inl>
+#   include <Bibim/AssetStreamReader.inl>
 
 #endif

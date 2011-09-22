@@ -15,6 +15,12 @@ namespace Halak.Bibim.Asset.Pipeline
         #endregion
 
         #region Properties
+        public GameAssetKitchen Kitchen
+        {
+            get;
+            private set;
+        }
+
         public ReadOnlyDictionary<string, string> Variables
         {
             get { return readonlyVariables; }
@@ -22,12 +28,12 @@ namespace Halak.Bibim.Asset.Pipeline
         #endregion
 
         #region Constructors
-        public CookingContext()
-            : this(null)
+        public CookingContext(GameAssetKitchen kitchen)
+            : this(kitchen, null)
         {
         }
 
-        public CookingContext(ICollection<KeyValuePair<string, string>> variables)
+        public CookingContext(GameAssetKitchen kitchen, ICollection<KeyValuePair<string, string>> variables)
         {
             int variableCapacity = (variables != null) ? variables.Count : 0;
 

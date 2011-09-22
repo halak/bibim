@@ -722,15 +722,15 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Asset\Bibim\AssetReader.cpp"
+					RelativePath=".\Asset\Bibim\AssetStreamReader.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Asset\Bibim\AssetReader.h"
+					RelativePath=".\Asset\Bibim\AssetStreamReader.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Asset\Bibim\AssetReader.inl"
+					RelativePath=".\Asset\Bibim\AssetStreamReader.inl"
 					>
 				</File>
 				<File

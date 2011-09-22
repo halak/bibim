@@ -54,32 +54,24 @@ namespace Bibim
         return std::fmod(a, b);
     }
 
-    int Math::GetNearestMorePowerOfTwo(int value)
+    int Math::GetNearestPowerOfTwo(int value)
     {
         if (value > 0)
-            return static_cast<int>(GetNearestMorePowerOfTwo(static_cast<uint>(value)));
+            return static_cast<int>(GetNearestPowerOfTwo(static_cast<uint>(value)));
         else
             return 0;
     }
 
-    uint Math::GetNearestMorePowerOfTwo(uint value)
+    uint Math::GetNearestPowerOfTwo(uint value)
     {
-        BBAssert(value < 0x80000000);
-
-        for (int i = 1; i < sizeof(uint) * 8; i++)
-        {
-            const uint mask = 0x80000000 >> i;
-
-            if ((value & mask) != 0x00000000)
-            {
-                if (value == mask)
-                    return value;
-                else
-                    return mask << 1;
-            }
-        }
-
-        return 0;
+        value--;
+        value |= (value >> 1);
+        value |= (value >> 2);
+        value |= (value >> 4);
+        value |= (value >> 8);
+        value |= (value >> 16);
+        value++;
+        return value;
     }
 
     bool Math::Equals(float a, float b)

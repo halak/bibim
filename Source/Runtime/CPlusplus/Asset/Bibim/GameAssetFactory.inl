@@ -1,6 +1,6 @@
 namespace Bibim
 {
-    GameAsset* GameAssetFactory::Create(AssetReader& reader)
+    GameAsset* GameAssetFactory::Create(AssetStreamReader& reader)
     {
         return Create(reader, nullptr);
     }

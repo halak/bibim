@@ -1,4 +1,4 @@
-#include <Bibim/AssetReader.h>
+#include <Bibim/AssetStreamReader.h>
 #include <Bibim/Assert.h>
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/GameModule.h>
@@ -7,7 +7,7 @@
 
 namespace Bibim
 {
-    AssetReader::AssetReader(const String& name, Stream* sourceStream, GameAssetStorage* storage)
+    AssetStreamReader::AssetStreamReader(const String& name, Stream* sourceStream, GameAssetStorage* storage)
         : BinaryReader(sourceStream),
           name(name),
           storage(storage),
@@ -17,7 +17,7 @@ namespace Bibim
         BBAssert(modules);
     }
 
-    AssetReader::AssetReader(const AssetReader& original)
+    AssetStreamReader::AssetStreamReader(const AssetStreamReader& original)
         : BinaryReader(original),
           name(original.name),
           storage(original.storage),
@@ -25,17 +25,17 @@ namespace Bibim
     {
     }
 
-    AssetReader::~AssetReader()
+    AssetStreamReader::~AssetStreamReader()
     {
     }
 
-    void AssetReader::ReadAsync(AssetLoadingTask* task)
+    void AssetStreamReader::ReadAsync(AssetLoadingTask* task)
     {
         BBAssertDebug(task);
         storage->Add(task);
     }
 
-    GameModule* AssetReader::ReadModule()
+    GameModule* AssetStreamReader::ReadModule()
     {
         if (modules == nullptr)
             return nullptr;
@@ -47,7 +47,7 @@ namespace Bibim
             return nullptr;
     }
 
-    GameModule* AssetReader::ReadModule(uint32 defaultModuleClassID)
+    GameModule* AssetStreamReader::ReadModule(uint32 defaultModuleClassID)
     {
         if (GameModule* module = ReadModule())
             return module;
@@ -55,7 +55,7 @@ namespace Bibim
             return FindModuleByClassID(defaultModuleClassID);
     }
 
-    GameModule* AssetReader::FindModuleByClassID(uint32 classID)
+    GameModule* AssetStreamReader::FindModuleByClassID(uint32 classID)
     {
         if (modules)
             return modules->GetRoot()->FindChildByClassID(classID);
@@ -63,7 +63,7 @@ namespace Bibim
             return nullptr;
     }
 
-    AssetReader& AssetReader::operator = (const AssetReader& right)
+    AssetStreamReader& AssetStreamReader::operator = (const AssetStreamReader& right)
     {
         BinaryReader::operator = (right);
         name = right.name;

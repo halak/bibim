@@ -30,7 +30,6 @@ namespace Halak.Bibim.Toolkit.Console
             BitmapToTexture2D btt2d = new BitmapToTexture2D() { Input = ib };
 
             GameAssetRecipe recipe = new GameAssetRecipe(btt2d);
-            XmlSerializer xml = new XmlSerializer(recipe.GetType(), GameAssetRecipe.RecipeTypes);
             FileStream fs = new FileStream("AAA.txt", FileMode.Create, FileAccess.Write);
             XmlTextWriter w = new XmlTextWriter(fs, Encoding.UTF8)
             {
@@ -38,7 +37,7 @@ namespace Halak.Bibim.Toolkit.Console
                 Indentation = 1,
                 IndentChar = '\t',
             };
-            xml.Serialize(w, recipe);
+            GameAssetRecipe.Serialize(w, recipe);
             w.Close();
 
 

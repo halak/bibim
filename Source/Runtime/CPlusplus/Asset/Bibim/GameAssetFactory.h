@@ -10,11 +10,11 @@
         {
             BBThisIsStaticClass(GameAssetFactory);
             public:
-                typedef GameAsset* (*CreateFunction)(AssetReader&, GameAsset*);
+                typedef GameAsset* (*CreateFunction)(AssetStreamReader&, GameAsset*);
 
             public:
-                static inline GameAsset* Create(AssetReader& reader);
-                static GameAsset* Create(AssetReader& reader, GameAsset* existingInstance);
+                static inline GameAsset* Create(AssetStreamReader& reader);
+                static GameAsset* Create(AssetStreamReader& reader, GameAsset* existingInstance);
 
                 template <typename T> static void AddEntry();
                 static void AddEntry(uint32 id, CreateFunction function);

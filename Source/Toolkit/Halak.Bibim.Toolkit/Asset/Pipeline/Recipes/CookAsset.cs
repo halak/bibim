@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Halak.Bibim.Asset.Pipeline.Recipes
 {
-    public sealed class FileToStream : CookingNode<Stream>
+    public sealed class CookAsset : CookingNode<object>
     {
         #region Fields
         private string input;
@@ -27,23 +27,24 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
         #endregion
 
         #region Constructors
-        public FileToStream()
+        public CookAsset()
             : this(string.Empty)
         {
         }
 
-        public FileToStream(string input)
+        public CookAsset(string input)
         {
             Input = input;
         }
         #endregion
 
-        #region Methods
-        public override Stream Cook(CookingContext context)
+        public override object Cook(CookingContext context)
         {
             string path = context.ExpandVariables(Input);
-            return new FileStream(path, FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+
+            GameAssetRecipe recipe = GameAssetRecipe.Deserialize(fs);
+            return context.Kitchen.Cook(recipe, context.Variables);
         }
-        #endregion
     }
 }

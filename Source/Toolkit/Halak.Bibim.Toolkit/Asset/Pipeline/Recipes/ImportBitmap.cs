@@ -10,11 +10,11 @@ using System.Xml.Schema;
 
 namespace Halak.Bibim.Asset.Pipeline.Recipes
 {
-    public sealed class ImportBitmap : CookableItem<Bitmap>
+    public sealed class ImportBitmap : CookingNode<Bitmap>
     {
         #region Properties
         [XmlElement]
-        public ICookable<Stream> Input
+        public CookingNode<Stream> Input
         {
             get;
             set;
@@ -27,7 +27,7 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
         {
         }
 
-        public ImportBitmap(ICookable<Stream> input)
+        public ImportBitmap(CookingNode<Stream> input)
         {
             Input = input;
         }

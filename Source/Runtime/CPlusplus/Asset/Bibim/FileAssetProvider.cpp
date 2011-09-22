@@ -1,6 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/FileAssetProvider.h>
-#include <Bibim/AssetReader.h>
+#include <Bibim/AssetStreamReader.h>
 #include <Bibim/BinaryWriter.h>
 #include <Bibim/FileStream.h>
 #include <BIbim/GameAssetFactory.h>
@@ -32,7 +32,7 @@ namespace Bibim
         BBAssertDebug(GetStorage() != nullptr);
 
         FileStreamPtr assetStream = new FileStream(directory + name, FileStream::ReadOnly);
-        AssetReader reader(name, assetStream, GetStorage());
+        AssetStreamReader reader(name, assetStream, GetStorage());
         return GameAssetFactory::Create(reader);
     }
 

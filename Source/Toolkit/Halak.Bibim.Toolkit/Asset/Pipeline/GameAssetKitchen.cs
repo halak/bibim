@@ -32,8 +32,8 @@ namespace Halak.Bibim.Asset.Pipeline
             if (recipe == null || recipe.Cook == null)
                 return null;
 
-            CookingContext context = new CookingContext(variables);
-            return recipe.Cook.Cook(context);
+            CookingContext context = new CookingContext(this, variables);
+            return recipe.Cook.CookObject(context);
         }
         #endregion
     }

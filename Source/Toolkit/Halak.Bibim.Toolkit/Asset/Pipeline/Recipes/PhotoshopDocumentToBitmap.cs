@@ -8,12 +8,11 @@ using System.Xml.Serialization;
 
 namespace Halak.Bibim.Asset.Pipeline.Recipes
 {
-    [XmlInclude(typeof(PhotoshopDocumentToBitmap))]
-    public sealed class PhotoshopDocumentToBitmap : CookableItem<Bitmap>
+    public sealed class PhotoshopDocumentToBitmap : CookingNode<Bitmap>
     {
         #region Properties
         [XmlElement]
-        public CookableItem<PhotoshopDocument> Input
+        public CookingNode<PhotoshopDocument> Input
         {
             get;
             set;
@@ -25,7 +24,7 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
         {
         }
 
-        public PhotoshopDocumentToBitmap(CookableItem<PhotoshopDocument> input)
+        public PhotoshopDocumentToBitmap(CookingNode<PhotoshopDocument> input)
         {
             Input = input;
         }

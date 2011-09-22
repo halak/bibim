@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using Halak.Bibim.Graphics;
+using G = System.Drawing.Graphics;
 
 namespace Halak.Bibim.Asset.Pipeline.Recipes
 {
-    public sealed class BitmapToTexture2D : CookableItem<object>
+    public sealed class BitmapToTexture2D : CookingNode<SourceTexture2D>
     {
         #region Properties
-        public ICookable<Bitmap> Input
+        public CookingNode<Bitmap> Input
         {
             get;
             set;
@@ -22,16 +24,37 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
         {
         }
 
-        public BitmapToTexture2D(ICookable<Bitmap> input)
+        public BitmapToTexture2D(CookingNode<Bitmap> input)
         {
             Input = input;
         }
         #endregion
 
         #region Methods
-        public override object Cook(CookingContext context)
+        public override SourceTexture2D Cook(CookingContext context)
         {
-            throw new NotImplementedException();
+            Bitmap input = Input.Cook(context);
+            int originalWidth = input.Width;
+            int originalHeight = input.Height;
+
+            int textureWidth = MathExtension.GetNearestPowerOfTwo(originalWidth);
+            int textureHeight = MathExtension.GetNearestPowerOfTwo(originalHeight);
+
+            if (originalWidth != textureWidth || originalHeight != textureHeight)
+            {
+                Bitmap textureBitmap = new Bitmap(textureWidth, textureHeight);
+                G g = G.FromImage(textureBitmap);
+
+                g.Clear(Color.Transparent);
+                g.DrawImage(input, Point.Empty);
+                g.Dispose();
+
+                input = textureBitmap;
+            }
+
+            SourceTexture2D output = new SourceTexture2D();
+
+            return output;
         }
         #endregion
     }
