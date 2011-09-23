@@ -13,7 +13,8 @@ namespace Halak.Bibim.Graphics
         {
         }
 
-        public SourceTexture2D(int width, int height, int surfaceWidth, int surfaceHeight)
+        public SourceTexture2D(GraphicsDevice graphicsDeivce, int width, int height, int surfaceWidth, int surfaceHeight)
+            : base(graphicsDeivce)
         {
             Setup(width, height, surfaceWidth, surfaceHeight);
         }

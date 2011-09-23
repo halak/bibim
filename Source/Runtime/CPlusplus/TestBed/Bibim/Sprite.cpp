@@ -42,8 +42,8 @@ class SpriteTest : public GameFramework
             GameModuleNode* uiNode = GetModules()->GetRoot()->AttachChild(uid);
             uiNode->AttachChild(uir);
 
-            texture1 = static_cast<SourceTexture2D*>(gas->Load("Hello.png"));
-            texture2 = static_cast<SourceTexture2D*>(gas->Load("BigHello.jpg"));
+            texture1 = static_cast<SourceTexture2D*>(gas->Load("Asset\\Hello.asset"));
+//            texture2 = static_cast<SourceTexture2D*>(gas->Load("Asset\\BigHello.asset"));
 
             storage = gas;
             uiDomain = uid;
@@ -77,7 +77,7 @@ class SpriteTest : public GameFramework
                 virtual void OnBegan(UIHandledDrawingContext& context)
                 {
                     context.Draw(Vector2(0.0f, 0.0f),   app->texture1);
-                    context.Draw(Vector2(256.0f, 0.0f), app->texture2);
+                    //context.Draw(Vector2(256.0f, 0.0f), app->texture2);
                 }
             };
             Handler handler(this);

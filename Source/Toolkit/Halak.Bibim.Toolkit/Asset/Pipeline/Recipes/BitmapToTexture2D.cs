@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using Halak.Bibim.Graphics;
 using G = System.Drawing.Graphics;
 
 namespace Halak.Bibim.Asset.Pipeline.Recipes
 {
-    public sealed class BitmapToTexture2D : CookingNode<SourceTexture2D>
+    public sealed class BitmapToTexture2D : CookingNode<CookingSourceTexture2D>
     {
         #region Properties
         public CookingNode<Bitmap> Input
@@ -31,7 +34,7 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
         #endregion
 
         #region Methods
-        public override SourceTexture2D Cook(CookingContext context)
+        public override CookingSourceTexture2D Cook(CookingContext context)
         {
             Bitmap input = Input.Cook(context);
             int originalWidth = input.Width;
@@ -39,7 +42,6 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
 
             int textureWidth = MathExtension.GetNearestPowerOfTwo(originalWidth);
             int textureHeight = MathExtension.GetNearestPowerOfTwo(originalHeight);
-
             if (originalWidth != textureWidth || originalHeight != textureHeight)
             {
                 Bitmap textureBitmap = new Bitmap(textureWidth, textureHeight);
@@ -52,7 +54,13 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
                 input = textureBitmap;
             }
 
-            SourceTexture2D output = new SourceTexture2D();
+            SourceTexture2D texture = new SourceTexture2D(null, originalWidth, originalHeight, input.Width, input.Height);
+
+            BitmapData bitmapData = input.LockBits(new Rectangle(0, 0, input.Width, input.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+            byte[] buffer = new byte[bitmapData.Stride * bitmapData.Height];
+            Marshal.Copy(bitmapData.Scan0, buffer, 0, buffer.Length);
+            CookingSourceTexture2D output = new CookingSourceTexture2D(texture, buffer, bitmapData.Stride);
+            input.UnlockBits(bitmapData);
 
             return output;
         }

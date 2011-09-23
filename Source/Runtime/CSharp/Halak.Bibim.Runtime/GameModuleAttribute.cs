@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Halak.Bibim.Reflection;
 
 namespace Halak.Bibim
 {
@@ -31,9 +32,9 @@ namespace Halak.Bibim
         #region StaticMethods
         public static uint GetClassID(Type type)
         {
-            object[] attributes = type.GetCustomAttributes(typeof(GameModuleAttribute), false);
-            if (attributes != null && attributes.Length > 0)
-                return ((GameModuleAttribute)attributes[0]).ClassID;
+            GameModuleAttribute attribute = type.GetCustomAttribute<GameModuleAttribute>();
+            if (attribute != null)
+                return attribute.ClassID;
             else
                 return 0;
         }

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Halak.BibimAssetRecipe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Author="" Comment="">
+	<Cook xsi:type="BitmapToTexture2D">
+		<Input xsi:type="ImportBitmap">
+			<Input xsi:type="FileToStream" Input1="$(RecipeName).png" Input2="$(RecipeName).jpg" Input3="$(RecipeName).bmp" />
+		</Input>
+	</Cook>
+</Halak.BibimAssetRecipe>

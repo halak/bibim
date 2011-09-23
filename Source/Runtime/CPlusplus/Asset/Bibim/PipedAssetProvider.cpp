@@ -53,7 +53,7 @@ namespace Bibim
         writer.Write(static_cast<uint32>(1000));
         writer.Write(name);
 
-        PipeClientStreamPtr assetStream = new PipeClientStream(serverName, pipeName + "_" + name, PipeStream::ReadOnly);
+        PipeClientStreamPtr assetStream = new PipeClientStream(serverName, pipeName + "_" + "ASSET", PipeStream::ReadOnly);
         do
         {
             assetStream->Connect();

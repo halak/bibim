@@ -17,7 +17,7 @@
                 virtual ~SourceTexture2D();
 
             private:
-                SourceTexture2D(GraphicsDevice* graphicsDevice, int width, int height);
+                SourceTexture2D(GraphicsDevice* graphicsDevice, int width, int height, int surfaceWidth, int surfaceHeight);
 
             private:
                 class LoadingTask : public AssetLoadingTask
