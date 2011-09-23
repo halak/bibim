@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
+using Halak.Bibim.Reflection;
 
 namespace Halak.Bibim.Asset.Pipeline
 {
@@ -55,24 +55,12 @@ namespace Halak.Bibim.Asset.Pipeline
             {
                 if (serializer == null)
                 {
-                    List<Type> recipeTypes = new List<Type>();
+                    ICollection<Type> classes = AssemblyUtility.FindClasses(typeof(CookingNode), true, true);
 
-                    Assembly assembly = Assembly.GetCallingAssembly();
-                    foreach (Type item in assembly.GetTypes())
-                    {
-                        if (item.IsClass &&
-                            item.IsAbstract == false &&
-                            item.GetConstructor(new Type[] { }) != null &&
-                            item.IsSubclassOf(typeof(CookingNode)))
-                        {
-                            recipeTypes.Add(item);
-                        }
-                    }
+                    Type[] recipeClasses = new Type[classes.Count];
+                    classes.CopyTo(recipeClasses, 0);
 
-                    Type[] recipeTypeArray = new Type[recipeTypes.Count];
-                    recipeTypes.CopyTo(recipeTypeArray);
-
-                    serializer = new XmlSerializer(typeof(GameAssetRecipe), recipeTypeArray);
+                    serializer = new XmlSerializer(typeof(GameAssetRecipe), recipeClasses);
                 }
 
                 return serializer;

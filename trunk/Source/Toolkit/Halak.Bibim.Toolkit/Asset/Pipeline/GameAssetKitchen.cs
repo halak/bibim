@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -22,18 +23,41 @@ namespace Halak.Bibim.Asset.Pipeline
         #endregion
 
         #region Methods
-        public object Cook(GameAssetRecipe recipe)
+        public object Cook(string path)
         {
-            return Cook(recipe, null);
+            return Cook(path, null);
         }
 
-        public object Cook(GameAssetRecipe recipe, ICollection<KeyValuePair<string, string>> variables)
+        public object Cook(string path, CookingContext parent)
         {
-            if (recipe == null || recipe.Cook == null)
+            if (File.Exists(path) == false)
                 return null;
 
-            CookingContext context = new CookingContext(this, variables);
-            return recipe.Cook.CookObject(context);
+            string directory = Path.GetDirectoryName(path);
+            string filename = Path.GetFileName(path);
+            string recipeName = Path.GetFileNameWithoutExtension(path);
+
+            FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            GameAssetRecipe recipe = GameAssetRecipe.Deserialize(fs);
+
+            if (recipe != null && recipe.Cook != null)
+            {
+                CookingContext context = new CookingContext(this, parent, directory);
+                context.SetVariable("Directory", directory);
+                context.SetVariable("FileName", filename);
+                if (parent == null)
+                    context.SetVariable("RecipeName", recipeName);
+                return recipe.Cook.CookObject(context);
+            }
+
+            return null;
+
+            //List<KeyValuePair<string, string>> variables = new List<KeyValuePair<string, string>>(4);
+            //variables.Add(new KeyValuePair<string, string>("Directory", directory));
+            //variables.Add(new KeyValuePair<string, string>("FileName", filename));
+            //variables.Add(new KeyValuePair<string, string>("RecipeName", recipeName));
+
+            //return Cook(recipe, directory, variables);
         }
         #endregion
     }

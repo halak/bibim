@@ -9,6 +9,7 @@ namespace Halak.Bibim.Asset.Pipeline
     public sealed class CookingContext
     {
         #region Fields
+        private string directory;
         private Dictionary<string, string> variables;
         private Dictionary<string, string> expandableVariables;
         private ReadOnlyDictionary<string, string> readonlyVariables;
@@ -21,22 +22,54 @@ namespace Halak.Bibim.Asset.Pipeline
             private set;
         }
 
+        public CookingContext Parent
+        {
+            get;
+            private set;
+        }
+
+        public string Directory
+        {
+            get { return directory; }
+            set
+            {
+                directory = value ?? string.Empty;
+            }
+        }
+
         public ReadOnlyDictionary<string, string> Variables
         {
             get { return readonlyVariables; }
         }
+
+        private CookingContext Root
+        {
+            get
+            {
+                CookingContext current = this;
+
+                while (current.Parent != null)
+                    current = current.Parent;
+
+                return current;
+            }
+        }
         #endregion
 
         #region Constructors
-        public CookingContext(GameAssetKitchen kitchen)
-            : this(kitchen, null)
+        public CookingContext(GameAssetKitchen kitchen, CookingContext parent, string directory)
+            : this(kitchen, parent, directory, null)
         {
         }
 
-        public CookingContext(GameAssetKitchen kitchen, ICollection<KeyValuePair<string, string>> variables)
+        public CookingContext(GameAssetKitchen kitchen, CookingContext parent, string directory, ICollection<KeyValuePair<string, string>> variables)
         {
+            Kitchen = kitchen;
+            Parent = parent;
+
             int variableCapacity = (variables != null) ? variables.Count : 0;
 
+            this.directory = directory;
             this.variables = new Dictionary<string, string>(variableCapacity);
             this.expandableVariables = new Dictionary<string, string>(variableCapacity);
 
@@ -76,7 +109,10 @@ namespace Halak.Bibim.Asset.Pipeline
             foreach (KeyValuePair<string, string> item in expandableVariables)
                 value = value.Replace(item.Key, item.Value);
 
-            return value;
+            if (Parent != null && value.Contains("$("))
+                return Parent.ExpandVariables(value);
+            else
+                return value;
         }
         #endregion
         #endregion

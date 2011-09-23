@@ -25,22 +25,6 @@ namespace Halak.Bibim.Toolkit.Console
         
         static void Main(string[] args)
         {
-            FileToStream fts = new FileToStream() { Input = "$(self.filename).png" };
-            ImportBitmap ib = new ImportBitmap() { Input = fts };
-            BitmapToTexture2D btt2d = new BitmapToTexture2D() { Input = ib };
-
-            GameAssetRecipe recipe = new GameAssetRecipe(btt2d);
-            FileStream fs = new FileStream("AAA.txt", FileMode.Create, FileAccess.Write);
-            XmlTextWriter w = new XmlTextWriter(fs, Encoding.UTF8)
-            {
-                Formatting = Formatting.Indented,
-                Indentation = 1,
-                IndentChar = '\t',
-            };
-            GameAssetRecipe.Serialize(w, recipe);
-            w.Close();
-
-
             C.Title = "Halak Bibim Console > AssetServer";
             C.WriteLine("================================");
             C.WriteLine("Halak Bibim Asset Server");
@@ -50,25 +34,36 @@ namespace Halak.Bibim.Toolkit.Console
             pipeName = GetArgument("Pipe Name", args, 0);
             assetDirectory = GetArgument("Asset Directory", args, 1);
 
-            NamedPipeServerStream serverPipe = new NamedPipeServerStream(pipeName, PipeDirection.InOut);
-            BinaryReader serverPipeReader = new BinaryReader(serverPipe);
+            GameModuleTree modules = new GameModuleTree();
 
-            byte[] buffer = new byte[4096];
+            GameAssetKitchen assetKitchen = new GameAssetKitchen();
+            PipedGameAssetServer assetServer = new PipedGameAssetServer(assetKitchen, pipeName);
+            modules.Root.AttachChild(assetKitchen);
+            modules.Root.AttachChild(assetServer);
+
             for (; ; )
             {
-                if (serverPipe.IsConnected == false)
-                    serverPipe.WaitForConnection();
-                
-                uint id = serverPipeReader.ReadUInt32();
-                switch (id)
-                {
-                    case 1000:
-                        LoadAsset(serverPipeReader.ReadBibimString());
-                        break;
-                    default:
-                        break;
-                }
             }
+
+            //NamedPipeServerStream serverPipe = new NamedPipeServerStream(pipeName, PipeDirection.InOut);
+            //BinaryReader serverPipeReader = new BinaryReader(serverPipe);
+
+            //byte[] buffer = new byte[4096];
+            //for (; ; )
+            //{
+            //    if (serverPipe.IsConnected == false)
+            //        serverPipe.WaitForConnection();
+                
+            //    uint id = serverPipeReader.ReadUInt32();
+            //    switch (id)
+            //    {
+            //        case 1000:
+            //            LoadAsset(serverPipeReader.ReadBibimString());
+            //            break;
+            //        default:
+            //            break;
+            //    }
+            //}
         }
 
         static string GetArgument(string argumentName, string[] args, int index)

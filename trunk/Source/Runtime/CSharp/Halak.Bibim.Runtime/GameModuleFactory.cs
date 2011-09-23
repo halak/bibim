@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Halak.Bibim.Reflection;
 
 namespace Halak.Bibim
 {
@@ -16,10 +17,19 @@ namespace Halak.Bibim
         #region Constructors
         static GameModuleFactory()
         {
-            entries = new Dictionary<uint, ConstructorInfo>(100);
-            AddEntries(Assembly.GetEntryAssembly().GetTypes());
-            AddEntries(Assembly.GetCallingAssembly().GetTypes());
-            AddEntries(Assembly.GetExecutingAssembly().GetTypes());
+            ICollection<Type> moduleClasses = AssemblyUtility.FindClasses(typeof(GameModule), true, false);
+
+            entries = new Dictionary<uint, ConstructorInfo>(moduleClasses.Count);
+
+            foreach (Type item in moduleClasses)
+            {
+                GameModuleAttribute attribute = item.GetCustomAttribute<GameModuleAttribute>();
+                if (attribute != null)
+                {
+                    Debug.Assert(entries.ContainsKey(attribute.ClassID) == false);
+                    entries.Add(attribute.ClassID, item.GetConstructor(Type.EmptyTypes));
+                }
+            }
         }
         #endregion
 
@@ -33,24 +43,6 @@ namespace Halak.Bibim
         {
             return null;
         }
-
-        #region Private
-        private static void AddEntries(Type[] types)
-        {
-            foreach (Type item in types)
-            {
-                object[] attributeObjects = item.GetCustomAttributes(typeof(GameModuleAttribute), true);
-                if (attributeObjects != null && attributeObjects.Length > 0)
-                {
-                    GameModuleAttribute attribute = (GameModuleAttribute)attributeObjects[0];
-
-                    Debug.Assert(entries.ContainsKey(attribute.ClassID) == false);
-
-                    entries.Add(attribute.ClassID, item.GetConstructor(Type.EmptyTypes));
-                }
-            }
-        }
-        #endregion
         #endregion
     }
 }

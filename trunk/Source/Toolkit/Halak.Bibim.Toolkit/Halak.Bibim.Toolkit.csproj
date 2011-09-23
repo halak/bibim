@@ -29,6 +29,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>x86</PlatformTarget>
     <XnaCompressContent>false</XnaCompressContent>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
@@ -41,6 +42,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>x86</PlatformTarget>
     <XnaCompressContent>true</XnaCompressContent>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
@@ -101,14 +103,16 @@
     <Compile Include="Asset\Pipeline\GameAssetKitchen.cs" />
     <Compile Include="Asset\Pipeline\GameAssetRecipe.cs" />
     <Compile Include="Asset\Pipeline\CookingNode.cs" />
+    <Compile Include="Asset\Pipeline\GameAssetServer.cs" />
+    <Compile Include="Asset\Pipeline\PipedGameAssetServer.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToTexture2D.cs" />
-    <Compile Include="Asset\Pipeline\Recipes\CookAsset.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\ReadRecipe.cs" />
     <Compile Include="Asset\Pipeline\Recipes\FileToStream.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ImportBitmap.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ImportPhotoshopDocument.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToBitmap.cs" />
-    <Compile Include="Graphics\ExtendedSourceTexture2D.cs" />
-    <Compile Include="Graphics\SourceTexture2DWriter.cs" />
+    <Compile Include="Graphics\CookingSourceTexture2D.cs" />
+    <Compile Include="Graphics\CookingSourceTexture2DWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
