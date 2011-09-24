@@ -33,9 +33,11 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
         #region Methods
         public override Bitmap Cook(CookingContext context)
         {
-            //PhotoshopDocument input = Input.Cook(context);
+            PhotoshopDocument input = Input.Cook(context);
+            if (input == null)
+                return null;
 
-            return null;
+            return input.MergedBitmap;
         }
         #endregion
     }

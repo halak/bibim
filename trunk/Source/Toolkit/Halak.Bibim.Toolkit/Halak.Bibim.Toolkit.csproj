@@ -99,6 +99,9 @@
     <Compile Include="Asset\GameAssetWriter.cs" />
     <Compile Include="Asset\GameAssetWriterAttribute.cs" />
     <Compile Include="Asset\PhotoshopDocument.cs" />
+    <Compile Include="Asset\PhotoshopDocument.ImageResources.cs" />
+    <Compile Include="Asset\PhotoshopDocument.Layer.cs" />
+    <Compile Include="Asset\PhotoshopDocument.Reader.cs" />
     <Compile Include="Asset\Pipeline\CookingContext.cs" />
     <Compile Include="Asset\Pipeline\GameAssetKitchen.cs" />
     <Compile Include="Asset\Pipeline\GameAssetRecipe.cs" />
