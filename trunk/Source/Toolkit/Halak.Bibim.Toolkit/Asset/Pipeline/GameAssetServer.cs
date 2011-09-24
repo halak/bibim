@@ -50,43 +50,32 @@ namespace Halak.Bibim.Asset.Pipeline
             taskThread.Join();
         }
         #endregion
-
+        
         #region Methods
-        protected abstract void Send(object target, byte[] buffer, int index, int count);
-
-        protected bool ProcessPacket(object target, uint id, BinaryReader reader)
+        protected void BeginCook(string path, Action<byte[], int, int> callback)
         {
-            switch (id)
+            GameAssetKitchen kitchen = Kitchen;
+            AddTask(() =>
             {
-                case 1000:
-                    GameAssetKitchen kitchen = Kitchen;
-                    string path = reader.ReadBibimString();
-                    Trace.WriteLine("Request Asset {0}", path);
-                    AddTask(() =>
-                    {
-                        object asset = kitchen.Cook(path);
-                        if (asset != null)
-                        {
-                            GameAssetWriter writer = GameAssetWriter.CreateWriter(asset.GetType());
-                            MemoryStream memoryStream = new MemoryStream();
-                            AssetStreamWriter streamWriter = new AssetStreamWriter(memoryStream, null);
-                            writer.Write(streamWriter, asset);
+                object asset = kitchen.Cook(path);
+                if (asset != null)
+                {
+                    GameAssetWriter writer = GameAssetWriter.CreateWriter(asset.GetType());
+                    MemoryStream memoryStream = new MemoryStream();
+                    AssetStreamWriter streamWriter = new AssetStreamWriter(memoryStream, null);
+                    writer.Write(streamWriter, asset);
 
-                            Send(target, memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
+                    callback(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
 
-                            string filepath = Path.ChangeExtension(path, GameAsset.BinaryFileExtension);
-                            FileStream fileStream = new FileStream(filepath, FileMode.Create, FileAccess.Write);
-                            fileStream.BeginWrite(memoryStream.GetBuffer(),
-                                                  0,
-                                                  (int)memoryStream.Length,
-                                                  new AsyncCallback(OnCacheFileWritten),
-                                                  fileStream);
-                        }
-                    });
-                    return true;
-                default:
-                    return false;
-            }
+                    string filepath = Path.ChangeExtension(path, GameAsset.BinaryFileExtension);
+                    FileStream fileStream = new FileStream(filepath, FileMode.Create, FileAccess.Write);
+                    fileStream.BeginWrite(memoryStream.GetBuffer(),
+                                          0,
+                                          (int)memoryStream.Length,
+                                          new AsyncCallback(OnCacheFileWritten),
+                                          fileStream);
+                }
+            });
         }
 
         protected void WorkCookingThread()
