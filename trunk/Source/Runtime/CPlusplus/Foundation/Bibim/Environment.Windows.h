@@ -13,7 +13,7 @@
             {
                 BBThisIsNoncopyableClass(Environment);
                 public:
-                    inline static const String& GetWorkingDirectory();
+                    static inline const String& GetWorkingDirectory();
 
                 private:
                     Environment();

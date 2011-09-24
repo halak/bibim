@@ -263,14 +263,16 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    inline int CompareString(const char* s1, const char* s2)
+    void String::CopyChars(char* destination, const char* source)
     {
-        return strcmp(s1, s2);
+        for (; (*source) != '\0'; destination++, source++)
+            (*destination) = (*source);
     }
 
-    inline int CompareString(const char* s1, const char* s2, int length)
+    void String::CopyChars(char* destination, const char* source, int length)
     {
-        return strncmp(s1, s2, length);
+        for (int i = 0; i < length && (*source) != '\0'; destination++, source++, i++)
+            (*destination) = (*source);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
