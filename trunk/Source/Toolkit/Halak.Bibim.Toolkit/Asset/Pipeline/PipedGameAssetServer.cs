@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
 using System.Linq;
@@ -14,14 +15,7 @@ namespace Halak.Bibim.Asset.Pipeline
     {
         #region Fields
         private string pipeName;
-        private struct Connection
-        {
-            public Thread Thread;
-            public NamedPipeServerStream Stream;
-            public BinaryReader Reader;
-            public byte[] Buffer;
-        }
-        private List<Connection> connections;
+        private LinkedList<Peer> peers;
         #endregion
 
         #region Properties
@@ -34,14 +28,13 @@ namespace Halak.Bibim.Asset.Pipeline
                 {
                     pipeName = value;
 
-                    foreach (Connection item in connections)
-                    {
-                    }
+                    foreach (Peer item in peers)
+                        item.Disconnect();
 
-                    connections.Clear();
+                    peers.Clear();
 
                     if (string.IsNullOrEmpty(pipeName) == false)
-                        AllocateConnection();
+                        InitializeNewPeer();
                 }
             }
         }
@@ -57,90 +50,186 @@ namespace Halak.Bibim.Asset.Pipeline
             : base(kitchen)
         {
             this.pipeName = pipeName;
-            this.connections = new List<Connection>();
+            this.peers = new LinkedList<Peer>();
 
             if (string.IsNullOrEmpty(pipeName) == false)
-                AllocateConnection();
+                InitializeNewPeer();
         }
         #endregion
 
         #region Methods
-        private void AllocateConnection()
+        protected override void Send(object target, byte[] buffer, int index, int count)
         {
-            Connection connection = new Connection();
-            connection.Stream = new NamedPipeServerStream(pipeName, PipeDirection.InOut,
-                                                          NamedPipeServerStream.MaxAllowedServerInstances,
-                                                          PipeTransmissionMode.Byte,
-                                                          PipeOptions.Asynchronous);
-            connection.Reader = new BinaryReader(connection.Stream);
-            connection.Buffer = new byte [4096];
-            connection.Stream.BeginWaitForConnection(new AsyncCallback(OnConnected), connection);
-            connections.Add(connection);
+        }
+        
+        #region Peer-Handlers
+        private void InitializeNewPeer()
+        {
+            Peer result = new Peer(pipeName);
+            peers.AddLast(result);
+            result.Stream.BeginWaitForConnection(new AsyncCallback(OnPeerConnected), result);
+
+            Trace.WriteLine("Waiting new peer...");
         }
 
-        #region Connection-Handlers
-        private void OnConnected(IAsyncResult result)
+        private void OnPeerConnected(IAsyncResult result)
         {
+            Peer peer = (Peer)result.AsyncState;
             if (result.IsCompleted)
             {
-                Connection connection = (Connection)result.AsyncState;
-                try
-                {
-                    connection.Stream.WaitForConnection();
-                    connection.Stream.BeginRead(connection.Buffer, 0, 4, new AsyncCallback(OnRead), connection);
-                }
-                catch (Exception e)
-                {
+                peer.Stream.EndWaitForConnection(result);
+                string directory = peer.StreamReader.ReadBibimString();
+                peer.Stream.BeginRead(peer.Buffer, 0, 4, new AsyncCallback(OnPeerRead), peer);
 
-                }
+                Trace.WriteLine("Peer connected. \n \t>{0}", directory);
             }
             else
             {
+                peer.Disconnect();
+                peers.Remove(peer);
+
+                Trace.WriteLine("Peer connect failure.");
             }
+
+            InitializeNewPeer();
         }
 
-        private void OnRead(IAsyncResult result)
+        private void OnPeerRead(IAsyncResult result)
         {
+            Peer peer = (Peer)result.AsyncState;
+
             if (result.IsCompleted)
             {
-                Connection connection = (Connection)result.AsyncState;
-                uint id = BitConverter.ToUInt32(connection.Buffer, 0);
-                switch (id)
+                int readBytes = peer.Stream.EndRead(result);
+                if (readBytes == 4)
                 {
-                    case 1000:
-                        string path = connection.Reader.ReadBibimString();
-                        object asset = Kitchen.Cook(path);
-                        if (asset != null)
-                        {
-                            GameAssetWriter writer = GameAssetWriter.CreateWriter(asset.GetType());
-                            MemoryStream ms = new MemoryStream();
-                            AssetStreamWriter assetWriter = new AssetStreamWriter(ms, null);
-                            writer.Write(assetWriter, asset);
-
-                            NamedPipeServerStream serverStream = new NamedPipeServerStream(pipeName + "_" + "ASSET", PipeDirection.Out,
-                                                   NamedPipeServerStream.MaxAllowedServerInstances,
-                                                   PipeTransmissionMode.Byte,
-                                                   PipeOptions.Asynchronous);
-                            serverStream.WaitForConnection();
-                            serverStream.BeginWrite(ms.GetBuffer(), 0, (int)ms.Length, new AsyncCallback(OnAssetWritten), serverStream);
-                            ms.Close();
-                        }
-                        break;
+                    uint id = BitConverter.ToUInt32(peer.Buffer, 0);
+                    ProcessPacket(new NamedPipeServerStream(pipeName + "_" + "ASSET", PipeDirection.Out,
+            //                                       NamedPipeServerStream.MaxAllowedServerInstances,
+            //                                       PipeTransmissionMode.Byte,
+            //                                       PipeOptions.Asynchronous);, id, peer.StreamReader);
+                    peer.ResetBuffer();
+                    peer.Stream.BeginRead(peer.Buffer, 0, 4, new AsyncCallback(OnPeerRead), peer);
+                }
+                else
+                {
+                    Trace.WriteLine("Peer disconnected.");
+                    peer.Disconnect();
                 }
             }
-            else
-            {
-            }
+
+            //    Connection connection = (Connection)result.AsyncState;
+            //    int r = connection.Stream.EndRead(result);
+            //    uint id = BitConverter.ToUInt32(connection.Buffer, 0);
+            //    switch (id)
+            //    {
+            //        case 1000:
+            //            string path = connection.Reader.ReadBibimString();
+            //            object asset = Kitchen.Cook(path);
+            //            if (asset != null)
+            //            {
+            //                GameAssetWriter writer = GameAssetWriter.CreateWriter(asset.GetType());
+            //                MemoryStream ms = new MemoryStream();
+            //                AssetStreamWriter assetWriter = new AssetStreamWriter(ms, null);
+            //                writer.Write(assetWriter, asset);
+
+            //                NamedPipeServerStream serverStream = new NamedPipeServerStream(pipeName + "_" + "ASSET", PipeDirection.Out,
+            //                                       NamedPipeServerStream.MaxAllowedServerInstances,
+            //                                       PipeTransmissionMode.Byte,
+            //                                       PipeOptions.Asynchronous);
+            //                serverStream.WaitForConnection();
+            //                serverStream.BeginWrite(ms.GetBuffer(), 0, (int)ms.Length, new AsyncCallback(OnAssetWritten), serverStream);
+            //                connection.Buffer[0] = 0;
+            //                connection.Buffer[1] = 0;
+            //                connection.Buffer[2] = 0;
+            //                connection.Buffer[3] = 0;
+            //                connection.Stream.BeginRead(connection.Buffer, 0, 4, new AsyncCallback(OnRead), connection);
+            //                ms.Close();
+            //            }
+            //            break;
+            //    }
+            //}
+            //else
+            //{
+            //}
         }
 
         private void OnAssetWritten(IAsyncResult result)
         {
-            NamedPipeServerStream stream = (NamedPipeServerStream)result.AsyncState;
-            stream.Flush();
-            stream.Disconnect();
-            stream.Close();
+            try
+            {
+                NamedPipeServerStream stream = (NamedPipeServerStream)result.AsyncState;
+                stream.EndWrite(result);
+                stream.Flush();
+                stream.Disconnect();
+                stream.Close();
+            }
+            catch (Exception ex)
+            {
+            }
+
+            if (result.IsCompleted == false)
+            {
+            }
         }
         #endregion
+        #endregion
+
+        #region Peer
+        private class Peer
+        {
+            public NamedPipeServerStream Stream
+            {
+                get;
+                private set;
+            }
+
+            public BinaryReader StreamReader
+            {
+                get;
+                private set;
+            }
+
+            public byte[] Buffer
+            {
+                get;
+                private set;
+            }
+
+            public Peer(string pipeName)
+            {
+                this.Stream = new NamedPipeServerStream(pipeName, PipeDirection.InOut,
+                                                        NamedPipeServerStream.MaxAllowedServerInstances,
+                                                        PipeTransmissionMode.Byte,
+                                                        PipeOptions.Asynchronous);
+                this.StreamReader = new BinaryReader(Stream);
+                this.Buffer = new byte [64];
+            }
+
+            public void Disconnect()
+            {
+                if (this.Stream.IsConnected)
+                    this.Stream.Disconnect();
+
+                this.Stream.Dispose();
+                this.Stream = null;
+                this.StreamReader = null;
+                this.Buffer = null;
+            }
+
+            public void ResetBuffer()
+            {
+                ResetBuffer(0, Buffer.Length);
+            }
+
+            public void ResetBuffer(int index, int length)
+            {
+                byte[] buffer = Buffer;
+                int end = Math.Min(index + length, buffer.Length);
+                for (int i = index; i < end; i++)
+                    buffer[i] = 0x00;
+            }
+        }
         #endregion
     }
 }

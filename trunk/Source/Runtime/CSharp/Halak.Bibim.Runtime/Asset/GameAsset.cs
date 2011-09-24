@@ -7,6 +7,10 @@ namespace Halak.Bibim.Asset
 {
     public abstract class GameAsset
     {
+        #region Fields
+        public static readonly string BinaryFileExtension = "ab";
+        #endregion
+
         #region Properties
         public uint ClassID
         {

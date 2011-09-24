@@ -44,6 +44,12 @@ namespace Bibim
         {
             queryStream = new PipeClientStream(serverName, pipeName, PipeStream::ReadAndWrite);
             queryStream->Connect();
+
+            if (queryStream->IsConnected())
+            {
+                BinaryWriter writer(queryStream);
+                writer.Write("BIBIMBIBIMBIBIM");
+            }
         }
 
         if (queryStream == nullptr || queryStream->IsConnected() == false)
