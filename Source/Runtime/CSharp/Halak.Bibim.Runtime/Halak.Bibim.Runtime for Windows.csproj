@@ -114,6 +114,7 @@
     <Compile Include="GameModuleStatus.cs" />
     <Compile Include="GameModuleNode.cs" />
     <Compile Include="GameModuleTree.cs" />
+    <Compile Include="IO\BinaryWriterExtension.cs" />
     <Compile Include="MathExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\AssemblyUtility.cs" />
