@@ -12,12 +12,14 @@ namespace Halak.Bibim.Asset.Pipeline
     public abstract class GameAssetServer : GameModule
     {
         #region Fields
-        private Dictionary<string, GameAssetRecipe> recipes;
         private Thread taskThread;
         private int taskThreadClosed;
         private LinkedList<Action> taskQueue;
         private object taskQueueLock = new object();
         private object taskQueueEvent = new object();
+
+        private Dictionary<string, byte[]> assetCaches;
+        private object assetCachesLock = new object();
         #endregion
 
         #region Properties
@@ -36,12 +38,13 @@ namespace Halak.Bibim.Asset.Pipeline
 
         protected GameAssetServer(GameAssetKitchen kitchen)
         {
-            recipes = new Dictionary<string, GameAssetRecipe>();
             Kitchen = kitchen;
             taskThread = new Thread(new ThreadStart(WorkCookingThread));
             taskThreadClosed = 0;
             taskThread.Start();
             taskQueue = new LinkedList<Action>();
+
+            assetCaches = new Dictionary<string, byte[]>();
         }
 
         ~GameAssetServer()
@@ -54,28 +57,41 @@ namespace Halak.Bibim.Asset.Pipeline
         #region Methods
         protected void BeginCook(string path, Action<byte[], int, int> callback)
         {
+            string binaryPath = Path.ChangeExtension(path, GameAsset.BinaryFileExtension);
+
+            byte[] cache = null;
+            bool hasCache = false;
+            lock (assetCachesLock)
+                hasCache = assetCaches.TryGetValue(binaryPath, out cache);
+
+            if (hasCache)
+            {
+                callback(cache, 0, cache.Length);
+                return;
+            }
+
             GameAssetKitchen kitchen = Kitchen;
             AddTask(() =>
-            {
-                object asset = kitchen.Cook(path);
-                if (asset != null)
-                {
-                    GameAssetWriter writer = GameAssetWriter.CreateWriter(asset.GetType());
-                    MemoryStream memoryStream = new MemoryStream();
-                    AssetStreamWriter streamWriter = new AssetStreamWriter(memoryStream, null);
-                    writer.Write(streamWriter, asset);
+                    {
+                        string recipePath = Path.ChangeExtension(path, GameAsset.TextFileExtension);
+                        object asset = kitchen.Cook(recipePath);
+                        if (asset != null)
+                        {
+                            GameAssetWriter writer = GameAssetWriter.CreateWriter(asset.GetType());
+                            MemoryStream memoryStream = new MemoryStream();
+                            AssetStreamWriter streamWriter = new AssetStreamWriter(memoryStream, null);
+                            writer.Write(streamWriter, asset);
 
-                    callback(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
+                            callback(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
 
-                    string filepath = Path.ChangeExtension(path, GameAsset.BinaryFileExtension);
-                    FileStream fileStream = new FileStream(filepath, FileMode.Create, FileAccess.Write);
-                    fileStream.BeginWrite(memoryStream.GetBuffer(),
-                                          0,
-                                          (int)memoryStream.Length,
-                                          new AsyncCallback(OnCacheFileWritten),
-                                          fileStream);
-                }
-            });
+                            byte[] cacheBuffer = memoryStream.GetBuffer();
+
+                            lock (assetCachesLock)
+                                assetCaches[binaryPath] = cacheBuffer;
+
+                            WriteCacheFile(binaryPath, cacheBuffer);
+                        }
+                    });
         }
 
         protected void WorkCookingThread()
@@ -104,11 +120,20 @@ namespace Halak.Bibim.Asset.Pipeline
                 taskQueue.AddLast(task);
         }
 
-        private void OnCacheFileWritten(IAsyncResult result)
+        private static void WriteCacheFile(string path, byte[] buffer)
         {
-            FileStream fileStream = (FileStream)result.AsyncState;
-            fileStream.EndWrite(result);
-            fileStream.Close();
+            WriteCacheFile(path, buffer, 0, buffer.Length);
+        }
+
+        private static void WriteCacheFile(string path, byte[] buffer, int index, int count)
+        {
+            FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write);
+            fileStream.BeginWrite(buffer, index, count,
+                                  (result) =>
+                                  {
+                                      fileStream.EndWrite(result);
+                                      fileStream.Close();
+                                  }, null);
         }
         #endregion
     }

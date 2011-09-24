@@ -14,8 +14,8 @@
             public:
                 PipedAssetProvider();
                 PipedAssetProvider(GameAssetStorage* storage);
-                PipedAssetProvider(GameAssetStorage* storage, const String& pipeName);
-                PipedAssetProvider(GameAssetStorage* storage, const String& serverName, const String& pipeName);
+                PipedAssetProvider(GameAssetStorage* storage, const String& pipeName, const String& clientName);
+                PipedAssetProvider(GameAssetStorage* storage, const String& serverName, const String& pipeName, const String& clientName);
                 virtual ~PipedAssetProvider();
 
                 virtual GameAsset* Load(const String& name);
@@ -26,9 +26,13 @@
                 inline const String& GetPipeName() const;
                 void SetPipeName(const String& value);
 
+                inline const String& GetClientName() const;
+                void SetClientName(const String& value);
+
             private:
                 String serverName;
                 String pipeName;
+                String clientName;
                 PipeClientStreamPtr queryStream;
         };
     }

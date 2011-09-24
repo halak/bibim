@@ -150,6 +150,22 @@
 		<Filter
 			Name="01. Foundation"
 			>
+			<File
+				RelativePath=".\Foundation\Bibim\Environment.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Foundation\Bibim\Environment.Windows.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Foundation\Bibim\Environment.Windows.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Foundation\Bibim\Environment.Windows.inl"
+				>
+			</File>
 			<Filter
 				Name="(Fundamental)"
 				>
