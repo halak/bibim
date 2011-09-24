@@ -127,6 +127,9 @@
                 friend inline bool operator <= (const char* left, const String& right);
                 friend inline bool operator >= (const char* left, const String& right);
 
+                static inline void CopyChars(char* destination, const char* source);
+                static inline void CopyChars(char* destination, const char* source, int length);
+
             public:
                 static const String Empty;
 
@@ -220,9 +223,6 @@
             private:
                 SharedPointer<StringBuffer> buffer;
         };
-
-        inline int CompareString(const char* s1, const char* s2);
-        inline int CompareString(const char* s1, const char* s2, int length);
     }
 
 #   include <Bibim/String.inl>

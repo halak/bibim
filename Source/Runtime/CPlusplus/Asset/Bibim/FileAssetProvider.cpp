@@ -35,9 +35,9 @@ namespace Bibim
         const int nl = name.GetLength();
         const int totalLength = dl + nl + 3 + 1;
         char* filename = BBStackAlloc(char, totalLength);
-        strcpy(&filename[0],       directory.CStr());
-        strcpy(&filename[dl],      name.CStr());
-        strcpy(&filename[dl + nl], ".ab");
+        String::CopyChars(&filename[0],       directory.CStr());
+        String::CopyChars(&filename[dl],      name.CStr());
+        String::CopyChars(&filename[dl + nl], ".ab");
         filename[totalLength - 1] = '\0';
 
         FileStreamPtr assetStream = new FileStream(filename, FileStream::ReadOnly);
