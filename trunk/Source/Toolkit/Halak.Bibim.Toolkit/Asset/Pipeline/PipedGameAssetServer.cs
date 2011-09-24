@@ -61,7 +61,7 @@ namespace Halak.Bibim.Asset.Pipeline
         protected override void Send(object target, byte[] buffer, int index, int count)
         {
         }
-        
+
         #region Peer-Handlers
         private void InitializeNewPeer()
         {
@@ -104,10 +104,9 @@ namespace Halak.Bibim.Asset.Pipeline
                 if (readBytes == 4)
                 {
                     uint id = BitConverter.ToUInt32(peer.Buffer, 0);
-                    ProcessPacket(new NamedPipeServerStream(pipeName + "_" + "ASSET", PipeDirection.Out,
-            //                                       NamedPipeServerStream.MaxAllowedServerInstances,
-            //                                       PipeTransmissionMode.Byte,
-            //                                       PipeOptions.Asynchronous);, id, peer.StreamReader);
+                    ProcessPacket(null, id, peer.StreamReader);
+                    string assetPipeName = Guid.NewGuid().ToString();
+                    peer.StreamWriter.WriteBibimString(assetPipeName);
                     peer.ResetBuffer();
                     peer.Stream.BeginRead(peer.Buffer, 0, 4, new AsyncCallback(OnPeerRead), peer);
                 }
@@ -190,6 +189,12 @@ namespace Halak.Bibim.Asset.Pipeline
                 private set;
             }
 
+            public BinaryWriter StreamWriter
+            {
+                get;
+                private set;
+            }
+
             public byte[] Buffer
             {
                 get;
@@ -203,6 +208,7 @@ namespace Halak.Bibim.Asset.Pipeline
                                                         PipeTransmissionMode.Byte,
                                                         PipeOptions.Asynchronous);
                 this.StreamReader = new BinaryReader(Stream);
+                this.StreamWriter = new BinaryWriter(Stream);
                 this.Buffer = new byte [64];
             }
 
@@ -214,6 +220,7 @@ namespace Halak.Bibim.Asset.Pipeline
                 this.Stream.Dispose();
                 this.Stream = null;
                 this.StreamReader = null;
+                this.StreamWriter = null;
                 this.Buffer = null;
             }
 

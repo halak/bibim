@@ -55,11 +55,14 @@ namespace Bibim
         if (queryStream == nullptr || queryStream->IsConnected() == false)
             return nullptr;
 
-        BinaryWriter writer(queryStream);
-        writer.Write(static_cast<uint32>(1000));
-        writer.Write(name);
+        BinaryWriter queryWriter(queryStream);
+        queryWriter.Write(static_cast<uint32>(1000));
+        queryWriter.Write(name);
 
-        PipeClientStreamPtr assetStream = new PipeClientStream(serverName, pipeName + "_" + "ASSET", PipeStream::ReadOnly);
+        BinaryReader queryReader(queryStream);
+        const String assetPipeName = queryReader.ReadString();
+
+        PipeClientStreamPtr assetStream = new PipeClientStream(serverName, assetPipeName, PipeStream::ReadOnly);
         do
         {
             assetStream->Connect();
