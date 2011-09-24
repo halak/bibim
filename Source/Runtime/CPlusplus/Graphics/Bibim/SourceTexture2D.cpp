@@ -32,7 +32,7 @@ namespace Bibim
             return nullptr;
 
         SourceTexture2D* texture = new SourceTexture2D(graphicsDevice, width, height, surfaceWidth, surfaceHeight);
-        reader.ReadAsync(new LoadingTask(reader, texture, height));
+        reader.ReadAsync(new LoadingTask(reader, texture, surfaceHeight));
 
         return texture;
     }
@@ -58,8 +58,8 @@ namespace Bibim
             texture->SetStatus(FaultStatus);
 
         IDirect3DDevice9* d3dDevice = texture->GetGraphicsDevice()->GetD3DDevice();
-        const int width  = texture->GetWidth();
-        const int height = texture->GetHeight();
+        const int width  = texture->GetSurfaceWidth();
+        const int height = texture->GetSurfaceHeight();
 
         IDirect3DTexture9* d3dTexture = NULL;
         IDirect3DTexture9* d3dSysMemTexture = NULL;
@@ -78,7 +78,6 @@ namespace Bibim
             reader.Read(destination, pitch);
             destination += destinationPitch;
             AddLoadedBytes(1);
-            //Thread::Sleep(10);
         }
         d3dSysMemTexture->UnlockRect(0);
 

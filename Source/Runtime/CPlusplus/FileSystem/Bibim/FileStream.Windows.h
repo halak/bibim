@@ -29,30 +29,15 @@
                 virtual void Flush();
                 virtual int Seek(int offset, SeekOrigin origin);
 
-                int GetPosition() const;
-                int GetSize() const;
-                uint64 GetPosition64() const;
-                uint64 GetSize64() const;
+                virtual int GetPosition();
+                virtual int GetLength();
 
                 virtual bool CanRead() const;
                 virtual bool CanWrite() const;
                 virtual bool CanSeek() const;
 
             private:
-                void StoreCache();
-
-            private:
                 void* handle;
-
-                int position;
-                int size;
-                uint64 position64;
-                uint64 size64;
-
-                std::vector<byte> cache;
-                int cacheOffset;
-                int cacheSize;
-
                 bool canRead;
                 bool canWrite;
         };

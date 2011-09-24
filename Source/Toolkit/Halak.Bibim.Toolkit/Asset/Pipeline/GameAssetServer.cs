@@ -55,9 +55,11 @@ namespace Halak.Bibim.Asset.Pipeline
         #endregion
         
         #region Methods
-        protected void BeginCook(string path, Action<byte[], int, int> callback)
+        protected void BeginCook(string path, Action<byte[], int, int> callback, Action fallback)
         {
             string binaryPath = Path.ChangeExtension(path, GameAsset.BinaryFileExtension);
+
+            // Cache Table에 Asset Binary가 존재하면 Cooking하지 않습니다.
 
             byte[] cache = null;
             bool hasCache = false;
@@ -73,23 +75,50 @@ namespace Halak.Bibim.Asset.Pipeline
             GameAssetKitchen kitchen = Kitchen;
             AddTask(() =>
                     {
-                        string recipePath = Path.ChangeExtension(path, GameAsset.TextFileExtension);
-                        object asset = kitchen.Cook(recipePath);
-                        if (asset != null)
+                        try
                         {
-                            GameAssetWriter writer = GameAssetWriter.CreateWriter(asset.GetType());
-                            MemoryStream memoryStream = new MemoryStream();
-                            AssetStreamWriter streamWriter = new AssetStreamWriter(memoryStream, null);
-                            writer.Write(streamWriter, asset);
+                            Trace.WriteLine(string.Format("#start cooking. {0}", path));
 
-                            callback(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
+                            string recipePath = Path.ChangeExtension(path, GameAsset.TextFileExtension);
+                            object asset = kitchen.Cook(recipePath);
+                            if (asset != null)
+                            {
+                                // Cooking 된 asset은 나중에 가져다 쓰기 쉽게 단순 Binary화합니다.
 
-                            byte[] cacheBuffer = memoryStream.GetBuffer();
+                                GameAssetWriter writer = GameAssetWriter.CreateWriter(asset.GetType());
+                                MemoryStream memoryStream = new MemoryStream();
+                                AssetStreamWriter streamWriter = new AssetStreamWriter(memoryStream, null);
+                                writer.Write(streamWriter, asset);
 
-                            lock (assetCachesLock)
-                                assetCaches[binaryPath] = cacheBuffer;
+                                callback(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
 
-                            WriteCacheFile(binaryPath, cacheBuffer);
+                                // Cooking 작업을 마치고 Callback까지 호출했으면,
+                                //   1. Asset Binary를 Cache Table에 보관합니다.
+                                //      다음 요청부터 Cooking 하지 않고 바로 Cache에서 넘겨줍니다.
+                                //   2. "{AssetName}.ab" File에 Asset Binary를 저장합니다.
+
+                                byte[] cacheBuffer = memoryStream.GetBuffer();
+
+                                lock (assetCachesLock)
+                                    assetCaches[binaryPath] = cacheBuffer;
+
+                                WriteCacheFile(binaryPath, cacheBuffer);
+                            }
+                            else
+                            {
+                                Trace.WriteLine(string.Format("!Asset cooking failed. {0}", path));
+
+                                if (fallback != null)
+                                    fallback();
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Trace.WriteLine("!" + e.Message);
+                            Trace.WriteLine("!" + e.StackTrace);
+
+                            if (fallback != null)
+                                fallback();
                         }
                     });
         }

@@ -31,9 +31,22 @@ namespace Bibim
     {
         BBAssertDebug(GetStorage() != nullptr);
 
-        FileStreamPtr assetStream = new FileStream(directory + name, FileStream::ReadOnly);
+        const int dl = directory.GetLength();
+        const int nl = name.GetLength();
+        const int totalLength = dl + nl + 3 + 1;
+        char* filename = BBStackAlloc(char, totalLength);
+        strcpy(&filename[0],       directory.CStr());
+        strcpy(&filename[dl],      name.CStr());
+        strcpy(&filename[dl + nl], ".ab");
+        filename[totalLength - 1] = '\0';
+
+        FileStreamPtr assetStream = new FileStream(filename, FileStream::ReadOnly);
         AssetStreamReader reader(name, assetStream, GetStorage());
-        return GameAssetFactory::Create(reader);
+        GameAsset* result = GameAssetFactory::Create(reader);
+
+        BBStackFree(filename);
+
+        return result;
     }
 
     void FileAssetProvider::SetDirectory(const String& value)
