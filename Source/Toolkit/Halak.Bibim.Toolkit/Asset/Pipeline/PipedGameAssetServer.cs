@@ -16,6 +16,7 @@ namespace Halak.Bibim.Asset.Pipeline
         #region Fields
         private string pipeName;
         private LinkedList<Peer> peers;
+        private uint idGenerator;
         #endregion
 
         #region Properties
@@ -51,6 +52,7 @@ namespace Halak.Bibim.Asset.Pipeline
         {
             this.pipeName = pipeName;
             this.peers = new LinkedList<Peer>();
+            this.idGenerator = 0;
 
             if (string.IsNullOrEmpty(pipeName) == false)
                 InitializeNewPeer();
@@ -58,10 +60,6 @@ namespace Halak.Bibim.Asset.Pipeline
         #endregion
 
         #region Methods
-        protected override void Send(object target, byte[] buffer, int index, int count)
-        {
-        }
-
         #region Peer-Handlers
         private void InitializeNewPeer()
         {
@@ -72,22 +70,39 @@ namespace Halak.Bibim.Asset.Pipeline
             Trace.WriteLine("Waiting new peer...");
         }
 
+        private void ShutdownPeer(Peer peer)
+        {
+            ShutdownPeer(peer, null);
+        }
+
+        private void ShutdownPeer(Peer peer, string message)
+        {
+            peer.Disconnect();
+            peers.Remove(peer);
+
+            if (string.IsNullOrEmpty(message) == false)
+                Trace.WriteLine(message);
+        }
+
         private void OnPeerConnected(IAsyncResult result)
         {
             Peer peer = (Peer)result.AsyncState;
             if (result.IsCompleted)
             {
                 peer.Stream.EndWaitForConnection(result);
-                string directory = peer.StreamReader.ReadBibimString();
+                string exeFilePath = peer.StreamReader.ReadBibimString();
+
+                string exeFileName = Path.GetFileNameWithoutExtension(exeFilePath);
+                peer.Name = exeFileName;
+                peer.ID = idGenerator++;
+
                 peer.Stream.BeginRead(peer.Buffer, 0, 4, new AsyncCallback(OnPeerRead), peer);
 
-                Trace.WriteLine("Peer connected. \n \t>{0}", directory);
+                Trace.WriteLine(string.Format("[{0}:{1}] Peer connected.", peer.Name, peer.ID));
             }
             else
             {
-                peer.Disconnect();
-                peers.Remove(peer);
-
+                ShutdownPeer(peer);
                 Trace.WriteLine("Peer connect failure.");
             }
 
@@ -98,78 +113,50 @@ namespace Halak.Bibim.Asset.Pipeline
         {
             Peer peer = (Peer)result.AsyncState;
 
-            if (result.IsCompleted)
-            {
-                int readBytes = peer.Stream.EndRead(result);
-                if (readBytes == 4)
-                {
-                    uint id = BitConverter.ToUInt32(peer.Buffer, 0);
-                    ProcessPacket(null, id, peer.StreamReader);
-                    string assetPipeName = Guid.NewGuid().ToString();
-                    peer.StreamWriter.WriteBibimString(assetPipeName);
-                    peer.ResetBuffer();
-                    peer.Stream.BeginRead(peer.Buffer, 0, 4, new AsyncCallback(OnPeerRead), peer);
-                }
-                else
-                {
-                    Trace.WriteLine("Peer disconnected.");
-                    peer.Disconnect();
-                }
-            }
-
-            //    Connection connection = (Connection)result.AsyncState;
-            //    int r = connection.Stream.EndRead(result);
-            //    uint id = BitConverter.ToUInt32(connection.Buffer, 0);
-            //    switch (id)
-            //    {
-            //        case 1000:
-            //            string path = connection.Reader.ReadBibimString();
-            //            object asset = Kitchen.Cook(path);
-            //            if (asset != null)
-            //            {
-            //                GameAssetWriter writer = GameAssetWriter.CreateWriter(asset.GetType());
-            //                MemoryStream ms = new MemoryStream();
-            //                AssetStreamWriter assetWriter = new AssetStreamWriter(ms, null);
-            //                writer.Write(assetWriter, asset);
-
-            //                NamedPipeServerStream serverStream = new NamedPipeServerStream(pipeName + "_" + "ASSET", PipeDirection.Out,
-            //                                       NamedPipeServerStream.MaxAllowedServerInstances,
-            //                                       PipeTransmissionMode.Byte,
-            //                                       PipeOptions.Asynchronous);
-            //                serverStream.WaitForConnection();
-            //                serverStream.BeginWrite(ms.GetBuffer(), 0, (int)ms.Length, new AsyncCallback(OnAssetWritten), serverStream);
-            //                connection.Buffer[0] = 0;
-            //                connection.Buffer[1] = 0;
-            //                connection.Buffer[2] = 0;
-            //                connection.Buffer[3] = 0;
-            //                connection.Stream.BeginRead(connection.Buffer, 0, 4, new AsyncCallback(OnRead), connection);
-            //                ms.Close();
-            //            }
-            //            break;
-            //    }
-            //}
-            //else
-            //{
-            //}
-        }
-
-        private void OnAssetWritten(IAsyncResult result)
-        {
-            try
-            {
-                NamedPipeServerStream stream = (NamedPipeServerStream)result.AsyncState;
-                stream.EndWrite(result);
-                stream.Flush();
-                stream.Disconnect();
-                stream.Close();
-            }
-            catch (Exception ex)
-            {
-            }
-
             if (result.IsCompleted == false)
             {
+                ShutdownPeer(peer, string.Format("[{0}:{1}] Peer disconnected. (unknown)", peer.Name, peer.ID));
+                return;
             }
+
+            int readBytes = peer.Stream.EndRead(result);
+            if (readBytes != 4)
+            {
+                ShutdownPeer(peer, string.Format("[{0}:{1}] Peer disconnected. (read error)", peer.Name, peer.ID));
+                return;
+            }
+
+            uint id = BitConverter.ToUInt32(peer.Buffer, 0);
+            string message = null;
+            switch (id)
+            {
+                case AssetProvider.LoadAssetPacketID:
+                    string path = peer.StreamReader.ReadBibimString();
+                    string guid = Guid.NewGuid().ToString();
+                    peer.StreamWriter.WriteBibimString(guid);
+                    BeginCook(path, (buffer, index, count) =>
+                    {
+                        NamedPipeServerStream stream = new NamedPipeServerStream(guid,
+                                                                                 PipeDirection.Out,
+                                                                                 NamedPipeServerStream.MaxAllowedServerInstances,
+                                                                                 PipeTransmissionMode.Byte,
+                                                                                 PipeOptions.Asynchronous);
+                        stream.WaitForConnection();
+                        stream.BeginWrite(buffer, 0, count, (_) =>
+                        {
+                            stream.Disconnect();
+                            stream.Dispose();
+                        }, null);
+                    });
+                    message = string.Format("[{0}:{1}] Received LoadAssetPacket {2}\n ({3}) AssetPipe.", peer.Name, peer.ID, path, guid);
+                    break;
+            }
+
+            peer.ResetBuffer();
+            peer.Stream.BeginRead(peer.Buffer, 0, 4, new AsyncCallback(OnPeerRead), peer);
+
+            if (string.IsNullOrEmpty(message) == false)
+                Trace.WriteLine(message);
         }
         #endregion
         #endregion
@@ -199,6 +186,18 @@ namespace Halak.Bibim.Asset.Pipeline
             {
                 get;
                 private set;
+            }
+
+            public uint ID
+            {
+                get;
+                set;
+            }
+
+            public string Name
+            {
+                get;
+                set;
             }
 
             public Peer(string pipeName)

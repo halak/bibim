@@ -34,16 +34,20 @@ namespace Halak.Bibim.Toolkit.Console
             pipeName = GetArgument("Pipe Name", args, 0);
             assetDirectory = GetArgument("Asset Directory", args, 1);
 
-            GameModuleTree modules = new GameModuleTree();
+            System.Diagnostics.Trace.Listeners.Add(ConsoleTraceListener.Instance);
 
+            GameModuleTree modules = new GameModuleTree();
+            
             GameAssetKitchen assetKitchen = new GameAssetKitchen();
             PipedGameAssetServer assetServer = new PipedGameAssetServer(assetKitchen, pipeName);
             modules.Root.AttachChild(assetKitchen);
             modules.Root.AttachChild(assetServer);
-
+            
             for (; ; )
             {
             }
+
+            System.Diagnostics.Trace.Listeners.Remove(ConsoleTraceListener.Instance);
 
             //NamedPipeServerStream serverPipe = new NamedPipeServerStream(pipeName, PipeDirection.InOut);
             //BinaryReader serverPipeReader = new BinaryReader(serverPipe);
