@@ -60,7 +60,6 @@ namespace Halak.Bibim.Asset.Pipeline
         #endregion
 
         #region Methods
-        #region Peer-Handlers
         private void InitializeNewPeer()
         {
             Peer result = new Peer(pipeName);
@@ -90,10 +89,11 @@ namespace Halak.Bibim.Asset.Pipeline
             if (result.IsCompleted)
             {
                 peer.Stream.EndWaitForConnection(result);
-                string exeFilePath = peer.StreamReader.ReadBibimString();
+                string directory = peer.StreamReader.ReadBibimString();
+                string clientName = peer.StreamReader.ReadBibimString();
 
-                string exeFileName = Path.GetFileNameWithoutExtension(exeFilePath);
-                peer.Name = exeFileName;
+                peer.Directory = directory;
+                peer.Name = clientName;
                 peer.ID = idGenerator++;
 
                 peer.Stream.BeginRead(peer.Buffer, 0, 4, new AsyncCallback(OnPeerRead), peer);
@@ -134,20 +134,24 @@ namespace Halak.Bibim.Asset.Pipeline
                     string path = peer.StreamReader.ReadBibimString();
                     string guid = Guid.NewGuid().ToString();
                     peer.StreamWriter.WriteBibimString(guid);
-                    BeginCook(path, (buffer, index, count) =>
-                    {
-                        NamedPipeServerStream stream = new NamedPipeServerStream(guid,
-                                                                                 PipeDirection.Out,
-                                                                                 NamedPipeServerStream.MaxAllowedServerInstances,
-                                                                                 PipeTransmissionMode.Byte,
-                                                                                 PipeOptions.Asynchronous);
-                        stream.WaitForConnection();
-                        stream.BeginWrite(buffer, 0, count, (_) =>
-                        {
-                            stream.Disconnect();
-                            stream.Dispose();
-                        }, null);
-                    });
+                    BeginCook(Path.Combine(peer.Directory, path),
+                              (buffer, index, count) =>
+                              {
+                                  NamedPipeServerStream stream = new NamedPipeServerStream(guid,
+                                                                                           PipeDirection.Out,
+                                                                                           NamedPipeServerStream.MaxAllowedServerInstances,
+                                                                                           PipeTransmissionMode.Byte,
+                                                                                           PipeOptions.Asynchronous);
+                                  stream.WaitForConnection();
+                                  stream.BeginWrite(buffer, 0, count,
+                                                    (r) =>
+                                                    {
+                                                        stream.EndWrite(r);
+                                                        stream.Disconnect();
+                                                        stream.Dispose();
+                                                    },
+                                                    null);
+                              });
                     message = string.Format("[{0}:{1}] Received LoadAssetPacket {2}\n ({3}) AssetPipe.", peer.Name, peer.ID, path, guid);
                     break;
             }
@@ -158,7 +162,6 @@ namespace Halak.Bibim.Asset.Pipeline
             if (string.IsNullOrEmpty(message) == false)
                 Trace.WriteLine(message);
         }
-        #endregion
         #endregion
 
         #region Peer
@@ -189,6 +192,12 @@ namespace Halak.Bibim.Asset.Pipeline
             }
 
             public uint ID
+            {
+                get;
+                set;
+            }
+
+            public string Directory
             {
                 get;
                 set;

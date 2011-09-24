@@ -26,7 +26,7 @@ class SpriteTest : public GameFramework
             GetWindow()->SetTitle("Sprite");
 
             GameAssetStorage*   gas = new GameAssetStorage(GetModules());
-            PipedAssetProvider* pap = new PipedAssetProvider(gas, "TestAssets");
+            PipedAssetProvider* pap = new PipedAssetProvider(gas, "TestAssets", "SpriteSample");
             FileAssetProvider*  fap = new FileAssetProvider(gas, "Asset");
             
             UIWindowPtr window = new UIWindow();
@@ -42,8 +42,8 @@ class SpriteTest : public GameFramework
             GameModuleNode* uiNode = GetModules()->GetRoot()->AttachChild(uid);
             uiNode->AttachChild(uir);
 
-            texture1 = static_cast<SourceTexture2D*>(gas->Load("Asset\\Hello.asset"));
-            texture2 = static_cast<SourceTexture2D*>(gas->Load("Asset\\BigHello.asset"));
+            texture1 = static_cast<SourceTexture2D*>(gas->Load("Asset\\Hello"));
+            texture2 = static_cast<SourceTexture2D*>(gas->Load("Asset\\BigHello"));
 
             storage = gas;
             uiDomain = uid;

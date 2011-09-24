@@ -2,6 +2,7 @@
 #include <Bibim/PipedAssetProvider.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/BinaryWriter.h>
+#include <Bibim/Environment.h>
 #include <BIbim/GameAssetFactory.h>
 #include <BIbim/GameAssetStorage.h>
 #include <Bibim/PipeClientStream.h>
@@ -17,16 +18,18 @@ namespace Bibim
     {
     }
 
-    PipedAssetProvider::PipedAssetProvider(GameAssetStorage* storage, const String& pipeName)
+    PipedAssetProvider::PipedAssetProvider(GameAssetStorage* storage, const String& pipeName, const String& clientName)
         : AssetProvider(storage),
-          pipeName(pipeName)
+          pipeName(pipeName),
+          clientName(clientName)
     {
     }
 
-    PipedAssetProvider::PipedAssetProvider(GameAssetStorage* storage, const String& serverName, const String& pipeName)
+    PipedAssetProvider::PipedAssetProvider(GameAssetStorage* storage, const String& serverName, const String& pipeName, const String& clientName)
         : AssetProvider(storage),
           serverName(serverName),
-          pipeName(pipeName)
+          pipeName(pipeName),
+          clientName(clientName)
     {
     }
 
@@ -48,7 +51,8 @@ namespace Bibim
             if (queryStream->IsConnected())
             {
                 BinaryWriter writer(queryStream);
-                writer.Write("BIBIMBIBIMBIBIM");
+                writer.Write(Environment::GetWorkingDirectory());
+                writer.Write(GetClientName());
             }
         }
 
@@ -70,6 +74,14 @@ namespace Bibim
 
         AssetStreamReader reader(name, assetStream, GetStorage());
         return GameAssetFactory::Create(reader);
+    }
+
+    void PipedAssetProvider::SetClientName(const String& value)
+    {
+        if (clientName != value)
+        {
+            clientName = value;
+        }
     }
 
     void PipedAssetProvider::SetServerName(const String& value)

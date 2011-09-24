@@ -78,7 +78,7 @@ namespace Bibim
             reader.Read(destination, pitch);
             destination += destinationPitch;
             AddLoadedBytes(1);
-            Thread::Sleep(10);
+            //Thread::Sleep(10);
         }
         d3dSysMemTexture->UnlockRect(0);
 
