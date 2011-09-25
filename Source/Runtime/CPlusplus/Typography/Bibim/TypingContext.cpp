@@ -52,7 +52,7 @@ namespace Bibim
     int TypingContext::GetLength(uint32 code)
     {
         const wchar_t wideCharacter = static_cast<wchar_t>(code);
-        return WideCharToMultiByte(CP_ACP, 0, &wideCharacter, 1, NULL, 0, NULL, NULL);
+        return WideCharToMultiByte(CP_ACP, 0, &wideCharacter, 1, nullptr, 0, nullptr, nullptr);
     }
 
     bool TypingContext::MoveNext()

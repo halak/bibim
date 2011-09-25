@@ -32,7 +32,7 @@ namespace Bibim
 
     void GraphicsDevice::Clear(Color color)
     {
-        GetD3DDevice()->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(color.R, color.G, color.B), 1.0f, 0);
+        GetD3DDevice()->Clear(0, nullptr, D3DCLEAR_TARGET, D3DCOLOR_XRGB(color.R, color.G, color.B), 1.0f, 0);
     }
 
     void GraphicsDevice::BeginDraw()
@@ -54,7 +54,7 @@ namespace Bibim
     void GraphicsDevice::Present()
     {
         if (defaultSwapChain == nullptr)
-            GetD3DDevice()->Present(NULL, NULL, NULL, NULL);
+            GetD3DDevice()->Present(nullptr, nullptr, nullptr, nullptr);
         else
             defaultSwapChain->Present();
     }
@@ -116,12 +116,12 @@ namespace Bibim
     {
         BBAssert(GetWindow());
 
-        if (d3dObject == NULL)
+        if (d3dObject == nullptr)
         {
             d3dObject = Direct3DCreate9(D3D_SDK_VERSION);
 
-            if (d3dObject == NULL)
-                throw new std::runtime_error("GraphicsDevice::d3dObject == NULL");
+            if (d3dObject == nullptr)
+                throw new std::runtime_error("GraphicsDevice::d3dObject == nullptr");
         }
 
         D3DPRESENT_PARAMETERS d3dParameters;

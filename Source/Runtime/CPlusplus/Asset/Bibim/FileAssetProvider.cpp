@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/FileAssetProvider.h>
+#include <Bibim/AssetLoadingTask.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/BinaryWriter.h>
 #include <Bibim/FileStream.h>
@@ -8,6 +9,44 @@
 
 namespace Bibim
 {
+    class FileAssetPreloadingTask : public AssetPreloadingTask
+    {
+        public:
+            FileAssetPreloadingTask(const String& name, GameAssetStorage* storage, const String& directory)
+                : AssetPreloadingTask(name, storage),
+                  directory(directory)
+            {
+            }
+
+            virtual ~FileAssetPreloadingTask()
+            {
+            }
+
+            virtual void Execute()
+            {
+                const int dl = directory.GetLength();
+                const int nl = GetName().GetLength();
+                const int totalLength = dl + nl + 3 + 1;
+                char* filename = BBStackAlloc(char, totalLength);
+                String::CopyChars(&filename[0],       directory.CStr());
+                String::CopyChars(&filename[dl],      GetName().CStr());
+                String::CopyChars(&filename[dl + nl], ".ab");
+                filename[totalLength - 1] = '\0';
+
+                FileStreamPtr assetStream = new FileStream(filename, FileStream::ReadOnly);
+                AssetStreamReader reader(GetName(), assetStream, GetStorage(), true);
+                GameAsset* result = GameAssetFactory::Create(reader);
+                Register(result);
+
+                BBStackFree(filename);
+            }
+
+        private:
+            String directory;
+    };
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     FileAssetProvider::FileAssetProvider()
     {
     }
@@ -29,7 +68,9 @@ namespace Bibim
 
     bool FileAssetProvider::Preload(const String& name)
     {
-        return false;
+        BBAssertDebug(GetStorage() != nullptr);
+        Add(new FileAssetPreloadingTask(name, GetStorage(), directory));
+        return true;
     }
 
     GameAsset* FileAssetProvider::Load(const String& name)

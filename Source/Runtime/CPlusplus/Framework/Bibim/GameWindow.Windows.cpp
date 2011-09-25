@@ -82,7 +82,7 @@
             {
                 position = value;
                 
-                ::SetWindowPos(static_cast<HWND>(handle), NULL, position.X, position.Y, 0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_NOACTIVATE);
+                ::SetWindowPos(static_cast<HWND>(handle), nullptr, position.X, position.Y, 0, 0, SWP_NOZORDER | SWP_NOSIZE | SWP_NOACTIVATE);
             }
         }
 
@@ -102,12 +102,12 @@
 
                 const DWORD exWindowStyle = static_cast<DWORD>(GetWindowLong(static_cast<HWND>(handle), GWL_EXSTYLE));
                 const DWORD windowStyle = static_cast<DWORD>(GetWindowLong(static_cast<HWND>(handle), GWL_STYLE));
-                const BOOL hasMenu = GetMenu(static_cast<HWND>(handle)) != NULL ? TRUE : FALSE;
+                const BOOL hasMenu = GetMenu(static_cast<HWND>(handle)) != nullptr ? TRUE : FALSE;
                 RECT windowRect = { 0, 0, size.X, size.Y };
                 ::AdjustWindowRectEx(&windowRect, windowStyle, hasMenu, exWindowStyle);
 
                 const SIZE windowSize = { windowRect.right - windowRect.left, windowRect.bottom - windowRect.top };
-                ::SetWindowPos(static_cast<HWND>(handle), NULL, 0, 0, windowSize.cx, windowSize.cy, SWP_NOZORDER | SWP_NOMOVE | SWP_NOACTIVATE);
+                ::SetWindowPos(static_cast<HWND>(handle), nullptr, 0, 0, windowSize.cx, windowSize.cy, SWP_NOZORDER | SWP_NOMOVE | SWP_NOACTIVATE);
             }
         }
 
@@ -164,18 +164,18 @@
             windowClass.lpfnWndProc = &Internal::WindowProcedure;
             windowClass.cbClsExtra = 0;
             windowClass.cbWndExtra = sizeof(this);
-            windowClass.hInstance = GetModuleHandle(NULL);
-            windowClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-            windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
+            windowClass.hInstance = GetModuleHandle(nullptr);
+            windowClass.hIcon = LoadIcon(nullptr, IDI_APPLICATION);
+            windowClass.hCursor = LoadCursor(nullptr, IDC_ARROW);
             windowClass.hbrBackground = static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH));
-            windowClass.lpszMenuName = NULL;
+            windowClass.lpszMenuName = nullptr;
             windowClass.lpszClassName = ClassName;
             windowClass.hIconSm = windowClass.hIcon;
             RegisterClassEx(&windowClass);
 
             handle = static_cast<void*>(::CreateWindowEx(0x00000000, ClassName, ClassName, WS_OVERLAPPEDWINDOW,
                                                          CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
-                                                         NULL, NULL, GetModuleHandle(NULL), this));
+                                                         nullptr, nullptr, GetModuleHandle(nullptr), this));
         }
 
         LRESULT CALLBACK GameWindow::Internal::WindowProcedure(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam)

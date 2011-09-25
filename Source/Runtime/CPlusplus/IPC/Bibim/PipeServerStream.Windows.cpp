@@ -30,24 +30,24 @@ namespace Bibim
                                              4096,
                                              4096,
                                              0,
-                                             NULL);
+                                             nullptr);
         if (newHandle != INVALID_HANDLE_VALUE)
             SetHandle(newHandle);
     }
 
     PipeServerStream::~PipeServerStream()
     {
-        if (GetHandle() != NULL)
+        if (GetHandle() != nullptr)
         {
             HANDLE handle = GetHandle();
             ::CloseHandle(handle);
-            SetHandle(NULL);
+            SetHandle(nullptr);
         }
     }
 
     bool PipeServerStream::WaitForConnection()
     {
-        BOOL connected = ::ConnectNamedPipe(GetHandle(), NULL);
+        BOOL connected = ::ConnectNamedPipe(GetHandle(), nullptr);
         if (connected == FALSE && GetLastError() == ERROR_PIPE_CONNECTED)
             connected = TRUE;
 
@@ -56,7 +56,7 @@ namespace Bibim
 
     void PipeServerStream::Disconnect()
     {
-        BBAssertDebug(GetHandle() != NULL);
+        BBAssertDebug(GetHandle() != nullptr);
 
         HANDLE handle = GetHandle();
         ::FlushFileBuffers(handle);
@@ -65,7 +65,7 @@ namespace Bibim
 
     bool PipeServerStream::IsConnected() const
     {
-        if (GetHandle() != NULL)
+        if (GetHandle() != nullptr)
         {
             ULONG id = 0;
             if (::GetNamedPipeClientProcessId(GetHandle(), &id))

@@ -52,6 +52,7 @@
                 AssetPreloadingTask(const String& name, GameAssetStorage* storage);
 
                 void Register(GameAsset* asset);
+                void Unregister();
 
             private:
                 GameAssetStorage* storage;

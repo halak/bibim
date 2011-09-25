@@ -7,7 +7,7 @@ namespace Bibim
 
     Environment::Environment()
     {
-        const DWORD workingDirectoryLength = ::GetCurrentDirectory(0, NULL);
+        const DWORD workingDirectoryLength = ::GetCurrentDirectory(0, nullptr);
         char* workingDirectoryBuffer = BBStackAlloc(char, workingDirectoryLength);
 
         ::GetCurrentDirectory(workingDirectoryLength, workingDirectoryBuffer);

@@ -4,7 +4,7 @@
 namespace Bibim
 {
     PipeStream::PipeStream(const String& name, AccessMode accessMode)
-        : handle(NULL),
+        : handle(nullptr),
           name(name),
           accessMode(accessMode)
     {
@@ -12,10 +12,10 @@ namespace Bibim
 
     PipeStream::~PipeStream()
     {
-        if (handle != NULL)
+        if (handle != nullptr)
         {
             ::CloseHandle(handle);
-            handle = NULL;
+            handle = nullptr;
         }
     }
 
@@ -24,7 +24,7 @@ namespace Bibim
         BBAssertDebug(size >= 0);
 
         DWORD read = 0;
-        if (handle && size > 0 && ::ReadFile(handle, buffer, size, &read, NULL))
+        if (handle && size > 0 && ::ReadFile(handle, buffer, size, &read, nullptr))
             return static_cast<int>(read);
         else
             return 0;
@@ -35,7 +35,7 @@ namespace Bibim
         BBAssertDebug(size >= 0);
 
         DWORD written = 0;
-        if (handle && size > 0 && ::WriteFile(handle, buffer, size, &written, NULL))
+        if (handle && size > 0 && ::WriteFile(handle, buffer, size, &written, nullptr))
             return static_cast<int>(written);
         else
             return 0;

@@ -47,4 +47,9 @@ namespace Bibim
     {
         storage->SetAsset(GetName(), asset);
     }
+
+    void AssetPreloadingTask::Unregister()
+    {
+        storage->SetAsset(GetName(), GameAssetStorage::BadAsset);
+    }
 }

@@ -89,6 +89,8 @@
                 };
 
             private:
+                GameAsset* LoadNew(const String& name);
+
                 void AddFirst(AssetLoadingTask* item); // call in AssetStreamReader, AssetProvider
                 void AddLast(AssetLoadingTask* item); // call in AssetStreamReader, AssetProvider
                 void Add(AssetProvider* item); // call in AssetProvider
@@ -101,6 +103,8 @@
                 ProviderCollection providers;
 
                 LoadingThread loadingThread;
+
+                static const GameAssetPtr BadAsset; // reference in AssetPreloadingTask
 
                 friend class AssetProvider;
                 friend class AssetStreamReader;
