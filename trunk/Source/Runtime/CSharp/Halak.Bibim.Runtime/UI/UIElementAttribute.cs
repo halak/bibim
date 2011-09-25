@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using Halak.Bibim.Reflection;
 
-namespace Halak.Bibim
+namespace Halak.Bibim.UI
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public sealed class GameModuleAttribute : Attribute
+    public sealed class UIElementAttribute : Attribute
     {
         #region Properties
         public uint ClassID
@@ -18,12 +18,12 @@ namespace Halak.Bibim
         #endregion
 
         #region Constructors
-        public GameModuleAttribute(char a, char b, char c, char d)
+        public UIElementAttribute(char a, char b, char c, char d)
             : this(FOURCC.Make(a, b, c, d))
         {
         }
 
-        public GameModuleAttribute(uint classID)
+        public UIElementAttribute(uint classID)
         {
             ClassID = classID;
         }
@@ -32,7 +32,7 @@ namespace Halak.Bibim
         #region Static Methods
         public static uint GetClassID(Type type)
         {
-            GameModuleAttribute attribute = type.GetCustomAttribute<GameModuleAttribute>();
+            UIElementAttribute attribute = type.GetCustomAttribute<UIElementAttribute>();
             if (attribute != null)
                 return attribute.ClassID;
             else

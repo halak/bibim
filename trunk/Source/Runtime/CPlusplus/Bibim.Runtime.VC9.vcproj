@@ -1278,6 +1278,18 @@
 					>
 				</File>
 				<File
+					RelativePath=".\UI\Bibim\UILayout.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\UI\Bibim\UILayout.h"
+					>
+				</File>
+				<File
+					RelativePath=".\UI\Bibim\UILayout.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\UI\Bibim\UIMarkupText.cpp"
 					>
 				</File>
@@ -1314,7 +1326,7 @@
 					>
 				</File>
 				<Filter
-					Name="Frame"
+					Name="Frames"
 					>
 					<File
 						RelativePath=".\UI\Bibim\UIAlignedFrame.cpp"
@@ -1378,7 +1390,7 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="Visual"
+					Name="Visuals"
 					>
 					<File
 						RelativePath=".\UI\Bibim\UIButton.cpp"
@@ -1490,7 +1502,7 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="Event"
+					Name="Events"
 					>
 					<File
 						RelativePath=".\UI\Bibim\UIAppEventDispatcher.cpp"
@@ -1710,7 +1722,7 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="Effect"
+					Name="Effects"
 					>
 					<File
 						RelativePath=".\UI\Bibim\UIEffect.cpp"
@@ -1750,7 +1762,7 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="Transform"
+					Name="Transforms"
 					>
 					<File
 						RelativePath=".\UI\Bibim\UITransform.cpp"
@@ -1782,7 +1794,7 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="Visitor"
+					Name="Visitors"
 					>
 					<File
 						RelativePath=".\UI\Bibim\UIDrawingContext.cpp"

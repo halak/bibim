@@ -94,13 +94,15 @@
             // Asset
                 class AssetLoadingTask;
                     class AssetPreloadingTask;
-                class AssetProvider;
-                    class PipedAssetProvider;
-                    class FileAssetProvider;
                 class AssetStreamReader;
                 BBForwardDeclareSmartPointerClass(GameAsset);
                 class GameAssetFactory;
                 class GameAssetStorage;
+                ////////////////////////////////////////////////////////////////////////////////////////////////////
+                // Providers
+                    class AssetProvider;
+                        class PipedAssetProvider;
+                        class FileAssetProvider;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // FileSystem
                 BBForwardDeclareSmartPointerClass(FileStream);
@@ -166,15 +168,16 @@
                     class UISimpleDomain;
                 BBForwardDeclareSmartPointerClass(UIElement);
                     BBForwardDeclareSmartPointerClass(UIImage);
+                BBForwardDeclareSmartPointerClass(UILayout);
                 class UIMarkupText;
                 class UIRenderer;
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
-                // Effect
+                // Effects
                     BBForwardDeclareSmartPointerClass(UIEffect);
                         BBForwardDeclareSmartPointerClass(UITintEffect);
                     BBForwardDeclareSmartPointerClass(UIEffectMap);
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
-                // Event
+                // Events
                     class UIAsyncEventQueue;
                     BBForwardDeclareSmartPointerClass(UIEventArgs);
                         BBForwardDeclareSmartPointerClass(UIGamePadEventArgs);
@@ -194,24 +197,24 @@
                     BBForwardDeclareSmartPointerClass(UIEventMap);
                     class UIFunctionTable;
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
-                // Frame
+                // Frames
                     BBForwardDeclareSmartPointerClass(UIFrame);
                         BBForwardDeclareSmartPointerClass(UIAlignedFrame);
                         BBForwardDeclareSmartPointerClass(UIAnchoredFrame);
                         BBForwardDeclareSmartPointerClass(UIFittedFrame);
                         BBForwardDeclareSmartPointerClass(UIFixedFrame);
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
-                // Transform
+                // Transforms
                     BBForwardDeclareSmartPointerClass(UITransform);
                         BBForwardDeclareSmartPointerClass(UITransform3D);
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
-                // Visitor
+                // Visitors
                     class UIVisualVisitor;
                         class UIDrawingContext;
                             class UIHandledDrawingContext;
                         class UIPickingContext;
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
-                // Visual
+                // Visuals
                     BBForwardDeclareSmartPointerClass(UIVisual);
                         BBForwardDeclareSmartPointerClass(UILabel);
                         BBForwardDeclareSmartPointerClass(UIMarkupTextBox);
