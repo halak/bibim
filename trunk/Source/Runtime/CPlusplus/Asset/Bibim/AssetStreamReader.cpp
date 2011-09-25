@@ -11,7 +11,19 @@ namespace Bibim
         : BinaryReader(sourceStream),
           name(name),
           storage(storage),
-          modules(storage->GetModules())
+          modules(storage->GetModules()),
+          isPriority(false)
+    {
+        BBAssert(storage);
+        BBAssert(modules);
+    }
+
+    AssetStreamReader::AssetStreamReader(const String& name, Stream* sourceStream, GameAssetStorage* storage, bool isPriority)
+        : BinaryReader(sourceStream),
+          name(name),
+          storage(storage),
+          modules(storage->GetModules()),
+          isPriority(isPriority)
     {
         BBAssert(storage);
         BBAssert(modules);
@@ -21,7 +33,8 @@ namespace Bibim
         : BinaryReader(original),
           name(original.name),
           storage(original.storage),
-          modules(original.modules)
+          modules(original.modules),
+          isPriority(original.isPriority)
     {
     }
 
@@ -32,7 +45,10 @@ namespace Bibim
     void AssetStreamReader::ReadAsync(AssetLoadingTask* task)
     {
         BBAssertDebug(task);
-        storage->Add(task);
+        if (isPriority)
+            storage->AddFirst(task);
+        else
+            storage->AddLast(task);            
     }
 
     GameModule* AssetStreamReader::ReadModule()
@@ -69,6 +85,7 @@ namespace Bibim
         name = right.name;
         storage = right.storage;
         modules = right.modules;
+        isPriority = right.isPriority;
         return *this;
     }
 }

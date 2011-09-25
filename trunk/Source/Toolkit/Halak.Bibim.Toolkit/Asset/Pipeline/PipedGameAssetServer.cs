@@ -140,7 +140,7 @@ namespace Halak.Bibim.Asset.Pipeline
             string message = null;
             switch (id)
             {
-                case AssetProvider.LoadAssetPacketID:
+                case PipedAssetProvider.LoadAssetPacketID:
                     string path = peer.StreamReader.ReadBibimString();
 
                     // Asset Binary를 전송할 Pipe의 이름을 알려줍니다.
@@ -156,15 +156,26 @@ namespace Halak.Bibim.Asset.Pipeline
                                                                                            NamedPipeServerStream.MaxAllowedServerInstances,
                                                                                            PipeTransmissionMode.Byte,
                                                                                            PipeOptions.Asynchronous);
-                                  stream.WaitForConnection();
-                                  stream.BeginWrite(buffer, 0, count,
-                                                    (r) =>
-                                                    {
-                                                        stream.EndWrite(r);
-                                                        stream.Disconnect();
-                                                        stream.Dispose();
-                                                    },
-                                                    null);
+
+                                  stream.BeginWaitForConnection((waitResult) =>
+                                                                {
+                                                                   // stream.EndWaitForConnection(waitResult);
+                                                                    stream.WaitForConnection();
+                                                                    stream.BeginWrite(buffer, 0, count,
+                                                                                      (r) =>
+                                                                                      {
+                                                                                          try
+                                                                                          {
+                                                                                              stream.EndWrite(r);
+                                                                                          }
+                                                                                          catch (Exception e) { }
+
+                                                                                          stream.Disconnect();
+                                                                                          stream.Dispose();
+                                                                                      },
+                                                                                      null);
+                                                                },
+                                                                null);
                               },
                               () =>
                               {
@@ -176,15 +187,23 @@ namespace Halak.Bibim.Asset.Pipeline
                                                                                            NamedPipeServerStream.MaxAllowedServerInstances,
                                                                                            PipeTransmissionMode.Byte,
                                                                                            PipeOptions.Asynchronous);
-                                  
-                                  byte[] zeroInteger = { 0, 0, 0, 0 };
-                                  stream.WaitForConnection();
-                                  stream.Write(zeroInteger, 0, zeroInteger.Length);
-                                  stream.WaitForPipeDrain();
-                                  stream.Disconnect();
-                                  stream.Dispose();
+                                  stream.BeginWaitForConnection((waitResult) =>
+                                                                {
+                                                                    stream.EndWaitForConnection(waitResult);
+                                                                    byte[] zeroInteger = { 0, 0, 0, 0 };
+                                                                    stream.Write(zeroInteger, 0, zeroInteger.Length);
+                                                                    stream.WaitForPipeDrain();
+                                                                    stream.Disconnect();
+                                                                    stream.Dispose();
+                                                                },
+                                                                null);
                               });
                     message = string.Format("[{0}:{1}] Received LoadAssetPacket. {2}\n\tAssetPipe opened. ({3}).", peer.Name, peer.ID, path, guid);
+                    break;
+                case PipedAssetProvider.ChangeClientNamePacketID:
+                    string oldName = peer.Name;
+                    peer.Name = peer.StreamReader.ReadBibimString();
+                    message = string.Format("[{0}:{1}] Received ChangeClientName. {2} => {3}", peer.Name, peer.ID, oldName, peer.Name);
                     break;
             }
 

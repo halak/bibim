@@ -8,12 +8,6 @@ namespace Halak.Bibim.Asset
     [GameModule('A', 'S', 'P', 'V')]
     public abstract class AssetProvider : GameModule
     {
-        #region Constants
-        public const uint LoadAssetPacketID = 1000;
-        public const uint PreloadAssets = 1001;
-        public const uint PreloadAssetsFromDirectory = 1002;
-        #endregion
-
         #region Fields
         private GameAssetStorage storage;
         #endregion

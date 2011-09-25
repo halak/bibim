@@ -93,6 +93,7 @@
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Asset
                 class AssetLoadingTask;
+                    class AssetPreloadingTask;
                 class AssetProvider;
                     class PipedAssetProvider;
                     class FileAssetProvider;

@@ -16,10 +16,14 @@
                 AssetProvider(GameAssetStorage* storage);
                 virtual ~AssetProvider();
 
+                virtual bool Preload(const String& name) = 0;
                 virtual GameAsset* Load(const String& name) = 0;
 
                 inline GameAssetStorage* GetStorage() const;
                 void SetStorage(GameAssetStorage* value);
+
+            protected:
+                void Add(AssetPreloadingTask* item);
 
             private:
                 GameAssetStorage* storage;

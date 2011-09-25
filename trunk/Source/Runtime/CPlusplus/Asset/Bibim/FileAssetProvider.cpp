@@ -27,6 +27,11 @@ namespace Bibim
     {
     }
 
+    bool FileAssetProvider::Preload(const String& name)
+    {
+        return false;
+    }
+
     GameAsset* FileAssetProvider::Load(const String& name)
     {
         BBAssertDebug(GetStorage() != nullptr);

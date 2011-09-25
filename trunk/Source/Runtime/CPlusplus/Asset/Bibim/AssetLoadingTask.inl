@@ -24,4 +24,11 @@ namespace Bibim
     {
         loadedBytes += value;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    GameAssetStorage* AssetPreloadingTask::GetStorage() const
+    {
+        return storage;
+    }
 }

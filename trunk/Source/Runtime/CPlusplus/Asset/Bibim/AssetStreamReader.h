@@ -12,6 +12,7 @@
         {
             public:
                 AssetStreamReader(const String& name, Stream* sourceStream, GameAssetStorage* storage);
+                AssetStreamReader(const String& name, Stream* sourceStream, GameAssetStorage* storage, bool isPriority);
                 AssetStreamReader(const AssetStreamReader& original);
                 ~AssetStreamReader();
 
@@ -24,15 +25,15 @@
 
                 inline const String& GetName() const;
                 inline GameModuleTree* GetModules() const;
+                inline bool IsPriority() const;
 
                 AssetStreamReader& operator = (const AssetStreamReader& right);
-                inline bool operator == (const AssetStreamReader& right) const;
-                inline bool operator != (const AssetStreamReader& right) const;
 
             private:
                 String name;
                 GameAssetStorage* storage;
                 GameModuleTree* modules;
+                bool isPriority;
         };
     }
 
