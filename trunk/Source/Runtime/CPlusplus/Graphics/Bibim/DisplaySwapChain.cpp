@@ -111,7 +111,7 @@ namespace Bibim
 
     void DisplaySwapChain::Present()
     {
-        swapChain->Present(NULL, NULL, static_cast<HWND>(window->GetHandle()), NULL, 0x00000000);
+        swapChain->Present(nullptr, nullptr, static_cast<HWND>(window->GetHandle()), nullptr, 0x00000000);
         backBuffer->Release();
     }
 }

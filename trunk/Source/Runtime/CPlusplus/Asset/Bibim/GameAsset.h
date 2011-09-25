@@ -38,7 +38,7 @@
                 inline uint GetRevision() const;
 
             protected:
-                GameAsset();
+                GameAsset(); // call in derived classes, GameAssetStorage
 
                 inline void SetStatus(Status value);
                 inline void IncreaseRevision();
@@ -46,6 +46,8 @@
             private:
                 Status status;
                 uint revision;
+
+                friend class GameAssetStorage;
         };
     }
 

@@ -65,7 +65,7 @@
                 return 0;
 
             DWORD readBytes = 0;
-            ::ReadFile(handle, buffer, size, &readBytes, NULL);
+            ::ReadFile(handle, buffer, size, &readBytes, nullptr);
 
             return static_cast<int>(readBytes);
         }
@@ -78,7 +78,7 @@
                 return 0;
 
             DWORD writtenBytes = 0;
-            ::WriteFile(handle, buffer, size, &writtenBytes, NULL);
+            ::WriteFile(handle, buffer, size, &writtenBytes, nullptr);
 
             return static_cast<int>(writtenBytes);
         }
@@ -107,17 +107,17 @@
                     break;
             }
 
-            return static_cast<int>(::SetFilePointer(handle, offset, NULL, moveMethod));
+            return static_cast<int>(::SetFilePointer(handle, offset, nullptr, moveMethod));
         }
 
         int FileStream::GetPosition()
         {
-            return static_cast<int>(::SetFilePointer(handle, 0, NULL, FILE_CURRENT));
+            return static_cast<int>(::SetFilePointer(handle, 0, nullptr, FILE_CURRENT));
         }
 
         int FileStream::GetLength()
         {
-            return static_cast<int>(::GetFileSize(handle, NULL));
+            return static_cast<int>(::GetFileSize(handle, nullptr));
         }
 
         bool FileStream::CanRead() const

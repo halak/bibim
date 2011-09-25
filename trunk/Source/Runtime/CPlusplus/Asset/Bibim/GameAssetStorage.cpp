@@ -4,10 +4,13 @@
 #include <Bibim/AssetProvider.h>
 #include <Bibim/AutoLocker.h>
 #include <Bibim/AssetLoadingTask.h>
+#include <Bibim/GameAsset.h>
 #include <algorithm>
 
 namespace Bibim
 {
+    const GameAssetPtr GameAssetStorage::BadAsset = new GameAsset();
+
     GameAssetStorage::GameAssetStorage()
         : modules(nullptr)
     {
@@ -48,19 +51,27 @@ namespace Bibim
     {
         AssetTable::iterator it = assets.find(name);
         if (it != assets.end())
-            return (*it).second;
+        {
+            GameAsset* result = (*it).second;
+            if (result == nullptr)
+                return nullptr;
+            else if (result == BadAsset)
+            {
+                assets.erase(it);
+                return nullptr;
+            }
+            else
+                return (*it).second;
+        }
         else
         {
-            for (ProviderCollection::const_iterator it = providers.begin(); it != providers.end(); it++)
+            if (GameAsset* asset = LoadNew(name))
             {
-                if (GameAsset* asset = (*it)->Load(name))
-                {
-                    assets.insert(AssetTable::value_type(name, asset));
-                    return asset;
-                }
+                assets.insert(AssetTable::value_type(name, asset));
+                return asset;
             }
-
-            return nullptr;
+            else
+                return nullptr;
         }
     }
 
@@ -76,6 +87,17 @@ namespace Bibim
                 loadingThread.Resume();
                 break;
         }
+    }
+
+    GameAsset* GameAssetStorage::LoadNew(const String& name)
+    {
+        for (ProviderCollection::const_iterator it = providers.begin(); it != providers.end(); it++)
+        {
+            if (GameAsset* asset = (*it)->Load(name))
+                return asset;
+        }
+
+        return nullptr;
     }
 
     void GameAssetStorage::AddFirst(AssetLoadingTask* item)
@@ -108,7 +130,10 @@ namespace Bibim
         AssetTable::iterator it = assets.find(name);
         BBAssert(it != assets.end()); // Preload를 호출할 때 이미 할당해 놓았습니다.
 
-        (*it).second = asset;
+        if (asset == nullptr)
+            asset = BadAsset;
+
+        (*it).second = asset; // interlocked exchange
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

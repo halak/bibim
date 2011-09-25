@@ -43,6 +43,7 @@ namespace Halak.Bibim.Toolkit.Console
             
             for (; ; )
             {
+                System.Threading.Thread.Sleep(100);
             }
 
             System.Diagnostics.Trace.Listeners.Remove(ConsoleTraceListener.Instance);

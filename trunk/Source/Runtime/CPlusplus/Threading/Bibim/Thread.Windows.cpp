@@ -49,7 +49,7 @@
             {
                 ::WaitForSingleObject(static_cast<HANDLE>(handle), INFINITE);
                 ::CloseHandle(static_cast<HANDLE>(handle));
-                handle = NULL;
+                handle = nullptr;
             }
         }
 
@@ -120,7 +120,7 @@
             if (autoStart == false)
                 creationFlags |= CREATE_SUSPENDED;
 
-            handle = static_cast<void*>(::CreateThread(NULL, 0, &Thread::Internal::Procedure, this, creationFlags, &threadID));
+            handle = static_cast<void*>(::CreateThread(nullptr, 0, &Thread::Internal::Procedure, this, creationFlags, &threadID));
             id = static_cast<uint>(threadID);
         }
     }

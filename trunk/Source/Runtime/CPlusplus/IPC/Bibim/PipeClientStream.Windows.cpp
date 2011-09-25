@@ -27,10 +27,10 @@ namespace Bibim
         HANDLE newHandle = ::CreateFile(GetFullName().CStr(),
                                         GetPlatformAccessMode(),
                                         0x00000000,
-                                        NULL,
+                                        nullptr,
                                         OPEN_EXISTING,
                                         0x00000000,
-                                        NULL);
+                                        nullptr);
         if (newHandle != INVALID_HANDLE_VALUE)
             SetHandle(newHandle);
     }
@@ -40,12 +40,12 @@ namespace Bibim
         BBAssertDebug(IsConnected());
 
         ::CloseHandle(GetHandle());
-        SetHandle(NULL);
+        SetHandle(nullptr);
     }
 
     bool PipeClientStream::IsConnected() const
     {
-        return GetHandle() != NULL;
+        return GetHandle() != nullptr;
     }
 
     String PipeClientStream::GetFullName() const

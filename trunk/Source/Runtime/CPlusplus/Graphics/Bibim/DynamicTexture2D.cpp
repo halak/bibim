@@ -47,7 +47,7 @@ namespace Bibim
                 break;
         }
 
-        IDirect3DTexture9* newD3DTexture = NULL;
+        IDirect3DTexture9* newD3DTexture = nullptr;
         HRESULT result = D3DXCreateTexture(GetGraphicsDevice()->GetD3DDevice(), width, height, 0, D3DUSAGE_DYNAMIC, d3dFormat, D3DPOOL_DEFAULT, &newD3DTexture);
         if (result == D3D_OK)
         {

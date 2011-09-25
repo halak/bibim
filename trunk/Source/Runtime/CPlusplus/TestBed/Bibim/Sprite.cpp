@@ -27,7 +27,7 @@ class SpriteTest : public GameFramework
 
             GameAssetStorage*   gas = new GameAssetStorage(GetModules());
             PipedAssetProvider* pap = new PipedAssetProvider(gas, "TestAssets", "SpriteSample");
-//          FileAssetProvider*  fap = new FileAssetProvider(gas);
+            FileAssetProvider*  fap = new FileAssetProvider(gas);
 
             UIWindowPtr window = new UIWindow();
             window->SetFrame(new UIFixedFrame(RectF(0, 0, 800, 600)));
@@ -36,17 +36,17 @@ class SpriteTest : public GameFramework
             UIRenderer*         uir = new UIRenderer(GetGraphicsDevice());
 
             GameModuleNode* gasNode = GetModules()->GetRoot()->AttachChild(gas);
-//          gasNode->AttachChild(fap);
+            gasNode->AttachChild(fap);
             gasNode->AttachChild(pap);
 
             GameModuleNode* uiNode = GetModules()->GetRoot()->AttachChild(uid);
             uiNode->AttachChild(uir);
 
-            gas->Preload("Asset\\BigHello");
-            gas->Preload("Asset\\Background");
+            //gas->Preload("Asset\\Background");
+            //gas->Preload("Asset\\BigHello");
 
-            //texture1 = static_cast<SourceTexture2D*>(gas->Load("Asset\\BigHello"));
-            //texture2 = static_cast<SourceTexture2D*>(gas->Load("Asset\\Background"));
+            texture1 = static_cast<SourceTexture2D*>(gas->Load("Asset\\BigHello"));
+            texture2 = static_cast<SourceTexture2D*>(gas->Load("Asset\\Background"));
 
             storage = gas;
             uiDomain = uid;
@@ -79,8 +79,8 @@ class SpriteTest : public GameFramework
 
                 virtual void OnBegan(UIHandledDrawingContext& context)
                 {
-                    //context.Draw(Vector2(0.0f, 0.0f),   app->texture1);
-                    //context.Draw(Vector2(256.0f, 0.0f), app->texture2);
+                    context.Draw(Vector2(0.0f, 0.0f),   app->texture1);
+                    context.Draw(Vector2(256.0f, 0.0f), app->texture2);
                 }
             };
             Handler handler(this);

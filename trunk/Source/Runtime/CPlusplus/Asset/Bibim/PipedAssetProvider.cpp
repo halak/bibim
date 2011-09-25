@@ -16,7 +16,8 @@ namespace Bibim
             PipedAssetPreloadingTask(const String& name, GameAssetStorage* storage, const String& serverName, const String& assetPipeName)
                 : AssetPreloadingTask(name, storage),
                   serverName(serverName),
-                  assetPipeName(assetPipeName)
+                  assetPipeName(assetPipeName),
+                  cancelled(false)
             {
             }
 
@@ -30,21 +31,30 @@ namespace Bibim
                 do
                 {
                     assetStream->Connect();
-                } while (assetStream->IsConnected() == false);
+                } while (assetStream->IsConnected() == false && cancelled == false);
 
-                AssetStreamReader reader(GetName(), assetStream, GetStorage(), true);
-                Register(GameAssetFactory::Create(reader));
+                if (cancelled == false)
+                {
+                    AssetStreamReader reader(GetName(), assetStream, GetStorage(), true);
+                    Register(GameAssetFactory::Create(reader));
+                }
+                else
+                    Unregister();
             }
 
             virtual void Cancel()
             {
+                cancelled = true;
             }
 
         private:
             String serverName;
             String assetPipeName;
             GameAssetStorage* storage;
+            bool cancelled;
     };
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     PipedAssetProvider::PipedAssetProvider()
     {

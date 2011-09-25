@@ -62,7 +62,7 @@ namespace Bibim
         glowGlyphs.clear();
 
         std::vector<wchar_t> wideCharacters;
-        wideCharacters.resize(MultiByteToWideChar(CP_ACP, 0, text.CStr(), text.GetLength(), NULL, 0), L'\0');
+        wideCharacters.resize(MultiByteToWideChar(CP_ACP, 0, text.CStr(), text.GetLength(), nullptr, 0), L'\0');
         MultiByteToWideChar(CP_ACP, 0, text.CStr(), text.GetLength(), &wideCharacters[0], wideCharacters.size());
 
         regularGlyphs.reserve(wideCharacters.size());

@@ -61,16 +61,16 @@ namespace Bibim
         const int width  = texture->GetSurfaceWidth();
         const int height = texture->GetSurfaceHeight();
 
-        IDirect3DTexture9* d3dTexture = NULL;
-        IDirect3DTexture9* d3dSysMemTexture = NULL;
+        IDirect3DTexture9* d3dTexture = nullptr;
+        IDirect3DTexture9* d3dSysMemTexture = nullptr;
         HRESULT result = D3D_OK;
         result = d3dDevice->CreateTexture(width, height, 1,
-                                          0, D3DFMT_A8R8G8B8, D3DPOOL_DEFAULT, &d3dTexture, NULL);
+                                          0, D3DFMT_A8R8G8B8, D3DPOOL_DEFAULT, &d3dTexture, nullptr);
         result = d3dDevice->CreateTexture(width, height, 1,
-                                          0, D3DFMT_A8R8G8B8, D3DPOOL_SYSTEMMEM, &d3dSysMemTexture, NULL);
+                                          0, D3DFMT_A8R8G8B8, D3DPOOL_SYSTEMMEM, &d3dSysMemTexture, nullptr);
 
         D3DLOCKED_RECT d3dLockedRect;
-        d3dSysMemTexture->LockRect(0, &d3dLockedRect, NULL, 0);
+        d3dSysMemTexture->LockRect(0, &d3dLockedRect, nullptr, 0);
         byte* destination = static_cast<byte*>(d3dLockedRect.pBits);
         const int destinationPitch = static_cast<int>(d3dLockedRect.Pitch);
         for (int y = 0; y < height && cancelled == false; y++)

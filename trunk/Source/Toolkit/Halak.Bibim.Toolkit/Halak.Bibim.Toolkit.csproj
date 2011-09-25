@@ -109,6 +109,7 @@
     <Compile Include="Asset\Pipeline\GameAssetServer.cs" />
     <Compile Include="Asset\Pipeline\PipedGameAssetServer.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToTexture2D.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToUIWindow.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ReadRecipe.cs" />
     <Compile Include="Asset\Pipeline\Recipes\FileToStream.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ImportBitmap.cs" />

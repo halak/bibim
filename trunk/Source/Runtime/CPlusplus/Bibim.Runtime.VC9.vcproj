@@ -674,6 +674,22 @@
 				Name="Threading"
 				>
 				<File
+					RelativePath=".\Threading\Bibim\Atomic.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Threading\Bibim\Atomic.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Threading\Bibim\Atomic.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Threading\Bibim\Atomic.Windows.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Threading\Bibim\AutoLocker.h"
 					>
 				</File>
