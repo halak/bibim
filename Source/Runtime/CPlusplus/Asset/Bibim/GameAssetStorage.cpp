@@ -29,7 +29,16 @@ namespace Bibim
         AssetTable::iterator it = assets.find(name);
         if (it == assets.end())
         {
-            return true;
+            for (ProviderCollection::const_iterator it = providers.begin(); it != providers.end(); it++)
+            {
+                if ((*it)->Preload(name))
+                {
+                    assets.insert(AssetTable::value_type(name, nullptr));
+                    return true;
+                }
+            }
+
+            return false;
         }
         else
             return true;
@@ -69,9 +78,14 @@ namespace Bibim
         }
     }
 
-    void GameAssetStorage::Add(AssetLoadingTask* item)
+    void GameAssetStorage::AddFirst(AssetLoadingTask* item)
     {
-        loadingThread.AddTask(item);
+        loadingThread.AddFirst(item);
+    }
+
+    void GameAssetStorage::AddLast(AssetLoadingTask* item)
+    {
+        loadingThread.AddLast(item);
     }
 
     void GameAssetStorage::Add(AssetProvider* item)
@@ -87,6 +101,14 @@ namespace Bibim
         BBAssertDebug(it != providers.end());
 
         providers.erase(it);
+    }
+
+    void GameAssetStorage::SetAsset(const String& name, GameAsset* asset)
+    {
+        AssetTable::iterator it = assets.find(name);
+        BBAssert(it != assets.end()); // Preload를 호출할 때 이미 할당해 놓았습니다.
+
+        (*it).second = asset;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -159,7 +181,14 @@ namespace Bibim
             delete (*it);
     }
 
-    void GameAssetStorage::LoadingThread::AddTask(AssetLoadingTask* item)
+    void GameAssetStorage::LoadingThread::AddFirst(AssetLoadingTask* item)
+    {
+        totalBytes += item->GetTotalBytes();
+        AutoLocker locker(taskQueueLock);
+        taskQueue.push_front(item);
+    }
+
+    void GameAssetStorage::LoadingThread::AddLast(AssetLoadingTask* item)
     {
         totalBytes += item->GetTotalBytes();
         AutoLocker locker(taskQueueLock);

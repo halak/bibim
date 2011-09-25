@@ -16,6 +16,7 @@
                 FileAssetProvider(GameAssetStorage* storage, const String& directory);
                 virtual ~FileAssetProvider();
 
+                virtual bool Preload(const String& name);
                 virtual GameAsset* Load(const String& name);
 
                 inline const String& GetDirectory() const;

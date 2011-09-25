@@ -67,7 +67,8 @@
                         LoadingThread();
                         virtual ~LoadingThread();
 
-                        void AddTask(AssetLoadingTask* item);
+                        void AddFirst(AssetLoadingTask* item);
+                        void AddLast(AssetLoadingTask* item);
 
                         void RequestClose();
 
@@ -88,9 +89,11 @@
                 };
 
             private:
-                void Add(AssetLoadingTask* item); // call in AssetStreamReader
+                void AddFirst(AssetLoadingTask* item); // call in AssetStreamReader, AssetProvider
+                void AddLast(AssetLoadingTask* item); // call in AssetStreamReader, AssetProvider
                 void Add(AssetProvider* item); // call in AssetProvider
                 void Remove(AssetProvider* item); // call in AssetProvider
+                void SetAsset(const String& name, GameAsset* asset); // call in AssetPreloadingTask
 
             private:
                 GameModuleTree* modules;
@@ -101,6 +104,7 @@
 
                 friend class AssetProvider;
                 friend class AssetStreamReader;
+                friend class AssetPreloadingTask;
         };
     }
 

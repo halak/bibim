@@ -25,6 +25,8 @@
                 inline uint GetTotalBytes() const;
                 inline uint GetLoadedBytes() const;
 
+                virtual bool IsPreloading() const;
+
             protected:
                 AssetLoadingTask(const String& name, uint totalBytes);
 
@@ -35,6 +37,24 @@
                 const String name;
                 const uint totalBytes;
                 uint loadedBytes;
+        };
+
+        class AssetPreloadingTask : public AssetLoadingTask
+        {
+            public:
+                virtual ~AssetPreloadingTask();
+
+                virtual bool IsPreloading() const;
+
+                inline GameAssetStorage* GetStorage() const;
+
+            protected:
+                AssetPreloadingTask(const String& name, GameAssetStorage* storage);
+
+                void Register(GameAsset* asset);
+
+            private:
+                GameAssetStorage* storage;
         };
     }
 

@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/AssetProvider.h>
+#include <Bibim/AssetLoadingTask.h>
 #include <Bibim/GameAssetStorage.h>
 
 namespace Bibim
@@ -34,5 +35,11 @@ namespace Bibim
             if (storage)
                 storage->Add(this);
         }
+    }
+    
+    void AssetProvider::Add(AssetPreloadingTask* item)
+    {
+        BBAssert(storage);
+        storage->AddLast(item);
     }
 }

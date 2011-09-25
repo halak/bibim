@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/PipedAssetProvider.h>
+#include <Bibim/AssetLoadingTask.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/BinaryWriter.h>
 #include <Bibim/Environment.h>
@@ -9,6 +10,42 @@
 
 namespace Bibim
 {
+    class PipedAssetPreloadingTask : public AssetPreloadingTask
+    {
+        public:
+            PipedAssetPreloadingTask(const String& name, GameAssetStorage* storage, const String& serverName, const String& assetPipeName)
+                : AssetPreloadingTask(name, storage),
+                  serverName(serverName),
+                  assetPipeName(assetPipeName)
+            {
+            }
+
+            virtual ~PipedAssetPreloadingTask()
+            {
+            }
+
+            virtual void Execute()
+            {
+                PipeClientStreamPtr assetStream = new PipeClientStream(serverName, assetPipeName, PipeStream::ReadOnly);
+                do
+                {
+                    assetStream->Connect();
+                } while (assetStream->IsConnected() == false);
+
+                AssetStreamReader reader(GetName(), assetStream, GetStorage(), true);
+                Register(GameAssetFactory::Create(reader));
+            }
+
+            virtual void Cancel()
+            {
+            }
+
+        private:
+            String serverName;
+            String assetPipeName;
+            GameAssetStorage* storage;
+    };
+
     PipedAssetProvider::PipedAssetProvider()
     {
     }
@@ -39,49 +76,34 @@ namespace Bibim
             queryStream->Disconnect();
     }
 
-    GameAsset* PipedAssetProvider::Load(const String& name)
+    bool PipedAssetProvider::Preload(const String& name)
     {
-        BBAssertDebug(GetStorage() != nullptr);
-
-        if (queryStream == nullptr && pipeName.IsEmpty() == false)
+        String assetPipeName;
+        if (BeginLoad(name, assetPipeName))
         {
-            queryStream = new PipeClientStream(serverName, pipeName, PipeStream::ReadAndWrite);
-            queryStream->Connect();
-
-            if (queryStream->IsConnected())
-            {
-                BinaryWriter writer(queryStream);
-                writer.Write(Environment::GetWorkingDirectory());
-                writer.Write(GetClientName());
-            }
+            Add(new PipedAssetPreloadingTask(name, GetStorage(), serverName, assetPipeName));
+            return true;
         }
-
-        if (queryStream == nullptr || queryStream->IsConnected() == false)
-            return nullptr;
-
-        BinaryWriter queryWriter(queryStream);
-        queryWriter.Write(static_cast<uint32>(1000));
-        queryWriter.Write(name);
-
-        BinaryReader queryReader(queryStream);
-        const String assetPipeName = queryReader.ReadString();
-
-        PipeClientStreamPtr assetStream = new PipeClientStream(serverName, assetPipeName, PipeStream::ReadOnly);
-        do
-        {
-            assetStream->Connect();
-        } while (assetStream->IsConnected() == false);
-
-        AssetStreamReader reader(name, assetStream, GetStorage());
-        return GameAssetFactory::Create(reader);
+        else
+            return false;
     }
 
-    void PipedAssetProvider::SetClientName(const String& value)
+    GameAsset* PipedAssetProvider::Load(const String& name)
     {
-        if (clientName != value)
+        String assetPipeName;
+        if (BeginLoad(name, assetPipeName))
         {
-            clientName = value;
+            PipeClientStreamPtr assetStream = new PipeClientStream(serverName, assetPipeName, PipeStream::ReadOnly);
+            do
+            {
+                assetStream->Connect();
+            } while (assetStream->IsConnected() == false);
+
+            AssetStreamReader reader(name, assetStream, GetStorage());
+            return GameAssetFactory::Create(reader);
         }
+        else
+            return nullptr;
     }
 
     void PipedAssetProvider::SetServerName(const String& value)
@@ -108,5 +130,57 @@ namespace Bibim
 
             queryStream.Reset();
         }
+    }
+
+    void PipedAssetProvider::SetClientName(const String& value)
+    {
+        if (clientName != value)
+        {
+            clientName = value;
+
+            if (TryConnectToServer())
+            {
+                BinaryWriter queryWriter(queryStream);
+                queryWriter.Write(ChangeClientNamePacketID);
+                queryWriter.Write(clientName);
+            }
+        }
+    }
+
+    bool PipedAssetProvider::BeginLoad(const String& name, String& outPipeName)
+    {
+        BBAssertDebug(GetStorage() != nullptr);
+
+        if (TryConnectToServer())
+        {
+            BinaryWriter queryWriter(queryStream);
+            queryWriter.Write(LoadAssetPacketID);
+            queryWriter.Write(name);
+
+            BinaryReader queryReader(queryStream);
+            outPipeName = queryReader.ReadString();
+
+            return true;
+        }
+        else
+            return false;
+    }
+
+    bool PipedAssetProvider::TryConnectToServer()
+    {
+        if (queryStream == nullptr && pipeName.IsEmpty() == false)
+        {
+            queryStream = new PipeClientStream(serverName, pipeName, PipeStream::ReadAndWrite);
+            queryStream->Connect();
+
+            if (queryStream->IsConnected())
+            {
+                BinaryWriter writer(queryStream);
+                writer.Write(Environment::GetWorkingDirectory());
+                writer.Write(GetClientName());
+            }
+        }
+
+        return queryStream &&queryStream->IsConnected();
     }
 }
