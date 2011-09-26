@@ -11,7 +11,7 @@ namespace Halak.Bibim.Typography
     public sealed class Font : GameAsset
     {
         #region Fields
-        private FontParameter parameters;
+        private FontCacheParameter parameters;
         private float spacing;
         private Color color;
         private Color strokeColor;
@@ -19,14 +19,20 @@ namespace Halak.Bibim.Typography
         #endregion
 
         #region Properties
-        public string Face
+        public FontLibrary Library
         {
-            get { return parameters.Face ; }
+            get;
+            set;
+        }
+
+        public string FaceURI
+        {
+            get { return parameters.FaceURI ; }
             set
             {
-                if (parameters.Face != value)
+                if (parameters.FaceURI != value)
                 {
-                    parameters.Face = value;
+                    parameters.FaceURI = value;
                     Revision++;
                 }
             }

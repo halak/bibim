@@ -101,6 +101,30 @@ namespace Bibim
         Write(value.CStr(), value.GetLength());
     }
 
+    void BinaryWriter::Write(Color value)
+    {
+        BBStaticAssert(sizeof(value) == 4);
+        WriteTemplate(value);
+    }
+
+    void BinaryWriter::Write(Vector2 value)
+    {
+        BBStaticAssert(sizeof(value) == 8);
+        WriteTemplate(value);
+    }
+
+    void BinaryWriter::Write(Vector3 value)
+    {
+        BBStaticAssert(sizeof(value) == 12);
+        WriteTemplate<Vector3>(value);
+    }
+
+    void BinaryWriter::Write(Vector4 value)
+    {
+        BBStaticAssert(sizeof(value) == 16);
+        WriteTemplate(value);
+    }
+
     BinaryWriter& BinaryWriter::operator = (const BinaryWriter& right)
     {
         sourceStream = right.sourceStream;

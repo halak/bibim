@@ -68,7 +68,7 @@ namespace Bibim
         if (item->GetParent())
             item->GetParent()->Remove(item);
 
-        BBAssert(item->GetParent() == nullptr);
+        BBAssertDebug(item->GetParent() == nullptr);
 
         item->SetParent(this);
 

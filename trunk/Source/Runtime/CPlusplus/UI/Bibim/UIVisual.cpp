@@ -72,7 +72,7 @@ namespace Bibim
     {
         if (parent != value)
         {
-            UIPanelWeakPtr old = parent;
+            UIPanel* old = parent;
 
             parent = value;
 

@@ -34,8 +34,7 @@ namespace Bibim
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     FontCacheParameters::FontCacheParameters()
-        : Face(),
-          FontSize(10.0f),
+        : FontSize(10.0f),
           StrokeSize(0.0f),
           Weights(0.0f),
           Shear(0.0f),
@@ -48,10 +47,10 @@ namespace Bibim
     {
     }
 
-    FontCacheParameters::FontCacheParameters(const String& face, float fontSize, float strokeSize, float weights, float shear, 
+    FontCacheParameters::FontCacheParameters(const String& faceURI, float fontSize, float strokeSize, float weights, float shear, 
                                              int glowSize, float glowSpread, float glowThickness,
                                              float scale, bool hinting, bool ignoreBitmap)
-        : Face(face),
+        : FaceURI(faceURI),
           FontSize(fontSize),
           StrokeSize(strokeSize),
           Weights(weights),
@@ -66,7 +65,7 @@ namespace Bibim
     }
 
     FontCacheParameters::FontCacheParameters(const FontCacheParameters& original)
-        : Face(original.Face),
+        : FaceURI(original.FaceURI),
           FontSize(original.FontSize),
           StrokeSize(original.StrokeSize),
           Weights(original.Weights),
@@ -83,7 +82,7 @@ namespace Bibim
     unsigned int FontCacheParameters::GetHashCode() const
     {
         unsigned int result = 0;
-        result += static_cast<unsigned int>(Face.GetLength() * 65536);
+        result += static_cast<unsigned int>(FaceURI.GetLength() * 65536);
         result += static_cast<unsigned int>(FloatToF26D6(FontSize));
         result += static_cast<unsigned int>(FloatToF26D6(StrokeSize));
         result += static_cast<unsigned int>(FloatToF26D6(Weights));
@@ -99,7 +98,7 @@ namespace Bibim
 
     FontCacheParameters& FontCacheParameters::operator = (const FontCacheParameters& right)
     {
-        Face = right.Face;
+        FaceURI = right.FaceURI;
         FontSize = right.FontSize;
         StrokeSize = right.StrokeSize;
         Weights = right.Weights;
@@ -117,7 +116,7 @@ namespace Bibim
     {
         if (GlowSize > 0 && right.GlowSize > 0)
         {
-            return (Face                     == right.Face &&
+            return (FaceURI                  == right.FaceURI &&
                     FloatToF26D6(FontSize)   == FloatToF26D6(right.FontSize) &&
                     FloatToF26D6(StrokeSize) == FloatToF26D6(right.StrokeSize) &&
                     FloatToF26D6(Weights)    == FloatToF26D6(right.Weights) &&
@@ -131,7 +130,7 @@ namespace Bibim
         }
         else if (GlowSize == 0 && right.GlowSize == 0)
         {
-            return (Face                     == right.Face &&
+            return (FaceURI                  == right.FaceURI &&
                     FloatToF26D6(FontSize)   == FloatToF26D6(right.FontSize) &&
                     FloatToF26D6(StrokeSize) == FloatToF26D6(right.StrokeSize) &&
                     FloatToF26D6(Weights)    == FloatToF26D6(right.Weights) &&
@@ -160,14 +159,14 @@ namespace Bibim
           strokedGlyphTable(nullptr),
           glowGlyphTable(nullptr)
     {
-        String faceFilename = parameters.Face;
+        String faceFilename = parameters.FaceURI;
         int    faceIndex    = 0; // *.ttc 파일일 경우 폰트가 존재하는 위치 (TTC = TrueTypeCollection)
 
-        int separatorIndex = parameters.Face.ReverseFind('?');
+        int separatorIndex = parameters.FaceURI.ReverseFind('?');
         if (separatorIndex != -1)
         {
-            faceFilename = parameters.Face.Substring(0, separatorIndex);
-            faceIndex    = atoi(parameters.Face.Substring(separatorIndex + 1).CStr());
+            faceFilename = parameters.FaceURI.Substring(0, separatorIndex);
+            faceIndex    = atoi(parameters.FaceURI.Substring(separatorIndex + 1).CStr());
         }
 
         if (FT_Error error = FT_New_Face(static_cast<FT_Library>(library->GetFTLibrary()), faceFilename.CStr(), faceIndex, &primaryFace))

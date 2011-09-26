@@ -30,8 +30,8 @@
                 inline FontLibrary* GetLibrary() const;
                 void SetLibrary(FontLibrary* value);
 
-                const String& GetFace() const;
-                void SetFace(const String& value);
+                const String& GetFaceURI() const;
+                void SetFaceURI(const String& value);
 
                 float GetSize() const;
                 void  SetSize(float value);

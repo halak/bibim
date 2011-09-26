@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/Font.h>
+#include <Bibim/AssetStreamReader.h>
 #include <Bibim/Assert.h>
 #include <Bibim/FontCache.h>
 #include <Bibim/FontLibrary.h>
@@ -98,16 +99,16 @@ namespace Bibim
         }
     }
 
-    const String& Font::GetFace() const
+    const String& Font::GetFaceURI() const
     {
-        return parameters.Face;
+        return parameters.FaceURI;
     }
 
-    void Font::SetFace(const String& value)
+    void Font::SetFaceURI(const String& value)
     {
-        if (parameters.Face != value)
+        if (parameters.FaceURI != value)
         {
-            parameters.Face = value;
+            parameters.FaceURI = value;
             cache.Reset();
             IncreaseRevision();
         }
@@ -409,8 +410,36 @@ namespace Bibim
         return cache;
     }
 
-    GameAsset* Font::Read(AssetStreamReader& /*reader*/, GameAsset* /*existingInstance*/)
+    GameAsset* Font::Read(AssetStreamReader& reader, GameAsset* existingInstance)
     {
-        return nullptr;
+        Font* result = nullptr;
+        
+        if (existingInstance)
+            result = static_cast<Font*>(existingInstance);
+        else
+            result = new Font();
+
+        result->SetStatus(GameAsset::LoadingStatus);
+        result->cache.Reset();
+        result->library = static_cast<FontLibrary*>(reader.ReadModule(FontLibrary::ClassID));
+        result->parameters.FaceURI = reader.ReadString();
+        result->parameters.FontSize = reader.ReadFloat();
+        result->parameters.StrokeSize = reader.ReadFloat();
+        result->parameters.Weights = reader.ReadFloat();
+        result->parameters.Shear = reader.ReadFloat();
+        result->parameters.GlowSize = reader.ReadInt32();
+        result->parameters.GlowSpread = reader.ReadFloat();
+        result->parameters.GlowThickness = reader.ReadFloat();
+        result->parameters.Scale = reader.ReadFloat();
+        result->parameters.Hinting = reader.ReadBool();
+        result->parameters.IgnoreBitmap = reader.ReadBool();
+        result->spacing = reader.ReadFloat();
+        result->color = reader.ReadColor();
+        result->strokeColor = reader.ReadColor();
+        result->glowColor = reader.ReadColor();
+        result->IncreaseRevision();
+        result->SetStatus(GameAsset::CompletedStatus);
+
+        return result;
     }
 }

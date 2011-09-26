@@ -14,7 +14,7 @@
     {
         struct FontCacheParameters
         {
-            String Face;
+            String FaceURI;
             float FontSize;
             float StrokeSize;
             float Weights;
@@ -27,7 +27,7 @@
             bool IgnoreBitmap;
 
             FontCacheParameters();
-            FontCacheParameters(const String& face, float fontSize, float strokeSize, float weights, float shear, 
+            FontCacheParameters(const String& faceURI, float fontSize, float strokeSize, float weights, float shear, 
                                 int glowSize, float glowSpread, float glowThickness,
                                 float scale, bool hinting, bool ignoreBitmap);
             FontCacheParameters(const FontCacheParameters& original);

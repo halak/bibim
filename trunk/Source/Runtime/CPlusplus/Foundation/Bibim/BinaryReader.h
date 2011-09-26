@@ -3,6 +3,10 @@
 #define __BIBIM_STREAMREADER_H__
 
 #   include <Bibim/FWD.h>
+#   include <Bibim/Color.h>
+#   include <Bibim/Vector2.h>
+#   include <Bibim/Vector3.h>
+#   include <Bibim/Vector4.h>
 
     namespace Bibim
     {
@@ -25,6 +29,10 @@
                 uint64 ReadUInt64();
                 float  ReadFloat();
                 String ReadString();
+                Color  ReadColor();
+                Vector2 ReadVector2();
+                Vector3 ReadVector3();
+                Vector4 ReadVector4();
 
                 inline Stream* GetSource() const;
 
