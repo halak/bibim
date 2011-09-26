@@ -11,6 +11,7 @@
     {
         class UIPanel : public UIVisual
         {
+            BBUIElementClass('U', 'P', 'N', 'L');
             public:
                 typedef std::vector<UIVisualPtr> VisualCollection;
 

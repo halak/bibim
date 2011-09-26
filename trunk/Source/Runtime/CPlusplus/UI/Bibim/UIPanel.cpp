@@ -65,9 +65,6 @@ namespace Bibim
     {
         index = Math::Clamp(index, 0, static_cast<int>(children.size()));
 
-        if (index < 0 || static_cast<int>(children.size()) < index)
-            return;
-
         if (item->GetParent())
             item->GetParent()->Remove(item);
 
@@ -189,5 +186,10 @@ namespace Bibim
             children.erase(it);
             children.insert(children.begin(), child);
         }
+    }
+
+    UIElement* UIPanel::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    {
+        return nullptr;
     }
 }

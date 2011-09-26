@@ -48,4 +48,9 @@ namespace Bibim
 
         context.Draw(GetImage(), GetHorizontalFlip(), GetVerticalFlip());
     }
+
+    UIElement* UISprite::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    {
+        return nullptr;
+    }
 }

@@ -84,4 +84,9 @@ namespace Bibim
             matrixChanged = true;
         }
     }
+
+    UIElement* UITransform3D::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    {
+        return nullptr;
+    }
 }

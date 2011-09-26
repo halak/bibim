@@ -171,6 +171,7 @@
                 BBForwardDeclareSmartPointerClass(UILayout);
                 class UIMarkupText;
                 class UIRenderer;
+                class AssetStreamReader;
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Effects
                     BBForwardDeclareSmartPointerClass(UIEffect);

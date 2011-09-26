@@ -27,7 +27,13 @@ namespace Halak.Bibim.Asset
         public uint Revision
         {
             get;
-            private set;
+            protected set;
+        }
+
+        public object Tag
+        {
+            get;
+            set;
         }
         #endregion
 

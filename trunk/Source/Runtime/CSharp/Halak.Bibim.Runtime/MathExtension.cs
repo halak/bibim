@@ -7,6 +7,11 @@ namespace Halak.Bibim
 {
     public static class MathExtension
     {
+        public static int Clamp(int value, int min, int max)
+        {
+            return value < min ? min : (max < value ? max : value);
+        }
+
         /// <summary>
         /// 입력한 수 보다 큰 2의 멱수 중 가장 작은 차를 가진 수를 가져옵니다.
         /// </summary>

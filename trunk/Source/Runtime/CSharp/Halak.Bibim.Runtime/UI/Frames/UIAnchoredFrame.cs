@@ -8,5 +8,16 @@ namespace Halak.Bibim.UI.Frames
     [UIElement('U', 'A', 'C', 'F')]
     public sealed class UIAnchoredFrame : UIFrame
     {
+        #region Fields
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Constructors
+        #endregion
+
+        #region Methods
+        #endregion
     }
 }

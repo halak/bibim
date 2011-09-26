@@ -11,6 +11,7 @@
     {
         class UIWindow : public UIPanel
         {
+            BBUIElementClass('U', 'W', 'N', 'D');
             public:
                 UIWindow();
                 explicit UIWindow(int childrenCapacity);
@@ -21,18 +22,6 @@
                 inline bool RemoveChild(UIVisual* item);
                 inline bool RemoveChildAt(int index);
                 inline void RemoveAllChildren();
-
-                virtual Vector2 GetDesiredSize();
-
-                inline Vector2 GetFixedSize() const;
-                inline void SetFixedSize(Vector2 value);
-
-                inline bool GetFixedSizeUsed() const;
-                inline void SetFixedSizeUsed(bool value);
-
-            private:
-                Vector2 fixedSize;
-                bool fixedSizeUsed;
         };
     }
 

@@ -23,4 +23,9 @@ namespace Bibim
     {
         return visitor.GetCurrentBounds();
     }
+
+    UIElement* UIFittedFrame::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    {
+        return nullptr;
+    }
 }

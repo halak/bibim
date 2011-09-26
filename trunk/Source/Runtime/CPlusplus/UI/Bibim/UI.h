@@ -1,8 +1,8 @@
 #pragma once
-#ifndef __BIBIM_D158FE80_1B5B_442F_8941_B723A2049994_ALL_H__
-#define __BIBIM_D158FE80_1B5B_442F_8941_B723A2049994_ALL_H__
+#ifndef __BIBIM_AB87597E_9736_4353_9F86_4C70809E5693_ALL_H__
+#define __BIBIM_AB87597E_9736_4353_9F86_4C70809E5693_ALL_H__
 
-   // This file was "AUTOMATICALLY GENERATED" by Bibim Console (9/18/2011 1:06:11 PM)
+   // This file was "AUTOMATICALLY GENERATED" by Bibim Console (9/26/2011 3:03:02 PM)
    // > Halak.Bibim.Toolkit.Console.exe CppHeaderGenerator full [Library-Name] [Source-Directory] [Header-File]
 
 
@@ -20,6 +20,7 @@
 #  include <Bibim/UIEffect.h>
 #  include <Bibim/UIEffectMap.h>
 #  include <Bibim/UIElement.h>
+#  include <Bibim/UIElementFactory.h>
 #  include <Bibim/UIEventArgs.h>
 #  include <Bibim/UIEventDispatcher.h>
 #  include <Bibim/UIEventHandler.h>
@@ -37,6 +38,7 @@
 #  include <Bibim/UIKeyboardEventArgs.h>
 #  include <Bibim/UIKeyboardEventDispatcher.h>
 #  include <Bibim/UILabel.h>
+#  include <Bibim/UILayout.h>
 #  include <Bibim/UIMarkupText.h>
 #  include <Bibim/UIMarkupTextBox.h>
 #  include <Bibim/UIMouseButtonEventArgs.h>

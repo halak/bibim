@@ -107,9 +107,6 @@
                 friend class UIGamdPadEventDispatcher;
                 friend class UITouchEventDispatcher;
                 friend class UIPanel;
-
-                friend void __Startup__();
-                static void __Startup__();
         };
     }
 

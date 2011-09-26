@@ -59,4 +59,9 @@ namespace Bibim
             revision++;
         }
     }
+
+    UIElement* UIImage::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    {
+        return nullptr;
+    }
 }

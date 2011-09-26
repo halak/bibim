@@ -11,7 +11,7 @@ using G = System.Drawing.Graphics;
 
 namespace Halak.Bibim.Asset.Pipeline.Recipes
 {
-    public sealed class BitmapToTexture2D : CookingNode<CookingSourceTexture2D>
+    public sealed class BitmapToTexture2D : CookingNode<SourceTexture2D>
     {
         #region Properties
         public CookingNode<Bitmap> Input
@@ -34,7 +34,7 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
         #endregion
 
         #region Methods
-        public override CookingSourceTexture2D Cook(CookingContext context)
+        public override SourceTexture2D Cook(CookingContext context)
         {
             Bitmap input = Input.Cook(context);
             int originalWidth = input.Width;
@@ -54,12 +54,12 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
                 input = textureBitmap;
             }
 
-            SourceTexture2D texture = new SourceTexture2D(null, originalWidth, originalHeight, input.Width, input.Height);
+            SourceTexture2D output = new SourceTexture2D(null, originalWidth, originalHeight, input.Width, input.Height);
 
             BitmapData bitmapData = input.LockBits(new Rectangle(0, 0, input.Width, input.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
             byte[] buffer = new byte[bitmapData.Stride * bitmapData.Height];
             Marshal.Copy(bitmapData.Scan0, buffer, 0, buffer.Length);
-            CookingSourceTexture2D output = new CookingSourceTexture2D(texture, buffer, bitmapData.Stride);
+            output.Tag = new SourceTexture2DCookingTag(bitmapData.Stride, buffer);
             input.UnlockBits(bitmapData);
 
             return output;

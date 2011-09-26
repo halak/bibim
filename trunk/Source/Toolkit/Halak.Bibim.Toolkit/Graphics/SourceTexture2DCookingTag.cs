@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace Halak.Bibim.Graphics
 {
-    public sealed class CookingSourceTexture2D
+    public sealed class SourceTexture2DCookingTag
     {
         #region Properties
-        public SourceTexture2D Texture
+        public int Pitch
         {
             get;
             set;
@@ -19,25 +20,19 @@ namespace Halak.Bibim.Graphics
             get;
             set;
         }
-
-        public int Pitch
-        {
-            get;
-            set;
-        }
         #endregion
 
-        #region Constructor
-        public CookingSourceTexture2D()
-            : this(null, null, 0)
+        #region Constructors
+        public SourceTexture2DCookingTag()
         {
         }
 
-        public CookingSourceTexture2D(SourceTexture2D texture, byte[] buffer, int pitch)
+        public SourceTexture2DCookingTag(int pitch, byte[] buffer)
         {
-            Texture = texture;
-            Buffer = buffer;
+            Debug.Assert(pitch >= 0);
+
             Pitch = pitch;
+            Buffer = buffer;
         }
         #endregion
     }

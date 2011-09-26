@@ -5,8 +5,19 @@ using System.Text;
 
 namespace Halak.Bibim.UI.Effects
 {
-    [UIElement('U', 'T', 'E', 'F')]
+    [UIElement('U', 'T', 'N', 'F')]
     public sealed class UITintEffect : UIEffect
     {
+        #region Fields
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Constructors
+        #endregion
+
+        #region Methods
+        #endregion
     }
 }

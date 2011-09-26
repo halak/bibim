@@ -273,4 +273,9 @@ namespace Bibim
             boundsChanged = true;
         }
     }
+
+    UIElement* UIAlignedFrame::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    {
+        return nullptr;
+    }
 }
