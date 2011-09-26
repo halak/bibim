@@ -125,7 +125,8 @@
     <Compile Include="Time\Timeline.cs" />
     <Compile Include="Time\UpdateableGameModule.cs" />
     <Compile Include="Typography\Font.cs" />
-    <Compile Include="Typography\FontParameter.cs" />
+    <Compile Include="Typography\FontLibrary.cs" />
+    <Compile Include="Typography\FontCacheParameter.cs" />
     <Compile Include="UI\Effects\UIEffect.cs" />
     <Compile Include="UI\Effects\UIEffectMap.cs" />
     <Compile Include="UI\Effects\UITintEffect.cs" />

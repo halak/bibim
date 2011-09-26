@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Halak.Bibim.Asset;
+using Halak.Bibim.IO;
+using Microsoft.Xna.Framework;
 
 namespace Halak.Bibim.Typography
 {
@@ -11,6 +13,22 @@ namespace Halak.Bibim.Typography
     {
         public override void Write(AssetStreamWriter writer, Font asset)
         {
+            writer.Write(asset.Library);
+            writer.WriteBibimString(asset.FaceURI);
+            writer.Write(asset.FontSize);
+            writer.Write(asset.StrokeSize);
+            writer.Write(asset.Weights);
+            writer.Write(asset.Shear);
+            writer.Write(asset.GlowSize);
+            writer.Write(asset.GlowSpread);
+            writer.Write(asset.GlowThickness);
+            writer.Write(asset.Scale);
+            writer.Write(asset.Hinting);
+            writer.Write(asset.IgnoreBitmap);
+            writer.Write(asset.Spacing);
+            writer.Write(asset.Color);
+            writer.Write(asset.StrokeColor);
+            writer.Write(asset.GlowColor);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Bibim
     {
         BBAssertDebug(sourceStream != nullptr);
 
-        T result = 0;
+        T result;
         if (sourceStream->Read(&result, sizeof(T)) == sizeof(T))
             return result;
         else
@@ -111,6 +111,30 @@ namespace Bibim
         BBStackFree(buffer);
 
         return result;
+    }
+
+    Color BinaryReader::ReadColor()
+    {
+        BBStaticAssert(sizeof(Color) == 4);
+        return ReadTemplate<Color>();
+    }
+
+    Vector2 BinaryReader::ReadVector2()
+    {
+        BBStaticAssert(sizeof(Vector2) == 8);
+        return ReadTemplate<Vector2>();
+    }
+
+    Vector3 BinaryReader::ReadVector3()
+    {
+        BBStaticAssert(sizeof(Vector3) == 12);
+        return ReadTemplate<Vector3>();
+    }
+
+    Vector4 BinaryReader::ReadVector4()
+    {
+        BBStaticAssert(sizeof(Vector4) == 16);
+        return ReadTemplate<Vector4>();
     }
 
     BinaryReader& BinaryReader::operator = (const BinaryReader& right)

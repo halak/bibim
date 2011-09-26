@@ -3,6 +3,10 @@
 #define __BIBIM_STREAMWRITER_H__
 
 #   include <Bibim/FWD.h>
+#   include <Bibim/Color.h>
+#   include <Bibim/Vector2.h>
+#   include <Bibim/Vector3.h>
+#   include <Bibim/Vector4.h>
 
     namespace Bibim
     {
@@ -26,6 +30,10 @@
                 void Write(const char* value);
                 void Write(const char* value, int length);
                 void Write(const String& value);
+                void Write(Color value);
+                void Write(Vector2 value);
+                void Write(Vector3 value);
+                void Write(Vector4 value);
 
                 inline Stream* GetSource() const;
 

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Halak.Bibim.Typography
 {
-    public struct FontParameter
+    public struct FontCacheParameter
     {
-        public String Face;
+        public String FaceURI;
         public float FontSize;
         public float StrokeSize;
         public float Weights;
