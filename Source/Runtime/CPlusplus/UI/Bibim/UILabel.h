@@ -10,6 +10,7 @@
     {
         class UILabel : public UIVisual
         {
+            BBUIElementClass('U', 'L', 'B', 'L');
             public:
                 UILabel();
                 virtual ~UILabel();

@@ -9,6 +9,7 @@
     {
         class UIAnchoredFrame : public UIFrame
         {
+            BBUIElementClass('U', 'A', 'C', 'F');
             public:
                 UIAnchoredFrame();
                 virtual ~UIAnchoredFrame();

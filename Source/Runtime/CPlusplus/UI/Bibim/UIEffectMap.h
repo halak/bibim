@@ -3,12 +3,13 @@
 #define __BIBIM_UIEFFECTMAP_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/SharedObject.h>
+#   include <Bibim/UIElement.h>
 
     namespace Bibim
     {
-        class UIEffectMap : public SharedObject
+        class UIEffectMap : public UIElement
         {
+            BBUIElementClass('U', 'F', 'X', 'M');
             public:
                 UIEffectMap();
                 virtual ~UIEffectMap();

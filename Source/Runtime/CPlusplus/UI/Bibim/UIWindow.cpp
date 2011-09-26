@@ -27,4 +27,9 @@ namespace Bibim
         else
             return UIVisual::GetDesiredSize();
     }
+
+    UIElement* UIWindow::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    {
+        return nullptr;
+    }
 }

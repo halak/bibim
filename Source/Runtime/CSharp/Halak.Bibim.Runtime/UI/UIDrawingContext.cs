@@ -5,7 +5,18 @@ using System.Text;
 
 namespace Halak.Bibim.UI
 {
-    class UIDrawingContext
+    public class UIDrawingContext : UIVisualVisitor
     {
+        #region Fields
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Constructors
+        #endregion
+
+        #region Methods
+        #endregion
     }
 }

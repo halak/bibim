@@ -10,9 +10,14 @@ namespace Halak.Bibim.IO
     {
         public static void WriteBibimString(this BinaryWriter writer, string value)
         {
-            byte[] bytes = Encoding.UTF8.GetBytes(value);
-            writer.Write(bytes.Length);
-            writer.Write(bytes);
+            if (string.IsNullOrEmpty(value) == false)
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(value);
+                writer.Write(bytes.Length);
+                writer.Write(bytes);
+            }
+            else
+                writer.Write((int)0);
         }
     }
 }

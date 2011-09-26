@@ -1266,6 +1266,18 @@
 					>
 				</File>
 				<File
+					RelativePath=".\UI\Bibim\UIElementFactory.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\UI\Bibim\UIElementFactory.h"
+					>
+				</File>
+				<File
+					RelativePath=".\UI\Bibim\UIElementFactory.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\UI\Bibim\UIImage.cpp"
 					>
 				</File>

@@ -3,15 +3,16 @@
 #define __BIBIM_UIIMAGE_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/SharedObject.h>
+#   include <Bibim/UIElement.h>
 #   include <Bibim/Rect.h>
 #   include <Bibim/RectF.h>
 #   include <Bibim/URI.h>
 
     namespace Bibim
     {
-        class UIImage : public SharedObject
+        class UIImage : public UIElement
         {
+            BBUIElementClass('U', 'I', 'M', 'G')
             public:
                 UIImage(const URI& textureURI, const Rect& clippingRect);
                 virtual ~UIImage();

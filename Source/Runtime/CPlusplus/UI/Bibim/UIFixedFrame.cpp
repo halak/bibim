@@ -65,4 +65,10 @@ namespace Bibim
     {
         return true;
     }
+
+    UIElement* UIFixedFrame::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    {
+        return nullptr;
+    }
+
 }

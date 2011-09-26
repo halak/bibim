@@ -9,6 +9,7 @@
     {
         class UISprite : public UIVisual
         {
+            BBUIElementClass('U', 'S', 'P', 'R');
             public:
                 UISprite();
                 virtual ~UISprite();

@@ -9,6 +9,7 @@
     {
         class UIFixedFrame : public UIFrame
         {
+            BBUIElementClass('U', 'F', 'X', 'F');
             public:
                 UIFixedFrame();
                 explicit UIFixedFrame(const RectF& Rect);

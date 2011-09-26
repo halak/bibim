@@ -115,9 +115,11 @@
     <Compile Include="Asset\Pipeline\Recipes\ImportBitmap.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ImportPhotoshopDocument.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToBitmap.cs" />
-    <Compile Include="Graphics\CookingSourceTexture2D.cs" />
-    <Compile Include="Graphics\CookingSourceTexture2DWriter.cs" />
+    <Compile Include="Graphics\SourceTexture2DWriter.cs" />
+    <Compile Include="Graphics\SourceTexture2DCookingTag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Typography\FontWriter.cs" />
+    <Compile Include="UI\UILayoutWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Runtime\CSharp\Halak.Bibim.Runtime\Halak.Bibim.Runtime for Windows.csproj">

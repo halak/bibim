@@ -11,7 +11,10 @@ namespace Halak.Bibim.IO
         public static string ReadBibimString(this BinaryReader reader)
         {
             int length = reader.ReadInt32();
-            return Encoding.UTF8.GetString(reader.ReadBytes(length));
+            if (length > 0)
+                return Encoding.UTF8.GetString(reader.ReadBytes(length));
+            else
+                return string.Empty;
         }
     }
 }

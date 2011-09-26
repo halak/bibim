@@ -5,7 +5,18 @@ using System.Text;
 
 namespace Halak.Bibim.UI
 {
-    class UIMarkupText
+    public sealed class UIMarkupText
     {
+        #region Fields
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Constructors
+        #endregion
+
+        #region Methods
+        #endregion
     }
 }

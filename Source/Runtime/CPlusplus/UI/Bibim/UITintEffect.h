@@ -9,6 +9,7 @@
     {
         class UITintEffect : public UIEffect
         {
+            BBUIElementClass('U', 'T', 'N', 'F');
             public:
                 UITintEffect();
                 virtual ~UITintEffect();

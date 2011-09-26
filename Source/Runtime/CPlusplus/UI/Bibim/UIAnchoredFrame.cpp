@@ -20,4 +20,9 @@ namespace Bibim
     {
         return RectF::Empty;
     }
+
+    UIElement* UIAnchoredFrame::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    {
+        return nullptr;
+    }
 }

@@ -15,8 +15,7 @@
 #       define BBReadableGameAssetClass(a, b, c, d) BBGameAssetClass(a, b, c, d); \
                                                     public: \
                                                         static GameAsset* Read(AssetStreamReader& reader, GameAsset* existingInstance); \
-                                                    private:
-                                                    
+                                                    private:                                                    
 
         class GameAsset : public SharedObject
         {

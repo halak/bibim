@@ -8,5 +8,16 @@ namespace Halak.Bibim.UI.Transforms
     [UIElement('U', 'T', '3', 'D')]
     public sealed class UITransform3D : UITransform
     {
+        #region Fields
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Constructors
+        #endregion
+
+        #region Methods
+        #endregion
     }
 }

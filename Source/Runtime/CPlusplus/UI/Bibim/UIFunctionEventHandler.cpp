@@ -58,4 +58,9 @@ namespace Bibim
             callableChanged = true;
         }
     }
+
+    UIElement* UIFunctionEventHandler::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    {
+        return nullptr;
+    }
 }

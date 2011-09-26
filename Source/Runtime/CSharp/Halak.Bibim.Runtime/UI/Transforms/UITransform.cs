@@ -7,5 +7,16 @@ namespace Halak.Bibim.UI.Transforms
 {
     public abstract class UITransform : UIElement
     {
+        #region Fields
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Constructors
+        #endregion
+
+        #region Methods
+        #endregion
     }
 }

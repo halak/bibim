@@ -11,6 +11,7 @@
     {
         class UIFunctionEventHandler : public UIEventHandler
         {
+            BBUIElementClass('U', 'F', 'C', 'H');
             public:
                 UIFunctionEventHandler();
                 UIFunctionEventHandler(const UIFunctionTable* table, const String& functionName);

@@ -70,4 +70,9 @@ namespace Bibim
         UpdateLayout();
         return false;
     }
+
+    UIElement* UICheckBox::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    {
+        return nullptr;
+    }
 }

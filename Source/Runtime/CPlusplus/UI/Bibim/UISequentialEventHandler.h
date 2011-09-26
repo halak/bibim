@@ -10,6 +10,7 @@
     {
         class UISequentialEventHandler : public UIEventHandler
         {
+            BBUIElementClass('U', 'S', 'Q', 'H');
             public:
                 typedef std::vector<UIEventHandlerPtr> HandlerCollection;
 
