@@ -7,7 +7,7 @@ using Halak.Bibim.UI;
 
 namespace Halak.Bibim.Asset.Pipeline.Recipes
 {
-    public sealed class PhotoshopDocumentToUILayout : CookingNode<UILayout>
+    public sealed class PhotoshopDocumentToUILayout1 : CookingNode<UILayout>
     {
         #region Properties
         [XmlElement]
@@ -19,11 +19,11 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
         #endregion
 
         #region Constructors
-        public PhotoshopDocumentToUILayout()
+        public PhotoshopDocumentToUILayout1()
         {
         }
 
-        public PhotoshopDocumentToUILayout(CookingNode<PhotoshopDocument> input)
+        public PhotoshopDocumentToUILayout1(CookingNode<PhotoshopDocument> input)
         {
             Input = input;
         }
@@ -31,7 +31,7 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
 
         public override UILayout Cook(CookingContext context)
         {
-            PhotoshopDocument photoshop = Input.Cook(context);
+            PhotoshopDocument input = Input.Cook(context);
 
             throw new NotImplementedException();
         }
