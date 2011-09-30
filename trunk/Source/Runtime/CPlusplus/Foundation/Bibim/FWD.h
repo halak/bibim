@@ -141,7 +141,8 @@
                 BBForwardDeclareSmartPointerClass(Script);
                 class ScriptCallable;
                 class ScriptingContext;
-                BBForwardDeclareSmartPointerClass(ScriptRunner);
+                BBForwardDeclareSmartPointerClass(ScriptProcess);
+                class ScriptStack;
                 BBForwardDeclareSmartPointerClass(VariableStorage);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Threading

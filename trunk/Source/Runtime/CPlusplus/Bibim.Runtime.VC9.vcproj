@@ -1898,15 +1898,27 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptRunner.cpp"
+					RelativePath=".\Scripting\Bibim\ScriptProcess.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptRunner.h"
+					RelativePath=".\Scripting\Bibim\ScriptProcess.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptRunner.inl"
+					RelativePath=".\Scripting\Bibim\ScriptProcess.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptStack.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptStack.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptStack.inl"
 					>
 				</File>
 				<File

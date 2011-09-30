@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Halak.Bibim.Scripting
+namespace Halak.Bibim.Scripting.Statements
 {
-    public sealed class ScriptDOM
+    public sealed class Yield : Block
     {
     }
 }

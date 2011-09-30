@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.Scripting.Statements
 {
-    public abstract class SimpleStatement : Statement
+    public sealed class Continue : Statement
     {
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.Scripting.Statements
 {
-    public sealed class If : CompoundStatement
+    public sealed class If : Block
     {
     }
 }

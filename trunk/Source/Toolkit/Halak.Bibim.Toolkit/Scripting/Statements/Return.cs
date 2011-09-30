@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.Scripting.Statements
 {
-    public sealed class Return : SimpleStatement
+    public sealed class Return : Block
     {
     }
 }
