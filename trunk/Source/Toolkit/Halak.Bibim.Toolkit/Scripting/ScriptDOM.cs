@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.Scripting
 {
-    class ScriptDOM
+    public sealed class ScriptDOM
     {
     }
 }

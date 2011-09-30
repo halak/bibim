@@ -120,6 +120,7 @@
     <Compile Include="RectangleF.cs" />
     <Compile Include="Reflection\AssemblyUtility.cs" />
     <Compile Include="Reflection\TypeExtension.cs" />
+    <Compile Include="Scripting\Script.cs" />
     <Compile Include="Time\Clock.cs" />
     <Compile Include="Time\ParallelTimeline.cs" />
     <Compile Include="Time\Timeline.cs" />

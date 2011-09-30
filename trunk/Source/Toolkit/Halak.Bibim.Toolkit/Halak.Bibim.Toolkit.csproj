@@ -115,9 +115,22 @@
     <Compile Include="Asset\Pipeline\Recipes\ImportBitmap.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ImportPhotoshopDocument.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToBitmap.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\THPanicScriptToScriptDOM.cs" />
     <Compile Include="Graphics\SourceTexture2DWriter.cs" />
     <Compile Include="Graphics\SourceTexture2DCookingTag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripting\ScriptDOM.cs" />
+    <Compile Include="Scripting\Statements\Block.cs" />
+    <Compile Include="Scripting\Statements\CompoundStatement.cs" />
+    <Compile Include="Scripting\Statements\DoWhile.cs" />
+    <Compile Include="Scripting\Statements\For.cs" />
+    <Compile Include="Scripting\Statements\ForEach.cs" />
+    <Compile Include="Scripting\Statements\If.cs" />
+    <Compile Include="Scripting\Statements\Return.cs" />
+    <Compile Include="Scripting\Statements\SimpleStatement.cs" />
+    <Compile Include="Scripting\Statements\Statement.cs" />
+    <Compile Include="Scripting\Statements\Switch.cs" />
+    <Compile Include="Scripting\Statements\While.cs" />
     <Compile Include="Typography\FontWriter.cs" />
     <Compile Include="UI\UILayoutWriter.cs" />
   </ItemGroup>
