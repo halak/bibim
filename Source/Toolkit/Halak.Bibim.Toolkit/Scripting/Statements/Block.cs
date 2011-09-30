@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Halak.Bibim.Scripting.Statements
 {
-    public sealed class Block : CompoundStatement
+    public class Block : Statement
     {
         #region Fields
         private List<Statement> statements;
@@ -28,7 +28,7 @@ namespace Halak.Bibim.Scripting.Statements
         }
         #endregion
 
-        #region Constructors
+        #region Methods
         public void Add(Statement item)
         {
             if (item == null)

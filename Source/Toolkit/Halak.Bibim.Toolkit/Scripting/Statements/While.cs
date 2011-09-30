@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.Scripting.Statements
 {
-    public sealed class While : CompoundStatement
+    public sealed class While : Block
     {
     }
 }

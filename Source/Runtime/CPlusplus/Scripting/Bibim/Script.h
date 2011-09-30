@@ -16,17 +16,19 @@
 
             public:
                 Script();
-                Script(const Buffer& buffer);
+                Script(const Buffer& buffer, uint entryPoint);
                 virtual ~Script();
 
                 inline const Buffer& GetBuffer() const;
+                inline uint GetEntryPoint() const;
 
             private:
                 struct MoveTag {};
-                Script(Buffer& buffer, MoveTag);
+                Script(Buffer& buffer, uint entryPoint, MoveTag);
 
             private:
                 Buffer buffer;
+                uint entryPoint;
         };
     }
 

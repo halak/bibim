@@ -48,12 +48,6 @@ namespace Halak.Bibim.Scripting.Statements
                 }
             }
         }
-
-        public int? Position
-        {
-            get;
-            set;
-        }
         #endregion
 
         #region Constructors

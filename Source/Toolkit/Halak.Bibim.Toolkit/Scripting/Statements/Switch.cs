@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.Scripting.Statements
 {
-    public sealed class Switch : CompoundStatement
+    public sealed class Switch : Block
     {
     }
 }

@@ -4,4 +4,9 @@ namespace Bibim
     {
         return buffer;
     }
+
+    uint Script::GetEntryPoint() const
+    {
+        return entryPoint;
+    }
 }
