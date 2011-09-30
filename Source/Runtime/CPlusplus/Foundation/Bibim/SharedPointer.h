@@ -4,7 +4,6 @@
 
 #   include <Bibim/Foundation.h>
 #   include <Bibim/SharedObject.h>
-#   include <Bibim/SharedObjectLife.h>
 
     namespace Bibim
     {
@@ -17,19 +16,10 @@
                 inline SharedPointer();
                 inline SharedPointer(const SharedPointer<T>& original);
                 template <typename U> inline SharedPointer(U* pointee)
-                    : pointee(static_cast<T*>(pointee)),
-                      life(pointee ? pointee->life : 0)
+                    : pointee(static_cast<T*>(pointee))
                 {
                     if (pointee)
-                    {
-                        if (life == nullptr)
-                        {
-                            life = new SharedObjectLife(pointee);
-                            pointee->life = life;
-                        }
-
-                        life->IncreaseStrongCount();
-                    }
+                        pointee->IncreaseReferenceCount();
                 }
                 inline ~SharedPointer();
 
@@ -39,17 +29,15 @@
                 {
                     if (pointee != right)
                     {
-                        if (life)
-                            life->DecreaseStrongCount();
-                        
-                        if (right && right->life == nullptr)
-                            right->life = new SharedObjectLife(right);
+                        T* oldPointee = pointee;
 
                         pointee = static_cast<T*>(right);
-                        life = right->life;
 
-                        if (life)
-                            life->IncreaseStrongCount();
+                        if (oldPointee)
+                            oldPointee->DecreaseReferenceCount();
+
+                        if (pointee)
+                            pointee->IncreaseReferenceCount();
                     }
                 }
 
@@ -57,7 +45,6 @@
 
                 inline T* GetPointee() const;
                 inline int GetReferenceCount() const;
-                inline int GetWeakReferenceCount() const;
 
                 inline SharedPointer<T>& operator = (const SharedPointer<T>& right);
 
@@ -78,18 +65,13 @@
 
                 template <typename U> operator SharedPointer<U>() const
                 {
-                    return SharedPointer<U>(static_cast<U*>(pointee), life);
+                    return SharedPointer<U>(static_cast<U*>(pointee));
                 }
 
             private:
-                inline SharedPointer(T* pointee, SharedObjectLife* life);
-
-            private:
                 T* pointee;
-                SharedObjectLife* life;
 
                 template <typename U> friend class SharedPointer;
-                template <typename T> friend class WeakPointer;
                 template <typename To, typename From> friend SharedPointer<To> StaticCast(const SharedPointer<From>& from);
                 template <typename To, typename From> friend SharedPointer<To> DynamicCast(const SharedPointer<From>& from);
                 friend class SharedObject;

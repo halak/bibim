@@ -15,6 +15,7 @@
                 ~ManualLocker();
 
                 inline void Lock();
+                inline bool TryLock();
                 inline void Unlock();
 
             private:

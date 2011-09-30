@@ -12,6 +12,12 @@ namespace Bibim
         lockCount++;
     }
 
+    bool ManualLocker::TryLock()
+    {
+        if (lock.TryAcquire())
+            lockCount++;
+    }
+
     void ManualLocker::Unlock()
     {
         lockCount--;

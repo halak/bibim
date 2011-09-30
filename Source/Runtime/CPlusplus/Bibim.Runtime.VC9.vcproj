@@ -351,8 +351,20 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="(SmartPointer)"
+				Name="(Object)"
 				>
+				<File
+					RelativePath=".\Foundation\Bibim\Object.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Object.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Object.inl"
+					>
+				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\PointerCasts.h"
 					>
@@ -370,15 +382,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\SharedObjectLife.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\SharedObjectLife.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\SharedObjectLife.Windows.cpp"
+					RelativePath=".\Foundation\Bibim\SharedObject.Windows.cpp"
 					>
 				</File>
 				<File
@@ -387,14 +391,6 @@
 				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\SharedPointer.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\WeakPointer.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\WeakPointer.inl"
 					>
 				</File>
 			</Filter>
@@ -475,14 +471,6 @@
 				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\RectStorage.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Signal.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Signal.inl"
 					>
 				</File>
 			</Filter>
@@ -1875,6 +1863,58 @@
 				</File>
 				<File
 					RelativePath=".\FileSystem\Bibim\FileStream.Windows.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Scripting"
+				>
+				<File
+					RelativePath=".\Scripting\Bibim\Script.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\Script.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\Script.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptCallable.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptingContext.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptingContext.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptingContext.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptRunner.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptRunner.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptRunner.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\VariableStorage.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\VariableStorage.h"
 					>
 				</File>
 			</Filter>

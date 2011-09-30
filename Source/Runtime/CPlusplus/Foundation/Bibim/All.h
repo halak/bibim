@@ -55,9 +55,7 @@
 #  include <Bibim/RectStorage.h>
 #  include <Bibim/SequenceDictionary.h>
 #  include <Bibim/SharedObject.h>
-#  include <Bibim/SharedObjectLife.h>
 #  include <Bibim/SharedPointer.h>
-#  include <Bibim/Signal.h>
 #  include <Bibim/Stream.h>
 #  include <Bibim/String.h>
 #  include <Bibim/URI.h>
@@ -65,7 +63,6 @@
 #  include <Bibim/Vector2.h>
 #  include <Bibim/Vector3.h>
 #  include <Bibim/Vector4.h>
-#  include <Bibim/WeakPointer.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Framework

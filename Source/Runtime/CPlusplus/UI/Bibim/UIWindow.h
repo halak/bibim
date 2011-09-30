@@ -4,7 +4,6 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/UIPanel.h>
-#   include <Bibim/Signal.h>
 #   include <vector>
 
     namespace Bibim

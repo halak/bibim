@@ -5,7 +5,6 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
 #   include <Bibim/Point.h>
-#   include <Bibim/Signal.h>
 
     namespace Bibim
     {

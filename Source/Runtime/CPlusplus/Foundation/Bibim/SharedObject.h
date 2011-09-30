@@ -3,15 +3,14 @@
 #define __BIBIM_SHAREDOBJECT_H__
 
 #   include <Bibim/Foundation.h>
+#   include <Bibim/Object.h>
 
     namespace Bibim
     {
         class SharedObject;
-        class SharedObjectLife;
         template <typename T> class SharedPointer;
-        template <typename T> class WeakPointer;
 
-        class SharedObject
+        class SharedObject : public Object
         {
             public:
                 virtual ~SharedObject();
@@ -24,10 +23,13 @@
                 template <typename To, typename ThisType> SharedPointer<To> This(ThisType* thisInstance);
 
             private:
-                SharedObjectLife* life;
+                void IncreaseReferenceCount();
+                void DecreaseReferenceCount();
+
+            private:
+                long referenceCount;
 
                 template <typename T> friend class SharedPointer;
-                template <typename T> friend class WeakPointer;
 
             private:
                 SharedObject& operator = (const SharedObject&);

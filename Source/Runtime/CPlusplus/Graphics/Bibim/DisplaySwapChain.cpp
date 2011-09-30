@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/DisplaySwapChain.h>
+#include <Bibim/Assert.h>
 #include <Bibim/CheckedRelease.h>
 #include <Bibim/GraphicsDevice.h>
 #include <Bibim/Window.h>

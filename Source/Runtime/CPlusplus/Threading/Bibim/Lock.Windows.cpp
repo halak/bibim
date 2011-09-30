@@ -24,6 +24,12 @@
         {
             ::LeaveCriticalSection(&cs);
         }
+
+        bool Lock::TryAcquire()
+        {
+            return ::TryEnterCriticalSection(&cs) != FALSE;
+        }
+
     }
 
 #endif
