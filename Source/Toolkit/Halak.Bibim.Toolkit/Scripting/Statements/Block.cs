@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
-namespace Halak.Bibim.Script.Statements
+namespace Halak.Bibim.Scripting.Statements
 {
     public sealed class Block : CompoundStatement
     {
