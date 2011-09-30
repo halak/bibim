@@ -1,40 +1,30 @@
 namespace Bibim
 {
     template <typename T> SharedPointer<T>::SharedPointer()
-        : pointee(0),
-          life(0)
+        : pointee(0)
     {
-    }
-
-    template <typename T> SharedPointer<T>::SharedPointer(T* pointee, SharedObjectLife* life)
-        : pointee(pointee),
-          life(pointee ? life : 0)
-    {
-        if (this->life)
-            this->life->IncreaseStrongCount();
     }
 
     template <typename T> SharedPointer<T>::SharedPointer(const SharedPointer<T>& original)
-        : pointee(original.pointee),
-          life(original.life)
+        : pointee(original.pointee)
     {
-        if (life)
-            life->IncreaseStrongCount();
+        if (pointee)
+            pointee->IncreaseReferenceCount();
     }
 
     template <typename T> SharedPointer<T>::~SharedPointer()
     {
-        if (life)
-            life->DecreaseStrongCount();
+        if (pointee)
+            pointee->DecreaseReferenceCount();
     }
 
     template <typename T> void SharedPointer<T>::Reset()
     {
-        if (life)
-            life->DecreaseStrongCount();
-
+        T* oldPointee = pointee;
         pointee = 0;
-        life = 0;
+
+        if (oldPointee)
+            oldPointee->DecreaseReferenceCount();
     }
 
     template <typename T> void SharedPointer<T>::Reset(const SharedPointer<T>& right)
@@ -42,26 +32,20 @@ namespace Bibim
         if (this == &right)
             return;
 
-        if (life)
-            life->DecreaseStrongCount();
-
+        T* oldPointee = pointee;
         pointee = right.pointee;
-        life = right.life;
 
-        if (life)
-            life->IncreaseStrongCount();
+        if (oldPointee)
+            oldPointee->DecreaseReferenceCount();
+        if (pointee)
+            pointee->IncreaseReferenceCount();
     }
 
     template <typename T> void SharedPointer<T>::Swap(SharedPointer<T>& right)
     {
         T* temporaryPointee = pointee;
-        SharedObjectLife* temporarySharedObjectLife = life;
-
         pointee = right.pointee;
-        life = right.life;
-
         right.pointee = temporaryPointee;
-        right.life = temporarySharedObjectLife;
     }
 
     template <typename T> T* SharedPointer<T>::GetPointee() const
@@ -71,16 +55,8 @@ namespace Bibim
 
     template <typename T> int SharedPointer<T>::GetReferenceCount() const
     {
-        if (life)
-            return life->GetStrong();
-        else
-            return 0;
-    }
-
-    template <typename T> int SharedPointer<T>::GetWeakReferenceCount() const
-    {
-        if (life)
-            return life->GetWeak();
+        if (pointee)
+            return static_cast<int>(pointee->referenceCount);
         else
             return 0;
     }

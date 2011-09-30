@@ -5,7 +5,6 @@
 #   include <Bibim/Foundation.h>
 #   include <Bibim/NullPointer.h>
 #   include <Bibim/SharedObject.h>
-#   include <Bibim/WeakPointer.h>
 
     namespace Bibim
     {
@@ -20,13 +19,7 @@
         /// 기존 C++ 표준 static_cast로는 불편한 Smart-pointer 변환을 편리하게 수행할 수 있도록 합니다.
         template <typename To, typename From> inline SharedPointer<To> StaticCast(const SharedPointer<From>& from)
         {
-            return SharedPointer<To>(static_cast<To*>(from.pointee), from.life);
-        }
-        /// Weak-pointer가 가리키는 형식을 지정한 형식(To)으로 변환합니다.
-        /// 기존 C++ 표준 static_cast로는 불편한 Smart-pointer 변환을 편리하게 수행할 수 있도록 합니다.
-        template <typename To, typename From> inline WeakPointer<To> StaticCast(const WeakPointer<From>& from)
-        {
-            return WeakPointer<To>(static_cast<To*>(from.pointee), from.life);
+            return SharedPointer<To>(static_cast<To*>(from.pointee));
         }
 
         /// Raw-pointer가 가리키는 형식을 지정한 형식(To)으로 변환합니다.
@@ -40,14 +33,7 @@
         /// 기존 C++ 표준 dynamic_cast로는 불편한 Smart-pointer 변환을 편리하게 수행할 수 있도록 합니다.
         template <typename To, typename From> inline SharedPointer<To> DynamicCast(const SharedPointer<From>& from)
         {
-            return SharedPointer<To>(dynamic_cast<To*>(from.pointee), from.life);
-        }
-
-        /// Weak-pointer가 가리키는 형식을 지정한 형식(To)으로 변환합니다.
-        /// 기존 C++ 표준 dynamic_cast로는 불편한 Smart-pointer 변환을 편리하게 수행할 수 있도록 합니다.
-        template <typename To, typename From> inline WeakPointer<To> DynamicCast(const WeakPointer<From>& from)
-        {
-            return WeakPointer<To>(dynamic_cast<To*>(from.pointee), from.life);
+            return SharedPointer<To>(dynamic_cast<To*>(from.pointee));
         }
     }
 

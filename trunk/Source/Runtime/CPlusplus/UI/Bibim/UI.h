@@ -1,8 +1,8 @@
 #pragma once
-#ifndef __BIBIM_AB87597E_9736_4353_9F86_4C70809E5693_ALL_H__
-#define __BIBIM_AB87597E_9736_4353_9F86_4C70809E5693_ALL_H__
+#ifndef __BIBIM_CD21CF35_0038_47A0_B1BE_1E929D93FC87_ALL_H__
+#define __BIBIM_CD21CF35_0038_47A0_B1BE_1E929D93FC87_ALL_H__
 
-   // This file was "AUTOMATICALLY GENERATED" by Bibim Console (9/26/2011 3:03:02 PM)
+   // This file was "AUTOMATICALLY GENERATED" by Bibim Console (9/30/2011 3:27:25 PM)
    // > Halak.Bibim.Toolkit.Console.exe CppHeaderGenerator full [Library-Name] [Source-Directory] [Header-File]
 
 

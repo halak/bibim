@@ -12,6 +12,7 @@
             {
                 BBThisIsStaticClass(Atomic);
                 public:
+                    void Exchange(long& variable, long value);
             };
         }
 

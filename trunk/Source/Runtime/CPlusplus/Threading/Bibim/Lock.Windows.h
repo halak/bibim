@@ -19,6 +19,7 @@
             private:
                 void Acquire();
                 void Unacquire();
+                bool TryAcquire();
 
             private:
                 CRITICAL_SECTION cs;

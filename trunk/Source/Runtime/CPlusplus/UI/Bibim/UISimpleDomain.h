@@ -20,7 +20,7 @@
                 virtual void SetFocus(UIVisual* value);
 
             private:
-                UIVisualWeakPtr focus;
+                UIVisualPtr focus;
         };
     }
 

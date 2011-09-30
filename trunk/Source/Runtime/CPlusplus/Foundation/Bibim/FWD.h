@@ -6,13 +6,11 @@
 #   include <Bibim/NullPointer.h>
 #   include <Bibim/PointerCasts.h>
 #   include <Bibim/SharedPointer.h>
-#   include <Bibim/WeakPointer.h>
 
     namespace Bibim
     {
 #       define BBForwardDeclareSmartPointerClass(name) class name; \
-                                                       typedef Bibim::SharedPointer<name> name##Ptr; \
-                                                       typedef Bibim::WeakPointer<name>   name##WeakPtr;
+                                                       typedef Bibim::SharedPointer<name> name##Ptr;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // 01. Foundation
@@ -53,10 +51,10 @@
                 typedef Range<Vector3>    Vector3Range;
                 typedef Range<Vector4>    Vector4Range;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
-            // (SmartPointer)
-                BBForwardDeclareSmartPointerClass(SharedObject);
+            // (Object)
+                class Object;
+                    BBForwardDeclareSmartPointerClass(SharedObject);
                 template <typename T> class SharedPointer;
-                template <typename T> class WeakPointer;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Assert
             ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,6 +136,13 @@
                 BBForwardDeclareSmartPointerClass(PipeStream);
                     BBForwardDeclareSmartPointerClass(PipeClientStream);
                     BBForwardDeclareSmartPointerClass(PipeServerStream);
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Scripting
+                BBForwardDeclareSmartPointerClass(Script);
+                class ScriptCallable;
+                class ScriptingContext;
+                BBForwardDeclareSmartPointerClass(ScriptRunner);
+                BBForwardDeclareSmartPointerClass(VariableStorage);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Threading
                 class AutoLocker;

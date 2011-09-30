@@ -7,6 +7,7 @@
 #include <Bibim/UIMouseWheelEventArgs.h>
 #include <Bibim/UIPickingContext.h>
 #include <Bibim/UIWindow.h>
+#include <algorithm>
 
 namespace Bibim
 {

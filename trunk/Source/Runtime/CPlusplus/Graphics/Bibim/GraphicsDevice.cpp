@@ -4,8 +4,9 @@
 #include <Bibim/CheckedRelease.h>
 #include <Bibim/Colors.h>
 #include <Bibim/DisplaySwapChain.h>
+#include <Bibim/Exception.h>
 #include <Bibim/Window.h>
-#include <stdexcept>
+#include <algorithm>
 
 namespace Bibim
 {
@@ -100,7 +101,7 @@ namespace Bibim
 
             HRESULT result = d3dDevice->SetViewport(&vp);
             if (result != D3D_OK)
-                throw new std::runtime_error("d3dDevice->SetViewport != D3D_OK");
+                throw Exception("d3dDevice->SetViewport != D3D_OK");
         }
     }
 
@@ -121,7 +122,7 @@ namespace Bibim
             d3dObject = Direct3DCreate9(D3D_SDK_VERSION);
 
             if (d3dObject == nullptr)
-                throw new std::runtime_error("GraphicsDevice::d3dObject == nullptr");
+                throw Exception("GraphicsDevice::d3dObject == nullptr");
         }
 
         D3DPRESENT_PARAMETERS d3dParameters;
@@ -149,7 +150,7 @@ namespace Bibim
                                               &d3dParameters,
                                               &d3dDevice);
         if (result != D3D_OK)
-            throw new std::runtime_error("d3dObject->CreateDevice != D3D_OK");
+            throw Exception("d3dObject->CreateDevice != D3D_OK");
 
         SetViewport(Rect(Point::Zero, GetWindow()->GetSize()));
     }
@@ -170,7 +171,7 @@ namespace Bibim
         HRESULT result = D3D_OK;
         result = GetD3DDevice()->GetSwapChain(0, &d3dSwapChain);
         if (result != D3D_OK)
-            throw new std::runtime_error("d3dDevice->GetSwapChain != D3D_OK");
+            throw Exception("d3dDevice->GetSwapChain != D3D_OK");
 
         defaultSwapChain = new DisplaySwapChain(this, window, d3dSwapChain);
         swapChains.push_back(defaultSwapChain);
