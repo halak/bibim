@@ -13,7 +13,7 @@
     {
         class GraphicsDevice : public GameModule
         {
-            BBGameModuleClass('G', 'R', 'P', 'D');
+            BBObjectClass(GraphicsDevice, GameModule, 'G', 'R', 'P', 'D');
             public:
                 GraphicsDevice();
                 virtual ~GraphicsDevice();

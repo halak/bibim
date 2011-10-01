@@ -10,7 +10,7 @@
     {
         class PipedAssetProvider : public AssetProvider
         {
-            BBGameModuleClass('P', 'A', 'S', 'P');
+            BBObjectClass(PipedAssetProvider, AssetProvider, 'P', 'A', 'S', 'P');
             public:
                 static const uint32 LoadAssetPacketID = 1000;
                 static const uint32 ChangeClientNamePacketID = 1001;

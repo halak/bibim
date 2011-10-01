@@ -96,6 +96,7 @@
     <Compile Include="Asset\AssetStreamReader.cs" />
     <Compile Include="Asset\GameAssetReader.cs" />
     <Compile Include="Asset\GameAssetStatus.cs" />
+    <Compile Include="ClassIDAttribute.cs" />
     <Compile Include="Collections\Generic\ReadOnlyDictionary.cs" />
     <Compile Include="Graphics\GraphicsDevice.cs" />
     <Compile Include="Graphics\SourceTexture2D.cs" />
@@ -103,13 +104,11 @@
     <Compile Include="IO\BinaryReaderExtension.cs" />
     <Compile Include="Asset\FileAssetProvider.cs" />
     <Compile Include="Asset\GameAsset.cs" />
-    <Compile Include="Asset\GameAssetAttribute.cs" />
     <Compile Include="Asset\GameAssetFactory.cs" />
     <Compile Include="Asset\GameAssetStorage.cs" />
     <Compile Include="Asset\PipedAssetProvider.cs" />
     <Compile Include="FOURCC.cs" />
     <Compile Include="GameModule.cs" />
-    <Compile Include="GameModuleAttribute.cs" />
     <Compile Include="GameModuleFactory.cs" />
     <Compile Include="GameModuleStatus.cs" />
     <Compile Include="GameModuleNode.cs" />
@@ -121,6 +120,9 @@
     <Compile Include="Reflection\AssemblyUtility.cs" />
     <Compile Include="Reflection\TypeExtension.cs" />
     <Compile Include="Scripting\Script.cs" />
+    <Compile Include="Scripting\ScriptingContext.cs" />
+    <Compile Include="Scripting\ScriptNativeCommand.cs" />
+    <Compile Include="Scripting\ScriptProcess.cs" />
     <Compile Include="Time\Clock.cs" />
     <Compile Include="Time\ParallelTimeline.cs" />
     <Compile Include="Time\Timeline.cs" />
@@ -159,7 +161,6 @@
     <Compile Include="UI\UIDomain.cs" />
     <Compile Include="UI\UIDrawingContext.cs" />
     <Compile Include="UI\UIElement.cs" />
-    <Compile Include="UI\UIElementAttribute.cs" />
     <Compile Include="UI\UIElementFactory.cs" />
     <Compile Include="UI\UIHandledDrawingContext.cs" />
     <Compile Include="UI\UIImage.cs" />

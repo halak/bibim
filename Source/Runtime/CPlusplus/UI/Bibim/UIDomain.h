@@ -9,10 +9,8 @@
     {
         class UIDomain : public GameModule
         {
-            BBGameModuleClass('U', 'I', 'D', 'M');
+            BBAbstractObjectClass(UIDomain, GameModule);
             public:
-                UIDomain();
-                UIDomain(UIWindow* root);
                 virtual ~UIDomain();
 
                 inline UIWindow* GetRoot() const;
@@ -20,6 +18,10 @@
 
                 virtual UIVisual* GetFocus() const = 0;
                 virtual void SetFocus(UIVisual* value) = 0;
+
+            protected:
+                UIDomain();
+                UIDomain(UIWindow* root);
 
             private:
                 UIWindowPtr root;

@@ -9,7 +9,7 @@
     {
         class UpdateableGameModule : public GameModule
         {
-            BBGameModuleClass('U', 'P', 'G', 'M');
+            BBAbstractObjectClass(UpdateableGameModule, GameModule);
             public:
                 UpdateableGameModule();
                 virtual ~UpdateableGameModule();

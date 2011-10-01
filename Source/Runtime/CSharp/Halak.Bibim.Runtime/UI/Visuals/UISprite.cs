@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.UI.Visuals
 {
-    [UIElement('U', 'S', 'P', 'R')]
+    [ClassID('U', 'S', 'P', 'R')]
     public sealed class UISprite : UIVisual
     {
         #region Fields

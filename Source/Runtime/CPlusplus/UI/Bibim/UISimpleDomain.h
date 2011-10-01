@@ -9,7 +9,7 @@
     {
         class UISimpleDomain : public UIDomain
         {
-            BBGameModuleClass('U', 'I', 'S', 'D');
+            BBObjectClass(UISimpleDomain, UIDomain, 'U', 'I', 'S', 'D');
             public:
                 UISimpleDomain();
                 UISimpleDomain(UIWindow* root);

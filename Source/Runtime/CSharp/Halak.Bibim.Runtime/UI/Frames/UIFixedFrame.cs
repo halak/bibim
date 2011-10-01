@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Halak.Bibim.UI.Frames
 {
-    [UIElement('U', 'F', 'X', 'F')]
+    [ClassID('U', 'F', 'X', 'F')]
     public sealed class UIFixedFrame : UIFrame
     {
         #region Fields

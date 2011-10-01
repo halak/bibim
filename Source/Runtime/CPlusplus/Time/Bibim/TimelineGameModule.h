@@ -9,13 +9,15 @@
     {
         class TimelineGameModule : public UpdateableGameModule
         {
-            BBGameModuleClass('T', 'L', 'G', 'M');
+            BBAbstractObjectClass(TimelineGameModule, UpdateableGameModule);
             public:
-                TimelineGameModule();
                 virtual ~TimelineGameModule();
 
                 inline Timeline* GetTimeline() const;
                 void SetTimeline(Timeline* value);
+
+            protected:
+                TimelineGameModule();
 
             private:
                 Timeline* timeline;

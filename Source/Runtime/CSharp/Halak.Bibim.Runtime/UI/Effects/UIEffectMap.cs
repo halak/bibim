@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.UI.Effects
 {
-    [UIElement('U', 'F', 'X', 'M')]
+    [ClassID('U', 'F', 'X', 'M')]
     public sealed class UIEffectMap : UIElement
     {
         #region Fields

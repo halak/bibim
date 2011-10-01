@@ -12,7 +12,7 @@
     {
         class DisplaySwapChain : public GameModule
         {
-            BBGameModuleClass('S', 'W', 'C', 'H');
+            BBObjectClass(DisplaySwapChain, GameModule, 'S', 'W', 'C', 'H');
             public:
                 DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window);
                 DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window, Point size);

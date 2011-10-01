@@ -11,7 +11,7 @@
     {
         class UIFunctionTable : public GameModule
         {
-            BBGameModuleClass('U', 'F', 'C', 'T');
+            BBObjectClass(UIFunctionTable, GameModule, 'U', 'F', 'C', 'T');
             public:
                 typedef bool (*GlobalFunctionType)(const UIEventArgs&);
                 typedef GlobalFunctionType FunctionType;

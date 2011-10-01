@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using C = System.Console;
 
-namespace Halak.Bibim.Toolkit.Console
+namespace Halak.Bibim.Toolkit.Consoles
 {
     /// <summary>
     /// 실행시간에 여러가지 Program을 결정하여 실행해주는 Program.
@@ -14,7 +14,7 @@ namespace Halak.Bibim.Toolkit.Console
     public sealed class Hub
     {
         [MTAThread]
-        static void Main(string[] args)
+        public static void MainA(string[] args)
         {
             try
             {
@@ -88,8 +88,7 @@ namespace Halak.Bibim.Toolkit.Console
         /// <returns>Main Method 객체</returns>
         static MethodInfo FindProgramEntry(string className)
         {
-            Assembly[] assemblies = GetAssemblies();
-            foreach (Assembly item in assemblies)
+            foreach (Assembly item in AppDomain.CurrentDomain.GetAssemblies())
             {
                 MethodInfo programEntry = FindProgramEntry(className, item.GetTypes());
                 if (programEntry != null)
@@ -119,32 +118,6 @@ namespace Halak.Bibim.Toolkit.Console
             }
 
             return null;
-        }
-
-        /// <summary>
-        /// 현재 Assembly 목록을 가져옵니다.
-        /// </summary>
-        /// <returns>Assembly 목록</returns>
-        static Assembly[] GetAssemblies()
-        {
-            Assembly assembly1 = Assembly.GetExecutingAssembly();
-            Assembly assembly2 = Assembly.GetEntryAssembly();
-            Assembly assembly3 = Assembly.GetCallingAssembly();
-
-            if (assembly1 != assembly2)
-            {
-                if (assembly1 != assembly3 && assembly2 != assembly3)
-                    return new Assembly[] { assembly1, assembly2, assembly3 };
-                else
-                    return new Assembly[] { assembly1, assembly2 };
-            }
-            else
-            {
-                if (assembly1 != assembly3)
-                    return new Assembly[] { assembly1, assembly3 };
-                else
-                    return new Assembly[] { assembly1 };
-            }
         }
     }
 }

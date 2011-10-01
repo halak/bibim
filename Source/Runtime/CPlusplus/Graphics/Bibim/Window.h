@@ -10,7 +10,7 @@
     {
         class Window : public GameModule
         {
-            BBGameModuleClass('W', 'I', 'N', 'D');
+            BBAbstractObjectClass(Window, GameModule);
             public:
                 virtual ~Window();
 

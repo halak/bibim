@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Halak.Bibim.Asset.Pipeline
 {
-    [GameModule('A', 'S', 'K', 'C')]
+    [ClassID('A', 'S', 'K', 'C')]
     public sealed class GameAssetKitchen : GameModule
     {
         #region Fields

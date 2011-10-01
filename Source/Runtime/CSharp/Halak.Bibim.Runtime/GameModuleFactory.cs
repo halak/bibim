@@ -23,7 +23,7 @@ namespace Halak.Bibim
 
             foreach (Type item in moduleClasses)
             {
-                GameModuleAttribute attribute = item.GetCustomAttribute<GameModuleAttribute>();
+                ClassIDAttribute attribute = item.GetCustomAttribute<ClassIDAttribute>();
                 if (attribute != null)
                 {
                     Debug.Assert(entries.ContainsKey(attribute.ClassID) == false);

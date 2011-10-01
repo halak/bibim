@@ -6,7 +6,7 @@ using Halak.Bibim.Asset;
 
 namespace Halak.Bibim.Graphics
 {
-    [GameAsset('S', 'T', 'X', '2', typeof(Reader))]
+    [ClassID('S', 'T', 'X', '2')]
     public sealed class SourceTexture2D : Texture2D
     {
         public SourceTexture2D()

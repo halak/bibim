@@ -16,7 +16,7 @@
     {
         class UIRenderer : public GameModule
         {
-            BBGameModuleClass('U', 'I', 'R', 'R');
+            BBObjectClass(UIRenderer, GameModule, 'U', 'I', 'R', 'R');
             public:
                 UIRenderer();
                 UIRenderer(GraphicsDevice* graphicsDevice);

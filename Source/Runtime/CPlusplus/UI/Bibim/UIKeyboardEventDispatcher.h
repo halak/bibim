@@ -10,7 +10,7 @@
     {
         class UIKeyboardEventDispatcher : public TimelineGameModule
         {
-            BBGameModuleClass('U', 'I', 'K', 'B');
+            BBObjectClass(UIKeyboardEventDispatcher, TimelineGameModule, 'U', 'I', 'K', 'B');
             public:
                 UIKeyboardEventDispatcher();
                 virtual ~UIKeyboardEventDispatcher();

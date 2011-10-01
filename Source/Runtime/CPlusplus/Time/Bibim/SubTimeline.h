@@ -9,7 +9,7 @@
     {
         class SubTimeline : public Timeline
         {
-            BBGameModuleClass('S', 'B', 'T', 'L');
+            BBObjectClass(SubTimeline, Timeline, 'S', 'B', 'T', 'L');
             public:
                 SubTimeline();
                 virtual ~SubTimeline();

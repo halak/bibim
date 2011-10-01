@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.Asset
 {
-    [GameModule('F', 'A', 'S', 'P')]
+    [ClassID('F', 'A', 'S', 'P')]
     public sealed class FileAssetProvider : AssetProvider
     {
         public override GameAsset Load(string name)

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.Typography
 {
-    [GameModule('F', 'T', 'L', 'B')]
+    [ClassID('F', 'T', 'L', 'B')]
     public sealed class FontLibrary : GameModule
     {
     }

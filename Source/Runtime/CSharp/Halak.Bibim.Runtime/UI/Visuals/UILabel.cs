@@ -6,7 +6,7 @@ using Halak.Bibim.Typography;
 
 namespace Halak.Bibim.UI.Visuals
 {
-    [UIElement('U', 'L', 'B', 'L')]
+    [ClassID('U', 'L', 'B', 'L')]
     public sealed class UILabel : UIVisual
     {
         #region Fields

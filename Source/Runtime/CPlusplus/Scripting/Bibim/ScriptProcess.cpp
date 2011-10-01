@@ -16,7 +16,11 @@ namespace Bibim
     {
     }
 
-    void ScriptProcess::Run()
+    void ScriptProcess::Resume()
+    {
+    }
+
+    void ScriptProcess::Suspend()
     {
     }
 }

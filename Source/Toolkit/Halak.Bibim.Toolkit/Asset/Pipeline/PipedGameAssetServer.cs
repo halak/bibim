@@ -6,11 +6,12 @@ using System.IO.Pipes;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using Halak.Bibim;
 using Halak.Bibim.IO;
 
 namespace Halak.Bibim.Asset.Pipeline
 {
-    [GameModule('P', 'A', 'S', 'S')]
+    [ClassID('P', 'A', 'S', 'S')]
     public sealed class PipedGameAssetServer : GameAssetServer
     {
         #region Fields

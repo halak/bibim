@@ -10,10 +10,24 @@
         class ScriptProcess : public SharedObject
         {
             public:
+                enum CommandID
+                {
+                    JumpCommand = 0,
+                    IfTrueThenJumpCommand = 1,
+                    IfFalseThenJumpCommand = 2,
+                    IfTrueThenJumpElseJumpCommand = 3,
+                    IfFalseThenJumpElseJumpCommand = 4,
+                    CallCommand = 5,
+                    CallNativeCommand = 6,
+                    Yield = 7,
+                };
+  
+            public:
                 ScriptProcess(Script* script);
                 virtual ~ScriptProcess();
 
-                void Run();
+                void Resume();
+                void Suspend();
 
             private:
                 ScriptPtr script;

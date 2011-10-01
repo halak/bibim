@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.UI.Visuals
 {
-    [UIElement('U', 'M', 'T', 'B')]
+    [ClassID('U', 'M', 'T', 'B')]
     public sealed class UIMarkupTextBox : UIVisual
     {
         #region Fields

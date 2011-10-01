@@ -8,11 +8,8 @@
 
     namespace Bibim
     {
-#       define BBGameAssetClass(a, b, c, d) public: \
-                                                static const uint32 ClassID = BBMakeFOURCC(a, b, c, d); \
-                                                virtual uint32 GetClassID() const { return ClassID; } \
-                                            private:
-#       define BBReadableGameAssetClass(a, b, c, d) BBGameAssetClass(a, b, c, d); \
+#       define BBGameAssetClass(classname, parent, a, b, c, d) BBObjectClass(classname, parent, a, b, c, d)
+#       define BBReadableGameAssetClass(classname, parent, a, b, c, d) BBObjectClass(classname, parent, a, b, c, d); \
                                                     public: \
                                                         static GameAsset* Read(AssetStreamReader& reader, GameAsset* existingInstance); \
                                                     private:

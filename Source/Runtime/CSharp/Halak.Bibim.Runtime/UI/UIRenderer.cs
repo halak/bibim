@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.UI
 {
-    [GameModule('U', 'I', 'R', 'R')]
+    [ClassID('U', 'I', 'R', 'R')]
     public class UIRenderer : GameModule
     {
         #region Fields

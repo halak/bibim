@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.UI.Events
 {
-    [GameModule('U', 'I', 'G', 'P')]
+    [ClassID('U', 'I', 'G', 'P')]
     public sealed class UIGamePadEventDispatcher : UIEventDispatcher
     {
     }

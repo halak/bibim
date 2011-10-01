@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.Asset
 {
-    [GameModule('P', 'A', 'S', 'P')]
+    [ClassID('P', 'A', 'S', 'P')]
     public sealed class PipedAssetProvider : AssetProvider
     {
         #region Constants

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.UI.Events
 {
-    [GameModule('U', 'A', 'E', 'Q')]
+    [ClassID('U', 'A', 'E', 'Q')]
     public sealed class UIAsyncEventQueue : GameModule
     {
     }

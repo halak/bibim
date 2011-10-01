@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.UI.Events
 {
-    [UIElement('U', 'E', 'V', 'M')]
+    [ClassID('U', 'E', 'V', 'M')]
     public sealed class UIEventMap : UIElement
     {
     }

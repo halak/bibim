@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Halak.Bibim.Asset
 {
-    [GameModule('G', 'A', 'S', 'T')]
+    [ClassID('G', 'A', 'S', 'T')]
     public class GameAssetStorage : GameModule
     {
         #region Fields
