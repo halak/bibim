@@ -160,8 +160,7 @@ namespace Halak.Bibim.Asset.Pipeline
 
                                   stream.BeginWaitForConnection((waitResult) =>
                                                                 {
-                                                                   // stream.EndWaitForConnection(waitResult);
-                                                                    stream.WaitForConnection();
+                                                                    stream.EndWaitForConnection(waitResult);
                                                                     stream.BeginWrite(buffer, 0, count,
                                                                                       (r) =>
                                                                                       {
