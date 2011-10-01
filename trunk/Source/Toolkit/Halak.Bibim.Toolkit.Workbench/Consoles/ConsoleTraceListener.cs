@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using C = System.Console;
 
-namespace Halak.Bibim.Toolkit.Console
+namespace Halak.Bibim.Toolkit.Consoles
 {
     public sealed class ConsoleTraceListener : TraceListener
     {

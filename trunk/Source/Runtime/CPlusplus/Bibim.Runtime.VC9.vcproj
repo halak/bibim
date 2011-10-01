@@ -1882,10 +1882,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptCallable.h"
-					>
-				</File>
-				<File
 					RelativePath=".\Scripting\Bibim\ScriptingContext.cpp"
 					>
 				</File>
@@ -1895,6 +1891,10 @@
 				</File>
 				<File
 					RelativePath=".\Scripting\Bibim\ScriptingContext.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptNativeCommand.h"
 					>
 				</File>
 				<File

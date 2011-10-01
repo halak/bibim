@@ -11,7 +11,7 @@
     {
         class Keyboard : public GameModule
         {
-            BBGameModuleClass('K', 'B', 'D', '_');
+            BBObjectClass(Keyboard, GameModule, 'K', 'B', 'D', '_');
             public:
                 Keyboard();
                 Keyboard(Window* window);

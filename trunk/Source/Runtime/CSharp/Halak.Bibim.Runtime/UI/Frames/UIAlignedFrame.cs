@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Halak.Bibim.UI.Frames
 {
-    [UIElement('U', 'A', 'L', 'F')]
+    [ClassID('U', 'A', 'L', 'F')]
     public sealed class UIAlignedFrame : UIFrame
     {
         #region Alignment (Nested Enum)

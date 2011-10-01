@@ -16,13 +16,13 @@ using Halak.Bibim.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Halak.Bibim.Toolkit.Console
+namespace Halak.Bibim.Toolkit.Consoles
 {
     public sealed class AssetServer
     {
         static string pipeName;
         
-        static void Main(string[] args)
+        static void MainA(string[] args)
         {
             C.Title = "Halak Bibim Console > AssetServer";
             C.WriteLine("================================");

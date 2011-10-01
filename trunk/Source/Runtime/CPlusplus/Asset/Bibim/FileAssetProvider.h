@@ -9,7 +9,7 @@
     {
         class FileAssetProvider : public AssetProvider
         {
-            BBGameModuleClass('F', 'A', 'S', 'P');
+            BBObjectClass(FileAssetProvider, AssetProvider, 'F', 'A', 'S', 'P');
             public:
                 FileAssetProvider();
                 FileAssetProvider(GameAssetStorage* storage);

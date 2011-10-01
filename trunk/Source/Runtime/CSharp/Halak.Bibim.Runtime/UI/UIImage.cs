@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.UI
 {
-    [UIElement('U', 'I', 'M', 'G')]
+    [ClassID('U', 'I', 'M', 'G')]
     public sealed class UIImage : UIElement
     {
         #region Fields

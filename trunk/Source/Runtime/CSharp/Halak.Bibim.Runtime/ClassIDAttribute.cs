@@ -7,7 +7,7 @@ using Halak.Bibim.Reflection;
 namespace Halak.Bibim
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public sealed class GameModuleAttribute : Attribute
+    public sealed class ClassIDAttribute : Attribute
     {
         #region Properties
         public uint ClassID
@@ -18,12 +18,12 @@ namespace Halak.Bibim
         #endregion
 
         #region Constructors
-        public GameModuleAttribute(char a, char b, char c, char d)
+        public ClassIDAttribute(char a, char b, char c, char d)
             : this(FOURCC.Make(a, b, c, d))
         {
         }
 
-        public GameModuleAttribute(uint classID)
+        public ClassIDAttribute(uint classID)
         {
             ClassID = classID;
         }
@@ -32,7 +32,7 @@ namespace Halak.Bibim
         #region Static Methods
         public static uint GetClassID(Type type)
         {
-            GameModuleAttribute attribute = type.GetCustomAttribute<GameModuleAttribute>();
+            ClassIDAttribute attribute = type.GetCustomAttribute<ClassIDAttribute>();
             if (attribute != null)
                 return attribute.ClassID;
             else

@@ -6,7 +6,7 @@ using Halak.Bibim.Asset;
 
 namespace Halak.Bibim.UI
 {
-    [GameAsset('U', 'I', 'L', 'T')]
+    [ClassID('U', 'I', 'L', 'T')]
     public sealed class UILayout : GameAsset
     {
         #region Fields

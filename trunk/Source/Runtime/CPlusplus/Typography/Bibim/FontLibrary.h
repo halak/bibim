@@ -11,7 +11,7 @@
     {
         class FontLibrary : public GameModule
         {
-            BBGameModuleClass('F', 'T', 'L', 'B');
+            BBObjectClass(FontLibrary, GameModule, 'F', 'T', 'L', 'B');
             public:
                 typedef std::pair<unsigned int, FontCachePtr> CachePair;
                 typedef std::vector<CachePair> CacheCollection;

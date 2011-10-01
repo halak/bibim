@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Halak.Bibim.Typography
 {
-    [GameAsset('F', 'O', 'N', 'T')]
+    [ClassID('F', 'O', 'N', 'T')]
     public sealed class Font : GameAsset
     {
         #region Fields

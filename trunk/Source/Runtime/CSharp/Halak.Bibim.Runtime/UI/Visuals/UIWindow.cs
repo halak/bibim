@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Halak.Bibim.UI.Visuals
 {
-    [UIElement('U', 'W', 'N', 'D')]
+    [ClassID('U', 'W', 'N', 'D')]
     public class UIWindow : UIPanel
     {
         #region Fields

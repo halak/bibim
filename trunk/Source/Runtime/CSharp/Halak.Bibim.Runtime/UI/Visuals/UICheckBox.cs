@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.UI.Visuals
 {
-    [UIElement('U', 'C', 'B', 'X')]
+    [ClassID('U', 'C', 'B', 'X')]
     public class UICheckBox : UIButton
     {
         #region Fields

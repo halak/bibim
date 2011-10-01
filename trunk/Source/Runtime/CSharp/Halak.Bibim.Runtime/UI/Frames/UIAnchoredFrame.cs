@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.UI.Frames
 {
-    [UIElement('U', 'A', 'C', 'F')]
+    [ClassID('U', 'A', 'C', 'F')]
     public sealed class UIAnchoredFrame : UIFrame
     {
         #region Fields

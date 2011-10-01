@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +56,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ConsoleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -62,6 +67,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Consoles\AssetServer.cs" />
+    <Compile Include="Consoles\ConsoleTraceListener.cs" />
+    <Compile Include="Consoles\CppHeaderGenerator.cs" />
+    <Compile Include="Consoles\Hub.cs" />
+    <Compile Include="ConsoleWindow.xaml.cs">
+      <DependentUpon>ConsoleWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -96,6 +108,10 @@
     <ProjectReference Include="..\..\Runtime\CSharp\Halak.Bibim.Runtime\Halak.Bibim.Runtime for Windows.csproj">
       <Project>{557C1E3F-0E92-4D23-AA07-7A0650B5682F}</Project>
       <Name>Halak.Bibim.Runtime for Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Halak.Bibim.Toolkit\Halak.Bibim.Toolkit.csproj">
+      <Project>{2E731BA3-4E48-4245-BD3F-718E1B649545}</Project>
+      <Name>Halak.Bibim.Toolkit</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

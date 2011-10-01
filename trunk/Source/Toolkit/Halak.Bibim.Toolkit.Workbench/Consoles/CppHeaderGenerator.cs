@@ -4,9 +4,9 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using C = System.Console;
+using C = System.Diagnostics.Trace;
 
-namespace Halak.Bibim.Toolkit.Console
+namespace Halak.Bibim.Toolkit.Consoles
 {
     /// <summary>
     /// C++ Header File들을 자동으로 생성하는 Program.
@@ -16,13 +16,15 @@ namespace Halak.Bibim.Toolkit.Console
     /// </example>
     public sealed class CppHeaderGenerator
     {
-        static void Main(string[] args)
+        public static void MainA(string[] args)
         {
             if (args.Length == 0)
             {
                 C.WriteLine("");
                 return;
             }
+
+            C.WriteLine("AAAA");
 
             switch (args[0].ToLower())
             {

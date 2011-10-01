@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.UI
 {
-    [GameModule('U', 'I', 'S', 'D')]
+    [ClassID('U', 'I', 'S', 'D')]
     public class UISimpleDomain : UIDomain
     {
         #region Fields

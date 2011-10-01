@@ -11,7 +11,7 @@
     {
         class UIMouseEventDispatcher : public UpdateableGameModule
         {
-            BBGameModuleClass('U', 'I', 'M', 'S');
+            BBObjectClass(UIMouseEventDispatcher, UpdateableGameModule, 'U', 'I', 'M', 'S');
             public:
                 UIMouseEventDispatcher();
                 virtual ~UIMouseEventDispatcher();

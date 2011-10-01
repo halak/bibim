@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.UI.Events
 {
-    [GameModule('U', 'F', 'C', 'T')]
+    [ClassID('U', 'F', 'C', 'T')]
     public sealed class UIFunctionTable : GameModule
     {
     }

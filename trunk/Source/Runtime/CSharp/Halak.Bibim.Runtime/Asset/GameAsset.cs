@@ -15,7 +15,7 @@ namespace Halak.Bibim.Asset
         #region Properties
         public uint ClassID
         {
-            get { return GameAssetAttribute.GetClassID(GetType()); }
+            get { return ClassIDAttribute.GetClassID(GetType()); }
         }
 
         public GameAssetStatus Status

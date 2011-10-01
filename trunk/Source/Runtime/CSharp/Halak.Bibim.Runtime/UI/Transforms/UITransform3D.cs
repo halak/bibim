@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.UI.Transforms
 {
-    [UIElement('U', 'T', '3', 'D')]
+    [ClassID('U', 'T', '3', 'D')]
     public sealed class UITransform3D : UITransform
     {
         #region Fields

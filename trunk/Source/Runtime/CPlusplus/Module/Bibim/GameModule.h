@@ -3,18 +3,14 @@
 #define __BIBIM_GAMEMODULE_H__
 
 #   include <Bibim/FWD.h>
+#   include <Bibim/Object.h>
 
     namespace Bibim
     {
-#       define BBGameModuleClass(a, b, c, d)    public: \
-                                                    static const uint32 ClassID = BBMakeFOURCC(a, b, c, d); \
-                                                    virtual uint32 GetClassID() const { return ClassID; } \
-                                                private:
-
         /// Game이란 Program을 구성하는 요소의 기반 class.
-        class GameModule
+        class GameModule : public Object
         {
-            BBGameModuleClass('G', 'M', 'O', 'D');
+            BBAbstractObjectClass(GameModule, Object);
             BBThisIsNoncopyableClass(GameModule);
             public:
                 enum Status

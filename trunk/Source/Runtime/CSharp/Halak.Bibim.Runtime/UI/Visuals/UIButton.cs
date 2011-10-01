@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.UI.Visuals
 {
-    [UIElement('U', 'B', 'T', 'N')]
+    [ClassID('U', 'B', 'T', 'N')]
     public class UIButton : UIPanel
     {
         public enum StateCode

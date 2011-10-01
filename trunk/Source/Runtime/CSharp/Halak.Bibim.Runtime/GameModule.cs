@@ -94,7 +94,7 @@ namespace Halak.Bibim
 
         public uint ClassID
         {
-            get { return GameModuleAttribute.GetClassID(GetType()); }
+            get { return ClassIDAttribute.GetClassID(GetType()); }
         }
 
         internal GameModuleNode Node

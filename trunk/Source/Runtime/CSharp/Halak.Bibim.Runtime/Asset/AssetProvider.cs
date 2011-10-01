@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.Asset
 {
-    [GameModule('A', 'S', 'P', 'V')]
+    [ClassID('A', 'S', 'P', 'V')]
     public abstract class AssetProvider : GameModule
     {
         #region Fields

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.Graphics
 {
-    [GameModule('G', 'R', 'P', 'D')]
+    [ClassID('G', 'R', 'P', 'D')]
     public sealed class GraphicsDevice : GameModule
     {
     }

@@ -10,7 +10,7 @@
     {
         class UIAsyncEventQueue : public TimelineGameModule
         {
-            BBGameModuleClass('U', 'A', 'E', 'Q');
+            BBObjectClass(UIAsyncEventQueue, TimelineGameModule, 'U', 'A', 'E', 'Q');
             public:
                 typedef std::pair<UIEventHandlerPtr, UIEventArgsPtr> EventHandlerArgsPair;
                 typedef std::vector<EventHandlerArgsPair> ItemCollection;

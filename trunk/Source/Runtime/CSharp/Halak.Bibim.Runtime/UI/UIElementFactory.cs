@@ -23,7 +23,7 @@ namespace Halak.Bibim.UI
 
             foreach (Type item in moduleClasses)
             {
-                UIElementAttribute attribute = item.GetCustomAttribute<UIElementAttribute>();
+                ClassIDAttribute attribute = item.GetCustomAttribute<ClassIDAttribute>();
                 if (attribute != null)
                 {
                     Debug.Assert(entries.ContainsKey(attribute.ClassID) == false);
