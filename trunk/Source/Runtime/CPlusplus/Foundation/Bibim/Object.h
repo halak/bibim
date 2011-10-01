@@ -17,7 +17,7 @@
             public:
                 virtual ~Object() { }
 
-                virtual uint32 GetClassID() const = 0;
+                virtual uint32 GetClassID() const { return 0; }
 
             protected:
                 Object();

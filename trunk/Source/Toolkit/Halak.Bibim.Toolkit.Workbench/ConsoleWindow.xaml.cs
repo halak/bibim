@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Halak.Bibim.Reflection;
+using Halak.Bibim.Toolkit.Workbench.Consoles;
 
 namespace Halak.Bibim.Toolkit.Workbench
 {
@@ -26,16 +28,28 @@ namespace Halak.Bibim.Toolkit.Workbench
         {
             InitializeComponent();
             ((Paragraph)consoleTextBox.Document.Blocks.FirstBlock).LineHeight = 1;
-            Trace.Listeners.Add(new TraceListener(this));
+            Trace.Listeners.Add(new TraceListener(consoleTextBox));
+
+            //foreach (Type item in AssemblyUtility.FindClasses(typeof(ConsoleProgram), true, true))
+            //{
+            //    item.Name == "hra"
+            //}
 
             Thread thread = new Thread(() =>
             {
-                Halak.Bibim.Toolkit.Consoles.CppHeaderGenerator.MainA(new string[]
+                AssetServer assetServer = new AssetServer()
                 {
-                    @"%BIBIM_DIR%Source\Runtime\CPlusplus",
-                    @"%BIBIM_DIR%Source\Runtime\CPlusplus\Foundation\Bibim\All.h",
-                    @"excluded:TestBed;Animation;Collision2D;Script;SFX",
-                });
+                    PipeName = "TestAssets",
+                };
+                assetServer.Run();
+
+                //Halak.Bibim.Toolkit.Consoles.CppHeaderGenerator.MainA(new string[]
+
+                //{
+                //    @"%BIBIM_DIR%Source\Runtime\CPlusplus",
+                //    @"%BIBIM_DIR%Source\Runtime\CPlusplus\Foundation\Bibim\All.h",
+                //    @"excluded:TestBed;Animation;Collision2D;Script;SFX",
+                //});
             });
             thread.Start();
         }
@@ -65,25 +79,33 @@ namespace Halak.Bibim.Toolkit.Workbench
         private class TraceListener : System.Diagnostics.TraceListener
         {
             #region Fields
-            private ConsoleWindow console;
+            private RichTextBox richTextBox;
             #endregion
 
             #region Constructor
-            public TraceListener(ConsoleWindow console)
+            public TraceListener(RichTextBox richTextBox)
             {
-                this.console = console;
+                this.richTextBox = richTextBox;
             }
             #endregion
 
             #region Write Methods
             public override void Write(string message)
             {
-                console.Write(message);
+                richTextBox.Dispatcher.Invoke(new Action(()=>
+                {
+                    richTextBox.AppendText(message);
+                }));
             }
 
             public override void WriteLine(string message)
             {
-                console.WriteLine(message);
+                message += "\n";
+
+                richTextBox.Dispatcher.Invoke(new Action(() =>
+                {
+                    richTextBox.AppendText(message);
+                }));
             }
             #endregion
         }

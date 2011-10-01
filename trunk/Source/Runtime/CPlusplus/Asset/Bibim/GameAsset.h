@@ -8,8 +8,8 @@
 
     namespace Bibim
     {
-#       define BBGameAssetClass(classname, parent, a, b, c, d) BBObjectClass(classname, parent, a, b, c, d)
-#       define BBReadableGameAssetClass(classname, parent, a, b, c, d) BBObjectClass(classname, parent, a, b, c, d); \
+#       define BBGameAssetClass(a, b, c, d) BBObjectClass(_, _, a, b, c, d)
+#       define BBReadableGameAssetClass(a, b, c, d) BBObjectClass(_, _, a, b, c, d); \
                                                     public: \
                                                         static GameAsset* Read(AssetStreamReader& reader, GameAsset* existingInstance); \
                                                     private:
