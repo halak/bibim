@@ -9,6 +9,7 @@
     {
         class UIEventHandler : public UIElement
         {
+            BBAbstractObjectClass(UIEventHandler, UIElement);
             public:
                 virtual ~UIEventHandler();
 

@@ -95,6 +95,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AliasAttribute.cs" />
     <Compile Include="Asset\AssetStreamWriter.cs" />
     <Compile Include="Asset\GameAssetWriter.cs" />
     <Compile Include="Asset\GameAssetWriterAttribute.cs" />

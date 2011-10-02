@@ -6,4 +6,9 @@ namespace Bibim
     Object::Object()
     {
     }
+
+    uint32 Object::GetClassID() const
+    {
+        return 0;
+    }
 }

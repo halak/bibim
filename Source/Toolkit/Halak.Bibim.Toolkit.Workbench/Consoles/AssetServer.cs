@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.IO.Pipes;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using Halak.Bibim.Asset;
@@ -18,32 +17,15 @@ using System.Xml.Serialization;
 
 namespace Halak.Bibim.Toolkit.Workbench.Consoles
 {
-    public sealed class AssetServer : ConsoleProgram
+    [ConsoleEntryPoint]
+    [Alias("assetsvr")]
+    public static class AssetServer
     {
-        #region Fields
-        private string pipeName;
-        #endregion
-
-        #region Properties
-        public string PipeName
+        static void Run([Alias("pipe")] string pipeName)
         {
-            get { return pipeName; }
-            set
-            {
-                pipeName = value ?? string.Empty;
-            }
-        }
-        #endregion
+            if (string.IsNullOrEmpty(pipeName))
+                throw new ArgumentException("pipeName");
 
-        #region Constructors
-        public AssetServer()
-        {
-            PipeName = string.Empty;
-        }
-        #endregion
-
-        public override void Run()
-        {
             Trace.WriteLine("================================");
             Trace.WriteLine("Halak Bibim Asset Server");
             Trace.WriteLine("================================");
@@ -52,14 +34,31 @@ namespace Halak.Bibim.Toolkit.Workbench.Consoles
             GameModuleTree modules = new GameModuleTree();
             
             GameAssetKitchen assetKitchen = new GameAssetKitchen();
-            PipedGameAssetServer assetServer = new PipedGameAssetServer(assetKitchen, PipeName);
+            PipedGameAssetServer assetServer = new PipedGameAssetServer(assetKitchen, pipeName);
             modules.Root.AttachChild(assetKitchen);
             modules.Root.AttachChild(assetServer);
-            
-            for (; ; )
+
+            bool closed = false;
+            while (closed == false)
             {
-                System.Threading.Thread.Sleep(100);
+                string command;
+                if (ConsoleWindow.CommandQueue.TryDequeue(out command))
+                {
+                    switch (command.ToLower())
+                    {
+                        case "clear":
+                        case "cls":
+                            break;
+                        case "exit":
+                            closed = true;
+                            break;
+                    }
+                }
+                else
+                    System.Threading.Thread.Sleep(10);
             }
+
+            assetServer.Alive = false;
         }
     }
 }

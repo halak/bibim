@@ -9,7 +9,7 @@
     {
         class UISprite : public UIVisual
         {
-            BBUIElementClass('U', 'S', 'P', 'R');
+            BBReadableObjectClass(UISprite, UIVisual, UIElement, 'U', 'S', 'P', 'R');
             public:
                 UISprite();
                 virtual ~UISprite();

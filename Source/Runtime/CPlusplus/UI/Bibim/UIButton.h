@@ -9,7 +9,7 @@
     {
         class UIButton : public UIPanel
         {
-            BBUIElementClass('U', 'B', 'T', 'N');
+            BBReadableObjectClass(UIButton, UIPanel, UIElement, 'U', 'B', 'T', 'N');
             public:
                 enum State
                 {

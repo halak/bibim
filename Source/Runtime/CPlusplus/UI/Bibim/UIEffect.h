@@ -9,6 +9,7 @@
     {
         class UIEffect : public UIElement
         {
+            BBAbstractObjectClass(UIEffect, UIElement);
             public:
                 UIEffect();
                 virtual ~UIEffect();

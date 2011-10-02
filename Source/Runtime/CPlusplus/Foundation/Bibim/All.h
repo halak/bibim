@@ -1,9 +1,9 @@
 #pragma once
-#ifndef __BIBIM_3A9684E8_86AC_4A8B_ADE5_834BD783EA8E_ALL_H__
-#define __BIBIM_3A9684E8_86AC_4A8B_ADE5_834BD783EA8E_ALL_H__
+#ifndef __BIBIM_EE4DC99A_9525_41DB_817C_DD69923A2773_ALL_H__
+#define __BIBIM_EE4DC99A_9525_41DB_817C_DD69923A2773_ALL_H__
 
-   // This file was "AUTOMATICALLY GENERATED" by Bibim Console (9/26/2011 3:03:01 PM)
-   // > Halak.Bibim.Toolkit.Console.exe CppHeaderGenerator full [Library-Name] [Source-Directory] [Header-File]
+   // This file was "AUTOMATICALLY GENERATED" by Bibim Console (10/2/2011 2:13:14 PM)
+   // > Halak.Bibim.Toolkit.Console.exe \class:cppfull.h \proj:[Project-Name] \src:[Source-Directory] \dest:[Header-File]
 
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,6 +44,7 @@
 #  include <Bibim/MemoryStream.h>
 #  include <Bibim/NullPointer.h>
 #  include <Bibim/Numerics.h>
+#  include <Bibim/Object.h>
 #  include <Bibim/PCH.h>
 #  include <Bibim/Point.h>
 #  include <Bibim/PointerCasts.h>
@@ -111,6 +112,14 @@
 #  include <Bibim/GameModuleFactory.h>
 #  include <Bibim/GameModuleNode.h>
 #  include <Bibim/GameModuleTree.h>
+
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   // Scripting
+#  include <Bibim/Script.h>
+#  include <Bibim/ScriptingContext.h>
+#  include <Bibim/ScriptProcess.h>
+#  include <Bibim/ScriptStack.h>
+#  include <Bibim/VariableStorage.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Startup

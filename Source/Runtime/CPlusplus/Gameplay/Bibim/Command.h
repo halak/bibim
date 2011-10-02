@@ -9,6 +9,7 @@
     {
         class Command : public SharedObject
         {
+            BBAbstractObjectClass(Command, SharedObject);
             public:
                 virtual ~Command();
 

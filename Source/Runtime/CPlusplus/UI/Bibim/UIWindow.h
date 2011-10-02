@@ -10,7 +10,7 @@
     {
         class UIWindow : public UIPanel
         {
-            BBUIElementClass('U', 'W', 'N', 'D');
+            BBReadableObjectClass(UIWindow, UIPanel, UIElement, 'U', 'W', 'N', 'D');
             public:
                 UIWindow();
                 explicit UIWindow(int childrenCapacity);

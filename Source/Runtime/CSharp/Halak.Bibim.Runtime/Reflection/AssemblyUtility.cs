@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -8,6 +7,9 @@ namespace Halak.Bibim.Reflection
 {
     public static class AssemblyUtility
     {
+        public static readonly Type[] EmptyTypes = new Type[0];
+        public static readonly object[] EmptyObjects = new object[0];
+
         public static ICollection<Type> FindClasses(Type baseClass)
         {
             return FindClasses(baseClass, false, false);
@@ -16,7 +18,7 @@ namespace Halak.Bibim.Reflection
         public static ICollection<Type> FindClasses(Type baseClass, bool creatableOnly, bool emptyConstructorOnly)
         {
             List<Type> result = new List<Type>();
-            Type[] emptyTypes = emptyConstructorOnly ? new Type[0] : null;
+            Type[] emptyTypes = emptyConstructorOnly ? EmptyTypes : null;
 
             foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {

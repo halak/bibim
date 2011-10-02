@@ -10,6 +10,7 @@
     {
         class UIFrame : public UIElement
         {
+            BBAbstractObjectClass(UIFrame, UIElement);
             public:
                 UIFrame();
                 virtual ~UIFrame();

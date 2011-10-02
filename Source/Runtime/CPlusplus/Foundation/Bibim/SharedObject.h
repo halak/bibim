@@ -12,6 +12,7 @@
 
         class SharedObject : public Object
         {
+            BBAbstractObjectClass(SharedObject, Object);
             public:
                 virtual ~SharedObject();
 

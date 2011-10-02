@@ -10,7 +10,7 @@
     {
         class Script : public GameAsset
         {
-            BBReadableGameAssetClass('S', 'C', 'R', 'T');
+            BBReadableObjectClass(Script, GameAsset, GameAsset, 'S', 'C', 'R', 'T');
             public:
                 typedef std::vector<byte> Buffer;
 

@@ -1894,10 +1894,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptNativeCommand.h"
-					>
-				</File>
-				<File
 					RelativePath=".\Scripting\Bibim\ScriptProcess.cpp"
 					>
 				</File>

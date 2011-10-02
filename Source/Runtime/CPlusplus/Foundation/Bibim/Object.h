@@ -6,18 +6,22 @@
 
     namespace Bibim
     {
-#       define BBAbstractObjectClass(classname, parent) 
+#       define BBAbstractObjectClass(classname, parent) ;
 #       define BBObjectClass(classname, parent, a, b, c, d) public: \
                                                                 static const uint32 ClassID = BBMakeFOURCC(a, b, c, d); \
                                                                 virtual uint32 GetClassID() const { return ClassID; } \
                                                             private:
+#       define BBReadableObjectClass(classname, parent, category, a, b, c, d)   BBObjectClass(classname, parent, a, b, c, d); \
+                                                                                public: \
+                                                                                    static category* Read(category::StreamReaderType& reader, category* existingInstance); \
+                                                                                private:
 
         class Object
         {
             public:
                 virtual ~Object() { }
 
-                virtual uint32 GetClassID() const { return 0; }
+                virtual uint32 GetClassID() const;
 
             protected:
                 Object();
