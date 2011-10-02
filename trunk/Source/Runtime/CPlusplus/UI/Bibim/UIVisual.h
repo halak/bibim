@@ -10,6 +10,7 @@
     {
         class UIVisual : public UIElement
         {
+            BBAbstractObjectClass(UIVisual, UIElement);
             public:
                 static const Property<float> OpacityProperty;
                 static const Property<bool>  ShownProperty;

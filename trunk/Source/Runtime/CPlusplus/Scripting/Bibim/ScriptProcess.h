@@ -9,6 +9,7 @@
     {
         class ScriptProcess : public SharedObject
         {
+            BBObjectClass(ScriptProcess, SharedObject, 'S', 'C', 'P', 'S');
             public:
                 enum CommandID
                 {

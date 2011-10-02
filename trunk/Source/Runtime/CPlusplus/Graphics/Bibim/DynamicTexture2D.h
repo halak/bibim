@@ -10,7 +10,7 @@
     {
         class DynamicTexture2D : public Texture2D
         {
-            BBGameAssetClass('D', 'T', 'X', '2');
+            BBObjectClass(DynamicTexture2D, Texture2D, 'D', 'T', 'X', '2');
             public:
                 class LockedInfo
                 {

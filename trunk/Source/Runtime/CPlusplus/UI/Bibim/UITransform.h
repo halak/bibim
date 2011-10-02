@@ -10,6 +10,7 @@
     {
         class UITransform : public UIElement
         {
+            BBAbstractObjectClass(UITransform, UIElement);
             public:
                 virtual ~UITransform();
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Halak.Bibim.Reflection;
 
@@ -9,7 +8,6 @@ namespace Halak.Bibim.Asset
     public abstract class GameAssetWriter
     {
         #region Static Field
-        private static readonly object[] emptyObjects;
         private static readonly Dictionary<Type, Type> writerClasses;
         #endregion
 
@@ -22,7 +20,6 @@ namespace Halak.Bibim.Asset
         #region Static Constructor
         static GameAssetWriter()
         {
-            emptyObjects = new object[0];
             writerClasses = new Dictionary<Type, Type>();
             foreach (Type item in AssemblyUtility.FindClasses(typeof(GameAssetWriter), true, true))
             {
@@ -41,7 +38,7 @@ namespace Halak.Bibim.Asset
         {
             Type type = null;
             if (writerClasses.TryGetValue(assetType, out type))
-                return (GameAssetWriter)type.GetConstructor().Invoke(emptyObjects);
+                return (GameAssetWriter)type.GetConstructor().Invoke(AssemblyUtility.EmptyObjects);
             else
                 return null;
         }

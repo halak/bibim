@@ -8,16 +8,13 @@
 
     namespace Bibim
     {
-#       define BBGameAssetClass(a, b, c, d) BBObjectClass(_, _, a, b, c, d)
-#       define BBReadableGameAssetClass(a, b, c, d) BBObjectClass(_, _, a, b, c, d); \
-                                                    public: \
-                                                        static GameAsset* Read(AssetStreamReader& reader, GameAsset* existingInstance); \
-                                                    private:
-
         class GameAsset : public SharedObject
         {
-            BBGameAssetClass('G', 'A', 'S', 'T');
+            BBAbstractObjectClass(GameAsset, SharedObject);
             BBThisIsNoncopyableClass(GameAsset);
+            public:
+                typedef AssetStreamReader StreamReaderType;
+
             public:
                 enum Status
                 {

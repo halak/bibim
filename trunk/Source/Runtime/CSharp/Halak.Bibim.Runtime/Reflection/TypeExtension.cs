@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Reflection;
 
@@ -8,14 +7,10 @@ namespace Halak.Bibim.Reflection
 {
     public static class TypeExtension
     {
-        #region Fields
-        private static readonly Type[] emptyTypes = new Type[0];
-        #endregion
-
         #region Methods
         public static ConstructorInfo GetConstructor(this Type type)
         {
-            return type.GetConstructor(emptyTypes);
+            return type.GetConstructor(AssemblyUtility.EmptyTypes);
         }
 
         public static object GetCustomAttribute(this Type type, Type attributeType)

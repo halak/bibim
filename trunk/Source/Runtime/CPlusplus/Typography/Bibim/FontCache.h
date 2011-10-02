@@ -41,7 +41,7 @@
 
         class FontCache : public GameAsset
         {
-            BBGameAssetClass('F', 'N', 'T', 'C');
+            BBObjectClass(FontCache, GameAsset, 'F', 'N', 'T', 'C');
             public:
                 virtual ~FontCache();
 

@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows;
@@ -23,59 +24,152 @@ namespace Halak.Bibim.Toolkit.Workbench
     /// </summary>
     public partial class ConsoleWindow : Window
     {
+        #region Fields
+        private MethodInfo programEntry;
+        private Thread programThread;
+        private ResourceDictionary resources;
+        #endregion
+
+        #region Properties
+        public static ConcurrentQueue<string> CommandQueue
+        {
+            get;
+            private set;
+        }
+        #endregion
+
         #region Constructor
         public ConsoleWindow()
         {
             InitializeComponent();
+
+            resources = new ResourceDictionary();
+            resources.Source = new Uri("ConsoleResources.xaml", UriKind.Relative);
+
             ((Paragraph)consoleTextBox.Document.Blocks.FirstBlock).LineHeight = 1;
             Trace.Listeners.Add(new TraceListener(consoleTextBox));
 
-            //foreach (Type item in AssemblyUtility.FindClasses(typeof(ConsoleProgram), true, true))
-            //{
-            //    item.Name == "hra"
-            //}
-
-            Thread thread = new Thread(() =>
+            string classname = null;
+            if (App.CommandLineArgs.TryGetValue("class", out classname))
             {
-                AssetServer assetServer = new AssetServer()
+                foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
                 {
-                    PipeName = "TestAssets",
-                };
-                assetServer.Run();
+                    foreach (Type item in assembly.GetTypes())
+                    {
+                        if (item.GetCustomAttribute<ConsoleEntryPointAttribute>() == null)
+                            continue;
 
-                //Halak.Bibim.Toolkit.Consoles.CppHeaderGenerator.MainA(new string[]
+                        if (AliasAttribute.MatchName(item, classname))
+                        {
+                            programEntry = item.GetMethod("Run", BindingFlags.NonPublic | BindingFlags.Static);
+                            if (programEntry != null)
+                                break;
+                        }
+                    }
+                }
 
-                //{
-                //    @"%BIBIM_DIR%Source\Runtime\CPlusplus",
-                //    @"%BIBIM_DIR%Source\Runtime\CPlusplus\Foundation\Bibim\All.h",
-                //    @"excluded:TestBed;Animation;Collision2D;Script;SFX",
-                //});
-            });
-            thread.Start();
+                if (programEntry == null)
+                {
+                    App.Current.Shutdown();
+                    return;
+                }
+
+                ParameterInfo[] parameters = programEntry.GetParameters();
+                object[] arguments = new object[parameters.Length];
+                for (int i = 0; i < parameters.Length; i++)
+                {
+                    Type parameterType = parameters[i].ParameterType;
+
+                    foreach (KeyValuePair<string, string> item in App.CommandLineArgs)
+                    {
+                        if (AliasAttribute.MatchName(parameters[i], item.Key))
+                        {
+                            if (parameterType == typeof(bool))
+                            {
+                                arguments[i] = string.Compare(item.Value, "t") == 0 ||
+                                               string.Compare(item.Value, "true") == 0 ||
+                                               string.Compare(item.Value, "y") == 0 ||
+                                               string.Compare(item.Value, "yes") == 0;
+                            }
+                            else
+                            {
+                                try
+                                {
+                                    arguments[i] = Convert.ChangeType(item.Value, parameterType);
+                                }
+                                catch (FormatException)
+                                {
+                                    arguments[i] = null;
+                                }
+                                catch (InvalidCastException)
+                                {
+                                    arguments[i] = null;
+                                }
+                            }
+
+                            break;
+                        }
+                    }
+                }
+
+                programThread = new Thread(() =>
+                {
+                    try
+                    {
+                        programEntry.Invoke(null, arguments);
+                        Dispatcher.Invoke(new Action(() => { OnProgramEnded(); }));
+                    }
+                    catch (Exception e)
+                    {
+                        Trace.WriteLine(e.ToString());
+                    }
+                });
+                programThread.Start();
+            }
+        }
+
+        static ConsoleWindow()
+        {
+            CommandQueue = new ConcurrentQueue<string>();
         }
         #endregion
 
         #region Methods
-        public void Write(string message)
+        private void OnProgramEnded()
         {
-            Dispatcher.Invoke(new Action(() =>
-            {
-                consoleTextBox.AppendText(message);
-            }),
-            DispatcherPriority.Normal);
+            if (checkBoxExit.IsChecked.HasValue && checkBoxExit.IsChecked.Value)
+                App.Current.Shutdown();
+
+            consoleTextBox.Background = (Brush)resources["ProgramCompletedBrush"];
         }
 
-        public void WriteLine(string message)
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            Dispatcher.Invoke(new Action(() =>
+            if (programThread != null && programThread.IsAlive)
             {
-                consoleTextBox.AppendText(message);
-                consoleTextBox.AppendText("\n");
-            }),
-            DispatcherPriority.Normal);
+                CommandQueue.Enqueue("close");
+                CommandQueue.Enqueue("exit");
+                CommandQueue.Enqueue("quit");
+            }
+
+            base.OnClosing(e);
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            if (programThread != null)
+            {
+                // Program Thread가 정상적으로 끝나는 것을 10초 정도 기다립니다.
+                // 그래도 안 끝나면 ""경험상"" 비정상적인 상황이므로 Thread를 강제로 종료합니다.
+                programThread.Join(10000);
+                programThread.Abort();
+            }
+
+            base.OnClosed(e);
         }
         #endregion
 
+        #region TraceListener (Nested Class)
         private class TraceListener : System.Diagnostics.TraceListener
         {
             #region Fields
@@ -96,6 +190,8 @@ namespace Halak.Bibim.Toolkit.Workbench
                 {
                     richTextBox.AppendText(message);
                 }));
+
+                System.Threading.Thread.Sleep(1);
             }
 
             public override void WriteLine(string message)
@@ -105,9 +201,13 @@ namespace Halak.Bibim.Toolkit.Workbench
                 richTextBox.Dispatcher.Invoke(new Action(() =>
                 {
                     richTextBox.AppendText(message);
+                    richTextBox.ScrollToEnd();
                 }));
+
+                System.Threading.Thread.Sleep(1);
             }
             #endregion
         }
+        #endregion
     }
 }

@@ -12,8 +12,10 @@
     {
         class VariableStorage : public SharedObject
         {
-            typedef std::map<String, Any> AnyDictionary;
-            typedef std::vector<Any> AnyCollection;
+            BBObjectClass(VariableStorage, SharedObject, 'V', 'S', 'T', 'O');
+            public:
+                typedef std::map<String, Any> AnyDictionary;
+                typedef std::vector<Any> AnyCollection;
 
             public:
                 VariableStorage();

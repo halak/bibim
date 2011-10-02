@@ -56,6 +56,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ConsoleResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ConsoleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -69,11 +73,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Consoles\AssetServer.cs" />
-    <Compile Include="Consoles\ConsoleProgram.cs" />
-    <Compile Include="Consoles\CppAllHeaderGenerator.cs" />
-    <Compile Include="Consoles\CppCodeGenerator.cs" />
-    <Compile Include="Consoles\CppFWDHeaderGenerator.cs" />
-    <Compile Include="Consoles\CppStartupSourceGenerator.cs" />
+    <Compile Include="Consoles\ConsoleEntryPointAttribute.cs" />
+    <Compile Include="Consoles\CppFullHeaderGenerator.cs" />
     <Compile Include="ConsoleWindow.xaml.cs">
       <DependentUpon>ConsoleWindow.xaml</DependentUpon>
     </Compile>

@@ -11,7 +11,7 @@
     {
         class UITransform3D : public UITransform
         {
-            BBUIElementClass('U' , 'T', '3', 'D');
+            BBReadableObjectClass(UITransform3D, UITransform, UIElement, 'U' , 'T', '3', 'D');
             public:
                 UITransform3D();
                 virtual ~UITransform3D();

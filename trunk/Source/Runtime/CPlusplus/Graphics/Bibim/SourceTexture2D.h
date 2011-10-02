@@ -11,7 +11,7 @@
     {
         class SourceTexture2D : public Texture2D
         {
-            BBReadableGameAssetClass('S', 'T', 'X', '2');
+            BBReadableObjectClass(SourceTexture2D, Texture2D, GameAsset, 'S', 'T', 'X', '2');
             public:
                 SourceTexture2D(GraphicsDevice* graphicsDevice);
                 virtual ~SourceTexture2D();
