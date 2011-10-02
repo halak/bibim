@@ -75,6 +75,7 @@
     <Compile Include="Consoles\AssetServer.cs" />
     <Compile Include="Consoles\ConsoleEntryPointAttribute.cs" />
     <Compile Include="Consoles\CppFullHeaderGenerator.cs" />
+    <Compile Include="Consoles\CppStartupCodeGenerator.cs" />
     <Compile Include="ConsoleWindow.xaml.cs">
       <DependentUpon>ConsoleWindow.xaml</DependentUpon>
     </Compile>

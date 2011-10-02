@@ -34,55 +34,54 @@ namespace Halak.Bibim.Toolkit.Workbench.Consoles
 
             List<string> headerFiles = FindAllHeaderFiles(projectName, sourceDirectoryPath);
 
-            FileStream fileStream = new FileStream(destinationFilePath, FileMode.Create, FileAccess.Write);
-            StreamWriter w = new StreamWriter(fileStream);
-
-            string guid = Guid.NewGuid().ToString();
-            string definition = string.Format("__{0}_{1}_ALL_H__", projectName.ToUpper(), guid.Replace('-', '_').ToUpper());
-            w.WriteLine("#pragma once");
-            w.Write("#ifndef ");
-            w.WriteLine(definition);
-            w.Write("#define ");
-            w.WriteLine(definition);
-            w.WriteLine();
-            w.WriteLine( "   // This file was \"AUTOMATICALLY GENERATED\" by Bibim Console ({0})", DateTime.Now.ToString(new CultureInfo("en-us")));
-            w.WriteLine(@"   // > Halak.Bibim.Toolkit.Console.exe \class:cppfull.h \proj:[Project-Name] \src:[Source-Directory] \dest:[Header-File]");
-            w.WriteLine();
-
-            string lastCategory = string.Empty;
-            foreach (string item in headerFiles)
+            using (FileStream fs = new FileStream(destinationFilePath, FileMode.Create, FileAccess.Write))
+            using (StreamWriter w = new StreamWriter(fs))
             {
-                if (string.Compare(item, sourceDirectoryPath, true) == 0)
-                    continue;
+                string guid = Guid.NewGuid().ToString();
+                string definition = string.Format("__{0}_{1}_ALL_H__", projectName.ToUpper(), guid.Replace('-', '_').ToUpper());
+                w.WriteLine("#pragma once");
+                w.Write("#ifndef ");
+                w.WriteLine(definition);
+                w.Write("#define ");
+                w.WriteLine(definition);
+                w.WriteLine();
+                w.WriteLine("   // This file was \"AUTOMATICALLY GENERATED\" by Bibim Console ({0})", DateTime.Now.ToString(new CultureInfo("en-us")));
+                w.WriteLine(@"   // > Halak.Bibim.Toolkit.Console.exe \class:cppfull.h \proj:[Project-Name] \src:[Source-Directory] \dest:[Header-File]");
+                w.WriteLine();
 
-                string category = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(item)));
-                if (excludedCategoryArray.Contains(category))
-                    continue;
-
-                if (category != lastCategory)
+                string lastCategory = string.Empty;
+                foreach (string item in headerFiles)
                 {
-                    w.WriteLine();
-                    w.WriteLine("   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
-                    w.Write("   // ");
-                    w.WriteLine(category);
-                    lastCategory = category;
+                    if (string.Compare(item, sourceDirectoryPath, true) == 0)
+                        continue;
+
+                    string category = Path.GetFileName(Path.GetDirectoryName(Path.GetDirectoryName(item)));
+                    if (excludedCategoryArray.Contains(category))
+                        continue;
+
+                    if (category != lastCategory)
+                    {
+                        w.WriteLine();
+                        w.WriteLine("   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+                        w.Write("   // ");
+                        w.WriteLine(category);
+                        lastCategory = category;
+                    }
+
+                    string filename = Path.GetFileName(item);
+                    w.Write("#  include <");
+                    w.Write(projectName);
+                    w.Write("/");
+                    w.Write(filename);
+                    w.WriteLine(">");
+
+                    if (silence == false)
+                        Trace.WriteLine(filename);
                 }
 
-                string filename = Path.GetFileName(item);
-                w.Write("#  include <");
-                w.Write(projectName);
-                w.Write("/");
-                w.Write(filename);
-                w.WriteLine(">");
-
-                if (silence == false)
-                    Trace.WriteLine(filename);
+                w.WriteLine();
+                w.Write("#endif");
             }
-
-            w.WriteLine();
-            w.Write("#endif");
-
-            w.Close();
         }
         
         static List<string> FindAllHeaderFiles(string projectName, string sourceDirectoryPath)
