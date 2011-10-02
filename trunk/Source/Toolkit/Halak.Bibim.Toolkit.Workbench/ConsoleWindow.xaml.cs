@@ -61,7 +61,7 @@ namespace Halak.Bibim.Toolkit.Workbench
 
                         if (AliasAttribute.MatchName(item, classname))
                         {
-                            programEntry = item.GetMethod("Run", BindingFlags.NonPublic | BindingFlags.Static);
+                            programEntry = item.GetMethod("Run", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
                             if (programEntry != null)
                                 break;
                         }

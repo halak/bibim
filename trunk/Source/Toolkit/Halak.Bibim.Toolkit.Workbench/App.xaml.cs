@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Text.RegularExpressions;
+using System.Reflection;
 using System.Windows;
 
 namespace Halak.Bibim.Toolkit.Workbench
@@ -20,6 +22,19 @@ namespace Halak.Bibim.Toolkit.Workbench
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            string[] dllFiles = Directory.GetFiles(Environment.CurrentDirectory, "*.dll", SearchOption.TopDirectoryOnly);
+            foreach (string item in dllFiles)
+            {
+                try
+                {
+                    AssemblyName name = AssemblyName.GetAssemblyName(item);
+                    AppDomain.CurrentDomain.Load(name);
+                }
+                catch (Exception)
+                {
+                }
+            }
+
             CommandLineArgs = new SortedList<string, string>(StringComparer.CurrentCultureIgnoreCase);
             if (e.Args.Length > 0)
             {
