@@ -48,15 +48,8 @@ namespace Halak.Bibim.Asset.Pipeline
                     context.SetVariable("RecipeName", recipeName);
                 return recipe.Cook.CookObject(context);
             }
-
-            return null;
-
-            //List<KeyValuePair<string, string>> variables = new List<KeyValuePair<string, string>>(4);
-            //variables.Add(new KeyValuePair<string, string>("Directory", directory));
-            //variables.Add(new KeyValuePair<string, string>("FileName", filename));
-            //variables.Add(new KeyValuePair<string, string>("RecipeName", recipeName));
-
-            //return Cook(recipe, directory, variables);
+            else
+                return null;
         }
         #endregion
     }

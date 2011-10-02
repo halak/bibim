@@ -29,7 +29,6 @@
             static const ushort Min;
             static const ushort Max;
         };
-        
 
         struct Int
         {
