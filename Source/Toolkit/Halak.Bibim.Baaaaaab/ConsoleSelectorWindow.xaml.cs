@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -35,9 +36,19 @@ namespace Halak.Bibim.Bab
                 {
                     if (item.GetCustomAttribute<ConsoleEntryPointAttribute>() != null)
                     {
-                        listViewConsoles.Items.Add(item.Name);
+                        listViewConsoles.Items.Add(item);
                     }
                 }
+            }
+        }
+
+        private void listViewConsoles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Trace.Assert(e.AddedItems.Count <= 1);
+
+            if (e.AddedItems.Count == 1)
+            {
+                Type item = (Type)e.AddedItems[0];
             }
         }
     }

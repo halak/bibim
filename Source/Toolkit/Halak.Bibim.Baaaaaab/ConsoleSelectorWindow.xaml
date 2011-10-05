@@ -1,8 +1,9 @@
 ﻿<Window x:Class="Halak.Bibim.Bab.ConsoleSelectorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ConsoleSelectorWindow" Height="300" Width="300" Loaded="Window_Loaded">
+        Title="ConsoleSelectorWindow" Height="355" Width="665" Loaded="Window_Loaded" xmlns:my="clr-namespace:System.Windows.Controls">
     <Grid>
-        <ListView Margin="12,12,64,12" Name="listViewConsoles" />
+        <ListView Margin="12,12,0,12" Name="listViewConsoles" HorizontalAlignment="Left" Width="298" SelectionChanged="listViewConsoles_SelectionChanged" SelectionMode="Single" />
+        <my:WpfPropertyGrid Margin="316,12,12,12" x:Name="propertyGridParameters" ToolbarVisible="False" HelpVisible="True" />
     </Grid>
 </Window>
