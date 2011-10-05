@@ -116,7 +116,6 @@
     <Compile Include="Asset\Pipeline\Recipes\ImportBitmap.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ImportPhotoshopDocument.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToBitmap.cs" />
-    <Compile Include="Asset\Pipeline\Recipes\THPanicScriptToScript.cs" />
     <Compile Include="Design\PluginManager.cs" />
     <Compile Include="Graphics\SourceTexture2DWriter.cs" />
     <Compile Include="Graphics\SourceTexture2DCookingTag.cs" />
