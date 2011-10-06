@@ -15,7 +15,6 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // 01. Foundation
             // (Fundamental)
-                class Any;
                 struct Color;
                 struct Colors;
                 struct Matrix4;
@@ -55,6 +54,7 @@
                 class Object;
                     BBForwardDeclareSmartPointerClass(SharedObject);
                 template <typename T> class SharedPointer;
+                template <typename T> class ObjectFactoryTemplate;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Assert
             ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,6 +138,7 @@
                     BBForwardDeclareSmartPointerClass(PipeServerStream);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Scripting
+                class Any;
                 BBForwardDeclareSmartPointerClass(Script);
                 class ScriptingContext;
                 class ScriptNativeCommand;

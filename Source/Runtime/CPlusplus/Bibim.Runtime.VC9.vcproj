@@ -170,18 +170,6 @@
 				Name="(Fundamental)"
 				>
 				<File
-					RelativePath=".\Foundation\Bibim\Any.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Any.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Any.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\Color.h"
 					>
 				</File>
@@ -1870,6 +1858,18 @@
 				Name="Scripting"
 				>
 				<File
+					RelativePath=".\Scripting\Bibim\Any.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\Any.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\Any.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Scripting\Bibim\Script.cpp"
 					>
 				</File>
@@ -1891,6 +1891,18 @@
 				</File>
 				<File
 					RelativePath=".\Scripting\Bibim\ScriptingContext.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptNativeFunctionTable.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptNativeFunctionTable.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptNativeFunctionTable.inl"
 					>
 				</File>
 				<File

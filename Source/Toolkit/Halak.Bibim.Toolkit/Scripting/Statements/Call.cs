@@ -4,7 +4,22 @@ using System.Text;
 
 namespace Halak.Bibim.Scripting.Statements
 {
-    public sealed class Call : Statement
+    public sealed class Call : CallBase
     {
+        #region Constructors
+        public Call()
+        {
+        }
+
+        public Call(string name)
+            : base(name)
+        {
+        }
+
+        public Call(string name, Expression[] arguments)
+            : base(name, arguments)
+        {
+        }
+        #endregion
     }
 }

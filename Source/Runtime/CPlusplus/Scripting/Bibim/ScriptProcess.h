@@ -20,7 +20,8 @@
                     IfFalseThenJumpElseJumpCommand = 4,
                     CallCommand = 5,
                     CallNativeCommand = 6,
-                    Yield = 7,
+                    ReturnCommand = 7,
+                    YieldCommand = 8,
                 };
   
             public:
@@ -32,7 +33,7 @@
 
             private:
                 ScriptPtr script;
-                int position;
+                uint position;
         };
     }
 

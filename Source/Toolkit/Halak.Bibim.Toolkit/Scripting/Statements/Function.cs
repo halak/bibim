@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Halak.Bibim.Scripting.Statements
 {
-    public sealed class Subroutine : Block
+    public sealed class Function : Block
     {
         #region Fields
         private string name;
@@ -25,12 +25,12 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Constructors
-        public Subroutine()
+        public Function()
             : this(string.Empty)
         {
         }
 
-        public Subroutine(string name)
+        public Function(string name)
         {
             this.name = name ?? string.Empty;
         }

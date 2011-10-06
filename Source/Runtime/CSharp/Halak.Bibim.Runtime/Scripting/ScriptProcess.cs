@@ -15,6 +15,8 @@ namespace Halak.Bibim.Scripting
             IfFalseThenJumpElseJump = 4,
             Call = 5,
             CallNative = 6,
+            Return = 7,
+            Yield = 8,
         }
     }
 }
