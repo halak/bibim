@@ -9,6 +9,8 @@ namespace Bibim
         : script(script),
           position(0)
     {
+        if (script)
+            position = script->GetEntryPoint();
     }
 
     ScriptProcess::~ScriptProcess()
