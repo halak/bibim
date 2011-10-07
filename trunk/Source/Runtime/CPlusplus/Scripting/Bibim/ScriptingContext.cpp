@@ -3,4 +3,11 @@
 
 namespace Bibim
 {
+    ScriptingContext::ScriptingContext()
+    {
+    }
+
+    ScriptingContext::~ScriptingContext()
+    {
+    }
 }

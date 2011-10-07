@@ -122,6 +122,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripting\BinaryScriptGenerator.cs" />
     <Compile Include="Scripting\ScriptWriter.cs" />
+    <Compile Include="Scripting\Statements\DeclareLocalVariable.cs" />
+    <Compile Include="Scripting\Statements\Label.cs" />
     <Compile Include="Scripting\Statements\Operators\AdditionOperator.cs" />
     <Compile Include="Scripting\Statements\Operators\AssignmentOperator.cs" />
     <Compile Include="Scripting\Statements\Operators\BinaryOperator.cs" />
@@ -138,10 +140,8 @@
     <Compile Include="Scripting\Statements\Expression.cs" />
     <Compile Include="Scripting\Statements\For.cs" />
     <Compile Include="Scripting\Statements\ForEach.cs" />
-    <Compile Include="Scripting\Statements\GlobalVariableExpression.cs" />
     <Compile Include="Scripting\Statements\If.cs" />
     <Compile Include="Scripting\Statements\Operators\InequalityOperator.cs" />
-    <Compile Include="Scripting\Statements\LocalVariableExpression.cs" />
     <Compile Include="Scripting\Statements\OperatorPrecedenceAttribute.cs" />
     <Compile Include="Scripting\Statements\Operators\NegationOperator.cs" />
     <Compile Include="Scripting\Statements\Return.cs" />

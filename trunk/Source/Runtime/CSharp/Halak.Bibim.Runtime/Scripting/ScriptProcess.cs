@@ -8,15 +8,25 @@ namespace Halak.Bibim.Scripting
     {
         public enum CommandID : byte
         {
-            Jump = 0,
-            IfTrueThenJump = 1,
-            IfFalseThenJump = 2,
-            IfTrueThenJumpElseJump = 3,
-            IfFalseThenJumpElseJump = 4,
-            Call = 5,
-            CallNative = 6,
-            Return = 7,
-            Yield = 8,
+            NOP,
+            PushInt32,
+            PushUInt32,
+            PushString,
+            Jump,
+            IfTrueThenJump,
+            IfFalseThenJump,
+            IfTrueThenJumpElseJump,
+            IfFalseThenJumpElseJump,
+            Call,
+            CallNative,
+            Return,
+            Yield,
+
+            LocalAssignmentOperator,
+            GlobalAssignmentOperator,
+            AdditionOperator,
+            EqualityOperator,
+            InequalityOperator,
         }
     }
 }

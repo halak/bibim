@@ -37,7 +37,33 @@ namespace Halak.Bibim.Scripting.Statements.Operators
         #region Methods
         public override void Generate(BinaryScriptGenerator.Context context)
         {
-            throw new NotImplementedException();
+            if (Variable == null)
+                throw new InvalidOperationException();
+            if (Value == null)
+                throw new InvalidOperationException();
+
+            int index = context.GetLocalVariableIndex(Variable.Name);
+            if (index != -1)
+            {
+            }
+            else
+            {
+            }
+
+            if (Variable is GlobalVariableExpression)
+            {
+                context.Write(ScriptProcess.CommandID.GlobalAssignmentOperator);
+                context.Write(Variable.Name);
+            }
+            else if (Variable is LocalVariableExpression)
+            {
+                context.Write(ScriptProcess.CommandID.LocalAssignmentOperator);
+                context.Write(Variable);
+            }
+            else
+                throw new InvalidOperationException();
+
+            context.Write(Value);
         }
 
         public override string ToString()

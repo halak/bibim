@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.Scripting.Statements
 {
-    public sealed class VariableExpression : Expression
+    public sealed class DeclareLocalVariable : Statement
     {
         #region Fields
         private string name;
@@ -23,36 +23,20 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Constructors
-        public VariableExpression()
+        public DeclareLocalVariable()
             : this(string.Empty)
         {
         }
 
-        public VariableExpression(string name)
+        public DeclareLocalVariable(string name)
         {
-            this.name = name ?? string.Empty;
+            Name = name;
         }
         #endregion
 
         #region Methods
         public override void Generate(BinaryScriptGenerator.Context context)
         {
-            int index = context.GetLocalVariableIndex(Name);
-            if (index != -1)
-            {
-                context.Write(ScriptProcess.CommandID.LocalAssignmentOperator);
-                context.Write((short)index);
-            }
-            else
-            {
-                context.Write(ScriptProcess.CommandID.GlobalAssignmentOperator);
-                context.Write(Name);
-            }
-        }
-
-        public override string ToString()
-        {
-            return Name;
         }
         #endregion
     }

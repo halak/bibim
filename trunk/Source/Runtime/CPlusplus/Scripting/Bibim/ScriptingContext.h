@@ -7,6 +7,10 @@
         class ScriptingContext
         {
             public:
+                ScriptingContext();
+                ~ScriptingContext();
+
+            private:
         };
     }
 

@@ -30,97 +30,83 @@ namespace Halak.Bibim.Scripting
                 throw new ArgumentNullException("statement");
 
             Context context = new Context(this, output);
-            statement.Generate(context);
-        }
-
-        private void Generate(Context context)
-        {
-            Block block = context.Current as Block;
-            if (block != null)
-            {
-                OnEnter(context, block);
-                foreach (Statement item in block.Statements)
-                {
-                    context.Push(item);
-                    Generate(context);
-                    context.Pop();
-                }
-                OnExit(context, block);
-            }
-            else
-                OnVisit(context, context.Current);
-        }
-        #endregion
-
-        #region Protected Methods
-        protected virtual void OnVisit(Context context, Statement statement)
-        {
-        }
-
-        protected virtual void OnEnter(Context context, Block block)
-        {
-        }
-
-        protected virtual void OnExit(Context context, Block block)
-        {
+            context.Write(statement);
         }
         #endregion
 
         #region Context (Nested Class)
-        public class Context
+        public class Context : BinaryWriter
         {
-            #region Fields
-            private Stack<Statement> stack;
-            #endregion
-
             #region Properties
-            public Stream Output
-            {
-                get;
-                private set;
-            }
-
-            public Statement Root
-            {
-                get;
-                private set;
-            }
-
-            public Statement Current
-            {
-                get
-                {
-                    Trace.Assert(stack.Count > 0);
-                    return stack.Peek();
-                }
-            }
+            private Dictionary<Label, uint> addresses;
+            private Dictionary<Label, List<uint>> reservedAddresses;
             #endregion
 
             #region Constructors
             public Context(BinaryScriptGenerator generator, Stream output)
+                : base(output)
             {
-                Trace.Assert(output != null && output.CanWrite);
-
-                Output = output;
-                stack = new Stack<Statement>();
+                addresses = new Dictionary<Label, uint>();
+                reservedAddresses = new Dictionary<Label, List<uint>>();
             }
             #endregion
 
             #region Methods
-            public void Push(Statement statement)
+            public override void Close()
             {
-                if (stack.Count == 0)
-                    Root = statement;
-
-                stack.Push(statement);
+                base.Close();
             }
 
-            public void Pop()
+            public void Write(ScriptProcess.CommandID value)
             {
-                stack.Pop();
+                Write((byte)value);
+            }
 
-                if (stack.Count == 0)
-                    Root = null;
+            public void Write(Statement value)
+            {
+                value.Generate(this);
+            }
+
+            public void WriteLabel(Label value)
+            {
+                Trace.Assert(addresses.ContainsKey(value) == false);
+
+                uint currentPosition = (uint)BaseStream.Position;
+                addresses.Add(value, currentPosition);
+
+                List<uint> positions = null;
+                if (reservedAddresses.TryGetValue(value, out positions))
+                {
+                    foreach (uint item in positions)
+                    {
+                        BaseStream.Position = item;
+                        Write(currentPosition);
+                    }
+
+                    BaseStream.Position = (long)currentPosition;
+                    reservedAddresses.Remove(value);
+                }
+            }
+
+            public void WriteAddress(Label value)
+            {
+                uint address = 0;
+                if (addresses.TryGetValue(value, out address))
+                    Write(address);
+                else
+                {
+                    uint currentPosition = (uint)BaseStream.Position;
+                    List<uint> positions = null;
+                    if (reservedAddresses.TryGetValue(value, out positions))
+                        positions.Add(currentPosition);
+                    else
+                        reservedAddresses.Add(value, new List<uint>() { currentPosition });
+                }
+            }
+
+            public int GetLocalVariableIndex(string name)
+            {
+                return -1;
             }
             #endregion
         }
