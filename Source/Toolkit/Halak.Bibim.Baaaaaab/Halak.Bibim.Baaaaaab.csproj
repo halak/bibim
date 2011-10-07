@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Consoles\RunScript.cs" />
     <Compile Include="References\Controls\WpfPropertyGrid.cs" />
     <Page Include="ConsoleResources.xaml">
       <SubType>Designer</SubType>

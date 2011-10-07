@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Halak.Bibim.Scripting.Statements
+namespace Halak.Bibim.Scripting.Statements.Operators
 {
-    public sealed class ConstantExpression : Expression
+    [OperatorPrecedence(14)]
+    public sealed class AssignmentOperator : Expression
     {
         #region Properties
-        public object Value
+        public VariableExpression Variable
+        {
+            get;
+            set;
+        }
+
+        public Expression Value
         {
             get;
             set;
@@ -16,13 +23,13 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Constructors
-        public ConstantExpression()
-            : this(null)
+        public AssignmentOperator()
         {
         }
 
-        public ConstantExpression(object value)
+        public AssignmentOperator(VariableExpression variable, Expression value)
         {
+            Variable = variable;
             Value = value;
         }
         #endregion
@@ -35,10 +42,10 @@ namespace Halak.Bibim.Scripting.Statements
 
         public override string ToString()
         {
-            if (Value != null)
-                return Value.ToString();
+            if (Variable != null && Value != null)
+                return string.Format("{0} = {1}", Variable.ToString(), Value.ToString());
             else
-                return "(null)";
+                return base.ToString();
         }
         #endregion
     }

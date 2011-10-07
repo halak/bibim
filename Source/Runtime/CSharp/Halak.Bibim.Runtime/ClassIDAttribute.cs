@@ -5,7 +5,7 @@ using Halak.Bibim.Reflection;
 
 namespace Halak.Bibim
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     public sealed class ClassIDAttribute : Attribute
     {
         #region Properties

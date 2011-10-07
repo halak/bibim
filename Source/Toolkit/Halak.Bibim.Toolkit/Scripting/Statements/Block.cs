@@ -25,6 +25,12 @@ namespace Halak.Bibim.Scripting.Statements
             statements = new List<Statement>();
             readonlyStatements = new ReadOnlyCollection<Statement>(statements);
         }
+
+        public Block(IEnumerable<Statement> statements)
+        {
+            this.statements = new List<Statement>(statements);
+            this.readonlyStatements = new ReadOnlyCollection<Statement>(this.statements);
+        }
         #endregion
 
         #region Methods
@@ -60,6 +66,11 @@ namespace Halak.Bibim.Scripting.Statements
         public void Clear()
         {
             statements.Clear();
+        }
+
+        public override void Generate(BinaryScriptGenerator.Context context)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

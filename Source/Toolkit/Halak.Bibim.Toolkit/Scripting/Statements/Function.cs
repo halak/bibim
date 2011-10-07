@@ -34,6 +34,19 @@ namespace Halak.Bibim.Scripting.Statements
         {
             this.name = name ?? string.Empty;
         }
+
+        public Function(string name, IEnumerable<Statement> statements)
+            : base(statements)
+        {
+            this.name = name ?? string.Empty;
+        }
+        #endregion
+
+        #region Methods
+        public override void Generate(BinaryScriptGenerator.Context context)
+        {
+            base.Generate(context);
+        }
         #endregion
     }
 }

@@ -1,27 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Halak.Bibim.Scripting.Statements
 {
-    public sealed class Return : Statement
+    public sealed class GlobalVariableExpression : VariableExpression
     {
-        #region Properties
-        public Expression Value
-        {
-            get;
-            set;
-        }
-        #endregion
-
         #region Constructors
-        public Return()
+        public GlobalVariableExpression()
         {
         }
 
-        public Return(Expression value)
+        public GlobalVariableExpression(string name)
+            : base(name)
         {
-            Value = value;
         }
         #endregion
 
@@ -29,6 +22,11 @@ namespace Halak.Bibim.Scripting.Statements
         public override void Generate(BinaryScriptGenerator.Context context)
         {
             throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
         #endregion
     }
