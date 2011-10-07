@@ -1,27 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
-namespace Halak.Bibim.Scripting.Statements
+namespace Halak.Bibim.Scripting.Statements.Operators
 {
-    public sealed class Return : Statement
+    [OperatorPrecedence(2)]
+    public class NegationOperator : UnaryOperator
     {
-        #region Properties
-        public Expression Value
-        {
-            get;
-            set;
-        }
-        #endregion
-
         #region Constructors
-        public Return()
+        public NegationOperator()
         {
         }
 
-        public Return(Expression value)
+        public NegationOperator(Expression operand)
+            : base(operand)
         {
-            Value = value;
         }
         #endregion
 

@@ -48,5 +48,10 @@ namespace Halak.Bibim.Scripting.Statements
         {
         }
         #endregion
+
+        public override void Generate(BinaryScriptGenerator.Context context)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

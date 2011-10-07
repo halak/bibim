@@ -53,8 +53,9 @@ namespace Halak.Bibim.Bab
             string classname = null;
             if (App.CommandLineArgs.TryGetValue("class", out classname))
             {
-                foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+                //foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
                 {
+                    Assembly assembly = Assembly.GetEntryAssembly();
                     foreach (Type item in assembly.GetTypes())
                     {
                         if (item.GetCustomAttribute<ConsoleEntryPointAttribute>() == null)

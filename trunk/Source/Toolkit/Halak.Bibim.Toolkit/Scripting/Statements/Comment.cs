@@ -32,5 +32,10 @@ namespace Halak.Bibim.Scripting.Statements
             this.text = text ?? string.Empty;
         }
         #endregion
+
+        public override void Generate(BinaryScriptGenerator.Context context)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
