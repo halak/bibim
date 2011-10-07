@@ -17,14 +17,16 @@ namespace Halak.Bibim.Bab.Consoles
         {
             Function code = new Function("Sum1To100", new Statement[]
             {
-                new AssignmentOperator(new LocalVariableExpression("result"), new ConstantExpression(0)),
-                new AssignmentOperator(new LocalVariableExpression("i"), new ConstantExpression(0)),
-                new While(new InequalityOperator(new LocalVariableExpression("i"), new ConstantExpression(101)), new Statement[]
+                //new DeclareLocalVariable("result"),
+                //new DeclareLocalVariable("i"),
+                new AssignmentOperator(new VariableExpression("result"), new ConstantExpression(0)),
+                new AssignmentOperator(new VariableExpression("i"), new ConstantExpression(0)),
+                new While(new InequalityOperator(new VariableExpression("i"), new ConstantExpression(101)), new Statement[]
                 {
-                    new AssignmentOperator(new LocalVariableExpression("result"), new AdditionOperator(new LocalVariableExpression("result"), new LocalVariableExpression("i"))),
-                    new AssignmentOperator(new LocalVariableExpression("i"), new AdditionOperator(new LocalVariableExpression("i"), new ConstantExpression(1))),
+                    new AssignmentOperator(new VariableExpression("result"), new AdditionOperator(new VariableExpression("result"), new VariableExpression("i"))),
+                    new AssignmentOperator(new VariableExpression("i"), new AdditionOperator(new VariableExpression("i"), new ConstantExpression(1))),
                 }),
-                new Return(new LocalVariableExpression("result"))
+                new Return(new VariableExpression("result"))
             });
             
             BinaryScriptGenerator generator = new BinaryScriptGenerator();

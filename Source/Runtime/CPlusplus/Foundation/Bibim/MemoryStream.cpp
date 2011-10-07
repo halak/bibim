@@ -1,43 +1,83 @@
 #include <Bibim/MemoryStream.h>
 #include <Bibim/Assert.h>
+#include <Bibim/Math.h>
+#include <Bibim/Memory.h>
 
 namespace Bibim
 {
-    MemoryStream::MemoryStream()
-        : buffer(nullptr),
+    MemoryStream::MemoryStream(const byte* buffer, int length)
+        : buffer(const_cast<byte*>(buffer)),
+          length(length),
+          capacity(length),
+          position(0),
+          deleteOnClose(false),
+          canRead(true),
+          canWrite(false)
+    {
+    }
+
+    MemoryStream::MemoryStream(int capacity, bool deleteOnClose, bool fillZero)
+        : buffer(capacity > 0 ? new byte[capacity] : nullptr),
           length(0),
-          position(0)
+          capacity(capacity > 0 ? capacity : 0),
+          position(0),
+          deleteOnClose(deleteOnClose),
+          canRead(false),
+          canWrite(true)
     {
-    }
-
-    MemoryStream::MemoryStream(int length)
-        : buffer(nullptr),
-          length(length),
-          position(0)
-    {
-        if (length > 0)
-            buffer = new byte[length];
-    }
-
-    MemoryStream::MemoryStream(byte* buffer, int length)
-        : buffer(buffer),
-          length(length),
-          position(position)
-    {
+        if (fillZero)
+            Memory::Fill(buffer, capacity);
     }
 
     MemoryStream::~MemoryStream()
     {
+        if (deleteOnClose)
+            delete [] buffer;
     }
 
-    int MemoryStream::Read(void* /*buffer*/, int /*size*/)
+    int MemoryStream::Read(void* buffer, int size)
     {
-        throw;
+        if (this->position + size < this->length)
+        {
+            Memory::Copy(buffer, size, &this->buffer[this->position], size);
+            this->position += size;
+            return size;
+        }
+        else
+        {
+            const int readBytes = this->length - this->position;
+            Memory::Copy(buffer, size, &this->buffer[this->position], readBytes);
+            this->position = this->length;
+            return readBytes;
+        }
     }
 
-    int MemoryStream::Write(const void* /*buffer*/, int /*size*/)
+    int MemoryStream::Write(const void* buffer, int size)
     {
-        throw;
+        if (this->position + size < this->length)
+        {
+            Memory::Copy(&this->buffer[this->position], this->capacity - this->position, buffer, size);
+            this->position += size;
+            return size;
+        }
+        else
+        {
+            const int newPosition = this->position + size;
+            if (newPosition >= this->capacity)
+            {
+                this->capacity = newPosition * 2;
+                byte* newBuffer = new byte [this->capacity];
+                byte* oldBuffer = this->buffer;
+                Memory::Copy(newBuffer, this->capacity, oldBuffer, this->length);
+                this->buffer = newBuffer;
+                delete [] oldBuffer;
+            }
+
+            Memory::Copy(&this->buffer[this->position], this->capacity - this->position, buffer, size);
+            this->position = newPosition;
+            this->length = newPosition;
+            return size;
+        }
     }
 
     void MemoryStream::Flush()
@@ -46,21 +86,24 @@ namespace Bibim
 
     int MemoryStream::Seek(int offset, SeekOrigin origin)
     {
+        int newPosition = 0;
         switch (origin)
         {
             case FromBegin:
-                position = offset;
+                newPosition = offset;
                 break;
             case FromEnd:
-                position = length + offset;
+                newPosition = length + offset;
                 break;
             case FromCurrent:
-                position += offset;
+                newPosition = position + offset;
                 break;
             default:
                 BBBreak();
                 break;
         }
+
+        position = Math::Max(newPosition, length);
 
         return position;
     }
@@ -77,12 +120,12 @@ namespace Bibim
 
     bool MemoryStream::CanRead() const
     {
-        return true;
+        return canRead;
     }
 
     bool MemoryStream::CanWrite() const
     {
-        return true;
+        return canWrite;
     }
 
     bool MemoryStream::CanSeek() const

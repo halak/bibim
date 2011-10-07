@@ -50,6 +50,18 @@ namespace Halak.Bibim.Scripting.Statements.Operators
         #endregion
 
         #region Methods
+        protected void Generate(BinaryScriptGenerator.Context context, ScriptProcess.CommandID commandID)
+        {
+            if (LeftOperand == null)
+                throw new InvalidOperationException("LeftOperand");
+            if (RightOperand == null)
+                throw new InvalidOperationException("RightOperand");
+
+            context.Write(commandID);
+            context.Write(LeftOperand);
+            context.Write(RightOperand);
+        }
+
         protected static string ToString(Expression operand)
         {
             if (operand != null)

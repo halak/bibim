@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/SharedObject.h>
+#   include <Bibim/ScriptStack.h>
 
     namespace Bibim
     {
@@ -13,20 +14,25 @@
             public:
                 enum CommandID
                 {
-                    JumpCommand = 0,
-                    IfTrueThenJumpCommand = 1,
-                    IfFalseThenJumpCommand = 2,
-                    IfTrueThenJumpElseJumpCommand = 3,
-                    IfFalseThenJumpElseJumpCommand = 4,
-                    CallCommand = 5,
-                    CallNativeCommand = 6,
-                    ReturnCommand = 7,
-                    YieldCommand = 8,
+                    NOPCommand,
+                    PushInt32Command,
+                    PushUInt32Command,
+                    PushStringCommand,
+                    JumpCommand,
+                    IfTrueThenJumpCommand,
+                    IfFalseThenJumpCommand,
+                    IfTrueThenJumpElseJumpCommand,
+                    IfFalseThenJumpElseJumpCommand,
+                    CallCommand,
+                    CallNativeCommand,
+                    ReturnCommand,
+                    YieldCommand,
 
-                    AssignmentOperator = 9,
-                    AdditionOperator = 10,
-                    EqualityOperator = 11,
-                    InequalityOperator = 12,
+                    LocalAssignmentOperator,
+                    GlobalAssignmentOperator,
+                    AdditionOperator,
+                    EqualityOperator,
+                    InequalityOperator,
 
                     //ConcatenationOperator
                     //AssignmentOperator = 9,
@@ -65,13 +71,18 @@
   
             public:
                 ScriptProcess(Script* script);
+                ScriptProcess(Script* script, int stackSize);
                 virtual ~ScriptProcess();
 
                 void Resume();
                 void Suspend();
+            
+            private:
+                void Process(BinaryReader& reader);
 
             private:
                 ScriptPtr script;
+                ScriptStack stack;
                 uint position;
         };
     }
