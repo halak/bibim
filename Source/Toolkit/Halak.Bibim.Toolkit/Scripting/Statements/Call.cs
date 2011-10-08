@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Halak.Bibim.IO;
 
 namespace Halak.Bibim.Scripting.Statements
 {
@@ -24,7 +25,8 @@ namespace Halak.Bibim.Scripting.Statements
 
         public override void Generate(BinaryScriptGenerator.Context context)
         {
-            throw new NotImplementedException();
+            context.WriteBibimString(Name);
+            GenerateArguments(context);
         }
     }
 }

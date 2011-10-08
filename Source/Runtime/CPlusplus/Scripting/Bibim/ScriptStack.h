@@ -11,41 +11,33 @@
         class ScriptStack
         {
             BBThisIsNoncopyableClass(ScriptStack);
-            public:
-                struct Item
-                {
-                    Any Value;
-
-                    Item();
-                    Item(const Any& value);
-                    Item(const Item& original);
-
-                    Item& operator = (const Item& right);
-                    bool operator == (const Item& right) const;
-                    inline bool operator != (const Item& right) const;
-
-                    static const Item Empty;
-                };
-
-                typedef std::vector<Item> Items;
+            private:
+                typedef std::vector<byte> ByteVector;
+                typedef std::vector<int>  IntVector;
 
             public:
                 ScriptStack();
-                ScriptStack(int capacity);
+                explicit ScriptStack(int capacity);
                 ~ScriptStack();
 
-                void Push(const Item& item);
+                byte* Push(int size);
                 void Pop(int count);
-                const Item& Peek() const;
-                const Item& GetAt(int index) const;
 
-                inline const Items& GetItems() const;
+                byte* Peek(int& outSize);
+                const byte* Peek(int& outSize) const;
+                inline byte* Peek();
+                inline const byte* Peek() const;
+
+                byte* GetAt(int index);
+                const byte* GetAt(int index) const;
+
                 inline int GetTopIndex() const;
                 inline int GetCapacity() const;
+                inline bool IsEmpty() const;
 
             private:
-                Items items;
-                int topIndex;
+                ByteVector buffer;
+                IntVector  offsetStack;
         };
     }
 

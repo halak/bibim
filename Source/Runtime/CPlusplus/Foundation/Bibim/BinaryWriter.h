@@ -41,6 +41,15 @@
                 inline bool operator == (const BinaryWriter& right) const;
                 inline bool operator != (const BinaryWriter& right) const;
 
+                static inline void From(byte* buffer, bool value);
+                static inline void From(byte* buffer, int8 value);
+                static inline void From(byte* buffer, uint8 value);
+                static inline void From(byte* buffer, int16 value);
+                static inline void From(byte* buffer, uint16 value);
+                static inline void From(byte* buffer, int32 value);
+                static inline void From(byte* buffer, uint32 value);
+                static inline void From(byte* buffer, float value);
+
             private:
                 template <typename T> inline void WriteTemplate(T value);
 

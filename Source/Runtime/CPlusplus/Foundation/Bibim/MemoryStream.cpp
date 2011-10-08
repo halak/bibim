@@ -103,7 +103,7 @@ namespace Bibim
                 break;
         }
 
-        position = Math::Max(newPosition, length);
+        position = Math::Min(newPosition, length);
 
         return position;
     }

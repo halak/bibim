@@ -1,24 +1,29 @@
 namespace Bibim
 {
-    const ScriptStack::Items& ScriptStack::GetItems() const
+    byte* ScriptStack::Peek()
     {
-        return items;
+        int t = 0;
+        return Peek(t);
+    }
+
+    const byte* ScriptStack::Peek() const
+    {
+        int t = 0;
+        return Peek(t);
     }
 
     int ScriptStack::GetTopIndex() const
     {
-        return topIndex;
+        return static_cast<int>(offsetStack.size()) - 1;
     }
 
     int ScriptStack::GetCapacity() const
     {
-        return items.size();
+        return static_cast<int>(buffer.capacity());
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    bool ScriptStack::Item::operator != (const Item& right) const
+    bool ScriptStack::IsEmpty() const
     {
-        return !operator == (right);
+        return offsetStack.empty();
     }
 }

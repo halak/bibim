@@ -17,8 +17,8 @@ namespace Halak.Bibim.Bab.Consoles
         {
             Function code = new Function("Sum1To100", new Statement[]
             {
-                //new DeclareLocalVariable("result"),
-                //new DeclareLocalVariable("i"),
+                new DeclareVariable("result", ScriptObjectType.Int),
+                new DeclareVariable("i", ScriptObjectType.Int),
                 new AssignmentOperator(new VariableExpression("result"), new ConstantExpression(0)),
                 new AssignmentOperator(new VariableExpression("i"), new ConstantExpression(0)),
                 new While(new InequalityOperator(new VariableExpression("i"), new ConstantExpression(101)), new Statement[]
@@ -30,8 +30,12 @@ namespace Halak.Bibim.Bab.Consoles
             });
             
             BinaryScriptGenerator generator = new BinaryScriptGenerator();
-            FileStream stream = new FileStream("Sum1To100.ab", FileMode.Create, FileAccess.Write);
-            generator.Generate(stream, code);
+            FileStream fs = new FileStream("Sum1To100.ab", FileMode.Create, FileAccess.Write);
+            MemoryStream ms = new MemoryStream();
+            generator.Generate(ms, code);
+
+            ScriptWriter writer = new ScriptWriter();
+            writer.Write(new Asset.AssetStreamWriter(fs, null), new Script(ms.GetBuffer(), 0));
         }
     }
 }

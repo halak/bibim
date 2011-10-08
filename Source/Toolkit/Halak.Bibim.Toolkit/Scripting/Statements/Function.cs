@@ -43,10 +43,6 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Methods
-        public override void Generate(BinaryScriptGenerator.Context context)
-        {
-            base.Generate(context);
-        }
         #endregion
     }
 }

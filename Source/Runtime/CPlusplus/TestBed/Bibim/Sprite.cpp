@@ -8,6 +8,8 @@
 #include <Bibim/PipedAssetProvider.h>
 #include <Bibim/FileAssetProvider.h>
 #include <Bibim/SourceTexture2D.h>
+#include <Bibim/Script.h>
+#include <Bibim/ScriptProcess.h>
 #include <Bibim/UI.h>
 using namespace Bibim;
 
@@ -47,6 +49,10 @@ class SpriteTest : public GameFramework
 
             texture1 = static_cast<SourceTexture2D*>(gas->Load("Asset\\BigHello"));
             texture2 = static_cast<SourceTexture2D*>(gas->Load("Asset\\Background"));
+
+            ScriptPtr script = static_cast<Script*>(gas->Load("Sum1To100"));
+            ScriptProcessPtr process = new ScriptProcess(script);
+            process->Resume();
 
             storage = gas;
             uiDomain = uid;

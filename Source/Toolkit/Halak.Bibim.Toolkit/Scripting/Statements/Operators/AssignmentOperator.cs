@@ -42,26 +42,19 @@ namespace Halak.Bibim.Scripting.Statements.Operators
             if (Value == null)
                 throw new InvalidOperationException();
 
-            int index = context.GetLocalVariableIndex(Variable.Name);
-            if (index != -1)
+            int stackIndex;
+            int localOffset;
+            if (context.TryGetVariableOffsetFromStack(Variable.Name, out stackIndex, out localOffset))
             {
+                context.Write(ScriptCommandID.LocalAssign);
+                context.Write(stackIndex);
+                context.Write(localOffset);
             }
             else
             {
-            }
-
-            if (Variable is GlobalVariableExpression)
-            {
-                context.Write(ScriptProcess.CommandID.GlobalAssignmentOperator);
+                context.Write(ScriptCommandID.GlobalAssign);
                 context.Write(Variable.Name);
             }
-            else if (Variable is LocalVariableExpression)
-            {
-                context.Write(ScriptProcess.CommandID.LocalAssignmentOperator);
-                context.Write(Variable);
-            }
-            else
-                throw new InvalidOperationException();
 
             context.Write(Value);
         }

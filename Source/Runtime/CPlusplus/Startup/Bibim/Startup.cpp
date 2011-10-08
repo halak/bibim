@@ -5,6 +5,7 @@ namespace Bibim
 {
     void Startup::All()
     {
+        GameAssetFactory::AddEntry<Script>();
         GameAssetFactory::AddEntry<SourceTexture2D>();
         GameAssetFactory::AddEntry<UILayout>();
         GameAssetFactory::SortEntries();

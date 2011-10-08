@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __BIBIM_ANY_H__
-#define __BIBIM_ANY_H__
+#ifndef __BIBIM_Variant_H__
+#define __BIBIM_Variant_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/Color.h>
@@ -18,7 +18,7 @@
 
     namespace Bibim
     {
-        class Any
+        class Variant
         {
             public:
                 enum Type
@@ -57,37 +57,37 @@
                 };
             
             public:
-                inline Any();
-                inline Any(bool value);
-                inline Any(char value);
-                inline Any(unsigned char value);
-                inline Any(short value);
-                inline Any(unsigned short value);
-                inline Any(int value);
-                inline Any(unsigned int value);
-                inline Any(long value);
-                inline Any(unsigned long value);
-                inline Any(int64 value);
-                inline Any(uint64 value);
-                inline Any(float value);
-                inline Any(double value);
-                inline Any(Color value);
-                inline Any(const Matrix4& value);
-                inline Any(Point value);
-                inline Any(Quaternion value);
-                inline Any(Rect value);
-                inline Any(RectF value);
-                inline Any(const char* value);
-                inline Any(const String& value);
-                inline Any(const URI& value);
-                inline Any(UUID value);
-                inline Any(Vector2 value);
-                inline Any(Vector3 value);
-                inline Any(Vector4 value);
-                template <typename T> Any(const T& value);
-                template <typename T> Any(const T& value, const String& tag);
-                inline Any(const Any& original);
-                ~Any();
+                inline Variant();
+                inline Variant(bool value);
+                inline Variant(char value);
+                inline Variant(unsigned char value);
+                inline Variant(short value);
+                inline Variant(unsigned short value);
+                inline Variant(int value);
+                inline Variant(unsigned int value);
+                inline Variant(long value);
+                inline Variant(unsigned long value);
+                inline Variant(int64 value);
+                inline Variant(uint64 value);
+                inline Variant(float value);
+                inline Variant(double value);
+                inline Variant(Color value);
+                inline Variant(const Matrix4& value);
+                inline Variant(Point value);
+                inline Variant(Quaternion value);
+                inline Variant(Rect value);
+                inline Variant(RectF value);
+                inline Variant(const char* value);
+                inline Variant(const String& value);
+                inline Variant(const URI& value);
+                inline Variant(UUID value);
+                inline Variant(Vector2 value);
+                inline Variant(Vector3 value);
+                inline Variant(Vector4 value);
+                template <typename T> Variant(const T& value);
+                template <typename T> Variant(const T& value, const String& tag);
+                inline Variant(const Variant& original);
+                ~Variant();
 
                 inline Type GetType() const;
                 inline bool GetBoolean() const;
@@ -120,21 +120,21 @@
                 // !ONLY! Class
                 const String& GetTag() const;
 
-                Any& operator = (const Any& right);
+                Variant& operator = (const Variant& right);
 
-                bool operator == (const Any& right) const;
-                bool operator != (const Any& right) const;
+                bool operator == (const Variant& right) const;
+                bool operator != (const Variant& right) const;
 
                 // std::map에 Key로 쓰이기 위하여 만들어졌습니다.
-                inline bool operator < (const Any& right) const;
+                inline bool operator < (const Variant& right) const;
 
             public:
-                static const Any Null;
-                static const Any Missing;
+                static const Variant Null;
+                static const Variant Missing;
 
             private:
                 struct MissingTag { };
-                inline Any(MissingTag);
+                inline Variant(MissingTag);
 
                 template <typename T> T CastNumericValueTo() const;
 

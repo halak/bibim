@@ -9,4 +9,9 @@ namespace Bibim
     {
         return entryPoint;
     }
+
+    const Script::StringCollection& Script::GetStringTable() const
+    {
+        return stringTable;
+    }
 }

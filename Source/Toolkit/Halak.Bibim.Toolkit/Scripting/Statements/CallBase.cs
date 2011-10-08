@@ -52,5 +52,14 @@ namespace Halak.Bibim.Scripting.Statements
             Arguments = arguments;
         }
         #endregion
+
+        #region Methods
+        public override void GenerateArguments(BinaryScriptGenerator.Context context)
+        {
+            context.Write(Arguments.Length);
+            foreach (Expression item in Arguments)
+                context.Write(item);
+        }
+        #endregion
     }
 }
