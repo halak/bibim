@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/BinaryReader.h>
+#include <Bibim/Memory.h>
 #include <Bibim/Stream.h>
 
 namespace Bibim

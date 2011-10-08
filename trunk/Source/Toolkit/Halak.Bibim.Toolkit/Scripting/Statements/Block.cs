@@ -112,10 +112,57 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Generate (Methods)
-        public override void Generate(BinaryScriptGenerator.Context context)
+        public sealed override void Generate(BinaryScriptGenerator.Context context)
         {
+            GenerateBlockBefore(context);
+
+            int requiredStackSize = ComputeRequiredStackSize();
+            if (requiredStackSize > 0)
+            {
+                context.Write(ScriptCommandID.AllocateN);
+                context.Write(ComputeRequiredStackSize());
+            }
+
+            GenerateBlockBegin(context);
+
             foreach (Statement item in statements)
                 context.Write(item);
+
+            GenerateBlockEnd(context);
+
+            if (requiredStackSize > 0)
+                context.Write(ScriptCommandID.Pop1);
+
+            GenerateBlockAfter(context);
+        }
+
+        protected virtual void GenerateBlockBefore(BinaryScriptGenerator.Context context)
+        {
+        }
+
+        protected virtual void GenerateBlockBegin(BinaryScriptGenerator.Context context)
+        {
+        }
+
+        protected virtual void GenerateBlockEnd(BinaryScriptGenerator.Context context)
+        {
+        }
+
+        protected virtual void GenerateBlockAfter(BinaryScriptGenerator.Context context)
+        {
+        }
+
+        private int ComputeRequiredStackSize()
+        {
+            int result = 0;
+            foreach (Statement item in statements)
+            {
+                DeclareVariable variableDeclaration = item as DeclareVariable;
+                if (variableDeclaration != null)
+                    result += DeclareVariable.SizeOf(variableDeclaration.Type);
+            }
+
+            return result;
         }
         #endregion
     }

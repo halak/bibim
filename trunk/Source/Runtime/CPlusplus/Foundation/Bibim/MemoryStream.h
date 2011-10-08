@@ -27,8 +27,9 @@
                 virtual bool CanWrite() const;
                 virtual bool CanSeek() const;
 
-                static MemoryStream* NewReadableStream(const byte* buffer, int length);
-                static MemoryStream* NewWritableStream(int capacity, bool deleteOnClose, bool fillZero);
+                static inline MemoryStream* NewReadableStream(const byte* buffer, int length);
+                static inline MemoryStream* NewWritableStream(int capacity, bool deleteOnClose);
+                static inline MemoryStream* NewWritableStream(int capacity, bool deleteOnClose, bool fillZero);
 
             private:
                 MemoryStream(const byte* buffer, int length);
@@ -44,5 +45,7 @@
                 bool canWrite;
         };
     }
+
+#   include <Bibim/MemoryStream.inl>
 
 #endif

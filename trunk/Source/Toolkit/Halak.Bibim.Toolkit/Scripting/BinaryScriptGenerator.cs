@@ -38,16 +38,16 @@ namespace Halak.Bibim.Scripting
         public class Context : BinaryWriter
         {
             #region Properties
-            private Dictionary<Label, uint> addresses;
-            private Dictionary<Label, List<uint>> reservedAddresses;
+            private Dictionary<Label, int> addresses;
+            private Dictionary<Label, List<int>> reservedAddresses;
             #endregion
 
             #region Constructors
             public Context(BinaryScriptGenerator generator, Stream output)
                 : base(output)
             {
-                addresses = new Dictionary<Label, uint>();
-                reservedAddresses = new Dictionary<Label, List<uint>>();
+                addresses = new Dictionary<Label, int>();
+                reservedAddresses = new Dictionary<Label, List<int>>();
             }
             #endregion
 
@@ -57,7 +57,7 @@ namespace Halak.Bibim.Scripting
                 base.Close();
             }
 
-            public void Write(ScriptProcess.CommandID value)
+            public void Write(ScriptCommandID value)
             {
                 Write((byte)value);
             }
@@ -71,13 +71,13 @@ namespace Halak.Bibim.Scripting
             {
                 Trace.Assert(addresses.ContainsKey(value) == false);
 
-                uint currentPosition = (uint)BaseStream.Position;
+                int currentPosition = (int)BaseStream.Position;
                 addresses.Add(value, currentPosition);
 
-                List<uint> positions = null;
+                List<int> positions = null;
                 if (reservedAddresses.TryGetValue(value, out positions))
                 {
-                    foreach (uint item in positions)
+                    foreach (int item in positions)
                     {
                         BaseStream.Position = item;
                         Write(currentPosition);
@@ -90,23 +90,43 @@ namespace Halak.Bibim.Scripting
 
             public void WriteAddress(Label value)
             {
-                uint address = 0;
+                int address = 0;
                 if (addresses.TryGetValue(value, out address))
                     Write(address);
                 else
                 {
-                    uint currentPosition = (uint)BaseStream.Position;
-                    List<uint> positions = null;
+                    int currentPosition = (int)BaseStream.Position;
+                    List<int> positions = null;
                     if (reservedAddresses.TryGetValue(value, out positions))
                         positions.Add(currentPosition);
                     else
-                        reservedAddresses.Add(value, new List<uint>() { currentPosition });
+                        reservedAddresses.Add(value, new List<int>() { currentPosition });
+
+                    // 나중에 WriteLabel에서 덮어 씌울 것이기 때문에 공간은 할당해 놓습니다.
+                    Write(address);
                 }
             }
 
-            public int GetLocalVariableIndex(string name)
+            public bool TryGetVariableOffsetFromStack(string name, out int stackIndex, out int localOffset)
             {
-                return -1;
+                if (name == "i")
+                {
+                    stackIndex = 0;
+                    localOffset = 0;
+                    return true;
+                }
+                else if (name == "result")
+                {
+                    stackIndex = 0;
+                    localOffset = 4;
+                    return true;
+                }
+                else
+                {
+                    stackIndex = -1;
+                    localOffset = -1;
+                    return false;
+                }
             }
             #endregion
         }

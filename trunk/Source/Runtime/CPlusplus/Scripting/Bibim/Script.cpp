@@ -15,10 +15,11 @@ namespace Bibim
         SetStatus(CompletedStatus);
     }
 
-    Script::Script(Buffer& buffer, uint entryPoint, MoveTag)
+    Script::Script(Buffer& buffer, uint entryPoint, StringCollection& stringTable, MoveTag)
         : entryPoint(entryPoint)
     {
         this->buffer.swap(buffer);
+        this->stringTable.swap(stringTable);
         SetStatus(CompletedStatus);
     }
 
@@ -36,6 +37,12 @@ namespace Bibim
         reader.Read(&buffer[0], length);
         const uint32 entryPoint = reader.ReadUInt32();
 
-        return new Script(buffer, entryPoint, MoveTag());
+        const int numberOfStrings = reader.ReadInt32();
+        StringCollection stringTable;
+        stringTable.reserve(numberOfStrings);
+        for (int i = 0; i < numberOfStrings; i++)
+            stringTable.push_back(reader.ReadString());
+
+        return new Script(buffer, entryPoint, stringTable, MoveTag());
     }
 }

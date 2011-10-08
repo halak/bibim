@@ -21,7 +21,7 @@
             public:
                 static void Add(uint32 id, NativeFunction function);
                 static void Add(Entry item);
-                static void AddRange(std::vector<Entry> items);
+                static void AddRange(const std::vector<Entry>& items);
 
                 static NativeFunction Find(uint32 id);
         };
@@ -29,6 +29,6 @@
         typedef ScriptNativeFunctionTable::NativeFunction ScriptNativeFunction;
     }
 
-#   include <ScriptNativeFunctionTable.inl>
+#   include <Bibim/ScriptNativeFunctionTable.inl>
 
 #endif

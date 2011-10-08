@@ -3,85 +3,88 @@
 
 namespace Bibim
 {
-    static const uint DefaultStackSize = 1024;
+    static const uint DefaultBufferSize = 1024 * 64; // 64kb
+    static const uint DefaultOffsetStackSize = 256;
 
     ScriptStack::ScriptStack()
-        : items(DefaultStackSize),
-          topIndex(-1)
     {
+        buffer.reserve(DefaultBufferSize);
+        offsetStack.reserve(DefaultOffsetStackSize);
     }
 
     ScriptStack::ScriptStack(int capacity)
-        : items(capacity),
-          topIndex(-1)
     {
-        BBAssertDebug(static_cast<int>(items.size()) == capacity);
+        buffer.reserve(capacity);
+        offsetStack.reserve(DefaultOffsetStackSize);
     }
 
     ScriptStack::~ScriptStack()
     {
     }
 
-    void ScriptStack::Push(const Item& item)
+    byte* ScriptStack::Push(int size)
     {
-        BBAssert(topIndex < static_cast<int>(items.size() - 1));
+        const int offset = static_cast<int>(buffer.size());
+        offsetStack.push_back(offset);
+        buffer.resize(buffer.size() + size);
 
-        items[topIndex] = item;
-        topIndex++;
+        return &buffer[offset];
     }
 
     void ScriptStack::Pop(int count)
     {
-        BBAssert(topIndex + 1 >= count);
+        BBAssertDebug(count <= static_cast<int>(offsetStack.size()));
 
-        topIndex -= count;
+        for (; count > 1; count--)
+            offsetStack.pop_back();
 
-        BBAssertDebug(topIndex >= -1);
+        buffer.resize(offsetStack.back());
+        offsetStack.pop_back();
     }
 
-    const ScriptStack::Item& ScriptStack::Peek() const
+    byte* ScriptStack::Peek(int& outSize)
     {
-        if (topIndex >= 0)
-            return items[topIndex];
-        else
-            return Item::Empty;
+        BBAssertDebug(IsEmpty() == false);
+
+        const int offset = offsetStack.back();
+        BBAssertDebug(0 <= offset && offset < static_cast<int>(buffer.size()));
+
+        outSize = static_cast<int>(buffer.size()) - offset;
+        return &buffer[offset];
     }
 
-    const ScriptStack::Item& ScriptStack::GetAt(int index) const
+    const byte* ScriptStack::Peek(int& outSize) const
+    {
+        BBAssertDebug(IsEmpty() == false);
+
+        const int offset = offsetStack.back();
+        BBAssertDebug(0 <= offset && offset < static_cast<int>(buffer.size()));
+
+        outSize = static_cast<int>(buffer.size()) - offset;
+        return &buffer[offset];
+    }
+
+    byte* ScriptStack::GetAt(int index)
     {
         if (index < 0)
-            index = topIndex + 1 + index;
+            index = GetTopIndex() + 1 + index;
+        BBAssertDebug(0 <= index && index < static_cast<int>(offsetStack.size()));
 
-        BBAssertDebug(0 <= index && index <= topIndex);
-        return items[index];
+        const int offset = offsetStack[index];
+        BBAssertDebug(0 <= offset && offset < static_cast<int>(buffer.size()));
+
+        return &buffer[offset];
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    const ScriptStack::Item ScriptStack::Item::Empty;
-
-    ScriptStack::Item::Item()
+    const byte* ScriptStack::GetAt(int index) const
     {
-    }
+        if (index < 0)
+            index = GetTopIndex() + 1 + index;
+        BBAssertDebug(0 <= index && index < static_cast<int>(offsetStack.size()));
 
-    ScriptStack::Item::Item(const Any& value)
-        : Value(value)
-    {
-    }
+        const int offset = offsetStack[index];
+        BBAssertDebug(0 <= offset && offset < static_cast<int>(buffer.size()));
 
-    ScriptStack::Item::Item(const Item& original)
-        : Value(original.Value)
-    {
-    }
-
-    ScriptStack::Item& ScriptStack::Item::operator = (const Item& right)
-    {
-        Value = right.Value;
-        return *this;
-    }
-
-    bool ScriptStack::Item::operator == (const Item& right) const
-    {
-        return Value == right.Value;
+        return &buffer[offset];
     }
 }

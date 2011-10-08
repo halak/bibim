@@ -40,6 +40,15 @@
                 inline bool operator == (const BinaryReader& right) const;
                 inline bool operator != (const BinaryReader& right) const;
 
+                static inline bool   ToBool(const byte* buffer);
+                static inline int8   ToInt8(const byte* buffer);
+                static inline uint8  ToUInt8(const byte* buffer);
+                static inline int16  ToInt16(const byte* buffer);
+                static inline uint16 ToUInt16(const byte* buffer);
+                static inline int32  ToInt32(const byte* buffer);
+                static inline uint32 ToUInt32(const byte* buffer);
+                static inline float  ToFloat(const byte* buffer);
+
             private:
                 template <typename T> inline T ReadTemplate();
 

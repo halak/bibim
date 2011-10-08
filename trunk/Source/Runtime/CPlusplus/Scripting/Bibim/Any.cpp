@@ -3,10 +3,10 @@
 
 namespace Bibim
 {
-    const Any Any::Null = Any();
-    const Any Any::Missing = Any(Any::MissingTag());
+    const Variant Variant::Null = Variant();
+    const Variant Variant::Missing = Variant(Variant::MissingTag());
 
-    Any::~Any()
+    Variant::~Variant()
     {
         switch (type)
         {
@@ -32,7 +32,7 @@ namespace Bibim
         }
     }
 
-    const String& Any::GetTag() const
+    const String& Variant::GetTag() const
     {
         if (type == ClassType)
             return reinterpret_cast<ClassStorageBase*>(value)->Tag;
@@ -40,7 +40,7 @@ namespace Bibim
             return String::Empty;
     }
 
-    Any& Any::operator = (const Any& right)
+    Variant& Variant::operator = (const Variant& right)
     {
         Type  oldType  = type;
         void* oldValue = value;
@@ -112,7 +112,7 @@ namespace Bibim
         return *this;
     }
 
-    bool Any::operator == (const Any& right) const
+    bool Variant::operator == (const Variant& right) const
     {
         if (type != right.type)
             return false;
@@ -155,7 +155,7 @@ namespace Bibim
         }
     }
 
-    bool Any::operator != (const Any& right) const
+    bool Variant::operator != (const Variant& right) const
     {
         return !operator == (right);
     }

@@ -6,15 +6,23 @@ namespace Halak.Bibim.Scripting.Statements
 {
     public sealed class While : Block
     {
-        #region Fields
-        private Label endLabel;
-        #endregion
-
         #region Properties
         public Expression Condition
         {
             get;
             set;
+        }
+
+        public Label StartLabel
+        {
+            get;
+            private set;
+        }
+
+        public Label FinishLabel
+        {
+            get;
+            private set;
         }
         #endregion
 
@@ -33,18 +41,25 @@ namespace Halak.Bibim.Scripting.Statements
             : base(statements)
         {
             Condition = condition;
-            endLabel = new Label();
+            StartLabel = new Label();
+            FinishLabel = new Label();
         }
         #endregion
 
         #region Methods
-        public override void Generate(BinaryScriptGenerator.Context context)
+        protected override void GenerateBlockBefore(BinaryScriptGenerator.Context context)
         {
-            context.Write(ScriptProcess.CommandID.IfFalseThenJump);
+            context.WriteLabel(StartLabel);
+            context.Write(ScriptCommandID.IfFalseThenJump);
+            context.WriteAddress(FinishLabel);
             context.Write(Condition);
-            context.WriteAddress(endLabel);
-            base.Generate(context);
-            context.WriteLabel(endLabel);
+        }
+
+        protected override void GenerateBlockAfter(BinaryScriptGenerator.Context context)
+        {
+            context.Write(ScriptCommandID.Jump);
+            context.WriteAddress(StartLabel);
+            context.WriteLabel(FinishLabel);
         }
 
         public override string ToString()
