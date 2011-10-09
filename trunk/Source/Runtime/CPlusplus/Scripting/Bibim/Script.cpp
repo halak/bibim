@@ -8,23 +8,27 @@ namespace Bibim
     {
     }
 
-    Script::Script(const Buffer& buffer, uint entryPoint)
-        : buffer(buffer),
-          entryPoint(entryPoint)
-    {
-        SetStatus(CompletedStatus);
-    }
-
-    Script::Script(Buffer& buffer, uint entryPoint, StringCollection& stringTable, MoveTag)
-        : entryPoint(entryPoint)
+    Script::Script(Buffer& buffer, FunctionTable& functionTable, StringCollection& stringTable, MoveTag)
     {
         this->buffer.swap(buffer);
+        this->functionTable.swap(functionTable);
         this->stringTable.swap(stringTable);
         SetStatus(CompletedStatus);
     }
 
     Script::~Script()
     {
+    }
+
+    const Script::Function* Script::Find(const String& name) const
+    {
+        for (FunctionTable::const_iterator it = functionTable.begin(); it != functionTable.end(); it++)
+        {
+            if ((*it).Name == name)
+                return &(*it);
+        }
+
+        return nullptr;
     }
 
     GameAsset* Script::Read(AssetStreamReader& reader, GameAsset* /*existingInstance*/)
@@ -35,7 +39,20 @@ namespace Bibim
         buffer.resize(length);
 
         reader.Read(&buffer[0], length);
-        const uint32 entryPoint = reader.ReadUInt32();
+        const int numberOfFunctions = reader.ReadInt32();
+        FunctionTable functionTable;
+        functionTable.resize(numberOfFunctions);
+        for (int i = 0; i < numberOfFunctions; i++)
+        {
+            Function& item = functionTable[i];
+            item.Name = reader.ReadString();
+            item.Position = reader.ReadInt32();
+            item.ArgumentStackSize = reader.ReadInt32();
+            item.ReturnType = static_cast<ScriptObjectType>(reader.ReadInt32());
+            item.ParameterTypes.resize(reader.ReadInt32());
+            for (std::vector<ScriptObjectType>::size_type i = 0; i < item.ParameterTypes.size(); i++)
+                item.ParameterTypes[i] = static_cast<ScriptObjectType>(reader.ReadInt32());
+        }
 
         const int numberOfStrings = reader.ReadInt32();
         StringCollection stringTable;
@@ -43,6 +60,6 @@ namespace Bibim
         for (int i = 0; i < numberOfStrings; i++)
             stringTable.push_back(reader.ReadString());
 
-        return new Script(buffer, entryPoint, stringTable, MoveTag());
+        return new Script(buffer, functionTable, stringTable, MoveTag());
     }
 }

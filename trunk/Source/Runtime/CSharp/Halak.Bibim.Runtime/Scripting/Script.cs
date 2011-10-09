@@ -9,9 +9,30 @@ namespace Halak.Bibim.Scripting
     [ClassID('S', 'C', 'R', 'T')]
     public sealed class Script : GameAsset
     {
+        #region Function (Nested Struct)
+        public struct Function
+        {
+            public readonly string Name;
+            public readonly int Position;
+            public readonly int ArgumentStackSize;
+            public readonly ScriptObjectType ReturnType;
+            public readonly ScriptObjectType[] ParameterTypes;
+
+            public Function(string name, int position, int argumentStackSize, ScriptObjectType returnType, ScriptObjectType[] parameterTypes)
+            {
+                Name = name;
+                Position = position;
+                ArgumentStackSize = argumentStackSize;
+                ReturnType = returnType;
+                ParameterTypes = parameterTypes;
+            }
+        }
+        #endregion
+
         #region Fields
         private List<string> stringTable;
         private ReadOnlyCollection<string> readonlyStringTable;
+        private readonly Function[] functionTable;
         #endregion
 
         #region Properties
@@ -21,33 +42,33 @@ namespace Halak.Bibim.Scripting
             private set;
         }
 
-        public uint EntryPoint
-        {
-            get;
-            private set;
-        }
-
         public IList<string> StringTable
         {
             get { return readonlyStringTable; }
         }
+
+        public Function[] FunctionTable
+        {
+            get { return functionTable; }
+        }
         #endregion
 
         #region Constructors
-        public Script(byte[] buffer, uint entryPoint)
-            : this(buffer, entryPoint, null)
+        public Script(byte[] buffer, int length)
+            : this(buffer, length, null, null)
         {
         }
-
-        public Script(byte[] buffer, uint entryPoint, IEnumerable<string> stringTable)
+        
+        public Script(byte[] buffer, int length, IEnumerable<string> stringTable, Function[] functionTable)
         {
-            this.Buffer = buffer;
-            this.EntryPoint = entryPoint;
+            this.Buffer = new byte[length];
+            System.Buffer.BlockCopy(buffer, 0, this.Buffer, 0, length);
             if (stringTable != null)
                 this.stringTable = new List<string>(stringTable);
             else
                 this.stringTable = new List<string>();
             this.readonlyStringTable = new ReadOnlyCollection<string>(this.stringTable);
+            this.functionTable = functionTable;
         }
         #endregion
     }

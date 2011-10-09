@@ -30,7 +30,7 @@ namespace Halak.Bibim.Scripting.Statements
 
         #region Constructors
         public DeclareVariable()
-            : this(string.Empty, ScriptObjectType.Null)
+            : this(string.Empty, ScriptObjectType.Void)
         {
         }
 
@@ -50,7 +50,7 @@ namespace Halak.Bibim.Scripting.Statements
         {
             switch (type)
             {
-                case ScriptObjectType.Null:
+                case ScriptObjectType.Void:
                     return 0;
                 case ScriptObjectType.Boolean:
                     return 1;

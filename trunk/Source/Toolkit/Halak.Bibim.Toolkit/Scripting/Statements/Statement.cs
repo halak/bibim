@@ -6,20 +6,6 @@ namespace Halak.Bibim.Scripting.Statements
 {
     public abstract class Statement
     {
-        #region Properties
-        public Statement Previous
-        {
-            get;
-            internal set;
-        }
-
-        public Statement Next
-        {
-            get;
-            internal set;
-        }
-        #endregion
-
         #region Constructors
         protected Statement()
         {

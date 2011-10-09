@@ -50,8 +50,23 @@ namespace Bibim
         return *reinterpret_cast<const uint32*>(buffer);
     }
 
+    int64 BinaryReader::ToInt64(const byte* buffer)
+    {
+        return *reinterpret_cast<const int64*>(buffer);
+    }
+
+    uint64 BinaryReader::ToUInt64(const byte* buffer)
+    {
+        return *reinterpret_cast<const uint64*>(buffer);
+    }
+
     float BinaryReader::ToFloat(const byte* buffer)
     {
         return *reinterpret_cast<const float*>(buffer);
+    }
+
+    Color BinaryReader::ToColor(const byte* buffer)
+    {
+        return Color(buffer[0], buffer[1], buffer[2], buffer[3]);
     }
 }

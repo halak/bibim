@@ -1918,6 +1918,18 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Scripting\Bibim\ScriptObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptObject.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptObject.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Scripting\Bibim\ScriptProcess.cpp"
 					>
 				</File>

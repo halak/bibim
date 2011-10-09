@@ -47,7 +47,10 @@
                 static inline uint16 ToUInt16(const byte* buffer);
                 static inline int32  ToInt32(const byte* buffer);
                 static inline uint32 ToUInt32(const byte* buffer);
+                static inline int64  ToInt64(const byte* buffer);
+                static inline uint64 ToUInt64(const byte* buffer);
                 static inline float  ToFloat(const byte* buffer);
+                static inline Color  ToColor(const byte* buffer);
 
             private:
                 template <typename T> inline T ReadTemplate();

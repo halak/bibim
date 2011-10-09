@@ -29,14 +29,16 @@ namespace Halak.Bibim.Scripting
         IfTrueThenJumpElseJump,
         IfFalseThenJump,
         IfFalseThenJumpElseJump,
-        Call,
-        CallNative,
+        CallScriptFunction,
+        CallNativeFunction,
         Return,
         Yield,
 
         LocalAssign,
         GlobalAssign,
         AddInt,
+        SubtractInt,
+        MultiplyInt,
         TestEqualityInt,
         TestInequalityInt,
     }

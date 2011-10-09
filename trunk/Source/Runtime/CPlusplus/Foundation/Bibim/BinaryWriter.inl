@@ -50,6 +50,16 @@ namespace Bibim
         *(reinterpret_cast<uint32*>(buffer)) = value;
     }
 
+    void BinaryWriter::From(byte* buffer, int64 value)
+    {
+        *(reinterpret_cast<int64*>(buffer)) = value;
+    }
+
+    void BinaryWriter::From(byte* buffer, uint64 value)
+    {
+        *(reinterpret_cast<uint64*>(buffer)) = value;
+    }
+
     void BinaryWriter::From(byte* buffer, float value)
     {
         *(reinterpret_cast<float*>(buffer)) = value;

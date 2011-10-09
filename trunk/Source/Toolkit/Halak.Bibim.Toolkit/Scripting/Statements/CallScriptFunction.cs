@@ -5,19 +5,19 @@ using Halak.Bibim.IO;
 
 namespace Halak.Bibim.Scripting.Statements
 {
-    public sealed class Call : CallBase
+    public sealed class CallScriptFunction : CallBase
     {
         #region Constructors
-        public Call()
+        public CallScriptFunction()
         {
         }
 
-        public Call(string name)
+        public CallScriptFunction(string name)
             : base(name)
         {
         }
 
-        public Call(string name, Expression[] arguments)
+        public CallScriptFunction(string name, Expression[] arguments)
             : base(name, arguments)
         {
         }
@@ -25,7 +25,8 @@ namespace Halak.Bibim.Scripting.Statements
 
         public override void Generate(BinaryScriptGenerator.Context context)
         {
-            context.WriteBibimString(Name);
+            Function function = context.FindFunction(Name);
+            context.WriteAddress(function.StartLabel);
             GenerateArguments(context);
         }
     }

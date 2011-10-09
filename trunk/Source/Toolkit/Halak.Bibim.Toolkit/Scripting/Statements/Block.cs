@@ -39,125 +39,46 @@ namespace Halak.Bibim.Scripting.Statements
         #region Sub-statement Manipulation (Methods)
         public void Add(Statement item)
         {
-            if (item == null)
-                throw new ArgumentNullException("item");
-
-            Statement last = null;
-            if (statements.Count > 0)
-            {
-                last = statements[statements.Count - 1];
-                last.Next = item;
-            }
-
-            item.Previous = last;
-            item.Next = null;
             statements.Add(item);
         }
 
         public void Insert(int index, Statement item)
-        {
-            if (item == null)
-                throw new ArgumentNullException("item");
-            if (0 <= index && index < statements.Count)
-                throw new ArgumentOutOfRangeException("index");
-
-            Statement after = statements[index];
-
-            if (after.Previous != null)
-                after.Previous.Next = item;
-            item.Previous = after.Previous;
-            item.Next = after;
-            after.Previous = item;
-
+        {            
             statements.Insert(index, item);
         }
 
         public bool Remove(Statement item)
         {
-            int index = statements.IndexOf(item);
-            if (index != -1)
-            {
-                RemoveAt(index);
-                return true;
-            }
-            else
-                return false;
+            return statements.Remove(item);
         }
 
         public void RemoveAt(int index)
-        {
-            Statement item = statements[index];
-
-            if (item.Previous != null)
-                item.Previous.Next = item.Next;
-            if (item.Next != null)
-                item.Next.Previous = item.Previous;
-
-            item.Previous = null;
-            item.Next = null;
-
+        {            
             statements.RemoveAt(index);
         }
 
         public void Clear()
         {
-            foreach (Statement item in statements)
-            {
-                item.Previous = null;
-                item.Next = null;
-            }
-
             statements.Clear();
         }
         #endregion
 
         #region Generate (Methods)
-        public sealed override void Generate(BinaryScriptGenerator.Context context)
+        public override void Generate(BinaryScriptGenerator.Context context)
         {
-            GenerateBlockBefore(context);
-
-            int requiredStackSize = ComputeRequiredStackSize();
-            if (requiredStackSize > 0)
-            {
-                context.Write(ScriptCommandID.AllocateN);
-                context.Write(ComputeRequiredStackSize());
-            }
-
-            GenerateBlockBegin(context);
-
             foreach (Statement item in statements)
                 context.Write(item);
-
-            GenerateBlockEnd(context);
-
-            if (requiredStackSize > 0)
-                context.Write(ScriptCommandID.Pop1);
-
-            GenerateBlockAfter(context);
         }
-
-        protected virtual void GenerateBlockBefore(BinaryScriptGenerator.Context context)
-        {
-        }
-
-        protected virtual void GenerateBlockBegin(BinaryScriptGenerator.Context context)
-        {
-        }
-
-        protected virtual void GenerateBlockEnd(BinaryScriptGenerator.Context context)
-        {
-        }
-
-        protected virtual void GenerateBlockAfter(BinaryScriptGenerator.Context context)
-        {
-        }
-
-        private int ComputeRequiredStackSize()
+        
+        protected virtual int ComputeRequiredStackSize()
         {
             int result = 0;
             foreach (Statement item in statements)
             {
+                Block block = item as Block;
                 DeclareVariable variableDeclaration = item as DeclareVariable;
+                if (block != null)
+                    result += block.ComputeRequiredStackSize();
                 if (variableDeclaration != null)
                     result += DeclareVariable.SizeOf(variableDeclaration.Type);
             }
