@@ -19,7 +19,7 @@
                     String Name;
                     int Position;
                     int ArgumentStackSize;
-                    ScriptObjectType ReturnType;
+                    std::vector<ScriptObjectType> ReturnTypes;
                     std::vector<ScriptObjectType> ParameterTypes;
                 };
 

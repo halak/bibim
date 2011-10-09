@@ -61,6 +61,8 @@
                        bool operator == (const ScriptObject& right) const;
                 inline bool operator != (const ScriptObject& right) const;
 
+                static inline int SizeOf(Type value);
+
                 static ScriptObject ReadFromBytes(const byte* buffer, Type type);
                 static int WriteToBytes(byte* buffer, const ScriptObject& value);
                 static int WriteToBytes(byte* buffer, const ScriptObject& value, Type castType);

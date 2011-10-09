@@ -35,6 +35,9 @@ namespace Bibim
 
     void ScriptStack::Pop(int count)
     {
+        if (count == 0)
+            return;
+
         BBAssertDebug(count <= static_cast<int>(offsetStack.size()));
 
         for (; count > 1; count--)

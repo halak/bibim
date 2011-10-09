@@ -48,7 +48,9 @@ namespace Bibim
             item.Name = reader.ReadString();
             item.Position = reader.ReadInt32();
             item.ArgumentStackSize = reader.ReadInt32();
-            item.ReturnType = static_cast<ScriptObjectType>(reader.ReadInt32());
+            item.ReturnTypes.resize(reader.ReadInt32());
+            for (std::vector<ScriptObjectType>::size_type i = 0; i < item.ReturnTypes.size(); i++)
+                item.ReturnTypes[i] = static_cast<ScriptObjectType>(reader.ReadInt32());
             item.ParameterTypes.resize(reader.ReadInt32());
             for (std::vector<ScriptObjectType>::size_type i = 0; i < item.ParameterTypes.size(); i++)
                 item.ParameterTypes[i] = static_cast<ScriptObjectType>(reader.ReadInt32());

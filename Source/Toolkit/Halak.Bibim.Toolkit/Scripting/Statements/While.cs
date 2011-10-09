@@ -50,9 +50,9 @@ namespace Halak.Bibim.Scripting.Statements
         public override void Generate(BinaryScriptGenerator.Context context)
         {
             context.WriteLabel(StartLabel);
+            context.Write(Condition);
             context.Write(ScriptCommandID.IfFalseThenJump);
             context.WriteAddress(FinishLabel);
-            context.Write(Condition);
 
             base.Generate(context);
 

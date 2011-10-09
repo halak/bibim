@@ -15,15 +15,15 @@ namespace Halak.Bibim.Scripting
             public readonly string Name;
             public readonly int Position;
             public readonly int ArgumentStackSize;
-            public readonly ScriptObjectType ReturnType;
+            public readonly ScriptObjectType[] ReturnTypes;
             public readonly ScriptObjectType[] ParameterTypes;
 
-            public Function(string name, int position, int argumentStackSize, ScriptObjectType returnType, ScriptObjectType[] parameterTypes)
+            public Function(string name, int position, int argumentStackSize, ScriptObjectType[] returnTypes, ScriptObjectType[] parameterTypes)
             {
                 Name = name;
                 Position = position;
                 ArgumentStackSize = argumentStackSize;
-                ReturnType = returnType;
+                ReturnTypes = returnTypes;
                 ParameterTypes = parameterTypes;
             }
         }

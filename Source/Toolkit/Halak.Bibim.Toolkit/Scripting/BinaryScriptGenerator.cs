@@ -48,6 +48,12 @@ namespace Halak.Bibim.Scripting
             #endregion
 
             #region Properties
+            public Function Function
+            {
+                get;
+                private set;
+            }
+
             public List<Script.Function> FunctionTable
             {
                 get;
@@ -109,21 +115,28 @@ namespace Halak.Bibim.Scripting
 
             public void Write(Statement value)
             {
+                Function oldFunction = Function;
                 Function function = value as Function;
                 if (function != null)
                 {
                     int argumentStackSize = 0;
                     ScriptObjectType[] parameterTypes = new ScriptObjectType[function.Parameters.Count];
+                    ScriptObjectType[] returnTypes = new ScriptObjectType[1];
                     for (int i = 0; i < parameterTypes.Length; i++)
                     {
                         parameterTypes[i] = function.Parameters[i].Type;
                         argumentStackSize += DeclareVariable.SizeOf(parameterTypes[i]);
                     }
+                    for (int i = 0; i < returnTypes.Length; i++)
+                        returnTypes[i] = function.ReturnTypes[i];
 
-                    FunctionTable.Add(new Script.Function(function.Name, (int)BaseStream.Position, argumentStackSize, function.ReturnType, parameterTypes));
+                    Function = function;
+                    FunctionTable.Add(new Script.Function(function.Name, (int)BaseStream.Position, argumentStackSize, returnTypes, parameterTypes));
                 }
 
                 value.Generate(this);
+
+                Function = oldFunction;
             }
 
             public void WriteLabel(Label value)
@@ -171,13 +184,13 @@ namespace Halak.Bibim.Scripting
             {
                 if (name == "i")
                 {
-                    stackIndex = 0;
+                    stackIndex = 2;
                     localOffset = 0;
                     return true;
                 }
                 else if (name == "result")
                 {
-                    stackIndex = 0;
+                    stackIndex = 2;
                     localOffset = 4;
                     return true;
                 }

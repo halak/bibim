@@ -93,4 +93,45 @@ namespace Bibim
     {
         return !operator == (right);
     }
+
+    int ScriptObject::SizeOf(Type value)
+    {
+        switch (value)
+        {
+            case VoidType:
+                return 0;
+            case BooleanType:
+                return sizeof(bool);
+            case IntType:
+                return sizeof(int);
+            case UIntType:
+                return sizeof(uint);
+            case LongIntType:
+                return sizeof(int64);
+            case FloatType:
+                return sizeof(float);
+            case ColorType:
+                return sizeof(uint);
+            case Int2Type:
+                return sizeof(int) * 2;
+            case Int3Type:
+                return sizeof(int) * 3;
+            case Int4Type:
+                return sizeof(int) * 4;
+            case Float2Type:
+                return sizeof(float) * 2;
+            case Float3Type:
+                return sizeof(float) * 3;
+            case Float4Type:
+                return sizeof(float) * 4;
+            case StringType:
+                throw;
+            case SharedObjectType:
+                throw;
+            case LightObjectType:
+                throw;
+            default:
+                return 0;
+        }
+    }
 }

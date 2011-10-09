@@ -111,8 +111,7 @@ namespace Bibim
     {
         if (const Script::Function* function = BeginCall(name, 1))
         {
-            int cursor = 0;
-            PushArgument(function->ParameterTypes[0], arg1, cursor);
+            PushArgument(function->ParameterTypes[0], arg1);
             return EndCall(function);
         }
         else
@@ -123,9 +122,8 @@ namespace Bibim
     {
         if (const Script::Function* function = BeginCall(name, 2))
         {
-            int cursor = 0;
-            PushArgument(function->ParameterTypes[0], arg1, cursor);
-            PushArgument(function->ParameterTypes[1], arg2, cursor);
+            PushArgument(function->ParameterTypes[0], arg1);
+            PushArgument(function->ParameterTypes[1], arg2);
             return EndCall(function);
         }
         else
@@ -136,10 +134,9 @@ namespace Bibim
     {
         if (const Script::Function* function = BeginCall(name, 3))
         {
-            int cursor = 0;
-            PushArgument(function->ParameterTypes[0], arg1, cursor);
-            PushArgument(function->ParameterTypes[1], arg2, cursor);
-            PushArgument(function->ParameterTypes[2], arg3, cursor);
+            PushArgument(function->ParameterTypes[0], arg1);
+            PushArgument(function->ParameterTypes[1], arg2);
+            PushArgument(function->ParameterTypes[2], arg3);
             return EndCall(function);
         }
         else
@@ -150,11 +147,10 @@ namespace Bibim
     {
         if (const Script::Function* function = BeginCall(name, 4))
         {
-            int cursor = 0;
-            PushArgument(function->ParameterTypes[0], arg1, cursor);
-            PushArgument(function->ParameterTypes[1], arg2, cursor);
-            PushArgument(function->ParameterTypes[2], arg3, cursor);
-            PushArgument(function->ParameterTypes[3], arg4, cursor);
+            PushArgument(function->ParameterTypes[0], arg1);
+            PushArgument(function->ParameterTypes[1], arg2);
+            PushArgument(function->ParameterTypes[2], arg3);
+            PushArgument(function->ParameterTypes[3], arg4);
             return EndCall(function);
         }
         else
@@ -165,12 +161,11 @@ namespace Bibim
     {
         if (const Script::Function* function = BeginCall(name, 5))
         {
-            int cursor = 0;
-            PushArgument(function->ParameterTypes[0], arg1, cursor);
-            PushArgument(function->ParameterTypes[1], arg2, cursor);
-            PushArgument(function->ParameterTypes[2], arg3, cursor);
-            PushArgument(function->ParameterTypes[3], arg4, cursor);
-            PushArgument(function->ParameterTypes[4], arg5, cursor);
+            PushArgument(function->ParameterTypes[0], arg1);
+            PushArgument(function->ParameterTypes[1], arg2);
+            PushArgument(function->ParameterTypes[2], arg3);
+            PushArgument(function->ParameterTypes[3], arg4);
+            PushArgument(function->ParameterTypes[4], arg5);
             return EndCall(function);
         }
         else
@@ -181,10 +176,9 @@ namespace Bibim
     {
         if (const Script::Function* function = script->Find(name))
         {
-            BinaryWriter::From(stack.Push(sizeof(int)), 0);
-            if (function->ArgumentStackSize > 0)
-                stack.Push(function->ArgumentStackSize);
-
+            const int count = static_cast<int>(function->ReturnTypes.size());
+            for (int i = 0; i < count; i++)
+                stack.Push(ScriptObject::SizeOf(function->ReturnTypes[i]));
             BBAssert(static_cast<int>(function->ParameterTypes.size()) == numberOfArguments);
             return function;
         }
@@ -199,30 +193,38 @@ namespace Bibim
         StreamPtr stream = MemoryStream::NewReadableStream(&script->GetBuffer()[function->Position], script->GetBuffer().size() - function->Position);
         BinaryReader reader(stream);
 
+        BinaryWriter::From(stack.Push(sizeof(int)), 0); // 이전 위치 기억
+        BinaryWriter::From(stack.Push(sizeof(int)), function->ParameterTypes.size());
+
         const int topIndex = stack.GetTopIndex();
         do
         {
             Process(reader);
         } while (stack.GetTopIndex() > topIndex);
 
-        ScriptObject result = ScriptObject::Void;
-        if (function->ReturnType != ScriptObject::VoidType)
-        {
-            result = ScriptObject::ReadFromBytes(stack.Peek(), function->ReturnType);
-            stack.Pop(1);
-        }
+        const int position = BinaryReader::ToInt32(stack.Peek());
+        stack.Pop(2);
+        stack.Pop(function->ParameterTypes.size());
 
-        if (function->ArgumentStackSize > 0)
-            stack.Pop(2);
-        else
-            stack.Pop(1);
+        ScriptObject result = ScriptObject::Void;
+        if (function->ReturnTypes.size() > 0)
+            result = ScriptObject::ReadFromBytes(stack.Peek(), function->ReturnTypes[0]);
+
+        stack.Pop(function->ReturnTypes.size());
+        
+        // --------------------
+        // Return 1 .. N
+        // Current Point
+        // Arg 1 .. N
+        // Local
+        // --------------------
 
         return result;
     }
 
-    void ScriptProcess::PushArgument(ScriptObjectType type, const ScriptObject& value, int& inOutCursor)
+    void ScriptProcess::PushArgument(ScriptObjectType type, const ScriptObject& value)
     {
-        inOutCursor += ScriptObject::WriteToBytes(stack.Peek() + inOutCursor, value, type);
+        ScriptObject::WriteToBytes(stack.Push(ScriptObject::SizeOf(type)), value, type);
     }
 
     void ScriptProcess::Resume()
@@ -305,9 +307,6 @@ namespace Bibim
             case IfTrueThenJump:
                 {
                     const int32 newPosition = reader.ReadInt32();
-                    
-                    Process(reader);
-
                     const bool condition = BinaryReader::ToBool(stack.Peek());
                     stack.Pop(1);
                     if (condition)
@@ -318,9 +317,6 @@ namespace Bibim
                 {
                     const int32 newPosition1 = reader.ReadInt32();
                     const int32 newPosition2 = reader.ReadInt32();
-
-                    Process(reader);
-
                     const bool condition = BinaryReader::ToBool(stack.Peek());
                     stack.Pop(1);
                     if (condition)
@@ -332,9 +328,6 @@ namespace Bibim
             case IfFalseThenJump:
                 {
                     const int32 newPosition = reader.ReadInt32();
-
-                    Process(reader);
-
                     const bool condition = BinaryReader::ToBool(stack.Peek());
                     stack.Pop(1);
                     if (condition == false)
@@ -345,9 +338,6 @@ namespace Bibim
                 {
                     const int32 newPosition1 = reader.ReadInt32();
                     const int32 newPosition2 = reader.ReadInt32();
-
-                    Process(reader);
-
                     const bool condition = BinaryReader::ToBool(stack.Peek());
                     stack.Pop(1);
                     if (condition == false)
@@ -358,45 +348,41 @@ namespace Bibim
                 break;
             case CallScriptFunction:
                 {
-                    const String functionName = reader.ReadString();
-                    const int32 numberOfArguments = reader.ReadInt32();
-                        
-                    for (int i = 0; i < numberOfArguments; i++)
-                        Process(reader);
+                    const int functionPosition = reader.ReadInt32();
+                    const int numberOfArguments = static_cast<int>(reader.ReadInt32());
+                    stack.Push(numberOfArguments);
+                    stack.Push(reader.GetSource()->GetPosition()); // Pop by ScriptCommandID::Return
 
-                    stack.Pop(numberOfArguments);
+                    reader.GetSource()->Seek(functionPosition, Stream::FromBegin);
                 }
                 break;
             case CallNativeFunction:
                 {
                     const uint32 functionID = reader.ReadUInt32();
-                    const int32 numberOfArguments = reader.ReadInt32();
+                    const int numberOfArguments = reader.ReadInt32();
                     ScriptNativeFunction function = ScriptNativeFunctionTable::Find(functionID);
-
-                    for (int i = 0; i < numberOfArguments; i++)
-                        Process(reader);
 
                     // function();
 
                     stack.Pop(numberOfArguments);
+
+                    throw;
                 }
                 break;
             case Return:
                 {
-                    int i = sizeof(SharedObjectPtr);
-                    Process(reader);
-                    int result = BinaryReader::ToInt32(stack.Peek());
-                    result = 0;
+                    const int position = BinaryReader::ToInt32(stack.GetAt(-1));
+                    const int numberOfArguments = BinaryReader::ToInt32(stack.GetAt(-2));
+                    stack.Pop(2 + numberOfArguments);
+                    reader.GetSource()->Seek(position, Stream::FromBegin);
                 }
                 break;
             case Yield:
                 break;
             case LocalAssign:
                 {
-                    const uint stackIndex  = reader.ReadInt32();
-                    const uint localOffset = reader.ReadInt32();
-
-                    Process(reader);
+                    const int stackIndex  = reader.ReadInt32();
+                    const int localOffset = reader.ReadInt32();
 
                           byte* destination = stack.GetAt(stackIndex);
                           int   sourceSize = 0;
@@ -412,8 +398,6 @@ namespace Bibim
                 break;
             case AddInt:
                 {
-                    Process(reader);
-                    Process(reader);
                     const int operand1 = BinaryReader::ToInt32(stack.GetAt(-2));
                     const int operand2 = BinaryReader::ToInt32(stack.GetAt(-1));
                     stack.Pop(2);
@@ -422,8 +406,6 @@ namespace Bibim
                 break;
             case SubtractInt:
                 {
-                    Process(reader);
-                    Process(reader);
                     const int operand1 = BinaryReader::ToInt32(stack.GetAt(-2));
                     const int operand2 = BinaryReader::ToInt32(stack.GetAt(-1));
                     stack.Pop(2);
@@ -432,8 +414,6 @@ namespace Bibim
                 break;
             case MultiplyInt:
                 {
-                    Process(reader);
-                    Process(reader);
                     const int operand1 = BinaryReader::ToInt32(stack.GetAt(-2));
                     const int operand2 = BinaryReader::ToInt32(stack.GetAt(-1));
                     stack.Pop(2);
@@ -442,8 +422,6 @@ namespace Bibim
                 break;
             case TestEqualityInt:
                 {
-                    Process(reader);
-                    Process(reader);
                     const int operand1 = BinaryReader::ToInt32(stack.GetAt(-2));
                     const int operand2 = BinaryReader::ToInt32(stack.GetAt(-1));
                     stack.Pop(2);
@@ -452,8 +430,6 @@ namespace Bibim
                 break;
             case TestInequalityInt:
                 {
-                    Process(reader);
-                    Process(reader);
                     const int operand1 = BinaryReader::ToInt32(stack.GetAt(-2));
                     const int operand2 = BinaryReader::ToInt32(stack.GetAt(-1));
                     stack.Pop(2);

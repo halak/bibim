@@ -31,7 +31,7 @@
             private:
                 const Script::Function* BeginCall(const String& name, int numberOfArguments);
                 ScriptObject EndCall(const Script::Function* function);
-                void PushArgument(ScriptObjectType type, const ScriptObject& value, int& inOutCursor);
+                void PushArgument(ScriptObjectType type, const ScriptObject& value);
 
                 void Process(BinaryReader& reader);
 
