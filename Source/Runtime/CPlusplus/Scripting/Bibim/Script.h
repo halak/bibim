@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameAsset.h>
+#   include <Bibim/ScriptObject.h>
 #   include <Bibim/String.h>
 #   include <vector>
 
@@ -13,25 +14,36 @@
         {
             BBReadableObjectClass(Script, GameAsset, GameAsset, 'S', 'C', 'R', 'T');
             public:
+                struct Function
+                {
+                    String Name;
+                    int Position;
+                    int ArgumentStackSize;
+                    ScriptObjectType ReturnType;
+                    std::vector<ScriptObjectType> ParameterTypes;
+                };
+
+            public:
                 typedef std::vector<byte> Buffer;
                 typedef std::vector<String> StringCollection;
+                typedef std::vector<Function> FunctionTable;
 
             public:
                 Script();
-                Script(const Buffer& buffer, uint entryPoint);
                 virtual ~Script();
 
+                const Function* Find(const String& name) const;
+
                 inline const Buffer& GetBuffer() const;
-                inline uint GetEntryPoint() const;
                 inline const StringCollection& GetStringTable() const;
 
             private:
                 struct MoveTag {};
-                Script(Buffer& buffer, uint entryPoint, StringCollection& stringTable, MoveTag);
+                Script(Buffer& buffer, FunctionTable& functionTable, StringCollection& stringTable, MoveTag);
 
             private:
                 Buffer buffer;
-                uint entryPoint;
+                FunctionTable functionTable;
                 StringCollection stringTable;
         };
     }

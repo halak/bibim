@@ -24,6 +24,8 @@ namespace Bibim
 
     byte* ScriptStack::Push(int size)
     {
+        BBAssert(size > 0);
+
         const int offset = static_cast<int>(buffer.size());
         offsetStack.push_back(offset);
         buffer.resize(buffer.size() + size);

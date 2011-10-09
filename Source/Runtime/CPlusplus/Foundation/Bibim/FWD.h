@@ -141,7 +141,7 @@
                 class Any;
                 BBForwardDeclareSmartPointerClass(Script);
                 class ScriptingContext;
-                class ScriptNativeCommand;
+                class ScriptObject;
                 BBForwardDeclareSmartPointerClass(ScriptProcess);
                 class ScriptStack;
                 BBForwardDeclareSmartPointerClass(VariableStorage);

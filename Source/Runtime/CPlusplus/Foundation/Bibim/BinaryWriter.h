@@ -48,6 +48,8 @@
                 static inline void From(byte* buffer, uint16 value);
                 static inline void From(byte* buffer, int32 value);
                 static inline void From(byte* buffer, uint32 value);
+                static inline void From(byte* buffer, int64 value);
+                static inline void From(byte* buffer, uint64 value);
                 static inline void From(byte* buffer, float value);
 
             private:

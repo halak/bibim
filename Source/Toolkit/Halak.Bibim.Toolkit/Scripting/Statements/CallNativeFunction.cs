@@ -6,44 +6,44 @@ using Halak.Bibim.Reflection;
 
 namespace Halak.Bibim.Scripting.Statements
 {
-    public sealed class CallNative : CallBase
+    public sealed class CallNativeFunction : CallBase
     {
         #region Constructors
-        public CallNative()
+        public CallNativeFunction()
         {
         }
 
-        public CallNative(string name)
+        public CallNativeFunction(string name)
             : base(name)
         {
         }
 
-        public CallNative(string name, Expression[] arguments)
+        public CallNativeFunction(string name, Expression[] arguments)
             : base(name, arguments)
         {
         }
 
-        public CallNative(string name, Expression arg1)
+        public CallNativeFunction(string name, Expression arg1)
             : this(name, new Expression[] { arg1 })
         {
         }
 
-        public CallNative(string name, Expression arg1, Expression arg2)
+        public CallNativeFunction(string name, Expression arg1, Expression arg2)
             : this(name, new Expression[] { arg1, arg2 })
         {
         }
 
-        public CallNative(string name, Expression arg1, Expression arg2, Expression arg3)
+        public CallNativeFunction(string name, Expression arg1, Expression arg2, Expression arg3)
             : this(name, new Expression[] { arg1, arg2, arg3 })
         {
         }
 
-        public CallNative(string name, Expression arg1, Expression arg2, Expression arg3, Expression arg4)
+        public CallNativeFunction(string name, Expression arg1, Expression arg2, Expression arg3, Expression arg4)
             : this(name, new Expression[] { arg1, arg2, arg3, arg4 })
         {
         }
 
-        public CallNative(string name, Expression arg1, Expression arg2, Expression arg3, Expression arg4, Expression arg5)
+        public CallNativeFunction(string name, Expression arg1, Expression arg2, Expression arg3, Expression arg4, Expression arg5)
             : this(name, new Expression[] { arg1, arg2, arg3, arg4, arg5 })
         {
         }

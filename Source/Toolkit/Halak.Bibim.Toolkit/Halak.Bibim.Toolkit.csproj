@@ -129,9 +129,9 @@
     <Compile Include="Scripting\Statements\Operators\BinaryOperator.cs" />
     <Compile Include="Scripting\Statements\Block.cs" />
     <Compile Include="Scripting\Statements\Break.cs" />
-    <Compile Include="Scripting\Statements\Call.cs" />
+    <Compile Include="Scripting\Statements\CallScriptFunction.cs" />
     <Compile Include="Scripting\Statements\CallBase.cs" />
-    <Compile Include="Scripting\Statements\CallNative.cs" />
+    <Compile Include="Scripting\Statements\CallNativeFunction.cs" />
     <Compile Include="Scripting\Statements\Comment.cs" />
     <Compile Include="Scripting\Statements\ConstantExpression.cs" />
     <Compile Include="Scripting\Statements\Continue.cs" />
@@ -143,7 +143,9 @@
     <Compile Include="Scripting\Statements\If.cs" />
     <Compile Include="Scripting\Statements\Operators\InequalityOperator.cs" />
     <Compile Include="Scripting\Statements\OperatorPrecedenceAttribute.cs" />
+    <Compile Include="Scripting\Statements\Operators\MultiplicationOperator.cs" />
     <Compile Include="Scripting\Statements\Operators\NegationOperator.cs" />
+    <Compile Include="Scripting\Statements\Operators\SubtractionOperator.cs" />
     <Compile Include="Scripting\Statements\Return.cs" />
     <Compile Include="Scripting\Statements\Statement.cs" />
     <Compile Include="Scripting\Statements\Function.cs" />

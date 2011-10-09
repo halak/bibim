@@ -22,32 +22,48 @@ namespace Halak.Bibim.Scripting
         #endregion
 
         #region Methods
-        public void Generate(Stream output, Statement statement)
+        public Script Generate(Statement statement)
         {
-            if (output == null)
-                throw new ArgumentNullException("output");
+            MemoryStream memoryStream = new MemoryStream();
+
             if (statement == null)
                 throw new ArgumentNullException("statement");
 
-            Context context = new Context(this, output);
+            Context context = new Context(this, memoryStream, statement as Block);
             context.Write(statement);
+            context.FunctionTable.Sort((a, b) => string.Compare(a.Name, b.Name));
+
+            return new Script(memoryStream.GetBuffer(), (int)memoryStream.Length, null, context.FunctionTable.ToArray());
         }
         #endregion
 
         #region Context (Nested Class)
         public class Context : BinaryWriter
         {
-            #region Properties
+            #region Fields
+            private Block block;
             private Dictionary<Label, int> addresses;
             private Dictionary<Label, List<int>> reservedAddresses;
+            private List<DeclareVariable> localVariables;
+            #endregion
+
+            #region Properties
+            public List<Script.Function> FunctionTable
+            {
+                get;
+                private set;
+            }
             #endregion
 
             #region Constructors
-            public Context(BinaryScriptGenerator generator, Stream output)
+            public Context(BinaryScriptGenerator generator, Stream output, Block block)
                 : base(output)
             {
-                addresses = new Dictionary<Label, int>();
-                reservedAddresses = new Dictionary<Label, List<int>>();
+                this.block = block;
+                this.addresses = new Dictionary<Label, int>();
+                this.reservedAddresses = new Dictionary<Label, List<int>>();
+                this.localVariables = new List<DeclareVariable>();
+                this.FunctionTable = new List<Script.Function>();
             }
             #endregion
 
@@ -57,6 +73,35 @@ namespace Halak.Bibim.Scripting
                 base.Close();
             }
 
+            public Function FindFunction(string name)
+            {
+                return FindFunction(block, name);
+            }
+
+            private static Function FindFunction(Block block, string name)
+            {
+                foreach (Statement item in block.Statements)
+                {
+                    Block subBlock = item as Block;
+                    if (subBlock != null)
+                    {
+                        Function function = subBlock as Function;
+                        if (function != null)
+                        {
+                            if (function.Name == name)
+                                return function;
+                        }
+
+                        Function foundFunction = FindFunction(subBlock, name);
+                        if (foundFunction != null)
+                            return foundFunction;
+                    }
+                }
+
+                return null;
+            }
+
+            #region Write
             public void Write(ScriptCommandID value)
             {
                 Write((byte)value);
@@ -64,6 +109,20 @@ namespace Halak.Bibim.Scripting
 
             public void Write(Statement value)
             {
+                Function function = value as Function;
+                if (function != null)
+                {
+                    int argumentStackSize = 0;
+                    ScriptObjectType[] parameterTypes = new ScriptObjectType[function.Parameters.Count];
+                    for (int i = 0; i < parameterTypes.Length; i++)
+                    {
+                        parameterTypes[i] = function.Parameters[i].Type;
+                        argumentStackSize += DeclareVariable.SizeOf(parameterTypes[i]);
+                    }
+
+                    FunctionTable.Add(new Script.Function(function.Name, (int)BaseStream.Position, argumentStackSize, function.ReturnType, parameterTypes));
+                }
+
                 value.Generate(this);
             }
 
@@ -106,6 +165,7 @@ namespace Halak.Bibim.Scripting
                     Write(address);
                 }
             }
+            #endregion
 
             public bool TryGetVariableOffsetFromStack(string name, out int stackIndex, out int localOffset)
             {

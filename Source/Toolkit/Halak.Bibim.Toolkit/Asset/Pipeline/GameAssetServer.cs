@@ -115,7 +115,8 @@ namespace Halak.Bibim.Asset.Pipeline
                                           //      다음 요청부터 Cooking 하지 않고 바로 Cache에서 넘겨줍니다.
                                           //   2. "{AssetName}.ab" File에 Asset Binary를 저장합니다.
 
-                                          byte[] cacheBuffer = memoryStream.GetBuffer();
+                                          byte[] cacheBuffer = new byte[memoryStream.Length];
+                                          System.Buffer.BlockCopy(memoryStream.GetBuffer(), 0, cacheBuffer, 0, (int)memoryStream.Length);
 
                                           lock (assetCachesLock)
                                               assetCaches[binaryPath] = cacheBuffer;

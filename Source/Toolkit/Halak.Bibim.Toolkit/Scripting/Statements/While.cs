@@ -47,16 +47,15 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Methods
-        protected override void GenerateBlockBefore(BinaryScriptGenerator.Context context)
+        public override void Generate(BinaryScriptGenerator.Context context)
         {
             context.WriteLabel(StartLabel);
             context.Write(ScriptCommandID.IfFalseThenJump);
             context.WriteAddress(FinishLabel);
             context.Write(Condition);
-        }
 
-        protected override void GenerateBlockAfter(BinaryScriptGenerator.Context context)
-        {
+            base.Generate(context);
+
             context.Write(ScriptCommandID.Jump);
             context.WriteAddress(StartLabel);
             context.WriteLabel(FinishLabel);

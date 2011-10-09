@@ -50,9 +50,10 @@ class SpriteTest : public GameFramework
             texture1 = static_cast<SourceTexture2D*>(gas->Load("Asset\\BigHello"));
             texture2 = static_cast<SourceTexture2D*>(gas->Load("Asset\\Background"));
 
-            ScriptPtr script = static_cast<Script*>(gas->Load("Sum1To100"));
+            ScriptPtr script = static_cast<Script*>(gas->Load("Script"));
             ScriptProcessPtr process = new ScriptProcess(script);
-            process->Resume();
+            //process->Resume();
+            process->Call("Sum1To100");
 
             storage = gas;
             uiDomain = uid;

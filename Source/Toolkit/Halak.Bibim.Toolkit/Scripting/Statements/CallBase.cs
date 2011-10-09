@@ -6,7 +6,7 @@ using Halak.Bibim.Reflection;
 
 namespace Halak.Bibim.Scripting.Statements
 {
-    public abstract class CallBase : Statement
+    public abstract class CallBase : Expression
     {
         #region Fields
         private string name;
@@ -54,7 +54,7 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Methods
-        public override void GenerateArguments(BinaryScriptGenerator.Context context)
+        public void GenerateArguments(BinaryScriptGenerator.Context context)
         {
             context.Write(Arguments.Length);
             foreach (Expression item in Arguments)

@@ -7,7 +7,7 @@ namespace Halak.Bibim.Scripting
 {
     public enum ScriptObjectType
     {
-        Null,
+        Void,
         Boolean,
         Int,
         UInt,
@@ -21,6 +21,8 @@ namespace Halak.Bibim.Scripting
         Float3,
         Float4,
         String,
+        SharedObject,
+        LightObject,
         Vector2 = Float2,
         Vector3 = Float3,
         Vector4 = Float4,
