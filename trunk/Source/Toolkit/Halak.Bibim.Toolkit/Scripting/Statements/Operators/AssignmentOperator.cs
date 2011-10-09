@@ -42,6 +42,8 @@ namespace Halak.Bibim.Scripting.Statements.Operators
             if (Value == null)
                 throw new InvalidOperationException();
 
+            context.Write(Value);
+
             int stackIndex;
             int localOffset;
             if (context.TryGetVariableOffsetFromStack(Variable.Name, out stackIndex, out localOffset))
@@ -55,8 +57,6 @@ namespace Halak.Bibim.Scripting.Statements.Operators
                 context.Write(ScriptCommandID.GlobalAssign);
                 context.Write(Variable.Name);
             }
-
-            context.Write(Value);
         }
 
         public override string ToString()

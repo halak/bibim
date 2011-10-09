@@ -20,10 +20,12 @@ namespace Halak.Bibim.Scripting
                 writer.WriteBibimString(item.Name);
                 writer.Write(item.Position);
                 writer.Write(item.ArgumentStackSize);
-                writer.Write((int)item.ReturnType);
+                writer.Write(item.ReturnTypes.Length);
+                foreach (ScriptObjectType type in item.ReturnTypes)
+                    writer.Write((int)type);
                 writer.Write(item.ParameterTypes.Length);
-                foreach (ScriptObjectType parameterType in item.ParameterTypes)
-                    writer.Write((int)parameterType);
+                foreach (ScriptObjectType type in item.ParameterTypes)
+                    writer.Write((int)type);
             }
             writer.Write(asset.StringTable.Count);
             foreach (string item in asset.StringTable)

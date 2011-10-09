@@ -57,9 +57,9 @@ namespace Halak.Bibim.Scripting.Statements.Operators
             if (RightOperand == null)
                 throw new InvalidOperationException("RightOperand");
 
-            context.Write(commandID);
             context.Write(LeftOperand);
             context.Write(RightOperand);
+            context.Write(commandID);
         }
 
         protected static string ToString(Expression operand)

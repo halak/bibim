@@ -62,9 +62,9 @@ namespace Halak.Bibim.Scripting.Statements
 
             if (Else != null)
             {
+                context.Write(Condition);
                 context.Write(ScriptCommandID.IfFalseThenJump);
                 context.WriteAddress(ElseLabel);
-                context.Write(Condition);
 
                 base.Generate(context);
 
@@ -76,9 +76,9 @@ namespace Halak.Bibim.Scripting.Statements
             }
             else
             {
+                context.Write(Condition);
                 context.Write(ScriptCommandID.IfFalseThenJump);
                 context.WriteAddress(FinishLabel);
-                context.Write(Condition);
 
                 base.Generate(context);
 

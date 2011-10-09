@@ -51,9 +51,10 @@ namespace Halak.Bibim.Scripting.Statements
 
         public override void Generate(BinaryScriptGenerator.Context context)
         {
+            GenerateArguments(context);
             uint functionID = 0;
             context.Write(functionID);
-            GenerateArguments(context);
+            context.Write(Arguments.Length);
         }
     }
 }

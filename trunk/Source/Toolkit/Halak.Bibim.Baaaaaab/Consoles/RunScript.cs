@@ -27,7 +27,7 @@ namespace Halak.Bibim.Bab.Consoles
         {
             Block code = new Block(new Statement[]
             {
-                new Function("Sum1To100", new Statement[]
+                new Function("Sum1To100", null, new ScriptObjectType[] { ScriptObjectType.Int }, new Statement[]
                 {
                     new DeclareVariable("result", ScriptObjectType.Int),
                     new DeclareVariable("i", ScriptObjectType.Int),
@@ -41,7 +41,7 @@ namespace Halak.Bibim.Bab.Consoles
                     new Return(new VariableExpression("result"))
                 }),
 
-                new Function("Factorial", ScriptObjectType.Int, new DeclareVariable[] { new DeclareVariable("N", ScriptObjectType.Int) }, new Statement[]
+                new Function("Factorial", new DeclareVariable[] { new DeclareVariable("N", ScriptObjectType.Int) }, new ScriptObjectType[] { ScriptObjectType.Int }, new Statement[]
                 {
                     new If(new EqualityOperator(new VariableExpression("N"), new ConstantExpression(0)), new Statement[]
                     {
