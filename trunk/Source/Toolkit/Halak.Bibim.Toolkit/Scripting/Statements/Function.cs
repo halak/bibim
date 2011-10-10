@@ -34,12 +34,6 @@ namespace Halak.Bibim.Scripting.Statements
             get;
             set;
         }
-
-        public Label StartLabel
-        {
-            get;
-            private set;
-        }
         #endregion
 
         #region Constructors
@@ -55,26 +49,31 @@ namespace Halak.Bibim.Scripting.Statements
                 this.ReturnTypes = new List<ScriptObjectType>(returnTypes);
             else
                 this.ReturnTypes = new List<ScriptObjectType>();
-            this.StartLabel = new Label();
         }
         #endregion
 
         #region Methods
-        public override void Generate(BinaryScriptGenerator.Context context)
+        protected override void GenerateBlockBegin(BinaryScriptGenerator.Context context)
         {
-            context.WriteLabel(StartLabel);
+            context.GenerateAllocateN(ComputeRequiredStackSize(this));
+        }
 
-            int requiredStackSize = ComputeRequiredStackSize();
-            if (requiredStackSize > 0)
+        protected override void GenerateBlockEnd(BinaryScriptGenerator.Context context)
+        {
+            context.GeneratePop(1);
+        }
+
+        private static int ComputeRequiredStackSize(Block block)
+        {
+            int result = 0;
+            foreach (Statement item in block.Statements)
             {
-                context.Write(ScriptCommandID.AllocateN);
-                context.Write(ComputeRequiredStackSize());
+                if (item is DeclareVariable)
+                    result += DeclareVariable.SizeOf(((DeclareVariable)item).Type);
+                else if (item is Block)
+                    result += ComputeRequiredStackSize((Block)item);
             }
-
-            base.Generate(context);
-
-            if (requiredStackSize > 0)
-                context.Write(ScriptCommandID.Pop1);
+            return result;
         }
         #endregion
     }

@@ -43,18 +43,16 @@ namespace Halak.Bibim.Scripting.Statements.Operators
                 throw new InvalidOperationException();
 
             context.Write(Value);
-
             int stackIndex;
             int localOffset;
-            if (context.TryGetVariableOffsetFromStack(Variable.Name, out stackIndex, out localOffset))
+            int size;
+            if (context.TryGetVariableOffsetFromStack(Variable.Name, out stackIndex, out localOffset, out size))
             {
-                context.Write(ScriptCommandID.LocalAssign);
-                context.Write(stackIndex);
-                context.Write(localOffset);
+                context.GenerateLocalAssign(stackIndex, localOffset);
             }
             else
             {
-                context.Write(ScriptCommandID.GlobalAssign);
+                context.Write(ScriptInstruction.GlobalAssign);
                 context.Write(Variable.Name);
             }
         }

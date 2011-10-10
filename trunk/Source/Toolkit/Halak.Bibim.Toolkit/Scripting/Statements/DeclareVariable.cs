@@ -44,6 +44,7 @@ namespace Halak.Bibim.Scripting.Statements
         #region Methods
         public override void Generate(BinaryScriptGenerator.Context context)
         {
+            // ... Generator에서 구분용으로 쓰는 식별자이기 때문에 아무 명령도 생성하지 않습니다 ...
         }
 
         public static int SizeOf(ScriptObjectType type)

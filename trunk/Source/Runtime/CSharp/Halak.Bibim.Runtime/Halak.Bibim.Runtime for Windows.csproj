@@ -120,7 +120,7 @@
     <Compile Include="Reflection\AssemblyUtility.cs" />
     <Compile Include="Reflection\TypeExtension.cs" />
     <Compile Include="Scripting\Script.cs" />
-    <Compile Include="Scripting\ScriptCommandID.cs" />
+    <Compile Include="Scripting\ScriptInstruction.cs" />
     <Compile Include="Scripting\ScriptFunctionLibraryAttribute.cs" />
     <Compile Include="Scripting\ScriptingContext.cs" />
     <Compile Include="Scripting\ScriptNativeCommand.cs" />

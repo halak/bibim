@@ -24,12 +24,6 @@ namespace Halak.Bibim.Scripting.Statements
             get;
             private set;
         }
-
-        public Label FinishLabel
-        {
-            get;
-            private set;
-        }
         #endregion
 
         #region Constructors
@@ -42,7 +36,6 @@ namespace Halak.Bibim.Scripting.Statements
             : this(condition, null)
         {
             ElseLabel = new Label();
-            FinishLabel = new Label();
         }
         
         public If(Expression condition, IEnumerable<Statement> statements)
@@ -50,39 +43,31 @@ namespace Halak.Bibim.Scripting.Statements
         {
             Condition = condition;
             ElseLabel = new Label();
-            FinishLabel = new Label();
         }
         #endregion
 
         #region Methods
-        public override void Generate(BinaryScriptGenerator.Context context)
+        protected override void GenerateBlockBefore(BinaryScriptGenerator.Context context)
         {
             if (Condition == null)
                 throw new InvalidOperationException();
+        }
 
+        protected override void GenerateBlockBegin(BinaryScriptGenerator.Context context)
+        {
+            if (Else != null)
+                context.GenerateIfFalseThenJump(Condition, ElseLabel);
+            else
+                context.GenerateIfFalseThenJump(Condition, FinishLabel);
+        }
+
+        protected override void GenerateBlockEnd(BinaryScriptGenerator.Context context)
+        {
             if (Else != null)
             {
-                context.Write(Condition);
-                context.Write(ScriptCommandID.IfFalseThenJump);
-                context.WriteAddress(ElseLabel);
-
-                base.Generate(context);
-
-                context.Write(ScriptCommandID.Jump);
-                context.WriteAddress(FinishLabel);
-                context.WriteLabel(ElseLabel);
+                context.GenerateJump(FinishLabel);
+                context.DeclareLabel(ElseLabel);
                 context.Write(Else);
-                context.WriteLabel(FinishLabel);
-            }
-            else
-            {
-                context.Write(Condition);
-                context.Write(ScriptCommandID.IfFalseThenJump);
-                context.WriteAddress(FinishLabel);
-
-                base.Generate(context);
-
-                context.WriteLabel(FinishLabel);
             }
         }
         #endregion

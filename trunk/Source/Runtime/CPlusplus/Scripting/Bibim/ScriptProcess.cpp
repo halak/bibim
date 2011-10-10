@@ -10,7 +10,7 @@
 
 namespace Bibim
 {
-    enum ScriptCommandID
+    enum ScriptInstruction
     {
         NOP,
 
@@ -30,10 +30,7 @@ namespace Bibim
         PopN,
 
         Jump,
-        IfTrueThenJump,
-        IfTrueThenJumpElseJump,
         IfFalseThenJump,
-        IfFalseThenJumpElseJump,
         CallScriptFunction,
         CallNativeFunction,
         Return,
@@ -202,22 +199,15 @@ namespace Bibim
             Process(reader);
         } while (stack.GetTopIndex() > topIndex);
 
-        const int position = BinaryReader::ToInt32(stack.Peek());
-        stack.Pop(2);
-        stack.Pop(function->ParameterTypes.size());
+        //const int position = BinaryReader::ToInt32(stack.Peek());
+        //stack.Pop(2);
+        //stack.Pop(function->ParameterTypes.size());
 
         ScriptObject result = ScriptObject::Void;
         if (function->ReturnTypes.size() > 0)
             result = ScriptObject::ReadFromBytes(stack.Peek(), function->ReturnTypes[0]);
 
         stack.Pop(function->ReturnTypes.size());
-        
-        // --------------------
-        // Return 1 .. N
-        // Current Point
-        // Arg 1 .. N
-        // Local
-        // --------------------
 
         return result;
     }
@@ -241,7 +231,7 @@ namespace Bibim
 
     void ScriptProcess::Process(BinaryReader& reader)
     {
-        const ScriptCommandID id = static_cast<ScriptCommandID>(reader.ReadUInt8());
+        const ScriptInstruction id = static_cast<ScriptInstruction>(reader.ReadUInt8());
         switch (id)
         {
             case NOP:
@@ -304,27 +294,6 @@ namespace Bibim
                     reader.GetSource()->Seek(newPosition, Stream::FromBegin);
                 }
                 break;
-            case IfTrueThenJump:
-                {
-                    const int32 newPosition = reader.ReadInt32();
-                    const bool condition = BinaryReader::ToBool(stack.Peek());
-                    stack.Pop(1);
-                    if (condition)
-                        reader.GetSource()->Seek(newPosition, Stream::FromBegin);
-                }
-                break;
-            case IfTrueThenJumpElseJump:
-                {
-                    const int32 newPosition1 = reader.ReadInt32();
-                    const int32 newPosition2 = reader.ReadInt32();
-                    const bool condition = BinaryReader::ToBool(stack.Peek());
-                    stack.Pop(1);
-                    if (condition)
-                        reader.GetSource()->Seek(newPosition1, Stream::FromBegin);
-                    else
-                        reader.GetSource()->Seek(newPosition2, Stream::FromBegin);
-                }
-                break;
             case IfFalseThenJump:
                 {
                     const int32 newPosition = reader.ReadInt32();
@@ -334,24 +303,12 @@ namespace Bibim
                         reader.GetSource()->Seek(newPosition, Stream::FromBegin);
                 }
                 break;
-            case IfFalseThenJumpElseJump:
-                {
-                    const int32 newPosition1 = reader.ReadInt32();
-                    const int32 newPosition2 = reader.ReadInt32();
-                    const bool condition = BinaryReader::ToBool(stack.Peek());
-                    stack.Pop(1);
-                    if (condition == false)
-                        reader.GetSource()->Seek(newPosition1, Stream::FromBegin);
-                    else
-                        reader.GetSource()->Seek(newPosition2, Stream::FromBegin);
-                }
-                break;
             case CallScriptFunction:
                 {
                     const int functionPosition = reader.ReadInt32();
                     const int numberOfArguments = static_cast<int>(reader.ReadInt32());
-                    stack.Push(numberOfArguments);
-                    stack.Push(reader.GetSource()->GetPosition()); // Pop by ScriptCommandID::Return
+                    stack.Push(reader.GetSource()->GetPosition());
+                    stack.Push(numberOfArguments); // Pop by ScriptInstruction::Return
 
                     reader.GetSource()->Seek(functionPosition, Stream::FromBegin);
                 }
@@ -361,19 +318,24 @@ namespace Bibim
                     const uint32 functionID = reader.ReadUInt32();
                     const int numberOfArguments = reader.ReadInt32();
                     ScriptNativeFunction function = ScriptNativeFunctionTable::Find(functionID);
+                    stack.Push(reader.GetSource()->GetPosition());
+                    stack.Push(numberOfArguments); // Pop by ScriptInstruction::Return
 
                     // function();
-
-                    stack.Pop(numberOfArguments);
-
-                    throw;
                 }
                 break;
             case Return:
                 {
-                    const int position = BinaryReader::ToInt32(stack.GetAt(-1));
+                    // Expected stack layout (Bottom-up)
+                    // ========================================
+                    // [-1] Local variables
+                    // [-2] Number of arguments
+                    // [-3] Caller-address
+                    // [-4 ~ ] Arguments 
+
+                    const int position = BinaryReader::ToInt32(stack.GetAt(-3));
                     const int numberOfArguments = BinaryReader::ToInt32(stack.GetAt(-2));
-                    stack.Pop(2 + numberOfArguments);
+                    stack.Pop(3 + numberOfArguments); // to "Return value spaces"
                     reader.GetSource()->Seek(position, Stream::FromBegin);
                 }
                 break;

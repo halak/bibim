@@ -144,7 +144,6 @@
     <Compile Include="Scripting\Statements\Operators\InequalityOperator.cs" />
     <Compile Include="Scripting\Statements\OperatorPrecedenceAttribute.cs" />
     <Compile Include="Scripting\Statements\Operators\MultiplicationOperator.cs" />
-    <Compile Include="Scripting\Statements\Operators\NegationOperator.cs" />
     <Compile Include="Scripting\Statements\Operators\SubtractionOperator.cs" />
     <Compile Include="Scripting\Statements\Return.cs" />
     <Compile Include="Scripting\Statements\Statement.cs" />

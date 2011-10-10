@@ -12,18 +12,6 @@ namespace Halak.Bibim.Scripting.Statements
             get;
             set;
         }
-
-        public Label StartLabel
-        {
-            get;
-            private set;
-        }
-
-        public Label FinishLabel
-        {
-            get;
-            private set;
-        }
         #endregion
 
         #region Constructors
@@ -41,24 +29,24 @@ namespace Halak.Bibim.Scripting.Statements
             : base(statements)
         {
             Condition = condition;
-            StartLabel = new Label();
-            FinishLabel = new Label();
         }
         #endregion
 
         #region Methods
-        public override void Generate(BinaryScriptGenerator.Context context)
+        protected override void GenerateBlockBefore(BinaryScriptGenerator.Context context)
         {
-            context.WriteLabel(StartLabel);
-            context.Write(Condition);
-            context.Write(ScriptCommandID.IfFalseThenJump);
-            context.WriteAddress(FinishLabel);
+            if (Condition == null)
+                throw new InvalidOperationException("Condition");
+        }
 
-            base.Generate(context);
+        protected override void GenerateBlockBegin(BinaryScriptGenerator.Context context)
+        {
+            context.GenerateIfFalseThenJump(Condition, FinishLabel);
+        }
 
-            context.Write(ScriptCommandID.Jump);
-            context.WriteAddress(StartLabel);
-            context.WriteLabel(FinishLabel);
+        protected override void GenerateBlockEnd(BinaryScriptGenerator.Context context)
+        {
+            context.GenerateJump(StartLabel);
         }
 
         public override string ToString()

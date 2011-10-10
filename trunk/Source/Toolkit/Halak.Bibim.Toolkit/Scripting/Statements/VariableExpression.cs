@@ -37,21 +37,7 @@ namespace Halak.Bibim.Scripting.Statements
         #region Methods
         public override void Generate(BinaryScriptGenerator.Context context)
         {
-            int stackIndex;
-            int localOffset;
-            if (context.TryGetVariableOffsetFromStack(Name, out stackIndex, out localOffset))
-            {
-                context.Write(ScriptCommandID.PushLocalVariable);
-                context.Write(stackIndex);
-                context.Write(localOffset);
-                context.Write(4);
-
-            }
-            else
-            {
-                context.Write(ScriptCommandID.PushGlobalVariable);
-                context.Write(Name);
-            }
+            context.GeneratePushVariable(Name);
         }
 
         public override string ToString()

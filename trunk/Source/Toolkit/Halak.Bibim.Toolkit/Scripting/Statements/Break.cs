@@ -8,7 +8,7 @@ namespace Halak.Bibim.Scripting.Statements
     {
         public override void Generate(BinaryScriptGenerator.Context context)
         {
-            throw new NotImplementedException();
+            // context.GenerateJump(context.CurrentBlock.FinishLabel);
         }
     }
 }

@@ -29,11 +29,8 @@ namespace Halak.Bibim.Scripting.Statements
         public override void Generate(BinaryScriptGenerator.Context context)
         {
             context.Write(Value);
-            context.Write(ScriptCommandID.LocalAssign);
-            context.Write(-1 - context.Function.Parameters.Count - 3);
-            int zero = 0;
-            context.Write(zero);
-            context.Write(ScriptCommandID.Return);
+            context.GenerateLocalAssign(context.Function.Parameters.Count - 5, 0);
+            context.GenerateReturn();
         }
         #endregion
     }
