@@ -49,12 +49,12 @@ namespace Halak.Bibim.Scripting.Statements
         }
         #endregion
 
-        public override void Generate(BinaryScriptGenerator.Context context)
+        public override void Generate(ScriptCompiler.Context context)
         {
-            GenerateArguments(context);
-            uint functionID = 0;
-            context.Write(functionID);
-            context.Write(Arguments.Length);
+            //GeneratePushArguments(context);
+            //uint functionID = 0;
+            //context.Write(functionID);
+            //context.Write(Arguments.Length);
         }
     }
 }

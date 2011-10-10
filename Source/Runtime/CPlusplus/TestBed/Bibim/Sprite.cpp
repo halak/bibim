@@ -53,7 +53,7 @@ class SpriteTest : public GameFramework
             ScriptPtr script = static_cast<Script*>(gas->Load("Script"));
             ScriptProcessPtr process = new ScriptProcess(script);
             //process->Resume();
-            process->Call("Sum1To100");
+            process->Call("Factorial", 5);
 
             storage = gas;
             uiDomain = uid;

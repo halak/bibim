@@ -62,11 +62,11 @@ namespace Halak.Bibim.Bab.Consoles
                 })
             });
 
-            BinaryScriptGenerator generator = new BinaryScriptGenerator();
+            ScriptCompiler compiler = new ScriptCompiler();
             FileStream fs = new FileStream("Script.ab", FileMode.Create, FileAccess.Write);
 
             ScriptWriter writer = new ScriptWriter();
-            writer.Write(new Asset.AssetStreamWriter(fs, null), generator.Generate(code));
+            writer.Write(new Asset.AssetStreamWriter(fs, null), compiler.Compile(code));
         }
     }
 }

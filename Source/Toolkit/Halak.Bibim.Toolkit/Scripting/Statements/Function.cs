@@ -16,9 +16,14 @@ namespace Halak.Bibim.Scripting.Statements
             get { return name; }
             set
             {
+                value = value ?? string.Empty;
+
                 if (name != value)
                 {
-                    name = value ?? string.Empty;
+                    name = value;
+
+                    BeginLabel.Name = string.Format("Function {0}", name);
+                    EndLabel.Name = string.Format("End Function {0}", name);
                 }
             }
         }
@@ -40,7 +45,7 @@ namespace Halak.Bibim.Scripting.Statements
         public Function(string name, IEnumerable<DeclareVariable> parameters, IEnumerable<ScriptObjectType> returnTypes, IEnumerable<Statement> statements)
             : base(statements)
         {
-            this.name = name ?? string.Empty;
+            this.Name = name ?? string.Empty;
             if (parameters != null)
                 this.Parameters = new List<DeclareVariable>(parameters);
             else
@@ -53,14 +58,14 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Methods
-        protected override void GenerateBlockBegin(BinaryScriptGenerator.Context context)
+        protected override void GenerateBlockBegin(ScriptCompiler.Context context)
         {
-            context.GenerateAllocateN(ComputeRequiredStackSize(this));
+            context.AllocateN(ComputeRequiredStackSize(this), false);
         }
 
-        protected override void GenerateBlockEnd(BinaryScriptGenerator.Context context)
+        protected override void GenerateBlockEnd(ScriptCompiler.Context context)
         {
-            context.GeneratePop(1);
+            context.Pop(1);
         }
 
         private static int ComputeRequiredStackSize(Block block)

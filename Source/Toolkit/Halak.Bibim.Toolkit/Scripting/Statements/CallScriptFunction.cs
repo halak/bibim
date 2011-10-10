@@ -23,7 +23,7 @@ namespace Halak.Bibim.Scripting.Statements
         }
         #endregion
 
-        public override void Generate(BinaryScriptGenerator.Context context)
+        public override void Generate(ScriptCompiler.Context context)
         {
             // Stack layout in Function call (Top-down)
             // ==============================
@@ -54,16 +54,13 @@ namespace Halak.Bibim.Scripting.Statements
             // ==============================
 
             Function function = context.FindFunction(Name);
-            
-            // return 값을 보관할 곳을 확보한다.
-            context.Write(ScriptInstruction.AllocateN);
-            int returnValueSize = 0;
-            foreach (ScriptObjectType item in function.ReturnTypes)
-                returnValueSize += DeclareVariable.SizeOf(item);
-            context.Write(returnValueSize);
 
-            GenerateArguments(context);
-            context.WriteAddress(function.StartLabel);
+            // return value들을 보관할 영역을 확보합니다.
+            foreach (ScriptObjectType item in function.ReturnTypes)
+                context.AllocateN(DeclareVariable.SizeOf(item), true);
+            GeneratePushArguments(context);
+            context.Write(ScriptInstruction.CallScriptFunction);
+            context.WriteAddress(function.BeginLabel);
             context.Write(Arguments.Length);
         }
     }

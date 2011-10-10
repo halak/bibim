@@ -29,7 +29,7 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Methods
-        public override void Generate(BinaryScriptGenerator.Context context)
+        public override void Generate(ScriptCompiler.Context context)
         {
             switch (Type.GetTypeCode(Value.GetType()))
             {
@@ -40,7 +40,7 @@ namespace Halak.Bibim.Scripting.Statements
                 case TypeCode.DBNull:
                     throw new NotSupportedException();
                 case TypeCode.Boolean:
-                    context.GeneratePushValue(BitConverter.GetBytes((bool)Value));
+                    context.Push((bool)Value);
                     break;
                 case TypeCode.Char:
                 case TypeCode.SByte:
@@ -48,18 +48,18 @@ namespace Halak.Bibim.Scripting.Statements
                 case TypeCode.Int16:
                 case TypeCode.UInt16:
                 case TypeCode.Int32:
-                    context.GeneratePushValue(BitConverter.GetBytes(Convert.ToInt32(Value)));
+                    context.Push(Convert.ToInt32(Value));
                     break;
                 case TypeCode.UInt32:
-                    context.GeneratePushValue(BitConverter.GetBytes(Convert.ToUInt32(Value)));
+                    context.Push(Convert.ToUInt32(Value));
                     break;
                 case TypeCode.Int64:
                 case TypeCode.UInt64:
-                    context.GeneratePushValue(BitConverter.GetBytes(Convert.ToInt64(Value)));
+                    context.Push(Convert.ToInt64(Value));
                     break;
                 case TypeCode.Single:
                 case TypeCode.Double:
-                    context.GeneratePushValue(BitConverter.GetBytes(Convert.ToSingle(Value)));
+                    context.Push(Convert.ToSingle(Value));
                     break;
                 case TypeCode.Decimal:
                     throw new InvalidOperationException();

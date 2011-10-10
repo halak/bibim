@@ -35,7 +35,6 @@ namespace Halak.Bibim.Scripting.Statements
         public If(Expression condition)
             : this(condition, null)
         {
-            ElseLabel = new Label();
         }
         
         public If(Expression condition, IEnumerable<Statement> statements)
@@ -43,31 +42,35 @@ namespace Halak.Bibim.Scripting.Statements
         {
             Condition = condition;
             ElseLabel = new Label();
+
+            BeginLabel.Name = "If";
+            EndLabel.Name = "End If";
+            ElseLabel.Name = "Else";
         }
         #endregion
 
         #region Methods
-        protected override void GenerateBlockBefore(BinaryScriptGenerator.Context context)
+        protected override void GenerateBlockBefore(ScriptCompiler.Context context)
         {
             if (Condition == null)
                 throw new InvalidOperationException();
         }
 
-        protected override void GenerateBlockBegin(BinaryScriptGenerator.Context context)
+        protected override void GenerateBlockBegin(ScriptCompiler.Context context)
         {
             if (Else != null)
-                context.GenerateIfFalseThenJump(Condition, ElseLabel);
+                context.IfFalseThenJump(Condition, ElseLabel);
             else
-                context.GenerateIfFalseThenJump(Condition, FinishLabel);
+                context.IfFalseThenJump(Condition, EndLabel);
         }
 
-        protected override void GenerateBlockEnd(BinaryScriptGenerator.Context context)
+        protected override void GenerateBlockEnd(ScriptCompiler.Context context)
         {
             if (Else != null)
             {
-                context.GenerateJump(FinishLabel);
-                context.DeclareLabel(ElseLabel);
-                context.Write(Else);
+                context.Jump(EndLabel);
+                context.InidicateLabel(ElseLabel);
+                context.Generate(Else);
             }
         }
         #endregion

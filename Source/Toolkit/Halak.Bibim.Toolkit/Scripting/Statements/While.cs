@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Halak.Bibim.Scripting.Statements
 {
-    public sealed class While : Block
+    public sealed class While : Iteration
     {
         #region Properties
         public Expression Condition
@@ -29,24 +29,28 @@ namespace Halak.Bibim.Scripting.Statements
             : base(statements)
         {
             Condition = condition;
+
+            BeginLabel.Name = "While";
+            EndLabel.Name = "End While";
+            LoopLabel.Name = "While-Loop";
         }
         #endregion
 
         #region Methods
-        protected override void GenerateBlockBefore(BinaryScriptGenerator.Context context)
+        protected override void GenerateBlockBefore(ScriptCompiler.Context context)
         {
             if (Condition == null)
                 throw new InvalidOperationException("Condition");
         }
 
-        protected override void GenerateBlockBegin(BinaryScriptGenerator.Context context)
+        protected override void GenerateBlockBegin(ScriptCompiler.Context context)
         {
-            context.GenerateIfFalseThenJump(Condition, FinishLabel);
+            context.IfFalseThenJump(Condition, EndLabel);
         }
 
-        protected override void GenerateBlockEnd(BinaryScriptGenerator.Context context)
+        protected override void GenerateBlockEnd(ScriptCompiler.Context context)
         {
-            context.GenerateJump(StartLabel);
+            context.Jump(BeginLabel);
         }
 
         public override string ToString()

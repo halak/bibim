@@ -50,14 +50,14 @@ namespace Halak.Bibim.Scripting.Statements.Operators
         #endregion
 
         #region Methods
-        protected void Generate(BinaryScriptGenerator.Context context, ScriptInstruction instruction)
+        protected void Generate(ScriptCompiler.Context context, ScriptInstruction instruction)
         {
             if (LeftOperand == null)
                 throw new InvalidOperationException("LeftOperand");
             if (RightOperand == null)
                 throw new InvalidOperationException("RightOperand");
 
-            context.GenerateBinaryOperator(instruction, LeftOperand, RightOperand);
+            context.BinaryOperator(instruction, LeftOperand, RightOperand);
         }
 
         protected static string ToString(Expression operand)

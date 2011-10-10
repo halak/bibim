@@ -7,6 +7,6 @@ namespace Halak.Bibim.Scripting.Statements
 {
     public abstract class Expression : Statement
     {
-        public virtual ScriptObjectType GuessResultType(BinaryScriptGenerator.Context context) { return ScriptObjectType.Void; }
+        public virtual ScriptObjectType GuessResultType(ScriptCompiler.Context context) { return ScriptObjectType.Void; }
     }
 }
