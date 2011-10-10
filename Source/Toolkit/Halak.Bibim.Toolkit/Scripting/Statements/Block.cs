@@ -17,6 +17,18 @@ namespace Halak.Bibim.Scripting.Statements
         {
             get { return readonlyStatements; }
         }
+
+        public Label StartLabel
+        {
+            get;
+            private set;
+        }
+
+        public Label FinishLabel
+        {
+            get;
+            private set;
+        }
         #endregion
 
         #region Constructors
@@ -33,6 +45,8 @@ namespace Halak.Bibim.Scripting.Statements
                 this.statements = new List<Statement>(statements);
 
             this.readonlyStatements = new ReadOnlyCollection<Statement>(this.statements);
+            this.StartLabel = new Label();
+            this.FinishLabel = new Label();
         }
         #endregion
 
@@ -64,27 +78,36 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Generate (Methods)
-        public override void Generate(BinaryScriptGenerator.Context context)
+        public sealed override void Generate(BinaryScriptGenerator.Context context)
         {
+            GenerateBlockBefore(context);
+            context.DeclareLabel(StartLabel);
+            GenerateBlockBegin(context);
+
             foreach (Statement item in statements)
                 context.Write(item);
-        }
-        
-        protected virtual int ComputeRequiredStackSize()
-        {
-            int result = 0;
-            foreach (Statement item in statements)
-            {
-                Block block = item as Block;
-                DeclareVariable variableDeclaration = item as DeclareVariable;
-                if (block != null)
-                    result += block.ComputeRequiredStackSize();
-                if (variableDeclaration != null)
-                    result += DeclareVariable.SizeOf(variableDeclaration.Type);
-            }
 
-            return result;
+            GenerateBlockEnd(context);
+            context.DeclareLabel(FinishLabel);
+            GenerateBlockAfter(context);
         }
+
+        protected virtual void GenerateBlockBefore(BinaryScriptGenerator.Context context)
+        {
+        }
+
+        protected virtual void GenerateBlockBegin(BinaryScriptGenerator.Context context)
+        {
+        }
+
+        protected virtual void GenerateBlockEnd(BinaryScriptGenerator.Context context)
+        {
+        }
+
+        protected virtual void GenerateBlockAfter(BinaryScriptGenerator.Context context)
+        {
+        }
+       
         #endregion
     }
 }

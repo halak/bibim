@@ -40,8 +40,7 @@ namespace Halak.Bibim.Scripting.Statements
                 case TypeCode.DBNull:
                     throw new NotSupportedException();
                 case TypeCode.Boolean:
-                    context.Write(ScriptCommandID.Push1);
-                    context.Write((bool)Value);
+                    context.GeneratePushValue(BitConverter.GetBytes((bool)Value));
                     break;
                 case TypeCode.Char:
                 case TypeCode.SByte:
@@ -49,32 +48,25 @@ namespace Halak.Bibim.Scripting.Statements
                 case TypeCode.Int16:
                 case TypeCode.UInt16:
                 case TypeCode.Int32:
-                    context.Write(ScriptCommandID.Push4);
-                    context.Write(Convert.ToInt32(Value));
+                    context.GeneratePushValue(BitConverter.GetBytes(Convert.ToInt32(Value)));
                     break;
                 case TypeCode.UInt32:
-                    context.Write(ScriptCommandID.Push4);
-                    context.Write(Convert.ToUInt32(Value));
+                    context.GeneratePushValue(BitConverter.GetBytes(Convert.ToUInt32(Value)));
                     break;
                 case TypeCode.Int64:
                 case TypeCode.UInt64:
-                    context.Write(ScriptCommandID.Push8);
-                    context.Write(Convert.ToInt64(Value));
+                    context.GeneratePushValue(BitConverter.GetBytes(Convert.ToInt64(Value)));
                     break;
                 case TypeCode.Single:
                 case TypeCode.Double:
-                    context.Write(ScriptCommandID.Push4);
-                    context.Write(Convert.ToSingle(Value));
+                    context.GeneratePushValue(BitConverter.GetBytes(Convert.ToSingle(Value)));
                     break;
                 case TypeCode.Decimal:
                     throw new InvalidOperationException();
                 case TypeCode.DateTime:
                     throw new InvalidOperationException();
                 case TypeCode.String:
-                    context.Write(ScriptCommandID.PushN);
-                    context.Write(GetBibimStringBytes((string)Value));
-                    context.WriteBibimString((string)Value);
-                    break;
+                    throw new InvalidOperationException();
             }
         }
 

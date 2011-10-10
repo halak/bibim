@@ -44,7 +44,7 @@ namespace Halak.Bibim.Scripting
             private Block block;
             private Dictionary<Label, int> addresses;
             private Dictionary<Label, List<int>> reservedAddresses;
-            private List<DeclareVariable> localVariables;
+            private List<List<DeclareVariable>> virtualLocalVariableStack;
             #endregion
 
             #region Properties
@@ -68,7 +68,7 @@ namespace Halak.Bibim.Scripting
                 this.block = block;
                 this.addresses = new Dictionary<Label, int>();
                 this.reservedAddresses = new Dictionary<Label, List<int>>();
-                this.localVariables = new List<DeclareVariable>();
+                this.virtualLocalVariableStack = new List<List<DeclareVariable>>();
                 this.FunctionTable = new List<Script.Function>();
             }
             #endregion
@@ -107,8 +107,132 @@ namespace Halak.Bibim.Scripting
                 return null;
             }
 
+            public void GeneratePushValue(byte[] value)
+            {
+                switch (value.Length)
+                {
+                    case 1:
+                        Write(ScriptInstruction.Push1);
+                        break;
+                    case 4:
+                        Write(ScriptInstruction.Push4);
+                        break;
+                    case 8:
+                        Write(ScriptInstruction.Push8);
+                        break;
+                    case 12:
+                        Write(ScriptInstruction.Push12);
+                        break;
+                    case 16:
+                        Write(ScriptInstruction.Push16);
+                        break;
+                    default:
+                        Write(ScriptInstruction.PushN);
+                        Write(value.Length);
+                        break;
+                }
+
+                Write(value);
+
+                virtualLocalVariableStack.Add(new List<DeclareVariable>());
+            }
+
+            public void GeneratePushVariable(string name)
+            {
+                int stackIndex;
+                int localOffset;
+                int size;
+                if (TryGetVariableOffsetFromStack(name, out stackIndex, out localOffset, out size))
+                {
+                    Write(ScriptInstruction.PushLocalVariable);
+                    Write(stackIndex);
+                    Write(localOffset);
+                    Write(size);
+                }
+                else
+                {
+                    Write(ScriptInstruction.PushGlobalVariable);
+                    Write(name);
+                }
+
+                virtualLocalVariableStack.Add(new List<DeclareVariable>());
+            }
+
+            public void GenerateAllocateN(int size)
+            {
+                Write(ScriptInstruction.AllocateN);
+                Write(size);
+            }
+
+            public void GeneratePop(int count)
+            {
+                switch (count)
+                {
+                    case 1:
+                        Write(ScriptInstruction.Pop1);
+                        break;
+                    case 2:
+                        Write(ScriptInstruction.Pop2);
+                        break;
+                    case 4:
+                        Write(ScriptInstruction.Pop3);
+                        break;
+                    case 12:
+                        Write(ScriptInstruction.Pop4);
+                        break;
+                    default:
+                        Write(ScriptInstruction.PopN);
+                        Write(count);
+                        break;
+                }
+
+                //virtualLocalVariableStack.RemoveAt(virtualLocalVariableStack.Count - 1);
+            }
+
+            public void GenerateJump(Label destination)
+            {
+                Write(ScriptInstruction.Jump);
+                WriteAddress(destination);
+            }
+
+            public void GenerateIfFalseThenJump(Expression condition, Label destination)
+            {
+                Write(condition);
+                Write(ScriptInstruction.IfFalseThenJump);
+                WriteAddress(destination);
+
+                virtualLocalVariableStack.RemoveAt(virtualLocalVariableStack.Count - 1);
+            }
+
+            public void GenerateReturn()
+            {
+                Write(ScriptInstruction.Return);
+            }
+            
+            public void GenerateLocalAssign(string name, Expression value)
+            {
+            }
+
+            public void GenerateLocalAssign(int stackIndex, int localOffset)
+            {
+                Write(ScriptInstruction.LocalAssign);
+                Write(stackIndex);
+                Write(localOffset);
+
+                virtualLocalVariableStack.RemoveAt(virtualLocalVariableStack.Count - 1);
+            }
+
+            public void GenerateBinaryOperator(ScriptInstruction instruction, Expression leftOperand, Expression rightOperand)
+            {
+                Write(leftOperand);
+                Write(rightOperand);
+                Write(instruction);
+
+                virtualLocalVariableStack.RemoveAt(virtualLocalVariableStack.Count - 1);
+            }
+
             #region Write
-            public void Write(ScriptCommandID value)
+            public void Write(ScriptInstruction value)
             {
                 Write((byte)value);
             }
@@ -134,12 +258,40 @@ namespace Halak.Bibim.Scripting
                     FunctionTable.Add(new Script.Function(function.Name, (int)BaseStream.Position, argumentStackSize, returnTypes, parameterTypes));
                 }
 
+                if (value is Block)
+                {
+                    if (value is Function)
+                    {
+                        virtualLocalVariableStack.Add(new List<DeclareVariable>());
+                    }
+
+                    foreach (Statement item in ((Block)value).Statements)
+                    {
+                        if (item is DeclareVariable)
+                            virtualLocalVariableStack[virtualLocalVariableStack.Count - 1].Add((DeclareVariable)item);
+                    }
+                }
+
                 value.Generate(this);
+
+                if (value is Block)
+                {
+                    foreach (Statement item in ((Block)value).Statements)
+                    {
+                        if (item is DeclareVariable)
+                            virtualLocalVariableStack[virtualLocalVariableStack.Count - 1].Remove((DeclareVariable)item);
+
+                    }
+                    if (value is Function)
+                    {
+                        virtualLocalVariableStack.RemoveAt(virtualLocalVariableStack.Count - 1);
+                    }
+                }
 
                 Function = oldFunction;
             }
 
-            public void WriteLabel(Label value)
+            public void DeclareLabel(Label value)
             {
                 Trace.Assert(addresses.ContainsKey(value) == false);
 
@@ -180,26 +332,35 @@ namespace Halak.Bibim.Scripting
             }
             #endregion
 
-            public bool TryGetVariableOffsetFromStack(string name, out int stackIndex, out int localOffset)
+            public bool TryGetVariableOffsetFromStack(string name, out int stackIndex, out int localOffset, out int size)
             {
-                if (name == "i")
+                stackIndex = -1;
+                localOffset = 0;
+                size = 0;
+                for (int i = virtualLocalVariableStack.Count - 1; i >= 0; i--, stackIndex--)
                 {
-                    stackIndex = 2;
-                    localOffset = 0;
-                    return true;
-                }
-                else if (name == "result")
-                {
-                    stackIndex = 2;
-                    localOffset = 4;
-                    return true;
-                }
-                else
-                {
-                    stackIndex = -1;
-                    localOffset = -1;
-                    return false;
-                }
+                    List<DeclareVariable> items = virtualLocalVariableStack[i];
+                    int k = items.Count - 1;
+                    bool found = false;
+                    for (k = items.Count - 1; k >= 0; k--)
+                    {
+                        DeclareVariable item = items[k];
+                        if (item.Name == name)
+                        {
+                            size = DeclareVariable.SizeOf(item.Type);
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    for (k = k - 1; k >= 0; k--)
+                        localOffset += DeclareVariable.SizeOf(items[k].Type);
+
+                    if (found)
+                        return true;
+                }   
+
+                return false;
             }
             #endregion
         }

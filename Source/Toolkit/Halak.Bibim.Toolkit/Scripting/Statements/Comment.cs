@@ -35,7 +35,7 @@ namespace Halak.Bibim.Scripting.Statements
 
         public override void Generate(BinaryScriptGenerator.Context context)
         {
-            throw new NotImplementedException();
+            // ... 아무 명령도 생성하지 않습니다 ...
         }
     }
 }

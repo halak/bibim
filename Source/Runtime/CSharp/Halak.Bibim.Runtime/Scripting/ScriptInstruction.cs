@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Halak.Bibim.Scripting
 {
-    public enum ScriptCommandID
+    public enum ScriptInstruction
     {
         NOP,
 
@@ -25,10 +25,7 @@ namespace Halak.Bibim.Scripting
         PopN,
 
         Jump,
-        IfTrueThenJump,
-        IfTrueThenJumpElseJump,
         IfFalseThenJump,
-        IfFalseThenJumpElseJump,
         CallScriptFunction,
         CallNativeFunction,
         Return,

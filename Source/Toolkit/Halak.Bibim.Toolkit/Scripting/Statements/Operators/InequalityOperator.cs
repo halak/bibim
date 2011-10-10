@@ -22,7 +22,7 @@ namespace Halak.Bibim.Scripting.Statements.Operators
         #region Methods
         public override void Generate(BinaryScriptGenerator.Context context)
         {
-            Generate(context, ScriptCommandID.TestInequalityInt);
+            Generate(context, ScriptInstruction.TestInequalityInt);
         }
 
         public override string ToString()
