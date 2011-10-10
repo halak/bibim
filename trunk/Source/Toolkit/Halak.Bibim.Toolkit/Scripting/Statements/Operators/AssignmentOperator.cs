@@ -35,26 +35,14 @@ namespace Halak.Bibim.Scripting.Statements.Operators
         #endregion
 
         #region Methods
-        public override void Generate(BinaryScriptGenerator.Context context)
+        public override void Generate(ScriptCompiler.Context context)
         {
             if (Variable == null)
                 throw new InvalidOperationException();
             if (Value == null)
                 throw new InvalidOperationException();
 
-            context.Write(Value);
-            int stackIndex;
-            int localOffset;
-            int size;
-            if (context.TryGetVariableOffsetFromStack(Variable.Name, out stackIndex, out localOffset, out size))
-            {
-                context.GenerateLocalAssign(stackIndex, localOffset);
-            }
-            else
-            {
-                context.Write(ScriptInstruction.GlobalAssign);
-                context.Write(Variable.Name);
-            }
+            context.Assign(Variable.Name, Value);
         }
 
         public override string ToString()

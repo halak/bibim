@@ -18,13 +18,13 @@ namespace Halak.Bibim.Scripting.Statements
             get { return readonlyStatements; }
         }
 
-        public Label StartLabel
+        public Label BeginLabel
         {
             get;
             private set;
         }
 
-        public Label FinishLabel
+        public Label EndLabel
         {
             get;
             private set;
@@ -45,8 +45,8 @@ namespace Halak.Bibim.Scripting.Statements
                 this.statements = new List<Statement>(statements);
 
             this.readonlyStatements = new ReadOnlyCollection<Statement>(this.statements);
-            this.StartLabel = new Label();
-            this.FinishLabel = new Label();
+            this.BeginLabel = new Label();
+            this.EndLabel = new Label();
         }
         #endregion
 
@@ -75,36 +75,88 @@ namespace Halak.Bibim.Scripting.Statements
         {
             statements.Clear();
         }
+
+        public IList<Statement> FindAll(Predicate<Statement> match)
+        {
+            List<Statement> result = new List<Statement>();
+            FindAll(result, this, match);
+            return result;
+        }
+
+        public Statement Find(Predicate<Statement> match)
+        {
+            return Find(this, match);
+        }
+
+        private static void FindAll(List<Statement> result, Block block, Predicate<Statement> match)
+        {
+            if (match(block))
+                result.Add(block);
+
+            foreach (Statement item in block.statements)
+            {
+                if (item is Block)
+                    FindAll(result, (Block)item, match);
+                else
+                {
+                    if (match(item))
+                        result.Add(item);
+                }
+            }
+        }
+
+        private static Statement Find(Block block, Predicate<Statement> match)
+        {
+            if (match(block))
+                return block;
+
+            foreach (Statement item in block.statements)
+            {
+                if (item is Block)
+                {
+                    Statement found = Find((Block)item, match);
+                    if (found != null)
+                        return found;
+                }
+                else
+                {
+                    if (match(item))
+                        return item;
+                }
+            }
+
+            return null;
+        }
         #endregion
 
         #region Generate (Methods)
-        public sealed override void Generate(BinaryScriptGenerator.Context context)
+        public sealed override void Generate(ScriptCompiler.Context context)
         {
             GenerateBlockBefore(context);
-            context.DeclareLabel(StartLabel);
+            context.InidicateLabel(BeginLabel);
             GenerateBlockBegin(context);
 
             foreach (Statement item in statements)
-                context.Write(item);
+                context.Generate(item);
 
             GenerateBlockEnd(context);
-            context.DeclareLabel(FinishLabel);
+            context.InidicateLabel(EndLabel);
             GenerateBlockAfter(context);
         }
 
-        protected virtual void GenerateBlockBefore(BinaryScriptGenerator.Context context)
+        protected virtual void GenerateBlockBefore(ScriptCompiler.Context context)
         {
         }
 
-        protected virtual void GenerateBlockBegin(BinaryScriptGenerator.Context context)
+        protected virtual void GenerateBlockBegin(ScriptCompiler.Context context)
         {
         }
 
-        protected virtual void GenerateBlockEnd(BinaryScriptGenerator.Context context)
+        protected virtual void GenerateBlockEnd(ScriptCompiler.Context context)
         {
         }
 
-        protected virtual void GenerateBlockAfter(BinaryScriptGenerator.Context context)
+        protected virtual void GenerateBlockAfter(ScriptCompiler.Context context)
         {
         }
        

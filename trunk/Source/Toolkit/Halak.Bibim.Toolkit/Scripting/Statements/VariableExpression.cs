@@ -35,9 +35,9 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Methods
-        public override void Generate(BinaryScriptGenerator.Context context)
+        public override void Generate(ScriptCompiler.Context context)
         {
-            context.GeneratePushVariable(Name);
+            context.PushVariable(Name);
         }
 
         public override string ToString()

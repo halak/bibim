@@ -26,11 +26,9 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Methods
-        public override void Generate(BinaryScriptGenerator.Context context)
+        public override void Generate(ScriptCompiler.Context context)
         {
-            context.Write(Value);
-            context.GenerateLocalAssign(context.Function.Parameters.Count - 5, 0);
-            context.GenerateReturn();
+            context.Return(Value);
         }
         #endregion
     }

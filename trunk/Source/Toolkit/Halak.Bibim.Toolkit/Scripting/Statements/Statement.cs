@@ -13,7 +13,7 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Methods
-        public abstract void Generate(BinaryScriptGenerator.Context context);
+        public abstract void Generate(ScriptCompiler.Context context);
         #endregion
     }
 }

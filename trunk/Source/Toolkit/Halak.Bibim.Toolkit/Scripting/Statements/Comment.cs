@@ -33,7 +33,7 @@ namespace Halak.Bibim.Scripting.Statements
         }
         #endregion
 
-        public override void Generate(BinaryScriptGenerator.Context context)
+        public override void Generate(ScriptCompiler.Context context)
         {
             // ... 아무 명령도 생성하지 않습니다 ...
         }

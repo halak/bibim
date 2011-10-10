@@ -173,10 +173,13 @@ namespace Bibim
     {
         if (const Script::Function* function = script->Find(name))
         {
+            // Return value를 보관할 영역을 확보합니다.
             const int count = static_cast<int>(function->ReturnTypes.size());
             for (int i = 0; i < count; i++)
                 stack.Push(ScriptObject::SizeOf(function->ReturnTypes[i]));
+
             BBAssert(static_cast<int>(function->ParameterTypes.size()) == numberOfArguments);
+
             return function;
         }
         else
@@ -187,7 +190,8 @@ namespace Bibim
     {
         BBAssertDebug(function);
 
-        StreamPtr stream = MemoryStream::NewReadableStream(&script->GetBuffer()[function->Position], script->GetBuffer().size() - function->Position);
+        StreamPtr stream = MemoryStream::NewReadableStream(&script->GetBuffer()[0], script->GetBuffer().size());
+        stream->Seek(function->Position, Stream::FromBegin);
         BinaryReader reader(stream);
 
         BinaryWriter::From(stack.Push(sizeof(int)), 0); // 이전 위치 기억
@@ -198,10 +202,6 @@ namespace Bibim
         {
             Process(reader);
         } while (stack.GetTopIndex() > topIndex);
-
-        //const int position = BinaryReader::ToInt32(stack.Peek());
-        //stack.Pop(2);
-        //stack.Pop(function->ParameterTypes.size());
 
         ScriptObject result = ScriptObject::Void;
         if (function->ReturnTypes.size() > 0)
@@ -307,8 +307,8 @@ namespace Bibim
                 {
                     const int functionPosition = reader.ReadInt32();
                     const int numberOfArguments = static_cast<int>(reader.ReadInt32());
-                    stack.Push(reader.GetSource()->GetPosition());
-                    stack.Push(numberOfArguments); // Pop by ScriptInstruction::Return
+                    BinaryWriter::From(stack.Push(sizeof(int)), reader.GetSource()->GetPosition());
+                    BinaryWriter::From(stack.Push(sizeof(int)), numberOfArguments); // Pop by ScriptInstruction::Return
 
                     reader.GetSource()->Seek(functionPosition, Stream::FromBegin);
                 }

@@ -120,9 +120,10 @@
     <Compile Include="Graphics\SourceTexture2DWriter.cs" />
     <Compile Include="Graphics\SourceTexture2DCookingTag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scripting\BinaryScriptGenerator.cs" />
+    <Compile Include="Scripting\ScriptCompiler.cs" />
     <Compile Include="Scripting\ScriptWriter.cs" />
     <Compile Include="Scripting\Statements\DeclareVariable.cs" />
+    <Compile Include="Scripting\Statements\Iteration.cs" />
     <Compile Include="Scripting\Statements\Label.cs" />
     <Compile Include="Scripting\Statements\Operators\AdditionOperator.cs" />
     <Compile Include="Scripting\Statements\Operators\AssignmentOperator.cs" />
@@ -135,11 +136,8 @@
     <Compile Include="Scripting\Statements\Comment.cs" />
     <Compile Include="Scripting\Statements\ConstantExpression.cs" />
     <Compile Include="Scripting\Statements\Continue.cs" />
-    <Compile Include="Scripting\Statements\DoWhile.cs" />
     <Compile Include="Scripting\Statements\Operators\EqualityOperator.cs" />
     <Compile Include="Scripting\Statements\Expression.cs" />
-    <Compile Include="Scripting\Statements\For.cs" />
-    <Compile Include="Scripting\Statements\ForEach.cs" />
     <Compile Include="Scripting\Statements\If.cs" />
     <Compile Include="Scripting\Statements\Operators\InequalityOperator.cs" />
     <Compile Include="Scripting\Statements\OperatorPrecedenceAttribute.cs" />

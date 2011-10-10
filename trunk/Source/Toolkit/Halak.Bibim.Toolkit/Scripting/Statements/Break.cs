@@ -6,9 +6,9 @@ namespace Halak.Bibim.Scripting.Statements
 {
     public sealed class Break : Statement
     {
-        public override void Generate(BinaryScriptGenerator.Context context)
+        public override void Generate(ScriptCompiler.Context context)
         {
-            // context.GenerateJump(context.CurrentBlock.FinishLabel);
+            context.Jump(context.CurrentBlock.EndLabel);
         }
     }
 }

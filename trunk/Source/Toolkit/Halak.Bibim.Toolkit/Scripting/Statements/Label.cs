@@ -12,7 +12,7 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Properties
-        private string Name
+        public string Name
         {
             get { return name; }
             set
@@ -35,7 +35,7 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Methods
-        public override void Generate(BinaryScriptGenerator.Context context)
+        public override void Generate(ScriptCompiler.Context context)
         {
             throw new InvalidOperationException("must call WriteLabel or WriteAddress");
         }

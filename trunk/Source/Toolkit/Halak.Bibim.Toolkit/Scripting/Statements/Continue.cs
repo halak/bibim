@@ -6,9 +6,9 @@ namespace Halak.Bibim.Scripting.Statements
 {
     public sealed class Continue : Statement
     {
-        public override void Generate(BinaryScriptGenerator.Context context)
+        public override void Generate(ScriptCompiler.Context context)
         {
-            // context.GenerateJump(context.CurrentBlock.StartLabel);
+            context.Jump(context.CurrentBlock.BeginLabel);
         }
     }
 }
