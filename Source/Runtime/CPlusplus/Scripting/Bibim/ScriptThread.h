@@ -15,12 +15,17 @@
         {
             BBObjectClass(ScriptThread, SharedObject, 'S', 'C', 'P', 'S');
             public:
+                enum State
+                {
+                    Stopped,
+                    Running,
+                    Suspended,
+                };
+
+            public:
                 ScriptThread(Script* script);
                 ScriptThread(Script* script, int stackSize);
                 virtual ~ScriptThread();
-
-                void Resume();
-                void Suspend();
 
                 ScriptObject Call(const String& name);
                 ScriptObject Call(const String& name, const ScriptObject& arg1);
@@ -29,20 +34,34 @@
                 ScriptObject Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4);
                 ScriptObject Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4, const ScriptObject& arg5);
 
+                ScriptObject Resume();
+
                 inline Script* GetScript() const;
                 inline const ScriptStack& GetStack() const;
+                inline State GetState() const;
 
             private:
                 const Script::Function* BeginCall(const String& name, int numberOfArguments);
                 ScriptObject EndCall(const Script::Function* function);
                 void PushArgument(ScriptObjectType type, const ScriptObject& value);
 
-                void Process(BinaryReader& reader);
+                ScriptObject Run(const Script::Function* function, int topIndex);
+                void ProcessInstruction(BinaryReader& reader);
+
+                inline void SetState(State value);
+                inline int GetNativeFunctionDepth() const;
 
             private:
                 ScriptPtr script;
                 ScriptStack stack;
                 MemoryStreamPtr stream;
+                State state;
+                int nativeFunctionDepth;
+
+                const Script::Function* suspendedFunction;
+                int suspendedTopIndex;
+
+                friend class ScriptingContext;
         };
     }
 

@@ -105,6 +105,10 @@ namespace Bibim
 
     void ScriptingContext::YieldReturn()
     {
+        // Native 함수에서 YieldReturn은 Call-stack에 Native 함수가 딱 하나일 때만 가능합니다.
+        // Script call -> Native call -> Script call -> Native 이 상황에서 YieldReturn을 하면 thread-stack 엉켜 제대로 작동하지 않습니다.
+        BBAssert(thread->GetNativeFunctionDepth() == 1);
+        thread->SetState(ScriptThread::Suspended);
     }
 
     ScriptObject ScriptingContext::Call(const String& name)
