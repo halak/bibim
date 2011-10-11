@@ -6,7 +6,7 @@ namespace Bibim
     }
 
     ScriptObject::ScriptObject(bool value)
-        : type(BooleanType),
+        : type(BoolType),
           value(value)
     {
     }
@@ -100,7 +100,7 @@ namespace Bibim
         {
             case VoidType:
                 return 0;
-            case BooleanType:
+            case BoolType:
                 return sizeof(bool);
             case IntType:
                 return sizeof(int);

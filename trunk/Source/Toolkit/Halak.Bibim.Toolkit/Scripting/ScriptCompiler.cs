@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using Halak.Bibim.Reflection;
 using Halak.Bibim.Scripting.Statements;
 
 namespace Halak.Bibim.Scripting
@@ -51,7 +52,10 @@ namespace Halak.Bibim.Scripting
             Script.Function[] functions = new Script.Function[context.BriefFunctionTable.Count];
             context.BriefFunctionTable.CopyTo(functions, 0);
 
-            return new Script(ms.GetBuffer(), (int)ms.Length, null, functions);
+            string[] strings = new string[context.StringTable.Count];
+            context.StringTable.CopyTo(strings, 0);
+
+            return new Script(ms.GetBuffer(), (int)ms.Length, strings, functions);
         }
         #endregion
 
@@ -74,7 +78,10 @@ namespace Halak.Bibim.Scripting
             private List<Script.Function> briefFunctionTable;
             private ReadOnlyCollection<Script.Function> readOnlyBriefFunctionTable;
 
-            private List<List<DeclareVariable>> virtualLocalVariableStack;
+            private List<string> stringTable;
+            private ReadOnlyCollection<string> readOnlyStringTable;
+
+            private List<List<DeclareVariable>> localVariableVirtualStack;
             #endregion
 
             #region Properties
@@ -98,7 +105,7 @@ namespace Halak.Bibim.Scripting
             {
                 get
                 {
-                    for (int i = blockStack.Count - 1; i >= 0; i++)
+                    for (int i = blockStack.Count - 1; i >= 0; i--)
                     {
                         if (blockStack[i] is Function)
                             return (Function)blockStack[i];
@@ -124,15 +131,15 @@ namespace Halak.Bibim.Scripting
                 get { return readOnlyBriefFunctionTable; }
             }
 
+            public IList<string> StringTable
+            {
+                get { return stringTable; }
+            }
+
             private Block RootBlock
             {
-                get
-                {
-                    if (blockStack.Count > 0)
-                        return blockStack[0];
-                    else
-                        return null;
-                }
+                get;
+                set;
             }
             #endregion
 
@@ -145,7 +152,7 @@ namespace Halak.Bibim.Scripting
                 else
                     this.textWriter = null;
 
-                this.blockStack = new List<Block>() { codeBlock };
+                this.blockStack = new List<Block>();
                 this.readOnlyBlockStack = new ReadOnlyCollection<Block>(this.blockStack);
 
                 this.labelAddresses = new Dictionary<Label, int>();
@@ -159,6 +166,13 @@ namespace Halak.Bibim.Scripting
                 this.readOnlyFunctionTable = new ReadOnlyCollection<Function>(this.functionTable);
                 this.briefFunctionTable = new List<Script.Function>();
                 this.readOnlyBriefFunctionTable = new ReadOnlyCollection<Script.Function>(this.briefFunctionTable);
+
+                this.stringTable = new List<string>();
+                this.readOnlyStringTable = new ReadOnlyCollection<string>(this.stringTable);
+
+                this.localVariableVirtualStack = new List<List<DeclareVariable>>();
+
+                this.RootBlock = codeBlock;
             }
             #endregion
 
@@ -167,7 +181,8 @@ namespace Halak.Bibim.Scripting
             {
                 BuildFunctionTable(RootBlock);
 
-                Generate(RootBlock);
+                foreach (Statement item in RootBlock.Statements)
+                    Generate(item);
 
                 BuildBriefFunctionTable();
             }
@@ -175,69 +190,29 @@ namespace Halak.Bibim.Scripting
             #region Generate
             public void Generate(Statement value)
             {
-                Function oldFunction = Function;
-                Function function = value as Function;
-                if (function != null)
+                bool isDeclareVariable = value is DeclareVariable;
+                bool isBlock = (isDeclareVariable == false) && (value is Block);
+                bool isFunction = (isBlock) && (value is Function);
+                if (isDeclareVariable)
+                    GetVSTopLayer().Add((DeclareVariable)value);
+
+                if (isBlock)
                 {
-                    int argumentStackSize = 0;
-                    ScriptObjectType[] parameterTypes = new ScriptObjectType[function.Parameters.Count];
-                    ScriptObjectType[] returnTypes = new ScriptObjectType[1];
-                    for (int i = 0; i < parameterTypes.Length; i++)
-                    {
-                        parameterTypes[i] = function.Parameters[i].Type;
-                        argumentStackSize += DeclareVariable.SizeOf(parameterTypes[i]);
-                    }
-                    for (int i = 0; i < returnTypes.Length; i++)
-                        returnTypes[i] = function.ReturnTypes[i];
+                    if (isFunction)
+                        BeginFunction((Function)value);
 
-                    Function = function;
-                    FunctionTable.Add(new Script.Function(function.Name, (int)BaseStream.Position, argumentStackSize, returnTypes, parameterTypes));
-                }
-
-                if (value is Block)
-                {
-                    if (value is Function)
-                    {
-                        for (int i = 0; i < ((Function)value).Parameters.Count; i++)
-                        {
-                            virtualLocalVariableStack.Add(new List<DeclareVariable>());
-                            virtualLocalVariableStack[virtualLocalVariableStack.Count - 1].Add(((Function)value).Parameters[i]);
-                        }
-                        virtualLocalVariableStack.Add(new List<DeclareVariable>());
-                        virtualLocalVariableStack.Add(new List<DeclareVariable>());
-
-                        virtualLocalVariableStack.Add(new List<DeclareVariable>());
-                    }
-
-                    foreach (Statement item in ((Block)value).Statements)
-                    {
-                        if (item is DeclareVariable)
-                            virtualLocalVariableStack[virtualLocalVariableStack.Count - 1].Add((DeclareVariable)item);
-                    }
+                    BeginBlock((Block)value);
                 }
 
                 value.Generate(this);
 
-                if (value is Block)
+                if (isBlock)
                 {
-                    foreach (Statement item in ((Block)value).Statements)
-                    {
-                        if (item is DeclareVariable)
-                            virtualLocalVariableStack[virtualLocalVariableStack.Count - 1].Remove((DeclareVariable)item);
+                    EndBlock((Block)value);
 
-                    }
-
-                    if (value is Function)
-                    {
-                        virtualLocalVariableStack.RemoveAt(virtualLocalVariableStack.Count - 1);
-                        virtualLocalVariableStack.RemoveAt(virtualLocalVariableStack.Count - 1);
-                        virtualLocalVariableStack.RemoveAt(virtualLocalVariableStack.Count - 1);
-                        for (int i = 0; i < ((Function)value).Parameters.Count; i++)
-                            virtualLocalVariableStack.RemoveAt(virtualLocalVariableStack.Count - 1);
-                    }
+                    if (isFunction)
+                        EndFunction((Function)value);
                 }
-
-                Function = oldFunction;
             }
 
             #region Push & Pop
@@ -248,7 +223,7 @@ namespace Halak.Bibim.Scripting
                 binaryWriter.Write(value);
 
                 if (textWriter != null)
-                    textWriter.AppendLine(string.Format("push {0}\n", value.ToString()));
+                    textWriter.AppendLine(string.Format("push {0}", value.ToString()));
 
                 PushVS();
             }
@@ -259,7 +234,7 @@ namespace Halak.Bibim.Scripting
                 binaryWriter.Write(value);
 
                 if (textWriter != null)
-                    textWriter.AppendLine(string.Format("push {0}\n", value.ToString()));
+                    textWriter.AppendLine(string.Format("push {0}", value.ToString()));
 
                 PushVS();
             }
@@ -270,7 +245,7 @@ namespace Halak.Bibim.Scripting
                 binaryWriter.Write(value);
 
                 if (textWriter != null)
-                    textWriter.AppendLine(string.Format("push {0}U\n", value.ToString()));
+                    textWriter.AppendLine(string.Format("push {0}U", value.ToString()));
 
                 PushVS();
             }
@@ -281,7 +256,7 @@ namespace Halak.Bibim.Scripting
                 binaryWriter.Write(value);
 
                 if (textWriter != null)
-                    textWriter.AppendLine(string.Format("push {0}L\n", value.ToString()));
+                    textWriter.AppendLine(string.Format("push {0}L", value.ToString()));
 
                 PushVS();
             }
@@ -292,7 +267,25 @@ namespace Halak.Bibim.Scripting
                 binaryWriter.Write(value);
 
                 if (textWriter != null)
-                    textWriter.AppendLine(string.Format("push {0}f\n", value.ToString()));
+                    textWriter.AppendLine(string.Format("push {0}f", value.ToString()));
+
+                PushVS();
+            }
+
+            public void Push(string value)
+            {
+                int index = stringTable.IndexOf(value);
+                if (index == -1)
+                {
+                    stringTable.Add(value);
+                    index = stringTable.Count - 1;
+                }
+
+                binaryWriter.Write(ScriptInstruction.Push4);
+                binaryWriter.Write(index);
+
+                if (textWriter != null)
+                    textWriter.AppendLine(string.Format("push {0}S >> \"{1}\"", index, value));
 
                 PushVS();
             }
@@ -325,7 +318,7 @@ namespace Halak.Bibim.Scripting
                 binaryWriter.Write(value);
 
                 if (textWriter != null)
-                    textWriter.AppendLine(string.Format("push({0}) {{ {1} }}\n", value.Length, string.Join(",", (IEnumerable<byte>)value)));
+                    textWriter.AppendLine(string.Format("push({0}) {{ {1} }}", value.Length, string.Join(",", (IEnumerable<byte>)value)));
 
                 PushVS();
             }
@@ -337,7 +330,7 @@ namespace Halak.Bibim.Scripting
                 int stackIndex;
                 int localOffset;
                 int size;
-                if (TryGetVariableOffsetFromStack(name, out stackIndex, out localOffset, out size))
+                if (TryGetVariableOffsetFromVS(name, out stackIndex, out localOffset, out size))
                 {
                     binaryWriter.Write(ScriptInstruction.PushLocalVariable);
                     binaryWriter.Write(stackIndex);
@@ -345,7 +338,7 @@ namespace Halak.Bibim.Scripting
                     binaryWriter.Write(size);
 
                     if (textWriter != null)
-                        textWriter.AppendLine(string.Format("pushv {0}, {1}, {2} [{3}]", stackIndex, localOffset, size, name));
+                        textWriter.AppendLine(string.Format("pushv ({0}, {1}, {2}) [{3}]", stackIndex, localOffset, size, name));
                 }
                 else
                 {
@@ -355,23 +348,7 @@ namespace Halak.Bibim.Scripting
                 PushVS();
             }
             #endregion
-
-            #region Push Allocate-only
-            public void AllocateN(int size)
-            {
-                if (size < 0)
-                    throw new ArgumentException("count");
-
-                binaryWriter.Write(ScriptInstruction.AllocateN);
-                binaryWriter.Write(size);
-
-                if (textWriter != null)
-                    textWriter.AppendLine(string.Format("push({0})", size));
-
-                PushVS();
-            }
-            #endregion
-
+            
             #region Pop
             public void Pop(int count)
             {
@@ -437,28 +414,107 @@ namespace Halak.Bibim.Scripting
 
             public void Return(Expression value)
             {
-                LocalAssign(CurrentFunction.Parameters.Count - 5, 0, value, "return @1");
+                Generate(value);
+                LocalAssign((-1) + (-1) + (-1) + (-1) + (-CurrentFunction.Parameters.Count) + (-1), 0, "return @1");
                 binaryWriter.Write(ScriptInstruction.Return);
+
+                if (textWriter != null)
+                    textWriter.AppendLine(string.Format("ret"));
             }
             #endregion
 
-            #region Assign
+            #region Function
+            public void Function(int stackSize)
+            {
+                // BeginFunction에서 이미 이 할당에 대한 Virtual-stack 구축을 끝마쳤기 때문에 PushVS를 하지 않습니다.
+                AllocateN(stackSize, false);
+            }
+
+            public void CallScriptFunction(string name, Expression[] args)
+            {
+                Function function = FindFunction(name);
+                if (function == null)
+                    throw new InvalidOperationException("Function not found");
+                
+                // return value들을 보관할 영역을 확보합니다.
+                foreach (ScriptObjectType item in function.ReturnTypes)
+                    AllocateN(DeclareVariable.SizeOf(item), true);
+
+                for (int i = 0; i < args.Length; i++)
+                    Generate(args[i]);
+
+                binaryWriter.Write(ScriptInstruction.CallScriptFunction);
+                string addressString = WriteAddress(function.BeginLabel);
+                binaryWriter.Write(args.Length);
+
+                if (textWriter != null)
+                    textWriter.AppendLine(string.Format("call {0} [{1}]", addressString, name));
+
+                // 실행에서 Pop은 return에서 해주므로 여기서는 VS에서만 Pop해줍니다.
+                PopVS(args.Length);
+            }
+
+            public void CallNativeFunction(string name, Expression[] args)
+            {
+                ScriptNativeFunction function = ScriptNativeFunctionTable.Find(name);
+                if (function == null)
+                    throw new InvalidOperationException("Function not found");
+
+                ScriptNativeFunctionAttribute functionAttribute = function.Method.GetCustomAttribute<ScriptNativeFunctionAttribute>();
+                ScriptNativeFunctionReturnAttribute[] returnTypes = function.Method.GetCustomAttributes<ScriptNativeFunctionReturnAttribute>();
+                ScriptNativeFunctionParameterAttribute[] parameterTypes = function.Method.GetCustomAttributes<ScriptNativeFunctionParameterAttribute>();
+
+                // return value들을 보관할 영역을 확보합니다.
+                foreach (ScriptNativeFunctionReturnAttribute item in returnTypes)
+                    AllocateN(DeclareVariable.SizeOf(item.Type), true);
+
+                Trace.Assert(parameterTypes.Length == args.Length);
+                for (int i = 0; i < args.Length; i++)
+                    Generate(args[i]);
+
+                binaryWriter.Write(ScriptInstruction.CallNativeFunction);
+                binaryWriter.Write(functionAttribute.FunctionID);
+                binaryWriter.Write(returnTypes.Length);
+                binaryWriter.Write(parameterTypes.Length);
+
+                if (textWriter != null)
+                    textWriter.AppendLine(string.Format("call_native {0} [{1}]", functionAttribute.FunctionID, name));
+
+                Pop(parameterTypes.Length);
+            }
+
+            private void AllocateN(int size, bool pushVS)
+            {
+                if (size < 0)
+                    throw new ArgumentException("count");
+
+                binaryWriter.Write(ScriptInstruction.AllocateN);
+                binaryWriter.Write(size);
+
+                if (textWriter != null)
+                    textWriter.AppendLine(string.Format("push({0})", size));
+
+                if (pushVS)
+                    PushVS();
+            }
+            #endregion
+
+            #region Operators
             public void Assign(string variableName, Expression value)
             {
+                Generate(value);
+
                 int stackIndex;
                 int localOffset;
                 int size;
-                if (TryGetVariableOffsetFromStack(variableName, out stackIndex, out localOffset, out size))
-                    LocalAssign(stackIndex, localOffset, value, variableName);
+                if (TryGetVariableOffsetFromVS(variableName, out stackIndex, out localOffset, out size))
+                    LocalAssign(stackIndex, localOffset, variableName);
                 else
                     throw new NotImplementedException();
-
-                PopVS(1);
             }
 
-            private void LocalAssign(int stackIndex, int localOffset, Expression value, string variableName)
+            private void LocalAssign(int stackIndex, int localOffset, string variableName)
             {
-                Generate(value);
                 binaryWriter.Write(ScriptInstruction.LocalAssign);
                 binaryWriter.Write(stackIndex);
                 binaryWriter.Write(localOffset);
@@ -466,14 +522,14 @@ namespace Halak.Bibim.Scripting
                 if (textWriter != null)
                 {
                     if (string.IsNullOrEmpty(variableName))
-                        textWriter.AppendLine(string.Format("assign {0}, {1}", stackIndex, localOffset));
+                        textWriter.AppendLine(string.Format("move ({0}, {1})", stackIndex, localOffset));
                     else
-                        textWriter.AppendLine(string.Format("assign {0}, {1} [{3}]", stackIndex, localOffset, variableName));
+                        textWriter.AppendLine(string.Format("move ({0}, {1}) [{2}]", stackIndex, localOffset, variableName));
                 }
-            }
-            #endregion
 
-            #region Operators
+                PopVS(1);
+            }
+
             public void BinaryOperator(ScriptInstruction instruction, Expression leftOperand, Expression rightOperand)
             {
                 Generate(leftOperand);
@@ -536,7 +592,7 @@ namespace Halak.Bibim.Scripting
 
                     for (int i = 0; i < rt.Length; i++)
                         rt[i] = item.ReturnTypes[i];
-                    for (int i = 0; i < rt.Length; i++)
+                    for (int i = 0; i < pt.Length; i++)
                         pt[i] = item.Parameters[i].Type;
 
                     briefFunctionTable.Add(new Script.Function(item.Name, labelAddresses[item.BeginLabel], 0, rt, pt));
@@ -548,14 +604,129 @@ namespace Halak.Bibim.Scripting
             #region Virtual-stack Manipulation
             private void PushVS()
             {
-                virtualLocalVariableStack.Add(new List<DeclareVariable>());
+                localVariableVirtualStack.Add(null);
             }
 
             private void PopVS(int count)
             {
+                List<List<DeclareVariable>> lvvs = localVariableVirtualStack;
+
+                Trace.Assert(count <= lvvs.Count);
                 for (int i = 0; i < count; i++)
-                    virtualLocalVariableStack.RemoveAt(virtualLocalVariableStack.Count - 1);
+                    lvvs.RemoveAt(lvvs.Count - 1);
             }
+
+            public bool TryGetVariableOffsetFromVS(string name, out int stackIndex, out int localOffset, out int size)
+            {
+                List<List<DeclareVariable>> lvvs = localVariableVirtualStack;
+
+                stackIndex = -1;
+                localOffset = 0;
+                size = 0;
+                for (int i = lvvs.Count - 1; i >= 0; i--, stackIndex--)
+                {
+                    List<DeclareVariable> items = lvvs[i];
+                    if (items == null)
+                        continue;
+
+                    int k = items.Count - 1;
+                    bool found = false;
+                    for (k = items.Count - 1; k >= 0; k--)
+                    {
+                        DeclareVariable item = items[k];
+                        if (item.Name == name)
+                        {
+                            size = DeclareVariable.SizeOf(item.Type);
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    for (k = k - 1; k >= 0; k--)
+                        localOffset += DeclareVariable.SizeOf(items[k].Type);
+
+                    if (found)
+                        return true;
+                }
+
+                return false;
+            }
+
+            #region Block & Function
+            public void BeginBlock(Block block)
+            {
+                blockStack.Add(block);
+            }
+
+            public void EndBlock(Block block)
+            {
+                List<DeclareVariable> declarations = GetVSTopLayer();
+                foreach (DeclareVariable item in block.GetVariableDeclarations(false))
+                {
+                    bool result = declarations.Remove(item);
+                    Trace.Assert(result);
+                }
+
+                blockStack.RemoveAt(blockStack.Count - 1);
+            }
+
+            private void BeginFunction(Function function)
+            {
+                // Stack layout in Function call (Top-down)
+                // ==============================
+                // 1st Return value space
+                // ------------------------------
+                // 2nd Return value space
+                // ------------------------------
+                // ...
+                // ------------------------------
+                // N Return value space
+                // ==============================
+                // 1st Argument
+                // ------------------------------
+                // 2nd Argument
+                // ------------------------------
+                // ...
+                // ------------------------------
+                // N Argument
+                // ==============================
+                // Caller-address
+                // ==============================
+                // Number of arugments
+                // ==============================
+                // 1st Local variable
+                // 2nd Local variable
+                // ...
+                // N Local variable
+                // ==============================
+
+                for (int i = 0; i < function.ReturnTypes.Count; i++)
+                    PushVS();
+                
+                for (int i = 0; i < function.Parameters.Count; i++)
+                {
+                    PushVS();
+                    GetVSTopLayer().Add(function.Parameters[i]);
+                }
+
+                PushVS(); // Caller-address
+                PushVS(); // Number of arugments
+                PushVS(); // Local-variables
+            }
+
+            private void EndFunction(Function function)
+            {
+                PopVS(1 + 1 + 1 + function.Parameters.Count + function.ReturnTypes.Count);
+            }
+
+            private List<DeclareVariable> GetVSTopLayer()
+            {
+                List<List<DeclareVariable>> lvvs = localVariableVirtualStack;
+
+                lvvs[lvvs.Count - 1] = lvvs[lvvs.Count - 1] ?? new List<DeclareVariable>();
+                return lvvs[lvvs.Count - 1];
+            }
+            #endregion
             #endregion
 
             #region Label addressing
@@ -587,7 +758,7 @@ namespace Halak.Bibim.Scripting
                 }
 
                 if (textWriter != null)
-                    textWriter.AppendLine(string.Format("[label] {0}:", value.Name));
+                    textWriter.AppendLine(string.Format("[label] {0} => {1}:", currentPosition, value.Name));
             }
 
             public string WriteAddress(Label value)
@@ -619,37 +790,6 @@ namespace Halak.Bibim.Scripting
                     else
                         return string.Empty;
                 }
-            }
-
-            public bool TryGetVariableOffsetFromStack(string name, out int stackIndex, out int localOffset, out int size)
-            {
-                stackIndex = -1;
-                localOffset = 0;
-                size = 0;
-                for (int i = virtualLocalVariableStack.Count - 1; i >= 0; i--, stackIndex--)
-                {
-                    List<DeclareVariable> items = virtualLocalVariableStack[i];
-                    int k = items.Count - 1;
-                    bool found = false;
-                    for (k = items.Count - 1; k >= 0; k--)
-                    {
-                        DeclareVariable item = items[k];
-                        if (item.Name == name)
-                        {
-                            size = DeclareVariable.SizeOf(item.Type);
-                            found = true;
-                            break;
-                        }
-                    }
-
-                    for (k = k - 1; k >= 0; k--)
-                        localOffset += DeclareVariable.SizeOf(items[k].Type);
-
-                    if (found)
-                        return true;
-                }
-
-                return false;
             }
             #endregion
             #endregion

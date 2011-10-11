@@ -9,7 +9,7 @@
 #include <Bibim/FileAssetProvider.h>
 #include <Bibim/SourceTexture2D.h>
 #include <Bibim/Script.h>
-#include <Bibim/ScriptProcess.h>
+#include <Bibim/ScriptThread.h>
 #include <Bibim/UI.h>
 using namespace Bibim;
 
@@ -51,9 +51,9 @@ class SpriteTest : public GameFramework
             texture2 = static_cast<SourceTexture2D*>(gas->Load("Asset\\Background"));
 
             ScriptPtr script = static_cast<Script*>(gas->Load("Script"));
-            ScriptProcessPtr process = new ScriptProcess(script);
+            ScriptThreadPtr process = new ScriptThread(script);
             //process->Resume();
-            process->Call("Factorial", 5);
+            process->Call("Sum1To100");
 
             storage = gas;
             uiDomain = uid;

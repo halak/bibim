@@ -15,10 +15,10 @@ namespace Bibim
         Functions[item.ID] = item.Function;
     }
 
-    void ScriptNativeFunctionTable::AddRange(const std::vector<Entry>& items)
+    void ScriptNativeFunctionTable::AddRange(const Entry* items, int count)
     {
-        for (std::vector<Entry>::const_iterator it = items.begin(); it != items.end(); it++)
-            Functions[(*it).ID] = (*it).Function;
+        for (int i = 0; i < count; i++)
+            Functions[items[i].ID] = items[i].Function;
     }
 
     ScriptNativeFunctionTable::NativeFunction ScriptNativeFunctionTable::Find(uint32 id)

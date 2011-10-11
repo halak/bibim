@@ -3,7 +3,7 @@
 	<Cook xsi:type="BitmapToTexture2D">
 		<Input xsi:type="PhotoshopDocumentToBitmap">
 			<Input xsi:type="ImportPhotoshopDocument">
-				<Input xsi:type="FileToStream" Input1="$(RecipeName).psd" />
+				<Input xsi:type="FileToStream" Input1="$(AssetName).psd" />
 			</Input>
 		</Input>
 	</Cook>

@@ -51,10 +51,7 @@ namespace Halak.Bibim.Scripting.Statements
 
         public override void Generate(ScriptCompiler.Context context)
         {
-            //GeneratePushArguments(context);
-            //uint functionID = 0;
-            //context.Write(functionID);
-            //context.Write(Arguments.Length);
+            context.CallNativeFunction(Name, Arguments);
         }
     }
 }

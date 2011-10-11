@@ -142,7 +142,7 @@
                 BBForwardDeclareSmartPointerClass(Script);
                 class ScriptingContext;
                 class ScriptObject;
-                BBForwardDeclareSmartPointerClass(ScriptProcess);
+                BBForwardDeclareSmartPointerClass(ScriptThread);
                 class ScriptStack;
                 BBForwardDeclareSmartPointerClass(VariableStorage);
             ////////////////////////////////////////////////////////////////////////////////////////////////////

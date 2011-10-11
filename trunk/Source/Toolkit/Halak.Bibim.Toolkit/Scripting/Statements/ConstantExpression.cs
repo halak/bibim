@@ -66,7 +66,8 @@ namespace Halak.Bibim.Scripting.Statements
                 case TypeCode.DateTime:
                     throw new InvalidOperationException();
                 case TypeCode.String:
-                    throw new InvalidOperationException();
+                    context.Push((string)Value);
+                    break;
             }
         }
 

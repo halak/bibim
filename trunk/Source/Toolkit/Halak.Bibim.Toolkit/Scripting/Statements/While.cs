@@ -45,12 +45,13 @@ namespace Halak.Bibim.Scripting.Statements
 
         protected override void GenerateBlockBegin(ScriptCompiler.Context context)
         {
+            context.InidicateLabel(LoopLabel);
             context.IfFalseThenJump(Condition, EndLabel);
         }
 
         protected override void GenerateBlockEnd(ScriptCompiler.Context context)
         {
-            context.Jump(BeginLabel);
+            context.Jump(LoopLabel);
         }
 
         public override string ToString()

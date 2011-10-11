@@ -26,7 +26,7 @@
                     NullType,
                     MissingType,
 
-                    BooleanType,
+                    BoolType,
                     CharType,
                     UCharType,
                     ShortType,

@@ -42,6 +42,11 @@ namespace Halak.Bibim.Scripting.Statements
         #endregion
 
         #region Constructors
+        public Function(string name)
+            : this(name, null, null, null)
+        {
+        }
+
         public Function(string name, IEnumerable<DeclareVariable> parameters, IEnumerable<ScriptObjectType> returnTypes, IEnumerable<Statement> statements)
             : base(statements)
         {
@@ -60,25 +65,7 @@ namespace Halak.Bibim.Scripting.Statements
         #region Methods
         protected override void GenerateBlockBegin(ScriptCompiler.Context context)
         {
-            context.AllocateN(ComputeRequiredStackSize(this), false);
-        }
-
-        protected override void GenerateBlockEnd(ScriptCompiler.Context context)
-        {
-            context.Pop(1);
-        }
-
-        private static int ComputeRequiredStackSize(Block block)
-        {
-            int result = 0;
-            foreach (Statement item in block.Statements)
-            {
-                if (item is DeclareVariable)
-                    result += DeclareVariable.SizeOf(((DeclareVariable)item).Type);
-                else if (item is Block)
-                    result += ComputeRequiredStackSize((Block)item);
-            }
-            return result;
+            context.Function(ComputeRequiredStackSize(true));
         }
         #endregion
     }

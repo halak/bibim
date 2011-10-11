@@ -53,7 +53,7 @@ namespace Halak.Bibim.Scripting.Statements
             {
                 case ScriptObjectType.Void:
                     return 0;
-                case ScriptObjectType.Boolean:
+                case ScriptObjectType.Bool:
                     return 1;
                 case ScriptObjectType.Int:
                     return 4;

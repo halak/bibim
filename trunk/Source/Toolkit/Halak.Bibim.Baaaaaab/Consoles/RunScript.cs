@@ -31,6 +31,7 @@ namespace Halak.Bibim.Bab.Consoles
                 {
                     new DeclareVariable("result", ScriptObjectType.Int),
                     new DeclareVariable("i", ScriptObjectType.Int),
+                    new CallNativeFunction("Print", new ConstantExpression("Hello Malthm !")),
                     new AssignmentOperator(new VariableExpression("result"), new ConstantExpression(0)),
                     new AssignmentOperator(new VariableExpression("i"), new ConstantExpression(0)),
                     new While(new InequalityOperator(new VariableExpression("i"), new ConstantExpression(101)), new Statement[]
@@ -62,11 +63,14 @@ namespace Halak.Bibim.Bab.Consoles
                 })
             });
 
+            ScriptNativeFunctionTable.Rebuild();
             ScriptCompiler compiler = new ScriptCompiler();
             FileStream fs = new FileStream("Script.ab", FileMode.Create, FileAccess.Write);
 
             ScriptWriter writer = new ScriptWriter();
-            writer.Write(new Asset.AssetStreamWriter(fs, null), compiler.Compile(code));
+            string text;
+            writer.Write(new Asset.AssetStreamWriter(fs, null), compiler.Compile(code, out text));
+            fs.Close();
         }
     }
 }

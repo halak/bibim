@@ -3,10 +3,13 @@
 #include <Bibim/FontLibrary.h>
 #include <Bibim/Glyph.h>
 #include <Bibim/GlyphTable.h>
+#include <ft2build.h>
+#include FT_FREETYPE_H
+#include FT_STROKER_H
+#include FT_BITMAP_H
 
 namespace Bibim
 {
-    static FT_Matrix UnitMatrix = { 0x10000L, 0, 0, 0x10000L };
     static FT_Vector ZeroVector = { 0, 0 };
 
     // library 26.6 실수계와 C++ float 좌표계를 상호 변환한다.
@@ -151,7 +154,6 @@ namespace Bibim
           primaryFace(nullptr),
           alternativeFace(nullptr),
           stroker(nullptr),
-          transform(UnitMatrix),
           ascender(0.0f),
           descender(0.0f),
           lineHeight(0.0f),
@@ -203,13 +205,10 @@ namespace Bibim
                 FT_Stroker_Set(stroker, scaledStrokeSize, FT_STROKER_LINECAP_BUTT, FT_STROKER_LINEJOIN_ROUND, 0);
         }
 
-        if (parameters.Shear != 0.0f)
-        {
-            transform.xx = FloatToF16D16(1.0f);
-            transform.xy = FloatToF16D16(parameters.Shear);
-            transform.yx = FloatToF16D16(0.0f);
-            transform.yy = FloatToF16D16(1.0f);
-        }
+        transform[0][0] = FloatToF16D16(1.0f);
+        transform[0][1] = FloatToF16D16(parameters.Shear);
+        transform[1][0] = FloatToF16D16(0.0f);
+        transform[1][1] = FloatToF16D16(1.0f);
 
         const FT_Face metricsFont = primaryFace ? primaryFace : alternativeFace;
         const FT_Size_Metrics& metrics = metricsFont->size->metrics;
@@ -322,8 +321,13 @@ namespace Bibim
                 loadFlags |= FT_LOAD_NO_BITMAP;
             if (parameters.Hinting == false)
                 loadFlags |= FT_LOAD_NO_HINTING;
-            
-            FT_Set_Transform(faceGlyphIndex.first, &transform, &ZeroVector);
+
+            FT_Matrix ftTransform = 
+            {
+                transform[0][0], transform[0][1],
+                transform[1][0], transform[1][1],
+            };
+            FT_Set_Transform(faceGlyphIndex.first, &ftTransform, &ZeroVector);
 
             if (parameters.StrokeSize > 0.0f)
             {

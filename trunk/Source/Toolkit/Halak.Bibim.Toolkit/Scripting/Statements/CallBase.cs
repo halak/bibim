@@ -57,7 +57,7 @@ namespace Halak.Bibim.Scripting.Statements
         public void GeneratePushArguments(ScriptCompiler.Context context)
         {
             foreach (Expression item in Arguments)
-                context.Write(item);
+                context.Generate(item);
         }
         #endregion
     }

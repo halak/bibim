@@ -34,7 +34,7 @@ namespace Halak.Bibim.Asset.Pipeline
 
             string directory = Path.GetDirectoryName(path);
             string filename = Path.GetFileName(path);
-            string recipeName = Path.GetFileNameWithoutExtension(path);
+            string assetName = Path.GetFileNameWithoutExtension(path);
 
             FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
             GameAssetRecipe recipe = GameAssetRecipe.Deserialize(fs);
@@ -45,7 +45,7 @@ namespace Halak.Bibim.Asset.Pipeline
                 context.SetVariable("Directory", directory);
                 context.SetVariable("FileName", filename);
                 if (parent == null)
-                    context.SetVariable("RecipeName", recipeName);
+                    context.SetVariable("AssetName", assetName);
                 return recipe.Cook.CookObject(context);
             }
             else

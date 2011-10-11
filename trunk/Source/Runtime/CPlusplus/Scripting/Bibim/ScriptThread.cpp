@@ -1,5 +1,5 @@
 #include <Bibim/PCH.h>
-#include <Bibim/ScriptProcess.h>
+#include <Bibim/ScriptThread.h>
 #include <Bibim/BinaryReader.h>
 #include <Bibim/BinaryWriter.h>
 #include <Bibim/Memory.h>
@@ -79,24 +79,24 @@ namespace Bibim
                     //LogicalRightShiftAssignmentOperator = 38,
     };
 
-    ScriptProcess::ScriptProcess(Script* script)
+    ScriptThread::ScriptThread(Script* script)
         : script(script),
-          position(0)
+          stream(MemoryStream::NewReadableStream(&script->GetBuffer()[0], script->GetBuffer().size()))
     {
     }
 
-    ScriptProcess::ScriptProcess(Script* script, int stackSize)
+    ScriptThread::ScriptThread(Script* script, int stackSize)
         : script(script),
-          position(0),
-          stack(stackSize)
+          stack(stackSize),
+          stream(MemoryStream::NewReadableStream(&script->GetBuffer()[0], script->GetBuffer().size()))
     {
     }
 
-    ScriptProcess::~ScriptProcess()
+    ScriptThread::~ScriptThread()
     {
     }
 
-    ScriptObject ScriptProcess::Call(const String& name)
+    ScriptObject ScriptThread::Call(const String& name)
     {
         if (const Script::Function* function = BeginCall(name, 0))
             return EndCall(function);
@@ -104,7 +104,7 @@ namespace Bibim
             return ScriptObject::Void;
     }
 
-    ScriptObject ScriptProcess::Call(const String& name, const ScriptObject& arg1)
+    ScriptObject ScriptThread::Call(const String& name, const ScriptObject& arg1)
     {
         if (const Script::Function* function = BeginCall(name, 1))
         {
@@ -115,7 +115,7 @@ namespace Bibim
             return ScriptObject::Void;
     }
 
-    ScriptObject ScriptProcess::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2)
+    ScriptObject ScriptThread::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2)
     {
         if (const Script::Function* function = BeginCall(name, 2))
         {
@@ -127,7 +127,7 @@ namespace Bibim
             return ScriptObject::Void;
     }
 
-    ScriptObject ScriptProcess::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3)
+    ScriptObject ScriptThread::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3)
     {
         if (const Script::Function* function = BeginCall(name, 3))
         {
@@ -140,7 +140,7 @@ namespace Bibim
             return ScriptObject::Void;
     }
 
-    ScriptObject ScriptProcess::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4)
+    ScriptObject ScriptThread::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4)
     {
         if (const Script::Function* function = BeginCall(name, 4))
         {
@@ -154,7 +154,7 @@ namespace Bibim
             return ScriptObject::Void;
     }
 
-    ScriptObject ScriptProcess::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4, const ScriptObject& arg5)
+    ScriptObject ScriptThread::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4, const ScriptObject& arg5)
     {
         if (const Script::Function* function = BeginCall(name, 5))
         {
@@ -169,7 +169,7 @@ namespace Bibim
             return ScriptObject::Void;
     }
 
-    const Script::Function* ScriptProcess::BeginCall(const String& name, int numberOfArguments)
+    const Script::Function* ScriptThread::BeginCall(const String& name, int numberOfArguments)
     {
         if (const Script::Function* function = script->Find(name))
         {
@@ -186,18 +186,18 @@ namespace Bibim
             return nullptr;
     }
 
-    ScriptObject ScriptProcess::EndCall(const Script::Function* function)
+    ScriptObject ScriptThread::EndCall(const Script::Function* function)
     {
         BBAssertDebug(function);
 
-        StreamPtr stream = MemoryStream::NewReadableStream(&script->GetBuffer()[0], script->GetBuffer().size());
         stream->Seek(function->Position, Stream::FromBegin);
         BinaryReader reader(stream);
 
-        BinaryWriter::From(stack.Push(sizeof(int)), 0); // 이전 위치 기억
+        const int topIndex = stack.GetTopIndex();
+
+        BinaryWriter::From(stack.Push(sizeof(int)), stream->GetPosition());
         BinaryWriter::From(stack.Push(sizeof(int)), function->ParameterTypes.size());
 
-        const int topIndex = stack.GetTopIndex();
         do
         {
             Process(reader);
@@ -212,12 +212,12 @@ namespace Bibim
         return result;
     }
 
-    void ScriptProcess::PushArgument(ScriptObjectType type, const ScriptObject& value)
+    void ScriptThread::PushArgument(ScriptObjectType type, const ScriptObject& value)
     {
         ScriptObject::WriteToBytes(stack.Push(ScriptObject::SizeOf(type)), value, type);
     }
 
-    void ScriptProcess::Resume()
+    void ScriptThread::Resume()
     {
         StreamPtr stream = MemoryStream::NewReadableStream(&script->GetBuffer()[0], script->GetBuffer().size());
         BinaryReader reader(stream);
@@ -225,11 +225,11 @@ namespace Bibim
             Process(reader);
     }
 
-    void ScriptProcess::Suspend()
+    void ScriptThread::Suspend()
     {
     }
 
-    void ScriptProcess::Process(BinaryReader& reader)
+    void ScriptThread::Process(BinaryReader& reader)
     {
         const ScriptInstruction id = static_cast<ScriptInstruction>(reader.ReadUInt8());
         switch (id)
@@ -316,12 +316,12 @@ namespace Bibim
             case CallNativeFunction:
                 {
                     const uint32 functionID = reader.ReadUInt32();
+                    const int numberOfReturnValues = reader.ReadInt32();
                     const int numberOfArguments = reader.ReadInt32();
                     ScriptNativeFunction function = ScriptNativeFunctionTable::Find(functionID);
-                    stack.Push(reader.GetSource()->GetPosition());
-                    stack.Push(numberOfArguments); // Pop by ScriptInstruction::Return
 
-                    // function();
+                    ScriptingContext context(this, numberOfArguments, numberOfReturnValues);
+                    function(context);
                 }
                 break;
             case Return:

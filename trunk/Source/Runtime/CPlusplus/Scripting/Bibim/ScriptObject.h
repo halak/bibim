@@ -17,7 +17,7 @@
                 enum Type
                 {
                     VoidType,
-                    BooleanType,
+                    BoolType,
                     IntType,
                     UIntType,
                     LongIntType,

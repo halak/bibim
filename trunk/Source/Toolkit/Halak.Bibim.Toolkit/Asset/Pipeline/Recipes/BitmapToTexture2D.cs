@@ -5,6 +5,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Xml.Serialization;
 using Halak.Bibim.Graphics;
 using G = System.Drawing.Graphics;
 
@@ -13,6 +14,7 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
     public sealed class BitmapToTexture2D : CookingNode<SourceTexture2D>
     {
         #region Properties
+        [XmlElement]
         public CookingNode<Bitmap> Input
         {
             get;

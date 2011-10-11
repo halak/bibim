@@ -117,9 +117,11 @@
    // Scripting
 #  include <Bibim/Script.h>
 #  include <Bibim/ScriptingContext.h>
-#  include <Bibim/ScriptProcess.h>
+#  include <Bibim/ScriptThread.h>
 #  include <Bibim/ScriptStack.h>
 #  include <Bibim/VariableStorage.h>
+#   include <Bibim/ScriptLibraryIO.h>
+#include <bibim/ScriptNativeFunctionTable.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Startup
@@ -147,7 +149,6 @@
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Typography
 #  include <Bibim/Font.h>
-#  include <Bibim/FontCache.h>
 #  include <Bibim/FontLibrary.h>
 #  include <Bibim/FontString.h>
 #  include <Bibim/Glyph.h>

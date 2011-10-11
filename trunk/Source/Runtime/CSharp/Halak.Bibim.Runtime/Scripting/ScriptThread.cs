@@ -4,8 +4,7 @@ using System.Text;
 
 namespace Halak.Bibim.Scripting
 {
-    public abstract class ScriptNativeCommand
+    public sealed class ScriptThread
     {
-        public abstract void Execute(ScriptingContext context);
     }
 }

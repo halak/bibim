@@ -135,10 +135,10 @@ namespace Halak.Bibim.Scripting.Statements
             GenerateBlockBefore(context);
             context.InidicateLabel(BeginLabel);
             GenerateBlockBegin(context);
-
+            
             foreach (Statement item in statements)
                 context.Generate(item);
-
+            
             GenerateBlockEnd(context);
             context.InidicateLabel(EndLabel);
             GenerateBlockAfter(context);
@@ -159,7 +159,48 @@ namespace Halak.Bibim.Scripting.Statements
         protected virtual void GenerateBlockAfter(ScriptCompiler.Context context)
         {
         }
-       
+
+        public int ComputeRequiredStackSize(bool recursively)
+        {
+            int result = 0;
+            foreach (Statement item in statements)
+            {
+                if (item is DeclareVariable)
+                    result += DeclareVariable.SizeOf(((DeclareVariable)item).Type);
+
+                if (recursively)
+                {
+                    Block block = item as Block;
+                    if (block != null)
+                        result += block.ComputeRequiredStackSize(true);
+                }
+            }
+
+            return result;
+        }
+
+        public IList<DeclareVariable> GetVariableDeclarations(bool recursively)
+        {
+            List<DeclareVariable> result = new List<DeclareVariable>();
+            GetVariableDeclarations(result, this, recursively);
+            return result;
+        }
+
+        private static void GetVariableDeclarations(List<DeclareVariable> declarations, Block block, bool recursively)
+        {
+            foreach (Statement item in block.statements)
+            {
+                if (item is DeclareVariable)
+                    declarations.Add((DeclareVariable)item);
+
+                if (recursively)
+                {
+                    Block subBlock = item as Block;
+                    if (subBlock != null)
+                        GetVariableDeclarations(declarations, subBlock, recursively);
+                }
+            }
+        }
         #endregion
     }
 }

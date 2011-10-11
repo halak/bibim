@@ -103,15 +103,20 @@ namespace Bibim
         readSize = sourceStream->Read(&length, sizeof(length));
         BBAssert(readSize == sizeof(length));
 
-        char* buffer = BBStackAlloc(char, length);
-        readSize = sourceStream->Read(buffer, length);
-        BBAssert(readSize == length);
-        
-        const String result = String(buffer, 0, length);
-        
-        BBStackFree(buffer);
+        if (length > 0)
+        {
+            char* buffer = BBStackAlloc(char, length);
+            readSize = sourceStream->Read(buffer, length);
+            BBAssert(readSize == length);
+            
+            const String result = String(buffer, 0, length);
+            
+            BBStackFree(buffer);
 
-        return result;
+            return result;
+        }
+        else
+            return String::Empty;
     }
 
     Color BinaryReader::ReadColor()
