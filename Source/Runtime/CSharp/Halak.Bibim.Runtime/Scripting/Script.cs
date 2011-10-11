@@ -30,8 +30,7 @@ namespace Halak.Bibim.Scripting
         #endregion
 
         #region Fields
-        private List<string> stringTable;
-        private ReadOnlyCollection<string> readonlyStringTable;
+        private readonly string[] stringTable;
         private readonly Function[] functionTable;
         #endregion
 
@@ -42,9 +41,9 @@ namespace Halak.Bibim.Scripting
             private set;
         }
 
-        public IList<string> StringTable
+        public string[] StringTable
         {
-            get { return readonlyStringTable; }
+            get { return stringTable; }
         }
 
         public Function[] FunctionTable
@@ -59,15 +58,11 @@ namespace Halak.Bibim.Scripting
         {
         }
         
-        public Script(byte[] buffer, int length, IEnumerable<string> stringTable, Function[] functionTable)
+        public Script(byte[] buffer, int length, string[] stringTable, Function[] functionTable)
         {
             this.Buffer = new byte[length];
             System.Buffer.BlockCopy(buffer, 0, this.Buffer, 0, length);
-            if (stringTable != null)
-                this.stringTable = new List<string>(stringTable);
-            else
-                this.stringTable = new List<string>();
-            this.readonlyStringTable = new ReadOnlyCollection<string>(this.stringTable);
+            this.stringTable = stringTable;
             this.functionTable = functionTable;
         }
         #endregion

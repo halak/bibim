@@ -30,5 +30,9 @@ namespace Bibim
         UIElementFactory::AddEntry<UISprite>();
         UIElementFactory::AddEntry<UIVideo>();
         UIElementFactory::SortEntries();
+
+        BBBeginScriptNativeFunction()
+            BBScriptNativeFunction(ScriptLibrary::IO::Print)
+        BBEndScriptNativeFunction();
     }
 }

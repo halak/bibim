@@ -16,7 +16,7 @@ namespace Bibim
     }
 
     Variant::Variant(bool value)
-        : type(BooleanType),
+        : type(BoolType),
           value(reinterpret_cast<void*>(value))          
     {
     }
@@ -197,7 +197,7 @@ namespace Bibim
 
     bool Variant::GetBoolean() const
     {
-        BBAssertDebug(type == BooleanType);
+        BBAssertDebug(type == BoolType);
         return reinterpret_cast<bool>(value);
     }
 
@@ -349,7 +349,7 @@ namespace Bibim
     {
         switch (type)
         {
-            case BooleanType:
+            case BoolType:
                 return static_cast<T>(GetBoolean());
             case CharType:
                 return static_cast<T>(GetChar());
@@ -395,7 +395,7 @@ namespace Bibim
             case NullType:
             case MissingType:
                 return false;
-            case BooleanType:
+            case BoolType:
                 return GetBoolean();
             default:
                 return true;

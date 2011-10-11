@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
 using Halak.Bibim.Asset;
 using Halak.Bibim.IO;
@@ -27,9 +29,17 @@ namespace Halak.Bibim.Scripting
                 foreach (ScriptObjectType type in item.ParameterTypes)
                     writer.Write((int)type);
             }
-            writer.Write(asset.StringTable.Count);
+            writer.Write(asset.StringTable.Length);
             foreach (string item in asset.StringTable)
                 writer.WriteBibimString(item);
+
+            ScriptCookingTag tag = asset.Tag as ScriptCookingTag;
+            if (tag != null && string.IsNullOrEmpty(tag.TextCode) == false)
+            {
+                Trace.WriteLine("==============================");
+                Trace.WriteLine(tag.TextCode);
+                Trace.WriteLine("==============================");
+            }
         }
     }
 }

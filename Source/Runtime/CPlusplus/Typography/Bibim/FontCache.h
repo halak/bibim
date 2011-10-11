@@ -5,10 +5,11 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameAsset.h>
 #   include <Bibim/String.h>
-#   include <ft2build.h>
-#   include FT_FREETYPE_H
-#   include FT_STROKER_H
-#   include FT_BITMAP_H
+
+    struct FT_FaceRec_;
+    struct FT_StrokerRec_;
+    typedef struct FT_FaceRec_*  FT_Face;
+    typedef struct FT_StrokerRec_*  FT_Stroker;
 
     namespace Bibim
     {
@@ -67,7 +68,7 @@
                 FT_Face primaryFace;
                 FT_Face alternativeFace;
                 FT_Stroker stroker;
-                FT_Matrix transform;
+                int transform[2][2];
 
                 float ascender;
                 float descender;

@@ -5,11 +5,10 @@ using System.Text;
 
 namespace Halak.Bibim.Scripting
 {
-    [AttributeUsage(AttributeTargets.Class)]
-    public sealed class ScriptFunctionLibraryAttribute : Attribute
+    public sealed class ScriptCookingTag
     {
         #region Properties
-        public string Name
+        public string TextCode
         {
             get;
             private set;
@@ -17,14 +16,14 @@ namespace Halak.Bibim.Scripting
         #endregion
 
         #region Constructors
-        public ScriptFunctionLibraryAttribute()
-            : this(string.Empty)
+        public ScriptCookingTag()
+            : this(null)
         {
         }
 
-        public ScriptFunctionLibraryAttribute(string name)
+        public ScriptCookingTag(string textCode)
         {
-            Name = name ?? string.Empty;
+            TextCode = textCode;
         }
         #endregion
     }

@@ -3,6 +3,8 @@
 #include <Bibim/FontCache.h>
 #include <vector>
 #include <windows.h>
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 namespace Bibim
 {

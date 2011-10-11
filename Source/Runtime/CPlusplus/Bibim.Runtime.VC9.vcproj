@@ -1930,18 +1930,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptProcess.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Scripting\Bibim\ScriptProcess.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Scripting\Bibim\ScriptProcess.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Scripting\Bibim\ScriptStack.cpp"
 					>
 				</File>
@@ -1954,6 +1942,18 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Scripting\Bibim\ScriptThread.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptThread.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptThread.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Scripting\Bibim\VariableStorage.cpp"
 					>
 				</File>
@@ -1961,6 +1961,18 @@
 					RelativePath=".\Scripting\Bibim\VariableStorage.h"
 					>
 				</File>
+				<Filter
+					Name="Libraries"
+					>
+					<File
+						RelativePath=".\Scripting\Bibim\ScriptLibraryIO.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Scripting\Bibim\ScriptLibraryIO.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

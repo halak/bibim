@@ -8,7 +8,7 @@ namespace Halak.Bibim.Scripting
     public enum ScriptObjectType
     {
         Void,
-        Boolean,
+        Bool,
         Int,
         UInt,
         LongInt,

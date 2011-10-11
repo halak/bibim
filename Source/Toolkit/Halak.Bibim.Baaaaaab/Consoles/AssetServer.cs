@@ -31,7 +31,7 @@ namespace Halak.Bibim.Bab.Consoles
             Trace.WriteLine("================================");
             Trace.WriteLine("Halak Bibim Asset Server");
             Trace.WriteLine("================================");
-            Trace.WriteLine("Ready");
+            Trace.WriteLine(string.Format("Ready : {0}", pipeName));
 
             GameModuleTree modules = new GameModuleTree();
             

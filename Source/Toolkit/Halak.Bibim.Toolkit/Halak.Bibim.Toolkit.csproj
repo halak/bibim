@@ -116,11 +116,13 @@
     <Compile Include="Asset\Pipeline\Recipes\ImportBitmap.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ImportPhotoshopDocument.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToBitmap.cs" />
+    <Compile Include="Collections\Generic\SerializableDictionary.cs" />
     <Compile Include="Design\PluginManager.cs" />
     <Compile Include="Graphics\SourceTexture2DWriter.cs" />
     <Compile Include="Graphics\SourceTexture2DCookingTag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripting\ScriptCompiler.cs" />
+    <Compile Include="Scripting\ScriptCookingTag.cs" />
     <Compile Include="Scripting\ScriptWriter.cs" />
     <Compile Include="Scripting\Statements\DeclareVariable.cs" />
     <Compile Include="Scripting\Statements\Iteration.cs" />

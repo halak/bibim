@@ -12,7 +12,7 @@ namespace Bibim
         switch (type)
         {
             case VoidType:
-            case BooleanType:
+            case BoolType:
             case IntType:
             case UIntType:
             case LongIntType:
@@ -49,7 +49,7 @@ namespace Bibim
         switch (type)
         {
             case VoidType:
-            case BooleanType:
+            case BoolType:
             case IntType:
             case UIntType:
             case LongIntType:
@@ -87,7 +87,7 @@ namespace Bibim
         switch (type)
         {
             case VoidType:
-            case BooleanType:
+            case BoolType:
             case IntType:
             case UIntType:
             case LongIntType:
@@ -120,7 +120,7 @@ namespace Bibim
         switch (oldType)
         {
             case VoidType:
-            case BooleanType:
+            case BoolType:
             case IntType:
             case UIntType:
             case LongIntType:
@@ -160,7 +160,7 @@ namespace Bibim
         {
             case VoidType:
                 return true;
-            case BooleanType:
+            case BoolType:
                 return value.BOOLEAN == right.value.BOOLEAN;
             case IntType:
                 return value.INT == right.value.INT;
@@ -229,7 +229,7 @@ namespace Bibim
         {
             case VoidType:
                 return ScriptObject::Void;
-            case BooleanType:
+            case BoolType:
                 return BinaryReader::ToBool(buffer);
             case IntType:
                 return BinaryReader::ToInt32(buffer);
@@ -282,7 +282,7 @@ namespace Bibim
         {
             case VoidType:
                 return 0;
-            case BooleanType:
+            case BoolType:
                 BinaryWriter::From(buffer, value.value.BOOLEAN);
                 return sizeof(value.value.BOOLEAN);
             case IntType:
@@ -346,7 +346,7 @@ namespace Bibim
             {
                 case VoidType:
                     throw;
-                case BooleanType:
+                case BoolType:
                     switch (castType)
                     {
                         case IntType:
@@ -370,7 +370,7 @@ namespace Bibim
                 case IntType:
                     switch (castType)
                     {
-                        case BooleanType:
+                        case BoolType:
                             BinaryWriter::From(buffer, static_cast<bool>(value.value.INT != 0));
                             return sizeof(bool);
                         case UIntType:
@@ -391,7 +391,7 @@ namespace Bibim
                 case UIntType:
                     switch (castType)
                     {
-                        case BooleanType:
+                        case BoolType:
                             BinaryWriter::From(buffer, static_cast<bool>(value.value.UINT != 0));
                             return sizeof(bool);
                         case IntType:
@@ -414,7 +414,7 @@ namespace Bibim
                 case FloatType:
                     switch (castType)
                     {
-                        case BooleanType:
+                        case BoolType:
                             BinaryWriter::From(buffer, static_cast<bool>(value.value.FLOAT != 0.0f));
                             return sizeof(bool);
                         case IntType:

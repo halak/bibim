@@ -77,7 +77,7 @@ namespace Bibim
             case MissingType:
                 value = nullptr;
                 break;
-            case BooleanType:
+            case BoolType:
             case CharType:
             case UCharType:
             case ShortType:
@@ -122,7 +122,7 @@ namespace Bibim
             case NullType:
             case MissingType:
                 return true;
-            case BooleanType:
+            case BoolType:
             case CharType:
             case UCharType:
             case ShortType:
