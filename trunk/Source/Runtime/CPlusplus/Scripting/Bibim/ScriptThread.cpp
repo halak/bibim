@@ -81,14 +81,22 @@ namespace Bibim
 
     ScriptThread::ScriptThread(Script* script)
         : script(script),
-          stream(MemoryStream::NewReadableStream(&script->GetBuffer()[0], script->GetBuffer().size()))
+          stream(MemoryStream::NewReadableStream(&script->GetBuffer()[0], script->GetBuffer().size())),
+          state(Stopped),
+          nativeFunctionDepth(0),
+          suspendedFunction(nullptr),
+          suspendedTopIndex(-1)
     {
     }
 
     ScriptThread::ScriptThread(Script* script, int stackSize)
         : script(script),
           stack(stackSize),
-          stream(MemoryStream::NewReadableStream(&script->GetBuffer()[0], script->GetBuffer().size()))
+          stream(MemoryStream::NewReadableStream(&script->GetBuffer()[0], script->GetBuffer().size())),
+          state(Stopped),
+          nativeFunctionDepth(0),
+          suspendedFunction(nullptr),
+          suspendedTopIndex(-1)
     {
     }
 
@@ -169,10 +177,26 @@ namespace Bibim
             return ScriptObject::Void;
     }
 
+    ScriptObject ScriptThread::Resume()
+    {
+        BBAssert(state == Suspended);
+        state = Running;
+        const Script::Function* temporarySuspendedFunction = nullptr;
+        int temporarySuspendedTopIndex = -1;
+        std::swap(temporarySuspendedFunction, suspendedFunction);
+        std::swap(temporarySuspendedTopIndex, suspendedTopIndex);
+        return Run(temporarySuspendedFunction, temporarySuspendedTopIndex);
+    }
+
     const Script::Function* ScriptThread::BeginCall(const String& name, int numberOfArguments)
     {
+        if (state == Suspended)
+            return nullptr;
+
         if (const Script::Function* function = script->Find(name))
         {
+            state = Running;
+
             // Return value를 보관할 영역을 확보합니다.
             const int count = static_cast<int>(function->ReturnTypes.size());
             for (int i = 0; i < count; i++)
@@ -191,25 +215,13 @@ namespace Bibim
         BBAssertDebug(function);
 
         stream->Seek(function->Position, Stream::FromBegin);
-        BinaryReader reader(stream);
 
-        const int topIndex = stack.GetTopIndex();
+        int topIndex = stack.GetTopIndex();
 
         BinaryWriter::From(stack.Push(sizeof(int)), stream->GetPosition());
         BinaryWriter::From(stack.Push(sizeof(int)), function->ParameterTypes.size());
 
-        do
-        {
-            Process(reader);
-        } while (stack.GetTopIndex() > topIndex);
-
-        ScriptObject result = ScriptObject::Void;
-        if (function->ReturnTypes.size() > 0)
-            result = ScriptObject::ReadFromBytes(stack.Peek(), function->ReturnTypes[0]);
-
-        stack.Pop(function->ReturnTypes.size());
-
-        return result;
+        return Run(function, topIndex);
     }
 
     void ScriptThread::PushArgument(ScriptObjectType type, const ScriptObject& value)
@@ -217,19 +229,35 @@ namespace Bibim
         ScriptObject::WriteToBytes(stack.Push(ScriptObject::SizeOf(type)), value, type);
     }
 
-    void ScriptThread::Resume()
+    ScriptObject ScriptThread::Run(const Script::Function* function, int topIndex)
     {
-        StreamPtr stream = MemoryStream::NewReadableStream(&script->GetBuffer()[0], script->GetBuffer().size());
         BinaryReader reader(stream);
-        while (stream->GetPosition() < stream->GetLength())
-            Process(reader);
+
+        do
+        {
+            ProcessInstruction(reader);
+        } while (stack.GetTopIndex() > topIndex && state == Running);
+
+        if (state == Running)
+        {
+            ScriptObject result = ScriptObject::Void;
+            if (function->ReturnTypes.size() > 0)
+                result = ScriptObject::ReadFromBytes(stack.Peek(), function->ReturnTypes[0]);
+
+            stack.Pop(function->ReturnTypes.size());
+
+            state = Stopped;
+            return result;
+        }
+        else
+        {
+            suspendedFunction = function;
+            suspendedTopIndex = topIndex;
+            return ScriptObject::Void;
+        }
     }
 
-    void ScriptThread::Suspend()
-    {
-    }
-
-    void ScriptThread::Process(BinaryReader& reader)
+    void ScriptThread::ProcessInstruction(BinaryReader& reader)
     {
         const ScriptInstruction id = static_cast<ScriptInstruction>(reader.ReadUInt8());
         switch (id)
@@ -321,7 +349,9 @@ namespace Bibim
                     ScriptNativeFunction function = ScriptNativeFunctionTable::Find(functionID);
 
                     ScriptingContext context(this, numberOfArguments, numberOfReturnValues);
+                    nativeFunctionDepth++;
                     function(context);
+                    nativeFunctionDepth--;
                 }
                 break;
             case Return:
@@ -340,6 +370,8 @@ namespace Bibim
                 }
                 break;
             case Yield:
+                {
+                }
                 break;
             case LocalAssign:
                 {
@@ -466,7 +498,7 @@ namespace Bibim
         //    case LocalAssignmentOperator:
         //        {
         //            const int16 localVariableIndex = reader.ReadInt16();
-        //            Process(reader);
+        //            ProcessInstruction(reader);
         //            stack.Peek(); // SET
         //            stack.Pop(1);
         //        }
@@ -474,15 +506,15 @@ namespace Bibim
         //    case GlobalAssignmentOperator:
         //        {
         //            stack.Push(reader.ReadString());
-        //            Process(reader);
+        //            ProcessInstruction(reader);
         //            stack.Peek().Value.CastTo<int32>();
         //            stack.Pop(1); // SET
         //        }
         //        break;
         //    case AdditionOperator:
         //        {
-        //            Process(reader);
-        //            Process(reader);
+        //            ProcessInstruction(reader);
+        //            ProcessInstruction(reader);
         //            ScriptStack::Item operand1 = stack.GetAt(-1);
         //            ScriptStack::Item operand2 = stack.GetAt(-2);
         //            stack.Pop(2);
@@ -495,8 +527,8 @@ namespace Bibim
         //        break;
         //    case InequalityOperator:
         //        {
-        //            Process(reader);
-        //            Process(reader);
+        //            ProcessInstruction(reader);
+        //            ProcessInstruction(reader);
         //            ScriptStack::Item operand1 = stack.GetAt(-1);
         //            ScriptStack::Item operand2 = stack.GetAt(-2);
         //            stack.Pop(2);
