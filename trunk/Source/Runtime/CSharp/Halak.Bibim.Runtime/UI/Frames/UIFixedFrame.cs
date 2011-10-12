@@ -12,7 +12,7 @@ namespace Halak.Bibim.UI.Frames
         #endregion
 
         #region Properties
-        public RectangleF Rectangle
+        public RectF Rectangle
         {
             get;
             set;
@@ -20,6 +20,23 @@ namespace Halak.Bibim.UI.Frames
         #endregion
 
         #region Constructors
+        public UIFixedFrame()
+        {
+        }
+
+        public UIFixedFrame(int x, int y, int width, int height)
+            : this((float)x, (float)y, (float)width, (float)height)
+        {
+        }
+
+        public UIFixedFrame(float x, float y, float width, float height)
+        {
+            Rectangle = RectF.Empty;
+            Rectangle.X = x;
+            Rectangle.Y = y;
+            Rectangle.Width = width;
+            Rectangle.Height = height;
+        }
         #endregion
 
         #region Methods

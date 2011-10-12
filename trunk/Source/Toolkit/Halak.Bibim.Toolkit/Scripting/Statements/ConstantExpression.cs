@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Halak.Bibim.IO;
 
 namespace Halak.Bibim.Scripting.Statements
@@ -36,7 +37,15 @@ namespace Halak.Bibim.Scripting.Statements
                 case TypeCode.Empty:
                     throw new NotSupportedException();
                 case TypeCode.Object:
-                    throw new NotSupportedException();
+                    Type type = Value.GetType();
+                    if (type == typeof(Vector2))
+                        context.Push((Vector2)Value);
+                    else if (type == typeof(Vector3))
+                        context.Push((Vector3)Value);
+                    else if (type == typeof(Vector4))
+                        context.Push((Vector4)Value);
+                    else
+                        throw;
                 case TypeCode.DBNull:
                     throw new NotSupportedException();
                 case TypeCode.Boolean:

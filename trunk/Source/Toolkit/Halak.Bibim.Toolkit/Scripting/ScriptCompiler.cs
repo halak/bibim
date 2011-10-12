@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Halak.Bibim.Reflection;
 using Halak.Bibim.Scripting.Statements;
 
@@ -270,6 +271,30 @@ namespace Halak.Bibim.Scripting
                     textWriter.AppendLine(string.Format("push {0}f", value.ToString()));
 
                 PushVS();
+            }
+
+            public void Push(Vector2 value)
+            {
+                binaryWriter.Write(ScriptInstruction.Push8);
+                binaryWriter.Write(value.X);
+                binaryWriter.Write(value.Y);
+            }
+
+            public void Push(Vector3 value)
+            {
+                binaryWriter.Write(ScriptInstruction.Push12);
+                binaryWriter.Write(value.X);
+                binaryWriter.Write(value.Y);
+                binaryWriter.Write(value.Z);
+            }
+
+            public void Push(Vector4 value)
+            {
+                binaryWriter.Write(ScriptInstruction.Push16);
+                binaryWriter.Write(value.X);
+                binaryWriter.Write(value.Y);
+                binaryWriter.Write(value.Z);
+                binaryWriter.Write(value.W);
             }
 
             public void Push(string value)

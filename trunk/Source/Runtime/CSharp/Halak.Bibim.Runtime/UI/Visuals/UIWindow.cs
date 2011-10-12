@@ -29,6 +29,25 @@ namespace Halak.Bibim.UI.Visuals
         #endregion
 
         #region Methods
+        public void AddChild(UIVisual item)
+        {
+            Add(item);
+        }
+
+        public void RemoveChild(UIVisual item)
+        {
+            Remove(item);
+        }
+
+        public void RemoveChildAt(int index)
+        {
+            RemoveAt(index);
+        }
+
+        public void RemoveAllChildren()
+        {
+            RemoveAll();
+        }
         #endregion
     }
 }
