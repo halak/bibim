@@ -79,6 +79,14 @@ namespace Halak.Bibim.UI.Frames
             size = Vector2.Zero;
             boundsChanged = true;
         }
+
+        public UIAlignedFrame(Alignment align, Vector2 offset, Vector2 size)
+        {
+            align = Alignment.LeftTop;
+            offset = Vector2.Zero;
+            size = Vector2.Zero;
+            boundsChanged = true;
+        }
         #endregion
 
         #region Methods

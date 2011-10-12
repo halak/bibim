@@ -39,7 +39,25 @@ namespace Bibim
         LocalAssign,
         GlobalAssign,
         AddInt,
+        AddUInt,
+        AddLongInt,
+        AddFloat,
+        AddInt2,
+        AddInt3,
+        AddInt4,
+        AddFloat2,
+        AddFloat3,
+        AddFloat4,
         SubtractInt,
+        SubtractUInt,
+        SubtractLongInt,
+        SubtractFloat,
+        SubtractInt2,
+        SubtractInt3,
+        SubtractInt4,
+        SubtractFloat2,
+        SubtractFloat3,
+        SubtractFloat4,
         MultiplyInt,
         TestEqualityInt,
         TestInequalityInt,
@@ -398,12 +416,84 @@ namespace Bibim
                     BinaryWriter::From(stack.Push(sizeof(int)), static_cast<int>(operand1 + operand2));
                 }
                 break;
+            case AddUInt:
+                {
+                }
+                break;
+            case AddLongInt:
+                {
+                }
+                break;
+            case AddFloat:
+                {
+                }
+                break;
+            case AddInt2:
+                {
+                }
+                break;
+            case AddInt3:
+                {
+                }
+                break;
+            case AddInt4:
+                {
+                }
+                break;
+            case AddFloat2:
+                {
+                }
+                break;
+            case AddFloat3:
+                {
+                }
+                break;
+            case AddFloat4:
+                {
+                }
+                break;
             case SubtractInt:
                 {
                     const int operand1 = BinaryReader::ToInt32(stack.GetAt(-2));
                     const int operand2 = BinaryReader::ToInt32(stack.GetAt(-1));
                     stack.Pop(2);
                     BinaryWriter::From(stack.Push(sizeof(int)), static_cast<int>(operand1 - operand2));
+                }
+                break;
+            case SubtractUInt:
+                {
+                }
+                break;
+            case SubtractLongInt:
+                {
+                }
+                break;
+            case SubtractFloat:
+                {
+                }
+                break;
+            case SubtractInt2:
+                {
+                }
+                break;
+            case SubtractInt3:
+                {
+                }
+                break;
+            case SubtractInt4:
+                {
+                }
+                break;
+            case SubtractFloat2:
+                {
+                }
+                break;
+            case SubtractFloat3:
+                {
+                }
+                break;
+            case SubtractFloat4:
+                {
                 }
                 break;
             case MultiplyInt:

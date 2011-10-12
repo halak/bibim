@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Halak.Bibim.Asset;
+using Halak.Bibim.UI.Visuals;
 
 namespace Halak.Bibim.UI
 {
@@ -12,9 +13,23 @@ namespace Halak.Bibim.UI
         #endregion
 
         #region Properties
+        public UIVisual Root
+        {
+            get;
+            private set;
+        }
         #endregion
 
         #region Constructors
+        public UILayout()
+            : this(null)
+        {
+        }
+
+        public UILayout(UIVisual root)
+        {
+            Root = root;
+        }
         #endregion
 
         #region Methods
