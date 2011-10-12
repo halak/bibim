@@ -125,6 +125,18 @@ namespace Bibim
         return ReadTemplate<Color>();
     }
 
+    Rect BinaryReader::ReadRect()
+    {
+        BBStaticAssert(sizeof(Rect) == 16);
+        return ReadTemplate<Rect>();
+    }
+
+    RectF BinaryReader::ReadRectF()
+    {
+        BBStaticAssert(sizeof(RectF) == 16);
+        return ReadTemplate<RectF>();
+    }
+
     Vector2 BinaryReader::ReadVector2()
     {
         BBStaticAssert(sizeof(Vector2) == 8);

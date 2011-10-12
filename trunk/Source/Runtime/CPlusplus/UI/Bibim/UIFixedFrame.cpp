@@ -1,17 +1,18 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIFixedFrame.h>
+#include <Bibim/UIStreamReader.h>
 
 namespace Bibim
 {
     UIFixedFrame::UIFixedFrame()
         : UIFrame(),
-          Rect(RectF::Empty)
+          rect(RectF::Empty)
     {
     }
 
-    UIFixedFrame::UIFixedFrame(const RectF& Rect)
+    UIFixedFrame::UIFixedFrame(const RectF& rect)
         : UIFrame(),
-          Rect(Rect)
+          rect(rect)
     {
     }
 
@@ -26,7 +27,7 @@ namespace Bibim
 
     RectF UIFixedFrame::ComputeBounds(UIVisualVisitor& /*visitor*/, Vector2 desiredSize)
     {
-        RectF result = Rect;
+        RectF result = rect;
         if (desiredSize.X >= 0.0f)
             result.Width = desiredSize.X;
         if (desiredSize.Y >= 0.0f)
@@ -37,8 +38,8 @@ namespace Bibim
 
     void UIFixedFrame::Move(Vector2 displacement)
     {
-        Rect.X += displacement.X;
-        Rect.Y += displacement.Y;
+        rect.X += displacement.X;
+        rect.Y += displacement.Y;
     }
 
     bool UIFixedFrame::IsMovable() const
@@ -48,17 +49,17 @@ namespace Bibim
 
     void UIFixedFrame::Resize(float left, float top, float right, float bottom)
     {
-        const float boundsLeft   = Rect.GetLeft() - left;
-        const float boundsTop    = Rect.GetTop() - top;
-        const float boundsRight  = Rect.GetRight() + right;
-        const float boundsBottom = Rect.GetBottom() + bottom;
-        Rect = RectF(boundsLeft, boundsTop, boundsRight - boundsLeft, boundsBottom - boundsTop);
+        const float boundsLeft   = rect.GetLeft() - left;
+        const float boundsTop    = rect.GetTop() - top;
+        const float boundsRight  = rect.GetRight() + right;
+        const float boundsBottom = rect.GetBottom() + bottom;
+        rect = RectF(boundsLeft, boundsTop, boundsRight - boundsLeft, boundsBottom - boundsTop);
     }
 
     void UIFixedFrame::ResizeTo(Vector2 size)
     {
-        Rect.Width  = size.X;
-        Rect.Height = size.Y;
+        rect.Width  = size.X;
+        rect.Height = size.Y;
     }
 
     bool UIFixedFrame::IsResizable() const
@@ -66,9 +67,14 @@ namespace Bibim
         return true;
     }
 
-    UIElement* UIFixedFrame::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    UIElement* UIFixedFrame::Create(StreamReader& reader, UIElement* /*existingInstance*/)
     {
-        return nullptr;
+        UIFixedFrame* o = new UIFixedFrame();
+        UIFrame::Read(reader, o);
+
+        o->rect = reader.ReadRectF();
+
+        return o;
     }
 
 }

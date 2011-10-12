@@ -5,6 +5,7 @@
 #include <Bibim/UIDrawingContext.h>
 #include <Bibim/UIFrame.h>
 #include <Bibim/UIImage.h>
+#include <Bibim/UIStreamReader.h>
 
 namespace Bibim
 {
@@ -49,8 +50,18 @@ namespace Bibim
         context.Draw(GetImage(), GetHorizontalFlip(), GetVerticalFlip());
     }
 
-    UIElement* UISprite::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    UIElement* UISprite::Create(StreamReader& reader, UIElement* /*existingInstance*/)
     {
-        return nullptr;
+        UISprite* o = new UISprite();
+        UIVisual::Read(reader, o);
+
+        const String textureURI = reader.ReadString();
+        const Rect clippingRect = reader.ReadRect();
+        o->image = new UIImage(textureURI, clippingRect);
+        o->autoResize = reader.ReadBool();
+        o->horizontalFlip = reader.ReadBool();
+        o->verticalFlip = reader.ReadBool();
+
+        return o;
     }
 }

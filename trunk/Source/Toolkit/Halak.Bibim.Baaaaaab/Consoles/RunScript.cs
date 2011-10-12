@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Halak.Bibim.Asset;
+using Halak.Bibim.Asset.Pipeline;
+using Halak.Bibim.Asset.Pipeline.Recipes;
 using Halak.Bibim.Scripting;
 using Halak.Bibim.Scripting.Statements;
 using Halak.Bibim.Scripting.Statements.Operators;
@@ -13,18 +16,11 @@ namespace Halak.Bibim.Bab.Consoles
     [Alias("script")]
     public static class RunScript
     {
-        public static int Factorial(int N)
-        {
-            if (N <= 0)
-                return 0;
-            else if (N == 1)
-                return 1;
-            else
-                return N * Factorial(N - 1);
-        }
-
         public static void Run([Alias("file")] string filename)
         {
+            //GameAssetKitchen kitchen = new GameAssetKitchen();
+            //object obj = kitchen.Cook(@"Asset\VisualNovelUI.asset");
+
             Block code = new Block(new Statement[]
             {
                 new Function("Sum1To100", null, new ScriptObjectType[] { ScriptObjectType.Int }, new Statement[]
@@ -70,6 +66,7 @@ namespace Halak.Bibim.Bab.Consoles
             ScriptWriter writer = new ScriptWriter();
             string text;
             writer.Write(new Asset.AssetStreamWriter(fs, null), compiler.Compile(code, out text));
+            
             fs.Close();
         }
     }

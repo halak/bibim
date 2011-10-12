@@ -11,7 +11,7 @@
     {
         class UIFunctionEventHandler : public UIEventHandler
         {
-            BBReadableObjectClass(UIFunctionEventHandler, UIEventHandler, UIElement, 'U', 'F', 'C', 'H');
+            BBCreatableObjectClass(UIFunctionEventHandler, UIEventHandler, UIElement, 'U', 'F', 'C', 'H');
             public:
                 UIFunctionEventHandler();
                 UIFunctionEventHandler(const UIFunctionTable* table, const String& functionName);

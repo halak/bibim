@@ -9,13 +9,17 @@ namespace Halak.Bibim.UI.Frames
     public sealed class UIFixedFrame : UIFrame
     {
         #region Fields
+        private RectangleF rectangle;
         #endregion
 
         #region Properties
-        public RectF Rectangle
+        public RectangleF Rectangle
         {
-            get;
-            set;
+            get { return rectangle; }
+            set
+            {
+                rectangle = value;
+            }
         }
         #endregion
 
@@ -31,11 +35,11 @@ namespace Halak.Bibim.UI.Frames
 
         public UIFixedFrame(float x, float y, float width, float height)
         {
-            Rectangle = RectF.Empty;
-            Rectangle.X = x;
-            Rectangle.Y = y;
-            Rectangle.Width = width;
-            Rectangle.Height = height;
+            rectangle = RectangleF.Empty;
+            rectangle.X = x;
+            rectangle.Y = y;
+            rectangle.Width = width;
+            rectangle.Height = height;
         }
         #endregion
 

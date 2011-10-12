@@ -5,6 +5,7 @@
 #include <Bibim/UIDrawingContext.h>
 #include <Bibim/UIFrame.h>
 #include <Bibim/UIPickingContext.h>
+#include <Bibim/UIStreamReader.h>
 #include <Bibim/UIVisual.h>
 #include <algorithm>
 
@@ -188,8 +189,20 @@ namespace Bibim
         }
     }
 
-    UIElement* UIPanel::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    void UIPanel::Read(StreamReader& reader, UIPanel* o)
     {
-        return nullptr;
+        UIVisual::Read(reader, o);
+        const int numberOfChildren = reader.ReadInt32();
+        for (int i = 0; i < numberOfChildren; i++)
+        {
+        }
+    }
+
+    UIElement* UIPanel::Create(StreamReader& reader, UIElement* /*existingInstance*/)
+    {
+        UIPanel* o = new UIPanel();
+        UIPanel::Read(reader, o);
+
+        return o;
     }
 }

@@ -213,15 +213,15 @@ namespace Halak.Bibim.Asset
                             for (int i = layers.Count - 1; i >= 0; i--)
                             {
                                 Layer item = layers[i];
+                                bool isEndLayerSetTag = (item.Name == "</Layer set>") ||
+                                                        (item.Name == "</Layer group>");
 
-                                if (layerStack.Count > 0)
-                                    item.Group = layerStack.Peek();
-                                else
-                                    item.Group = null;
+                                if (layerStack.Count > 0 && isEndLayerSetTag == false)
+                                    layerStack.Peek().AddSubLayer(item);
 
                                 if (item.IsGroup)
                                 {
-                                    if (item.Name != "</Layer set>")
+                                    if (isEndLayerSetTag == false)
                                         layerStack.Push(item);
                                     else
                                     {
@@ -229,6 +229,14 @@ namespace Halak.Bibim.Asset
                                         layers.RemoveAt(i);
                                     }
                                 }
+                            }
+
+                            for (int i = 0; i < layers.Count;)
+                            {
+                                if (layers[i].Group != null)
+                                    layers.RemoveAt(i);
+                                else
+                                    i++;
                             }
                         }
                         #endregion

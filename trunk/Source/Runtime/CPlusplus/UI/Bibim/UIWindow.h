@@ -10,7 +10,7 @@
     {
         class UIWindow : public UIPanel
         {
-            BBReadableObjectClass(UIWindow, UIPanel, UIElement, 'U', 'W', 'N', 'D');
+            BBCreatableObjectClass(UIWindow, UIPanel, UIElement, 'U', 'W', 'N', 'D');
             public:
                 UIWindow();
                 explicit UIWindow(int childrenCapacity);
@@ -29,6 +29,9 @@
 
                 inline bool GetFixedSizeUsed() const;
                 inline void SetFixedSizeUsed(bool value);
+
+            protected:
+                static void Read(StreamReader& reader, UIWindow* o);
 
             private:
                 Vector2 fixedSize;

@@ -4,6 +4,8 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/Color.h>
+#   include <Bibim/Rect.h>
+#   include <Bibim/RectF.h>
 #   include <Bibim/Vector2.h>
 #   include <Bibim/Vector3.h>
 #   include <Bibim/Vector4.h>
@@ -30,6 +32,8 @@
                 float  ReadFloat();
                 String ReadString();
                 Color  ReadColor();
+                Rect   ReadRect();
+                RectF  ReadRectF();
                 Vector2 ReadVector2();
                 Vector3 ReadVector3();
                 Vector4 ReadVector4();

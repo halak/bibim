@@ -10,7 +10,7 @@
     {
         class UIAlignedFrame : public UIFrame
         {
-            BBReadableObjectClass(UIAlignedFrame, UIFrame, UIElement, 'U', 'A', 'L', 'F');
+            BBCreatableObjectClass(UIAlignedFrame, UIFrame, UIElement, 'U', 'A', 'L', 'F');
             public:
                 enum Alignment
                 {

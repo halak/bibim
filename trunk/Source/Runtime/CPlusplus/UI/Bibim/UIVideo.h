@@ -9,7 +9,7 @@
     {
         class UIVideo : public UIVisual
         {
-            BBReadableObjectClass(UIVideo, UIVisual, UIElement, 'U', 'V', 'D', 'O');
+            BBCreatableObjectClass(UIVideo, UIVisual, UIElement, 'U', 'V', 'D', 'O');
             public:
                 UIVideo();
                 virtual ~UIVideo();

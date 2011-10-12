@@ -1,5 +1,7 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UILayout.h>
+#include <Bibim/AssetStreamReader.h>
+#include <Bibim/UIStreamReader.h>
 
 namespace Bibim
 {
@@ -11,7 +13,7 @@ namespace Bibim
     {
     }
 
-    GameAsset* UILayout::Read(AssetStreamReader& reader, GameAsset* /*existingInstance*/)
+    GameAsset* UILayout::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
     {
         return nullptr;
         //GraphicsDevice* graphicsDevice = static_cast<GraphicsDevice*>(reader.ReadModule(GraphicsDevice::ClassID));

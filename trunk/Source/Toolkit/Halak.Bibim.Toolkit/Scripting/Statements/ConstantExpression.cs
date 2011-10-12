@@ -45,7 +45,8 @@ namespace Halak.Bibim.Scripting.Statements
                     else if (type == typeof(Vector4))
                         context.Push((Vector4)Value);
                     else
-                        throw;
+                        throw new InvalidOperationException();
+                    break;
                 case TypeCode.DBNull:
                     throw new NotSupportedException();
                 case TypeCode.Boolean:

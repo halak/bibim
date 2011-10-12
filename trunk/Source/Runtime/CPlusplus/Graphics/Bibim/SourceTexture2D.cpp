@@ -21,7 +21,7 @@ namespace Bibim
     {
     }
 
-    GameAsset* SourceTexture2D::Read(AssetStreamReader& reader, GameAsset* /*existingInstance*/)
+    GameAsset* SourceTexture2D::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
     {
         GraphicsDevice* graphicsDevice = static_cast<GraphicsDevice*>(reader.ReadModule(GraphicsDevice::ClassID));
         const int width = static_cast<int>(reader.ReadInt16());

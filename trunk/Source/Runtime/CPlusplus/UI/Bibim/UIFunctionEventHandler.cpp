@@ -59,7 +59,7 @@ namespace Bibim
         }
     }
 
-    UIElement* UIFunctionEventHandler::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    UIElement* UIFunctionEventHandler::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
     {
         return nullptr;
     }

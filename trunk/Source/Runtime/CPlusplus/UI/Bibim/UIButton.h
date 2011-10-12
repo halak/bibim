@@ -9,7 +9,7 @@
     {
         class UIButton : public UIPanel
         {
-            BBReadableObjectClass(UIButton, UIPanel, UIElement, 'U', 'B', 'T', 'N');
+            BBCreatableObjectClass(UIButton, UIPanel, UIElement, 'U', 'B', 'T', 'N');
             public:
                 enum State
                 {
@@ -39,6 +39,8 @@
             protected:
                 void UpdateLayout();
                 virtual UIWindow* OnUpdateLayout();
+
+                static void Read(StreamReader& reader, UIButton* o);
 
                 virtual void OnMouseEnter(const UIMouseEventArgs& args);
                 virtual void OnMouseLeave(const UIMouseEventArgs& args);

@@ -4,16 +4,16 @@ using System.Text;
 
 namespace Halak.Bibim
 {
-    public struct RectF
+    public struct RectangleF
     {
-        public static readonly RectF Empty = new RectF(0.0f, 0.0f, 0.0f, 0.0f);
+        public static readonly RectangleF Empty = new RectangleF(0.0f, 0.0f, 0.0f, 0.0f);
 
         public float X;
         public float Y;
         public float Width;
         public float Height;
 
-        public RectF(float x, float y, float width, float height)
+        public RectangleF(float x, float y, float width, float height)
         {
             X = x;
             Y = y;

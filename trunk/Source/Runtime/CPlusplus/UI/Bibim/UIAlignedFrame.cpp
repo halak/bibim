@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIAlignedFrame.h>
+#include <Bibim/UIStreamReader.h>
 #include <Bibim/UIVisualVisitor.h>
 
 namespace Bibim
@@ -274,8 +275,13 @@ namespace Bibim
         }
     }
 
-    UIElement* UIAlignedFrame::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    UIElement* UIAlignedFrame::Create(StreamReader& reader, UIElement* /*existingInstance*/)
     {
+        UIAlignedFrame* o = new UIAlignedFrame();
+        UIFrame::Read(reader, o);
+        o->align = static_cast<Alignment>(reader.ReadUInt8());
+        o->offset = reader.ReadVector2();
+        o->size = reader.ReadVector2();
         return nullptr;
     }
 }

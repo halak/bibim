@@ -267,7 +267,7 @@ namespace Bibim
         asyncEventQueue = value;
     }
 
-    UIElement* UIEventMap::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    UIElement* UIEventMap::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
     {
         return nullptr;
     }

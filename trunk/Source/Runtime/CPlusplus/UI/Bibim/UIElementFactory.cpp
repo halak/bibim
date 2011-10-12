@@ -1,8 +1,8 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIElementFactory.h>
-#include <Bibim/AssetStreamReader.h>
 #include <Bibim/Assert.h>
 #include <Bibim/UIElement.h>
+#include <Bibim/UIStreamReader.h>
 #include <algorithm>
 #include <vector>
 
@@ -62,7 +62,7 @@ namespace Bibim
         std::sort(Entries.begin(), Entries.end(), Compare());
     }
 
-    UIElement* UIElementFactory::Create(AssetStreamReader& reader, UIElement* existingInstance)
+    UIElement* UIElementFactory::Create(StreamReader& reader, UIElement* existingInstance)
     {
         const uint32 id = reader.ReadUInt32();
 

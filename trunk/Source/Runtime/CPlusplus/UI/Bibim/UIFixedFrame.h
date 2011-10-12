@@ -9,7 +9,7 @@
     {
         class UIFixedFrame : public UIFrame
         {
-            BBReadableObjectClass(UIFixedFrame, UIFrame, UIElement, 'U', 'F', 'X', 'F');
+            BBCreatableObjectClass(UIFixedFrame, UIFrame, UIElement, 'U', 'F', 'X', 'F');
             public:
                 UIFixedFrame();
                 explicit UIFixedFrame(const RectF& Rect);
@@ -29,7 +29,7 @@
                 inline void SetRect(const RectF& value);
 
             private:
-                RectF Rect;
+                RectF rect;
         };
     }
 

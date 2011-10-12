@@ -10,7 +10,6 @@
    // UI
 #  include <Bibim/UI.h>
 #  include <Bibim/UIAlignedFrame.h>
-#  include <Bibim/UIAnchoredFrame.h>
 #  include <Bibim/UIAppEventDispatcher.h>
 #  include <Bibim/UIAsyncEventQueue.h>
 #  include <Bibim/UIButton.h>

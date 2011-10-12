@@ -60,7 +60,7 @@ namespace Bibim
         }
     }
 
-    UIElement* UIImage::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    UIElement* UIImage::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
     {
         return nullptr;
     }

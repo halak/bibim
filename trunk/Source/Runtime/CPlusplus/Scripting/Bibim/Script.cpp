@@ -31,7 +31,7 @@ namespace Bibim
         return nullptr;
     }
 
-    GameAsset* Script::Read(AssetStreamReader& reader, GameAsset* /*existingInstance*/)
+    GameAsset* Script::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
     {
         const int length = reader.ReadInt32();
 

@@ -12,7 +12,7 @@
     {
         class Script : public GameAsset
         {
-            BBReadableObjectClass(Script, GameAsset, GameAsset, 'S', 'C', 'R', 'T');
+            BBCreatableObjectClass(Script, GameAsset, GameAsset, 'S', 'C', 'R', 'T');
             public:
                 struct Function
                 {

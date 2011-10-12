@@ -1,12 +1,12 @@
 namespace Bibim
 {
-    GameAsset* GameAssetFactory::Create(AssetStreamReader& reader)
+    GameAsset* GameAssetFactory::Create(StreamReader& reader)
     {
         return Create(reader, nullptr);
     }
 
     template <typename T> void GameAssetFactory::AddEntry()
     {
-        AddEntry(T::ClassID, &T::Read);
+        AddEntry(T::ClassID, &T::Create);
     }
 }

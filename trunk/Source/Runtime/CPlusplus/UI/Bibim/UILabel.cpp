@@ -60,7 +60,7 @@ namespace Bibim
         context.DrawString(fontString);
     }
 
-    UIElement* UILabel::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    UIElement* UILabel::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
     {
         return nullptr;
     }

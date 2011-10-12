@@ -110,7 +110,7 @@ namespace Bibim
         return true;
     }
 
-    UIElement* UISequentialEventHandler::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    UIElement* UISequentialEventHandler::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
     {
         return nullptr;
     }

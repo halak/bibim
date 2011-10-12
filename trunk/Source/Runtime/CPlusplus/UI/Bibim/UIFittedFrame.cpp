@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIFittedFrame.h>
+#include <Bibim/UIStreamReader.h>
 #include <Bibim/UIVisualVisitor.h>
 
 namespace Bibim
@@ -24,8 +25,11 @@ namespace Bibim
         return visitor.GetCurrentBounds();
     }
 
-    UIElement* UIFittedFrame::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    UIElement* UIFittedFrame::Create(StreamReader& reader, UIElement* existingInstance)
     {
-        return nullptr;
+        UIFittedFrame* o = new UIFittedFrame();
+        UIFrame::Read(reader, o);
+
+        return o;
     }
 }

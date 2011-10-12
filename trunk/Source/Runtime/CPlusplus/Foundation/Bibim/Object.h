@@ -11,9 +11,9 @@
                                                                 static const uint32 ClassID = BBMakeFOURCC(a, b, c, d); \
                                                                 virtual uint32 GetClassID() const { return ClassID; } \
                                                             private:
-#       define BBReadableObjectClass(classname, parent, category, a, b, c, d)   BBObjectClass(classname, parent, a, b, c, d); \
+#       define BBCreatableObjectClass(classname, parent, category, a, b, c, d)   BBObjectClass(classname, parent, a, b, c, d); \
                                                                                 public: \
-                                                                                    static category* Read(category::StreamReaderType& reader, category* existingInstance); \
+                                                                                    static category* Create(category::StreamReader& reader, category* existingInstance); \
                                                                                 private:
 
         class Object

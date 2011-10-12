@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIWindow.h>
+#include <Bibim/UIStreamReader.h>
 
 namespace Bibim
 {
@@ -28,8 +29,16 @@ namespace Bibim
             return UIVisual::GetDesiredSize();
     }
 
-    UIElement* UIWindow::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    void UIWindow::Read(StreamReader& reader, UIWindow* o)
     {
-        return nullptr;
+        UIPanel::Read(reader, o);
+    }
+
+    UIElement* UIWindow::Create(StreamReader& reader, UIElement* /*existingInstance*/)
+    {
+        UIWindow* o = new UIWindow();
+        UIWindow::Read(reader, o);
+
+        return o;
     }
 }

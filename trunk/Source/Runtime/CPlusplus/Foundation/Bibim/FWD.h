@@ -178,7 +178,7 @@
                 BBForwardDeclareSmartPointerClass(UILayout);
                 class UIMarkupText;
                 class UIRenderer;
-                class AssetStreamReader;
+                class UIStreamReader;
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Effects
                     BBForwardDeclareSmartPointerClass(UIEffect);
@@ -208,7 +208,6 @@
                 // Frames
                     BBForwardDeclareSmartPointerClass(UIFrame);
                         BBForwardDeclareSmartPointerClass(UIAlignedFrame);
-                        BBForwardDeclareSmartPointerClass(UIAnchoredFrame);
                         BBForwardDeclareSmartPointerClass(UIFittedFrame);
                         BBForwardDeclareSmartPointerClass(UIFixedFrame);
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
