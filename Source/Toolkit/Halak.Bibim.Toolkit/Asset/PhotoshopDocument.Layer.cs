@@ -171,6 +171,8 @@ namespace Halak.Bibim.Asset
         public sealed class Layer
         {
             #region Fields
+            private List<Layer> subLayers;
+            private ReadOnlyCollection<Layer> readonlySubLayers;
             private List<Channel> channels;
             private ReadOnlyCollection<Channel> readonlyChannels;
             private SortedList<ChannelID, Channel> sortedChannels;
@@ -197,7 +199,7 @@ namespace Halak.Bibim.Asset
             public Layer Group
             {
                 get;
-                set;
+                private set;
             }
 
             public Rectangle Rectangle
@@ -247,6 +249,11 @@ namespace Halak.Bibim.Asset
                 get { return readonlyChannels; }
             }
 
+            public IList<Layer> SubLayers
+            {
+                get { return readonlySubLayers; }
+            }
+
             public Mask Mask
             {
                 get;
@@ -268,6 +275,9 @@ namespace Halak.Bibim.Asset
             #region Constructor
             public Layer(Reader reader)
             {
+                subLayers = new List<Layer>();
+                readonlySubLayers = new ReadOnlyCollection<Layer>(subLayers);
+
                 #region Layer 사각영역 정보를 읽어옵니다.
                 Rectangle = reader.ReadRectangle();
                 #endregion
@@ -371,9 +381,35 @@ namespace Halak.Bibim.Asset
                 #endregion
             }
             #endregion
+            
+            #region Methods
+            public Rectangle ComputeUnionRectangle()
+            {
+                Rectangle result = Rectangle;
+                foreach (Layer item in subLayers)
+                {
+                    if (result.IsEmpty)
+                        result = item.ComputeUnionRectangle();
+                    else
+                        result = System.Drawing.Rectangle.Union(result, item.ComputeUnionRectangle());
+                }
 
-            #region PixelData
-            public void ReadPixelData(int bitsPerPixel, Reader reader)
+                return result;
+            }
+
+            internal void AddSubLayer(Layer item)
+            {
+                if (item.Group == this)
+                    return;
+
+                if (item.Group != null)
+                    item.Group.subLayers.Remove(item);
+
+                item.Group = this;
+                subLayers.Add(item);
+            }
+
+            internal void ReadPixelData(int bitsPerPixel, Reader reader)
             {
                 foreach (Channel channel in Channels)
                 {

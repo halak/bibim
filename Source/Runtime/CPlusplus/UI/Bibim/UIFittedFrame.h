@@ -9,7 +9,7 @@
     {
         class UIFittedFrame : public UIFrame
         {
-            BBReadableObjectClass(UIFittedFrame, UIFrame, UIElement, 'U', 'F', 'T', 'F');
+            BBCreatableObjectClass(UIFittedFrame, UIFrame, UIElement, 'U', 'F', 'T', 'F');
             public:
                 static UIFittedFramePtr Instance;
 

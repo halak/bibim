@@ -1325,6 +1325,14 @@
 					RelativePath=".\UI\Bibim\UISimpleDomain.h"
 					>
 				</File>
+				<File
+					RelativePath=".\UI\Bibim\UIStreamReader.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\UI\Bibim\UIStreamReader.h"
+					>
+				</File>
 				<Filter
 					Name="Frames"
 					>
@@ -1338,18 +1346,6 @@
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIAlignedFrame.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIAnchoredFrame.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIAnchoredFrame.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIAnchoredFrame.inl"
 						>
 					</File>
 					<File

@@ -13,7 +13,7 @@
             BBAbstractObjectClass(GameAsset, SharedObject);
             BBThisIsNoncopyableClass(GameAsset);
             public:
-                typedef AssetStreamReader StreamReaderType;
+                typedef AssetStreamReader StreamReader;
 
             public:
                 enum Status

@@ -62,7 +62,7 @@ namespace Bibim
         std::sort(Entries.begin(), Entries.end(), Compare());
     }
 
-    GameAsset* GameAssetFactory::Create(AssetStreamReader& reader, GameAsset* existingInstance)
+    GameAsset* GameAssetFactory::Create(StreamReader& reader, GameAsset* existingInstance)
     {
         const uint32 id = reader.ReadUInt32();
 

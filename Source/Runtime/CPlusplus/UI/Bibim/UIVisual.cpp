@@ -10,6 +10,7 @@
 #include <Bibim/UIMouseWheelEventArgs.h>
 #include <Bibim/UIPickingContext.h>
 #include <Bibim/UIPanel.h>
+#include <Bibim/UIStreamReader.h>
 #include <Bibim/UITransform.h>
 
 namespace Bibim
@@ -83,6 +84,15 @@ namespace Bibim
     bool UIVisual::IsPanel() const
     {
         return false;
+    }
+
+    void UIVisual::Read(StreamReader& reader, UIVisual* o)
+    {
+        UIElement::Read(reader, o);
+        o->opacity = reader.ReadFloat();
+        o->shown = reader.ReadBool();
+        o->size = reader.ReadVector2();
+        // frame = reader.ReadFrame();
     }
 
     void UIVisual::OnDraw(UIDrawingContext& /*context*/)

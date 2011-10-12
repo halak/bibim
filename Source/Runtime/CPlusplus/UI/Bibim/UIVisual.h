@@ -50,6 +50,8 @@
                 virtual bool IsPanel() const;
 
             protected:
+                static void Read(StreamReader& reader, UIVisual* o);
+
                 virtual void OnDraw(UIDrawingContext& context);
                 virtual void OnPick(UIPickingContext& context);
 

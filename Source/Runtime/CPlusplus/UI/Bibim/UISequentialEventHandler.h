@@ -10,7 +10,7 @@
     {
         class UISequentialEventHandler : public UIEventHandler
         {
-            BBReadableObjectClass(UISequentialEventHandler, UIEventHandler, UIElement, 'U', 'S', 'Q', 'H');
+            BBCreatableObjectClass(UISequentialEventHandler, UIEventHandler, UIElement, 'U', 'S', 'Q', 'H');
             public:
                 typedef std::vector<UIEventHandlerPtr> HandlerCollection;
 

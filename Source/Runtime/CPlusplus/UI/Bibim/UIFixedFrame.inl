@@ -2,11 +2,11 @@ namespace Bibim
 {
     const RectF& UIFixedFrame::GetRect() const
     {
-        return Rect;
+        return rect;
     }
 
     void UIFixedFrame::SetRect(const RectF& value)
     {
-        Rect = value;
+        rect = value;
     }
 }

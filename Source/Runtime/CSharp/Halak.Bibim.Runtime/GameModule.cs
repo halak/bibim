@@ -7,7 +7,7 @@ namespace Halak.Bibim
     public abstract class GameModule
     {
         #region Static Fields
-        public const uint UnspecifiedID = 0x00000000;
+        public const uint UnspecifiedID = 0xFFFFFFFF;
         #endregion
 
         #region Fields

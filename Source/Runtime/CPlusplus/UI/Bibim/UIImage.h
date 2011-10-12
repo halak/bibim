@@ -12,7 +12,7 @@
     {
         class UIImage : public UIElement
         {
-            BBReadableObjectClass(UIImage, UIElement, UIElement, 'U', 'I', 'M', 'G')
+            BBCreatableObjectClass(UIImage, UIElement, UIElement, 'U', 'I', 'M', 'G')
             public:
                 UIImage(const URI& textureURI, const Rect& clippingRect);
                 virtual ~UIImage();

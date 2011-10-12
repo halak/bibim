@@ -10,7 +10,7 @@ namespace Bibim
     {
     }
 
-    UIElement* UITintEffect::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    UIElement* UITintEffect::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
     {
         return nullptr;
     }

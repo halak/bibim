@@ -55,7 +55,7 @@ namespace Halak.Bibim.UI.Visuals
             set;
         }
 
-        public bool stateSizeReferenced
+        public bool StateSizeReferenced
         {
             get;
             set;

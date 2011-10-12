@@ -10,7 +10,7 @@
     {
         class UIPanel : public UIVisual
         {
-            BBReadableObjectClass(UIPanel, UIVisual, UIElement, 'U', 'P', 'N', 'L');
+            BBCreatableObjectClass(UIPanel, UIVisual, UIElement, 'U', 'P', 'N', 'L');
             public:
                 typedef std::vector<UIVisualPtr> VisualCollection;
 
@@ -33,6 +33,8 @@
                 void RemoveAll();
 
                 void DrawChildren(UIDrawingContext& context);
+
+                static void Read(StreamReader& reader, UIPanel* o);
 
                 virtual void OnDraw(UIDrawingContext& context);
                 virtual void OnPick(UIPickingContext& context);

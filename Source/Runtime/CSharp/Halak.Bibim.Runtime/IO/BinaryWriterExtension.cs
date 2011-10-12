@@ -8,6 +8,22 @@ namespace Halak.Bibim.IO
 {
     public static class BinaryWriterExtension
     {
+        public static void Write(this BinaryWriter writer, Rectangle value)
+        {
+            writer.Write(value.X);
+            writer.Write(value.Y);
+            writer.Write(value.Width);
+            writer.Write(value.Height);
+        }
+
+        public static void Write(this BinaryWriter writer, RectangleF value)
+        {
+            writer.Write(value.X);
+            writer.Write(value.Y);
+            writer.Write(value.Width);
+            writer.Write(value.Height);
+        }
+
         public static void Write(this BinaryWriter writer, Vector2 value)
         {
             writer.Write(value.X);

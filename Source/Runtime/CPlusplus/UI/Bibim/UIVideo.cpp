@@ -11,7 +11,7 @@ namespace Bibim
     {
     }
 
-    UIElement* UIVideo::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    UIElement* UIVideo::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
     {
         return nullptr;
     }

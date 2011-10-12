@@ -2,7 +2,8 @@
 #ifndef __BIBIM_GAMEASSETFACTORY_H__
 #define __BIBIM_GAMEASSETFACTORY_H__
 
-#    include <Bibim/FWD.h>
+#   include <Bibim/FWD.h>
+#   include <Bibim/GameAsset.h>
 
     namespace Bibim
     {
@@ -10,11 +11,12 @@
         {
             BBThisIsStaticClass(GameAssetFactory);
             public:
-                typedef GameAsset* (*CreateFunction)(AssetStreamReader&, GameAsset*);
+                typedef GameAsset::StreamReader StreamReader;
+                typedef GameAsset* (*CreateFunction)(StreamReader&, GameAsset*);
 
             public:
-                static inline GameAsset* Create(AssetStreamReader& reader);
-                static GameAsset* Create(AssetStreamReader& reader, GameAsset* existingInstance);
+                static inline GameAsset* Create(StreamReader& reader);
+                static GameAsset* Create(StreamReader& reader, GameAsset* existingInstance);
 
                 template <typename T> static void AddEntry();
                 static void AddEntry(uint32 id, CreateFunction function);

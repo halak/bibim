@@ -410,7 +410,7 @@ namespace Bibim
         return cache;
     }
 
-    GameAsset* Font::Read(AssetStreamReader& reader, GameAsset* existingInstance)
+    GameAsset* Font::Create(StreamReader& reader, GameAsset* existingInstance)
     {
         Font* result = nullptr;
         

@@ -92,24 +92,39 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
 
         private static void Process(UIVisual visual, PhotoshopDocument.Layer layer)
         {
+            System.Drawing.Rectangle parentBounds = System.Drawing.Rectangle.Empty;
+            if (layer.Group != null)
+                parentBounds = layer.Group.ComputeUnionRectangle();
+            
+            System.Drawing.Rectangle bounds = layer.ComputeUnionRectangle();
+            bounds.X -= parentBounds.X;
+            bounds.Y -= parentBounds.Y;
+
+            visual.Frame = new UIAlignedFrame(UIAlignedFrame.Alignment.LeftTop,
+                                              new Vector2((float)bounds.X, (float)bounds.Y),
+                                              new Vector2((float)bounds.Width, (float)bounds.Height));
+            visual.Opacity = (float)layer.Opacity / (float)byte.MaxValue;
+            visual.Shown = layer.Visible;
         }
 
         private static void Process(UISprite sprite, PhotoshopDocument.Layer layer)
         {
+            Process((UIVisual)sprite, layer);
+
+            sprite.Image = new UIImage(string.Empty, Rectangle.Empty);
         }
 
         private static void Process(UIButton button, PhotoshopDocument.Layer layer)
         {
+            Process((UIVisual)button, layer);
         }
 
         private static void Process(UIWindow window, PhotoshopDocument.Layer layer)
         {
-            //Process((UIVisual)window, layer);
+            Process((UIVisual)window, layer);
 
-            //foreach () // reverse
-            //{
-            //    AddChildTo(window, item);
-            //}
+            for (int i = layer.SubLayers.Count - 1; i >= 0; i--)
+                AddChildTo(window, layer.SubLayers[i]);
         }
 
         private static void ParseLayerName(string layerName, out string name, out string type)

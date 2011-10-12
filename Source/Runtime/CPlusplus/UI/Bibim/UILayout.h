@@ -9,7 +9,7 @@
     {
         class UILayout : public GameAsset
         {
-            BBReadableObjectClass(UILayout, GameAsset, GameAsset, 'U', 'I', 'L', 'T');
+            BBCreatableObjectClass(UILayout, GameAsset, GameAsset, 'U', 'I', 'L', 'T');
             public:
                 UILayout();
                 virtual ~UILayout();

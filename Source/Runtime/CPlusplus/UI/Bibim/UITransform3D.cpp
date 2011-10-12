@@ -85,7 +85,7 @@ namespace Bibim
         }
     }
 
-    UIElement* UITransform3D::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    UIElement* UITransform3D::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
     {
         return nullptr;
     }

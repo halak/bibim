@@ -14,16 +14,26 @@
             BBAbstractObjectClass(UIElement, SharedObject);
             BBThisIsNoncopyableClass(UIElement);
             public:
-                typedef AssetStreamReader StreamReaderType;
+                typedef UIStreamReader StreamReader;
+
+            public:
+                static const uint UnspecifiedID;
 
             public:
                 UIElement();
                 virtual ~UIElement();
 
+                inline uint GetID() const;
+                inline void SetID(uint value);
+
                 inline const String& GetName() const;
                 inline void SetName(const String& value);
 
+            protected:
+                static void Read(StreamReader& reader, UIElement* o);
+
             private:
+                uint id;
                 String name;
         };
     }

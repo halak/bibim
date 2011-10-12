@@ -132,8 +132,16 @@ namespace Bibim
         return false;
     }
 
-    UIElement* UIButton::Read(AssetStreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    void UIButton::Read(StreamReader& reader, UIButton* o)
     {
-        return nullptr;
+        UIPanel::Read(reader, o);
+    }
+
+    UIElement* UIButton::Create(StreamReader& reader, UIElement* /*existingInstance*/)
+    {
+        UIButton* o = new UIButton();
+        UIButton::Read(reader, o);
+
+        return o;
     }
 }

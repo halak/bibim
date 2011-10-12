@@ -38,6 +38,7 @@ namespace Halak.Bibim.Asset.Pipeline
 
             FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
             GameAssetRecipe recipe = GameAssetRecipe.Deserialize(fs);
+            fs.Close();
 
             if (recipe != null && recipe.Cook != null)
             {

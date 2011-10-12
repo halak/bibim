@@ -9,7 +9,7 @@
     {
         class UITintEffect : public UIEffect
         {
-            BBReadableObjectClass(UITintEffect, UIEffect, UIElement, 'U', 'T', 'N', 'F');
+            BBCreatableObjectClass(UITintEffect, UIEffect, UIElement, 'U', 'T', 'N', 'F');
             public:
                 UITintEffect();
                 virtual ~UITintEffect();

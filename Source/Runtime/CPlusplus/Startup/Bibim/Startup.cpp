@@ -17,7 +17,6 @@ namespace Bibim
         UIElementFactory::AddEntry<UISequentialEventHandler>();
         UIElementFactory::AddEntry<UIEventMap>();
         UIElementFactory::AddEntry<UIAlignedFrame>();
-        UIElementFactory::AddEntry<UIAnchoredFrame>();
         UIElementFactory::AddEntry<UIFittedFrame>();
         UIElementFactory::AddEntry<UIFixedFrame>();
         UIElementFactory::AddEntry<UITransform3D>();
