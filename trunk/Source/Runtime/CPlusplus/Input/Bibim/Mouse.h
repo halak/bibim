@@ -11,7 +11,7 @@
     {
         class Mouse : public GameModule
         {
-            BBObjectClass(Mouse, GameModule, 'M', 'O', 'U', 'S');
+            BBModuleClass(Mouse, GameModule, 'M', 'O', 'U', 'S');
             public:
                 Mouse();
                 Mouse(Window* window);

@@ -9,7 +9,7 @@
     {
         class UICheckBox : public UIButton
         {
-            BBCreatableObjectClass(UICheckBox, UIButton, UIElement, 'U', 'C', 'B', 'X');
+            BBComponentClass(UICheckBox, UIButton, 'U', 'C', 'B', 'X');
             public:
                 UICheckBox();
                 virtual ~UICheckBox();

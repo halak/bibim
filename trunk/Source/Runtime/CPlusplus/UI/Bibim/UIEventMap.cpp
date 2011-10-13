@@ -6,6 +6,8 @@
 
 namespace Bibim
 {
+    BBImplementsComponent(UIEventMap);
+
     UIEventMap::UIEventMap()
         : eventDispatcher(nullptr),
           asyncEventQueue(nullptr)
@@ -267,8 +269,15 @@ namespace Bibim
         asyncEventQueue = value;
     }
 
-    UIElement* UIEventMap::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    void UIEventMap::OnRead(ComponentStreamReader& reader)
     {
-        return nullptr;
+        Base::OnRead(reader);
+        BBAssert(0);
+    }
+
+    void UIEventMap::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        BBAssert(0);
     }
 }

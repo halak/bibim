@@ -16,9 +16,9 @@
 
                 void Draw(UIVisual* target);
 
-                inline void Draw(UIImage* image);
-                inline void Draw(UIImage* image, bool horizontalFlip, bool verticalFlip);
-                void Draw(const RectF& bounds, const RectF& clippedBounds, UIImage* image, bool horizontalFlip, bool verticalFlip);
+                inline void Draw(Image* image);
+                inline void Draw(Image* image, bool horizontalFlip, bool verticalFlip);
+                void Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, bool horizontalFlip, bool verticalFlip);
                 void Draw(Vector2 position, Texture2D* texture);
 
                 inline void DrawString(Font* font, const String& text);

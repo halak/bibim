@@ -1,21 +1,27 @@
 #include <Bibim/PCH.h>
-#include <Bibim/UIImage.h>
+#include <Bibim/Image.h>
+#include <Bibim/AssetStreamReader.h>
 #include <Bibim/Texture2D.h>
 
 namespace Bibim
 {
-    UIImage::UIImage(const URI& textureURI, const Rect& clippingRect)
+    Image::Image()
+    {
+        // for cloning and deserialization
+    }
+
+    Image::Image(const URI& textureURI, const Rect& clippingRect)
         : textureURI(textureURI),
           clippingRect(clippingRect),
           revision(1)
     {
     }
 
-    UIImage::~UIImage()
+    Image::~Image()
     {
     }
 
-    void UIImage::SetRealTextureData(Texture2D* texture)
+    void Image::SetRealTextureData(Texture2D* texture)
     {
         if (realTexture != texture || realClippingRect != clippingRect)
         {
@@ -36,7 +42,7 @@ namespace Bibim
         }
     }
 
-    void UIImage::SetRealTextureData(Texture2D* texture, const Rect& clippingRect)
+    void Image::SetRealTextureData(Texture2D* texture, const Rect& clippingRect)
     {
         if (realTexture != texture || realClippingRect != clippingRect)
         {
@@ -60,8 +66,11 @@ namespace Bibim
         }
     }
 
-    UIElement* UIImage::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    GameAsset* Image::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
     {
-        return nullptr;
+        const String textureURI = reader.ReadString();
+        const Rect clippingRect = reader.ReadRect();
+
+        return new Image(textureURI, clippingRect);
     }
 }

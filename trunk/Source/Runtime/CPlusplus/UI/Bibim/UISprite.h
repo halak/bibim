@@ -9,15 +9,15 @@
     {
         class UISprite : public UIVisual
         {
-            BBCreatableObjectClass(UISprite, UIVisual, UIElement, 'U', 'S', 'P', 'R');
+            BBComponentClass(UISprite, UIVisual, 'U', 'S', 'P', 'R');
             public:
                 UISprite();
                 virtual ~UISprite();
 
                 virtual Vector2 GetDesiredSize();
 
-                inline UIImage* GetImage() const;
-                void SetImage(UIImage* value);
+                inline Image* GetImage() const;
+                void SetImage(Image* value);
 
                 inline bool GetAutoResize() const;
                 inline void SetAutoResize(bool value);
@@ -32,7 +32,7 @@
                 virtual void OnDraw(UIDrawingContext& context);
 
             private:
-                UIImagePtr image;
+                ImagePtr image;
                 bool autoResize;
                 bool horizontalFlip;
                 bool verticalFlip;

@@ -11,7 +11,7 @@
     {
         class UITransform3D : public UITransform
         {
-            BBCreatableObjectClass(UITransform3D, UITransform, UIElement, 'U' , 'T', '3', 'D');
+            BBComponentClass(UITransform3D, UITransform, 'U' , 'T', '3', 'D');
             public:
                 UITransform3D();
                 virtual ~UITransform3D();

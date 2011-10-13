@@ -9,7 +9,7 @@
     {
         class UISimpleDomain : public UIDomain
         {
-            BBObjectClass(UISimpleDomain, UIDomain, 'U', 'I', 'S', 'D');
+            BBModuleClass(UISimpleDomain, UIDomain, 'U', 'I', 'S', 'D');
             public:
                 UISimpleDomain();
                 UISimpleDomain(UIWindow* root);

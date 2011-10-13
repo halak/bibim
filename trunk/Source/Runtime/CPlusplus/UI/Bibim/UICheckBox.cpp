@@ -6,6 +6,8 @@
 
 namespace Bibim
 {
+    BBImplementsComponent(UICheckBox);
+
     UICheckBox::UICheckBox()
         : checkedNormalWindow(new UIWindow()),
           checkedPushedWindow(new UIWindow()),
@@ -71,8 +73,14 @@ namespace Bibim
         return false;
     }
 
-    UIElement* UICheckBox::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    void UICheckBox::OnRead(ComponentStreamReader& reader)
     {
-        return nullptr;
+        Base::OnRead(reader);
+    }
+
+    void UICheckBox::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        const This* o = static_cast<const This*>(original);
     }
 }

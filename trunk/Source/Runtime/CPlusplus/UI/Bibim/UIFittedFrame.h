@@ -9,7 +9,7 @@
     {
         class UIFittedFrame : public UIFrame
         {
-            BBCreatableObjectClass(UIFittedFrame, UIFrame, UIElement, 'U', 'F', 'T', 'F');
+            BBComponentClass(UIFittedFrame, UIFrame, 'U', 'F', 'T', 'F');
             public:
                 static UIFittedFramePtr Instance;
 

@@ -2,6 +2,8 @@
 
 namespace Bibim
 {
+    BBImplementsComponent(UITintEffect);
+
     UITintEffect::UITintEffect()
     {
     }
@@ -10,8 +12,15 @@ namespace Bibim
     {
     }
 
-    UIElement* UITintEffect::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    void UITintEffect::OnRead(ComponentStreamReader& reader)
     {
-        return nullptr;
+        Base::OnRead(reader);
+        BBAssert(0);
+    }
+
+    void UITintEffect::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        BBAssert(0);
     }
 }

@@ -1,9 +1,11 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIWindow.h>
-#include <Bibim/UIStreamReader.h>
+#include <Bibim/ComponentStreamReader.h>
 
 namespace Bibim
 {
+    BBImplementsComponent(UIWindow);
+    
     UIWindow::UIWindow()
         : fixedSize(Vector2::Zero),
           fixedSizeUsed(false)
@@ -29,16 +31,14 @@ namespace Bibim
             return UIVisual::GetDesiredSize();
     }
 
-    void UIWindow::Read(StreamReader& reader, UIWindow* o)
+    void UIWindow::OnRead(ComponentStreamReader& reader)
     {
-        UIPanel::Read(reader, o);
+        Base::OnRead(reader);
     }
 
-    UIElement* UIWindow::Create(StreamReader& reader, UIElement* /*existingInstance*/)
+    void UIWindow::OnCopy(const GameComponent* original, CloningContext& context)
     {
-        UIWindow* o = new UIWindow();
-        UIWindow::Read(reader, o);
-
-        return o;
+        Base::OnCopy(original, context);
+        const This* o = static_cast<const This*>(original);
     }
 }

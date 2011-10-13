@@ -7,7 +7,6 @@ namespace Bibim
 {
     class UIEventArgs : public SharedObject
     {
-        BBObjectClass(UIEventArgs, SharedObject, 'U', 'E', 'V', 'As');
         public:
             UIEventArgs();
             UIEventArgs(UIVisual* target);

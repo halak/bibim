@@ -1022,6 +1022,18 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Graphics\Bibim\Image.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\Image.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\Image.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Graphics\Bibim\SourceTexture2D.cpp"
 					>
 				</File>
@@ -1254,30 +1266,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIElementFactory.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIElementFactory.h"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIElementFactory.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIImage.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIImage.h"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIImage.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\UI\Bibim\UILayout.cpp"
 					>
 				</File>
@@ -1323,14 +1311,6 @@
 				</File>
 				<File
 					RelativePath=".\UI\Bibim\UISimpleDomain.h"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIStreamReader.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIStreamReader.h"
 					>
 				</File>
 				<Filter
@@ -1969,6 +1949,58 @@
 						>
 					</File>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="(Component)"
+				>
+				<File
+					RelativePath=".\Component\Bibim\CloningContext.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\CloningContext.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\CloningContext.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\ComponentStreamReader.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\ComponentStreamReader.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\ComponentStreamReader.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\GameComponent.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\GameComponent.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\GameComponent.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\GameComponentFactory.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\GameComponentFactory.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\GameComponentFactory.inl"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

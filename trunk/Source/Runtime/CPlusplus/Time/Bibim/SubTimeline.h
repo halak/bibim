@@ -9,7 +9,7 @@
     {
         class SubTimeline : public Timeline
         {
-            BBObjectClass(SubTimeline, Timeline, 'S', 'B', 'T', 'L');
+            BBModuleClass(SubTimeline, Timeline, 'S', 'B', 'T', 'L');
             public:
                 SubTimeline();
                 virtual ~SubTimeline();

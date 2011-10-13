@@ -10,7 +10,6 @@
     {
         class Stream : public SharedObject
         {
-            BBAbstractObjectClass(Stream, SharedObject);
             BBThisIsNoncopyableClass(Stream);
             public:
                 enum SeekOrigin

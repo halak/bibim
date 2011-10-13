@@ -1,8 +1,11 @@
 #include <Bibim/UIFunctionEventHandler.h>
+#include <Bibim/ComponentStreamReader.h>
 #include <Bibim/UIFunctionTable.h>
 
 namespace Bibim
 {
+    BBImplementsComponent(UIFunctionEventHandler);
+
     UIFunctionEventHandler::UIFunctionEventHandler()
         : table(nullptr),
           functionName(),
@@ -59,8 +62,22 @@ namespace Bibim
         }
     }
 
-    UIElement* UIFunctionEventHandler::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    void UIFunctionEventHandler::OnRead(ComponentStreamReader& reader)
     {
-        return nullptr;
+        Base::OnRead(reader);
+        BBAssert(0);
+        // table = reader.ReadModule();
+        functionName = reader.ReadString();
+        callableChanged = true;
+    }
+
+    void UIFunctionEventHandler::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        const UIFunctionEventHandler* o = static_cast<const UIFunctionEventHandler*>(original);
+        table = o->table;
+        functionName = o->functionName;
+        callable = o->callable;
+        callableChanged = o->callableChanged;
     }
 }

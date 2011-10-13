@@ -13,7 +13,6 @@
     {
         class ScriptThread : public SharedObject
         {
-            BBObjectClass(ScriptThread, SharedObject, 'S', 'C', 'P', 'S');
             public:
                 enum State
                 {

@@ -9,7 +9,7 @@
     {
         class UIGamePadEventDispatcher : public UIEventDispatcher
         {
-            BBObjectClass(UIGamePadEventDispatcher, UIEventDispatcher, 'U', 'I', 'G', 'P');
+            BBModuleClass(UIGamePadEventDispatcher, UIEventDispatcher, 'U', 'I', 'G', 'P');
             public:
                 UIGamePadEventDispatcher();
                 virtual ~UIGamePadEventDispatcher();

@@ -15,7 +15,7 @@
     {
         class GameAssetStorage : public GameModule
         {
-            BBObjectClass(GameAssetStorage, GameModule, 'G', 'A', 'S', 'T');
+            BBModuleClass(GameAssetStorage, GameModule, 'G', 'A', 'S', 'T');
             public:
                 typedef std::map<String, GameAsset*> AssetTable;
                 typedef std::vector<AssetProvider*> ProviderCollection;

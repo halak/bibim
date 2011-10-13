@@ -3,4 +3,41 @@
 ;------------------------------------------------------------------------------
 ;  Bibim::String
 Bibim::String{ preview ([$e.buffer.pointee->s]) }
+
+;------------------------------------------------------------------------------
+;  Bibim::SharedPointer
+;------------------------------------------------------------------------------
+Bibim::SharedPointer<*>{
+	preview
+	(
+		#if ($e.pointee == 0)
+		(
+			"empty"
+		)
+		#else
+		(
+			#(
+				*$e.pointee,
+				" [",
+				$e.pointee->referenceCount,
+				#if ($e.pointee->referenceCount == 1) (" ref") #else (" refs"),
+				"]"
+			)
+		)
+	)
+	children
+	(
+		#if ($e.pointee == 0)
+		(
+			#array(expr: 0, size: 0)
+		)
+		#else 
+		(
+			#(
+				#([ptr] : $e.pointee),
+				#([actual members] : [$e,!])
+			)
+		)
+	)
+}
 ;==============================================================================

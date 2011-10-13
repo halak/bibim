@@ -9,7 +9,6 @@
     {
         class UIGamePadEventArgs : public UIEventArgs
         {
-            BBObjectClass(UIGamePadEventArgs, UIEventArgs, 'U', 'G', 'P', 'E');
             public:
                 UIGamePadEventArgs();
                 virtual ~UIGamePadEventArgs();

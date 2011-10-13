@@ -1,11 +1,14 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIButton.h>
+#include <Bibim/ComponentStreamReader.h>
 #include <Bibim/UIFittedFrame.h>
 #include <Bibim/UIMouseButtonEventArgs.h>
 #include <Bibim/UIWindow.h>
 
 namespace Bibim
 {
+    BBImplementsComponent(UIButton);
+
     UIButton::UIButton()
         : currentState(NormalState),
           normalWindow(new UIWindow()),
@@ -132,16 +135,18 @@ namespace Bibim
         return false;
     }
 
-    void UIButton::Read(StreamReader& reader, UIButton* o)
+    void UIButton::OnRead(ComponentStreamReader& reader)
     {
-        UIPanel::Read(reader, o);
+        Base::OnRead(reader);
+        normalWindow = static_cast<UIWindow*>(reader.ReadComponent());
+        pushedWindow = static_cast<UIWindow*>(reader.ReadComponent());
+        hoveringWindow = static_cast<UIWindow*>(reader.ReadComponent());
+        hideInactives = reader.ReadBool();
     }
 
-    UIElement* UIButton::Create(StreamReader& reader, UIElement* /*existingInstance*/)
+    void UIButton::OnCopy(const GameComponent* original, CloningContext& context)
     {
-        UIButton* o = new UIButton();
-        UIButton::Read(reader, o);
-
-        return o;
+        Base::OnCopy(original, context);
+        const This* o = static_cast<const This*>(original);
     }
 }

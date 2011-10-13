@@ -11,7 +11,7 @@
     {
         class UIAppEventDispatcher : public UIEventDispatcher
         {
-            BBObjectClass(UIAppEventDispatcher, UIEventDispatcher, 'U', 'I', 'A', 'P');
+            BBModuleClass(UIAppEventDispatcher, UIEventDispatcher, 'U', 'I', 'A', 'P');
             public:
                 typedef std::multimap<UIEventID, UIEventMap*> SubscriptionMap;
 

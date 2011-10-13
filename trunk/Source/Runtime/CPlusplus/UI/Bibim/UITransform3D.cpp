@@ -1,9 +1,12 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UITransform3D.h>
+#include <Bibim/ComponentStreamReader.h>
 #include <Bibim/UIVisualVisitor.h>
 
 namespace Bibim
 {
+    BBImplementsComponent(UITransform3D);
+
     UITransform3D::UITransform3D()
         : localOffset(Vector3::Zero),
           globalOffset(Vector3::Zero),
@@ -85,8 +88,30 @@ namespace Bibim
         }
     }
 
-    UIElement* UITransform3D::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    void UITransform3D::OnRead(ComponentStreamReader& reader)
     {
-        return nullptr;
+        Base::OnRead(reader);
+        localOffset = reader.ReadVector3();
+        globalOffset = reader.ReadVector3();
+        rotationCenter = reader.ReadVector2();
+        rotation = reader.ReadVector3();
+        scaleCenter = reader.ReadVector2();
+        scale = reader.ReadVector2();
+        matrixChanged = true;
+    }
+
+    void UITransform3D::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        const UITransform3D* o = static_cast<const UITransform3D*>(original);
+        localOffset = o->localOffset;
+        globalOffset = o->globalOffset;
+        rotationCenter = o->rotationCenter;
+        rotation = o->rotation;
+        scaleCenter = o->scaleCenter;
+        scale = o->scale;
+        matrix = o->matrix;
+        lastBounds = o->lastBounds;
+        matrixChanged = o->matrixChanged;
     }
 }

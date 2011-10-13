@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
+using Halak.Bibim.Graphics;
 using Halak.Bibim.UI;
 using Halak.Bibim.UI.Frames;
 using Halak.Bibim.UI.Visuals;
@@ -40,7 +41,6 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
             windowSize.Y = (float)input.Height;
             UIWindow rootWindow = new UIWindow();
             rootWindow.Frame = new UIAlignedFrame(UIAlignedFrame.Alignment.Center, Vector2.Zero, windowSize);
-
             foreach (PhotoshopDocument.Layer item in input.Layers)
                 AddChildTo(rootWindow, item);
 
@@ -111,7 +111,7 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
         {
             Process((UIVisual)sprite, layer);
 
-            sprite.Image = new UIImage(string.Empty, Rectangle.Empty);
+            sprite.Image = new Image(string.Empty, Rectangle.Empty);
         }
 
         private static void Process(UIButton button, PhotoshopDocument.Layer layer)

@@ -9,7 +9,7 @@
     {
         class UIEffectMap : public UIElement
         {
-            BBCreatableObjectClass(UIEffectMap, UIElement, UIElement, 'U', 'F', 'X', 'M');
+            BBComponentClass(UIEffectMap, UIElement, 'U', 'F', 'X', 'M');
             public:
                 UIEffectMap();
                 virtual ~UIEffectMap();

@@ -1,31 +1,31 @@
 namespace Bibim
 {
-    const URI& UIImage::GetTextureURI() const
+    const URI& Image::GetTextureURI() const
     {
         return textureURI;
     }
 
-    const Rect& UIImage::GetClippingRect() const
+    const Rect& Image::GetClippingRect() const
     {
         return clippingRect;
     }
 
-    Texture2D* UIImage::GetRealTexture() const
+    Texture2D* Image::GetRealTexture() const
     {
         return realTexture;
     }
 
-    const Rect& UIImage::GetRealClippingRect() const
+    const Rect& Image::GetRealClippingRect() const
     {
         return realClippingRect;
     }
 
-    const RectF& UIImage::GetNormalizedRealClippingRect() const
+    const RectF& Image::GetNormalizedRealClippingRect() const
     {
         return normalizedRealClippingRect;
     }
 
-    uint UIImage::GetRevision() const
+    uint Image::GetRevision() const
     {
         return revision;
     }
