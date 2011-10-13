@@ -109,6 +109,7 @@
     <Compile Include="Asset\Pipeline\CookingNode.cs" />
     <Compile Include="Asset\Pipeline\GameAssetServer.cs" />
     <Compile Include="Asset\Pipeline\PipedGameAssetServer.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\PackBitmap.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToTexture2D.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToUILayout1.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ReadRecipe.cs" />
@@ -118,6 +119,8 @@
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToBitmap.cs" />
     <Compile Include="Collections\Generic\SerializableDictionary.cs" />
     <Compile Include="Design\PluginManager.cs" />
+    <Compile Include="Graphics\ImageCookingTag.cs" />
+    <Compile Include="Graphics\ImageWriter.cs" />
     <Compile Include="Graphics\SourceTexture2DWriter.cs" />
     <Compile Include="Graphics\SourceTexture2DCookingTag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

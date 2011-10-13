@@ -48,6 +48,9 @@ namespace Bibim
     GameComponent* ComponentStreamReader::ReadComponent()
     {
         const int index = ReadInt32();
+        if (index == -1)
+            return nullptr;
+
         if (index >= static_cast<int>(localComponents.size()))
             localComponents.resize(index + 1);
 

@@ -6,13 +6,14 @@ Bibim::String{ preview ([$e.buffer.pointee->s]) }
 
 ;------------------------------------------------------------------------------
 ;  Bibim::SharedPointer
+;  std::tr1::shared_ptr<T> Âü°í
 ;------------------------------------------------------------------------------
 Bibim::SharedPointer<*>{
 	preview
 	(
 		#if ($e.pointee == 0)
 		(
-			"empty"
+			"null"
 		)
 		#else
 		(
