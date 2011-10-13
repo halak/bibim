@@ -25,7 +25,7 @@ namespace Halak.Bibim.UI
         {
             if (o == null)
             {
-                writer.Write((uint)0);
+                writer.Write(-1);
                 return false;
             }
 
