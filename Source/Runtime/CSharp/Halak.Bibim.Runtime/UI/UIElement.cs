@@ -4,14 +4,9 @@ using System.Text;
 
 namespace Halak.Bibim.UI
 {
-    public abstract class UIElement
+    public abstract class UIElement : GameComponent
     {
-        #region Static Fields
-        public const uint UnspecifiedID = 0xFFFFFFFF;
-        #endregion
-
         #region Fields
-        private uint id;
         private string name;
         #endregion
 
@@ -20,16 +15,7 @@ namespace Halak.Bibim.UI
         {
             get { return ClassIDAttribute.GetClassID(GetType()); }
         }
-
-        public uint ID
-        {
-            get { return id; }
-            set
-            {
-                id = value;
-            }
-        }
-
+        
         public string Name
         {
             get { return name; }
@@ -52,8 +38,8 @@ namespace Halak.Bibim.UI
         }
 
         public UIElement(uint id, string name)
+            : base(id)
         {
-            this.id = id;
             this.name = name ?? string.Empty;
         }
         #endregion

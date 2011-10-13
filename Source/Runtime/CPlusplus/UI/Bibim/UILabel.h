@@ -10,7 +10,7 @@
     {
         class UILabel : public UIVisual
         {
-            BBCreatableObjectClass(UILabel, UIVisual, UIElement, 'U', 'L', 'B', 'L');
+            BBComponentClass(UILabel, UIVisual, 'U', 'L', 'B', 'L');
             public:
                 UILabel();
                 virtual ~UILabel();

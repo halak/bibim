@@ -2,13 +2,15 @@
 #include <Bibim/UISprite.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Colors.h>
+#include <Bibim/ComponentStreamReader.h>
+#include <Bibim/Image.h>
 #include <Bibim/UIDrawingContext.h>
 #include <Bibim/UIFrame.h>
-#include <Bibim/UIImage.h>
-#include <Bibim/UIStreamReader.h>
 
 namespace Bibim
 {
+    BBImplementsComponent(UISprite);
+
     UISprite::UISprite()
         : image(nullptr),
           autoResize(true),
@@ -35,7 +37,7 @@ namespace Bibim
         return UIVisual::GetDesiredSize();
     }
 
-    void UISprite::SetImage(UIImage* value)
+    void UISprite::SetImage(Image* value)
     {
         image = value;
     }
@@ -50,18 +52,24 @@ namespace Bibim
         context.Draw(GetImage(), GetHorizontalFlip(), GetVerticalFlip());
     }
 
-    UIElement* UISprite::Create(StreamReader& reader, UIElement* /*existingInstance*/)
+    void UISprite::OnRead(ComponentStreamReader& reader)
     {
-        UISprite* o = new UISprite();
-        UIVisual::Read(reader, o);
-
+        Base::OnRead(reader);
         const String textureURI = reader.ReadString();
         const Rect clippingRect = reader.ReadRect();
-        o->image = new UIImage(textureURI, clippingRect);
-        o->autoResize = reader.ReadBool();
-        o->horizontalFlip = reader.ReadBool();
-        o->verticalFlip = reader.ReadBool();
+        image = new Image(textureURI, clippingRect);
+        autoResize = reader.ReadBool();
+        horizontalFlip = reader.ReadBool();
+        verticalFlip = reader.ReadBool();
+    }
 
-        return o;
+    void UISprite::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        const This* o = static_cast<const This*>(original);
+        image = o->image;
+        autoResize = o->autoResize;
+        horizontalFlip = o->horizontalFlip;
+        verticalFlip = o->verticalFlip;
     }
 }

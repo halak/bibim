@@ -6,6 +6,8 @@
 
 namespace Bibim
 {
+    BBImplementsComponent(UILabel);
+
     UILabel::UILabel()
         : text(String::Empty),
           font(nullptr),
@@ -60,8 +62,14 @@ namespace Bibim
         context.DrawString(fontString);
     }
 
-    UIElement* UILabel::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    void UILabel::OnRead(ComponentStreamReader& reader)
     {
-        return nullptr;
+        Base::OnRead(reader);
+    }
+
+    void UILabel::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        const This* o = static_cast<const This*>(original);
     }
 }

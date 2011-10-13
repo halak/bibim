@@ -158,6 +158,7 @@
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // UI
+#   include <Bibim/GameComponentFactory.h>
 #  include <Bibim/UI.h>
 #  include <Bibim/UIAlignedFrame.h>
 #  include <Bibim/UIAppEventDispatcher.h>
@@ -169,7 +170,6 @@
 #  include <Bibim/UIEffect.h>
 #  include <Bibim/UIEffectMap.h>
 #  include <Bibim/UIElement.h>
-#  include <Bibim/UIElementFactory.h>
 #  include <Bibim/UIEventArgs.h>
 #  include <Bibim/UIEventDispatcher.h>
 #  include <Bibim/UIEventHandler.h>
@@ -183,7 +183,7 @@
 #  include <Bibim/UIGamePadEventArgs.h>
 #  include <Bibim/UIGamePadEventDispatcher.h>
 #  include <Bibim/UIHandledDrawingContext.h>
-#  include <Bibim/UIImage.h>
+#  include <Bibim/Image.h>
 #  include <Bibim/UIKeyboardEventArgs.h>
 #  include <Bibim/UIKeyboardEventDispatcher.h>
 #  include <Bibim/UILabel.h>

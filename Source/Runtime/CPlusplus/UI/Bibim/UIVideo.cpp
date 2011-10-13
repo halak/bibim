@@ -3,6 +3,8 @@
 
 namespace Bibim
 {
+    BBImplementsComponent(UIVideo);
+
     UIVideo::UIVideo()
     {
     }
@@ -11,8 +13,13 @@ namespace Bibim
     {
     }
 
-    UIElement* UIVideo::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    void UIVideo::OnRead(ComponentStreamReader& reader)
     {
-        return nullptr;
+        Base::OnRead(reader);
+    }
+
+    void UIVideo::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
     }
 }

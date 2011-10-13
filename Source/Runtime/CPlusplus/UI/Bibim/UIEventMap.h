@@ -12,7 +12,7 @@
     {
         class UIEventMap : public UIElement
         {
-            BBCreatableObjectClass(UIEventMap, UIElement, UIElement, 'U', 'E', 'V', 'M');
+            BBComponentClass(UIEventMap, UIElement, 'U', 'E', 'V', 'M');
             public:
                 typedef std::vector<UIEventHandlerPtr> HandlerCollection;
                 typedef std::map<UIEventID, UIEventHandlerPtr> HandlerDictionary;

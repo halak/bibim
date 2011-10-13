@@ -1,9 +1,11 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIFixedFrame.h>
-#include <Bibim/UIStreamReader.h>
+#include <Bibim/ComponentStreamReader.h>
 
 namespace Bibim
 {
+    BBImplementsComponent(UIFixedFrame);
+
     UIFixedFrame::UIFixedFrame()
         : UIFrame(),
           rect(RectF::Empty)
@@ -20,8 +22,9 @@ namespace Bibim
     {
     }
 
-    bool UIFixedFrame::Setup(const RectF& bounds, const RectF& referenceBounds)
+    bool UIFixedFrame::Setup(const RectF& bounds, const RectF& /*referenceBounds*/)
     {
+        rect = bounds;
         return true;
     }
 
@@ -67,14 +70,16 @@ namespace Bibim
         return true;
     }
 
-    UIElement* UIFixedFrame::Create(StreamReader& reader, UIElement* /*existingInstance*/)
+    void UIFixedFrame::OnRead(ComponentStreamReader& reader)
     {
-        UIFixedFrame* o = new UIFixedFrame();
-        UIFrame::Read(reader, o);
-
-        o->rect = reader.ReadRectF();
-
-        return o;
+        Base::OnRead(reader);
+        rect = reader.ReadRectF();
     }
 
+    void UIFixedFrame::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        const UIFixedFrame* o = static_cast<const UIFixedFrame*>(original);
+        rect = o->rect;
+    }
 }

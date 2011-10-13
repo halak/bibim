@@ -3,6 +3,8 @@
 
 namespace Bibim
 {
+    BBImplementsComponent(UISequentialEventHandler);
+
     UISequentialEventHandler::UISequentialEventHandler()
     {
     }
@@ -110,8 +112,15 @@ namespace Bibim
         return true;
     }
 
-    UIElement* UISequentialEventHandler::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    void UISequentialEventHandler::OnRead(ComponentStreamReader& reader)
     {
-        return nullptr;
+        Base::OnRead(reader);
+        BBAssert(0);
+    }
+
+    void UISequentialEventHandler::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        BBAssert(0);
     }
 }

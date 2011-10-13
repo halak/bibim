@@ -55,6 +55,7 @@ class UISample : public GameFramework
             //ScriptObject r1 = process->Call("Sum1To100");
             //ScriptObject r2 = process->Call("Factorial", 6);
 
+            UILayoutPtr layout2;
             UILayoutPtr layout = static_cast<UILayout*>(gas->Load("Asset\\VisualNovelUI"));
 
             storage = gas;

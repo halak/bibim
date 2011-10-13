@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIVisual.h>
+#include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Math.h>
 #include <Bibim/UIEventMap.h>
 #include <Bibim/UIFrame.h>
@@ -10,7 +11,6 @@
 #include <Bibim/UIMouseWheelEventArgs.h>
 #include <Bibim/UIPickingContext.h>
 #include <Bibim/UIPanel.h>
-#include <Bibim/UIStreamReader.h>
 #include <Bibim/UITransform.h>
 
 namespace Bibim
@@ -86,13 +86,23 @@ namespace Bibim
         return false;
     }
 
-    void UIVisual::Read(StreamReader& reader, UIVisual* o)
+    void UIVisual::OnRead(ComponentStreamReader& reader)
     {
-        UIElement::Read(reader, o);
-        o->opacity = reader.ReadFloat();
-        o->shown = reader.ReadBool();
-        o->size = reader.ReadVector2();
-        // frame = reader.ReadFrame();
+        Base::OnRead(reader);
+        opacity = reader.ReadFloat();
+        shown = reader.ReadBool();
+        size = reader.ReadVector2();
+        frame = static_cast<UIFrame*>(reader.ReadComponent());
+    }
+
+    void UIVisual::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        const This* o = static_cast<const This*>(original);
+        opacity = o->opacity;
+        shown = o->shown;
+        size = o->size;
+        //frame = static_cast<UIFrame*>(reader.ReadUIElement());
     }
 
     void UIVisual::OnDraw(UIDrawingContext& /*context*/)

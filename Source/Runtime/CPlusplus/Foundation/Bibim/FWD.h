@@ -89,6 +89,11 @@
                 class GameModuleNode;
                 class GameModuleTree;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // (Component)
+                class CloningContext;
+                class ComponentStreamReader;
+                BBForwardDeclareSmartPointerClass(GameComponent);
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Asset
                 class AssetLoadingTask;
                     class AssetPreloadingTask;
@@ -120,6 +125,7 @@
             // Graphics
                 class DisplaySwapChain;
                 class GraphicsDevice;
+                BBForwardDeclareSmartPointerClass(Image);
                 BBForwardDeclareSmartPointerClass(Texture2D);
                     BBForwardDeclareSmartPointerClass(DynamicTexture2D);
                     BBForwardDeclareSmartPointerClass(SourceTexture2D);
@@ -174,11 +180,9 @@
                 class UIDomain;
                     class UISimpleDomain;
                 BBForwardDeclareSmartPointerClass(UIElement);
-                    BBForwardDeclareSmartPointerClass(UIImage);
                 BBForwardDeclareSmartPointerClass(UILayout);
                 class UIMarkupText;
                 class UIRenderer;
-                class UIStreamReader;
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Effects
                     BBForwardDeclareSmartPointerClass(UIEffect);

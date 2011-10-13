@@ -8,9 +8,19 @@
 
     namespace Bibim
     {
+#       define BBAbstractAssetClass(classname, parent) ;
+#       define BBAssetClass(classname, parent, a, b, c, d) public: \
+                                                                static const uint32 ClassID = BBMakeFOURCC(a, b, c, d); \
+                                                                virtual uint32 GetClassID() const { return ClassID; } \
+                                                            private:
+#       define BBSerializableAssetClass(classname, parent, a, b, c, d)  BBAssetClass(classname, parent, a, b, c, d); \
+                                                                        public: \
+                                                                            static GameAsset* Create(AssetStreamReader& reader, GameAsset* existingInstance); \
+                                                                        private:
+
         class GameAsset : public SharedObject
         {
-            BBAbstractObjectClass(GameAsset, SharedObject);
+            BBAbstractAssetClass(GameAsset, SharedObject);
             BBThisIsNoncopyableClass(GameAsset);
             public:
                 typedef AssetStreamReader StreamReader;

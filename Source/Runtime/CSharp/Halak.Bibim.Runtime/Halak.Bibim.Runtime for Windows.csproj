@@ -98,7 +98,9 @@
     <Compile Include="Asset\GameAssetStatus.cs" />
     <Compile Include="ClassIDAttribute.cs" />
     <Compile Include="Collections\Generic\ReadOnlyDictionary.cs" />
+    <Compile Include="GameComponent.cs" />
     <Compile Include="Graphics\GraphicsDevice.cs" />
+    <Compile Include="Graphics\Image.cs" />
     <Compile Include="Graphics\SourceTexture2D.cs" />
     <Compile Include="Graphics\Texture2D.cs" />
     <Compile Include="IO\BinaryReaderExtension.cs" />
@@ -170,7 +172,6 @@
     <Compile Include="UI\UIElement.cs" />
     <Compile Include="UI\UIElementFactory.cs" />
     <Compile Include="UI\UIHandledDrawingContext.cs" />
-    <Compile Include="UI\UIImage.cs" />
     <Compile Include="UI\UILayout.cs" />
     <Compile Include="UI\UIMarkupText.cs" />
     <Compile Include="UI\UIPickingContext.cs" />

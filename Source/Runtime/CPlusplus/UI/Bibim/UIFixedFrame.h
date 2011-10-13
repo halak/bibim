@@ -9,7 +9,7 @@
     {
         class UIFixedFrame : public UIFrame
         {
-            BBCreatableObjectClass(UIFixedFrame, UIFrame, UIElement, 'U', 'F', 'X', 'F');
+            BBComponentClass(UIFixedFrame, UIFrame, 'U', 'F', 'X', 'F');
             public:
                 UIFixedFrame();
                 explicit UIFixedFrame(const RectF& Rect);

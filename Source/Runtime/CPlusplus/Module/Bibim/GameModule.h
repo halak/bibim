@@ -7,10 +7,16 @@
 
     namespace Bibim
     {
+#       define BBAbstractModuleClass(classname, parent) ;
+#       define BBModuleClass(classname, parent, a, b, c, d) public: \
+                                                                static const uint32 ClassID = BBMakeFOURCC(a, b, c, d); \
+                                                                virtual uint32 GetClassID() const { return ClassID; } \
+                                                            private:
+
         /// Game이란 Program을 구성하는 요소의 기반 class.
         class GameModule : public Object
         {
-            BBAbstractObjectClass(GameModule, Object);
+            BBAbstractModuleClass(GameModule, Object);
             BBThisIsNoncopyableClass(GameModule);
             public:
                 enum Status

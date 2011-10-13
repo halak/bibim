@@ -1,8 +1,7 @@
 #include <Bibim/PCH.h>
-#include <Bibim/UIElementFactory.h>
+#include <Bibim/GameComponentFactory.h>
 #include <Bibim/Assert.h>
-#include <Bibim/UIElement.h>
-#include <Bibim/UIStreamReader.h>
+#include <Bibim/ComponentStreamReader.h>
 #include <algorithm>
 #include <vector>
 
@@ -11,9 +10,9 @@ namespace Bibim
     struct Entry
     {
         uint32 ID;
-        UIElementFactory::CreateFunction Function;
+        GameComponentFactory::CreateFunction Function;
 
-        Entry(uint32 id, UIElementFactory::CreateFunction function)
+        Entry(uint32 id, GameComponentFactory::CreateFunction function)
             : ID(id),
               Function(function)
         {
@@ -44,12 +43,12 @@ namespace Bibim
         return nullptr;
     }
 
-    void UIElementFactory::AddEntry(uint32 id, CreateFunction function)
+    void GameComponentFactory::AddEntry(uint32 id, CreateFunction function)
     {
         Entries.push_back(Entry(id, function));
     }
 
-    void UIElementFactory::SortEntries()
+    void GameComponentFactory::SortEntries()
     {
         struct Compare
         {
@@ -62,12 +61,10 @@ namespace Bibim
         std::sort(Entries.begin(), Entries.end(), Compare());
     }
 
-    UIElement* UIElementFactory::Create(StreamReader& reader, UIElement* existingInstance)
+    GameComponent* GameComponentFactory::Create(uint32 id)
     {
-        const uint32 id = reader.ReadUInt32();
-
         if (Entry* entry = FindEntry(id))
-            return (*entry->Function)(reader, existingInstance);
+            return (*entry->Function)();
         else
             return nullptr;
     }

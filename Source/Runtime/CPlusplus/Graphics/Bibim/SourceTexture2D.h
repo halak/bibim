@@ -11,7 +11,7 @@
     {
         class SourceTexture2D : public Texture2D
         {
-            BBCreatableObjectClass(SourceTexture2D, Texture2D, GameAsset, 'S', 'T', 'X', '2');
+            BBSerializableAssetClass(SourceTexture2D, Texture2D, 'S', 'T', 'X', '2');
             public:
                 SourceTexture2D(GraphicsDevice* graphicsDevice);
                 virtual ~SourceTexture2D();

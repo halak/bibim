@@ -1,13 +1,12 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIElement.h>
-#include <Bibim/UIStreamReader.h>
+#include <Bibim/ComponentStreamReader.h>
 
 namespace Bibim
 {
     const uint UIElement::UnspecifiedID = 0xFFFFFFFF;
 
     UIElement::UIElement()
-        : id(UnspecifiedID)
     {
     }
 
@@ -15,9 +14,18 @@ namespace Bibim
     {
     }
 
-    void UIElement::Read(StreamReader& reader, UIElement* o)
+    void UIElement::OnRead(ComponentStreamReader& reader)
     {
-        o->id = reader.ReadUInt32();
-        o->name = reader.ReadString();
+        Base::OnRead(reader);
+        name = reader.ReadString();
+    }
+
+    void UIElement::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        if (const UIElement* o = static_cast<const UIElement*>(original))
+        {
+            name = o->name;
+        }
     }
 }

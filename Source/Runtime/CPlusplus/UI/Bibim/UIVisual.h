@@ -10,7 +10,7 @@
     {
         class UIVisual : public UIElement
         {
-            BBAbstractObjectClass(UIVisual, UIElement);
+            BBAbstractComponentClass(UIVisual, UIElement);
             public:
                 static const Property<float> OpacityProperty;
                 static const Property<bool>  ShownProperty;
@@ -50,8 +50,6 @@
                 virtual bool IsPanel() const;
 
             protected:
-                static void Read(StreamReader& reader, UIVisual* o);
-
                 virtual void OnDraw(UIDrawingContext& context);
                 virtual void OnPick(UIPickingContext& context);
 

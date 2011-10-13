@@ -10,7 +10,6 @@
     {
         class UIKeyboardEventArgs : public UIEventArgs
         {
-            BBObjectClass(UIKeyboardEventArgs, UIEventArgs, 'U', 'K', 'B', 'E');
             public:
                 UIKeyboardEventArgs();
                 UIKeyboardEventArgs(UIVisual* target, Key::Code keyCode);

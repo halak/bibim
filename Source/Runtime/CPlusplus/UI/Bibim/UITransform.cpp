@@ -10,4 +10,14 @@ namespace Bibim
     UITransform::~UITransform()
     {
     }
+
+    void UITransform::OnRead(ComponentStreamReader& reader)
+    {
+        Base::OnRead(reader);
+    }
+
+    void UITransform::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+    }
 }

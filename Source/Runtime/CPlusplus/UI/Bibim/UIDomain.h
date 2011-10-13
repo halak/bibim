@@ -9,7 +9,7 @@
     {
         class UIDomain : public GameModule
         {
-            BBAbstractObjectClass(UIDomain, GameModule);
+            BBAbstractModuleClass(UIDomain, GameModule);
             public:
                 virtual ~UIDomain();
 

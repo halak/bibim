@@ -10,7 +10,7 @@
     {
         class CommandHistory : public GameModule
         {
-            BBObjectClass(CommandHistory, GameModule, 'C', 'M', 'D', 'H');
+            BBModuleClass(CommandHistory, GameModule, 'C', 'M', 'D', 'H');
             public:
                 typedef std::list<CommandPtr> CommandCollection;
 

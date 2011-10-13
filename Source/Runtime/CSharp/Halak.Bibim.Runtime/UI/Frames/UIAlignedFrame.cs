@@ -82,9 +82,9 @@ namespace Halak.Bibim.UI.Frames
 
         public UIAlignedFrame(Alignment align, Vector2 offset, Vector2 size)
         {
-            align = Alignment.LeftTop;
-            offset = Vector2.Zero;
-            size = Vector2.Zero;
+            this.align = align;
+            this.offset = offset;
+            this.size = size;
             boundsChanged = true;
         }
         #endregion

@@ -9,12 +9,16 @@
     {
         class UILayout : public GameAsset
         {
-            BBCreatableObjectClass(UILayout, GameAsset, GameAsset, 'U', 'I', 'L', 'T');
+            BBSerializableAssetClass(UILayout, GameAsset, 'U', 'I', 'L', 'T');
             public:
                 UILayout();
+                UILayout(UIWindow* root);
                 virtual ~UILayout();
 
+                inline UIWindow* GetRoot() const;
+
             private:
+                UIWindowPtr root;
         };
     }
 

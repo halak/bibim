@@ -1,11 +1,11 @@
 namespace Bibim
 {
-    void UIDrawingContext::Draw(UIImage* image)
+    void UIDrawingContext::Draw(Image* image)
     {
         Draw(GetCurrentBounds(), GetCurrentClippedBounds(), image, false, false);
     }
 
-    void UIDrawingContext::Draw(UIImage* image, bool horizontalFlip, bool verticalFlip)
+    void UIDrawingContext::Draw(Image* image, bool horizontalFlip, bool verticalFlip)
     {
         Draw(GetCurrentBounds(), GetCurrentClippedBounds(), image, horizontalFlip, verticalFlip);
     }

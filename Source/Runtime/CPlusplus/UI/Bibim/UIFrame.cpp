@@ -36,4 +36,14 @@ namespace Bibim
     {
         return false;
     }
+
+    void UIFrame::OnRead(ComponentStreamReader& reader)
+    {
+        Base::OnRead(reader);
+    }
+
+    void UIFrame::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+    }
 }

@@ -1,10 +1,11 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIFittedFrame.h>
-#include <Bibim/UIStreamReader.h>
 #include <Bibim/UIVisualVisitor.h>
 
 namespace Bibim
 {
+    BBImplementsComponent(UIFittedFrame);
+
     UIFittedFramePtr UIFittedFrame::Instance = new UIFittedFrame();
 
     UIFittedFrame::UIFittedFrame()
@@ -25,11 +26,13 @@ namespace Bibim
         return visitor.GetCurrentBounds();
     }
 
-    UIElement* UIFittedFrame::Create(StreamReader& reader, UIElement* existingInstance)
+    void UIFittedFrame::OnRead(ComponentStreamReader& reader)
     {
-        UIFittedFrame* o = new UIFittedFrame();
-        UIFrame::Read(reader, o);
+        Base::OnRead(reader);
+    }
 
-        return o;
+    void UIFittedFrame::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
     }
 }

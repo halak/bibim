@@ -9,7 +9,7 @@
     {
         class UIEventDispatcher : public GameModule
         {
-            BBAbstractObjectClass(UIEventDispatcher, GameModule);
+            BBAbstractModuleClass(UIEventDispatcher, GameModule);
             public:
                 UIEventDispatcher();
                 virtual ~UIEventDispatcher();

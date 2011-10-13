@@ -10,7 +10,6 @@
     {
         class UIMouseEventArgs : public UIEventArgs
         {
-            BBObjectClass(UIMouseEventArgs, UIEventArgs, 'U', 'M', 'S', 'E');
             public:
                 UIMouseEventArgs();
                 UIMouseEventArgs(UIVisual* target, Point position);

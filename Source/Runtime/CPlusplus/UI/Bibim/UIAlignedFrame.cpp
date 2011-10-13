@@ -1,10 +1,12 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIAlignedFrame.h>
-#include <Bibim/UIStreamReader.h>
+#include <Bibim/ComponentStreamReader.h>
 #include <Bibim/UIVisualVisitor.h>
 
 namespace Bibim
 {
+    BBImplementsComponent(UIAlignedFrame);
+
     UIAlignedFrame::UIAlignedFrame()
         : UIFrame(),
           align(LeftTop),
@@ -275,13 +277,22 @@ namespace Bibim
         }
     }
 
-    UIElement* UIAlignedFrame::Create(StreamReader& reader, UIElement* /*existingInstance*/)
+    void UIAlignedFrame::OnRead(ComponentStreamReader& reader)
     {
-        UIAlignedFrame* o = new UIAlignedFrame();
-        UIFrame::Read(reader, o);
-        o->align = static_cast<Alignment>(reader.ReadUInt8());
-        o->offset = reader.ReadVector2();
-        o->size = reader.ReadVector2();
-        return nullptr;
+        Base::OnRead(reader);
+        align = static_cast<Alignment>(reader.ReadUInt8());
+        offset = reader.ReadVector2();
+        size = reader.ReadVector2();
+        boundsChanged = true;
+    }
+
+    void UIAlignedFrame::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        const UIAlignedFrame* o = static_cast<const UIAlignedFrame*>(original);
+        align = o->align;
+        offset = o->offset;
+        size = o->size;
+        boundsChanged = true;
     }
 }

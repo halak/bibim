@@ -10,7 +10,7 @@
     {
         class Timeline : public UpdateableGameModule
         {
-            BBObjectClass(Timeline, UpdateableGameModule, 'T', 'M', 'L', 'N');
+            BBModuleClass(Timeline, UpdateableGameModule, 'T', 'M', 'L', 'N');
             public:
                 typedef std::vector<UpdateableGameModule*> ItemCollection;
 

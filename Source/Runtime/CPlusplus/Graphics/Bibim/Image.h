@@ -1,21 +1,20 @@
 #pragma once
-#ifndef __BIBIM_UIIMAGE_H__
-#define __BIBIM_UIIMAGE_H__
+#ifndef __BIBIM_IMAGE_H__
+#define __BIBIM_IMAGE_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/UIElement.h>
+#   include <Bibim/GameAsset.h>
 #   include <Bibim/Rect.h>
 #   include <Bibim/RectF.h>
-#   include <Bibim/URI.h>
 
     namespace Bibim
     {
-        class UIImage : public UIElement
+        class Image : public GameAsset
         {
-            BBCreatableObjectClass(UIImage, UIElement, UIElement, 'U', 'I', 'M', 'G')
+            BBSerializableAssetClass(SourceTexture2D, Texture2D, 'G', 'I', 'M', 'G');
             public:
-                UIImage(const URI& textureURI, const Rect& clippingRect);
-                virtual ~UIImage();
+                Image(const URI& textureURI, const Rect& clippingRect);
+                virtual ~Image();
 
                 void SetRealTextureData(Texture2D* texture);
                 void SetRealTextureData(Texture2D* texture, const Rect& clippingRect);
@@ -30,6 +29,9 @@
                 inline uint GetRevision() const;
 
             private:
+                Image();
+
+            private:
                 URI textureURI;
                 Rect clippingRect;
                 Texture2DPtr realTexture;
@@ -39,6 +41,6 @@
         };
     }
 
-#   include <Bibim/UIImage.inl>
+#   include <Bibim/Image.inl>
 
 #endif

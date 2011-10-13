@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Halak.Bibim.Graphics;
 
 namespace Halak.Bibim.UI.Visuals
 {
@@ -13,7 +14,7 @@ namespace Halak.Bibim.UI.Visuals
         #endregion
 
         #region Properties
-        public UIImage Image
+        public Image Image
         {
             get;
             set;

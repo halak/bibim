@@ -69,6 +69,8 @@ namespace Halak.Bibim.UI.Visuals
         #region Constructors
         public UIVisual()
         {
+            Opacity = 1.0f;
+            Shown = true;
         }
         #endregion
 

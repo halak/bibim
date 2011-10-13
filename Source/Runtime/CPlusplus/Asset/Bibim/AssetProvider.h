@@ -10,7 +10,7 @@
     {
         class AssetProvider : public GameModule
         {
-            BBAbstractObjectClass(AssetProvider, GameModule);
+            BBAbstractModuleClass(AssetProvider, GameModule);
             public:
                 AssetProvider();
                 AssetProvider(GameAssetStorage* storage);

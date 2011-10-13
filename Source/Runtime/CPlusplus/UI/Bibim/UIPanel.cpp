@@ -1,16 +1,18 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIPanel.h>
 #include <Bibim/Assert.h>
+#include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Math.h>
 #include <Bibim/UIDrawingContext.h>
 #include <Bibim/UIFrame.h>
 #include <Bibim/UIPickingContext.h>
-#include <Bibim/UIStreamReader.h>
 #include <Bibim/UIVisual.h>
 #include <algorithm>
 
 namespace Bibim
 {
+    BBImplementsComponent(UIPanel);
+
     UIPanel::UIPanel()
     {
     }
@@ -189,20 +191,19 @@ namespace Bibim
         }
     }
 
-    void UIPanel::Read(StreamReader& reader, UIPanel* o)
+    void UIPanel::OnRead(ComponentStreamReader& reader)
     {
-        UIVisual::Read(reader, o);
+        Base::OnRead(reader);
         const int numberOfChildren = reader.ReadInt32();
         for (int i = 0; i < numberOfChildren; i++)
         {
+            Add(static_cast<UIVisual*>(reader.ReadComponent()));
         }
     }
 
-    UIElement* UIPanel::Create(StreamReader& reader, UIElement* /*existingInstance*/)
+    void UIPanel::OnCopy(const GameComponent* original, CloningContext& context)
     {
-        UIPanel* o = new UIPanel();
-        UIPanel::Read(reader, o);
-
-        return o;
+        Base::OnCopy(original, context);
+        const This* o = static_cast<const This*>(original);
     }
 }

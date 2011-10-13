@@ -9,7 +9,7 @@
     {
         class TimelineGameModule : public UpdateableGameModule
         {
-            BBAbstractObjectClass(TimelineGameModule, UpdateableGameModule);
+            BBAbstractModuleClass(TimelineGameModule, UpdateableGameModule);
             public:
                 virtual ~TimelineGameModule();
 

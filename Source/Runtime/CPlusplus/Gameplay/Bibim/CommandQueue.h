@@ -9,7 +9,7 @@
     {
         class CommandQueue : public GameModule
         {
-            BBObjectClass(CommandQueue, GameModule, 'C', 'M', 'D', 'Q');
+            BBModuleClass(CommandQueue, GameModule, 'C', 'M', 'D', 'Q');
             public:
                 CommandQueue();
                 virtual ~CommandQueue();

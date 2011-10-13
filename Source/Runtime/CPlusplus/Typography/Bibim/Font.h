@@ -12,7 +12,7 @@
     {
         class Font : public GameAsset
         {
-            BBCreatableObjectClass(Font, GameAsset, GameAsset, 'F', 'O', 'N', 'T');
+            BBSerializableAssetClass(Font, GameAsset, 'F', 'O', 'N', 'T');
             public:
                 typedef std::map<uint32, const Glyph*> GlyphDictionary;
 

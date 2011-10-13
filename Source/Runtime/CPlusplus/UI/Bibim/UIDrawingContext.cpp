@@ -3,7 +3,7 @@
 #include <Bibim/Assert.h>
 #include <Bibim/Font.h>
 #include <Bibim/FontString.h>
-#include <Bibim/UIImage.h>
+#include <Bibim/Image.h>
 #include <Bibim/UIRenderer.h>
 #include <Bibim/UIVisual.h>
 #include <Bibim/Texture2D.h>
@@ -37,7 +37,7 @@ namespace Bibim
         isDrawing = false;
     }
 
-    void UIDrawingContext::Draw(const RectF& bounds, const RectF& clippedBounds, UIImage* image, bool horizontalFlip, bool verticalFlip)
+    void UIDrawingContext::Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, bool horizontalFlip, bool verticalFlip)
     {
         BBAssertDebug(image && image->GetRealTexture() && renderer);
 

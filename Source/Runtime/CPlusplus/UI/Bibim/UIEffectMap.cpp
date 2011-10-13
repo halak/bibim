@@ -2,6 +2,8 @@
 
 namespace Bibim
 {
+    BBImplementsComponent(UIEffectMap);
+
     UIEffectMap::UIEffectMap()
     {
     }
@@ -10,8 +12,15 @@ namespace Bibim
     {
     }
 
-    UIElement* UIEffectMap::Create(StreamReader& /*reader*/, UIElement* /*existingInstance*/)
+    void UIEffectMap::OnRead(ComponentStreamReader& reader)
     {
-        return nullptr;
+        Base::OnRead(reader);
+        BBAssert(0);
+    }
+
+    void UIEffectMap::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        BBAssert(0);
     }
 }

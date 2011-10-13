@@ -9,7 +9,7 @@
     {
         class UIEventHandler : public UIElement
         {
-            BBAbstractObjectClass(UIEventHandler, UIElement);
+            BBAbstractComponentClass(UIEventHandler, UIElement);
             public:
                 virtual ~UIEventHandler();
 
