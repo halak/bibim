@@ -1846,18 +1846,6 @@
 				Name="Scripting"
 				>
 				<File
-					RelativePath=".\Scripting\Bibim\Any.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Scripting\Bibim\Any.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Scripting\Bibim\Any.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Scripting\Bibim\Script.cpp"
 					>
 				</File>
