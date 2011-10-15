@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Halak.Bibim.Asset;
 using Halak.Bibim.Asset.Pipeline;
+using Halak.Bibim.IO;
 
 namespace Halak.Bibim.Graphics
 {
@@ -12,6 +13,9 @@ namespace Halak.Bibim.Graphics
     {
         public override void Write(AssetStreamWriter writer, Image asset)
         {
+            writer.Write(asset.ClassID);
+            writer.WriteBibimString(asset.TextureURI);
+            writer.Write(asset.ClippingRectangle);
         }
     }
 }

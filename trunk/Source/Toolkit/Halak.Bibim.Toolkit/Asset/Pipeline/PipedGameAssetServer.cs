@@ -141,14 +141,14 @@ namespace Halak.Bibim.Asset.Pipeline
             switch (id)
             {
                 case PipedAssetProvider.LoadAssetPacketID:
-                    string path = peer.StreamReader.ReadBibimString();
+                    string relativePath = peer.StreamReader.ReadBibimString();
 
                     // Asset Binary를 전송할 Pipe의 이름을 알려줍니다.
                     // 단순히 Unique한 이름을 가져오기 위해 GUID를 이용하였습니다.
                     string guid = Guid.NewGuid().ToString();
                     peer.StreamWriter.WriteBibimString(guid);
 
-                    BeginCook(Path.Combine(peer.Directory, path),
+                    BeginCook(peer.Directory, relativePath,
                               (buffer, index, count) =>
                               {
                                   NamedPipeServerStream stream = new NamedPipeServerStream(guid,
@@ -197,7 +197,8 @@ namespace Halak.Bibim.Asset.Pipeline
                                                                 },
                                                                 null);
                               });
-                    message = string.Format("[{0}:{1}] Received LoadAssetPacket. {2}\n\tAssetPipe opened. ({3}).", peer.Name, peer.ID, path, guid);
+
+                    message = string.Format("[{0}:{1}] Received LoadAssetPacket. {2}\n\tAssetPipe opened. ({3}).", peer.Name, peer.ID, relativePath, guid);
                     break;
                 case PipedAssetProvider.ChangeClientNamePacketID:
                     string oldName = peer.Name;

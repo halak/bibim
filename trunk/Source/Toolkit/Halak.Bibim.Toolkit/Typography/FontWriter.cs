@@ -12,6 +12,7 @@ namespace Halak.Bibim.Typography
     {
         public override void Write(AssetStreamWriter writer, Font asset)
         {
+            writer.Write(asset.ClassID);
             writer.Write(asset.Library);
             writer.WriteBibimString(asset.FaceURI);
             writer.Write(asset.FontSize);

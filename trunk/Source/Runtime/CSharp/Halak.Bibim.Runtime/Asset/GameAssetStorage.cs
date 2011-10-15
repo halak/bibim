@@ -36,6 +36,9 @@ namespace Halak.Bibim.Asset
         #region Methods
         public GameAsset Load(string name)
         {
+            if (string.IsNullOrEmpty(name))
+                return null;
+
             GameAsset result = null;
             if (assets.TryGetValue(name, out result))
                 return result;
@@ -50,6 +53,28 @@ namespace Halak.Bibim.Asset
 
                 return null;
             }
+        }
+
+        public void Store(string name, GameAsset asset)
+        {
+            if (string.IsNullOrEmpty(name) || asset == null)
+                return;
+
+            assets[name] = asset;
+        }
+
+        public string FindName(GameAsset asset)
+        {
+            if (asset == null)
+                return null;
+
+            foreach (var item in assets)
+            {
+                if (item.Value == asset)
+                    return item.Key;
+            }
+
+            return null;
         }
 
         /// <summary>

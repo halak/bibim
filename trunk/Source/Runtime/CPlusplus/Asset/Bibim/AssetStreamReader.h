@@ -25,6 +25,7 @@
 
                 inline const String& GetName() const;
                 inline GameModuleTree* GetModules() const;
+                inline GameAssetStorage* GetStorage() const;
                 inline bool IsPriority() const;
 
                 AssetStreamReader& operator = (const AssetStreamReader& right);

@@ -64,7 +64,7 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
             string[] paths = { Input1, Input2, Input3, Input4 };
             foreach (string item in paths)
             {
-                string actualPath = Path.Combine(context.Directory, context.ExpandVariables(item));
+                string actualPath = Path.Combine(context.BaseDirectory, context.Directory, context.ExpandVariables(item));
 
                 if (File.Exists(actualPath))
                     return new FileStream(actualPath, FileMode.Open, FileAccess.Read);

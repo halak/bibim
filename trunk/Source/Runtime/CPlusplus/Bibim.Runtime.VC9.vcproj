@@ -278,30 +278,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\URI.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\URI.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\URI.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\UUID.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\UUID.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\UUID.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\Vector2.cpp"
 					>
 				</File>

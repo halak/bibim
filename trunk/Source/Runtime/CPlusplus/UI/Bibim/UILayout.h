@@ -22,4 +22,6 @@
         };
     }
 
+#   include <Bibim/UILayout.inl>
+
 #endif

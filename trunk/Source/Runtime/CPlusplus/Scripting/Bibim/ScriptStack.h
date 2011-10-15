@@ -3,7 +3,6 @@
 #define __BIBIM_SCRIPTSTACK_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/Any.h>
 #   include <vector>
 
     namespace Bibim

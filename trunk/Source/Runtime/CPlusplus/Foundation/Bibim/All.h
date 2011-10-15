@@ -25,7 +25,6 @@
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Foundation
 #  include <Bibim/All.h>
-#  include <Bibim/Any.h>
 #  include <Bibim/Assert.h>
 #  include <Bibim/BinaryReader.h>
 #  include <Bibim/BinaryWriter.h>
@@ -59,8 +58,6 @@
 #  include <Bibim/SharedPointer.h>
 #  include <Bibim/Stream.h>
 #  include <Bibim/String.h>
-#  include <Bibim/URI.h>
-#  include <Bibim/UUID.h>
 #  include <Bibim/Vector2.h>
 #  include <Bibim/Vector3.h>
 #  include <Bibim/Vector4.h>

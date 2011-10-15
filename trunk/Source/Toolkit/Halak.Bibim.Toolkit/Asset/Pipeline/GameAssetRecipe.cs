@@ -17,6 +17,7 @@ namespace Halak.Bibim.Asset.Pipeline
 
         #region Static Fields
         private static XmlSerializer serializer;
+        private static XmlWriterSettings writerSettings;
         #endregion
         #endregion
 
@@ -65,6 +66,17 @@ namespace Halak.Bibim.Asset.Pipeline
                 return serializer;
             }
         }
+
+        private static XmlWriterSettings WriterSettings
+        {
+            get
+            {
+                if (writerSettings == null)
+                    writerSettings = new XmlWriterSettings() { Encoding = Encoding.UTF8, Indent = true, IndentChars = "\t" };
+
+                return writerSettings;
+            }
+        }
         #endregion
 
         #region Constructors
@@ -92,7 +104,7 @@ namespace Halak.Bibim.Asset.Pipeline
         #region Static Methods
         public static void Serialize(Stream stream, GameAssetRecipe recipe)
         {
-            Serializer.Serialize(stream, recipe);
+            Serializer.Serialize(XmlWriter.Create(stream, WriterSettings), recipe);
         }
 
         public static void Serialize(XmlWriter writer, GameAssetRecipe recipe)

@@ -24,8 +24,6 @@
                 struct Rect;
                 struct RectF;
                 class String;
-                class URI;
-                struct UUID;
                 struct Vector2;
                 struct Vector3;
                 struct Vector4;
