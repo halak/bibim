@@ -20,10 +20,15 @@
 
                 GameModule* FindModuleByClassID(uint32 classID);
 
+                GameAsset* ReadAsset();
                 GameComponent* ReadComponent();
 
             private:
+                inline GameAssetStorage* GetStorage();
+
+            private:
                 GameModuleTree* modules;
+                GameAssetStorage* storage;
                 std::vector<GameComponentPtr> localComponents;
         };
     }

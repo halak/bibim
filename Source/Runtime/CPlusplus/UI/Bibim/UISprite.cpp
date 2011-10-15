@@ -28,8 +28,6 @@ namespace Bibim
         if (GetAutoResize() && GetImage())
         {
             Rect clippingRect = GetImage()->GetClippingRect();
-            if (clippingRect.IsEmpty())
-                clippingRect = GetImage()->GetRealClippingRect();
             if (clippingRect.IsEmpty() == false)
                 return Vector2(clippingRect.Width, clippingRect.Height);
         }
@@ -46,7 +44,7 @@ namespace Bibim
     {
         UIVisual::OnDraw(context);
 
-        if (GetImage() == nullptr || GetImage()->GetRealTexture() == nullptr)
+        if (GetImage() == nullptr || GetImage()->GetTexture() == nullptr)
             return;
 
         context.Draw(GetImage(), GetHorizontalFlip(), GetVerticalFlip());
@@ -55,9 +53,7 @@ namespace Bibim
     void UISprite::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        const String textureURI = reader.ReadString();
-        const Rect clippingRect = reader.ReadRect();
-        image = new Image(textureURI, clippingRect);
+        image = static_cast<GameAsset*>(reader.ReadAsset());
         autoResize = reader.ReadBool();
         horizontalFlip = reader.ReadBool();
         verticalFlip = reader.ReadBool();

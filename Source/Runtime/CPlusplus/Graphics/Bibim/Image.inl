@@ -1,6 +1,6 @@
 namespace Bibim
 {
-    const URI& Image::GetTextureURI() const
+    const String& Image::GetTextureURI() const
     {
         return textureURI;
     }
@@ -9,24 +9,14 @@ namespace Bibim
     {
         return clippingRect;
     }
-
-    Texture2D* Image::GetRealTexture() const
+    
+    const RectF& Image::GetNormalizedClippingRect() const
     {
-        return realTexture;
+        return normalizedClippingRect;
     }
 
-    const Rect& Image::GetRealClippingRect() const
+    Texture2D* Image::GetTexture() const
     {
-        return realClippingRect;
-    }
-
-    const RectF& Image::GetNormalizedRealClippingRect() const
-    {
-        return normalizedRealClippingRect;
-    }
-
-    uint Image::GetRevision() const
-    {
-        return revision;
+        return texture;
     }
 }

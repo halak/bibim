@@ -40,7 +40,7 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
         #region Method
         public override object Cook(CookingContext context)
         {
-            return context.Kitchen.Cook(Path.Combine(context.Directory, context.ExpandVariables(Input)), context);
+            return context.Kitchen.Cook(context, Path.Combine(context.Directory, context.ExpandVariables(Input)));
         }
         #endregion
     }

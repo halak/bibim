@@ -10,6 +10,11 @@ namespace Bibim
         return modules;
     }
 
+    GameAssetStorage* AssetStreamReader::GetStorage() const
+    {
+        return storage;
+    }
+
     bool AssetStreamReader::IsPriority() const
     {
         return isPriority;

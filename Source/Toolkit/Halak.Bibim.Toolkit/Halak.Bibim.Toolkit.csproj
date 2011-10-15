@@ -79,6 +79,7 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
@@ -114,15 +115,28 @@
     <Compile Include="Asset\Pipeline\Recipes\PackBitmap.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToTexture2D.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToUILayout1.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\ReadImage.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ReadRecipe.cs" />
     <Compile Include="Asset\Pipeline\Recipes\FileToStream.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ImportBitmap.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ImportPhotoshopDocument.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToBitmap.cs" />
     <Compile Include="Collections\Generic\SerializableDictionary.cs" />
+    <Compile Include="DesignResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DesignResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Design\PluginManager.cs" />
-    <Compile Include="Graphics\BitmapUtility.cs" />
+    <Compile Include="Graphics\BitmapSheet.cs" />
+    <Compile Include="Graphics\ImageCookingTagDebuggerVisualizer.cs" />
     <Compile Include="Graphics\ImageCookingTag.cs" />
+    <Compile Include="Graphics\ImageViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Graphics\ImageViewForm.Designer.cs">
+      <DependentUpon>ImageViewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Graphics\ImageWriter.cs" />
     <Compile Include="Graphics\SourceTexture2DWriter.cs" />
     <Compile Include="Graphics\SourceTexture2DCookingTag.cs" />
@@ -169,7 +183,18 @@
       <Name>Halak.Bibim.Runtime for Windows</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="DesignResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DesignResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Graphics\ImageViewForm.resx">
+      <DependentUpon>ImageViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Transparent.bmp" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

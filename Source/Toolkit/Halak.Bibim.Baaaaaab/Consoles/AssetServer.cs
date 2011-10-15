@@ -34,9 +34,10 @@ namespace Halak.Bibim.Bab.Consoles
             Trace.WriteLine(string.Format("Ready : {0}", pipeName));
 
             GameModuleTree modules = new GameModuleTree();
-            
-            GameAssetKitchen assetKitchen = new GameAssetKitchen();
+            GameAssetStorage assetStorage = new GameAssetStorage();
+            GameAssetKitchen assetKitchen = new GameAssetKitchen(assetStorage);
             PipedGameAssetServer assetServer = new PipedGameAssetServer(assetKitchen, pipeName);
+            modules.Root.AttachChild(assetStorage);
             modules.Root.AttachChild(assetKitchen);
             modules.Root.AttachChild(assetServer);
 

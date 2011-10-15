@@ -1,6 +1,7 @@
 #include <Bibim/PCH.h>
 #include <Bibim/Image.h>
 #include <Bibim/AssetStreamReader.h>
+#include <Bibim/GameAssetStorage.h>
 #include <Bibim/Texture2D.h>
 
 namespace Bibim
@@ -10,67 +11,47 @@ namespace Bibim
         // for cloning and deserialization
     }
 
-    Image::Image(const URI& textureURI, const Rect& clippingRect)
+    Image::Image(const String& textureURI, const Rect& clippingRect)
+        : textureURI(textureURI),
+          clippingRect(clippingRect)
+    {
+    }
+
+    Image::Image(const String& textureURI, const Rect& clippingRect, Texture2D* texture)
         : textureURI(textureURI),
           clippingRect(clippingRect),
-          revision(1)
+          texture(texture)
     {
+        Setup(texture);
     }
 
     Image::~Image()
     {
     }
 
-    void Image::SetRealTextureData(Texture2D* texture)
+    void Image::Setup(Texture2D* texture)
     {
-        if (realTexture != texture || realClippingRect != clippingRect)
+        this->texture = texture;
+
+        if (texture)
         {
-            realTexture = texture;
-            
-            if (texture)
-            {
-                realClippingRect = Rect(0, 0, texture->GetWidth(), texture->GetHeight());
-                normalizedRealClippingRect = RectF(0.0f, 0.0f, 1.0f, 1.0f);
-            }
-            else
-            {
-                realClippingRect = Rect::Empty;
-                normalizedRealClippingRect = RectF::Empty;
-            }
-
-            revision++;
+            const float w = static_cast<float>(texture->GetWidth());
+            const float h = static_cast<float>(texture->GetHeight());
+            this->normalizedClippingRect.X = static_cast<float>(clippingRect.X) / w;
+            this->normalizedClippingRect.Y = static_cast<float>(clippingRect.Y) / h;
+            this->normalizedClippingRect.Width = static_cast<float>(clippingRect.Width) / w;
+            this->normalizedClippingRect.Height = static_cast<float>(clippingRect.Height) / h;
         }
-    }
-
-    void Image::SetRealTextureData(Texture2D* texture, const Rect& clippingRect)
-    {
-        if (realTexture != texture || realClippingRect != clippingRect)
-        {
-            realTexture = texture;
-            realClippingRect = clippingRect;
-            
-            if (texture)
-            {
-                const float textureWidth  = static_cast<float>(texture->GetWidth());
-                const float textureHeight = static_cast<float>(texture->GetHeight());
-                const float left   = static_cast<float>(clippingRect.GetLeft()) / textureWidth;
-                const float top    = static_cast<float>(clippingRect.GetTop()) / textureHeight;
-                const float right  = static_cast<float>(clippingRect.GetRight()) / textureWidth;
-                const float bottom = static_cast<float>(clippingRect.GetBottom()) / textureHeight;
-                normalizedRealClippingRect = RectF(left, top, right - left, bottom - top);
-            }
-            else
-                normalizedRealClippingRect = RectF::Empty;
-
-            revision++;
-        }
+        else
+            this->normalizedClippingRect = RectF::Empty;
     }
 
     GameAsset* Image::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
     {
         const String textureURI = reader.ReadString();
         const Rect clippingRect = reader.ReadRect();
+        Texture2D* texture = static_cast<Texture2D*>(reader.GetStorage()->Load(textureURI));
 
-        return new Image(textureURI, clippingRect);
+        return new Image(textureURI, clippingRect, texture);
     }
 }

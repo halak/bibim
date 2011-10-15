@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/ComponentStreamReader.h>
+#include <Bibim/GameAssetStorage.h>
 #include <Bibim/GameComponent.h>
 #include <Bibim/GameComponentFactory.h>
 #include <Bibim/GameModuleNode.h>
@@ -9,12 +10,22 @@ namespace Bibim
 {
     ComponentStreamReader::ComponentStreamReader(Stream* sourceStream, GameModuleTree* modules)
         : BinaryReader(sourceStream),
-          modules(modules)
+          modules(modules),
+          storage(nullptr)
     {
+        
     }
 
     ComponentStreamReader::~ComponentStreamReader()
     {
+    }
+
+    GameAssetStorage* ComponentStreamReader::GetStorage()
+    {
+        if (storage == nullptr)
+            storage = static_cast<GameAssetStorage*>(modules->GetRoot()->FindChildByClassID(GameAssetStorage::ClassID));
+
+        return storage;
     }
 
     GameModule* ComponentStreamReader::ReadModule()
@@ -43,6 +54,15 @@ namespace Bibim
             return modules->GetRoot()->FindChildByClassID(classID);
         else
             return nullptr;
+    }
+
+    GameAsset* ComponentStreamReader::ReadAsset()
+    {
+        const String assetName = ReadString();
+        if (assetName.IsEmpty())
+            return nullptr;
+
+        return GetStorage()->Load(assetName);
     }
 
     GameComponent* ComponentStreamReader::ReadComponent()

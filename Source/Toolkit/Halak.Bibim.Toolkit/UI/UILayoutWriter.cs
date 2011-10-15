@@ -96,8 +96,7 @@ namespace Halak.Bibim.UI
 
         private static void WriteImage(AssetStreamWriter writer, Image o)
         {
-            writer.WriteBibimString(o.TextureURI);
-            writer.Write(o.ClippingRectangle);
+            writer.Write(o);
         }
         #endregion
 

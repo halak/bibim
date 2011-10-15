@@ -6,6 +6,7 @@
 #   include <Bibim/GameAsset.h>
 #   include <Bibim/Rect.h>
 #   include <Bibim/RectF.h>
+#   include <Bibim/String.h>
 
     namespace Bibim
     {
@@ -13,31 +14,25 @@
         {
             BBSerializableAssetClass(SourceTexture2D, Texture2D, 'G', 'I', 'M', 'G');
             public:
-                Image(const URI& textureURI, const Rect& clippingRect);
+                Image(const String& textureURI, const Rect& clippingRect);
                 virtual ~Image();
 
-                void SetRealTextureData(Texture2D* texture);
-                void SetRealTextureData(Texture2D* texture, const Rect& clippingRect);
+                void Setup(Texture2D* texture);
 
-                inline const URI& GetTextureURI() const;
+                inline const String& GetTextureURI() const;
                 inline const Rect& GetClippingRect() const;
-
-                inline Texture2D* GetRealTexture() const;
-                inline const Rect& GetRealClippingRect() const;
-                inline const RectF& GetNormalizedRealClippingRect() const;
-
-                inline uint GetRevision() const;
+                inline const RectF& GetNormalizedClippingRect() const;
+                inline Texture2D* GetTexture() const;
 
             private:
                 Image();
+                Image(const String& textureURI, const Rect& clippingRect, Texture2D* texture);
 
             private:
-                URI textureURI;
+                String textureURI;
                 Rect clippingRect;
-                Texture2DPtr realTexture;
-                Rect realClippingRect;
-                RectF normalizedRealClippingRect;
-                uint revision;
+                RectF normalizedClippingRect;
+                Texture2DPtr texture;
         };
     }
 

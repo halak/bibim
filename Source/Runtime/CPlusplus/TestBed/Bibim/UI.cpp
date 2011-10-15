@@ -58,6 +58,8 @@ class UISample : public GameFramework
             UILayoutPtr layout2;
             UILayoutPtr layout = static_cast<UILayout*>(gas->Load("Asset\\VisualNovelUI"));
 
+            uid->GetRoot()->AddChild(layout->GetRoot());
+
             storage = gas;
             uiDomain = uid;
             uiRenderer = uir;

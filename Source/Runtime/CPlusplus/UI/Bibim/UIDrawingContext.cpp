@@ -39,14 +39,14 @@ namespace Bibim
 
     void UIDrawingContext::Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, bool horizontalFlip, bool verticalFlip)
     {
-        BBAssertDebug(image && image->GetRealTexture() && renderer);
+        BBAssertDebug(image && image->GetTexture() && renderer);
 
         const float boundsClippedLeft   = (clippedBounds.GetLeft() - bounds.GetLeft()) / bounds.Width;
         const float boundsClippedTop    = (clippedBounds.GetTop() - bounds.GetTop()) / bounds.Height;
         const float boundsClippedRight  = (bounds.GetRight() - clippedBounds.GetRight()) / bounds.Width;
         const float boundsClippedBottom = (bounds.GetBottom() - clippedBounds.GetBottom()) / bounds.Height;
 
-        RectF clippingRect = image->GetNormalizedRealClippingRect();
+        RectF clippingRect = image->GetNormalizedClippingRect();
         const float clippingLeft   = clippingRect.GetLeft() + boundsClippedLeft;
         const float clippingTop    = clippingRect.GetTop() + boundsClippedTop;
         const float clippingRight  = clippingRect.GetRight() - boundsClippedRight;
@@ -66,7 +66,7 @@ namespace Bibim
         };
         Project(points[0], points[1], points[2], points[3]);
 
-        renderer->Draw(points[0], points[1], points[2], points[3], clippingRect, image->GetRealTexture(), Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())));
+        renderer->Draw(points[0], points[1], points[2], points[3], clippingRect, image->GetTexture(), Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())));
     }
 
     void UIDrawingContext::Draw(Vector2 position, Texture2D* texture)

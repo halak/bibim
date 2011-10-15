@@ -159,6 +159,11 @@ namespace Halak.Bibim
                 return null;
         }
 
+        public T FindChildByClass<T>() where T : GameModule
+        {
+            return (T)FindChildByClassID(ClassIDAttribute.GetClassID(typeof(T)));
+        }
+
         public GameModule FindChildByClassID(uint classID)
         {
             GameModuleNode node = FindChildNodeByClassID(classID);

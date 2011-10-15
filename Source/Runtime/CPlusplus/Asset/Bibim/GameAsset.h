@@ -4,7 +4,6 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/SharedObject.h>
-#   include <Bibim/URI.h>
 
     namespace Bibim
     {
