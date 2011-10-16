@@ -35,7 +35,8 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
         #region Methods
         public override Bitmap Cook(CookingContext context)
         {
-            return new Bitmap(Input.Cook(context));
+            using (var stream = Input.Cook(context))
+                return new Bitmap(stream);
         }
         #endregion
     }

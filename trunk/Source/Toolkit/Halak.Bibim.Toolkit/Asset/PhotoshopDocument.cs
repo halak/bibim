@@ -77,7 +77,8 @@ namespace Halak.Bibim.Asset
         #region Constructors
         public PhotoshopDocument(string path)
         {
-            Load(new FileStream(path, FileMode.Open, FileAccess.Read));
+            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+                Load(fs);
         }
 
         public PhotoshopDocument(Stream stream)
