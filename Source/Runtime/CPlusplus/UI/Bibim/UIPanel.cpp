@@ -172,8 +172,10 @@ namespace Bibim
     {
         VisualCollection::iterator it = std::find(children.begin(), children.end(), child);
         BBAssert(it != children.end());
-        if (it == children.end() - 1)
+
+        if (it != children.end() - 1)
         {
+            UIVisualPtr lockedChild = child;
             children.erase(it);
             children.push_back(child);
         }

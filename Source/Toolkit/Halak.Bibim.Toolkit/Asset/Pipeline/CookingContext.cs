@@ -107,7 +107,12 @@ namespace Halak.Bibim.Asset.Pipeline
             if (variables.TryGetValue(name, out result))
                 return result;
             else
-                return string.Empty;
+            {
+                if (Parent != null)
+                    return Parent.GetVariable(name);
+                else
+                    return string.Empty;
+            }
         }
 
         public void SetVariable(string name, string value)
