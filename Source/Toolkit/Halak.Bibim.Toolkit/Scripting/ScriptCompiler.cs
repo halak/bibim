@@ -439,8 +439,12 @@ namespace Halak.Bibim.Scripting
 
             public void Return(Expression value)
             {
-                Generate(value);
-                LocalAssign((-1) + (-1) + (-1) + (-1) + (-CurrentFunction.Parameters.Count) + (-1), 0, "return @1");
+                if (value != null)
+                {
+                    Generate(value);
+                    LocalAssign((-1) + (-1) + (-1) + (-1) + (-CurrentFunction.Parameters.Count) + (-1), 0, "return @1");
+                }
+
                 binaryWriter.Write(ScriptInstruction.Return);
 
                 if (textWriter != null)

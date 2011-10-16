@@ -32,7 +32,8 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
         #region Methods
         public override PhotoshopDocument Cook(CookingContext context)
         {
-            return new PhotoshopDocument(Input.Cook(context));
+            using (var stream = Input.Cook(context))
+                return new PhotoshopDocument(stream);
         }
         #endregion
     }

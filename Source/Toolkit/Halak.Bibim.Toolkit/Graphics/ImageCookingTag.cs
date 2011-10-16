@@ -8,7 +8,7 @@ using System.Text;
 namespace Halak.Bibim.Graphics
 {
     [Serializable]
-    [DebuggerVisualizer(typeof(ImageCookingTagDebuggerVisualizer))]
+    //[DebuggerVisualizer(typeof(ImageCookingTagDebuggerVisualizer))]
     public sealed class ImageCookingTag
     {
         #region Properties
