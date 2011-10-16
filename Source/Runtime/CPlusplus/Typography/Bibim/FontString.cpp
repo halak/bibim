@@ -49,7 +49,7 @@ namespace Bibim
         {
             const uint32 code = regularGlyphs[i]->GetCode();
             const wchar_t wideCharacter = static_cast<wchar_t>(code);
-            result += WideCharToMultiByte(CP_ACP, 0, &wideCharacter, 1, nullptr, 0, nullptr, nullptr);
+            result += WideCharToMultiByte(CP_UTF8, 0, &wideCharacter, 1, nullptr, 0, nullptr, nullptr);
         }
 
         return result;
@@ -62,8 +62,8 @@ namespace Bibim
         glowGlyphs.clear();
 
         std::vector<wchar_t> wideCharacters;
-        wideCharacters.resize(MultiByteToWideChar(CP_ACP, 0, text.CStr(), text.GetLength(), nullptr, 0), L'\0');
-        MultiByteToWideChar(CP_ACP, 0, text.CStr(), text.GetLength(), &wideCharacters[0], wideCharacters.size());
+        wideCharacters.resize(MultiByteToWideChar(CP_UTF8, 0, text.CStr(), text.GetLength(), nullptr, 0), L'\0');
+        MultiByteToWideChar(CP_UTF8, 0, text.CStr(), text.GetLength(), &wideCharacters[0], wideCharacters.size());
 
         regularGlyphs.reserve(wideCharacters.size());
         if (font->GetStrokeSize() > 0.0f)

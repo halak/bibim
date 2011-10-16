@@ -142,13 +142,11 @@
                     BBForwardDeclareSmartPointerClass(PipeServerStream);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Scripting
-                class Any;
                 BBForwardDeclareSmartPointerClass(Script);
                 class ScriptingContext;
                 class ScriptObject;
                 BBForwardDeclareSmartPointerClass(ScriptThread);
                 class ScriptStack;
-                BBForwardDeclareSmartPointerClass(VariableStorage);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Threading
                 class AutoLocker;

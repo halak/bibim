@@ -15,6 +15,8 @@
             BBSerializableAssetClass(SourceTexture2D, Texture2D, 'G', 'I', 'M', 'G');
             public:
                 Image(const String& textureURI, const Rect& clippingRect);
+                Image(Texture2D* texture);
+                Image(Texture2D* texture, const Rect& clippingRect);
                 virtual ~Image();
 
                 void Setup(Texture2D* texture);

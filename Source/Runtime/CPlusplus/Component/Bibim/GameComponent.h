@@ -11,15 +11,15 @@
                                                                     typedef classname This; \
                                                                     typedef parent Base; \
                                                                 protected: \
-                                                                    virtual void OnRead(ComponentStreamReader& reader); \
-                                                                    virtual void OnCopy(const GameComponent* original, CloningContext& context); \
+                                                                    virtual void OnRead(Bibim::ComponentStreamReader& reader); \
+                                                                    virtual void OnCopy(const Bibim::GameComponent* original, Bibim::CloningContext& context); \
                                                                 private:
 
 #       define BBComponentClass(classname, parent, a, b, c, d)  BBAbstractComponentClass(classname, parent); \
                                                                 public: \
                                                                     static const uint32 ClassID = BBMakeFOURCC(a, b, c, d); \
                                                                     virtual uint32 GetClassID() const { return ClassID; } \
-                                                                    virtual classname* Clone(CloningContext& context) const; \
+                                                                    virtual classname* Clone(Bibim::CloningContext& context) const; \
                                                                 private:
 
 #       define BBImplementsComponent(classname) classname* classname::Clone(CloningContext& /*context*/) const \

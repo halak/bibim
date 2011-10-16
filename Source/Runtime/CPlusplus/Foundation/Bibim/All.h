@@ -116,7 +116,6 @@
 #  include <Bibim/ScriptingContext.h>
 #  include <Bibim/ScriptThread.h>
 #  include <Bibim/ScriptStack.h>
-#  include <Bibim/VariableStorage.h>
 #   include <Bibim/ScriptLibraryIO.h>
 #include <bibim/ScriptNativeFunctionTable.h>
 

@@ -140,4 +140,14 @@ namespace Bibim
     {
         return thread->Call(name, arg1, arg2, arg3, arg4, arg5);
     }
+
+    const ScriptObject& ScriptingContext::GetGlobalVariable(uint id) const
+    {
+        return thread->GetGlobalVariable(id);
+    }
+
+    void ScriptingContext::SetGlobalVariable(uint id, const ScriptObject& value)
+    {
+        thread->SetGlobalVariable(id, value);
+    }
 }

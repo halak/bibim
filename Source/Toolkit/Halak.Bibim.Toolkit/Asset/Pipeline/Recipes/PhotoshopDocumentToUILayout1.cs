@@ -128,6 +128,10 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
                 if (string.Compare(type, "UIMarkupLabel", true) == 0 ||
                     string.Compare(type, "MarkupLabel", true) == 0)
                 {
+                    UILabel label = new UILabel();
+                    label.Name = name;
+                    window.AddChild(label);
+                    Process(label, layer, context);
                 }
                 else
                 {
@@ -182,6 +186,11 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
                 Tag = new ImageCookingTag(layer.Bitmap)
             };
             context.Sprites.Add(sprite);
+        }
+
+        private static void Process(UILabel label, PhotoshopDocument.Layer layer, Context context)
+        {
+            Process((UIVisual)label, layer, context);
         }
 
         private static void Process(UIButton button, PhotoshopDocument.Layer layer, Context context)
@@ -246,6 +255,10 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
                     Comment = "Automatically generated.", 
                 };
 
+                string absoluteDirectory = Path.Combine(context.BaseDirectory, context.Directory);
+                if (Directory.Exists(absoluteDirectory) == false)
+                    Directory.CreateDirectory(absoluteDirectory);
+
                 int textureNumber = 0;
                 string textureOutputFormat = context.ExpandVariables(TextureOutput);
                 foreach (Bitmap item in bitmapSheet.Sheets)
@@ -255,12 +268,17 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
                     string path = string.Format(textureOutputFormat, textureNumber++);
 
                     string textureFilePath = Path.ChangeExtension(path, "png");
-                    item.Save(Path.Combine(context.BaseDirectory, context.Directory, textureFilePath), ImageFormat.Png);
+                    string fullPath = Path.Combine(absoluteDirectory, textureFilePath);
+                    string fullPathDirectory = Path.GetDirectoryName(fullPath);
+                    if (Directory.Exists(fullPathDirectory) == false)
+                        Directory.CreateDirectory(fullPathDirectory);
+
+                    item.Save(fullPath, ImageFormat.Png);
                     item.Tag = textureFilePath;
 
-                    textureFileToStream.Input1 = textureFilePath;
+                    textureFileToStream.Input1 = Path.GetFileName(textureFilePath);
 
-                    using (var fs = new FileStream(Path.Combine(context.BaseDirectory, context.Directory, Path.ChangeExtension(path, "asset")), FileMode.Create, FileAccess.Write))
+                    using (var fs = new FileStream(Path.ChangeExtension(fullPath, "asset"), FileMode.Create, FileAccess.Write))
                         GameAssetRecipe.Serialize(fs, textureRecipe);
                 }
                 #endregion

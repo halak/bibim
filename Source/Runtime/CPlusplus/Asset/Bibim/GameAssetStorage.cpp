@@ -187,11 +187,13 @@ namespace Bibim
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     GameAssetStorage::LoadingThread::LoadingThread()
-        : currentTask(nullptr),
+        : Thread(false),
+          currentTask(nullptr),
           totalBytes(0),
           loadedBytes(0),
           closed(false)
     {
+        Resume();
     }
 
     GameAssetStorage::LoadingThread::~LoadingThread()

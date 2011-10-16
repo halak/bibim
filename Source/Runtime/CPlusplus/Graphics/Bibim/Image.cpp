@@ -17,6 +17,18 @@ namespace Bibim
     {
     }
 
+    Image::Image(Texture2D* texture)
+        : clippingRect(0, 0, texture->GetWidth(), texture->GetHeight())
+    {
+        Setup(texture);
+    }
+
+    Image::Image(Texture2D* texture, const Rect& clippingRect)
+        : clippingRect(clippingRect)
+    {
+        Setup(texture);
+    }
+
     Image::Image(const String& textureURI, const Rect& clippingRect, Texture2D* texture)
         : textureURI(textureURI),
           clippingRect(clippingRect),
@@ -35,8 +47,8 @@ namespace Bibim
 
         if (texture)
         {
-            const float w = static_cast<float>(texture->GetWidth());
-            const float h = static_cast<float>(texture->GetHeight());
+            const float w = static_cast<float>(texture->GetSurfaceWidth());
+            const float h = static_cast<float>(texture->GetSurfaceHeight());
             this->normalizedClippingRect.X = static_cast<float>(clippingRect.X) / w;
             this->normalizedClippingRect.Y = static_cast<float>(clippingRect.Y) / h;
             this->normalizedClippingRect.Width = static_cast<float>(clippingRect.Width) / w;

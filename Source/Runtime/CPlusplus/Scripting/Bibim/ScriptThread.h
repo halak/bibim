@@ -8,6 +8,7 @@
 #   include <Bibim/Script.h>
 #   include <Bibim/ScriptObject.h>
 #   include <Bibim/ScriptStack.h>
+#   include <map>
 
     namespace Bibim
     {
@@ -39,6 +40,9 @@
                 inline const ScriptStack& GetStack() const;
                 inline State GetState() const;
 
+                const ScriptObject& GetGlobalVariable(uint id) const;
+                void SetGlobalVariable(uint id, const ScriptObject& value);
+
             private:
                 const Script::Function* BeginCall(const String& name, int numberOfArguments);
                 ScriptObject EndCall(const Script::Function* function);
@@ -56,6 +60,7 @@
                 MemoryStreamPtr stream;
                 State state;
                 int nativeFunctionDepth;
+                std::map<uint, ScriptObject> globalVariables;
 
                 const Script::Function* suspendedFunction;
                 int suspendedTopIndex;
