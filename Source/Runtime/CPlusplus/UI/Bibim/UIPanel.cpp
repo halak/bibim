@@ -188,6 +188,7 @@ namespace Bibim
 
         if (it != children.begin())
         {
+            UIVisualPtr lockedChild = child;
             children.erase(it);
             children.insert(children.begin(), child);
         }
