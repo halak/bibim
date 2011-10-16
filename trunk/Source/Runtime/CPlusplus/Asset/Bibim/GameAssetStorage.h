@@ -17,7 +17,7 @@
         {
             BBModuleClass(GameAssetStorage, GameModule, 'G', 'A', 'S', 'T');
             public:
-                typedef std::map<String, GameAsset*> AssetTable;
+                typedef std::map<String, GameAssetPtr> AssetTable;
                 typedef std::vector<AssetProvider*> ProviderCollection;
 
                 struct LoadingStatus

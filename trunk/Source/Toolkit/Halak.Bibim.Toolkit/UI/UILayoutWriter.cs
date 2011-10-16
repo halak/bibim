@@ -53,6 +53,8 @@ namespace Halak.Bibim.UI
                 Write(writer, (UIVisual)o, objectDictionary);
             else if (t == typeof(UISprite))
                 Write(writer, (UISprite)o, objectDictionary);
+            else if (t == typeof(UILabel))
+                Write(writer, (UILabel)o, objectDictionary);
             else if (t == typeof(UIPanel))
                 Write(writer, (UIPanel)o, objectDictionary);
             else if (t == typeof(UIButton))
@@ -93,11 +95,6 @@ namespace Halak.Bibim.UI
         {
             throw new NotImplementedException();
         }
-
-        private static void WriteImage(AssetStreamWriter writer, Image o)
-        {
-            writer.Write(o);
-        }
         #endregion
 
         #region WriteVisual
@@ -122,10 +119,18 @@ namespace Halak.Bibim.UI
         private static void Write(AssetStreamWriter writer, UISprite o, List<object> objectDictionary)
         {
             Write(writer, (UIVisual)o, objectDictionary);
-            WriteImage(writer, o.Image);
+            writer.Write(o.Image);
             writer.Write(o.AutoResize);
             writer.Write(o.HorizontalFlip);
             writer.Write(o.VerticalFlip);
+        }
+
+        private static void Write(AssetStreamWriter writer, UILabel o, List<object> objectDictionary)
+        {
+            Write(writer, (UIVisual)o, objectDictionary);
+            writer.Write(o.Font);
+            writer.WriteBibimString(o.Text);
+            writer.Write(o.AutoResize);
         }
 
         private static void Write(AssetStreamWriter writer, UIPanel o, List<object> objectDictionary)

@@ -15,6 +15,13 @@ namespace Bibim
     {
     }
 
+    UIKeyboardEventDispatcher::UIKeyboardEventDispatcher(UIDomain* domain, Keyboard* device)
+        : domain(domain),
+          device(device),
+          lastState(KeyboardState::Empty)
+    {
+    }
+
     UIKeyboardEventDispatcher::~UIKeyboardEventDispatcher()
     {
     }

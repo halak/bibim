@@ -272,12 +272,12 @@ namespace Bibim
     void UIEventMap::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        BBAssert(0);
+        BBBreak();
     }
 
     void UIEventMap::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
-        BBAssert(0);
+        BBBreak();
     }
 }

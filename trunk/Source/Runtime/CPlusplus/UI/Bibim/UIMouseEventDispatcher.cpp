@@ -21,6 +21,16 @@ namespace Bibim
     {
     }
 
+    UIMouseEventDispatcher::UIMouseEventDispatcher(UIDomain* domain, Mouse* device, UIRenderer* renderer)
+        : domain(domain),
+          device(device),
+          renderer(renderer),
+          capturedVisual(nullptr),
+          lastTargetVisual(nullptr),
+          lastMouseState(MouseState::Empty)
+    {
+    }
+
     UIMouseEventDispatcher::~UIMouseEventDispatcher()
     {
     }

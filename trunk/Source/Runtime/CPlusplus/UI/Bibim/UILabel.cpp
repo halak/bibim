@@ -1,6 +1,7 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UILabel.h>
 #include <Bibim/Colors.h>
+#include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Font.h>
 #include <Bibim/UIDrawingContext.h>
 
@@ -65,6 +66,9 @@ namespace Bibim
     void UILabel::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
+        font = static_cast<Font*>(reader.ReadAsset());
+        text = reader.ReadString();
+        autoResize = reader.ReadBool();
     }
 
     void UILabel::OnCopy(const GameComponent* original, CloningContext& context)

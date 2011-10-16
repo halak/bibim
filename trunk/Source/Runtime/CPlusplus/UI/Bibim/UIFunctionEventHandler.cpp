@@ -65,7 +65,7 @@ namespace Bibim
     void UIFunctionEventHandler::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        BBAssert(0);
+        BBBreak();
         // table = reader.ReadModule();
         functionName = reader.ReadString();
         callableChanged = true;

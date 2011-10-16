@@ -1893,14 +1893,6 @@
 					RelativePath=".\Scripting\Bibim\ScriptThread.inl"
 					>
 				</File>
-				<File
-					RelativePath=".\Scripting\Bibim\VariableStorage.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Scripting\Bibim\VariableStorage.h"
-					>
-				</File>
 				<Filter
 					Name="Libraries"
 					>

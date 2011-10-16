@@ -13,6 +13,7 @@
             BBModuleClass(UIKeyboardEventDispatcher, TimelineGameModule, 'U', 'I', 'K', 'B');
             public:
                 UIKeyboardEventDispatcher();
+                UIKeyboardEventDispatcher(UIDomain* domain, Keyboard* device);
                 virtual ~UIKeyboardEventDispatcher();
 
                 virtual void Update(float dt, uint timestamp);

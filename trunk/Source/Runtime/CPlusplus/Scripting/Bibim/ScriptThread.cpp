@@ -206,6 +206,20 @@ namespace Bibim
         return Run(temporarySuspendedFunction, temporarySuspendedTopIndex);
     }
 
+    const ScriptObject& ScriptThread::GetGlobalVariable(uint id) const
+    {
+        std::map<uint, ScriptObject>::const_iterator it = globalVariables.find(id);
+        if (it != globalVariables.end())
+            return (*it).second;
+        else
+            return ScriptObject::Void;
+    }
+
+    void ScriptThread::SetGlobalVariable(uint id, const ScriptObject& value)
+    {
+        globalVariables[id] = value;
+    }
+
     const Script::Function* ScriptThread::BeginCall(const String& name, int numberOfArguments)
     {
         if (state == Suspended)

@@ -113,6 +113,8 @@ namespace Bibim
                 while (context.MoveNext())
                 {
                     const Glyph* glyph = glyphs[context.GetGlyphIndex()];
+                    if (glyph->GetTexture() == nullptr)
+                        continue;
 
                     const float tw = 1.0f / static_cast<float>(glyph->GetTexture()->GetWidth());
                     const float th = 1.0f / static_cast<float>(glyph->GetTexture()->GetHeight());

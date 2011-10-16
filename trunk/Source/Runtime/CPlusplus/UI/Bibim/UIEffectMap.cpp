@@ -15,12 +15,12 @@ namespace Bibim
     void UIEffectMap::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        BBAssert(0);
+        BBBreak();
     }
 
     void UIEffectMap::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
-        BBAssert(0);
+        BBBreak();
     }
 }

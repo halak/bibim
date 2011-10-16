@@ -78,6 +78,126 @@ namespace Bibim
         }
     }
 
+    bool ScriptObject::CastBool() const
+    {
+        switch (type)
+        {
+            case BoolType:
+                return value.BOOLEAN;
+            case IntType:
+                return value.INT != 0;
+            case UIntType:
+                return value.UINT != 0;
+            case LongIntType:
+                return value.LONGINT != 0;
+            case FloatType:
+                return value.FLOAT != 0.0f;
+            case SharedObjectType:
+                return static_cast<SharedObjectPtr*>(value.POINTER)->GetPointee() != nullptr;
+            case LightObjectType:
+                return value.POINTER != nullptr;
+            default:
+                return false;
+        }
+    }
+
+    int ScriptObject::CastInt() const
+    {
+        switch (type)
+        {
+            case BoolType:
+                return value.BOOLEAN ? 1 : 0;
+            case IntType:
+                return value.INT;
+            case UIntType:
+                return static_cast<int>(value.UINT);
+            case LongIntType:
+                return static_cast<int>(value.LONGINT);
+            case FloatType:
+                return static_cast<int>(value.FLOAT);
+            default:
+                return 0;
+        }
+    }
+
+    uint ScriptObject::CastUInt() const
+    {
+        switch (type)
+        {
+            case BoolType:
+                return value.BOOLEAN ? 1 : 0;
+            case IntType:
+                return static_cast<uint>(value.INT);
+            case UIntType:
+                return value.UINT;
+            case LongIntType:
+                return static_cast<uint>(value.LONGINT);
+            case FloatType:
+                return static_cast<uint>(value.FLOAT);
+            default:
+                return 0;
+        }
+    }
+
+    int64 ScriptObject::CastLongInt() const
+    {
+        switch (type)
+        {
+            case BoolType:
+                return value.BOOLEAN ? 1 : 0;
+            case IntType:
+                return static_cast<int64>(value.INT);
+            case UIntType:
+                return static_cast<int64>(value.UINT);
+            case LongIntType:
+                return value.LONGINT;
+            case FloatType:
+                return static_cast<int64>(value.FLOAT);
+            default:
+                return 0;
+        }
+    }
+
+    float ScriptObject::CastFloat()
+    {
+        switch (type)
+        {
+            case BoolType:
+                return value.BOOLEAN ? 1.0f : 0.0f;
+            case IntType:
+                return static_cast<float>(value.INT);
+            case UIntType:
+                return static_cast<float>(value.UINT);
+            case LongIntType:
+                return static_cast<float>(value.LONGINT);
+            case FloatType:
+                return value.FLOAT;
+            default:
+                return 0.0f;
+        }
+    }
+
+    SharedObject* ScriptObject::CastSharedObject() const
+    {
+        if (type == SharedObjectType)
+            return static_cast<SharedObjectPtr*>(value.POINTER)->GetPointee();
+        else
+            return nullptr;
+    }
+
+    void* ScriptObject::CastLightObject() const
+    {
+        switch (type)
+        {
+            case LightObjectType:
+                return value.POINTER;
+            case SharedObjectType:
+                return static_cast<SharedObjectPtr*>(value.POINTER)->GetPointee();
+            default:
+                return nullptr;
+        }
+    }
+
     ScriptObject& ScriptObject::operator = (const ScriptObject& right)
     {
         Type  oldType  = type;
@@ -114,6 +234,7 @@ namespace Bibim
                 value.POINTER = new SharedObjectPtr(*static_cast<const SharedObjectPtr*>(right.value.POINTER));
                 break;
             case LightObjectType:
+                value.POINTER = right.value.POINTER;
                 break;
         }
 

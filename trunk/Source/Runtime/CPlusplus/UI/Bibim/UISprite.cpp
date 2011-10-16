@@ -53,7 +53,7 @@ namespace Bibim
     void UISprite::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        image = static_cast<GameAsset*>(reader.ReadAsset());
+        image = static_cast<Image*>(reader.ReadAsset());
         autoResize = reader.ReadBool();
         horizontalFlip = reader.ReadBool();
         verticalFlip = reader.ReadBool();

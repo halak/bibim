@@ -57,6 +57,14 @@
 
                 inline Type GetType() const;
 
+                bool CastBool() const;
+                int CastInt() const;
+                uint CastUInt() const;
+                int64 CastLongInt() const;
+                float CastFloat();
+                SharedObject* CastSharedObject() const;
+                void* CastLightObject() const;
+
                 ScriptObject& operator = (const ScriptObject& right);
                        bool operator == (const ScriptObject& right) const;
                 inline bool operator != (const ScriptObject& right) const;

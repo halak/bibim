@@ -3,17 +3,18 @@
 #define __BIBIM_UIMOUSEEVENTDISPATCHER_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/UpdateableGameModule.h>
+#   include <Bibim/TimelineGameModule.h>
 #   include <Bibim/MouseState.h>
 #   include <vector>
 
     namespace Bibim
     {
-        class UIMouseEventDispatcher : public UpdateableGameModule
+        class UIMouseEventDispatcher : public TimelineGameModule
         {
             BBModuleClass(UIMouseEventDispatcher, UpdateableGameModule, 'U', 'I', 'M', 'S');
             public:
                 UIMouseEventDispatcher();
+                UIMouseEventDispatcher(UIDomain* domain, Mouse* mouse, UIRenderer* renderer);
                 virtual ~UIMouseEventDispatcher();
 
                 virtual void Update(float dt, uint timestamp);
