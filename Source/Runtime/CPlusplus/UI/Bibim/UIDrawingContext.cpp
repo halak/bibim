@@ -47,15 +47,48 @@ namespace Bibim
         const float boundsClippedBottom = (bounds.GetBottom() - clippedBounds.GetBottom()) / bounds.Height;
 
         RectF clippingRect = image->GetNormalizedClippingRect();
-        const float clippingLeft   = clippingRect.GetLeft() + boundsClippedLeft;
-        const float clippingTop    = clippingRect.GetTop() + boundsClippedTop;
-        const float clippingRight  = clippingRect.GetRight() - boundsClippedRight;
-        const float clippingBottom = clippingRect.GetBottom() - boundsClippedBottom;
+        float clippingLeft   = clippingRect.GetLeft();
+        float clippingTop    = clippingRect.GetTop();
+        float clippingRight  = clippingRect.GetRight();
+        float clippingBottom = clippingRect.GetBottom();
+
+        switch (image->GetAppliedTransform())
+        {
+            case Image::Identity:
+                clippingLeft   += boundsClippedLeft;
+                clippingTop    += boundsClippedTop;
+                clippingRight  -= boundsClippedRight;
+                clippingBottom -= boundsClippedBottom;
+                break;
+            case Image::RotateCW90:
+                clippingLeft   += boundsClippedBottom;
+                clippingTop    += boundsClippedLeft;
+                clippingRight  -= boundsClippedTop;
+                clippingBottom -= boundsClippedRight;
+                break;
+        }
 
         clippingRect.X = clippingLeft;
         clippingRect.Y = clippingTop;
         clippingRect.Width  = (horizontalFlip == false) ? clippingRight - clippingLeft : clippingLeft - clippingRight;
         clippingRect.Height = (verticalFlip   == false) ? clippingBottom - clippingTop : clippingTop - clippingBottom;
+
+        Vector2 uv[4];
+        switch (image->GetAppliedTransform())
+        {
+            case Image::Identity:
+                uv[0] = Vector2(clippingRect.GetLeft(), clippingRect.GetTop());
+                uv[1] = Vector2(clippingRect.GetRight(), clippingRect.GetTop());
+                uv[2] = Vector2(clippingRect.GetLeft(), clippingRect.GetBottom());
+                uv[3] = Vector2(clippingRect.GetRight(), clippingRect.GetBottom());
+                break;
+            case Image::RotateCW90:
+                uv[0] = Vector2(clippingRect.GetRight(), clippingRect.GetTop());
+                uv[1] = Vector2(clippingRect.GetRight(), clippingRect.GetBottom());
+                uv[2] = Vector2(clippingRect.GetLeft(), clippingRect.GetTop());
+                uv[3] = Vector2(clippingRect.GetLeft(), clippingRect.GetBottom());
+                break;
+        }
 
         Vector2 points[] =
         {
@@ -66,7 +99,7 @@ namespace Bibim
         };
         Project(points[0], points[1], points[2], points[3]);
 
-        renderer->Draw(points[0], points[1], points[2], points[3], clippingRect, image->GetTexture(), Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())));
+        renderer->DrawQuad(points, uv, image->GetTexture(), Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())));
     }
 
     void UIDrawingContext::Draw(Vector2 position, Texture2D* texture)
@@ -87,7 +120,7 @@ namespace Bibim
         };
         Project(points[0], points[1], points[2], points[3]);
 
-        renderer->Draw(points[0], points[1], points[2], points[3], RectF(0.0f, 0.0f, 1.0f, 1.0f), texture, Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())));
+        renderer->DrawQuad(points, RectF(0.0f, 0.0f, 1.0f, 1.0f), texture, Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())));
     }
 
     void UIDrawingContext::DrawString(const RectF& bounds, const RectF& clippedBounds, Font* font, const String& text)
@@ -136,7 +169,7 @@ namespace Bibim
                         Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetBottom() - 0.5f),
                     };
                     self->Project(points[0], points[1], points[2], points[3]);
-                    renderer->Draw(points[0], points[1], points[2], points[3], clippingRect, glyph->GetTexture(), color);
+                    renderer->DrawQuad(points, clippingRect, glyph->GetTexture(), color);
                 }
             }
         };

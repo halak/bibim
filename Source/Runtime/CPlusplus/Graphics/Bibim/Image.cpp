@@ -13,27 +13,51 @@ namespace Bibim
 
     Image::Image(const String& textureURI, const Rect& clippingRect)
         : textureURI(textureURI),
-          clippingRect(clippingRect)
+          clippingRect(clippingRect),
+          appliedTransform(Identity),
+          width(clippingRect.Width),
+          height(clippingRect.Height)
     {
     }
 
     Image::Image(Texture2D* texture)
-        : clippingRect(0, 0, texture->GetWidth(), texture->GetHeight())
+        : clippingRect(0, 0, texture->GetWidth(), texture->GetHeight()),
+          appliedTransform(Identity),
+          width(clippingRect.Width),
+          height(clippingRect.Height)
     {
         Setup(texture);
     }
 
     Image::Image(Texture2D* texture, const Rect& clippingRect)
-        : clippingRect(clippingRect)
+        : clippingRect(clippingRect),
+          appliedTransform(Identity),
+          width(clippingRect.Width),
+          height(clippingRect.Height)
     {
         Setup(texture);
     }
 
-    Image::Image(const String& textureURI, const Rect& clippingRect, Texture2D* texture)
+    Image::Image(const String& textureURI, const Rect& clippingRect, Transform appliedTransform, Texture2D* texture)
         : textureURI(textureURI),
           clippingRect(clippingRect),
+          appliedTransform(appliedTransform),
+          width(0),
+          height(0),
           texture(texture)
     {
+        switch (appliedTransform)
+        {
+            case Identity:
+                width = clippingRect.Width;
+                height = clippingRect.Height;
+                break;
+            case RotateCW90:
+                width = clippingRect.Height;
+                height = clippingRect.Width;
+                break;
+        }
+
         Setup(texture);
     }
 
@@ -62,8 +86,9 @@ namespace Bibim
     {
         const String textureURI = reader.ReadString();
         const Rect clippingRect = reader.ReadRect();
+        const Transform appliedTransform = static_cast<Transform>(reader.ReadUInt8());
         Texture2D* texture = static_cast<Texture2D*>(reader.GetStorage()->Load(textureURI));
 
-        return new Image(textureURI, clippingRect, texture);
+        return new Image(textureURI, clippingRect, appliedTransform, texture);
     }
 }

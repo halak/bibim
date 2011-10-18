@@ -25,23 +25,33 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
             get;
             set;
         }
+
+        [XmlAttribute]
+        public Image.Transform AppliedTransform
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
         public ReadImage()
-            : this(string.Empty, Rectangle.Empty)
+            : this(string.Empty, Rectangle.Empty, Image.Transform.Identity)
         {
         }
 
-        public ReadImage(string textureURI, Rectangle clippingRectangle)
+        public ReadImage(string textureURI, Rectangle clippingRectangle, Image.Transform appliedTransform)
         {
+            TextureURI = textureURI;
+            ClippingRectangle = clippingRectangle;
+            AppliedTransform = appliedTransform;
         }
         #endregion
 
         #region Method
         public override Image Cook(CookingContext context)
         {
-            return new Image(TextureURI, ClippingRectangle);
+            return new Image(TextureURI, ClippingRectangle, AppliedTransform);
         }
         #endregion
     }

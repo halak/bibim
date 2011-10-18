@@ -260,10 +260,22 @@
             d3dDevice->SetTextureStageState(0, D3DTSS_TEXCOORDINDEX, 0);
         }
 
-        void UIRenderer::Draw(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3, const RectF& clippingRect, Texture2D* texture, Color color)
+        void UIRenderer::DrawQuad(const Vector2* p, const RectF& clippingRect, Texture2D* texture, Color color)
         {
-            const RectF bounds = RectF(Vector2(Math::Min(p0.X, p1.X, p2.X, p3.X), Math::Min(p0.Y, p1.Y, p2.Y, p3.Y)),
-                                       Vector2(Math::Max(p0.X, p1.X, p2.X, p3.X), Math::Max(p0.Y, p1.Y, p2.Y, p3.Y)));
+            const Vector2 uv[4] =
+            {
+                Vector2(clippingRect.GetLeft(),  clippingRect.GetTop()),
+                Vector2(clippingRect.GetRight(), clippingRect.GetTop()),
+                Vector2(clippingRect.GetLeft(),  clippingRect.GetBottom()),
+                Vector2(clippingRect.GetRight(), clippingRect.GetBottom()),
+            };
+            DrawQuad(p, uv, texture, color);
+        }
+
+        void UIRenderer::DrawQuad(const Vector2* p, const Vector2* uv, Texture2D* texture, Color color)
+        {
+            const RectF bounds = RectF(Vector2(Math::Min(p[0].X, p[1].X, p[2].X, p[3].X), Math::Min(p[0].Y, p[1].Y, p[2].Y, p[3].Y)),
+                                       Vector2(Math::Max(p[0].X, p[1].X, p[2].X, p[3].X), Math::Max(p[0].Y, p[1].Y, p[2].Y, p[3].Y)));
 
             int quadSetIndex = numberOfActiveQuadSets;
             for (int i = 0; i < numberOfActiveQuadSets; i++)
@@ -314,10 +326,10 @@
 
             const D3DCOLOR d3dColor = color.ToARGB();
             Vertex* localLockedVertices = &lockedVertices[quadSet.StartIndex + quadSet.Count * VerticesPerQuad];
-            localLockedVertices[0] = Vertex(D3DXVECTOR3(p0.X, p0.Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetLeft(),  clippingRect.GetTop()));
-            localLockedVertices[1] = Vertex(D3DXVECTOR3(p1.X, p1.Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetRight(), clippingRect.GetTop()));
-            localLockedVertices[2] = Vertex(D3DXVECTOR3(p2.X, p2.Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetLeft(),  clippingRect.GetBottom()));
-            localLockedVertices[3] = Vertex(D3DXVECTOR3(p3.X, p3.Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetRight(), clippingRect.GetBottom()));
+            localLockedVertices[0] = Vertex(D3DXVECTOR3(p[0].X, p[0].Y, 0.0f), d3dColor, D3DXVECTOR2(uv[0].X, uv[0].Y));
+            localLockedVertices[1] = Vertex(D3DXVECTOR3(p[1].X, p[1].Y, 0.0f), d3dColor, D3DXVECTOR2(uv[1].X, uv[1].Y));
+            localLockedVertices[2] = Vertex(D3DXVECTOR3(p[2].X, p[2].Y, 0.0f), d3dColor, D3DXVECTOR2(uv[2].X, uv[2].Y));
+            localLockedVertices[3] = Vertex(D3DXVECTOR3(p[3].X, p[3].Y, 0.0f), d3dColor, D3DXVECTOR2(uv[3].X, uv[3].Y));
             quadSet.Count++;
         }
 

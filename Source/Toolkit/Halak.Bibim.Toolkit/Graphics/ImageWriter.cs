@@ -16,6 +16,7 @@ namespace Halak.Bibim.Graphics
             writer.Write(asset.ClassID);
             writer.WriteBibimString(asset.TextureURI);
             writer.Write(asset.ClippingRectangle);
+            writer.Write((byte)asset.AppliedTransform);
         }
     }
 }

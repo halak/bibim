@@ -15,6 +15,21 @@ namespace Bibim
         return normalizedClippingRect;
     }
 
+    Image::Transform Image::GetAppliedTransform() const
+    {
+        return appliedTransform;
+    }
+
+    int Image::GetWidth() const
+    {
+        return width;
+    }
+
+    int Image::GetHeight() const
+    {
+        return height;
+    }
+
     Texture2D* Image::GetTexture() const
     {
         return texture;

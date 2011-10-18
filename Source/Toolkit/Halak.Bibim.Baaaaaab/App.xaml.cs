@@ -67,7 +67,7 @@ namespace Halak.Bibim.Bab
                     if (CommandLineArgs.ContainsKey("class"))
                         StartupUri = new Uri("ConsoleWindow.xaml", UriKind.Relative);
                     else
-                        StartupUri = new Uri("ConsoleSelectorWindow.xaml", UriKind.Relative);
+                        StartupUri = new Uri("CommandLineWindow.xaml", UriKind.Relative);
                 }
             }
 
