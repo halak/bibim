@@ -27,9 +27,10 @@ namespace Bibim
     {
         if (GetAutoResize() && GetImage())
         {
-            Rect clippingRect = GetImage()->GetClippingRect();
-            if (clippingRect.IsEmpty() == false)
-                return Vector2(clippingRect.Width, clippingRect.Height);
+            const int width = GetImage()->GetWidth();
+            const int height = GetImage()->GetHeight();
+            if (width != 0 && height != 0)
+                return Vector2(width, height);
         }
 
         return UIVisual::GetDesiredSize();

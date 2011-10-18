@@ -140,7 +140,7 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
             using (var bitmapSheet = BitmapSheet.Create(spriteBitmaps.Keys,
                                                         BitmapSheetSize.Width, BitmapSheetSize.Height,
                                                         BitmapSheetClusterSize.Width, BitmapSheetClusterSize.Height,
-                                                        true))
+                                                        BitmapSheet.Options.PowerOfTwoSize | BitmapSheet.Options.RotatableMerging))
             {
                 #region Texture File과 Asset을 저장합니다.
                 var textureFileToStream = new FileToStream();
@@ -197,6 +197,7 @@ namespace Halak.Bibim.Asset.Pipeline.Recipes
                     readImage.TextureURI = Path.Combine(context.Directory, Path.ChangeExtension((string)item.Sheet.Tag, null));
                     readImage.ClippingRectangle = new Rectangle(item.Bounds.X, item.Bounds.Y,
                                                                 item.Bounds.Width, item.Bounds.Height);
+                    readImage.AppliedTransform = item.AppliedTransform;
 
                     using (var fs = new FileStream(Path.Combine(context.BaseDirectory, context.Directory, Path.ChangeExtension(path, "asset")), FileMode.Create, FileAccess.Write))
                         GameAssetRecipe.Serialize(fs, imageRecipe);

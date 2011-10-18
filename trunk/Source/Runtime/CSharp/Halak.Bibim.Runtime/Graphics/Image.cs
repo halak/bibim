@@ -10,6 +10,16 @@ namespace Halak.Bibim.Graphics
     [ClassID('G', 'I', 'M', 'G')]
     public sealed class Image : GameAsset
     {
+        #region SimpleTransform (Nested Enum)
+        public enum Transform
+        {
+            Identity,
+            RotateCW90,
+            RotateCW180,
+            RotateCW270,
+        }
+        #endregion
+
         #region Fields
         #endregion
 
@@ -25,6 +35,12 @@ namespace Halak.Bibim.Graphics
             get;
             set;
         }
+
+        public Transform AppliedTransform
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
@@ -33,9 +49,15 @@ namespace Halak.Bibim.Graphics
         }
 
         public Image(string textureURI, Rectangle clippingRectangle)
+            : this(textureURI, clippingRectangle, Transform.Identity)
+        {
+        }
+
+        public Image(string textureURI, Rectangle clippingRectangle, Transform appliedTransform)
         {
             TextureURI = textureURI;
             ClippingRectangle = clippingRectangle;
+            AppliedTransform = appliedTransform;
         }
         #endregion
 

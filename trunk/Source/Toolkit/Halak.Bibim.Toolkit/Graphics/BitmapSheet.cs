@@ -19,13 +19,25 @@ namespace Halak.Bibim.Graphics
             public readonly Bitmap Sheet;
             public readonly Bitmap Source;
             public readonly Rectangle Bounds;
+            public readonly Image.Transform AppliedTransform;
 
-            public Element(Bitmap sheet, Bitmap source, Rectangle bounds)
+            public Element(Bitmap sheet, Bitmap source, Rectangle bounds, Image.Transform appliedTransform)
             {
                 Sheet = sheet;
                 Source = source;
                 Bounds = bounds;
+                AppliedTransform = appliedTransform;
             }
+        }
+        #endregion
+
+        #region Options (Nested Enum)
+        [Flags]
+        public enum Options
+        {
+            None,
+            PowerOfTwoSize = (1 << 0),
+            RotatableMerging = (1 << 1)
         }
         #endregion
 
@@ -75,20 +87,20 @@ namespace Halak.Bibim.Graphics
         #region Create (Methods)
         public static BitmapSheet Create(IEnumerable<Bitmap> input)
         {
-            return Create(input, 1024, 1024, 16, 16, false);
+            return Create(input, 1024, 1024, 16, 16, Options.None);
         }
 
-        public static BitmapSheet Create(IEnumerable<Bitmap> input, int maxWidth, int maxHeight, bool isPowerOfTwoSize)
+        public static BitmapSheet Create(IEnumerable<Bitmap> input, int maxWidth, int maxHeight, Options options)
         {
-            return Create(input, maxWidth, maxHeight, (maxWidth >= 16) ? 16 : 1, (maxHeight >= 16) ? 16 : 1, false);
+            return Create(input, maxWidth, maxHeight, (maxWidth >= 16) ? 16 : 1, (maxHeight >= 16) ? 16 : 1, options);
         }
 
-        public static BitmapSheet Create(IEnumerable<Bitmap> input, int maxWidth, int maxHeight, int clusterSize, bool isPowerOfTwoSize)
+        public static BitmapSheet Create(IEnumerable<Bitmap> input, int maxWidth, int maxHeight, int clusterSize, Options options)
         {
-            return Create(input, maxWidth, maxHeight, clusterSize, clusterSize, false);
+            return Create(input, maxWidth, maxHeight, clusterSize, clusterSize, options);
         }
 
-        public static BitmapSheet Create(IEnumerable<Bitmap> input, int maxWidth, int maxHeight, int clusterWidth, int clusterHeight, bool isPowerOfTwoSize)
+        public static BitmapSheet Create(IEnumerable<Bitmap> input, int maxWidth, int maxHeight, int clusterWidth, int clusterHeight, Options options)
         {
             if (input == null)
                 throw new ArgumentNullException("input");
@@ -98,7 +110,7 @@ namespace Halak.Bibim.Graphics
                 throw new ArgumentException("maxHeight");
 
             #region maxWidth/maxHeight를 2의 멱수로 맞춥니다.
-            if (isPowerOfTwoSize)
+            if (options.HasFlag(Options.PowerOfTwoSize))
             {
                 // maxWidth/maxHeight보다 작은 2의 멱수로 맞춥니다.
                 int mw = MathExtension.GetNearestPowerOfTwo(maxWidth);
@@ -124,7 +136,7 @@ namespace Halak.Bibim.Graphics
                 return (b.Width + b.Height).CompareTo(a.Width + a.Height);
             });
 
-            var items = new List<Tuple<int, Bitmap, Rectangle>>();
+            var items = new List<Tuple<int, Bitmap, Rectangle, Image.Transform>>();
             int margin = 1;
             var textureAtlases = new List<RectangleStorage>();
             #region 각각의 Bitmap들을 어떤 큰 Bitmap에 배치할지 결정합니다. (선작업)
@@ -135,7 +147,16 @@ namespace Halak.Bibim.Graphics
                 int ah = margin + item.Height + margin;
 
                 RectangleStorage atlas = null;
-                int index = textureAtlases.FindIndex((ta) => ta.CanAllocate(aw, ah));
+
+                int index = -1;
+                if (options.HasFlag(Options.RotatableMerging))
+                {
+                    // 병합할 때 변환 가능 Option이 설정되어 있으면 가로 세로를 바꾼 영역도 검색해봅니다.
+                    index = textureAtlases.FindIndex((ta) => ta.CanAllocate(aw, ah) || ta.CanAllocate(ah, aw));
+                }
+                else
+                    index = textureAtlases.FindIndex((ta) => ta.CanAllocate(aw, ah));
+
                 if (index != -1)
                     atlas = textureAtlases[index];
                 else
@@ -146,23 +167,32 @@ namespace Halak.Bibim.Graphics
                 }
 
                 Rectangle rectangle = atlas.Allocate(aw, ah);
+                Image.Transform appliedTransform = Image.Transform.Identity;
+                if (rectangle.IsEmpty)
+                {
+                    Debug.Assert(options.HasFlag(Options.RotatableMerging));
+                    rectangle = atlas.Allocate(ah, aw);
+                    appliedTransform = Image.Transform.RotateCW90;
+                }
+
                 Rectangle bitmapRectangle = Rectangle.FromLTRB(rectangle.Left + margin,
                                                                rectangle.Top + margin,
                                                                rectangle.Right - margin,
                                                                rectangle.Bottom - margin);
-                items.Add(Tuple.Create(index, item, bitmapRectangle));
+                items.Add(Tuple.Create(index, item, bitmapRectangle, appliedTransform));
             }
             #endregion
 
             var graphics = new GDIGraphics[textureAtlases.Count];
             var sheetBitmaps = new Bitmap[textureAtlases.Count];
             var elements = new List<Element>();
-            #region 입력된 작은 Bitmap들을 큰 Bitmap에 복사합니다.
+            #region 입력된 작은 Bitmap들을 큰 SheetBitmap에 복사합니다.
             foreach (var item in items)
             {
                 int sheetIndex = item.Item1;
                 Bitmap bitmap = item.Item2;
                 Rectangle rectangle = item.Item3;
+                Image.Transform appliedTransform = item.Item4;
 
                 if (sheetBitmaps[sheetIndex] == null)
                 {
@@ -171,7 +201,7 @@ namespace Halak.Bibim.Graphics
 
                     int w = bounds.Width;
                     int h = bounds.Height;
-                    if (isPowerOfTwoSize)
+                    if (options.HasFlag(Options.PowerOfTwoSize))
                     {
                         w = MathExtension.GetNearestPowerOfTwo(w);
                         h = MathExtension.GetNearestPowerOfTwo(h);
@@ -182,8 +212,23 @@ namespace Halak.Bibim.Graphics
                     graphics[sheetIndex].Clear(Color.Transparent);
                 }
 
-                graphics[sheetIndex].DrawImageUnscaled(bitmap, rectangle.X, rectangle.Y);
-                elements.Add(new Element(sheetBitmaps[sheetIndex], bitmap, rectangle));
+                switch (appliedTransform)
+                {
+                    case Image.Transform.Identity:
+                        graphics[sheetIndex].DrawImageUnscaled(bitmap, rectangle.X, rectangle.Y);
+                        break;
+                    case Image.Transform.RotateCW90:
+                        graphics[sheetIndex].TranslateTransform(+rectangle.X, +rectangle.Y);
+                        graphics[sheetIndex].RotateTransform(90.0f);
+                        graphics[sheetIndex].TranslateTransform(-rectangle.X, -rectangle.Y - rectangle.Width);
+                        graphics[sheetIndex].DrawImageUnscaled(bitmap, rectangle.X, rectangle.Y);
+                        graphics[sheetIndex].ResetTransform();
+                        break;
+                    default:
+                        throw new NotSupportedException();
+                }
+
+                elements.Add(new Element(sheetBitmaps[sheetIndex], bitmap, rectangle, appliedTransform));
             }
             #endregion
 

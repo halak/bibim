@@ -14,6 +14,13 @@
         {
             BBSerializableAssetClass(SourceTexture2D, Texture2D, 'G', 'I', 'M', 'G');
             public:
+                enum Transform
+                {
+                    Identity,
+                    RotateCW90,
+                };
+
+            public:
                 Image(const String& textureURI, const Rect& clippingRect);
                 Image(Texture2D* texture);
                 Image(Texture2D* texture, const Rect& clippingRect);
@@ -24,16 +31,22 @@
                 inline const String& GetTextureURI() const;
                 inline const Rect& GetClippingRect() const;
                 inline const RectF& GetNormalizedClippingRect() const;
+                inline Transform GetAppliedTransform() const;
+                inline int GetWidth() const;
+                inline int GetHeight() const;
                 inline Texture2D* GetTexture() const;
 
             private:
                 Image();
-                Image(const String& textureURI, const Rect& clippingRect, Texture2D* texture);
+                Image(const String& textureURI, const Rect& clippingRect, Transform appliedTransform, Texture2D* texture);
 
             private:
                 String textureURI;
                 Rect clippingRect;
                 RectF normalizedClippingRect;
+                Transform appliedTransform;
+                int width;
+                int height;
                 Texture2DPtr texture;
         };
     }
