@@ -49,5 +49,15 @@ namespace Halak.Bibim.Bab
 
             Settings.Default.Save();
         }
+
+        private void buttonCreateShortcut_Click(object sender, RoutedEventArgs e)
+        {
+            ToolTip tooltip = new ToolTip();
+            tooltip.Content = "AAAA";
+
+            textBoxShortcutName.ToolTip = tooltip;
+            tooltip.IsOpen = true;
+            ToolTipService.SetShowDuration(textBoxShortcutName, 1);
+        }
     }
 }

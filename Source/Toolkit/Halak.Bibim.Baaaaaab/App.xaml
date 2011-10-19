@@ -6,5 +6,7 @@
     <my:String x:Key="CommandLineWindow_Title">Bibimbaaaaaab 시작</my:String>
     <my:String x:Key="CommandLineWindow_Execute">실행</my:String>
     <my:String x:Key="CommandLineWindow_Startup">시작 명령을 입력하세요.</my:String>
+    <my:String x:Key="CommandLineWindow_CreateShortcut">바로가기 만들기</my:String>
+    <my:String x:Key="CommandLineWindow_CreateShortcutDescription">바로가기 파일 이름</my:String>
   </Application.Resources>
 </Application>
