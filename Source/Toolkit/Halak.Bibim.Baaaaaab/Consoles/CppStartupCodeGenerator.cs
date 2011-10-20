@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.IO;
 using System.Text;
-using Halak.Bibim.Toolkit;
+using Bibim.Toolkit;
 
-namespace Halak.Bibim.Bab.Consoles
+namespace Bibim.Bab.Consoles
 {
     [ConsoleEntryPoint]
     [Alias("CppStartup.cpp")]

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Halak.Bibim.Collections.Generic;
+using Bibim.Collections.Generic;
 
-namespace Halak.Bibim.Asset.Pipeline
+namespace Bibim.Asset.Pipeline
 {
     public sealed class CookingContext
     {

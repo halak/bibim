@@ -4,10 +4,10 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using Halak.Bibim.Graphics;
+using Bibim.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace Halak.Bibim.Asset.Pipeline.Recipes
+namespace Bibim.Asset.Pipeline.Recipes
 {
     public sealed class ReadImage : CookingNode<Image>
     {

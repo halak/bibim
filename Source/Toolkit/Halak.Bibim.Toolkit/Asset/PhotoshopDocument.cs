@@ -5,9 +5,9 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using Halak.Bibim.Reflection;
+using Bibim.Reflection;
 
-namespace Halak.Bibim.Asset
+namespace Bibim.Asset
 {   
     /// <summary>
     /// Adobe Photoshop Document (*.psd)를 나타내는 class 

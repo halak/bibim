@@ -4,7 +4,7 @@
 //using System.Windows.Forms;
 //using Microsoft.VisualStudio.DebuggerVisualizers;
 
-//namespace Halak.Bibim.Graphics
+//namespace Bibim.Graphics
 //{
 //    /// <summary>
 //    /// A Visualizer for ImageCookingTag.  

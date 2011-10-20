@@ -14,11 +14,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using Halak.Bibim.Bab.Consoles;
-using Halak.Bibim.Reflection;
-using Halak.Bibim.Toolkit;
+using Bibim.Bab.Consoles;
+using Bibim.Reflection;
+using Bibim.Toolkit;
 
-namespace Halak.Bibim.Bab
+namespace Bibim.Bab
 {
     /// <summary>
     /// Interaction logic for ConsoleWindow.xaml
@@ -47,8 +47,9 @@ namespace Halak.Bibim.Bab
             resources = new ResourceDictionary();
             resources.Source = new Uri("ConsoleResources.xaml", UriKind.Relative);
 
-            ((Paragraph)consoleTextBox.Document.Blocks.FirstBlock).LineHeight = 1;
-            Trace.Listeners.Add(new TraceListener(consoleTextBox));
+            Trace.Listeners.Add(new TraceListener(listBoxLogs));
+            Trace.TraceError("AAAAA");
+            Trace.TraceError("BBBB");
 
             string classname = null;
             if (App.CommandLineArgs.TryGetValue("class", out classname))
@@ -139,10 +140,6 @@ namespace Halak.Bibim.Bab
         #region Methods
         private void OnProgramEnded()
         {
-            if (checkBoxExit.IsChecked.HasValue && checkBoxExit.IsChecked.Value)
-                App.Current.Shutdown();
-
-            consoleTextBox.Background = (Brush)resources["ProgramCompletedBrush"];
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
@@ -172,25 +169,47 @@ namespace Halak.Bibim.Bab
         #endregion
 
         #region TraceListener (Nested Class)
-        private class TraceListener : System.Diagnostics.TraceListener
+        private class TraceListener : System.Diagnostics.TraceListener, Bibim.Diagnostics.IExtendedTraceListenable
         {
             #region Fields
-            private RichTextBox richTextBox;
+            private ListBox listBox;
             #endregion
 
             #region Constructor
-            public TraceListener(RichTextBox richTextBox)
+            public TraceListener(ListBox listBox)
             {
-                this.richTextBox = richTextBox;
+                this.listBox = listBox;
             }
             #endregion
 
             #region Write Methods
+            public void TraceObject(object key, string message, object obj)
+            {
+            }
+
             public override void Write(string message)
             {
-                richTextBox.Dispatcher.Invoke(new Action(()=>
+                listBox.Dispatcher.Invoke(new Action(() =>
                 {
-                    richTextBox.AppendText(message);
+                    int index = listBox.Items.Count - 1;
+                    if (index >= 0)
+                    {
+                        object value = ((ListBoxItem)listBox.Items[index]).Content;
+                        if (value is string)
+                            ((ListBoxItem)listBox.Items[index]).Content = (string)value + message;
+                        else if (value is TextBlock)
+                            ((TextBlock)value).Text += value;
+                        else if (value is Label)
+                            ((Label)value).Content += (string)((Label)value).Content + message;
+                        else if (value is StackPanel)
+                            ((StackPanel)value).Children.Add(new TextBlock() { Text = message });
+                        else
+                            throw new InvalidOperationException();
+                    }
+                    else
+                    {
+                        listBox.Items.Add(new ListBoxItem() { Content = message });
+                    }
                 }));
 
                 System.Threading.Thread.Sleep(1);
@@ -198,12 +217,10 @@ namespace Halak.Bibim.Bab
 
             public override void WriteLine(string message)
             {
-                message += "\n";
-
-                richTextBox.Dispatcher.Invoke(new Action(() =>
+                listBox.Dispatcher.Invoke(new Action(() =>
                 {
-                    richTextBox.AppendText(message);
-                    richTextBox.ScrollToEnd();
+                    listBox.Items.Add(new ListBoxItem() { Content = message });
+                    listBox.ScrollIntoView(listBox.Items[listBox.Items.Count - 1]);
                 }));
 
                 System.Threading.Thread.Sleep(1);

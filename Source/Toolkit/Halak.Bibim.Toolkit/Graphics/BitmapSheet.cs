@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using GDIGraphics = System.Drawing.Graphics;
 
-namespace Halak.Bibim.Graphics
+namespace Bibim.Graphics
 {
     public sealed class BitmapSheet : IDisposable
     {

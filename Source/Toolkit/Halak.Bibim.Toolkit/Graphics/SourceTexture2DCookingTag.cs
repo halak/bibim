@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
 
-namespace Halak.Bibim.Graphics
+namespace Bibim.Graphics
 {
     public sealed class SourceTexture2DCookingTag
     {

@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 
-namespace Halak.Bibim.Asset
+namespace Bibim.Asset
 {
     public sealed partial class PhotoshopDocument
     {

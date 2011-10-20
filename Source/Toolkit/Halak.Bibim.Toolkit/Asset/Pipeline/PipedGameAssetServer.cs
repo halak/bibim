@@ -5,10 +5,10 @@ using System.IO;
 using System.IO.Pipes;
 using System.Text;
 using System.Threading;
-using Halak.Bibim;
-using Halak.Bibim.IO;
+using Bibim;
+using Bibim.IO;
 
-namespace Halak.Bibim.Asset.Pipeline
+namespace Bibim.Asset.Pipeline
 {
     [ClassID('P', 'A', 'S', 'S')]
     public sealed class PipedGameAssetServer : GameAssetServer
@@ -167,7 +167,7 @@ namespace Halak.Bibim.Asset.Pipeline
                                                                                           {
                                                                                               stream.EndWrite(r);
                                                                                           }
-                                                                                          catch (Exception e) { }
+                                                                                          catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
 
                                                                                           stream.Disconnect();
                                                                                           stream.Dispose();

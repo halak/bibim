@@ -4,11 +4,11 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using Halak.Bibim.Reflection;
+using Bibim.Reflection;
 
-namespace Halak.Bibim.Asset.Pipeline
+namespace Bibim.Asset.Pipeline
 {
-    [XmlRoot("Halak.BibimAssetRecipe")]
+    [XmlRoot("BibimAssetRecipe")]
     public sealed class GameAssetRecipe
     {
         #region Fields

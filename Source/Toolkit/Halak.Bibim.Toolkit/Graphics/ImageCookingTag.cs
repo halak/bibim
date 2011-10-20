@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 
-namespace Halak.Bibim.Graphics
+namespace Bibim.Graphics
 {
     [Serializable]
     //[DebuggerVisualizer(typeof(ImageCookingTagDebuggerVisualizer))]

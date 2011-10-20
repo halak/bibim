@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Halak.Bibim.IO;
+using Bibim.IO;
 
-namespace Halak.Bibim.Scripting.Statements
+namespace Bibim.Scripting.Statements
 {
     public sealed class CallScriptFunction : CallBase
     {

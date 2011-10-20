@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Halak.Bibim.Asset;
-using Halak.Bibim.IO;
+using Bibim.Asset;
+using Bibim.IO;
 using Microsoft.Xna.Framework;
 
-namespace Halak.Bibim.Typography
+namespace Bibim.Typography
 {
     [GameAssetWriter(typeof(Font))]
     public sealed class FontWriter : GameAssetWriter<Font>

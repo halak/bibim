@@ -5,10 +5,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Halak.Bibim.Reflection;
-using Halak.Bibim.Scripting.Statements;
+using Bibim.Reflection;
+using Bibim.Scripting.Statements;
 
-namespace Halak.Bibim.Scripting
+namespace Bibim.Scripting
 {
     public class ScriptCompiler
     {

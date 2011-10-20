@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Text;
 
-namespace Halak.Bibim
+namespace Bibim
 {
     public sealed class RectangleStorage
     {

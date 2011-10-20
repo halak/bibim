@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Halak.Bibim.Bab
+namespace Bibim.Bab
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -21,6 +21,13 @@ namespace Halak.Bibim.Bab
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            App.Current.Shutdown();
         }
     }
 }

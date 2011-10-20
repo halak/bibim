@@ -5,9 +5,9 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Halak.Bibim.Toolkit;
+using Bibim.Toolkit;
 
-namespace Halak.Bibim.Bab.Consoles
+namespace Bibim.Bab.Consoles
 {
     [ConsoleEntryPoint]
     [Alias("cppfull.h")]
@@ -47,7 +47,7 @@ namespace Halak.Bibim.Bab.Consoles
                 w.WriteLine(definition);
                 w.WriteLine();
                 w.WriteLine("   // This file was \"AUTOMATICALLY GENERATED\" by Bibim Console ({0})", DateTime.Now.ToString(new CultureInfo("en-us")));
-                w.WriteLine(@"   // > Halak.Bibim.Baaaaaab.exe \class:cppfull.h \proj:[Project-Name] \src:[Source-Directory] \dest:[Header-File]");
+                w.WriteLine(@"   // > Bibim.Baaaaaab.exe \class:cppfull.h \proj:[Project-Name] \src:[Source-Directory] \dest:[Header-File]");
                 w.WriteLine();
 
                 string lastCategory = string.Empty;

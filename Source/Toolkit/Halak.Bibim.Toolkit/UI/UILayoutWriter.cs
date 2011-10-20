@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Halak.Bibim.Asset;
-using Halak.Bibim.Graphics;
-using Halak.Bibim.IO;
-using Halak.Bibim.UI.Frames;
-using Halak.Bibim.UI.Visuals;
+using Bibim.Asset;
+using Bibim.Graphics;
+using Bibim.IO;
+using Bibim.UI.Frames;
+using Bibim.UI.Visuals;
 
-namespace Halak.Bibim.UI
+namespace Bibim.UI
 {
     [GameAssetWriter(typeof(UILayout))]
     public sealed class UILayoutWriter : GameAssetWriter<UILayout>
