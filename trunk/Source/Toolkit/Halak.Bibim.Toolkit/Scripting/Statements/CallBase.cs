@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Halak.Bibim.Reflection;
+using Bibim.Reflection;
 
-namespace Halak.Bibim.Scripting.Statements
+namespace Bibim.Scripting.Statements
 {
     public abstract class CallBase : Expression
     {

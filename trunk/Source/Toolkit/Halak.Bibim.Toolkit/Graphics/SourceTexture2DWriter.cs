@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Halak.Bibim.Asset;
+using Bibim.Asset;
 
-namespace Halak.Bibim.Graphics
+namespace Bibim.Graphics
 {
     [GameAssetWriter(typeof(SourceTexture2D))]
     public sealed class SourceTexture2DWriter : GameAssetWriter<SourceTexture2D>

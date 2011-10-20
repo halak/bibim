@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace Halak.Bibim.Collections.Generic
+namespace Bibim.Collections.Generic
 {
     /// <summary>
     /// 

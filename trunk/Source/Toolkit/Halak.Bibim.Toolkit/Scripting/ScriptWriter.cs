@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using Halak.Bibim.Asset;
-using Halak.Bibim.IO;
+using Bibim.Asset;
+using Bibim.IO;
 
-namespace Halak.Bibim.Scripting
+namespace Bibim.Scripting
 {
     [GameAssetWriter(typeof(Script))]
     public sealed class ScriptWriter : GameAssetWriter<Script>

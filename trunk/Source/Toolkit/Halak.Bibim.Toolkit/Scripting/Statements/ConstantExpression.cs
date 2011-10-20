@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Halak.Bibim.IO;
+using Bibim.IO;
 
-namespace Halak.Bibim.Scripting.Statements
+namespace Bibim.Scripting.Statements
 {
     public sealed class ConstantExpression : Expression
     {

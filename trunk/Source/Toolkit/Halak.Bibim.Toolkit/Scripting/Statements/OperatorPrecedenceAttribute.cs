@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Halak.Bibim.Scripting.Statements
+namespace Bibim.Scripting.Statements
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public sealed class OperatorPrecedenceAttribute : Attribute

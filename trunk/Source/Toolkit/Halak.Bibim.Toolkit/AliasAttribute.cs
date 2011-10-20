@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace Halak.Bibim.Toolkit
+namespace Bibim.Toolkit
 {
     [AttributeUsage(AttributeTargets.Module |
                     AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Enum |

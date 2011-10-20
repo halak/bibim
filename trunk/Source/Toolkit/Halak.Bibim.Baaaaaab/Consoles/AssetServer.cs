@@ -10,14 +10,14 @@ using System.Text;
 using System.Threading;
 using System.Xml;
 using System.Xml.Serialization;
-using Halak.Bibim;
-using Halak.Bibim.Asset;
-using Halak.Bibim.Asset.Pipeline;
-using Halak.Bibim.Asset.Pipeline.Recipes;
-using Halak.Bibim.IO;
-using Halak.Bibim.Toolkit;
+using Bibim;
+using Bibim.Asset;
+using Bibim.Asset.Pipeline;
+using Bibim.Asset.Pipeline.Recipes;
+using Bibim.IO;
+using Bibim.Toolkit;
 
-namespace Halak.Bibim.Bab.Consoles
+namespace Bibim.Bab.Consoles
 {
     [ConsoleEntryPoint]
     [Alias("assetsvr")]

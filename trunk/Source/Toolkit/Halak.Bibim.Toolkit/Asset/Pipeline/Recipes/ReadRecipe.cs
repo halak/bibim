@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Halak.Bibim.Asset.Pipeline.Recipes
+namespace Bibim.Asset.Pipeline.Recipes
 {
     public sealed class ReadRecipe : CookingNode<object>
     {

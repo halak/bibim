@@ -7,7 +7,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Xml.Schema;
 
-namespace Halak.Bibim.Asset.Pipeline.Recipes
+namespace Bibim.Asset.Pipeline.Recipes
 {
     public sealed class ImportBitmap : CookingNode<Bitmap>
     {

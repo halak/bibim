@@ -7,13 +7,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
-using Halak.Bibim.Graphics;
-using Halak.Bibim.UI;
-using Halak.Bibim.UI.Frames;
-using Halak.Bibim.UI.Visuals;
+using Bibim.Graphics;
+using Bibim.UI;
+using Bibim.UI.Frames;
+using Bibim.UI.Visuals;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
-namespace Halak.Bibim.Asset.Pipeline.Recipes
+namespace Bibim.Asset.Pipeline.Recipes
 {
     public sealed class ExportUILayoutAssets : CookingNode<UILayout>
     {

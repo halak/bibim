@@ -1,4 +1,4 @@
-﻿namespace Halak.Bibim.Graphics
+﻿namespace Bibim.Graphics
 {
     partial class ImageViewForm
     {
@@ -88,7 +88,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Halak.Bibim.DesignResources.Transparent;
+            this.BackgroundImage = global::Bibim.DesignResources.Transparent;
             this.ClientSize = new System.Drawing.Size(655, 395);
             this.Controls.Add(this.labelDescription);
             this.Controls.Add(this.pictureBoxMain);

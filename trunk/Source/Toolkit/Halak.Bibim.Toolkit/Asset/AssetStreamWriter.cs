@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Halak.Bibim.IO;
+using Bibim.IO;
 
-namespace Halak.Bibim.Asset
+namespace Bibim.Asset
 {
     public sealed class AssetStreamWriter : BinaryWriter
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace Halak.Bibim.Scripting.Statements
+namespace Bibim.Scripting.Statements
 {
     public class Block : Statement
     {

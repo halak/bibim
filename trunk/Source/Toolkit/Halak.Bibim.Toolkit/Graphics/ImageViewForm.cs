@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using GDIImage = System.Drawing.Image;
 
-namespace Halak.Bibim.Graphics
+namespace Bibim.Graphics
 {
     public partial class ImageViewForm : Form
     {

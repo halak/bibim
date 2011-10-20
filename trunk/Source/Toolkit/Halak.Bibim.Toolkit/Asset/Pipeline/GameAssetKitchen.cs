@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Text;
 
-namespace Halak.Bibim.Asset.Pipeline
+namespace Bibim.Asset.Pipeline
 {
     [ClassID('A', 'S', 'K', 'C')]
     public sealed class GameAssetKitchen : GameModule

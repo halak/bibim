@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Halak.Bibim.Asset;
-using Halak.Bibim.Asset.Pipeline;
-using Halak.Bibim.IO;
+using Bibim.Asset;
+using Bibim.Asset.Pipeline;
+using Bibim.IO;
 
-namespace Halak.Bibim.Graphics
+namespace Bibim.Graphics
 {
     [GameAssetWriter(typeof(Image))]
     public sealed class ImageWriter : GameAssetWriter<Image>

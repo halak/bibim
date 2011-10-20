@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Halak.Bibim.Reflection;
+using Bibim.Reflection;
 
-namespace Halak.Bibim.Asset
+namespace Bibim.Asset
 {
     public abstract class GameAssetWriter
     {

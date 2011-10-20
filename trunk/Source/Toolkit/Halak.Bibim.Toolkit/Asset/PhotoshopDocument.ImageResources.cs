@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace Halak.Bibim.Asset
+namespace Bibim.Asset
 {
     public sealed partial class PhotoshopDocument
     {

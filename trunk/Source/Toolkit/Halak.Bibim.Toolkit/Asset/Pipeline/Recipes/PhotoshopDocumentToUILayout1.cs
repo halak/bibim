@@ -6,14 +6,14 @@ using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
-using Halak.Bibim.Graphics;
-using Halak.Bibim.UI;
-using Halak.Bibim.UI.Frames;
-using Halak.Bibim.UI.Visuals;
-using Image = Halak.Bibim.Graphics.Image;
+using Bibim.Graphics;
+using Bibim.UI;
+using Bibim.UI.Frames;
+using Bibim.UI.Visuals;
+using Image = Bibim.Graphics.Image;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
-namespace Halak.Bibim.Asset.Pipeline.Recipes
+namespace Bibim.Asset.Pipeline.Recipes
 {
     public class PhotoshopDocumentToUILayout1 : CookingNode<UILayout>
     {

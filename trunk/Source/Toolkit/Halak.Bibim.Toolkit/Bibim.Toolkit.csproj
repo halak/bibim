@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Halak.Bibim</RootNamespace>
-    <AssemblyName>Halak.Bibim.Toolkit</AssemblyName>
+    <RootNamespace>Bibim</RootNamespace>
+    <AssemblyName>Bibim.Toolkit</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
@@ -128,6 +128,9 @@
       <DependentUpon>DesignResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Design\PluginManager.cs" />
+    <Compile Include="Diagnostics\DebugExtension.cs" />
+    <Compile Include="Diagnostics\IExtendedTraceListenable.cs" />
+    <Compile Include="Diagnostics\TraceExtension.cs" />
     <Compile Include="Graphics\BitmapSheet.cs" />
     <Compile Include="Graphics\ImageCookingTagDebuggerVisualizer.cs" />
     <Compile Include="Graphics\ImageCookingTag.cs" />
@@ -176,12 +179,6 @@
     <Compile Include="Scripting\Statements\Yield.cs" />
     <Compile Include="Typography\FontWriter.cs" />
     <Compile Include="UI\UILayoutWriter.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Runtime\CSharp\Halak.Bibim.Runtime\Halak.Bibim.Runtime for Windows.csproj">
-      <Project>{557C1E3F-0E92-4D23-AA07-7A0650B5682F}</Project>
-      <Name>Halak.Bibim.Runtime for Windows</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DesignResources.resx">

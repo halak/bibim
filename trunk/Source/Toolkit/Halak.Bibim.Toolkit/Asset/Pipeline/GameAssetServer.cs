@@ -5,9 +5,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading;
-using Halak.Bibim.IO;
+using Bibim.IO;
 
-namespace Halak.Bibim.Asset.Pipeline
+namespace Bibim.Asset.Pipeline
 {
     public abstract class GameAssetServer : GameModule
     {

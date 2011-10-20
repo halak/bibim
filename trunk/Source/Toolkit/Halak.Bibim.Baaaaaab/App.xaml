@@ -1,12 +1,7 @@
-﻿<Application x:Class="Halak.Bibim.Bab.App"
+﻿<Application x:Class="Bibim.Bab.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="CommandLineWindow.xaml" xmlns:my="clr-namespace:System;assembly=mscorlib">
+             StartupUri="MainWindow.xaml" xmlns:my="clr-namespace:System;assembly=mscorlib" ShutdownMode="OnExplicitShutdown">
     <Application.Resources>
-    <my:String x:Key="CommandLineWindow_Title">Bibimbaaaaaab 시작</my:String>
-    <my:String x:Key="CommandLineWindow_Execute">실행</my:String>
-    <my:String x:Key="CommandLineWindow_Startup">시작 명령을 입력하세요.</my:String>
-    <my:String x:Key="CommandLineWindow_CreateShortcut">바로가기 만들기</my:String>
-    <my:String x:Key="CommandLineWindow_CreateShortcutDescription">바로가기 파일 이름</my:String>
   </Application.Resources>
 </Application>

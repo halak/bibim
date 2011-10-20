@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Halak.Bibim.Asset;
-using Halak.Bibim.Asset.Pipeline;
-using Halak.Bibim.Asset.Pipeline.Recipes;
-using Halak.Bibim.Scripting;
-using Halak.Bibim.Scripting.Statements;
-using Halak.Bibim.Scripting.Statements.Operators;
-using Halak.Bibim.Toolkit;
+using Bibim.Asset;
+using Bibim.Asset.Pipeline;
+using Bibim.Asset.Pipeline.Recipes;
+using Bibim.Scripting;
+using Bibim.Scripting.Statements;
+using Bibim.Scripting.Statements.Operators;
+using Bibim.Toolkit;
 
-namespace Halak.Bibim.Bab.Consoles
+namespace Bibim.Bab.Consoles
 {
     [ConsoleEntryPoint]
     [Alias("script")]
