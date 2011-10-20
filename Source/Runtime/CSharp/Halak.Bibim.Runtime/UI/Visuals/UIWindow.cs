@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Halak.Bibim.UI.Visuals
+namespace Bibim.UI.Visuals
 {
     [ClassID('U', 'W', 'N', 'D')]
     public class UIWindow : UIPanel

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim.UI.Frames
+namespace Bibim.UI.Frames
 {
     public abstract class UIFrame : UIElement
     {

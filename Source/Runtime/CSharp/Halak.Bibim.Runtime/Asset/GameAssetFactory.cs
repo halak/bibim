@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim.Asset
+namespace Bibim.Asset
 {
     public static class GameAssetFactory
     {

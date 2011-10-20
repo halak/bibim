@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim.UI.Visuals
+namespace Bibim.UI.Visuals
 {
     [ClassID('U', 'V', 'D', 'O')]
     public sealed class UIVideo : UIVisual

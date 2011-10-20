@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Halak.Bibim.Asset;
-using Halak.Bibim.UI.Visuals;
+using Bibim.Asset;
+using Bibim.UI.Visuals;
 
-namespace Halak.Bibim.UI
+namespace Bibim.UI
 {
     [ClassID('U', 'I', 'L', 'T')]
     public sealed class UILayout : GameAsset

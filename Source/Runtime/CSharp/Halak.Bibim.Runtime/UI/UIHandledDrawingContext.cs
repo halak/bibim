@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim.UI
+namespace Bibim.UI
 {
     public sealed class UIHandledDrawingContext : UIDrawingContext
     {

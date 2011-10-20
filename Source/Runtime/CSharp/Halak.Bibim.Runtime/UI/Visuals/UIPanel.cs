@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Halak.Bibim.UI.Visuals
+namespace Bibim.UI.Visuals
 {
     [ClassID('U', 'P', 'N', 'L')]
     public class UIPanel : UIVisual

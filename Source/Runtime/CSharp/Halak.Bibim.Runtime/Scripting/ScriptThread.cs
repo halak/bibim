@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim.Scripting
+namespace Bibim.Scripting
 {
     public sealed class ScriptThread
     {

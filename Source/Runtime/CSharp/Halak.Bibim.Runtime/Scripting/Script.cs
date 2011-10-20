@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
-using Halak.Bibim.Asset;
+using Bibim.Asset;
 
-namespace Halak.Bibim.Scripting
+namespace Bibim.Scripting
 {
     [ClassID('S', 'C', 'R', 'T')]
     public sealed class Script : GameAsset

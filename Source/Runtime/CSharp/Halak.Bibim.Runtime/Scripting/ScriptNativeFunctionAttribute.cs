@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Halak.Bibim.Reflection;
+using Bibim.Reflection;
 
-namespace Halak.Bibim.Scripting
+namespace Bibim.Scripting
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public sealed class ScriptNativeFunctionAttribute : Attribute

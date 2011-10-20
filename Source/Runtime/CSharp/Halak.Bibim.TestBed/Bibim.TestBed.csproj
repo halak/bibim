@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Halak.Bibim.TestBed</RootNamespace>
-    <AssemblyName>Halak.Bibim.TestBed</AssemblyName>
+    <RootNamespace>Bibim.TestBed</RootNamespace>
+    <AssemblyName>Bibim.TestBed</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
@@ -116,13 +116,9 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Halak.Bibim.Runtime\Halak.Bibim.Runtime for Windows.csproj">
-      <Project>{557C1E3F-0E92-4D23-AA07-7A0650B5682F}</Project>
-      <Name>Halak.Bibim.Runtime for Windows</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Halak.Bibim.TestBedContent\Halak.Bibim.TestBedContent.contentproj">
+    <ProjectReference Include="..\Halak.Bibim.TestBedContent\Bibim.TestBedContent.contentproj">
       <Project>{D975F912-25F0-4081-A323-5A432039D7E7}</Project>
-      <Name>Halak.Bibim.TestBedContent %28Content%29</Name>
+      <Name>Bibim.TestBedContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
     </ProjectReference>
   </ItemGroup>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Halak.Bibim.UI.Frames
+namespace Bibim.UI.Frames
 {
     [ClassID('U', 'F', 'X', 'F')]
     public sealed class UIFixedFrame : UIFrame

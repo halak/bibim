@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim.UI.Transforms
+namespace Bibim.UI.Transforms
 {
     public abstract class UITransform : UIElement
     {

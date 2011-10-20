@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim.UI.Visuals
+namespace Bibim.UI.Visuals
 {
     [ClassID('U', 'C', 'B', 'X')]
     public class UICheckBox : UIButton

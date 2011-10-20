@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Halak.Bibim.Graphics;
+using Bibim.Graphics;
 
-namespace Halak.Bibim.UI.Visuals
+namespace Bibim.UI.Visuals
 {
     [ClassID('U', 'S', 'P', 'R')]
     public sealed class UISprite : UIVisual

@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Halak.Bibim.IO
+namespace Bibim.IO
 {
     public static class BinaryWriterExtension
     {

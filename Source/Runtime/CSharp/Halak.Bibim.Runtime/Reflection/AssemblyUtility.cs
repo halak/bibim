@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace Halak.Bibim.Reflection
+namespace Bibim.Reflection
 {
     public static class AssemblyUtility
     {

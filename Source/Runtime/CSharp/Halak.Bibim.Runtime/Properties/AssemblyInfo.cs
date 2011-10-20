@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Halak.Bibim.Runtime")]
+[assembly: AssemblyTitle("Bibim.Runtime")]
 [assembly: AssemblyProduct("Bibim")]
-[assembly: AssemblyDescription("Halak Bibim Runtime Library")]
+[assembly: AssemblyDescription("Bibim Runtime Library")]
 [assembly: AssemblyCompany("Halak")]
 [assembly: AssemblyCopyright("Copyright © Halak 2011")]
 [assembly: AssemblyTrademark("")]

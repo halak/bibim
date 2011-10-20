@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Halak.Bibim.Asset;
+using Bibim.Asset;
 
-namespace Halak.Bibim.Graphics
+namespace Bibim.Graphics
 {
     public abstract class Texture2D : GameAsset
     {

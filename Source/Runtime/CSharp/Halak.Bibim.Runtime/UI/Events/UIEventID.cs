@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim.UI.Events
+namespace Bibim.UI.Events
 {
     public struct UIEventID
     {

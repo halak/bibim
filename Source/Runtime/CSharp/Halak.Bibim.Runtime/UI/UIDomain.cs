@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim.UI
+namespace Bibim.UI
 {
     [ClassID('U', 'I', 'D', 'M')]
     public abstract class UIDomain : GameModule
