@@ -192,6 +192,12 @@
   <ItemGroup>
     <None Include="Resources\Transparent.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Runtime\CSharp\Bibim.Runtime\Bibim.Runtime for Windows.csproj">
+      <Project>{557C1E3F-0E92-4D23-AA07-7A0650B5682F}</Project>
+      <Name>Bibim.Runtime for Windows</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

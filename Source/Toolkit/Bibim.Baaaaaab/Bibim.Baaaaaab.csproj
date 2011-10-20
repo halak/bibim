@@ -208,11 +208,11 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Runtime\CSharp\Halak.Bibim.Runtime\Bibim.Runtime for Windows.csproj">
+    <ProjectReference Include="..\..\Runtime\CSharp\Bibim.Runtime\Bibim.Runtime for Windows.csproj">
       <Project>{557C1E3F-0E92-4D23-AA07-7A0650B5682F}</Project>
       <Name>Bibim.Runtime for Windows</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Halak.Bibim.Toolkit\Bibim.Toolkit.csproj">
+    <ProjectReference Include="..\Bibim.Toolkit\Bibim.Toolkit.csproj">
       <Project>{2E731BA3-4E48-4245-BD3F-718E1B649545}</Project>
       <Name>Bibim.Toolkit</Name>
     </ProjectReference>
