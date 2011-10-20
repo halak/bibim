@@ -50,6 +50,10 @@ namespace Bibim.Bab
             Trace.Listeners.Add(new TraceListener(listBoxLogs));
             Trace.TraceError("AAAAA");
             Trace.TraceError("BBBB");
+            Trace.TraceInformation("QQQQQ");
+            Trace.TraceWarning("XXXXXX");
+            Trace.Fail("AAAFFF");
+            TraceSource s = new TraceSource("A");
 
             string classname = null;
             if (App.CommandLineArgs.TryGetValue("class", out classname))
@@ -182,7 +186,42 @@ namespace Bibim.Bab
             }
             #endregion
 
-            #region Write Methods
+            #region Methods
+            public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id)
+            {
+                base.TraceEvent(eventCache, source, eventType, id);
+            }
+
+            public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string format, params object[] args)
+            {
+                base.TraceEvent(eventCache, source, eventType, id, format, args);
+            }
+
+            public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string message)
+            {
+                base.TraceEvent(eventCache, source, eventType, id, message);
+            }
+
+            public override void TraceData(TraceEventCache eventCache, string source, TraceEventType eventType, int id, object data)
+            {
+                base.TraceData(eventCache, source, eventType, id, data);
+            }
+            public override void TraceData(TraceEventCache eventCache, string source, TraceEventType eventType, int id, params object[] data)
+            {
+                base.TraceData(eventCache, source, eventType, id, data);
+            }
+            public override void TraceTransfer(TraceEventCache eventCache, string source, int id, string message, Guid relatedActivityId)
+            {
+                base.TraceTransfer(eventCache, source, id, message, relatedActivityId);
+            }
+            public override void Fail(string message)
+            {
+                base.Fail(message);
+            }
+            public override void Fail(string message, string detailMessage)
+            {
+                base.Fail(message, detailMessage);
+            }
             public void TraceObject(object key, string message, object obj)
             {
             }

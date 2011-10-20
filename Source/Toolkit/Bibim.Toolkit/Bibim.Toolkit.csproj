@@ -128,9 +128,6 @@
       <DependentUpon>DesignResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Design\PluginManager.cs" />
-    <Compile Include="Diagnostics\DebugExtension.cs" />
-    <Compile Include="Diagnostics\IExtendedTraceListenable.cs" />
-    <Compile Include="Diagnostics\TraceExtension.cs" />
     <Compile Include="Graphics\BitmapSheet.cs" />
     <Compile Include="Graphics\ImageCookingTagDebuggerVisualizer.cs" />
     <Compile Include="Graphics\ImageCookingTag.cs" />
