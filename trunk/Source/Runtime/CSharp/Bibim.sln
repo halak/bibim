@@ -1,7 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bibim.Runtime for Windows", "Bibim.Runtime\Bibim.Runtime for Windows.csproj", "{557C1E3F-0E92-4D23-AA07-7A0650B5682F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bibim.TestBed", "Bibim.TestBed\Bibim.TestBed.csproj", "{4F0C86C5-88B6-4100-B4A5-A275144C72AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bibim.TestBedContent", "Bibim.TestBedContent\Bibim.TestBedContent.contentproj", "{D975F912-25F0-4081-A323-5A432039D7E7}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{557C1E3F-0E92-4D23-AA07-7A0650B5682F}.Debug|x86.ActiveCfg = Debug|x86
+		{557C1E3F-0E92-4D23-AA07-7A0650B5682F}.Debug|x86.Build.0 = Debug|x86
+		{557C1E3F-0E92-4D23-AA07-7A0650B5682F}.Release|x86.ActiveCfg = Release|x86
+		{557C1E3F-0E92-4D23-AA07-7A0650B5682F}.Release|x86.Build.0 = Release|x86
+		{4F0C86C5-88B6-4100-B4A5-A275144C72AC}.Debug|x86.ActiveCfg = Debug|x86
+		{4F0C86C5-88B6-4100-B4A5-A275144C72AC}.Debug|x86.Build.0 = Debug|x86
+		{4F0C86C5-88B6-4100-B4A5-A275144C72AC}.Release|x86.ActiveCfg = Release|x86
+		{4F0C86C5-88B6-4100-B4A5-A275144C72AC}.Release|x86.Build.0 = Release|x86
+		{D975F912-25F0-4081-A323-5A432039D7E7}.Debug|x86.ActiveCfg = Debug|x86
+		{D975F912-25F0-4081-A323-5A432039D7E7}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
