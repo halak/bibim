@@ -116,6 +116,10 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bibim.Runtime\Bibim.Runtime for Windows.csproj">
+      <Project>{557C1E3F-0E92-4D23-AA07-7A0650B5682F}</Project>
+      <Name>Bibim.Runtime for Windows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Halak.Bibim.TestBedContent\Bibim.TestBedContent.contentproj">
       <Project>{D975F912-25F0-4081-A323-5A432039D7E7}</Project>
       <Name>Bibim.TestBedContent %28Content%29</Name>
