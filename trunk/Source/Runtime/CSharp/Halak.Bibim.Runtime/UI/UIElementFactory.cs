@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Text;
-using Halak.Bibim.Reflection;
+using Bibim.Reflection;
 
-namespace Halak.Bibim.UI
+namespace Bibim.UI
 {
     public static class UIElementFactory
     {

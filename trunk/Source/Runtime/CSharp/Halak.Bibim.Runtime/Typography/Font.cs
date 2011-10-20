@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Halak.Bibim.Asset;
+using Bibim.Asset;
 using Microsoft.Xna.Framework;
 
-namespace Halak.Bibim.Typography
+namespace Bibim.Typography
 {
     [ClassID('F', 'O', 'N', 'T')]
     public sealed class Font : GameAsset

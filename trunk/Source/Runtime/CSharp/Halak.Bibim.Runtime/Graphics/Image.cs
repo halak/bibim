@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Halak.Bibim.Asset;
+using Bibim.Asset;
 
-namespace Halak.Bibim.Graphics
+namespace Bibim.Graphics
 {
     [ClassID('G', 'I', 'M', 'G')]
     public sealed class Image : GameAsset

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Halak.Bibim.IO
+namespace Bibim.IO
 {
     public static class BinaryReaderExtension
     {

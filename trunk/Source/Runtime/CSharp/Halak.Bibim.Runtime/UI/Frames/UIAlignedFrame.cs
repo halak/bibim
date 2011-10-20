@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Halak.Bibim.UI.Frames
+namespace Bibim.UI.Frames
 {
     [ClassID('U', 'A', 'L', 'F')]
     public sealed class UIAlignedFrame : UIFrame
@@ -90,6 +90,12 @@ namespace Halak.Bibim.UI.Frames
         #endregion
 
         #region Methods
+        public void ComputeBounds()
+        {
+            if (boundsChanged)
+            {
+            }
+        }
         #endregion
     }
 }

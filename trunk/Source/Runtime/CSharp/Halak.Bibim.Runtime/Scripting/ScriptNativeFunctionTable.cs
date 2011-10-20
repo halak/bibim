@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Reflection;
-using Halak.Bibim.Reflection;
+using Bibim.Reflection;
 
-namespace Halak.Bibim.Scripting
+namespace Bibim.Scripting
 {
     public static class ScriptNativeFunctionTable
     {

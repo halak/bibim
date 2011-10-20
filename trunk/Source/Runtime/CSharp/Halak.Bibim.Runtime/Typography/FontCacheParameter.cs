@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim.Typography
+namespace Bibim.Typography
 {
     public struct FontCacheParameter
     {

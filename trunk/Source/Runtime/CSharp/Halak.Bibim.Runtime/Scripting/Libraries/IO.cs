@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Halak.Bibim.Scripting.Libraries
+namespace Bibim.Scripting.Libraries
 {
     [ScriptNativeLibrary]
     public static class IO

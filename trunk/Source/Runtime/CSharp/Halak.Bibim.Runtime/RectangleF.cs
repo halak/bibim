@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim
+namespace Bibim
 {
     public struct RectangleF
     {

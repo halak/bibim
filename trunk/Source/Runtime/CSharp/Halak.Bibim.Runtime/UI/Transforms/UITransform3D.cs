@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim.UI.Transforms
+namespace Bibim.UI.Transforms
 {
     [ClassID('U', 'T', '3', 'D')]
     public sealed class UITransform3D : UITransform

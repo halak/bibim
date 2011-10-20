@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Halak.Bibim.Scripting
+namespace Bibim.Scripting
 {
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class ScriptNativeLibraryAttribute : Attribute

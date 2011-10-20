@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim.UI.Frames
+namespace Bibim.UI.Frames
 {
     [ClassID('U', 'F', 'T', 'F')]
     public sealed class UIFittedFrame : UIFrame

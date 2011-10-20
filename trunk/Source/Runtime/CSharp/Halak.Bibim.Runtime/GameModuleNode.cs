@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
-namespace Halak.Bibim
+namespace Bibim
 {
     public sealed class GameModuleNode
     {

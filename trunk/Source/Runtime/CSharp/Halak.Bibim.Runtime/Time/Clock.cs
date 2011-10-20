@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim.Time
+namespace Bibim.Time
 {
     public static class Clock
     {

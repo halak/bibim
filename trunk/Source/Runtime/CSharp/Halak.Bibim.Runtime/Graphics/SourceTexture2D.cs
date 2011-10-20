@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Halak.Bibim.Asset;
+using Bibim.Asset;
 
-namespace Halak.Bibim.Graphics
+namespace Bibim.Graphics
 {
     [ClassID('S', 'T', 'X', '2')]
     public sealed class SourceTexture2D : Texture2D

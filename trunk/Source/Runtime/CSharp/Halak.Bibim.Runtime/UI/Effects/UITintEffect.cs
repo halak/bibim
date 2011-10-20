@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim.UI.Effects
+namespace Bibim.UI.Effects
 {
     [ClassID('U', 'T', 'N', 'F')]
     public sealed class UITintEffect : UIEffect

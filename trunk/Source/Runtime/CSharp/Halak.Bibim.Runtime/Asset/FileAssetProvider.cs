@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Halak.Bibim.Asset
+namespace Bibim.Asset
 {
     [ClassID('F', 'A', 'S', 'P')]
     public sealed class FileAssetProvider : AssetProvider

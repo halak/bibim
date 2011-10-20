@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Halak.Bibim.UI.Events;
-using Halak.Bibim.UI.Frames;
-using Halak.Bibim.UI.Transforms;
+using Bibim.UI.Events;
+using Bibim.UI.Frames;
+using Bibim.UI.Transforms;
 
-namespace Halak.Bibim.UI.Visuals
+namespace Bibim.UI.Visuals
 {
     public abstract class UIVisual : UIElement
     {
