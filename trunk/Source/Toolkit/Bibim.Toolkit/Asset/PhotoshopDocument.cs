@@ -422,7 +422,7 @@ namespace Bibim.Asset
                 case "hLit":
                 case "sLit":
                 default:
-                    return "";
+                    return string.Empty;
             }
         }
         #endregion
