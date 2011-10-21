@@ -196,7 +196,7 @@ namespace Bibim
                 allocatedRectangles.Remove(node);
             }
             else
-                Trace.WriteLine("RectangleStorage.Deallocate > 할당되지 않은 Rect를 Deallocate 하였습니다. ({0})", rectangle.ToString());
+                Trace.TraceWarning("RectangleStorage.Deallocate > 할당되지 않은 Rect를 Deallocate 하였습니다. ({0})", rectangle.ToString());
         }
 
         public bool CanAllocate(int width, int height)

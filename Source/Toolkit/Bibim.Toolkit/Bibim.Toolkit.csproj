@@ -184,6 +184,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Graphics\ImageViewForm.resx">
       <DependentUpon>ImageViewForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

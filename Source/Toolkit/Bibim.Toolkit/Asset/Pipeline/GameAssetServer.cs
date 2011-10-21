@@ -122,19 +122,20 @@ namespace Bibim.Asset.Pipeline
                                               assetCaches[binaryAbsolutePath] = cacheBuffer;
 
                                           WriteCacheFile(binaryAbsolutePath, cacheBuffer);
+
+                                          Trace.TraceInformation("Asset cooing succeed. {0}", assetPath);
                                       }
                                       else
                                       {
-                                          Trace.WriteLine(string.Format("!Asset cooking failed. {0}", assetPath));
+                                          Trace.TraceError("Asset cooing failed. {0}", assetPath);
 
                                           if (fallback != null)
                                               fallback();
                                       }
                                   }
-                                  catch (Exception e)
+                                  catch (Exception ex)
                                   {
-                                      Trace.WriteLine("!" + e.Message);
-                                      Trace.WriteLine("!" + e.StackTrace);
+                                      Trace.WriteLine(ex);
 
                                       if (fallback != null)
                                           fallback();

@@ -106,6 +106,9 @@
     <Compile Include="CommandLineWindow.xaml.cs">
       <DependentUpon>CommandLineWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ConsoleHtmlBox.xaml.cs">
+      <DependentUpon>ConsoleHtmlBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Consoles\RunScript.cs" />
     <Compile Include="Properties\Resources1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -114,6 +117,10 @@
     </Compile>
     <Compile Include="References\Controls\WpfPropertyGrid.cs" />
     <Page Include="CommandLineWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ConsoleHtmlBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

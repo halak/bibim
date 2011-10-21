@@ -36,9 +36,7 @@ namespace Bibim.Scripting
             ScriptCookingTag tag = asset.Tag as ScriptCookingTag;
             if (tag != null && string.IsNullOrEmpty(tag.TextCode) == false)
             {
-                Trace.WriteLine("==============================");
                 Trace.WriteLine(tag.TextCode);
-                Trace.WriteLine("==============================");
             }
         }
     }

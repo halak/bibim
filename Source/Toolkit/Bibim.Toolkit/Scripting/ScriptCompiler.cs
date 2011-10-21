@@ -66,6 +66,7 @@ namespace Bibim.Scripting
             #region Fields
             private Writer binaryWriter;
             private StringBuilder textWriter;
+            private int line;
 
             private List<Block> blockStack;
             private ReadOnlyCollection<Block> readOnlyBlockStack;
@@ -152,6 +153,7 @@ namespace Bibim.Scripting
                     this.textWriter = new StringBuilder();
                 else
                     this.textWriter = null;
+                this.line = 0;
 
                 this.blockStack = new List<Block>();
                 this.readOnlyBlockStack = new ReadOnlyCollection<Block>(this.blockStack);
@@ -223,9 +225,7 @@ namespace Bibim.Scripting
                 binaryWriter.Write(ScriptInstruction.Push1);
                 binaryWriter.Write(value);
 
-                if (textWriter != null)
-                    textWriter.AppendLine(string.Format("push {0}", value.ToString()));
-
+                AppendTextCode("<b>push</b> {0}", value);
                 PushVS();
             }
 
@@ -234,9 +234,7 @@ namespace Bibim.Scripting
                 binaryWriter.Write(ScriptInstruction.Push4);
                 binaryWriter.Write(value);
 
-                if (textWriter != null)
-                    textWriter.AppendLine(string.Format("push {0}", value.ToString()));
-
+                AppendTextCode("<b>push</b> {0}", value);
                 PushVS();
             }
 
@@ -245,9 +243,7 @@ namespace Bibim.Scripting
                 binaryWriter.Write(ScriptInstruction.Push4);
                 binaryWriter.Write(value);
 
-                if (textWriter != null)
-                    textWriter.AppendLine(string.Format("push {0}U", value.ToString()));
-
+                AppendTextCode("<b>push</b> {0}U", value);
                 PushVS();
             }
 
@@ -256,9 +252,7 @@ namespace Bibim.Scripting
                 binaryWriter.Write(ScriptInstruction.Push8);
                 binaryWriter.Write(value);
 
-                if (textWriter != null)
-                    textWriter.AppendLine(string.Format("push {0}L", value.ToString()));
-
+                AppendTextCode("<b>push</b> {0}L", value);
                 PushVS();
             }
 
@@ -267,9 +261,7 @@ namespace Bibim.Scripting
                 binaryWriter.Write(ScriptInstruction.Push4);
                 binaryWriter.Write(value);
 
-                if (textWriter != null)
-                    textWriter.AppendLine(string.Format("push {0}f", value.ToString()));
-
+                AppendTextCode("<b>push</b> {0}f", value);
                 PushVS();
             }
 
@@ -278,6 +270,9 @@ namespace Bibim.Scripting
                 binaryWriter.Write(ScriptInstruction.Push8);
                 binaryWriter.Write(value.X);
                 binaryWriter.Write(value.Y);
+
+                AppendTextCode("<b>push</b> {0}f, {1}f", value.X, value.Y);
+                PushVS();
             }
 
             public void Push(Vector3 value)
@@ -286,6 +281,9 @@ namespace Bibim.Scripting
                 binaryWriter.Write(value.X);
                 binaryWriter.Write(value.Y);
                 binaryWriter.Write(value.Z);
+
+                AppendTextCode("<b>push</b> {0}f, {1}f", value.X, value.Y, value.Z);
+                PushVS();
             }
 
             public void Push(Vector4 value)
@@ -295,6 +293,9 @@ namespace Bibim.Scripting
                 binaryWriter.Write(value.Y);
                 binaryWriter.Write(value.Z);
                 binaryWriter.Write(value.W);
+
+                AppendTextCode("<b>push</b> {0}f, {1}f", value.X, value.Y, value.Z, value.W);
+                PushVS();
             }
 
             public void Push(string value)
@@ -309,9 +310,7 @@ namespace Bibim.Scripting
                 binaryWriter.Write(ScriptInstruction.Push4);
                 binaryWriter.Write(index);
 
-                if (textWriter != null)
-                    textWriter.AppendLine(string.Format("push {0}S >> \"{1}\"", index, value));
-
+                AppendTextCode("<b>push</b> {0}S >> \"{1}\"", index, value);
                 PushVS();
             }
 
@@ -342,9 +341,7 @@ namespace Bibim.Scripting
 
                 binaryWriter.Write(value);
 
-                if (textWriter != null)
-                    textWriter.AppendLine(string.Format("push({0}) {{ {1} }}", value.Length, string.Join(",", (IEnumerable<byte>)value)));
-
+                AppendTextCode("<b>push({0})</b> {{ {1} }}", value.Length, string.Join(",", (IEnumerable<byte>)value));
                 PushVS();
             }
             #endregion
@@ -362,8 +359,7 @@ namespace Bibim.Scripting
                     binaryWriter.Write(localOffset);
                     binaryWriter.Write(size);
 
-                    if (textWriter != null)
-                        textWriter.AppendLine(string.Format("pushv ({0}, {1}, {2}) [{3}]", stackIndex, localOffset, size, name));
+                    AppendTextCode("<b>pushv</b> ({0}, {1}, {2}) [{3}]", stackIndex, localOffset, size, name);
                 }
                 else
                 {
@@ -400,9 +396,7 @@ namespace Bibim.Scripting
                         break;
                 }
 
-                if (textWriter != null)
-                    textWriter.AppendLine(string.Format("pop {0}", count));
-
+                AppendTextCode("<b>pop</b> {0}", count);
                 PopVS(count);
             }
             #endregion
@@ -417,9 +411,9 @@ namespace Bibim.Scripting
                 if (textWriter != null)
                 {
                     if (string.IsNullOrEmpty(destination.Name))
-                        textWriter.AppendLine(string.Format("jump {0}", addressString));
+                        AppendTextCode("<b>jump</b> <a href=\"#{0}\">{0}</a>", addressString);
                     else
-                        textWriter.AppendLine(string.Format("jump {0} [{1}]", addressString, destination.Name));
+                        AppendTextCode("<b>jump</b> <a href=\"#{0}\">{0}</a> [{1}]", addressString, destination.Name);
                 }
             }
 
@@ -430,9 +424,9 @@ namespace Bibim.Scripting
                 string addressString = WriteAddress(destination);
 
                 if (string.IsNullOrEmpty(destination.Name))
-                    textWriter.AppendLine(string.Format("if_jump {0}", addressString));
+                    AppendTextCode("<b>if_jump</b> <a href=\"#{0}\">{0}</a>", addressString);
                 else
-                    textWriter.AppendLine(string.Format("if_jump {0} [{1}]", addressString, destination.Name));
+                    AppendTextCode("<b>if_jump</b> <a href=\"#{0}\">{0}</a> [{1}]", addressString, destination.Name);
 
                 PopVS(1);
             }
@@ -447,8 +441,7 @@ namespace Bibim.Scripting
 
                 binaryWriter.Write(ScriptInstruction.Return);
 
-                if (textWriter != null)
-                    textWriter.AppendLine(string.Format("ret"));
+                AppendTextCode("<b>ret</b>");
             }
             #endregion
 
@@ -476,8 +469,7 @@ namespace Bibim.Scripting
                 string addressString = WriteAddress(function.BeginLabel);
                 binaryWriter.Write(args.Length);
 
-                if (textWriter != null)
-                    textWriter.AppendLine(string.Format("call {0} [{1}]", addressString, name));
+                AppendTextCode("<b>call</b> <a href=\"#{0}\">{0}</a> [{1}]", addressString, name);
 
                 // 실행에서 Pop은 return에서 해주므로 여기서는 VS에서만 Pop해줍니다.
                 PopVS(args.Length);
@@ -506,9 +498,7 @@ namespace Bibim.Scripting
                 binaryWriter.Write(returnTypes.Length);
                 binaryWriter.Write(parameterTypes.Length);
 
-                if (textWriter != null)
-                    textWriter.AppendLine(string.Format("call_native {0} [{1}]", functionAttribute.FunctionID, name));
-
+                AppendTextCode("<b>call_native</b> {0} [{1}]", functionAttribute.FunctionID, name);
                 Pop(parameterTypes.Length);
             }
 
@@ -520,8 +510,7 @@ namespace Bibim.Scripting
                 binaryWriter.Write(ScriptInstruction.AllocateN);
                 binaryWriter.Write(size);
 
-                if (textWriter != null)
-                    textWriter.AppendLine(string.Format("push({0})", size));
+                AppendTextCode("<b>push({0})</b>", size);
 
                 if (pushVS)
                     PushVS();
@@ -548,13 +537,10 @@ namespace Bibim.Scripting
                 binaryWriter.Write(stackIndex);
                 binaryWriter.Write(localOffset);
 
-                if (textWriter != null)
-                {
-                    if (string.IsNullOrEmpty(variableName))
-                        textWriter.AppendLine(string.Format("move ({0}, {1})", stackIndex, localOffset));
-                    else
-                        textWriter.AppendLine(string.Format("move ({0}, {1}) [{2}]", stackIndex, localOffset, variableName));
-                }
+                if (string.IsNullOrEmpty(variableName))
+                    AppendTextCode(string.Format("<b>move</b> ({0}, {1})", stackIndex, localOffset));
+                else
+                    AppendTextCode(string.Format("<b>move</b> ({0}, {1}) [{2}]", stackIndex, localOffset, variableName));
 
                 PopVS(1);
             }
@@ -589,7 +575,7 @@ namespace Bibim.Scripting
                             throw new NotSupportedException(string.Format("{0} is not binary operator.", instruction.ToString()));
                     }
 
-                    textWriter.AppendLine(string.Format("{0}", instructionString));
+                    AppendTextCode(string.Format("<b>{0}</b>", instructionString));
                 }
 
                 PopVS(2);
@@ -782,12 +768,13 @@ namespace Bibim.Scripting
                 Guid guid = Guid.Empty;
                 if (reservedLabelGuids != null && reservedLabelGuids.TryGetValue(value, out guid))
                 {
-                    textWriter.Replace(guid.ToString(), currentPosition.ToString());
+                    if (textWriter != null)
+                        textWriter.Replace(guid.ToString(), currentPosition.ToString());
+
                     reservedLabelGuids.Remove(value);
                 }
 
-                if (textWriter != null)
-                    textWriter.AppendLine(string.Format("[label] {0} => {1}:", currentPosition, value.Name));
+                AppendTextCode("<b><i><a name=\"{0}\">[label] {0} => {1}:</a></i></b>", currentPosition, value.Name);
             }
 
             public string WriteAddress(Label value)
@@ -818,6 +805,18 @@ namespace Bibim.Scripting
                     }
                     else
                         return string.Empty;
+                }
+            }
+            #endregion
+
+            #region Text-Code Generateion
+            private void AppendTextCode(string format, params object[] args)
+            {
+                if (textWriter != null)
+                {
+                    textWriter.AppendFormat("{0}\t", line++);
+                    textWriter.AppendFormat(format, args);
+                    textWriter.AppendLine("<br>");
                 }
             }
             #endregion

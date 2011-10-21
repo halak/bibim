@@ -8,7 +8,7 @@ using Bibim.Reflection;
 
 namespace Bibim.Asset.Pipeline
 {
-    [XmlRoot("BibimAssetRecipe")]
+    [XmlRoot]
     public sealed class GameAssetRecipe
     {
         #region Fields

@@ -80,7 +80,7 @@ namespace Bibim.Asset.Pipeline
             peers.Remove(peer);
 
             if (string.IsNullOrEmpty(message) == false)
-                Trace.WriteLine(message);
+                Trace.TraceInformation(message);
         }
 
         private void OnPeerConnected(IAsyncResult result)
@@ -104,12 +104,12 @@ namespace Bibim.Asset.Pipeline
                 // 그렇기 때문에 일단 Packet ID를 읽기 위해 일단 4byte 비동기 읽기 작업을 수행합니다.
                 peer.Stream.BeginRead(peer.Buffer, 0, 4, new AsyncCallback(OnPeerRead), peer);
 
-                Trace.WriteLine(string.Format("[{0}:{1}] Peer connected.", peer.Name, peer.ID));
+                Trace.TraceInformation(string.Format("[{0}:{1}] Peer connected.", peer.Name, peer.ID));
             }
             else
             {
                 ShutdownPeer(peer);
-                Trace.WriteLine("Peer connect failed.");
+                Trace.TraceError("Peer connect failed.");
             }
 
             InitializeNewPeer();
@@ -167,7 +167,10 @@ namespace Bibim.Asset.Pipeline
                                                                                           {
                                                                                               stream.EndWrite(r);
                                                                                           }
-                                                                                          catch (Exception ex) { Trace.WriteLine(ex.ToString()); }
+                                                                                          catch (Exception ex)
+                                                                                          {
+                                                                                              Trace.WriteLine(ex);
+                                                                                          }
 
                                                                                           stream.Disconnect();
                                                                                           stream.Dispose();
