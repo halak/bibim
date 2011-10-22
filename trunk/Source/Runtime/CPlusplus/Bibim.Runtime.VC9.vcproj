@@ -1974,15 +1974,27 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Animation\Bibim\Animators.cpp"
+					RelativePath=".\Animation\Bibim\Animator.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Animation\Bibim\Animators.h"
+					RelativePath=".\Animation\Bibim\Animator.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Animation\Bibim\Animators.inl"
+					RelativePath=".\Animation\Bibim\Animator.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Animation\Bibim\AnimatorGroup.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Animation\Bibim\AnimatorGroup.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Animation\Bibim\AnimatorGroup.inl"
 					>
 				</File>
 				<File
