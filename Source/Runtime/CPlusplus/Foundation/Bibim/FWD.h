@@ -92,6 +92,14 @@
                 class ComponentStreamReader;
                 BBForwardDeclareSmartPointerClass(GameComponent);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Animation
+                class AnimationTimeline;
+                class Animator;
+
+                ////////////////////////////////////////////////////////////////////////////////////////////////////
+                // Evaluation
+                    class EvaluationContext;
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Asset
                 class AssetLoadingTask;
                     class AssetPreloadingTask;
