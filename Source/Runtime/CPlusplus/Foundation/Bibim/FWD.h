@@ -94,7 +94,8 @@
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Animation
                 class AnimationTimeline;
-                class Animator;
+                BBForwardDeclareSmartPointerClass(Animator);
+                    BBForwardDeclareSmartPointerClass(AnimatorGroup);
 
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Evaluation
