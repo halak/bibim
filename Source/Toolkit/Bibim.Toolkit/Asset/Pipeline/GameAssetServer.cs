@@ -11,12 +11,26 @@ namespace Bibim.Asset.Pipeline
 {
     public abstract class GameAssetServer : GameModule
     {
+        #region AssetCache (Nested Struct)
+        private struct AssetCache
+        {
+            public readonly byte[] Buffer;
+            public readonly string[] Dependencies;
+
+            public AssetCache(byte[] buffer, string[] dependencies)
+            {
+                Buffer = buffer;
+                Dependencies = dependencies;
+            }
+        }
+        #endregion
+
         #region Fields
         private ConcurrentQueue<Action> taskQueue;
         private Thread taskThread;
         private int taskThreadClosed;
 
-        private Dictionary<string, byte[]> assetCaches;
+        private Dictionary<string, AssetCache> assetCaches;
         private object assetCachesLock = new object();
         #endregion
 
@@ -42,15 +56,14 @@ namespace Bibim.Asset.Pipeline
             taskThreadClosed = 0;
             taskThread.Start();
 
-            assetCaches = new Dictionary<string, byte[]>();
+            assetCaches = new Dictionary<string, AssetCache>();
         }
 
         ~GameAssetServer()
         {
-
         }
         #endregion
-        
+
         #region Methods
         protected override void OnStatusChanged(GameModuleStatus old)
         {
@@ -79,14 +92,14 @@ namespace Bibim.Asset.Pipeline
 
             // Cache Table에 Asset Binary가 존재하면 Cooking하지 않습니다.
 
-            byte[] cache = null;
+            AssetCache cache;
             bool hasCache = false;
             lock (assetCachesLock)
                 hasCache = assetCaches.TryGetValue(binaryAbsolutePath, out cache);
 
             if (hasCache)
             {
-                callback(cache, 0, cache.Length);
+                callback(cache.Buffer, 0, cache.Buffer.Length);
                 return;
             }
 
@@ -98,15 +111,15 @@ namespace Bibim.Asset.Pipeline
                                       Trace.WriteLine(string.Format("#start cooking. {0}", assetPath));
 
                                       string recipePath = Path.ChangeExtension(assetPath, GameAsset.TextFileExtension);
-                                      object asset = kitchen.Cook(directory, recipePath);
-                                      if (asset != null)
+                                      GameAssetKitchen.CookingReport report = kitchen.Cook(directory, recipePath);
+                                      if (report.Asset != null)
                                       {
                                           // Cooking 된 asset은 나중에 가져다 쓰기 쉽게 단순 Binary화합니다.
 
-                                          GameAssetWriter writer = GameAssetWriter.CreateWriter(asset.GetType());
+                                          GameAssetWriter writer = GameAssetWriter.CreateWriter(report.Asset.GetType());
                                           MemoryStream memoryStream = new MemoryStream();
                                           AssetStreamWriter streamWriter = new AssetStreamWriter(memoryStream, null, Kitchen.Storage);
-                                          writer.Write(streamWriter, asset);
+                                          writer.Write(streamWriter, report.Asset);
 
                                           callback(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
 
@@ -118,8 +131,11 @@ namespace Bibim.Asset.Pipeline
                                           byte[] cacheBuffer = new byte[memoryStream.Length];
                                           System.Buffer.BlockCopy(memoryStream.GetBuffer(), 0, cacheBuffer, 0, (int)memoryStream.Length);
 
+                                          string[] dependencies = new string[report.Dependencies.Count];
+                                          report.Dependencies.CopyTo(dependencies, 0);
+
                                           lock (assetCachesLock)
-                                              assetCaches[binaryAbsolutePath] = cacheBuffer;
+                                              assetCaches[binaryAbsolutePath] = new AssetCache(cacheBuffer, dependencies);
 
                                           WriteCacheFile(binaryAbsolutePath, cacheBuffer);
 
@@ -172,6 +188,32 @@ namespace Bibim.Asset.Pipeline
                                       fileStream.EndWrite(result);
                                       fileStream.Close();
                                   }, null);
+        }
+
+        protected void RemoveAssetCachesByDependency(string path)
+        {
+            List<string> removingKeys = new List<string>();
+
+            lock (assetCachesLock)
+            {
+                foreach (var cache in assetCaches)
+                {
+                    foreach (string item in cache.Value.Dependencies)
+                    {
+                        if (string.Compare(item, path, true) == 0)
+                        {
+                            removingKeys.Add(cache.Key);
+                            break;
+                        }
+                    }
+                }
+
+                foreach (string item in removingKeys)
+                    assetCaches.Remove(item);
+            }
+
+            foreach (string item in removingKeys)
+                Trace.TraceInformation("{0}이 바뀌었으므로 {1}의 Cache를 비움", Path.GetFileName(path), Path.GetFileName(item));
         }
         #endregion
     }
