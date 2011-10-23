@@ -67,7 +67,10 @@ namespace Bibim.Asset.Pipeline.Recipes
                 string actualPath = Path.Combine(context.BaseDirectory, context.Directory, context.ExpandVariables(item));
 
                 if (File.Exists(actualPath))
+                {
+                    context.AddDependency(actualPath);
                     return new FileStream(actualPath, FileMode.Open, FileAccess.Read);
+                }
             }
 
             return null;

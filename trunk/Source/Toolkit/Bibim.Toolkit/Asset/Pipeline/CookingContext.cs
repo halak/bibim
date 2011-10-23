@@ -14,6 +14,8 @@ namespace Bibim.Asset.Pipeline
         private Dictionary<string, string> variables;
         private Dictionary<string, string> expandableVariables;
         private ReadOnlyDictionary<string, string> readonlyVariables;
+
+        private SortedSet<string> dependencies;
         #endregion
 
         #region Properties
@@ -50,6 +52,17 @@ namespace Bibim.Asset.Pipeline
             get { return readonlyVariables; }
         }
 
+        public ICollection<string> Dependencies
+        {
+            get { return dependencies; }
+        }
+
+        public bool CanHotload
+        {
+            get;
+            private set;
+        }
+
         private CookingContext Root
         {
             get
@@ -65,17 +78,17 @@ namespace Bibim.Asset.Pipeline
         #endregion
 
         #region Constructors
-        public CookingContext(GameAssetKitchen kitchen, string baseDirectory, string recipePath)
-            : this(kitchen, kitchen.Storage, null, baseDirectory, recipePath)
+        public CookingContext(GameAssetKitchen kitchen, string baseDirectory, string recipePath, GameAssetRecipe recipe)
+            : this(kitchen, kitchen.Storage, null, baseDirectory, recipePath, recipe)
         {
         }
 
-        public CookingContext(CookingContext parent, string recipePath)
-            : this(parent.Kitchen, parent.Storage, parent, parent.baseDirectory, recipePath)
+        public CookingContext(CookingContext parent, string recipePath, GameAssetRecipe recipe)
+            : this(parent.Kitchen, parent.Storage, parent, parent.baseDirectory, recipePath, recipe)
         {
         }
 
-        private CookingContext(GameAssetKitchen kitchen, GameAssetStorage storage, CookingContext parent, string baseDirectory, string recipePath)
+        private CookingContext(GameAssetKitchen kitchen, GameAssetStorage storage, CookingContext parent, string baseDirectory, string recipePath, GameAssetRecipe recipe)
         {
             int variableCapacity = 4;
             string directory = Path.GetDirectoryName(recipePath);
@@ -89,15 +102,32 @@ namespace Bibim.Asset.Pipeline
             this.expandableVariables = new Dictionary<string, string>(variableCapacity);
             this.readonlyVariables = new ReadOnlyDictionary<string, string>(this.variables);
 
+            this.dependencies = new SortedSet<string>();
+            this.CanHotload = recipe.CanHotload;
+
             SetVariable("Directory", directory);
             SetVariable("Path", recipePath);
         }
         #endregion
 
         #region Methods
+        public void AddDependency(string item)
+        {
+            dependencies.Add(item);
+        }
+
         public void Store(string name, GameAsset asset)
         {
             Storage.Store(name, asset);
+        }
+
+        public void Reference(CookingContext context)
+        {
+            foreach (string item in context.Dependencies)
+                dependencies.Add(item);
+
+            if (context.CanHotload == false)
+                CanHotload = false;
         }
         
         #region Variable Manipulation

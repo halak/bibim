@@ -49,6 +49,13 @@ namespace Bibim.Asset.Pipeline
             }
         }
 
+        [XmlAttribute]
+        public bool CanHotload
+        {
+            get;
+            set;
+        }
+
         private static XmlSerializer Serializer
         {
             get
@@ -81,20 +88,21 @@ namespace Bibim.Asset.Pipeline
 
         #region Constructors
         public GameAssetRecipe()
-            : this(null, string.Empty, string.Empty)
+            : this(null, string.Empty, string.Empty, false)
         {
         }
 
         public GameAssetRecipe(CookingNode cook)
-            : this(cook, string.Empty, string.Empty)
+            : this(cook, string.Empty, string.Empty, false)
         {
         }
 
-        public GameAssetRecipe(CookingNode cook, string author, string comment)
+        public GameAssetRecipe(CookingNode cook, string author, string comment, bool canHotload)
         {
             Cook = cook;
             Author = author;
             Comment = comment;
+            CanHotload = canHotload;
         }
         #endregion
         
