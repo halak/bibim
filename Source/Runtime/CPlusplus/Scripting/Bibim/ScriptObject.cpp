@@ -158,7 +158,7 @@ namespace Bibim
         }
     }
 
-    float ScriptObject::CastFloat()
+    float ScriptObject::CastFloat() const
     {
         switch (type)
         {

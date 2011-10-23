@@ -206,7 +206,7 @@ namespace Bibim
         return Run(temporarySuspendedFunction, temporarySuspendedTopIndex);
     }
 
-    const ScriptObject& ScriptThread::GetGlobalVariable(uint id) const
+    const ScriptObject& ScriptThread::GetGlobal(uint id) const
     {
         std::map<uint, ScriptObject>::const_iterator it = globalVariables.find(id);
         if (it != globalVariables.end())
@@ -215,7 +215,7 @@ namespace Bibim
             return ScriptObject::Void;
     }
 
-    void ScriptThread::SetGlobalVariable(uint id, const ScriptObject& value)
+    void ScriptThread::SetGlobal(uint id, const ScriptObject& value)
     {
         globalVariables[id] = value;
     }
@@ -403,6 +403,9 @@ namespace Bibim
                 break;
             case Yield:
                 {
+                    // Script call -> Native call -> Script call -> Native 이 상황에서 Yield를 하면 thread-stack 엉켜 제대로 작동하지 않습니다.
+                    BBAssert(nativeFunctionDepth == 0);
+                    SetState(ScriptThread::Suspended);
                 }
                 break;
             case LocalAssign:

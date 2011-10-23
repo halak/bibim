@@ -93,10 +93,6 @@
                 BBForwardDeclareSmartPointerClass(GameComponent);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Animation
-                class AnimationTimeline;
-                BBForwardDeclareSmartPointerClass(Animator);
-                    BBForwardDeclareSmartPointerClass(AnimatorGroup);
-
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Evaluation
                     class EvaluationContext;
@@ -169,6 +165,7 @@
                     class Timeline;
                         class SubTimeline;
                     class TimelineGameModule;
+                        class AlarmClock;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Typography
                 BBForwardDeclareSmartPointerClass(Font);

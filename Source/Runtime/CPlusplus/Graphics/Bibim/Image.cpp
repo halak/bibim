@@ -77,9 +77,14 @@ namespace Bibim
             this->normalizedClippingRect.Y = static_cast<float>(clippingRect.Y) / h;
             this->normalizedClippingRect.Width = static_cast<float>(clippingRect.Width) / w;
             this->normalizedClippingRect.Height = static_cast<float>(clippingRect.Height) / h;
+
+            SetStatus(CompletedStatus);
         }
         else
+        {
             this->normalizedClippingRect = RectF::Empty;
+            SetStatus(FaultStatus);
+        }
     }
 
     GameAsset* Image::Create(StreamReader& reader, GameAsset* /*existingInstance*/)

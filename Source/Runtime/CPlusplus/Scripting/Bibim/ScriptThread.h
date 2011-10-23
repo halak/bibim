@@ -40,8 +40,8 @@
                 inline const ScriptStack& GetStack() const;
                 inline State GetState() const;
 
-                const ScriptObject& GetGlobalVariable(uint id) const;
-                void SetGlobalVariable(uint id, const ScriptObject& value);
+                const ScriptObject& GetGlobal(uint id) const;
+                void SetGlobal(uint id, const ScriptObject& value);
 
             private:
                 const Script::Function* BeginCall(const String& name, int numberOfArguments);

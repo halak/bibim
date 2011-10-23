@@ -13,7 +13,11 @@
             {
                 None = 0x00,
                 Enter = 0x0D,
+                Shift = 0x10,
+                Ctrl = 0x11,
+                Alt = 0x12,
                 Escape = 0x1B,
+                Space = 0x20,
                 Left = 0x25,
                 Up = 0x26,
                 Right = 0x27,

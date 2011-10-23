@@ -167,6 +167,7 @@
                         inline bool MoveNext();
 
                         inline int GetCurrent() const;
+                        inline int GetCurrentIndex() const;
 
                         inline UTF8CharEnumerator& operator = (const UTF8CharEnumerator& right);
 

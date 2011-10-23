@@ -40,6 +40,9 @@ namespace Bibim
     void UIDrawingContext::Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, bool horizontalFlip, bool verticalFlip)
     {
         BBAssertDebug(image && image->GetTexture() && renderer);
+        if (image->GetStatus() != GameAsset::CompletedStatus ||
+            image->GetTexture()->GetStatus() != GameAsset::CompletedStatus)
+            return;
 
         const float boundsClippedLeft   = (clippedBounds.GetLeft() - bounds.GetLeft()) / bounds.Width;
         const float boundsClippedTop    = (clippedBounds.GetTop() - bounds.GetTop()) / bounds.Height;

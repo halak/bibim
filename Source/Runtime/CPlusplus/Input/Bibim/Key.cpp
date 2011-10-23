@@ -6,7 +6,11 @@ namespace Bibim
     const Key::Code Key::Codes[Count] = 
     {
         Enter,
+        Shift,
+        Ctrl,
+        Alt,
         Escape,
+        Space,
         Left,
         Up,
         Right,
