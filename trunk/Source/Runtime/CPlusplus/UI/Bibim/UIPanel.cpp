@@ -24,6 +24,11 @@ namespace Bibim
 
     UIPanel::~UIPanel()
     {
+        VisualCollection removingChildren;
+        removingChildren.swap(children);
+
+        for (VisualCollection::iterator it = removingChildren.begin(); it != removingChildren.end(); it++)
+            (*it)->SetParent(nullptr);
     }
 
     UIVisual* UIPanel::FindChild(const String& name, bool searchAllChildren) const

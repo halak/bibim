@@ -358,7 +358,7 @@ namespace Bibim
                 current = first;
                 return true;
             }
-            else if (0xC2 <= current && current <= 0xDF)
+            else if (0xC2 <= first && first <= 0xDF)
             {
                 BBAssertDebug(index + 1 < length);
                 current = (static_cast<uint>(buffer[index + 0]) << 8) |
@@ -366,7 +366,7 @@ namespace Bibim
                 index += 1;
                 return true;
             }
-            else if (0xE0 <= current && current <= 0xEF)
+            else if (0xE0 <= first && first <= 0xEF)
             {
                 BBAssertDebug(index + 2 < length);
                 current = (static_cast<uint>(buffer[index + 0]) << 16) | 
@@ -375,7 +375,7 @@ namespace Bibim
                 index += 2;
                 return true;
             }
-            else if (0xF0 <= current && current <= 0xF4)
+            else if (0xF0 <= first && first <= 0xF4)
             {
                 BBAssertDebug(index + 3 < length);
                 current = (static_cast<uint>(buffer[index + 0]) << 24) | 
@@ -395,6 +395,11 @@ namespace Bibim
     int String::UTF8CharEnumerator::GetCurrent() const
     {
         return current;
+    }
+
+    int String::UTF8CharEnumerator::GetCurrentIndex() const
+    {
+        return index + 1;
     }
 
     String::UTF8CharEnumerator& String::UTF8CharEnumerator::operator = (const UTF8CharEnumerator& right)

@@ -11,6 +11,8 @@
             public:
                 CloningContext();
                 ~CloningContext();
+
+            private:
         };
     }
 

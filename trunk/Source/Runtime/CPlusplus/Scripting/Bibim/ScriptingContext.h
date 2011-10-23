@@ -38,8 +38,8 @@
                 ScriptObject Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4);
                 ScriptObject Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4, const ScriptObject& arg5);
 
-                const ScriptObject& GetGlobalVariable(uint id) const;
-                void SetGlobalVariable(uint id, const ScriptObject& value);
+                const ScriptObject& GetGlobal(uint id) const;
+                void SetGlobal(uint id, const ScriptObject& value);
 
             private:
                 ScriptThread* thread;

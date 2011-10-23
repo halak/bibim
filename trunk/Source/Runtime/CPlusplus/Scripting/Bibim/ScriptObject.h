@@ -61,7 +61,7 @@
                 int CastInt() const;
                 uint CastUInt() const;
                 int64 CastLongInt() const;
-                float CastFloat();
+                float CastFloat() const;
                 SharedObject* CastSharedObject() const;
                 void* CastLightObject() const;
 
