@@ -32,13 +32,14 @@ namespace Bibim
         if (this == &right)
             return;
 
+        if (right.pointee)
+            right.pointee->IncreaseReferenceCount();
+
         T* oldPointee = pointee;
         pointee = right.pointee;
 
         if (oldPointee)
             oldPointee->DecreaseReferenceCount();
-        if (pointee)
-            pointee->IncreaseReferenceCount();
     }
 
     template <typename T> void SharedPointer<T>::Swap(SharedPointer<T>& right)
