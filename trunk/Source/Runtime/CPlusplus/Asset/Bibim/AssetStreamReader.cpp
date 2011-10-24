@@ -48,7 +48,7 @@ namespace Bibim
         if (isPriority)
             storage->AddFirst(task);
         else
-            storage->AddLast(task);            
+            storage->AddLast(task);
     }
 
     GameModule* AssetStreamReader::ReadModule()

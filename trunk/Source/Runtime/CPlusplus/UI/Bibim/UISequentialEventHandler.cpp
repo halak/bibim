@@ -1,4 +1,5 @@
 #include <Bibim/UISequentialEventHandler.h>
+#include <Bibim/ComponentStreamReader.h>
 #include <algorithm>
 
 namespace Bibim
@@ -94,7 +95,7 @@ namespace Bibim
         handlers.reserve(value.size());
         for (HandlerCollection::const_iterator it = value.begin(); it != value.end(); it++)
         {
-            if (*it)
+            if (*it != nullptr)
                 handlers.push_back(*it);
         }
     }
@@ -115,12 +116,18 @@ namespace Bibim
     void UISequentialEventHandler::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        BBBreak();
+        const int count = static_cast<int>(reader.ReadInt16());
+        handlers.reserve(count);
+        for (int i = 0; i < count; i++)
+            handlers.push_back(static_cast<UIEventHandler*>(reader.ReadComponent()));
     }
 
     void UISequentialEventHandler::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
-        BBBreak();
+        const This* o = static_cast<const This*>(original);
+        handlers.reserve(o->handlers.size());
+        for (HandlerCollection::const_iterator it = o->handlers.begin(); it != o->handlers.end(); it++)
+            handlers.push_back(context.Clone(*it));
     }
 }

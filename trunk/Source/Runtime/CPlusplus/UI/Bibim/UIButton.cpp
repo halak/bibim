@@ -47,11 +47,8 @@ namespace Bibim
 
     void UIButton::SetCurrentState(State value)
     {
-        if (currentState != value)
-        {
-            currentState = value;
-            UpdateLayout();
-        }
+        currentState = value;
+        UpdateLayout();
     }
 
     void UIButton::SetHideInactives(bool value)
@@ -142,11 +139,17 @@ namespace Bibim
         pushedWindow = static_cast<UIWindow*>(reader.ReadComponent());
         hoveringWindow = static_cast<UIWindow*>(reader.ReadComponent());
         hideInactives = reader.ReadBool();
+        SetCurrentState(NormalState);
     }
 
     void UIButton::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
+        normalWindow = context.Clone(o->normalWindow);
+        pushedWindow = context.Clone(o->pushedWindow);
+        hoveringWindow = context.Clone(o->hoveringWindow);
+        hideInactives = o->hideInactives;
+        SetCurrentState(NormalState);
     }
 }

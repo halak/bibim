@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UICheckBox.h>
+#include <Bibim/ComponentStreamReader.h>
 #include <Bibim/UIFittedFrame.h>
 #include <Bibim/UIMouseEventArgs.h>
 #include <Bibim/UIWindow.h>
@@ -76,11 +77,19 @@ namespace Bibim
     void UICheckBox::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
+        checkedNormalWindow = static_cast<UIWindow*>(reader.ReadComponent());
+        checkedPushedWindow = static_cast<UIWindow*>(reader.ReadComponent());
+        checkedHoveringWindow = static_cast<UIWindow*>(reader.ReadComponent());
+        checked = reader.ReadBool();
     }
 
     void UICheckBox::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
+        checkedNormalWindow = context.Clone(o->checkedNormalWindow);
+        checkedPushedWindow = context.Clone(o->checkedPushedWindow);
+        checkedHoveringWindow = context.Clone(o->checkedHoveringWindow);
+        checked = o->checked;
     }
 }

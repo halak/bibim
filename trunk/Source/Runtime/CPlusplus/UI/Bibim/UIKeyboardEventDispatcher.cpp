@@ -45,8 +45,8 @@ namespace Bibim
         uint code = 0;
         for (int i = 0; i < sizeof(state.Keys) / sizeof(state.Keys[0]); i++)
         {
-            const dword lastField    = state.Keys[i];
-            const dword currentField = lastState.Keys[i];
+            const dword currentField    = state.Keys[i];
+            const dword lastField = lastState.Keys[i];
             for (dword k = 0x80000000; k != 0x00000000; k >>= 1, code++)
             {
                 const bool lastDown    = (lastField & k) != 0x00000000;

@@ -69,9 +69,9 @@ namespace Bibim.UI.Visuals
             NormalWindow = new UIWindow() { Frame = new UIFittedFrame() };
             PushedWindow = new UIWindow() { Frame = new UIFittedFrame() };
             HoveringWindow = new UIWindow(){ Frame = new UIFittedFrame() };
-            Add(NormalWindow);
             Add(PushedWindow);
             Add(HoveringWindow);
+            Add(NormalWindow);
         }
         #endregion
 

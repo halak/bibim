@@ -40,5 +40,7 @@ namespace Bibim
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
+        fixedSize = o->fixedSize;
+        fixedSizeUsed = o->fixedSizeUsed;
     }
 }
