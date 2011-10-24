@@ -2,6 +2,7 @@
 #include <Bibim/AlarmClock.h>
 #include <Bibim/Assert.h>
 #include <algorithm>
+#include <windows.h>
 
 namespace Bibim
 {
@@ -71,30 +72,34 @@ namespace Bibim
         bool needsGarbageCollection = false;
         for (int i = 0; i < count; i++)
         {
-            AlarmCounter& item = alarmCounters[i];
+            //BBAssertDebug(count == alarmCounters.size());
+            //BBAssertDebug(count == alarms.size());
+            //BBAssertDebug(count == callbacks.size());
 
-            if (item.RemainTickTime >= 0.0f)
+            //AlarmCounter& item = alarmCounters[i];
+
+            if (alarmCounters[i].RemainTickTime >= 0.0f)
             {
-                item.RemainTickTime -= dt;
-                if (item.RemainTickTime <= 0.0f)
+                alarmCounters[i].RemainTickTime -= dt;
+                if (alarmCounters[i].RemainTickTime <= 0.0f)
                 {
                     if (callbacks[i])
                     {
-                        switch (callbacks[i]->OnTick(this, alarms[i].AlarmTime - item.RemainAlarmTime, alarms[i].AlarmTime))
+                        switch (callbacks[i]->OnTick(this, alarms[i].AlarmTime - alarmCounters[i].RemainAlarmTime, alarms[i].AlarmTime))
                         {
                             case Callback::Continue:
-                                item.RemainTickTime = alarms[i].TickTime;
+                                alarmCounters[i].RemainTickTime = alarms[i].TickTime;
                                 break;
                             case Callback::Stop:
                                 callbacks[i].Reset();
                                 needsGarbageCollection = true;
                                 break;
                             case Callback::StopTick:
-                                item.RemainTickTime = InvalidTime;
+                                alarmCounters[i].RemainTickTime = InvalidTime;
                                 break;
                             case Callback::Restart:
-                                item.RemainTickTime = alarms[i].TickTime;
-                                item.RemainAlarmTime = alarms[i].AlarmTime;
+                                alarmCounters[i].RemainTickTime = alarms[i].TickTime;
+                                alarmCounters[i].RemainAlarmTime = alarms[i].AlarmTime;
                                 break;
                         }
                     }
@@ -106,10 +111,10 @@ namespace Bibim
                 }
             }
 
-            if (item.RemainAlarmTime >= 0.0f)
+            if (alarmCounters[i].RemainAlarmTime >= 0.0f)
             {
-                item.RemainAlarmTime -= dt;
-                if (item.RemainAlarmTime <= 0.0f)
+                alarmCounters[i].RemainAlarmTime -= dt;
+                if (alarmCounters[i].RemainAlarmTime <= 0.0f)
                 {
                     if (callbacks[i])
                     {
@@ -122,8 +127,8 @@ namespace Bibim
                                 needsGarbageCollection = true;
                                 break;
                             case Callback::Restart:
-                                item.RemainTickTime = alarms[i].TickTime;
-                                item.RemainAlarmTime = alarms[i].AlarmTime;
+                                alarmCounters[i].RemainTickTime = alarms[i].TickTime;
+                                alarmCounters[i].RemainAlarmTime = alarms[i].AlarmTime;
                                 break;
                         }
                     }
@@ -139,7 +144,7 @@ namespace Bibim
         if (needsGarbageCollection)
         {
             int newCount = static_cast<int>(alarms.size());
-            for (int i = 0; i < newCount;)
+            for (int i = 0; i < newCount; i++)
             {
                 if (callbacks[i] == nullptr)
                 {
@@ -148,8 +153,6 @@ namespace Bibim
                     callbacks[i] = callbacks[newCount - 1];
                     newCount--;
                 }
-                else
-                    i++;
             }
 
             alarmCounters.resize(newCount);
@@ -164,6 +167,12 @@ namespace Bibim
             return;
 
         CallbackPtr sharedCallback = callback;
+
+        //if (group == 1000)
+        //{
+        //    callback->OnCancelled(this);
+        //    return;
+        //}
 
         BBAssertDebug(std::find(callbacks.begin(), callbacks.end(), callback) == callbacks.end());
 
