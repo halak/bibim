@@ -85,6 +85,8 @@
 #  include <Bibim/SourceTexture2D.h>
 #  include <Bibim/Texture2D.h>
 #  include <Bibim/Window.h>
+#include <Bibim/RenderTargetTexture2D.h>
+#   include <Bibim/ScreenshotPrinter.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Input
@@ -205,5 +207,7 @@
 #  include <Bibim/UIVisual.h>
 #  include <Bibim/UIVisualVisitor.h>
 #  include <Bibim/UIWindow.h>
+#   include <Bibim/UIMaskEffect.h>
+#   include <Bibim/UIOpacityMaskEffect.h>
 
 #endif

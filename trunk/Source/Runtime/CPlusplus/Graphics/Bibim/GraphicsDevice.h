@@ -22,7 +22,9 @@
                 void Clear(Color color);
 
                 void BeginDraw();
+                void BeginDraw(RenderTargetTexture2D* renderTarget);
                 void EndDraw();
+                void EndDraw(RenderTargetTexture2D* renderTarget);
                 void Present();
 
                 inline Window* GetWindow() const;
@@ -51,6 +53,7 @@
             private:
                 IDirect3D9*       d3dObject;
                 IDirect3DDevice9* d3dDevice;
+                IDirect3DSurface9* d3dBackbufferSurface;
                 Window* window;
 
                 DisplaySwapChain* defaultSwapChain;

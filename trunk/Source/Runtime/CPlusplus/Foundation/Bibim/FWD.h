@@ -129,8 +129,10 @@
                 class DisplaySwapChain;
                 class GraphicsDevice;
                 BBForwardDeclareSmartPointerClass(Image);
+                class ScreenshotPrinter;
                 BBForwardDeclareSmartPointerClass(Texture2D);
                     BBForwardDeclareSmartPointerClass(DynamicTexture2D);
+                    BBForwardDeclareSmartPointerClass(RenderTargetTexture2D);
                     BBForwardDeclareSmartPointerClass(SourceTexture2D);
                 class Window;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -188,6 +190,8 @@
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Effects
                     BBForwardDeclareSmartPointerClass(UIEffect);
+                        BBForwardDeclareSmartPointerClass(UIMaskEffect);
+                            BBForwardDeclareSmartPointerClass(UIOpacityMaskEffect);
                         BBForwardDeclareSmartPointerClass(UITintEffect);
                     BBForwardDeclareSmartPointerClass(UIEffectMap);
                 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -105,6 +105,121 @@ namespace Bibim
         renderer->DrawQuad(points, uv, image->GetTexture(), Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())));
     }
 
+    void UIDrawingContext::Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, Image* maskImage, bool horizontalFlip, bool verticalFlip)
+    {
+        BBAssertDebug(image && image->GetTexture() && renderer);
+        if (image->GetStatus() != GameAsset::CompletedStatus ||
+            image->GetTexture()->GetStatus() != GameAsset::CompletedStatus)
+            return;
+        if (maskImage->GetStatus() != GameAsset::CompletedStatus ||
+            maskImage->GetTexture()->GetStatus() != GameAsset::CompletedStatus)
+            return Draw(bounds, clippedBounds, image, horizontalFlip, verticalFlip);
+
+        const float boundsClippedLeft   = (clippedBounds.GetLeft() - bounds.GetLeft()) / bounds.Width;
+        const float boundsClippedTop    = (clippedBounds.GetTop() - bounds.GetTop()) / bounds.Height;
+        const float boundsClippedRight  = (bounds.GetRight() - clippedBounds.GetRight()) / bounds.Width;
+        const float boundsClippedBottom = (bounds.GetBottom() - clippedBounds.GetBottom()) / bounds.Height;
+
+        RectF clippingRect = image->GetNormalizedClippingRect();
+        float clippingLeft   = clippingRect.GetLeft();
+        float clippingTop    = clippingRect.GetTop();
+        float clippingRight  = clippingRect.GetRight();
+        float clippingBottom = clippingRect.GetBottom();
+
+        RectF maskClippingRect = maskImage->GetNormalizedClippingRect();
+        float maskClippingLeft   = maskClippingRect.GetLeft();
+        float maskClippingTop    = maskClippingRect.GetTop();
+        float maskClippingRight  = maskClippingRect.GetRight();
+        float maskClippingBottom = maskClippingRect.GetBottom();
+
+        switch (image->GetAppliedTransform())
+        {
+            case Image::Identity:
+                clippingLeft   += boundsClippedLeft;
+                clippingTop    += boundsClippedTop;
+                clippingRight  -= boundsClippedRight;
+                clippingBottom -= boundsClippedBottom;
+                break;
+            case Image::RotateCW90:
+                clippingLeft   += boundsClippedBottom;
+                clippingTop    += boundsClippedLeft;
+                clippingRight  -= boundsClippedTop;
+                clippingBottom -= boundsClippedRight;
+                break;
+        }
+
+        switch (maskImage->GetAppliedTransform())
+        {
+            case Image::Identity:
+                maskClippingLeft   += boundsClippedLeft;
+                maskClippingTop    += boundsClippedTop;
+                maskClippingRight  -= boundsClippedRight;
+                maskClippingBottom -= boundsClippedBottom;
+                break;
+            case Image::RotateCW90:
+                maskClippingLeft   += boundsClippedBottom;
+                maskClippingTop    += boundsClippedLeft;
+                maskClippingRight  -= boundsClippedTop;
+                maskClippingBottom -= boundsClippedRight;
+                break;
+        }
+
+        clippingRect.X = clippingLeft;
+        clippingRect.Y = clippingTop;
+        clippingRect.Width  = (horizontalFlip == false) ? clippingRight - clippingLeft : clippingLeft - clippingRight;
+        clippingRect.Height = (verticalFlip   == false) ? clippingBottom - clippingTop : clippingTop - clippingBottom;
+
+        maskClippingRect.X = maskClippingLeft;
+        maskClippingRect.Y = maskClippingTop;
+        maskClippingRect.Width  = (horizontalFlip == false) ? maskClippingRight - maskClippingLeft : maskClippingLeft - maskClippingRight;
+        maskClippingRect.Height = (verticalFlip   == false) ? maskClippingBottom - maskClippingTop : maskClippingTop - maskClippingBottom;
+
+        Vector2 uv1[4];
+        switch (image->GetAppliedTransform())
+        {
+            case Image::Identity:
+                uv1[0] = Vector2(clippingRect.GetLeft(), clippingRect.GetTop());
+                uv1[1] = Vector2(clippingRect.GetRight(), clippingRect.GetTop());
+                uv1[2] = Vector2(clippingRect.GetLeft(), clippingRect.GetBottom());
+                uv1[3] = Vector2(clippingRect.GetRight(), clippingRect.GetBottom());
+                break;
+            case Image::RotateCW90:
+                uv1[0] = Vector2(clippingRect.GetRight(), clippingRect.GetTop());
+                uv1[1] = Vector2(clippingRect.GetRight(), clippingRect.GetBottom());
+                uv1[2] = Vector2(clippingRect.GetLeft(), clippingRect.GetTop());
+                uv1[3] = Vector2(clippingRect.GetLeft(), clippingRect.GetBottom());
+                break;
+        }
+
+        Vector2 uv2[4];
+        switch (image->GetAppliedTransform())
+        {
+            case Image::Identity:
+                uv2[0] = Vector2(maskClippingRect.GetLeft(), maskClippingRect.GetTop());
+                uv2[1] = Vector2(maskClippingRect.GetRight(), maskClippingRect.GetTop());
+                uv2[2] = Vector2(maskClippingRect.GetLeft(), maskClippingRect.GetBottom());
+                uv2[3] = Vector2(maskClippingRect.GetRight(), maskClippingRect.GetBottom());
+                break;
+            case Image::RotateCW90:
+                uv2[0] = Vector2(maskClippingRect.GetRight(), maskClippingRect.GetTop());
+                uv2[1] = Vector2(maskClippingRect.GetRight(), maskClippingRect.GetBottom());
+                uv2[2] = Vector2(maskClippingRect.GetLeft(), maskClippingRect.GetTop());
+                uv2[3] = Vector2(maskClippingRect.GetLeft(), maskClippingRect.GetBottom());
+                break;
+        }
+
+        Vector2 points[] =
+        {
+            Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetTop() - 0.5f),
+            Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetTop() - 0.5f),
+            Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetBottom() - 0.5f),
+            Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetBottom() - 0.5f),
+        };
+        Project(points[0], points[1], points[2], points[3]);
+
+        renderer->DrawQuad(points, uv1, image->GetTexture(), uv2, maskImage->GetTexture(), Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())));
+    }
+
     void UIDrawingContext::Draw(Vector2 position, Texture2D* texture)
     {
         BBAssertDebug(texture && renderer);

@@ -27,19 +27,16 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    DynamicTexture2D::DynamicTexture2D(GraphicsDevice* graphicsDevice, int width, int height, PixelFormat format)
-        : Texture2D(graphicsDevice, width, height, width, height),
-          width(width),
-          height(height),
-          format(format),
+    DynamicTexture2D::DynamicTexture2D(GraphicsDevice* graphicsDevice, int width, int height, PixelFormat pixelFormat)
+        : Texture2D(graphicsDevice, width, height, width, height, pixelFormat),
           isLocked(false)
     {
         BBAssert(GetGraphicsDevice()->GetD3DDevice() != nullptr);
 
         D3DFORMAT d3dFormat = D3DFMT_UNKNOWN;
-        switch (GetFormat())
+        switch (pixelFormat)
         {
-            case Texture2D::A8G8B8A8Pixels:
+            case Texture2D::A8R8G8B8Pixels:
                 d3dFormat = D3DFMT_A8R8G8B8;
                 break;
             case Texture2D::A8Pixels:
@@ -53,9 +50,9 @@ namespace Bibim
         {
             D3DSURFACE_DESC surfaceDesc;
             if (newD3DTexture->GetLevelDesc(0, &surfaceDesc) == D3D_OK)
-                Setup(newD3DTexture, width, height, static_cast<int>(surfaceDesc.Width), static_cast<int>(surfaceDesc.Height));
+                Setup(newD3DTexture, width, height, static_cast<int>(surfaceDesc.Width), static_cast<int>(surfaceDesc.Height), pixelFormat);
             else
-                Setup(newD3DTexture, width, height, width, height);
+                Setup(newD3DTexture, width, height, width, height, pixelFormat);
             
             IncreaseRevision();
             SetStatus(CompletedStatus);

@@ -35,7 +35,7 @@
                 };
 
             public:
-                DynamicTexture2D(GraphicsDevice* graphicsDevice, int width, int height, PixelFormat format);
+                DynamicTexture2D(GraphicsDevice* graphicsDevice, int width, int height, PixelFormat pixelFormat);
                 virtual ~DynamicTexture2D();
 
                 bool Lock(LockedInfo& outLockedInfo);
@@ -44,12 +44,7 @@
 
                 inline bool IsLocked() const;
 
-                inline PixelFormat GetFormat() const;
-
             private:
-                int width;
-                int height;
-                PixelFormat format;
                 bool isLocked;
         };
     }

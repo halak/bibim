@@ -11,8 +11,8 @@ namespace Bibim
     {
     }
 
-    SourceTexture2D::SourceTexture2D(GraphicsDevice* graphicsDevice, int width, int height, int surfaceWidth, int surfaceHeight)
-        : Texture2D(graphicsDevice, width, height, surfaceWidth, surfaceHeight)
+    SourceTexture2D::SourceTexture2D(GraphicsDevice* graphicsDevice, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat)
+        : Texture2D(graphicsDevice, width, height, surfaceWidth, surfaceHeight, pixelFormat)
     {
         SetStatus(LoadingStatus);
     }
@@ -28,10 +28,11 @@ namespace Bibim
         const int height = static_cast<int>(reader.ReadInt16());
         const int surfaceWidth = static_cast<int>(reader.ReadInt16());
         const int surfaceHeight = static_cast<int>(reader.ReadInt16());
+        const PixelFormat pixelFormat = static_cast<PixelFormat>(reader.ReadInt8());
         if (width == 0 || height == 0 || surfaceWidth == 0 || surfaceHeight == 0)
             return nullptr;
 
-        SourceTexture2D* texture = new SourceTexture2D(graphicsDevice, width, height, surfaceWidth, surfaceHeight);
+        SourceTexture2D* texture = new SourceTexture2D(graphicsDevice, width, height, surfaceWidth, surfaceHeight, pixelFormat);
         reader.ReadAsync(new LoadingTask(reader, texture, surfaceHeight));
 
         return texture;
@@ -60,14 +61,26 @@ namespace Bibim
         IDirect3DDevice9* d3dDevice = texture->GetGraphicsDevice()->GetD3DDevice();
         const int width  = texture->GetSurfaceWidth();
         const int height = texture->GetSurfaceHeight();
+        const PixelFormat pixelFormat = texture->GetPixelFormat();
+
+        D3DFORMAT d3dFormat = D3DFMT_UNKNOWN;
+        switch (pixelFormat)
+        {
+            case A8R8G8B8Pixels:
+                d3dFormat = D3DFMT_A8R8G8B8;
+                break;
+            case A8Pixels:
+                d3dFormat = D3DFMT_A8;
+                break;
+        }
 
         IDirect3DTexture9* d3dTexture = nullptr;
         IDirect3DTexture9* d3dSysMemTexture = nullptr;
         HRESULT result = D3D_OK;
         result = d3dDevice->CreateTexture(width, height, 1,
-                                          0, D3DFMT_A8R8G8B8, D3DPOOL_DEFAULT, &d3dTexture, nullptr);
+                                          0, d3dFormat, D3DPOOL_DEFAULT, &d3dTexture, nullptr);
         result = d3dDevice->CreateTexture(width, height, 1,
-                                          0, D3DFMT_A8R8G8B8, D3DPOOL_SYSTEMMEM, &d3dSysMemTexture, nullptr);
+                                          0, d3dFormat, D3DPOOL_SYSTEMMEM, &d3dSysMemTexture, nullptr);
 
         D3DLOCKED_RECT d3dLockedRect;
         d3dSysMemTexture->LockRect(0, &d3dLockedRect, nullptr, 0);
@@ -84,7 +97,7 @@ namespace Bibim
         d3dDevice->UpdateTexture(d3dSysMemTexture, d3dTexture);
         d3dSysMemTexture->Release();
 
-        texture->Setup(d3dTexture, width, height, width, height);
+        texture->Setup(d3dTexture, texture->GetWidth(), texture->GetHeight(), width, height, pixelFormat);
         texture->IncreaseRevision();
         texture->SetStatus(CompletedStatus);
     }

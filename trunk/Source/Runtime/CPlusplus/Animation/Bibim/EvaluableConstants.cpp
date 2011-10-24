@@ -5,6 +5,8 @@
 
 namespace Bibim
 {
+    BBImplementsComponent(EvaluableGameAssetConstant);
+
     EvaluableGameAssetConstant::EvaluableGameAssetConstant()
         : value()
     {
