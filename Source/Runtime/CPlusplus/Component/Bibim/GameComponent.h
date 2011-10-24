@@ -22,7 +22,7 @@
                                                                     virtual classname* Clone(Bibim::CloningContext& context) const; \
                                                                 private:
 
-#       define BBImplementsComponent(classname) classname* classname::Clone(CloningContext& /*context*/) const \
+#       define BBImplementsComponent(classname) classname* classname::Clone(Bibim::CloningContext& /*context*/) const \
                                                 { \
                                                     classname* clone = new classname(); \
                                                     return clone; \

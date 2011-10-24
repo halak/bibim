@@ -135,6 +135,24 @@ namespace Bibim.Asset.Pipeline.Recipes
         private static void Process(UIButton button, PhotoshopDocument.Layer layer)
         {
             Process((UIVisual)button, layer);
+
+            PhotoshopDocument.Layer normal = layer.FindSubLayer("#Normal", true);
+            PhotoshopDocument.Layer pushed = layer.FindSubLayer("#Pushed", true);
+            PhotoshopDocument.Layer hovering = layer.FindSubLayer("#Focusing", true);
+
+            if (hovering == null)
+                hovering = layer.FindSubLayer("#Hovering", true);
+            if (hovering == null)
+                hovering = normal;
+            if (pushed == null)
+                pushed = hovering;
+
+            if (normal != null)
+                AddChildTo(button.NormalWindow, normal);
+            if (pushed != null)
+                AddChildTo(button.PushedWindow, pushed);
+            if (hovering != null)
+                AddChildTo(button.HoveringWindow, hovering);
         }
 
         private static void Process(UIWindow window, PhotoshopDocument.Layer layer)

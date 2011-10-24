@@ -5,6 +5,7 @@
 #include <Bibim/Colors.h>
 #include <Bibim/DisplaySwapChain.h>
 #include <Bibim/Exception.h>
+#include <Bibim/RenderTargetTexture2D.h>
 #include <Bibim/Window.h>
 #include <algorithm>
 
@@ -13,6 +14,7 @@ namespace Bibim
     GraphicsDevice::GraphicsDevice()
         : d3dObject(nullptr),
           d3dDevice(nullptr),
+          d3dBackbufferSurface(nullptr),
           window(nullptr),
           defaultSwapChain(nullptr),
           viewport(Rect::Empty),
@@ -44,12 +46,32 @@ namespace Bibim
             defaultSwapChain->BeginDraw();
     }
 
+    void GraphicsDevice::BeginDraw(RenderTargetTexture2D* renderTarget)
+    {
+        BBAssertDebug(renderTarget);
+
+        if (defaultSwapChain)
+            SetViewport(defaultSwapChain->GetViewport());
+
+        GetD3DDevice()->GetRenderTarget(0, &d3dBackbufferSurface);
+
+        GetD3DDevice()->SetRenderTarget(0, renderTarget->GetD3DSurface());
+        GetD3DDevice()->BeginScene();
+    }
+
     void GraphicsDevice::EndDraw()
     {
         if (defaultSwapChain == nullptr)
             GetD3DDevice()->EndScene();
         else
             defaultSwapChain->EndDraw();
+    }
+
+    void GraphicsDevice::EndDraw(RenderTargetTexture2D* /*renderTarget*/)
+    {
+        GetD3DDevice()->EndScene();
+        GetD3DDevice()->SetRenderTarget(0, d3dBackbufferSurface);
+        CheckedRelease(d3dBackbufferSurface);
     }
 
     void GraphicsDevice::Present()

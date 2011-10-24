@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Bibim.UI.Frames;
 
 namespace Bibim.UI.Visuals
 {
@@ -63,6 +64,15 @@ namespace Bibim.UI.Visuals
         #endregion
 
         #region Constructors
+        public UIButton()
+        {
+            NormalWindow = new UIWindow() { Frame = new UIFittedFrame() };
+            PushedWindow = new UIWindow() { Frame = new UIFittedFrame() };
+            HoveringWindow = new UIWindow(){ Frame = new UIFittedFrame() };
+            Add(NormalWindow);
+            Add(PushedWindow);
+            Add(HoveringWindow);
+        }
         #endregion
 
         #region Methods

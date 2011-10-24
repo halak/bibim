@@ -111,6 +111,7 @@
     <Compile Include="Asset\Pipeline\CookingNode.cs" />
     <Compile Include="Asset\Pipeline\GameAssetServer.cs" />
     <Compile Include="Asset\Pipeline\PipedGameAssetServer.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\BitmapToMaskTexture2D.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PackBitmap.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToTexture2D.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToUILayout1.cs" />

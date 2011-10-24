@@ -10,6 +10,13 @@ namespace Bibim
     }
 
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
+    EvaluableRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>* EvaluableRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::Clone(CloningContext& /*context*/) const
+    {
+        This* clone = new This();
+        return clone;
+    }
+
+    template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
     void EvaluableRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::UpdateValue()
     {
         if (source1 == nullptr || source2 == nullptr)

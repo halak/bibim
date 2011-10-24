@@ -1022,6 +1022,30 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\ScreenshotPrinter.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\ScreenshotPrinter.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\ScreenshotPrinter.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Graphics\Bibim\SourceTexture2D.cpp"
 					>
 				</File>
@@ -1710,6 +1734,30 @@
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIEffectMap.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIMaskEffect.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIMaskEffect.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIMaskEffect.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIOpacityMaskEffect.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIOpacityMaskEffect.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIOpacityMaskEffect.inl"
 						>
 					</File>
 					<File

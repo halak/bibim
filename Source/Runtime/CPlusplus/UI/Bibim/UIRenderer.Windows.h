@@ -30,6 +30,7 @@
 
                 void DrawQuad(const Vector2* p, const RectF& clippingRect, Texture2D* texture, Color color);
                 void DrawQuad(const Vector2* p, const Vector2* uv, Texture2D* texture, Color color);
+                void DrawQuad(const Vector2* p, const Vector2* uv1, Texture2D* texture, const Vector2* uv2, Texture2D* maskTexture, Color color);
                 void Draw(int count, const Vector2* points, Color color);
 
                 inline GraphicsDevice* GetGraphicsDevice() const;
@@ -62,14 +63,14 @@
                     static const DWORD NoTexturedFVF = D3DFVF_XYZ | D3DFVF_DIFFUSE;
                 };
 
-                struct AlphaTexturedVertex : Vertex
+                struct MaskVertex : Vertex
                 {
-                    D3DXVECTOR2 AlphaTexture;
+                    D3DXVECTOR2 MaskTexture;
 
-                    inline AlphaTexturedVertex();
-                    inline AlphaTexturedVertex(D3DXVECTOR3 position);
-                    inline AlphaTexturedVertex(D3DXVECTOR3 position, D3DCOLOR color);
-                    inline AlphaTexturedVertex(D3DXVECTOR3 position, D3DCOLOR color, D3DXVECTOR2 texture, D3DXVECTOR2 alphaTexture);
+                    inline MaskVertex();
+                    inline MaskVertex(D3DXVECTOR3 position);
+                    inline MaskVertex(D3DXVECTOR3 position, D3DCOLOR color);
+                    inline MaskVertex(D3DXVECTOR3 position, D3DCOLOR color, D3DXVECTOR2 texture, D3DXVECTOR2 maskTexture);
 
                     static const DWORD FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX2;
                 };
@@ -81,6 +82,7 @@
                     Texture2DPtr Texture;
                     void* Effect;
                     RectF Bounds;
+                    DWORD FVF;
 
                     inline QuadSet();
                 };
@@ -144,6 +146,9 @@
                  std::deque<OldRenderState>       oldRenderStates;
                  std::deque<OldTextureStageState> oldTextureStageStates;
                  std::deque<OldSamplerState>      oldSamplerStates;
+
+                 std::deque<OldTextureStageState> oldStringModeTextureStageStates;
+                 std::deque<OldSamplerState>      oldStringModeSamplerStates;
         };
     }
 

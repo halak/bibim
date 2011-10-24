@@ -16,9 +16,4 @@ namespace Bibim
     {
         return isLocked;
     }
-
-    Texture2D::PixelFormat DynamicTexture2D::GetFormat() const
-    {
-        return format;
-    }
 }

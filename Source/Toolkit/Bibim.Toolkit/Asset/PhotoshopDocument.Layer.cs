@@ -383,6 +383,24 @@ namespace Bibim.Asset
             #endregion
             
             #region Methods
+            public Layer FindSubLayer(string name, bool allSubLayers)
+            {
+                foreach (Layer item in SubLayers)
+                {
+                    if (string.Compare(item.Name, name, true) == 0)
+                        return item;
+
+                    if (allSubLayers)
+                    {
+                        Layer found = item.FindSubLayer(name, true);
+                        if (found != null)
+                            return found;
+                    }
+                }
+
+                return null;
+            }
+
             public Rectangle ComputeUnionRectangle()
             {
                 Rectangle result = Rectangle;

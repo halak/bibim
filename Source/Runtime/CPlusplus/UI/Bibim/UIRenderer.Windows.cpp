@@ -39,24 +39,23 @@
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        UIRenderer::AlphaTexturedVertex::AlphaTexturedVertex()
-            : Vertex()
+        UIRenderer::MaskVertex::MaskVertex()
         {
         }
 
-        UIRenderer::AlphaTexturedVertex::AlphaTexturedVertex(D3DXVECTOR3 position)
+        UIRenderer::MaskVertex::MaskVertex(D3DXVECTOR3 position)
             : Vertex(position)
         {
         }
 
-        UIRenderer::AlphaTexturedVertex::AlphaTexturedVertex(D3DXVECTOR3 position, D3DCOLOR color)
+        UIRenderer::MaskVertex::MaskVertex(D3DXVECTOR3 position, D3DCOLOR color)
             : Vertex(position, color)
         {
         }
 
-        UIRenderer::AlphaTexturedVertex::AlphaTexturedVertex(D3DXVECTOR3 position, D3DCOLOR color, D3DXVECTOR2 texture, D3DXVECTOR2 alphaTexture)
+        UIRenderer::MaskVertex::MaskVertex(D3DXVECTOR3 position, D3DCOLOR color, D3DXVECTOR2 texture, D3DXVECTOR2 maskTexture)
             : Vertex(position, color, texture),
-              AlphaTexture(alphaTexture)
+              MaskTexture(maskTexture)
         {
         }
 
@@ -65,6 +64,33 @@
         const unsigned short UIRenderer::TrianglesPerQuad = 2;
         const unsigned short UIRenderer::VerticesPerQuad  = 4;
         const unsigned short UIRenderer::IndicesPerQuad   = 6;
+
+        static void CheckedSetRenderState(IDirect3DDevice9* d3dDevice, D3DRENDERSTATETYPE state, DWORD value)
+        {
+            DWORD oldValue;
+            d3dDevice->GetRenderState(state, &oldValue);
+            if (oldValue != value)
+                d3dDevice->SetRenderState(state, value);
+        }
+
+        static void CheckedSetTextureStageState(IDirect3DDevice9* d3dDevice, DWORD stage, D3DTEXTURESTAGESTATETYPE type, DWORD value)
+        {
+            DWORD oldValue;
+            d3dDevice->GetTextureStageState(stage, type, &oldValue);
+            if (oldValue != value)
+            {
+                HRESULT r = d3dDevice->SetTextureStageState(stage, type, value);
+                r = r;
+            }
+        }
+
+        static void CheckedSetSamplerState(IDirect3DDevice9* d3dDevice, DWORD sampler, D3DSAMPLERSTATETYPE type, DWORD value)
+        {
+            DWORD oldValue;
+            d3dDevice->GetSamplerState(sampler, type, &oldValue);
+            if (oldValue != value)
+                d3dDevice->SetSamplerState(sampler, type, value);
+        }
 
         UIRenderer::UIRenderer()
             : graphicsDevice(nullptr),
@@ -230,16 +256,17 @@
             FlushAndLock();
 
             IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
-            d3dDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
-            d3dDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
-            d3dDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
-            d3dDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_DIFFUSE);
-            d3dDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG1);
-            d3dDevice->SetTextureStageState(0, D3DTSS_TEXCOORDINDEX, 0);
 
-            d3dDevice->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
-            d3dDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
-            d3dDevice->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG1, D3DTA_DIFFUSE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLOROP, D3DTOP_SELECTARG1);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_TEXCOORDINDEX, 0);
+
+            CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
+            CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
+            CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
         }
 
         void UIRenderer::LeaveStringRenderMode()
@@ -247,17 +274,17 @@
             FlushAndLock();
 
             IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
-            d3dDevice->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
-            d3dDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
-            d3dDevice->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
+            CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
+            CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
+            CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
 
-            d3dDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
-            d3dDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
-            d3dDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
-            d3dDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
-            d3dDevice->SetTextureStageState(0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
-            d3dDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_MODULATE);
-            d3dDevice->SetTextureStageState(0, D3DTSS_TEXCOORDINDEX, 0);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLOROP, D3DTOP_MODULATE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_TEXCOORDINDEX, 0);
         }
 
         void UIRenderer::DrawQuad(const Vector2* p, const RectF& clippingRect, Texture2D* texture, Color color)
@@ -314,6 +341,7 @@
                     numberOfActiveQuadSets = 1;
                 }
 
+                cachedQuadSets[quadSetIndex].FVF = Vertex::FVF;
                 cachedQuadSets[quadSetIndex].Texture = texture;
                 cachedQuadSets[quadSetIndex].Bounds = bounds;
             }
@@ -331,6 +359,95 @@
             localLockedVertices[2] = Vertex(D3DXVECTOR3(p[2].X, p[2].Y, 0.0f), d3dColor, D3DXVECTOR2(uv[2].X, uv[2].Y));
             localLockedVertices[3] = Vertex(D3DXVECTOR3(p[3].X, p[3].Y, 0.0f), d3dColor, D3DXVECTOR2(uv[3].X, uv[3].Y));
             quadSet.Count++;
+        }
+
+        void UIRenderer::DrawQuad(const Vector2* p, const Vector2* uv1, Texture2D* texture, const Vector2* uv2, Texture2D* maskTexture, Color color)
+        {
+            FlushAndLock();
+
+            IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
+            //CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+            //CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
+            //CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+            //CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+            //CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
+            //CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLOROP, D3DTOP_MODULATE);
+            //CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_TEXCOORDINDEX, 0);
+
+            //CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+            //CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+            //CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+            //CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_COLOROP, D3DTOP_SELECTARG2);
+            //CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_TEXCOORDINDEX, 1);
+
+            if (color.A >= 128)
+            {
+                double a = (double)(color.A - 128) / 127.0;
+                color.A = (byte)(a * 255);
+
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAOP, D3DTOP_ADD);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG1, D3DTA_CURRENT);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLOROP, D3DTOP_SELECTARG2);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_TEXCOORDINDEX, 0);
+
+            CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+            CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+            CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+            CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_COLOROP, D3DTOP_MODULATE);
+            CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_TEXCOORDINDEX, 1);
+            }
+            else
+            {
+                double a = (double)color.A / 127.0;
+                color.A = 255 - (byte)(a * 255);
+
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAOP, D3DTOP_SUBTRACT);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG1, D3DTA_CURRENT);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLOROP, D3DTOP_SELECTARG2);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_TEXCOORDINDEX, 0);
+
+            CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+            CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+            CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+            CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_COLOROP, D3DTOP_MODULATE);
+            CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_TEXCOORDINDEX, 1);
+            }
+
+            // Draw
+            {
+                const D3DCOLOR d3dColor = color.ToARGB();
+                const MaskVertex v[4] = 
+                {
+                    MaskVertex(D3DXVECTOR3(p[0].X, p[0].Y, 0.0f), d3dColor, D3DXVECTOR2(uv2[0].X, uv2[0].Y), D3DXVECTOR2(uv1[0].X, uv1[0].Y)),
+                    MaskVertex(D3DXVECTOR3(p[1].X, p[1].Y, 0.0f), d3dColor, D3DXVECTOR2(uv2[1].X, uv2[1].Y), D3DXVECTOR2(uv1[1].X, uv1[1].Y)),
+                    MaskVertex(D3DXVECTOR3(p[2].X, p[2].Y, 0.0f), d3dColor, D3DXVECTOR2(uv2[2].X, uv2[2].Y), D3DXVECTOR2(uv1[2].X, uv1[2].Y)),
+                    MaskVertex(D3DXVECTOR3(p[3].X, p[3].Y, 0.0f), d3dColor, D3DXVECTOR2(uv2[3].X, uv2[3].Y), D3DXVECTOR2(uv1[3].X, uv1[3].Y)),
+                };
+                d3dDevice->SetFVF(MaskVertex::FVF);
+                d3dDevice->SetTexture(0, maskTexture->GetD3DTexture());
+                d3dDevice->SetTexture(1, texture->GetD3DTexture());
+                d3dDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, v, sizeof(MaskVertex));
+                d3dDevice->SetTexture(0, nullptr);
+                d3dDevice->SetTexture(1, nullptr);
+                d3dDevice->SetStreamSource(0, vb, 0, sizeof(Vertex));
+            }
+
+            CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
+            CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_COLOROP, D3DTOP_DISABLE);
+
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLOROP, D3DTOP_MODULATE);
+            CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_TEXCOORDINDEX, 0);
         }
 
         void UIRenderer::Draw(int count, const Vector2* points, Color color)
@@ -359,14 +476,14 @@
 
         void UIRenderer::Flush()
         {
-            if (numberOfActiveQuadSets == 0)
-                return;
-
             if (lockedVertices)
             {
                 lockedVertices = nullptr;
                 vb->Unlock();
             }
+
+            if (numberOfActiveQuadSets == 0)
+                return;
 
             IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
 
@@ -376,16 +493,12 @@
 
                 if (cachedQuadSets[i].Count > 0)
                 {
+                    d3dDevice->SetFVF(item.FVF);
+
                     if (item.Texture)
-                    {
-                        d3dDevice->SetFVF(Vertex::FVF);
                         d3dDevice->SetTexture(0, item.Texture->GetD3DTexture());
-                    }
                     else
-                    {
-                        d3dDevice->SetFVF(Vertex::NoTexturedFVF);
                         d3dDevice->SetTexture(0, nullptr);
-                    }
 
                     d3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, item.StartIndex, 0, item.Count * VerticesPerQuad, 0, item.Count * TrianglesPerQuad);
                     item.Texture.Reset();
@@ -508,7 +621,8 @@
             : Count(0),
               StartIndex(0),
               Texture(),
-              Effect(nullptr)
+              Effect(nullptr),
+              FVF(0)
         {
         }
 

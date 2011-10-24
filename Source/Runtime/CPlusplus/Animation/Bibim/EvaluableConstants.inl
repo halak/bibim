@@ -18,6 +18,13 @@ namespace Bibim
     }
 
     template <typename T, char a, char b, char c, char d>
+    EvaluableConstantTemplate<T, a, b, c, d>* EvaluableConstantTemplate<T, a, b, c, d>::Clone(CloningContext& /*context*/) const
+    {
+        This* clone = new This();
+        return clone;
+    }
+
+    template <typename T, char a, char b, char c, char d>
     T EvaluableConstantTemplate<T, a, b, c, d>::Evaluate(EvaluationContext& /*context*/)
     {
         return value;

@@ -11,7 +11,7 @@ using G = System.Drawing.Graphics;
 
 namespace Bibim.Asset.Pipeline.Recipes
 {
-    public sealed class BitmapToTexture2D : CookingNode<SourceTexture2D>
+    public sealed class BitmapToMaskTexture2D : CookingNode<SourceTexture2D>
     {
         #region Properties
         [XmlElement]
@@ -23,12 +23,12 @@ namespace Bibim.Asset.Pipeline.Recipes
         #endregion
 
         #region Constructors
-        public BitmapToTexture2D()
+        public BitmapToMaskTexture2D()
             : this(null)
         {
         }
 
-        public BitmapToTexture2D(CookingNode<Bitmap> input)
+        public BitmapToMaskTexture2D(CookingNode<Bitmap> input)
         {
             Input = input;
         }
@@ -58,13 +58,15 @@ namespace Bibim.Asset.Pipeline.Recipes
                 input = textureBitmap;
             }
 
-            SourceTexture2D output = new SourceTexture2D(null, originalWidth, originalHeight, input.Width, input.Height, Texture2D.PixelFormat.A8R8G8B8);
+            SourceTexture2D output = new SourceTexture2D(null, originalWidth, originalHeight, input.Width, input.Height, Texture2D.PixelFormat.A8);
+            byte[] buffer = new byte[input.Width * input.Height];
+            for (int y = 0; y < input.Height; y++)
+            {
+                for (int x = 0; x < input.Width; x++)
+                    buffer[(y * input.Height) + x] = input.GetPixel(x, y).R;
+            }
 
-            BitmapData bitmapData = input.LockBits(new Rectangle(0, 0, input.Width, input.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
-            byte[] buffer = new byte[bitmapData.Stride * bitmapData.Height];
-            Marshal.Copy(bitmapData.Scan0, buffer, 0, buffer.Length);
-            output.Tag = new SourceTexture2DCookingTag(bitmapData.Stride, buffer);
-            input.UnlockBits(bitmapData);
+            output.Tag = new SourceTexture2DCookingTag(input.Width, buffer);
 
             return output;
         }

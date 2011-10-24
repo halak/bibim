@@ -25,6 +25,11 @@ namespace Bibim
         return surfaceHeight;
     }
 
+    Texture2D::PixelFormat Texture2D::GetPixelFormat() const
+    {
+        return pixelFormat;
+    }
+
     IDirect3DTexture9* Texture2D::GetD3DTexture() const
     {
         return d3dTexture;

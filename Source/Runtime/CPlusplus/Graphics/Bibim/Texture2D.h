@@ -13,7 +13,8 @@
             public:
                 enum PixelFormat
                 {
-                    A8G8B8A8Pixels,
+                    UnknownPixels,
+                    A8R8G8B8Pixels,
                     A8Pixels,
                 };
 
@@ -26,14 +27,15 @@
                 inline int GetHeight() const;
                 inline int GetSurfaceWidth() const;
                 inline int GetSurfaceHeight() const;
+                inline PixelFormat GetPixelFormat() const;
 
                 inline IDirect3DTexture9* GetD3DTexture() const;
 
             protected:
                 Texture2D(GraphicsDevice* graphicsDevice);
-                Texture2D(GraphicsDevice* graphicsDevice, int width, int height, int surfaceWidth, int surfaceHeight);
+                Texture2D(GraphicsDevice* graphicsDevice, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
 
-                void Setup(IDirect3DTexture9* d3dTexture, int width, int height, int surfaceWidth, int surfaceHeight);
+                void Setup(IDirect3DTexture9* d3dTexture, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
 
             private:
                 GraphicsDevice* graphicsDevice;
@@ -41,6 +43,7 @@
                 int height;
                 int surfaceWidth;
                 int surfaceHeight;
+                PixelFormat pixelFormat;
                 IDirect3DTexture9* d3dTexture;
         };
     }

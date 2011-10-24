@@ -12,10 +12,10 @@ namespace Bibim.Graphics
         {
         }
 
-        public SourceTexture2D(GraphicsDevice graphicsDeivce, int width, int height, int surfaceWidth, int surfaceHeight)
+        public SourceTexture2D(GraphicsDevice graphicsDeivce, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat format)
             : base(graphicsDeivce)
         {
-            Setup(width, height, surfaceWidth, surfaceHeight);
+            Setup(width, height, surfaceWidth, surfaceHeight, format);
         }
 
         public class Reader : GameAssetReader<SourceTexture2D>

@@ -7,6 +7,15 @@ namespace Bibim.Graphics
 {
     public abstract class Texture2D : GameAsset
     {
+        #region PixelFormat (Nested Enum)
+        public enum PixelFormat
+        {
+            Unknown,
+            A8R8G8B8,
+            A8
+        }
+        #endregion
+
         #region Fields
         private GraphicsDevice graphicsDevice;
         #endregion
@@ -47,6 +56,12 @@ namespace Bibim.Graphics
             get;
             private set;
         }
+
+        public PixelFormat Format
+        {
+            get;
+            private set;
+        }
         #endregion
 
         #region Constructors
@@ -61,12 +76,13 @@ namespace Bibim.Graphics
         #endregion
 
         #region Methods
-        protected void Setup(int width, int height, int surfaceWidth, int surfaceHeight)
+        protected void Setup(int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat format)
         {
             Width = width;
             Height = height;
             SurfaceWidth = surfaceWidth;
             SurfaceHeight = surfaceHeight;
+            Format = format;
         }
         #endregion
     }
