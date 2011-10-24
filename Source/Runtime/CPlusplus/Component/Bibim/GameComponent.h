@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/SharedObject.h>
+#   include <Bibim/CloningContext.h>
 
     namespace Bibim
     {
@@ -19,12 +20,21 @@
                                                                 public: \
                                                                     static const uint32 ClassID = BBMakeFOURCC(a, b, c, d); \
                                                                     virtual uint32 GetClassID() const { return ClassID; } \
+                                                                    virtual classname* Clone() const; \
+                                                                protected: \
                                                                     virtual classname* Clone(Bibim::CloningContext& context) const; \
                                                                 private:
 
-#       define BBImplementsComponent(classname) classname* classname::Clone(Bibim::CloningContext& /*context*/) const \
+#       define BBImplementsComponent(classname) classname* classname::Clone() const \
+                                                { \
+                                                    CloningContext context; \
+                                                    return Clone(context); \
+                                                } \
+                                                classname* classname::Clone(Bibim::CloningContext& context) const \
                                                 { \
                                                     classname* clone = new classname(); \
+                                                    context.Store(this, clone); \
+                                                    clone->OnCopy(this, context); \
                                                     return clone; \
                                                 }
 
@@ -38,8 +48,7 @@
             public:
                 virtual ~GameComponent();
 
-                        GameComponent* Clone() const;
-                virtual GameComponent* Clone(CloningContext& context) const = 0;
+                virtual GameComponent* Clone() const;
 
                 inline uint GetID() const;
                 inline void SetID(uint value);
@@ -47,6 +56,8 @@
             protected:
                 GameComponent();
                 GameComponent(uint id);
+
+                virtual GameComponent* Clone(CloningContext& context) const = 0;
 
             private:
                 uint id;

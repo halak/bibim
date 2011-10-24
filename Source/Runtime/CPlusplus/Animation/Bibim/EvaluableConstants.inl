@@ -18,9 +18,11 @@ namespace Bibim
     }
 
     template <typename T, char a, char b, char c, char d>
-    EvaluableConstantTemplate<T, a, b, c, d>* EvaluableConstantTemplate<T, a, b, c, d>::Clone(CloningContext& /*context*/) const
+    EvaluableConstantTemplate<T, a, b, c, d>* EvaluableConstantTemplate<T, a, b, c, d>::Clone(CloningContext& context) const
     {
         This* clone = new This();
+        context.Store(this, clone);
+        clone->OnCopy(this, context);
         return clone;
     }
 
@@ -46,6 +48,7 @@ namespace Bibim
     void EvaluableConstantTemplate<T, a, b, c, d>::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
+        reader.Read(value);
     }
 
     template <typename T, char a, char b, char c, char d>
@@ -53,6 +56,7 @@ namespace Bibim
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
+        value = o->value;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

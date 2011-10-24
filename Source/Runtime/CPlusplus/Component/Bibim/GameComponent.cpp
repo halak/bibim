@@ -1,6 +1,5 @@
 #include <Bibim/PCH.h>
 #include <Bibim/GameComponent.h>
-#include <Bibim/CloningContext.h>
 #include <Bibim/ComponentStreamReader.h>
 
 namespace Bibim

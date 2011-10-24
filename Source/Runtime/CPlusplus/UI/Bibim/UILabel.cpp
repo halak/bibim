@@ -75,5 +75,9 @@ namespace Bibim
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
+        font = o->font;
+        text = o->text;
+        autoResize = o->autoResize;
+        fontStringChanged = true;
     }
 }

@@ -32,6 +32,7 @@ namespace Bibim.Asset.Pipeline
 
         private Dictionary<string, AssetCache> assetCaches;
         private object assetCachesLock = new object();
+        private List<FileSystemWatcher> dependencyWatchers;
         #endregion
 
         #region Properties
@@ -57,10 +58,7 @@ namespace Bibim.Asset.Pipeline
             taskThread.Start();
 
             assetCaches = new Dictionary<string, AssetCache>();
-        }
-
-        ~GameAssetServer()
-        {
+            dependencyWatchers = new List<FileSystemWatcher>();
         }
         #endregion
 
@@ -70,6 +68,9 @@ namespace Bibim.Asset.Pipeline
             switch (Status)
             {
                 case GameModuleStatus.Dead:
+                    foreach (var item in dependencyWatchers)
+                        item.EnableRaisingEvents = false;
+
                     Interlocked.Exchange(ref taskThreadClosed, 1);
                     taskThread.Join();
                     taskQueue = null;
@@ -82,6 +83,9 @@ namespace Bibim.Asset.Pipeline
                         Interlocked.Exchange(ref taskThreadClosed, 0);
                         taskThread.Start();
                     }
+
+                    foreach (var item in dependencyWatchers)
+                        item.EnableRaisingEvents = true;
                     break;
             }
         }
@@ -140,6 +144,21 @@ namespace Bibim.Asset.Pipeline
                                           WriteCacheFile(binaryAbsolutePath, cacheBuffer);
 
                                           Trace.TraceInformation("Asset cooing succeed. {0}", assetPath);
+
+                                          foreach (string item in dependencies)
+                                          {
+                                              string dependencyDirectory = Path.GetDirectoryName(item);
+                                              if (dependencyWatchers.Exists((watcher) => string.Compare(watcher.Path, dependencyDirectory) == 0) == false)
+                                              {
+                                                  var watcher = new FileSystemWatcher(dependencyDirectory);
+                                                  watcher.Changed += (o, e) => { RemoveAssetCachesByDependency(e.FullPath); };
+                                                  watcher.Deleted += (o, e) => { RemoveAssetCachesByDependency(e.FullPath); };
+                                                  watcher.Renamed += (o, e) => { RemoveAssetCachesByDependency(e.FullPath); };
+                                                  watcher.IncludeSubdirectories = false;
+                                                  watcher.EnableRaisingEvents = true;
+                                                  dependencyWatchers.Add(watcher);
+                                              }
+                                          }
                                       }
                                       else
                                       {
@@ -213,7 +232,7 @@ namespace Bibim.Asset.Pipeline
             }
 
             foreach (string item in removingKeys)
-                Trace.TraceInformation("{0}이 바뀌었으므로 {1}의 Cache를 비움", Path.GetFileName(path), Path.GetFileName(item));
+                Trace.TraceInformation("{0}의 내용이 바뀌었으므로 {1}의 Cache를 비웠습니다.", Path.GetFileName(path), Path.GetFileName(item));
         }
         #endregion
     }

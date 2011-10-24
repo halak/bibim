@@ -51,7 +51,7 @@ namespace Bibim
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const int AlarmClock::DefaultGroup = 0;
-    const float AlarmClock::InvalidTime = 0.0f;
+    const float AlarmClock::InvalidTime = -1.0f;
 
     AlarmClock::AlarmClock()
     {
@@ -90,7 +90,7 @@ namespace Bibim
                                 needsGarbageCollection = true;
                                 break;
                             case Callback::StopTick:
-                                item.RemainTickTime = -1.0f;
+                                item.RemainTickTime = InvalidTime;
                                 break;
                             case Callback::Restart:
                                 item.RemainTickTime = alarms[i].TickTime;

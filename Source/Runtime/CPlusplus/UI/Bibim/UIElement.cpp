@@ -23,9 +23,7 @@ namespace Bibim
     void UIElement::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
-        if (const UIElement* o = static_cast<const UIElement*>(original))
-        {
-            name = o->name;
-        }
+        const This* o = static_cast<const UIElement*>(original);
+        name = o->name;
     }
 }

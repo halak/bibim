@@ -9,9 +9,11 @@ namespace Bibim
     }
 
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
-    EvaluableSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>* EvaluableSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::Clone(CloningContext& /*context*/) const
+    EvaluableSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>* EvaluableSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::Clone(CloningContext& context) const
     {
         This* clone = new This();
+        context.Store(this, clone);
+        clone->OnCopy(this, context);
         return clone;
     }
 

@@ -29,11 +29,13 @@ namespace Bibim
     void EvaluableGameAssetConstant::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
+        value = reader.ReadAsset();
     }
 
     void EvaluableGameAssetConstant::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
+        value = o->value;
     }
 }

@@ -102,7 +102,9 @@ namespace Bibim
         opacity = o->opacity;
         shown = o->shown;
         size = o->size;
-        //frame = static_cast<UIFrame*>(reader.ReadUIElement());
+        frame = context.Clone(o->frame);
+        transform = context.Clone(o->transform);
+        eventMap = context.Clone(o->eventMap);
     }
 
     void UIVisual::OnDraw(UIDrawingContext& /*context*/)

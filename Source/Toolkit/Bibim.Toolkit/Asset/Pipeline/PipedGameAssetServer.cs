@@ -98,12 +98,6 @@ namespace Bibim.Asset.Pipeline
                 peer.Directory = directory;
                 peer.Name = clientName;
                 peer.ID = idGenerator++;
-                peer.FileSystemWatcher.Path = directory;
-                peer.FileSystemWatcher.Changed += (o, e) => { RemoveAssetCachesByDependency(e.FullPath); };
-                peer.FileSystemWatcher.Deleted += (o, e) => { RemoveAssetCachesByDependency(e.FullPath); };
-                peer.FileSystemWatcher.Renamed += (o, e) => { RemoveAssetCachesByDependency(e.FullPath); };
-                peer.FileSystemWatcher.IncludeSubdirectories = true;
-                peer.FileSystemWatcher.EnableRaisingEvents = true;
 
                 // Client에서는 uint32형식의 Packet ID를 먼저 전송합니다.
                 // Packet 종류에 따라 다음에 이어질 정보가 달라집니다.
@@ -269,12 +263,6 @@ namespace Bibim.Asset.Pipeline
                 set;
             }
 
-            public FileSystemWatcher FileSystemWatcher
-            {
-                get;
-                private set;
-            }
-
             public Peer(string pipeName)
             {
                 this.Stream = new NamedPipeServerStream(pipeName, PipeDirection.InOut,
@@ -284,13 +272,10 @@ namespace Bibim.Asset.Pipeline
                 this.StreamReader = new BinaryReader(Stream);
                 this.StreamWriter = new BinaryWriter(Stream);
                 this.Buffer = new byte [64];
-                this.FileSystemWatcher = new FileSystemWatcher();
             }
 
             public void Disconnect()
             {
-                FileSystemWatcher.Dispose();
-
                 if (this.Stream.IsConnected)
                     this.Stream.Disconnect();
 

@@ -213,5 +213,8 @@ namespace Bibim
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
+        children.reserve(o->children.size());
+        for (VisualCollection::const_iterator it = o->children.begin(); it != o->children.end(); it++)
+            Add(context.Clone(*it));
     }
 }
