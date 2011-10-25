@@ -208,6 +208,11 @@ namespace Bibim.Asset.Pipeline
                     peer.Name = peer.StreamReader.ReadBibimString();
                     message = string.Format("[{0}:{1}] Received ChangeClientName. {2} => {3}", peer.Name, peer.ID, oldName, peer.Name);
                     break;
+                case PipedAssetProvider.ChangeWorkingDirectoryPacketID:
+                    string oldWorkingDirectory = peer.Directory;
+                    peer.Name = peer.StreamReader.ReadBibimString();
+                    message = string.Format("[{0}:{1}] Received ChangeWorkingDirectory. {2} => {3}", peer.Name, peer.ID, oldWorkingDirectory, peer.Directory);
+                    break;
             }
 
             // 다시 새로운 Packet ID를 받기 위해 비동기 읽기 작업을 수행합니다.

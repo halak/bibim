@@ -177,6 +177,21 @@ namespace Bibim
         }
     }
 
+    void PipedAssetProvider::SetWorkingDirectory(const String& value)
+    {
+        if (workingDirectory != value)
+        {
+            workingDirectory = value;
+
+            if (TryConnectToServer())
+            {
+                BinaryWriter queryWriter(queryStream);
+                queryWriter.Write(ChangeWorkingDirectoryPacketID);
+                queryWriter.Write(workingDirectory);
+            }
+        }
+    }
+
     bool PipedAssetProvider::BeginLoad(const String& name, String& outPipeName)
     {
         BBAssertDebug(GetStorage() != nullptr);
