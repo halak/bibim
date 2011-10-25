@@ -3,6 +3,8 @@
 #include <Bibim/AssetLoadingTask.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/BinaryWriter.h>
+#include <Bibim/DumpStream.h>
+#include <Bibim/FileStream.h>
 #include <Bibim/Environment.h>
 #include <BIbim/GameAssetFactory.h>
 #include <BIbim/GameAssetStorage.h>
@@ -13,10 +15,11 @@ namespace Bibim
     class PipedAssetPreloadingTask : public AssetPreloadingTask
     {
         public:
-            PipedAssetPreloadingTask(const String& name, GameAssetStorage* storage, const String& serverName, const String& assetPipeName)
+            PipedAssetPreloadingTask(const String& name, GameAssetStorage* storage, const String& serverName, const String& assetPipeName, bool dumpCacheEnabled)
                 : AssetPreloadingTask(name, storage),
                   serverName(serverName),
                   assetPipeName(assetPipeName),
+                  dumpCacheEnabled(dumpCacheEnabled),
                   cancelled(false)
             {
             }
@@ -27,14 +30,20 @@ namespace Bibim
 
             virtual void Execute()
             {
-                PipeClientStreamPtr assetStream = new PipeClientStream(serverName, assetPipeName, PipeStream::ReadOnly);
+                PipeClientStreamPtr pipeStream = new PipeClientStream(serverName, assetPipeName, PipeStream::ReadOnly);
                 do
                 {
-                    assetStream->Connect();
-                } while (assetStream->IsConnected() == false && cancelled == false);
+                    pipeStream->Connect();
+                } while (pipeStream->IsConnected() == false && cancelled == false);
 
                 if (cancelled == false)
                 {
+                    StreamPtr assetStream = nullptr;
+                    if (dumpCacheEnabled)
+                        assetStream = new DumpStream(pipeStream, new FileStream(GetName() + ".ab", FileStream::WriteOnly));
+                    else
+                        assetStream = pipeStream;
+
                     AssetStreamReader reader(GetName(), assetStream, GetStorage(), true);
                     Register(GameAssetFactory::Create(reader));
                 }
@@ -51,24 +60,28 @@ namespace Bibim
             String serverName;
             String assetPipeName;
             GameAssetStorage* storage;
+            bool dumpCacheEnabled;
             bool cancelled;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     PipedAssetProvider::PipedAssetProvider()
+        : dumpCacheEnabled(false)
     {
     }
 
     PipedAssetProvider::PipedAssetProvider(GameAssetStorage* storage)
-        : AssetProvider(storage)
+        : AssetProvider(storage),
+          dumpCacheEnabled(false)
     {
     }
 
     PipedAssetProvider::PipedAssetProvider(GameAssetStorage* storage, const String& pipeName, const String& clientName)
         : AssetProvider(storage),
           pipeName(pipeName),
-          clientName(clientName)
+          clientName(clientName),
+          dumpCacheEnabled(false)
     {
     }
 
@@ -76,7 +89,8 @@ namespace Bibim
         : AssetProvider(storage),
           serverName(serverName),
           pipeName(pipeName),
-          clientName(clientName)
+          clientName(clientName),
+          dumpCacheEnabled(false)
     {
     }
 
@@ -91,7 +105,7 @@ namespace Bibim
         String assetPipeName;
         if (BeginLoad(name, assetPipeName))
         {
-            Add(new PipedAssetPreloadingTask(name, GetStorage(), serverName, assetPipeName));
+            Add(new PipedAssetPreloadingTask(name, GetStorage(), serverName, assetPipeName, dumpCacheEnabled));
             return true;
         }
         else
@@ -103,11 +117,17 @@ namespace Bibim
         String assetPipeName;
         if (BeginLoad(name, assetPipeName))
         {
-            PipeClientStreamPtr assetStream = new PipeClientStream(serverName, assetPipeName, PipeStream::ReadOnly);
+            PipeClientStreamPtr pipeStream = new PipeClientStream(serverName, assetPipeName, PipeStream::ReadOnly);
             do
             {
-                assetStream->Connect();
-            } while (assetStream->IsConnected() == false);
+                pipeStream->Connect();
+            } while (pipeStream->IsConnected() == false);
+
+            StreamPtr assetStream = nullptr;
+            if (dumpCacheEnabled)
+                assetStream = new DumpStream(pipeStream, new FileStream(name + ".ab", FileStream::WriteOnly));
+            else
+                assetStream = pipeStream;
 
             AssetStreamReader reader(name, assetStream, GetStorage());
             return GameAssetFactory::Create(reader);
@@ -186,7 +206,10 @@ namespace Bibim
             if (queryStream->IsConnected())
             {
                 BinaryWriter writer(queryStream);
-                writer.Write(Environment::GetWorkingDirectory());
+                if (workingDirectory.IsEmpty() == false)
+                    writer.Write(workingDirectory);
+                else
+                    writer.Write(Environment::GetWorkingDirectory());
                 writer.Write(GetClientName());
             }
         }

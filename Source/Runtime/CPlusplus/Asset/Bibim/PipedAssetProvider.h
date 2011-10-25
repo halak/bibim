@@ -34,6 +34,12 @@
                 inline const String& GetClientName() const;
                 void SetClientName(const String& value);
 
+                inline const String& GetWorkingDirectory() const;
+                void SetWorkingDirectory(const String& value);
+
+                inline bool GetDumpCacheEnabled() const;
+                inline void SetDumpCacheEnabled(bool value);
+
             private:
                 bool BeginLoad(const String& name, String& outPipeName);
                 bool TryConnectToServer();
@@ -42,7 +48,9 @@
                 String serverName;
                 String pipeName;
                 String clientName;
+                String workingDirectory;     
                 PipeClientStreamPtr queryStream;
+                bool dumpCacheEnabled;
         };
     }
 
