@@ -506,6 +506,18 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Foundation\Bibim\DumpStream.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\DumpStream.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\DumpStream.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Foundation\Bibim\MemoryStream.cpp"
 					>
 				</File>

@@ -15,4 +15,18 @@ namespace Bibim
         return pipeName;
     }
 
+    const String& PipedAssetProvider::GetWorkingDirectory() const
+    {
+        return workingDirectory;
+    }
+
+    bool PipedAssetProvider::GetDumpCacheEnabled() const
+    {
+        return dumpCacheEnabled;
+    }
+
+    void PipedAssetProvider::SetDumpCacheEnabled(bool value)
+    {
+        dumpCacheEnabled = value;
+    }
 }

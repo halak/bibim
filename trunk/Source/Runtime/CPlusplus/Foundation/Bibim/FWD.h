@@ -71,6 +71,7 @@
                 class BinaryReader;
                 class BinaryWriter;
                 BBForwardDeclareSmartPointerClass(Stream);
+                    BBForwardDeclareSmartPointerClass(DumpStream);
                     BBForwardDeclareSmartPointerClass(MemoryStream);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Mathematics
