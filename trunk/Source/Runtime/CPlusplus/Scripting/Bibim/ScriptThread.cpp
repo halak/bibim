@@ -217,7 +217,14 @@ namespace Bibim
 
     void ScriptThread::SetGlobal(uint id, const ScriptObject& value)
     {
-        globalVariables[id] = value;
+        if (value != ScriptObject::Void)
+            globalVariables[id] = value;
+        else
+        {
+            std::map<uint, ScriptObject>::iterator it = globalVariables.find(id);
+            if (it != globalVariables.end())
+                globalVariables.erase(it);
+        }
     }
 
     const Script::Function* ScriptThread::BeginCall(const String& name, int numberOfArguments)

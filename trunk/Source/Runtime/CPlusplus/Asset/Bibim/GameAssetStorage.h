@@ -46,6 +46,8 @@
                 bool Preload(const String& name);
                 GameAsset* Load(const String& name);
 
+                const String& FindName(GameAsset* value) const;
+
                 inline GameModuleTree* GetModules() const;
                 inline void SetModules(GameModuleTree* value);
 

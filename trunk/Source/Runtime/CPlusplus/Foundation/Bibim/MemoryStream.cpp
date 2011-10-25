@@ -5,12 +5,12 @@
 
 namespace Bibim
 {
-    MemoryStream::MemoryStream(const byte* buffer, int length)
+    MemoryStream::MemoryStream(const byte* buffer, int length, bool deleteOnClose)
         : buffer(const_cast<byte*>(buffer)),
           length(length),
           capacity(length),
           position(0),
-          deleteOnClose(false),
+          deleteOnClose(deleteOnClose),
           canRead(true),
           canWrite(false)
     {
