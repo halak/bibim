@@ -10,6 +10,7 @@ namespace Bibim.Asset
         #region Constants
         public const uint LoadAssetPacketID = 1000;
         public const uint ChangeClientNamePacketID = 1001;
+        public const uint ChangeWorkingDirectoryPacketID = 1002;
         #endregion
 
         public override GameAsset Load(string name)
