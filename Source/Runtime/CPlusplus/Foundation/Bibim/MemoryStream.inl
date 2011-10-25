@@ -17,7 +17,12 @@ namespace Bibim
 
     MemoryStream* MemoryStream::NewReadableStream(const byte* buffer, int length)
     {
-        return new MemoryStream(buffer, length);
+        return new MemoryStream(buffer, length, false);
+    }
+
+    MemoryStream* MemoryStream::NewReadableStream(const byte* buffer, int length, bool deleteOnClose)
+    {
+        return new MemoryStream(buffer, length, deleteOnClose);
     }
 
     MemoryStream* MemoryStream::NewWritableStream(int capacity, bool deleteOnClose)

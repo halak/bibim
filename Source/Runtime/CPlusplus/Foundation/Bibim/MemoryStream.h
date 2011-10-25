@@ -28,11 +28,12 @@
                 virtual bool CanSeek() const;
 
                 static inline MemoryStream* NewReadableStream(const byte* buffer, int length);
+                static inline MemoryStream* NewReadableStream(const byte* buffer, int length, bool deleteOnClose);
                 static inline MemoryStream* NewWritableStream(int capacity, bool deleteOnClose);
                 static inline MemoryStream* NewWritableStream(int capacity, bool deleteOnClose, bool fillZero);
 
             private:
-                MemoryStream(const byte* buffer, int length);
+                MemoryStream(const byte* buffer, int length, bool deleteOnClose);
                 MemoryStream(int capacity, bool deleteOnClose, bool fillZero);
 
             private:

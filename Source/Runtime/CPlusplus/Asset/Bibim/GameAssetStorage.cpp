@@ -75,6 +75,17 @@ namespace Bibim
         }
     }
 
+    const String& GameAssetStorage::FindName(GameAsset* value) const
+    {
+        for (AssetTable::const_iterator it = assets.begin(); it != assets.end(); it++)
+        {
+            if ((*it).second == value)
+                return (*it).first;
+        }
+
+        return String::Empty;
+    }
+
     void GameAssetStorage::OnStatusChanged(Status /*old*/)
     {
         switch (GetStatus())
