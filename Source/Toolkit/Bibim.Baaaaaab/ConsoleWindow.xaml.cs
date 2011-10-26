@@ -14,7 +14,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using dragonz.actb.core;
+using dragonz.actb.provider;
 using Bibim.Bab.Consoles;
+using Bibim.Bab.Properties;
 using Bibim.Reflection;
 using Bibim.Toolkit;
 
@@ -28,7 +31,10 @@ namespace Bibim.Bab
         #region Fields
         private MethodInfo programEntry;
         private Thread programThread;
+        private TraceListener listener;
         private ResourceDictionary resources;
+        private AutoCompleteManager consoleCommandACM;
+        private SortedSet<string> realtimeConsoleCommands;
         private int isProgramEnded;
         private int isWindowClosing;
         #endregion
@@ -51,7 +57,8 @@ namespace Bibim.Bab
             resources = new ResourceDictionary();
             resources.Source = new Uri("ConsoleResources.xaml", UriKind.Relative);
 
-            Trace.Listeners.Add(new TraceListener(listBoxLogs));
+            listener = new TraceListener(listBoxLogs);
+            Trace.Listeners.Add(listener);
 
             string classname = App.CommandLineArgs["class"];
             programEntry = ConsoleEntryPointAttribute.Find(classname);
@@ -118,6 +125,7 @@ namespace Bibim.Bab
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
+            Trace.Listeners.Remove(listener);
             Interlocked.Exchange(ref isWindowClosing, 1);
 
             if (isProgramEnded == 0)
@@ -138,13 +146,39 @@ namespace Bibim.Bab
 
         protected override void OnClosed(EventArgs e)
         {
+            Settings.Default.ConsoleWindowX = Left;
+            Settings.Default.ConsoleWindowY = Top;
+            Settings.Default.ConsoleWindowWidth = Width;
+            Settings.Default.ConsoleWindowHeight = Height;
+            Settings.Default.Save();
             App.Current.Shutdown();
             base.OnClosed(e);
         }
 
+        private void consoleWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            textBoxCommand.Focus();
+
+            realtimeConsoleCommands = new SortedSet<string>();
+            //foreach (string item in Settings.Default.ConsoleCommands)
+            //    realtimeConsoleCommands.Add(item);
+
+            consoleCommandACM = new AutoCompleteManager(textBoxCommand);
+            consoleCommandACM.DataProvider = new SimpleStaticDataProvider(realtimeConsoleCommands);
+            consoleCommandACM.AutoAppend = true;
+        }
+
         private void buttonCommand_Click(object sender, RoutedEventArgs e)
         {
-            CommandQueue.Enqueue(textBoxCommand.Text);
+            string command = textBoxCommand.Text;
+
+            if (realtimeConsoleCommands.Contains(command) == false)
+            {
+                Settings.Default.ConsoleCommands.Add(command);
+                realtimeConsoleCommands.Add(command);
+            }
+
+            CommandQueue.Enqueue(command);
             textBoxCommand.Focus();
             textBoxCommand.Text = string.Empty;
         }
@@ -288,14 +322,16 @@ namespace Bibim.Bab
                 {
                     Exception ex = (Exception)o;
 
-                    string message = string.Format("{0} Thrown ({1}).", ex.GetType().Name, ex.Message);
-                    foreach (UIElement item in CreateTextBlock(message, "EXCEPTION"))
-                        yield return item;
-
+                    Font font = categoryFonts["EXCEPTION"];
                     Button button = new Button()
                     {
-                        Content = "자세히",
+                        Content = string.Format("{0} Thrown ({1}).", ex.GetType().Name, ex.Message),
+                        FontStyle = font.Style,
+                        FontWeight = font.Weight,
                     };
+
+                    if (font.Foreground != null)
+                        button.Foreground = font.Foreground;
 
                     button.Click += new RoutedEventHandler((sender, e) =>
                     {

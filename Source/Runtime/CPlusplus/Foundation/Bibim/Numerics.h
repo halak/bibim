@@ -3,6 +3,7 @@
 #define __BIBIM_NUMERICS_H__
 
 #   include <Bibim/Foundation.h>
+#   include <Bibim/String.h>
 
     namespace Bibim
     {
@@ -34,6 +35,8 @@
         {
             static const int Min;
             static const int Max;
+
+            static int Parse(const String& s);
         };
 
         struct UInt
