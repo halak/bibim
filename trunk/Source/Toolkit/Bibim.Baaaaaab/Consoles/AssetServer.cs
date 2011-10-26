@@ -90,20 +90,26 @@ namespace Bibim.Bab.Consoles
                         Precook(assetServer, command.Substring("precook ".Length).Trim());
                     }
 
+                    if (command.StartsWith("compress "))
+                    {
+                        int index1 = "compress ".Length;
+                        int index2 = command.IndexOf(">>", index1);
+
+                        string directory = command.Substring(index1, index2 - index1).Trim();
+                        string zipFilePath = Path.ChangeExtension(command.Substring(index2 + ">>".Length), "zip").Trim();
+                        Compress(directory, zipFilePath);
+                    }
+
+
                     if (command.StartsWith("precook_and_compress "))
                     {
                         int index1 = "precook_and_compress ".Length;
                         int index2 = command.IndexOf(">>", index1);
 
-                        string directory = command.Substring(index1, index2 - index1);
-                        string zipFilePath = Path.ChangeExtension(command.Substring(index2 + ">>".Length), "zip");
+                        string directory = command.Substring(index1, index2 - index1).Trim();
+                        string zipFilePath = Path.ChangeExtension(command.Substring(index2 + ">>".Length), "zip").Trim();
                         Precook(assetServer, directory);
-
-                        Trace.WriteLine("Begin Create ZIP");
-                        using (var zipFile = new Ionic.Zip.ZipFile())
-                        {
-                            string[] files = Directory.GetFiles(directory, "*." + GameAsset.BinaryFileExtension, SearchOption.AllDirectories);
-                        }
+                        Compress(directory, zipFilePath);
                     }
                 }
                 else
@@ -151,6 +157,24 @@ namespace Bibim.Bab.Consoles
             {
                 Trace.WriteLine(ex);
             }
+
+            while (assetServer.IsBusy)
+                Thread.Sleep(100);
+        }
+
+        private static void Compress(string directory, string zipFilePath)
+        {
+            using (var zipFile = new Ionic.Zip.ZipFile())
+            {
+                string[] files = Directory.GetFiles(directory, "*." + GameAsset.BinaryFileExtension, SearchOption.AllDirectories);
+                foreach (string item in files)
+                    zipFile.AddFile(item, Path.GetDirectoryName(item.Substring(directory.Length + 1)));
+
+                Trace.WriteLine("Begin ZIP Creation");
+                zipFile.Save(Path.Combine(directory, zipFilePath));
+            }
+
+            Trace.TraceInformation("ZIP FILE Created! {0}", zipFilePath);
         }
     }
 }
