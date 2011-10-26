@@ -111,6 +111,11 @@
                         class PipedAssetProvider;
                         class FileAssetProvider;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Diagnostics
+                class Logger;
+                    class FileLogger;
+                    class OutputWindowLogger;
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
             // FileSystem
                 BBForwardDeclareSmartPointerClass(FileStream);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -128,6 +133,7 @@
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Graphics
                 class DisplaySwapChain;
+                class GraphicsCapabilities;
                 class GraphicsDevice;
                 BBForwardDeclareSmartPointerClass(Image);
                 class ScreenshotPrinter;

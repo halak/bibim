@@ -451,18 +451,6 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="Assert"
-				>
-				<File
-					RelativePath=".\Foundation\Bibim\Assert.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Assert.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="Exception"
 				>
 				<File
@@ -535,6 +523,30 @@
 				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\Stream.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Diagnostics"
+				>
+				<File
+					RelativePath=".\Foundation\Bibim\Assert.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Assert.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Log.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Log.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Log.inl"
 					>
 				</File>
 			</Filter>
@@ -1007,6 +1019,18 @@
 				</File>
 				<File
 					RelativePath=".\Graphics\Bibim\DynamicTexture2D.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\GraphicsCapabilities.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\GraphicsCapabilities.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\GraphicsCapabilities.inl"
 					>
 				</File>
 				<File
@@ -2097,6 +2121,46 @@
 						>
 					</File>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="Diagnostics"
+				>
+				<File
+					RelativePath=".\Diagnostics\Bibim\FileLogger.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\FileLogger.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\FileLogger.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\Logger.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\Logger.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\Logger.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\SystemLogger.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\SystemLogger.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\SystemLogger.inl"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

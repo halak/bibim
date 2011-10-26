@@ -20,6 +20,7 @@ namespace Bibim
           viewport(Rect::Empty),
           fullscreen(false)
     {
+        ::ZeroMemory(&d3dCaps, sizeof(d3dCaps));
     }
 
     GraphicsDevice::~GraphicsDevice()
@@ -142,9 +143,38 @@ namespace Bibim
         if (d3dObject == nullptr)
         {
             d3dObject = Direct3DCreate9(D3D_SDK_VERSION);
-
             if (d3dObject == nullptr)
                 throw Exception("GraphicsDevice::d3dObject == nullptr");
+
+            struct CollectDisplayModes
+            {
+                static void Do(DisplayModeCollection& modes, IDirect3D9* d3dObject, D3DFORMAT format, int bitsPerPixel)
+                {
+                    D3DDISPLAYMODE item = { 0, };
+                    const int count = d3dObject->GetAdapterModeCount(D3DADAPTER_DEFAULT, format);
+                    modes.reserve(modes.size() + count);
+                    for (int i = 0; i < count; i++)
+                    {
+                        if (d3dObject->EnumAdapterModes(D3DADAPTER_DEFAULT, format, i, &item) == D3D_OK)
+                        {
+                            BBAssert(item.Format == format);
+                            modes.push_back(DisplayMode(static_cast<int>(item.Width),
+                                                        static_cast<int>(item.Height),
+                                                        static_cast<int>(item.RefreshRate),
+                                                        bitsPerPixel));
+                        }
+                    }
+                }
+            };
+
+            DisplayModeCollection modes;
+            CollectDisplayModes::Do(modes, d3dObject, D3DFMT_A1R5G5B5, 16);
+            CollectDisplayModes::Do(modes, d3dObject, D3DFMT_A2R10G10B10, 32);
+            CollectDisplayModes::Do(modes, d3dObject, D3DFMT_A8R8G8B8, 32);
+            CollectDisplayModes::Do(modes, d3dObject, D3DFMT_R5G6B5, 16);
+            CollectDisplayModes::Do(modes, d3dObject, D3DFMT_X1R5G5B5, 16);
+            CollectDisplayModes::Do(modes, d3dObject, D3DFMT_X8R8G8B8, 32);
+            capabilities.displayModes.swap(modes);
         }
 
         D3DPRESENT_PARAMETERS d3dParameters;
@@ -172,13 +202,110 @@ namespace Bibim
                                               &d3dParameters,
                                               &d3dDevice);
         if (result != D3D_OK)
-            throw Exception("d3dObject->CreateDevice != D3D_OK");
+        {
+            result = GetD3DObject()->CreateDevice(D3DADAPTER_DEFAULT,
+                                                  D3DDEVTYPE_HAL,
+                                                  d3dParameters.hDeviceWindow,
+                                                  D3DCREATE_SOFTWARE_VERTEXPROCESSING | D3DCREATE_MULTITHREADED,
+                                                  &d3dParameters,
+                                                  &d3dDevice);
+            if (result != D3D_OK)
+                throw Exception("d3dObject->CreateDevice != D3D_OK");
+        }
+
+        if (d3dDevice->GetDeviceCaps(&d3dCaps) == D3D_OK)
+        {
+            const int vsMajor = D3DSHADER_VERSION_MAJOR(d3dCaps.VertexShaderVersion);
+            const int vsMinor = D3DSHADER_VERSION_MINOR(d3dCaps.VertexShaderVersion);
+            const int psMajor = D3DSHADER_VERSION_MAJOR(d3dCaps.PixelShaderVersion);
+            const int psMinor = D3DSHADER_VERSION_MINOR(d3dCaps.PixelShaderVersion);
+
+            switch (vsMajor)
+            {
+                case 0:
+                    capabilities.vertexShaderVersion = GraphicsCapabilities::VSNotSupported;
+                    break;
+                case 1:
+                    if (vsMinor >= 1)
+                        capabilities.vertexShaderVersion = GraphicsCapabilities::VS1X;
+                    else
+                        capabilities.vertexShaderVersion = GraphicsCapabilities::VSNotSupported;
+                    break;
+                case 2:
+                    if (vsMinor == 0)
+                        capabilities.vertexShaderVersion = GraphicsCapabilities::VS20;
+                    else
+                        capabilities.vertexShaderVersion = GraphicsCapabilities::VS20Ex;
+                    break;
+                case 3:
+                    capabilities.vertexShaderVersion = GraphicsCapabilities::VS30;
+                    break;
+                case 4:
+                    capabilities.vertexShaderVersion = GraphicsCapabilities::VS40;
+                    break;
+                default:
+                    capabilities.vertexShaderVersion = GraphicsCapabilities::VSUpperVersion;
+                    break;
+            }
+
+            switch (psMajor)
+            {
+                case 0:
+                    capabilities.pixelShaderVersion = GraphicsCapabilities::PSNotSupported;
+                    break;
+                case 1:
+                    if (psMinor >= 1)
+                        capabilities.pixelShaderVersion = GraphicsCapabilities::PS1X;
+                    else
+                        capabilities.pixelShaderVersion = GraphicsCapabilities::PSNotSupported;
+                    break;
+                case 2:
+                    if (psMinor == 0)
+                        capabilities.pixelShaderVersion = GraphicsCapabilities::PS20;
+                    else
+                        capabilities.pixelShaderVersion = GraphicsCapabilities::PS20Ex;
+                    break;
+                case 3:
+                    capabilities.pixelShaderVersion = GraphicsCapabilities::PS30;
+                    break;
+                case 4:
+                    capabilities.pixelShaderVersion = GraphicsCapabilities::PS40;
+                    break;
+                default:
+                    capabilities.pixelShaderVersion = GraphicsCapabilities::PSUpperVersion;
+                    break;
+            }
+
+            BBAssert(d3dCaps.Caps2 & D3DCAPS2_DYNAMICTEXTURES);
+            BBAssert(d3dCaps.PrimitiveMiscCaps & D3DPMISCCAPS_CULLNONE);
+            BBAssert(d3dCaps.ZCmpCaps & D3DPCMPCAPS_ALWAYS);
+            BBAssert(d3dCaps.SrcBlendCaps);
+            BBAssert(d3dCaps.DestBlendCaps);
+            BBAssert(d3dCaps.TextureCaps & D3DPTEXTURECAPS_ALPHA);
+            BBAssert((d3dCaps.TextureCaps & D3DPTEXTURECAPS_SQUAREONLY) == 0x00000000);
+            BBAssert(d3dCaps.MaxTextureWidth >= 1024);
+            BBAssert(d3dCaps.MaxTextureHeight >= 1024);
+            BBAssert(d3dCaps.TextureOpCaps & D3DTEXOPCAPS_ADD);
+            BBAssert(d3dCaps.TextureOpCaps & D3DTEXOPCAPS_ADDSIGNED);
+            BBAssert(d3dCaps.TextureOpCaps & D3DTEXOPCAPS_ADDSIGNED2X);
+            BBAssert(d3dCaps.TextureOpCaps & D3DTEXOPCAPS_DISABLE);
+            BBAssert(d3dCaps.TextureOpCaps & D3DTEXOPCAPS_MODULATE);
+            BBAssert(d3dCaps.TextureOpCaps & D3DTEXOPCAPS_MODULATE2X);
+            BBAssert(d3dCaps.TextureOpCaps & D3DTEXOPCAPS_MODULATE4X);
+            BBAssert(d3dCaps.TextureOpCaps & D3DTEXOPCAPS_SELECTARG1);
+            BBAssert(d3dCaps.TextureOpCaps & D3DTEXOPCAPS_SELECTARG2);
+            BBAssert(d3dCaps.TextureOpCaps & D3DTEXOPCAPS_SUBTRACT);
+            BBAssert(d3dCaps.MaxTextureBlendStages >= 4);
+            BBAssert(d3dCaps.MaxSimultaneousTextures >= 2);
+        }
 
         SetViewport(Rect(Point::Zero, GetWindow()->GetSize()));
     }
 
     void GraphicsDevice::FinalizeDevice()
     {
+        capabilities = GraphicsCapabilities();
+        ::ZeroMemory(&d3dCaps, sizeof(d3dCaps));
         delete defaultSwapChain;
         defaultSwapChain = nullptr;
         CheckedRelease(d3dDevice);
