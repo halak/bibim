@@ -6,6 +6,7 @@
 namespace Bibim
 {
     const String String::Empty = String(EmptyStringTag());
+    const byte String::UTF8BOM[3] = { 0xEF, 0xBB, 0xBF };
 
     String::String(const char* s, int startIndex)
     {
