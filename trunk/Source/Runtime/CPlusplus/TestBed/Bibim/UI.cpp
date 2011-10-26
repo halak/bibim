@@ -57,7 +57,7 @@ class UISample : public GameFramework
 
             UILayoutPtr layout2;
             UILayoutPtr layout = static_cast<UILayout*>(gas->Load("Asset\\VisualNovelUI"));
-
+            BBAssertDebug(layout && layout->GetRoot());
             uid->GetRoot()->AddChild(layout->GetRoot());
 
             storage = gas;
