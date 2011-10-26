@@ -28,6 +28,11 @@ namespace Bibim
     const int Int::Min = std::numeric_limits<int>::min();
     const int Int::Max = std::numeric_limits<int>::max();
 
+    int Int::Parse(const String& s)
+    {
+        return atoi(s.CStr());
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     const uint UInt::Min = std::numeric_limits<uint>::min();

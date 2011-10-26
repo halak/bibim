@@ -1,9 +1,14 @@
 ﻿<Window x:Class="Bibim.Bab.ConsoleWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ConsoleWindow" Height="558" Width="681" xmlns:my="clr-namespace:System;assembly=mscorlib" Icon="/Bibim.Baaaaaab;component/Icon.ico" Name="consoleWindow">
+        Title="ConsoleWindow" xmlns:my="clr-namespace:System;assembly=mscorlib" Icon="/Bibim.Baaaaaab;component/Icon.ico" Name="consoleWindow" 
+        Left="{Binding Source={StaticResource Settings}, Path=Default.ConsoleWindowX}"
+        Top="{Binding Source={StaticResource Settings}, Path=Default.ConsoleWindowY}"
+        Width="{Binding Source={StaticResource Settings}, Path=Default.ConsoleWindowWidth}"
+        Height="{Binding Source={StaticResource Settings}, Path=Default.ConsoleWindowHeight}"
+        Loaded="consoleWindow_Loaded">
     <Grid>
-        <TextBox Margin="12,0,93,51" Name="textBoxCommand" Height="23" VerticalAlignment="Bottom" Background="#FF070000" Foreground="White" FontFamily="Consolas" FontWeight="SemiBold">
+        <TextBox Margin="12,0,93,51" Name="textBoxCommand" Height="23" VerticalAlignment="Bottom" Background="#FF070000" Foreground="White" FontFamily="Consolas" FontWeight="SemiBold" TabIndex="0">
             <TextBox.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF383838" Offset="0.337" />
@@ -14,7 +19,7 @@
         </TextBox>
         <Button Content="입력" Margin="0,0,12,51" Name="buttonCommand" IsDefault="True" HorizontalAlignment="Right" Width="75" Height="23" VerticalAlignment="Bottom" Click="buttonCommand_Click" />
         <ListBox Margin="12,12,12,80" Name="listBoxLogs" FontFamily="Consolas" FontSize="12" Foreground="White" Background="Black" SelectionMode="Extended"></ListBox>
-        <StackPanel Height="33" Margin="12,474,12,0" Name="stackPanel1" VerticalAlignment="Top" Orientation="Horizontal">
+        <StackPanel Margin="12,0,12,12" Name="stackPanel1" Orientation="Horizontal" Height="33" VerticalAlignment="Bottom">
             <Button Content="모두 지우기" Height="23" Name="buttonClear" Width="75" Margin="4" Click="buttonClear_Click" />
             <CheckBox Content="최상위 윈도우로 설정합니다." Height="16" Name="checkBoxTopmost" Foreground="White" IsChecked="{Binding Path=Topmost, ElementName=consoleWindow}" />
             <CheckBox Content="프로그램이 끝나면 윈도우를 닫습니다." Height="16" Name="checkBoxCloseOnProgramEnded" Foreground="White" Margin="4" />
