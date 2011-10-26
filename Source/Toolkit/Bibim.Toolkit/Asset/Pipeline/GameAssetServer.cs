@@ -41,6 +41,14 @@ namespace Bibim.Asset.Pipeline
             get;
             set;
         }
+
+        public bool IsBusy
+        {
+            get
+            {
+                return !taskQueue.IsEmpty;
+            }
+        }
         #endregion
 
         #region Constructors
