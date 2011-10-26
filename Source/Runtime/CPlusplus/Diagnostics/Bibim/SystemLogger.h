@@ -13,6 +13,13 @@
             public:
                 SystemLogger();
                 virtual ~SystemLogger();
+
+                virtual void Error(const char* category, const char* message);
+                virtual void Warning(const char* category, const char* message);
+                virtual void Information(const char* category, const char* message);
+
+            private:
+                inline void Write(const char* head, const char* category, const char* message);
         };
     }
 

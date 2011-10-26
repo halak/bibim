@@ -8,7 +8,7 @@
 
     namespace Bibim
     {
-        class Logger
+        class Logger : public GameModule, public Log::Listener
         {
             BBAbstractModuleClass(Logger, GameModule);
             public:

@@ -21,6 +21,8 @@
    // FileSystem
 #  include <Bibim/FileStream.h>
 #  include <Bibim/FileStream.Windows.h>
+#  include <Bibim/FileLogger.h>
+#  include <Bibim/SystemLogger.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Foundation

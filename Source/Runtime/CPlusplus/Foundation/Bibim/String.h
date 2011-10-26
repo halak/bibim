@@ -129,9 +129,11 @@
 
                 static inline void CopyChars(char* destination, const char* source);
                 static inline void CopyChars(char* destination, const char* source, int length);
+                static inline int CharsLength(const char* s);
 
             public:
                 static const String Empty;
+                static const byte UTF8BOM[3];
 
             public:
                 class CharRef

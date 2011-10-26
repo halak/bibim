@@ -28,7 +28,7 @@
             if (windowsAccessMode == GENERIC_READ)
                 windowsCreationDisposition = OPEN_EXISTING;
             else if (windowsAccessMode & GENERIC_WRITE)
-                windowsCreationDisposition = CREATE_NEW;
+                windowsCreationDisposition = CREATE_ALWAYS;
 
             handle = ::CreateFile(path.CStr(), windowsAccessMode, windowsShareMode, nullptr, windowsCreationDisposition, FILE_ATTRIBUTE_NORMAL, nullptr);
             if (handle == INVALID_HANDLE_VALUE)

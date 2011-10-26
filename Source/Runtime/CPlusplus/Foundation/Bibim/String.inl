@@ -275,6 +275,13 @@ namespace Bibim
             (*destination) = (*source);
     }
 
+    int String::CharsLength(const char* s)
+    {
+        int result = 0;
+        while (*s++ != '\0') { result++; }
+        return result;
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     String::CharRef::CharRef(String& s, int index)
