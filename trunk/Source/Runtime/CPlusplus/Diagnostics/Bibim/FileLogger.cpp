@@ -22,18 +22,39 @@ namespace Bibim
     {
         if (stream)
         {
-            stream->Write(head, headLength);
-
             if (category)
             {
-                stream->Write("[",  1);
-                stream->Write(category, String::CharsLength(category));
-                stream->Write("] ", 2);
+                const int categoryLength = String::CharsLength(category);
+                const int messageLength  = String::CharsLength(message);
+                const int fullLength = headLength + 1 + categoryLength + 2 + messageLength + 2;
+                char* full = BBStackAlloc(char, fullLength);
+                char* s = full;
+                s += String::CopyChars(s, head, headLength);
+                (*s++) = '[';
+                s += String::CopyChars(s, category, categoryLength);
+                (*s++) = ']';
+                (*s++) = ' ';
+                s += String::CopyChars(s, message, messageLength);
+                (*s++) = '\r';
+                (*s++) = '\n';
+                stream->Write(full, fullLength);
+                stream->Flush();
+                BBStackFree(full);
             }
-
-            stream->Write(message, String::CharsLength(message));
-            stream->Write("\r\n", 2);
-            stream->Flush();
+            else
+            {
+                const int messageLength  = String::CharsLength(message);
+                const int fullLength = headLength + messageLength + 2;
+                char* full = BBStackAlloc(char, fullLength);
+                char* s = full;
+                s += String::CopyChars(s, head, headLength);
+                s += String::CopyChars(s, message, messageLength);
+                (*s++) = '\r';
+                (*s++) = '\n';
+                stream->Write(full, fullLength);
+                stream->Flush();
+                BBStackFree(full);
+            }
         }
     }
 

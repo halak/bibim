@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/Logger.h>
+#   include <Bibim/String.h>
 
     namespace Bibim
     {
@@ -12,14 +13,21 @@
             BBModuleClass(SystemLogger, Logger, 'S', 'L', 'O', 'G');
             public:
                 SystemLogger();
+                SystemLogger(const String& name);
                 virtual ~SystemLogger();
 
                 virtual void Error(const char* category, const char* message);
                 virtual void Warning(const char* category, const char* message);
                 virtual void Information(const char* category, const char* message);
 
+                inline const String& GetName() const;
+                inline void SetName(const String& value);
+
             private:
                 inline void Write(const char* head, const char* category, const char* message);
+
+            private:
+                String name;
         };
     }
 

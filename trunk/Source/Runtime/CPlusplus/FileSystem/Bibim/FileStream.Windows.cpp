@@ -20,17 +20,13 @@
             else if (accessMode == WriteOnly)
                 windowsAccessMode = GENERIC_WRITE;
 
-            DWORD windowsShareMode = 0x00000000;
-            if (windowsAccessMode == GENERIC_READ)
-                windowsShareMode = FILE_SHARE_READ;
-            
             DWORD windowsCreationDisposition = 0x00000000;
             if (windowsAccessMode == GENERIC_READ)
                 windowsCreationDisposition = OPEN_EXISTING;
             else if (windowsAccessMode & GENERIC_WRITE)
                 windowsCreationDisposition = CREATE_ALWAYS;
 
-            handle = ::CreateFile(path.CStr(), windowsAccessMode, windowsShareMode, nullptr, windowsCreationDisposition, FILE_ATTRIBUTE_NORMAL, nullptr);
+            handle = ::CreateFile(path.CStr(), windowsAccessMode, FILE_SHARE_READ, nullptr, windowsCreationDisposition, FILE_ATTRIBUTE_NORMAL, nullptr);
             if (handle == INVALID_HANDLE_VALUE)
             {
                 canRead  = false;

@@ -263,16 +263,20 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    void String::CopyChars(char* destination, const char* source)
+    int String::CopyChars(char* destination, const char* source)
     {
-        for (; (*source) != '\0'; destination++, source++)
+        int i = 0;
+        for (; (*source) != '\0'; destination++, source++, i++)
             (*destination) = (*source);
+        return i;
     }
 
-    void String::CopyChars(char* destination, const char* source, int length)
+    int String::CopyChars(char* destination, const char* source, int length)
     {
-        for (int i = 0; i < length && (*source) != '\0'; destination++, source++, i++)
+        int i = 0;
+        for (i = 0; i < length && (*source) != '\0'; destination++, source++, i++)
             (*destination) = (*source);
+        return i;
     }
 
     int String::CharsLength(const char* s)

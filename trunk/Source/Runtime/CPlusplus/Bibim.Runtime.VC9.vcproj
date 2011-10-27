@@ -430,10 +430,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Memory.Windows.h"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\Property.h"
 					>
 				</File>

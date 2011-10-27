@@ -4,8 +4,15 @@
 
 #   include <Bibim/Foundation.h>
 
-#   if (defined(BIBIM_PLATFORM_WINDOWS))
-#       include <Bibim/Memory.Windows.h>
-#   endif
+    namespace Bibim
+    {
+        class Memory
+        {
+            BBThisIsStaticClass(Memory);
+            public:
+                static void Fill(void* destination, int destinationLength);
+                static void Copy(void* destination, int destinationLength, const void* source, int sourceLength);
+        };
+    }
 
 #endif

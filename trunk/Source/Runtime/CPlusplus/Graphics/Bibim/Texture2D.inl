@@ -1,4 +1,4 @@
-namespace Bibim
+    namespace Bibim
 {
     GraphicsDevice* Texture2D::GetGraphicsDevice() const
     {

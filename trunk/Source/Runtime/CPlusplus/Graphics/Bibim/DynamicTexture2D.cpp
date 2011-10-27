@@ -1,7 +1,8 @@
 #include <Bibim/PCH.h>
 #include <Bibim/DynamicTexture2D.h>
-#include <Bibim/GraphicsDevice.h>
 #include <Bibim/Assert.h>
+#include <Bibim/CheckedRelease.h>
+#include <Bibim/GraphicsDevice.h>
 
 namespace Bibim
 {
@@ -29,6 +30,8 @@ namespace Bibim
 
     DynamicTexture2D::DynamicTexture2D(GraphicsDevice* graphicsDevice, int width, int height, PixelFormat pixelFormat)
         : Texture2D(graphicsDevice, width, height, width, height, pixelFormat),
+          d3dSystemMemoryTexture(nullptr),
+          d3dLockableTexture(nullptr),
           isLocked(false)
     {
         BBAssert(GetGraphicsDevice()->GetD3DDevice() != nullptr);
@@ -44,8 +47,21 @@ namespace Bibim
                 break;
         }
 
+        IDirect3DDevice9* d3dDevice = GetGraphicsDevice()->GetD3DDevice();
         IDirect3DTexture9* newD3DTexture = nullptr;
-        HRESULT result = D3DXCreateTexture(GetGraphicsDevice()->GetD3DDevice(), width, height, 0, D3DUSAGE_DYNAMIC, d3dFormat, D3DPOOL_DEFAULT, &newD3DTexture);
+        HRESULT result = D3D_OK;
+        if (GetGraphicsDevice()->GetD3DCaps().Caps2 & D3DCAPS2_DYNAMICTEXTURES)
+        {
+            result = d3dDevice->CreateTexture(width, height, 0, D3DUSAGE_DYNAMIC, d3dFormat, D3DPOOL_DEFAULT, &newD3DTexture, nullptr);
+            d3dLockableTexture = newD3DTexture;
+        }
+        else
+        {
+            result = d3dDevice->CreateTexture(width, height, 0, 0, d3dFormat, D3DPOOL_SYSTEMMEM, &d3dSystemMemoryTexture, nullptr);
+            result = d3dDevice->CreateTexture(width, height, 0, 0, d3dFormat, D3DPOOL_DEFAULT, &newD3DTexture, nullptr);
+            d3dLockableTexture = d3dSystemMemoryTexture;
+        }
+
         if (result == D3D_OK)
         {
             D3DSURFACE_DESC surfaceDesc;
@@ -66,6 +82,7 @@ namespace Bibim
 
     DynamicTexture2D::~DynamicTexture2D()
     {
+        CheckedRelease(d3dSystemMemoryTexture);
     }
 
     bool DynamicTexture2D::Lock(LockedInfo& outLockedInfo)
@@ -81,10 +98,11 @@ namespace Bibim
         D3DLOCKED_RECT lockInfo = { 0, };
         RECT d3dLockingRect = { Rect.GetLeft(), Rect.GetTop(), Rect.GetRight(), Rect.GetBottom() };
 
-        HRESULT result = GetD3DTexture()->LockRect(0, &lockInfo, &d3dLockingRect, 0x00000000);
+        HRESULT result = d3dLockableTexture->LockRect(0, &lockInfo, &d3dLockingRect, 0x00000000);
         if (result == D3D_OK)
         {
             outLockedInfo.SetData(this, lockInfo.pBits, static_cast<int>(lockInfo.Pitch));
+            SetStatus(LoadingStatus);
             isLocked = true;
             return true;
         }
@@ -99,10 +117,17 @@ namespace Bibim
         if (IsLocked() == false)
             return;
 
-        HRESULT result = GetD3DTexture()->UnlockRect(0);
+        HRESULT result = d3dLockableTexture->UnlockRect(0);
         BBAssert(result == D3D_OK);
 
+        if (d3dSystemMemoryTexture)
+        {
+            BBAssertDebug(d3dSystemMemoryTexture == d3dLockableTexture);
+            GetGraphicsDevice()->GetD3DDevice()->UpdateTexture(d3dSystemMemoryTexture, GetD3DTexture());
+        }
+
         isLocked = false;
+        SetStatus(CompletedStatus);
         outLockedInfo.SetData(nullptr, nullptr, 0);
     }
 }
