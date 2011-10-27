@@ -198,7 +198,6 @@
 #  include <Bibim/UIPanel.h>
 #  include <Bibim/UIPickingContext.h>
 #  include <Bibim/UIRenderer.h>
-#  include <Bibim/UIRenderer.Windows.h>
 #  include <Bibim/UISequentialEventHandler.h>
 #  include <Bibim/UISimpleDomain.h>
 #  include <Bibim/UISprite.h>

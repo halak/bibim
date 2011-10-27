@@ -5,30 +5,26 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/String.h>
 
-#   if (defined(BIBIM_PLATFORM_WINDOWS))
-
-        namespace Bibim
+    namespace Bibim
+    {
+        class Environment
         {
-            class Environment
-            {
-                BBThisIsNoncopyableClass(Environment);
-                public:
-                    static inline const String& GetWorkingDirectory();
+            BBThisIsNoncopyableClass(Environment);
+            public:
+                static inline const String& GetWorkingDirectory();
 
-                private:
-                    Environment();
+            private:
+                Environment();
 
-                    inline const String& PrivateGetWorkingDirectory() const;
+                inline const String& PrivateGetWorkingDirectory() const;
 
-                private:
-                    String workingDirectory;
+            private:
+                String workingDirectory;
 
-                    static Environment PrivateInstance;
-            };
-        }
+                static Environment PrivateInstance;
+        };
+    }
 
-#       include <Bibim/Environment.Windows.inl>
-
-#   endif
+#   include <Bibim/Environment.Windows.inl>
 
 #   endif
