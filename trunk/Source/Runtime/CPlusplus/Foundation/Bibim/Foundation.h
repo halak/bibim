@@ -11,6 +11,7 @@
 
 #       if (defined(WINDOWS) || defined(WIN32) || defined(WIN64))
 #           define BIBIM_PLATFORM_WINDOWS
+#           define BIBIM_USE_DIRECTX9
 #       else
 #           define BIBIM_PLATFORM_UNKNOWN
 #       endif

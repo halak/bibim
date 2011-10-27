@@ -4,8 +4,8 @@
 
 #   include <Bibim/Foundation.h>
 
-#   if (defined(BIBIM_PLATFORM_WINDOWS))
-#       include <Bibim/UIRenderer.Windows.h>
+#   if (defined(BIBIM_USE_DIRECTX9))
+#       include <Bibim/UIRenderer.DX9.h>
 #   endif
 
 #endif

@@ -346,10 +346,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\SharedObject.Windows.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\SharedPointer.h"
 					>
 				</File>
@@ -413,6 +409,18 @@
 			<Filter
 				Name="Utility"
 				>
+				<File
+					RelativePath=".\Foundation\Bibim\Atomic.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Atomic.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Atomic.Windows.inl"
+					>
+				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\CheckedRelease.h"
 					>
@@ -657,22 +665,6 @@
 			<Filter
 				Name="Threading"
 				>
-				<File
-					RelativePath=".\Threading\Bibim\Atomic.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\Atomic.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\Atomic.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\Atomic.Windows.inl"
-					>
-				</File>
 				<File
 					RelativePath=".\Threading\Bibim\AutoLocker.h"
 					>
@@ -994,27 +986,11 @@
 				Name="Graphics"
 				>
 				<File
-					RelativePath=".\Graphics\Bibim\DisplaySwapChain.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\Graphics\Bibim\DisplaySwapChain.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\DisplaySwapChain.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\DynamicTexture2D.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\Graphics\Bibim\DynamicTexture2D.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\DynamicTexture2D.inl"
 					>
 				</File>
 				<File
@@ -1030,15 +1006,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\GraphicsDevice.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\Graphics\Bibim\GraphicsDevice.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\GraphicsDevice.inl"
 					>
 				</File>
 				<File
@@ -1054,15 +1022,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.inl"
 					>
 				</File>
 				<File
@@ -1078,23 +1038,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\SourceTexture2D.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\Graphics\Bibim\SourceTexture2D.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\Texture2D.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\Graphics\Bibim\Texture2D.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\Texture2D.inl"
 					>
 				</File>
 				<File
@@ -1109,6 +1057,78 @@
 					RelativePath=".\Graphics\Bibim\Window.inl"
 					>
 				</File>
+				<Filter
+					Name="DX9"
+					>
+					<File
+						RelativePath=".\Graphics\Bibim\DisplaySwapChain.DX9.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\DisplaySwapChain.DX9.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\DisplaySwapChain.DX9.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\DynamicTexture2D.DX9.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\DynamicTexture2D.DX9.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\DynamicTexture2D.DX9.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\SourceTexture2D.DX9.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\SourceTexture2D.DX9.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\Texture2D.DX9.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\Texture2D.DX9.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\Texture2D.DX9.inl"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Input"
@@ -1334,19 +1354,19 @@
 					>
 				</File>
 				<File
+					RelativePath=".\UI\Bibim\UIRenderer.DX9.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\UI\Bibim\UIRenderer.DX9.h"
+					>
+				</File>
+				<File
+					RelativePath=".\UI\Bibim\UIRenderer.DX9.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\UI\Bibim\UIRenderer.h"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIRenderer.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIRenderer.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIRenderer.Windows.inl"
 					>
 				</File>
 				<File

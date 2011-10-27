@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/SharedObject.h>
+#include <Bibim/Atomic.h>
 
 namespace Bibim
 {
@@ -15,5 +16,17 @@ namespace Bibim
 
     SharedObject::~SharedObject()
     {
+    }
+
+    void SharedObject::IncreaseReferenceCount()
+    {
+        Atomic::Increment(referenceCount);
+    }
+
+    void SharedObject::DecreaseReferenceCount()
+    {
+        Atomic::Decrement(referenceCount);
+        if (referenceCount == 0)
+            delete this;
     }
 }

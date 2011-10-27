@@ -6,6 +6,8 @@
 
 #   if (defined(BIBIM_PLATFORM_WINDOWS))
 #       include <Bibim/FileStream.Windows.h>
+#   else
+#       include <Bibim/FileStream.CRT.h>
 #   endif
 
 #endif

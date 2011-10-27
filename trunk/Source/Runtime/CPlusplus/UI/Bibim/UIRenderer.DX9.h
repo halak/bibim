@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __BIBIM_UIRENDERER_WINDOWS_H__
-#define __BIBIM_UIRENDERER_WINDOWS_H__
+#ifndef __BIBIM_UIRENDERER_DX9_H__
+#define __BIBIM_UIRENDERER_DX9_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
@@ -152,6 +152,6 @@
         };
     }
 
-#   include <Bibim/UIRenderer.Windows.inl>
+#   include <Bibim/UIRenderer.DX9.inl>
 
 #endif

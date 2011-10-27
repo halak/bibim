@@ -61,14 +61,12 @@
         {
             static const float Min;
             static const float Max;
-            static const float NaN;
         };
 
         struct Double
         {
             static const double Min;
             static const double Max;
-            static const double NaN;
         };
 
         struct Int64

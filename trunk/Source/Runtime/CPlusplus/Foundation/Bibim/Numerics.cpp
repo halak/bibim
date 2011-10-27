@@ -1,32 +1,33 @@
 #include <Bibim/PCH.h>
 #include <Bibim/Numerics.h>
-#include <limits>
+#include <float.h>
+#include <limits.h>
 #include <stdlib.h>
 
 namespace Bibim
 {
-    const char Char::Min = std::numeric_limits<char>::min();
-    const char Char::Max = std::numeric_limits<char>::max();
+    const char Char::Min = CHAR_MIN;
+    const char Char::Max = CHAR_MAX;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const uchar UChar::Min = std::numeric_limits<uchar>::min();
-    const uchar UChar::Max = std::numeric_limits<uchar>::max();
+    const uchar UChar::Min = 0;
+    const uchar UChar::Max = UCHAR_MAX;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const short Short::Min = std::numeric_limits<short>::min();
-    const short Short::Max = std::numeric_limits<short>::max();
+    const short Short::Min = SHRT_MIN;
+    const short Short::Max = SHRT_MAX;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const ushort UShort::Min = std::numeric_limits<ushort>::min();
-    const ushort UShort::Max = std::numeric_limits<ushort>::max();
+    const ushort UShort::Min = 0;
+    const ushort UShort::Max = USHRT_MAX;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const int Int::Min = std::numeric_limits<int>::min();
-    const int Int::Max = std::numeric_limits<int>::max();
+    const int Int::Min = INT_MIN;
+    const int Int::Max = INT_MAX;
 
     int Int::Parse(const String& s)
     {
@@ -35,38 +36,36 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const uint UInt::Min = std::numeric_limits<uint>::min();
-    const uint UInt::Max = std::numeric_limits<uint>::max();
+    const uint UInt::Min = 0;
+    const uint UInt::Max = UINT_MAX;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const long Long::Min = std::numeric_limits<long>::min();
-    const long Long::Max = std::numeric_limits<long>::max();
+    const long Long::Min = LONG_MIN;
+    const long Long::Max = LONG_MAX;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const ulong ULong::Min = std::numeric_limits<ulong>::min();
-    const ulong ULong::Max = std::numeric_limits<ulong>::max();
+    const ulong ULong::Min = 0;
+    const ulong ULong::Max = ULONG_MAX;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const float Float::Min = std::numeric_limits<float>::min();
-    const float Float::Max = std::numeric_limits<float>::max();
-    const float Float::NaN = std::numeric_limits<float>::quiet_NaN();
+    const float Float::Min = FLT_MIN;
+    const float Float::Max = FLT_MAX;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const double Double::Min = std::numeric_limits<double>::min();
-    const double Double::Max = std::numeric_limits<double>::max();
-    const double Double::NaN = std::numeric_limits<double>::quiet_NaN();
+    const double Double::Min = DBL_MIN;
+    const double Double::Max = DBL_MAX;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const int64 Int64::Min = std::numeric_limits<int64>::min();
-    const int64 Int64::Max = std::numeric_limits<int64>::max();
+    const int64 Int64::Min = LLONG_MIN;
+    const int64 Int64::Max = LLONG_MAX;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    const uint64 UInt64::Min = std::numeric_limits<uint64>::min();
-    const uint64 UInt64::Max = std::numeric_limits<uint64>::max();
+    const uint64 UInt64::Min = 0;
+    const uint64 UInt64::Max = ULLONG_MAX;
 }

@@ -1,5 +1,5 @@
 #include <Bibim/PCH.h>
-#include <Bibim/Texture2D.h>
+#include <Bibim/Texture2D.DX9.h>
 #include <Bibim/GraphicsDevice.h>
 #include <Bibim/CheckedRelease.h>
 
