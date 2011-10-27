@@ -58,16 +58,16 @@ namespace Bibim
         switch (image->GetAppliedTransform())
         {
             case Image::Identity:
-                clippingLeft   += boundsClippedLeft;
-                clippingTop    += boundsClippedTop;
-                clippingRight  -= boundsClippedRight;
-                clippingBottom -= boundsClippedBottom;
+                clippingLeft   += clippingRect.Width * boundsClippedLeft;
+                clippingTop    += clippingRect.Height * boundsClippedTop;
+                clippingRight  -= clippingRect.Width * boundsClippedRight;
+                clippingBottom -= clippingRect.Height * boundsClippedBottom;
                 break;
             case Image::RotateCW90:
-                clippingLeft   += boundsClippedBottom;
-                clippingTop    += boundsClippedLeft;
-                clippingRight  -= boundsClippedTop;
-                clippingBottom -= boundsClippedRight;
+                clippingLeft   += clippingRect.Height * boundsClippedBottom;
+                clippingTop    += clippingRect.Width * boundsClippedLeft;
+                clippingRight  -= clippingRect.Height * boundsClippedTop;
+                clippingBottom -= clippingRect.Width * boundsClippedRight;
                 break;
         }
 
@@ -269,7 +269,10 @@ namespace Bibim
 
                     const float tw = 1.0f / static_cast<float>(glyph->GetTexture()->GetWidth());
                     const float th = 1.0f / static_cast<float>(glyph->GetTexture()->GetHeight());
-                    RectF clippingRect = RectF(glyph->GetClippingRect().X, glyph->GetClippingRect().Y, glyph->GetClippingRect().Width, glyph->GetClippingRect().Height);
+                    RectF clippingRect = RectF(glyph->GetClippingRect().X,
+                                               glyph->GetClippingRect().Y,
+                                               glyph->GetClippingRect().Width,
+                                               glyph->GetClippingRect().Height);
                     clippingRect.X *= tw;
                     clippingRect.Y *= th;
                     clippingRect.Width  *= tw;

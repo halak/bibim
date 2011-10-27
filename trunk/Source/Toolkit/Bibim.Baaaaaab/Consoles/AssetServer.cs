@@ -87,7 +87,16 @@ namespace Bibim.Bab.Consoles
 
                     if (command.StartsWith("precook "))
                     {
-                        Precook(assetServer, command.Substring("precook ".Length).Trim());
+                        int index1 = "precook ".Length;
+                        int index2 = command.IndexOf(">>", index1);
+                        if (index2 == -1)
+                            Precook(assetServer, command.Substring(index1).Trim());
+                        else
+                        {
+                            Precook(assetServer,
+                                    command.Substring(index1, index2 - index1).Trim(),
+                                    command.Substring(index2 + ">>".Length).Trim());
+                        }
                     }
 
                     if (command.StartsWith("compress "))
@@ -120,31 +129,31 @@ namespace Bibim.Bab.Consoles
             Trace.TraceInformation("AssetServer closed.");
         }
 
-        private static void Precook(GameAssetServer assetServer, string directory)
+        private static void Precook(GameAssetServer assetServer, string path)
         {
             try
             {
-                string[] files = Directory.GetFiles(directory, "*." + GameAsset.TextFileExtension, SearchOption.AllDirectories);
+                string[] files = Directory.GetFiles(path, "*." + GameAsset.TextFileExtension, SearchOption.AllDirectories);
                 int countingIndex = files.Length / 10;
                 for (int i = 0, k = 0; i < files.Length; i++, k++)
                 {
                     try
                     {
-                        string assetPath = files[i].Substring(directory.Length + 1);
+                        string assetPath = files[i].Substring(path.Length + 1);
 
                         if (i == files.Length - 1)
                         {
-                            assetServer.Precook(directory, assetPath, (_, __, ___) => { Trace.TraceInformation("LAST COOKING!"); }, () => { Trace.TraceInformation("LAST COOKING!"); });
+                            assetServer.Precook(path, assetPath, (_, __, ___) => { Trace.TraceInformation("LAST COOKING!"); }, () => { Trace.TraceInformation("LAST COOKING!"); });
                         }
                         else if (k == countingIndex)
                         {
                             k = 0;
                             int count = i;
-                            assetServer.Precook(directory, assetPath, (_, __, ___) => { Trace.TraceInformation("({0}/{1})", count, files.Length); }, () => { Trace.TraceInformation("({0}/{1})", count, files.Length); });
+                            assetServer.Precook(path, assetPath, (_, __, ___) => { Trace.TraceInformation("({0}/{1})", count, files.Length); }, () => { Trace.TraceInformation("({0}/{1})", count, files.Length); });
                         }
                         else
                         {
-                            assetServer.Precook(directory, assetPath);
+                            assetServer.Precook(path, assetPath);
                         }
                     }
                     catch (Exception ex)
@@ -152,6 +161,21 @@ namespace Bibim.Bab.Consoles
                         Trace.WriteLine(ex);
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+
+            while (assetServer.IsBusy)
+                Thread.Sleep(100);
+        }
+
+        private static void Precook(GameAssetServer assetServer, string directory, string assetPath)
+        {
+            try
+            {
+                assetServer.Precook(directory, assetPath);
             }
             catch (Exception ex)
             {

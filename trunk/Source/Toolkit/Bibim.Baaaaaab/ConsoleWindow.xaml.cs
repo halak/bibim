@@ -187,6 +187,22 @@ namespace Bibim.Bab
         {
             listBoxLogs.Items.Clear();
         }
+
+        private void listBoxLogs_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyboardDevice.IsKeyDown(Key.LeftCtrl) && e.Key == Key.C)
+            {
+                StringBuilder text = new StringBuilder();
+                foreach (object item in listBoxLogs.SelectedItems)
+                {
+                    if (item is ListBoxItem)
+                        text.AppendLine((string)((ListBoxItem)item).Tag);
+                }
+
+                if (text.Length > 0)
+                    Clipboard.SetText(text.ToString());
+            }
+        }
         #endregion
 
         #region TraceListener (Nested Class)
@@ -255,7 +271,7 @@ namespace Bibim.Bab
 
             public override void Write(object o, string category)
             {
-                WriteActually(() => CreateElement(o, category), false);
+                WriteActually((item, panel) => AppendElement(item, panel, o, category), false);
             }
 
             public override void WriteLine(object o)
@@ -265,7 +281,7 @@ namespace Bibim.Bab
 
             public override void WriteLine(object o, string category)
             {
-                WriteActually(() => CreateElement(o, category), true);
+                WriteActually((item, panel) => AppendElement(item, panel, o, category), true);
             }
 
             public override void Write(string message)
@@ -275,7 +291,7 @@ namespace Bibim.Bab
 
             public override void Write(string message, string category)
             {
-                WriteActually(() => CreateTextBlock(message, category), false);
+                WriteActually((item, panel) => AppendText(item, panel, message, category), false);
             }
 
             public override void WriteLine(string message)
@@ -285,10 +301,10 @@ namespace Bibim.Bab
 
             public override void WriteLine(string message, string category)
             {
-                WriteActually(() => CreateTextBlock(message, category), true);
+                WriteActually((item, panel) => AppendText(item, panel, message, category), true);
             }
 
-            private void WriteActually(Func<IEnumerable<UIElement>> createElement, bool newLine)
+            private void WriteActually(Action<ListBoxItem, StackPanel> appendUIElement, bool newLine)
             {
                 this.listBox.Dispatcher.Invoke(new Action(() =>
                 {
@@ -299,94 +315,90 @@ namespace Bibim.Bab
                         {
                             Content = new StackPanel()
                             {
-                                Orientation = Orientation.Horizontal
+                                Orientation = Orientation.Horizontal,
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                VerticalAlignment = VerticalAlignment.Center,
                             }
                         };
+
                         this.listBox.Items.Add(item);
                         this.listBox.ScrollIntoView(item);
                     }
                     else
                         item = (ListBoxItem)this.listBox.Items[this.listBox.Items.Count - 1];
 
-                    var line = (StackPanel)item.Content;
-                    foreach (UIElement element in createElement())
-                        line.Children.Add(element);
+                    appendUIElement(item, (StackPanel)item.Content);
 
                     this.newLine = newLine;
                 }));
             }
 
-            private IEnumerable<UIElement> CreateElement(object o, string category)
+            private void AppendElement(ListBoxItem item, StackPanel panel, object o, string category)
             {
+                Debug.Assert(item.Content == panel);
+
                 if (o is Exception)
                 {
                     Exception ex = (Exception)o;
 
-                    Font font = categoryFonts["EXCEPTION"];
-                    Button button = new Button()
-                    {
-                        Content = string.Format("{0} Thrown ({1}).", ex.GetType().Name, ex.Message),
-                        FontStyle = font.Style,
-                        FontWeight = font.Weight,
-                    };
-
-                    if (font.Foreground != null)
-                        button.Foreground = font.Foreground;
-
+                    string text = string.Format("{0} Thrown ({1}).", ex.GetType().Name, ex.Message.Replace("\r\n", " "));
+                    Button button = new Button();
+                    button.Content = text;
                     button.Click += new RoutedEventHandler((sender, e) =>
                     {
                         ConsoleHtmlBox htmlBox = new ConsoleHtmlBox(ex.ToString());
                         htmlBox.Show();
                     });
+                    ApplyFont(button, "EXCEPTION");
 
-                    yield return button;
+                    panel.Children.Add(button);
+                    if (item.Tag == null)
+                        item.Tag = text;
+                    else
+                        item.Tag = (string)item.Tag + text;
                 }
                 else
-                {
-                    foreach (UIElement item in CreateTextBlock((string)o.ToString(), category))
-                        yield return item;
-                }
+                    AppendText(item, panel, o.ToString(), category);
             }
 
-            private IEnumerable<UIElement> CreateTextBlock(string message, string category)
+            private void AppendText(ListBoxItem item, StackPanel panel, string message, string category)
             {
+                Debug.Assert(item.Content == panel);
+
                 int singleLineIndex = Math.Min(message.IndexOf('\r'), message.IndexOf('\n'));
-                string fullMessage = message;
-                if (singleLineIndex != -1)
-                    message = message.Substring(0, singleLineIndex);
-
-                Font font;
-                if (string.IsNullOrEmpty(category) == false && categoryFonts.TryGetValue(category, out font))
+                if (singleLineIndex == -1)
                 {
-                    TextBlock result = new TextBlock()
-                    {
-                        Text = message,
-                        FontStyle = font.Style,
-                        FontWeight = font.Weight,
-                    };
+                    if (singleLineIndex != -1)
+                        message = message.Substring(0, singleLineIndex);
 
-                    if (font.Foreground != null)
-                        result.Foreground = font.Foreground;
-                    if (font.Background != null)
-                        result.Background = font.Background;
+                    TextBlock textBlock = new TextBlock();
+                    textBlock.Text = message;
+                    ApplyFont(textBlock, category);
+                    panel.Children.Add(textBlock);
 
-                    yield return result;
+                    if (item.Tag == null)
+                        item.Tag = message;
+                    else
+                        item.Tag = (string)item.Tag + message;
                 }
                 else
-                    yield return new TextBlock() { Text = message };
-
-                if (singleLineIndex != -1)
                 {
-                    Button button = new Button()
-                    {
-                        Content = "자세히",
-                    };
+                    string singleLineMessage = message.Substring(0, singleLineIndex);
+
+                    Button button = new Button();
+                    button.Content = singleLineMessage;
                     button.Click += new RoutedEventHandler((sender, e) =>
                     {
-                        ConsoleHtmlBox htmlBox = new ConsoleHtmlBox(fullMessage);
+                        ConsoleHtmlBox htmlBox = new ConsoleHtmlBox(message);
                         htmlBox.Show();
                     });
-                    yield return button;
+                    ApplyFont(button, category);
+                    panel.Children.Add(button);
+
+                    if (item.Tag == null)
+                        item.Tag = singleLineMessage;
+                    else
+                        item.Tag = (string)item.Tag + singleLineMessage;
                 }
             }
 
@@ -402,6 +414,40 @@ namespace Bibim.Bab
                         return "INFORMATION";
                     default:
                         return null;
+                }
+            }
+
+            private void ApplyFont(Control target, string fontName)
+            {
+                if (string.IsNullOrEmpty(fontName))
+                    return;
+
+                Font font;
+                if (categoryFonts.TryGetValue(fontName, out font))
+                {
+                    target.FontStyle = font.Style;
+                    target.FontWeight = font.Weight;
+                    if (font.Foreground != null)
+                        target.Foreground = font.Foreground;
+                    if (font.Background != null)
+                        target.Background = font.Background;
+                }
+            }
+
+            private void ApplyFont(TextBlock target, string fontName)
+            {
+                if (string.IsNullOrEmpty(fontName))
+                    return;
+
+                Font font;
+                if (categoryFonts.TryGetValue(fontName, out font))
+                {
+                    target.FontStyle = font.Style;
+                    target.FontWeight = font.Weight;
+                    if (font.Foreground != null)
+                        target.Foreground = font.Foreground;
+                    if (font.Background != null)
+                        target.Background = font.Background;
                 }
             }
             #endregion

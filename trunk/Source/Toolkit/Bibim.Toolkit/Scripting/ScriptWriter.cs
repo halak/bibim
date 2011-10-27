@@ -32,12 +32,6 @@ namespace Bibim.Scripting
             writer.Write(asset.StringTable.Length);
             foreach (string item in asset.StringTable)
                 writer.WriteBibimString(item);
-
-            ScriptCookingTag tag = asset.Tag as ScriptCookingTag;
-            if (tag != null && string.IsNullOrEmpty(tag.TextCode) == false)
-            {
-                Trace.WriteLine(tag.TextCode);
-            }
         }
     }
 }
