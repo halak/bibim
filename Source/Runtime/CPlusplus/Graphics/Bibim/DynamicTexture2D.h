@@ -45,6 +45,8 @@
                 inline bool IsLocked() const;
 
             private:
+                IDirect3DTexture9* d3dSystemMemoryTexture;
+                IDirect3DTexture9* d3dLockableTexture;
                 bool isLocked;
         };
     }

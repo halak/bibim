@@ -5,6 +5,7 @@
 #include <Bibim/Colors.h>
 #include <Bibim/DisplaySwapChain.h>
 #include <Bibim/Exception.h>
+#include <Bibim/Log.h>
 #include <Bibim/RenderTargetTexture2D.h>
 #include <Bibim/Window.h>
 #include <algorithm>
@@ -209,7 +210,9 @@ namespace Bibim
                                                   D3DCREATE_SOFTWARE_VERTEXPROCESSING | D3DCREATE_MULTITHREADED,
                                                   &d3dParameters,
                                                   &d3dDevice);
-            if (result != D3D_OK)
+            if (result == D3D_OK)
+                Log::Information("Graphics", "device created by Software vertex processing.");
+            else
                 throw Exception("d3dObject->CreateDevice != D3D_OK");
         }
 
@@ -276,7 +279,9 @@ namespace Bibim
                     break;
             }
 
-            BBAssert(d3dCaps.Caps2 & D3DCAPS2_DYNAMICTEXTURES);
+            if ((d3dCaps.Caps2 & D3DCAPS2_DYNAMICTEXTURES) == 0x00000000)
+                Log::Warning("Graphics", "This videocard is dynamic texture not supported.");
+
             BBAssert(d3dCaps.PrimitiveMiscCaps & D3DPMISCCAPS_CULLNONE);
             BBAssert(d3dCaps.ZCmpCaps & D3DPCMPCAPS_ALWAYS);
             BBAssert(d3dCaps.SrcBlendCaps);

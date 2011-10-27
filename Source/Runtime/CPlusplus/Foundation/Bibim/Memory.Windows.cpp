@@ -1,5 +1,5 @@
 #include <Bibim/PCH.h>
-#include <Bibim/Memory.Windows.h>
+#include <Bibim/Memory.h>
 
 #if (defined(BIBIM_PLATFORM_WINDOWS))
 
