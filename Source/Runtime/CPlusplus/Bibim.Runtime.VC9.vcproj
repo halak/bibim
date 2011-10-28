@@ -1038,6 +1038,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Graphics\Bibim\ShaderEffect.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Graphics\Bibim\SourceTexture2D.h"
 					>
 				</File>
@@ -1106,6 +1110,18 @@
 					</File>
 					<File
 						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.inl"
 						>
 					</File>
 					<File
