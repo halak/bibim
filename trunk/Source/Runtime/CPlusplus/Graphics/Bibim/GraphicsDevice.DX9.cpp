@@ -230,7 +230,7 @@ namespace Bibim
                     break;
                 case 1:
                     if (vsMinor >= 1)
-                        capabilities.vertexShaderVersion = GraphicsCapabilities::VS1X;
+                        capabilities.vertexShaderVersion = GraphicsCapabilities::VS1x;
                     else
                         capabilities.vertexShaderVersion = GraphicsCapabilities::VSNotSupported;
                     break;
@@ -238,7 +238,7 @@ namespace Bibim
                     if (vsMinor == 0)
                         capabilities.vertexShaderVersion = GraphicsCapabilities::VS20;
                     else
-                        capabilities.vertexShaderVersion = GraphicsCapabilities::VS20Ex;
+                        capabilities.vertexShaderVersion = GraphicsCapabilities::VS2x;
                     break;
                 case 3:
                     capabilities.vertexShaderVersion = GraphicsCapabilities::VS30;
@@ -258,7 +258,7 @@ namespace Bibim
                     break;
                 case 1:
                     if (psMinor >= 1)
-                        capabilities.pixelShaderVersion = GraphicsCapabilities::PS1X;
+                        capabilities.pixelShaderVersion = GraphicsCapabilities::PS1x;
                     else
                         capabilities.pixelShaderVersion = GraphicsCapabilities::PSNotSupported;
                     break;
@@ -266,7 +266,7 @@ namespace Bibim
                     if (psMinor == 0)
                         capabilities.pixelShaderVersion = GraphicsCapabilities::PS20;
                     else
-                        capabilities.pixelShaderVersion = GraphicsCapabilities::PS20Ex;
+                        capabilities.pixelShaderVersion = GraphicsCapabilities::PS2x;
                     break;
                 case 3:
                     capabilities.pixelShaderVersion = GraphicsCapabilities::PS30;

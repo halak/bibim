@@ -11,6 +11,13 @@
         {
             BBAbstractComponentClass(UIEffect, UIElement);
             public:
+                enum Task
+                {
+                    TransformVertex = (1 << 0),
+                    ShaderEffect = (1 << 1),
+                };
+
+            public:
                 UIEffect();
                 virtual ~UIEffect();
 

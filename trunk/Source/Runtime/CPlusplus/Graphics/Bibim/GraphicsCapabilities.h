@@ -23,26 +23,26 @@
 
                 enum VertexShader
                 {
-                    VSUnknown,
-                    VSNotSupported,
-                    VS1X,
-                    VS20,
-                    VS20Ex,
-                    VS30,
-                    VS40,
-                    VSUpperVersion,
+                    VSUnknown = -1,
+                    VSNotSupported = 0,
+                    VS1x = 10,
+                    VS20 = 20,
+                    VS2x = 25,
+                    VS30 = 30,
+                    VS40 = 40,
+                    VSUpperVersion = 1000,
                 };
 
                 enum PixelShader
                 {
-                    PSUnknown,
-                    PSNotSupported,
-                    PS1X,
-                    PS20,
-                    PS20Ex,
-                    PS30,
-                    PS40,
-                    PSUpperVersion,
+                    PSUnknown = -1,
+                    PSNotSupported = 0,
+                    PS1x = 10,
+                    PS20 = 20,
+                    PS2x = 25,
+                    PS30 = 30,
+                    PS40 = 40,
+                    PSUpperVersion = 1000,
                 };
 
             public:
