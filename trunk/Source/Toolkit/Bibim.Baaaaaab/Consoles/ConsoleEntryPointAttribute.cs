@@ -14,7 +14,7 @@ namespace Bibim.Bab.Consoles
         public static MethodInfo Find(string name)
         {
             Assembly assembly = Assembly.GetEntryAssembly();
-            foreach (Type item in assembly.GetTypes())
+            foreach (Type item in assembly.GetExportedTypes())
             {
                 if (item.GetCustomAttribute<ConsoleEntryPointAttribute>() == null)
                     continue;

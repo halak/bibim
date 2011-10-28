@@ -198,6 +198,7 @@
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Effects
                     BBForwardDeclareSmartPointerClass(UIEffect);
+                        BBForwardDeclareSmartPointerClass(UIColorMatrixEffect);
                         BBForwardDeclareSmartPointerClass(UIMaskEffect);
                             BBForwardDeclareSmartPointerClass(UIOpacityMaskEffect);
                         BBForwardDeclareSmartPointerClass(UITintEffect);

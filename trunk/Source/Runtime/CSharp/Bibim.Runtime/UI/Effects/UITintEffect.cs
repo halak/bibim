@@ -14,6 +14,10 @@ namespace Bibim.UI.Effects
         #endregion
 
         #region Constructors
+        public UITintEffect()
+            : base(0)
+        {
+        }
         #endregion
 
         #region Methods

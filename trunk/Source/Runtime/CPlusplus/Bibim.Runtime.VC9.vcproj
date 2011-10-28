@@ -1781,6 +1781,18 @@
 					Name="Effects"
 					>
 					<File
+						RelativePath=".\Graphics\Bibim\UIColorMatrixEffect.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\UIColorMatrixEffect.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\UIColorMatrixEffect.inl"
+						>
+					</File>
+					<File
 						RelativePath=".\UI\Bibim\UIEffect.cpp"
 						>
 					</File>

@@ -18,7 +18,7 @@ namespace Bibim.Graphics
             writer.Write((short)asset.SurfaceHeight);
             writer.Write((sbyte)asset.Format);
 
-            SourceTexture2DCookingTag tag = (SourceTexture2DCookingTag)asset.Tag;
+            var tag = (SourceTexture2DCookingTag)asset.Tag;
             writer.Write(tag.Pitch);
             writer.Write(tag.Buffer);
         }

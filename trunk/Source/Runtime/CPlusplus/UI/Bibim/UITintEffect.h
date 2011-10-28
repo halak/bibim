@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/UIEffect.h>
+#   include <Bibim/Vector4.h>
 
     namespace Bibim
     {
@@ -11,10 +12,18 @@
         {
             BBComponentClass(UITintEffect, UIEffect, 'U', 'T', 'N', 'F');
             public:
+                static const int ClassIndex = 0;
+
+            public:
                 UITintEffect();
+                UITintEffect(Vector4 value);
                 virtual ~UITintEffect();
 
+                inline Vector4 GetValue() const;
+                inline void SetValue(Vector4 value);
+
             private:
+                Vector4 value;
         };
     }
 

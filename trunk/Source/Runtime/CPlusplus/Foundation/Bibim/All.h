@@ -16,6 +16,7 @@
 #  include <Bibim/GameAssetFactory.h>
 #  include <Bibim/GameAssetStorage.h>
 #  include <Bibim/PipedAssetProvider.h>
+#   include <Bibim/UIColorMatrixEffect.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // FileSystem

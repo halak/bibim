@@ -18,10 +18,15 @@
                 };
 
             public:
-                UIEffect();
                 virtual ~UIEffect();
 
+                inline int GetSlotIndex() const;
+
+            protected:
+                UIEffect(int slotIndex);
+
             private:
+                int slotIndex;
         };
     }
 

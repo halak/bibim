@@ -22,7 +22,7 @@ namespace Bibim.Scripting
 
             foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                foreach (Type item in assembly.GetTypes())
+                foreach (Type item in assembly.GetExportedTypes())
                 {
                     if (item.IsDefined(typeof(ScriptNativeLibraryAttribute), false) == false)
                         continue;
