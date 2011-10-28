@@ -11,6 +11,9 @@
         {
             BBComponentClass(UIOpacityMaskEffect, UIMaskEffect, 'U', 'O', 'M', 'E');
             public:
+                static const int ClassIndex = 1;
+
+            public:
                 UIOpacityMaskEffect();
                 virtual ~UIOpacityMaskEffect();
         };

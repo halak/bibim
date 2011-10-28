@@ -11,8 +11,10 @@
         {
             BBAbstractComponentClass(UIMaskEffect, UIEffect);
             public:
-                UIMaskEffect();
                 virtual ~UIMaskEffect();
+
+            protected:
+                UIMaskEffect(int slotIndex);
 
             private:
         };

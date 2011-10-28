@@ -112,6 +112,7 @@
     <Compile Include="Asset\Pipeline\GameAssetServer.cs" />
     <Compile Include="Asset\Pipeline\PipedGameAssetServer.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToMaskTexture2D.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\ImportShaderEffect.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PackBitmap.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToTexture2D.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToUILayout1.cs" />
@@ -139,6 +140,8 @@
       <DependentUpon>ImageViewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Graphics\ImageWriter.cs" />
+    <Compile Include="Graphics\ShaderEffectCookingTag.cs" />
+    <Compile Include="Graphics\ShaderEffectWriter.cs" />
     <Compile Include="Graphics\SourceTexture2DWriter.cs" />
     <Compile Include="Graphics\SourceTexture2DCookingTag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

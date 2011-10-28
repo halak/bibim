@@ -322,7 +322,7 @@ namespace Bibim.Asset
                 imageResourceDictionary = new Dictionary<ImageResourceID, Type>();
                 Assembly assembly = Assembly.GetCallingAssembly();
                 Type[] constructorParameterTypes = new Type[] { typeof(ImageResourceID), typeof(string), typeof(uint), typeof(Reader) };
-                foreach (Type item in assembly.GetTypes())
+                foreach (Type item in assembly.GetExportedTypes())
                 {
                     if (item.IsVisible &&
                         item.IsClass &&

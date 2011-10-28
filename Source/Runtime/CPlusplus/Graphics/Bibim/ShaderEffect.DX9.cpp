@@ -9,6 +9,8 @@ namespace Bibim
         : graphicsDevice(graphicsDevice),
           d3dEffect(nullptr)
     {
+        IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
+        // D3DXCreateEffect(d3dDevice, 
     }
 
     ShaderEffect::~ShaderEffect()

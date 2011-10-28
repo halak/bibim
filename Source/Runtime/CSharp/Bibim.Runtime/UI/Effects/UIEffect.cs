@@ -10,9 +10,18 @@ namespace Bibim.UI.Effects
         #endregion
 
         #region Properties
+        public int SlotIndex
+        {
+            get;
+            private set;
+        }
         #endregion
 
         #region Constructors
+        protected UIEffect(int slotIndex)
+        {
+            SlotIndex = slotIndex;
+        }
         #endregion
 
         #region Methods

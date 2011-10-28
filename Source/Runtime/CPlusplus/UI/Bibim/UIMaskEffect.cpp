@@ -3,7 +3,8 @@
 
 namespace Bibim
 {
-    UIMaskEffect::UIMaskEffect()
+    UIMaskEffect::UIMaskEffect(int slotIndex)
+        : Base(slotIndex)
     {
     }
 
@@ -14,12 +15,10 @@ namespace Bibim
     void UIMaskEffect::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        BBBreak();
     }
 
     void UIMaskEffect::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
-        BBBreak();
     }
 }

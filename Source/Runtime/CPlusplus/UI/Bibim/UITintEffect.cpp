@@ -1,10 +1,20 @@
+#include <Bibim/PCH.h>
 #include <Bibim/UITintEffect.h>
+#include <Bibim/ComponentStreamReader.h>
 
 namespace Bibim
 {
     BBImplementsComponent(UITintEffect);
 
     UITintEffect::UITintEffect()
+        : Base(ClassIndex),
+          value(1.0f, 1.0f, 1.0f, 0.0f)
+    {
+    }
+
+    UITintEffect::UITintEffect(Vector4 value)
+        : Base(ClassIndex),
+          value(value)
     {
     }
 
@@ -15,12 +25,13 @@ namespace Bibim
     void UITintEffect::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        BBBreak();
+        value = reader.ReadVector4();
     }
 
     void UITintEffect::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
-        BBBreak();
+        const This* o = static_cast<const This*>(original);
+        value = o->value;
     }
 }

@@ -121,7 +121,9 @@ namespace Bibim.Asset.Pipeline
 
             if (hasCache)
             {
-                callback(cache.Buffer, 0, cache.Buffer.Length);
+                if (callback != null)
+                    callback(cache.Buffer, 0, cache.Buffer.Length);
+
                 return;
             }
 

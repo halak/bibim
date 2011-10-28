@@ -101,6 +101,7 @@
     <Compile Include="GameComponent.cs" />
     <Compile Include="Graphics\GraphicsDevice.cs" />
     <Compile Include="Graphics\Image.cs" />
+    <Compile Include="Graphics\ShaderEffect.cs" />
     <Compile Include="Graphics\SourceTexture2D.cs" />
     <Compile Include="Graphics\Texture2D.cs" />
     <Compile Include="IO\BinaryReaderExtension.cs" />

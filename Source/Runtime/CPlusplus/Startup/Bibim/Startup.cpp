@@ -11,6 +11,8 @@ namespace Bibim
         GameAssetFactory::AddEntry<UILayout>();
         GameAssetFactory::SortEntries();
 
+        GameComponentFactory::AddEntry<UIColorMatrixEffect>();
+        GameComponentFactory::AddEntry<UIOpacityMaskEffect>();
         GameComponentFactory::AddEntry<UITintEffect>();
         GameComponentFactory::AddEntry<UIEffectMap>();
         GameComponentFactory::AddEntry<UIFunctionEventHandler>();
