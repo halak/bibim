@@ -16,6 +16,8 @@
             public:
                 UIOpacityMaskEffect();
                 virtual ~UIOpacityMaskEffect();
+
+            private:
         };
     }
 

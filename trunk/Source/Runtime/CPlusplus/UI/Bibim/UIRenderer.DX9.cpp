@@ -6,6 +6,7 @@
 #include <Bibim/GraphicsDevice.h>
 #include <Bibim/Math.h>
 #include <Bibim/Matrix4.h>
+#include <Bibim/ShaderEffect.h>
 #include <Bibim/Texture2D.h>
 
 namespace Bibim
@@ -76,10 +77,7 @@ namespace Bibim
         DWORD oldValue;
         d3dDevice->GetTextureStageState(stage, type, &oldValue);
         if (oldValue != value)
-        {
-            HRESULT r = d3dDevice->SetTextureStageState(stage, type, value);
-            r = r;
-        }
+            d3dDevice->SetTextureStageState(stage, type, value);
     }
 
     static void CheckedSetSamplerState(IDirect3DDevice9* d3dDevice, DWORD sampler, D3DSAMPLERSTATETYPE type, DWORD value)
@@ -226,12 +224,19 @@ namespace Bibim
         d3dDevice->SetStreamSource(0, vb, 0, sizeof(Vertex));
         d3dDevice->SetIndices(ib);
 
+        UINT passes = 0;
+        shaderEffect->GetD3DEffect()->Begin(&passes, 0);
+        shaderEffect->GetD3DEffect()->BeginPass(0);
+
         vb->Lock(0, vbSize, reinterpret_cast<void**>(&lockedVertices), D3DLOCK_DISCARD);
     }
 
     void UIRenderer::End()
     {
         Flush();
+
+        shaderEffect->GetD3DEffect()->EndPass();
+        shaderEffect->GetD3DEffect()->End();
 
         IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
 
@@ -285,7 +290,7 @@ namespace Bibim
         CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_TEXCOORDINDEX, 0);
     }
 
-    void UIRenderer::DrawQuad(const Vector2* p, const RectF& clippingRect, Texture2D* texture, Color color)
+    void UIRenderer::DrawQuad(const Vector2* p, const RectF& clippingRect, Texture2D* texture, Color color, UIEffectStack* effects)
     {
         const Vector2 uv[4] =
         {
@@ -294,10 +299,10 @@ namespace Bibim
             Vector2(clippingRect.GetLeft(),  clippingRect.GetBottom()),
             Vector2(clippingRect.GetRight(), clippingRect.GetBottom()),
         };
-        DrawQuad(p, uv, texture, color);
+        DrawQuad(p, uv, texture, color, effects);
     }
 
-    void UIRenderer::DrawQuad(const Vector2* p, const Vector2* uv, Texture2D* texture, Color color)
+    void UIRenderer::DrawQuad(const Vector2* p, const Vector2* uv, Texture2D* texture, Color color, UIEffectStack* effects)
     {
         const RectF bounds = RectF(Vector2(Math::Min(p[0].X, p[1].X, p[2].X, p[3].X), Math::Min(p[0].Y, p[1].Y, p[2].Y, p[3].Y)),
                                    Vector2(Math::Max(p[0].X, p[1].X, p[2].X, p[3].X), Math::Max(p[0].Y, p[1].Y, p[2].Y, p[3].Y)));
@@ -359,7 +364,7 @@ namespace Bibim
         quadSet.Count++;
     }
 
-    void UIRenderer::DrawQuad(const Vector2* p, const Vector2* uv1, Texture2D* texture, const Vector2* uv2, Texture2D* maskTexture, Color color)
+    void UIRenderer::DrawQuad(const Vector2* p, const Vector2* uv1, Texture2D* texture, const Vector2* uv2, Texture2D* maskTexture, Color color, UIEffectStack* effects)
     {
         FlushAndLock();
 
@@ -452,6 +457,18 @@ namespace Bibim
     {
     }
 
+    void UIRenderer::SetupEffectors(const std::vector<UIPixelEffectorPtr>& effectors)
+    {
+        FlushAndLock();
+
+        for (std::vector<UIPixelEffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); it++)
+        {
+            (*it)->Setup(shaderEffect);
+        }
+
+        shaderEffect->GetD3DEffect()->CommitChanges();
+    }
+
     void UIRenderer::SetGraphicsDevice(GraphicsDevice* value)
     {
         if (graphicsDevice != value)
@@ -459,6 +476,11 @@ namespace Bibim
             graphicsDevice = value;
             ReserveCachedQuads(64);
         }
+    }
+
+    void UIRenderer::SetShaderEffect(ShaderEffect* value)
+    {
+        shaderEffect = value;
     }
 
     void UIRenderer::SetFieldOfView(float value)

@@ -3,20 +3,24 @@
 #define __BIBIM_UIMASKEFFECT_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/UIEffect.h>
+#   include <Bibim/UIPixelEffect.h>
 
     namespace Bibim
     {
-        class UIMaskEffect : public UIEffect
+        class UIMaskEffect : public UIPixelEffect
         {
-            BBAbstractComponentClass(UIMaskEffect, UIEffect);
+            BBAbstractComponentClass(UIMaskEffect, UIPixelEffect);
             public:
                 virtual ~UIMaskEffect();
 
+                inline Image* GetMask() const;
+                void SetMask(Image* value);
+
             protected:
-                UIMaskEffect(int slotIndex);
+                UIMaskEffect(int slotIndex, bool isFixedFunctionImplemented, bool isShaderFunctionImplemented);
 
             private:
+                ImagePtr mask;
         };
     }
 

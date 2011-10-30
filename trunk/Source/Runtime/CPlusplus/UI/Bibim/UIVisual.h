@@ -42,6 +42,9 @@
                 inline UIEventMap* GetEventMap() const;
                 void SetEventMap(UIEventMap* value);
 
+                inline UIEffectMap* GetEffectMap() const;
+                void SetEffectMap(UIEffectMap* value);
+
                 inline virtual Vector2 GetDesiredSize();
 
                 inline UIPanel* GetParent() const;
@@ -99,6 +102,7 @@
                 UIFramePtr frame;
                 UITransformPtr transform;
                 UIEventMapPtr eventMap;
+                UIEffectMapPtr effectMap;
                 UIPanel* parent;
 
                 friend class UIDrawingContext;

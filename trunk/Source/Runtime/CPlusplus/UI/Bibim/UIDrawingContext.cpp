@@ -5,6 +5,7 @@
 #include <Bibim/FontString.h>
 #include <Bibim/Image.h>
 #include <Bibim/UIRenderer.h>
+#include <Bibim/UIEffectStack.h>
 #include <Bibim/UIVisual.h>
 #include <Bibim/Texture2D.h>
 #include <Bibim/TypingContext.h>
@@ -14,6 +15,7 @@ namespace Bibim
     UIDrawingContext::UIDrawingContext(UIRenderer* renderer)
         : UIVisualVisitor(renderer->GetViewTransform(), renderer->GetInversedViewTransform(), renderer->GetProjectionTransform(), true),
           renderer(renderer),
+          effectStack(new UIEffectStack()),
           isDrawing(false)
     {
     }
@@ -102,7 +104,7 @@ namespace Bibim
         };
         Project(points[0], points[1], points[2], points[3]);
 
-        renderer->DrawQuad(points, uv, image->GetTexture(), Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())));
+        renderer->DrawQuad(points, uv, image->GetTexture(), Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())), effectStack);
     }
 
     void UIDrawingContext::Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, Image* maskImage, bool horizontalFlip, bool verticalFlip)
@@ -217,7 +219,7 @@ namespace Bibim
         };
         Project(points[0], points[1], points[2], points[3]);
 
-        renderer->DrawQuad(points, uv1, image->GetTexture(), uv2, maskImage->GetTexture(), Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())));
+        renderer->DrawQuad(points, uv1, image->GetTexture(), uv2, maskImage->GetTexture(), Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())), effectStack);
     }
 
     void UIDrawingContext::Draw(Vector2 position, Texture2D* texture)
@@ -238,7 +240,7 @@ namespace Bibim
         };
         Project(points[0], points[1], points[2], points[3]);
 
-        renderer->DrawQuad(points, RectF(0.0f, 0.0f, 1.0f, 1.0f), texture, Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())));
+        renderer->DrawQuad(points, RectF(0.0f, 0.0f, 1.0f, 1.0f), texture, Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())), effectStack);
     }
 
     void UIDrawingContext::DrawString(const RectF& bounds, const RectF& clippedBounds, Font* font, const String& text)
@@ -290,7 +292,7 @@ namespace Bibim
                         Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetBottom() - 0.5f),
                     };
                     self->Project(points[0], points[1], points[2], points[3]);
-                    renderer->DrawQuad(points, clippingRect, glyph->GetTexture(), color);
+                    renderer->DrawQuad(points, clippingRect, glyph->GetTexture(), color, self->effectStack);
                 }
             }
         };
@@ -333,6 +335,18 @@ namespace Bibim
 
     void UIDrawingContext::OnVisit()
     {
+        if (GetCurrentVisual()->GetEffectMap())
+        {
+            if (effectStack->Push(GetCurrentVisual()->GetEffectMap()))
+                renderer->SetupEffectors(effectStack->GetTopEffectors());
+        }
+
         GetCurrentVisual()->OnDraw(*this);
+
+        if (GetCurrentVisual()->GetEffectMap())
+        {
+            if (effectStack->Pop())
+                renderer->SetupEffectors(effectStack->GetTopEffectors());
+        }
     }
 }

@@ -5,6 +5,11 @@ namespace Bibim
         return graphicsDevice;
     }
 
+    ShaderEffect* UIRenderer::GetShaderEffect() const
+    {
+        return shaderEffect;
+    }
+
     float UIRenderer::GetFieldOfView() const
     {
         return fieldOfView;

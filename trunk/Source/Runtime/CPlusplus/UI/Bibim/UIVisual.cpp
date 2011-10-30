@@ -2,6 +2,7 @@
 #include <Bibim/UIVisual.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Math.h>
+#include <Bibim/UIEffectMap.h>
 #include <Bibim/UIEventMap.h>
 #include <Bibim/UIFrame.h>
 #include <Bibim/UIGamePadEventArgs.h>
@@ -24,6 +25,7 @@ namespace Bibim
           frame(nullptr),
           transform(nullptr),
           eventMap(nullptr),
+          effectMap(nullptr),
           parent(nullptr)
     {
     }
@@ -67,6 +69,11 @@ namespace Bibim
     void UIVisual::SetEventMap(UIEventMap* value)
     {
         eventMap = value;
+    }
+
+    void UIVisual::SetEffectMap(UIEffectMap* value)
+    {
+        effectMap = value;
     }
 
     void UIVisual::SetParent(UIPanel* value)

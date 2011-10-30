@@ -9,7 +9,9 @@
 #   include <Bibim/RectF.h>
 #   include <Bibim/Vector2.h>
 #   include <Bibim/Vector3.h>
+#   include <Bibim/UIPixelEffect.h>
 #   include <deque>
+#   include <vector>
 #   include <d3dx9.h>
 
     namespace Bibim
@@ -28,13 +30,17 @@
                 void EnterStringRenderMode();
                 void LeaveStringRenderMode();
 
-                void DrawQuad(const Vector2* p, const RectF& clippingRect, Texture2D* texture, Color color);
-                void DrawQuad(const Vector2* p, const Vector2* uv, Texture2D* texture, Color color);
-                void DrawQuad(const Vector2* p, const Vector2* uv1, Texture2D* texture, const Vector2* uv2, Texture2D* maskTexture, Color color);
+                void DrawQuad(const Vector2* p, const RectF& clippingRect, Texture2D* texture, Color color, UIEffectStack* effects);
+                void DrawQuad(const Vector2* p, const Vector2* uv, Texture2D* texture, Color color, UIEffectStack* effects);
+                void DrawQuad(const Vector2* p, const Vector2* uv1, Texture2D* texture, const Vector2* uv2, Texture2D* maskTexture, Color color, UIEffectStack* effects);
                 void Draw(int count, const Vector2* points, Color color);
+                void SetupEffectors(const std::vector<UIPixelEffectorPtr>& effectors);
 
                 inline GraphicsDevice* GetGraphicsDevice() const;
                 void SetGraphicsDevice(GraphicsDevice* value);
+
+                inline ShaderEffect* GetShaderEffect() const;
+                void SetShaderEffect(ShaderEffect* value);
 
                 inline float GetFieldOfView() const;
                 void SetFieldOfView(float value);
@@ -95,6 +101,7 @@
 
             private:
                 GraphicsDevice* graphicsDevice;
+                ShaderEffectPtr shaderEffect;
                 float fieldOfView;
                 Matrix4 viewTransform;
                 Matrix4 viewTransformInv;

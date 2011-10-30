@@ -16,7 +16,6 @@
 #  include <Bibim/UICheckBox.h>
 #  include <Bibim/UIDomain.h>
 #  include <Bibim/UIDrawingContext.h>
-#  include <Bibim/UIEffect.h>
 #  include <Bibim/UIEffectMap.h>
 #  include <Bibim/UIElement.h>
 #  include <Bibim/UIEventArgs.h>

@@ -32,6 +32,7 @@
                 inline float GetCurrentOpacity() const; 
                 inline const RectF& GetCurrentBounds() const;
                 inline const RectF& GetCurrentClippedBounds() const;
+                inline const UIGeometryEffect* GetCurrentGeometryEffect() const;
                 inline const Matrix4& GetCurrentTransform() const;
 
                 inline const Matrix4& GetViewTransform() const;
@@ -52,6 +53,7 @@
                 float currentOpacity;
                 RectF currentBounds;
                 RectF currentClippedBounds;
+                UIGeometryEffectPtr currentGeometryEffect;
                 Matrix4 currentTransform;
                 Matrix4 currentTransformInv;
                 Matrix4 parentTransform;

@@ -25,6 +25,11 @@ namespace Bibim
         return currentClippedBounds;
     }
 
+    const UIGeometryEffect* UIVisualVisitor::GetCurrentGeometryEffect() const
+    {
+        return currentGeometryEffect;
+    }
+
     const Matrix4& UIVisualVisitor::GetCurrentTransform() const
     {
         return currentTransform;

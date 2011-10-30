@@ -17,7 +17,7 @@
 #  include <Bibim/GameAssetStorage.h>
 #  include <Bibim/PipedAssetProvider.h>
 #   include <Bibim/UIColorMatrixEffect.h>
-
+#include <Bibim/ShaderEffect.h>
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // FileSystem
 #  include <Bibim/FileStream.h>
@@ -169,10 +169,10 @@
 #  include <Bibim/UICheckBox.h>
 #  include <Bibim/UIDomain.h>
 #  include <Bibim/UIDrawingContext.h>
-#  include <Bibim/UIEffect.h>
 #  include <Bibim/UIEffectMap.h>
 #  include <Bibim/UIElement.h>
 #  include <Bibim/UIEventArgs.h>
+#include <Bibim/UISineCurveEffect.h>
 #  include <Bibim/UIEventDispatcher.h>
 #  include <Bibim/UIEventHandler.h>
 #  include <Bibim/UIEventID.h>

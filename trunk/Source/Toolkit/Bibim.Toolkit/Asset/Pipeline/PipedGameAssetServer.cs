@@ -201,7 +201,7 @@ namespace Bibim.Asset.Pipeline
                                                                 null);
                               });
 
-                    message = string.Format("[{0}:{1}] Received LoadAssetPacket. {2}\n\tAssetPipe opened. ({3}).", peer.Name, peer.ID, relativePath, guid);
+                    message = string.Format("[{0}:{1}] Received LoadAssetPacket. {2} ({3}).", peer.Name, peer.ID, relativePath, guid);
                     break;
                 case PipedAssetProvider.ChangeClientNamePacketID:
                     string oldName = peer.Name;

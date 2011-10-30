@@ -2,7 +2,9 @@
 #include <Bibim/UIVisualVisitor.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Math.h>
+#include <Bibim/UIEffectMap.h>
 #include <Bibim/UIFrame.h>
+#include <Bibim/UIGeometryEffect.h>
 #include <Bibim/UITransform.h>
 #include <Bibim/UIVisual.h>
 #include <d3dx9.h>
@@ -116,6 +118,7 @@ namespace Bibim
         const float oldOpacity = currentOpacity;
         const RectF oldBounds = currentBounds;
         const RectF oldClippedBounds = currentClippedBounds;
+        UIGeometryEffect*const oldGeometryEffect = currentGeometryEffect;
         const Matrix4 oldTransform = currentTransform;
         const Matrix4 oldTransformInv = currentTransformInv;
         const Matrix4 oldParentTransform = parentTransform;
@@ -126,6 +129,8 @@ namespace Bibim
         currentVisual = target;
         currentOpacity *= target->GetOpacity();
         currentBounds = bounds;
+        if (currentVisual->GetEffectMap() && currentVisual->GetEffectMap()->GetGeometryEffect())
+            currentGeometryEffect = currentVisual->GetEffectMap()->GetGeometryEffect();
         currentClippedBounds = RectF::Intersect(currentClippedBounds, currentBounds);
         parentTransform = currentTransform;
         parentTransformInv = currentTransformInv;
@@ -140,6 +145,7 @@ namespace Bibim
         currentVisual = oldVisual;
         currentOpacity = oldOpacity;
         currentBounds = oldBounds;
+        currentGeometryEffect = oldGeometryEffect;
         currentClippedBounds = oldClippedBounds;
         currentTransform = oldTransform;
         currentTransformInv = oldTransformInv;
