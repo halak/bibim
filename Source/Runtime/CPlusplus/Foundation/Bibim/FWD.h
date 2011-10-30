@@ -194,15 +194,20 @@
                 BBForwardDeclareSmartPointerClass(UIElement);
                 BBForwardDeclareSmartPointerClass(UILayout);
                 class UIMarkupText;
+                BBForwardDeclareSmartPointerClass(UIRenderBuffer);
                 class UIRenderer;
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Effects
-                    BBForwardDeclareSmartPointerClass(UIEffect);
+                    BBForwardDeclareSmartPointerClass(UIEffectMap);
+                    BBForwardDeclareSmartPointerClass(UIEffectStack);
+                    BBForwardDeclareSmartPointerClass(UIGeometryEffect);
+                        BBForwardDeclareSmartPointerClass(UISineCurveEffect);
+                        BBForwardDeclareSmartPointerClass(UITintEffect);
+                    BBForwardDeclareSmartPointerClass(UIPixelEffect);
+                        BBForwardDeclareSmartPointerClass(UIBlurEffect);
                         BBForwardDeclareSmartPointerClass(UIColorMatrixEffect);
                         BBForwardDeclareSmartPointerClass(UIMaskEffect);
                             BBForwardDeclareSmartPointerClass(UIOpacityMaskEffect);
-                        BBForwardDeclareSmartPointerClass(UITintEffect);
-                    BBForwardDeclareSmartPointerClass(UIEffectMap);
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Events
                     class UIAsyncEventQueue;

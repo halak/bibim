@@ -1,9 +1,54 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIColorMatrixEffect.h>
 #include <Bibim/ComponentStreamReader.h>
+#include <Bibim/ShaderEffect.h>
 
 namespace Bibim
 {
+    UIColorMatrixEffect::Effector::Effector(Effector* parent, UIColorMatrixEffect* effect)
+    {
+        if (parent)
+        {
+            red.X = parent->red.X * effect->red.X;
+            red.Y = parent->red.Y * effect->red.Y;
+            red.Z = parent->red.Z * effect->red.Z;
+            red.W = parent->red.W * effect->red.W;
+            green.X = parent->green.X * effect->green.X;
+            green.Y = parent->green.Y * effect->green.Y;
+            green.Z = parent->green.Z * effect->green.Z;
+            green.W = parent->green.W * effect->green.W;
+            blue.X = parent->blue.X * effect->blue.X;
+            blue.Y = parent->blue.Y * effect->blue.Y;
+            blue.Z = parent->blue.Z * effect->blue.Z;
+            blue.W = parent->blue.W * effect->blue.W;
+            alpha.X = parent->alpha.X * effect->alpha.X;
+            alpha.Y = parent->alpha.Y * effect->alpha.Y;
+            alpha.Z = parent->alpha.Z * effect->alpha.Z;
+            alpha.W = parent->alpha.W * effect->alpha.W;
+        }
+        else
+        {
+            red = effect->red;
+            green = effect->green;
+            blue = effect->blue;
+            alpha = effect->alpha;
+        }
+    }
+
+    UIColorMatrixEffect::Effector::~Effector()
+    {
+    }
+
+    void UIColorMatrixEffect::Effector::Setup(ShaderEffect* effect)
+    {/*
+        effect->FindParameter("Red")->SetValue(red);
+        effect->FindParameter("Green")->SetValue(red);
+        effect->FindParameter("Blue")->SetValue(red);
+        effect->FindParameter("Alpha")->SetValue(red);*/
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     BBImplementsComponent(UIColorMatrixEffect);
 
     const Vector4 UIColorMatrixEffect::DefaultRed(1.0f, 0.0f, 0.0f, 0.0f);
@@ -12,7 +57,7 @@ namespace Bibim
     const Vector4 UIColorMatrixEffect::DefaultAlpha(0.0f, 0.0f, 0.0f, 0.0f);
 
     UIColorMatrixEffect::UIColorMatrixEffect()
-        : Base(ClassIndex),
+        : Base(ClassIndex, false, true),
           red(DefaultRed),
           green(DefaultGreen),
           blue(DefaultBlue),
@@ -21,7 +66,7 @@ namespace Bibim
     }
 
     UIColorMatrixEffect::UIColorMatrixEffect(Vector4 red, Vector4 green, Vector4 blue, Vector4 alpha)
-        : Base(ClassIndex),
+        : Base(ClassIndex, false, true),
           red(red),
           green(green),
           blue(blue),
@@ -31,6 +76,11 @@ namespace Bibim
 
     UIColorMatrixEffect::~UIColorMatrixEffect()
     {
+    }
+
+    UIColorMatrixEffect::Effector* UIColorMatrixEffect::CreateEffector(UIPixelEffect::Effector* parent)
+    {
+        return new Effector(static_cast<UIColorMatrixEffect::Effector*>(parent), this);
     }
 
     void UIColorMatrixEffect::OnRead(ComponentStreamReader& reader)

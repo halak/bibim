@@ -4,7 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/UIVisualVisitor.h>
-#    include <Bibim/Vector2.h>
+#   include <Bibim/Vector2.h>
 
     namespace Bibim
     {
@@ -37,10 +37,11 @@
 
                 virtual void OnBegan();
                 virtual void OnEnded();
-                virtual void OnVisit();               
+                virtual void OnVisit();
 
             private:
                 UIRenderer* renderer;
+                UIEffectStackPtr effectStack;
                 bool isDrawing;
 
                 friend class UIPanel;

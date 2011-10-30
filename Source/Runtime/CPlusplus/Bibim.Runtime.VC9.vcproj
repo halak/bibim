@@ -1370,6 +1370,18 @@
 					>
 				</File>
 				<File
+					RelativePath=".\UI\Bibim\UIRenderBuffer.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\UI\Bibim\UIRenderBuffer.h"
+					>
+				</File>
+				<File
+					RelativePath=".\UI\Bibim\UIRenderBuffer.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\UI\Bibim\UIRenderer.DX9.cpp"
 					>
 				</File>
@@ -1781,30 +1793,6 @@
 					Name="Effects"
 					>
 					<File
-						RelativePath=".\Graphics\Bibim\UIColorMatrixEffect.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\UIColorMatrixEffect.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\UIColorMatrixEffect.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIEffect.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIEffect.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIEffect.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIEffectMap.cpp"
 						>
 					</File>
@@ -1817,41 +1805,109 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIMaskEffect.cpp"
+						RelativePath=".\UI\Bibim\UIEffectStack.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIMaskEffect.h"
+						RelativePath=".\UI\Bibim\UIEffectStack.h"
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIMaskEffect.inl"
+						RelativePath=".\UI\Bibim\UIEffectStack.inl"
 						>
 					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIOpacityMaskEffect.cpp"
+					<Filter
+						Name="Geometry"
 						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIOpacityMaskEffect.h"
+						<File
+							RelativePath=".\UI\Bibim\UIGeometryEffect.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UIGeometryEffect.h"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UIGeometryEffect.inl"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UISineCurveEffect.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UISineCurveEffect.h"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UISineCurveEffect.inl"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UITintEffect.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UITintEffect.h"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UITintEffect.inl"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="Pixel"
 						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIOpacityMaskEffect.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UITintEffect.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UITintEffect.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UITintEffect.inl"
-						>
-					</File>
+						<File
+							RelativePath=".\Graphics\Bibim\UIColorMatrixEffect.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\Graphics\Bibim\UIColorMatrixEffect.h"
+							>
+						</File>
+						<File
+							RelativePath=".\Graphics\Bibim\UIColorMatrixEffect.inl"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UIMaskEffect.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UIMaskEffect.h"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UIMaskEffect.inl"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UIOpacityMaskEffect.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UIOpacityMaskEffect.h"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UIOpacityMaskEffect.inl"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UIPixelEffect.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UIPixelEffect.h"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UIPixelEffect.inl"
+							>
+						</File>
+					</Filter>
 				</Filter>
 				<Filter
 					Name="Transforms"

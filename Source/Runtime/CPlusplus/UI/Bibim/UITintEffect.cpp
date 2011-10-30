@@ -7,14 +7,12 @@ namespace Bibim
     BBImplementsComponent(UITintEffect);
 
     UITintEffect::UITintEffect()
-        : Base(ClassIndex),
-          value(1.0f, 1.0f, 1.0f, 0.0f)
+        : value(1.0f, 1.0f, 1.0f, 0.0f)
     {
     }
 
     UITintEffect::UITintEffect(Vector4 value)
-        : Base(ClassIndex),
-          value(value)
+        : value(value)
     {
     }
 

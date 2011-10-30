@@ -341,7 +341,7 @@ namespace Bibim.Bab
                 {
                     Exception ex = (Exception)o;
 
-                    string text = string.Format("{0} Thrown ({1}).", ex.GetType().Name, ex.Message.Replace("\r\n", " "));
+                    string text = string.Format("{0} Thrown ({1})", ex.GetType().Name, GetFirstLine(ex.Message));
                     Button button = new Button();
                     button.Content = text;
                     button.Click += new RoutedEventHandler((sender, e) =>
@@ -365,12 +365,9 @@ namespace Bibim.Bab
             {
                 Debug.Assert(item.Content == panel);
 
-                int singleLineIndex = Math.Min(message.IndexOf('\r'), message.IndexOf('\n'));
-                if (singleLineIndex == -1)
+                string firstLine = GetFirstLine(message);
+                if (firstLine == message)
                 {
-                    if (singleLineIndex != -1)
-                        message = message.Substring(0, singleLineIndex);
-
                     TextBlock textBlock = new TextBlock();
                     textBlock.Text = message;
                     ApplyFont(textBlock, category);
@@ -383,10 +380,8 @@ namespace Bibim.Bab
                 }
                 else
                 {
-                    string singleLineMessage = message.Substring(0, singleLineIndex);
-
                     Button button = new Button();
-                    button.Content = singleLineMessage;
+                    button.Content = firstLine;
                     button.Click += new RoutedEventHandler((sender, e) =>
                     {
                         ConsoleHtmlBox htmlBox = new ConsoleHtmlBox(message);
@@ -396,9 +391,9 @@ namespace Bibim.Bab
                     panel.Children.Add(button);
 
                     if (item.Tag == null)
-                        item.Tag = singleLineMessage;
+                        item.Tag = firstLine;
                     else
-                        item.Tag = (string)item.Tag + singleLineMessage;
+                        item.Tag = (string)item.Tag + firstLine;
                 }
             }
 
@@ -449,6 +444,24 @@ namespace Bibim.Bab
                     if (font.Background != null)
                         target.Background = font.Background;
                 }
+            }
+
+            private static string GetFirstLine(string msg)
+            {
+                if (string.IsNullOrEmpty(msg))
+                    return msg;
+
+                int index1 = msg.IndexOf('\r');
+                int index2 = msg.IndexOf('\n');
+                if (index1 == -1 && index2 == -1)
+                    return msg;
+
+                if (index1 == -1)
+                    index1 = msg.Length;
+                if (index2 == -1)
+                    index2 = msg.Length;
+
+                return msg.Substring(0, Math.Min(index1, index2));
             }
             #endregion
         }

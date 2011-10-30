@@ -40,6 +40,11 @@ namespace Bibim
         return eventMap;
     }
 
+    UIEffectMap* UIVisual::GetEffectMap() const
+    {
+        return effectMap;
+    }
+
     Vector2 UIVisual::GetDesiredSize()
     {
         return Vector2(-1.0f, -1.0f);

@@ -3,14 +3,14 @@
 #define __BIBIM_UITINTEFFECT_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/UIEffect.h>
+#   include <Bibim/UIGeometryEffect.h>
 #   include <Bibim/Vector4.h>
 
     namespace Bibim
     {
-        class UITintEffect : public UIEffect
+        class UITintEffect : public UIGeometryEffect
         {
-            BBComponentClass(UITintEffect, UIEffect, 'U', 'T', 'N', 'F');
+            BBComponentClass(UITintEffect, UIGeometryEffect, 'U', 'T', 'N', 'F');
             public:
                 static const int ClassIndex = 0;
 

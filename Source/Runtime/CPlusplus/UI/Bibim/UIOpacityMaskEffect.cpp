@@ -6,7 +6,7 @@ namespace Bibim
     BBImplementsComponent(UIOpacityMaskEffect);
 
     UIOpacityMaskEffect::UIOpacityMaskEffect()
-        : Base(ClassIndex)
+        : Base(ClassIndex, true, true)
     {
     }
 

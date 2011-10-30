@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/UIElement.h>
+#   include <vector>
 
     namespace Bibim
     {
@@ -11,10 +12,24 @@
         {
             BBComponentClass(UIEffectMap, UIElement, 'U', 'F', 'X', 'M');
             public:
+                typedef std::vector<UIPixelEffectPtr> PixelEffectCollection;
+
+            public:
                 UIEffectMap();
                 virtual ~UIEffectMap();
 
+                void Insert(UIPixelEffect* item);
+                bool Remove(UIPixelEffect* item);
+                bool Remove(int index);
+                void RemoveAll();
+
+                inline UIGeometryEffect* GetGeometryEffect() const;
+                void SetGeometryEffect(UIGeometryEffect* value);
+                inline const PixelEffectCollection& GetPixelEffects() const;
+
             private:
+                UIGeometryEffectPtr geomEffect;
+                PixelEffectCollection pixelEffects;
         };
     }
 
