@@ -16,7 +16,7 @@ namespace Bibim
         const float minimumRight  = Math::Min(a.GetRight(),  b.GetRight());
         const float minimumBottom = Math::Min(a.GetBottom(), b.GetBottom());
         return RectF(Vector2(maximumLeft, maximumTop), 
-                          Vector2(minimumRight, minimumBottom));
+                     Vector2(minimumRight, minimumBottom));
 
     }
 

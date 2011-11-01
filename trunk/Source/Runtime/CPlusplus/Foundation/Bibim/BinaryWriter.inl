@@ -64,4 +64,24 @@ namespace Bibim
     {
         *(reinterpret_cast<float*>(buffer)) = value;
     }
+
+    void BinaryWriter::From(byte* buffer, Color value)
+    {
+        *(reinterpret_cast<Color*>(buffer)) = value;
+    }
+
+    void BinaryWriter::From(byte* buffer, Vector2 value)
+    {
+        *(reinterpret_cast<Vector2*>(buffer)) = value;
+    }
+
+    void BinaryWriter::From(byte* buffer, Vector3 value)
+    {
+        *(reinterpret_cast<Vector3*>(buffer)) = value;
+    }
+
+    void BinaryWriter::From(byte* buffer, Vector4 value)
+    {
+        *(reinterpret_cast<Vector4*>(buffer)) = value;
+    }
 }

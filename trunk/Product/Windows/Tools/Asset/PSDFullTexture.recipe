@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Halak.BibimAssetRecipe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Author="" Comment="">
+<GameAssetRecipe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Author="" Comment="">
 	<Cook xsi:type="BitmapToTexture2D">
 		<Input xsi:type="PhotoshopDocumentToBitmap">
 			<Input xsi:type="ImportPhotoshopDocument">
@@ -7,4 +7,4 @@
 			</Input>
 		</Input>
 	</Cook>
-</Halak.BibimAssetRecipe>
+</GameAssetRecipe>

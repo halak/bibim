@@ -1,5 +1,6 @@
 #include <Bibim/TestBed.h>
 #include <Bibim/GameFramework.h>
+#include <Bibim/Clock.h>
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/GameModuleNode.h>
 #include <Bibim/GameModuleTree.h>
@@ -18,8 +19,8 @@ class UISample : public GameFramework
     GameAssetStorage* storage;
     UIDomain* uiDomain;
     UIRenderer* uiRenderer;
+    UIRenderBufferPtr buffer;
     SourceTexture2DPtr texture1;
-    SourceTexture2DPtr texture2;
 
     protected:
         virtual void Initialize()
@@ -44,60 +45,48 @@ class UISample : public GameFramework
             GameModuleNode* uiNode = GetModules()->GetRoot()->AttachChild(uid);
             uiNode->AttachChild(uir);
 
-            //gas->Preload("Asset\\Background");
-            //gas->Preload("Asset\\BigHello");
-
-            //texture1 = static_cast<SourceTexture2D*>(gas->Load("Asset\\BigHello"));
-            //texture2 = static_cast<SourceTexture2D*>(gas->Load("Asset\\Background"));
-
-            //ScriptPtr script = static_cast<Script*>(gas->Load("Script"));
-            //ScriptThreadPtr process = new ScriptThread(script);
-            //ScriptObject r1 = process->Call("Sum1To100");
-            //ScriptObject r2 = process->Call("Factorial", 6);
-
-            UILayoutPtr layout2;
-            UILayoutPtr layout = static_cast<UILayout*>(gas->Load("Asset\\VisualNovelUI"));
-            BBAssertDebug(layout && layout->GetRoot());
-            uid->GetRoot()->AddChild(layout->GetRoot());
-
             storage = gas;
             uiDomain = uid;
             uiRenderer = uir;
+
+            texture1 = static_cast<SourceTexture2D*>(gas->Load("Asset\\BigHello"));
+
+            buffer = new UIRenderBuffer(1024 * 64);
+            ImagePtr image = new Image(texture1);
+            UIDrawingContext context(uiRenderer, buffer);
+            for (float x = 0.0f; x < 800.0f; x+=5.0f)
+            {
+                for (float y = 0.0f; y < 600.0f; y+= 5.0f)
+                    context.Draw(RectF(x, y, 10.0f, 10.0f), RectF(x, y, 10.0f, 10.0f), image, false, false);
+            }
+            buffer->Flush();
         }
+
 
         virtual void Finalize()
         {
-            texture1.Reset();
-            texture2.Reset();
-
             GameFramework::Finalize();
         }
 
         virtual void Draw()
         {
-            GameAssetStorage::LoadingStatus status = storage->GetBackgroundLoadingStatus();
-            char title[128];
-            sprintf(title, "%d/%d", status.LoadedBytes, status.TotalBytes);
-            GetWindow()->SetTitle(title);
-
             GetGraphicsDevice()->Clear();
-            struct Handler : UIHandledDrawingContext::IHandler
-            {
-                UISample* app;
-                Handler(UISample* app)
-                    : app(app)
-                {
-                }
-
-                virtual void OnBegan(UIHandledDrawingContext& context)
-                {/*
-                    context.Draw(Vector2(0.0f, 0.0f),   app->texture1);
-                    context.Draw(Vector2(256.0f, 0.0f), app->texture2);*/
-                }
-            };
-            Handler handler(this);
-            UIHandledDrawingContext context(uiRenderer, &handler);
-            context.Draw(uiDomain->GetRoot());
+            UIDrawingContext context(uiRenderer, buffer);
+            //uiRenderer->Begin();
+            //ImagePtr image = new Image(texture1);
+            //int i = 0;
+            //for (float x = 0.0f; x < 800.0f; x+=5.0f)
+            //{
+            //    for (float y = 0.0f; y < 600.0f; y+= 5.0f,i++)
+            //        context.Draw(RectF(x, y, 10.0f, 10.0f), RectF(x, y, 10.0f, 10.0f), image, false, false);
+            //}
+            //uiRenderer->End();
+            //UIDrawingContext context(uiRenderer, buffer);
+            //uiRenderer->Begin();
+            //context.Draw(RectF(100.0f, 100.0f, 100.0f, 100.0f), RectF(100.0f, 100.0f, 100.0f, 100.0f), image, false, false);
+            //uiRenderer->End();
+            for (int i = 0; i < 100; i++)
+                uiRenderer->Draw(buffer);
         }
 };
 

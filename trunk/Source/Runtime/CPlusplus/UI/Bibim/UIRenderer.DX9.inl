@@ -1,13 +1,30 @@
 namespace Bibim
 {
+    UIRenderer::Effector::Effector(uint32 effectName)
+        : effectName(effectName)
+    {
+    }
+
+    uint32 UIRenderer::Effector::GetEffectName() const
+    {
+        return effectName;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     GraphicsDevice* UIRenderer::GetGraphicsDevice() const
     {
         return graphicsDevice;
     }
 
-    ShaderEffect* UIRenderer::GetShaderEffect() const
+    GameAssetStorage* UIRenderer::GetStorage() const
     {
-        return shaderEffect;
+        return storage;
+    }
+
+    const String& UIRenderer::GetShaderEffectDirectory() const
+    {
+        return shaderEffectDirectory;
     }
 
     float UIRenderer::GetFieldOfView() const

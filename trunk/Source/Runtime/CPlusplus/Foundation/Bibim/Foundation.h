@@ -12,6 +12,8 @@
 #       if (defined(WINDOWS) || defined(WIN32) || defined(WIN64))
 #           define BIBIM_PLATFORM_WINDOWS
 #           define BIBIM_USE_DIRECTX9
+// #           define BIBIM_USE_OPENGL2
+// #           define BIBIM_USE_OPENGLES2
 #       else
 #           define BIBIM_PLATFORM_UNKNOWN
 #       endif
@@ -49,6 +51,10 @@
                                          (static_cast<uint32>(b) << 16) | \
                                          (static_cast<uint32>(c) << 8) | \
                                          (static_cast<uint32>(d) << 0))
+#       define BBFOURCCFirst(fourcc)    static_cast<char>((fourcc & 0xFF000000) >> 24)
+#       define BBFOURCCSecond(fourcc)   static_cast<char>((fourcc & 0x00FF0000) >> 16)
+#       define BBFOURCCThird(fourcc)    static_cast<char>((fourcc & 0x0000FF00) >> 8)
+#       define BBFOURCCFourth(fourcc)   static_cast<char>((fourcc & 0x000000FF) >> 0)
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Macro Functions

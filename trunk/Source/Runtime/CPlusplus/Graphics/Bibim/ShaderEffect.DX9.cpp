@@ -3,6 +3,7 @@
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/CheckedRelease.h>
 #include <Bibim/GraphicsDevice.h>
+#include <Bibim/Matrix4.h>
 #include <Bibim/String.h>
 #include <Bibim/Texture2D.h>
 
@@ -56,6 +57,13 @@ namespace Bibim
         BBAssert(desc.Class == D3DXPC_VECTOR && desc.Type == D3DXPT_FLOAT);
         const float values[] = { value.X, value.Y, value.Z, value.W };
         effect->GetD3DEffect()->SetFloatArray(handle, values, sizeof(values) / sizeof(values[0]));
+    }
+
+    void ShaderEffect::Parameter::SetValue(const Matrix4& value)
+    {
+        BBAssert(desc.Class == D3DXPC_MATRIX_ROWS && desc.Type == D3DXPT_FLOAT);
+        const D3DXMATRIX matrix(value);
+        effect->GetD3DEffect()->SetMatrix(handle, &matrix);
     }
 
     void ShaderEffect::Parameter::SetValue(Texture2D* value)

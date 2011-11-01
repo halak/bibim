@@ -11,6 +11,7 @@
         {
             class GameFramework
             {
+                BBThisIsNoncopyableClass(GameFramework);
                 public:
                     virtual ~GameFramework();
 

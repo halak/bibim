@@ -69,4 +69,19 @@ namespace Bibim
     {
         return Color(buffer[0], buffer[1], buffer[2], buffer[3]);
     }
+
+    Vector2 BinaryReader::ToVector2(const byte* buffer)
+    {
+        return *reinterpret_cast<const Vector2*>(buffer);
+    }
+
+    Vector3 BinaryReader::ToVector3(const byte* buffer)
+    {
+        return *reinterpret_cast<const Vector3*>(buffer);
+    }
+
+    Vector4 BinaryReader::ToVector4(const byte* buffer)
+    {
+        return *reinterpret_cast<const Vector4*>(buffer);
+    }
 }

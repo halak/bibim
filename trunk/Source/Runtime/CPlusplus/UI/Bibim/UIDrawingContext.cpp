@@ -95,16 +95,15 @@ namespace Bibim
                 break;
         }
 
-        Vector2 points[] =
+        const Vector2 points[] =
         {
             Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetTop() - 0.5f),
             Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetTop() - 0.5f),
             Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetBottom() - 0.5f),
             Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetBottom() - 0.5f),
         };
-        Project(points[0], points[1], points[2], points[3]);
-
-        renderer->DrawQuad(points, uv, image->GetTexture(), Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())), effectStack);
+        const Color color = Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity()));
+        renderer->DrawQuad(points, color, uv, image->GetTexture());
     }
 
     void UIDrawingContext::Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, Image* maskImage, bool horizontalFlip, bool verticalFlip)
@@ -210,16 +209,15 @@ namespace Bibim
                 break;
         }
 
-        Vector2 points[] =
+        const Vector2 points[] =
         {
             Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetTop() - 0.5f),
             Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetTop() - 0.5f),
             Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetBottom() - 0.5f),
             Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetBottom() - 0.5f),
         };
-        Project(points[0], points[1], points[2], points[3]);
-
-        renderer->DrawQuad(points, uv1, image->GetTexture(), uv2, maskImage->GetTexture(), Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())), effectStack);
+        const Color color = Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity()));
+        renderer->DrawQuad(points, color, uv1, image->GetTexture(), uv2, maskImage->GetTexture());
     }
 
     void UIDrawingContext::Draw(Vector2 position, Texture2D* texture)
@@ -227,20 +225,19 @@ namespace Bibim
         BBAssertDebug(texture && renderer);
 
         const RectF drawingRect = RectF(position.X,
-                                                       position.Y,
-                                                       static_cast<float>(texture->GetWidth()),
-                                                       static_cast<float>(texture->GetHeight()));
+                                        position.Y,
+                                        static_cast<float>(texture->GetWidth()),
+                                        static_cast<float>(texture->GetHeight()));
 
-        Vector2 points[] =
+        const Vector2 points[] =
         {
             Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetTop() - 0.5f),
             Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetTop() - 0.5f),
             Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetBottom() - 0.5f),
             Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetBottom() - 0.5f),
         };
-        Project(points[0], points[1], points[2], points[3]);
-
-        renderer->DrawQuad(points, RectF(0.0f, 0.0f, 1.0f, 1.0f), texture, Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity())), effectStack);
+        const Color color = Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity()));
+        renderer->DrawQuad(points, color, RectF(0.0f, 0.0f, 1.0f, 1.0f), texture);
     }
 
     void UIDrawingContext::DrawString(const RectF& bounds, const RectF& clippedBounds, Font* font, const String& text)
@@ -254,8 +251,6 @@ namespace Bibim
 
         if (fontString.GetText().IsEmpty())
             return;
-
-        renderer->EnterStringRenderMode();
 
         TypingContext context(fontString, bounds.Width);
 
@@ -284,18 +279,19 @@ namespace Bibim
                                                                    bounds.Y + context.GetPosition().Y + glyph->GetBitmapOffset().Y,
                                                                    glyph->GetBitmapSize().X,
                                                                    glyph->GetBitmapSize().Y);
-                    Vector2 points[4] = 
+                    const Vector2 points[4] = 
                     {
                         Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetTop() - 0.5f),
                         Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetTop() - 0.5f),
                         Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetBottom() - 0.5f),
                         Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetBottom() - 0.5f),
                     };
-                    self->Project(points[0], points[1], points[2], points[3]);
-                    renderer->DrawQuad(points, clippingRect, glyph->GetTexture(), color, self->effectStack);
+                    renderer->DrawQuad(points, color, clippingRect, glyph->GetTexture());
                 }
             }
         };
+
+        renderer->BeginBatch();
 
         if (fontString.GetFont()->GetGlowSize() > 0)
         {
@@ -310,14 +306,12 @@ namespace Bibim
         }
 
         DrawGlyphs::Do(this, context, renderer, bounds, clippedBounds, fontString.GetRegularGlyphs(), fontString.GetFont()->GetColor());
-
-        renderer->LeaveStringRenderMode();
+        renderer->EndBatch();
     }
 
     void UIDrawingContext::DrawRect(const RectF& bounds, float width, Color color)
     {
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
-        //renderer->DrawRect(bounds, color);
     }
 
     void UIDrawingContext::FillRect(const RectF& bounds, float width, Color color)
@@ -338,15 +332,17 @@ namespace Bibim
         if (GetCurrentVisual()->GetEffectMap())
         {
             if (effectStack->Push(GetCurrentVisual()->GetEffectMap()))
-                renderer->SetupEffectors(effectStack->GetTopEffectors());
+                renderer->Setup(effectStack->GetTopEffectors());
         }
 
+        renderer->Setup(GetCurrentTransform());
         GetCurrentVisual()->OnDraw(*this);
+        renderer->Setup(GetCurrentTransform());
 
         if (GetCurrentVisual()->GetEffectMap())
         {
             if (effectStack->Pop())
-                renderer->SetupEffectors(effectStack->GetTopEffectors());
+                renderer->Setup(effectStack->GetTopEffectors());
         }
     }
 }

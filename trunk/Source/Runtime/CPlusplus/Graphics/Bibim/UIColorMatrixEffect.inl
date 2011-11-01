@@ -29,14 +29,4 @@ namespace Bibim
     {
         blue = value;
     }
-
-    Vector4 UIColorMatrixEffect::GetAlpha() const
-    {
-        return alpha;
-    }
-
-    void UIColorMatrixEffect::SetAlpha(Vector4 value)
-    {
-        alpha = value;
-    }
 }

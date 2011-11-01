@@ -53,6 +53,7 @@
                 inline const DisplayModeCollection& GetDisplayModes() const;
                 inline VertexShader GetVertexShaderVersion() const;
                 inline PixelShader  GetPixelShaderVersion() const;
+                inline bool IsShaderSupported() const;
 
                 GraphicsCapabilities& operator = (const GraphicsCapabilities& right);
 
