@@ -51,6 +51,10 @@
                 static inline void From(byte* buffer, int64 value);
                 static inline void From(byte* buffer, uint64 value);
                 static inline void From(byte* buffer, float value);
+                static inline void From(byte* buffer, Color value);
+                static inline void From(byte* buffer, Vector2 value);
+                static inline void From(byte* buffer, Vector3 value);
+                static inline void From(byte* buffer, Vector4 value);
 
             private:
                 template <typename T> inline void WriteTemplate(T value);

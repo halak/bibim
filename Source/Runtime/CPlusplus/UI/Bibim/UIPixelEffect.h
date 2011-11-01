@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/UIElement.h>
+#   include <Bibim/UIRenderer.h>
 
     namespace Bibim
     {
@@ -11,20 +12,9 @@
         {
             BBAbstractComponentClass(UIPixelEffect, UIElement);
             public:
-                class Effector : public SharedObject
-                {
-                    public:
-                        virtual ~Effector() { }
-
-                        virtual void Setup(ShaderEffect* effect) = 0;
-                    protected:
-                        Effector() { }
-                };
-
-            public:
                 virtual ~UIPixelEffect();
 
-                virtual Effector* CreateEffector(Effector* /*parent*/) { return 0; }
+                virtual UIRenderer::Effector* CreateEffector(UIRenderer::Effector* /*parent*/) { return 0; }
 
                 inline int GetSlotIndex() const;
                 inline bool IsFixedFunctionImplemented() const;
@@ -38,9 +28,6 @@
                 bool isFixedFunctionImplemented;
                 bool isShaderFunctionImplemented;
         };
-
-        typedef UIPixelEffect::Effector UIPixelEffector;
-        typedef SharedPointer<UIPixelEffector> UIPixelEffectorPtr;
     }
 
 #   include <Bibim/UIPixelEffect.inl>

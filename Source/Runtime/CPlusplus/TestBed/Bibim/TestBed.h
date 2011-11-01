@@ -14,6 +14,7 @@
             void PipeStream(CommandLines commands);
             void Sprite(CommandLines commands);
             void UI(CommandLines commands);
+            void UIRender(CommandLines commands);
         }
     }
 

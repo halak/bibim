@@ -6,6 +6,8 @@
 
 #   if (defined(BIBIM_USE_DIRECTX9))
 #       include <Bibim/GraphicsDevice.DX9.h>
+#   elif (defined(BIBIM_USE_OPENGLES2))
+#       include <Bibim/GraphicsDevice.GLES2.h>
 #   endif
 
 #endif

@@ -7,9 +7,9 @@
 #   include <Bibim/Matrix4.h>
 #   include <Bibim/Rect.h>
 #   include <Bibim/RectF.h>
+#   include <Bibim/String.h>
 #   include <Bibim/Vector2.h>
 #   include <Bibim/Vector3.h>
-#   include <Bibim/UIPixelEffect.h>
 #   include <deque>
 #   include <vector>
 #   include <d3dx9.h>
@@ -20,27 +20,57 @@
         {
             BBModuleClass(UIRenderer, GameModule, 'U', 'I', 'R', 'R');
             public:
+                class Effector : public SharedObject
+                {
+                    public:
+                        virtual ~Effector() { }
+
+                        virtual void Begin(ShaderEffect* effect) = 0;
+                        virtual void End(ShaderEffect* effect) = 0;
+
+                        inline uint32 GetEffectName() const;
+
+                    protected:
+                        inline Effector(uint32 effectName);
+
+                    private:
+                        uint32 effectName;
+                };
+                typedef SharedPointer<Effector> EffectorPtr;
+
+            public:
                 UIRenderer();
-                UIRenderer(GraphicsDevice* graphicsDevice);
+                UIRenderer(GraphicsDevice* graphicsDevice, GameAssetStorage* storage, const String& shaderEffectDirectory);
                 virtual ~UIRenderer();
 
                 void Begin();
                 void End();
 
-                void EnterStringRenderMode();
-                void LeaveStringRenderMode();
+                void BeginBatch();
+                void EndBatch();
 
-                void DrawQuad(const Vector2* p, const RectF& clippingRect, Texture2D* texture, Color color, UIEffectStack* effects);
-                void DrawQuad(const Vector2* p, const Vector2* uv, Texture2D* texture, Color color, UIEffectStack* effects);
-                void DrawQuad(const Vector2* p, const Vector2* uv1, Texture2D* texture, const Vector2* uv2, Texture2D* maskTexture, Color color, UIEffectStack* effects);
-                void Draw(int count, const Vector2* points, Color color);
-                void SetupEffectors(const std::vector<UIPixelEffectorPtr>& effectors);
+                void Setup(const Matrix4& worldTransform);
+                void Setup(const std::vector<EffectorPtr>& effectors);
+
+                void DrawQuad(const Vector2* p, Color color);
+                void DrawQuad(const Vector2* p, Color color, const Vector2* uv,  Texture2D* texture);
+                void DrawQuad(const Vector2* p, Color color, const Vector2* uv1, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2);
+
+                void DrawQuad(const Vector2* p, Color color, const RectF& clippingRect,  Texture2D* texture);
+                void DrawQuad(const Vector2* p, Color color, const RectF& clippingRect, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2);
+
+                void DrawQuad(const Vector2* p, Color* c);
+                void DrawQuad(const Vector2* p, Color* c, const Vector2* uv,  Texture2D* texture);
+                void DrawQuad(const Vector2* p, Color* c, const Vector2* uv1, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2);
 
                 inline GraphicsDevice* GetGraphicsDevice() const;
                 void SetGraphicsDevice(GraphicsDevice* value);
 
-                inline ShaderEffect* GetShaderEffect() const;
-                void SetShaderEffect(ShaderEffect* value);
+                inline GameAssetStorage* GetStorage() const;
+                void SetStorage(GameAssetStorage* value);
+
+                inline const String& GetShaderEffectDirectory() const;
+                void SetShaderEffectDirectory(const String& value);
 
                 inline float GetFieldOfView() const;
                 void SetFieldOfView(float value);
@@ -51,111 +81,122 @@
                 inline const Matrix4& GetInversedProjectionTransform();
 
             private:
-                int PrepareCache(const RectF bounds, Texture2D* texture);
-
-            private:
-                struct Vertex
+                struct VertexCO // Color Only
                 {
                     D3DXVECTOR3 Position;
-                    D3DCOLOR    Color;
-                    D3DXVECTOR2 Texture;
+                    D3DCOLOR Color;
 
-                    inline Vertex();
-                    inline Vertex(D3DXVECTOR3 position);
-                    inline Vertex(D3DXVECTOR3 position, D3DCOLOR color);
-                    inline Vertex(D3DXVECTOR3 position, D3DCOLOR color, D3DXVECTOR2 texture);
+                    inline VertexCO(D3DXVECTOR3 position, D3DCOLOR color);
 
-                    static const DWORD FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX1;
-                    static const DWORD NoTexturedFVF = D3DFVF_XYZ | D3DFVF_DIFFUSE;
+                    static const DWORD FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE;
                 };
 
-                struct MaskVertex : Vertex
+                struct VertexST : VertexCO // Single Textured
                 {
-                    D3DXVECTOR2 MaskTexture;
+                    D3DXVECTOR2 Texture;
 
-                    inline MaskVertex();
-                    inline MaskVertex(D3DXVECTOR3 position);
-                    inline MaskVertex(D3DXVECTOR3 position, D3DCOLOR color);
-                    inline MaskVertex(D3DXVECTOR3 position, D3DCOLOR color, D3DXVECTOR2 texture, D3DXVECTOR2 maskTexture);
+                    inline VertexST(D3DXVECTOR3 position, D3DCOLOR color, D3DXVECTOR2 texture);
+
+                    static const DWORD FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX1;
+                };
+
+                struct VertexDT : VertexCO // Double Textured
+                {
+                    D3DXVECTOR2 Texture1;
+                    D3DXVECTOR2 Texture2;
+
+                    inline VertexDT(D3DXVECTOR3 position, D3DCOLOR color, D3DXVECTOR2 texture1, D3DXVECTOR2 texture2);
 
                     static const DWORD FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX2;
                 };
 
-                struct QuadSet
+                struct QuadSetCO
                 {
                     int StartIndex;
                     int Count;
-                    Texture2DPtr Texture;
-                    void* Effect;
-                    RectF Bounds;
-                    DWORD FVF;
+                    int Capacity;
 
-                    inline QuadSet();
+                    inline QuadSetCO();
+                };
+
+                struct QuadSetST : QuadSetCO
+                {
+                    Texture2DPtr KeyTexture;
+                };
+
+                struct QuadSetDT : QuadSetCO
+                {
+                    Texture2DPtr KeyTexture;
+                    Texture2DPtr KeyMask;
+                };
+
+                enum PixelEffectMode
+                {
+                    NoTextureMode,
+                    ColorTextureMode,
+                    AlphaTextureMode,
+                    ColorAndAlphaTextureMode,
+                    PixelEffectModeCount,
                 };
 
             private:
+                void InitializeNormalQuadSets();
+                void InitializeBatchQuadSets();
+
+                VertexCO* PrepareCO();
+                VertexST* PrepareST(Texture2D* texture);
+                VertexDT* PrepareDT(Texture2D* texture1, Texture2D* texture2);
+
+                void BeginAlphaTextureMode();
+                void EndAlphaTextureMode();
+                void BeginEffect(int index, const char* key);
+                void EndEffect(int index);
+
                 void Flush();
-                void FlushAndLock();
                 void ReserveCachedQuads(int capacity);
                 void UpdateViewProjectionTransform();
 
             private:
                 GraphicsDevice* graphicsDevice;
-                ShaderEffectPtr shaderEffect;
+                GameAssetStorage* storage;
+                String shaderEffectDirectory;
                 float fieldOfView;
                 Matrix4 viewTransform;
                 Matrix4 viewTransformInv;
                 Matrix4 projectionTransform;
                 Matrix4 projectionTransformInv;
+                Matrix4 worldTransform;
 
-                IDirect3DVertexBuffer9* vb;
-                IDirect3DIndexBuffer9* ib;
-                QuadSet cachedQuadSets[8];
-                int numberOfActiveQuadSets;
-                
-                Vertex* lockedVertices;
-                int vbSize;
-                int capacityPerQuad;
+                ShaderEffectPtr          effects[PixelEffectModeCount];
+                std::vector<EffectorPtr> effectors;
+                String shaderEffectBaseURI;
+
+                IDirect3DStateBlock9* d3dStateBlock;
+                IDirect3DVertexBuffer9* d3dVBCO;
+                IDirect3DVertexBuffer9* d3dVBSCT;
+                IDirect3DVertexBuffer9* d3dVBSAT;
+                IDirect3DVertexBuffer9* d3dVBDT;
+                IDirect3DIndexBuffer9* d3dQuadIndices;
+                int vbcoSize;
+                int vbsctSize;
+                int vbsatSize;
+                int vbdtSize;
+                VertexCO* lockedVBCO;
+                VertexST* lockedVBSCT;
+                VertexST* lockedVBSAT;
+                VertexDT* lockedVBDT;
+                QuadSetCO quadSetCO;
+                QuadSetST quadSetsSCT[8];
+                QuadSetST quadSetsSAT[8];
+                QuadSetDT quadSetsDT[8];
+
+                bool isBatching;
 
                 Rect lastViewport;
 
-                static const unsigned short TrianglesPerQuad;
-                static const unsigned short VerticesPerQuad;
-                static const unsigned short IndicesPerQuad;
-
-            private:
-                 struct OldRenderState
-                 {
-                     D3DRENDERSTATETYPE State;
-                     DWORD Value;
-
-                     OldRenderState(D3DRENDERSTATETYPE state, DWORD value);
-                 };
-
-                 struct OldTextureStageState
-                 {
-                     DWORD Stage;
-                     D3DTEXTURESTAGESTATETYPE Type;
-                     DWORD Value;
-
-                     OldTextureStageState(DWORD stage, D3DTEXTURESTAGESTATETYPE type, DWORD value);
-                 };
-
-                 struct OldSamplerState
-                 {
-                     DWORD Sampler;
-                     D3DSAMPLERSTATETYPE Type;
-                     DWORD Value;
-
-                     OldSamplerState(DWORD sampler, D3DSAMPLERSTATETYPE type, DWORD value);
-                 };
-
-                 std::deque<OldRenderState>       oldRenderStates;
-                 std::deque<OldTextureStageState> oldTextureStageStates;
-                 std::deque<OldSamplerState>      oldSamplerStates;
-
-                 std::deque<OldTextureStageState> oldStringModeTextureStageStates;
-                 std::deque<OldSamplerState>      oldStringModeSamplerStates;
+                static const int TrianglesPerQuad;
+                static const int VerticesPerQuad;
+                static const int IndicesPerQuad;
         };
     }
 

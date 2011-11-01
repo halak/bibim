@@ -3,6 +3,7 @@
 #include <Bibim/Assert.h>
 #include <Bibim/UIEffectMap.h>
 #include <Bibim/Math.h>
+#include <Bibim/UIPixelEffect.h>
 
 namespace Bibim
 {
@@ -35,8 +36,8 @@ namespace Bibim
         const UIPixelEffectPtr* effects = &item->GetPixelEffects()[0];
         if (depth > 0)
         {
-            UIPixelEffectorPtr* oldLine = &map[(depth - 1) * numberOfClasses];
-            UIPixelEffectorPtr* newLine = &map[(depth + 0) * numberOfClasses];
+            UIRenderer::EffectorPtr* oldLine = &map[(depth - 1) * numberOfClasses];
+            UIRenderer::EffectorPtr* newLine = &map[(depth + 0) * numberOfClasses];
             for (int i = 0; i < minCount; i++)
             {
                 if (effects[i])
@@ -54,7 +55,7 @@ namespace Bibim
         }
         else
         {
-            UIPixelEffectorPtr* newLine = &map[0];
+            UIRenderer::EffectorPtr* newLine = &map[0];
             for (int i = 0; i < minCount; i++)
             {
                 if (effects[i])
@@ -81,9 +82,8 @@ namespace Bibim
         topEffectors.clear();
         if (depth > 1)
         {
-
-            UIPixelEffectorPtr* newLine = &map[(depth - 1) * numberOfClasses];
-            UIPixelEffectorPtr* currentLine = &map[depth * numberOfClasses];
+            UIRenderer::EffectorPtr* newLine = &map[(depth - 2) * numberOfClasses];
+            UIRenderer::EffectorPtr* currentLine = &map[(depth - 1) * numberOfClasses];
             for (int i = 0; i < numberOfClasses; i++)
             {
                 if (currentLine[i] != newLine[i])
@@ -99,7 +99,7 @@ namespace Bibim
         }
         else
         {
-            UIPixelEffectorPtr* currentLine = &map[depth * numberOfClasses];
+            UIRenderer::EffectorPtr* currentLine = &map[depth * numberOfClasses];
             for (int i = 0; i < numberOfClasses; i++)
             {
                 if (currentLine[i])

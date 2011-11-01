@@ -4,7 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/SharedObject.h>
-#   include <Bibim/UIPixelEffect.h>
+#   include <Bibim/UIRenderer.h>
 #   include <vector>
 
     namespace Bibim
@@ -12,8 +12,8 @@
         class UIEffectStack : public SharedObject
         {
             public:
-                typedef std::vector<UIPixelEffectorPtr> EffectorCollection;
-                typedef std::vector<UIPixelEffectorPtr> EffectorMap;
+                typedef std::vector<UIRenderer::EffectorPtr> EffectorCollection;
+                typedef std::vector<UIRenderer::EffectorPtr> EffectorMap;
 
             public:
                 UIEffectStack();

@@ -986,6 +986,10 @@
 				Name="Graphics"
 				>
 				<File
+					RelativePath=".\Graphics\Bibim\BlendMode.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Graphics\Bibim\DisplaySwapChain.h"
 					>
 				</File>
@@ -1142,6 +1146,94 @@
 					</File>
 					<File
 						RelativePath=".\Graphics\Bibim\Texture2D.DX9.inl"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="GLES2"
+					>
+					<File
+						RelativePath=".\Graphics\Bibim\DisplaySwapChain.GLES2.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\DisplaySwapChain.GLES2.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\DisplaySwapChain.GLES2.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\DynamicTexture2D.GLES2.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\DynamicTexture2D.GLES2.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\DynamicTexture2D.GLES2.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\GraphicsDevice.GLES2.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\GraphicsDevice.GLES2.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\GraphicsDevice.GLES2.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.GLES2.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.GLES2.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.GLES2.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\ShaderEffect.GLES2.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\ShaderEffect.GLES2.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\Shadereffect.GLES2.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\SourceTexture2D.GLES2.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\SourceTexture2D.GLES2.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\SourceTexture2D.GLES2.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\Texture2D.GLES2.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\Texture2D.GLES2.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\Texture2D.GLES2.inl"
 						>
 					</File>
 				</Filter>
@@ -1370,18 +1462,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIRenderBuffer.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIRenderBuffer.h"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIRenderBuffer.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\UI\Bibim\UIRenderer.DX9.cpp"
 					>
 				</File>
@@ -1391,6 +1471,18 @@
 				</File>
 				<File
 					RelativePath=".\UI\Bibim\UIRenderer.DX9.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\UI\Bibim\UIRenderer.GLES2.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\UI\Bibim\UIRenderer.GLES2.h"
+					>
+				</File>
+				<File
+					RelativePath=".\UI\Bibim\UIRenderer.GLES2.inl"
 					>
 				</File>
 				<File

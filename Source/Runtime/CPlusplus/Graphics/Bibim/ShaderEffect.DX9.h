@@ -23,6 +23,7 @@
                         void SetValue(Vector2 value);
                         void SetValue(Vector3 value);
                         void SetValue(Vector4 value);
+                        void SetValue(const Matrix4& value);
                         void SetValue(Texture2D* value);
 
                     private:

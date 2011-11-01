@@ -14,4 +14,9 @@ namespace Bibim
     {
         return pixelShaderVersion;
     }
+
+    bool GraphicsCapabilities::IsShaderSupported() const
+    {
+        return vertexShaderVersion != VSNotSupported && pixelShaderVersion != PSNotSupported;
+    }
 }
