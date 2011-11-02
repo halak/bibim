@@ -99,7 +99,7 @@ namespace Bibim
         }
         else
         {
-            UIRenderer::EffectorPtr* currentLine = &map[depth * numberOfClasses];
+            UIRenderer::EffectorPtr* currentLine = &map[(depth - 1) * numberOfClasses];
             for (int i = 0; i < numberOfClasses; i++)
             {
                 if (currentLine[i])
