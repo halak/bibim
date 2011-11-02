@@ -196,6 +196,7 @@ namespace Bibim
 
         d3dDevice->SetIndices(d3dQuadIndices);
         InitializeNormalQuadSets();
+        Setup(NormalBlend);
     }
 
     void UIRenderer::End()
@@ -232,6 +233,39 @@ namespace Bibim
         }
     }
 
+    BlendMode UIRenderer::Setup(BlendMode blendMode)
+    {
+        if (this->blendMode != blendMode)
+        {
+            const BlendMode old = this->blendMode;
+
+            this->blendMode = blendMode;
+
+            DWORD blendOp = D3DBLENDOP_ADD;
+            DWORD srcBlend = D3DBLEND_SRCALPHA;
+            DWORD dstBlend = D3DBLEND_INVSRCALPHA;
+            switch (this->blendMode)
+            {
+                case NormalBlend:
+                    break;
+                case AddBlend:
+                    blendOp = D3DBLENDOP_ADD;
+                    srcBlend = D3DBLEND_SRCALPHA;
+                    dstBlend = D3DBLEND_ONE;
+                    break;
+            }
+
+            IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
+            CheckedSetRenderState(d3dDevice, D3DRS_BLENDOP, blendOp);
+            CheckedSetRenderState(d3dDevice, D3DRS_SRCBLEND, srcBlend);
+            CheckedSetRenderState(d3dDevice, D3DRS_DESTBLEND, dstBlend);
+
+            return old;
+        }
+        else
+            return this->blendMode;
+    }
+
     void UIRenderer::Setup(const std::vector<EffectorPtr>& effectors)
     {
         Flush();
@@ -248,17 +282,24 @@ namespace Bibim
                 String::CopyChars(effectName, shaderEffectDirectory.CStr());
                 en[0] = '\\';
                 en++;
-                for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); it++, en += 4)
+                for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); it++)
                 {
-                    const uint32 localName = (*it)->GetEffectName();
-                    en[0] = BBFOURCCFirst(localName);
-                    en[1] = BBFOURCCSecond(localName);
-                    en[2] = BBFOURCCThird(localName);
-                    en[3] = BBFOURCCFourth(localName);
+                    if ((*it)->IsSetupEnabled())
+                    {
+                        const uint32 localName = (*it)->GetEffectName();
+                        en[0] = BBFOURCCFirst(localName);
+                        en[1] = BBFOURCCSecond(localName);
+                        en[2] = BBFOURCCThird(localName);
+                        en[3] = BBFOURCCFourth(localName);
+                        en += 4;
+                    }
                 }
-                effectName[effectNameLength] = '\0';
+                en[0] = '\0';
 
-                this->shaderEffectBaseURI = String(effectName, 0, effectNameLength);
+                if (en - effectName - shaderEffectDirectory.GetLength() > 1)
+                    this->shaderEffectBaseURI = String(effectName, 0, en - effectName);
+                else
+                    this->shaderEffectBaseURI = shaderEffectDirectory + "\\NORM";
 
                 BBStackFree(effectName);
             }
@@ -669,7 +710,12 @@ namespace Bibim
         if (effects[index])
         {
             for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); it++)
-                (*it)->Begin(effects[index]);
+            {
+                if ((*it)->IsSetupEnabled())
+                    (*it)->Setup(effects[index]);
+                if ((*it)->IsBeginEndEnabled())
+                    (*it)->Begin(this);
+            }
 
             ID3DXEffect* d3dEffect = effects[index]->GetD3DEffect();
             const D3DXMATRIX wtm = worldTransform;
@@ -687,6 +733,12 @@ namespace Bibim
 
         if (effects[index])
         {
+            for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
+            {
+                if ((*it)->IsBeginEndEnabled())
+                    (*it)->End(this);
+            }
+
             ID3DXEffect* d3dEffect = effects[index]->GetD3DEffect();
             d3dEffect->EndPass();
             d3dEffect->End();

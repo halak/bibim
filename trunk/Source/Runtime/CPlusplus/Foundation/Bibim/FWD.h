@@ -204,7 +204,7 @@
                         BBForwardDeclareSmartPointerClass(UISineCurveEffect);
                         BBForwardDeclareSmartPointerClass(UITintEffect);
                     BBForwardDeclareSmartPointerClass(UIPixelEffect);
-                        BBForwardDeclareSmartPointerClass(UIBlurEffect);
+                        BBForwardDeclareSmartPointerClass(UIBlendingEffect);
                         BBForwardDeclareSmartPointerClass(UIColorMatrixEffect);
                         BBForwardDeclareSmartPointerClass(UIMaskEffect);
                             BBForwardDeclareSmartPointerClass(UIOpacityMaskEffect);
