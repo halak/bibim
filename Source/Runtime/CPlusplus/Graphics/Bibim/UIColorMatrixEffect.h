@@ -20,8 +20,7 @@
                         Effector(Effector* parent, UIColorMatrixEffect* effect);
                         virtual ~Effector();
 
-                        virtual void Begin(ShaderEffect* effect);
-                        virtual void End(ShaderEffect* effect);
+                        virtual void Setup(ShaderEffect* effect);
 
                     private:
                         Vector4 red;

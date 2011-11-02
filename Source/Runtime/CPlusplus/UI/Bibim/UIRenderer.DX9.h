@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
+#   include <Bibim/BlendMode.h>
 #   include <Bibim/Matrix4.h>
 #   include <Bibim/Rect.h>
 #   include <Bibim/RectF.h>
@@ -25,16 +26,22 @@
                     public:
                         virtual ~Effector() { }
 
-                        virtual void Begin(ShaderEffect* effect) = 0;
-                        virtual void End(ShaderEffect* effect) = 0;
+                        virtual void Setup(ShaderEffect* /*effect*/) { }
+                        virtual void Begin(UIRenderer* /*renderer*/) { }
+                        virtual void End(UIRenderer* /*renderer*/) { }
 
                         inline uint32 GetEffectName() const;
+                        inline bool IsSetupEnabled() const;
+                        inline bool IsBeginEndEnabled() const;
 
                     protected:
-                        inline Effector(uint32 effectName);
+                        inline Effector(uint32 effectName, bool setupEnabled, bool beginEndEnabled);
 
                     private:
                         uint32 effectName;
+                        bool setupEnabled;
+                        bool beginEndEnabled;
+                        char reserved[2];
                 };
                 typedef SharedPointer<Effector> EffectorPtr;
 
@@ -51,6 +58,7 @@
 
                 void Setup(const Matrix4& worldTransform);
                 void Setup(const std::vector<EffectorPtr>& effectors);
+                BlendMode Setup(BlendMode value);
 
                 void DrawQuad(const Vector2* p, Color color);
                 void DrawQuad(const Vector2* p, Color color, const Vector2* uv,  Texture2D* texture);
@@ -166,6 +174,7 @@
                 Matrix4 projectionTransform;
                 Matrix4 projectionTransformInv;
                 Matrix4 worldTransform;
+                BlendMode blendMode;
 
                 ShaderEffectPtr          effects[PixelEffectModeCount];
                 std::vector<EffectorPtr> effectors;

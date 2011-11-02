@@ -21,7 +21,7 @@ namespace Bibim
 
     bool UIEffectStack::Push(UIEffectMap* item)
     {
-        if (item == nullptr)
+        if (item == nullptr || item->GetPixelEffects().empty())
             return false;
 
         if (static_cast<int>(item->GetPixelEffects().size()) > numberOfClasses)

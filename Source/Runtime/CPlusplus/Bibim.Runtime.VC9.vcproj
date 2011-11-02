@@ -1952,6 +1952,18 @@
 						Name="Pixel"
 						>
 						<File
+							RelativePath=".\UI\Bibim\UIBlendingEffect.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UIBlendingEffect.h"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UIBlendingEffect.inl"
+							>
+						</File>
+						<File
 							RelativePath=".\Graphics\Bibim\UIColorMatrixEffect.cpp"
 							>
 						</File>

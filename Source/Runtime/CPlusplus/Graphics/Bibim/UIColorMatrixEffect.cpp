@@ -6,7 +6,7 @@
 namespace Bibim
 {
     UIColorMatrixEffect::Effector::Effector(Effector* parent, UIColorMatrixEffect* effect)
-        : UIRenderer::Effector(UIColorMatrixEffect::ClassID)
+        : UIRenderer::Effector(UIColorMatrixEffect::ClassID, true, false)
     {
         if (parent)
         {
@@ -35,7 +35,7 @@ namespace Bibim
     {
     }
 
-    void UIColorMatrixEffect::Effector::Begin(ShaderEffect* effect)
+    void UIColorMatrixEffect::Effector::Setup(ShaderEffect* effect)
     {
         if (ShaderEffect::ParameterPtr param = effect->FindParameter("Red"))
             param->SetValue(red);
@@ -43,14 +43,6 @@ namespace Bibim
             param->SetValue(green);
         if (ShaderEffect::ParameterPtr param = effect->FindParameter("Blue"))
             param->SetValue(blue);
-    }
-
-    void UIColorMatrixEffect::Effector::End(ShaderEffect* effect)
-    {/*
-        effect->FindParameter("Red")->SetValue(red);
-        effect->FindParameter("Green")->SetValue(red);
-        effect->FindParameter("Blue")->SetValue(red);
-        effect->FindParameter("Alpha")->SetValue(red);*/
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
