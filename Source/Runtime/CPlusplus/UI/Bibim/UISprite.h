@@ -19,9 +19,6 @@
                 inline Image* GetImage() const;
                 void SetImage(Image* value);
 
-                inline Image* GetMaskImage() const;
-                void SetMaskImage(Image* value);
-
                 inline bool GetAutoResize() const;
                 inline void SetAutoResize(bool value);
 
@@ -36,7 +33,6 @@
 
             private:
                 ImagePtr image;
-                ImagePtr maskImage;
                 bool autoResize;
                 bool horizontalFlip;
                 bool verticalFlip;

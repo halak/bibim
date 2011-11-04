@@ -35,7 +35,7 @@ class SpriteTest : public GameFramework
             window->SetFrame(new UIFixedFrame(RectF(0, 0, 800, 600)));
 
             UIDomain*           uid = new UISimpleDomain(window);
-            UIRenderer*         uir = new UIRenderer(GetGraphicsDevice());
+            UIRenderer*         uir = new UIRenderer(GetGraphicsDevice(), gas, String::Empty);
 
             GameModuleNode* gasNode = GetModules()->GetRoot()->AttachChild(gas);
             gasNode->AttachChild(fap);

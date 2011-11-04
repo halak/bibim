@@ -17,9 +17,11 @@
 
             public:
                 UIEffectStack();
+                UIEffectStack(bool isShaderFunctionRendering);
                 virtual ~UIEffectStack();
 
                 bool Push(UIEffectMap* item);
+                bool Push(UIEffectMap* item, ImagePtr& outMask);
                 bool Pop();
                 void Clear();
 
@@ -35,6 +37,7 @@
                 EffectorMap map;
                 int numberOfClasses;
                 int maxDepth;
+                bool isShaderFunctionRendering;
         };
     }
 

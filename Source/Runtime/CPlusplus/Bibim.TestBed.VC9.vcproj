@@ -170,6 +170,10 @@
 	</References>
 	<Files>
 		<File
+			RelativePath=".\TestBed\Bibim\Blend.cpp"
+			>
+		</File>
+		<File
 			RelativePath=".\TestBed\Bibim\Hub.cpp"
 			>
 		</File>

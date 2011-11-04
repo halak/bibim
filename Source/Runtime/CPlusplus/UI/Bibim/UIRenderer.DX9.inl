@@ -1,29 +1,5 @@
 namespace Bibim
 {
-    UIRenderer::Effector::Effector(uint32 effectName, bool setupEnabled, bool beginEndEnabled)
-        : effectName(effectName),
-          setupEnabled(setupEnabled),
-          beginEndEnabled(beginEndEnabled)
-    {
-    }
-
-    uint32 UIRenderer::Effector::GetEffectName() const
-    {
-        return effectName;
-    }
-
-    bool UIRenderer::Effector::IsSetupEnabled() const
-    {
-        return setupEnabled;
-    }
-
-    bool UIRenderer::Effector::IsBeginEndEnabled() const
-    {
-        return beginEndEnabled;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
     GraphicsDevice* UIRenderer::GetGraphicsDevice() const
     {
         return graphicsDevice;

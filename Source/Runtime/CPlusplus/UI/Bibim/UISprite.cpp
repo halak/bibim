@@ -41,11 +41,6 @@ namespace Bibim
         image = value;
     }
 
-    void UISprite::SetMaskImage(Image* value)
-    {
-        maskImage = value;
-    }
-
     void UISprite::OnDraw(UIDrawingContext& context)
     {
         UIVisual::OnDraw(context);
@@ -53,10 +48,7 @@ namespace Bibim
         if (GetImage() == nullptr || GetImage()->GetTexture() == nullptr)
             return;
 
-        if (maskImage == nullptr)
-            context.Draw(GetImage(), GetHorizontalFlip(), GetVerticalFlip());
-        else
-            context.Draw(GetImage(), GetMaskImage(), GetHorizontalFlip(), GetVerticalFlip());
+        context.Draw(GetImage(), GetHorizontalFlip(), GetVerticalFlip());
     }
 
     void UISprite::OnRead(ComponentStreamReader& reader)

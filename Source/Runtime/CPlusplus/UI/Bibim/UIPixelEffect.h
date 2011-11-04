@@ -14,7 +14,7 @@
             public:
                 virtual ~UIPixelEffect();
 
-                virtual UIRenderer::Effector* CreateEffector(UIRenderer::Effector* /*parent*/) { return 0; }
+                virtual UIRenderer::Effector* CreateEffector(UIRenderer::Effector* /*parent*/, bool /*isShaderFunctionRendering*/) { return 0; }
 
                 inline int GetSlotIndex() const;
                 inline bool IsFixedFunctionImplemented() const;
@@ -27,6 +27,7 @@
                 int slotIndex;
                 bool isFixedFunctionImplemented;
                 bool isShaderFunctionImplemented;
+                bool reserved[2];
         };
     }
 

@@ -11,13 +11,29 @@
         {
             BBAbstractComponentClass(UIMaskEffect, UIPixelEffect);
             public:
+                static const int ClassIndex = 2;
+
+                class MaskEffector : public UIRenderer::Effector
+                {
+                    public:
+                        MaskEffector(UIMaskEffect* effect);
+                        MaskEffector(uint32 shaderEffectNameHint, UIMaskEffect* effect);
+                        virtual ~MaskEffector();
+
+                        inline Image* GetMask() const;
+
+                    private:
+                        Image* mask;
+                };
+
+            public:
                 virtual ~UIMaskEffect();
 
                 inline Image* GetMask() const;
                 void SetMask(Image* value);
 
             protected:
-                UIMaskEffect(int slotIndex, bool isFixedFunctionImplemented, bool isShaderFunctionImplemented);
+                UIMaskEffect(bool isFixedFunctionImplemented, bool isShaderFunctionImplemented, Image* mask);
 
             private:
                 ImagePtr mask;

@@ -1490,6 +1490,18 @@
 					>
 				</File>
 				<File
+					RelativePath=".\UI\Bibim\UIRendererBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\UI\Bibim\UIRendererBase.h"
+					>
+				</File>
+				<File
+					RelativePath=".\UI\Bibim\UIRendererBase.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\UI\Bibim\UISimpleDomain.cpp"
 					>
 				</File>

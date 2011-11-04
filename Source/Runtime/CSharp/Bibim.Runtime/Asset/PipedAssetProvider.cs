@@ -8,6 +8,7 @@ namespace Bibim.Asset
     public sealed class PipedAssetProvider : AssetProvider
     {
         #region Constants
+        public static readonly string DefaultPipeName = "BibimAssetPipe";
         public const uint LoadAssetPacketID = 1000;
         public const uint ChangeClientNamePacketID = 1001;
         public const uint ChangeWorkingDirectoryPacketID = 1002;

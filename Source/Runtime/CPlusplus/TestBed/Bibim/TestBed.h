@@ -11,6 +11,7 @@
         {
             typedef std::vector<const char*> CommandLines;
 
+            void Blend(CommandLines commands);
             void PipeStream(CommandLines commands);
             void Sprite(CommandLines commands);
             void UI(CommandLines commands);

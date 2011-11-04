@@ -167,6 +167,36 @@ namespace Bibim.Asset
         }
         #endregion
 
+        #region BlendMode
+        public enum BlendMode
+        {
+            Normal,
+            Dissolve,
+            Darken,
+            Multiply,
+            ColorBurn,
+            LinearBurn,
+            Lighten,
+            Screen,
+            ColorDodge,
+            LinearDodge,
+            Overlay,
+            SoftLight,
+            HardLight,
+            VividLight,
+            LinearLight,
+            PinLight,
+            HardMix,
+            Difference,
+            Exclusion,
+            Hue,
+            Saturation,
+            Color,
+            Luminosity,
+            Unknown,
+        }
+        #endregion
+
         #region Layer
         public sealed class Layer
         {
@@ -208,7 +238,7 @@ namespace Bibim.Asset
                 private set;
             }
 
-            public string BlendMode
+            public BlendMode BlendMode
             {
                 get;
                 private set;
@@ -308,7 +338,7 @@ namespace Bibim.Asset
                 if (signature != "8BIM")
                     throw new Exception("Channel 정보가 올바르지 않습니다.");
 
-                BlendMode = new string(reader.ReadChars(4));
+                BlendMode = ParseBlendMode(new string(reader.ReadChars(4)));
                 Opacity = reader.ReadByte();
                 Clipping = reader.ReadByte() != 0;
 
@@ -463,6 +493,63 @@ namespace Bibim.Asset
                 }
             }
             #endregion
+        }
+        #endregion
+
+        #region ParseBlendMode
+        private static BlendMode ParseBlendMode(string mode)
+        {
+            switch (mode)
+            {
+                case "norm":
+                    return BlendMode.Normal;
+                case "diss":
+                    return BlendMode.Dissolve;
+                case "dark":
+                    return BlendMode.Darken;
+                case "mul ":
+                    return BlendMode.Multiply;
+                case "idiv":
+                    return BlendMode.ColorBurn;
+                case "lbrn":
+                    return BlendMode.LinearBurn;
+                case "lite":
+                    return BlendMode.Lighten;
+                case "scrn":
+                    return BlendMode.Screen;
+                case "div ":
+                    return BlendMode.ColorDodge;
+                case "lddg":
+                    return BlendMode.LinearDodge;
+                case "over":
+                    return BlendMode.Overlay;
+                case "sLit":
+                    return BlendMode.SoftLight;
+                case "hLit":
+                    return BlendMode.HardLight;
+                case "vLit":
+                    return BlendMode.VividLight;
+                case "lLit":
+                    return BlendMode.LinearLight;
+                case "pLit":
+                    return BlendMode.PinLight;
+                case "hMix":
+                    return BlendMode.HardMix;
+                case "diff":
+                    return BlendMode.Difference;
+                case "smud":
+                    return BlendMode.Exclusion;
+                case "hue ":
+                    return BlendMode.Hue;
+                case "sat ":
+                    return BlendMode.Saturation;
+                case "colr":
+                    return BlendMode.Color;
+                case "lum ":
+                    return BlendMode.Luminosity;
+                default:
+                    return BlendMode.Unknown;
+            }
         }
         #endregion
     }

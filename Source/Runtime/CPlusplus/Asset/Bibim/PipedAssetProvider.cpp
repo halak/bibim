@@ -66,6 +66,8 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    const String PipedAssetProvider::DefaultPipeName = "BibimAssetPipe";
+
     PipedAssetProvider::PipedAssetProvider()
         : dumpCacheEnabled(false)
     {

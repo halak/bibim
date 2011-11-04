@@ -4,7 +4,10 @@ using System.Text;
 using Bibim.Asset;
 using Bibim.Graphics;
 using Bibim.IO;
+using Bibim.UI.Effects;
+using Bibim.UI.Events;
 using Bibim.UI.Frames;
+using Bibim.UI.Transforms;
 using Bibim.UI.Visuals;
 
 namespace Bibim.UI
@@ -81,18 +84,60 @@ namespace Bibim.UI
                 throw new NotSupportedException(t.ToString());
          }
 
-        private static void WriteEvent()
+        private static void WriteEventMap(AssetStreamWriter writer, UIEventMap o, List<object> objectDictionary)
         {
+            if (WriteElement(writer, o, objectDictionary) == false)
+                return;
+
             throw new NotImplementedException();
         }
 
-        private static void WriteEffect()
+        private static void WriteEvent(AssetStreamWriter writer, UIFrame o, List<object> objectDictionary)
         {
+            if (WriteElement(writer, o, objectDictionary) == false)
+                return;
+
             throw new NotImplementedException();
         }
 
-        private static void WriteTransform()
+        private static void WriteEffectMap(AssetStreamWriter writer, UIEffectMap o, List<object> objectDictionary)
         {
+            if (WriteElement(writer, o, objectDictionary) == false)
+                return;
+
+            Write(writer, (UIElement)o, objectDictionary);
+            WriteGeometryEffect(writer, o.GeometryEffect, objectDictionary);
+            writer.Write((short)o.PixelEffects.Count);
+            foreach (var item in o.PixelEffects)
+                WritePixelEffect(writer, item, objectDictionary);
+        }
+
+        private static void WriteGeometryEffect(AssetStreamWriter writer, UIGeometryEffect o, List<object> objectDictionary)
+        {
+            if (WriteElement(writer, o, objectDictionary) == false)
+                return;
+
+            Type t = o.GetType();
+            throw new NotSupportedException(t.ToString());
+        }
+
+        private static void WritePixelEffect(AssetStreamWriter writer, UIPixelEffect o, List<object> objectDictionary)
+        {
+            if (WriteElement(writer, o, objectDictionary) == false)
+                return;
+
+            Type t = o.GetType();
+            if (t == typeof(UIBlendingEffect))
+                Write(writer, (UIBlendingEffect)o, objectDictionary);
+            else
+                throw new NotSupportedException(t.ToString());
+        }
+
+        private static void WriteTransform(AssetStreamWriter writer, UITransform o, List<object> objectDictionary)
+        {
+            if (WriteElement(writer, o, objectDictionary) == false)
+                return;
+
             throw new NotImplementedException();
         }
         #endregion
@@ -112,8 +157,9 @@ namespace Bibim.UI
             writer.Write(o.Shown);
             writer.Write(o.Size);
             WriteFrame(writer, o.Frame, objectDictionary);
-            // writer.Write(o.EventMap);
-            // writer.Write(o.Transform);
+            WriteTransform(writer, o.Transform, objectDictionary);
+            WriteEventMap(writer, o.EventMap, objectDictionary);
+            WriteEffectMap(writer, o.EffectMap, objectDictionary);
         }
 
         private static void Write(AssetStreamWriter writer, UISprite o, List<object> objectDictionary)
@@ -179,6 +225,26 @@ namespace Bibim.UI
             writer.Write((byte)o.Align);
             writer.Write(o.Offset);
             writer.Write(o.Size);
+        }
+        #endregion
+
+        #region WriteGeometryEffect
+        private static void Write(AssetStreamWriter writer, UIGeometryEffect o, List<object> objectDictionary)
+        {
+            Write(writer, (UIElement)o, objectDictionary);
+        }
+        #endregion
+
+        #region WritePixelEffect
+        private static void Write(AssetStreamWriter writer, UIPixelEffect o, List<object> objectDictionary)
+        {
+            Write(writer, (UIElement)o, objectDictionary);
+        }
+
+        private static void Write(AssetStreamWriter writer, UIBlendingEffect o, List<object> objectDictionary)
+        {
+            Write(writer, (UIPixelEffect)o, objectDictionary);
+            writer.Write((sbyte)o.Mode);
         }
         #endregion
     }

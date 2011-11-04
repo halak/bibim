@@ -18,17 +18,14 @@ namespace Bibim
     void UIPixelEffect::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        slotIndex = static_cast<int>(reader.ReadInt16());
-        isFixedFunctionImplemented = reader.ReadBool();
-        isShaderFunctionImplemented = reader.ReadBool();
     }
 
     void UIPixelEffect::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
-        const This* o = static_cast<const This*>(original);
-        slotIndex = o->slotIndex;
-        isFixedFunctionImplemented = o->isFixedFunctionImplemented;
-        isShaderFunctionImplemented = o->isShaderFunctionImplemented;
+        const UIPixelEffect* o = static_cast<const UIPixelEffect*>(original);
+        BBAssert(slotIndex == o->slotIndex);
+        BBAssert(isFixedFunctionImplemented == o->isFixedFunctionImplemented);
+        BBAssert(isShaderFunctionImplemented == o->isShaderFunctionImplemented);
     }
 }

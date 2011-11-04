@@ -76,19 +76,29 @@ namespace Bibim.Asset
 
         #region Constructors
         public PhotoshopDocument(string path)
+            : this(path, false, false, false)
         {
-            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
-                Load(fs);
         }
 
         public PhotoshopDocument(Stream stream)
+            : this(stream, false, false, false)
         {
-            Load(stream);
+        }
+
+        public PhotoshopDocument(string path, bool ignoreImageResources, bool ignoreLayers, bool ignoreMergedBitmap)
+        {
+            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+                Load(fs, ignoreImageResources, ignoreLayers, ignoreMergedBitmap);
+        }
+
+        public PhotoshopDocument(Stream stream, bool ignoreImageResources, bool ignoreLayers, bool ignoreMergedBitmap)
+        {
+            Load(stream, ignoreImageResources, ignoreLayers, ignoreMergedBitmap);
         }
         #endregion
 
         #region Methods
-        private void Load(Stream stream)
+        private void Load(Stream stream, bool ignoreImageResources, bool ignoreLayers, bool ignoreMergedBitmap)
         {
             Reader reader = new Reader(stream);
 
@@ -135,34 +145,36 @@ namespace Bibim.Asset
             }
             #endregion
 
-            List<ImageResource> imageResources = null;
+            List<ImageResource> imageResources = new List<ImageResource>();
             #region ImageResource들을 읽어옵니다.
             {
                 uint sectionSize = reader.ReadUInt32();
                 if (sectionSize > 0)
                 {
                     long sectionEndPosition = reader.BaseStream.Position + (long)sectionSize;
-
-                    imageResources = new List<ImageResource>();
-                    while (reader.BaseStream.Position < sectionEndPosition)
+                    
+                    if (ignoreImageResources == false)
                     {
-                        string signature = new string(reader.ReadChars(4));
-                        if (signature != "8BIM" && signature != "MeSa")
-                            throw new Exception("올바르지 않은 ImageResource가 존재합니다.");
-
-                        ImageResourceID id = (ImageResourceID)reader.ReadInt16();
-                        string name = reader.ReadPascalString();
-                        uint size = reader.ReadUInt32();
-                        long endPosition = reader.BaseStream.Position + (long)size;
-                        if (size > 0)
+                        while (reader.BaseStream.Position < sectionEndPosition)
                         {
-                            ImageResource resource = CreateImageResource(id, name, size, reader);
-                            if (resource != null)
-                                imageResources.Add(resource);
-                        }
+                            string signature = new string(reader.ReadChars(4));
+                            if (signature != "8BIM" && signature != "MeSa")
+                                throw new Exception("올바르지 않은 ImageResource가 존재합니다.");
 
-                        // 위치는 짝수로 맞춥니다.
-                        reader.BaseStream.Position = (endPosition % 2 == 0) ? endPosition : endPosition + 1;
+                            ImageResourceID id = (ImageResourceID)reader.ReadInt16();
+                            string name = reader.ReadPascalString();
+                            uint size = reader.ReadUInt32();
+                            long endPosition = reader.BaseStream.Position + (long)size;
+                            if (size > 0)
+                            {
+                                ImageResource resource = CreateImageResource(id, name, size, reader);
+                                if (resource != null)
+                                    imageResources.Add(resource);
+                            }
+
+                            // 위치는 짝수로 맞춥니다.
+                            reader.BaseStream.Position = (endPosition % 2 == 0) ? endPosition : endPosition + 1;
+                        }
                     }
 
                     reader.BaseStream.Position = sectionEndPosition;
@@ -170,7 +182,7 @@ namespace Bibim.Asset
             }
             #endregion
 
-            List<Layer> layers = null;
+            List<Layer> layers = new List<Layer>();
             #region Layer와 Mask 정보를 읽어옵니다.
             {
                 uint sectionSize = reader.ReadUInt32();
@@ -178,79 +190,80 @@ namespace Bibim.Asset
                 {
                     long sectionEndPosition = reader.BaseStream.Position + (long)sectionSize;
 
-                    #region Layer를 읽어옵니다.
-                    layers = new List<Layer>();
-
-                    uint layersSize = reader.ReadUInt32();
-                    if (layersSize > 0)
+                    if (ignoreLayers == false)
                     {
-                        long layersEndPosition = reader.BaseStream.Position + (long)layersSize;
-
-                        //bool absoluteAlpha = false;
-                        short numberOfLayers = reader.ReadInt16();
-                        if (numberOfLayers < 0)
+                        #region Layer를 읽어옵니다.
+                        uint layersSize = reader.ReadUInt32();
+                        if (layersSize > 0)
                         {
-                            //absoluteAlpha = true;
-                            numberOfLayers = Math.Abs(numberOfLayers);
-                        }
+                            long layersEndPosition = reader.BaseStream.Position + (long)layersSize;
 
-                        #region Layer들의 기본 정보를 읽어서 보관합니다.
-                        for (short i = 0; i < numberOfLayers; i++)
-                        {
-                            layers.Add(new Layer(reader));
-                        }
-                        #endregion
-
-                        #region Layer들의 Pixel 정보를 읽어옵니다.
-                        foreach (Layer layer in layers)
-                        {
-                            layer.ReadPixelData(bitsPerPixel, reader);
-                        }
-                        #endregion
-
-                        #region Group을 정리합니다.
-                        {
-                            Stack<Layer> layerStack = new Stack<Layer>(layers.Count / 2);
-                            for (int i = layers.Count - 1; i >= 0; i--)
+                            //bool absoluteAlpha = false;
+                            short numberOfLayers = reader.ReadInt16();
+                            if (numberOfLayers < 0)
                             {
-                                Layer item = layers[i];
-                                bool isEndLayerSetTag = (item.Name == "</Layer set>") ||
-                                                        (item.Name == "</Layer group>");
+                                //absoluteAlpha = true;
+                                numberOfLayers = Math.Abs(numberOfLayers);
+                            }
 
-                                if (layerStack.Count > 0 && isEndLayerSetTag == false)
-                                    layerStack.Peek().AddSubLayer(item);
+                            #region Layer들의 기본 정보를 읽어서 보관합니다.
+                            for (short i = 0; i < numberOfLayers; i++)
+                            {
+                                layers.Add(new Layer(reader));
+                            }
+                            #endregion
 
-                                if (item.IsGroup)
+                            #region Layer들의 Pixel 정보를 읽어옵니다.
+                            foreach (Layer layer in layers)
+                            {
+                                layer.ReadPixelData(bitsPerPixel, reader);
+                            }
+                            #endregion
+
+                            #region Group을 정리합니다.
+                            {
+                                Stack<Layer> layerStack = new Stack<Layer>(layers.Count / 2);
+                                for (int i = layers.Count - 1; i >= 0; i--)
                                 {
-                                    if (isEndLayerSetTag == false)
-                                        layerStack.Push(item);
-                                    else
+                                    Layer item = layers[i];
+                                    bool isEndLayerSetTag = (item.Name == "</Layer set>") ||
+                                                            (item.Name == "</Layer group>");
+
+                                    if (layerStack.Count > 0 && isEndLayerSetTag == false)
+                                        layerStack.Peek().AddSubLayer(item);
+
+                                    if (item.IsGroup)
                                     {
-                                        layerStack.Pop();
-                                        layers.RemoveAt(i);
+                                        if (isEndLayerSetTag == false)
+                                            layerStack.Push(item);
+                                        else
+                                        {
+                                            layerStack.Pop();
+                                            layers.RemoveAt(i);
+                                        }
                                     }
                                 }
-                            }
 
-                            for (int i = 0; i < layers.Count;)
-                            {
-                                if (layers[i].Group != null)
-                                    layers.RemoveAt(i);
-                                else
-                                    i++;
+                                for (int i = 0; i < layers.Count; )
+                                {
+                                    if (layers[i].Group != null)
+                                        layers.RemoveAt(i);
+                                    else
+                                        i++;
+                                }
                             }
+                            #endregion
+
+                            reader.BaseStream.Position = layersEndPosition;
                         }
                         #endregion
 
-                        reader.BaseStream.Position = layersEndPosition;
+                        #region Layer Global Mask정보를 읽어옵니다.
+                        {
+                            // 쓰지 않으므로 무시합니다.
+                        }
+                        #endregion
                     }
-                    #endregion
-
-                    #region Layer Global Mask정보를 읽어옵니다.
-                    {
-                        // 쓰지 않으므로 무시합니다.
-                    }
-                    #endregion
 
                     reader.BaseStream.Position = sectionEndPosition;
                 }
@@ -263,36 +276,39 @@ namespace Bibim.Asset
             int numberOfPixels = width * height;
             Compression compressionMode = (Compression)reader.ReadInt16();
             mergedImageChannelData = new byte[channels][];
-            
-            #region Channel 별로 기록된 Pixel Data를 읽어옵니다.
-            switch (compressionMode)
+
+            if (ignoreMergedBitmap == false)
             {
-                case Compression.RawData:
-                    for (int i = 0; i < mergedImageChannelData.Length; i++)
-                        mergedImageChannelData[i] = reader.ReadRawPixelData(width, height, bitsPerPixel);
-                    break;
-                case Compression.RLECompression:
-                    // 행별로 열의 길이가 기록되어 있습니다만 무시합니다.
-                    reader.BaseStream.Position += height * channels * 2;
-                    for (int i = 0; i < mergedImageChannelData.Length; i++)
-                        mergedImageChannelData[i] = reader.ReadRLECompressedPixelData(width, height, bitsPerPixel);
-                    break;
-                default:
-                    throw new Exception(string.Format("{0} 로 저장된 PSD는 읽어올 수 없습니다. (프로그래머에게 연락하세요)", compressionMode));
+                #region Channel 별로 기록된 Pixel Data를 읽어옵니다.
+                switch (compressionMode)
+                {
+                    case Compression.RawData:
+                        for (int i = 0; i < mergedImageChannelData.Length; i++)
+                            mergedImageChannelData[i] = reader.ReadRawPixelData(width, height, bitsPerPixel);
+                        break;
+                    case Compression.RLECompression:
+                        // 행별로 열의 길이가 기록되어 있습니다만 무시합니다.
+                        reader.BaseStream.Position += height * channels * 2;
+                        for (int i = 0; i < mergedImageChannelData.Length; i++)
+                            mergedImageChannelData[i] = reader.ReadRLECompressedPixelData(width, height, bitsPerPixel);
+                        break;
+                    default:
+                        throw new Exception(string.Format("{0} 로 저장된 PSD는 읽어올 수 없습니다. (프로그래머에게 연락하세요)", compressionMode));
+                }
+                #endregion
+
+                #region BitmapContent에 Pixel들을 채워 넣습니다.
+                switch (colorMode)
+                {
+                    case ColorModes.RGB:
+                        if (channels == 3)
+                            mergedImageData = MergeChannels(width, height, mergedImageChannelData[0], mergedImageChannelData[1], mergedImageChannelData[2], null);
+                        else if (channels >= 4)
+                            mergedImageData = MergeChannels(width, height, mergedImageChannelData[0], mergedImageChannelData[1], mergedImageChannelData[2], mergedImageChannelData[3]);
+                        break;
+                }
+                #endregion
             }
-            #endregion
-            
-            #region BitmapContent에 Pixel들을 채워 넣습니다.
-            switch (colorMode)
-            {
-                case ColorModes.RGB:
-                    if (channels == 3)
-                        mergedImageData = MergeChannels(width, height, mergedImageChannelData[0], mergedImageChannelData[1], mergedImageChannelData[2], null);
-                    else if (channels >= 4)
-                        mergedImageData = MergeChannels(width, height, mergedImageChannelData[0], mergedImageChannelData[1], mergedImageChannelData[2], mergedImageChannelData[3]);
-                    break;
-            }
-            #endregion
             #endregion
 
             #region 읽어온 정보들을 Field에 설정합니다.
@@ -379,51 +395,6 @@ namespace Bibim.Asset
             }
 
             return result;
-        }
-        #endregion
-
-        #region ParseBlendMode
-        private static string ParseBlendMode(string mode)
-        {
-            switch (mode)
-            {
-                case "norm":
-                    return "Normal";
-                case "dark":
-                    return "Darken";
-                case "lite":
-                    return "Lighten";
-                case "mul ":
-                    return "Multiply";
-                case "scrn":
-                    return "Screen";
-                case "diff":
-                    return "Difference";
-                case "smud":
-                    return "Exclusion";
-                case "div ":
-                    return "ColorDodge";
-                case "idiv":
-                    return "ColorBurn";
-                case "lbrn":
-                    return "LinearBurn";
-                case "lddg":
-                    return "LinearDodge";
-                case "vLit":
-                case "lLit":
-                case "pLit":
-                case "hMix":
-                case "hue ":
-                case "sat ":
-                case "colr":
-                case "lum ":
-                case "diss":
-                case "over":
-                case "hLit":
-                case "sLit":
-                default:
-                    return string.Empty;
-            }
         }
         #endregion
         #endregion

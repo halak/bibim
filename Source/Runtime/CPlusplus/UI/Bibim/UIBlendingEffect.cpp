@@ -5,38 +5,16 @@
 
 namespace Bibim
 {
-    UIBlendingEffect::Effector::Effector(Effector* /*parent*/, UIBlendingEffect* effect)
-        : UIRenderer::Effector(UIBlendingEffect::ClassID, false, true),
-          mode(effect->mode)
-    {
-    }
-
-    UIBlendingEffect::Effector::~Effector()
-    {
-    }
-
-    void UIBlendingEffect::Effector::Begin(UIRenderer* renderer)
-    {
-        oldMode = renderer->Setup(mode);
-    }
-
-    void UIBlendingEffect::Effector::End(UIRenderer* renderer)
-    {
-        renderer->Setup(oldMode);
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
     BBImplementsComponent(UIBlendingEffect);
 
     UIBlendingEffect::UIBlendingEffect()
-        : Base(ClassIndex, true, false),
+        : Base(ClassIndex, true, true),
           mode(NormalBlend)
     {
     }
 
     UIBlendingEffect::UIBlendingEffect(BlendMode mode)
-        : Base(ClassIndex, true, false),
+        : Base(ClassIndex, true, true),
           mode(mode)
     {
     }
@@ -45,7 +23,7 @@ namespace Bibim
     {
     }
 
-    UIBlendingEffect::Effector* UIBlendingEffect::CreateEffector(UIRenderer::Effector* parent)
+    UIRenderer::Effector* UIBlendingEffect::CreateEffector(UIRenderer::Effector* parent, bool /*isShaderFunctionRendering*/)
     {
         return new Effector(static_cast<Effector*>(parent), this);
     }
@@ -61,5 +39,26 @@ namespace Bibim
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
         mode = o->mode;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    UIBlendingEffect::Effector::Effector(Effector* /*parent*/, UIBlendingEffect* effect)
+        : mode(effect->mode)
+    {
+    }
+
+    UIBlendingEffect::Effector::~Effector()
+    {
+    }
+
+    void UIBlendingEffect::Effector::Begin(UIRenderer* renderer)
+    {
+        oldMode = renderer->Setup(mode);
+    }
+
+    void UIBlendingEffect::Effector::End(UIRenderer* renderer)
+    {
+        renderer->Setup(oldMode);
     }
 }

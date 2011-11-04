@@ -16,16 +16,46 @@ namespace Bibim.Asset.Pipeline.Recipes
             get;
             set;
         }
+
+        [XmlAttribute]
+        public bool IgnoreImageResources
+        {
+            get;
+            set;
+        }
+
+        [XmlAttribute]
+        public bool IgnoreLayers
+        {
+            get;
+            set;
+        }
+
+        [XmlAttribute]
+        public bool IgnoreMergedBitmap
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
         public ImportPhotoshopDocument()
+            : this(null, false, false, false)
         {
         }
 
         public ImportPhotoshopDocument(CookingNode<Stream> input)
+            : this(input, false, false, false)
+        {
+        }
+
+        public ImportPhotoshopDocument(CookingNode<Stream> input, bool ignoreImageResources, bool ignoreLayers, bool ignoreMergedBitmap)
         {
             Input = input;
+            IgnoreImageResources = ignoreImageResources;
+            IgnoreLayers = ignoreLayers;
+            IgnoreMergedBitmap = ignoreMergedBitmap;
         }
         #endregion
 
@@ -33,7 +63,7 @@ namespace Bibim.Asset.Pipeline.Recipes
         public override PhotoshopDocument Cook(CookingContext context)
         {
             using (var stream = Input.Cook(context))
-                return new PhotoshopDocument(stream);
+                return new PhotoshopDocument(stream, IgnoreImageResources, IgnoreLayers, IgnoreMergedBitmap);
         }
         #endregion
     }

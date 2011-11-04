@@ -18,9 +18,7 @@
 
                 inline void Draw(Image* image);
                 inline void Draw(Image* image, bool horizontalFlip, bool verticalFlip);
-                inline void Draw(Image* image, Image* maskImage, bool horizontalFlip, bool verticalFlip);
                 void Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, bool horizontalFlip, bool verticalFlip);
-                void Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, Image* maskImage, bool horizontalFlip, bool verticalFlip);
                 void Draw(Vector2 position, Texture2D* texture);
 
                 inline void DrawString(Font* font, const String& text);
@@ -32,6 +30,9 @@
 
                 void FillRect(const RectF& bounds, float width, Color color);
 
+            private:
+                void Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, Image* maskImage, bool horizontalFlip, bool verticalFlip);
+
             protected:
                 inline void DrawChild(UIVisual* target);
 
@@ -42,6 +43,7 @@
             private:
                 UIRenderer* renderer;
                 UIEffectStackPtr effectStack;
+                ImagePtr currentMask;
                 bool isDrawing;
 
                 friend class UIPanel;

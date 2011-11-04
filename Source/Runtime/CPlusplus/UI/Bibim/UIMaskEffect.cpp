@@ -5,8 +5,9 @@
 
 namespace Bibim
 {
-    UIMaskEffect::UIMaskEffect(int slotIndex, bool isFixedFunctionImplemented, bool isShaderFunctionImplemented)
-        : Base(slotIndex, isFixedFunctionImplemented, isShaderFunctionImplemented)
+    UIMaskEffect::UIMaskEffect(bool isFixedFunctionImplemented, bool isShaderFunctionImplemented, Image* mask)
+        : Base(ClassIndex, isFixedFunctionImplemented, isShaderFunctionImplemented),
+          mask(mask)
     {
     }
 
@@ -30,5 +31,23 @@ namespace Bibim
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
         mask = o->mask;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    UIMaskEffect::MaskEffector::MaskEffector(UIMaskEffect* effect)
+        : UIRenderer::Effector(true),
+          mask(effect->mask)
+    {
+    }
+
+    UIMaskEffect::MaskEffector::MaskEffector(uint32 shaderEffectNameHint, UIMaskEffect* effect)
+        : UIRenderer::Effector(shaderEffectNameHint, true),
+          mask(effect->mask)
+    {
+    }
+
+    UIMaskEffect::MaskEffector::~MaskEffector()
+    {
     }
 }

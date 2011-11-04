@@ -14,6 +14,7 @@ namespace Bibim
 
         GameComponentFactory::AddEntry<UISineCurveEffect>();
         GameComponentFactory::AddEntry<UITintEffect>();
+        GameComponentFactory::AddEntry<UIBlendingEffect>();
         GameComponentFactory::AddEntry<UIColorMatrixEffect>();
         GameComponentFactory::AddEntry<UIOpacityMaskEffect>();
         GameComponentFactory::AddEntry<UIEffectMap>();

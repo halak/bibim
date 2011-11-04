@@ -9,15 +9,76 @@
     {
         class UIOpacityMaskEffect : public UIMaskEffect
         {
-            BBComponentClass(UIOpacityMaskEffect, UIMaskEffect, 'U', 'O', 'M', 'E');
+            BBComponentClass(UIOpacityMaskEffect, UIMaskEffect, 'U', 'O', 'M', 'F');
             public:
-                static const int ClassIndex = 1;
+                enum FillStyle
+                {
+                    FanStyle,
+                    BarStyle,
+                };
 
             public:
                 UIOpacityMaskEffect();
+                UIOpacityMaskEffect(Image* mask);
+                UIOpacityMaskEffect(Image* mask, float startPoint, float length, FillStyle fill);
                 virtual ~UIOpacityMaskEffect();
 
+                virtual UIRenderer::Effector* CreateEffector(UIRenderer::Effector* parent, bool isShaderFunctionRendering);
+
+                inline float GetStartPoint() const;
+                void SetStartPoint(float value);
+
+                inline float GetLength() const;
+                void SetLength(float value);
+
+                inline FillStyle GetFill() const;
+                void SetFill(FillStyle value);
+
             private:
+                class FanEffectorForShaderFunction : public MaskEffector
+                {
+                    BBEffectorClass(FanEffectorForShaderFunction);
+                    public:
+                        FanEffectorForShaderFunction(UIOpacityMaskEffect* effect);
+                        virtual ~FanEffectorForShaderFunction();
+
+                        virtual void Setup(ShaderEffect* effect);
+
+                    private:
+                        float startPoint;
+                        float invLength;
+                };
+
+                class BarEffectorForShaderFunction : public MaskEffector
+                {
+                    BBEffectorClass(BarEffectorForShaderFunction);
+                    public:
+                        BarEffectorForShaderFunction(UIOpacityMaskEffect* effect);
+                        virtual ~BarEffectorForShaderFunction();
+
+                        virtual void Setup(ShaderEffect* effect);
+
+                    private:
+                        float startPoint;
+                        float invLength;
+                };
+
+                class EffectorForFixedFunction : public MaskEffector
+                {
+                    BBEffectorClass(EffectorForFixedFunction);
+                    public:
+                        EffectorForFixedFunction(UIOpacityMaskEffect* effect);
+                        virtual ~EffectorForFixedFunction();
+
+                        virtual void Begin(UIRenderer* renderer);
+                        virtual void End(UIRenderer* renderer);
+                };
+
+            private:
+                float startPoint;
+                float length;
+                FillStyle fill;
+                float invLength;
         };
     }
 

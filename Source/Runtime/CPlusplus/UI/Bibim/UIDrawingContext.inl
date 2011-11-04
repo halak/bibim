@@ -10,11 +10,6 @@ namespace Bibim
         Draw(GetCurrentBounds(), GetCurrentClippedBounds(), image, horizontalFlip, verticalFlip);
     }
 
-    void UIDrawingContext::Draw(Image* image, Image* maskImage, bool horizontalFlip, bool verticalFlip)
-    {
-        Draw(GetCurrentBounds(), GetCurrentClippedBounds(), image, maskImage, horizontalFlip, verticalFlip);
-    }
-
     void UIDrawingContext::DrawString(Font* font, const String& text)
     {
         DrawString(GetCurrentBounds(), GetCurrentClippedBounds(), font, text);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Bibim.UI.Effects;
 using Bibim.UI.Events;
 using Bibim.UI.Frames;
 using Bibim.UI.Transforms;
@@ -49,6 +50,12 @@ namespace Bibim.UI.Visuals
         }
 
         public UIEventMap EventMap
+        {
+            get;
+            set;
+        }
+
+        public UIEffectMap EffectMap
         {
             get;
             set;
