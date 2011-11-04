@@ -28,7 +28,7 @@
         };
 
         typedef EvaluableSequenceTemplate<bool,       BoolSequence,      BoolKeyframe,      'e', 's', 'b', '_'> EvaluableBoolSequence;
-        typedef EvaluableSequenceTemplate<short,      ShortSequence,     ShortKeyframe,     'e', 's', 's', '_'> EvaluableShortSequence;
+        typedef EvaluableSequenceTemplate<short,      ShortIntSequence,  ShortIntKeyframe,  'e', 's', 's', '_'> EvaluableShortIntSequence;
         typedef EvaluableSequenceTemplate<int,        IntSequence,       IntKeyframe,       'e', 's', 'i', '_'> EvaluableIntSequence;
         typedef EvaluableSequenceTemplate<int64,      LongIntSequence,   LongIntKeyframe,   'e', 's', 'l', '_'> EvaluableLongIntSequence;
         typedef EvaluableSequenceTemplate<float,      FloatSequence,     FloatKeyframe,     'e', 's', 'f', '_'> EvaluableFloatSequence;
@@ -39,10 +39,10 @@
         typedef EvaluableSequenceTemplate<Vector2,    Vector2Sequence,   Vector2Keyframe,   'e', 's', 'v', '2'> EvaluableVector2Sequence;
         typedef EvaluableSequenceTemplate<Vector3,    Vector3Sequence,   Vector3Keyframe,   'e', 's', 'v', '3'> EvaluableVector3Sequence;
         typedef EvaluableSequenceTemplate<Vector4,    Vector4Sequence,   Vector4Keyframe,   'e', 's', 'v', '4'> EvaluableVector4Sequence;
-        typedef EvaluableSequenceTemplate<GameAsset*, GameAssetSequence, GameAssetKeyframe, 'e', 's', 'v', '4'> EvaluableGameAssetSequence;
+        typedef EvaluableSequenceTemplate<GameAsset*, GameAssetSequence, GameAssetKeyframe, 'e', 's', 'a', '_'> EvaluableGameAssetSequence;
 
         typedef SharedPointer<EvaluableBoolSequence>      EvaluableBoolSequencePtr;
-        typedef SharedPointer<EvaluableShortSequence>     EvaluableShortSequencePtr;
+        typedef SharedPointer<EvaluableShortIntSequence>  EvaluableShortIntSequencePtr;
         typedef SharedPointer<EvaluableIntSequence>       EvaluableIntSequencePtr;
         typedef SharedPointer<EvaluableLongIntSequence>   EvaluableLongIntSequencePtr;
         typedef SharedPointer<EvaluableFloatSequence>     EvaluableFloatSequencePtr;

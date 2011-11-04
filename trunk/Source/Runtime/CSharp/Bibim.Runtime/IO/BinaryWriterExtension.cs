@@ -8,6 +8,12 @@ namespace Bibim.IO
 {
     public static class BinaryWriterExtension
     {
+        public static void Write(this BinaryWriter writer, Point value)
+        {
+            writer.Write(value.X);
+            writer.Write(value.Y);
+        }
+
         public static void Write(this BinaryWriter writer, Rectangle value)
         {
             writer.Write(value.X);

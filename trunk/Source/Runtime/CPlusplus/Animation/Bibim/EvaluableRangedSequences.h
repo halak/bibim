@@ -32,22 +32,22 @@
                 SharedPointer<TSequence> source2;
         };
 
-        typedef EvaluableRangedSequenceTemplate<bool,       BoolSequence,      BoolKeyframe,      'e', 's', 'b', '_'> EvaluableBoolRangedSequence;
-        typedef EvaluableRangedSequenceTemplate<short,      ShortSequence,     ShortKeyframe,     'e', 's', 's', '_'> EvaluableShortRangedSequence;
-        typedef EvaluableRangedSequenceTemplate<int,        IntSequence,       IntKeyframe,       'e', 's', 'i', '_'> EvaluableIntRangedSequence;
-        typedef EvaluableRangedSequenceTemplate<int64,      LongIntSequence,   LongIntKeyframe,   'e', 's', 'l', '_'> EvaluableLongIntRangedSequence;
-        typedef EvaluableRangedSequenceTemplate<float,      FloatSequence,     FloatKeyframe,     'e', 's', 'f', '_'> EvaluableFloatRangedSequence;
-        typedef EvaluableRangedSequenceTemplate<double,     DoubleSequence,    DoubleKeyframe,    'e', 's', 'd', '_'> EvaluableDoubleRangedSequence;
-        typedef EvaluableRangedSequenceTemplate<Point,      PointSequence,     PointKeyframe,     'e', 's', 'p', '_'> EvaluablePointRangedSequence;
-        typedef EvaluableRangedSequenceTemplate<Rect,       RectSequence,      RectKeyframe,      'e', 's', 'r', '_'> EvaluableRectRangedSequence;
-        typedef EvaluableRangedSequenceTemplate<RectF,      RectFSequence,     RectFKeyframe,     'e', 's', 'R', 'f'> EvaluableRectFRangedSequence;
-        typedef EvaluableRangedSequenceTemplate<Vector2,    Vector2Sequence,   Vector2Keyframe,   'e', 's', 'v', '2'> EvaluableVector2RangedSequence;
-        typedef EvaluableRangedSequenceTemplate<Vector3,    Vector3Sequence,   Vector3Keyframe,   'e', 's', 'v', '3'> EvaluableVector3RangedSequence;
-        typedef EvaluableRangedSequenceTemplate<Vector4,    Vector4Sequence,   Vector4Keyframe,   'e', 's', 'v', '4'> EvaluableVector4RangedSequence;
-        typedef EvaluableRangedSequenceTemplate<GameAsset*, GameAssetSequence, GameAssetKeyframe, 'e', 's', 'v', '4'> EvaluableGameAssetRangedSequence;
+        typedef EvaluableRangedSequenceTemplate<bool,       BoolSequence,      BoolKeyframe,      'e', 'r', 'b', '_'> EvaluableBoolRangedSequence;
+        typedef EvaluableRangedSequenceTemplate<short,      ShortIntSequence,  ShortIntKeyframe,  'e', 'r', 's', '_'> EvaluableShortIntRangedSequence;
+        typedef EvaluableRangedSequenceTemplate<int,        IntSequence,       IntKeyframe,       'e', 'r', 'i', '_'> EvaluableIntRangedSequence;
+        typedef EvaluableRangedSequenceTemplate<int64,      LongIntSequence,   LongIntKeyframe,   'e', 'r', 'l', '_'> EvaluableLongIntRangedSequence;
+        typedef EvaluableRangedSequenceTemplate<float,      FloatSequence,     FloatKeyframe,     'e', 'r', 'f', '_'> EvaluableFloatRangedSequence;
+        typedef EvaluableRangedSequenceTemplate<double,     DoubleSequence,    DoubleKeyframe,    'e', 'r', 'd', '_'> EvaluableDoubleRangedSequence;
+        typedef EvaluableRangedSequenceTemplate<Point,      PointSequence,     PointKeyframe,     'e', 'r', 'p', '_'> EvaluablePointRangedSequence;
+        typedef EvaluableRangedSequenceTemplate<Rect,       RectSequence,      RectKeyframe,      'e', 'r', 'r', '_'> EvaluableRectRangedSequence;
+        typedef EvaluableRangedSequenceTemplate<RectF,      RectFSequence,     RectFKeyframe,     'e', 'r', 'R', 'f'> EvaluableRectFRangedSequence;
+        typedef EvaluableRangedSequenceTemplate<Vector2,    Vector2Sequence,   Vector2Keyframe,   'e', 'r', 'v', '2'> EvaluableVector2RangedSequence;
+        typedef EvaluableRangedSequenceTemplate<Vector3,    Vector3Sequence,   Vector3Keyframe,   'e', 'r', 'v', '3'> EvaluableVector3RangedSequence;
+        typedef EvaluableRangedSequenceTemplate<Vector4,    Vector4Sequence,   Vector4Keyframe,   'e', 'r', 'v', '4'> EvaluableVector4RangedSequence;
+        typedef EvaluableRangedSequenceTemplate<GameAsset*, GameAssetSequence, GameAssetKeyframe, 'e', 'r', 'a', '_'> EvaluableGameAssetRangedSequence;
 
         typedef SharedPointer<EvaluableBoolRangedSequence>      EvaluableBoolRangedSequencePtr;
-        typedef SharedPointer<EvaluableShortRangedSequence>     EvaluableShortRangedSequencePtr;
+        typedef SharedPointer<EvaluableShortIntRangedSequence>  EvaluableShortIntRangedSequencePtr;
         typedef SharedPointer<EvaluableIntRangedSequence>       EvaluableIntRangedSequencePtr;
         typedef SharedPointer<EvaluableLongIntRangedSequence>   EvaluableLongIntRangedSequencePtr;
         typedef SharedPointer<EvaluableFloatRangedSequence>     EvaluableFloatRangedSequencePtr;

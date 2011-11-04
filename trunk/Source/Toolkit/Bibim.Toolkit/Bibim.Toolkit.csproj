@@ -98,6 +98,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AliasAttribute.cs" />
+    <Compile Include="Animation\Sequences\BoolSequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\DoubleSequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\FloatSequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\GameAssetSequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\IntSequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\LongIntSequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\PointSequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\RectangleFSequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\RectangleSequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\ShortIntSequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\Vector2SequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\Vector3SequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\Vector4SequenceWriter.cs" />
+    <Compile Include="Animation\SequenceWriterTemplate.cs" />
     <Compile Include="Asset\AssetStreamWriter.cs" />
     <Compile Include="Asset\GameAssetWriter.cs" />
     <Compile Include="Asset\GameAssetWriterAttribute.cs" />
@@ -199,6 +213,12 @@
       <Project>{557C1E3F-0E92-4D23-AA07-7A0650B5682F}</Project>
       <Name>Bibim.Runtime for Windows</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Animation\EvaluableConstants\" />
+    <Folder Include="Animation\EvaluableRangedSequences\" />
+    <Folder Include="Animation\EvaluableSequences\" />
+    <Folder Include="Animation\EvaluableVariables\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

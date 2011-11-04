@@ -51,7 +51,7 @@
         };
 
         typedef Keyframe<bool>         BoolKeyframe;
-        typedef Keyframe<short>        ShortKeyframe;
+        typedef Keyframe<short>        ShortIntKeyframe;
         typedef Keyframe<int>          IntKeyframe;
         typedef Keyframe<int64>        LongIntKeyframe;
         typedef Keyframe<float>        FloatKeyframe;
@@ -65,7 +65,7 @@
         typedef Keyframe<GameAssetPtr> GameAssetKeyframe;
 
         typedef SequenceTemplate<bool,         's', 'q', 'b', '_'> BoolSequence;
-        typedef SequenceTemplate<short,        's', 'q', 's', '_'> ShortSequence;
+        typedef SequenceTemplate<short,        's', 'q', 's', '_'> ShortIntSequence;
         typedef SequenceTemplate<int,          's', 'q', 'i', '_'> IntSequence;
         typedef SequenceTemplate<int64,        's', 'q', 'l', '_'> LongIntSequence;
         typedef SequenceTemplate<float,        's', 'q', 'f', '_'> FloatSequence;
@@ -76,10 +76,10 @@
         typedef SequenceTemplate<Vector2,      's', 'q', 'v', '2'> Vector2Sequence;
         typedef SequenceTemplate<Vector3,      's', 'q', 'v', '3'> Vector3Sequence;
         typedef SequenceTemplate<Vector4,      's', 'q', 'v', '4'> Vector4Sequence;
-        typedef SequenceTemplate<GameAssetPtr, 's', 'q', 'a', 'r'> GameAssetSequence;
+        typedef SequenceTemplate<GameAssetPtr, 's', 'q', 'a', '_'> GameAssetSequence;
 
         typedef SharedPointer<BoolSequence>      BoolSequencePtr;
-        typedef SharedPointer<ShortSequence>     ShortSequencePtr;
+        typedef SharedPointer<ShortIntSequence>  ShortIntSequencePtr;
         typedef SharedPointer<IntSequence>       IntSequencePtr;
         typedef SharedPointer<LongIntSequence>   LongIntSequencePtr;
         typedef SharedPointer<FloatSequence>     FloatSequencePtr;

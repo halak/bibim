@@ -23,7 +23,7 @@
         };
 
         typedef EvaluableTemplate<bool>       EvaluableBool;
-        typedef EvaluableTemplate<short>      EvaluableShort;
+        typedef EvaluableTemplate<short>      EvaluableShortInt;
         typedef EvaluableTemplate<int>        EvaluableInt;
         typedef EvaluableTemplate<int64>      EvaluableLongInt;
         typedef EvaluableTemplate<float>      EvaluableFloat;
@@ -37,7 +37,7 @@
         typedef EvaluableTemplate<GameAsset*> EvaluableGameAsset;
 
         typedef SharedPointer<EvaluableBool>      EvaluableBoolPtr;
-        typedef SharedPointer<EvaluableShort>     EvaluableShortPtr;
+        typedef SharedPointer<EvaluableShortInt>  EvaluableShortIntPtr;
         typedef SharedPointer<EvaluableInt>       EvaluableIntPtr;
         typedef SharedPointer<EvaluableLongInt>   EvaluableLongIntPtr;
         typedef SharedPointer<EvaluableFloat>     EvaluableFloatPtr;

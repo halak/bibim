@@ -83,7 +83,9 @@ namespace Bibim
     template <typename T, char a, char b, char c, char d>
     void SequenceTemplate<T, a, b, c, d>::RemoveKeyframe(float time)
     {
-        RemoveKeyframe(GetKeyframeIndex(time));
+        const int index = GetKeyframeIndex(time);
+        if (index != -1)
+            RemoveKeyframe(index);
     }
 
     template <typename T, char a, char b, char c, char d>
@@ -103,15 +105,13 @@ namespace Bibim
     template <typename T, char a, char b, char c, char d>
     const Keyframe<T>& SequenceTemplate<T, a, b, c, d>::GetKeyframe(int index)
     {
-        Keyframe<T>& item = keyframes[index];
-
         if (startTimeChanged)
         {
             startTimeChanged = false;
             UpdateStartTimes();
         }
 
-        return item;
+        return keyframes[index];
     }
 
     template <typename T, char a, char b, char c, char d>
@@ -122,7 +122,7 @@ namespace Bibim
             return GetKeyframe(index);
         else
         {
-            static const T Default = T();
+            static const Keyframe<T> Default;
             return Default;
         }
     }
@@ -165,10 +165,12 @@ namespace Bibim
             throw std::invalid_argument("item.Duration");
 
         if (keyframes[index].Duration != item.Duration)
+        {
             ResetDuration();
+            startTimeChanged = true;
+        }
 
         keyframes[index] = item;
-        startTimeChanged = true;
     }
 
     template <typename T, char a, char b, char c, char d>
