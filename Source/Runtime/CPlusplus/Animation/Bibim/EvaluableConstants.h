@@ -42,7 +42,7 @@
         };
 
         typedef EvaluableConstantTemplate<bool,         'e', 'c', 'b', '_'> EvaluableBoolConstant;
-        typedef EvaluableConstantTemplate<short,        'e', 'c', 's', '_'> EvaluableShortConstant;
+        typedef EvaluableConstantTemplate<short,        'e', 'c', 's', '_'> EvaluableShortIntConstant;
         typedef EvaluableConstantTemplate<int,          'e', 'c', 'i', '_'> EvaluableIntConstant;
         typedef EvaluableConstantTemplate<int64,        'e', 'c', 'l', '_'> EvaluableLongIntConstant;
         typedef EvaluableConstantTemplate<float,        'e', 'c', 'f', '_'> EvaluableFloatConstant;
@@ -55,7 +55,7 @@
         typedef EvaluableConstantTemplate<Vector4,      'e', 'c', 'v', '4'> EvaluableVector4Constant;
 
         typedef SharedPointer<EvaluableBoolConstant>      EvaluableBoolConstantPtr;
-        typedef SharedPointer<EvaluableShortConstant>     EvaluableShortConstantPtr;
+        typedef SharedPointer<EvaluableShortIntConstant>     EvaluableShortIntConstantPtr;
         typedef SharedPointer<EvaluableIntConstant>       EvaluableIntConstantPtr;
         typedef SharedPointer<EvaluableLongIntConstant>   EvaluableLongIntConstantPtr;
         typedef SharedPointer<EvaluableFloatConstant>     EvaluableFloatConstantPtr;

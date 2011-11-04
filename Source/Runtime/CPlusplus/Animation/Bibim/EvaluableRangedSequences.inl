@@ -13,6 +13,8 @@ namespace Bibim
     EvaluableRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>* EvaluableRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::Clone(CloningContext& /*context*/) const
     {
         This* clone = new This();
+        context.Store(this, clone);
+        clone->OnCopy(this, context);
         return clone;
     }
 

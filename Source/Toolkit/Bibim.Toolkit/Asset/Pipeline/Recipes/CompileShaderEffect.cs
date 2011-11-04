@@ -113,11 +113,12 @@ namespace Bibim.Asset.Pipeline.Recipes
                     definesArguments.AppendFormat("/D {0}={1} ", item.Key, item.Value);
             }
 
-            string args = string.Format("/T fx_2_0 /Fo \"{1}\" {2} /Zi /nologo \"{0}\"", input, outputFXOFileName, definesArguments.ToString());
+            string args = string.Format("/T fx_2_0 /Fo \"{1}\" {2} /Zi /nologo \"{0}\"", Path.GetFileName(input), outputFXOFileName, definesArguments.ToString());
 
             ProcessStartInfo start = new ProcessStartInfo(@"Plugin\fxc.exe", args)
             {
-                CreateNoWindow = false,
+                WorkingDirectory = Path.GetDirectoryName(input),
+                CreateNoWindow = true,
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
@@ -149,7 +150,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             else
             {
                 File.Delete(outputFXOFileName);
-                throw new InvalidDataException(string.Format("Compile failure.\n{0}\n{1}", compileMessage, compileErrorMessage));
+                throw new InvalidDataException(string.Format("Compile failure.\n{0}\n{1}\n{2}", compileMessage, compileErrorMessage, args));
             }
         }
     }
