@@ -99,6 +99,7 @@
     <Compile Include="ClassIDAttribute.cs" />
     <Compile Include="Collections\Generic\ReadOnlyDictionary.cs" />
     <Compile Include="GameComponent.cs" />
+    <Compile Include="Graphics\BlendMode.cs" />
     <Compile Include="Graphics\GraphicsDevice.cs" />
     <Compile Include="Graphics\Image.cs" />
     <Compile Include="Graphics\ShaderEffect.cs" />
@@ -140,8 +141,14 @@
     <Compile Include="Typography\Font.cs" />
     <Compile Include="Typography\FontLibrary.cs" />
     <Compile Include="Typography\FontCacheParameter.cs" />
-    <Compile Include="UI\Effects\UIEffect.cs" />
+    <Compile Include="UI\Effects\UIBlendingEffect.cs" />
+    <Compile Include="UI\Effects\UIColorMatrixEffect.cs" />
+    <Compile Include="UI\Effects\UIPixelEffect.cs" />
     <Compile Include="UI\Effects\UIEffectMap.cs" />
+    <Compile Include="UI\Effects\UIGeometryEffect.cs" />
+    <Compile Include="UI\Effects\UIMaskEffect.cs" />
+    <Compile Include="UI\Effects\UIOpacityMaskEffect.cs" />
+    <Compile Include="UI\Effects\UISineCurveEffect.cs" />
     <Compile Include="UI\Effects\UITintEffect.cs" />
     <Compile Include="UI\Events\UIAppEventDispatcher.cs" />
     <Compile Include="UI\Events\UIAsyncEventQueue.cs" />

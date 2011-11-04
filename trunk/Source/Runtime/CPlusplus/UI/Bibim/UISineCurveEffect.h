@@ -9,7 +9,7 @@
     {
         class UISineCurveEffect : public UIGeometryEffect
         {
-            BBComponentClass(UISineCurveEffect, UIGeometryEffect, 'U', 'S', 'I', 'E');
+            BBComponentClass(UISineCurveEffect, UIGeometryEffect, 'U', 'S', 'I', 'F');
             public:
                 UISineCurveEffect();
                 virtual ~UISineCurveEffect();

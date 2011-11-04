@@ -68,7 +68,7 @@ namespace Bibim
 
     void ShaderEffect::Parameter::SetValue(Texture2D* value)
     {
-        BBAssert(desc.Class == D3DXPC_OBJECT && desc.Type == D3DXPT_TEXTURE2D);
+        BBAssert(desc.Class == D3DXPC_OBJECT && desc.Type == D3DXPT_TEXTURE);
         effect->GetD3DEffect()->SetTexture(handle, value->GetD3DTexture());
     }
 

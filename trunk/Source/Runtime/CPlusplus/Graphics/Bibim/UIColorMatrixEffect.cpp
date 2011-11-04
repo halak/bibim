@@ -5,8 +5,61 @@
 
 namespace Bibim
 {
+    BBImplementsComponent(UIColorMatrixEffect);
+
+    const Vector4 UIColorMatrixEffect::DefaultRed(1.0f, 0.0f, 0.0f, 0.0f);
+    const Vector4 UIColorMatrixEffect::DefaultGreen(0.0f, 1.0f, 0.0f, 0.0f);
+    const Vector4 UIColorMatrixEffect::DefaultBlue(0.0f, 0.0f, 1.0f, 0.0f);
+
+    UIColorMatrixEffect::UIColorMatrixEffect()
+        : Base(ClassIndex, false, true),
+          red(DefaultRed),
+          green(DefaultGreen),
+          blue(DefaultBlue)
+    {
+    }
+
+    UIColorMatrixEffect::UIColorMatrixEffect(Vector4 red, Vector4 green, Vector4 blue)
+        : Base(ClassIndex, false, true),
+          red(red),
+          green(green),
+          blue(blue)
+    {
+    }
+
+    UIColorMatrixEffect::~UIColorMatrixEffect()
+    {
+    }
+
+    UIRenderer::Effector* UIColorMatrixEffect::CreateEffector(UIRenderer::Effector* parent, bool isShaderFunctionRendering)
+    {
+        if (isShaderFunctionRendering)
+            return new Effector(static_cast<Effector*>(parent), this);
+        else
+            return nullptr;
+    }
+
+    void UIColorMatrixEffect::OnRead(ComponentStreamReader& reader)
+    {
+        Base::OnRead(reader);
+        red = reader.ReadVector4();
+        blue = reader.ReadVector4();
+        green = reader.ReadVector4();
+    }
+
+    void UIColorMatrixEffect::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        const This* o = static_cast<const This*>(original);
+        red = o->red;
+        green = o->green;
+        blue = o->blue;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     UIColorMatrixEffect::Effector::Effector(Effector* parent, UIColorMatrixEffect* effect)
-        : UIRenderer::Effector(UIColorMatrixEffect::ClassID, true, false)
+        : UIRenderer::Effector(UIColorMatrixEffect::ClassID)
     {
         if (parent)
         {
@@ -43,55 +96,5 @@ namespace Bibim
             param->SetValue(green);
         if (ShaderEffect::ParameterPtr param = effect->FindParameter("Blue"))
             param->SetValue(blue);
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    BBImplementsComponent(UIColorMatrixEffect);
-
-    const Vector4 UIColorMatrixEffect::DefaultRed(1.0f, 0.0f, 0.0f, 0.0f);
-    const Vector4 UIColorMatrixEffect::DefaultGreen(0.0f, 1.0f, 0.0f, 0.0f);
-    const Vector4 UIColorMatrixEffect::DefaultBlue(0.0f, 0.0f, 1.0f, 0.0f);
-
-    UIColorMatrixEffect::UIColorMatrixEffect()
-        : Base(ClassIndex, false, true),
-          red(DefaultRed),
-          green(DefaultGreen),
-          blue(DefaultBlue)
-    {
-    }
-
-    UIColorMatrixEffect::UIColorMatrixEffect(Vector4 red, Vector4 green, Vector4 blue)
-        : Base(ClassIndex, false, true),
-          red(red),
-          green(green),
-          blue(blue)
-    {
-    }
-
-    UIColorMatrixEffect::~UIColorMatrixEffect()
-    {
-    }
-
-    UIColorMatrixEffect::Effector* UIColorMatrixEffect::CreateEffector(UIRenderer::Effector* parent)
-    {
-        return new Effector(static_cast<Effector*>(parent), this);
-    }
-
-    void UIColorMatrixEffect::OnRead(ComponentStreamReader& reader)
-    {
-        Base::OnRead(reader);
-        red = reader.ReadVector4();
-        blue = reader.ReadVector4();
-        green = reader.ReadVector4();
-    }
-
-    void UIColorMatrixEffect::OnCopy(const GameComponent* original, CloningContext& context)
-    {
-        Base::OnCopy(original, context);
-        const This* o = static_cast<const This*>(original);
-        red = o->red;
-        green = o->green;
-        blue = o->blue;
     }
 }

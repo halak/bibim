@@ -17,6 +17,8 @@
 #  include <Bibim/UIDomain.h>
 #  include <Bibim/UIDrawingContext.h>
 #  include <Bibim/UIEffectMap.h>
+#include <Bibim/UIOpacityMaskEffect.h>
+#include <Bibim/UIColorMatrixEffect.h>
 #  include <Bibim/UIElement.h>
 #  include <Bibim/UIEventArgs.h>
 #  include <Bibim/UIEventDispatcher.h>

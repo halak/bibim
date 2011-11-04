@@ -11,6 +11,7 @@ using Bibim.Graphics;
 using Bibim.UI;
 using Bibim.UI.Frames;
 using Bibim.UI.Visuals;
+using Image = Bibim.Graphics.Image;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace Bibim.Asset.Pipeline.Recipes
@@ -100,6 +101,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             List<UILabel> labels = new List<UILabel>();
             CollectObjects(input.Root, sprites, labels);
 
+            OptimizeAllSprites(context, sprites);
             MergeAllSprites(context, sprites);
 
             return input;
@@ -118,10 +120,85 @@ namespace Bibim.Asset.Pipeline.Recipes
             }
         }
 
+        private void OptimizeAllSprites(CookingContext context, ICollection<UISprite> sprites)
+        {
+            var uniqueImages = new List<Image>();
+            foreach (var item in sprites)
+            {
+                bool found = false;
+                foreach (var image in uniqueImages)
+                {
+                    if (EqualsImage(item.Image, image))
+                    {
+                        item.Image = image;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found == false)
+                    uniqueImages.Add(item.Image);
+            }
+        }
+
+        private static bool EqualsImage(Image a, Image b)
+        {
+            if (a == null || b == null)
+                return false;
+
+            var aTag = a.Tag as ImageCookingTag;
+            var bTag = b.Tag as ImageCookingTag;
+
+            if (aTag != null && bTag != null)
+            {
+                int aWidth = a.ClippingRectangle.Width;
+                int aHeight = a.ClippingRectangle.Height;
+                int bWidth = b.ClippingRectangle.Width;
+                int bHeight = b.ClippingRectangle.Height;
+
+                if (aWidth == 0)
+                    aWidth = aTag.Bitmap.Width;
+                if (aHeight == 0)
+                    aHeight = aTag.Bitmap.Height;
+                if (bWidth == 0)
+                    bWidth = bTag.Bitmap.Width;
+                if (bHeight == 0)
+                    bHeight = bTag.Bitmap.Height;
+
+                if (aWidth != bWidth ||
+                    aHeight != bHeight)
+                    return false;
+
+                for (int y = 0; y < aHeight; y++)
+                {
+                    for (int x = 0; x < aWidth; x++)
+                    {
+                        Color aPixel = aTag.Bitmap.GetPixel(x + a.ClippingRectangle.X, y + a.ClippingRectangle.Y);
+                        Color bPixel = bTag.Bitmap.GetPixel(x + b.ClippingRectangle.X, y + b.ClippingRectangle.Y);
+
+                        if (aPixel.A > 0 && bPixel.A > 0)
+                        {
+                            if (aPixel != bPixel)
+                                return false;
+                        }
+                        else
+                        {
+                            if (aPixel.A != 0 || bPixel.A != 0)
+                                return false;
+                        }
+                    }
+                }
+
+                return true;
+            }
+            else
+                return false;
+        }
+
         private void MergeAllSprites(CookingContext context, ICollection<UISprite> sprites)
         {
             var spriteBitmaps = new Dictionary<Bitmap, List<UISprite>>(sprites.Count);
-            foreach (UISprite item in sprites)
+            foreach (var item in sprites)
             {
                 var tag = item.Image.Tag as ImageCookingTag;
                 if (tag != null)

@@ -12,6 +12,7 @@
         {
             BBModuleClass(PipedAssetProvider, AssetProvider, 'P', 'A', 'S', 'P');
             public:
+                static const String DefaultPipeName;
                 static const uint32 LoadAssetPacketID = 1000;
                 static const uint32 ChangeClientNamePacketID = 1001;
                 static const uint32 ChangeWorkingDirectoryPacketID = 1002;

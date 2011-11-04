@@ -2,7 +2,7 @@
 <GameAssetRecipe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Author="" Comment="">
 	<Cook xsi:type="BitmapToTexture2D">
 		<Input xsi:type="PhotoshopDocumentToBitmap">
-			<Input xsi:type="ImportPhotoshopDocument">
+			<Input xsi:type="ImportPhotoshopDocument" IgnoreImageResources="true" IgnoreLayers="true" IgnoreMergedBitmap="false">
 				<Input xsi:type="FileToStream" Input1="$(AssetName).psd" />
 			</Input>
 		</Input>

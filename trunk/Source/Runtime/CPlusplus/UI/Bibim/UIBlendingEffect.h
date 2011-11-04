@@ -14,6 +14,17 @@
             public:
                 static const int ClassIndex = 1;
 
+            public:
+                UIBlendingEffect();
+                UIBlendingEffect(BlendMode mode);
+                virtual ~UIBlendingEffect();
+
+                virtual UIRenderer::Effector* CreateEffector(UIRenderer::Effector* parent, bool isShaderFunctionRendering);
+                
+                inline BlendMode GetMode() const;
+                inline void SetMode(BlendMode value);
+
+            private:
                 class Effector : public UIRenderer::Effector
                 {
                     public:
@@ -27,16 +38,6 @@
                         BlendMode mode;
                         BlendMode oldMode;
                 };
-
-            public:
-                UIBlendingEffect();
-                UIBlendingEffect(BlendMode mode);
-                virtual ~UIBlendingEffect();
-
-                virtual Effector* CreateEffector(UIRenderer::Effector* parent);
-                
-                inline BlendMode GetMode() const;
-                inline void SetMode(BlendMode value);
 
             private:
                 BlendMode mode;

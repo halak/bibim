@@ -5,7 +5,7 @@ using System.Text;
 namespace Bibim.UI.Effects
 {
     [ClassID('U', 'T', 'N', 'F')]
-    public sealed class UITintEffect : UIEffect
+    public sealed class UITintEffect : UIGeometryEffect
     {
         #region Fields
         #endregion
@@ -15,7 +15,6 @@ namespace Bibim.UI.Effects
 
         #region Constructors
         public UITintEffect()
-            : base(0)
         {
         }
         #endregion

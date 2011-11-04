@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameAssetRecipe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Author="" Comment="">
+	<Cook xsi:type="ExportUILayoutAssets" TextureOutput="gen\$(AssetName)_TEXTURE{0}" ImageOutput="gen\$(AssetName)_IMG{0}">
+		<Input xsi:type="PhotoshopDocumentToUILayout1">
+			<Input xsi:type="ImportPhotoshopDocument" IgnoreImageResources="false" IgnoreLayers="false" IgnoreMergedBitmap="true">
+				<Input xsi:type="FileToStream" Input1="$(AssetName).psd" />
+			</Input>
+		</Input>
+		<BitmapSheetSize>
+			<Width>1024</Width>
+			<Height>1024</Height>
+		</BitmapSheetSize>
+		<BitmapSheetClusterSize>
+			<Width>16</Width>
+			<Height>16</Height>
+		</BitmapSheetClusterSize>
+	</Cook>
+</GameAssetRecipe>

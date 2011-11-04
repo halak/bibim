@@ -197,6 +197,7 @@ namespace Bibim
         d3dDevice->SetIndices(d3dQuadIndices);
         InitializeNormalQuadSets();
         Setup(NormalBlend);
+        Setup(std::vector<EffectorPtr>());
     }
 
     void UIRenderer::End()
@@ -247,10 +248,33 @@ namespace Bibim
             switch (this->blendMode)
             {
                 case NormalBlend:
-                    break;
-                case AddBlend:
                     blendOp = D3DBLENDOP_ADD;
                     srcBlend = D3DBLEND_SRCALPHA;
+                    dstBlend = D3DBLEND_INVSRCALPHA;
+                    break;
+                case AdditiveBlend:
+                    blendOp = D3DBLENDOP_ADD;
+                    srcBlend = D3DBLEND_SRCALPHA;
+                    dstBlend = D3DBLEND_ONE;
+                    break;
+                case LightenBlend:
+                    blendOp = D3DBLENDOP_MAX;
+                    srcBlend = D3DBLEND_SRCALPHA;
+                    dstBlend = D3DBLEND_INVSRCALPHA;
+                    break;
+                case DarkenBlend:
+                    blendOp = D3DBLENDOP_MIN;
+                    srcBlend = D3DBLEND_SRCALPHA;
+                    dstBlend = D3DBLEND_INVSRCALPHA;
+                    break;
+                case MultiplyBlend:
+                    blendOp = D3DBLENDOP_ADD;
+                    srcBlend = D3DBLEND_ZERO;
+                    dstBlend =  D3DBLEND_SRCCOLOR;
+                    break;
+                case ScreenBlend:
+                    blendOp = D3DBLENDOP_ADD;
+                    srcBlend = D3DBLEND_INVDESTCOLOR;
                     dstBlend = D3DBLEND_ONE;
                     break;
             }
@@ -284,13 +308,13 @@ namespace Bibim
                 en++;
                 for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); it++)
                 {
-                    if ((*it)->IsSetupEnabled())
+                    const uint32 nameHint = (*it)->GetShaderEffectNameHint();
+                    if (nameHint != 0x00000000)
                     {
-                        const uint32 localName = (*it)->GetEffectName();
-                        en[0] = BBFOURCCFirst(localName);
-                        en[1] = BBFOURCCSecond(localName);
-                        en[2] = BBFOURCCThird(localName);
-                        en[3] = BBFOURCCFourth(localName);
+                        en[0] = BBFOURCCFirst(nameHint);
+                        en[1] = BBFOURCCSecond(nameHint);
+                        en[2] = BBFOURCCThird(nameHint);
+                        en[3] = BBFOURCCFourth(nameHint);
                         en += 4;
                     }
                 }
@@ -711,10 +735,8 @@ namespace Bibim
         {
             for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); it++)
             {
-                if ((*it)->IsSetupEnabled())
-                    (*it)->Setup(effects[index]);
-                if ((*it)->IsBeginEndEnabled())
-                    (*it)->Begin(this);
+                (*it)->Setup(effects[index]);
+                (*it)->Begin(this);
             }
 
             ID3DXEffect* d3dEffect = effects[index]->GetD3DEffect();
@@ -734,10 +756,7 @@ namespace Bibim
         if (effects[index])
         {
             for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
-            {
-                if ((*it)->IsBeginEndEnabled())
-                    (*it)->End(this);
-            }
+                (*it)->End(this);
 
             ID3DXEffect* d3dEffect = effects[index]->GetD3DEffect();
             d3dEffect->EndPass();
@@ -810,6 +829,11 @@ namespace Bibim
         {
             if (graphicsDevice->GetCapabilities().IsShaderSupported())
                 BeginEffect(NoTextureMode, "0");
+            else
+            {
+                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
+                    (*it)->Begin(this);
+            }
 
             d3dDevice->SetStreamSource(0, d3dVBCO, 0, sizeof(VertexCO));
             d3dDevice->SetFVF(VertexCO::FVF);
@@ -825,12 +849,22 @@ namespace Bibim
             
             if (graphicsDevice->GetCapabilities().IsShaderSupported())
                 EndEffect(NoTextureMode);
+            else
+            {
+                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
+                    (*it)->End(this);
+            }
         }
 
         if (quadSetsSCT[0].Count > 0)
         {
             if (graphicsDevice->GetCapabilities().IsShaderSupported())
                 BeginEffect(ColorTextureMode, "1");
+            else
+            {
+                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
+                    (*it)->Begin(this);
+            }
 
             const int count = sizeof(quadSetsSCT) / sizeof(quadSetsSCT[0]);
             d3dDevice->SetStreamSource(0, d3dVBSCT, 0, sizeof(VertexST));
@@ -854,6 +888,11 @@ namespace Bibim
 
             if (graphicsDevice->GetCapabilities().IsShaderSupported())
                 EndEffect(ColorTextureMode);
+            else
+            {
+                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
+                    (*it)->End(this);
+            }
         }
 
         if (quadSetsSAT[0].Count > 0)
@@ -861,7 +900,11 @@ namespace Bibim
             if (graphicsDevice->GetCapabilities().IsShaderSupported())
                 BeginEffect(AlphaTextureMode, "2");
             else
+            {
                 BeginAlphaTextureMode();
+                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
+                    (*it)->Begin(this);
+            }
 
             const int count = sizeof(quadSetsSAT) / sizeof(quadSetsSAT[0]);
             d3dDevice->SetStreamSource(0, d3dVBSAT, 0, sizeof(VertexST));
@@ -884,7 +927,11 @@ namespace Bibim
             }
 
             if (graphicsDevice->GetCapabilities().IsShaderSupported() == false)
+            {
                 EndAlphaTextureMode();
+                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
+                    (*it)->End(this);
+            }
             else
                 EndEffect(AlphaTextureMode);
         }
@@ -893,14 +940,26 @@ namespace Bibim
         {
             if (graphicsDevice->GetCapabilities().IsShaderSupported())
                 BeginEffect(ColorAndAlphaTextureMode, "3");
+            else
+            {
+                BeginAlphaTextureMode();
+                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
+                    (*it)->Begin(this);
+            }
 
-            const int count = sizeof(d3dVBDT) / sizeof(quadSetsDT[0]);
+            const int count = sizeof(quadSetsDT) / sizeof(quadSetsDT[0]);
             d3dDevice->SetStreamSource(0, d3dVBDT, 0, sizeof(VertexDT));
             d3dDevice->SetFVF(VertexDT::FVF);
             for (int i = 0; i < count; i++)
             {
                 if (quadSetsDT[i].Count == 0)
                     break;
+
+                if (effects[ColorAndAlphaTextureMode])
+                {
+                    ID3DXEffect* d3dEffect = effects[ColorAndAlphaTextureMode]->GetD3DEffect();
+                    d3dEffect->SetTexture(d3dEffect->GetParameterByName(NULL, "DefaultTexture"), quadSetsDT[i].KeyTexture->GetD3DTexture());
+                }
 
                 d3dDevice->SetTexture(0, quadSetsDT[i].KeyTexture->GetD3DTexture());
                 d3dDevice->SetTexture(1, quadSetsDT[i].KeyMask->GetD3DTexture());
@@ -916,6 +975,11 @@ namespace Bibim
 
             if (graphicsDevice->GetCapabilities().IsShaderSupported())
                 EndEffect(ColorAndAlphaTextureMode);
+            else
+            {
+                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
+                    (*it)->End(this);
+            }
         }
     }
 

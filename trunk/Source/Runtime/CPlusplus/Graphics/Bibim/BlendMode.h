@@ -9,8 +9,12 @@
         enum BlendMode
         {
             NormalBlend,
-            AddBlend,
+            AdditiveBlend,
+            LightenBlend,
+            DarkenBlend,
             MultiplyBlend,
+            ScreenBlend,
+            LinearDodgeBlend = AdditiveBlend,
         };
     }
 

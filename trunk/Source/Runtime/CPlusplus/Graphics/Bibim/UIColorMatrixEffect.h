@@ -14,26 +14,12 @@
             public:
                 static const int ClassIndex = 0;
 
-                class Effector : public UIRenderer::Effector
-                {
-                    public:
-                        Effector(Effector* parent, UIColorMatrixEffect* effect);
-                        virtual ~Effector();
-
-                        virtual void Setup(ShaderEffect* effect);
-
-                    private:
-                        Vector4 red;
-                        Vector4 green;
-                        Vector4 blue;
-                };
-
             public:
                 UIColorMatrixEffect();
                 UIColorMatrixEffect(Vector4 red, Vector4 green, Vector4 blue);
                 virtual ~UIColorMatrixEffect();
 
-                virtual Effector* CreateEffector(UIRenderer::Effector* parent);
+                virtual UIRenderer::Effector* CreateEffector(UIRenderer::Effector* parent, bool isShaderFunctionRendering);
 
                 inline Vector4 GetRed() const;
                 inline void SetRed(Vector4 value);
@@ -51,6 +37,21 @@
                 static const Vector4 DefaultRed;
                 static const Vector4 DefaultGreen;
                 static const Vector4 DefaultBlue;
+
+            private:
+                class Effector : public UIRenderer::Effector
+                {
+                    public:
+                        Effector(Effector* parent, UIColorMatrixEffect* effect);
+                        virtual ~Effector();
+
+                        virtual void Setup(ShaderEffect* effect);
+
+                    private:
+                        Vector4 red;
+                        Vector4 green;
+                        Vector4 blue;
+                };
 
             private:
                 Vector4 red;

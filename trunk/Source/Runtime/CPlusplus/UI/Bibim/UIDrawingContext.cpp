@@ -3,6 +3,8 @@
 #include <Bibim/Assert.h>
 #include <Bibim/Font.h>
 #include <Bibim/FontString.h>
+#include <Bibim/GraphicsCapabilities.h>
+#include <Bibim/GraphicsDevice.h>
 #include <Bibim/Image.h>
 #include <Bibim/UIRenderer.h>
 #include <Bibim/UIEffectStack.h>
@@ -15,9 +17,9 @@ namespace Bibim
     UIDrawingContext::UIDrawingContext(UIRenderer* renderer)
         : UIVisualVisitor(renderer->GetViewTransform(), renderer->GetInversedViewTransform(), renderer->GetProjectionTransform(), true),
           renderer(renderer),
-          effectStack(new UIEffectStack()),
           isDrawing(false)
     {
+        effectStack = new UIEffectStack(renderer->GetGraphicsDevice()->GetCapabilities().IsShaderSupported());
     }
     
     UIDrawingContext::~UIDrawingContext()
@@ -45,6 +47,12 @@ namespace Bibim
         if (image->GetStatus() != GameAsset::CompletedStatus ||
             image->GetTexture()->GetStatus() != GameAsset::CompletedStatus)
             return;
+
+        if (currentMask)
+        {
+            Draw(bounds, clippedBounds, image, currentMask, horizontalFlip, verticalFlip);
+            return;
+        }
 
         const float boundsClippedLeft   = (clippedBounds.GetLeft() - bounds.GetLeft()) / bounds.Width;
         const float boundsClippedTop    = (clippedBounds.GetTop() - bounds.GetTop()) / bounds.Height;
@@ -78,6 +86,14 @@ namespace Bibim
         clippingRect.Width  = (horizontalFlip == false) ? clippingRight - clippingLeft : clippingLeft - clippingRight;
         clippingRect.Height = (verticalFlip   == false) ? clippingBottom - clippingTop : clippingTop - clippingBottom;
 
+        const Vector2 points[] =
+        {
+            Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetTop() - 0.5f),
+            Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetTop() - 0.5f),
+            Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetBottom() - 0.5f),
+            Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetBottom() - 0.5f),
+        };
+
         Vector2 uv[4];
         switch (image->GetAppliedTransform())
         {
@@ -95,13 +111,6 @@ namespace Bibim
                 break;
         }
 
-        const Vector2 points[] =
-        {
-            Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetTop() - 0.5f),
-            Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetTop() - 0.5f),
-            Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetBottom() - 0.5f),
-            Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetBottom() - 0.5f),
-        };
         const Color color = Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity()));
         renderer->DrawQuad(points, color, uv, image->GetTexture());
     }
@@ -175,6 +184,14 @@ namespace Bibim
         maskClippingRect.Width  = (horizontalFlip == false) ? maskClippingRight - maskClippingLeft : maskClippingLeft - maskClippingRight;
         maskClippingRect.Height = (verticalFlip   == false) ? maskClippingBottom - maskClippingTop : maskClippingTop - maskClippingBottom;
 
+        const Vector2 points[] =
+        {
+            Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetTop() - 0.5f),
+            Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetTop() - 0.5f),
+            Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetBottom() - 0.5f),
+            Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetBottom() - 0.5f),
+        };
+
         Vector2 uv1[4];
         switch (image->GetAppliedTransform())
         {
@@ -209,13 +226,6 @@ namespace Bibim
                 break;
         }
 
-        const Vector2 points[] =
-        {
-            Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetTop() - 0.5f),
-            Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetTop() - 0.5f),
-            Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetBottom() - 0.5f),
-            Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetBottom() - 0.5f),
-        };
         const Color color = Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity()));
         renderer->DrawQuad(points, color, uv1, image->GetTexture(), uv2, maskImage->GetTexture());
     }
@@ -329,9 +339,11 @@ namespace Bibim
 
     void UIDrawingContext::OnVisit()
     {
+        ImagePtr oldMask = currentMask;
+
         if (GetCurrentVisual()->GetEffectMap())
         {
-            if (effectStack->Push(GetCurrentVisual()->GetEffectMap()))
+            if (effectStack->Push(GetCurrentVisual()->GetEffectMap(), currentMask))
                 renderer->Setup(effectStack->GetTopEffectors());
         }
 
@@ -342,7 +354,10 @@ namespace Bibim
         if (GetCurrentVisual()->GetEffectMap())
         {
             if (effectStack->Pop())
+            {
+                currentMask = oldMask;
                 renderer->Setup(effectStack->GetTopEffectors());
+            }
         }
     }
 }

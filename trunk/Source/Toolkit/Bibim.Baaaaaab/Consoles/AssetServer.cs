@@ -26,7 +26,7 @@ namespace Bibim.Bab.Consoles
         static void Run([Alias("pipe")] string pipeName)
         {
             if (string.IsNullOrEmpty(pipeName))
-                throw new ArgumentException("pipeName");
+                pipeName = PipedAssetProvider.DefaultPipeName;
 
             Trace.WriteLine("================================");
             Trace.WriteLine("Halak Bibim Asset Server");

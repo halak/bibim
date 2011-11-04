@@ -1,16 +1,28 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIEffectStack.h>
 #include <Bibim/Assert.h>
-#include <Bibim/UIEffectMap.h>
+#include <Bibim/IMage.h>
 #include <Bibim/Math.h>
+#include <Bibim/UIEffectMap.h>
 #include <Bibim/UIPixelEffect.h>
+#include <Bibim/UIMaskEffect.h>
 
 namespace Bibim
 {
     UIEffectStack::UIEffectStack()
         : depth(0),
           numberOfClasses(16),
-          maxDepth(16)
+          maxDepth(16),
+          isShaderFunctionRendering(false)
+    {
+        map.resize(numberOfClasses * maxDepth);
+    }
+
+    UIEffectStack::UIEffectStack(bool isShaderFunctionRendering)
+        : depth(0),
+          numberOfClasses(16),
+          maxDepth(16),
+          isShaderFunctionRendering(isShaderFunctionRendering)
     {
         map.resize(numberOfClasses * maxDepth);
     }
@@ -21,6 +33,12 @@ namespace Bibim
 
     bool UIEffectStack::Push(UIEffectMap* item)
     {
+        ImagePtr mask;
+        return Push(item, mask);
+    }
+
+    bool UIEffectStack::Push(UIEffectMap* item, ImagePtr& outMask)
+    {
         if (item == nullptr || item->GetPixelEffects().empty())
             return false;
 
@@ -28,6 +46,17 @@ namespace Bibim
             ExpandClass(item->GetPixelEffects().size());
         if (depth >= maxDepth)
             ExpandDepth(maxDepth + 4);
+
+        struct IsEffectorCreateable
+        {
+            static bool Do(UIPixelEffect* effect, bool isShaderFunctionRendering)
+            {
+                if (isShaderFunctionRendering)
+                    return effect->IsShaderFunctionImplemented();
+                else
+                    return effect->IsFixedFunctionImplemented();
+            }
+        };
 
         topEffectors.clear();
 
@@ -40,16 +69,21 @@ namespace Bibim
             UIRenderer::EffectorPtr* newLine = &map[(depth + 0) * numberOfClasses];
             for (int i = 0; i < minCount; i++)
             {
-                if (effects[i])
+                if (effects[i] && IsEffectorCreateable::Do(effects[i], isShaderFunctionRendering))
                 {
-                    newLine[i] = effects[i]->CreateEffector(oldLine[i]);
+                    newLine[i] = effects[i]->CreateEffector(oldLine[i], isShaderFunctionRendering);
                     result = true;
                 }
                 else
                     newLine[i] = oldLine[i];
 
                 if (newLine[i])
+                {
                     topEffectors.push_back(newLine[i]);
+
+                    if (newLine[i]->IsMaskEffector())
+                        outMask = StaticCast<UIMaskEffect::MaskEffector>(newLine[i])->GetMask();
+                }
             }
             depth++;
         }
@@ -58,13 +92,18 @@ namespace Bibim
             UIRenderer::EffectorPtr* newLine = &map[0];
             for (int i = 0; i < minCount; i++)
             {
-                if (effects[i])
+                if (effects[i] && IsEffectorCreateable::Do(effects[i], isShaderFunctionRendering))
                 {
-                    newLine[i] = effects[i]->CreateEffector(nullptr);
+                    newLine[i] = effects[i]->CreateEffector(nullptr, isShaderFunctionRendering);
                     result = true;
 
                     if (newLine[i])
+                    {
                         topEffectors.push_back(newLine[i]);
+
+                        if (newLine[i]->IsMaskEffector())
+                            outMask = StaticCast<UIMaskEffect::MaskEffector>(newLine[i])->GetMask();
+                    }
                 }
             }
             depth = 1;

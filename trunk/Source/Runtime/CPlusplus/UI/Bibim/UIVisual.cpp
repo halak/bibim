@@ -100,6 +100,9 @@ namespace Bibim
         shown = reader.ReadBool();
         size = reader.ReadVector2();
         frame = static_cast<UIFrame*>(reader.ReadComponent());
+        transform = static_cast<UITransform*>(reader.ReadComponent());
+        eventMap = static_cast<UIEventMap*>(reader.ReadComponent());
+        effectMap = static_cast<UIEffectMap*>(reader.ReadComponent());
     }
 
     void UIVisual::OnCopy(const GameComponent* original, CloningContext& context)
@@ -112,6 +115,7 @@ namespace Bibim
         frame = context.Clone(o->frame);
         transform = context.Clone(o->transform);
         eventMap = context.Clone(o->eventMap);
+        effectMap = context.Clone(o->effectMap);
     }
 
     void UIVisual::OnDraw(UIDrawingContext& /*context*/)
