@@ -12,6 +12,9 @@
                 EvaluationContext();
                 ~EvaluationContext();
 
+                template <typename T>
+                T GetValue(const String& name);
+
             private:
         };
     }

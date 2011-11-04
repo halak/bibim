@@ -2317,6 +2317,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Animation\Bibim\EvaluableVariables.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvaluableVariables.inl"
+						>
+					</File>
+					<File
 						RelativePath=".\Animation\Bibim\EvaluationContext.cpp"
 						>
 					</File>

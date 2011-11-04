@@ -64,76 +64,56 @@
                 inline const Matrix4& GetInversedProjectionTransform();
 
             private:
-                struct VertexCO // Color Only
+                struct Vertex
                 {
                     D3DXVECTOR3 Position;
                     D3DCOLOR Color;
+                    D3DXVECTOR2 TexCoord1;
+                    D3DXVECTOR2 TexCoord2;
 
-                    inline VertexCO(D3DXVECTOR3 position, D3DCOLOR color);
-
-                    static const DWORD FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE;
-                };
-
-                struct VertexST : VertexCO // Single Textured
-                {
-                    D3DXVECTOR2 Texture;
-
-                    inline VertexST(D3DXVECTOR3 position, D3DCOLOR color, D3DXVECTOR2 texture);
-
-                    static const DWORD FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX1;
-                };
-
-                struct VertexDT : VertexCO // Double Textured
-                {
-                    D3DXVECTOR2 Texture1;
-                    D3DXVECTOR2 Texture2;
-
-                    inline VertexDT(D3DXVECTOR3 position, D3DCOLOR color, D3DXVECTOR2 texture1, D3DXVECTOR2 texture2);
+                    inline Vertex(Vector2 position, D3DCOLOR color);
+                    inline Vertex(Vector2 position, D3DCOLOR color, Vector2 texCoord1);
+                    inline Vertex(Vector2 position, D3DCOLOR color, Vector2 texCoord1, Vector2 texCoord2);
 
                     static const DWORD FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX2;
                 };
 
-                struct QuadSetCO
+                enum PixelMode
                 {
-                    int StartIndex;
+                    ColorOnlyMode,
+                    ColorTextureOnlyMode,
+                    AlphaTextureOnlyMode,
+                    MaskedColorMode,
+                    MaskedColorTextureMode,
+                    MaskedAlphaTextureMode,
+                    NumberOfPixelModes,
+                };
+
+                struct QuadSet
+                {
                     int Count;
-                    int Capacity;
-
-                    inline QuadSetCO();
-                };
-
-                struct QuadSetST : QuadSetCO
-                {
-                    Texture2DPtr KeyTexture;
-                };
-
-                struct QuadSetDT : QuadSetCO
-                {
                     Texture2DPtr KeyTexture;
                     Texture2DPtr KeyMask;
-                };
+                    PixelMode Mode;
+                    int StartIndex;
+                    int Capacity;
 
-                enum PixelEffectMode
-                {
-                    NoTextureMode,
-                    ColorTextureMode,
-                    AlphaTextureMode,
-                    ColorAndAlphaTextureMode,
-                    PixelEffectModeCount,
+                    inline QuadSet();
                 };
 
             private:
                 void InitializeNormalQuadSets();
                 void InitializeBatchQuadSets();
 
-                VertexCO* PrepareCO();
-                VertexST* PrepareST(Texture2D* texture);
-                VertexDT* PrepareDT(Texture2D* texture1, Texture2D* texture2);
+                static PixelMode GetPixelMode(const Texture2D* texture, const Texture2D* mask);
+                Vertex* Prepare(Texture2D* texture, Texture2D* mask);
 
                 void BeginAlphaTextureMode();
                 void EndAlphaTextureMode();
-                void BeginEffect(int index, const char* key);
-                void EndEffect(int index);
+                void BeginEffect(PixelMode mode);
+                void EndEffect(PixelMode mode);
+                void BeginOpacityMaskMode();
+                void EndOpacityMaskMode();
 
                 void Flush();
                 void ReserveCachedQuads(int capacity);
@@ -149,30 +129,20 @@
                 Matrix4 projectionTransform;
                 Matrix4 projectionTransformInv;
                 Matrix4 worldTransform;
+                D3DXMATRIX d3dMVPTransform;
                 BlendMode blendMode;
 
-                ShaderEffectPtr          effects[PixelEffectModeCount];
+                ShaderEffectPtr          effects[NumberOfPixelModes];
                 std::vector<EffectorPtr> effectors;
                 String shaderEffectBaseURI;
 
                 IDirect3DStateBlock9* d3dStateBlock;
-                IDirect3DVertexBuffer9* d3dVBCO;
-                IDirect3DVertexBuffer9* d3dVBSCT;
-                IDirect3DVertexBuffer9* d3dVBSAT;
-                IDirect3DVertexBuffer9* d3dVBDT;
-                IDirect3DIndexBuffer9* d3dQuadIndices;
-                int vbcoSize;
-                int vbsctSize;
-                int vbsatSize;
-                int vbdtSize;
-                VertexCO* lockedVBCO;
-                VertexST* lockedVBSCT;
-                VertexST* lockedVBSAT;
-                VertexDT* lockedVBDT;
-                QuadSetCO quadSetCO;
-                QuadSetST quadSetsSCT[8];
-                QuadSetST quadSetsSAT[8];
-                QuadSetDT quadSetsDT[8];
+                IDirect3DVertexBuffer9* vb;
+                IDirect3DIndexBuffer9*  ib;
+                Vertex* lockedVertices;
+                int vbSize;
+
+                QuadSet quadSets[8];
 
                 bool isBatching;
 
@@ -181,6 +151,8 @@
                 static const int TrianglesPerQuad;
                 static const int VerticesPerQuad;
                 static const int IndicesPerQuad;
+
+                friend class UIOpacityMaskEffect;
         };
     }
 

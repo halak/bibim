@@ -1,54 +1,54 @@
-float4x4 WTM;
-float4x4 VPTM;
+float4x4 MVP;
+texture MainTexture;
 
-#if defined(COLORMATRIX)
-float4 Red;
-float4 Green;
-float4 Blue;
-#endif
-
-texture DefaultTexture;
-
-#if defined(COLORANDALPHATEXTURE)
+#if defined(MASKTEXTURE)
 texture MaskTexture;
 #endif
 
-#if defined(OPACITYMAP)
-float OMStart;
-float OMInvLength;
-#endif
-
-struct VSInput
+sampler MainSampler = sampler_state
 {
-    float4 Position : POSITION0;
-    float4  Color : COLOR0;
-    float2 TexCoord1 : TEXCOORD0;
-#if defined(COLORANDALPHATEXTURE)
-    float2 TexCoord2 : TEXCOORD1;
-#endif
+    Texture = <MainTexture>;
 };
 
-sampler DefaultSampler = 
-sampler_state
-{
-    Texture = <DefaultTexture>;
-};
-
-#if defined(COLORANDALPHATEXTURE)
-sampler MaskSampler = 
-sampler_state
+#if defined(MASKTEXTURE)
+sampler MaskSampler = sampler_state
 {
     Texture = <MaskTexture>;
 };
 #endif
 
+#if defined(FX_COLORMATRIX)
+float4 CMRed;
+float4 CMGreen;
+float4 CMBlue;
+#endif
+
+#if defined(FX_OPACITYMAPFAN) || defined(FX_OPACITYMAPBAR)
+float4 OMValues;
+#endif
+
+texture DefaultTexture;
+struct VSInput
+{
+    float4 Position : POSITION0;
+    float4 Color : COLOR0;
+#if defined(INPUT_COLORTEXTURE) || defined(INPUT_ALPHATEXTURE)
+    float2 TexCoord1 : TEXCOORD0;
+#endif
+#if defined(MASKTEXTURE)
+    float2 TexCoord2 : TEXCOORD1;
+#endif
+};
+
 VSInput VSMain(VSInput input)
 {
     VSInput output;
-    output.Position = mul(mul(input.Position, WTM), VPTM);
+    output.Position = mul(input.Position, MVP);
     output.Color = input.Color;
+#if defined(INPUT_COLORTEXTURE) || defined(INPUT_ALPHATEXTURE)
     output.TexCoord1 = input.TexCoord1;
-#if defined(COLORANDALPHATEXTURE)
+#endif
+#if defined(MASKTEXTURE)
     output.TexCoord2 = input.TexCoord2;
 #endif
     return output;
@@ -56,41 +56,44 @@ VSInput VSMain(VSInput input)
 
 float4 PSMain(VSInput input) : COLOR0
 {
-    float4 output;
-#if defined(NOTEXTURE) || defined(COLORONLY)
-    output = input.Color;
-#elif defined(COLORTEXTURE)
-    output = tex2D(DefaultSampler, input.TexCoord1) * input.Color;
-#elif defined(ALPHATEXTURE)
-    output = float4(input.Color.rgb, tex2D(DefaultSampler, input.TexCoord1).a * input.Color.a);
-#elif defined(COLORANDALPHATEXTURE)
-    float maskAlpha = tex2D(MaskSampler, input.TexCoord2).a;
-    output = tex2D(DefaultSampler, input.TexCoord1) * input.Color;
+#if defined(INPUT_COLOR)
+    float4 output = input.Color;
+#elif defined(INPUT_COLORTEXTURE)
+    float4 output = tex2D(MainSampler, input.TexCoord1) * input.Color;
+#elif defined(INPUT_ALPHATEXTURE)
+    float4 output = float4(input.Color.rgb, tex2D(MainSampler, input.TexCoord1).a * input.Color.a);
 #endif
 
-#if defined(COLORMATRIX)
+#if defined(MASKTEXTURE)
+    float4 mask = tex2D(MaskSampler, input.TexCoord2).a;
+#endif
+
+#if defined(FX_COLORMATRIX)
     output = float4
     (
-        dot(output.rgb, Red.rgb) + Red.a,
-        dot(output.rgb, Green.rgb) + Green.a,
-        dot(output.rgb, Blue.rgb) + Blue.a,
+        dot(output.rgb, CMRed.rgb) + CMRed.a,
+        dot(output.rgb, CMGreen.rgb) + CMGreen.a,
+        dot(output.rgb, CMBlue.rgb) + CMBlue.a,
         output.a
     );
 #endif
 
-#if defined(OPACITYMAP)
-    float OM = (maskAlpha - OMStart) * OMInvLength;
-    output.a *= OM;
+#if defined(FX_OPACITYMAP)
+    output.a *= mask;
+#elif defined(FX_OPACITYMAPFAN)
+    output.a *= (mask - OMValues.x) * OMValues.y;
+#elif defined(FX_OPACITYMAPBAR)
+    output.a *= (OMValues.x <= mask && mask <= OMValues.y) ? 1.0f - abs((mask - OMValues.z) * OMValues.w) : 0.0f;
 #endif
 
     return output;
 }
 
-technique Grayscale
+technique
 {
     pass
     {
         VertexShader = compile vs_2_0 VSMain();
-        PixelShader = compile ps_2_0 PSMain();
+        PixelShader  = compile ps_2_0 PSMain();
     }
 }

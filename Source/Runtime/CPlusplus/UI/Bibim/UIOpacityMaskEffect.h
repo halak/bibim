@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/UIMaskEffect.h>
+#   include <Bibim/Vector4.h>
 
     namespace Bibim
     {
@@ -35,6 +36,14 @@
                 void SetFill(FillStyle value);
 
             private:
+                class EffectorForShaderFunction : public MaskEffector
+                {
+                    BBEffectorClass(EffectorForShaderFunction);
+                    public:
+                        EffectorForShaderFunction(UIOpacityMaskEffect* effect);
+                        virtual ~EffectorForShaderFunction();
+                };
+
                 class FanEffectorForShaderFunction : public MaskEffector
                 {
                     BBEffectorClass(FanEffectorForShaderFunction);
@@ -45,8 +54,7 @@
                         virtual void Setup(ShaderEffect* effect);
 
                     private:
-                        float startPoint;
-                        float invLength;
+                        Vector4 unifiedValue;
                 };
 
                 class BarEffectorForShaderFunction : public MaskEffector
@@ -59,8 +67,7 @@
                         virtual void Setup(ShaderEffect* effect);
 
                     private:
-                        float startPoint;
-                        float invLength;
+                        Vector4 unifiedValue;
                 };
 
                 class EffectorForFixedFunction : public MaskEffector
