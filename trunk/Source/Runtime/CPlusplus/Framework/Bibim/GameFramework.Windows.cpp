@@ -88,19 +88,10 @@
                         Update(currentTime - previousTime, timestamp++);
                         previousTime = currentTime;
                     }
-            float t1 = Clock::GetCurrent();
-
-            
 
                     BeginDraw();
                     Draw();
                     EndDraw();
-
-
-                    float t2 = Clock::GetCurrent();
-            char c[100];
-            _snprintf(c, 100, "%f\n", t2 - t1);
-            OutputDebugStringA(c);
 
                     timestamps.push_back(currentTime);
                     if (static_cast<uint>(timestamps.size()) > desiredFPS)

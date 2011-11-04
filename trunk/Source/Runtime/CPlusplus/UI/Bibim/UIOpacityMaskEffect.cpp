@@ -42,14 +42,26 @@ namespace Bibim
 
     UIRenderer::Effector* UIOpacityMaskEffect::CreateEffector(UIRenderer::Effector* /*parent*/, bool isShaderFunctionRendering)
     {
+        if ((startPoint == 0.0f && length == +1.0f) ||
+            (startPoint == 1.0f && length == -1.0f))
+        {
+            if (isShaderFunctionRendering)
+                return new EffectorForShaderFunction(this);
+            else
+                return new EffectorForFixedFunction(this);
+        }
+
         switch (fill)
         {
             case FanStyle:
                 if (isShaderFunctionRendering)
                     return new FanEffectorForShaderFunction(this);
                 else
-                    return new EffectorForFixedFunction(this);
+                    return nullptr;
             case BarStyle:
+                if (length == 0.0f)
+                    return nullptr;
+
                 if (isShaderFunctionRendering)
                     return new BarEffectorForShaderFunction(this);
                 else
@@ -61,12 +73,18 @@ namespace Bibim
 
     void UIOpacityMaskEffect::SetStartPoint(float value)
     {
-        startPoint = Math::Clamp(value, 0.0f, 1.0f);
+        startPoint = value;
     }
 
     void UIOpacityMaskEffect::SetLength(float value)
     {
-        length = Math::Clamp(value, -1.0f, +1.0f);
+        value = value;
+        if (length != value)
+        {
+            length = value;
+            if (value != 0.0f)
+                invLength = 1.0f / value;
+        }
     }
 
     void UIOpacityMaskEffect::SetFill(FillStyle value)
@@ -80,7 +98,8 @@ namespace Bibim
         startPoint = reader.ReadFloat();
         length = reader.ReadFloat();
         fill = static_cast<FillStyle>(reader.ReadInt8());
-        invLength = 1.0f / length;
+        if (length != 0.0f)
+            invLength = 1.0f / length;
     }
 
     void UIOpacityMaskEffect::OnCopy(const GameComponent* original, CloningContext& context)
@@ -95,11 +114,24 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    UIOpacityMaskEffect::EffectorForShaderFunction::EffectorForShaderFunction(UIOpacityMaskEffect* effect)
+        : MaskEffector(BBMakeFOURCC('U', 'O', 'M', '_'), effect)
+    {
+    }
+
+    UIOpacityMaskEffect::EffectorForShaderFunction::~EffectorForShaderFunction()
+    {
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     UIOpacityMaskEffect::FanEffectorForShaderFunction::FanEffectorForShaderFunction(UIOpacityMaskEffect* effect)
         : MaskEffector(BBMakeFOURCC('U', 'O', 'M', 'F'), effect)
     {
-        startPoint = effect->startPoint;
-        invLength = effect->invLength;
+        unifiedValue.X = effect->startPoint;
+        unifiedValue.Y = effect->invLength;
+        unifiedValue.Z = 0.0f;
+        unifiedValue.W = 0.0f;
     }
 
     UIOpacityMaskEffect::FanEffectorForShaderFunction::~FanEffectorForShaderFunction()
@@ -108,12 +140,8 @@ namespace Bibim
 
     void UIOpacityMaskEffect::FanEffectorForShaderFunction::Setup(ShaderEffect* effect)
     {
-        if (ShaderEffect::ParameterPtr param = effect->FindParameter("MaskTexture"))
-            param->SetValue(GetMask()->GetTexture());
-        if (ShaderEffect::ParameterPtr param = effect->FindParameter("OMStart"))
-            param->SetValue(startPoint);
-        if (ShaderEffect::ParameterPtr param = effect->FindParameter("OMInvLength"))
-            param->SetValue(invLength);
+        if (ShaderEffect::ParameterPtr param = effect->FindParameter("OMValues"))
+            param->SetValue(unifiedValue);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -121,8 +149,13 @@ namespace Bibim
     UIOpacityMaskEffect::BarEffectorForShaderFunction::BarEffectorForShaderFunction(UIOpacityMaskEffect* effect)
         : MaskEffector(BBMakeFOURCC('U', 'O', 'M', 'B'), effect)
     {
-        startPoint = effect->startPoint;
-        invLength = effect->invLength;
+        const float s = effect->startPoint;
+        const float e = effect->startPoint + effect->length;
+
+        unifiedValue.X = Math::Min(s, e);
+        unifiedValue.Y = Math::Max(s, e);
+        unifiedValue.Z = s + (e - s) * 0.5f;
+        unifiedValue.W = effect->invLength * 2.0f;
     }
 
     UIOpacityMaskEffect::BarEffectorForShaderFunction::~BarEffectorForShaderFunction()
@@ -131,12 +164,8 @@ namespace Bibim
 
     void UIOpacityMaskEffect::BarEffectorForShaderFunction::Setup(ShaderEffect* effect)
     {
-        if (ShaderEffect::ParameterPtr param = effect->FindParameter("MaskTexture"))
-            param->SetValue(GetMask()->GetTexture());
-        if (ShaderEffect::ParameterPtr param = effect->FindParameter("OMStart"))
-            param->SetValue(startPoint);
-        if (ShaderEffect::ParameterPtr param = effect->FindParameter("OMInvLength"))
-            param->SetValue(invLength);
+        if (ShaderEffect::ParameterPtr param = effect->FindParameter("OMValues"))
+            param->SetValue(unifiedValue);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -152,9 +181,11 @@ namespace Bibim
 
     void UIOpacityMaskEffect::EffectorForFixedFunction::Begin(UIRenderer* renderer)
     {
+        renderer->BeginOpacityMaskMode();
     }
     
     void UIOpacityMaskEffect::EffectorForFixedFunction::End(UIRenderer* renderer)
     {
+        renderer->EndOpacityMaskMode();
     }
 }

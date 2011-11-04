@@ -15,32 +15,30 @@
 
 namespace Bibim
 {
-    UIRenderer::VertexCO::VertexCO(D3DXVECTOR3 position, D3DCOLOR color)
-        : Position(position),
+    UIRenderer::Vertex::Vertex(Vector2 position, D3DCOLOR color)
+        : Position(position.X, position.Y, 0.0f),
           Color(color)
     {
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    UIRenderer::Vertex::Vertex(Vector2 position, D3DCOLOR color, Vector2 texCoord1)
+        : Position(position.X, position.Y, 0.0f),
+          Color(color),
+          TexCoord1(texCoord1.X, texCoord1.Y)
+    {
+    }
 
-    UIRenderer::VertexST::VertexST(D3DXVECTOR3 position, D3DCOLOR color, D3DXVECTOR2 texture)
-        : VertexCO(position, color),
-          Texture(texture)
+    UIRenderer::Vertex::Vertex(Vector2 position, D3DCOLOR color, Vector2 texCoord1, Vector2 texCoord2)
+        : Position(position.X, position.Y, 0.0f),
+          Color(color),
+          TexCoord1(texCoord1.X, texCoord1.Y),
+          TexCoord2(texCoord2.X, texCoord2.Y)
     {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    UIRenderer::VertexDT::VertexDT(D3DXVECTOR3 position, D3DCOLOR color, D3DXVECTOR2 texture1, D3DXVECTOR2 texture2)
-        : VertexCO(position, color),
-          Texture1(texture1),
-          Texture2(texture2)
-    {
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    UIRenderer::QuadSetCO::QuadSetCO()
+    UIRenderer::QuadSet::QuadSet()
         : StartIndex(0),
           Count(0),
           Capacity(0)
@@ -84,19 +82,10 @@ namespace Bibim
           storage(nullptr),
           fieldOfView(Math::PiOver4),
           d3dStateBlock(nullptr),
-          d3dVBCO(nullptr),
-          d3dVBSCT(nullptr),
-          d3dVBSAT(nullptr),
-          d3dVBDT(nullptr),
-          d3dQuadIndices(nullptr),
-          vbcoSize(0),
-          vbsctSize(0),
-          vbsatSize(0),
-          vbdtSize(0),
-          lockedVBCO(nullptr),
-          lockedVBSCT(nullptr),
-          lockedVBSAT(nullptr),
-          lockedVBDT(nullptr),
+          vb(nullptr),
+          ib(nullptr),
+          lockedVertices(nullptr),
+          vbSize(0),
           isBatching(false),
           lastViewport(-1, -1, -1, -1)
     {
@@ -108,19 +97,10 @@ namespace Bibim
           shaderEffectDirectory(shaderEffectDirectory),
           fieldOfView(Math::PiOver4),
           d3dStateBlock(nullptr),
-          d3dVBCO(nullptr),
-          d3dVBSCT(nullptr),
-          d3dVBSAT(nullptr),
-          d3dVBDT(nullptr),
-          d3dQuadIndices(nullptr),
-          vbcoSize(0),
-          vbsctSize(0),
-          vbsatSize(0),
-          vbdtSize(0),
-          lockedVBCO(nullptr),
-          lockedVBSCT(nullptr),
-          lockedVBSAT(nullptr),
-          lockedVBDT(nullptr),
+          vb(nullptr),
+          ib(nullptr),
+          lockedVertices(nullptr),
+          vbSize(0),
           isBatching(false),
           lastViewport(-1, -1, -1, -1)
     {
@@ -130,11 +110,8 @@ namespace Bibim
     UIRenderer::~UIRenderer()
     {
         CheckedRelease(d3dStateBlock);
-        CheckedRelease(d3dVBCO);
-        CheckedRelease(d3dVBSCT);
-        CheckedRelease(d3dVBSAT);
-        CheckedRelease(d3dVBDT);
-        CheckedRelease(d3dQuadIndices);
+        CheckedRelease(vb);
+        CheckedRelease(ib);
     }
 
     void UIRenderer::Begin()
@@ -183,18 +160,30 @@ namespace Bibim
         CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_TEXTURETRANSFORMFLAGS, D3DTTFF_DISABLE);
         CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
         CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_COLOROP, D3DTOP_DISABLE);
+        CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_TEXCOORDINDEX, 1);
 
         CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_ADDRESSU, D3DTADDRESS_CLAMP);
         CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_ADDRESSV, D3DTADDRESS_CLAMP);
         CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
-        CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MAXMIPLEVEL, 0);
         CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
         CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
+        CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MAXMIPLEVEL, 0);
         CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MIPMAPLODBIAS, 0);
         CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_SRGBTEXTURE, 0);
+
+        CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_ADDRESSU, D3DTADDRESS_CLAMP);
+        CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_ADDRESSV, D3DTADDRESS_CLAMP);
+        CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
+        CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
+        CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
+        CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_MAXMIPLEVEL, 0);
+        CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_MIPMAPLODBIAS, 0);
+        CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_SRGBTEXTURE, 0);
         d3dDevice->EndStateBlock(&d3dStateBlock);
 
-        d3dDevice->SetIndices(d3dQuadIndices);
+        d3dDevice->SetFVF(Vertex::FVF);
+        d3dDevice->SetStreamSource(0, vb, 0, sizeof(Vertex));
+        d3dDevice->SetIndices(ib);
         InitializeNormalQuadSets();
         Setup(NormalBlend);
         Setup(std::vector<EffectorPtr>());
@@ -231,6 +220,9 @@ namespace Bibim
             const D3DXMATRIX d3dWorldTransform(worldTransform);
             graphicsDevice->GetD3DDevice()->SetTransform(D3DTS_WORLD, &d3dWorldTransform);
             this->worldTransform = worldTransform;
+
+            Matrix4 mvpTransform = worldTransform * viewTransform * projectionTransform;
+            this->d3dMVPTransform = D3DXMATRIX(mvpTransform);
         }
     }
 
@@ -334,7 +326,7 @@ namespace Bibim
             this->shaderEffectBaseURI = shaderEffectDirectory + "\\NORM";
         }
 
-        for (int i = 0; i < PixelEffectModeCount; i++)
+        for (int i = 0; i < NumberOfPixelModes; i++)
             this->effects[i].Reset();
     }
 
@@ -343,11 +335,11 @@ namespace Bibim
         BBAssert(p);
 
         const D3DCOLOR d3dColor = color.ToARGB();
-        VertexCO* v = PrepareCO();
-        v[0] = VertexCO(D3DXVECTOR3(p[0].X, p[0].Y, 0.0f), d3dColor);
-        v[1] = VertexCO(D3DXVECTOR3(p[1].X, p[1].Y, 0.0f), d3dColor);
-        v[2] = VertexCO(D3DXVECTOR3(p[2].X, p[2].Y, 0.0f), d3dColor);
-        v[3] = VertexCO(D3DXVECTOR3(p[3].X, p[3].Y, 0.0f), d3dColor);
+        Vertex* v = Prepare(nullptr, nullptr);
+        v[0] = Vertex(p[0], d3dColor);
+        v[1] = Vertex(p[1], d3dColor);
+        v[2] = Vertex(p[2], d3dColor);
+        v[3] = Vertex(p[3], d3dColor);
     }
 
     void UIRenderer::DrawQuad(const Vector2* p, Color color, const Vector2* uv, Texture2D* texture)
@@ -355,11 +347,11 @@ namespace Bibim
         BBAssert(p && uv && texture);
 
         const D3DCOLOR d3dColor = color.ToARGB();
-        VertexST* v = PrepareST(texture);
-        v[0] = VertexST(D3DXVECTOR3(p[0].X, p[0].Y, 0.0f), d3dColor, D3DXVECTOR2(uv[0].X, uv[0].Y));
-        v[1] = VertexST(D3DXVECTOR3(p[1].X, p[1].Y, 0.0f), d3dColor, D3DXVECTOR2(uv[1].X, uv[1].Y));
-        v[2] = VertexST(D3DXVECTOR3(p[2].X, p[2].Y, 0.0f), d3dColor, D3DXVECTOR2(uv[2].X, uv[2].Y));
-        v[3] = VertexST(D3DXVECTOR3(p[3].X, p[3].Y, 0.0f), d3dColor, D3DXVECTOR2(uv[3].X, uv[3].Y));
+        Vertex* v = Prepare(texture, nullptr);
+        v[0] = Vertex(p[0], d3dColor, uv[0]);
+        v[1] = Vertex(p[1], d3dColor, uv[1]);
+        v[2] = Vertex(p[2], d3dColor, uv[2]);
+        v[3] = Vertex(p[3], d3dColor, uv[3]);
     }
 
     void UIRenderer::DrawQuad(const Vector2* p, Color color, const Vector2* uv1, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2)
@@ -367,11 +359,11 @@ namespace Bibim
         BBAssert(p && uv1 && texture1 && uv2 && texture2);
 
         const D3DCOLOR d3dColor = color.ToARGB();
-        VertexDT* v = PrepareDT(texture1, texture2);
-        v[0] = VertexDT(D3DXVECTOR3(p[0].X, p[0].Y, 0.0f), d3dColor, D3DXVECTOR2(uv1[0].X, uv1[0].Y), D3DXVECTOR2(uv2[0].X, uv2[0].Y));
-        v[1] = VertexDT(D3DXVECTOR3(p[1].X, p[1].Y, 0.0f), d3dColor, D3DXVECTOR2(uv1[1].X, uv1[1].Y), D3DXVECTOR2(uv2[1].X, uv2[1].Y));
-        v[2] = VertexDT(D3DXVECTOR3(p[2].X, p[2].Y, 0.0f), d3dColor, D3DXVECTOR2(uv1[2].X, uv1[2].Y), D3DXVECTOR2(uv2[2].X, uv2[2].Y));
-        v[3] = VertexDT(D3DXVECTOR3(p[3].X, p[3].Y, 0.0f), d3dColor, D3DXVECTOR2(uv1[3].X, uv1[3].Y), D3DXVECTOR2(uv2[3].X, uv2[3].Y));
+        Vertex* v = Prepare(texture1, texture2);
+        v[0] = Vertex(p[0], d3dColor, uv1[0], uv2[0]);
+        v[1] = Vertex(p[1], d3dColor, uv1[1], uv2[1]);
+        v[2] = Vertex(p[2], d3dColor, uv1[2], uv2[2]);
+        v[3] = Vertex(p[3], d3dColor, uv1[3], uv2[3]);
     }
 
     void UIRenderer::DrawQuad(const Vector2* p, Color color, const RectF& clippingRect, Texture2D* texture)
@@ -379,11 +371,11 @@ namespace Bibim
         BBAssert(p && texture);
 
         const D3DCOLOR d3dColor = color.ToARGB();
-        VertexST* v = PrepareST(texture);
-        v[0] = VertexST(D3DXVECTOR3(p[0].X, p[0].Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetLeft(),  clippingRect.GetTop()));
-        v[1] = VertexST(D3DXVECTOR3(p[1].X, p[1].Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetRight(), clippingRect.GetTop()));
-        v[2] = VertexST(D3DXVECTOR3(p[2].X, p[2].Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetLeft(),  clippingRect.GetBottom()));
-        v[3] = VertexST(D3DXVECTOR3(p[3].X, p[3].Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetRight(), clippingRect.GetBottom()));
+        Vertex* v = Prepare(texture, nullptr);
+        v[0] = Vertex(p[0], d3dColor, Vector2(clippingRect.GetLeft(),  clippingRect.GetTop()));
+        v[1] = Vertex(p[1], d3dColor, Vector2(clippingRect.GetRight(), clippingRect.GetTop()));
+        v[2] = Vertex(p[2], d3dColor, Vector2(clippingRect.GetLeft(),  clippingRect.GetBottom()));
+        v[3] = Vertex(p[3], d3dColor, Vector2(clippingRect.GetRight(), clippingRect.GetBottom()));
     }
 
     void UIRenderer::DrawQuad(const Vector2* p, Color color, const RectF& clippingRect, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2)
@@ -391,46 +383,305 @@ namespace Bibim
         BBAssert(p && texture1 && uv2 && texture2);
 
         const D3DCOLOR d3dColor = color.ToARGB();
-        VertexDT* v = PrepareDT(texture1, texture2);
-        v[0] = VertexDT(D3DXVECTOR3(p[0].X, p[0].Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetLeft(),  clippingRect.GetTop()),   D3DXVECTOR2(uv2[0].X, uv2[0].Y));
-        v[1] = VertexDT(D3DXVECTOR3(p[1].X, p[1].Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetRight(), clippingRect.GetTop()),   D3DXVECTOR2(uv2[1].X, uv2[1].Y));
-        v[2] = VertexDT(D3DXVECTOR3(p[2].X, p[2].Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetLeft(),  clippingRect.GetBottom()), D3DXVECTOR2(uv2[2].X, uv2[2].Y));
-        v[3] = VertexDT(D3DXVECTOR3(p[3].X, p[3].Y, 0.0f), d3dColor, D3DXVECTOR2(clippingRect.GetRight(), clippingRect.GetBottom()), D3DXVECTOR2(uv2[3].X, uv2[3].Y));
+        Vertex* v = Prepare(texture1, texture2);
+        v[0] = Vertex(p[0], d3dColor, Vector2(clippingRect.GetLeft(),  clippingRect.GetTop()),    uv2[0]);
+        v[1] = Vertex(p[1], d3dColor, Vector2(clippingRect.GetRight(), clippingRect.GetTop()),    uv2[1]);
+        v[2] = Vertex(p[2], d3dColor, Vector2(clippingRect.GetLeft(),  clippingRect.GetBottom()), uv2[2]);
+        v[3] = Vertex(p[3], d3dColor, Vector2(clippingRect.GetRight(), clippingRect.GetBottom()), uv2[3]);
     }
 
     void UIRenderer::DrawQuad(const Vector2* p, Color* c)
     {
         BBAssert(p && c);
 
-        VertexCO* v = PrepareCO();
-        v[0] = VertexCO(D3DXVECTOR3(p[0].X, p[0].Y, 0.0f), c[0].ToARGB());
-        v[1] = VertexCO(D3DXVECTOR3(p[1].X, p[1].Y, 0.0f), c[1].ToARGB());
-        v[2] = VertexCO(D3DXVECTOR3(p[2].X, p[2].Y, 0.0f), c[2].ToARGB());
-        v[3] = VertexCO(D3DXVECTOR3(p[3].X, p[3].Y, 0.0f), c[3].ToARGB());
+        Vertex* v = Prepare(nullptr, nullptr);
+        v[0] = Vertex(p[0], c[0].ToARGB());
+        v[1] = Vertex(p[1], c[1].ToARGB());
+        v[2] = Vertex(p[2], c[2].ToARGB());
+        v[3] = Vertex(p[3], c[3].ToARGB());
     }
 
     void UIRenderer::DrawQuad(const Vector2* p, Color* c, const Vector2* uv, Texture2D* texture)
     {
         BBAssert(p && c && uv && texture);
 
-        VertexST* v = PrepareST(texture);
-        v[0] = VertexST(D3DXVECTOR3(p[0].X, p[0].Y, 0.0f), c[0].ToARGB(), D3DXVECTOR2(uv[0].X, uv[0].Y));
-        v[1] = VertexST(D3DXVECTOR3(p[1].X, p[1].Y, 0.0f), c[1].ToARGB(), D3DXVECTOR2(uv[1].X, uv[1].Y));
-        v[2] = VertexST(D3DXVECTOR3(p[2].X, p[2].Y, 0.0f), c[2].ToARGB(), D3DXVECTOR2(uv[2].X, uv[2].Y));
-        v[3] = VertexST(D3DXVECTOR3(p[3].X, p[3].Y, 0.0f), c[3].ToARGB(), D3DXVECTOR2(uv[3].X, uv[3].Y));
+        Vertex* v = Prepare(texture, nullptr);
+        v[0] = Vertex(p[0], c[0].ToARGB(), uv[0]);
+        v[1] = Vertex(p[1], c[1].ToARGB(), uv[1]);
+        v[2] = Vertex(p[2], c[2].ToARGB(), uv[2]);
+        v[3] = Vertex(p[3], c[3].ToARGB(), uv[3]);
     }
 
     void UIRenderer::DrawQuad(const Vector2* p, Color* c, const Vector2* uv1, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2)
     {
         BBAssert(p && c && uv1 && texture1 && uv2 && texture2);
 
-        VertexDT* v = PrepareDT(texture1, texture2);
-        v[0] = VertexDT(D3DXVECTOR3(p[0].X, p[0].Y, 0.0f), c[0].ToARGB(), D3DXVECTOR2(uv1[0].X, uv1[0].Y), D3DXVECTOR2(uv2[0].X, uv2[0].Y));
-        v[1] = VertexDT(D3DXVECTOR3(p[1].X, p[1].Y, 0.0f), c[1].ToARGB(), D3DXVECTOR2(uv1[1].X, uv1[1].Y), D3DXVECTOR2(uv2[1].X, uv2[1].Y));
-        v[2] = VertexDT(D3DXVECTOR3(p[2].X, p[2].Y, 0.0f), c[2].ToARGB(), D3DXVECTOR2(uv1[2].X, uv1[2].Y), D3DXVECTOR2(uv2[2].X, uv2[2].Y));
-        v[3] = VertexDT(D3DXVECTOR3(p[3].X, p[3].Y, 0.0f), c[3].ToARGB(), D3DXVECTOR2(uv1[3].X, uv1[3].Y), D3DXVECTOR2(uv2[3].X, uv2[3].Y));
+        Vertex* v = Prepare(texture1, texture2);
+        v[0] = Vertex(p[0], c[0].ToARGB(), uv1[0], uv2[0]);
+        v[1] = Vertex(p[1], c[1].ToARGB(), uv1[1], uv2[1]);
+        v[2] = Vertex(p[2], c[2].ToARGB(), uv1[2], uv2[2]);
+        v[3] = Vertex(p[3], c[3].ToARGB(), uv1[3], uv2[3]);
     }
 
+    void UIRenderer::SetGraphicsDevice(GraphicsDevice* value)
+    {
+        if (graphicsDevice != value)
+        {
+            graphicsDevice = value;
+            ReserveCachedQuads(256);
+        }
+    }
+
+    void UIRenderer::SetStorage(GameAssetStorage* value)
+    {
+        storage = value;
+    }
+
+    void UIRenderer::SetShaderEffectDirectory(const String& value)
+    {
+        shaderEffectDirectory = value;
+    }
+
+    void UIRenderer::SetFieldOfView(float value)
+    {
+        value = Math::Clamp(value, 0.0001f, Math::Pi);
+
+        if (fieldOfView != value)
+        {
+            fieldOfView = value;
+            lastViewport = Rect(-1, -1, -1, -1);
+        }
+    }
+
+    void UIRenderer::InitializeNormalQuadSets()
+    {
+        const int count = sizeof(quadSets) / sizeof(quadSets[0]);
+        quadSets[0].KeyTexture.Reset();
+        quadSets[0].KeyMask.Reset();
+        quadSets[0].StartIndex = 0;
+        quadSets[0].Count = 0;
+        quadSets[0].Capacity = vbSize / sizeof(Vertex) / VerticesPerQuad;
+        for (int i = 1; i < count; i++)
+        {
+            quadSets[i].KeyTexture.Reset();
+            quadSets[i].KeyMask.Reset();
+            quadSets[i].StartIndex = 0;
+            quadSets[i].Count = 0;
+            quadSets[i].Capacity = 0;
+        }
+    }
+
+    void UIRenderer::InitializeBatchQuadSets()
+    {
+        const int count = sizeof(quadSets) / sizeof(quadSets[0]);
+        const int capacityPerQuadSet = vbSize / sizeof(Vertex) / VerticesPerQuad / 8;
+        for (int i = 0, startIndex = 0; i < count; i++, startIndex += capacityPerQuadSet)
+        {
+            quadSets[i].KeyTexture.Reset();
+            quadSets[i].KeyMask.Reset();
+            quadSets[i].StartIndex = startIndex;
+            quadSets[i].Count = 0;
+            quadSets[i].Capacity = capacityPerQuadSet;
+        }
+    }
+
+    UIRenderer::PixelMode UIRenderer::GetPixelMode(const Texture2D* texture, const Texture2D* mask)
+    {
+        if (texture)
+        {
+            if (texture->GetPixelFormat() == Texture2D::A8Pixels)
+            {
+                if (mask)
+                    return MaskedAlphaTextureMode;
+                else
+                    return AlphaTextureOnlyMode;
+            }
+            else
+            {
+                if (mask)
+                    return MaskedColorTextureMode;
+                else
+                    return ColorTextureOnlyMode;
+            }
+        }
+        else
+        {
+            if (mask)
+                return MaskedColorMode;
+            else
+                return ColorOnlyMode;
+        }
+    }
+
+    UIRenderer::Vertex* UIRenderer::Prepare(Texture2D* texture, Texture2D* mask)
+    {
+        QuadSet* selectedQuadSet = nullptr;
+        if (isBatching)
+        {
+            const int count = sizeof(quadSets) / sizeof(quadSets[0]);
+            for (int i = 0; i < count; i++)
+            {
+                QuadSet& item = quadSets[i];
+
+                if (item.Count > 0 &&
+                    item.Count < item.Capacity &&
+                    item.KeyTexture == texture &&
+                    item.KeyMask == mask)
+                {
+                    selectedQuadSet = &item;
+                    break;
+                }
+                else if (item.Count == 0)
+                {
+                    item.Mode = GetPixelMode(texture, mask);
+                    item.KeyTexture = texture;
+                    item.KeyMask = mask;
+                    selectedQuadSet = &item;
+                    break;
+                }
+            }
+
+            if (selectedQuadSet == nullptr)
+            {
+                Flush();
+                quadSets[0].Mode = GetPixelMode(texture, mask);
+                quadSets[0].KeyTexture = texture;
+                quadSets[0].KeyMask = mask;
+                selectedQuadSet = &quadSets[0];
+            }
+        }
+        else
+        {
+            if (quadSets[0].Count == 0 ||
+                quadSets[0].Count >= quadSets[0].Capacity ||
+                quadSets[0].KeyTexture != texture ||
+                quadSets[0].KeyMask != mask)
+            {
+                Flush();
+                quadSets[0].Mode = GetPixelMode(texture, mask);
+                quadSets[0].KeyTexture = texture;
+                quadSets[0].KeyMask = mask;
+            }
+
+            selectedQuadSet = &quadSets[0];
+        }
+
+        if (lockedVertices == nullptr)
+            vb->Lock(0, vbSize, reinterpret_cast<void**>(&lockedVertices), D3DLOCK_DISCARD);
+
+        BBAssertDebug(selectedQuadSet);
+        selectedQuadSet->Count++;
+        return &lockedVertices[(selectedQuadSet->StartIndex + selectedQuadSet->Count - 1) * VerticesPerQuad];
+    }
+
+    void UIRenderer::BeginEffect(PixelMode mode)
+    {
+        if (graphicsDevice->GetCapabilities().IsShaderSupported())
+        {
+            const int index = static_cast<int>(mode);
+
+            if (effects[index] == nullptr)
+            {
+                const char* key = nullptr;
+                switch (mode)
+                {
+                    case ColorOnlyMode:
+                        key = "_A";
+                        break;
+                    case ColorTextureOnlyMode:
+                        key = "_B";
+                        break;
+                    case AlphaTextureOnlyMode:
+                        key = "_C";
+                        break;
+                    case MaskedColorMode:
+                        key = "_A";
+                        break;
+                    case MaskedColorTextureMode:
+                        key = "_B";
+                        break;
+                    case MaskedAlphaTextureMode:
+                        key = "_C";
+                        break;
+                }
+
+                effects[index] = static_cast<ShaderEffect*>(storage->Load(shaderEffectBaseURI + key));
+            }
+
+            if (effects[index])
+            {
+                for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); it++)
+                {
+                    (*it)->Setup(effects[index]);
+                    (*it)->Begin(this);
+                }
+
+                ID3DXEffect* d3dEffect = effects[index]->GetD3DEffect();
+                d3dEffect->SetMatrix(d3dEffect->GetParameter(NULL, 0), &d3dMVPTransform);
+                d3dEffect->Begin(0, D3DXFX_DONOTSAVESTATE);
+                d3dEffect->BeginPass(0);
+            }
+        }
+        else
+        {
+            for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); it++)
+                (*it)->Begin(this);
+
+            if (mode == AlphaTextureOnlyMode || mode == MaskedAlphaTextureMode)
+                BeginAlphaTextureMode();
+        }
+    }
+
+    void UIRenderer::EndEffect(PixelMode mode)
+    {
+        if (graphicsDevice->GetCapabilities().IsShaderSupported() == false)
+        {
+            if (mode == AlphaTextureOnlyMode || mode == MaskedAlphaTextureMode)
+                EndAlphaTextureMode();
+        }
+
+        for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
+            (*it)->End(this);
+
+        if (graphicsDevice->GetCapabilities().IsShaderSupported())
+        {
+            const int index = static_cast<int>(mode);
+
+            if (effects[index])
+            {
+                ID3DXEffect* d3dEffect = effects[index]->GetD3DEffect();
+                d3dEffect->EndPass();
+                d3dEffect->End();
+            }
+        }
+    }
+
+    void UIRenderer::BeginAlphaTextureMode()
+    {
+        IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
+
+        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
+        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG1, D3DTA_DIFFUSE);
+        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLOROP, D3DTOP_SELECTARG1);
+        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_TEXCOORDINDEX, 0);
+    }
+
+    void UIRenderer::EndAlphaTextureMode()
+    {
+        IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
+
+        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
+        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
+        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
+        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLOROP, D3DTOP_MODULATE);
+        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_TEXCOORDINDEX, 0);
+    }
+
+    
         //Flush();
 
         //IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
@@ -518,468 +769,55 @@ namespace Bibim
         //CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_TEXCOORDINDEX, 0);
     //}
 
-    void UIRenderer::SetGraphicsDevice(GraphicsDevice* value)
-    {
-        if (graphicsDevice != value)
-        {
-            graphicsDevice = value;
-            ReserveCachedQuads(256);
-        }
-    }
-
-    void UIRenderer::SetStorage(GameAssetStorage* value)
-    {
-        storage = value;
-    }
-
-    void UIRenderer::SetShaderEffectDirectory(const String& value)
-    {
-        shaderEffectDirectory = value;
-    }
-
-    void UIRenderer::SetFieldOfView(float value)
-    {
-        value = Math::Clamp(value, 0.0001f, Math::Pi);
-
-        if (fieldOfView != value)
-        {
-            fieldOfView = value;
-            lastViewport = Rect(-1, -1, -1, -1);
-        }
-    }
-
-    void UIRenderer::InitializeNormalQuadSets()
-    {
-        quadSetCO.StartIndex = 0;
-        quadSetCO.Count = 0;
-        quadSetCO.Capacity = vbcoSize / sizeof(VertexCO);
-        quadSetsSCT[0].StartIndex = 0;
-        quadSetsSCT[0].Count = 0;
-        quadSetsSCT[0].Capacity = vbsctSize / sizeof(VertexST);
-        quadSetsSAT[0].StartIndex = 0;
-        quadSetsSAT[0].Count = 0;
-        quadSetsSAT[0].Capacity = vbsatSize / sizeof(VertexST);
-        quadSetsDT[0].StartIndex = 0;
-        quadSetsDT[0].Count = 0;
-        quadSetsDT[0].Capacity = vbdtSize / sizeof(VertexDT);
-    }
-
-    void UIRenderer::InitializeBatchQuadSets()
-    {
-        quadSetCO.StartIndex = 0;
-        quadSetCO.Count = 0;
-        quadSetCO.Capacity = vbcoSize / sizeof(VertexCO) / VerticesPerQuad;
-
-        const int numberOfQuadSetsSCT = sizeof(quadSetsSCT) / sizeof(quadSetsSCT[0]);
-        const int numberOfQuadSetsSAT = sizeof(quadSetsSAT) / sizeof(quadSetsSAT[0]);
-        const int numberOfQuadSetsDT = sizeof(quadSetsDT) / sizeof(quadSetsDT[0]);
-        const int quadsPerSCT = vbsctSize / sizeof(VertexST) / VerticesPerQuad / numberOfQuadSetsSCT;
-        const int quadsPerSAT = vbsatSize / sizeof(VertexST) / VerticesPerQuad / numberOfQuadSetsSAT;
-        const int quadsPerDT = vbdtSize / sizeof(VertexDT) / VerticesPerQuad / numberOfQuadSetsDT;
-
-        for (int i = 0; i < numberOfQuadSetsSCT; i++)
-        {
-            quadSetsSCT[i].StartIndex = quadsPerSCT * i;
-            quadSetsSCT[i].Count = 0;
-            quadSetsSCT[i].Capacity = quadsPerSCT;
-        }
-
-        for (int i = 0; i < numberOfQuadSetsSAT; i++)
-        {
-            quadSetsSAT[i].StartIndex = quadsPerSAT * i;
-            quadSetsSAT[i].Count = 0;
-            quadSetsSAT[i].Capacity = quadsPerSAT;
-        }
-
-        for (int i = 0; i < numberOfQuadSetsDT; i++)
-        {
-            quadSetsDT[i].StartIndex = quadsPerDT * i;
-            quadSetsDT[i].Count = 0;
-            quadSetsDT[i].Capacity = quadsPerDT;
-        }
-    }
-
-    UIRenderer::VertexCO* UIRenderer::PrepareCO()
-    {
-        if (quadSetCO.Count >= quadSetCO.Capacity)
-            Flush();
-
-        if (lockedVBCO == nullptr)
-            d3dVBCO->Lock(0, vbcoSize, reinterpret_cast<void**>(&lockedVBCO), D3DLOCK_DISCARD);
-
-        quadSetCO.Count++;
-        return &lockedVBCO[(quadSetCO.StartIndex + quadSetCO.Count - 1) * VerticesPerQuad];
-    }
-
-    UIRenderer::VertexST* UIRenderer::PrepareST(Texture2D* texture)
-    {
-        typedef QuadSetST QuadSetSTArray[8];
-
-        const bool isColorTexture = (texture->GetPixelFormat() == Texture2D::A8R8G8B8Pixels);
-        QuadSetST* quadSetsST = isColorTexture ? quadSetsSCT : quadSetsSAT;
-        VertexST*& lockedVBST = isColorTexture ? lockedVBSCT : lockedVBSAT;
-        IDirect3DVertexBuffer9* d3dVBST = isColorTexture ? d3dVBSCT : d3dVBSAT;
-        const int vbstSize = isColorTexture ? vbsctSize : vbsatSize;
-
-        QuadSetST* selectedQuadSet = nullptr;
-        if (isBatching)
-        {
-            const int count = sizeof(quadSetsST) / sizeof(quadSetsST[0]);
-            for (int i = 0; i < count; i++)
-            {
-                if (quadSetsST[i].Count > 0 &&
-                    quadSetsST[i].Count < quadSetsST[i].Capacity &&
-                    quadSetsST[i].KeyTexture == texture)
-                {
-                    selectedQuadSet = &quadSetsST[i];
-                    break;
-                }
-                else if (quadSetsST[i].Count == 0)
-                {
-                    quadSetsST[i].KeyTexture = texture;
-                    selectedQuadSet = &quadSetsST[i];
-                    break;
-                }
-            }
-
-            if (selectedQuadSet == nullptr)
-            {
-                Flush();
-                quadSetsST[0].KeyTexture = texture;
-                selectedQuadSet = &quadSetsST[0];
-            }
-        }
-        else
-        {
-            if (quadSetsST[0].Count == 0 ||
-                quadSetsST[0].Count >= quadSetsST[0].Capacity ||
-                quadSetsST[0].KeyTexture != texture)
-            {
-                Flush();
-                quadSetsST[0].KeyTexture = texture;
-                BBAssert(quadSetsST[0].Count == 0);
-            }
-
-            selectedQuadSet = &quadSetsST[0];
-        }
-
-        if (lockedVBST == nullptr)
-            d3dVBST->Lock(0, vbstSize, reinterpret_cast<void**>(&lockedVBST), D3DLOCK_DISCARD);
-
-        selectedQuadSet->Count++;
-        return &lockedVBST[(selectedQuadSet->StartIndex + selectedQuadSet->Count - 1) * VerticesPerQuad];
-    }
-
-    UIRenderer::VertexDT* UIRenderer::PrepareDT(Texture2D* texture1, Texture2D* texture2)
-    {
-        QuadSetDT* selectedQuadSet = nullptr;
-        if (isBatching)
-        {
-            const int count = sizeof(quadSetsDT) / sizeof(quadSetsDT[0]);
-            for (int i = 0; i < count; i++)
-            {
-                if (quadSetsDT[i].Count > 0 &&
-                    quadSetsDT[i].KeyTexture == texture1 &&
-                    quadSetsDT[i].KeyMask == texture2)
-                {
-                    selectedQuadSet = &quadSetsDT[i];
-                    break;
-                }
-                else if (quadSetsDT[i].Count == 0)
-                {
-                    quadSetsDT[i].KeyTexture = texture1;
-                    quadSetsDT[i].KeyMask = texture2;
-                    selectedQuadSet = &quadSetsDT[i];
-                    break;
-                }
-            }
-
-            if (selectedQuadSet == nullptr)
-            {
-                Flush();
-                quadSetsDT[0].KeyTexture = texture1;
-                selectedQuadSet = &quadSetsDT[0];
-            }
-        }
-        else
-        {
-            if (quadSetsDT[0].Count == 0 ||
-                quadSetsDT[0].Count >= quadSetsDT[0].Capacity ||
-                quadSetsDT[0].KeyTexture != texture1 ||
-                quadSetsDT[0].KeyMask != texture2)
-            {
-                Flush();
-                quadSetsDT[0].KeyTexture = texture1;
-                quadSetsDT[0].KeyMask = texture2;
-                BBAssert(quadSetsDT[0].Count == 0);
-            }
-
-            selectedQuadSet = &quadSetsDT[0];
-        }
-
-        if (lockedVBDT == nullptr)
-            d3dVBDT->Lock(0, vbdtSize, reinterpret_cast<void**>(&lockedVBDT), D3DLOCK_DISCARD);
-
-        selectedQuadSet->Count++;
-        return &lockedVBDT[(selectedQuadSet->StartIndex + selectedQuadSet->Count - 1) * VerticesPerQuad];
-    }
-
-    void UIRenderer::BeginEffect(int index, const char* key)
-    {
-        BBAssert(graphicsDevice->GetCapabilities().IsShaderSupported());
-
-        if (effects[index] == nullptr)
-            effects[index] = static_cast<ShaderEffect*>(storage->Load(shaderEffectBaseURI + key));
-
-        if (effects[index])
-        {
-            for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); it++)
-            {
-                (*it)->Setup(effects[index]);
-                (*it)->Begin(this);
-            }
-
-            ID3DXEffect* d3dEffect = effects[index]->GetD3DEffect();
-            const D3DXMATRIX wtm = worldTransform;
-            const D3DXMATRIX vptm = viewTransform * projectionTransform;
-            d3dEffect->SetMatrix(d3dEffect->GetParameter(NULL, 0), &wtm);
-            d3dEffect->SetMatrix(d3dEffect->GetParameter(NULL, 1), &vptm);
-            d3dEffect->Begin(0, D3DXFX_DONOTSAVESTATE);
-            d3dEffect->BeginPass(0);
-        }
-    }
-
-    void UIRenderer::EndEffect(int index)
-    {
-        BBAssert(graphicsDevice->GetCapabilities().IsShaderSupported());
-
-        if (effects[index])
-        {
-            for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
-                (*it)->End(this);
-
-            ID3DXEffect* d3dEffect = effects[index]->GetD3DEffect();
-            d3dEffect->EndPass();
-            d3dEffect->End();
-        }
-    }
-
-    void UIRenderer::BeginAlphaTextureMode()
+    void UIRenderer::BeginOpacityMaskMode()
     {
         IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
-
-        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
-        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
-        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
-        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG1, D3DTA_DIFFUSE);
-        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLOROP, D3DTOP_SELECTARG1);
-        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_TEXCOORDINDEX, 0);
-
-        CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
-        CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
-        CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
+        CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+        CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+        CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_COLOROP, D3DTOP_SELECTARG2);
     }
 
-    void UIRenderer::EndAlphaTextureMode()
+    void UIRenderer::EndOpacityMaskMode()
     {
         IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
-
-        CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
-        CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
-        CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
-
-        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
-        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
-        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
-        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG1, D3DTA_TEXTURE);
-        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
-        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_COLOROP, D3DTOP_MODULATE);
-        CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_TEXCOORDINDEX, 0);
+        CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
+        CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_COLOROP, D3DTOP_DISABLE);
     }
 
     void UIRenderer::Flush()
     {
-        if (lockedVBCO)
+        if (lockedVertices)
         {
-            lockedVBCO = nullptr;
-            d3dVBCO->Unlock();
-        }
-
-        if (lockedVBSCT)
-        {
-            lockedVBSCT = nullptr;
-            d3dVBSCT->Unlock();
-        }
-
-        if (lockedVBSAT)
-        {
-            lockedVBSAT = nullptr;
-            d3dVBSAT->Unlock();
-        }
-        
-        if (lockedVBDT)
-        {
-            lockedVBDT = nullptr;
-            d3dVBDT->Unlock();
+            lockedVertices = nullptr;
+            vb->Unlock();
         }
  
         IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
 
-        if (quadSetCO.Count > 0)
+        const int count = sizeof(quadSets) / sizeof(quadSets[0]);
+        for (int i = 0; i < count; i++)
         {
-            if (graphicsDevice->GetCapabilities().IsShaderSupported())
-                BeginEffect(NoTextureMode, "0");
-            else
-            {
-                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
-                    (*it)->Begin(this);
-            }
+            QuadSet& item = quadSets[i];
+            if (item.Count == 0)
+                break;
 
-            d3dDevice->SetStreamSource(0, d3dVBCO, 0, sizeof(VertexCO));
-            d3dDevice->SetFVF(VertexCO::FVF);
-            d3dDevice->SetTexture(0, nullptr);
-            d3dDevice->SetTexture(1, nullptr);
+            BeginEffect(item.Mode);
+            if (item.KeyTexture)
+                d3dDevice->SetTexture(0, item.KeyTexture->GetD3DTexture());
+            else
+                d3dDevice->SetTexture(0, nullptr);
+            if (item.KeyMask)
+                d3dDevice->SetTexture(1, item.KeyMask->GetD3DTexture());
+            else
+                d3dDevice->SetTexture(1, nullptr);
             d3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST,
+                                            item.StartIndex * VerticesPerQuad,
                                             0,
+                                            item.Count * VerticesPerQuad,
                                             0,
-                                            quadSetCO.Count * VerticesPerQuad,
-                                            0,
-                                            quadSetCO.Count * TrianglesPerQuad);
-            quadSetCO.Count = 0;
-            
-            if (graphicsDevice->GetCapabilities().IsShaderSupported())
-                EndEffect(NoTextureMode);
-            else
-            {
-                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
-                    (*it)->End(this);
-            }
-        }
-
-        if (quadSetsSCT[0].Count > 0)
-        {
-            if (graphicsDevice->GetCapabilities().IsShaderSupported())
-                BeginEffect(ColorTextureMode, "1");
-            else
-            {
-                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
-                    (*it)->Begin(this);
-            }
-
-            const int count = sizeof(quadSetsSCT) / sizeof(quadSetsSCT[0]);
-            d3dDevice->SetStreamSource(0, d3dVBSCT, 0, sizeof(VertexST));
-            d3dDevice->SetFVF(VertexST::FVF);
-            d3dDevice->SetTexture(1, nullptr);
-            for (int i = 0; i < count; i++)
-            {
-                if (quadSetsSCT[i].Count == 0)
-                    break;
-
-                d3dDevice->SetTexture(0, quadSetsSCT[i].KeyTexture->GetD3DTexture());
-                d3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST,
-                                                quadSetsSCT[i].StartIndex * VerticesPerQuad,
-                                                0,
-                                                quadSetsSCT[i].Count * VerticesPerQuad,
-                                                0,
-                                                quadSetsSCT[i].Count * TrianglesPerQuad);
-
-                quadSetsSCT[i].Count = 0;
-            }
-
-            if (graphicsDevice->GetCapabilities().IsShaderSupported())
-                EndEffect(ColorTextureMode);
-            else
-            {
-                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
-                    (*it)->End(this);
-            }
-        }
-
-        if (quadSetsSAT[0].Count > 0)
-        {
-            if (graphicsDevice->GetCapabilities().IsShaderSupported())
-                BeginEffect(AlphaTextureMode, "2");
-            else
-            {
-                BeginAlphaTextureMode();
-                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
-                    (*it)->Begin(this);
-            }
-
-            const int count = sizeof(quadSetsSAT) / sizeof(quadSetsSAT[0]);
-            d3dDevice->SetStreamSource(0, d3dVBSAT, 0, sizeof(VertexST));
-            d3dDevice->SetFVF(VertexST::FVF);
-            d3dDevice->SetTexture(1, nullptr);
-            for (int i = 0; i < count; i++)
-            {
-                if (quadSetsSAT[i].Count == 0)
-                    break;
-
-                d3dDevice->SetTexture(0, quadSetsSAT[i].KeyTexture->GetD3DTexture());
-                d3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST,
-                                                quadSetsSAT[i].StartIndex * VerticesPerQuad,
-                                                0,
-                                                quadSetsSAT[i].Count * VerticesPerQuad,
-                                                0,
-                                                quadSetsSAT[i].Count * TrianglesPerQuad);
-
-                quadSetsSAT[i].Count = 0;
-            }
-
-            if (graphicsDevice->GetCapabilities().IsShaderSupported() == false)
-            {
-                EndAlphaTextureMode();
-                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
-                    (*it)->End(this);
-            }
-            else
-                EndEffect(AlphaTextureMode);
-        }
-
-        if (quadSetsDT[0].Count > 0)
-        {
-            if (graphicsDevice->GetCapabilities().IsShaderSupported())
-                BeginEffect(ColorAndAlphaTextureMode, "3");
-            else
-            {
-                BeginAlphaTextureMode();
-                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
-                    (*it)->Begin(this);
-            }
-
-            const int count = sizeof(quadSetsDT) / sizeof(quadSetsDT[0]);
-            d3dDevice->SetStreamSource(0, d3dVBDT, 0, sizeof(VertexDT));
-            d3dDevice->SetFVF(VertexDT::FVF);
-            for (int i = 0; i < count; i++)
-            {
-                if (quadSetsDT[i].Count == 0)
-                    break;
-
-                if (effects[ColorAndAlphaTextureMode])
-                {
-                    ID3DXEffect* d3dEffect = effects[ColorAndAlphaTextureMode]->GetD3DEffect();
-                    d3dEffect->SetTexture(d3dEffect->GetParameterByName(NULL, "DefaultTexture"), quadSetsDT[i].KeyTexture->GetD3DTexture());
-                }
-
-                d3dDevice->SetTexture(0, quadSetsDT[i].KeyTexture->GetD3DTexture());
-                d3dDevice->SetTexture(1, quadSetsDT[i].KeyMask->GetD3DTexture());
-                d3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST,
-                                                quadSetsDT[i].StartIndex * VerticesPerQuad,
-                                                0,
-                                                quadSetsDT[i].Count * VerticesPerQuad,
-                                                0,
-                                                quadSetsDT[i].Count * TrianglesPerQuad);
-
-                quadSetsDT[i].Count = 0;
-            }
-
-            if (graphicsDevice->GetCapabilities().IsShaderSupported())
-                EndEffect(ColorAndAlphaTextureMode);
-            else
-            {
-                for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
-                    (*it)->End(this);
-            }
+                                            item.Count * TrianglesPerQuad);
+            EndEffect(item.Mode);
+            item.Count = 0;
         }
     }
 
@@ -987,33 +825,23 @@ namespace Bibim
     {
         BBAssert(capacity >= 0);
 
-        CheckedRelease(d3dVBCO);
-        CheckedRelease(d3dVBSCT);
-        CheckedRelease(d3dVBSAT);
-        CheckedRelease(d3dVBDT);
-        CheckedRelease(d3dQuadIndices);
+        CheckedRelease(vb);
+        CheckedRelease(ib);
 
         HRESULT result = D3D_OK;
 
+        vbSize = sizeof(Vertex) * VerticesPerQuad * capacity;
         const int ibSize = sizeof(WORD) * IndicesPerQuad * capacity;
-        vbcoSize = sizeof(VertexCO) * VerticesPerQuad * capacity;
-        vbsctSize = sizeof(VertexST) * VerticesPerQuad * capacity;
-        vbsatSize = sizeof(VertexST) * VerticesPerQuad * capacity;
-        vbdtSize = sizeof(VertexDT) * VerticesPerQuad * capacity;
 
         IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
-
         static const DWORD vbUsage = D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY;
         static const D3DPOOL vbPool = D3DPOOL_DEFAULT;
-        result = d3dDevice->CreateVertexBuffer(vbcoSize, vbUsage, VertexCO::FVF, vbPool, &d3dVBCO, nullptr);
-        result = d3dDevice->CreateVertexBuffer(vbsctSize, vbUsage, VertexST::FVF, vbPool, &d3dVBSCT, nullptr);
-        result = d3dDevice->CreateVertexBuffer(vbsatSize, vbUsage, VertexST::FVF, vbPool, &d3dVBSAT, nullptr);
-        result = d3dDevice->CreateVertexBuffer(vbdtSize, vbUsage, VertexDT::FVF, vbPool, &d3dVBDT, nullptr);
-        result = d3dDevice->CreateIndexBuffer(ibSize, D3DUSAGE_WRITEONLY, D3DFMT_INDEX16, D3DPOOL_DEFAULT, &d3dQuadIndices, nullptr);
+        result = d3dDevice->CreateVertexBuffer(vbSize, D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY, Vertex::FVF, D3DPOOL_DEFAULT, &vb, nullptr);
+        result = d3dDevice->CreateIndexBuffer(ibSize, D3DUSAGE_WRITEONLY, D3DFMT_INDEX16, D3DPOOL_DEFAULT, &ib, nullptr);
         if (result == D3D_OK)
         {
             WORD* indices = nullptr;
-            if (d3dQuadIndices->Lock(0, ibSize, reinterpret_cast<void**>(&indices), 0) == D3D_OK)
+            if (ib->Lock(0, ibSize, reinterpret_cast<void**>(&indices), 0) == D3D_OK)
             {
                 const int numberOfIndices = IndicesPerQuad * capacity;
                 for (WORD i = 0, v = 0; i < numberOfIndices; i += IndicesPerQuad, v += VerticesPerQuad)
@@ -1025,7 +853,7 @@ namespace Bibim
                     indices[i + 4] = v + 2;
                     indices[i + 5] = v + 1;
                 }
-                d3dQuadIndices->Unlock();
+                ib->Unlock();
             }
         }
     }

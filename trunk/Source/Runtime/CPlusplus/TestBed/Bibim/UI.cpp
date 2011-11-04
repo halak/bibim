@@ -58,8 +58,9 @@ class UISample : public GameFramework
             uiDomain = uid;
             uiRenderer = uir;
 
-            maskEffect->SetStartPoint(0.0f);
-            maskEffect->SetLength(0.05f);
+            //maskEffect->SetStartPoint(0.0f);
+            //maskEffect->SetLength(0.05f);
+            maskEffect->SetFill(UIOpacityMaskEffect::FanStyle);
         }
 
 

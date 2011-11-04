@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <GameAssetRecipe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Author="" Comment="">
-	<Cook xsi:type="CompileShaderEffect" Input="UI.fx" Defines="COLORONLY;COLORMATRIX"/>
+	<Cook xsi:type="CompileShaderEffect" Input="UI.fx" Defines="INPUT_COLOR;MASKTEXTURE;FX_COLORMATRIX;FX_OPACITYMAP"/>
 </GameAssetRecipe>

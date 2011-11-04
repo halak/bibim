@@ -90,11 +90,11 @@ namespace Bibim
 
     void UIColorMatrixEffect::Effector::Setup(ShaderEffect* effect)
     {
-        if (ShaderEffect::ParameterPtr param = effect->FindParameter("Red"))
+        if (ShaderEffect::ParameterPtr param = effect->FindParameter("CMRed"))
             param->SetValue(red);
-        if (ShaderEffect::ParameterPtr param = effect->FindParameter("Green"))
+        if (ShaderEffect::ParameterPtr param = effect->FindParameter("CMGreen"))
             param->SetValue(green);
-        if (ShaderEffect::ParameterPtr param = effect->FindParameter("Blue"))
+        if (ShaderEffect::ParameterPtr param = effect->FindParameter("CMBlue"))
             param->SetValue(blue);
     }
 }
