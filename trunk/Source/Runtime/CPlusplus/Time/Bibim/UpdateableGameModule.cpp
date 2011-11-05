@@ -3,7 +3,7 @@
 namespace Bibim
 {
     UpdateableGameModule::UpdateableGameModule()
-        : lastTimestamp(0xFFFFFFFF)
+        : lastTimestamp(-1)
     {
     }
 

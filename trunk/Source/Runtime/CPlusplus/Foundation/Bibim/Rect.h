@@ -3,7 +3,7 @@
 #define __BIBIM_RECT_H__
 
 #   include <Bibim/Foundation.h>
-#   include <Bibim/Point.h>
+#   include <Bibim/Point2.h>
 
     namespace Bibim
     {
@@ -16,7 +16,7 @@
 
             inline Rect();
             inline Rect(int x, int y, int width, int height);
-            inline Rect(Point leftTop, Point rightBottom);
+            inline Rect(Point2 leftTop, Point2 rightBottom);
             inline Rect(const Rect& original);
 
             inline int GetLeft() const;
@@ -25,14 +25,14 @@
             inline int GetBottom() const;
             inline int GetCenter() const;
             inline int GetMiddle() const;
-            inline Point GetCenterPoint() const;
+            inline Point2 GetCenterPoint() const;
 
             inline void SetLeft(int value);
             inline void SetTop(int value);
             inline void SetRight(int value);
             inline void SetBottom(int value);
 
-            inline bool Contains(Point p) const;
+            inline bool Contains(Point2 p) const;
 
             inline bool IsEmpty() const;
 

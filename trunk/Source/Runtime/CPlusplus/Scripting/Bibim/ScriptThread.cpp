@@ -206,22 +206,22 @@ namespace Bibim
         return Run(temporarySuspendedFunction, temporarySuspendedTopIndex);
     }
 
-    const ScriptObject& ScriptThread::GetGlobal(uint id) const
+    const ScriptObject& ScriptThread::GetGlobal(int id) const
     {
-        std::map<uint, ScriptObject>::const_iterator it = globalVariables.find(id);
+        std::map<int, ScriptObject>::const_iterator it = globalVariables.find(id);
         if (it != globalVariables.end())
             return (*it).second;
         else
             return ScriptObject::Void;
     }
 
-    void ScriptThread::SetGlobal(uint id, const ScriptObject& value)
+    void ScriptThread::SetGlobal(int id, const ScriptObject& value)
     {
         if (value != ScriptObject::Void)
             globalVariables[id] = value;
         else
         {
-            std::map<uint, ScriptObject>::iterator it = globalVariables.find(id);
+            std::map<int, ScriptObject>::iterator it = globalVariables.find(id);
             if (it != globalVariables.end())
                 globalVariables.erase(it);
         }
@@ -258,7 +258,7 @@ namespace Bibim
         int topIndex = stack.GetTopIndex();
 
         BinaryWriter::From(stack.Push(sizeof(int)), stream->GetPosition());
-        BinaryWriter::From(stack.Push(sizeof(int)), function->ParameterTypes.size());
+        BinaryWriter::From(stack.Push(sizeof(int)), static_cast<int>(function->ParameterTypes.size()));
 
         return Run(function, topIndex);
     }
@@ -298,7 +298,7 @@ namespace Bibim
 
     void ScriptThread::ProcessInstruction(BinaryReader& reader)
     {
-        const ScriptInstruction id = static_cast<ScriptInstruction>(reader.ReadUInt8());
+        const ScriptInstruction id = static_cast<ScriptInstruction>(reader.ReadByte());
         switch (id)
         {
             case NOP:
@@ -320,15 +320,15 @@ namespace Bibim
                 break;
             case PushN:
                 {
-                    const int size = static_cast<int>(reader.ReadInt32());
+                    const int size = static_cast<int>(reader.ReadInt());
                     reader.Read(stack.Push(size), size);
                 }
                 break;
             case PushLocalVariable:
                 {
-                    const int stackIndex  = reader.ReadInt32();
-                    const int localOffset = reader.ReadInt32();
-                    const int size = reader.ReadInt32();
+                    const int stackIndex  = reader.ReadInt();
+                    const int localOffset = reader.ReadInt();
+                    const int size = reader.ReadInt();
                     const byte* source = stack.GetAt(stackIndex);
                     Memory::Copy(stack.Push(size), size, &source[localOffset], size);
                 }
@@ -338,7 +338,7 @@ namespace Bibim
                 }
                 break;
             case AllocateN:
-                stack.Push(reader.ReadInt32());
+                stack.Push(reader.ReadInt());
                 break;
             case Pop1:
                 stack.Pop(1);
@@ -353,17 +353,17 @@ namespace Bibim
                 stack.Pop(4);
                 break;
             case PopN:
-                stack.Pop(reader.ReadInt32());
+                stack.Pop(reader.ReadInt());
                 break;
             case Jump:
                 {
-                    const int32 newPosition = reader.ReadInt32();
+                    const int newPosition = reader.ReadInt();
                     reader.GetSource()->Seek(newPosition, Stream::FromBegin);
                 }
                 break;
             case IfFalseThenJump:
                 {
-                    const int32 newPosition = reader.ReadInt32();
+                    const int newPosition = reader.ReadInt();
                     const bool condition = BinaryReader::ToBool(stack.Peek());
                     stack.Pop(1);
                     if (condition == false)
@@ -372,8 +372,8 @@ namespace Bibim
                 break;
             case CallScriptFunction:
                 {
-                    const int functionPosition = reader.ReadInt32();
-                    const int numberOfArguments = static_cast<int>(reader.ReadInt32());
+                    const int functionPosition = reader.ReadInt();
+                    const int numberOfArguments = static_cast<int>(reader.ReadInt());
                     BinaryWriter::From(stack.Push(sizeof(int)), reader.GetSource()->GetPosition());
                     BinaryWriter::From(stack.Push(sizeof(int)), numberOfArguments); // Pop by ScriptInstruction::Return
 
@@ -382,9 +382,9 @@ namespace Bibim
                 break;
             case CallNativeFunction:
                 {
-                    const uint32 functionID = reader.ReadUInt32();
-                    const int numberOfReturnValues = reader.ReadInt32();
-                    const int numberOfArguments = reader.ReadInt32();
+                    const int functionID = reader.ReadInt();
+                    const int numberOfReturnValues = reader.ReadInt();
+                    const int numberOfArguments = reader.ReadInt();
                     ScriptNativeFunction function = ScriptNativeFunctionTable::Find(functionID);
 
                     ScriptingContext context(this, numberOfArguments, numberOfReturnValues);
@@ -402,8 +402,8 @@ namespace Bibim
                     // [-3] Caller-address
                     // [-4 ~ ] Arguments 
 
-                    const int position = BinaryReader::ToInt32(stack.GetAt(-3));
-                    const int numberOfArguments = BinaryReader::ToInt32(stack.GetAt(-2));
+                    const int position = BinaryReader::ToInt(stack.GetAt(-3));
+                    const int numberOfArguments = BinaryReader::ToInt(stack.GetAt(-2));
                     stack.Pop(3 + numberOfArguments); // to "Return value spaces"
                     reader.GetSource()->Seek(position, Stream::FromBegin);
                 }
@@ -417,8 +417,8 @@ namespace Bibim
                 break;
             case LocalAssign:
                 {
-                    const int stackIndex  = reader.ReadInt32();
-                    const int localOffset = reader.ReadInt32();
+                    const int stackIndex  = reader.ReadInt();
+                    const int localOffset = reader.ReadInt();
 
                           byte* destination = stack.GetAt(stackIndex);
                           int   sourceSize = 0;
@@ -434,8 +434,8 @@ namespace Bibim
                 break;
             case AddInt:
                 {
-                    const int operand1 = BinaryReader::ToInt32(stack.GetAt(-2));
-                    const int operand2 = BinaryReader::ToInt32(stack.GetAt(-1));
+                    const int operand1 = BinaryReader::ToInt(stack.GetAt(-2));
+                    const int operand2 = BinaryReader::ToInt(stack.GetAt(-1));
                     stack.Pop(2);
                     BinaryWriter::From(stack.Push(sizeof(int)), static_cast<int>(operand1 + operand2));
                 }
@@ -478,8 +478,8 @@ namespace Bibim
                 break;
             case SubtractInt:
                 {
-                    const int operand1 = BinaryReader::ToInt32(stack.GetAt(-2));
-                    const int operand2 = BinaryReader::ToInt32(stack.GetAt(-1));
+                    const int operand1 = BinaryReader::ToInt(stack.GetAt(-2));
+                    const int operand2 = BinaryReader::ToInt(stack.GetAt(-1));
                     stack.Pop(2);
                     BinaryWriter::From(stack.Push(sizeof(int)), static_cast<int>(operand1 - operand2));
                 }
@@ -522,24 +522,24 @@ namespace Bibim
                 break;
             case MultiplyInt:
                 {
-                    const int operand1 = BinaryReader::ToInt32(stack.GetAt(-2));
-                    const int operand2 = BinaryReader::ToInt32(stack.GetAt(-1));
+                    const int operand1 = BinaryReader::ToInt(stack.GetAt(-2));
+                    const int operand2 = BinaryReader::ToInt(stack.GetAt(-1));
                     stack.Pop(2);
                     BinaryWriter::From(stack.Push(sizeof(int)), static_cast<int>(operand1 * operand2));
                 }
                 break;
             case TestEqualityInt:
                 {
-                    const int operand1 = BinaryReader::ToInt32(stack.GetAt(-2));
-                    const int operand2 = BinaryReader::ToInt32(stack.GetAt(-1));
+                    const int operand1 = BinaryReader::ToInt(stack.GetAt(-2));
+                    const int operand2 = BinaryReader::ToInt(stack.GetAt(-1));
                     stack.Pop(2);
                     BinaryWriter::From(stack.Push(sizeof(bool)), static_cast<bool>(operand1 == operand2));
                 }
                 break;
             case TestInequalityInt:
                 {
-                    const int operand1 = BinaryReader::ToInt32(stack.GetAt(-2));
-                    const int operand2 = BinaryReader::ToInt32(stack.GetAt(-1));
+                    const int operand1 = BinaryReader::ToInt(stack.GetAt(-2));
+                    const int operand2 = BinaryReader::ToInt(stack.GetAt(-1));
                     stack.Pop(2);
                     BinaryWriter::From(stack.Push(sizeof(bool)), static_cast<bool>(operand1 != operand2));
                 }
@@ -550,7 +550,7 @@ namespace Bibim
         //        break;
         //    case PushInt32Command:
         //        {
-        //            stack.Push(reader.ReadInt32());
+        //            stack.Push(reader.ReadInt());
         //        }
         //        break;
         //    case PushUInt32Command:
@@ -621,7 +621,7 @@ namespace Bibim
         //        {
         //            stack.Push(reader.ReadString());
         //            ProcessInstruction(reader);
-        //            stack.Peek().Value.CastTo<int32>();
+        //            stack.Peek().Value.CastTo<int>();
         //            stack.Pop(1); // SET
         //        }
         //        break;
@@ -632,7 +632,7 @@ namespace Bibim
         //            ScriptStack::Item operand1 = stack.GetAt(-1);
         //            ScriptStack::Item operand2 = stack.GetAt(-2);
         //            stack.Pop(2);
-        //            stack.Push(operand1.Value.CastTo<int32>() + operand2.Value.CastTo<int32>());
+        //            stack.Push(operand1.Value.CastTo<int>() + operand2.Value.CastTo<int>());
         //        }
         //        break;
         //    case EqualityOperator:
@@ -646,7 +646,7 @@ namespace Bibim
         //            ScriptStack::Item operand1 = stack.GetAt(-1);
         //            ScriptStack::Item operand2 = stack.GetAt(-2);
         //            stack.Pop(2);
-        //            stack.Push(operand1.Value.CastTo<int32>() != operand2.Value.CastTo<int32>());
+        //            stack.Push(operand1.Value.CastTo<int>() != operand2.Value.CastTo<int>());
         //        }
         //        break;
         }

@@ -69,9 +69,9 @@
             return static_cast<float>(WindowsClock::StaticInstance.GetCurrent());
         }
 
-        uint Clock::GetCurrentMilliSeconds()
+        int Clock::GetCurrentMilliSeconds()
         {
-            return static_cast<uint>(WindowsClock::StaticInstance.GetCurrentMilliSeconds());
+            return static_cast<int>(WindowsClock::StaticInstance.GetCurrentMilliSeconds());
         }
 
         bool Clock::IsHighResolution()

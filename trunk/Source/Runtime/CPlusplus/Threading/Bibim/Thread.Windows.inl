@@ -1,6 +1,6 @@
 namespace Bibim
 {
-    uint Thread::GetID() const
+    int Thread::GetID() const
     {
         return id;
     }

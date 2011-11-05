@@ -17,7 +17,7 @@
                 {
                     public:
                         MaskEffector(UIMaskEffect* effect);
-                        MaskEffector(uint32 shaderEffectNameHint, UIMaskEffect* effect);
+                        MaskEffector(int shaderEffectNameHint, UIMaskEffect* effect);
                         virtual ~MaskEffector();
 
                         inline Image* GetMask() const;

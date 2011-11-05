@@ -372,27 +372,27 @@ namespace Bibim
             else if (0xC2 <= first && first <= 0xDF)
             {
                 BBAssertDebug(index + 1 < length);
-                current = (static_cast<uint>(buffer[index + 0]) << 8) |
-                          (static_cast<uint>(buffer[index + 1]) << 0);
+                current = (static_cast<int>(buffer[index + 0]) << 8) |
+                          (static_cast<int>(buffer[index + 1]) << 0);
                 index += 1;
                 return true;
             }
             else if (0xE0 <= first && first <= 0xEF)
             {
                 BBAssertDebug(index + 2 < length);
-                current = (static_cast<uint>(buffer[index + 0]) << 16) | 
-                          (static_cast<uint>(buffer[index + 1]) << 8) | 
-                          (static_cast<uint>(buffer[index + 2]) << 0);
+                current = (static_cast<int>(buffer[index + 0]) << 16) | 
+                          (static_cast<int>(buffer[index + 1]) << 8) | 
+                          (static_cast<int>(buffer[index + 2]) << 0);
                 index += 2;
                 return true;
             }
             else if (0xF0 <= first && first <= 0xF4)
             {
                 BBAssertDebug(index + 3 < length);
-                current = (static_cast<uint>(buffer[index + 0]) << 24) | 
-                          (static_cast<uint>(buffer[index + 1]) << 16) | 
-                          (static_cast<uint>(buffer[index + 2]) << 8) | 
-                          (static_cast<uint>(buffer[index + 3]) << 0);
+                current = (static_cast<int>(buffer[index + 0]) << 24) | 
+                          (static_cast<int>(buffer[index + 1]) << 16) | 
+                          (static_cast<int>(buffer[index + 2]) << 8) | 
+                          (static_cast<int>(buffer[index + 3]) << 0);
                 index += 3;
                 return true;
             }

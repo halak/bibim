@@ -5,7 +5,7 @@
 
 namespace Bibim
 {
-    Glyph::Glyph(uint32 code, Vector2 advance)
+    Glyph::Glyph(int code, Vector2 advance)
         : code(code),
           advance(advance),
           bitmapOffset(Vector2::Zero),
@@ -15,7 +15,7 @@ namespace Bibim
     {
     }
 
-    Glyph::Glyph(uint32 code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, GlyphSurface* surface, Rect clippingRect)
+    Glyph::Glyph(int code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, GlyphSurface* surface, Rect clippingRect)
         : code(code),
           advance(advance),
           bitmapOffset(bitmapOffset),

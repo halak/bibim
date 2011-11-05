@@ -307,7 +307,7 @@ namespace Bibim
             BBAssert(d3dCaps.MaxSimultaneousTextures >= 2);
         }
 
-        SetViewport(Rect(Point::Zero, GetWindow()->GetSize()));
+        SetViewport(Rect(Point2::Zero, GetWindow()->GetSize()));
     }
 
     void GraphicsDevice::FinalizeDevice()

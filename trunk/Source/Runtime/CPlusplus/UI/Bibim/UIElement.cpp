@@ -4,8 +4,6 @@
 
 namespace Bibim
 {
-    const uint UIElement::UnspecifiedID = 0xFFFFFFFF;
-
     UIElement::UIElement()
     {
     }

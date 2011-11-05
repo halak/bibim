@@ -19,7 +19,7 @@
                 static GameAsset* Create(StreamReader& reader, GameAsset* existingInstance);
 
                 template <typename T> static void AddEntry();
-                static void AddEntry(uint32 id, CreateFunction function);
+                static void AddEntry(int id, CreateFunction function);
                 static void SortEntries();
         };
     }

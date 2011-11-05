@@ -71,7 +71,7 @@ namespace Bibim
     {
         Base::OnRead(reader);
         geomEffect = static_cast<UIGeometryEffect*>(reader.ReadComponent());
-        const int count = static_cast<int>(reader.ReadInt16());
+        const int count = static_cast<int>(reader.ReadShortInt());
         pixelEffects.reserve(count);
         for (int i = 0; i < count; i++)
             pixelEffects.push_back(static_cast<UIPixelEffect*>(reader.ReadComponent()));

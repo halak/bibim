@@ -4,6 +4,9 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/Color.h>
+#   include <Bibim/Point2.h>
+#   include <Bibim/Point3.h>
+#   include <Bibim/Point4.h>
 #   include <Bibim/String.h>
 #   include <Bibim/Vector2.h>
 #   include <Bibim/Vector3.h>
@@ -19,7 +22,6 @@
                     VoidType,
                     BoolType,
                     IntType,
-                    UIntType,
                     LongIntType,
                     FloatType,
                     ColorType,
@@ -32,6 +34,9 @@
                     StringType,
                     SharedObjectType,
                     LightObjectType,
+                    Point2Type = Int2Type,
+                    Point3Type = Int3Type,
+                    Point4Type = Int4Type,
                     Vector2Type = Float2Type,
                     Vector3Type = Float3Type,
                     Vector4Type = Float4Type,
@@ -41,10 +46,12 @@
                 inline ScriptObject();
                 inline ScriptObject(bool value);
                 inline ScriptObject(int value);
-                inline ScriptObject(uint value);
-                inline ScriptObject(int64 value);
+                inline ScriptObject(longint value);
                 inline ScriptObject(float value);
                 inline ScriptObject(Color value);
+                inline ScriptObject(Point2 value);
+                inline ScriptObject(Point3 value);
+                inline ScriptObject(Point4 value);
                 inline ScriptObject(Vector2 value);
                 inline ScriptObject(Vector3 value);
                 inline ScriptObject(Vector4 value);
@@ -59,8 +66,7 @@
 
                 bool CastBool() const;
                 int CastInt() const;
-                uint CastUInt() const;
-                int64 CastLongInt() const;
+                longint CastLongInt() const;
                 float CastFloat() const;
                 SharedObject* CastSharedObject() const;
                 void* CastLightObject() const;
@@ -83,8 +89,7 @@
                 {
                     bool    BOOLEAN;
                     int     INT;
-                    uint    UINT;
-                    int64   LONGINT;
+                    longint LONGINT;
                     float   FLOAT;
                     int     INT2[2];
                     float   FLOAT2[2];
@@ -105,12 +110,7 @@
                         INT = value;
                     }
 
-                    explicit Value(uint value)
-                    {
-                        UINT = value;
-                    }
-
-                    explicit Value(int64 value)
+                    explicit Value(longint value)
                     {
                         LONGINT = value;
                     }

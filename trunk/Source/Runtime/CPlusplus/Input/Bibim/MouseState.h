@@ -3,20 +3,20 @@
 #define __BIBIM_MOUSESTATE_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/Point.h>
+#   include <Bibim/Point2.h>
 
     namespace Bibim
     {
         struct MouseState
         {
-            Point Position;
+            Point2 Position;
             int Wheel;
             bool IsLeftButtonPressed;
             bool IsRightButtonPressed;
             bool IsMiddleButtonPressed;
 
             inline MouseState();
-            inline MouseState(Point position, int wheel, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed);
+            inline MouseState(Point2 position, int wheel, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed);
             inline MouseState(const MouseState& original);
 
             inline MouseState& operator = (const MouseState& right);

@@ -5,14 +5,14 @@ namespace Bibim
 {
     UIMouseEventArgs::UIMouseEventArgs()
         : UIEventArgs(),
-          position(Point::Zero),
+          position(Point2::Zero),
           isLeftButtonPressed(false),
           isRightButtonPressed(false),
           isMiddleButtonPressed(false)
     {
     }
 
-    UIMouseEventArgs::UIMouseEventArgs(UIVisual* target, Point position)
+    UIMouseEventArgs::UIMouseEventArgs(UIVisual* target, Point2 position)
         : UIEventArgs(target),
           position(position),
           isLeftButtonPressed(false),
@@ -21,7 +21,7 @@ namespace Bibim
     {
     }
 
-    UIMouseEventArgs::UIMouseEventArgs(UIVisual* target, Point position, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed)
+    UIMouseEventArgs::UIMouseEventArgs(UIVisual* target, Point2 position, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed)
         : UIEventArgs(target),
           position(position),
           isLeftButtonPressed(isLeftButtonPressed),

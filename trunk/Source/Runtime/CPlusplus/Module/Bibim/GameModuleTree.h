@@ -14,13 +14,13 @@
                 GameModuleTree();
                 ~GameModuleTree();
 
-                GameModule* Find(uint32 id) const;
-                GameModuleNode* FindNode(uint32 id) const;
+                GameModule* Find(int id) const;
+                GameModuleNode* FindNode(int id) const;
 
                 inline GameModuleNode* GetRoot() const;
 
             private:
-                void OnModuleIDChanged(GameModule* module, uint32 old); // call in GameModule
+                void OnModuleIDChanged(GameModule* module, int old); // call in GameModule
 
                 // 아래 Attach/Detach의 의미는 Tree로의 Attach/Detach를 의미합니다.
                 // 그래서 같은 Container내에 GameModuleNode의 이동(Deatch=>Attach)에서는 호출할 필요 없다.
@@ -28,7 +28,7 @@
                 void OnNodeDetached(GameModuleNode* parent, GameModuleNode* child); // call in GameModuleNode
 
             private:
-                typedef std::map<uint32, GameModuleNode*> UIntNodeDictionary;
+                typedef std::map<int, GameModuleNode*> UIntNodeDictionary;
 
             private:
                 GameModuleNode* root;

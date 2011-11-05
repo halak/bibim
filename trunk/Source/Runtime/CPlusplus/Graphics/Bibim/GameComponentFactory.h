@@ -14,10 +14,10 @@
                 typedef GameComponent* (*CreateFunction)();
 
             public:
-                static GameComponent* Create(uint32 id);
+                static GameComponent* Create(int id);
 
                 template <typename T> static void AddEntry();
-                static void AddEntry(uint32 id, CreateFunction function);
+                static void AddEntry(int id, CreateFunction function);
                 static void SortEntries();
         };
     }

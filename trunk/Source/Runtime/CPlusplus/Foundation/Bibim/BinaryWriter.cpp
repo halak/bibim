@@ -30,52 +30,37 @@ namespace Bibim
 
     void BinaryWriter::Write(bool value)
     {
-        WriteTemplate<bool>(value);
+        WriteTemplate(value);
     }
 
-    void BinaryWriter::Write(int8 value)
+    void BinaryWriter::Write(byte value)
     {
-        WriteTemplate<int8>(value);
+        WriteTemplate(value);
     }
 
-    void BinaryWriter::Write(uint8 value)
+    void BinaryWriter::Write(short value)
     {
-        WriteTemplate<uint8>(value);
+        WriteTemplate(value);
     }
 
-    void BinaryWriter::Write(int16 value)
+    void BinaryWriter::Write(int value)
     {
-        WriteTemplate<int16>(value);
+        WriteTemplate(value);
     }
 
-    void BinaryWriter::Write(uint16 value)
+    void BinaryWriter::Write(longint value)
     {
-        WriteTemplate<uint16>(value);
-    }
-
-    void BinaryWriter::Write(int32 value)
-    {
-        WriteTemplate<int32>(value);
-    }
-
-    void BinaryWriter::Write(uint32 value)
-    {
-        WriteTemplate<uint32>(value);
-    }
-
-    void BinaryWriter::Write(int64 value)
-    {
-        WriteTemplate<int64>(value);
-    }
-
-    void BinaryWriter::Write(uint64 value)
-    {
-        WriteTemplate<uint64>(value);
+        WriteTemplate(value);
     }
 
     void BinaryWriter::Write(float value)
     {
-        WriteTemplate<float>(value);
+        WriteTemplate(value);
+    }
+
+    void BinaryWriter::Write(double value)
+    {
+        WriteTemplate(value);
     }
 
     void BinaryWriter::Write(const char* value)
@@ -103,25 +88,46 @@ namespace Bibim
 
     void BinaryWriter::Write(Color value)
     {
-        BBStaticAssert(sizeof(value) == 4);
+        WriteTemplate(value);
+    }
+
+    void BinaryWriter::Write(Point2 value)
+    {
+        WriteTemplate(value);
+    }
+
+    void BinaryWriter::Write(Point3 value)
+    {
+        WriteTemplate(value);
+    }
+
+    void BinaryWriter::Write(Point4 value)
+    {
+        WriteTemplate(value);
+    }
+
+    void BinaryWriter::Write(Rect value)
+    {
+        WriteTemplate(value);
+    }
+
+    void BinaryWriter::Write(RectF value)
+    {
         WriteTemplate(value);
     }
 
     void BinaryWriter::Write(Vector2 value)
     {
-        BBStaticAssert(sizeof(value) == 8);
         WriteTemplate(value);
     }
 
     void BinaryWriter::Write(Vector3 value)
     {
-        BBStaticAssert(sizeof(value) == 12);
-        WriteTemplate<Vector3>(value);
+        WriteTemplate(value);
     }
 
     void BinaryWriter::Write(Vector4 value)
     {
-        BBStaticAssert(sizeof(value) == 16);
         WriteTemplate(value);
     }
 

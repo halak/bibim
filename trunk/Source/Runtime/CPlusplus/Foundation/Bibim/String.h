@@ -220,7 +220,7 @@
 
                     char* s;
                     int length;
-                    uint hashCode;
+                    int hashCode;
                 };
 
             private:

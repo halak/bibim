@@ -5,7 +5,7 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
 #   include <Bibim/MouseState.h>
-#   include <Bibim/Point.h>
+#   include <Bibim/Point2.h>
 
     namespace Bibim
     {
@@ -19,7 +19,7 @@
 
                 const MouseState& GetState();
 
-                void SetPosition(Point value);
+                void SetPosition(Point2 value);
 
                 inline Window* GetWindow();
                 inline void SetWindow(Window* value);

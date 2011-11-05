@@ -21,17 +21,17 @@
                         virtual void Begin(UIRenderer* /*renderer*/) { }
                         virtual void End(UIRenderer* /*renderer*/) { }
 
-                        inline uint32 GetShaderEffectNameHint() const;
+                        inline int GetShaderEffectNameHint() const;
                         inline bool IsMaskEffector() const;
 
                     protected:
                         inline Effector();
-                        inline Effector(uint32 shaderEffectNameHint);
+                        inline Effector(int shaderEffectNameHint);
                         inline Effector(bool isMaskEffector);
-                        inline Effector(uint32 shaderEffectNameHint, bool isMaskEffector);
+                        inline Effector(int shaderEffectNameHint, bool isMaskEffector);
 
                     private:
-                        uint32 shaderEffectNameHint;
+                        int shaderEffectNameHint;
                         bool isMaskEffector;
                         bool reserved[2];
                 };

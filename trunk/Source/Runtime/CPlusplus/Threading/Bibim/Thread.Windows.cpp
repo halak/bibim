@@ -102,9 +102,9 @@
             ::Sleep(1);
         }
 
-        void Thread::Sleep(uint milliSeconds)
+        void Thread::Sleep(int milliSeconds)
         {
-            ::Sleep(milliSeconds);
+            ::Sleep(static_cast<ULONG>(milliSeconds));
         }
 
         void Thread::Exit()
@@ -121,7 +121,7 @@
                 creationFlags |= CREATE_SUSPENDED;
 
             handle = static_cast<void*>(::CreateThread(nullptr, 0, &Thread::Internal::Procedure, this, creationFlags, &threadID));
-            id = static_cast<uint>(threadID);
+            id = static_cast<int>(threadID);
         }
     }
 

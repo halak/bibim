@@ -14,7 +14,7 @@
             POINT windowsMousePosition = { 0, 0 };
             ::GetCursorPos(&windowsMousePosition);
             ::ScreenToClient(static_cast<HWND>(window->GetHandle()), &windowsMousePosition);
-            state.Position     = Point(windowsMousePosition.x, windowsMousePosition.y);
+            state.Position = Point2(windowsMousePosition.x, windowsMousePosition.y);
             state.IsLeftButtonPressed   = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0x0000;
             state.IsRightButtonPressed  = (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0x0000; 
             state.IsMiddleButtonPressed = (GetAsyncKeyState(VK_MBUTTON) & 0x8000) != 0x0000;
@@ -22,7 +22,7 @@
             return state;
         }
 
-        void Mouse::SetPosition(Point value)
+        void Mouse::SetPosition(Point2 value)
         {
             POINT windowsMousePosition = { value.X, value.Y };
             ::ClientToScreen(static_cast<HWND>(window->GetHandle()), &windowsMousePosition);

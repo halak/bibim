@@ -53,10 +53,13 @@
         typedef Keyframe<bool>         BoolKeyframe;
         typedef Keyframe<short>        ShortIntKeyframe;
         typedef Keyframe<int>          IntKeyframe;
-        typedef Keyframe<int64>        LongIntKeyframe;
+        typedef Keyframe<longint>      LongIntKeyframe;
         typedef Keyframe<float>        FloatKeyframe;
         typedef Keyframe<double>       DoubleKeyframe;
-        typedef Keyframe<Point>        PointKeyframe;
+        typedef Keyframe<Color>        ColorKeyframe;
+        typedef Keyframe<Point2>       Point2Keyframe;
+        typedef Keyframe<Point3>       Point3Keyframe;
+        typedef Keyframe<Point4>       Point4Keyframe;
         typedef Keyframe<Rect>         RectKeyframe;
         typedef Keyframe<RectF>        RectFKeyframe;
         typedef Keyframe<Vector2>      Vector2Keyframe;
@@ -67,10 +70,13 @@
         typedef SequenceTemplate<bool,         's', 'q', 'b', '_'> BoolSequence;
         typedef SequenceTemplate<short,        's', 'q', 's', '_'> ShortIntSequence;
         typedef SequenceTemplate<int,          's', 'q', 'i', '_'> IntSequence;
-        typedef SequenceTemplate<int64,        's', 'q', 'l', '_'> LongIntSequence;
+        typedef SequenceTemplate<longint,      's', 'q', 'l', '_'> LongIntSequence;
         typedef SequenceTemplate<float,        's', 'q', 'f', '_'> FloatSequence;
         typedef SequenceTemplate<double,       's', 'q', 'd', '_'> DoubleSequence;
-        typedef SequenceTemplate<Point,        's', 'q', 'p', '_'> PointSequence;
+        typedef SequenceTemplate<Color,        's', 'q', 'c', '_'> ColorSequence;
+        typedef SequenceTemplate<Point2,       's', 'q', 'p', '2'> Point2Sequence;
+        typedef SequenceTemplate<Point3,       's', 'q', 'p', '3'> Point3Sequence;
+        typedef SequenceTemplate<Point4,       's', 'q', 'p', '4'> Point4Sequence;
         typedef SequenceTemplate<Rect,         's', 'q', 'r', '_'> RectSequence;
         typedef SequenceTemplate<RectF,        's', 'q', 'R', 'f'> RectFSequence;
         typedef SequenceTemplate<Vector2,      's', 'q', 'v', '2'> Vector2Sequence;
@@ -84,7 +90,10 @@
         typedef SharedPointer<LongIntSequence>   LongIntSequencePtr;
         typedef SharedPointer<FloatSequence>     FloatSequencePtr;
         typedef SharedPointer<DoubleSequence>    DoubleSequencePtr;
-        typedef SharedPointer<PointSequence>     PointSequencePtr;
+        typedef SharedPointer<ColorSequence>     ColorSequencePtr;
+        typedef SharedPointer<Point2Sequence>    Point2SequencePtr;
+        typedef SharedPointer<Point3Sequence>    Point3SequencePtr;
+        typedef SharedPointer<Point4Sequence>    Point4SequencePtr;
         typedef SharedPointer<RectSequence>      RectSequencePtr;
         typedef SharedPointer<RectFSequence>     RectFSequencePtr;
         typedef SharedPointer<Vector2Sequence>   Vector2SequencePtr;
@@ -94,8 +103,8 @@
 
         template <typename T> T InterpolateKeyframe(const Keyframe<T>& k1, const Keyframe<T>& k2, float t);
 
-        bool       InterpolateKeyframe(const Keyframe<bool>& k1, const Keyframe<bool>& k2, float t);
-        GameAsset* InterpolateKeyframe(const Keyframe<GameAssetPtr>& k1, const Keyframe<GameAssetPtr>& k2, float t);
+        inline bool       InterpolateKeyframe(const Keyframe<bool>& k1, const Keyframe<bool>& k2, float t);
+        inline GameAsset* InterpolateKeyframe(const Keyframe<GameAssetPtr>& k1, const Keyframe<GameAssetPtr>& k2, float t);
     }
 
 #   include <Bibim/Sequences.inl>

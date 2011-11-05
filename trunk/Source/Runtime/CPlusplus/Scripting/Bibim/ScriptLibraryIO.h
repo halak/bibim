@@ -12,7 +12,7 @@
             {
                 BBThisIsStaticClass(IO);
                 public:
-                    static const uint PrintID = BBMakeFOURCC('p', 'r', 'n', 't');
+                    static const int  PrintID = BBMakeFOURCC('p', 'r', 'n', 't');
                     static       void Print(ScriptingContext& context);
             };
         }

@@ -210,35 +210,39 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Point.cpp"
+					RelativePath=".\Foundation\Bibim\Point2.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Point.h"
+					RelativePath=".\Foundation\Bibim\Point2.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Point.inl"
+					RelativePath=".\Foundation\Bibim\Point2.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Quaternion.cpp"
+					RelativePath=".\Foundation\Bibim\Point3.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Quaternion.h"
+					RelativePath=".\Foundation\Bibim\Point3.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Quaternion.inl"
+					RelativePath=".\Foundation\Bibim\Point3.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Range.h"
+					RelativePath=".\Foundation\Bibim\Point4.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Range.inl"
+					RelativePath=".\Foundation\Bibim\Point4.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Point4.inl"
 					>
 				</File>
 				<File
@@ -2277,63 +2281,67 @@
 					Name="Evaluation"
 					>
 					<File
-						RelativePath=".\Animation\Bibim\EvaluableConstants.cpp"
+						RelativePath=".\Animation\Bibim\EvalConstants.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvaluableConstants.h"
+						RelativePath=".\Animation\Bibim\EvalConstants.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvaluableConstants.inl"
+						RelativePath=".\Animation\Bibim\EvalConstants.inl"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvaluableRangedSequences.h"
+						RelativePath=".\Animation\Bibim\EvalContext.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvaluableRangedSequences.inl"
+						RelativePath=".\Animation\Bibim\EvalContext.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\Evaluables.h"
+						RelativePath=".\Animation\Bibim\EvalContext.inl"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvaluableSequenceBase.h"
+						RelativePath=".\Animation\Bibim\EvalRangedSequences.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvaluableSequenceBase.inl"
+						RelativePath=".\Animation\Bibim\EvalRangedSequences.inl"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvaluableSequences.h"
+						RelativePath=".\Animation\Bibim\Evals.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvaluableSequences.inl"
+						RelativePath=".\Animation\Bibim\EvalSequenceBase.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvaluableVariables.h"
+						RelativePath=".\Animation\Bibim\EvalSequenceBase.inl"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvaluableVariables.inl"
+						RelativePath=".\Animation\Bibim\EvalSequences.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvaluationContext.cpp"
+						RelativePath=".\Animation\Bibim\EvalSequences.inl"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvaluationContext.h"
+						RelativePath=".\Animation\Bibim\EvalVariables.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvaluationContext.inl"
+						RelativePath=".\Animation\Bibim\EvalVariables.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\Sequences.cpp"
 						>
 					</File>
 					<File

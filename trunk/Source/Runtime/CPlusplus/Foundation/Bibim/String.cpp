@@ -687,20 +687,20 @@ namespace Bibim
         for (; i < index; i++, destination++, s1++)
         {
             (*destination) = (*s1);
-            this->hashCode += static_cast<uint>(*destination) << i;
+            this->hashCode += static_cast<int>(*destination) << i;
         }
 
         const int midterm = index + length2;
         for (; i < midterm; i++, destination++, s2++)
         {
             (*destination) = (*s2);
-            this->hashCode += static_cast<uint>(*destination) << i;
+            this->hashCode += static_cast<int>(*destination) << i;
         }
 
         for (; i < this->length; i++, destination++, s1++)
         {
             (*destination) = (*s1);
-            this->hashCode += static_cast<uint>(*destination) << i;
+            this->hashCode += static_cast<int>(*destination) << i;
         }
 
         BBAssertDebug(destination - this->s == this->length);
@@ -718,7 +718,7 @@ namespace Bibim
         for (int i = 0; i < length; i++, destination++)
         {
             (*destination) = s[i];
-            this->hashCode += static_cast<uint>(s[i]) << i;
+            this->hashCode += static_cast<int>(s[i]) << i;
         }
  
         BBAssertDebug(destination - this->s == this->length);

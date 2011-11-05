@@ -5,22 +5,22 @@ namespace Bibim
         return name;
     }
 
-    uint AssetLoadingTask::GetTotalBytes() const
+    int AssetLoadingTask::GetTotalBytes() const
     {
         return totalBytes;
     }
 
-    uint AssetLoadingTask::GetLoadedBytes() const
+    int AssetLoadingTask::GetLoadedBytes() const
     {
         return loadedBytes;
     }
 
-    void AssetLoadingTask::SetLoadedBytes(uint value)
+    void AssetLoadingTask::SetLoadedBytes(int value)
     {
         loadedBytes = value;
     }
 
-    void AssetLoadingTask::AddLoadedBytes(uint value)
+    void AssetLoadingTask::AddLoadedBytes(int value)
     {
         loadedBytes += value;
     }

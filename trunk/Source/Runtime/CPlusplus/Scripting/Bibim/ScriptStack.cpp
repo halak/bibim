@@ -3,8 +3,8 @@
 
 namespace Bibim
 {
-    static const uint DefaultBufferSize = 1024 * 64; // 64kb
-    static const uint DefaultOffsetStackSize = 256;
+    static const int DefaultBufferSize = 1024 * 64; // 64kb
+    static const int DefaultOffsetStackSize = 256;
 
     ScriptStack::ScriptStack()
     {

@@ -16,9 +16,9 @@
                 ~ComponentStreamReader();
 
                 GameModule* ReadModule();
-                GameModule* ReadModule(uint32 defaultModuleClassID);
+                GameModule* ReadModule(int defaultModuleClassID);
 
-                GameModule* FindModuleByClassID(uint32 classID);
+                GameModule* FindModuleByClassID(int classID);
 
                 GameAsset* ReadAsset();
                 GameComponent* ReadComponent();

@@ -3,7 +3,7 @@
 namespace Bibim
 {
     template <typename T>
-    EvaluableSequenceBase<T>::EvaluableSequenceBase()
+    EvalSequenceBase<T>::EvalSequenceBase()
         : time(0.0f),
           velocity(1.0f),
           looped(false),
@@ -14,12 +14,12 @@ namespace Bibim
     }
     
     template <typename T>
-    EvaluableSequenceBase<T>::~EvaluableSequenceBase()
+    EvalSequenceBase<T>::~EvalSequenceBase()
     {
     }
 
     template <typename T>
-    void EvaluableSequenceBase<T>::Update(float dt, uint timestamp)
+    void EvalSequenceBase<T>::Update(float dt, int timestamp)
     {
         if (lastTimestamp == timestamp)
             return;
@@ -31,7 +31,7 @@ namespace Bibim
     }
 
     template <typename T>
-    T EvaluableSequenceBase<T>::Evaluate(EvaluationContext& /*context*/)
+    T EvalSequenceBase<T>::Evaluate(EvaluationContext& /*context*/)
     {
         if (timeChanged)
         {
@@ -43,43 +43,43 @@ namespace Bibim
     }
 
     template <typename T>
-    float EvaluableSequenceBase<T>::GetTime() const
+    float EvalSequenceBase<T>::GetTime() const
     {
         return time;
     }
 
     template <typename T>
-    float EvaluableSequenceBase<T>::GetVelocity() const
+    float EvalSequenceBase<T>::GetVelocity() const
     {
         return velocity;
     }
 
     template <typename T>
-    void EvaluableSequenceBase<T>::SetVelocity(float value)
+    void EvalSequenceBase<T>::SetVelocity(float value)
     {
         velocity = value;
     }
 
     template <typename T>
-    bool EvaluableSequenceBase<T>::GetLooped() const
+    bool EvalSequenceBase<T>::GetLooped() const
     {
         return looped;
     }
 
     template <typename T>
-    void EvaluableSequenceBase<T>::SetLooped(bool value)
+    void EvalSequenceBase<T>::SetLooped(bool value)
     {
         looped = value;
     }
 
     template <typename T>
-    void EvaluableSequenceBase<T>::SetValue(T value)
+    void EvalSequenceBase<T>::SetValue(T value)
     {
         this->value = value;
     }
 
     template <typename T>
-    void EvaluableSequenceBase<T>::OnRead(ComponentStreamReader& reader)
+    void EvalSequenceBase<T>::OnRead(ComponentStreamReader& reader)
     {
         Base::onRead(reader);
         time = 0.0f;
@@ -90,7 +90,7 @@ namespace Bibim
     }
 
     template <typename T>
-    void EvaluableSequenceBase<T>::OnCopy(const GameComponent* original, CloningContext& context)
+    void EvalSequenceBase<T>::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);

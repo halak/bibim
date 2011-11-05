@@ -14,8 +14,8 @@ namespace Bibim
 
     bool KeyboardState::IsPressed(Key::Code code) const
     {
-        const uint index = static_cast<uint>(static_cast<uint>(code) / (sizeof(dword) * 8));
-        const uint bit   = static_cast<uint>(static_cast<uint>(code) % (sizeof(dword) * 8));
+        const int index = static_cast<int>(static_cast<int>(code) / (sizeof(int) * 8));
+        const int bit   = static_cast<int>(static_cast<int>(code) % (sizeof(int) * 8));
         return Keys[index] & (0x80000000 >> bit) ? true : false;
     }
 

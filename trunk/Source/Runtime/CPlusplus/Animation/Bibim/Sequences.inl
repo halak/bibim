@@ -23,12 +23,12 @@ namespace Bibim
         return Math::Interpolate(k1.Value, k2.Value, t);
     }
 
-    bool InterpolateKeyframe(const Keyframe<bool>& k1, const Keyframe<bool>& /*k2*/, float /*t*/)
+    inline bool InterpolateKeyframe(const Keyframe<bool>& k1, const Keyframe<bool>& /*k2*/, float /*t*/)
     {
         return k1.Value;
     }
 
-    GameAsset* InterpolateKeyframe(const Keyframe<GameAssetPtr>& k1, const Keyframe<GameAssetPtr*>& /*k2*/, float /*t*/)
+    inline GameAsset* InterpolateKeyframe(const Keyframe<GameAssetPtr>& k1, const Keyframe<GameAssetPtr*>& /*k2*/, float /*t*/)
     {
         return k1.Value;
     }
@@ -204,8 +204,19 @@ namespace Bibim
     }
 
     template <typename T, char a, char b, char c, char d>
-    GameAsset* SequenceTemplate<T, a, b, c, d>::Create(AssetStreamReader& reader, GameAsset* existingInstance)
-    {
-        return nullptr;
+    GameAsset* SequenceTemplate<T, a, b, c, d>::Create(AssetStreamReader& reader, GameAsset* /*existingInstance*/)
+    { 
+        This* o = new This();
+        o->duration = reader.ReadFloat();
+        o->startTimeChanged = true;
+        const int count = static_cast<int>(reader.ReadShortInt());
+        o->keyframes.resize(count);
+        for (int i = 0; i < count; i++)
+        {
+            reader.Read(o->keyframes[i].Value);
+            o->keyframes[i].Duration = reader.ReadFloat();
+        }
+
+        return o;
     }
 }

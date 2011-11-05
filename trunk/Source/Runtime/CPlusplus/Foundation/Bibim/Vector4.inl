@@ -13,6 +13,7 @@ namespace Bibim
     Vector4::Vector4(float x, float y, float z, float w)
         : X(x), Y(y), Z(z), W(w)
     {
+        Vector4 s;
     }
 
     Vector4::Vector4(const Vector3& original, float W)

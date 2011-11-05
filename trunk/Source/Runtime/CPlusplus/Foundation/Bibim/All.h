@@ -49,11 +49,9 @@
 #  include <Bibim/Numerics.h>
 #  include <Bibim/Object.h>
 #  include <Bibim/PCH.h>
-#  include <Bibim/Point.h>
+#  include <Bibim/Point2.h>
 #  include <Bibim/PointerCasts.h>
 #  include <Bibim/Property.h>
-#  include <Bibim/Quaternion.h>
-#  include <Bibim/Range.h>
 #  include <Bibim/Rect.h>
 #  include <Bibim/RectF.h>
 #  include <Bibim/RectStorage.h>

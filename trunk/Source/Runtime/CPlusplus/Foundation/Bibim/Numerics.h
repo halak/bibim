@@ -7,28 +7,16 @@
 
     namespace Bibim
     {
-        struct Char
+        struct Byte
         {
-            static const char Min;
-            static const char Max;
+            static const byte Min;
+            static const byte Max;
         };
 
-        struct UChar
-        {
-            static const uchar Min;
-            static const uchar Max;
-        };
-
-        struct  Short
+        struct  ShortInt
         {
             static const short Min;
             static const short Max;
-        };
-
-        struct UShort
-        {
-            static const ushort Min;
-            static const ushort Max;
         };
 
         struct Int
@@ -39,22 +27,10 @@
             static int Parse(const String& s);
         };
 
-        struct UInt
+        struct LongInt
         {
-            static const uint Min;
-            static const uint Max;
-        };
-
-        struct Long
-        {
-            static const long Min;
-            static const long Max;
-        };
-
-        struct ULong
-        {
-            static const ulong Min;
-            static const ulong Max;
+            static const longint Min;
+            static const longint Max;
         };
 
         struct Float
@@ -68,31 +44,6 @@
             static const double Min;
             static const double Max;
         };
-
-        struct Int64
-        {
-            static const int64 Min;
-            static const int64 Max;
-        };
-
-        struct UInt64
-        {
-            static const uint64 Min;
-            static const uint64 Max;
-        };
-
-        typedef Char   Int8;
-        typedef UChar  Byte;
-        typedef UChar  UInt8;
-        typedef Short  Int16;
-        typedef UShort UInt16;
-        typedef UShort Word;
-        typedef Int    Int32;
-        typedef UInt   UInt32;
-        typedef ULong  DWord;
-        typedef Float  Real32;
-        typedef Double Real64;
-        typedef UInt64 QWord;
     }
 
 #endif

@@ -4,7 +4,7 @@
 
 namespace Bibim
 {
-    AssetLoadingTask::AssetLoadingTask(const String& name, uint totalBytes)
+    AssetLoadingTask::AssetLoadingTask(const String& name, int totalBytes)
         : name(name),
           totalBytes(totalBytes),
           loadedBytes(0)

@@ -13,16 +13,16 @@
                 typedef void (*NativeFunction)(ScriptingContext& context);
                 struct Entry
                 {
-                    uint32 ID;
+                    int ID;
                     NativeFunction Function;
                 };
 
             public:
-                static void Add(uint32 id, NativeFunction function);
+                static void Add(int id, NativeFunction function);
                 static void Add(Entry item);
                 static void AddRange(const Entry* items, int count);
 
-                static NativeFunction Find(uint32 id);
+                static NativeFunction Find(int id);
         };
 
         typedef ScriptNativeFunctionTable::NativeFunction ScriptNativeFunction;

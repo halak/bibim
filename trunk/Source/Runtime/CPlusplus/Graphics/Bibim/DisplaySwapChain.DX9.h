@@ -4,7 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
-#   include <Bibim/Point.h>
+#   include <Bibim/Point2.h>
 #   include <Bibim/Rect.h>
 #   include <d3d9.h>
 
@@ -15,7 +15,7 @@
             BBModuleClass(DisplaySwapChain, GameModule, 'S', 'W', 'C', 'H');
             public:
                 DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window);
-                DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window, Point size);
+                DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window, Point2 size);
                 virtual ~DisplaySwapChain();
 
                 void BeginDraw();
@@ -25,7 +25,7 @@
                 inline GraphicsDevice* GetGraphicsDevice() const;
                 inline Window* GetWindow() const;
 
-                inline Point GetBackbufferSize() const;
+                inline Point2 GetBackbufferSize() const;
 
                 inline const Rect& GetViewport() const;
                 inline void SetViewport(const Rect& value);
@@ -33,12 +33,12 @@
             protected:
                 DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window, void* swapChainInterface);
 
-                void Construct(Window* window, Point size);
+                void Construct(Window* window, Point2 size);
 
             private:
                 GraphicsDevice* graphicsDevice;
                 Window* window;
-                Point backbufferSize;
+                Point2 backbufferSize;
                 Rect viewport;
 
                 IDirect3DSwapChain9* swapChain;

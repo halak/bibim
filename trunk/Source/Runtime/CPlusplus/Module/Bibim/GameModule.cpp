@@ -6,7 +6,7 @@
 
 namespace Bibim
 {
-    const uint GameModule::UnspecifiedID = 0xFFFFFFFF;
+    const int GameModule::UnspecifiedID = -1;
 
     GameModule::GameModule()
         : node(nullptr),
@@ -16,7 +16,7 @@ namespace Bibim
     {
     }
 
-    GameModule::GameModule(uint32 id)
+    GameModule::GameModule(int id)
         : node(nullptr),
           id(id),
           alive(true),
@@ -30,7 +30,7 @@ namespace Bibim
             node->OnModuleDestructed();
     }
 
-    void GameModule::SetID(uint32 value)
+    void GameModule::SetID(int value)
     {
         if (id != value)
         {
@@ -38,7 +38,7 @@ namespace Bibim
             BBAssertDebug(value != UnspecifiedID &&
                           node && node->GetTree() && node->GetTree()->Find(value) != nullptr);
 
-            const uint oldID = id;
+            const int oldID = id;
 
             id = value;
 
@@ -79,7 +79,7 @@ namespace Bibim
         }
     }
 
-    void* GameModule::QueryClass(uint32 /*classID*/)
+    void* GameModule::QueryClass(int /*classID*/)
     {
         return nullptr;
     }

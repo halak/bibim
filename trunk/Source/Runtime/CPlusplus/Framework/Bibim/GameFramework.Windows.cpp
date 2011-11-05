@@ -13,7 +13,7 @@
 
     namespace Bibim
     {
-        static const uint GeneralFPS = 60;
+        static const int GeneralFPS = 60;
 
         GameFramework::GameFramework()
             : modules(new GameModuleTree()),
@@ -47,7 +47,7 @@
         {
             Initialize();
 
-            uint  timestamp = 0;
+            int  timestamp = 0;
             float previousTime = Clock::GetCurrent();
             timestamps.push_back(previousTime);
 
@@ -94,7 +94,7 @@
                     EndDraw();
 
                     timestamps.push_back(currentTime);
-                    if (static_cast<uint>(timestamps.size()) > desiredFPS)
+                    if (static_cast<int>(timestamps.size()) > desiredFPS)
                         timestamps.pop_front();
 
                     Sleep(1);
@@ -110,7 +110,7 @@
         void GameFramework::SetFixedElapsedTime(float value)
         {
             fixedElapsedTime = Math::Max(value, 0.0001f);
-            desiredFPS = Math::Min(static_cast<uint>(1.0f / fixedElapsedTime), GeneralFPS);
+            desiredFPS = Math::Min(static_cast<int>(1.0f / fixedElapsedTime), GeneralFPS);
         }
 
         void GameFramework::SetMaxTimeInOneFrame(float value)
@@ -128,8 +128,8 @@
 
         void GameFramework::Initialize()
         {
-            if (window->GetSize() == Point::Zero)
-                window->SetSize(Point(800, 600));
+            if (window->GetSize() == Point2::Zero)
+                window->SetSize(Point2(800, 600));
 
             graphicsDevice->SetWindow(window);
             window->SetVisible(true);
@@ -140,7 +140,7 @@
             window->SetVisible(false);
         }
 
-        void GameFramework::Update(float dt, uint timestamp)
+        void GameFramework::Update(float dt, int timestamp)
         {
             mainTimeline->Update(dt, timestamp);
         }
@@ -160,12 +160,12 @@
             graphicsDevice->Present();
         }
 
-        //void GameFramework::ForceUpdateAllComponents(float dt, uint timestamp)
+        //void GameFramework::ForceUpdateAllComponents(float dt, int timestamp)
         //{
         //    ForceUpdateComponent(structure->GetRoot(), dt, timestamp);
         //}
 
-        //void GameFramework::ForceUpdateComponent(GameNode* node, float dt, uint timestamp)
+        //void GameFramework::ForceUpdateComponent(GameNode* node, float dt, int timestamp)
         //{
         //    if (node->GetComponent())
         //    {

@@ -1,6 +1,6 @@
 namespace Bibim
 {
-    uint32 TypingContext::GetCode() const
+    int TypingContext::GetCode() const
     {
         return currentGlyph ? currentGlyph->GetCode() : '\0';
     }

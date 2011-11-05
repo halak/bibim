@@ -3,14 +3,14 @@
 namespace Bibim
 {
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
-    EvaluableRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::EvaluableRangedSequenceTemplate()
+    EvalRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::EvalRangedSequenceTemplate()
         : timeIndex1(0),
           timeIndex2(0)
     {
     }
 
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
-    EvaluableRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>* EvaluableRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::Clone(CloningContext& /*context*/) const
+    EvalRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>* EvalRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::Clone(CloningContext& /*context*/) const
     {
         This* clone = new This();
         context.Store(this, clone);
@@ -19,7 +19,7 @@ namespace Bibim
     }
 
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
-    void EvaluableRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::UpdateValue()
+    void EvalRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::UpdateValue()
     {
         if (source1 == nullptr || source2 == nullptr)
             return;
@@ -49,7 +49,7 @@ namespace Bibim
     }
 
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
-    void EvaluableRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::OnRead(ComponentStreamReader& reader)
+    void EvalRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::OnRead(ComponentStreamReader& reader)
     {
         Base::onRead(reader);
         timeIndex1 = 0;
@@ -59,7 +59,7 @@ namespace Bibim
     }
 
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
-    void EvaluableRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::OnCopy(const GameComponent* original, CloningContext& context)
+    void EvalRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);

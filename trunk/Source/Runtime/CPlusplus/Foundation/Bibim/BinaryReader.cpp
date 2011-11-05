@@ -48,49 +48,34 @@ namespace Bibim
         return ReadTemplate<bool>();
     }
 
-    int8 BinaryReader::ReadInt8()
+    byte BinaryReader::ReadByte()
     {
-        return ReadTemplate<int8>();
+        return ReadTemplate<byte>();
     }
 
-    uint8 BinaryReader::ReadUInt8()
+    short BinaryReader::ReadShortInt()
     {
-        return ReadTemplate<uint8>();
+        return ReadTemplate<short>();
     }
 
-    int16 BinaryReader::ReadInt16()
+    int BinaryReader::ReadInt()
     {
-        return ReadTemplate<int16>();
+        return ReadTemplate<int>();
     }
 
-    uint16 BinaryReader::ReadUInt16()
+    longint BinaryReader::ReadLongInt()
     {
-        return ReadTemplate<uint16>();
-    }
-
-    int32 BinaryReader::ReadInt32()
-    {
-        return ReadTemplate<int32>();
-    }
-
-    uint32 BinaryReader::ReadUInt32()
-    {
-        return ReadTemplate<uint32>();
-    }
-
-    int64 BinaryReader::ReadInt64()
-    {
-        return ReadTemplate<int64>();
-    }
-
-    uint64 BinaryReader::ReadUInt64()
-    {
-        return ReadTemplate<uint64>();
+        return ReadTemplate<longint>();
     }
 
     float BinaryReader::ReadFloat()
     {
         return ReadTemplate<float>();
+    }
+
+    double BinaryReader::ReadDouble()
+    {
+        return ReadTemplate<double>();
     }
 
     String BinaryReader::ReadString()
@@ -121,37 +106,46 @@ namespace Bibim
 
     Color BinaryReader::ReadColor()
     {
-        BBStaticAssert(sizeof(Color) == 4);
         return ReadTemplate<Color>();
+    }
+
+    Point2 BinaryReader::ReadPoint2()
+    {
+        return ReadTemplate<Point2>();
+    }
+
+    Point3 BinaryReader::ReadPoint3()
+    {
+        return ReadTemplate<Point3>();
+    }
+
+    Point4 BinaryReader::ReadPoint4()
+    {
+        return ReadTemplate<Point4>();
     }
 
     Rect BinaryReader::ReadRect()
     {
-        BBStaticAssert(sizeof(Rect) == 16);
         return ReadTemplate<Rect>();
     }
 
     RectF BinaryReader::ReadRectF()
     {
-        BBStaticAssert(sizeof(RectF) == 16);
         return ReadTemplate<RectF>();
     }
 
     Vector2 BinaryReader::ReadVector2()
     {
-        BBStaticAssert(sizeof(Vector2) == 8);
         return ReadTemplate<Vector2>();
     }
 
     Vector3 BinaryReader::ReadVector3()
     {
-        BBStaticAssert(sizeof(Vector3) == 12);
         return ReadTemplate<Vector3>();
     }
 
     Vector4 BinaryReader::ReadVector4()
     {
-        BBStaticAssert(sizeof(Vector4) == 16);
         return ReadTemplate<Vector4>();
     }
 

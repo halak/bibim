@@ -1,6 +1,6 @@
 namespace Bibim
 {
-    uint32 Glyph::GetCode() const
+    int Glyph::GetCode() const
     {
         return code;
     }

@@ -157,8 +157,8 @@ namespace Bibim
     {
     }
 
-    GameAssetStorage::LoadingStatus::LoadingStatus(uint totalBytes, uint loadedBytes,
-                                                   uint taskTotalBytes, uint taskLoadedBytes, const String& taskName)
+    GameAssetStorage::LoadingStatus::LoadingStatus(int totalBytes, int loadedBytes,
+                                                   int taskTotalBytes, int taskLoadedBytes, const String& taskName)
         : TotalBytes(totalBytes),
           LoadedBytes(loadedBytes),
           CurrentTaskTotalBytes(taskTotalBytes),

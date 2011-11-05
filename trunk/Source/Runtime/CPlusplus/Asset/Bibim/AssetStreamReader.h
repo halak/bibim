@@ -19,9 +19,9 @@
                 void ReadAsync(AssetLoadingTask* task);
 
                 GameModule* ReadModule();
-                GameModule* ReadModule(uint32 defaultModuleClassID);
+                GameModule* ReadModule(int defaultModuleClassID);
 
-                GameModule* FindModuleByClassID(uint32 classID);
+                GameModule* FindModuleByClassID(int classID);
 
                 inline const String& GetName() const;
                 inline GameModuleTree* GetModules() const;

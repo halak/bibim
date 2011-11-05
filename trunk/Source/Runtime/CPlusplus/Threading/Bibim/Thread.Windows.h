@@ -31,11 +31,11 @@
                 Priority GetPriority() const;
                 void SetPriority(Priority value);
 
-                inline uint GetID() const;
+                inline int GetID() const;
 
             public:
                 static void Sleep();
-                static void Sleep(uint milliSeconds);
+                static void Sleep(int milliSeconds);
 
             protected:
                 void Exit();
@@ -46,7 +46,7 @@
                 void Construct(bool autoStart);
 
             private:
-                uint id;
+                int id;
                 void* handle;
 
                 struct Internal;

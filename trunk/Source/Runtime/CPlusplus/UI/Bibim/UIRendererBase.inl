@@ -6,7 +6,7 @@ namespace Bibim
     {
     }
 
-    UIRendererBase::Effector::Effector(uint32 shaderEffectNameHint)
+    UIRendererBase::Effector::Effector(int shaderEffectNameHint)
         : shaderEffectNameHint(shaderEffectNameHint),
           isMaskEffector(false)
     {
@@ -18,13 +18,13 @@ namespace Bibim
     {
     }
 
-    UIRendererBase::Effector::Effector(uint32 shaderEffectNameHint, bool isMaskEffector)
+    UIRendererBase::Effector::Effector(int shaderEffectNameHint, bool isMaskEffector)
         : shaderEffectNameHint(shaderEffectNameHint),
           isMaskEffector(isMaskEffector)
     {
     }
 
-    uint32 UIRendererBase::Effector::GetShaderEffectNameHint() const
+    int UIRendererBase::Effector::GetShaderEffectNameHint() const
     {
         return shaderEffectNameHint;
     }

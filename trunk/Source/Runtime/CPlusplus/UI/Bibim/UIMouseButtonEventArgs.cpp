@@ -9,13 +9,13 @@ namespace Bibim
     {
     }
 
-    UIMouseButtonEventArgs::UIMouseButtonEventArgs(UIVisual* target, Point position, Key::Code buttonCode)
+    UIMouseButtonEventArgs::UIMouseButtonEventArgs(UIVisual* target, Point2 position, Key::Code buttonCode)
         : UIMouseEventArgs(target, position),
           buttonCode(buttonCode)
     {
     }
 
-    UIMouseButtonEventArgs::UIMouseButtonEventArgs(UIVisual* target, Point position, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed, Key::Code buttonCode)
+    UIMouseButtonEventArgs::UIMouseButtonEventArgs(UIVisual* target, Point2 position, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed, Key::Code buttonCode)
         : UIMouseEventArgs(target, position, isLeftButtonPressed, isRightButtonPressed, isMiddleButtonPressed),
           buttonCode(buttonCode)
     {

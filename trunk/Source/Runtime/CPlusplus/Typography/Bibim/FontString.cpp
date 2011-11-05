@@ -47,7 +47,7 @@ namespace Bibim
         int result = 0;
         for (int i = 0; i < index; i++)
         {
-            const uint32 code = regularGlyphs[i]->GetCode();
+            const int code = regularGlyphs[i]->GetCode();
             const wchar_t wideCharacter = static_cast<wchar_t>(code);
             result += WideCharToMultiByte(CP_UTF8, 0, &wideCharacter, 1, nullptr, 0, nullptr, nullptr);
         }

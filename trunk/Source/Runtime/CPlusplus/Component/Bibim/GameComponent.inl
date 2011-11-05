@@ -1,11 +1,11 @@
 namespace Bibim
 {
-    uint GameComponent::GetID() const
+    int GameComponent::GetID() const
     {
         return id;
     }
 
-    void GameComponent::SetID(uint value)
+    void GameComponent::SetID(int value)
     {
         id = value;
     }

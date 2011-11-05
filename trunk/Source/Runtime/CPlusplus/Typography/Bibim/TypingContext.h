@@ -19,7 +19,7 @@
                 void Reset();
                 bool MoveNext();
 
-                inline uint32 GetCode() const;
+                inline int GetCode() const;
                 inline Vector2 GetPosition() const;
                 inline const Glyph* GetRegularGlyph() const;
                 inline const Glyph* GetStrokedGlyph() const;
@@ -27,7 +27,7 @@
                 inline int GetGlyphIndex() const;
 
             private:
-                static inline int GetLength(uint32 code);
+                static inline int GetLength(int code);
 
             private:
                 const FontString* fontString;

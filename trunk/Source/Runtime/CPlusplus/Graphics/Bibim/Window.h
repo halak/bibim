@@ -4,7 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
-#   include <Bibim/Point.h>
+#   include <Bibim/Point2.h>
 
     namespace Bibim
     {
@@ -16,11 +16,11 @@
 
                 virtual void Close() = 0;
 
-                virtual Point GetPosition() const = 0;
-                virtual void  SetPosition(Point value) = 0;
+                virtual Point2 GetPosition() const = 0;
+                virtual void   SetPosition(Point2 value) = 0;
 
-                virtual Point GetSize() const = 0;
-                virtual void  SetSize(Point value) = 0;
+                virtual Point2 GetSize() const = 0;
+                virtual void   SetSize(Point2 value) = 0;
 
                 virtual bool GetVisible() const = 0;
                 virtual void SetVisible(bool value) = 0;

@@ -1,6 +1,6 @@
 namespace Bibim
 {
-    Point UIMouseEventArgs::GetPosition() const
+    Point2 UIMouseEventArgs::GetPosition() const
     {
         return position;
     }

@@ -11,7 +11,7 @@
             BBThisIsStaticClass(Clock);
             public:
                 static float GetCurrent();
-                static uint  GetCurrentMilliSeconds();
+                static int  GetCurrentMilliSeconds();
                 static bool IsHighResolution();
         };
     }
