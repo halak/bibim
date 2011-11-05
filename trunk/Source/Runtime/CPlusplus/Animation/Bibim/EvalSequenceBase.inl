@@ -81,7 +81,7 @@ namespace Bibim
     template <typename T>
     void EvalSequenceBase<T>::OnRead(ComponentStreamReader& reader)
     {
-        Base::onRead(reader);
+        Base::OnRead(reader);
         time = 0.0f;
         velocity = reader.ReadFloat();
         looped = reader.ReadBool();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Bibim.Asset
 {
@@ -16,13 +17,15 @@ namespace Bibim.Asset
         {
             get { return ClassIDAttribute.GetClassID(GetType()); }
         }
-
+        
+        [XmlIgnore]
         public GameAssetStatus Status
         {
             get;
             protected set;
         }
 
+        [XmlIgnore]
         public uint Revision
         {
             get;

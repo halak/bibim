@@ -17,6 +17,8 @@ using Bibim.Asset.Pipeline.Recipes;
 using Bibim.IO;
 using Bibim.Toolkit;
 
+using Bibim.Animation;
+
 namespace Bibim.Bab.Consoles
 {
     [ConsoleEntryPoint]
@@ -25,6 +27,24 @@ namespace Bibim.Bab.Consoles
     {
         static void Run([Alias("pipe")] string pipeName)
         {
+            //BoolSequence seq = new BoolSequence();
+            //seq.AddKeyframe(new Keyframe<bool>(true, 1.0f));
+            //seq.AddKeyframe(new Keyframe<bool>(false, 0.7f));
+            //seq.AddKeyframe(new Keyframe<bool>(true, 0.3f));
+            
+            //XmlSerializer serz = new XmlSerializer(typeof(object));//typeof(BoolSequence), new Type[]{typeof(Keyframe<bool>)});
+            ////using (var fs = new FileStream("Hello.xml", FileMode.Create, FileAccess.Write))
+            ////    serz.Serialize(fs, seq);
+            //using (var fs = new FileStream("Hello.xml", FileMode.Open, FileAccess.Read))
+            //{
+            //    object o = serz.Deserialize(fs);
+            //}
+
+
+            ////GameAssetRecipe recipe = new GameAssetRecipe();
+            ////recipe.Cook = new ReadGameAsset(seq);
+            ////GameAssetRecipe.Serialize("Hello.asset", recipe);
+
             if (string.IsNullOrEmpty(pipeName))
                 pipeName = PipedAssetProvider.DefaultPipeName;
 

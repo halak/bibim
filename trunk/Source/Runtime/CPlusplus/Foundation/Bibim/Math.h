@@ -7,6 +7,8 @@
 #   include <Bibim/Point2.h>
 #   include <Bibim/Point3.h>
 #   include <Bibim/Point4.h>
+#   include <Bibim/Rect.h>
+#   include <Bibim/RectF.h>
 #   include <Bibim/Vector2.h>
 #   include <Bibim/Vector3.h>
 #   include <Bibim/Vector4.h>
@@ -90,12 +92,16 @@
                 static bool IsClockwise(Vector2 a, Vector2 b, Vector2 c);
                 static bool IsClockwise(const Vector2* points, int numberOfPoints);
 
+                static inline short   Interpolate(short a, short b, float t);
                 static inline int     Interpolate(int a, int b, float t);
+                static inline longint Interpolate(longint a, longint b, float t);
                 static inline float   Interpolate(float a, float b, float t);
                 static inline double  Interpolate(double a, double b, float t);
                 static inline Point2  Interpolate(Point2 a, Point2 b, float t);
                 static inline Point3  Interpolate(Point3 a, Point3 b, float t);
                 static inline Point4  Interpolate(Point4 a, Point4 b, float t);
+                static inline Rect    Interpolate(Rect a, Rect b, float t);
+                static inline RectF   Interpolate(RectF a, RectF b, float t);
                 static inline Vector2 Interpolate(Vector2 a, Vector2 b, float t);
                 static inline Vector3 Interpolate(Vector3 a, Vector3 b, float t);
                 static inline Vector4 Interpolate(Vector4 a, Vector4 b, float t);

@@ -110,6 +110,12 @@ namespace Bibim.Asset.Pipeline
         #endregion
 
         #region Static Methods
+        public static void Serialize(string path, GameAssetRecipe recipe)
+        {
+            using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
+                Serialize(fs, recipe);
+        }
+
         public static void Serialize(Stream stream, GameAssetRecipe recipe)
         {
             Serializer.Serialize(XmlWriter.Create(stream, WriterSettings), recipe);
@@ -118,6 +124,12 @@ namespace Bibim.Asset.Pipeline
         public static void Serialize(XmlWriter writer, GameAssetRecipe recipe)
         {
             Serializer.Serialize(writer, recipe);
+        }
+
+        public static GameAssetRecipe Deserialize(string path)
+        {
+            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+                return Deserialize(fs) as GameAssetRecipe;
         }
 
         public static GameAssetRecipe Deserialize(Stream stream)

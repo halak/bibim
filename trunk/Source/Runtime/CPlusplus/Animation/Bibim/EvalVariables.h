@@ -22,7 +22,7 @@
                 void SetName(const String& value);
 
             private:
-                T name;
+                String name;
         };
 
         typedef EvalVariableTemplate<bool,         'e', 'v', 'b', '_'> EvalBoolVariable;
@@ -60,6 +60,6 @@
         typedef SharedPointer<EvalGameAssetVariable> EvalGameAssetVariablePtr;
     }
 
-#   include <Bibim/EvalConstants.inl>
+#   include <Bibim/EvalVariables.inl>
 
 #endif

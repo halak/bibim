@@ -16,7 +16,7 @@ namespace Bibim.UI
         public UIVisual Root
         {
             get;
-            private set;
+            set;
         }
         #endregion
 

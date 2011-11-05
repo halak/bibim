@@ -71,6 +71,15 @@ namespace Bibim
             return FindModuleByClassID(defaultModuleClassID);
     }
 
+    GameAsset* AssetStreamReader::ReadAsset()
+    {
+        const String assetName = ReadString();
+        if (assetName.IsEmpty())
+            return nullptr;
+
+        return storage->Load(assetName);
+    }
+
     GameModule* AssetStreamReader::FindModuleByClassID(int classID)
     {
         if (modules)

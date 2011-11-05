@@ -199,9 +199,19 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    short Math::Interpolate(short a, short b, float t)
+    {
+        return a + static_cast<short>(static_cast<float>(b - a) * t);
+    }
+
     int Math::Interpolate(int a, int b, float t)
     {
         return a + static_cast<int>(static_cast<float>(b - a) * t);
+    }
+
+    longint Math::Interpolate(longint a, longint b, float t)
+    {
+        return a + static_cast<longint>(static_cast<double>(b - a) * t);
     }
 
     float Math::Interpolate(float a, float b, float t)
@@ -233,6 +243,22 @@ namespace Bibim
                       Interpolate(a.Y, b.Y, t),
                       Interpolate(a.Z, b.Z, t),
                       Interpolate(a.W, b.W, t));
+    }
+
+    Rect Math::Interpolate(Rect a, Rect b, float t)
+    {
+        return Rect(Interpolate(a.X, b.X, t),
+                    Interpolate(a.Y, b.Y, t),
+                    Interpolate(a.Width , b.Width,  t),
+                    Interpolate(a.Height, b.Height, t));
+    }
+
+    RectF Math::Interpolate(RectF a, RectF b, float t)
+    {
+        return RectF(Interpolate(a.X, b.X, t),
+                     Interpolate(a.Y, b.Y, t),
+                     Interpolate(a.Width,  b.Width,  t),
+                     Interpolate(a.Height, b.Height, t));
     }
 
     Vector2 Math::Interpolate(Vector2 a, Vector2 b, float t)

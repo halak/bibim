@@ -33,7 +33,7 @@
         typedef EvalSequenceTemplate<longint,    LongIntSequence,   LongIntKeyframe,   'e', 's', 'l', '_'> EvalLongIntSequence;
         typedef EvalSequenceTemplate<float,      FloatSequence,     FloatKeyframe,     'e', 's', 'f', '_'> EvalFloatSequence;
         typedef EvalSequenceTemplate<double,     DoubleSequence,    DoubleKeyframe,    'e', 's', 'd', '_'> EvalDoubleSequence;
-        typedef EvalSequenceTemplate<Color,      ColorSequence,     ColorKeyframe,     'e', 's', 'c', '_'> EvalPointSequence;
+        typedef EvalSequenceTemplate<Color,      ColorSequence,     ColorKeyframe,     'e', 's', 'c', '_'> EvalColorSequence;
         typedef EvalSequenceTemplate<Point2,     Point2Sequence,    Point2Keyframe,    'e', 's', 'p', '2'> EvalPoint2Sequence;
         typedef EvalSequenceTemplate<Point3,     Point3Sequence,    Point3Keyframe,    'e', 's', 'p', '3'> EvalPoint3Sequence;
         typedef EvalSequenceTemplate<Point4,     Point4Sequence,    Point4Keyframe,    'e', 's', 'p', '4'> EvalPoint4Sequence;

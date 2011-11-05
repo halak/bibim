@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace Bibim.Animation
@@ -19,6 +18,13 @@ namespace Bibim.Animation
             Value = value;
             Duration = duration;
             StartTime = 0.0f;
+        }
+
+        public Keyframe(T value, float duration, float startTime)
+        {
+            Value = value;
+            Duration = duration;
+            StartTime = startTime;
         }
     }
 }
