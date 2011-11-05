@@ -31,7 +31,7 @@
             private:
                 Window* window;
                 KeyboardState state;
-                dword allowedKeys[Key::Count / (sizeof(dword) * 8)];
+                int allowedKeys[Key::Count / (sizeof(int) * 8)];
         };
     }
 

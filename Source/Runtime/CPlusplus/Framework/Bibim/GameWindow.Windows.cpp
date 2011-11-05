@@ -38,7 +38,7 @@
                 const SIZE windowSize = { windowRect.right - windowRect.left, windowRect.bottom - windowRect.top };
                 const POINT windowPosition = { (screenSize.cx - windowSize.cx) / 2, (screenSize.cy - windowSize.cy) / 2 };
 
-                SetPosition(Point(windowPosition.x, windowPosition.y));
+                SetPosition(Point2(windowPosition.x, windowPosition.y));
             }
         }
 
@@ -68,12 +68,12 @@
             }
         }
 
-        Point GameWindow::GetPosition() const
+        Point2 GameWindow::GetPosition() const
         {
             return position;
         }
 
-        void GameWindow::SetPosition(Point value)
+        void GameWindow::SetPosition(Point2 value)
         {
             if (handle == nullptr)
                 CreateHandle();
@@ -86,12 +86,12 @@
             }
         }
 
-        Point GameWindow::GetSize() const
+        Point2 GameWindow::GetSize() const
         {
             return size;
         }
 
-        void GameWindow::SetSize(Point value)
+        void GameWindow::SetSize(Point2 value)
         {
             if (handle == nullptr)
                 CreateHandle();

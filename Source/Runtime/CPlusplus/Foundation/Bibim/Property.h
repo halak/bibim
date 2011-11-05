@@ -12,36 +12,36 @@
                 inline ~PropertyBase();
 
             protected:
-                inline PropertyBase(uint32 id);
+                inline PropertyBase(int id);
 
-                inline uint32 GetID() const;
+                inline int GetID() const;
 
             private:
-                uint32 id;
+                int id;
         };
 
         template <typename T> class Property : public PropertyBase
         {
             public:
-                template <typename C, typename G> Property(uint32 id, G (C::*getter)())
+                template <typename C, typename G> Property(int id, G (C::*getter)())
                     : PropertyBase(id),
                       getterAndSetter(new GetterAndSetterTemplate<C, G, S>(getter))
                 {
                 }
 
-                template <typename C, typename G> Property(uint32 id, G (C::*getter)() const)
+                template <typename C, typename G> Property(int id, G (C::*getter)() const)
                     : PropertyBase(id),
                       getterAndSetter(new GetterAndSetterTemplate<C, G, S>(getter))
                 {
                 }
 
-                template <typename C, typename G, typename S> Property(uint32 id, G (C::*getter)(), void (C::*setter)(S))
+                template <typename C, typename G, typename S> Property(int id, G (C::*getter)(), void (C::*setter)(S))
                     : PropertyBase(id),
                       getterAndSetter(new GetterAndSetterTemplate<C, G, S>(getter, setter))
                 {
                 }
 
-                template <typename C, typename G, typename S> Property(uint32 id, G (C::*getter)() const, void (C::*setter)(S))
+                template <typename C, typename G, typename S> Property(int id, G (C::*getter)() const, void (C::*setter)(S))
                     : PropertyBase(id),
                       getterAndSetter(new GetterAndSetterTemplate<C, G, S>(getter, setter))
                 {

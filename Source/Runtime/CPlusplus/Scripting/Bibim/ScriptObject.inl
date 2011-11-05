@@ -17,14 +17,8 @@ namespace Bibim
     {
     }
 
-    ScriptObject::ScriptObject(uint value)
-        : type(UIntType),
-          value(value)
-    {
-    }
-
-    ScriptObject::ScriptObject(int64 value)
-        : type(FloatType),
+    ScriptObject::ScriptObject(longint value)
+        : type(LongIntType),
           value(value)
     {
     }
@@ -37,8 +31,26 @@ namespace Bibim
 
     ScriptObject::ScriptObject(Color value)
         : type(ColorType),
-          value(static_cast<uint>(value.ToARGB()))
+          value(static_cast<int>(value.ToARGB()))
 
+    {
+    }
+
+    ScriptObject::ScriptObject(Point2 value)
+        : type(Int2Type),
+          value(value.X, value.Y)
+    {
+    }
+
+    ScriptObject::ScriptObject(Point3 value)
+        : type(Int3Type),
+          value(new SixteenBytes(value.X, value.Y, value.Z, 0))
+    {
+    }
+
+    ScriptObject::ScriptObject(Point4 value)
+        : type(Int4Type),
+          value(new SixteenBytes(value.X, value.Y, value.Z, value.W))
     {
     }
 
@@ -55,7 +67,7 @@ namespace Bibim
     }
 
     ScriptObject::ScriptObject(Vector4 value)
-        : type(Float3Type),
+        : type(Float4Type),
           value(new SixteenBytes(value.X, value.Y, value.Z, value.W))
     {
     }
@@ -104,14 +116,12 @@ namespace Bibim
                 return sizeof(bool);
             case IntType:
                 return sizeof(int);
-            case UIntType:
-                return sizeof(uint);
             case LongIntType:
-                return sizeof(int64);
+                return sizeof(longint);
             case FloatType:
                 return sizeof(float);
             case ColorType:
-                return sizeof(uint);
+                return sizeof(Color);
             case Int2Type:
                 return sizeof(int) * 2;
             case Int3Type:

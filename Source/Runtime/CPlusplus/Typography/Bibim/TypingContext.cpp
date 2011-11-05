@@ -49,7 +49,7 @@ namespace Bibim
         currentIndexFromOriginalText = 0;
     }
 
-    int TypingContext::GetLength(uint32 code)
+    int TypingContext::GetLength(int code)
     {
         const wchar_t wideCharacter = static_cast<wchar_t>(code);
         return WideCharToMultiByte(CP_UTF8, 0, &wideCharacter, 1, nullptr, 0, nullptr, nullptr);

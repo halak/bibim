@@ -29,19 +29,13 @@ namespace Bibim
     int ScriptingContext::GetIntArg(int index) const
     {
         BBAssertDebug(0 <= index && index < numberOfArguments);
-        return BinaryReader::ToInt32(thread->GetStack().GetAt(index - numberOfArguments));
+        return BinaryReader::ToInt(thread->GetStack().GetAt(index - numberOfArguments));
     }
 
-    uint ScriptingContext::GetUIntArg(int index) const
+    longint ScriptingContext::GetLongIntArg(int index) const
     {
         BBAssertDebug(0 <= index && index < numberOfArguments);
-        return BinaryReader::ToUInt32(thread->GetStack().GetAt(index - numberOfArguments));
-    }
-
-    int64 ScriptingContext::GetLongIntArg(int index) const
-    {
-        BBAssertDebug(0 <= index && index < numberOfArguments);
-        return BinaryReader::ToInt64(thread->GetStack().GetAt(index - numberOfArguments));
+        return BinaryReader::ToLongInt(thread->GetStack().GetAt(index - numberOfArguments));
     }
 
     float ScriptingContext::GetFloatArg(int index) const
@@ -53,7 +47,7 @@ namespace Bibim
     String ScriptingContext::GetStringArg(int index) const
     {
         BBAssertDebug(0 <= index && index < numberOfArguments);
-        const int stringIndex = BinaryReader::ToInt32(thread->GetStack().GetAt(index - numberOfArguments));
+        const int stringIndex = BinaryReader::ToInt(thread->GetStack().GetAt(index - numberOfArguments));
         return thread->GetScript()->GetStringTable()[stringIndex];
     }
 
@@ -141,12 +135,12 @@ namespace Bibim
         return thread->Call(name, arg1, arg2, arg3, arg4, arg5);
     }
 
-    const ScriptObject& ScriptingContext::GetGlobal(uint id) const
+    const ScriptObject& ScriptingContext::GetGlobal(int id) const
     {
         return thread->GetGlobal(id);
     }
 
-    void ScriptingContext::SetGlobal(uint id, const ScriptObject& value)
+    void ScriptingContext::SetGlobal(int id, const ScriptObject& value)
     {
         thread->SetGlobal(id, value);
     }

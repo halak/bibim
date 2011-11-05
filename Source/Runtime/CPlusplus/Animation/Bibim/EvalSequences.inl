@@ -3,13 +3,13 @@
 namespace Bibim
 {
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
-    EvaluableSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::EvaluableSequenceTemplate()
+    EvalSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::EvalSequenceTemplate()
         : timeIndex(0)
     {
     }
 
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
-    EvaluableSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>* EvaluableSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::Clone(CloningContext& context) const
+    EvalSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>* EvalSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::Clone(CloningContext& context) const
     {
         This* clone = new This();
         context.Store(this, clone);
@@ -18,7 +18,7 @@ namespace Bibim
     }
 
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
-    void EvaluableSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::UpdateValue()
+    void EvalSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::UpdateValue()
     {
         if (source == nullptr || source->GetDuration() == 0.0f)
             return;
@@ -38,7 +38,7 @@ namespace Bibim
     }
 
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
-    void EvaluableSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::OnRead(ComponentStreamReader& reader)
+    void EvalSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::OnRead(ComponentStreamReader& reader)
     {
         Base::onRead(reader);
         timeIndex = 0;
@@ -46,7 +46,7 @@ namespace Bibim
     }
 
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
-    void EvaluableSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::OnCopy(const GameComponent* original, CloningContext& context)
+    void EvalSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);

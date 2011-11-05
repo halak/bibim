@@ -18,8 +18,8 @@
 
 #       define BBComponentClass(classname, parent, a, b, c, d)  BBAbstractComponentClass(classname, parent); \
                                                                 public: \
-                                                                    static const uint32 ClassID = BBMakeFOURCC(a, b, c, d); \
-                                                                    virtual uint32 GetClassID() const { return ClassID; } \
+                                                                    static const int ClassID = BBMakeFOURCC(a, b, c, d); \
+                                                                    virtual int GetClassID() const { return ClassID; } \
                                                                     virtual classname* Clone() const; \
                                                                 protected: \
                                                                     virtual classname* Clone(Bibim::CloningContext& context) const; \
@@ -43,24 +43,24 @@
             BBAbstractComponentClass(GameComponent, SharedObject);
             BBThisIsNoncopyableClass(GameComponent);
             public:
-                static const uint UnspecifiedID;
+                static const int UnspecifiedID;
 
             public:
                 virtual ~GameComponent();
 
                 virtual GameComponent* Clone() const;
 
-                inline uint GetID() const;
-                inline void SetID(uint value);
+                inline int GetID() const;
+                inline void SetID(int value);
 
             protected:
                 GameComponent();
-                GameComponent(uint id);
+                GameComponent(int id);
 
                 virtual GameComponent* Clone(CloningContext& context) const = 0;
 
             private:
-                uint id;
+                int id;
 
                 friend class CloningContext;
                 friend class ComponentStreamReader;

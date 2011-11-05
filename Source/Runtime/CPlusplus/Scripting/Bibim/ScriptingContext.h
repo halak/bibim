@@ -15,12 +15,11 @@
                 ScriptingContext(ScriptThread* thread, int numberOfArguments, int numberOfReturnValues);
                 ~ScriptingContext();
 
-                bool   GetBoolArg(int index) const;
-                int    GetIntArg(int index) const;
-                uint   GetUIntArg(int index) const;
-                int64  GetLongIntArg(int index) const;
-                float  GetFloatArg(int index) const;
-                String GetStringArg(int index) const;
+                bool    GetBoolArg(int index) const;
+                int     GetIntArg(int index) const;
+                longint GetLongIntArg(int index) const;
+                float   GetFloatArg(int index) const;
+                String  GetStringArg(int index) const;
 
                 void Return();
                 void Return(const ScriptObject& value);
@@ -38,8 +37,8 @@
                 ScriptObject Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4);
                 ScriptObject Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4, const ScriptObject& arg5);
 
-                const ScriptObject& GetGlobal(uint id) const;
-                void SetGlobal(uint id, const ScriptObject& value);
+                const ScriptObject& GetGlobal(int id) const;
+                void SetGlobal(int id, const ScriptObject& value);
 
             private:
                 ScriptThread* thread;

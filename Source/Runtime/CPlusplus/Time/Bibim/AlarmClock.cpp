@@ -62,7 +62,7 @@ namespace Bibim
     {
     }
 
-    void AlarmClock::Update(float dt, uint timestamp)
+    void AlarmClock::Update(float dt, int timestamp)
     {
         if (alarms.empty() || 
             Seal(timestamp))

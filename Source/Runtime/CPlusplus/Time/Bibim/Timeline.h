@@ -18,7 +18,7 @@
                 Timeline();
                 virtual ~Timeline();
 
-                virtual void Update(float dt, uint timestamp);
+                virtual void Update(float dt, int timestamp);
 
                 void Add(UpdateableGameModule* item);
                 bool Remove(UpdateableGameModule* item);

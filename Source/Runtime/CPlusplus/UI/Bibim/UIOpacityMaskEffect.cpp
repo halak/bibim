@@ -97,7 +97,7 @@ namespace Bibim
         Base::OnRead(reader);
         startPoint = reader.ReadFloat();
         length = reader.ReadFloat();
-        fill = static_cast<FillStyle>(reader.ReadInt8());
+        fill = static_cast<FillStyle>(reader.ReadByte());
         if (length != 0.0f)
             invLength = 1.0f / length;
     }

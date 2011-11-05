@@ -35,7 +35,7 @@ namespace Bibim
     {
     }
 
-    void UIMouseEventDispatcher::Update(float /*dt*/, uint timestamp)
+    void UIMouseEventDispatcher::Update(float /*dt*/, int timestamp)
     {
         if (domain == nullptr ||
             device == nullptr ||

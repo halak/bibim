@@ -9,7 +9,7 @@
     {
         struct KeyboardState
         {
-            dword Keys[Key::Count / (sizeof(dword) * 8)];
+            int Keys[Key::Count / (sizeof(int) * 8)];
 
             inline KeyboardState();
             inline KeyboardState(const KeyboardState& original);

@@ -14,7 +14,7 @@ namespace Bibim
     {
     }
 
-    void UIAsyncEventQueue::Update(float /*dt*/, uint /*timestamp*/)
+    void UIAsyncEventQueue::Update(float /*dt*/, int /*timestamp*/)
     {
         NotifyAll();
     }

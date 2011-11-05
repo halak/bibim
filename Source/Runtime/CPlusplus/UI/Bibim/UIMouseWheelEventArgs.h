@@ -11,8 +11,8 @@
         {
             public:
                 UIMouseWheelEventArgs();
-                UIMouseWheelEventArgs(UIVisual* target, Point position, int wheelDelta);
-                UIMouseWheelEventArgs(UIVisual* target, Point position, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed, int wheelDelta);
+                UIMouseWheelEventArgs(UIVisual* target, Point2 position, int wheelDelta);
+                UIMouseWheelEventArgs(UIVisual* target, Point2 position, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed, int wheelDelta);
                 UIMouseWheelEventArgs(const UIMouseEventArgs& base, int wheelDelta);
                 UIMouseWheelEventArgs(const UIMouseWheelEventArgs& original);
                 virtual ~UIMouseWheelEventArgs();

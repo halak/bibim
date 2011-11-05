@@ -10,10 +10,10 @@ namespace Bibim
 {
     struct Entry
     {
-        uint32 ID;
+        int ID;
         GameAssetFactory::CreateFunction Function;
 
-        Entry(uint32 id, GameAssetFactory::CreateFunction function)
+        Entry(int id, GameAssetFactory::CreateFunction function)
             : ID(id),
               Function(function)
         {
@@ -22,7 +22,7 @@ namespace Bibim
 
     static std::vector<Entry> Entries;
 
-    static Entry* FindEntry(uint32 id)
+    static Entry* FindEntry(int id)
     {
         BBAssertDebug(Entries.empty() == false);
 
@@ -44,7 +44,7 @@ namespace Bibim
         return nullptr;
     }
 
-    void GameAssetFactory::AddEntry(uint32 id, CreateFunction function)
+    void GameAssetFactory::AddEntry(int id, CreateFunction function)
     {
         Entries.push_back(Entry(id, function));
     }
@@ -64,8 +64,7 @@ namespace Bibim
 
     GameAsset* GameAssetFactory::Create(StreamReader& reader, GameAsset* existingInstance)
     {
-        const uint32 id = reader.ReadUInt32();
-
+        const int id = reader.ReadInt();
         if (Entry* entry = FindEntry(id))
             return (*entry->Function)(reader, existingInstance);
         else

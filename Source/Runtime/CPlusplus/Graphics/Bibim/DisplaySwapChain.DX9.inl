@@ -10,7 +10,7 @@ namespace Bibim
         return window;
     }
 
-    Point DisplaySwapChain::GetBackbufferSize() const
+    Point2 DisplaySwapChain::GetBackbufferSize() const
     {
         return backbufferSize;
     }

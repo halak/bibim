@@ -3,7 +3,7 @@
 #define __BIBIM_GLYPHTABLE_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/Point.h>
+#   include <Bibim/Point2.h>
 #   include <Bibim/Vector2.h>
 #   include <map>
 #   include <vector>
@@ -13,27 +13,27 @@
         class GlyphTable
         {
             public:
-                typedef std::map<uint32, const Glyph*> GlyphDictionary;
+                typedef std::map<int, const Glyph*> GlyphDictionary;
                 typedef std::vector<GlyphSurface*> SurfaceCollection;
 
             public:
                 GlyphTable(GraphicsDevice* graphicsDevice);
                 ~GlyphTable();
 
-                const Glyph* Add(uint32 code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, const void* buffer, int width, int height, int pitch);
+                const Glyph* Add(int code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, const void* buffer, int width, int height, int pitch);
 
-                bool Remove(uint32 code);
+                bool Remove(int code);
 
                 void Clear();
 
-                const Glyph* Find(uint32 code) const;
+                const Glyph* Find(int code) const;
 
                 inline const GlyphDictionary& GetGlyphs() const;
                 inline const SurfaceCollection& GetSurfaces() const;
 
             private:
                 std::pair<GlyphSurface*, Rect> AllocateSurface(const void* buffer, int width, int height, int pitch);
-                static Point GetAdaptiveSurfaceSize(int numberOfExisting, int width, int height);
+                static Point2 GetAdaptiveSurfaceSize(int numberOfExisting, int width, int height);
 
             private:
                 GraphicsDevice* graphicsDevice;

@@ -22,15 +22,15 @@
 
                 struct LoadingStatus
                 {
-                    uint TotalBytes;
-                    uint LoadedBytes;
-                    uint CurrentTaskTotalBytes;
-                    uint CurrentTaskLoadedBytes;
+                    int TotalBytes;
+                    int LoadedBytes;
+                    int CurrentTaskTotalBytes;
+                    int CurrentTaskLoadedBytes;
                     String CurrentTaskName;
 
                     LoadingStatus();
-                    LoadingStatus(uint totalBytes, uint loadedBytes,
-                                  uint taskTotalBytes, uint taskLoadedBytes, const String& taskName);
+                    LoadingStatus(int totalBytes, int loadedBytes,
+                                  int taskTotalBytes, int taskLoadedBytes, const String& taskName);
                     LoadingStatus(const LoadingStatus& original);
 
                     LoadingStatus& operator = (const LoadingStatus& right);
@@ -85,8 +85,8 @@
                         Lock currentTaskLock;
                         TaskQueue taskQueue;
                         Lock taskQueueLock;
-                        uint totalBytes;
-                        uint loadedBytes;
+                        int totalBytes;
+                        int loadedBytes;
                         bool closed;
                 };
 

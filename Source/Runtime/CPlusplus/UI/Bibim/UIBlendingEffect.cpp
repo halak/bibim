@@ -31,7 +31,7 @@ namespace Bibim
     void UIBlendingEffect::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        mode = static_cast<BlendMode>(reader.ReadInt8());
+        mode = static_cast<BlendMode>(reader.ReadByte());
     }
 
     void UIBlendingEffect::OnCopy(const GameComponent* original, CloningContext& context)

@@ -12,7 +12,7 @@
         {
             BBThisIsNoncopyableClass(Glyph);
             public:
-                inline uint32 GetCode() const;
+                inline int GetCode() const;
                 inline Vector2 GetAdvance() const;
                 inline Vector2 GetBitmapOffset() const;
                 inline Vector2 GetBitmapSize() const;
@@ -21,12 +21,12 @@
                 inline Rect GetClippingRect() const;
 
             private:
-                Glyph(uint32 code, Vector2 advance);
-                Glyph(uint32 code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, GlyphSurface* surface, Rect clippingRect);
+                Glyph(int code, Vector2 advance);
+                Glyph(int code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, GlyphSurface* surface, Rect clippingRect);
                 ~Glyph();
 
             private:
-                uint32 code;
+                int code;
                 Vector2 advance;
                 Vector2 bitmapOffset;
                 Vector2 bitmapSize;

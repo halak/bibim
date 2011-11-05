@@ -29,7 +29,7 @@ namespace Bibim
 
         if (renderTarget == nullptr)
         {
-            const Point size = graphicsDevice->GetWindow()->GetSize();
+            const Point2 size = graphicsDevice->GetWindow()->GetSize();
             renderTarget = new RenderTargetTexture2D(graphicsDevice, size.X, size.Y);
         }
 

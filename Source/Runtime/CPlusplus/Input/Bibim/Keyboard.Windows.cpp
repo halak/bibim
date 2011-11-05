@@ -16,12 +16,12 @@
 
             if (window && window->GetHandle() == ::GetForegroundWindow())
             {
-                uint code = 0;
+                int code = 0;
                 for (int i = 0; i < sizeof(allowedKeys) / sizeof(allowedKeys[0]); i++)
                 {
-                    dword& keyStateField = state.Keys[i];
-                    const dword allowField = allowedKeys[i];
-                    for (dword k = 0x80000000; k != 0x00000000; k >>= 1, code++)
+                    int& keyStateField = state.Keys[i];
+                    const int allowField = allowedKeys[i];
+                    for (unsigned int k = 0x80000000; k != 0x00000000; k >>= 1, code++)
                     {
                         if ((allowField & k) != 0x00000000)
                         {

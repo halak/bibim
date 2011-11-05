@@ -27,7 +27,7 @@ namespace Bibim
         const float maximumRight  = Math::Max(a.GetRight(),  b.GetRight());
         const float maximumBottom = Math::Max(a.GetBottom(), b.GetBottom());
         return RectF(Vector2(minimumLeft, minimumTop), 
-                          Vector2(maximumRight, maximumBottom));
+                     Vector2(maximumRight, maximumBottom));
     }
 
     const RectF RectF::Empty = RectF(0.0f, 0.0f, 0.0f, 0.0f);

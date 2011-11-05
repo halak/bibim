@@ -45,7 +45,7 @@
                 AlarmClock();
                 virtual ~AlarmClock();
 
-                virtual void Update(float dt, uint timestamp);
+                virtual void Update(float dt, int timestamp);
 
                 void Start(Callback* callback, int group, float tickTime, float alaramTime);
                 void Cancel(int group);

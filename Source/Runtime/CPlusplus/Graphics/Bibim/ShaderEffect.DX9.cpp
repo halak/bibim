@@ -106,7 +106,7 @@ namespace Bibim
     GameAsset* ShaderEffect::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
     {
         GraphicsDevice* graphicsDevice = static_cast<GraphicsDevice*>(reader.ReadModule(GraphicsDevice::ClassID));
-        const int length = reader.ReadInt32();
+        const int length = reader.ReadInt();
         std::vector<byte> buffer;
         buffer.resize(length);
         reader.Read(&buffer[0], length);

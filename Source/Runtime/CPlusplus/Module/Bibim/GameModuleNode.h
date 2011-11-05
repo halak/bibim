@@ -27,11 +27,11 @@
                 template <typename T>
                 T* CreateAndAttachChild();
 
-                GameModule* FindChild(uint32 id) const;
-                GameModule* FindChildByClassID(uint32 id) const;
-                GameModuleNode* FindChildNode(uint32 id) const;
+                GameModule* FindChild(int id) const;
+                GameModule* FindChildByClassID(int id) const;
+                GameModuleNode* FindChildNode(int id) const;
                 GameModuleNode* FindChildNode(GameModule* item) const;
-                GameModuleNode* FindChildNodeByClassID(uint32 id) const;
+                GameModuleNode* FindChildNodeByClassID(int id) const;
 
                 template <typename T> T* FindChild(bool searchAllChildren) const;
 

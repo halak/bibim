@@ -18,7 +18,7 @@ namespace Bibim
         delete root;
     }
 
-    GameModule* GameModuleTree::Find(uint32 id) const
+    GameModule* GameModuleTree::Find(int id) const
     {
         if (GameModuleNode* foundNode = FindNode(id))
             return foundNode->GetModule();
@@ -26,7 +26,7 @@ namespace Bibim
             return nullptr;
     }
 
-    GameModuleNode* GameModuleTree::FindNode(uint32 id) const
+    GameModuleNode* GameModuleTree::FindNode(int id) const
     {
         UIntNodeDictionary::const_iterator it = idNodes.find(id);
         if (it != idNodes.end())
@@ -35,7 +35,7 @@ namespace Bibim
             return nullptr;
     }
 
-    void GameModuleTree::OnModuleIDChanged(GameModule* module, uint32 oldID)
+    void GameModuleTree::OnModuleIDChanged(GameModule* module, int oldID)
     {
         // Precondition
         BBAssertDebug(module->node && module->node->tree == this);
@@ -47,7 +47,7 @@ namespace Bibim
                 idNodes.erase(itOld);
         }
 
-        const uint32 id = module->GetID();
+        const int id = module->GetID();
         if (id != GameModule::UnspecifiedID)
             idNodes.insert(UIntNodeDictionary::value_type(id, module->node));
     }
@@ -67,7 +67,7 @@ namespace Bibim
 
                 node->tree = tree;
 
-                const uint32 id = node->GetModule()->GetID();
+                const int id = node->GetModule()->GetID();
                 if (id != GameModule::UnspecifiedID)
                     tree->idNodes.insert(UIntNodeDictionary::value_type(id, node));
 
@@ -93,7 +93,7 @@ namespace Bibim
             {
                 node->tree = nullptr;
 
-                const uint32 id = node->GetModule()->GetID();
+                const int id = node->GetModule()->GetID();
                 if (id != GameModule::UnspecifiedID)
                 {
                     UIntNodeDictionary::iterator it = tree->idNodes.find(id);

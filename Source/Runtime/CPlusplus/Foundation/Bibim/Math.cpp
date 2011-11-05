@@ -57,21 +57,18 @@ namespace Bibim
     int Math::GetNearestPowerOfTwo(int value)
     {
         if (value > 0)
-            return static_cast<int>(GetNearestPowerOfTwo(static_cast<uint>(value)));
+        {
+            value--;
+            value |= (value >> 1);
+            value |= (value >> 2);
+            value |= (value >> 4);
+            value |= (value >> 8);
+            value |= (value >> 16);
+            value++;
+            return value;
+        }
         else
             return 0;
-    }
-
-    uint Math::GetNearestPowerOfTwo(uint value)
-    {
-        value--;
-        value |= (value >> 1);
-        value |= (value >> 2);
-        value |= (value >> 4);
-        value |= (value >> 8);
-        value |= (value >> 16);
-        value++;
-        return value;
     }
 
     bool Math::Equals(float a, float b)

@@ -19,7 +19,7 @@
                 UIAsyncEventQueue();
                 virtual ~UIAsyncEventQueue();
 
-                virtual void Update(float dt, uint timestamp);
+                virtual void Update(float dt, int timestamp);
 
                 void NotifyAll();
    

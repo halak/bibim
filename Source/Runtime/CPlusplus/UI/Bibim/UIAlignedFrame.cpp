@@ -280,7 +280,7 @@ namespace Bibim
     void UIAlignedFrame::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        align = static_cast<Alignment>(reader.ReadUInt8());
+        align = static_cast<Alignment>(reader.ReadByte());
         offset = reader.ReadVector2();
         size = reader.ReadVector2();
         boundsChanged = true;

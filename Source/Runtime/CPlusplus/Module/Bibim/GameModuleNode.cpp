@@ -134,7 +134,7 @@ namespace Bibim
         }
     }
 
-    GameModule* GameModuleNode::FindChild(uint32 id) const
+    GameModule* GameModuleNode::FindChild(int id) const
     {
         if (GameModuleNode* foundNode = FindChildNode(id))
             return foundNode->GetModule();
@@ -142,7 +142,7 @@ namespace Bibim
             return nullptr;
     }
 
-    GameModule* GameModuleNode::FindChildByClassID(uint32 id) const
+    GameModule* GameModuleNode::FindChildByClassID(int id) const
     {
         if (GameModuleNode* foundNode = FindChildNodeByClassID(id))
             return foundNode->GetModule();
@@ -150,7 +150,7 @@ namespace Bibim
             return nullptr;
     }
 
-    GameModuleNode* GameModuleNode::FindChildNode(uint32 id) const
+    GameModuleNode* GameModuleNode::FindChildNode(int id) const
     {
         if (id == GameModule::UnspecifiedID)
             return nullptr;
@@ -170,7 +170,7 @@ namespace Bibim
         return nullptr;
     }
 
-    GameModuleNode* GameModuleNode::FindChildNodeByClassID(uint32 id) const
+    GameModuleNode* GameModuleNode::FindChildNodeByClassID(int id) const
     {
         for (NodeCollection::const_iterator it = children.begin(); it != children.end(); it++)
         {

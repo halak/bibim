@@ -20,11 +20,11 @@
                 const String& GetTitle() const;
                 void SetTitle(const String& value);
 
-                virtual Point GetPosition() const;
-                virtual void  SetPosition(Point value);
+                virtual Point2 GetPosition() const;
+                virtual void   SetPosition(Point2 value);
 
-                virtual Point GetSize() const;
-                virtual void  SetSize(Point value);
+                virtual Point2 GetSize() const;
+                virtual void   SetSize(Point2 value);
 
                 virtual bool GetVisible() const;
                 virtual void SetVisible(bool value);
@@ -47,8 +47,8 @@
             private:
                 void* handle;
                 String title;
-                Point position;
-                Point size;
+                Point2 position;
+                Point2 size;
                 bool visible;
 
                 struct Internal;

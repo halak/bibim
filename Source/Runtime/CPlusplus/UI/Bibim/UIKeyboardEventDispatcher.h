@@ -16,7 +16,7 @@
                 UIKeyboardEventDispatcher(UIDomain* domain, Keyboard* device);
                 virtual ~UIKeyboardEventDispatcher();
 
-                virtual void Update(float dt, uint timestamp);
+                virtual void Update(float dt, int timestamp);
 
                 inline UIDomain* GetDomain() const;
                 void SetDomain(UIDomain* value);

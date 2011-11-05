@@ -1,16 +1,16 @@
 #pragma once
-#ifndef __BIBIM_EVALUATIONCONTEXT_H__
-#define __BIBIM_EVALUATIONCONTEXT_H__
+#ifndef __BIBIM_EVALCONTEXT_H__
+#define __BIBIM_EVALCONTEXT_H__
 
 #   include <Bibim/FWD.h>
 
     namespace Bibim
     {
-        class EvaluationContext
+        class EvalContext
         {
             public:
-                EvaluationContext();
-                ~EvaluationContext();
+                EvalContext();
+                ~EvalContext();
 
                 template <typename T>
                 T GetValue(const String& name);
@@ -19,6 +19,6 @@
         };
     }
 
-#   include <Bibim/EvaluationContext.inl>
+#   include <Bibim/EvalContext.inl>
 
 #endif

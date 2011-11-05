@@ -17,7 +17,7 @@
                 UIMouseEventDispatcher(UIDomain* domain, Mouse* mouse, UIRenderer* renderer);
                 virtual ~UIMouseEventDispatcher();
 
-                virtual void Update(float dt, uint timestamp);
+                virtual void Update(float dt, int timestamp);
 
                 inline UIDomain* GetDomain() const;
                 void SetDomain(UIDomain* value);

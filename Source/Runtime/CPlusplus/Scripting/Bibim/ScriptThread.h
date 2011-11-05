@@ -40,8 +40,8 @@
                 inline const ScriptStack& GetStack() const;
                 inline State GetState() const;
 
-                const ScriptObject& GetGlobal(uint id) const;
-                void SetGlobal(uint id, const ScriptObject& value);
+                const ScriptObject& GetGlobal(int id) const;
+                void SetGlobal(int id, const ScriptObject& value);
 
             private:
                 const Script::Function* BeginCall(const String& name, int numberOfArguments);
@@ -60,7 +60,7 @@
                 MemoryStreamPtr stream;
                 State state;
                 int nativeFunctionDepth;
-                std::map<uint, ScriptObject> globalVariables;
+                std::map<int, ScriptObject> globalVariables;
 
                 const Script::Function* suspendedFunction;
                 int suspendedTopIndex;

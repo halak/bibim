@@ -26,31 +26,16 @@
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Fundamental Type Redefinition
-        typedef          char    int8;
-        typedef unsigned char    byte;
-        typedef unsigned char    uchar;
-        typedef unsigned char    uint8;
-        typedef          short   int16;
-        typedef unsigned short   ushort;
-        typedef unsigned short   uint16;
-        typedef unsigned short   word;
-        typedef          int     int32;
-        typedef unsigned int     uint;
-        typedef unsigned int     uint32;
-        typedef unsigned long    ulong;
-        typedef unsigned long    dword;
-        typedef          float   real32;
-        typedef          double  real64;
-        typedef          __int64 int64;
-        typedef unsigned __int64 uint64;
-        typedef unsigned __int64 qword;
+        typedef unsigned char byte;
+        typedef __int64       longint;
+        typedef float         single;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // FOURCC
-#       define BBMakeFOURCC(a, b, c, d) ((static_cast<uint32>(a) << 24) | \
-                                         (static_cast<uint32>(b) << 16) | \
-                                         (static_cast<uint32>(c) << 8) | \
-                                         (static_cast<uint32>(d) << 0))
+#       define BBMakeFOURCC(a, b, c, d) ((static_cast<int>(a) << 24) | \
+                                         (static_cast<int>(b) << 16) | \
+                                         (static_cast<int>(c) << 8) | \
+                                         (static_cast<int>(d) << 0))
 #       define BBFOURCCFirst(fourcc)    static_cast<char>((fourcc & 0xFF000000) >> 24)
 #       define BBFOURCCSecond(fourcc)   static_cast<char>((fourcc & 0x00FF0000) >> 16)
 #       define BBFOURCCThird(fourcc)    static_cast<char>((fourcc & 0x0000FF00) >> 8)

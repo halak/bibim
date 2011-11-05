@@ -14,13 +14,13 @@
                 UpdateableGameModule();
                 virtual ~UpdateableGameModule();
 
-                virtual void Update(float dt, uint timestamp) = 0;
+                virtual void Update(float dt, int timestamp) = 0;
 
             protected:
-                inline bool Seal(uint timestamp);
+                inline bool Seal(int timestamp);
 
             private:
-                uint lastTimestamp;
+                int lastTimestamp;
         };
     }
 

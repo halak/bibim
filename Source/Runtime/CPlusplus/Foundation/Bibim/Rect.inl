@@ -10,7 +10,7 @@ namespace Bibim
     {
     }
 
-    Rect::Rect(Point leftTop, Point rightBottom)
+    Rect::Rect(Point2 leftTop, Point2 rightBottom)
         : X(leftTop.X),
           Y(leftTop.Y),
           Width(rightBottom.X - leftTop.X),
@@ -53,9 +53,9 @@ namespace Bibim
         return Y + Height / 2;
     }
 
-    Point Rect::GetCenterPoint() const
+    Point2 Rect::GetCenterPoint() const
     {
-        return Point(GetCenter(), GetMiddle());
+        return Point2(GetCenter(), GetMiddle());
     }
 
     void Rect::SetLeft(int value)
@@ -84,7 +84,7 @@ namespace Bibim
         Height = value - Y;
     }
 
-    bool Rect::Contains(Point p) const
+    bool Rect::Contains(Point2 p) const
     {
         return GetLeft() <= p.X && p.X <= GetRight() &&
                GetTop()  <= p.Y && p.Y <= GetBottom();

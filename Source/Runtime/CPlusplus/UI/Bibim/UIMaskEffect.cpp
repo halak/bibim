@@ -41,7 +41,7 @@ namespace Bibim
     {
     }
 
-    UIMaskEffect::MaskEffector::MaskEffector(uint32 shaderEffectNameHint, UIMaskEffect* effect)
+    UIMaskEffect::MaskEffector::MaskEffector(int shaderEffectNameHint, UIMaskEffect* effect)
         : UIRenderer::Effector(shaderEffectNameHint, true),
           mask(effect->mask)
     {

@@ -1,7 +1,7 @@
 namespace Bibim
 {
     MouseState::MouseState()
-        : Position(Point::Zero),
+        : Position(Point2::Zero),
           Wheel(0),
           IsLeftButtonPressed(false),
           IsRightButtonPressed(false),
@@ -9,7 +9,7 @@ namespace Bibim
     {
     }
 
-    MouseState::MouseState(Point position, int wheel, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed)
+    MouseState::MouseState(Point2 position, int wheel, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed)
         : Position(position),
           Wheel(wheel),
           IsLeftButtonPressed(isLeftButtonPressed),

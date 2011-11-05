@@ -7,7 +7,7 @@ namespace Bibim
     {
     }
 
-    uint32 Object::GetClassID() const
+    int Object::GetClassID() const
     {
         return 0;
     }

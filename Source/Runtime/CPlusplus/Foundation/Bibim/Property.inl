@@ -1,6 +1,6 @@
 namespace Bibim
 {
-    PropertyBase::PropertyBase(uint32 id)
+    PropertyBase::PropertyBase(int id)
         : id(id)
     {
     }
@@ -9,7 +9,7 @@ namespace Bibim
     {
     }
 
-    uint32 PropertyBase::GetID() const
+    int PropertyBase::GetID() const
     {
         return id;
     }

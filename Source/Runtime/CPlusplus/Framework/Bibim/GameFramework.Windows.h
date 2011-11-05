@@ -39,7 +39,7 @@
                     virtual void Initialize();
                     virtual void Finalize();
 
-                    virtual void Update(float dt, uint timestamp);
+                    virtual void Update(float dt, int timestamp);
                     virtual void Draw();
 
                     virtual void BeginDraw();
@@ -54,7 +54,7 @@
                     bool  fixedTimeStep;
                     float fixedElapsedTime;
                     float maxTimeInOneFrame;
-                    uint  desiredFPS;
+                    int  desiredFPS;
                     std::deque<float> timestamps;
             };
         }

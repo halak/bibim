@@ -9,8 +9,8 @@
     {
 #       define BBAbstractModuleClass(classname, parent) ;
 #       define BBModuleClass(classname, parent, a, b, c, d) public: \
-                                                                static const uint32 ClassID = BBMakeFOURCC(a, b, c, d); \
-                                                                virtual uint32 GetClassID() const { return ClassID; } \
+                                                                static const int ClassID = BBMakeFOURCC(a, b, c, d); \
+                                                                virtual int GetClassID() const { return ClassID; } \
                                                             private:
 
         /// Game이란 Program을 구성하는 요소의 기반 class.
@@ -27,13 +27,13 @@
                 };
 
             public:
-                static const uint UnspecifiedID;
+                static const int UnspecifiedID;
 
             public:
                 virtual ~GameModule();
 
-                inline uint32 GetID() const;
-                       void SetID(uint32 value);
+                inline int GetID() const;
+                       void SetID(int value);
 
                 inline Status GetStatus() const;
 
@@ -43,17 +43,17 @@
                 inline bool GetActive() const;
                        void SetActive(bool value);
 
-                virtual void* QueryClass(uint32 classID);
+                virtual void* QueryClass(int classID);
 
             protected:
                 GameModule();
-                GameModule(uint32 id);
+                GameModule(int id);
 
                 virtual void OnStatusChanged(Status old);
 
             private:
                 GameModuleNode* node;
-                uint32 id;
+                int id;
                 bool alive;
                 bool active;
 

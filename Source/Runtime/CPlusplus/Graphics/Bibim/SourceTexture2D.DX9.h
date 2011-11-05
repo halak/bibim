@@ -23,7 +23,7 @@
                 class LoadingTask : public AssetLoadingTask
                 {
                     public:
-                        LoadingTask(const AssetStreamReader& reader, SourceTexture2D* texture, uint totalBytes);
+                        LoadingTask(const AssetStreamReader& reader, SourceTexture2D* texture, int totalBytes);
                         virtual ~LoadingTask();
 
                         virtual void Execute();

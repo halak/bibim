@@ -1,6 +1,6 @@
 namespace Bibim
 {
-    uint32 GameModule::GetID() const
+    int GameModule::GetID() const
     {
         return id;
     }

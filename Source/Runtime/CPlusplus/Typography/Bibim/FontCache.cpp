@@ -237,7 +237,7 @@ namespace Bibim
             FT_Done_Face(primaryFace);
     }
 
-    const Glyph* FontCache::GetGlyph(uint32 code)
+    const Glyph* FontCache::GetGlyph(int code)
     {
         if (const Glyph* result = regularGlyphTable->Find(code))
             return result;
@@ -246,7 +246,7 @@ namespace Bibim
             struct SelectFace
             {
                 // 두 Face에서 Code를 찾아서 반환합니다.
-                static std::pair<FT_Face, unsigned int> Do(FT_Face primary, FT_Face alternative, uint32 code)
+                static std::pair<FT_Face, unsigned int> Do(FT_Face primary, FT_Face alternative, int code)
                 {
                     if (primary)
                     {

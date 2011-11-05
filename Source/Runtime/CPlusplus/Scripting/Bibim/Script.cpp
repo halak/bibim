@@ -33,30 +33,30 @@ namespace Bibim
 
     GameAsset* Script::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
     {
-        const int length = reader.ReadInt32();
+        const int length = reader.ReadInt();
 
         Buffer buffer;
         buffer.resize(length);
 
         reader.Read(&buffer[0], length);
-        const int numberOfFunctions = reader.ReadInt32();
+        const int numberOfFunctions = reader.ReadInt();
         FunctionTable functionTable;
         functionTable.resize(numberOfFunctions);
         for (int i = 0; i < numberOfFunctions; i++)
         {
             Function& item = functionTable[i];
             item.Name = reader.ReadString();
-            item.Position = reader.ReadInt32();
-            item.ArgumentStackSize = reader.ReadInt32();
-            item.ReturnTypes.resize(reader.ReadInt32());
+            item.Position = reader.ReadInt();
+            item.ArgumentStackSize = reader.ReadInt();
+            item.ReturnTypes.resize(reader.ReadInt());
             for (std::vector<ScriptObjectType>::size_type i = 0; i < item.ReturnTypes.size(); i++)
-                item.ReturnTypes[i] = static_cast<ScriptObjectType>(reader.ReadInt32());
-            item.ParameterTypes.resize(reader.ReadInt32());
+                item.ReturnTypes[i] = static_cast<ScriptObjectType>(reader.ReadInt());
+            item.ParameterTypes.resize(reader.ReadInt());
             for (std::vector<ScriptObjectType>::size_type i = 0; i < item.ParameterTypes.size(); i++)
-                item.ParameterTypes[i] = static_cast<ScriptObjectType>(reader.ReadInt32());
+                item.ParameterTypes[i] = static_cast<ScriptObjectType>(reader.ReadInt());
         }
 
-        const int numberOfStrings = reader.ReadInt32();
+        const int numberOfStrings = reader.ReadInt();
         StringCollection stringTable;
         stringTable.reserve(numberOfStrings);
         for (int i = 0; i < numberOfStrings; i++)

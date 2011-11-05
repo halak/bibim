@@ -116,7 +116,7 @@ namespace Bibim
     void UISequentialEventHandler::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        const int count = static_cast<int>(reader.ReadInt16());
+        const int count = static_cast<int>(reader.ReadShortInt());
         handlers.reserve(count);
         for (int i = 0; i < count; i++)
             handlers.push_back(static_cast<UIEventHandler*>(reader.ReadComponent()));

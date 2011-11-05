@@ -46,7 +46,7 @@
             public:
                 virtual ~FontCache();
 
-                const Glyph* GetGlyph(uint32 code);
+                const Glyph* GetGlyph(int code);
 
                 inline FontLibrary* GetLibrary() const;
                 inline const FontCacheParameters& GetParameters() const;

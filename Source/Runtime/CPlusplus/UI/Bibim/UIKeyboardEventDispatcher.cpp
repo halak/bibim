@@ -26,7 +26,7 @@ namespace Bibim
     {
     }
 
-    void UIKeyboardEventDispatcher::Update(float /*dt*/, uint timestamp)
+    void UIKeyboardEventDispatcher::Update(float /*dt*/, int timestamp)
     {
         if (domain == nullptr ||
             device == nullptr ||
@@ -42,12 +42,12 @@ namespace Bibim
 
         const KeyboardState& state = device->GetState();
 
-        uint code = 0;
+        int code = 0;
         for (int i = 0; i < sizeof(state.Keys) / sizeof(state.Keys[0]); i++)
         {
-            const dword currentField    = state.Keys[i];
-            const dword lastField = lastState.Keys[i];
-            for (dword k = 0x80000000; k != 0x00000000; k >>= 1, code++)
+            const int currentField = state.Keys[i];
+            const int lastField    = lastState.Keys[i];
+            for (unsigned int k = 0x80000000; k != 0x00000000; k >>= 1, code++)
             {
                 const bool lastDown    = (lastField & k) != 0x00000000;
                 const bool currentDown = (currentField & k) != 0x00000000;

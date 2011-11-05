@@ -300,8 +300,8 @@ namespace Bibim
                 en++;
                 for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); it++)
                 {
-                    const uint32 nameHint = (*it)->GetShaderEffectNameHint();
-                    if (nameHint != 0x00000000)
+                    const int nameHint = (*it)->GetShaderEffectNameHint();
+                    if (nameHint != 0)
                     {
                         en[0] = BBFOURCCFirst(nameHint);
                         en[1] = BBFOURCCSecond(nameHint);

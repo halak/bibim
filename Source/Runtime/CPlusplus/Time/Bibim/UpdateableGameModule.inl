@@ -1,6 +1,6 @@
 namespace Bibim
 {
-    bool UpdateableGameModule::Seal(uint timestamp)
+    bool UpdateableGameModule::Seal(int timestamp)
     {
         if (lastTimestamp != timestamp)
         {

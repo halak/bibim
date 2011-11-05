@@ -14,74 +14,89 @@ namespace Bibim
     {
         return !operator == (right);
     }
-    
+
+    template <typename T> void BinaryWriter::FromTemplate(byte* buffer, T value)
+    {
+        *(reinterpret_cast<T*>(buffer)) = value;
+    }
+
     void BinaryWriter::From(byte* buffer, bool value)
     {
-        *buffer = value ? 1 : 0;
+        (*buffer) = value ? 1 : 0;
     }
 
-    void BinaryWriter::From(byte* buffer, int8 value)
+    void BinaryWriter::From(byte* buffer, byte value)
     {
-        *(reinterpret_cast<int8*>(buffer)) = value;
+        FromTemplate(buffer, value);
     }
 
-    void BinaryWriter::From(byte* buffer, uint8 value)
+    void BinaryWriter::From(byte* buffer, short value)
     {
-        *(reinterpret_cast<uint8*>(buffer)) = value;
+        FromTemplate(buffer, value);
     }
 
-    void BinaryWriter::From(byte* buffer, int16 value)
+    void BinaryWriter::From(byte* buffer, int value)
     {
-        *(reinterpret_cast<int16*>(buffer)) = value;
+        FromTemplate(buffer, value);
     }
 
-    void BinaryWriter::From(byte* buffer, uint16 value)
+    void BinaryWriter::From(byte* buffer, longint value)
     {
-        *(reinterpret_cast<uint16*>(buffer)) = value;
-    }
-
-    void BinaryWriter::From(byte* buffer, int32 value)
-    {
-        *(reinterpret_cast<int32*>(buffer)) = value;
-    }
-
-    void BinaryWriter::From(byte* buffer, uint32 value)
-    {
-        *(reinterpret_cast<uint32*>(buffer)) = value;
-    }
-
-    void BinaryWriter::From(byte* buffer, int64 value)
-    {
-        *(reinterpret_cast<int64*>(buffer)) = value;
-    }
-
-    void BinaryWriter::From(byte* buffer, uint64 value)
-    {
-        *(reinterpret_cast<uint64*>(buffer)) = value;
+        FromTemplate(buffer, value);
     }
 
     void BinaryWriter::From(byte* buffer, float value)
     {
-        *(reinterpret_cast<float*>(buffer)) = value;
+        FromTemplate(buffer, value);
+    }
+
+    void BinaryWriter::From(byte* buffer, double value)
+    {
+        FromTemplate(buffer, value);
     }
 
     void BinaryWriter::From(byte* buffer, Color value)
     {
-        *(reinterpret_cast<Color*>(buffer)) = value;
+        FromTemplate(buffer, value);
+    }
+
+    void BinaryWriter::From(byte* buffer, Point2 value)
+    {
+        FromTemplate(buffer, value);
+    }
+
+    void BinaryWriter::From(byte* buffer, Point3 value)
+    {
+        FromTemplate(buffer, value);
+    }
+
+    void BinaryWriter::From(byte* buffer, Point4 value)
+    {
+        FromTemplate(buffer, value);
+    }
+
+    void BinaryWriter::From(byte* buffer, Rect value)
+    {
+        FromTemplate(buffer, value);
+    }
+
+    void BinaryWriter::From(byte* buffer, RectF value)
+    {
+        FromTemplate(buffer, value);
     }
 
     void BinaryWriter::From(byte* buffer, Vector2 value)
     {
-        *(reinterpret_cast<Vector2*>(buffer)) = value;
+        FromTemplate(buffer, value);
     }
 
     void BinaryWriter::From(byte* buffer, Vector3 value)
     {
-        *(reinterpret_cast<Vector3*>(buffer)) = value;
+        FromTemplate(buffer, value);
     }
 
     void BinaryWriter::From(byte* buffer, Vector4 value)
     {
-        *(reinterpret_cast<Vector4*>(buffer)) = value;
+        FromTemplate(buffer, value);
     }
 }

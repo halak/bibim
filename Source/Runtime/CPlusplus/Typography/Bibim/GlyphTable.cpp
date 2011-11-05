@@ -20,7 +20,7 @@ namespace Bibim
         Clear();
     }
 
-    const Glyph* GlyphTable::Add(uint32 code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, const void* buffer, int width, int height, int pitch)
+    const Glyph* GlyphTable::Add(int code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, const void* buffer, int width, int height, int pitch)
     {
         std::pair<GlyphSurface*, Rect> allocated = AllocateSurface(buffer, width, height, pitch);
         Glyph* newGlyph = nullptr;
@@ -48,7 +48,7 @@ namespace Bibim
         return newGlyph;
     }
 
-    bool GlyphTable::Remove(uint32 code)
+    bool GlyphTable::Remove(int code)
     {
         GlyphDictionary::const_iterator it = glyphs.find(code);
         if (it != glyphs.end())
@@ -81,7 +81,7 @@ namespace Bibim
         }
     }
 
-    const Glyph* GlyphTable::Find(uint32 code) const
+    const Glyph* GlyphTable::Find(int code) const
     {
         GlyphDictionary::const_iterator it = glyphs.find(code);
         if (it != glyphs.end())
@@ -102,8 +102,8 @@ namespace Bibim
                 return std::pair<GlyphSurface*, Rect>(*it, allocated);
         }
 
-        const Point surfaceSize = GetAdaptiveSurfaceSize(surfaces.size(), width, height);
-        BBAssert(surfaceSize != Point::Zero);
+        const Point2 surfaceSize = GetAdaptiveSurfaceSize(surfaces.size(), width, height);
+        BBAssert(surfaceSize != Point2::Zero);
 
         GlyphSurface* glyphSurface = new GlyphSurface(graphicsDevice, surfaceSize.X, surfaceSize.Y);
         Rect allocated = glyphSurface->Allocate(buffer, width, height, pitch);
@@ -114,32 +114,32 @@ namespace Bibim
         return std::pair<GlyphSurface*, Rect>(glyphSurface, allocated);
     }
 
-    Point GlyphTable::GetAdaptiveSurfaceSize(int numberOfExisting, int width, int height)
+    Point2 GlyphTable::GetAdaptiveSurfaceSize(int numberOfExisting, int width, int height)
     {
-        static const Point textureSizes[] =
+        static const Point2 textureSizes[] =
         {
-            Point(128, 128),
-            Point(256, 256),
-            Point(256, 256),
-            Point(512, 512),
-            Point(512, 512),
-            Point(1024, 512),
-            Point(1024, 1024)
+            Point2(128, 128),
+            Point2(256, 256),
+            Point2(256, 256),
+            Point2(512, 512),
+            Point2(512, 512),
+            Point2(1024, 512),
+            Point2(1024, 1024)
         };
         static const int lastTextureSizeIndex = sizeof(textureSizes) / sizeof(textureSizes[0]) - 1;
 
         const int   index = Math::Min(numberOfExisting, lastTextureSizeIndex);
-        const Point selectedSize = textureSizes[index];
+        const Point2 selectedSize = textureSizes[index];
         if (selectedSize.X >= width && selectedSize.Y >= height)
             return selectedSize;
         else
         {
             // 만약 할당하려는 텍스쳐의 크기가 글리프 크기보다 작으면,
-            // 다음 텍스쳐의 크기를 할당한다. 만약 최고 텍스쳐 크기보다 크다면 Point::Zero를 반환한다. (예외 상황임)
+            // 다음 텍스쳐의 크기를 할당한다. 만약 최고 텍스쳐 크기보다 크다면 Point2::Zero를 반환한다. (예외 상황임)
             if (numberOfExisting < lastTextureSizeIndex)
                 return GetAdaptiveSurfaceSize(numberOfExisting + 1, width, height);
             else
-                return Point::Zero;
+                return Point2::Zero;
         }
     }
 }

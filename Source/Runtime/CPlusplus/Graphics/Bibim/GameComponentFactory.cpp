@@ -9,10 +9,10 @@ namespace Bibim
 {
     struct Entry
     {
-        uint32 ID;
+        int ID;
         GameComponentFactory::CreateFunction Function;
 
-        Entry(uint32 id, GameComponentFactory::CreateFunction function)
+        Entry(int id, GameComponentFactory::CreateFunction function)
             : ID(id),
               Function(function)
         {
@@ -21,7 +21,7 @@ namespace Bibim
 
     static std::vector<Entry> Entries;
 
-    static Entry* FindEntry(uint32 id)
+    static Entry* FindEntry(int id)
     {
         BBAssertDebug(Entries.empty() == false);
 
@@ -43,7 +43,7 @@ namespace Bibim
         return nullptr;
     }
 
-    void GameComponentFactory::AddEntry(uint32 id, CreateFunction function)
+    void GameComponentFactory::AddEntry(int id, CreateFunction function)
     {
         Entries.push_back(Entry(id, function));
     }
@@ -61,7 +61,7 @@ namespace Bibim
         std::sort(Entries.begin(), Entries.end(), Compare());
     }
 
-    GameComponent* GameComponentFactory::Create(uint32 id)
+    GameComponent* GameComponentFactory::Create(int id)
     {
         if (Entry* entry = FindEntry(id))
             return (*entry->Function)();

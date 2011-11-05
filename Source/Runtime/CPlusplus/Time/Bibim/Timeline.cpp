@@ -15,7 +15,7 @@ namespace Bibim
     {
     }
 
-    void Timeline::Update(float dt, uint timestamp)
+    void Timeline::Update(float dt, int timestamp)
     {
         if (GetSpeed() == 0.0f ||
             GetStatus() != ActiveStatus ||

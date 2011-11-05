@@ -64,7 +64,7 @@ namespace Bibim
 
     Vector2 Font::Measure(const String& text, float boundary)
     {
-        return Measure(FontString(This<Font>(), text), boundary);
+        return Measure(FontString(this, text), boundary);
     }
 
     Vector2 Font::Measure(const FontString& fontString)
@@ -339,12 +339,12 @@ namespace Bibim
         }
     }
 
-    const Glyph* Font::GetRegularGlyph(uint32 code) const
+    const Glyph* Font::GetRegularGlyph(int code) const
     {
         return GetCache()->GetGlyph(code);
     }
 
-    const Glyph* Font::GetStrokedGlyph(uint32 code) const
+    const Glyph* Font::GetStrokedGlyph(int code) const
     {
         if (const GlyphTable* t = GetCache()->GetStrokedGlyphTable())
             return t->Find(code);
@@ -352,7 +352,7 @@ namespace Bibim
             return nullptr;
     }
 
-    const Glyph* Font::GetGlowGlyph(uint32 code) const
+    const Glyph* Font::GetGlowGlyph(int code) const
     {
         if (const GlyphTable* t = GetCache()->GetGlowGlyphTable())
             return t->Find(code);
@@ -427,7 +427,7 @@ namespace Bibim
         result->parameters.StrokeSize = reader.ReadFloat();
         result->parameters.Weights = reader.ReadFloat();
         result->parameters.Shear = reader.ReadFloat();
-        result->parameters.GlowSize = reader.ReadInt32();
+        result->parameters.GlowSize = reader.ReadInt();
         result->parameters.GlowSpread = reader.ReadFloat();
         result->parameters.GlowThickness = reader.ReadFloat();
         result->parameters.Scale = reader.ReadFloat();

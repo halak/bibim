@@ -33,14 +33,14 @@ namespace Bibim
         if (modules == nullptr)
             return nullptr;
 
-        const uint32 id = ReadUInt32();
-        if (id != 0x00000000)
+        const int id= ReadInt();
+        if (id != 0)
             return modules->Find(id);
         else
             return nullptr;
     }
 
-    GameModule* ComponentStreamReader::ReadModule(uint32 defaultModuleClassID)
+    GameModule* ComponentStreamReader::ReadModule(int defaultModuleClassID)
     {
         if (GameModule* module = ReadModule())
             return module;
@@ -48,7 +48,7 @@ namespace Bibim
             return FindModuleByClassID(defaultModuleClassID);
     }
 
-    GameModule* ComponentStreamReader::FindModuleByClassID(uint32 classID)
+    GameModule* ComponentStreamReader::FindModuleByClassID(int classID)
     {
         if (modules)
             return modules->GetRoot()->FindChildByClassID(classID);
@@ -67,7 +67,7 @@ namespace Bibim
 
     GameComponent* ComponentStreamReader::ReadComponent()
     {
-        const int index = ReadInt32();
+        const int index = ReadInt();
         if (index == -1)
             return nullptr;
 
@@ -77,8 +77,8 @@ namespace Bibim
         if (localComponents[index])
             return localComponents[index];
 
-        const uint32 classID = ReadUInt32();
-        if (classID == 0x00000000)
+        const int classID = ReadInt();
+        if (classID == 0)
             return nullptr;
 
         if (GameComponent* o = GameComponentFactory::Create(classID))

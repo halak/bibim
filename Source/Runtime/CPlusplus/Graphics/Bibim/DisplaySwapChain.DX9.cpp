@@ -11,7 +11,7 @@ namespace Bibim
     DisplaySwapChain::DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window)
         : graphicsDevice(graphicsDevice),
           window(window),
-          backbufferSize(Point::Zero),
+          backbufferSize(Point2::Zero),
           viewport(Rect::Empty),
           swapChain(nullptr),
           backBuffer(nullptr)
@@ -20,10 +20,10 @@ namespace Bibim
         Construct(window, window->GetSize());
     }
 
-    DisplaySwapChain::DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window, Point size)
+    DisplaySwapChain::DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window, Point2 size)
          : graphicsDevice(graphicsDevice),
            window(window),
-           backbufferSize(Point::Zero),
+           backbufferSize(Point2::Zero),
            viewport(Rect::Empty),
            swapChain(nullptr),
            backBuffer(nullptr)
@@ -35,7 +35,7 @@ namespace Bibim
     DisplaySwapChain::DisplaySwapChain(GraphicsDevice* graphicsDevice, Window* window, void* swapChainInterface)
          : graphicsDevice(graphicsDevice),
            window(window),
-           backbufferSize(Point::Zero),
+           backbufferSize(Point2::Zero),
            viewport(Rect::Empty),
            swapChain(nullptr),
            backBuffer(nullptr)
@@ -60,7 +60,7 @@ namespace Bibim
         graphicsDevice->Remove(this);
     }
 
-    void DisplaySwapChain::Construct(Window* window, Point size)
+    void DisplaySwapChain::Construct(Window* window, Point2 size)
     {
         graphicsDevice->Add(this);
 

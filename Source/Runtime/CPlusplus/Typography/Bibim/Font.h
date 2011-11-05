@@ -14,7 +14,7 @@
         {
             BBSerializableAssetClass(Font, GameAsset, 'F', 'O', 'N', 'T');
             public:
-                typedef std::map<uint32, const Glyph*> GlyphDictionary;
+                typedef std::map<int, const Glyph*> GlyphDictionary;
 
             public:
                 Font();
@@ -81,9 +81,9 @@
                 inline float GetSpacing() const;
                 void SetSpacing(float value);
 
-                const Glyph* GetRegularGlyph(uint32 code) const;
-                const Glyph* GetStrokedGlyph(uint32 code) const;
-                const Glyph* GetGlowGlyph(uint32 code) const;
+                const Glyph* GetRegularGlyph(int code) const;
+                const Glyph* GetStrokedGlyph(int code) const;
+                const Glyph* GetGlowGlyph(int code) const;
 
                 float GetAscender() const;
                 float GetDescender() const;

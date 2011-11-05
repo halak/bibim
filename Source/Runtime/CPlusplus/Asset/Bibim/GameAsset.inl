@@ -5,7 +5,7 @@ namespace Bibim
         return status;
     }
 
-    uint GameAsset::GetRevision() const
+    int GameAsset::GetRevision() const
     {
         return revision;
     }

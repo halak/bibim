@@ -3,9 +3,9 @@
 
 namespace Bibim
 {
-    static std::map<uint32, ScriptNativeFunctionTable::NativeFunction> Functions;
+    static std::map<int, ScriptNativeFunctionTable::NativeFunction> Functions;
 
-    void ScriptNativeFunctionTable::Add(uint32 id, NativeFunction function)
+    void ScriptNativeFunctionTable::Add(int id, NativeFunction function)
     {
         Functions[id] = function;
     }
@@ -21,9 +21,9 @@ namespace Bibim
             Functions[items[i].ID] = items[i].Function;
     }
 
-    ScriptNativeFunctionTable::NativeFunction ScriptNativeFunctionTable::Find(uint32 id)
+    ScriptNativeFunctionTable::NativeFunction ScriptNativeFunctionTable::Find(int id)
     {
-        std::map<uint32, NativeFunction>::const_iterator it = Functions.find(id);
+        std::map<int, NativeFunction>::const_iterator it = Functions.find(id);
         if (it != Functions.end())
             return (*it).second;
         else

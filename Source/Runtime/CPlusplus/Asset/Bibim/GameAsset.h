@@ -7,10 +7,15 @@
 
     namespace Bibim
     {
-#       define BBAbstractAssetClass(classname, parent) ;
-#       define BBAssetClass(classname, parent, a, b, c, d) public: \
-                                                                static const uint32 ClassID = BBMakeFOURCC(a, b, c, d); \
-                                                                virtual uint32 GetClassID() const { return ClassID; } \
+#       define BBAbstractAssetClass(classname, parent)      private: \
+                                                                typedef classname This; \
+                                                                typedef parent Base;
+#       define BBAssetClass(classname, parent, a, b, c, d)  private: \
+                                                                typedef classname This; \
+                                                                typedef parent Base; \
+                                                            public: \
+                                                                static const int ClassID = BBMakeFOURCC(a, b, c, d); \
+                                                                virtual int GetClassID() const { return ClassID; } \
                                                             private:
 #       define BBSerializableAssetClass(classname, parent, a, b, c, d)  BBAssetClass(classname, parent, a, b, c, d); \
                                                                         public: \
@@ -37,7 +42,7 @@
                 virtual ~GameAsset();
 
                 inline Status GetStatus() const;
-                inline uint GetRevision() const;
+                inline int GetRevision() const;
 
             protected:
                 GameAsset(); // call in derived classes, GameAssetStorage
@@ -47,7 +52,7 @@
 
             private:
                 Status status;
-                uint revision;
+                int revision;
 
                 friend class GameAssetStorage;
         };

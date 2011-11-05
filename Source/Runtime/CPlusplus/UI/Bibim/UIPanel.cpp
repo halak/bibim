@@ -202,7 +202,7 @@ namespace Bibim
     void UIPanel::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        const int numberOfChildren = reader.ReadInt32();
+        const int numberOfChildren = reader.ReadInt();
         for (int i = 0; i < numberOfChildren; i++)
         {
             Add(static_cast<UIVisual*>(reader.ReadComponent()));

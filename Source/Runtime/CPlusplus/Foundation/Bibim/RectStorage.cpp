@@ -114,9 +114,9 @@ namespace Bibim
                 nearest.GetBottom(),
             };
 
-            const Rect leftUp  = Rect(Point(xPoints[0], yPoints[0]), Point(xPoints[1], yPoints[1]));
-            const Rect rightUp = Rect(Point(xPoints[1], yPoints[0]), Point(xPoints[2], yPoints[1]));
-            const Rect down    = Rect(Point(xPoints[0], yPoints[1]), Point(xPoints[2], yPoints[2]));
+            const Rect leftUp  = Rect(Point2(xPoints[0], yPoints[0]), Point2(xPoints[1], yPoints[1]));
+            const Rect rightUp = Rect(Point2(xPoints[1], yPoints[0]), Point2(xPoints[2], yPoints[1]));
+            const Rect down    = Rect(Point2(xPoints[0], yPoints[1]), Point2(xPoints[2], yPoints[2]));
 
             freeRects.erase(nearestIterator);
             freeRects.push_back(rightUp);

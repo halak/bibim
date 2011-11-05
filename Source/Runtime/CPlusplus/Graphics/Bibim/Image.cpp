@@ -91,7 +91,7 @@ namespace Bibim
     {
         const String textureURI = reader.ReadString();
         const Rect clippingRect = reader.ReadRect();
-        const Transform appliedTransform = static_cast<Transform>(reader.ReadUInt8());
+        const Transform appliedTransform = static_cast<Transform>(reader.ReadByte());
         Texture2D* texture = static_cast<Texture2D*>(reader.GetStorage()->Load(textureURI));
 
         return new Image(textureURI, clippingRect, appliedTransform, texture);

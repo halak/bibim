@@ -3,19 +3,19 @@
 #define __BIBIM_EVALUABLESEQUENCEBASE_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/Evaluables.h>
+#   include <Bibim/Evals.h>
 
     namespace Bibim
     {
         template <typename T>
-        class EvaluableSequenceBase : public EvaluableTemplate<T>
+        class EvalSequenceBase : public EvalTemplate<T>
         {
-            BBAbstractComponentClass(EvaluableSequenceBase, EvaluableTemplate<T>);
+            BBAbstractComponentClass(EvalSequenceBase, EvalTemplate<T>);
             public:
-                EvaluableSequenceBase();
-                virtual ~EvaluableSequenceBase();
+                EvalSequenceBase();
+                virtual ~EvalSequenceBase();
 
-                void Update(float dt, uint timestamp);
+                void Update(float dt, int timestamp);
 
                 T Evaluate(EvaluationContext& context);
 
@@ -37,10 +37,10 @@
                 bool looped;
                 bool timeChanged;
                 T value;
-                uint lastTimestamp;
+                int lastTimestamp;
         };
     }
 
-#   include <Bibim/EvaluableSequenceBase.inl>
+#   include <Bibim/EvalSequenceBase.inl>
 
 #endif

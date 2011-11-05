@@ -24,11 +24,11 @@ namespace Bibim
     GameAsset* SourceTexture2D::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
     {
         GraphicsDevice* graphicsDevice = static_cast<GraphicsDevice*>(reader.ReadModule(GraphicsDevice::ClassID));
-        const int width = static_cast<int>(reader.ReadInt16());
-        const int height = static_cast<int>(reader.ReadInt16());
-        const int surfaceWidth = static_cast<int>(reader.ReadInt16());
-        const int surfaceHeight = static_cast<int>(reader.ReadInt16());
-        const PixelFormat pixelFormat = static_cast<PixelFormat>(reader.ReadInt8());
+        const int width = static_cast<int>(reader.ReadShortInt());
+        const int height = static_cast<int>(reader.ReadShortInt());
+        const int surfaceWidth = static_cast<int>(reader.ReadShortInt());
+        const int surfaceHeight = static_cast<int>(reader.ReadShortInt());
+        const PixelFormat pixelFormat = static_cast<PixelFormat>(reader.ReadByte());
         if (width == 0 || height == 0 || surfaceWidth == 0 || surfaceHeight == 0)
             return nullptr;
 
@@ -40,7 +40,7 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    SourceTexture2D::LoadingTask::LoadingTask(const AssetStreamReader& reader, SourceTexture2D* texture, uint totalBytes)
+    SourceTexture2D::LoadingTask::LoadingTask(const AssetStreamReader& reader, SourceTexture2D* texture, int totalBytes)
         : AssetLoadingTask(reader.GetName(), totalBytes),
           texture(texture),
           reader(reader),
@@ -54,7 +54,7 @@ namespace Bibim
 
     void SourceTexture2D::LoadingTask::Execute()
     {
-        const int pitch = reader.ReadInt32();
+        const int pitch = reader.ReadInt();
         if (pitch == 0)
             texture->SetStatus(FaultStatus);
 

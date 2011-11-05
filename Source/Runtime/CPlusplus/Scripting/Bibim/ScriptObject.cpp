@@ -14,7 +14,6 @@ namespace Bibim
             case VoidType:
             case BoolType:
             case IntType:
-            case UIntType:
             case LongIntType:
             case FloatType:
             case ColorType:
@@ -51,7 +50,6 @@ namespace Bibim
             case VoidType:
             case BoolType:
             case IntType:
-            case UIntType:
             case LongIntType:
             case FloatType:
             case ColorType:
@@ -86,8 +84,6 @@ namespace Bibim
                 return value.BOOLEAN;
             case IntType:
                 return value.INT != 0;
-            case UIntType:
-                return value.UINT != 0;
             case LongIntType:
                 return value.LONGINT != 0;
             case FloatType:
@@ -109,8 +105,6 @@ namespace Bibim
                 return value.BOOLEAN ? 1 : 0;
             case IntType:
                 return value.INT;
-            case UIntType:
-                return static_cast<int>(value.UINT);
             case LongIntType:
                 return static_cast<int>(value.LONGINT);
             case FloatType:
@@ -120,39 +114,18 @@ namespace Bibim
         }
     }
 
-    uint ScriptObject::CastUInt() const
+    longint ScriptObject::CastLongInt() const
     {
         switch (type)
         {
             case BoolType:
                 return value.BOOLEAN ? 1 : 0;
             case IntType:
-                return static_cast<uint>(value.INT);
-            case UIntType:
-                return value.UINT;
-            case LongIntType:
-                return static_cast<uint>(value.LONGINT);
-            case FloatType:
-                return static_cast<uint>(value.FLOAT);
-            default:
-                return 0;
-        }
-    }
-
-    int64 ScriptObject::CastLongInt() const
-    {
-        switch (type)
-        {
-            case BoolType:
-                return value.BOOLEAN ? 1 : 0;
-            case IntType:
-                return static_cast<int64>(value.INT);
-            case UIntType:
-                return static_cast<int64>(value.UINT);
+                return static_cast<longint>(value.INT);
             case LongIntType:
                 return value.LONGINT;
             case FloatType:
-                return static_cast<int64>(value.FLOAT);
+                return static_cast<longint>(value.FLOAT);
             default:
                 return 0;
         }
@@ -166,8 +139,6 @@ namespace Bibim
                 return value.BOOLEAN ? 1.0f : 0.0f;
             case IntType:
                 return static_cast<float>(value.INT);
-            case UIntType:
-                return static_cast<float>(value.UINT);
             case LongIntType:
                 return static_cast<float>(value.LONGINT);
             case FloatType:
@@ -209,7 +180,6 @@ namespace Bibim
             case VoidType:
             case BoolType:
             case IntType:
-            case UIntType:
             case LongIntType:
             case FloatType:
             case ColorType:
@@ -243,7 +213,6 @@ namespace Bibim
             case VoidType:
             case BoolType:
             case IntType:
-            case UIntType:
             case LongIntType:
             case FloatType:
             case ColorType:
@@ -285,14 +254,12 @@ namespace Bibim
                 return value.BOOLEAN == right.value.BOOLEAN;
             case IntType:
                 return value.INT == right.value.INT;
-            case UIntType:
-                return value.UINT == right.value.UINT;
             case LongIntType:
                 return value.LONGINT == right.value.LONGINT;
             case FloatType:
                 return value.FLOAT == right.value.FLOAT;
             case ColorType:
-                return value.UINT == right.value.UINT;
+                return value.INT == right.value.INT;
             case Int2Type:
                 return value.INT2[0] == right.value.INT2[0] &&
                        value.INT2[1] == right.value.INT2[1];
@@ -353,11 +320,9 @@ namespace Bibim
             case BoolType:
                 return BinaryReader::ToBool(buffer);
             case IntType:
-                return BinaryReader::ToInt32(buffer);
-            case UIntType:
-                return BinaryReader::ToUInt32(buffer);
+                return BinaryReader::ToInt(buffer);
             case LongIntType:
-                return BinaryReader::ToInt64(buffer);
+                return BinaryReader::ToLongInt(buffer);
             case FloatType:
                 return BinaryReader::ToFloat(buffer);
             case ColorType:
@@ -409,9 +374,6 @@ namespace Bibim
             case IntType:
                 BinaryWriter::From(buffer, value.value.INT);
                 return sizeof(value.value.INT);
-            case UIntType:
-                BinaryWriter::From(buffer, value.value.UINT);
-                return sizeof(value.value.UINT);
             case LongIntType:
                 BinaryWriter::From(buffer, value.value.LONGINT);
                 return sizeof(value.value.LONGINT);
@@ -419,8 +381,8 @@ namespace Bibim
                 BinaryWriter::From(buffer, value.value.FLOAT);
                 return sizeof(value.value.FLOAT);
             case ColorType:
-                BinaryWriter::From(buffer, value.value.UINT);
-                return sizeof(value.value.UINT);
+                BinaryWriter::From(buffer, value.value.INT);
+                return sizeof(value.value.INT);
             case Int2Type:
                 BBStaticAssert(sizeof(int) == 4);
                 BinaryWriter::From(buffer + 0, value.value.INT2[0]);
@@ -473,12 +435,9 @@ namespace Bibim
                         case IntType:
                             BinaryWriter::From(buffer, static_cast<int>(value.value.BOOLEAN ? 1 : 0));
                             return sizeof(int);
-                        case UIntType:
-                            BinaryWriter::From(buffer, static_cast<uint>(value.value.BOOLEAN ? 1 : 0));
-                            return sizeof(uint);
                         case LongIntType:
-                            BinaryWriter::From(buffer, static_cast<int64>(value.value.BOOLEAN ? 1 : 0));
-                            return sizeof(int64);
+                            BinaryWriter::From(buffer, static_cast<longint>(value.value.BOOLEAN ? 1 : 0));
+                            return sizeof(longint);
                         case FloatType:
                             BinaryWriter::From(buffer, static_cast<float>(value.value.BOOLEAN ? 1.0f : 0.0f));
                             return sizeof(float);
@@ -494,12 +453,9 @@ namespace Bibim
                         case BoolType:
                             BinaryWriter::From(buffer, static_cast<bool>(value.value.INT != 0));
                             return sizeof(bool);
-                        case UIntType:
-                            BinaryWriter::From(buffer, static_cast<uint>(value.value.INT));
-                            return sizeof(uint);
                         case LongIntType:
-                            BinaryWriter::From(buffer, static_cast<int64>(value.value.INT));
-                            return sizeof(int64);
+                            BinaryWriter::From(buffer, static_cast<longint>(value.value.INT));
+                            return sizeof(longint);
                         case FloatType:
                             BinaryWriter::From(buffer, static_cast<float>(value.value.INT));
                             return sizeof(float);
@@ -509,20 +465,17 @@ namespace Bibim
                             throw;
                     }
                     break;
-                case UIntType:
+                case LongIntType:
                     switch (castType)
                     {
                         case BoolType:
-                            BinaryWriter::From(buffer, static_cast<bool>(value.value.UINT != 0));
+                            BinaryWriter::From(buffer, static_cast<bool>(value.value.LONGINT != 0));
                             return sizeof(bool);
                         case IntType:
-                            BinaryWriter::From(buffer, static_cast<int>(value.value.UINT));
-                            return sizeof(uint);
-                        case LongIntType:
-                            BinaryWriter::From(buffer, static_cast<int64>(value.value.UINT));
-                            return sizeof(int64);
+                            BinaryWriter::From(buffer, static_cast<int>(value.value.LONGINT));
+                            return sizeof(int);
                         case FloatType:
-                            BinaryWriter::From(buffer, static_cast<float>(value.value.UINT));
+                            BinaryWriter::From(buffer, static_cast<float>(value.value.LONGINT));
                             return sizeof(float);
                         case StringType:
                             throw;
@@ -530,8 +483,6 @@ namespace Bibim
                             throw;
                     }
                     break;
-                case LongIntType:
-                    throw;
                 case FloatType:
                     switch (castType)
                     {
@@ -540,13 +491,10 @@ namespace Bibim
                             return sizeof(bool);
                         case IntType:
                             BinaryWriter::From(buffer, static_cast<int>(value.value.FLOAT));
-                            return sizeof(uint);
-                        case UIntType:
-                            BinaryWriter::From(buffer, static_cast<uint>(value.value.FLOAT));
-                            return sizeof(float);
+                            return sizeof(int);
                         case LongIntType:
-                            BinaryWriter::From(buffer, static_cast<int64>(value.value.FLOAT));
-                            return sizeof(int64);
+                            BinaryWriter::From(buffer, static_cast<longint>(value.value.FLOAT));
+                            return sizeof(longint);
                         case StringType:
                             throw;
                         default:

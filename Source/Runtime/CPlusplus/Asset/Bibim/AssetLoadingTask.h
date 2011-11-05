@@ -22,21 +22,21 @@
                 virtual void Cancel();
 
                 inline const String& GetName() const;
-                inline uint GetTotalBytes() const;
-                inline uint GetLoadedBytes() const;
+                inline int GetTotalBytes() const;
+                inline int GetLoadedBytes() const;
 
                 virtual bool IsPreloading() const;
 
             protected:
-                AssetLoadingTask(const String& name, uint totalBytes);
+                AssetLoadingTask(const String& name, int totalBytes);
 
-                inline void SetLoadedBytes(uint value);
-                inline void AddLoadedBytes(uint value);
+                inline void SetLoadedBytes(int value);
+                inline void AddLoadedBytes(int value);
 
             private:
                 const String name;
-                const uint totalBytes;
-                uint loadedBytes;
+                const int totalBytes;
+                int loadedBytes;
         };
 
         class AssetPreloadingTask : public AssetLoadingTask
