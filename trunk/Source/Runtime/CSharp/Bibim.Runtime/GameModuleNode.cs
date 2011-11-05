@@ -150,7 +150,7 @@ namespace Bibim
         #endregion
 
         #region Find
-        public GameModule FindChild(uint id)
+        public GameModule FindChild(int id)
         {
             GameModuleNode node = FindChildNode(id);
             if (node != null)
@@ -164,7 +164,7 @@ namespace Bibim
             return (T)FindChildByClassID(ClassIDAttribute.GetClassID(typeof(T)));
         }
 
-        public GameModule FindChildByClassID(uint classID)
+        public GameModule FindChildByClassID(int classID)
         {
             GameModuleNode node = FindChildNodeByClassID(classID);
             if (node != null)
@@ -173,7 +173,7 @@ namespace Bibim
                 return null;
         }
 
-        public GameModuleNode FindChildNode(uint id)
+        public GameModuleNode FindChildNode(int id)
         {
             if (id == GameModule.UnspecifiedID)
                 return null;
@@ -195,7 +195,7 @@ namespace Bibim
             return null;
         }
 
-        public GameModuleNode FindChildNodeByClassID(uint classID)
+        public GameModuleNode FindChildNodeByClassID(int classID)
         {
             foreach (GameModuleNode item in children)
             {

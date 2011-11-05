@@ -12,7 +12,7 @@ namespace Bibim.Asset
         #endregion
 
         #region Properties
-        public uint ClassID
+        public int ClassID
         {
             get { return ClassIDAttribute.GetClassID(GetType()); }
         }

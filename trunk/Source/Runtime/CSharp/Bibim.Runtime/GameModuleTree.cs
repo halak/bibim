@@ -8,7 +8,7 @@ namespace Bibim
     public sealed class GameModuleTree
     {
         #region Fields
-        private Dictionary<uint, GameModuleNode> idNodes;
+        private Dictionary<int, GameModuleNode> idNodes;
         #endregion
 
         #region Properties
@@ -28,12 +28,12 @@ namespace Bibim
         public GameModuleTree(int capacity)
         {
             Root = new GameModuleNode();
-            idNodes = new Dictionary<uint, GameModuleNode>(capacity);
+            idNodes = new Dictionary<int, GameModuleNode>(capacity);
         }
         #endregion
 
         #region Methods
-        public GameModule Find(uint id)
+        public GameModule Find(int id)
         {
             GameModuleNode foundNode = null;
             if (idNodes.TryGetValue(id, out foundNode))
@@ -42,7 +42,7 @@ namespace Bibim
                 return null;
         }
 
-        public GameModuleNode FindNode(uint id)
+        public GameModuleNode FindNode(int id)
         {
             GameModuleNode foundNode = null;
             if (idNodes.TryGetValue(id, out foundNode))
@@ -52,14 +52,14 @@ namespace Bibim
         }
 
         #region Internal
-        internal void OnModuleIDChanged(GameModule module, uint oldID)
+        internal void OnModuleIDChanged(GameModule module, int oldID)
         {
             Debug.Assert(module.Node != null && module.Node.Tree == this);
 
             if (oldID != GameModule.UnspecifiedID)
                 idNodes.Remove(oldID);
 
-            uint id = module.ID;
+            int id = module.ID;
             if (id != GameModule.UnspecifiedID)
                 idNodes.Add(id, module.Node);
         }
@@ -83,7 +83,7 @@ namespace Bibim
 
             node.Tree = this;
 
-            uint id = node.Module.ID;
+            int id = node.Module.ID;
             if (id != GameModule.UnspecifiedID)
                 idNodes.Add(id, node);
 
@@ -95,7 +95,7 @@ namespace Bibim
         {
             node.Tree = null;
 
-            uint id = node.Module.ID;
+            int id = node.Module.ID;
             if (id != GameModule.UnspecifiedID)
                 idNodes.Remove(id);
 

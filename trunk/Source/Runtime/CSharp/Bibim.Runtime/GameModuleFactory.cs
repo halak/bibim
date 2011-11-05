@@ -10,7 +10,7 @@ namespace Bibim
     public static class GameModuleFactory
     {
         #region Fields
-        static Dictionary<uint, ConstructorInfo> entries;
+        static Dictionary<int, ConstructorInfo> entries;
         #endregion
 
         #region Constructors
@@ -18,7 +18,7 @@ namespace Bibim
         {
             ICollection<Type> moduleClasses = AssemblyUtility.FindClasses(typeof(GameModule), true, false);
 
-            entries = new Dictionary<uint, ConstructorInfo>(moduleClasses.Count);
+            entries = new Dictionary<int, ConstructorInfo>(moduleClasses.Count);
 
             foreach (Type item in moduleClasses)
             {

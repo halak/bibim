@@ -10,7 +10,7 @@ namespace Bibim.Scripting
     public sealed class ScriptNativeFunctionAttribute : Attribute
     {
         #region Properties
-        public uint FunctionID
+        public int FunctionID
         {
             get;
             private set;
@@ -23,7 +23,7 @@ namespace Bibim.Scripting
         {
         }
 
-        public ScriptNativeFunctionAttribute(uint functionID)
+        public ScriptNativeFunctionAttribute(int functionID)
         {
             FunctionID = functionID;
         }

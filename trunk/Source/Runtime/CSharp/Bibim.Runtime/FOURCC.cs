@@ -7,7 +7,7 @@ namespace Bibim
 {
     public static class FOURCC
     {
-        public static uint Make(char a, char b, char c, char d)
+        public static int Make(char a, char b, char c, char d)
         {
             uint a_ = (uint)a;
             uint b_ = (uint)b;
@@ -19,7 +19,7 @@ namespace Bibim
             Debug.Assert(IsOneByteChar(c));
             Debug.Assert(IsOneByteChar(d));
 
-            return (a_ << 24) | (b_ << 16) | (c_ << 8) | (d_ << 0);
+            return (int)((a_ << 24) | (b_ << 16) | (c_ << 8) | (d_ << 0));
         }
 
         /// <summary>

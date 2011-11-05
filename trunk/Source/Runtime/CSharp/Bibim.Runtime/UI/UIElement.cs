@@ -11,11 +11,6 @@ namespace Bibim.UI
         #endregion
 
         #region Properties
-        public uint ClassID
-        {
-            get { return ClassIDAttribute.GetClassID(GetType()); }
-        }
-        
         public string Name
         {
             get { return name; }
@@ -32,12 +27,12 @@ namespace Bibim.UI
         {
         }
 
-        public UIElement(uint id)
+        public UIElement(int id)
             : this(id, string.Empty)
         {
         }
 
-        public UIElement(uint id, string name)
+        public UIElement(int id, string name)
             : base(id)
         {
             this.name = name ?? string.Empty;
