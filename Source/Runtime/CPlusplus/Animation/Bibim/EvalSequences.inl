@@ -9,6 +9,13 @@ namespace Bibim
     }
 
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
+    EvalSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>* EvalSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::Clone() const
+    {
+        CloningContext context;
+        return Clone(context);
+    }
+
+    template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
     EvalSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>* EvalSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::Clone(CloningContext& context) const
     {
         This* clone = new This();

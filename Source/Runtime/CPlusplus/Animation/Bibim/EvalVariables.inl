@@ -17,6 +17,13 @@ namespace Bibim
     }
 
     template <typename T, char a, char b, char c, char d>
+    EvalVariableTemplate<T, a, b, c, d>* EvalVariableTemplate<T, a, b, c, d>::Clone() const
+    {
+        CloningContext context;
+        return Clone(context);
+    }
+
+    template <typename T, char a, char b, char c, char d>
     EvalVariableTemplate<T, a, b, c, d>* EvalVariableTemplate<T, a, b, c, d>::Clone(CloningContext& context) const
     {
         This* clone = new This();

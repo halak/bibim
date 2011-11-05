@@ -28,7 +28,7 @@ namespace Bibim
         return k1.Value;
     }
 
-    inline GameAsset* InterpolateKeyframe(const Keyframe<GameAssetPtr>& k1, const Keyframe<GameAssetPtr*>& /*k2*/, float /*t*/)
+    inline GameAsset* InterpolateKeyframe(const Keyframe<GameAssetPtr>& k1, const Keyframe<GameAssetPtr>& /*k2*/, float /*t*/)
     {
         return k1.Value;
     }
@@ -40,6 +40,11 @@ namespace Bibim
         : startTimeChanged(true)
     {
         ResetDuration();
+    }
+
+    template <typename T, char a, char b, char c, char d>
+    SequenceTemplate<T, a, b, c, d>::~SequenceTemplate()
+    {
     }
 
     template <typename T, char a, char b, char c, char d>

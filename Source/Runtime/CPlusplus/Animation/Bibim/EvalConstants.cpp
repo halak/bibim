@@ -1,9 +1,7 @@
 #include <Bibim/PCH.h>
-#include <Bibim/AssetStreamReader.h>
 #include <Bibim/EvalConstants.h>
+#include <Bibim/ComponentStreamReader.h>
 #include <Bibim/GameAsset.h>
-#include <Bibim/EvalRangedSequences.h>
-#include <Bibim/EvalTrees.h>
 
 namespace Bibim
 {

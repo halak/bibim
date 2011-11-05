@@ -59,4 +59,6 @@
         typedef SharedPointer<EvalGameAsset> EvalGameAssetPtr;
     }
 
+#   include <Bibim/Evals.inl>
+
 #endif

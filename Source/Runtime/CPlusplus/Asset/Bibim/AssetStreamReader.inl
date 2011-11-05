@@ -1,9 +1,9 @@
 namespace Bibim
 {
-    //void AssetStreamReader::Read(GameAssetPtr& outValue)
-    //{
-    //    outValue = ReadAsset();
-    //}
+    void AssetStreamReader::Read(GameAssetPtr& outValue)
+    {
+        outValue = ReadAsset();
+    }
 
     const String& AssetStreamReader::GetName() const
     {

@@ -1,5 +1,6 @@
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/Assert.h>
+#include <Bibim/GameAsset.h>
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/GameModule.h>
 #include <Bibim/GameModuleNode.h>
