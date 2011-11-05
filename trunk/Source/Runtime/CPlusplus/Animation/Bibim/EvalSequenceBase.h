@@ -29,7 +29,7 @@
 
             protected:
                 void SetValue(T value);
-                virtual void UpdateValue();
+                virtual void UpdateValue() = 0;
 
             protected:
                 float time;
