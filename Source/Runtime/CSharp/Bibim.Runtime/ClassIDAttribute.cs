@@ -9,7 +9,7 @@ namespace Bibim
     public sealed class ClassIDAttribute : Attribute
     {
         #region Properties
-        public uint ClassID
+        public int ClassID
         {
             get;
             private set;
@@ -22,14 +22,14 @@ namespace Bibim
         {
         }
 
-        public ClassIDAttribute(uint classID)
+        public ClassIDAttribute(int classID)
         {
             ClassID = classID;
         }
         #endregion
 
         #region Static Methods
-        public static uint GetClassID(Type type)
+        public static int GetClassID(Type type)
         {
             ClassIDAttribute attribute = type.GetCustomAttribute<ClassIDAttribute>();
             if (attribute != null)

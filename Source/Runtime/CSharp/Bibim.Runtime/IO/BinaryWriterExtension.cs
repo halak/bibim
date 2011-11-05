@@ -14,6 +14,27 @@ namespace Bibim.IO
             writer.Write(value.Y);
         }
 
+        public static void Write(this BinaryWriter writer, Point2 value)
+        {
+            writer.Write(value.X);
+            writer.Write(value.Y);
+        }
+
+        public static void Write(this BinaryWriter writer, Point3 value)
+        {
+            writer.Write(value.X);
+            writer.Write(value.Y);
+            writer.Write(value.Z);
+        }
+
+        public static void Write(this BinaryWriter writer, Point4 value)
+        {
+            writer.Write(value.X);
+            writer.Write(value.Y);
+            writer.Write(value.Z);
+            writer.Write(value.W);
+        }
+
         public static void Write(this BinaryWriter writer, Rectangle value)
         {
             writer.Write(value.X);

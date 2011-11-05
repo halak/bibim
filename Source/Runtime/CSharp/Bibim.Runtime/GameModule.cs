@@ -7,17 +7,17 @@ namespace Bibim
     public abstract class GameModule
     {
         #region Static Fields
-        public const uint UnspecifiedID = 0xFFFFFFFF;
+        public const int UnspecifiedID = -1;
         #endregion
 
         #region Fields
-        private uint id;
+        private int id;
         private bool alive;
         private bool active;
         #endregion
 
         #region Properties
-        public uint ID
+        public int ID
         {
             get { return id; }
             set
@@ -30,7 +30,7 @@ namespace Bibim
                             throw new ArgumentException(string.Empty, "value");
                     }
 
-                    uint oldID = id;
+                    int oldID = id;
 
                     id = value;
 
@@ -91,7 +91,7 @@ namespace Bibim
             }
         }
 
-        public uint ClassID
+        public int ClassID
         {
             get { return ClassIDAttribute.GetClassID(GetType()); }
         }
@@ -111,7 +111,7 @@ namespace Bibim
             active = true;
         }
 
-        protected GameModule(uint id)
+        protected GameModule(int id)
         {
             this.id = id;
             this.alive = true;

@@ -8,15 +8,15 @@ namespace Bibim
     public abstract class GameComponent
     {
         #region Static Fields
-        public static readonly uint UnspecifiedID = 0xFFFFFFFF;
+        public static readonly int UnspecifiedID = -1;
         #endregion
 
         #region Fields
-        private uint id;
+        private int id;
         #endregion
 
         #region Properties
-        public uint ID
+        public int ID
         {
             get { return id; }
             set
@@ -27,6 +27,11 @@ namespace Bibim
                 }
             }
         }
+
+        public int ClassID
+        {
+            get { return ClassIDAttribute.GetClassID(GetType()); }
+        }
         #endregion
 
         #region Constructors
@@ -35,7 +40,7 @@ namespace Bibim
         {
         }
 
-        protected GameComponent(uint id)
+        protected GameComponent(int id)
         {
             this.id = id;
         }
