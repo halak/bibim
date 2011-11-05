@@ -12,6 +12,7 @@ namespace Bibim.Animation
         public sealed override void Write(AssetStreamWriter writer, T asset)
         {
             int count = asset.GetNumberOfKeyframes();
+            writer.Write(asset.Duration);
             writer.Write((short)count);
             for (int i = 0; i < count; i++)
             {
