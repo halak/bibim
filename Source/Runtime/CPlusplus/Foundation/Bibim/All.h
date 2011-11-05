@@ -34,9 +34,20 @@
 #  include <Bibim/BinaryWriter.h>
 #  include <Bibim/CheckedRelease.h>
 #  include <Bibim/Color.h>
+#include <Bibim/AssetStreamReader.h>
+#include <Bibim/ComponentStreamReader.h>
 #  include <Bibim/Colors.h>
 #  include <Bibim/Delete.h>
 #  include <Bibim/Environment.h>
+#include <Bibim/EvalConstants.h>
+#include <Bibim/EvalContext.h>
+#include <Bibim/EvalRangedSequences.h>
+#include <Bibim/Evals.h>
+#include <bibim/EvalSequenceBase.h>
+#include <Bibim/EvalSEquences.h>
+#include <Bibim/EvalTrees.h>
+#include <Bibim/EvalVariables.h>
+#include <Bibim/SEquences.h>
 #  include <Bibim/Environment.Windows.h>
 #  include <Bibim/Exception.h>
 #  include <Bibim/Foundation.h>
@@ -44,6 +55,7 @@
 #  include <Bibim/Geom2D.h>
 #  include <Bibim/Math.h>
 #  include <Bibim/Matrix4.h>
+#include <Bibim/EvalTrees.h>
 #  include <Bibim/MemoryStream.h>
 #  include <Bibim/NullPointer.h>
 #  include <Bibim/Numerics.h>

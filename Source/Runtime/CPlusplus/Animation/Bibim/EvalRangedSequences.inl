@@ -10,7 +10,7 @@ namespace Bibim
     }
 
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
-    EvalRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>* EvalRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::Clone(CloningContext& /*context*/) const
+    EvalRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>* EvalRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::Clone(CloningContext& context) const
     {
         This* clone = new This();
         context.Store(this, clone);
@@ -51,7 +51,7 @@ namespace Bibim
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
     void EvalRangedSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::OnRead(ComponentStreamReader& reader)
     {
-        Base::onRead(reader);
+        Base::OnRead(reader);
         timeIndex1 = 0;
         timeIndex2 = 0;
         source1 = static_cast<TSequence*>(reader.ReadAsset());

@@ -98,6 +98,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AliasAttribute.cs" />
+    <Compile Include="Animation\EvalTrees\BoolEvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTrees\ColorEvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTrees\DoubleEvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTrees\RectFEvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTrees\RectEvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTrees\ShortIntEvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTrees\Vector4EvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTrees\Vector3EvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTrees\Vector2EvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTrees\Point4EvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTrees\Point3EvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTrees\Point2EvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTrees\LongIntEvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTrees\IntEvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTrees\GameAssetEvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTrees\FloatEvalTreeWriter.cs" />
+    <Compile Include="Animation\EvalTreeWriterTemplate.cs" />
     <Compile Include="Animation\Sequences\BoolSequenceWriter.cs" />
     <Compile Include="Animation\Sequences\ColorSequenceWriter.cs" />
     <Compile Include="Animation\Sequences\DoubleSequenceWriter.cs" />
@@ -133,7 +150,9 @@
     <Compile Include="Asset\Pipeline\Recipes\PackBitmap.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToTexture2D.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToUILayout1.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\ReadGameAsset.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ReadImage.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\ReadGameAssetXml.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ReadRecipe.cs" />
     <Compile Include="Asset\Pipeline\Recipes\FileToStream.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ImportBitmap.cs" />

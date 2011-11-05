@@ -26,9 +26,10 @@ namespace Bibim
     }
 
     template <typename T, char a, char b, char c, char d>
-    T EvalVariableTemplate<T, a, b, c, d>::Evaluate(EvaluationContext& context)
+    T EvalVariableTemplate<T, a, b, c, d>::Evaluate(EvaluationContext& /*context*/)
     {
-        return context.GetValue<T>(name);
+        return T();
+        // return context.GetValue<T>(name);
     }
 
     template <typename T, char a, char b, char c, char d>

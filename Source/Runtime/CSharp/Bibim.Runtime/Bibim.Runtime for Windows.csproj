@@ -92,6 +92,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animation\EvalTrees\BoolEvalTree.cs" />
     <Compile Include="Animation\EvalConstants\EvalColorConstant.cs" />
     <Compile Include="Animation\EvalConstants\EvalPoint3Constant.cs" />
     <Compile Include="Animation\EvalConstants\EvalPoint4Constant.cs" />
@@ -105,6 +106,22 @@
     <Compile Include="Animation\EvalSequences\EvalPoint3Sequence.cs" />
     <Compile Include="Animation\EvalSequences\EvalPoint4Sequence.cs" />
     <Compile Include="Animation\EvalSequenceTemplate.cs" />
+    <Compile Include="Animation\EvalTrees\ShortIntEvalTree.cs" />
+    <Compile Include="Animation\EvalTrees\IntEvalTree.cs" />
+    <Compile Include="Animation\EvalTrees\LongIntEvalTree.cs" />
+    <Compile Include="Animation\EvalTrees\GameAssetEvalTree.cs" />
+    <Compile Include="Animation\EvalTrees\RectEvalTree.cs" />
+    <Compile Include="Animation\EvalTrees\RectFEvalTree.cs" />
+    <Compile Include="Animation\EvalTrees\Vector2EvalTree.cs" />
+    <Compile Include="Animation\EvalTrees\Vector3EvalTree.cs" />
+    <Compile Include="Animation\EvalTrees\Vector4EvalTree.cs" />
+    <Compile Include="Animation\EvalTrees\Point2EvalTree.cs" />
+    <Compile Include="Animation\EvalTrees\Point3EvalTree.cs" />
+    <Compile Include="Animation\EvalTrees\Point4EvalTree.cs" />
+    <Compile Include="Animation\EvalTrees\FloatEvalTree.cs" />
+    <Compile Include="Animation\EvalTrees\DoubleEvalTree.cs" />
+    <Compile Include="Animation\EvalTrees\ColorEvalTree.cs" />
+    <Compile Include="Animation\EvalTreeTemplate.cs" />
     <Compile Include="Animation\EvalVariables\EvalColorVariable.cs" />
     <Compile Include="Animation\EvalVariables\EvalPoint3Variable.cs" />
     <Compile Include="Animation\EvalVariables\EvalPoint4Variable.cs" />

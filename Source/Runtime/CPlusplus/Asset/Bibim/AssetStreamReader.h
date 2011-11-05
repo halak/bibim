@@ -21,6 +21,11 @@
                 GameModule* ReadModule();
                 GameModule* ReadModule(int defaultModuleClassID);
 
+                GameAsset* ReadAsset();
+                
+                using BinaryReader::Read;
+                inline void Read(GameAssetPtr& outValue);
+
                 GameModule* FindModuleByClassID(int classID);
 
                 inline const String& GetName() const;

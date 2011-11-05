@@ -2333,6 +2333,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Animation\Bibim\EvalTrees.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalTrees.inl"
+						>
+					</File>
+					<File
 						RelativePath=".\Animation\Bibim\EvalVariables.h"
 						>
 					</File>

@@ -2,6 +2,7 @@
 #ifndef __BIBIM_EVALUABLECONSTANTS_H__
 #define __BIBIM_EVALUABLECONSTANTS_H__
 
+#   include <Bibim/FWD.h>
 #   include <Bibim/Evals.h>
 
     namespace Bibim

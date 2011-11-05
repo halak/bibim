@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 using Bibim.Asset;
 
 namespace Bibim.Animation
 {
-    public abstract class SequenceTemplate<T> : GameAsset
+    public abstract class SequenceTemplate<T> : GameAsset, IXmlSerializable
     {
         #region Fields
         private Keyframe<T>[] keyframes;
@@ -51,6 +51,7 @@ namespace Bibim.Animation
         public SequenceTemplate()
         {
             keyframes = Keyframe<T>.ZeroArray;
+            duration = 0.0f;
             startTimeChanged = true;
         }
         #endregion
@@ -207,6 +208,64 @@ namespace Bibim.Animation
                 keyframes[i].StartTime = time;
                 time += keyframes[i].Duration;
             }
+        }
+        #endregion
+
+        #region IXmlSerializable
+        public System.Xml.Schema.XmlSchema GetSchema()
+        {
+            return null;
+        }
+
+        public void ReadXml(System.Xml.XmlReader reader)
+        {
+            bool wasEmpty = reader.IsEmptyElement;
+            reader.Read();
+
+            if (wasEmpty)
+                return;
+
+            XmlSerializer valueSerializer = new XmlSerializer(typeof(T));
+            var keyframeList = new LinkedList<Keyframe<T>>();
+
+            reader.ReadStartElement("Keyframes");
+
+            float totalDuration = 0.0f;
+            while (reader.NodeType != System.Xml.XmlNodeType.EndElement)
+            {
+                float duration = float.Parse(reader.GetAttribute("Duration"));
+                reader.ReadStartElement("Item");
+                T value = (T) valueSerializer.Deserialize(reader);
+                reader.ReadEndElement();
+
+                keyframeList.AddLast(new Keyframe<T>(value, duration, totalDuration));
+                totalDuration += duration;
+            }
+
+            reader.ReadEndElement();
+
+            this.keyframes = new Keyframe<T>[keyframeList.Count];
+            this.duration = totalDuration;
+            this.startTimeChanged = false;
+
+            int index = 0;
+            foreach (var item in keyframeList)
+                this.keyframes[index++] = item;
+        }
+
+        public void WriteXml(System.Xml.XmlWriter writer)
+        {
+            XmlSerializer valueSerializer = new XmlSerializer(typeof(T));
+
+            writer.WriteStartElement("Keyframes");
+            foreach (var item in keyframes)
+            {
+                writer.WriteStartElement("Item");
+                writer.WriteAttributeString("Duration", item.Duration.ToString());
+                valueSerializer.Serialize(writer, item.Value);
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
         }
         #endregion
     }

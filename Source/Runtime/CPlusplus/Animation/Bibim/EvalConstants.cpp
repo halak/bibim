@@ -3,6 +3,7 @@
 #include <Bibim/EvalConstants.h>
 #include <Bibim/GameAsset.h>
 #include <Bibim/EvalRangedSequences.h>
+#include <Bibim/EvalTrees.h>
 
 namespace Bibim
 {
@@ -11,9 +12,6 @@ namespace Bibim
     EvalGameAssetConstant::EvalGameAssetConstant()
         : value()
     {
-        BoolSequence s;
-        AssetStreamReader r("", nullptr, nullptr);
-        BoolSequence::Create(r, nullptr);
     }
 
     EvalGameAssetConstant::EvalGameAssetConstant(GameAsset* value)

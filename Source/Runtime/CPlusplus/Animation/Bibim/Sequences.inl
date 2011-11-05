@@ -4,7 +4,7 @@ namespace Bibim
 {
     template <typename T>
     Keyframe<T>::Keyframe()
-        : Value(0.0f),
+        : Value(),
           Duration(0.0f),
           StartTime(0.0f)
     {

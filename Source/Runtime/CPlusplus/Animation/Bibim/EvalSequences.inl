@@ -40,7 +40,7 @@ namespace Bibim
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
     void EvalSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::OnRead(ComponentStreamReader& reader)
     {
-        Base::onRead(reader);
+        Base::OnRead(reader);
         timeIndex = 0;
         source = static_cast<TSequence*>(reader.ReadAsset());
     }
