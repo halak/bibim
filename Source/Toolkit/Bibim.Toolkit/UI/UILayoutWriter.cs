@@ -244,7 +244,7 @@ namespace Bibim.UI
         private static void Write(AssetStreamWriter writer, UIBlendingEffect o, List<object> objectDictionary)
         {
             Write(writer, (UIPixelEffect)o, objectDictionary);
-            writer.Write((sbyte)o.Mode);
+            writer.Write((byte)o.Mode);
         }
         #endregion
     }

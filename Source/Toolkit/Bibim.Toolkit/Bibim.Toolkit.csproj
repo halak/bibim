@@ -99,12 +99,15 @@
   <ItemGroup>
     <Compile Include="AliasAttribute.cs" />
     <Compile Include="Animation\Sequences\BoolSequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\ColorSequenceWriter.cs" />
     <Compile Include="Animation\Sequences\DoubleSequenceWriter.cs" />
     <Compile Include="Animation\Sequences\FloatSequenceWriter.cs" />
     <Compile Include="Animation\Sequences\GameAssetSequenceWriter.cs" />
     <Compile Include="Animation\Sequences\IntSequenceWriter.cs" />
     <Compile Include="Animation\Sequences\LongIntSequenceWriter.cs" />
-    <Compile Include="Animation\Sequences\PointSequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\Point2SequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\Point3SequenceWriter.cs" />
+    <Compile Include="Animation\Sequences\Point4SequenceWriter.cs" />
     <Compile Include="Animation\Sequences\RectangleFSequenceWriter.cs" />
     <Compile Include="Animation\Sequences\RectangleSequenceWriter.cs" />
     <Compile Include="Animation\Sequences\ShortIntSequenceWriter.cs" />

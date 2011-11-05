@@ -57,8 +57,6 @@ namespace Bibim.Scripting.Statements
                     return 1;
                 case ScriptObjectType.Int:
                     return 4;
-                case ScriptObjectType.UInt:
-                    return 4;
                 case ScriptObjectType.LongInt:
                     return 4;
                 case ScriptObjectType.Float:
