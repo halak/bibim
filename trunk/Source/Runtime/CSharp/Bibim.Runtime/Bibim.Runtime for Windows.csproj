@@ -92,6 +92,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animation\EvalBinaryOperatorTemplate.cs" />
+    <Compile Include="Animation\EvalOperators\EvalBoolOperators.cs" />
+    <Compile Include="Animation\EvalOperators\EvalDoubleOperators.cs" />
+    <Compile Include="Animation\EvalOperators\EvalFloatOperators.cs" />
+    <Compile Include="Animation\EvalOperators\EvalIntOperators.cs" />
+    <Compile Include="Animation\EvalOperators\EvalLongIntOperators.cs" />
+    <Compile Include="Animation\EvalOperators\EvalShortIntOperators.cs" />
     <Compile Include="Animation\EvalTrees\BoolEvalTree.cs" />
     <Compile Include="Animation\EvalConstants\EvalColorConstant.cs" />
     <Compile Include="Animation\EvalConstants\EvalPoint3Constant.cs" />
@@ -122,6 +129,7 @@
     <Compile Include="Animation\EvalTrees\DoubleEvalTree.cs" />
     <Compile Include="Animation\EvalTrees\ColorEvalTree.cs" />
     <Compile Include="Animation\EvalTreeTemplate.cs" />
+    <Compile Include="Animation\EvalUnaryOperatorTemplate.cs" />
     <Compile Include="Animation\EvalVariables\EvalColorVariable.cs" />
     <Compile Include="Animation\EvalVariables\EvalPoint3Variable.cs" />
     <Compile Include="Animation\EvalVariables\EvalPoint4Variable.cs" />

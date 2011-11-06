@@ -15,12 +15,19 @@
             inline Point2(int x, int y);
             inline Point2(const Point2& original);
 
+            inline Point2 operator + () const;
+            inline Point2 operator - () const;
+
             inline Point2& operator = (const Point2& right);
             inline Point2& operator += (const Point2& right);
             inline Point2& operator -= (const Point2& right);
+            inline Point2& operator *= (int right);
+            inline Point2& operator /= (int right);
 
             inline Point2 operator + (const Point2& right) const;
             inline Point2 operator - (const Point2& right) const;
+            inline Point2 operator * (int right) const;
+            inline Point2 operator / (int right) const;
 
             inline bool operator == (const Point2& right) const;
             inline bool operator != (const Point2& right) const;

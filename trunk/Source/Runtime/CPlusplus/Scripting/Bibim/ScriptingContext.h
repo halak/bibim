@@ -19,6 +19,7 @@
                 int     GetIntArg(int index) const;
                 longint GetLongIntArg(int index) const;
                 float   GetFloatArg(int index) const;
+                Color   GetColorArg(int index) const;
                 String  GetStringArg(int index) const;
 
                 void Return();

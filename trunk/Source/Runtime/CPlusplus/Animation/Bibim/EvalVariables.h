@@ -16,7 +16,7 @@
                 EvalVariableTemplate(const String& name);
                 virtual ~EvalVariableTemplate();
                 
-                virtual T Evaluate(EvaluationContext& context);
+                virtual T Evaluate(EvalContext& context);
 
                 const String& GetName() const;
                 void SetName(const String& value);

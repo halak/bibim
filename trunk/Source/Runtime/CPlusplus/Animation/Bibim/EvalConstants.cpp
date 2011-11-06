@@ -21,7 +21,7 @@ namespace Bibim
     {
     }
 
-    GameAsset* EvalGameAssetConstant::Evaluate(EvaluationContext& /*context*/)
+    GameAsset* EvalGameAssetConstant::Evaluate(EvalContext& /*context*/)
     {
         return value;
     }

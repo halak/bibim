@@ -2281,6 +2281,14 @@
 					Name="Evaluation"
 					>
 					<File
+						RelativePath=".\Animation\Bibim\EvalBinaryOperators.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalBinaryOperators.inl"
+						>
+					</File>
+					<File
 						RelativePath=".\Animation\Bibim\EvalConstants.cpp"
 						>
 					</File>
@@ -2342,6 +2350,14 @@
 					</File>
 					<File
 						RelativePath=".\Animation\Bibim\EvalTrees.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalUnaryOperators.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalUnaryOperators.inl"
 						>
 					</File>
 					<File

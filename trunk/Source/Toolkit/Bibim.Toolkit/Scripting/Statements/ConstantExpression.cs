@@ -37,7 +37,9 @@ namespace Bibim.Scripting.Statements
                     throw new NotSupportedException();
                 case TypeCode.Object:
                     Type type = Value.GetType();
-                    if (type == typeof(Vector2))
+                    if (type == typeof(Color))
+                        context.Push((Color)Value);
+                    else if (type == typeof(Vector2))
                         context.Push((Vector2)Value);
                     else if (type == typeof(Vector3))
                         context.Push((Vector3)Value);

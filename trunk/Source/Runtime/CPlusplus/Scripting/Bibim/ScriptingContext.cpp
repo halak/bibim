@@ -44,6 +44,12 @@ namespace Bibim
         return BinaryReader::ToFloat(thread->GetStack().GetAt(index - numberOfArguments));
     }
 
+    Color ScriptingContext::GetColorArg(int index) const
+    {
+        BBAssertDebug(0 <= index && index < numberOfArguments);
+        return BinaryReader::ToColor(thread->GetStack().GetAt(index - numberOfArguments));
+    }
+
     String ScriptingContext::GetStringArg(int index) const
     {
         BBAssertDebug(0 <= index && index < numberOfArguments);
