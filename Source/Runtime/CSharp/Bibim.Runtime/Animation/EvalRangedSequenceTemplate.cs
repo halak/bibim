@@ -56,5 +56,17 @@ namespace Bibim.Animation
 
         protected abstract T Interpolate(T a, T b, float t);
         #endregion
+
+        #region IXmlSerializable
+        public override void ReadXml(System.Xml.XmlReader reader)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void WriteXml(System.Xml.XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
     }
 }
