@@ -30,17 +30,5 @@ namespace Bibim.Animation
         {
             return Value;
         }
-
-        #region IXmlSerializable
-        public override void ReadXml(System.Xml.XmlReader reader)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void WriteXml(System.Xml.XmlWriter writer)
-        {
-            throw new NotImplementedException();
-        }
-        #endregion
     }
 }
