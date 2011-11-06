@@ -265,6 +265,18 @@ namespace Bibim.Scripting
                 PushVS();
             }
 
+            public void Push(Color value)
+            {
+                binaryWriter.Write(ScriptInstruction.Push4);
+                binaryWriter.Write(value.A);
+                binaryWriter.Write(value.R);
+                binaryWriter.Write(value.G);
+                binaryWriter.Write(value.B);
+
+                AppendTextCode("<b>push</b> color(R:{0}, G:{1}, B:{2}, A:{3})", value.R, value.G, value.B, value.A);
+                PushVS();
+            }
+
             public void Push(Vector2 value)
             {
                 binaryWriter.Write(ScriptInstruction.Push8);

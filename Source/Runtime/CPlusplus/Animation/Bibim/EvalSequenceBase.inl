@@ -31,7 +31,7 @@ namespace Bibim
     }
 
     template <typename T>
-    T EvalSequenceBase<T>::Evaluate(EvaluationContext& /*context*/)
+    T EvalSequenceBase<T>::Evaluate(EvalContext& /*context*/)
     {
         if (timeChanged)
         {

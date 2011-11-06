@@ -16,12 +16,19 @@
             inline Point3(int x, int y, int z);
             inline Point3(const Point3& original);
 
+            inline Point3 operator + () const;
+            inline Point3 operator - () const;
+
             inline Point3& operator = (const Point3& right);
             inline Point3& operator += (const Point3& right);
             inline Point3& operator -= (const Point3& right);
+            inline Point3& operator *= (int right);
+            inline Point3& operator /= (int right);
 
             inline Point3 operator + (const Point3& right) const;
             inline Point3 operator - (const Point3& right) const;
+            inline Point3 operator * (int right) const;
+            inline Point3 operator / (int right) const;
 
             inline bool operator == (const Point3& right) const;
             inline bool operator != (const Point3& right) const;

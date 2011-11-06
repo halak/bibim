@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/ComponentStreamReader.h>
+#include <Bibim/GameAsset.h>
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/GameComponent.h>
 #include <Bibim/GameComponentFactory.h>
@@ -89,5 +90,15 @@ namespace Bibim
         }
         else
             return nullptr;
+    }
+
+    void ComponentStreamReader::Read(GameAssetPtr& outValue)
+    {
+        outValue = ReadAsset();
+    }
+
+    void ComponentStreamReader::Read(GameComponentPtr& outValue)
+    {
+        outValue = ReadComponent();
     }
 }

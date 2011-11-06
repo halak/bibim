@@ -21,7 +21,7 @@
             public:
                 virtual ~EvalTemplate() { }
 
-                virtual T Evaluate(EvaluationContext& context) = 0;
+                virtual T Evaluate(EvalContext& context) = 0;
         };
 
         typedef EvalTemplate<bool>       EvalBool;
@@ -41,22 +41,23 @@
         typedef EvalTemplate<Vector4>    EvalVector4;
         typedef EvalTemplate<GameAsset*> EvalGameAsset;
 
-        typedef SharedPointer<EvalBool>      EvalBoolPtr;
-        typedef SharedPointer<EvalShortInt>  EvalShortIntPtr;
-        typedef SharedPointer<EvalInt>       EvalIntPtr;
-        typedef SharedPointer<EvalLongInt>   EvalLongIntPtr;
-        typedef SharedPointer<EvalFloat>     EvalFloatPtr;
-        typedef SharedPointer<EvalDouble>    EvalDoublePtr;
-        typedef SharedPointer<EvalColor>     EvalColorPtr;
-        typedef SharedPointer<EvalPoint2>    EvalPoint2Ptr;
-        typedef SharedPointer<EvalPoint3>    EvalPoint3Ptr;
-        typedef SharedPointer<EvalPoint4>    EvalPoint4Ptr;
-        typedef SharedPointer<EvalRect>      EvalRectPtr;
-        typedef SharedPointer<EvalRectF>     EvalRectFPtr;
-        typedef SharedPointer<EvalVector2>   EvalVector2Ptr;
-        typedef SharedPointer<EvalVector3>   EvalVector3Ptr;
-        typedef SharedPointer<EvalVector4>   EvalVector4Ptr;
-        typedef SharedPointer<EvalGameAsset> EvalGameAssetPtr;
+#       define BBDeclareEvalClass(classname) typedef SharedPointer<classname> classname##Ptr;
+        BBDeclareEvalClass(EvalBool);
+        BBDeclareEvalClass(EvalShortInt);
+        BBDeclareEvalClass(EvalInt);
+        BBDeclareEvalClass(EvalLongInt);
+        BBDeclareEvalClass(EvalFloat);
+        BBDeclareEvalClass(EvalDouble);
+        BBDeclareEvalClass(EvalColor);
+        BBDeclareEvalClass(EvalPoint2);
+        BBDeclareEvalClass(EvalPoint3);
+        BBDeclareEvalClass(EvalPoint4);
+        BBDeclareEvalClass(EvalRect);
+        BBDeclareEvalClass(EvalRectF);
+        BBDeclareEvalClass(EvalVector2);
+        BBDeclareEvalClass(EvalVector3);
+        BBDeclareEvalClass(EvalVector4);
+        BBDeclareEvalClass(EvalGameAsset);
     }
 
 #   include <Bibim/Evals.inl>

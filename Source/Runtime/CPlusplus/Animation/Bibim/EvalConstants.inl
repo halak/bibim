@@ -34,7 +34,7 @@ namespace Bibim
     }
 
     template <typename T, char a, char b, char c, char d>
-    T EvalConstantTemplate<T, a, b, c, d>::Evaluate(EvaluationContext& /*context*/)
+    T EvalConstantTemplate<T, a, b, c, d>::Evaluate(EvalContext& /*context*/)
     {
         return value;
     }

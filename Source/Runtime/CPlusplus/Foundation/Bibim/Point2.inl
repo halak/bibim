@@ -15,6 +15,16 @@ namespace Bibim
     {
     }
 
+    Point2 Point2::operator + () const
+    {
+        return Point2(+X, +Y);
+    }
+
+    Point2 Point2::operator - () const
+    {
+        return Point2(-X, -Y);
+    }
+
     Point2& Point2::operator = (const Point2& right)
     {
         X = right.X;
@@ -36,6 +46,20 @@ namespace Bibim
         return *this;
     }
 
+    Point2& Point2::operator *= (int right)
+    {
+        X *= right;
+        Y *= right;
+        return *this;
+    }
+
+    Point2& Point2::operator /= (int right)
+    {
+        X /= right;
+        Y /= right;
+        return *this;
+    }
+
     Point2 Point2::operator + (const Point2& right) const
     {
         return Point2(X + right.X, Y + right.Y);
@@ -44,6 +68,16 @@ namespace Bibim
     Point2 Point2::operator - (const Point2& right) const
     {
         return Point2(X - right.X, Y - right.Y);
+    }
+
+    Point2 Point2::operator * (int right) const
+    {
+        return Point2(X * right, Y * right);
+    }
+
+    Point2 Point2::operator / (int right) const
+    {
+        return Point2(X / right, Y / right);
     }
 
     bool Point2::operator == (const Point2& right) const

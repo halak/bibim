@@ -17,7 +17,7 @@
 
                 void Update(float dt, int timestamp);
 
-                T Evaluate(EvaluationContext& context);
+                T Evaluate(EvalContext& context);
 
                 float GetTime() const;
 

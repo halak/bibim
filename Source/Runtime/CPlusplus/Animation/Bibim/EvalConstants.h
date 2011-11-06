@@ -16,7 +16,7 @@
                 EvalConstantTemplate(T value);
                 virtual ~EvalConstantTemplate();
                 
-                virtual T Evaluate(EvaluationContext& context);
+                virtual T Evaluate(EvalContext& context);
 
                 T GetValue() const;
                 void SetValue(T value);
@@ -33,7 +33,7 @@
                 EvalGameAssetConstant(GameAsset* value);
                 virtual ~EvalGameAssetConstant();
 
-                virtual GameAsset* Evaluate(EvaluationContext& context);
+                virtual GameAsset* Evaluate(EvalContext& context);
 
                 inline GameAsset* GetValue() const;
                 inline void SetValue(GameAsset* value);

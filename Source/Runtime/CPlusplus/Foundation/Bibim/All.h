@@ -14,8 +14,11 @@
 #  include <Bibim/FileAssetProvider.h>
 #  include <Bibim/GameAsset.h>
 #  include <Bibim/GameAssetFactory.h>
+#include <Bibim/EvalUnaryOperators.h>
+#include <Bibim/EvalContext.h>
 #  include <Bibim/GameAssetStorage.h>
 #  include <Bibim/PipedAssetProvider.h>
+#include <Bibim/EvalBinaryOperators.h>
 #   include <Bibim/UIColorMatrixEffect.h>
 #   include <Bibim/UIBlendingEffect.h>
 #include <Bibim/ShaderEffect.h>

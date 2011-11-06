@@ -22,6 +22,10 @@
 
                 GameAsset* ReadAsset();
                 GameComponent* ReadComponent();
+                
+                using BinaryReader::Read;
+                void Read(GameAssetPtr& outValue);
+                void Read(GameComponentPtr& outValue);
 
             private:
                 inline GameAssetStorage* GetStorage();

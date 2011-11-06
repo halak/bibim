@@ -148,6 +148,17 @@ namespace Bibim
         }
     }
 
+    Color ScriptObject::CastColor() const
+    {
+        switch (type)
+        {
+            case ColorType:
+                return Color(static_cast<unsigned long>(value.INT));
+            default:
+                return Color(0, 0, 0, 0);
+        }
+    }
+
     SharedObject* ScriptObject::CastSharedObject() const
     {
         if (type == SharedObjectType)
