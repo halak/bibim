@@ -3,14 +3,14 @@
 namespace Bibim.Animation
 {
     [ClassID('e', 'v', 'R', 'f')]
-    public sealed class EvalRectangleFVariable : EvalVariableTemplate<RectangleF>
+    public sealed class EvalRectFVariable : EvalVariableTemplate<RectangleF>
     {
         #region Constructors
-        public EvalRectangleFVariable()
+        public EvalRectFVariable()
         {
         }
 
-        public EvalRectangleFVariable(string name)
+        public EvalRectFVariable(string name)
             : base(name)
         {
         }

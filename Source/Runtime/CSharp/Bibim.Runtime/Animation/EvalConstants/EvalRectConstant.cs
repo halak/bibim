@@ -4,14 +4,14 @@ using Microsoft.Xna.Framework;
 namespace Bibim.Animation
 {
     [ClassID('e', 'c', 'r', '_')]
-    public sealed class EvalRectangleConstant : EvalConstantTemplate<Rectangle>
+    public sealed class EvalRectConstant : EvalConstantTemplate<Rectangle>
     {
         #region Constructors
-        public EvalRectangleConstant()
+        public EvalRectConstant()
         {
         }
 
-        public EvalRectangleConstant(Rectangle value)
+        public EvalRectConstant(Rectangle value)
             : base(value)
         {
         }

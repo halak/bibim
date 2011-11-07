@@ -3,7 +3,7 @@
 namespace Bibim.Animation
 {
     [ClassID('s', 'q', 'R', 'f')]
-    public sealed class RectangleFSequence : SequenceTemplate<RectangleF>
+    public sealed class RectFSequence : SequenceTemplate<RectangleF>
     {
     }
 }

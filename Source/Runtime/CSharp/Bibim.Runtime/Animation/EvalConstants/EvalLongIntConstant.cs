@@ -3,14 +3,14 @@
 namespace Bibim.Animation
 {
     [ClassID('e', 'c', 'l', '_')]
-    public sealed class EvalLongConstant : EvalConstantTemplate<long>
+    public sealed class EvalLongIntConstant : EvalConstantTemplate<long>
     {
         #region Constructors
-        public EvalLongConstant()
+        public EvalLongIntConstant()
         {
         }
 
-        public EvalLongConstant(long value)
+        public EvalLongIntConstant(long value)
             : base(value)
         {
         }

@@ -21,6 +21,6 @@ namespace Bibim.Animation
             }
         }
 
-        public abstract void WriteValue(AssetStreamWriter writer, U value);
+        protected abstract void WriteValue(AssetStreamWriter writer, U value);
     }
 }

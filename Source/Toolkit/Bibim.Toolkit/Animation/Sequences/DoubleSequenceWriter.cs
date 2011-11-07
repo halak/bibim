@@ -7,7 +7,7 @@ namespace Bibim.Animation
     [GameAssetWriter(typeof(DoubleSequence))]
     public sealed class DoubleSequenceWriter : SequenceWriterTemplate<DoubleSequence, double>
     {
-        public override void WriteValue(AssetStreamWriter writer, double value)
+        protected override void WriteValue(AssetStreamWriter writer, double value)
         {
             writer.Write(value);
         }

@@ -3,14 +3,14 @@
 namespace Bibim.Animation
 {
     [ClassID('e', 'v', 'l', '_')]
-    public sealed class EvalLongVariable : EvalVariableTemplate<long>
+    public sealed class EvalLongIntVariable : EvalVariableTemplate<long>
     {
         #region Constructors
-        public EvalLongVariable()
+        public EvalLongIntVariable()
         {
         }
 
-        public EvalLongVariable(string name)
+        public EvalLongIntVariable(string name)
             : base(name)
         {
         }

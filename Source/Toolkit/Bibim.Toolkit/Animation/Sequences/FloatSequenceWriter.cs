@@ -7,7 +7,7 @@ namespace Bibim.Animation
     [GameAssetWriter(typeof(FloatSequence))]
     public sealed class FloatSequenceWriter : SequenceWriterTemplate<FloatSequence, float>
     {
-        public override void WriteValue(AssetStreamWriter writer, float value)
+        protected override void WriteValue(AssetStreamWriter writer, float value)
         {
             writer.Write(value);
         }

@@ -4,10 +4,10 @@ using Bibim.IO;
 
 namespace Bibim.Animation
 {
-    [GameAssetWriter(typeof(RectangleFSequence))]
-    public sealed class RectangleFSequenceWriter : SequenceWriterTemplate<RectangleFSequence, RectangleF>
+    [GameAssetWriter(typeof(RectFSequence))]
+    public sealed class RectangleFSequenceWriter : SequenceWriterTemplate<RectFSequence, RectangleF>
     {
-        public override void WriteValue(AssetStreamWriter writer, RectangleF value)
+        protected override void WriteValue(AssetStreamWriter writer, RectangleF value)
         {
             writer.Write(value);
         }

@@ -10,9 +10,5 @@ namespace Bibim.Animation
     [GameAssetWriter(typeof(RectEvalTree))]
     public sealed class RectEvalTreeWriter : EvalTreeWriterTemplate<RectEvalTree, Rectangle>
     {
-        public override void WriteValue(AssetStreamWriter writer, Rectangle value)
-        {
-            writer.Write(value);
-        }
     }
 }
