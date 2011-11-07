@@ -8,7 +8,7 @@ namespace Bibim.Animation
     [GameAssetWriter(typeof(Point4Sequence))]
     public sealed class Point4SequenceWriter : SequenceWriterTemplate<Point4Sequence, Point4>
     {
-        public override void WriteValue(AssetStreamWriter writer, Point4 value)
+        protected override void WriteValue(AssetStreamWriter writer, Point4 value)
         {
             writer.Write(value);
         }

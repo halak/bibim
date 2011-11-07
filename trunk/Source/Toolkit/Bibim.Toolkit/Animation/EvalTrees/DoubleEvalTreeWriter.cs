@@ -9,9 +9,5 @@ namespace Bibim.Animation
     [GameAssetWriter(typeof(DoubleEvalTree))]
     public sealed class DoubleEvalTreeWriter : EvalTreeWriterTemplate<DoubleEvalTree, double>
     {
-        public override void WriteValue(AssetStreamWriter writer, double value)
-        {
-            writer.Write(value);
-        }
     }
 }

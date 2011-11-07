@@ -1,14 +1,13 @@
 ﻿using System;
-using Microsoft.Xna.Framework;
 
 namespace Bibim.Animation
 {
-    [ClassID('e', 'r', 'r', '_')]
-    public sealed class EvalRectangleRangedSequence : EvalRangedSequenceTemplate<Rectangle, RectangleSequence>
+    [ClassID('e', 's', 'R', 'f')]
+    public sealed class EvalRectFSequence : EvalSequenceTemplate<RectangleF, RectFSequence>
     {
-        protected override Rectangle Interpolate(Rectangle a, Rectangle b, float t)
+        protected override RectangleF Interpolate(RectangleF a, RectangleF b, float t)
         {
-            Rectangle result = Rectangle.Empty;
+            RectangleF result = RectangleF.Empty;
             result.X = (int)((float)a.X + ((float)(b.X - a.X)) * t);
             result.Y = (int)((float)a.Y + ((float)(b.Y - a.Y)) * t);
             result.Width = (int)((float)a.Width + ((float)(b.Width - a.Width)) * t);

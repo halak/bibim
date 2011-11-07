@@ -9,9 +9,5 @@ namespace Bibim.Animation
     [GameAssetWriter(typeof(FloatEvalTree))]
     public sealed class FloatEvalTreeWriter : EvalTreeWriterTemplate<FloatEvalTree, float>
     {
-        public override void WriteValue(AssetStreamWriter writer, float value)
-        {
-            writer.Write(value);
-        }
     }
 }

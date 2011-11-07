@@ -48,7 +48,7 @@ namespace Bibim.Animation
     }
 
     [ClassID('e', 'C', 'f', 'd')]
-    public sealed class EvaDoubleToFloat : EvalUnaryOperatorTemplate<float, double>
+    public sealed class EvalDoubleToFloat : EvalUnaryOperatorTemplate<float, double>
     {
         protected override float Calculate(double value) { return (float)value; }
     }

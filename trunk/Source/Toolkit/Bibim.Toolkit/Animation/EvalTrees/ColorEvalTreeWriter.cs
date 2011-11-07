@@ -10,9 +10,5 @@ namespace Bibim.Animation
     [GameAssetWriter(typeof(ColorEvalTree))]
     public sealed class ColorEvalTreeWriter : EvalTreeWriterTemplate<ColorEvalTree, Color>
     {
-        public override void WriteValue(AssetStreamWriter writer, Color value)
-        {
-            writer.Write(value);
-        }
     }
 }

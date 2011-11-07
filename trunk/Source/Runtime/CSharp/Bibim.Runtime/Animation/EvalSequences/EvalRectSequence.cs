@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 namespace Bibim.Animation
 {
     [ClassID('e', 's', 'r', '_')]
-    public sealed class EvalRectangleSequence : EvalSequenceTemplate<Rectangle, RectangleSequence>
+    public sealed class EvalRectSequence : EvalSequenceTemplate<Rectangle, RectSequence>
     {
         protected override Rectangle Interpolate(Rectangle a, Rectangle b, float t)
         {

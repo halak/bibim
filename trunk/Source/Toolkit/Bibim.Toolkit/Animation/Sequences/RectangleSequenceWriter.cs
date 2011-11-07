@@ -5,10 +5,10 @@ using Microsoft.Xna.Framework;
 
 namespace Bibim.Animation
 {
-    [GameAssetWriter(typeof(RectangleSequence))]
-    public sealed class RectangleSequenceWriter : SequenceWriterTemplate<RectangleSequence, Rectangle>
+    [GameAssetWriter(typeof(RectSequence))]
+    public sealed class RectangleSequenceWriter : SequenceWriterTemplate<RectSequence, Rectangle>
     {
-        public override void WriteValue(AssetStreamWriter writer, Rectangle value)
+        protected override void WriteValue(AssetStreamWriter writer, Rectangle value)
         {
             writer.Write(value);
         }

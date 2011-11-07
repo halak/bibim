@@ -3,7 +3,7 @@
 namespace Bibim.Animation
 {
     [ClassID('e', 'r', 'R', 'f')]
-    public sealed class EvalRectangleFRangedSequence : EvalRangedSequenceTemplate<RectangleF, RectangleFSequence>
+    public sealed class EvalRectFRangedSequence : EvalRangedSequenceTemplate<RectangleF, RectFSequence>
     {
         protected override RectangleF Interpolate(RectangleF a, RectangleF b, float t)
         {

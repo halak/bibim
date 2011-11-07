@@ -10,9 +10,5 @@ namespace Bibim.Animation
     [GameAssetWriter(typeof(Vector2EvalTree))]
     public sealed class Vector2EvalTreeWriter : EvalTreeWriterTemplate<Vector2EvalTree, Vector2>
     {
-        public override void WriteValue(AssetStreamWriter writer, Vector2 value)
-        {
-            writer.Write(value);
-        }
     }
 }
