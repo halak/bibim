@@ -40,7 +40,13 @@
                 }
 
                 virtual ~EvalUnaryOperatorTemplate() { }
-                
+
+                virtual void Reset()
+                {
+                    if (operand)
+                        operand->Reset();
+                }
+
                 virtual T Evaluate(EvalContext& context)
                 {
                     if (operand)

@@ -20,7 +20,7 @@ namespace Bibim
 
     template <typename T> T InterpolateKeyframe(const Keyframe<T>& k1, const Keyframe<T>& k2, float t)
     {
-        return Math::Interpolate(k1.Value, k2.Value, t);
+        return Math::Lerp(k1.Value, k2.Value, t);
     }
 
     inline bool InterpolateKeyframe(const Keyframe<bool>& k1, const Keyframe<bool>& /*k2*/, float /*t*/)

@@ -141,6 +141,18 @@ namespace Bibim.Animation
 
             return true;
         }
+
+        private static bool WriteInterpolator<V>(AssetStreamWriter writer, EvalInterpolatorTemplate<V> o, IList<object> objMap)
+        {
+            if (WriteEval(writer, o, objMap) == false)
+                return false;
+
+            Write(writer, o.Value1, objMap);
+            Write(writer, o.Value2, objMap);
+            Write(writer, o.Weight, objMap);
+
+            return true;
+        }
         #endregion
 
         #region Write EvalConstantTemplate<T> derived classes
@@ -341,6 +353,35 @@ namespace Bibim.Animation
         protected static void Write(AssetStreamWriter writer, EvalIntDivision o, IList<object> objMap) { WriteBinaryOperator(writer, o, objMap); }
         protected static void Write(AssetStreamWriter writer, EvalIntModulus o, IList<object> objMap) { WriteBinaryOperator(writer, o, objMap); }
         #endregion
+        #endregion
+
+        #region Write EvalInterpolator<T> derived classes
+        protected static void Write(AssetStreamWriter writer, EvalColorInterpolator o, IList<object> objMap) { WriteInterpolator(writer, o, objMap); }
+        protected static void Write(AssetStreamWriter writer, EvalDoubleInterpolator o, IList<object> objMap) { WriteInterpolator(writer, o, objMap); }
+        protected static void Write(AssetStreamWriter writer, EvalFloatInterpolator o, IList<object> objMap) { WriteInterpolator(writer, o, objMap); }
+        protected static void Write(AssetStreamWriter writer, EvalIntInterpolator o, IList<object> objMap) { WriteInterpolator(writer, o, objMap); }
+        protected static void Write(AssetStreamWriter writer, EvalLongIntInterpolator o, IList<object> objMap) { WriteInterpolator(writer, o, objMap); }
+        protected static void Write(AssetStreamWriter writer, EvalPoint2Interpolator o, IList<object> objMap) { WriteInterpolator(writer, o, objMap); }
+        protected static void Write(AssetStreamWriter writer, EvalPoint3Interpolator o, IList<object> objMap) { WriteInterpolator(writer, o, objMap); }
+        protected static void Write(AssetStreamWriter writer, EvalPoint4Interpolator o, IList<object> objMap) { WriteInterpolator(writer, o, objMap); }
+        protected static void Write(AssetStreamWriter writer, EvalShortIntInterpolator o, IList<object> objMap) { WriteInterpolator(writer, o, objMap); }
+        protected static void Write(AssetStreamWriter writer, EvalVector2Interpolator o, IList<object> objMap) { WriteInterpolator(writer, o, objMap); }
+        protected static void Write(AssetStreamWriter writer, EvalVector3Interpolator o, IList<object> objMap) { WriteInterpolator(writer, o, objMap); }
+        protected static void Write(AssetStreamWriter writer, EvalVector4Interpolator o, IList<object> objMap) { WriteInterpolator(writer, o, objMap); }
+        #endregion
+
+        #region Write misc classes
+        protected void Write(AssetStreamWriter writer, EvalTimeflow o, IList<object> objMap)
+        {
+            if (WriteEval(writer, o, objMap) == false)
+                return;
+        }
+
+        protected void Write(AssetStreamWriter writer, EvalUnitRandom o, IList<object> objMap)
+        {
+            if (WriteEval(writer, o, objMap) == false)
+                return;
+        }
         #endregion
     }
 }

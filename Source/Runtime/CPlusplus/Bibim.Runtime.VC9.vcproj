@@ -2313,6 +2313,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Animation\Bibim\EvalInterpolators.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalInterpolators.inl"
+						>
+					</File>
+					<File
 						RelativePath=".\Animation\Bibim\EvalRangedSequences.h"
 						>
 					</File>
@@ -2345,6 +2353,18 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Animation\Bibim\EvalTimeflow.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalTimeflow.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalTimeflow.inl"
+						>
+					</File>
+					<File
 						RelativePath=".\Animation\Bibim\EvalTrees.h"
 						>
 					</File>
@@ -2358,6 +2378,18 @@
 					</File>
 					<File
 						RelativePath=".\Animation\Bibim\EvalUnaryOperators.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalUnitRandom.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalUnitRandom.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalUnitRandom.inl"
 						>
 					</File>
 					<File

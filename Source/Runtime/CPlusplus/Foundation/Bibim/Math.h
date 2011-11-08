@@ -92,20 +92,20 @@
                 static bool IsClockwise(Vector2 a, Vector2 b, Vector2 c);
                 static bool IsClockwise(const Vector2* points, int numberOfPoints);
 
-                static inline short   Interpolate(short a, short b, float t);
-                static inline int     Interpolate(int a, int b, float t);
-                static inline longint Interpolate(longint a, longint b, float t);
-                static inline float   Interpolate(float a, float b, float t);
-                static inline double  Interpolate(double a, double b, float t);
-                static inline Point2  Interpolate(Point2 a, Point2 b, float t);
-                static inline Point3  Interpolate(Point3 a, Point3 b, float t);
-                static inline Point4  Interpolate(Point4 a, Point4 b, float t);
-                static inline Rect    Interpolate(Rect a, Rect b, float t);
-                static inline RectF   Interpolate(RectF a, RectF b, float t);
-                static inline Vector2 Interpolate(Vector2 a, Vector2 b, float t);
-                static inline Vector3 Interpolate(Vector3 a, Vector3 b, float t);
-                static inline Vector4 Interpolate(Vector4 a, Vector4 b, float t);
-                static inline Color   Interpolate(Color a, Color b, float t);
+                static inline short   Lerp(short a, short b, float t);
+                static inline int     Lerp(int a, int b, float t);
+                static inline longint Lerp(longint a, longint b, float t);
+                static inline float   Lerp(float a, float b, float t);
+                static inline double  Lerp(double a, double b, float t);
+                static inline Point2  Lerp(Point2 a, Point2 b, float t);
+                static inline Point3  Lerp(Point3 a, Point3 b, float t);
+                static inline Point4  Lerp(Point4 a, Point4 b, float t);
+                static inline Rect    Lerp(Rect a, Rect b, float t);
+                static inline RectF   Lerp(RectF a, RectF b, float t);
+                static inline Vector2 Lerp(Vector2 a, Vector2 b, float t);
+                static inline Vector3 Lerp(Vector3 a, Vector3 b, float t);
+                static inline Vector4 Lerp(Vector4 a, Vector4 b, float t);
+                static inline Color   Lerp(Color a, Color b, float t);
 
                 static int     Random(int a, int b);
                 static float   Random(float a, float b);

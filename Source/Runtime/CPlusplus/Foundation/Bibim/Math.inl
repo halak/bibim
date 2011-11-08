@@ -199,94 +199,94 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    short Math::Interpolate(short a, short b, float t)
+    short Math::Lerp(short a, short b, float t)
     {
         return a + static_cast<short>(static_cast<float>(b - a) * t);
     }
 
-    int Math::Interpolate(int a, int b, float t)
+    int Math::Lerp(int a, int b, float t)
     {
         return a + static_cast<int>(static_cast<float>(b - a) * t);
     }
 
-    longint Math::Interpolate(longint a, longint b, float t)
+    longint Math::Lerp(longint a, longint b, float t)
     {
         return a + static_cast<longint>(static_cast<double>(b - a) * t);
     }
 
-    float Math::Interpolate(float a, float b, float t)
+    float Math::Lerp(float a, float b, float t)
     {
         return a + (b - a) * t;
     }
 
-    double Math::Interpolate(double a, double b, float t)
+    double Math::Lerp(double a, double b, float t)
     {
         return a + (b - a) * static_cast<double>(t);
     }
 
-    Point2 Math::Interpolate(Point2 a, Point2 b, float t)
+    Point2 Math::Lerp(Point2 a, Point2 b, float t)
     {
-        return Point2(Interpolate(a.X, b.X, t),
-                      Interpolate(a.Y, b.Y, t));
+        return Point2(Lerp(a.X, b.X, t),
+                      Lerp(a.Y, b.Y, t));
     }
 
-    Point3 Math::Interpolate(Point3 a, Point3 b, float t)
+    Point3 Math::Lerp(Point3 a, Point3 b, float t)
     {
-        return Point3(Interpolate(a.X, b.X, t),
-                      Interpolate(a.Y, b.Y, t),
-                      Interpolate(a.Z, b.Z, t));
+        return Point3(Lerp(a.X, b.X, t),
+                      Lerp(a.Y, b.Y, t),
+                      Lerp(a.Z, b.Z, t));
     }
 
-    Point4 Math::Interpolate(Point4 a, Point4 b, float t)
+    Point4 Math::Lerp(Point4 a, Point4 b, float t)
     {
-        return Point4(Interpolate(a.X, b.X, t),
-                      Interpolate(a.Y, b.Y, t),
-                      Interpolate(a.Z, b.Z, t),
-                      Interpolate(a.W, b.W, t));
+        return Point4(Lerp(a.X, b.X, t),
+                      Lerp(a.Y, b.Y, t),
+                      Lerp(a.Z, b.Z, t),
+                      Lerp(a.W, b.W, t));
     }
 
-    Rect Math::Interpolate(Rect a, Rect b, float t)
+    Rect Math::Lerp(Rect a, Rect b, float t)
     {
-        return Rect(Interpolate(a.X, b.X, t),
-                    Interpolate(a.Y, b.Y, t),
-                    Interpolate(a.Width , b.Width,  t),
-                    Interpolate(a.Height, b.Height, t));
+        return Rect(Lerp(a.X, b.X, t),
+                    Lerp(a.Y, b.Y, t),
+                    Lerp(a.Width , b.Width,  t),
+                    Lerp(a.Height, b.Height, t));
     }
 
-    RectF Math::Interpolate(RectF a, RectF b, float t)
+    RectF Math::Lerp(RectF a, RectF b, float t)
     {
-        return RectF(Interpolate(a.X, b.X, t),
-                     Interpolate(a.Y, b.Y, t),
-                     Interpolate(a.Width,  b.Width,  t),
-                     Interpolate(a.Height, b.Height, t));
+        return RectF(Lerp(a.X, b.X, t),
+                     Lerp(a.Y, b.Y, t),
+                     Lerp(a.Width,  b.Width,  t),
+                     Lerp(a.Height, b.Height, t));
     }
 
-    Vector2 Math::Interpolate(Vector2 a, Vector2 b, float t)
+    Vector2 Math::Lerp(Vector2 a, Vector2 b, float t)
     {
-        return Vector2(Interpolate(a.X, b.X, t),
-                       Interpolate(a.Y, b.Y, t));
+        return Vector2(Lerp(a.X, b.X, t),
+                       Lerp(a.Y, b.Y, t));
     }
 
-    Vector3 Math::Interpolate(Vector3 a, Vector3 b, float t)
+    Vector3 Math::Lerp(Vector3 a, Vector3 b, float t)
     {
-        return Vector3(Interpolate(a.X, b.X, t),
-                       Interpolate(a.Y, b.Y, t),
-                       Interpolate(a.Z, b.Z, t));
+        return Vector3(Lerp(a.X, b.X, t),
+                       Lerp(a.Y, b.Y, t),
+                       Lerp(a.Z, b.Z, t));
     }
 
-    Vector4 Math::Interpolate(Vector4 a, Vector4 b, float t)
+    Vector4 Math::Lerp(Vector4 a, Vector4 b, float t)
     {
-        return Vector4(Interpolate(a.X, b.X, t),
-                       Interpolate(a.Y, b.Y, t),
-                       Interpolate(a.Z, b.Z, t),
-                       Interpolate(a.W, b.W, t));
+        return Vector4(Lerp(a.X, b.X, t),
+                       Lerp(a.Y, b.Y, t),
+                       Lerp(a.Z, b.Z, t),
+                       Lerp(a.W, b.W, t));
     }
 
-    Color Math::Interpolate(Color a, Color b, float t)
+    Color Math::Lerp(Color a, Color b, float t)
     {
-        return Color(Interpolate(static_cast<int>(a.R), static_cast<int>(b.R), t),
-                     Interpolate(static_cast<int>(a.G), static_cast<int>(b.G), t),
-                     Interpolate(static_cast<int>(a.B), static_cast<int>(b.B), t),
-                     Interpolate(static_cast<int>(a.A), static_cast<int>(b.A), t));
+        return Color(Lerp(static_cast<int>(a.R), static_cast<int>(b.R), t),
+                     Lerp(static_cast<int>(a.G), static_cast<int>(b.G), t),
+                     Lerp(static_cast<int>(a.B), static_cast<int>(b.B), t),
+                     Lerp(static_cast<int>(a.A), static_cast<int>(b.A), t));
     }
 }

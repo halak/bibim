@@ -17,7 +17,14 @@
 
                 void Update(float dt, int timestamp);
 
-                T Evaluate(EvalContext& context);
+                virtual void Reset()
+                {
+                    time = 0.0f;
+                    timeChanged = true;
+                    lastTimestamp = 0;
+                }
+
+                virtual T Evaluate(EvalContext& context);
 
                 float GetTime() const;
 

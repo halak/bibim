@@ -109,6 +109,18 @@ namespace Bibim
         GameComponentFactory::AddEntry<EvalVector3RangedSequence>();
         GameComponentFactory::AddEntry<EvalVector4RangedSequence>();
         GameComponentFactory::AddEntry<EvalGameAssetRangedSequence>();
+        GameComponentFactory::AddEntry<EvalShortIntInterpolator>();
+        GameComponentFactory::AddEntry<EvalIntInterpolator>();
+        GameComponentFactory::AddEntry<EvalLongIntInterpolator>();
+        GameComponentFactory::AddEntry<EvalFloatInterpolator>();
+        GameComponentFactory::AddEntry<EvalDoubleInterpolator>();
+        GameComponentFactory::AddEntry<EvalColorInterpolator>();
+        GameComponentFactory::AddEntry<EvalPoint2Interpolator>();
+        GameComponentFactory::AddEntry<EvalPoint3Interpolator>();
+        GameComponentFactory::AddEntry<EvalPoint4Interpolator>();
+        GameComponentFactory::AddEntry<EvalVector2Interpolator>();
+        GameComponentFactory::AddEntry<EvalVector3Interpolator>();
+        GameComponentFactory::AddEntry<EvalVector4Interpolator>();
         GameComponentFactory::AddEntry<EvalShortIntToIntCast>(); 
         GameComponentFactory::AddEntry<EvalLongIntToIntCast>();  
         GameComponentFactory::AddEntry<EvalIntToFloatCast>();    

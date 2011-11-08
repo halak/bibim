@@ -6,6 +6,21 @@ namespace Bibim
 {
     public static class MathExtension
     {
+        public static short Lerp(short value1, short value2, float amount)
+        {
+            return (short)Lerp((int)value1, (int)value2, amount);
+        }
+
+        public static int Lerp(int value1, int value2, float amount)
+        {
+            return value1 + (int)((float)(value2 - value1) * amount);
+        }
+
+        public static long Lerp(long value1, long value2, float amount)
+        {
+            return value1 + (long)((float)(value2 - value1) * amount);
+        }
+
         public static int Clamp(int value, int min, int max)
         {
             return value < min ? min : (max < value ? max : value);

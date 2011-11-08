@@ -1,23 +1,6 @@
 namespace Bibim
 {
     template <typename T, char a, char b, char c, char d>
-    EvalConstantTemplate<T, a, b, c, d>::EvalConstantTemplate()
-        : value()
-    {
-    }
-
-    template <typename T, char a, char b, char c, char d>
-    EvalConstantTemplate<T, a, b, c, d>::EvalConstantTemplate(T value)
-        : value(value)
-    {
-    }
-
-    template <typename T, char a, char b, char c, char d>
-    EvalConstantTemplate<T, a, b, c, d>::~EvalConstantTemplate()
-    {
-    }
-
-    template <typename T, char a, char b, char c, char d>
     EvalConstantTemplate<T, a, b, c, d>* EvalConstantTemplate<T, a, b, c, d>::Clone() const
     {
         CloningContext context;
@@ -31,24 +14,6 @@ namespace Bibim
         context.Store(this, clone);
         clone->OnCopy(this, context);
         return clone;
-    }
-
-    template <typename T, char a, char b, char c, char d>
-    T EvalConstantTemplate<T, a, b, c, d>::Evaluate(EvalContext& /*context*/)
-    {
-        return value;
-    }
-
-    template <typename T, char a, char b, char c, char d>
-    T EvalConstantTemplate<T, a, b, c, d>::GetValue() const
-    {
-        return value;
-    }
-
-    template <typename T, char a, char b, char c, char d>
-    void EvalConstantTemplate<T, a, b, c, d>::SetValue(T value)
-    {
-        this->value = value;
     }
 
     template <typename T, char a, char b, char c, char d>
