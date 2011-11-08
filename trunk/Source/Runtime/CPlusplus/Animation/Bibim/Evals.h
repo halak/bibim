@@ -21,6 +21,7 @@
             public:
                 virtual ~EvalTemplate() { }
 
+                virtual void Reset() = 0;
                 virtual T Evaluate(EvalContext& context) = 0;
         };
 

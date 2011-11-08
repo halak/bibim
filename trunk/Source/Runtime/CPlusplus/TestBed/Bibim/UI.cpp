@@ -70,7 +70,7 @@ class UISample : public GameFramework
             GameFramework::Finalize();
         }
 
-        virtual void Update(float dt, uint timestamp)
+        virtual void Update(float dt, int /*timestamp*/)
         {
             if (GetAsyncKeyState(VK_UP))
                 maskEffect->SetStartPoint(maskEffect->GetStartPoint() + dt);

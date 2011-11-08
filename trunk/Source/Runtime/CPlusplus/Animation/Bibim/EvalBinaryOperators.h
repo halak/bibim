@@ -68,7 +68,15 @@
                 }
 
                 virtual ~EvalBinaryOperatorTemplate() { }
-                
+
+                virtual void Reset()
+                {
+                    if (left)
+                        left->Reset();
+                    if (right)
+                        right->Reset();
+                }
+               
                 virtual T Evaluate(EvalContext& context)
                 {
                     if (left && right)

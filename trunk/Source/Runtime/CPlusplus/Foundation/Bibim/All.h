@@ -9,6 +9,7 @@
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Asset
 #  include <Bibim/AssetLoadingTask.h>
+#include <Bibim/EvalInterpolators.h>
 #  include <Bibim/AssetProvider.h>
 #  include <Bibim/AssetStreamReader.h>
 #  include <Bibim/FileAssetProvider.h>

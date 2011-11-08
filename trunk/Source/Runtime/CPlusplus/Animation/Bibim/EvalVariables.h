@@ -12,14 +12,18 @@
         {
             BBComponentClass(EvalVariableTemplate, EvalTemplate<T>, a, b, c, d);
             public:
-                EvalVariableTemplate();
-                EvalVariableTemplate(const String& name);
-                virtual ~EvalVariableTemplate();
+                EvalVariableTemplate() { }
+                EvalVariableTemplate(const String& name)
+                    : name(name)
+                {
+                }
+                virtual ~EvalVariableTemplate() { }
                 
+                virtual void Reset() { }
                 virtual T Evaluate(EvalContext& context);
 
-                const String& GetName() const;
-                void SetName(const String& value);
+                const String& GetName() const { return name; }
+                void SetName(const String& value) { name = value; }
 
             private:
                 String name;

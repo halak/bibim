@@ -12,14 +12,21 @@
         {
             BBComponentClass(EvalConstantTemplate, EvalTemplate<T>, a, b, c, d);
             public:
-                EvalConstantTemplate();
-                EvalConstantTemplate(T value);
-                virtual ~EvalConstantTemplate();
-                
-                virtual T Evaluate(EvalContext& context);
+                EvalConstantTemplate() { }
+                EvalConstantTemplate(T value)
+                    : value(value) 
+                {
+                }
+                virtual ~EvalConstantTemplate() { }
+               
+                virtual void Reset() { }
+                virtual T Evaluate(EvalContext& /*context*/)
+                {
+                    return value;
+                }
 
-                T GetValue() const;
-                void SetValue(T value);
+                T GetValue() const { return value; }
+                void SetValue(T value) { this->value = value; }
 
             private:
                 T value;
@@ -33,6 +40,7 @@
                 EvalGameAssetConstant(GameAsset* value);
                 virtual ~EvalGameAssetConstant();
 
+                virtual void Reset() { }
                 virtual GameAsset* Evaluate(EvalContext& context);
 
                 inline GameAsset* GetValue() const;
@@ -58,22 +66,22 @@
         typedef EvalConstantTemplate<Vector3,      'e', 'c', 'v', '3'> EvalVector3Constant;
         typedef EvalConstantTemplate<Vector4,      'e', 'c', 'v', '4'> EvalVector4Constant;
 
-        typedef SharedPointer<EvalBoolConstant>      EvalBoolConstantPtr;
-        typedef SharedPointer<EvalShortIntConstant>  EvalShortIntConstantPtr;
-        typedef SharedPointer<EvalIntConstant>       EvalIntConstantPtr;
-        typedef SharedPointer<EvalLongIntConstant>   EvalLongIntConstantPtr;
-        typedef SharedPointer<EvalFloatConstant>     EvalFloatConstantPtr;
-        typedef SharedPointer<EvalDoubleConstant>    EvalDoubleConstantPtr;
-        typedef SharedPointer<EvalColorConstant>     EvalColorConstantPtr;
-        typedef SharedPointer<EvalPoint2Constant>    EvalPoint2ConstantPtr;
-        typedef SharedPointer<EvalPoint3Constant>    EvalPoint3ConstantPtr;
-        typedef SharedPointer<EvalPoint4Constant>    EvalPoint4ConstantPtr;
-        typedef SharedPointer<EvalRectConstant>      EvalRectConstantPtr;
-        typedef SharedPointer<EvalRectFConstant>     EvalRectFConstantPtr;
-        typedef SharedPointer<EvalVector2Constant>   EvalVector2ConstantPtr;
-        typedef SharedPointer<EvalVector3Constant>   EvalVector3ConstantPtr;
-        typedef SharedPointer<EvalVector4Constant>   EvalVector4ConstantPtr;
-        typedef SharedPointer<EvalGameAssetConstant> EvalGameAssetConstantPtr;
+        BBDeclareEvalClass(EvalBoolConstant);
+        BBDeclareEvalClass(EvalShortIntConstant);
+        BBDeclareEvalClass(EvalIntConstant);
+        BBDeclareEvalClass(EvalLongIntConstant);
+        BBDeclareEvalClass(EvalFloatConstant);
+        BBDeclareEvalClass(EvalDoubleConstant);
+        BBDeclareEvalClass(EvalColorConstant);
+        BBDeclareEvalClass(EvalPoint2Constant);
+        BBDeclareEvalClass(EvalPoint3Constant);
+        BBDeclareEvalClass(EvalPoint4Constant);
+        BBDeclareEvalClass(EvalRectConstant);
+        BBDeclareEvalClass(EvalRectFConstant);
+        BBDeclareEvalClass(EvalVector2Constant);
+        BBDeclareEvalClass(EvalVector3Constant);
+        BBDeclareEvalClass(EvalVector4Constant);
+        BBDeclareEvalClass(EvalGameAssetConstant);
     }
 
 #   include <Bibim/EvalConstants.inl>

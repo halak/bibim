@@ -1,22 +1,6 @@
 namespace Bibim
 {
     template <typename T, char a, char b, char c, char d>
-    EvalVariableTemplate<T, a, b, c, d>::EvalVariableTemplate()
-    {
-    }
-
-    template <typename T, char a, char b, char c, char d>
-    EvalVariableTemplate<T, a, b, c, d>::EvalVariableTemplate(const String& name)
-        : name(name)
-    {
-    }
-
-    template <typename T, char a, char b, char c, char d>
-    EvalVariableTemplate<T, a, b, c, d>::~EvalVariableTemplate()
-    {
-    }
-
-    template <typename T, char a, char b, char c, char d>
     EvalVariableTemplate<T, a, b, c, d>* EvalVariableTemplate<T, a, b, c, d>::Clone() const
     {
         CloningContext context;
@@ -37,18 +21,6 @@ namespace Bibim
     {
         return T();
         // return context.GetValue<T>(name);
-    }
-
-    template <typename T, char a, char b, char c, char d>
-    const String& EvalVariableTemplate<T, a, b, c, d>::GetName() const
-    {
-        return name;
-    }
-
-    template <typename T, char a, char b, char c, char d>
-    void EvalVariableTemplate<T, a, b, c, d>::SetName(const String& value)
-    {
-        name = value;
     }
 
     template <typename T, char a, char b, char c, char d>
