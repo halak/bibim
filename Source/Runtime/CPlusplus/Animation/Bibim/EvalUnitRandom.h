@@ -24,6 +24,8 @@
 
                 void Generate();
 
+                virtual void Start();
+                virtual void Stop()  { }
                 virtual void Reset();
                 virtual float Evaluate(EvalContext& context);
 

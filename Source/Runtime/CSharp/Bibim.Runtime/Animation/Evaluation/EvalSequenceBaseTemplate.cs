@@ -65,6 +65,15 @@ namespace Bibim.Animation
             timeChanged = true;
         }
 
+        public sealed override void Start()
+        {
+            Reset();
+        }
+
+        public sealed override void Stop()
+        {
+        }
+
         public sealed override void Reset()
         {
             Time = 0.0f;

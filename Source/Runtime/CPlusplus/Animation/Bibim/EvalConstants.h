@@ -19,6 +19,8 @@
                 }
                 virtual ~EvalConstantTemplate() { }
                
+                virtual void Start() { }
+                virtual void Stop()  { }
                 virtual void Reset() { }
                 virtual T Evaluate(EvalContext& /*context*/)
                 {
@@ -40,6 +42,8 @@
                 EvalGameAssetConstant(GameAsset* value);
                 virtual ~EvalGameAssetConstant();
 
+                virtual void Start() { }
+                virtual void Stop()  { }
                 virtual void Reset() { }
                 virtual GameAsset* Evaluate(EvalContext& context);
 

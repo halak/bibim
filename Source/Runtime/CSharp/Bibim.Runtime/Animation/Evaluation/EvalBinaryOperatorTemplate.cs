@@ -21,6 +21,22 @@ namespace Bibim.Animation
         }
         #endregion
 
+        public sealed override void Start()
+        {
+            if (Left != null)
+                Left.Start();
+            if (Right != null)
+                Right.Start();
+        }
+
+        public sealed override void Stop()
+        {
+            if (Left != null)
+                Left.Stop();
+            if (Right != null)
+                Right.Stop();
+        }
+
         public sealed override void Reset()
         {
             if (Left != null)

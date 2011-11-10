@@ -47,6 +47,8 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    BBImplementsComponent(EaseInElasticCurve);
+
     EaseInElasticCurve::EaseInElasticCurve()
     {
     }
@@ -72,6 +74,8 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    BBImplementsComponent(EaseOutElasticCurve);
+
     EaseOutElasticCurve::EaseOutElasticCurve()
     {
     }
@@ -96,6 +100,8 @@ namespace Bibim
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    BBImplementsComponent(EaseInOutElasticCurve);
 
     EaseInOutElasticCurve::EaseInOutElasticCurve()
     {

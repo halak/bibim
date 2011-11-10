@@ -19,6 +19,8 @@
                 }
                 virtual ~EvalVariableTemplate() { }
                 
+                virtual void Start() { }
+                virtual void Stop()  { }
                 virtual void Reset() { }
                 virtual T Evaluate(EvalContext& context);
 

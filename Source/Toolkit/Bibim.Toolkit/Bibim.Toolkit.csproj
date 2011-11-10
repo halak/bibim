@@ -80,6 +80,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
@@ -152,7 +153,6 @@
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToUILayout1.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ReadGameAsset.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ReadImage.cs" />
-    <Compile Include="Asset\Pipeline\Recipes\ReadGameAssetXml.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ReadRecipe.cs" />
     <Compile Include="Asset\Pipeline\Recipes\FileToStream.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ImportBitmap.cs" />

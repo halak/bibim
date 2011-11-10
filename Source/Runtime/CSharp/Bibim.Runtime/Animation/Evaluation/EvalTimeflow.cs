@@ -94,6 +94,14 @@ namespace Bibim.Animation
         }
         #endregion
 
+        public override void Start()
+        {
+        }
+
+        public override void Stop()
+        {
+        }
+
         public override void Reset()
         {
             Time = 0.0f;

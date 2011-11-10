@@ -7,6 +7,7 @@
 #include <Bibim/GameWindow.h>
 #include <Bibim/GraphicsDevice.h>
 #include <Bibim/Math.h>
+#include <Bibim/Startup.h>
 #include <Bibim/Timeline.h>
 
 #if (defined(BIBIM_PLATFORM_WINDOWS))
@@ -16,18 +17,31 @@
         static const int GeneralFPS = 60;
 
         GameFramework::GameFramework()
-            : modules(new GameModuleTree()),
-              window(new GameWindow()),
-              graphicsDevice(new GraphicsDevice()),
-              mainTimeline(new Timeline()),
-              fixedTimeStep(true),
-              fixedElapsedTime(1.0f / static_cast<float>(GeneralFPS)),
-              maxTimeInOneFrame(1.0f),
-              desiredFPS(GeneralFPS)
         {
+            _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+            Startup::All();
+
+            modules = new GameModuleTree();
+            window = new GameWindow();
+            graphicsDevice = new GraphicsDevice();
+            mainTimeline = new Timeline();
+            fixedTimeStep = true;
+            fixedElapsedTime = 1.0f / static_cast<float>(GeneralFPS);
+            maxTimeInOneFrame = 1.0f;
+            desiredFPS = GeneralFPS;
+
             modules->GetRoot()->AttachChild(window);
             modules->GetRoot()->AttachChild(graphicsDevice);
             modules->GetRoot()->AttachChild(mainTimeline);
+
+            LPWSTR commandLine = ::GetCommandLineW();
+            char utf8CommandLine[1024];
+            ::WideCharToMultiByte(CP_UTF8,
+                                  0,
+                                  commandLine, wcslen(commandLine),
+                                  utf8CommandLine, sizeof(utf8CommandLine),
+                                  NULL, NULL);
+            startupArgs = utf8CommandLine;
 
             //SYSTEM_INFO systemInfo = { 0, };
             //GetSystemInfo(&systemInfo);

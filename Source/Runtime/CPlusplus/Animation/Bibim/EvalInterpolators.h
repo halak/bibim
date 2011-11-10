@@ -36,6 +36,26 @@
 
                 virtual ~EvalInterpolatorTemplate() { }
 
+                virtual void Start()
+                {
+                    if (value1)
+                        value1->Start();
+                    if (value2)
+                        value2->Start();
+                    if (weight)
+                        weight->Start();
+                }
+
+                virtual void Stop()
+                {
+                    if (value1)
+                        value1->Stop();
+                    if (value2)
+                        value2->Stop();
+                    if (weight)
+                        weight->Stop();
+                }
+
                 virtual void Reset()
                 {
                     if (value1)

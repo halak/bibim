@@ -35,6 +35,11 @@ namespace Bibim
         }
     }
 
+    void EvalUnitRandom::Start()
+    {
+        Reset();
+    }
+
     void EvalUnitRandom::Reset()
     {
         if (cycle == ResetOrManual)

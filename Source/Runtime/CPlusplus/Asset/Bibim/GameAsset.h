@@ -19,7 +19,7 @@
                                                             private:
 #       define BBSerializableAssetClass(classname, parent, a, b, c, d)  BBAssetClass(classname, parent, a, b, c, d); \
                                                                         public: \
-                                                                            static GameAsset* Create(AssetStreamReader& reader, GameAsset* existingInstance); \
+                                                                            static Bibim::GameAsset* Create(Bibim::AssetStreamReader& reader, Bibim::GameAsset* existingInstance); \
                                                                         private:
 
         class GameAsset : public SharedObject
