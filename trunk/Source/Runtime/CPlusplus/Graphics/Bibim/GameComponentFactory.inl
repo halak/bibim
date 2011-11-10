@@ -12,4 +12,17 @@ namespace Bibim
 
         AddEntry(T::ClassID, &New::Do);
     }
+
+    template <typename T> void GameComponentFactory::AddSingletonEntry()
+    {
+        struct Get
+        {
+            static GameComponent* Do()
+            {
+                return T::Instance;
+            }
+        };
+
+        AddEntry(T::ClassID, &Get::Do);
+    }
 }

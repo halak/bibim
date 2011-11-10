@@ -4,13 +4,7 @@
 
 namespace Bibim
 {
-    BBImplementsComponent(UIFittedFrame);
-
-    UIFittedFramePtr UIFittedFrame::Instance = new UIFittedFrame();
-
-    UIFittedFrame::UIFittedFrame()
-    {
-    }
+    BBImplementsSingletonComponent(UIFittedFrame);
 
     UIFittedFrame::~UIFittedFrame()
     {
@@ -24,15 +18,5 @@ namespace Bibim
     RectF UIFittedFrame::ComputeBounds(UIVisualVisitor& visitor, Vector2 /*desiredSize*/)
     {
         return visitor.GetCurrentBounds();
-    }
-
-    void UIFittedFrame::OnRead(ComponentStreamReader& reader)
-    {
-        Base::OnRead(reader);
-    }
-
-    void UIFittedFrame::OnCopy(const GameComponent* original, CloningContext& context)
-    {
-        Base::OnCopy(original, context);
     }
 }

@@ -14,7 +14,7 @@ namespace Bibim.Animation
     [ClassID('e', 'A', 'N', 'b')]
     public sealed class EvalBoolAND : EvalBinaryOperatorTemplate<bool, bool, bool>
     {
-        protected override bool  Calculate(bool left, bool right) { return left && right; }
+        protected override bool Calculate(bool left, bool right) { return left && right; }
     }
 
     [ClassID('e', 'O', 'R', 'b')]

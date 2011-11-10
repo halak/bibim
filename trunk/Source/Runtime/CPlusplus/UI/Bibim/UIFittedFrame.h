@@ -9,12 +9,8 @@
     {
         class UIFittedFrame : public UIFrame
         {
-            BBComponentClass(UIFittedFrame, UIFrame, 'U', 'F', 'T', 'F');
+            BBSingletonComponentClass(UIFittedFrame, UIFrame, 'U', 'F', 'T', 'F');
             public:
-                static UIFittedFramePtr Instance;
-
-            public:
-                UIFittedFrame();
                 virtual ~UIFittedFrame();
 
                 virtual bool Setup(const RectF& bounds, const RectF& referenceBounds);

@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/Evals.h>
+#   include <Bibim/EasingCurves.h>
 #   include <Bibim/Math.h>
 
     namespace Bibim
@@ -28,7 +29,8 @@
                 EvalInterpolatorTemplate(EvalValue* value1, EvalValue* value2, EvalFloat* weight)
                     : value1(value1),
                       value2(value2), 
-                      weight(weight)
+                      weight(weight),
+                      easingCurve(EaseInOutQuadraticCurve::Instance)
                 {
                 }
 
@@ -39,7 +41,7 @@
                     if (value1)
                         value1->Reset();
                     if (value2)
-                        value2->Reset():
+                        value2->Reset();
                     if (weight)
                         weight->Reset();
                 }
@@ -47,7 +49,9 @@
                 virtual T Evaluate(EvalContext& context)
                 {
                     if (value1 && value2 && weight)
-                        return op(value1->Evaluate(context), value2->Evaluate(context), weight->Evaluate(context));
+                        return op(value1->Evaluate(context),
+                                  value2->Evaluate(context),
+                                  easingCurve->Ease(weight->Evaluate(context)));
                     else
                         return T();
                 }
@@ -61,10 +65,14 @@
                 EvalFloat* GetWeight() const { return weight ; }
                 void SetWeigt(EvalFloat* value) { weight = value; }
 
+                EasingCurve* GetEasingCurve() const { return easingCurve; }
+                void SetEasingCurve(EasingCurve* value) const { easingCurve = value ? value : EaseInOutQuadraticCurve::Instance; }
+
             private:
                 SharedPointer<EvalValue> value1;
                 SharedPointer<EvalValue> value2;
                 EvalFloatPtr weight;
+                EasingCurvePtr easingCurve;
                 TOperator<T> op;
         };
 

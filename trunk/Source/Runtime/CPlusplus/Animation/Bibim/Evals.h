@@ -15,9 +15,18 @@
 
     namespace Bibim
     {
-        template <typename T> class EvalTemplate : public GameComponent
+        class EvalBase : public GameComponent
         {
-            BBAbstractComponentClass(EvalTemplate, GameComponent);
+            BBAbstractComponentClass(EvalBase, GameComponent);
+            public:
+                virtual ~EvalBase() { }
+
+                virtual void Reset() = 0;
+        };
+
+        template <typename T> class EvalTemplate : public EvalBase
+        {
+            BBAbstractComponentClass(EvalTemplate, EvalBase);
             public:
                 virtual ~EvalTemplate() { }
 

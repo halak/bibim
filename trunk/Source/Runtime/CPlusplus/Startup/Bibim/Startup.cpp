@@ -170,6 +170,34 @@ namespace Bibim
         GameComponentFactory::AddEntry<EvalVector4Subtraction>();
         GameComponentFactory::AddEntry<EvalVector4Multiplication>();
         GameComponentFactory::AddEntry<EvalVector4Division>();
+        GameComponentFactory::AddEntry<EvalUnitRandom>();
+        GameComponentFactory::AddEntry<EvalTimeflow>();
+
+        GameComponentFactory::AddSingletonEntry<LinearCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseInQuadraticCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseOutQuadraticCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseInOutQuadraticCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseInCubicCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseOutCubicCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseInOutCubicCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseInQuarticCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseOutQuarticCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseInOutQuarticCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseInQuinticCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseOutQuinticCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseInOutQuinticCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseInSinusoidalCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseOutSinusoidalCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseInOutSinusoidalCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseInExponentialCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseOutExponentialCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseInOutExponentialCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseInCircularCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseOutCircularCurve>();
+        GameComponentFactory::AddSingletonEntry<EaseInOutCircularCurve>();
+        GameComponentFactory::AddEntry<EaseInElasticCurve>();
+        GameComponentFactory::AddEntry<EaseOutElasticCurve>();
+        GameComponentFactory::AddEntry<EaseInOutElasticCurve>();
 
         GameComponentFactory::AddEntry<UISineCurveEffect>();
         GameComponentFactory::AddEntry<UITintEffect>();
@@ -181,7 +209,7 @@ namespace Bibim
         GameComponentFactory::AddEntry<UISequentialEventHandler>();
         GameComponentFactory::AddEntry<UIEventMap>();
         GameComponentFactory::AddEntry<UIAlignedFrame>();
-        GameComponentFactory::AddEntry<UIFittedFrame>();
+        GameComponentFactory::AddSingletonEntry<UIFittedFrame>();
         GameComponentFactory::AddEntry<UIFixedFrame>();
         GameComponentFactory::AddEntry<UITransform3D>();
         GameComponentFactory::AddEntry<UILabel>();

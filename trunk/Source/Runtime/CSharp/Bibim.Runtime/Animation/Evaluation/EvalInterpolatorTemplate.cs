@@ -27,6 +27,16 @@ namespace Bibim.Animation
         }
         #endregion
 
+        public sealed override void Reset()
+        {
+            if (Value1 != null)
+                Value1.Reset();
+            if (Value2 != null)
+                Value2.Reset();
+            if (Weight != null)
+                Weight.Reset();
+        }
+
         public sealed override T Evaluate(EvalContext context)
         {
             if (Value1 != null && Value2 != null && Weight != null)

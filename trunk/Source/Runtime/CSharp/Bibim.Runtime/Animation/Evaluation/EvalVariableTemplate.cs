@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace Bibim.Animation
 {
-    public abstract class EvaluableVariableTemplate<T> : Evaluable<T>
+    public abstract class EvalVariableTemplate<T> : Eval<T>
     {
         #region Fields
         private string name;
@@ -23,18 +22,22 @@ namespace Bibim.Animation
         #endregion
 
         #region Constructors
-        protected EvaluableVariableTemplate()
+        protected EvalVariableTemplate()
             : this(string.Empty)
         {
         }
 
-        protected EvaluableVariableTemplate(string value)
+        protected EvalVariableTemplate(string value)
         {
             Name = value;
         }
         #endregion
 
-        public override T Evaluate(EvaluationContext context)
+        public sealed override void Reset()
+        {
+        }
+
+        public sealed override T Evaluate(EvalContext context)
         {
             return default(T);
         }

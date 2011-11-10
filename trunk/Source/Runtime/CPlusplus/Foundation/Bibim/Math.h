@@ -28,9 +28,11 @@
                 static const float TwoPi;
 
                 static float Sqrt(float value);
+                static float Pow(float x, float y);
                 static float Sin(float radian);
                 static float Cos(float radian);
                 static float Tan(float radian);
+                static float Asin(float radian);
                 static float Acos(float radian);
                 static float Atan2(float y, float x);
                 static inline float Atan2(Vector2 xy);
