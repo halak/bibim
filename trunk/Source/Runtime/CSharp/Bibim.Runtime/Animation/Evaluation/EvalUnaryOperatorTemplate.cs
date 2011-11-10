@@ -15,6 +15,18 @@ namespace Bibim.Animation
         }
         #endregion
 
+        public sealed override void Start()
+        {
+            if (Operand != null)
+                Operand.Start();
+        }
+
+        public sealed override void Stop()
+        {
+            if (Operand != null)
+                Operand.Stop();
+        }
+
         public sealed override void Reset()
         {
             if (Operand != null)

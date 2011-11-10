@@ -71,6 +71,15 @@ namespace Bibim.Animation
             value = ((float)generatedValue) * 0.0001f;
         }
 
+        public override void Start()
+        {
+            Reset();
+        }
+
+        public override void Stop()
+        {
+        }
+
         public override void Reset()
         {
             if (Cycle == GenerationCycle.ResetOrManual)

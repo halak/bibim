@@ -41,6 +41,18 @@
 
                 virtual ~EvalUnaryOperatorTemplate() { }
 
+                virtual void Start()
+                {
+                    if (operand)
+                        operand->Start();
+                }
+
+                virtual void Stop()
+                {
+                    if (operand)
+                        operand->Stop();
+                }
+
                 virtual void Reset()
                 {
                     if (operand)

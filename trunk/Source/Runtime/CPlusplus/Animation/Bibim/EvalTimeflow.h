@@ -16,6 +16,8 @@
 
                 void Update(float dt, int timestamp);
 
+                virtual void Start();
+                virtual void Stop();
                 virtual void Reset();
                 virtual float Evaluate(EvalContext& context);
 

@@ -21,7 +21,12 @@
             public:
                 virtual ~EvalBase() { }
 
+                virtual void Start() = 0;
+                virtual void Stop()  = 0;
                 virtual void Reset() = 0;
+
+            protected:
+                EvalBase();
         };
 
         template <typename T> class EvalTemplate : public EvalBase

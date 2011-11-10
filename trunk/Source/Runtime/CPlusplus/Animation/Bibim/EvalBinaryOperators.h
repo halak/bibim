@@ -69,6 +69,22 @@
 
                 virtual ~EvalBinaryOperatorTemplate() { }
 
+                virtual void Start()
+                {
+                    if (left)
+                        left->Start();
+                    if (right)
+                        right->Start();
+                }
+
+                virtual void Stop()
+                {
+                    if (left)
+                        left->Stop();
+                    if (right)
+                        right->Stop();
+                }
+
                 virtual void Reset()
                 {
                     if (left)
@@ -90,6 +106,8 @@
 
                 EvalRight* GetRight() const { return right; }
                 void SetRight(EvalRight* value) { right = value; }
+
+            protected:
 
             private:
                 SharedPointer<EvalLeft> left;

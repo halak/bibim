@@ -33,9 +33,9 @@ namespace Bibim.Animation
         }
         #endregion
 
-        public sealed override void Reset()
-        {
-        }
+        public sealed override void Start() { }
+        public sealed override void Stop() { }
+        public sealed override void Reset() { }
 
         public sealed override T Evaluate(EvalContext context)
         {

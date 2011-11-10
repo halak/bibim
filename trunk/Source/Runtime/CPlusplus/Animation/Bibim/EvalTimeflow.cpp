@@ -50,6 +50,14 @@ namespace Bibim
         }
     }
 
+    void EvalTimeflow::Start()
+    {
+    }
+
+    void EvalTimeflow::Stop()
+    {
+    }
+
     void EvalTimeflow::Reset()
     {
         time = 0.0f;

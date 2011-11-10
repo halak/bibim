@@ -3,6 +3,7 @@
 #define __BIBIM_GAMEFRAMEWORK_WINDOWS_H__
 
 #   include <Bibim/FWD.h>
+#   include <Bibim/String.h>
 #   include <deque>
 
 #   if (defined(BIBIM_PLATFORM_WINDOWS))
@@ -21,6 +22,8 @@
                     inline GameWindow*     GetWindow() const;
                     inline GraphicsDevice* GetGraphicsDevice() const;
                     inline Timeline*       GetMainTimeline() const;
+
+                    inline const String& GetStartupArgs() const;
 
                     inline bool GetFixedTimeStep() const;
                            void SetFixedTimeStep(bool value);
@@ -50,6 +53,7 @@
                     GameWindow* window;
                     GraphicsDevice* graphicsDevice;
                     Timeline* mainTimeline;
+                    String startupArgs;
 
                     bool  fixedTimeStep;
                     float fixedElapsedTime;

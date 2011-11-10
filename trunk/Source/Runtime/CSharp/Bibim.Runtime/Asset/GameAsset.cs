@@ -13,6 +13,7 @@ namespace Bibim.Asset
         #endregion
 
         #region Properties
+        [XmlIgnore]
         public int ClassID
         {
             get { return ClassIDAttribute.GetClassID(GetType()); }
@@ -32,6 +33,7 @@ namespace Bibim.Asset
             protected set;
         }
 
+        [XmlIgnore]
         public object Tag
         {
             get;

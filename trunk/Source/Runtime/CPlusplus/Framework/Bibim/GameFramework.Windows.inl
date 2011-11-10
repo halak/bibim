@@ -20,6 +20,11 @@ namespace Bibim
         return mainTimeline;
     }
 
+    const String& GameFramework::GetStartupArgs() const
+    {
+        return startupArgs;
+    }
+
     bool GameFramework::GetFixedTimeStep() const
     {
         return fixedTimeStep;

@@ -16,6 +16,8 @@ namespace Bibim.Animation
         }
         #endregion
 
+        public abstract void Start();
+        public abstract void Stop();
         public abstract void Reset();
     }
 

@@ -17,6 +17,14 @@
 
                 void Update(float dt, int timestamp);
 
+                virtual void Start()
+                {
+                    time = 0.0f;
+                    timeChanged = true;
+                    lastTimestamp = 0;
+                }
+
+                virtual void Stop() { }
                 virtual void Reset()
                 {
                     time = 0.0f;

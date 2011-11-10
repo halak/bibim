@@ -57,7 +57,7 @@ namespace Bibim.Animation
         }
 
         #region Write Templates
-        private static bool WriteEval<V>(AssetStreamWriter writer, Eval<V> o, IList<object> objMap)
+        private static bool WriteGameComponent(AssetStreamWriter writer, GameComponent o, IList<object> objMap)
         {
             int index = objMap.IndexOf(o);
             if (index != -1)
@@ -72,6 +72,11 @@ namespace Bibim.Animation
                 writer.Write(o.ClassID);
                 return true;
             }
+        }
+
+        private static bool WriteEval<V>(AssetStreamWriter writer, Eval<V> o, IList<object> objMap)
+        {
+            return WriteGameComponent(writer, o, objMap);
         }
 
         private static bool WriteConstant<V>(AssetStreamWriter writer, EvalConstantTemplate<V> o, IList<object> objMap)
@@ -150,6 +155,22 @@ namespace Bibim.Animation
             Write(writer, o.Value1, objMap);
             Write(writer, o.Value2, objMap);
             Write(writer, o.Weight, objMap);
+
+            return true;
+        }
+
+        private static bool WriteEasingCurve(AssetStreamWriter writer, EasingCurve o, IList<object> objMap)
+        {
+            return WriteGameComponent(writer, o, objMap);
+        }
+
+        private static bool WriteElasticEasingCurve(AssetStreamWriter writer, ElasticEasingCurve o, IList<object> objMap)
+        {
+            if (WriteEasingCurve(writer, o, objMap) == false)
+                return false;
+
+            writer.Write(o.Amplitude);
+            writer.Write(o.Period);
 
             return true;
         }
@@ -389,6 +410,34 @@ namespace Bibim.Animation
             writer.Write(o.InitialSeed);
             writer.Write((byte)o.Cycle);
         }
+        #endregion
+
+        #region Write EasingCurve derived classes
+        protected void Write(AssetStreamWriter writer, LinearCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInQuadraticCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseOutQuadraticCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInOutQuadraticCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInCubicCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseOutCubicCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInOutCubicCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInQuarticCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseOutQuarticCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInOutQuarticCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInQuinticCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseOutQuinticCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInOutQuinticCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInSinusoidalCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseOutSinusoidalCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInOutSinusoidalCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInExponentialCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseOutExponentialCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInOutExponentialCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInCircularCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseOutCircularCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInOutCircularCurve o, IList<object> objMap) { WriteEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInElasticCurve o, IList<object> objMap) { WriteElasticEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseOutElasticCurve o, IList<object> objMap) { WriteElasticEasingCurve(writer, o, objMap); }
+        protected void Write(AssetStreamWriter writer, EaseInOutElasticCurve o, IList<object> objMap) { WriteElasticEasingCurve(writer, o, objMap); }
         #endregion
     }
 }

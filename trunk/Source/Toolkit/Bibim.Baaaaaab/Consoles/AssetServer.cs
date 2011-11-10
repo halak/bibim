@@ -39,16 +39,17 @@ namespace Bibim.Bab.Consoles
             };
             var shakeAnimation1 = new EvalFloatInterpolator()
             {
-                Value1 = new EvalFloatConstant(0.0f),
-                Value2 = shakeAmount1,
-                Weight = new EvalTimeflow(1.0f),
-            };
-            var shakeAnimation2 = new EvalFloatInterpolator()
-            {
                 Value1 = shakeAmount1,
                 Value2 = shakeAmount2,
                 Weight = new EvalTimeflow(1.0f),
+                EasingCurve = new EaseInElasticCurve(1.0f, 0.1f),
             };
+
+            using (var fs = new FileStream("Hello.xml", FileMode.Create, FileAccess.Write))
+                GameAssetRecipe.Serialize(fs, new GameAssetRecipe()
+                {
+                    Cook = new ReadGameAsset(new FloatEvalTree(shakeAnimation1))
+                });
 
             //seq.AddKeyframe(new Keyframe<bool>(true, 1.0f));
             //seq.AddKeyframe(new Keyframe<bool>(false, 0.7f));
