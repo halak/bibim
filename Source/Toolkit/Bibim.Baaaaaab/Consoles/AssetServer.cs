@@ -27,7 +27,29 @@ namespace Bibim.Bab.Consoles
     {
         static void Run([Alias("pipe")] string pipeName)
         {
-            //BoolSequence seq = new BoolSequence();
+            var shakeAmount1 = new EvalFloatInterpolator()
+            {
+                Value1 = new EvalFloatConstant(50.0f),
+                Value2 = new EvalFloatConstant(100.0f),
+                Weight = new EvalUnitRandom(EvalUnitRandom.GenerationCycle.ResetOrManual),
+            };
+            var shakeAmount2 = new EvalFloatNegation()
+            {
+                Operand = shakeAmount1,
+            };
+            var shakeAnimation1 = new EvalFloatInterpolator()
+            {
+                Value1 = new EvalFloatConstant(0.0f),
+                Value2 = shakeAmount1,
+                Weight = new EvalTimeflow(1.0f),
+            };
+            var shakeAnimation2 = new EvalFloatInterpolator()
+            {
+                Value1 = shakeAmount1,
+                Value2 = shakeAmount2,
+                Weight = new EvalTimeflow(1.0f),
+            };
+
             //seq.AddKeyframe(new Keyframe<bool>(true, 1.0f));
             //seq.AddKeyframe(new Keyframe<bool>(false, 0.7f));
             //seq.AddKeyframe(new Keyframe<bool>(true, 0.3f));

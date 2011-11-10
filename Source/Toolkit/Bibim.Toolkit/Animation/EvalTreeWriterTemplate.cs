@@ -375,12 +375,19 @@ namespace Bibim.Animation
         {
             if (WriteEval(writer, o, objMap) == false)
                 return;
+
+            writer.Write(o.Duration);
+            writer.Write(o.Velocity);
+            writer.Write(o.IsLooped);
         }
 
         protected void Write(AssetStreamWriter writer, EvalUnitRandom o, IList<object> objMap)
         {
             if (WriteEval(writer, o, objMap) == false)
                 return;
+
+            writer.Write(o.InitialSeed);
+            writer.Write((byte)o.Cycle);
         }
         #endregion
     }
