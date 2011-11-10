@@ -8,6 +8,10 @@
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Asset
+#include <Bibim/EvalUnitRandom.h>
+#include <Bibim/EasingCurves.h>
+#include <Bibim/ElasticEasingCurves.h>
+#include <Bibim/EvalTimeflow.h>
 #  include <Bibim/AssetLoadingTask.h>
 #include <Bibim/EvalInterpolators.h>
 #  include <Bibim/AssetProvider.h>

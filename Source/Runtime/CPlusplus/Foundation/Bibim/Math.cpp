@@ -19,6 +19,11 @@ namespace Bibim
         return std::sqrtf(value);
     }
 
+    float Math::Pow(float x, float y)
+    {
+        return std::powf(x, y);
+    }
+
     float Math::Sin(float radian)
     {
         return std::sinf(radian);
@@ -32,6 +37,11 @@ namespace Bibim
     float Math::Tan(float radian)
     {
         return std::tanf(radian);    
+    }
+
+    float Math::Asin(float radian)
+    {
+        return std::asinf(radian);
     }
 
     float Math::Acos(float radian)

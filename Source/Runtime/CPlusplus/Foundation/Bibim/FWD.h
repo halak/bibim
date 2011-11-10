@@ -63,6 +63,19 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // 02. Framework
             ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // (Asset)
+                class AssetLoadingTask;
+                    class AssetPreloadingTask;
+                class AssetStreamReader;
+                BBForwardDeclareSmartPointerClass(GameAsset);
+                class GameAssetFactory;
+                class GameAssetStorage;
+                ////////////////////////////////////////////////////////////////////////////////////////////////////
+                // Providers
+                    class AssetProvider;
+                        class PipedAssetProvider;
+                        class FileAssetProvider;
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
             // (Module)
                 class GameModule;
                 class GameModuleFactory;
@@ -78,19 +91,35 @@
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Evaluation
                     class EvalContext;
-            ////////////////////////////////////////////////////////////////////////////////////////////////////
-            // Asset
-                class AssetLoadingTask;
-                    class AssetPreloadingTask;
-                class AssetStreamReader;
-                BBForwardDeclareSmartPointerClass(GameAsset);
-                class GameAssetFactory;
-                class GameAssetStorage;
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
-                // Providers
-                    class AssetProvider;
-                        class PipedAssetProvider;
-                        class FileAssetProvider;
+                // Easing
+                    BBForwardDeclareSmartPointerClass(EasingCurve);
+                        BBForwardDeclareSmartPointerClass(LinearCurve);
+                        BBForwardDeclareSmartPointerClass(EaseInQuadraticCurve);
+                        BBForwardDeclareSmartPointerClass(EaseOutQuadraticCurve);
+                        BBForwardDeclareSmartPointerClass(EaseInOutQuadraticCurve);
+                        BBForwardDeclareSmartPointerClass(EaseInCubicCurve);
+                        BBForwardDeclareSmartPointerClass(EaseOutCubicCurve);
+                        BBForwardDeclareSmartPointerClass(EaseInOutCubicCurve);
+                        BBForwardDeclareSmartPointerClass(EaseInQuarticCurve);
+                        BBForwardDeclareSmartPointerClass(EaseOutQuarticCurve);
+                        BBForwardDeclareSmartPointerClass(EaseInOutQuarticCurve);
+                        BBForwardDeclareSmartPointerClass(EaseInQuinticCurve);
+                        BBForwardDeclareSmartPointerClass(EaseOutQuinticCurve);
+                        BBForwardDeclareSmartPointerClass(EaseInOutQuinticCurve);
+                        BBForwardDeclareSmartPointerClass(EaseInSinusoidalCurve);
+                        BBForwardDeclareSmartPointerClass(EaseOutSinusoidalCurve);
+                        BBForwardDeclareSmartPointerClass(EaseInOutSinusoidalCurve);
+                        BBForwardDeclareSmartPointerClass(EaseInExponentialCurve);
+                        BBForwardDeclareSmartPointerClass(EaseOutExponentialCurve);
+                        BBForwardDeclareSmartPointerClass(EaseInOutExponentialCurve);
+                        BBForwardDeclareSmartPointerClass(EaseInCircularCurve);
+                        BBForwardDeclareSmartPointerClass(EaseOutCircularCurve);
+                        BBForwardDeclareSmartPointerClass(EaseInOutCircularCurve);
+                        BBForwardDeclareSmartPointerClass(ElasticEasingCurve);
+                            BBForwardDeclareSmartPointerClass(EaseInElasticCurve);
+                            BBForwardDeclareSmartPointerClass(EaseOutElasticCurve);
+                            BBForwardDeclareSmartPointerClass(EaseInOutElasticCurve);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Diagnostics
                 class Logger;

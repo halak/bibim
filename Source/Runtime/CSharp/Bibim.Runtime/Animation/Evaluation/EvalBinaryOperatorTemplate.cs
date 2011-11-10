@@ -21,6 +21,14 @@ namespace Bibim.Animation
         }
         #endregion
 
+        public sealed override void Reset()
+        {
+            if (Left != null)
+                Left.Reset();
+            if (Right != null)
+                Right.Reset();
+        }
+
         public sealed override T Evaluate(EvalContext context)
         {
             if (Left != null && Right != null)

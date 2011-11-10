@@ -17,6 +17,7 @@
                 static GameComponent* Create(int id);
 
                 template <typename T> static void AddEntry();
+                template <typename T> static void AddSingletonEntry();
                 static void AddEntry(int id, CreateFunction function);
                 static void SortEntries();
         };

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Bibim.Animation
 {
-    public abstract class EvaluableSequenceBaseTemplate<T> : Evaluable<T>
+    public abstract class EvalSequenceBaseTemplate<T> : Eval<T>
     {
         #region Fields
         private uint lastTimestamp;
@@ -13,24 +13,28 @@ namespace Bibim.Animation
         #endregion
 
         #region Properties
+        [XmlIgnore]
         public float Time
         {
             get;
             private set;
         }
 
+        [XmlAttribute]
         public float Velocity
         {
             get;
             set;
         }
 
+        [XmlAttribute]
         public bool Looped
         {
             get;
             set;
         }
 
+        [XmlIgnore]
         protected T Value
         {
             private get;
@@ -39,7 +43,7 @@ namespace Bibim.Animation
         #endregion
 
         #region Constructors
-        public EvaluableSequenceBaseTemplate()
+        public EvalSequenceBaseTemplate()
         {
             Time = 0.0f;
             Velocity = 1.0f;
@@ -61,7 +65,13 @@ namespace Bibim.Animation
             timeChanged = true;
         }
 
-        public sealed override T Evaluate(EvaluationContext context)
+        public sealed override void Reset()
+        {
+            Time = 0.0f;
+            timeChanged = true;
+        }
+
+        public sealed override T Evaluate(EvalContext context)
         {
             if (timeChanged)
             {

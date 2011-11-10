@@ -24,6 +24,11 @@
                                                                 protected: \
                                                                     virtual classname* Clone(Bibim::CloningContext& context) const; \
                                                                 private:
+#       define BBSingletonComponentClass(classname, parent, a, b, c, d) BBComponentClass(classname, parent, a, b, c, d); \
+                                                                        public: \
+                                                                            static const SharedPointer<classname> Instance; \
+                                                                        private: \
+                                                                            classname();
 
 #       define BBImplementsComponent(classname) classname* classname::Clone() const \
                                                 { \
@@ -37,6 +42,24 @@
                                                     clone->OnCopy(this, context); \
                                                     return clone; \
                                                 }
+#       define BBImplementsSingletonComponent(classname)    classname::classname() { } \
+                                                            classname* classname::Clone() const \
+                                                            { \
+                                                                return const_cast<classname*>(this); \
+                                                            } \
+                                                            classname* classname::Clone(Bibim::CloningContext& /*context*/) const \
+                                                            { \
+                                                                return const_cast<classname*>(this); \
+                                                            } \
+                                                            void classname::OnRead(Bibim::ComponentStreamReader& reader) \
+                                                            { \
+                                                                Base::OnRead(reader); \
+                                                            } \
+                                                            void classname::OnCopy(const Bibim::GameComponent* original, Bibim::CloningContext& context) \
+                                                            { \
+                                                                Base::OnCopy(original, context); \
+                                                            } \
+                                                            const SharedPointer<classname> classname::Instance = new classname();
 
         class GameComponent : public SharedObject
         {

@@ -14,10 +14,25 @@
                 EvalTimeflow();
                 virtual ~EvalTimeflow();
 
+                void Update(float dt, int timestamp);
+
                 virtual void Reset();
                 virtual float Evaluate(EvalContext& context);
 
+                inline float GetTime() const;
+                inline float GetDuration() const;
+                void SetDuration(float value);
+                inline float GetVelocity() const;
+                inline void SetVelocity(float value);
+                inline bool GetLooped() const;
+                inline void SetLooped(bool value);
+
             private:
+                float time;
+                float duration;
+                float velocity;
+                bool looped;
+                int lastTimestamp;
         };
 
         BBDeclareEvalClass(EvalTimeflow);

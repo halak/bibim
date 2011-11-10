@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace Bibim.Animation
 {
-    public abstract class EvaluableConstantTemplate<T> : Evaluable<T>
+    public abstract class EvalConstantTemplate<T> : Eval<T>
     {
         #region Properties
         public T Value
@@ -16,18 +15,22 @@ namespace Bibim.Animation
         #endregion
 
         #region Constructors
-        protected EvaluableConstantTemplate()
+        protected EvalConstantTemplate()
         {
             Value = default(T);
         }
 
-        protected EvaluableConstantTemplate(T value)
+        protected EvalConstantTemplate(T value)
         {
             Value = value;
         }
         #endregion
 
-        public override T Evaluate(EvaluationContext context)
+        public sealed override void Reset()
+        {
+        }
+
+        public sealed override T Evaluate(EvalContext context)
         {
             return Value;
         }

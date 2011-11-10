@@ -719,7 +719,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="Asset"
+				Name="(Asset)"
 				>
 				<File
 					RelativePath=".\Asset\Bibim\AssetLoadingTask.cpp"
@@ -2401,15 +2401,47 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\Sequences.cpp"
-						>
-					</File>
-					<File
 						RelativePath=".\Animation\Bibim\Sequences.h"
 						>
 					</File>
 					<File
 						RelativePath=".\Animation\Bibim\Sequences.inl"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Easing"
+					>
+					<File
+						RelativePath=".\Animation\Bibim\Ease.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\Ease.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\Ease.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EasingCurves.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EasingCurves.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\ElasticEasingCurves.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\ElasticEasingCurves.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\ElasticEasingCurves.inl"
 						>
 					</File>
 				</Filter>
