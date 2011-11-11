@@ -882,6 +882,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Time\Bibim\IUpdateable.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Time\Bibim\SubTimeline.cpp"
 					>
 				</File>

@@ -43,7 +43,7 @@ namespace Bibim.Asset
         #region Methods
         public void Write(GameModule module)
         {
-            if (module != null)
+            if (module != null && module.ID != GameModule.UnspecifiedID)
                 Write(module.ID);
             else
                 Write((uint)0);
@@ -53,9 +53,9 @@ namespace Bibim.Asset
         {
             string name = Storage.FindName(asset);
             if (string.IsNullOrEmpty(name) == false)
-                BinaryWriterExtension.WriteBibimString(this, name);
+                this.WriteBibimString(name);
             else
-                BinaryWriterExtension.WriteBibimString(this, string.Empty);
+                this.WriteBibimString(string.Empty);
         }
         #endregion
     }

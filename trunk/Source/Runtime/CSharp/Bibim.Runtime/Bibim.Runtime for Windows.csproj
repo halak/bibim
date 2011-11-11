@@ -270,6 +270,7 @@
     <Compile Include="Scripting\ScriptThread.cs" />
     <Compile Include="Scripting\ScriptObjectType.cs" />
     <Compile Include="Time\Clock.cs" />
+    <Compile Include="Time\IUpdateable.cs" />
     <Compile Include="Time\ParallelTimeline.cs" />
     <Compile Include="Time\Timeline.cs" />
     <Compile Include="Time\UpdateableGameModule.cs" />

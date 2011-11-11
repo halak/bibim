@@ -17,7 +17,7 @@ namespace Bibim.Asset.Pipeline
         private string comment;
 
         #region Static Fields
-        private static DataContractSerializer serializer;
+        private static XmlSerializer serializer;
         private static XmlWriterSettings writerSettings;
         #endregion
         #endregion
@@ -57,7 +57,7 @@ namespace Bibim.Asset.Pipeline
             set;
         }
 
-        private static DataContractSerializer Serializer
+        private static XmlSerializer Serializer
         {
             get
             {
@@ -68,7 +68,7 @@ namespace Bibim.Asset.Pipeline
                     Type[] recipeClasses = new Type[classes.Count];
                     classes.CopyTo(recipeClasses, 0);
 
-                    serializer = new DataContractSerializer(typeof(GameAssetRecipe), recipeClasses, 128,false,true, null);
+                    serializer = new XmlSerializer(typeof(GameAssetRecipe), recipeClasses);
                 }
 
                 return serializer;
@@ -119,12 +119,14 @@ namespace Bibim.Asset.Pipeline
 
         public static void Serialize(Stream stream, GameAssetRecipe recipe)
         {
-            Serializer.WriteObject(XmlDictionaryWriter.Create(XmlWriter.Create(stream, WriterSettings)), recipe);
+            var writer = XmlWriter.Create(stream, WriterSettings);
+            Serializer.Serialize(writer, recipe);
+            writer.Close();
         }
 
         public static void Serialize(XmlWriter writer, GameAssetRecipe recipe)
         {
-            Serializer.WriteObject(writer, recipe);
+            Serializer.Serialize(writer, recipe);
         }
 
         public static GameAssetRecipe Deserialize(string path)
@@ -135,12 +137,12 @@ namespace Bibim.Asset.Pipeline
 
         public static GameAssetRecipe Deserialize(Stream stream)
         {
-            return Serializer.ReadObject(stream) as GameAssetRecipe;
+            return Serializer.Deserialize(stream) as GameAssetRecipe;
         }
 
         public static GameAssetRecipe Deserialize(XmlReader reader)
         {
-            return Serializer.ReadObject(reader) as GameAssetRecipe;
+            return Serializer.Deserialize(reader) as GameAssetRecipe;
         }
         #endregion
     }

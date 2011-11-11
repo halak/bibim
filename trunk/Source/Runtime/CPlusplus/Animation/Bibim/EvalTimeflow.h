@@ -4,23 +4,26 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/Evals.h>
+#   include <Bibim/IUpdateable.h>
 
     namespace Bibim
     {
-        class EvalTimeflow : public EvalFloat
+        class EvalTimeflow : public EvalFloat, public IUpdateable
         {
             BBComponentClass(EvalTimeflow, EvalFloat, 'e', 'T', 'F', 'f');
             public:
                 EvalTimeflow();
                 virtual ~EvalTimeflow();
 
-                void Update(float dt, int timestamp);
+                virtual void Update(float dt, int timestamp);
 
                 virtual void Start();
                 virtual void Stop();
                 virtual void Reset();
                 virtual float Evaluate(EvalContext& context);
 
+                inline Timeline* GetTimeline() const;
+                void SetTimeline(Timeline* value);
                 inline float GetTime() const;
                 inline float GetDuration() const;
                 void SetDuration(float value);
@@ -30,10 +33,12 @@
                 inline void SetLooped(bool value);
 
             private:
+                Timeline* timeline;
                 float time;
                 float duration;
                 float velocity;
                 bool looped;
+                bool isUpdating;
                 int lastTimestamp;
         };
 

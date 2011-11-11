@@ -181,6 +181,7 @@
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Time
                 class Clock;
+                class IUpdateable;
                 class UpdateableGameModule;
                     class Timeline;
                         class SubTimeline;
