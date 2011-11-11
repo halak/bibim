@@ -4,10 +4,12 @@ using System.Text;
 
 namespace Bibim.Time
 {
-    public abstract class UpdateableGameModule : GameModule
+    public abstract class UpdateableGameModule : GameModule, IUpdateable
     {
         public UpdateableGameModule()
         {
         }
+
+        public abstract void Update(float dt, int timestamp);
     }
 }

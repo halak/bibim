@@ -1,6 +1,7 @@
 #include <Bibim/PCH.h>
 #include <Bibim/Timeline.h>
 #include <Bibim/Assert.h>
+#include <Bibim/IUpdateable.h>
 #include <Bibim/Math.h>
 #include <algorithm>
 
@@ -28,12 +29,15 @@ namespace Bibim
 
         dt *= GetSpeed();
         for (ItemCollection::iterator it = temporaryItems.begin(); it != temporaryItems.end(); it++)
-        {
             (*it)->Update(dt, timestamp);
-        }
     }
 
-    void Timeline::Add(UpdateableGameModule* item)
+    void Timeline::Add(IUpdateable* item)
+    {
+        Add(item, nullptr);
+    }
+
+    void Timeline::Add(IUpdateable* item, SharedObject* object)
     {
         if (item == nullptr)
             return;
@@ -41,14 +45,17 @@ namespace Bibim
         BBAssertDebug(Contains(item) == false);
 
         items.push_back(item);
+        objects.push_back(object);
     }
 
-    bool Timeline::Remove(UpdateableGameModule* item)
+    bool Timeline::Remove(IUpdateable* item)
     {
         ItemCollection::iterator it = std::find(items.begin(), items.end(), item);
         if (it != items.end())
         {
+            const int index = std::distance(items.begin(), it);
             items.erase(it);
+            objects.erase(objects.begin() + index);
             return true;
         }
         else
@@ -60,14 +67,16 @@ namespace Bibim
         BBAssert(0 <= index && index < static_cast<int>(items.size()));
 
         items.erase(items.begin() + index);
+        objects.erase(objects.begin() + index);
     }
 
     void Timeline::Clear()
     {
         items.clear();
+        objects.clear();
     }
 
-    bool Timeline::Contains(UpdateableGameModule* item) const
+    bool Timeline::Contains(IUpdateable* item) const
     {
         return std::find(items.begin(), items.end(), item) != items.end();
     }

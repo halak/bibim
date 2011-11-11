@@ -2,18 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Bibim.Time;
 
 namespace Bibim.Animation
 {
     [ClassID('e', 'T', 'F', 'f')]
-    public sealed class EvalTimeflow : Eval<float>
+    public sealed class EvalTimeflow : Eval<float>, IUpdateable
     {
         #region Fields
+        private Timeline timeline;
         private float duration;
         private int lastTimestamp;
+        private bool isUpdating;
         #endregion
 
         #region Properties
+        public Timeline Timeline
+        {
+            get { return timeline; }
+            set
+            {
+                if (timeline != value)
+                {
+                    if (timeline != null && isUpdating)
+                        timeline.Remove(this);
+
+                    timeline = value;
+
+                    if (timeline != null && isUpdating)
+                        timeline.Add(this);
+                }
+            }
+        }
+
         public float Time
         {
             get;
@@ -56,7 +77,7 @@ namespace Bibim.Animation
         public EvalTimeflow(float duration, float velocity, bool isLooped)
         {
             Time = 0.0f;
-            duration = Math.Max(duration, 0.0f);
+            Duration = duration;
             Velocity = velocity;
             IsLooped = isLooped;
         }
@@ -96,10 +117,22 @@ namespace Bibim.Animation
 
         public override void Start()
         {
+            if (isUpdating)
+                return;
+
+            isUpdating = true;
+            if (timeline != null)
+                timeline.Add(this);
         }
 
         public override void Stop()
         {
+            if (isUpdating == false)
+                return;
+
+            isUpdating = false;
+            if (timeline != null)
+                timeline.Remove(this);
         }
 
         public override void Reset()

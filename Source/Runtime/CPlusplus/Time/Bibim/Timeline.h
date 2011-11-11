@@ -12,7 +12,8 @@
         {
             BBModuleClass(Timeline, UpdateableGameModule, 'T', 'M', 'L', 'N');
             public:
-                typedef std::vector<UpdateableGameModule*> ItemCollection;
+                typedef std::vector<IUpdateable*> ItemCollection;
+                typedef std::vector<SharedObjectPtr> ObjectCollection;
 
             public:
                 Timeline();
@@ -20,11 +21,12 @@
 
                 virtual void Update(float dt, int timestamp);
 
-                void Add(UpdateableGameModule* item);
-                bool Remove(UpdateableGameModule* item);
+                void Add(IUpdateable* item);
+                void Add(IUpdateable* item, SharedObject* object);
+                bool Remove(IUpdateable* item);
                 void RemoveAt(int index);
                 void Clear();
-                bool Contains(UpdateableGameModule* item) const;
+                bool Contains(IUpdateable* item) const;
 
                 inline const ItemCollection& GetItems() const;
 
@@ -34,10 +36,9 @@
             private:
                 ItemCollection items;
                 ItemCollection temporaryItems;
+                ObjectCollection objects;
                 float speed;
 
-                friend class SubTimeline;
-                friend class TimelineGameModule;
         };
     }
 

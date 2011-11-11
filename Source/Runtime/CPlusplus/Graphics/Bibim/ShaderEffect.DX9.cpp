@@ -78,7 +78,7 @@ namespace Bibim
         : graphicsDevice(graphicsDevice),
           d3dEffect(d3dEffect)
     {
-        IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
+        /*IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();*/
     }
 
     ShaderEffect::~ShaderEffect()
@@ -112,7 +112,7 @@ namespace Bibim
         reader.Read(&buffer[0], length);
 
         ID3DXEffect* d3dEffect = nullptr;
-        HRESULT r = D3DXCreateEffect(graphicsDevice->GetD3DDevice(),
+        /*HRESULT r = */D3DXCreateEffect(graphicsDevice->GetD3DDevice(),
                          &buffer[0],
                          length,
                          NULL, NULL, 0, 0, &d3dEffect, 0);

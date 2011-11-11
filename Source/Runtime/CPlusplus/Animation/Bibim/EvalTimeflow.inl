@@ -1,5 +1,10 @@
 namespace Bibim
 {
+    Timeline* EvalTimeflow::GetTimeline() const
+    {
+        return timeline;
+    }
+
     float EvalTimeflow::GetTime() const
     {
         return time;

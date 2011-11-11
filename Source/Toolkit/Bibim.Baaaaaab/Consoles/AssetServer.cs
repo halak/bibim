@@ -27,29 +27,11 @@ namespace Bibim.Bab.Consoles
     {
         static void Run([Alias("pipe")] string pipeName)
         {
-            var shakeAmount1 = new EvalFloatInterpolator()
-            {
-                Value1 = new EvalFloatConstant(50.0f),
-                Value2 = new EvalFloatConstant(100.0f),
-                Weight = new EvalUnitRandom(EvalUnitRandom.GenerationCycle.ResetOrManual),
-            };
-            var shakeAmount2 = new EvalFloatNegation()
-            {
-                Operand = shakeAmount1,
-            };
-            var shakeAnimation1 = new EvalFloatInterpolator()
-            {
-                Value1 = shakeAmount1,
-                Value2 = shakeAmount2,
-                Weight = new EvalTimeflow(1.0f),
-                EasingCurve = new EaseInElasticCurve(1.0f, 0.1f),
-            };
-
-            using (var fs = new FileStream("Hello.xml", FileMode.Create, FileAccess.Write))
-                GameAssetRecipe.Serialize(fs, new GameAssetRecipe()
-                {
-                    Cook = new ReadGameAsset(new FloatEvalTree(shakeAnimation1))
-                });
+            //using (var fs = new FileStream("Hello.xml", FileMode.Create, FileAccess.Write))
+            //    GameAssetRecipe.Serialize(fs, new GameAssetRecipe()
+            //    {
+            //        Cook = new ReadGameAsset(new FloatEvalTree(shakeAnimation1))
+            //    });
 
             //seq.AddKeyframe(new Keyframe<bool>(true, 1.0f));
             //seq.AddKeyframe(new Keyframe<bool>(false, 0.7f));
@@ -83,6 +65,41 @@ namespace Bibim.Bab.Consoles
             modules.Root.AttachChild(assetStorage);
             modules.Root.AttachChild(assetKitchen);
             modules.Root.AttachChild(assetServer);
+
+            var shakeAmount1 = new EvalFloatInterpolator()
+            {
+                Value1 = new EvalFloatConstant(50.0f),
+                Value2 = new EvalFloatConstant(100.0f),
+                Weight = new EvalUnitRandom(EvalUnitRandom.GenerationCycle.ResetOrManual),
+            };
+            var shakeAmount2 = new EvalFloatNegation()
+            {
+                Operand = shakeAmount1,
+            };
+            var shakeAnimation1 = new EvalFloatInterpolator()
+            {
+                Value1 = shakeAmount1,
+                Value2 = shakeAmount2,
+                Weight = new EvalTimeflow(1.0f),
+                EasingCurve = new EaseInElasticCurve(1.0f, 0.1f),
+            };
+
+            using (var fs = new FileStream(@"Hello.xml", FileMode.Create, FileAccess.Write))
+            {
+                var c1 = Bibim.Reflection.AssemblyUtility.FindClasses(typeof(EvalBase), true, true);
+                var c2 = Bibim.Reflection.AssemblyUtility.FindClasses(typeof(EasingCurve), true, true);
+                var c3 = new Type[c1.Count + c2.Count];
+                c1.CopyTo(c3, 0);
+                c2.CopyTo(c3, c1.Count);
+                var s = new System.Runtime.Serialization.DataContractSerializer(typeof(FloatEvalTree), c3, 256, false, true, null);
+                var w = XmlWriter.Create(fs, new XmlWriterSettings() { NewLineChars = "\r\n", IndentChars = "\t", Indent=true,Encoding=Encoding.UTF8 });
+                s.WriteObject(w, shakeAnimation1);
+                w.Close();
+            }
+
+            //FloatEvalTreeWriter writer = new FloatEvalTreeWriter();
+            //using (var fs = new FileStream(@"C:\Works\TouhouPanic!\Game\Asset\ShakeScreen.ab", FileMode.Create, FileAccess.Write))
+            //    writer.Write(new AssetStreamWriter(fs, modules), new FloatEvalTree(shakeAnimation1));
 
             bool closed = false;
             while (closed == false)

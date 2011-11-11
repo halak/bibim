@@ -31,7 +31,7 @@ namespace Bibim
         {
             GameComponent* clone = original->Clone(*this);
             BBAssertDebug(clone != nullptr);
-            BBAssertDebug(originalCloneMap.find(original) != originalCloneMap.end());
+            BBAssertDebug(original == clone || originalCloneMap.find(original) != originalCloneMap.end());
             return clone;
         }
     }

@@ -4,17 +4,16 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
+#   include <Bibim/IUpdateable.h>
 
     namespace Bibim
     {
-        class UpdateableGameModule : public GameModule
+        class UpdateableGameModule : public GameModule, public IUpdateable
         {
             BBAbstractModuleClass(UpdateableGameModule, GameModule);
             public:
                 UpdateableGameModule();
                 virtual ~UpdateableGameModule();
-
-                virtual void Update(float dt, int timestamp) = 0;
 
             protected:
                 inline bool Seal(int timestamp);
