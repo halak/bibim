@@ -1,5 +1,15 @@
 namespace Bibim
 {
+    int UIElement::GetID() const
+    {
+        return id;
+    }
+
+    void UIElement::SetID(int value)
+    {
+        id = value;
+    }
+
     const String& UIElement::GetName() const
     {
         return name;

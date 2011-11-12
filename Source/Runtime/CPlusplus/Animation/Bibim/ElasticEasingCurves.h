@@ -35,7 +35,7 @@
                 EaseInElasticCurve(float amplitude, float period);
                 virtual ~EaseInElasticCurve();
 
-                virtual float Ease(float t) { return Ease::InElastic(t, GetAmplitude(), GetPeriod()); }
+                virtual float Ease(float t) const { return Ease::InElastic(t, GetAmplitude(), GetPeriod()); }
         };
 
         class EaseOutElasticCurve : public ElasticEasingCurve
@@ -46,7 +46,7 @@
                 EaseOutElasticCurve(float amplitude, float period);
                 virtual ~EaseOutElasticCurve();
 
-                virtual float Ease(float t) { return Ease::OutElastic(t, GetAmplitude(), GetPeriod()); }
+                virtual float Ease(float t) const { return Ease::OutElastic(t, GetAmplitude(), GetPeriod()); }
         };
 
         class EaseInOutElasticCurve : public ElasticEasingCurve
@@ -57,7 +57,7 @@
                 EaseInOutElasticCurve(float amplitude, float period);
                 virtual ~EaseInOutElasticCurve();
 
-                virtual float Ease(float t) { return Ease::InOutElastic(t, GetAmplitude(), GetPeriod()); }
+                virtual float Ease(float t) const { return Ease::InOutElastic(t, GetAmplitude(), GetPeriod()); }
         };
     }
 

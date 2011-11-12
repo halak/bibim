@@ -35,8 +35,15 @@ namespace Bibim.Animation
             get { return easingCurve; }
             set
             {
-                easingCurve = value ?? EaseInOutQuadraticCurve.Instance;
+                easingCurve = value ?? LinearCurve.Instance;
             }
+        }
+        #endregion
+
+        #region Constructors
+        public EvalInterpolatorTemplate()
+        {
+            easingCurve = LinearCurve.Instance;
         }
         #endregion
 

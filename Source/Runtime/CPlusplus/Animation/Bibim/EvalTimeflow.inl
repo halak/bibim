@@ -25,6 +25,16 @@ namespace Bibim
         velocity = value;
     }
 
+    EvalTimeflow::Behavior EvalTimeflow::GetStopBehavior() const
+    {
+        return stopBehavior;
+    }
+
+    void EvalTimeflow::SetStopBehavior(Behavior value)
+    {
+        stopBehavior = value;
+    }
+
     bool EvalTimeflow::GetLooped() const
     {
         return looped;

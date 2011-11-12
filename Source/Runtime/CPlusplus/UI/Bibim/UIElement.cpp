@@ -4,7 +4,10 @@
 
 namespace Bibim
 {
+    const int UIElement::UnspecifiedID = -1;
+
     UIElement::UIElement()
+        : id(UnspecifiedID)
     {
     }
 
@@ -15,6 +18,7 @@ namespace Bibim
     void UIElement::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
+        id = reader.ReadInt();
         name = reader.ReadString();
     }
 
@@ -22,6 +26,7 @@ namespace Bibim
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const UIElement*>(original);
+        id = o->id;
         name = o->name;
     }
 }

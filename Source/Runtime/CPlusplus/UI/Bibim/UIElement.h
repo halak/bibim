@@ -14,13 +14,19 @@
         {
             BBAbstractComponentClass(UIElement, GameComponent);
             public:
+                static const int UnspecifiedID;
+
+            public:
                 UIElement();
                 virtual ~UIElement();
 
+                inline int GetID() const;
+                inline void SetID(int value);
                 inline const String& GetName() const;
                 inline void SetName(const String& value);
 
             private:
+                int id;
                 String name;
         };
     }

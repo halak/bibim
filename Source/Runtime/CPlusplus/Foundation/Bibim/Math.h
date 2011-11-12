@@ -36,6 +36,7 @@
                 static float Acos(float radian);
                 static float Atan2(float y, float x);
                 static inline float Atan2(Vector2 xy);
+                static float Exp(float value);
 
                 static inline short   Abs(short value);
                 static inline int     Abs(int value);

@@ -9,6 +9,15 @@ namespace Bibim.Animation
     [ClassID('e', 'T', 'F', 'f')]
     public sealed class EvalTimeflow : Eval<float>, IUpdateable
     {
+        #region Behavior (Nested Enum)
+        public enum Behavior
+        {
+            Pause,
+            Reset,
+            Finish,
+        }
+        #endregion
+
         #region Fields
         private Timeline timeline;
         private float duration;
@@ -61,24 +70,31 @@ namespace Bibim.Animation
             get;
             set;
         }
+
+        public Behavior StopBehavior
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
         public EvalTimeflow()
-            : this(0.0f, 1.0f, true)
+            : this(0.0f, 1.0f, Behavior.Pause, true)
         {
         }
 
         public EvalTimeflow(float duration)
-            : this(duration, 1.0f, true)
+            : this(duration, 1.0f, Behavior.Pause, true)
         {
         }
 
-        public EvalTimeflow(float duration, float velocity, bool isLooped)
+        public EvalTimeflow(float duration, float velocity, Behavior stopBehavior, bool isLooped)
         {
             Time = 0.0f;
             Duration = duration;
             Velocity = velocity;
+            StopBehavior = stopBehavior;
             IsLooped = isLooped;
         }
         #endregion
@@ -133,6 +149,18 @@ namespace Bibim.Animation
             isUpdating = false;
             if (timeline != null)
                 timeline.Remove(this);
+
+            switch (StopBehavior)
+            {
+                case Behavior.Pause:
+                    break;
+                case Behavior.Reset:
+                    Time = 0.0f;
+                    break;
+                case Behavior.Finish:
+                    Time = Duration;
+                    break;
+            }
         }
 
         public override void Reset()

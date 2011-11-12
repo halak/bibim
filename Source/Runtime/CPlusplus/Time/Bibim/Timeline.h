@@ -37,6 +37,7 @@
                 ItemCollection items;
                 ItemCollection temporaryItems;
                 ObjectCollection objects;
+                ObjectCollection temporaryObjects;
                 float speed;
 
         };

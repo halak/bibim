@@ -70,7 +70,6 @@ namespace Bibim.Animation
                 objMap.Add(o);
                 writer.Write(objMap.Count - 1);
                 writer.Write(o.ClassID);
-                writer.Write(o.ID);
                 return true;
             }
         }
@@ -156,6 +155,7 @@ namespace Bibim.Animation
             Write(writer, o.Value1, objMap);
             Write(writer, o.Value2, objMap);
             Write(writer, o.Weight, objMap);
+            Write(writer, o.EasingCurve, objMap);
 
             return true;
         }
@@ -402,6 +402,7 @@ namespace Bibim.Animation
             writer.Write(o.Timeline);
             writer.Write(o.Duration);
             writer.Write(o.Velocity);
+            writer.Write((byte)o.StopBehavior);
             writer.Write(o.IsLooped);
         }
 
@@ -441,6 +442,15 @@ namespace Bibim.Animation
         protected static void Write(AssetStreamWriter writer, EaseInElasticCurve o, IList<object> objMap) { WriteElasticEasingCurve(writer, o, objMap); }
         protected static void Write(AssetStreamWriter writer, EaseOutElasticCurve o, IList<object> objMap) { WriteElasticEasingCurve(writer, o, objMap); }
         protected static void Write(AssetStreamWriter writer, EaseInOutElasticCurve o, IList<object> objMap) { WriteElasticEasingCurve(writer, o, objMap); }
+        protected static void Write(AssetStreamWriter writer, OscillationCurve o, IList<object> objMap)
+        {
+            if (WriteEasingCurve(writer, o, objMap) == false)
+                return;
+
+            writer.Write((byte)o.Mode);
+            writer.Write((short)o.Frequency);
+            writer.Write(o.Strength);
+        }
         #endregion
     }
 }

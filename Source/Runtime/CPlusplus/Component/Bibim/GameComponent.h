@@ -66,25 +66,16 @@
             BBAbstractComponentClass(GameComponent, SharedObject);
             BBThisIsNoncopyableClass(GameComponent);
             public:
-                static const int UnspecifiedID;
-
-            public:
                 virtual ~GameComponent();
 
                 virtual GameComponent* Clone() const;
 
-                inline int GetID() const;
-                inline void SetID(int value);
-
             protected:
                 GameComponent();
-                GameComponent(int id);
 
                 virtual GameComponent* Clone(CloningContext& context) const = 0;
 
             private:
-                int id;
-
                 friend class CloningContext;
                 friend class ComponentStreamReader;
         };

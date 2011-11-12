@@ -14,7 +14,7 @@
             public:
                 virtual ~EasingCurve();
 
-                virtual float Ease(float t) = 0;
+                virtual float Ease(float t) const = 0;
 
             protected:
                 EasingCurve();
@@ -26,7 +26,7 @@
                                                     BBSingletonComponentClass(name, EasingCurve, a, b, c, d); \
                                                     public: \
                                                         virtual ~name() { } \
-                                                        virtual float Ease(float t) { return func(t); } \
+                                                        virtual float Ease(float t) const { return func(t); } \
                                                 };
 
         BBDeclareStandardEasingCurveClass(LinearCurve,               Ease::Linear,             'E', 'C', '0', '0');

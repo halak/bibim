@@ -2452,6 +2452,18 @@
 						RelativePath=".\Animation\Bibim\ElasticEasingCurves.inl"
 						>
 					</File>
+					<File
+						RelativePath=".\Animation\Bibim\OscillationCurve.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\OscillationCurve.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\OscillationCurve.inl"
+						>
+					</File>
 				</Filter>
 			</Filter>
 			<Filter

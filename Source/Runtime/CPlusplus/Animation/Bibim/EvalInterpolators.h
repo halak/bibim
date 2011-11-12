@@ -30,7 +30,7 @@
                     : value1(value1),
                       value2(value2), 
                       weight(weight),
-                      easingCurve(EaseInOutQuadraticCurve::Instance)
+                      easingCurve(LinearCurve::Instance)
                 {
                 }
 
@@ -86,7 +86,7 @@
                 void SetWeigt(EvalFloat* value) { weight = value; }
 
                 EasingCurve* GetEasingCurve() const { return easingCurve; }
-                void SetEasingCurve(EasingCurve* value) const { easingCurve = value ? value : EaseInOutQuadraticCurve::Instance; }
+                void SetEasingCurve(EasingCurve* value) const { easingCurve = value ? value : LinearCurve::Instance; }
 
             private:
                 SharedPointer<EvalValue> value1;
