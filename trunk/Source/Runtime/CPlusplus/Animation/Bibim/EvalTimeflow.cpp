@@ -13,6 +13,7 @@ namespace Bibim
           time(0.0f),
           duration(0.0f),
           velocity(1.0f),
+          stopBehavior(PauseAtStop),
           looped(true),
           isUpdating(false)
     {
@@ -37,7 +38,7 @@ namespace Bibim
             time = nextTime;
         else
         {
-            if (nextTime < duration)
+            if (nextTime > duration)
             {
                 if (looped && duration > 0.0f)
                     time = Math::Mod(nextTime, duration);
@@ -46,7 +47,6 @@ namespace Bibim
             }
             else
             {
-                BBAssertDebug(nextTime < 0.0f);
                 if (looped && duration > 0.0f)
                     time = duration - Math::Mod(-nextTime, duration);
                 else
@@ -62,7 +62,7 @@ namespace Bibim
 
         isUpdating = true;
         if (timeline != nullptr)
-            timeline->Add(this);
+            timeline->Add(this, this);
     }
 
     void EvalTimeflow::Stop()
@@ -73,6 +73,18 @@ namespace Bibim
         isUpdating = false;
         if (timeline != nullptr)
             timeline->Remove(this);
+
+        switch (stopBehavior)
+        {
+            case PauseAtStop:
+                break;
+            case ResetAtStop:
+                time = 0.0f;
+                break;
+            case FinishAtStop:
+                time = duration;
+                break;
+        }
     }
 
     void EvalTimeflow::Reset()
@@ -111,6 +123,7 @@ namespace Bibim
         time = 0.0f;
         duration = reader.ReadFloat();
         velocity = reader.ReadFloat();
+        stopBehavior = static_cast<Behavior>(reader.ReadByte());
         looped = reader.ReadBool();
     }
 
@@ -122,6 +135,7 @@ namespace Bibim
         time = o->time;
         duration = o->duration;
         velocity = o->velocity;
+        stopBehavior = o->stopBehavior;
         looped = o->looped;
         isUpdating = o->isUpdating;
 

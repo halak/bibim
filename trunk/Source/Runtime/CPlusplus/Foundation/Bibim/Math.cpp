@@ -54,6 +54,11 @@ namespace Bibim
         return std::atan2(y, x);
     }
 
+    float Math::Exp(float value)
+    {
+        return std::expf(value);
+    }
+
     float Math::Mod(float a, float b)
     {
         return std::fmodf(a, b);

@@ -23,6 +23,7 @@ namespace Bibim
         value1 = static_cast<EvalValue*>(reader.ReadComponent());
         value2 = static_cast<EvalValue*>(reader.ReadComponent());
         weight = static_cast<EvalFloat*>(reader.ReadComponent());
+        easingCurve = static_cast<EasingCurve*>(reader.ReadComponent());
     }
 
     template <typename T, template <typename T> class TOperator, char a, char b, char c, char d>
@@ -33,5 +34,6 @@ namespace Bibim
         value1 = context.Clone(o->value1);
         value2 = context.Clone(o->value2);
         weight = context.Clone(o->weight);
+        easingCurve = context.Clone(o->easingCurve);
     }
 }

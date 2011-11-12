@@ -120,6 +120,7 @@
                             BBForwardDeclareSmartPointerClass(EaseInElasticCurve);
                             BBForwardDeclareSmartPointerClass(EaseOutElasticCurve);
                             BBForwardDeclareSmartPointerClass(EaseInOutElasticCurve);
+                        BBForwardDeclareSmartPointerClass(OscillationCurve);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Diagnostics
                 class Logger;

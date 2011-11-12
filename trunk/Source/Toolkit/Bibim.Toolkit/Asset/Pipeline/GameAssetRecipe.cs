@@ -12,14 +12,15 @@ namespace Bibim.Asset.Pipeline
     [XmlRoot]
     public sealed class GameAssetRecipe
     {
+        #region Static Fields
+        private static XmlSerializer oldSerializer;
+        private static DataContractSerializer serializer;
+        private static XmlWriterSettings writerSettings;
+        #endregion
+
         #region Fields
         private string author;
         private string comment;
-
-        #region Static Fields
-        private static XmlSerializer serializer;
-        private static XmlWriterSettings writerSettings;
-        #endregion
         #endregion
 
         #region Properties
@@ -57,7 +58,25 @@ namespace Bibim.Asset.Pipeline
             set;
         }
 
-        private static XmlSerializer Serializer
+        private static XmlSerializer OldSerializer
+        {
+            get
+            {
+                if (oldSerializer == null)
+                {
+                    ICollection<Type> classes = AssemblyUtility.FindClasses(typeof(CookingNode), true, true);
+
+                    Type[] recipeClasses = new Type[classes.Count];
+                    classes.CopyTo(recipeClasses, 0);
+
+                    oldSerializer = new XmlSerializer(typeof(GameAssetRecipe), recipeClasses);
+                }
+
+                return oldSerializer;
+            }
+        }
+
+        private static DataContractSerializer Serializer
         {
             get
             {
@@ -65,10 +84,7 @@ namespace Bibim.Asset.Pipeline
                 {
                     ICollection<Type> classes = AssemblyUtility.FindClasses(typeof(CookingNode), true, true);
 
-                    Type[] recipeClasses = new Type[classes.Count];
-                    classes.CopyTo(recipeClasses, 0);
-
-                    serializer = new XmlSerializer(typeof(GameAssetRecipe), recipeClasses);
+                    serializer = new DataContractSerializer(typeof(GameAssetRecipe), null, "Bibim", classes, 65536, false, true, null);
                 }
 
                 return serializer;
@@ -120,29 +136,59 @@ namespace Bibim.Asset.Pipeline
         public static void Serialize(Stream stream, GameAssetRecipe recipe)
         {
             var writer = XmlWriter.Create(stream, WriterSettings);
-            Serializer.Serialize(writer, recipe);
+            OldSerializer.Serialize(writer, recipe);
             writer.Close();
         }
 
         public static void Serialize(XmlWriter writer, GameAssetRecipe recipe)
         {
-            Serializer.Serialize(writer, recipe);
+            OldSerializer.Serialize(writer, recipe);
         }
 
         public static GameAssetRecipe Deserialize(string path)
         {
             using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
-                return Deserialize(fs) as GameAssetRecipe;
+            {
+                try
+                {
+                    return Serializer.ReadObject(fs) as GameAssetRecipe;
+                }
+                catch (Exception)
+                {
+                    var result = OldSerializer.Deserialize(fs) as GameAssetRecipe;
+                    if (result != null)
+                    {
+                        Serialize(path, result);
+                        return result;
+                    }
+                    else
+                        return null;
+                }
+            }
         }
 
         public static GameAssetRecipe Deserialize(Stream stream)
         {
-            return Serializer.Deserialize(stream) as GameAssetRecipe;
+            try
+            {
+                return Serializer.ReadObject(stream) as GameAssetRecipe;
+            }
+            catch (Exception)
+            {
+                return OldSerializer.Deserialize(stream) as GameAssetRecipe;
+            }
         }
 
         public static GameAssetRecipe Deserialize(XmlReader reader)
         {
-            return Serializer.Deserialize(reader) as GameAssetRecipe;
+            try
+            {
+                return Serializer.ReadObject(reader) as GameAssetRecipe;
+            }
+            catch (Exception)
+            {
+                return OldSerializer.Deserialize(reader) as GameAssetRecipe;
+            }
         }
         #endregion
     }

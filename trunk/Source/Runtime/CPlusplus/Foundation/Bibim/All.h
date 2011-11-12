@@ -20,6 +20,7 @@
 #  include <Bibim/GameAsset.h>
 #  include <Bibim/GameAssetFactory.h>
 #include <Bibim/EvalUnaryOperators.h>
+#include <Bibim/OscillationCurve.h>
 #include <Bibim/EvalContext.h>
 #  include <Bibim/GameAssetStorage.h>
 #  include <Bibim/PipedAssetProvider.h>

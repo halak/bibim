@@ -6,11 +6,25 @@ namespace Bibim.UI
 {
     public abstract class UIElement : GameComponent
     {
+        #region Static Fields
+        public static readonly int UnspecifiedID = -1;
+        #endregion
+
         #region Fields
+        private int id;
         private string name;
         #endregion
 
         #region Properties
+        public int ID
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+            }
+        }
+
         public string Name
         {
             get { return name; }
@@ -33,8 +47,8 @@ namespace Bibim.UI
         }
 
         public UIElement(int id, string name)
-            : base(id)
         {
+            this.id = id;
             this.name = name ?? string.Empty;
         }
         #endregion

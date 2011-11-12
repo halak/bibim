@@ -23,9 +23,14 @@ namespace Bibim
             Seal(timestamp))
             return;
 
-        temporaryItems.resize(items.size());
-        for (ItemCollection::size_type i = 0; i < temporaryItems.size(); i++)
+        const int count = static_cast<int>(items.size());
+        temporaryItems.resize(count);
+        temporaryObjects.resize(count);
+        for (int i = 0; i < count; i++)
+        {
             temporaryItems[i] = items[i];
+            temporaryObjects[i] = objects[i];
+        }
 
         dt *= GetSpeed();
         for (ItemCollection::iterator it = temporaryItems.begin(); it != temporaryItems.end(); it++)

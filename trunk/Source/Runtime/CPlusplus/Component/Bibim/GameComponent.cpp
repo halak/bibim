@@ -4,15 +4,7 @@
 
 namespace Bibim
 {
-    const int GameComponent::UnspecifiedID = -1;
-
     GameComponent::GameComponent()
-        : id(UnspecifiedID)
-    {
-    }
-
-    GameComponent::GameComponent(int id)
-        : id(id)
     {
     }
 
@@ -28,11 +20,9 @@ namespace Bibim
 
     void GameComponent::OnRead(ComponentStreamReader& reader)
     {
-        id = reader.ReadInt();
     }
 
     void GameComponent::OnCopy(const GameComponent* original, CloningContext& /*context*/)
     {
-        id = original->id;
     }
 }

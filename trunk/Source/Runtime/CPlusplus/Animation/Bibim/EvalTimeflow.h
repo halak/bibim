@@ -12,6 +12,14 @@
         {
             BBComponentClass(EvalTimeflow, EvalFloat, 'e', 'T', 'F', 'f');
             public:
+                enum Behavior
+                {
+                    PauseAtStop,
+                    ResetAtStop,
+                    FinishAtStop,
+                };
+
+            public:
                 EvalTimeflow();
                 virtual ~EvalTimeflow();
 
@@ -29,6 +37,8 @@
                 void SetDuration(float value);
                 inline float GetVelocity() const;
                 inline void SetVelocity(float value);
+                inline Behavior GetStopBehavior() const;
+                inline void SetStopBehavior(Behavior value);
                 inline bool GetLooped() const;
                 inline void SetLooped(bool value);
 
@@ -37,6 +47,7 @@
                 float time;
                 float duration;
                 float velocity;
+                Behavior stopBehavior;
                 bool looped;
                 bool isUpdating;
                 int lastTimestamp;
