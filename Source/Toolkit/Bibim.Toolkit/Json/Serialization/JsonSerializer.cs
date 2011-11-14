@@ -15,6 +15,7 @@ namespace Bibim.Json.Serialization
     public sealed class JsonSerializer
     {
         #region Fields
+        private static JsonSerializer instance;
         private static readonly string IDPropertyName = "$id";
         private static readonly string TypePropertyName = "$type";
         private static readonly BindingFlags memberFlags = BindingFlags.Public |
@@ -25,6 +26,19 @@ namespace Bibim.Json.Serialization
                                                            BindingFlags.SetField;
         private Dictionary<Type, TypeConverter> typeConverters = new Dictionary<Type, TypeConverter>();
         private Dictionary<string, Type> nameTypeDictionary = new Dictionary<string, Type>();
+        #endregion
+
+        #region Properties
+        public static JsonSerializer Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new JsonSerializer();
+
+                return instance;
+            }
+        }
         #endregion
 
         #region Constructors
@@ -124,8 +138,7 @@ namespace Bibim.Json.Serialization
                                 writer.Write((int)Convert.ChangeType(v, typeof(int)));
                             }
                             else if (v.GetType() == typeof(uint) ||
-                                     v.GetType() == typeof(long) ||
-                                     v.GetType() == typeof(ulong))
+                                     v.GetType() == typeof(long))
                             {
                                 writer.Write((long)Convert.ChangeType(v, typeof(long)));
                             }
