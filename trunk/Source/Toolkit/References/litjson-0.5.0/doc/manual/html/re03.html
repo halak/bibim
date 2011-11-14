@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>EndOfJson</title><link rel="stylesheet" href="ld-default.css" type="text/css" /><meta name="generator" content="DocBook XSL-NS Stylesheets V1.73.1" /><link rel="start" href="index.html" title="LitJSON Manual" /><link rel="up" href="ch03.html#T.LitJson.JsonReader" title="1.1. JsonReader" /><link rel="prev" href="re02.html" title="AllowSingleQuotedStrings" /><link rel="next" href="pt03.html" title="Part III. Appendices" /><link xmlns="" rel="stylesheet" href="ld-highlight.css" type="text/css" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">EndOfJson</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="re02.html">Prev</a> </td><th width="60%" align="center">1.1. JsonReader</th><td width="20%" align="right"> <a accesskey="n" href="pt03.html">Next</a></td></tr></table><hr /></div><div class="refentry" lang="en" xml:lang="en"><a id="P.LitJson.JsonReader.EndOfJson"></a><div class="titlepage"></div><div class="refnamediv"><h2>EndOfJson</h2><p>EndOfJson — 
+      Indicates whether the reader has reached the end of the input stream
+    </p></div><div class="refsection" lang="en" xml:lang="en"><a id="id2522083"></a><h2>Description</h2><code xmlns="" xmlns:ldf="http://lb.diptongonante.com/ns/litdoc/functions" class="fieldsynopsis"><span class="modifier">public </span><span class="type">bool </span><span class="varname">EndOfJson </span>{ get; }</code><p>
+      This property tells the user if the reader has reached the end of the
+      input.
+    </p><p>
+      Note that reading data from a <code class="classname"><a class="classname" href="ch03.html#T.LitJson.JsonReader" title="LitJson.JsonReader">JsonReader</a></code> can be
+      done in a loop checking the return value of the
+      <code class="methodname">JsonReader.Read()</code> method, in which case it's not necessary
+      to use this property.
+    </p></div><div class="refsection" lang="en" xml:lang="en"><a id="id2522127"></a><h2>Examples</h2><div class="example"><a id="id2522136"></a><p class="title"><b>Example 1.3. Checking the <code class="varname">EndOfJson</code> property</b></p><div class="example-contents"><div xmlns="" class="programlisting">
+<!-- Generator: GNU source-highlight 2.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span class="preproc">using</span><span class="normal"> LitJson</span><span class="symbol">;</span>
+
+<span class="keyword">class</span><span class="normal"> JsonSample</span>
+<span class="cbracket">{</span>
+<span class="normal">    </span><span class="type">void</span><span class="normal"> </span><span class="function">ReadJson </span><span class="symbol">(</span><span class="type">string</span><span class="normal"> json_data</span><span class="symbol">)</span>
+<span class="normal">    </span><span class="cbracket">{</span>
+<span class="normal">        JsonReader reader </span><span class="symbol">=</span><span class="normal"> </span><span class="keyword">new</span><span class="normal"> </span><span class="function">JsonReader </span><span class="symbol">(</span><span class="normal">json_data</span><span class="symbol">);</span>
+
+<span class="normal">        </span><span class="keyword">while</span><span class="normal"> </span><span class="symbol">(!</span><span class="normal"> reader</span><span class="symbol">.</span><span class="normal">EndOfJson</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">            reader</span><span class="symbol">.</span><span class="function">Read </span><span class="symbol">();</span>
+
+<span class="normal">            </span><span class="comment">// Do something here</span>
+<span class="normal">        </span><span class="cbracket">}</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+<span class="cbracket">}</span></tt></pre>
+</div></div></div><br class="example-break" /></div><div class="refsection" lang="en" xml:lang="en"><a id="id2522160"></a><h2>See Also</h2><table class="simplelist" border="0" summary="Simple list"><tr><td><code class="methodname">JsonReader.Read()</code></td></tr></table></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="re02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html#T.LitJson.JsonReader">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="pt03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">AllowSingleQuotedStrings </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Part III. Appendices</td></tr></table></div></body></html>

@@ -1,0 +1,863 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>LitJSON Manual</title><meta name="generator" content="DocBook XSL-NS Stylesheets V1.73.2" /></head><body><div class="book" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="manual"></a>LitJSON Manual</h1></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="firstname">Leonardo</span> <span class="surname">Boshell</span></h3><code class="email">&lt;<a class="email" href="mailto:leonardoboshell@users.sourceforge.net">leonardoboshell@users.sourceforge.net</a>&gt;</code></div></div></div><div><div class="legalnotice"><a id="id2244231"></a><p class="legalnotice-title"><b>Terms Of Use</b></p><p>
+        This manual is dedicated to the public domain. Anyone is free to
+        copy, modify, publish, use, or distribute the manual for any
+        purpose, commercial or non-commercial, and by any means. Have fun.
+      </p></div></div><div><p class="pubdate">2007-10-04</p></div></div><hr /></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="preface"><a href="#preface">Preface</a></span></dt><dt><span class="part"><a href="#quickstart">I. Quick Start</a></span></dt><dd><dl><dt><span class="chapter"><a href="#quickstart.mapping">1. Mapping JSON to objects and vice versa</a></span></dt><dt><span class="chapter"><a href="#quickstart.readerwriter">2. Readers and Writers</a></span></dt></dl></dd><dt><span class="part"><a href="#reference">II. API Reference</a></span></dt><dd><dl><dt><span class="chapter"><a href="#id2501123">3. </a></span></dt></dl></dd><dt><span class="part"><a href="#appendices">III. Appendices</a></span></dt><dd><dl><dt><span class="appendix"><a href="#appendix.parser">A. Parser Implementation</a></span></dt><dd><dl><dt><span class="section"><a href="#appendix.parser.lexer">Reading Tokens</a></span></dt><dd><dl><dt><span class="section"><a href="#appendix.parser.lexer.table">State Machine Table</a></span></dt></dl></dd><dt><span class="section"><a href="#appendix.parser.grammar">Grammar</a></span></dt><dd><dl><dt><span class="section"><a href="#appendix.parser.grammar.ll">LL(1) Form</a></span></dt><dt><span class="section"><a href="#appendix.parser.grammar.first">FIRST(X) sets</a></span></dt><dt><span class="section"><a href="#appendix.parser.grammar.follow">FOLLOW(X) sets</a></span></dt><dt><span class="section"><a href="#appendix.parser.grammar.table">Parse table</a></span></dt></dl></dd></dl></dd><dt><span class="appendix"><a href="#appendix.benchmarks">B. Performance Benchmarks</a></span></dt><dd><dl><dt><span class="section"><a href="#appendix.benchmarks.description">Description</a></span></dt><dd><dl><dt><span class="section"><a href="#id2509500">Figures Being Measured</a></span></dt><dt><span class="section"><a href="#id2509583">Software Being Measured</a></span></dt><dt><span class="section"><a href="#id2509650">Environment</a></span></dt></dl></dd><dt><span class="section"><a href="#appendix.benchmarks.results">Results</a></span></dt><dd><dl><dt><span class="section"><a href="#id2509737">Readers</a></span></dt><dt><span class="section"><a href="#id2509922">Writers</a></span></dt><dt><span class="section"><a href="#id2510090">Importing</a></span></dt><dt><span class="section"><a href="#id2510259">Exporting</a></span></dt></dl></dd></dl></dd></dl></dd></dl></div><div class="list-of-tables"><p><b>List of Tables</b></p><dl><dt>A.1. <a href="#id2501627">Lexer State Machine (part one)</a></dt><dt>A.2. <a href="#id2504054">Lexer State Machine (part two)</a></dt><dt>A.3. <a href="#id2508634">Grammar FIRST(X) sets</a></dt><dt>A.4. <a href="#id2508809">Grammar FOLLOW(X) sets</a></dt><dt>A.5. <a href="#id2508990">Parse Table</a></dt></dl></div><div class="list-of-examples"><p><b>List of Examples</b></p><dl><dt>1.1. <a href="#quickstart.mapping.examples.jsonmapper">Simple JsonMapper examples</a></dt><dt>1.2. <a href="#quickstart.mapping.examples.jsondata">Using the non-generic variant of JsonMapper.ToObject</a></dt><dt>2.1. <a href="#quickstart.readerwriter.examples.jsonreader">Using JsonReader</a></dt><dt>2.2. <a href="#quickstart.readerwriter.examples.jsonwriter">Using JsonWriter</a></dt></dl></div><div class="preface" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="preface"></a>Preface</h1></div><div><div class="abstract"><p class="title"><b>Abstract</b></p><p>
+          This is the manual of LitJSON, a library for the .Net framework,
+          which purpose is to handle data in the JSON format.
+        </p><p>
+          It covers version 0.5.0 of the library and at the
+          moment it includes a quick start section and some appendices
+          containing specific information about features of LitJSON, such as
+          the specific approach used in the parser component, and some notes
+          regarding performance as measured by a set of benchmarks.
+        </p><p>
+          Due to some problems in the generation of HTML output from the XML
+          sources, the complete API reference is not included yet, although
+          this shortcoming will likely be fixed in a future release. Until
+          that time, it is recommended that developers familiarise with the
+          API by reading the unit tests distributed with its sources.
+        </p></div></div></div></div><p>
+      JSON is a simple, yet powerful notation to specify data. It defines
+      simple scalar types such as boolean, number (integers and reals) and
+      string, and a couple of data structures: arrays (lists) and objects
+      (dictionaries). For more information on the JSON format, visit <a class="link" href="http://www.json.org/">JSON.org</a>.
+    </p><p>
+      LitJSON is written in C#, and it's intended to be small, fast and easy
+      to use. It was developed on a GNU/Linux environment, using the <a class="link" href="http://www.mono-project.com/">Mono</a> framework.
+    </p></div><div class="part" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="quickstart"></a>Part I. Quick Start</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#quickstart.mapping">1. Mapping JSON to objects and vice versa</a></span></dt><dt><span class="chapter"><a href="#quickstart.readerwriter">2. Readers and Writers</a></span></dt></dl></div><div class="chapter" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="quickstart.mapping"></a>Chapter 1. Mapping JSON to objects and vice versa</h2></div></div></div><p>
+      In order to consume data in JSON format inside .Net programs, the
+      natural approach that comes to mind is to use JSON text to populate a
+      new instance of a particular class; either a custom one, built to
+      match the structure of the input JSON text, or a more general one
+      which acts as a dictionary.
+    </p><p>
+      Conversely, in order to build new JSON strings from data stored in
+      objects, a simple <span class="emphasis"><em>export</em></span>-like operation sounds
+      like a good idea.
+    </p><p>
+      For this purpose, LitJSON includes the <code class="classname">JsonMapper</code> class, which provides two main methods
+      used to do JSON-to-object and object-to-JSON conversions. These
+      methods are <code class="methodname">ToObject</code> and
+      <code class="methodname">ToJson</code>.
+    </p><div class="example"><a id="quickstart.mapping.examples.jsonmapper"></a><p class="title"><b>Example 1.1. Simple JsonMapper examples</b></p><div class="example-contents"><p>
+        As the example shows, the method
+        <code class="methodname">JsonMapper.ToObject</code> has a generic variant
+        that is used to specify the type of the object to be returned.
+      </p><pre class="programlisting">
+
+using LitJson;
+using System;
+
+public class Person
+{
+    // Person members are defined here ...
+}
+
+public class JsonSample
+{
+    public static void Main ()
+    {
+        PersonToJson ();
+        JsonToPerson ();
+    }
+
+    public static void PersonToJson ()
+    {
+        Person bill = new Person ();
+
+        bill.Name = "William Shakespeare";
+        bill.Age  = 51;
+        bill.Birthday = new DateTime (1564, 4, 26);
+
+        string json_bill = JsonMapper.ToJson (bill);
+
+        Console.WriteLine (json_bill);
+        // {"Name":"William Shakespeare","Age":51,"Birthday":"04/26/1564 00:00:00"}
+    }
+
+    public static void JsonToPerson ()
+    {
+        string json = @"
+            {
+                ""Name""     : ""Thomas More"",
+                ""Age""      : 57,
+                ""Birthday"" : ""02/07/1478 00:00:00""
+            }";
+
+        Person thomas = JsonMapper.ToObject&lt;Person&gt; (json);
+
+        Console.WriteLine ("Thomas' age: {0}", thomas.Age);
+        // Thomas' age: 57
+    }
+}
+
+      </pre></div></div><br class="example-break" /><p>
+      When JSON data is to be read and a custom class that matches a
+      particular data structure is not available or desired, users can use
+      the non-generic variant of <code class="methodname">ToObject</code>, which
+      returns a <code class="classname">JsonData</code> instance.
+      <code class="classname">JsonData</code> is a general purpose type that can
+      hold any of the data types supported by JSON, including lists and
+      dictionaries.
+    </p><div class="example"><a id="quickstart.mapping.examples.jsondata"></a><p class="title"><b>Example 1.2. Using the non-generic variant of JsonMapper.ToObject</b></p><div class="example-contents"><pre class="programlisting">
+
+using LitJson;
+using System;
+
+public class JsonSample
+{
+    public void LoadAlbumData (string json_text)
+    {
+        JsonData data = JsonMapper.ToObject (json_text);
+
+        // Dictionaries are accessed like a hash-table
+        Console.WriteLine ("Album's name: {0}", data["album"]["name"]);
+
+        // Scalar elements stored in a JsonData instance can be cast to
+        // their natural types
+        string artist = (string) data["album"]["artist"];
+        int    year   = (int) data["album"]["year"];
+
+        // Arrays are accessed like regular lists as well
+        Console.WriteLine ("First track: {0}", data["album"]["tracks"][0]);
+    }
+}
+
+      </pre></div></div><br class="example-break" /></div><div class="chapter" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="quickstart.readerwriter"></a>Chapter 2. Readers and Writers</h2></div></div></div><p>
+      An alternative interface to handling JSON data that might be familiar
+      to some developers is through classes that make it possible to read
+      and write data in a stream-like fashion. These classes are <code class="classname">JsonReader</code> and <code class="classname">JsonWriter</code>.
+    </p><p>
+      These two types are in fact the foundation of this library, and the
+      <code class="classname">JsonMapper</code> type is built on top of them, so in
+      a way, the developer can think of the reader and writer classes as the
+      low-level programming interface for LitJSON.
+    </p><div class="example"><a id="quickstart.readerwriter.examples.jsonreader"></a><p class="title"><b>Example 2.1. Using JsonReader</b></p><div class="example-contents"><pre class="programlisting">
+
+using LitJson;
+using System;
+
+public class DataReader
+{
+    public static void Main ()
+    {
+        string sample = @"{
+            ""name""  : ""Bill"",
+            ""age""   : 32,
+            ""awake"" : true,
+            ""n""     : 1994.0226,
+            ""note""  : [ ""life"", ""is"", ""but"", ""a"", ""dream"" ]
+          }";
+
+        ReadJson (sample);
+    }
+
+    public static void ReadJson (string json)
+    {
+        JsonReader reader = new JsonReader (json);
+
+        Console.WriteLine ("{0,14} {1,10} {2,16}", "Token", "Value", "Type");
+        Console.WriteLine (new String ('-', 42));
+
+        // The Read() method returns false when there's nothing else to read
+        while (reader.Read ()) {
+            string type = reader.Value != null ?
+                reader.Value.GetType ().ToString () : "";
+
+            Console.WriteLine ("{0,14} {1,10} {2,16}",
+                               reader.Token, reader.Value, type);
+        }
+    }
+}
+
+      </pre><p>
+        This example would produce the following output:
+      </p><pre class="screen">
+
+         Token      Value             Type
+------------------------------------------
+   ObjectStart                            
+  PropertyName       name    System.String
+        String       Bill    System.String
+  PropertyName        age    System.String
+           Int         32     System.Int32
+  PropertyName      awake    System.String
+       Boolean       True   System.Boolean
+  PropertyName          n    System.String
+        Double  1994.0226    System.Double
+  PropertyName       note    System.String
+    ArrayStart                            
+        String       life    System.String
+        String         is    System.String
+        String        but    System.String
+        String          a    System.String
+        String      dream    System.String
+      ArrayEnd                            
+     ObjectEnd                            
+
+      </pre></div></div><br class="example-break" /><div class="example"><a id="quickstart.readerwriter.examples.jsonwriter"></a><p class="title"><b>Example 2.2. Using JsonWriter</b></p><div class="example-contents"><pre class="programlisting">
+
+using LitJson;
+using System;
+using System.Text;
+
+public class DataReader
+{
+    public static void WriteJson ()
+    {
+        StringBuilder sb = new StringBuilder ();
+        JsonWriter writer = new JsonWriter (sb);
+
+        writer.WriteArrayStart ();
+        writer.Write (1);
+        writer.Write (2);
+        writer.Write (3);
+
+        writer.WriteObjectStart ();
+        writer.WritePropertyName ("color");
+        writer.Write ("blue");
+        writer.WriteObjectEnd ();
+
+        writer.WriteArrayEnd ();
+
+        Console.WriteLine (sb.ToString ());
+        // [1,2,3,{"color":"blue"}]
+    }
+}
+
+      </pre></div></div><br class="example-break" /></div></div><div class="part" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="reference"></a>Part II. API Reference</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#id2501123">3. </a></span></dt></dl></div><div class="chapter" lang="en" xml:lang="en"><div class="titlepage"></div><p>
+      To be added.
+    </p></div></div><div class="part" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="appendices"></a>Part III. Appendices</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="appendix"><a href="#appendix.parser">A. Parser Implementation</a></span></dt><dd><dl><dt><span class="section"><a href="#appendix.parser.lexer">Reading Tokens</a></span></dt><dd><dl><dt><span class="section"><a href="#appendix.parser.lexer.table">State Machine Table</a></span></dt></dl></dd><dt><span class="section"><a href="#appendix.parser.grammar">Grammar</a></span></dt><dd><dl><dt><span class="section"><a href="#appendix.parser.grammar.ll">LL(1) Form</a></span></dt><dt><span class="section"><a href="#appendix.parser.grammar.first">FIRST(X) sets</a></span></dt><dt><span class="section"><a href="#appendix.parser.grammar.follow">FOLLOW(X) sets</a></span></dt><dt><span class="section"><a href="#appendix.parser.grammar.table">Parse table</a></span></dt></dl></dd></dl></dd><dt><span class="appendix"><a href="#appendix.benchmarks">B. Performance Benchmarks</a></span></dt><dd><dl><dt><span class="section"><a href="#appendix.benchmarks.description">Description</a></span></dt><dd><dl><dt><span class="section"><a href="#id2509500">Figures Being Measured</a></span></dt><dt><span class="section"><a href="#id2509583">Software Being Measured</a></span></dt><dt><span class="section"><a href="#id2509650">Environment</a></span></dt></dl></dd><dt><span class="section"><a href="#appendix.benchmarks.results">Results</a></span></dt><dd><dl><dt><span class="section"><a href="#id2509737">Readers</a></span></dt><dt><span class="section"><a href="#id2509922">Writers</a></span></dt><dt><span class="section"><a href="#id2510090">Importing</a></span></dt><dt><span class="section"><a href="#id2510259">Exporting</a></span></dt></dl></dd></dl></dd></dl></div><div class="appendix" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="appendix.parser"></a>Parser Implementation</h1></div><div><div class="abstract"><p class="title"><b>Abstract</b></p><p>
+        LitJSON was built out of a specific need for a small JSON library
+        for the .Net framework, but also a big motivation was simply the fun
+        of learning a little bit about parsing techniques and put some of
+        that information into action writing a parser for the JSON grammar,
+        which is not very complicated.
+      </p><p>
+        This appendix includes some specific details about the approach used
+        by the parser. This section should clarify some of the internal
+        details of this library's source code.
+      </p></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#appendix.parser.lexer">Reading Tokens</a></span></dt><dd><dl><dt><span class="section"><a href="#appendix.parser.lexer.table">State Machine Table</a></span></dt></dl></dd><dt><span class="section"><a href="#appendix.parser.grammar">Grammar</a></span></dt><dd><dl><dt><span class="section"><a href="#appendix.parser.grammar.ll">LL(1) Form</a></span></dt><dt><span class="section"><a href="#appendix.parser.grammar.first">FIRST(X) sets</a></span></dt><dt><span class="section"><a href="#appendix.parser.grammar.follow">FOLLOW(X) sets</a></span></dt><dt><span class="section"><a href="#appendix.parser.grammar.table">Parse table</a></span></dt></dl></dd></dl></div><p>
+    The parser in this library is based on a couple of elements: a finite
+    state machine used to recognize tokens, and a pushdown automaton that
+    recognizes the grammar of JSON text.
+  </p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="appendix.parser.lexer"></a>Reading Tokens</h2></div></div></div><p>
+      A finite state machine recognizes tokens from the input text, in
+      effect acting as a lexer. It's composed of 28 states, listed below:
+      </p><div class="orderedlist"><ol type="1"><li>Default</li><li>Number1</li><li>Number2</li><li>Number3</li><li>Number4</li><li>Number5</li><li>Number6</li><li>Number7</li><li>True1</li><li>True2</li><li>True3</li><li>False1</li><li>False2</li><li>False3</li><li>False4</li><li>Null1</li><li>Null2</li><li>Null3</li><li>String1</li><li>String2</li><li>EscChar1</li><li>EscChar2</li><li>SingleQuotedString1</li><li>SingleQuotedString2</li><li>Comment</li><li>SingleLineComment</li><li>MultiLineComment1</li><li>MultiLineComment2</li></ol></div><p>
+    </p><p>
+      As you may notice, the lexer is designed to read more than just the
+      strict JSON grammar as defined in <a class="link" href="http://www.ietf.org/rfc/rfc4627.txt?number=4627">RFC
+      4627</a>. It may also allow comments (the forms
+      <code class="literal">//comment</code> and <code class="literal">/*comment*/</code> are
+      supported) and single-quoted strings. The library allows the developer
+      to configure whether this extensions are accepted or not. They are
+      allowed by default.
+    </p><p>
+      A simple table lists which state to go to next depending on the
+      current state and the current input character.
+    </p><p>
+      Now, the actual handling of the states can do a little more than just
+      setting the next state. The following flags are used to indicate
+      special information related to the actions in a state:
+    </p><div class="variablelist"><dl><dt><span class="term">A</span></dt><dd><p>
+            Add char to buffer. A string buffer is kept and returned in
+            certain states along with the token ID. For example, when
+            reading a number, the entire sequence of characters
+            corresponding to the number are returned as a string, along with
+            the NUMBER token.
+          </p></dd><dt><span class="term">C</span></dt><dd><p>
+            Only accept this state if the lexer is configured to allow
+            comments.
+          </p></dd><dt><span class="term">E</span></dt><dd><p>
+            Add the unescaped character to the buffer.
+          </p></dd><dt><span class="term">L</span></dt><dd><p>
+            Leave character unconsumed. This leaves the current input
+            character untouched so it is used in the next lexer cycle.
+          </p></dd><dt><span class="term">R</span></dt><dd><p>
+            Return. This means that a token has been recognized, so the
+            corresponding ID should be returned. If the string buffer is not
+            empty, it should be returned as well, and then the buffer
+            cleared.
+          </p></dd><dt><span class="term">SQ</span></dt><dd><p>
+            Only accept this state if the lexer is configured to allow
+            string literals enclosed with single-quotes.
+          </p></dd><dt><span class="term">SS</span></dt><dd><p>
+            Stack State. When used as a flag, it indicates that the current
+            state number should be put in a stack. When used as a state
+            value, it means that the next state to go to is the one in the
+            stack.
+          </p></dd><dt><span class="term">U</span></dt><dd><p>
+            Unicode escaping sequence. In this state, exactly 4 hex
+            characters should be read and, at the end, the corresponding
+            unicode character is added to the string buffer and the machine
+            continues.
+          </p></dd></dl></div><p>
+      One last thing to notice: the <span class="token">Char</span> token means that the
+      literal input character is returned as a token, except when it's a
+      single quote (<code class="literal">'</code>), in which case the double quote
+      (<code class="literal">"</code>) is returned. This is just to simplify things a
+      little bit for the grammar parser.
+    </p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="appendix.parser.lexer.table"></a>State Machine Table</h3></div></div></div><div class="table"><a id="id2501627"></a><p class="title"><b>Table A.1. Lexer State Machine (part one)</b></p><div class="table-contents"><table summary="Lexer State Machine (part one)" border="1"><colgroup><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /></colgroup><thead><tr><th align="right">Input</th><th align="right">State 1</th><th align="right">2</th><th align="right">3</th><th align="right">4</th><th align="right">5</th><th align="right">6</th><th align="right">7</th><th align="right">8</th><th align="right">9</th><th align="right">10</th><th align="right">11</th><th align="right">12</th><th align="right">13</th><th align="right">14</th><th align="right">15</th></tr></thead><tfoot><tr><th align="right">Token</th><th align="right"><span class="token">Char</span></th><th align="right"> </th><th align="right"><span class="token">NUMBER</span></th><th align="right"><span class="token">NUMBER</span></th><th align="right"> </th><th align="right"><span class="token">NUMBER</span></th><th align="right"> </th><th align="right"><span class="token">NUMBER</span></th><th align="right"> </th><th align="right"> </th><th align="right"><span class="token">TRUE</span></th><th align="right"> </th><th align="right"> </th><th align="right"> </th><th align="right"><span class="token">FALSE</span></th></tr></tfoot><tbody><tr><td align="right"><code class="literal">space</code></td><td align="right">1</td><td align="right"> </td><td align="right"><code class="literal">[R]</code> 1</td><td align="right"><code class="literal">[R]</code> 1</td><td align="right"> </td><td align="right"><code class="literal">[R]</code> 1</td><td align="right"> </td><td align="right"><code class="literal">[R]</code> 1</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">"</code></td><td align="right"><code class="literal">[R]</code> 19</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">'</code></td><td align="right"><code class="literal">[SQ][R]</code> 23</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">+</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 8</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">[,\]}]</code></td><td align="right"><code class="literal">[R]</code> 1</td><td align="right"> </td><td align="right"><code class="literal">[L][R]</code> 1</td><td align="right"><code class="literal">[L][R]</code> 1</td><td align="right"> </td><td align="right"><code class="literal">[L][R]</code> 1</td><td align="right"> </td><td align="right"><code class="literal">[L][R]</code> 1</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">-</code></td><td align="right"><code class="literal">[A]</code> 2</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 8</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">.</code></td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 5</td><td align="right"><code class="literal">[A]</code> 5</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">/</code></td><td align="right"><code class="literal">[C]</code> 25</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">0</code></td><td align="right"><code class="literal">[A]</code> 4</td><td align="right"><code class="literal">[A]</code> 4</td><td align="right"><code class="literal">[A]</code> 3</td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 6</td><td align="right"><code class="literal">[A]</code> 6</td><td align="right"><code class="literal">[A]</code> 8</td><td align="right"><code class="literal">[A]</code> 8</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">[1-9]</code></td><td align="right"><code class="literal">[A]</code> 3</td><td align="right"><code class="literal">[A]</code> 3</td><td align="right"><code class="literal">[A]</code> 3</td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 6</td><td align="right"><code class="literal">[A]</code> 6</td><td align="right"><code class="literal">[A]</code> 8</td><td align="right"><code class="literal">[A]</code> 8</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">:</code></td><td align="right"><code class="literal">[R]</code> 1</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">E</code></td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 7</td><td align="right"><code class="literal">[A]</code> 7</td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 7</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">[\[{]</code></td><td align="right"><code class="literal">[R]</code> 1</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">a</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right">13</td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">e</code></td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 7</td><td align="right"><code class="literal">[A]</code> 7</td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 7</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[R]</code> 1</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[R]</code> 1</td></tr><tr><td align="right"><code class="literal">f</code></td><td align="right">12</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">l</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right">14</td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">n</code></td><td align="right">16</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">r</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right">10</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">s</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right">15</td><td align="right"> </td></tr><tr><td align="right"><code class="literal">t</code></td><td align="right">9</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">u</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right">11</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr></tbody></table></div></div><br class="table-break" /><div class="table"><a id="id2504054"></a><p class="title"><b>Table A.2. Lexer State Machine (part two)</b></p><div class="table-contents"><table summary="Lexer State Machine (part two)" border="1"><colgroup><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /></colgroup><thead><tr><th align="right">Input</th><th align="right">State 16</th><th align="right">17</th><th align="right">18</th><th align="right">19</th><th align="right">20</th><th align="right">21</th><th align="right">22</th><th align="right">23</th><th align="right">24</th><th align="right">25</th><th align="right">26</th><th align="right">27</th><th align="right">28</th></tr></thead><tfoot><tr><th align="right">Token</th><th align="right"> </th><th align="right"> </th><th align="right"><span class="token">NULL</span></th><th align="right"><span class="token">CHARSEQ</span></th><th align="right"><span class="token">Char</span></th><th align="right"> </th><th align="right"> </th><th align="right"><span class="token">CHARSEQ</span></th><th align="right"><span class="token">Char</span></th><th align="right"> </th><th align="right"> </th><th align="right"> </th><th align="right"> </th></tr></tfoot><tbody><tr><td align="right"><code class="literal">\n</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right">1</td><td align="right">27</td><td align="right">27</td></tr><tr><td align="right"><code class="literal">"</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[L][R]</code> 20</td><td align="right"><code class="literal">[R]</code> 1</td><td align="right"><code class="literal">[E]</code> SS</td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 23</td><td align="right"> </td><td align="right"> </td><td align="right">26</td><td align="right">27</td><td align="right">27</td></tr><tr><td align="right"><code class="literal">'</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 19</td><td align="right"> </td><td align="right"><code class="literal">[E]</code> SS</td><td align="right"> </td><td align="right"><code class="literal">[L][R]</code> 24</td><td align="right"><code class="literal">[R]</code> 1</td><td align="right"> </td><td align="right">26</td><td align="right">27</td><td align="right">27</td></tr><tr><td align="right"><code class="literal">*</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right">27</td><td align="right">26</td><td align="right">28</td><td align="right">28</td></tr><tr><td align="right"><code class="literal">/</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 19</td><td align="right"> </td><td align="right"><code class="literal">[E]</code> SS</td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 23</td><td align="right"> </td><td align="right">26</td><td align="right">26</td><td align="right">27</td><td align="right">1</td></tr><tr><td align="right"><code class="literal">[0-9A-Facde]</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 19</td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[U]</code> SS</td><td align="right"><code class="literal">[A]</code> 23</td><td align="right"> </td><td align="right"> </td><td align="right">26</td><td align="right">27</td><td align="right">27</td></tr><tr><td align="right"><code class="literal">\</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[SS]</code> 21</td><td align="right"> </td><td align="right"><code class="literal">[E]</code> SS</td><td align="right"> </td><td align="right"><code class="literal">[SS]</code> 21</td><td align="right"> </td><td align="right"> </td><td align="right">26</td><td align="right">27</td><td align="right">27</td></tr><tr><td align="right"><code class="literal">[bf]</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 19</td><td align="right"> </td><td align="right"><code class="literal">[E]</code> SS</td><td align="right"><code class="literal">[U]</code> SS</td><td align="right"><code class="literal">[A]</code> 23</td><td align="right"> </td><td align="right"> </td><td align="right">26</td><td align="right">27</td><td align="right">27</td></tr><tr><td align="right"><code class="literal">l</code></td><td align="right"> </td><td align="right">18</td><td align="right"><code class="literal">[R]</code> 1</td><td align="right"><code class="literal">[A]</code> 19</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 23</td><td align="right"> </td><td align="right"> </td><td align="right">26</td><td align="right">27</td><td align="right">27</td></tr><tr><td align="right"><code class="literal">[nrt]</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 19</td><td align="right"> </td><td align="right"><code class="literal">[E]</code> SS</td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 23</td><td align="right"> </td><td align="right"> </td><td align="right">26</td><td align="right">27</td><td align="right">27</td></tr><tr><td align="right"><code class="literal">u</code></td><td align="right">17</td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 19</td><td align="right"> </td><td align="right">22</td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 23</td><td align="right"> </td><td align="right"> </td><td align="right">26</td><td align="right">27</td><td align="right">27</td></tr><tr><td align="right"><code class="literal">other</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 19</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">[A]</code> 23</td><td align="right"> </td><td align="right"> </td><td align="right">26</td><td align="right">27</td><td align="right">27</td></tr></tbody></table></div></div><br class="table-break" /></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="appendix.parser.grammar"></a>Grammar</h2></div></div></div><p>
+      Since the lexer handles most of the hairy stuff (returning it as
+      terminals), the resulting grammar deals mainly with the recursive
+      portions.
+    </p><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="appendix.parser.grammar.ll"></a>LL(1) Form</h3></div></div></div><pre class="literallayout">
+Text<sub>S</sub> -&gt; Object
+         | Array
+
+Object  -&gt; { Object'
+Object' -&gt; }
+         | Pair PairRest }
+
+PairRest -&gt; ε
+          | , Pair PairRest
+Pair     -&gt; String : Value
+
+Array     -&gt; [ Array'
+Array'    -&gt; ]
+           | Value ValueRest ]
+ValueRest -&gt; ε
+           | , Value ValueRest
+
+Value -&gt; String
+       | Object
+       | Array
+       | NUMBER
+       | TRUE
+       | FALSE
+       | NULL
+
+String -&gt; " CHARSEQ "
+      </pre></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="appendix.parser.grammar.first"></a>FIRST(X) sets</h3></div></div></div><div class="table"><a id="id2508634"></a><p class="title"><b>Table A.3. Grammar FIRST(X) sets</b></p><div class="table-contents"><table summary="Grammar FIRST(X) sets" border="1"><colgroup><col /><col /></colgroup><thead><tr><th>Rule</th><th>FIRST set</th></tr></thead><tbody><tr><td>Array</td><td><code class="literal">[</code></td></tr><tr><td>Array'</td><td><code class="literal">] " { [ NUMBER TRUE FALSE NULL</code></td></tr><tr><td>Object</td><td><code class="literal">{</code></td></tr><tr><td>Object'</td><td><code class="literal">} "</code></td></tr><tr><td>Pair</td><td><code class="literal">"</code></td></tr><tr><td>PairRest</td><td><code class="literal">ε ,</code></td></tr><tr><td>String</td><td><code class="literal">"</code></td></tr><tr><td>Text</td><td><code class="literal">{ [</code></td></tr><tr><td>Value</td><td><code class="literal">" { [ NUMBER TRUE FALSE NULL</code></td></tr><tr><td>ValueRest</td><td><code class="literal">ε ,</code></td></tr></tbody></table></div></div><br class="table-break" /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="appendix.parser.grammar.follow"></a>FOLLOW(X) sets</h3></div></div></div><p>
+        Note: <code class="literal">$</code> is the end of input marker
+      </p><div class="table"><a id="id2508809"></a><p class="title"><b>Table A.4. Grammar FOLLOW(X) sets</b></p><div class="table-contents"><table summary="Grammar FOLLOW(X) sets" border="1"><colgroup><col /><col /></colgroup><thead><tr><th>Rule</th><th>FOLLOW set</th></tr></thead><tbody><tr><td>Array</td><td><code class="literal">$ , ] }</code></td></tr><tr><td>Array'</td><td><code class="literal">$</code></td></tr><tr><td>CharList</td><td><code class="literal">"</code></td></tr><tr><td>Object</td><td><code class="literal">$ , ] }</code></td></tr><tr><td>Object'</td><td><code class="literal">$</code></td></tr><tr><td>Pair</td><td><code class="literal">, }</code></td></tr><tr><td>PairRest</td><td><code class="literal">}</code></td></tr><tr><td>String</td><td><code class="literal">: , ] }</code></td></tr><tr><td>Text</td><td><code class="literal">$</code></td></tr><tr><td>Value</td><td><code class="literal">, ] }</code></td></tr><tr><td>ValueRest</td><td><code class="literal">]</code></td></tr></tbody></table></div></div><br class="table-break" /></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="appendix.parser.grammar.table"></a>Parse table</h3></div></div></div><div class="table"><a id="id2508990"></a><p class="title"><b>Table A.5. Parse Table</b></p><div class="table-contents"><table summary="Parse Table" border="1"><colgroup><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /><col /></colgroup><thead><tr><th align="right">Input Token</th><th align="right">Array</th><th align="right">Array'</th><th align="right">Object</th><th align="right">Object'</th><th align="right">Pair</th><th align="right">PairRest</th><th align="right">String</th><th align="right">Text</th><th align="right">Value</th><th align="right">ValueRest</th></tr></thead><tbody><tr><td align="right"><code class="literal">"</code></td><td align="right"> </td><td align="right">Value ValueRest <code class="literal">]</code></td><td align="right"> </td><td align="right">Pair PairRest <code class="literal">}</code></td><td align="right">String <code class="literal">:</code> Value</td><td align="right"> </td><td align="right"><code class="literal">" CHARSEQ "</code></td><td align="right"> </td><td align="right">String</td><td align="right"> </td></tr><tr><td align="right"><code class="literal">,</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">,</code> Pair PairRest</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">,</code> Value ValueRest</td></tr><tr><td align="right"><code class="literal">[</code></td><td align="right"><code class="literal">[</code> Array'</td><td align="right">Value ValueRest <code class="literal">]</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right">Array</td><td align="right">Array</td><td align="right"> </td></tr><tr><td align="right"><code class="literal">]</code></td><td align="right"> </td><td align="right"><code class="literal">]</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right">ε</td></tr><tr><td align="right"><code class="literal">{</code></td><td align="right"> </td><td align="right">Value ValueRest <code class="literal">]</code></td><td align="right"><code class="literal">{</code> Object'</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right">Object</td><td align="right">Object</td><td align="right"> </td></tr><tr><td align="right"><code class="literal">}</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">}</code></td><td align="right"> </td><td align="right">ε</td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td></tr><tr><td align="right"><code class="literal">NUMBER</code></td><td align="right"> </td><td align="right">Value ValueRest <code class="literal">]</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">NUMBER</code></td><td align="right"> </td></tr><tr><td align="right"><code class="literal">TRUE</code></td><td align="right"> </td><td align="right">Value ValueRest <code class="literal">]</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">TRUE</code></td><td align="right"> </td></tr><tr><td align="right"><code class="literal">FALSE</code></td><td align="right"> </td><td align="right">Value ValueRest <code class="literal">]</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">FALSE</code></td><td align="right"> </td></tr><tr><td align="right"><code class="literal">NULL</code></td><td align="right"> </td><td align="right">Value ValueRest <code class="literal">]</code></td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"> </td><td align="right"><code class="literal">NULL</code></td><td align="right"> </td></tr></tbody></table></div></div><br class="table-break" /></div></div></div><div class="appendix" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="appendix.benchmarks"></a>Performance Benchmarks</h1></div><div><div class="abstract"><p class="title"><b>Abstract</b></p><p>
+        One of the main design goals of LitJSON is to be a small and fast
+        library.
+      </p><p>
+        This doesn't mean that it should perform every operation as fast as
+        possible down to the last nano-second (which would be a pointless
+        exercise anyway). However, a set of simple benchmarks to keep track
+        of its performance as the library grows, and to compare it against
+        other JSON libraries for .Net does serve a useful purpose. In simple
+        terms, a set of benchmarks has been created to make sure LitJSON's
+        performance doesn't suck.
+      </p></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#appendix.benchmarks.description">Description</a></span></dt><dd><dl><dt><span class="section"><a href="#id2509500">Figures Being Measured</a></span></dt><dt><span class="section"><a href="#id2509583">Software Being Measured</a></span></dt><dt><span class="section"><a href="#id2509650">Environment</a></span></dt></dl></dd><dt><span class="section"><a href="#appendix.benchmarks.results">Results</a></span></dt><dd><dl><dt><span class="section"><a href="#id2509737">Readers</a></span></dt><dt><span class="section"><a href="#id2509922">Writers</a></span></dt><dt><span class="section"><a href="#id2510090">Importing</a></span></dt><dt><span class="section"><a href="#id2510259">Exporting</a></span></dt></dl></dd></dl></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="appendix.benchmarks.description"></a>Description</h2></div></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2509500"></a>Figures Being Measured</h3></div></div></div><p>
+        In an attempt to keep the benchmarks useful and organised, different
+        binaries are created, each one with its own set of micro-benchmarks
+        measuring different features of the libraries.
+      </p><p>
+        The benchmarks are split in 4 main categories:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            Readers.
+          </p></li><li><p>
+            Writers.
+          </p></li><li><p>
+            Importing data into objects.
+          </p></li><li><p>
+            Exporting data from objects.
+          </p></li></ul></div><p>
+        Aditionally, information about heap memory used is gathered using
+        <a class="link" href="http://www.mono-project.com/HeapBuddy">heap-buddy</a>.
+      </p><p>
+        The complete source code of the benchmarks can be found under the
+        <code class="filename">benchmarks</code> directory included
+        in the library's source tree. More information about this code is
+        included in the <code class="filename">README</code> file under that
+        directory.
+      </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2509583"></a>Software Being Measured</h3></div></div></div><p>
+        The benchmarks included test related capabilities of the following
+        .Net libraries:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            <a class="link" href="http://jayrock.berlios.de/">Jayrock</a> version 0.9.8316.
+          </p></li><li><p>
+            <a class="link" href="http://litjson.sourceforge.net/">LitJSON</a> version 0.3.0.
+          </p></li><li><p>
+            <a class="link" href="http://www.newtonsoft.com/products/json/">Newtonsoft Json.NET</a>
+            version 1.1.
+          </p></li></ul></div><p>
+        Much gratitude goes out to the developers of Jayrock and Json.NET
+        for their excellent work, and, needless to say, LitJSON wouldn't be
+        what it is now without them.
+      </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2509650"></a>Environment</h3></div></div></div><p>
+        It is important to notice that, although benchmarks like these can
+        show trends in performance and help the developers notice when
+        something goes notably wrong, in general they are not meant to
+        produce conclusive results in general.
+      </p><p>
+        For this reason, every number presented here is a relative figure,
+        that depends on a number of variables (hardware, operating system,
+        runtime, system load, etc.) Also notice that different libraries may
+        have been designed with different purposes in mind, so benchmark
+        suites that only focus on a common subset of functionality, like
+        this one, don't present the full picture to the potential developer
+        that is deciding whether to use a given tool or not.
+      </p><p>
+        These benchmarks have been run while trying to keep the environment
+        as consistent as possible. The machine used is an old Pentium III,
+        running Linux 2.6.19. The binaries are executed using Mono 1.2.4.
+      </p></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="appendix.benchmarks.results"></a>Results</h2></div><div><div class="abstract"><p class="title"><b>Abstract</b></p><p>
+          The results below are presented in the form
+          </p><pre class="literallayout">
+Benchmarking type <em class="replaceable"><code>TYPE</code></em>
+  <em class="replaceable"><code>TEST</code></em> <em class="replaceable"><code>TIME</code></em>
+          </pre><p>
+          where <em class="replaceable"><code>TEST</code></em> is the name of the specific
+          micro-benchmark, and <em class="replaceable"><code>TIME</code></em> is the amount
+          of time spent  running the benchmark a constant number of times.
+          The number of iterations used was 10000.
+        </p></div></div></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2509737"></a>Readers</h3></div></div></div><p>
+        The benchmarks implemented are:
+      </p><div class="variablelist"><dl><dt><span class="term">ReaderNumbers</span></dt><dd><p>
+              Using a reader class (<code class="classname">JsonTextReader</code> in
+              Jayrock, <code class="classname">JsonReader</code> in LitJSON and
+              Json.NET), read the following input:
+              </p><pre class="literallayout">
+
+[
+    42,
+    1,
+    1,
+    2,
+    3,
+    5,
+    8,
+    -50,
+    -678.56,
+    3.1415,
+    1.4e10,
+    4.0e5,
+    8.0e-3
+]
+
+              </pre><p>
+            </p></dd><dt><span class="term">ReaderStrings</span></dt><dd><p>
+              Using a reader class, the following input is read:
+              </p><pre class="literallayout">
+
+[
+    "Hello World!",
+    "The quick brown fox jumps over the lazy dog",
+    "Lorem ipsum dolor sit amet, consectetur adipisicing elit",  // .. more text
+    "$%&amp;'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^"
+]
+
+              </pre><p>
+            </p></dd><dt><span class="term">ReaderFirstProperty</span></dt><dd><p>
+              Given the following input:
+              </p><pre class="literallayout">
+{
+    "Image": {
+        "FirstProperty": true,
+        "Width":  800,
+        "Height": 600,
+        "Title":  "View from 15th Floor",
+        "Comment": "Sample text:\t\"abcdef\"\nSecond Line",
+        "Comment2": "\u03c0\u03c1\u03cc\u03b3\u03c1\u03b1\u03bc\u03bc\u03b1",
+        "Default": true,
+        "Active": false,
+        "Resource": null,
+        "Thumbnail": {
+            "Url":    "http://www.example.com/image/481989943",
+            "Height": 125,
+            "Width":  "100" },
+        "IDs": [ 116, 943, 234, 38793 ],
+        "Score": 9.40,
+        "Scale": 1.0e-1,
+        "Views": 3000000000,
+        "LastProperty": true
+    }
+}
+              </pre><p>
+              A reader is created and tokens are read until the
+              <code class="literal">"FirstProperty"</code> element is found.
+            </p></dd><dt><span class="term">ReaderLastProperty</span></dt><dd><p>
+              Given the same input as the last benchmark, a reader is
+              created and tokens are read until
+              <code class="literal">"LastProperty"</code> is found.
+            </p></dd></dl></div><p>
+        The results:
+      </p><pre class="screen">
+
+Benchmarking type BenchmarkJayrock
+  JayrockReaderNumbers 00:00:01.9310770
+  JayrockReaderStrings 00:00:01.7263010
+  JayrockReaderFirstProperty 00:00:00.5530070
+  JayrockReaderLastProperty 00:00:04.2311710
+
+Benchmarking type BenchmarkLitJson
+  LitJsonReaderNumbers 00:00:01.4522950
+  LitJsonReaderStrings 00:00:01.7806950
+  LitJsonReaderFirstProperty 00:00:00.3135730
+  LitJsonReaderLastProperty 00:00:03.4958360
+
+Benchmarking type BenchmarkNewtonsoft
+  NewtonsoftReaderNumbers 00:00:02.6169990
+  NewtonsoftReaderStrings 00:00:02.3476750
+  NewtonsoftReaderFirstProperty 00:00:01.1853270
+  NewtonsoftReaderLastProperty 00:00:03.5655060
+
+      </pre><p>
+        Heap memory usage:
+      </p><pre class="screen">
+
+           SUMMARY                         
+                                           
+         Filename: BmJayrockReader-heap.out
+  Allocated Bytes: 132.3M                  
+Allocated Objects: 2511436                 
+              GCs: 980                     
+          Resizes: 5                       
+  Final heap size: 468k                    
+                                           
+   Distinct Types: 81                      
+       Backtraces: 565                     
+
+
+           SUMMARY                         
+                                           
+         Filename: BmLitJsonReader-heap.out
+  Allocated Bytes: 65.4M                   
+Allocated Objects: 1251602                 
+              GCs: 479                     
+          Resizes: 5                       
+  Final heap size: 472k                    
+                                           
+   Distinct Types: 92                      
+       Backtraces: 671
+
+
+           SUMMARY                            
+                                              
+         Filename: BmNewtonsoftReader-heap.out
+  Allocated Bytes: 353.5M                     
+Allocated Objects: 1361535                    
+              GCs: 3122                       
+          Resizes: 5                          
+  Final heap size: 476k                       
+                                              
+   Distinct Types: 81                         
+       Backtraces: 527
+
+      </pre></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2509922"></a>Writers</h3></div></div></div><p>
+        The benchmarks implemented are:
+      </p><div class="variablelist"><dl><dt><span class="term">WriterNumbers</span></dt><dd><p>
+              Using a writer object (<code class="classname">JsonTextWriter</code> in
+              Jayrock, <code class="classname">JsonWriter</code> in LitJSON and
+              Json.NET), write the following numbers in an array:
+              </p><pre class="literallayout">
+0.0,
+10.0,
+3.1416,
+0.0000001,
+-789.123,
+0.00056,
+50000000000.0
+0,
+42,
+100000,
+-1,
+-123,
+7777,
+25
+              </pre><p>
+            </p></dd><dt><span class="term">WriterObjects</span></dt><dd><p>
+              Using a writer, write the following information:
+              </p><pre class="literallayout">
+'[', null,
+'{', null,
+'P', "precision",
+'S', "zip",
+'P', "Latitude",
+'D', 37.7668,
+'P', "Longitude",
+'D', -122.3959,
+'P', "Address",
+'S', "",
+'P', "City",
+'S', "SAN FRANCISCO",
+'P', "State",
+'S', "CA",
+'P', "Zip",
+'S', "94107",
+'P', "Country",
+'S', "US",
+'P', "Visited",
+'B', true,
+'P', "Ref",
+'N', null,
+'P', "Comment",
+'S', "This is a \"comment\"\tColumn2\nLine2. " +
+    "\u00c6nema is a good album.",
+'}', null,
+
+'{', null,
+'P', "precision",
+'S', "zip",
+'P', "Latitude",
+'D', 37.371991,
+'P', "Longitude",
+'D', -122.026020,
+'P', "Address",
+'S', "",
+'P', "City",
+'S', "SUNNYVALE",
+'P', "State",
+'S', "CA",
+'P', "Zip",
+'S', "94085",
+'P', "Country",
+'S', "US",
+'P', "Visited",
+'B', false,
+'P', "Ref",
+'N', null,
+'}', null,
+']', null
+              </pre><p>
+              This information is processed in pairs, the first item
+              indicates the type of token to write: <code class="literal">{</code>,
+              <code class="literal">}</code>, <code class="literal">[</code> and
+              <code class="literal">]</code> for opening/closing objects and arrays,
+              <code class="literal">P</code> for properties, <code class="literal">S</code> for
+              strings, <code class="literal">B</code> for booleans,
+              <code class="literal">D</code> for double numbers and
+              <code class="literal">N</code> for null.
+            </p></dd></dl></div><p>
+        The results:
+      </p><pre class="screen">
+
+Benchmarking type BenchmarkJayrock
+  JayrockWriterNumbers 00:00:10.7310150
+  JayrockWriterObjects 00:00:08.8977730
+
+Benchmarking type BenchmarkLitJson
+  LitJsonWriterNumbers 00:00:10.6846000
+  LitJsonWriterObjects 00:00:08.4647110
+
+Benchmarking type BenchmarkNewtonsoft
+  NewtonsoftWriterNumbers 00:00:10.6271730
+  NewtonsoftWriterObjects 00:00:08.4410420
+
+      </pre><p>
+        Heap memory usage:
+      </p><pre class="screen">
+
+           SUMMARY                         
+                                           
+         Filename: BmJayrockWriter-heap.out
+  Allocated Bytes: 88.8M                   
+Allocated Objects: 1890928                 
+              GCs: 671                     
+          Resizes: 5                       
+  Final heap size: 468k                    
+                                           
+   Distinct Types: 64                      
+       Backtraces: 419                     
+
+
+           SUMMARY                         
+                                           
+         Filename: BmLitJsonWriter-heap.out
+  Allocated Bytes: 70.0M                   
+Allocated Objects: 1320942                 
+              GCs: 543                     
+          Resizes: 5                       
+  Final heap size: 468k                    
+                                           
+   Distinct Types: 66                      
+       Backtraces: 434
+
+
+           SUMMARY                            
+                                              
+         Filename: BmNewtonsoftWriter-heap.out
+  Allocated Bytes: 74.0M                      
+Allocated Objects: 1470936                    
+              GCs: 563                        
+          Resizes: 5                          
+  Final heap size: 468k                       
+                                              
+   Distinct Types: 64                         
+       Backtraces: 422
+
+      </pre></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2510090"></a>Importing</h3></div></div></div><p>
+        These benchmarks receive the following as input:
+        </p><pre class="literallayout">
+{
+    "Name"    : "Art Vandelay",
+    "Age"     : 30,
+    "Height"  : 1.65,
+    "Retired" : false,
+    "Urls"    : [
+        "http://example.com/artvandelay",
+        "http://artvandelay.org/" ],
+
+    "Job" : {
+        "Title"       : "Importer/Exporter",
+        "Description" : "import matches... long matches"
+    }
+}
+        </pre><p>
+      </p><p>
+        The benchmarks implemented are:
+      </p><div class="variablelist"><dl><dt><span class="term">ConversionToGenericObject</span></dt><dd><p>
+              Using the specific API to import JSON data
+              (<code class="methodname">JsonConvert.Import</code> in Jayrock,
+              <code class="methodname">JsonMapper.ToObject</code> in LitJSON and
+              <code class="methodname">JavaScriptConvert.DeserializeObject</code>
+              in Json.NET), the input data is imported into a
+              general-purpose data type defined by the library:
+              <code class="classname">JsonObject</code> in Jayrock,
+              <code class="classname">JsonData</code> in LitJSON and
+              <code class="classname">JavaScriptObject</code> in Json.NET.
+            </p></dd><dt><span class="term">ConversionToHashtable</span></dt><dd><p>
+              Import the input JSON into an object of type
+              <span class="type">System.Collections.Hashtable</span>. Unfortunately,
+              Jayrock doesn't seem to be able to perform this conversion, so
+              it's not included in the results. Notice that this also
+              affects the heap memory usage results (Jayrock's summary
+              corresponds to running 2 of the 3 benchmarks).
+            </p></dd><dt><span class="term">ConversionToObject</span></dt><dd><p>
+              A custom <code class="classname">Person</code> class is used to import
+              the input data.
+            </p></dd></dl></div><p>
+        The results:
+      </p><pre class="screen">
+
+Benchmarking type BenchmarkJayrock
+  JayrockConversionToGenericObject 00:00:03.8663690
+  JayrockConversionToObject 00:00:12.6593170
+
+Benchmarking type BenchmarkLitJson
+  LitJsonConversionToGenericObject 00:00:02.5881870
+  LitJsonConversionToHashtable 00:00:06.2299200
+  LitJsonConversionToObject 00:00:06.4707210
+
+Benchmarking type BenchmarkNewtonsoft
+  NewtonsoftConversionToGenericObject 00:00:10.3858570
+  NewtonsoftConversionToHashtable 00:00:11.3133830
+  NewtonsoftConversionToObject 00:00:24.4709470
+
+      </pre><p>
+        Heap memory usage:
+      </p><pre class="screen">
+
+           SUMMARY                         
+                                           
+         Filename: BmJayrockImport-heap.out
+  Allocated Bytes: 111.0M                  
+Allocated Objects: 2923200                 
+              GCs: 677                     
+          Resizes: 6                       
+  Final heap size: 628k                    
+                                           
+   Distinct Types: 162                     
+       Backtraces: 1236                    
+
+
+           SUMMARY                         
+                                           
+         Filename: BmLitJsonImport-heap.out
+  Allocated Bytes: 87.7M                   
+Allocated Objects: 2132239                 
+              GCs: 582                     
+          Resizes: 6                       
+  Final heap size: 628k                    
+                                           
+   Distinct Types: 142                     
+       Backtraces: 988
+
+
+           SUMMARY                            
+                                              
+         Filename: BmNewtonsoftImport-heap.out
+  Allocated Bytes: 504.1M                     
+Allocated Objects: 8801931                    
+              GCs: 3797                       
+          Resizes: 6                          
+  Final heap size: 644k                       
+                                              
+   Distinct Types: 107                        
+       Backtraces: 811
+
+      </pre></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2510259"></a>Exporting</h3></div></div></div><p>
+        The benchmarks implemented are:
+      </p><div class="variablelist"><dl><dt><span class="term">ConversionFromGenericObject</span></dt><dd><p>
+              Using an object of the same type as in the
+              ConversionToGenericObject benchmark, convert it into a JSON
+              string via <code class="methodname">JsonConvert.ExportToString</code>
+              in Jayrock, <code class="methodname">JsonMapper.ToJson</code> in
+              LitJSON, and
+              <code class="methodname">JavaScriptConvert.SerializeObject</code> in
+              Json.NET.
+            </p></dd><dt><span class="term">ConversionFromHashtable</span></dt><dd><p>
+              Convert an object with the same structure and data, but of
+              type <span class="type">System.Collections.Hashtable</span> into JSON.
+            </p></dd><dt><span class="term">ConversionFromObject</span></dt><dd><p>
+              Convert from the custom <code class="classname">Person</code> type
+              into JSON.
+            </p></dd></dl></div><p>
+        The results:
+      </p><pre class="screen">
+
+Benchmarking type BenchmarkJayrock
+  JayrockConversionFromGenericObject 00:00:01.5508170
+  JayrockConversionFromHashtable 00:00:03.9338940
+  JayrockConversionFromObject 00:00:07.6953470
+
+Benchmarking type BenchmarkLitJson
+  LitJsonConversionFromGenericObject 00:00:00.2117890
+  LitJsonConversionFromHashtable 00:00:02.7785360
+  LitJsonConversionFromObject 00:00:03.7776010
+
+Benchmarking type BenchmarkNewtonsoft
+  NewtonsoftConversionFromGenericObject 00:00:03.1178680
+  NewtonsoftConversionFromHashtable 00:00:03.0265470
+  NewtonsoftConversionFromObject 00:00:08.6941390
+
+      </pre><p>
+        Heap memory usage:
+      </p><pre class="screen">
+
+           SUMMARY                         
+                                           
+         Filename: BmJayrockExport-heap.out
+  Allocated Bytes: 104.7M                  
+Allocated Objects: 2744490                 
+              GCs: 639                     
+          Resizes: 6                       
+  Final heap size: 632k                    
+                                           
+   Distinct Types: 191                     
+       Backtraces: 1667                    
+
+
+           SUMMARY                         
+                                           
+         Filename: BmLitJsonExport-heap.out
+  Allocated Bytes: 30.3M                   
+Allocated Objects: 651969                  
+              GCs: 211                     
+          Resizes: 5                       
+  Final heap size: 472k                    
+                                           
+   Distinct Types: 144                     
+       Backtraces: 945
+
+
+           SUMMARY                            
+                                              
+         Filename: BmNewtonsoftExport-heap.out
+  Allocated Bytes: 83.5M                      
+Allocated Objects: 2081974                    
+              GCs: 586                        
+          Resizes: 5                          
+  Final heap size: 476k                       
+                                              
+   Distinct Types: 110                        
+       Backtraces: 762
+
+      </pre></div></div></div></div></div></body></html>

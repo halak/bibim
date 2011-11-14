@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
-using System.Xml.Serialization;
 using Bibim.Graphics;
 using Bibim.UI;
 using Bibim.UI.Frames;
@@ -23,28 +22,24 @@ namespace Bibim.Asset.Pipeline.Recipes
         #endregion
 
         #region Properties
-        [XmlElement]
         public CookingNode<UILayout> Input
         {
             get;
             set;
         }
 
-        [XmlElement]
         public Size BitmapSheetSize
         {
             get;
             set;
         }
 
-        [XmlElement]
         public Size BitmapSheetClusterSize
         {
             get;
             set;
         }
 
-        [XmlAttribute]
         public string TextureOutput
         {
             get { return textureOutput; }
@@ -54,7 +49,6 @@ namespace Bibim.Asset.Pipeline.Recipes
             }
         }
 
-        [XmlAttribute]
         public string ImageOutput
         {
             get { return imageOutput; }

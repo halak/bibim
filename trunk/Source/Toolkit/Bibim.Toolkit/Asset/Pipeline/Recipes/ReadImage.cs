@@ -12,21 +12,18 @@ namespace Bibim.Asset.Pipeline.Recipes
     public sealed class ReadImage : CookingNode<Image>
     {
         #region Properties
-        [XmlAttribute]
         public string TextureURI
         {
             get;
             set;
         }
 
-        [XmlElement]
         public Rectangle ClippingRectangle
         {
             get;
             set;
         }
 
-        [XmlAttribute]
         public Image.Transform AppliedTransform
         {
             get;

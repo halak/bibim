@@ -5,9 +5,7 @@ using System.Text;
 
 namespace Bibim.Toolkit
 {
-    [AttributeUsage(AttributeTargets.Module |
-                    AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Enum |
-                    AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Parameter, AllowMultiple=true, Inherited=true)]
+    [AttributeUsage(AttributeTargets.All, AllowMultiple=true, Inherited=true)]
     public sealed class AliasAttribute : Attribute
     {
         #region Properties

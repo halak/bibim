@@ -1,4 +1,13 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<GameAssetRecipe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Author="" Comment="">
-	<Cook xsi:type="ReadRecipe" Input="PSDMaskFullTexture.recipe" />
-</GameAssetRecipe>
+﻿
+{
+    "$id" : 1,
+    "$type" : "Bibim.Asset.Pipeline.GameAssetRecipe",
+    "Cook"  : {
+        "$id" : 2,
+        "$type" : "Bibim.Asset.Pipeline.Recipes.ReadRecipe",
+        "Input" : "PSDMaskFullTexture.recipe"
+    },
+    "Author" : "",
+    "Comment" : "",
+    "CanHotload" : false
+}

@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
-using System.Xml.Serialization;
 using Microsoft.Xna.Framework;
 using Bibim.Graphics;
 using Bibim.UI;
@@ -21,7 +20,6 @@ namespace Bibim.Asset.Pipeline.Recipes
     public class PhotoshopDocumentToUILayout1 : CookingNode<UILayout>
     {
         #region Properties
-        [XmlElement]
         public CookingNode<PhotoshopDocument> Input
         {
             get;

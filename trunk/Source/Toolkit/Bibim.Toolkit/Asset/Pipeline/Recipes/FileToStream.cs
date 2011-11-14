@@ -2,36 +2,30 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace Bibim.Asset.Pipeline.Recipes
 {
     public sealed class FileToStream : CookingNode<Stream>
     {
         #region Properties
-        [XmlAttribute]
         public string Input1
         {
             get;
             set;
         }
 
-        [XmlAttribute]
         public string Input2
         {
             get;
             set;
         }
 
-        [XmlAttribute]
         public string Input3
         {
             get;
             set;
         }
 
-        [XmlAttribute]
         public string Input4
         {
             get;

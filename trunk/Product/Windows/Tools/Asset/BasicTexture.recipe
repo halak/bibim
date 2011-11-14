@@ -1,8 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<GameAssetRecipe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Author="" Comment="">
-	<Cook xsi:type="BitmapToTexture2D">
-		<Input xsi:type="ImportBitmap">
-			<Input xsi:type="FileToStream" Input1="$(AssetName).png" Input2="$(AssetName).jpg" Input3="$(AssetName).bmp" />
-		</Input>
-	</Cook>
-</GameAssetRecipe>
+﻿
+{
+    "$id" : 1,
+    "$type" : "Bibim.Asset.Pipeline.GameAssetRecipe",
+    "Cook"  : {
+        "$id" : 2,
+        "$type" : "Bibim.Asset.Pipeline.Recipes.BitmapToTexture2D",
+        "Input" : {
+            "$id" : 3,
+            "$type" : "Bibim.Asset.Pipeline.Recipes.ImportBitmap",
+            "Input" : {
+                "$id" : 4,
+                "$type" : "Bibim.Asset.Pipeline.Recipes.FileToStream",
+                "Input1" : "$(AssetName).png",
+                "Input2" : "$(AssetName).jpg",
+                "Input3" : "$(AssetName).bmp",
+                "Input4" : null
+            }
+        }
+    },
+    "Author" : "",
+    "Comment" : "",
+    "CanHotload" : false
+}

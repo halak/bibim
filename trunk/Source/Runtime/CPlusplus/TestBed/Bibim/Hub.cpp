@@ -16,7 +16,7 @@ int APIENTRY WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     //    args.push_back(argv[i]);
 
     Bibim::Startup::All();
-    Bibim::TestBed::UI(args);
+    Bibim::TestBed::Blend(args);
 
     return 0;
 }

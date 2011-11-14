@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Xml.Serialization;
+using System.Runtime.Serialization;
 using Bibim.Asset;
 
 namespace Bibim.Graphics
@@ -22,7 +22,6 @@ namespace Bibim.Graphics
         #endregion
 
         #region Properties
-        [XmlIgnore]
         public GraphicsDevice GraphicsDevice
         {
             get { return graphicsDevice; }
@@ -35,35 +34,30 @@ namespace Bibim.Graphics
             }
         }
 
-        [XmlIgnore]
         public int Width
         {
             get;
             private set;
         }
 
-        [XmlIgnore]
         public int Height
         {
             get;
             private set;
         }
 
-        [XmlIgnore]
         public int SurfaceWidth
         {
             get;
             private set;
         }
 
-        [XmlIgnore]
         public int SurfaceHeight
         {
             get;
             private set;
         }
 
-        [XmlIgnore]
         public PixelFormat Format
         {
             get;

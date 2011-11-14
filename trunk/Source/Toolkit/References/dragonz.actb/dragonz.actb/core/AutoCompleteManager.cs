@@ -693,6 +693,8 @@ namespace dragonz.actb.core
 
         private void UpdateText(string text, bool selectAll)
         {
+            text = text ?? string.Empty;
+         
             _textChangedByCode = true;
             _textBox.Text = text;
             if (selectAll)

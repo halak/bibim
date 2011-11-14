@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Xml.Serialization;
 
 namespace Bibim.Animation
 {
@@ -13,28 +12,24 @@ namespace Bibim.Animation
         #endregion
 
         #region Properties
-        [XmlIgnore]
         public float Time
         {
             get;
             private set;
         }
 
-        [XmlAttribute]
         public float Velocity
         {
             get;
             set;
         }
 
-        [XmlAttribute]
         public bool Looped
         {
             get;
             set;
         }
 
-        [XmlIgnore]
         protected T Value
         {
             private get;
