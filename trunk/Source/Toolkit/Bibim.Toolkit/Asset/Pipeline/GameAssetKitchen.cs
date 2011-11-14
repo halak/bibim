@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Text;
+using Bibim.Json.Serialization;
 
 namespace Bibim.Asset.Pipeline
 {
@@ -74,7 +75,7 @@ namespace Bibim.Asset.Pipeline
             if (File.Exists(absolutePath) == false)
                 throw new FileNotFoundException("Recipe file not found.", absolutePath);
 
-            GameAssetRecipe recipe = GameAssetRecipe.Deserialize(absolutePath);
+            GameAssetRecipe recipe = JsonSerializer.Instance.Deserialize(absolutePath) as GameAssetRecipe;
 
             if (recipe != null && recipe.Cook != null)
                 return recipe;

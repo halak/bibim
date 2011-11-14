@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using Bibim.Graphics;
+using Bibim.Json.Serialization;
 using Bibim.UI;
 using Bibim.UI.Frames;
 using Bibim.UI.Visuals;
@@ -244,8 +245,7 @@ namespace Bibim.Asset.Pipeline.Recipes
 
                     textureFileToStream.Input1 = Path.GetFileName(textureFilePath);
 
-                    using (var fs = new FileStream(Path.ChangeExtension(fullPath, "asset"), FileMode.Create, FileAccess.Write))
-                        GameAssetRecipe.Serialize(fs, textureRecipe);
+                    JsonSerializer.Instance.Serialize(Path.ChangeExtension(fullPath, "asset"), textureRecipe);
                 }
                 #endregion
 
@@ -269,8 +269,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                                                                 item.Bounds.Width, item.Bounds.Height);
                     readImage.AppliedTransform = item.AppliedTransform;
 
-                    using (var fs = new FileStream(Path.Combine(context.BaseDirectory, context.Directory, Path.ChangeExtension(path, "asset")), FileMode.Create, FileAccess.Write))
-                        GameAssetRecipe.Serialize(fs, imageRecipe);
+                    JsonSerializer.Instance.Serialize(Path.Combine(context.BaseDirectory, context.Directory, Path.ChangeExtension(path, "asset")), imageRecipe);
 
                     List<UISprite> values = null;
                     if (spriteBitmaps.TryGetValue(item.Source, out values))
