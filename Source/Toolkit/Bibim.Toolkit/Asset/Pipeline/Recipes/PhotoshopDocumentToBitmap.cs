@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace Bibim.Asset.Pipeline.Recipes
 {
     public sealed class PhotoshopDocumentToBitmap : CookingNode<Bitmap>
     {
         #region Properties
-        [XmlElement]
         public CookingNode<PhotoshopDocument> Input
         {
             get;

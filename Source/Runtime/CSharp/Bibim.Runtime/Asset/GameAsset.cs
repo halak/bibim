@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
-using System.Xml.Serialization;
 
 namespace Bibim.Asset
 {
@@ -13,27 +13,23 @@ namespace Bibim.Asset
         #endregion
 
         #region Properties
-        [XmlIgnore]
         public int ClassID
         {
             get { return ClassIDAttribute.GetClassID(GetType()); }
         }
         
-        [XmlIgnore]
         public GameAssetStatus Status
         {
             get;
             protected set;
         }
 
-        [XmlIgnore]
         public uint Revision
         {
             get;
             protected set;
         }
 
-        [XmlIgnore]
         public object Tag
         {
             get;

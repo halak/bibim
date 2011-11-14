@@ -6,6 +6,8 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using Bibim.Reflection;
+using Bibim.Json.Serialization;
+using OldXmlSerializer = System.Xml.Serialization.XmlSerializer;
 
 namespace Bibim.Asset.Pipeline
 {
@@ -13,8 +15,8 @@ namespace Bibim.Asset.Pipeline
     public sealed class GameAssetRecipe
     {
         #region Static Fields
-        private static XmlSerializer oldSerializer;
-        private static DataContractSerializer serializer;
+        private static OldXmlSerializer oldSerializer;
+        private static JsonSerializer serializer;
         private static XmlWriterSettings writerSettings;
         #endregion
 
@@ -24,14 +26,12 @@ namespace Bibim.Asset.Pipeline
         #endregion
 
         #region Properties
-        [XmlElement]
         public CookingNode Cook
         {
             get;
             set;
         }
 
-        [XmlAttribute]
         public string Author
         {
             get { return author; }
@@ -41,7 +41,6 @@ namespace Bibim.Asset.Pipeline
             }
         }
 
-        [XmlAttribute]
         public string Comment
         {
             get { return comment; }
@@ -51,14 +50,13 @@ namespace Bibim.Asset.Pipeline
             }
         }
 
-        [XmlAttribute]
         public bool CanHotload
         {
             get;
             set;
         }
 
-        private static XmlSerializer OldSerializer
+        private static OldXmlSerializer OldSerializer
         {
             get
             {
@@ -69,23 +67,19 @@ namespace Bibim.Asset.Pipeline
                     Type[] recipeClasses = new Type[classes.Count];
                     classes.CopyTo(recipeClasses, 0);
 
-                    oldSerializer = new XmlSerializer(typeof(GameAssetRecipe), recipeClasses);
+                    oldSerializer = new OldXmlSerializer(typeof(GameAssetRecipe), recipeClasses);
                 }
 
                 return oldSerializer;
             }
         }
 
-        private static DataContractSerializer Serializer
+        private static JsonSerializer Serializer
         {
             get
             {
                 if (serializer == null)
-                {
-                    ICollection<Type> classes = AssemblyUtility.FindClasses(typeof(CookingNode), true, true);
-
-                    serializer = new DataContractSerializer(typeof(GameAssetRecipe), null, "Bibim", classes, 65536, false, true, null);
-                }
+                    serializer = new JsonSerializer();
 
                 return serializer;
             }
@@ -129,21 +123,18 @@ namespace Bibim.Asset.Pipeline
         #region Static Methods
         public static void Serialize(string path, GameAssetRecipe recipe)
         {
-            using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
-                Serialize(fs, recipe);
+            Serializer.Serialize(path, recipe);
         }
 
         public static void Serialize(Stream stream, GameAssetRecipe recipe)
         {
-            var writer = XmlWriter.Create(stream, WriterSettings);
-            OldSerializer.Serialize(writer, recipe);
-            writer.Close();
+            Serializer.Serialize(stream, recipe);
         }
 
-        public static void Serialize(XmlWriter writer, GameAssetRecipe recipe)
-        {
-            OldSerializer.Serialize(writer, recipe);
-        }
+        //public static void Serialize(XmlWriter writer, GameAssetRecipe recipe)
+        //{
+        //    Serializer.Serialize(writer, recipe);
+        //}
 
         public static GameAssetRecipe Deserialize(string path)
         {
@@ -151,29 +142,40 @@ namespace Bibim.Asset.Pipeline
             {
                 try
                 {
-                    return Serializer.ReadObject(fs) as GameAssetRecipe;
-                }
-                catch (Exception)
-                {
-                    var result = OldSerializer.Deserialize(fs) as GameAssetRecipe;
+                    var result = Serializer.Deserialize(fs) as GameAssetRecipe;
                     if (result != null)
                     {
+                        fs.Close();
                         Serialize(path, result);
-                        return result;
                     }
-                    else
-                        return null;
+
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    using (var fs2 = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    {
+                        var result = OldSerializer.Deserialize(fs2) as GameAssetRecipe;
+                        if (result != null)
+                        {
+                            fs2.Close();
+                            Serialize(path, result);
+                            return result;
+                        }
+                        else
+                            return null;
+                    }
                 }
             }
         }
 
         public static GameAssetRecipe Deserialize(Stream stream)
         {
-            try
-            {
-                return Serializer.ReadObject(stream) as GameAssetRecipe;
-            }
-            catch (Exception)
+            //try
+            //{
+            //    return Serializer.Deserialize(stream) as GameAssetRecipe;
+            //}
+            //catch (Exception)
             {
                 return OldSerializer.Deserialize(stream) as GameAssetRecipe;
             }
@@ -181,11 +183,11 @@ namespace Bibim.Asset.Pipeline
 
         public static GameAssetRecipe Deserialize(XmlReader reader)
         {
-            try
-            {
-                return Serializer.ReadObject(reader) as GameAssetRecipe;
-            }
-            catch (Exception)
+            //try
+            //{
+            //    return Serializer.Deserialize(reader) as GameAssetRecipe;
+            //}
+            //catch (Exception)
             {
                 return OldSerializer.Deserialize(reader) as GameAssetRecipe;
             }

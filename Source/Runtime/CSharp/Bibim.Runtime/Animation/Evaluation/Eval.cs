@@ -9,7 +9,6 @@ namespace Bibim.Animation
     public abstract class EvalBase : GameComponent
     {
         #region Properties
-        [XmlIgnore]
         protected abstract Type EvaluableType
         {
             get;

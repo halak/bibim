@@ -74,9 +74,7 @@ namespace Bibim.Asset.Pipeline
             if (File.Exists(absolutePath) == false)
                 throw new FileNotFoundException("Recipe file not found.", absolutePath);
 
-            FileStream fs = new FileStream(absolutePath, FileMode.Open, FileAccess.Read);
-            GameAssetRecipe recipe = GameAssetRecipe.Deserialize(fs);
-            fs.Close();
+            GameAssetRecipe recipe = GameAssetRecipe.Deserialize(absolutePath);
 
             if (recipe != null && recipe.Cook != null)
                 return recipe;

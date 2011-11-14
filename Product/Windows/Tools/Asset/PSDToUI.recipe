@@ -1,18 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<GameAssetRecipe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Author="" Comment="">
-	<Cook xsi:type="ExportUILayoutAssets" TextureOutput="gen\$(AssetName)_TEXTURE{0}" ImageOutput="gen\$(AssetName)_IMG{0}">
-		<Input xsi:type="PhotoshopDocumentToUILayout1">
-			<Input xsi:type="ImportPhotoshopDocument" IgnoreImageResources="false" IgnoreLayers="false" IgnoreMergedBitmap="true">
-				<Input xsi:type="FileToStream" Input1="$(AssetName).psd" />
-			</Input>
-		</Input>
-		<BitmapSheetSize>
-			<Width>1024</Width>
-			<Height>1024</Height>
-		</BitmapSheetSize>
-		<BitmapSheetClusterSize>
-			<Width>16</Width>
-			<Height>16</Height>
-		</BitmapSheetClusterSize>
-	</Cook>
-</GameAssetRecipe>
+﻿
+{
+    "$id" : 1,
+    "$type" : "Bibim.Asset.Pipeline.GameAssetRecipe",
+    "Cook"  : {
+        "$id" : 2,
+        "$type" : "Bibim.Asset.Pipeline.Recipes.ExportUILayoutAssets",
+        "Input" : {
+            "$id" : 3,
+            "$type" : "Bibim.Asset.Pipeline.Recipes.PhotoshopDocumentToUILayout1",
+            "Input" : {
+                "$id" : 4,
+                "$type" : "Bibim.Asset.Pipeline.Recipes.ImportPhotoshopDocument",
+                "Input" : {
+                    "$id" : 5,
+                    "$type" : "Bibim.Asset.Pipeline.Recipes.FileToStream",
+                    "Input1" : "$(AssetName).psd",
+                    "Input2" : null,
+                    "Input3" : null,
+                    "Input4" : null
+                },
+                "IgnoreImageResources" : false,
+                "IgnoreLayers"         : false,
+                "IgnoreMergedBitmap"   : false
+            }
+        },
+        "BitmapSheetSize" : "1024, 1024",
+        "BitmapSheetClusterSize" : "16, 16",
+        "TextureOutput"          : "gen\\$(AssetName)_TEXTURE{0}",
+        "ImageOutput"            : "gen\\$(AssetName)_IMG{0}"
+    },
+    "Author" : "",
+    "Comment" : "",
+    "CanHotload" : false
+}

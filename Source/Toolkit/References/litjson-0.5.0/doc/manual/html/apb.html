@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Appendix B. Performance Benchmarks</title><link rel="stylesheet" href="ld-default.css" type="text/css" /><meta name="generator" content="DocBook XSL-NS Stylesheets V1.73.1" /><meta name="description" content="One of the main design goals of LitJSON is to be a small and fast library. This doesn't mean that it should perform every operation as fast as possible down to the last nano-second (which would be a pointless exercise anyway). However, a set of simple benchmarks to keep track of its performance as the library grows, and to compare it against other JSON libraries for .Net does serve a useful purpose. In simple terms, a set of benchmarks has been created to make sure LitJSON's performance doesn't suck." /><link rel="start" href="index.html" title="LitJSON Manual" /><link rel="up" href="pt03.html" title="Part III. Appendices" /><link rel="prev" href="apas02.html" title="A.2. Grammar" /><link rel="next" href="apbs02.html" title="B.2. Results" /><link xmlns="" rel="stylesheet" href="ld-highlight.css" type="text/css" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix B. Performance Benchmarks</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="apas02.html">Prev</a> </td><th width="60%" align="center">Part III. Appendices</th><td width="20%" align="right"> <a accesskey="n" href="apbs02.html">Next</a></td></tr></table><hr /></div><div class="appendix" lang="en" xml:lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="appendix.benchmarks"></a>Performance Benchmarks</h1></div><div><div class="abstract"><p class="title"><b>Abstract</b></p><p>
+        One of the main design goals of LitJSON is to be a small and fast
+        library.
+      </p><p>
+        This doesn't mean that it should perform every operation as fast as
+        possible down to the last nano-second (which would be a pointless
+        exercise anyway). However, a set of simple benchmarks to keep track
+        of its performance as the library grows, and to compare it against
+        other JSON libraries for .Net does serve a useful purpose. In simple
+        terms, a set of benchmarks has been created to make sure LitJSON's
+        performance doesn't suck.
+      </p></div></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="apb.html#appendix.benchmarks.description">B.1. Description</a></span></dt><dd><dl><dt><span class="section"><a href="apb.html#id2525593">B.1.1. Figures Being Measured</a></span></dt><dt><span class="section"><a href="apb.html#id2525669">B.1.2. Software Being Measured</a></span></dt><dt><span class="section"><a href="apb.html#id2525730">B.1.3. Environment</a></span></dt></dl></dd><dt><span class="section"><a href="apbs02.html">B.2. Results</a></span></dt><dd><dl><dt><span class="section"><a href="apbs02.html#id2525811">B.2.1. Readers</a></span></dt><dt><span class="section"><a href="apbs02.html#id2525985">B.2.2. Writers</a></span></dt><dt><span class="section"><a href="apbs02.html#id2521097">B.2.3. Importing</a></span></dt><dt><span class="section"><a href="apbs02.html#id2526464">B.2.4. Exporting</a></span></dt></dl></dd></dl></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="appendix.benchmarks.description"></a>B.1. Description</h2></div></div></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2525593"></a>B.1.1. Figures Being Measured</h3></div></div></div><p>
+        In an attempt to keep the benchmarks useful and organised, different
+        binaries are created, each one with its own set of micro-benchmarks
+        measuring different features of the libraries.
+      </p><p>
+        The benchmarks are split in 4 main categories:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            Readers.
+          </p></li><li><p>
+            Writers.
+          </p></li><li><p>
+            Importing data into objects.
+          </p></li><li><p>
+            Exporting data from objects.
+          </p></li></ul></div><p>
+        Aditionally, information about heap memory used is gathered using
+        <a class="link" href="http://www.mono-project.com/HeapBuddy">heap-buddy</a>.
+      </p><p>
+        The complete source code of the benchmarks can be found under the
+        <code class="filename">benchmarks</code> directory included
+        in the library's source tree. More information about this code is
+        included in the <code class="filename">README</code> file under that
+        directory.
+      </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2525669"></a>B.1.2. Software Being Measured</h3></div></div></div><p>
+        The benchmarks included test related capabilities of the following
+        .Net libraries:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            <a class="link" href="http://jayrock.berlios.de/">Jayrock</a> version 0.9.8316.
+          </p></li><li><p>
+            <a class="link" href="http://litjson.sourceforge.net/">LitJSON</a> version 0.3.0.
+          </p></li><li><p>
+            <a class="link" href="http://www.newtonsoft.com/products/json/">Newtonsoft Json.NET</a>
+            version 1.1.
+          </p></li></ul></div><p>
+        Much gratitude goes out to the developers of Jayrock and Json.NET
+        for their excellent work, and, needless to say, LitJSON wouldn't be
+        what it is now without them.
+      </p></div><div class="section" lang="en" xml:lang="en"><div class="titlepage"><div><div><h3 class="title"><a id="id2525730"></a>B.1.3. Environment</h3></div></div></div><p>
+        It is important to notice that, although benchmarks like these can
+        show trends in performance and help the developers notice when
+        something goes notably wrong, in general they are not meant to
+        produce conclusive results in general.
+      </p><p>
+        For this reason, every number presented here is a relative figure,
+        that depends on a number of variables (hardware, operating system,
+        runtime, system load, etc.) Also notice that different libraries may
+        have been designed with different purposes in mind, so benchmark
+        suites that only focus on a common subset of functionality, like
+        this one, don't present the full picture to the potential developer
+        that is deciding whether to use a given tool or not.
+      </p><p>
+        These benchmarks have been run while trying to keep the environment
+        as consistent as possible. The machine used is an old Pentium III,
+        running Linux 2.6.19. The binaries are executed using Mono 1.2.4.
+      </p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apas02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="pt03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="apbs02.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">A.2. Grammar </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> B.2. Results</td></tr></table></div></body></html>

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace Bibim.Asset.Pipeline.Recipes
 {
@@ -14,7 +12,6 @@ namespace Bibim.Asset.Pipeline.Recipes
         #endregion
 
         #region Properties
-        [XmlAttribute]
         public string Input
         {
             get { return input; }

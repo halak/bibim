@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
 using Bibim.Collections.Generic;
 using Bibim.Graphics;
 
@@ -17,14 +15,12 @@ namespace Bibim.Asset.Pipeline.Recipes
         #endregion
 
         #region Properties
-        [XmlAttribute]
         public string Input
         {
             get;
             set;
         }
 
-        [XmlAttribute]
         public string Defines
         {
             get

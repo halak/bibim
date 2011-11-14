@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
-using System.Xml.Schema;
 
 namespace Bibim.Asset.Pipeline.Recipes
 {
     public sealed class ImportBitmap : CookingNode<Bitmap>
     {
         #region Properties
-        [XmlElement]
         public CookingNode<Stream> Input
         {
             get;

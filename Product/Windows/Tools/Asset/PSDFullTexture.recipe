@@ -1,10 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<GameAssetRecipe xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Author="" Comment="">
-	<Cook xsi:type="BitmapToTexture2D">
-		<Input xsi:type="PhotoshopDocumentToBitmap">
-			<Input xsi:type="ImportPhotoshopDocument" IgnoreImageResources="true" IgnoreLayers="true" IgnoreMergedBitmap="false">
-				<Input xsi:type="FileToStream" Input1="$(AssetName).psd" />
-			</Input>
-		</Input>
-	</Cook>
-</GameAssetRecipe>
+﻿
+{
+    "$id" : 1,
+    "$type" : "Bibim.Asset.Pipeline.GameAssetRecipe",
+    "Cook"  : {
+        "$id" : 2,
+        "$type" : "Bibim.Asset.Pipeline.Recipes.BitmapToTexture2D",
+        "Input" : {
+            "$id" : 3,
+            "$type" : "Bibim.Asset.Pipeline.Recipes.PhotoshopDocumentToBitmap",
+            "Input" : {
+                "$id" : 4,
+                "$type" : "Bibim.Asset.Pipeline.Recipes.ImportPhotoshopDocument",
+                "Input" : {
+                    "$id" : 5,
+                    "$type" : "Bibim.Asset.Pipeline.Recipes.FileToStream",
+                    "Input1" : "$(AssetName).psd",
+                    "Input2" : null,
+                    "Input3" : null,
+                    "Input4" : null
+                },
+                "IgnoreImageResources" : false,
+                "IgnoreLayers"         : false,
+                "IgnoreMergedBitmap"   : false
+            }
+        }
+    },
+    "Author" : "",
+    "Comment" : "",
+    "CanHotload" : false
+}
