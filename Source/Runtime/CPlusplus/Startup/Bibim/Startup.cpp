@@ -5,22 +5,7 @@ namespace Bibim
 {
     void Startup::All()
     {
-        GameAssetFactory::AddEntry<BoolEvalTree>();
-        GameAssetFactory::AddEntry<ShortIntEvalTree>();
-        GameAssetFactory::AddEntry<IntEvalTree>();
-        GameAssetFactory::AddEntry<LongIntEvalTree>();
-        GameAssetFactory::AddEntry<FloatEvalTree>();
-        GameAssetFactory::AddEntry<DoubleEvalTree>();
-        GameAssetFactory::AddEntry<ColorEvalTree>();
-        GameAssetFactory::AddEntry<Point2EvalTree>();
-        GameAssetFactory::AddEntry<Point3EvalTree>();
-        GameAssetFactory::AddEntry<Point4EvalTree>();
-        GameAssetFactory::AddEntry<RectEvalTree>();
-        GameAssetFactory::AddEntry<RectFEvalTree>();
-        GameAssetFactory::AddEntry<Vector2EvalTree>();
-        GameAssetFactory::AddEntry<Vector3EvalTree>();
-        GameAssetFactory::AddEntry<Vector4EvalTree>();
-        GameAssetFactory::AddEntry<GameAssetEvalTree>();
+        GameAssetFactory::AddEntry<EvalBoard>();
         GameAssetFactory::AddEntry<BoolSequence>();
         GameAssetFactory::AddEntry<ShortIntSequence>();
         GameAssetFactory::AddEntry<IntSequence>();

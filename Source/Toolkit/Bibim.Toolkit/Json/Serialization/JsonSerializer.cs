@@ -20,6 +20,7 @@ namespace Bibim.Json.Serialization
         private static JsonSerializer instance;
         private static readonly string IDPropertyName = "$id";
         private static readonly string TypePropertyName = "$type";
+        private static readonly string ItemsPropertyName = "$items";
         private static readonly BindingFlags memberFlags = BindingFlags.Public |
                                                            BindingFlags.Instance |
                                                            BindingFlags.GetProperty |
@@ -84,97 +85,148 @@ namespace Bibim.Json.Serialization
 
             List<object> objectReferences = new List<object>();
             objectReferences.Add(null);
-            WriteObjectAsElement(writer, o, objectReferences);
+            Write(writer, o, objectReferences);
         }
 
-        private void SerializeToElement(JsonWriter writer, object o, List<object> objectReferences)
+        private void Write(JsonWriter writer, object o, List<object> objectReferences)
         {
             if (o == null)
-                return;
-
-            Action<string, object> writeValue = (key, value) =>
             {
-                writer.WritePropertyName(key);
-                if (value != null)
+                writer.Write((string)null);
+                return;
+            }
+
+            Type t = o.GetType();
+            if (t.IsClass)
+            {
+                if (o is string)
+                    writer.Write((string)o);
+                else
+                    WriteObject(writer, o, objectReferences);
+            }
+            else if (t.IsValueType)
+            {
+                if (t.IsPrimitive)
                 {
-                    if (value.GetType().IsValueType)
+                    if (t == typeof(bool))
                     {
-                        if (value.GetType().IsPrimitive)
-                        {
-                            if (value.GetType() == typeof(bool))
-                            {
-                                writer.Write((bool)value);
-                            }
-                            else if (value.GetType() == typeof(sbyte) ||
-                                     value.GetType() == typeof(byte) ||
-                                     value.GetType() == typeof(short) ||
-                                     value.GetType() == typeof(ushort) ||
-                                     value.GetType() == typeof(int))
-                            {
-                                writer.Write((int)Convert.ChangeType(value, typeof(int)));
-                            }
-                            else if (value.GetType() == typeof(uint) ||
-                                     value.GetType() == typeof(long))
-                            {
-                                writer.Write((long)Convert.ChangeType(value, typeof(long)));
-                            }
-                            else if (value.GetType() == typeof(ulong))
-                            {
-                                writer.Write((ulong)value);
-                            }
-                            else if (value.GetType() == typeof(float) ||
-                                     value.GetType() == typeof(double))
-                            {
-                                writer.Write((double)Convert.ChangeType(value, typeof(double)));
-                            }
-                            else
-                                throw new NotSupportedException(value.GetType().ToString());
-                        }
-                        else if (value.GetType().IsEnum)
-                            writer.Write(value.GetType().GetEnumName(value));
-                        else
-                        {
-                            TypeConverter tc = GetTypeConverter(value.GetType());
-                            if (tc != null)
-                                writer.Write(tc.ConvertToString(value));
-                            else
-                                WriteObjectAsElement(writer, value, objectReferences);
-                        }
+                        writer.Write((bool)o);
                     }
-                    else if (value.GetType().IsClass)
+                    else if (t == typeof(sbyte) ||
+                             t == typeof(byte) ||
+                             t == typeof(short) ||
+                             t == typeof(ushort) ||
+                             t == typeof(int))
                     {
-                        if (value.GetType() == typeof(string))
-                            writer.Write((string)value);
-                        else
-                            WriteObjectAsElement(writer, value, objectReferences);
+                        writer.Write((int)Convert.ChangeType(o, typeof(int)));
+                    }
+                    else if (t == typeof(uint) ||
+                             t == typeof(long))
+                    {
+                        writer.Write((long)Convert.ChangeType(o, typeof(long)));
+                    }
+                    else if (t == typeof(ulong))
+                    {
+                        writer.Write((ulong)o);
+                    }
+                    else if (t == typeof(float) ||
+                             t == typeof(double))
+                    {
+                        writer.Write((double)Convert.ChangeType(o, typeof(double)));
                     }
                     else
-                        throw new NotSupportedException(value.GetType().ToString());
+                        throw new NotSupportedException(t.ToString());
+                }
+                else if (t.IsEnum)
+                {
+                    writer.Write(t.GetEnumName(o));
                 }
                 else
-                    writer.Write((string)null);
-            };
+                {
+                    var typeConverter = GetTypeConverter(t);
+                    if (typeConverter != null)
+                        writer.Write(typeConverter.ConvertToString(o));
+                    else
+                        WriteObject(writer, o, objectReferences);
+                }
+            }
+            else
+                throw new NotSupportedException(t.ToString());
+        }
+
+        private void WriteObject(JsonWriter writer, object o, List<object> objectReferences)
+        {
+            writer.WriteObjectStart();
+            #region Write Header ($id, $type)
+            if (o.GetType().IsClass)
+            {
+                int index = objectReferences.IndexOf(o);
+                if (index != -1)
+                {
+                    writer.WritePropertyName(IDPropertyName);
+                    writer.Write(index);
+                    writer.WriteObjectEnd();
+                    return;
+                }
+                else
+                {
+                    objectReferences.Add(o);
+                    int id = objectReferences.Count - 1;
+                    writer.WritePropertyName(IDPropertyName);
+                    writer.Write(id);
+                    writer.WritePropertyName(TypePropertyName);
+                    writer.Write(o.GetType().FullName);
+                }
+            }
+            else
+            {
+                writer.WritePropertyName(TypePropertyName);
+                writer.Write(o.GetType().FullName);
+            }
+            #endregion
 
             if (o is IDictionary)
             {
                 foreach (DictionaryEntry item in (IDictionary)o)
-                    writeValue(item.Key.ToString(), item.Value);
+                {
+                    writer.WritePropertyName(item.Key.ToString());
+                    Write(writer, item.Value, objectReferences);
+                }
             }
             else if (o is NameValueCollection)
             {
                 var nvc = (NameValueCollection)o;
                 for (int i = 0; i < nvc.Count; i++)
-                    writeValue(nvc.Keys[i], nvc[i]);
+                {
+                    writer.WritePropertyName(nvc.Keys[i].ToString());
+                    Write(writer, nvc[i], objectReferences);
+                }
             }
             else if (o is StringDictionary)
             {
                 foreach (DictionaryEntry item in (StringDictionary)o)
-                    writeValue((string)item.Key, (string)item.Value);
+                {
+                    writer.WritePropertyName(item.Key.ToString());
+                    writer.Write((string)item.Value);
+                }
             }
             else if (o is HybridDictionary)
             {
                 foreach (DictionaryEntry item in (HybridDictionary)o)
-                    writeValue(item.Key.ToString(), item.Value);
+                {
+                    writer.WritePropertyName(item.Key.ToString());
+                    Write(writer, item.Value, objectReferences);
+                }
+            }
+            else if (o is IList)
+            {
+                writer.WritePropertyName(ItemsPropertyName);
+                writer.WriteArrayStart();
+                foreach (object item in (IList)o)
+                {
+                    Write(writer, item, objectReferences);
+                }
+                writer.WriteArrayEnd();
             }
             else
             {
@@ -186,9 +238,10 @@ namespace Bibim.Json.Serialization
                     if (mi is PropertyInfo)
                     {
                         var pi = (PropertyInfo)mi;
-
                         if (pi.GetGetMethod() == null || pi.GetGetMethod().IsPublic == false ||
                             pi.GetSetMethod() == null || pi.GetSetMethod().IsPublic == false)
+                            continue;
+                        if (pi.GetIndexParameters() != null && pi.GetIndexParameters().Length > 0)
                             continue;
 
                         v = pi.GetValue(o, null);
@@ -206,47 +259,174 @@ namespace Bibim.Json.Serialization
                     if (mi.IsDefined(typeof(NonSerializedAttribute), true))
                         continue;
 
-                    writeValue(mi.Name, v);
+                    writer.WritePropertyName(mi.Name);
+                    Write(writer, v, objectReferences);
                 }
-            }
-        }
-
-        private void WriteObjectAsElement(JsonWriter writer, object o, List<object> objectReferences)
-        {
-            if (o == null)
-            {
-                writer.Write((string)null);
-                return;
-            }
-
-            writer.WriteObjectStart();
-            if (o.GetType().IsClass)
-            {
-                int index = objectReferences.IndexOf(o);
-                if (index != -1)
-                {
-                    writer.WritePropertyName(IDPropertyName);
-                    writer.Write(index);
-                }
-                else
-                {
-                    objectReferences.Add(o);
-                    int id = objectReferences.Count - 1;
-                    writer.WritePropertyName(IDPropertyName);
-                    writer.Write(id);
-                    writer.WritePropertyName(TypePropertyName);
-                    writer.Write(o.GetType().FullName);
-                    SerializeToElement(writer, o, objectReferences);
-                }
-            }
-            else
-            {
-                writer.WritePropertyName(TypePropertyName);
-                writer.Write(o.GetType().FullName);
-                SerializeToElement(writer, o, objectReferences);
             }
             writer.WriteObjectEnd();
         }
+
+        //private void SerializeToElement(JsonWriter writer, object o, List<object> objectReferences)
+        //{
+        //    if (o == null)
+        //        return;
+
+        //    Action<string, object> writeValue = (key, value) =>
+        //    {
+        //        writer.WritePropertyName(key);
+        //        if (value != null)
+        //        {
+        //            if (value.GetType().IsValueType)
+        //            {
+        //                if (value.GetType().IsPrimitive)
+        //                {
+        //                    if (value.GetType() == typeof(bool))
+        //                    {
+        //                        writer.Write((bool)value);
+        //                    }
+        //                    else if (value.GetType() == typeof(sbyte) ||
+        //                             value.GetType() == typeof(byte) ||
+        //                             value.GetType() == typeof(short) ||
+        //                             value.GetType() == typeof(ushort) ||
+        //                             value.GetType() == typeof(int))
+        //                    {
+        //                        writer.Write((int)Convert.ChangeType(value, typeof(int)));
+        //                    }
+        //                    else if (value.GetType() == typeof(uint) ||
+        //                             value.GetType() == typeof(long))
+        //                    {
+        //                        writer.Write((long)Convert.ChangeType(value, typeof(long)));
+        //                    }
+        //                    else if (value.GetType() == typeof(ulong))
+        //                    {
+        //                        writer.Write((ulong)value);
+        //                    }
+        //                    else if (value.GetType() == typeof(float) ||
+        //                             value.GetType() == typeof(double))
+        //                    {
+        //                        writer.Write((double)Convert.ChangeType(value, typeof(double)));
+        //                    }
+        //                    else
+        //                        throw new NotSupportedException(value.GetType().ToString());
+        //                }
+        //                else if (value.GetType().IsEnum)
+        //                    writer.Write(value.GetType().GetEnumName(value));
+        //                else
+        //                {
+        //                    TypeConverter tc = GetTypeConverter(value.GetType());
+        //                    if (tc != null)
+        //                        writer.Write(tc.ConvertToString(value));
+        //                    else
+        //                        WriteObjectAsElement(writer, value, objectReferences);
+        //                }
+        //            }
+        //            else if (value.GetType().IsClass)
+        //            {
+        //                if (value.GetType() == typeof(string))
+        //                    writer.Write((string)value);
+        //                else
+        //                    WriteObjectAsElement(writer, value, objectReferences);
+        //            }
+        //            else
+        //                throw new NotSupportedException(value.GetType().ToString());
+        //        }
+        //        else
+        //            writer.Write((string)null);
+        //    };
+
+        //    if (o is IDictionary)
+        //    {
+        //        foreach (DictionaryEntry item in (IDictionary)o)
+        //            writeValue(item.Key.ToString(), item.Value);
+        //    }
+        //    else if (o is NameValueCollection)
+        //    {
+        //        var nvc = (NameValueCollection)o;
+        //        for (int i = 0; i < nvc.Count; i++)
+        //            writeValue(nvc.Keys[i], nvc[i]);
+        //    }
+        //    else if (o is StringDictionary)
+        //    {
+        //        foreach (DictionaryEntry item in (StringDictionary)o)
+        //            writeValue((string)item.Key, (string)item.Value);
+        //    }
+        //    else if (o is HybridDictionary)
+        //    {
+        //        foreach (DictionaryEntry item in (HybridDictionary)o)
+        //            writeValue(item.Key.ToString(), item.Value);
+        //    }
+        //    else
+        //    {
+        //        Type t = o.GetType();
+        //        foreach (var mi in t.FindMembers(MemberTypes.Field | MemberTypes.Property, memberFlags, (m, fc) => { return true; }, null))
+        //        {
+        //            object v = null;
+        //            Type declaredType = null;
+        //            if (mi is PropertyInfo)
+        //            {
+        //                var pi = (PropertyInfo)mi;
+        //                if (pi.GetGetMethod() == null || pi.GetGetMethod().IsPublic == false ||
+        //                    pi.GetSetMethod() == null || pi.GetSetMethod().IsPublic == false)
+        //                    continue;
+        //                if (pi.GetIndexParameters() != null && pi.GetIndexParameters().Length > 0)
+        //                    continue;
+
+        //                v = pi.GetValue(o, null);
+        //                declaredType = pi.PropertyType;
+        //            }
+        //            else if (mi is FieldInfo)
+        //            {
+        //                var fi = (FieldInfo)mi;
+        //                v = fi.GetValue(o);
+        //                declaredType = fi.FieldType;
+        //            }
+        //            else
+        //                continue;
+
+        //            if (mi.IsDefined(typeof(NonSerializedAttribute), true))
+        //                continue;
+
+        //            writeValue(mi.Name, v);
+        //        }
+        //    }
+        //}
+
+        //private void WriteObjectAsElement(JsonWriter writer, object o, List<object> objectReferences)
+        //{
+        //    if (o == null)
+        //    {
+        //        writer.Write((string)null);
+        //        return;
+        //    }
+
+        //    writer.WriteObjectStart();
+        //    if (o.GetType().IsClass)
+        //    {
+        //        int index = objectReferences.IndexOf(o);
+        //        if (index != -1)
+        //        {
+        //            writer.WritePropertyName(IDPropertyName);
+        //            writer.Write(index);
+        //        }
+        //        else
+        //        {
+        //            objectReferences.Add(o);
+        //            int id = objectReferences.Count - 1;
+        //            writer.WritePropertyName(IDPropertyName);
+        //            writer.Write(id);
+        //            writer.WritePropertyName(TypePropertyName);
+        //            writer.Write(o.GetType().FullName);
+        //            SerializeToElement(writer, o, objectReferences);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        writer.WritePropertyName(TypePropertyName);
+        //        writer.Write(o.GetType().FullName);
+        //        SerializeToElement(writer, o, objectReferences);
+        //    }
+        //    writer.WriteObjectEnd();
+        //}
         #endregion
 
         #region Deserialization
@@ -269,24 +449,56 @@ namespace Bibim.Json.Serialization
 
             List<object> objectReferences = new List<object>();
             objectReferences.Add(null);
-            return DeserializeFromElement(reader, objectReferences);
+            return Read(reader, objectReferences);
         }
 
-        private object DeserializeFromElement(JsonReader reader, List<object> objectReferences)
+        private object Read(JsonReader reader, List<object> objectReferences)
         {
             if (reader.Read())
             {
                 switch (reader.Token)
                 {
+                    case JsonToken.None:
+                        return null;
                     case JsonToken.ObjectStart:
                         return ReadObject(reader, objectReferences);
+                    case JsonToken.PropertyName:
+                        throw new InvalidDataException();
+                    case JsonToken.ObjectEnd:
+                        throw new InvalidDataException();
                     case JsonToken.ArrayStart:
                         return ReadArray(reader, objectReferences);
+                    case JsonToken.ArrayEnd:
+                        throw new InvalidDataException();
+                    case JsonToken.Int:
+                    case JsonToken.Long:
+                    case JsonToken.Double:
+                    case JsonToken.String:
+                    case JsonToken.Boolean:
+                        return reader.Value;
+                    case JsonToken.Null:
+                        return null;
                 }
             }
 
             return null;
         }
+
+        //private object DeserializeFromElement(JsonReader reader, List<object> objectReferences)
+        //{
+        //    if (reader.Read())
+        //    {
+        //        switch (reader.Token)
+        //        {
+        //            case JsonToken.ObjectStart:
+        //                return ReadObject(reader, objectReferences);
+        //            case JsonToken.ArrayStart:
+        //                return ReadArray(reader, objectReferences);
+        //        }
+        //    }
+
+        //    return null;
+        //}
 
         private List<object> ReadArray(JsonReader reader, List<object> objectReferences)
         {
@@ -297,14 +509,14 @@ namespace Bibim.Json.Serialization
                 switch (reader.Token)
                 {
                     case JsonToken.None:
-                        break;
+                        throw new InvalidDataException();
                     case JsonToken.ObjectStart:
                         result.Add(ReadObject(reader, objectReferences));
                         break;
                     case JsonToken.PropertyName:
-                        break;
+                        throw new InvalidDataException();
                     case JsonToken.ObjectEnd:
-                        break;
+                        throw new InvalidDataException();
                     case JsonToken.ArrayStart:
                         result.Add(ReadArray(reader, objectReferences));
                         break;
@@ -361,15 +573,24 @@ namespace Bibim.Json.Serialization
                 }
             }
 
+            int id = -1;
             if (properties.ContainsKey(IDPropertyName))
             {
-                int id = (int)properties[IDPropertyName];
+                id = (int)properties[IDPropertyName];
                 if (0 <= id && id < objectReferences.Count && objectReferences[id] != null)
                     return objectReferences[id];
             }
 
             Type type = FindType((string)properties[TypePropertyName]);
-            object result = Activator.CreateInstance(type);
+            object result = Activator.CreateInstance(type, true);
+
+            if (0 <= id)
+            {
+                if (objectReferences.Count <= id)
+                    objectReferences.AddRange(new object[id - objectReferences.Count + 1]);
+
+                objectReferences[id] = result;
+            }
 
             properties.Remove(IDPropertyName);
             properties.Remove(TypePropertyName);
@@ -397,6 +618,12 @@ namespace Bibim.Json.Serialization
                 var dictionary = (HybridDictionary)result;
                 foreach (var item in properties)
                     dictionary.Add(item.Key, item.Value);
+            }
+            else if (result is IList)
+            {
+                var list = (IList)result;
+                foreach (var item in (List<object>)properties[ItemsPropertyName])
+                    list.Add(item);
             }
             else
             {
