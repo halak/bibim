@@ -215,8 +215,8 @@ namespace LitJson
                 context.Count > 1)
                 writer.Write (',');
 
-            if (pretty_print && ! context.ExpectingValue)
-                writer.Write ('\n');
+            if (pretty_print && !context.ExpectingValue)
+                writer.WriteLine();
         }
 
         private void PutString (string str)

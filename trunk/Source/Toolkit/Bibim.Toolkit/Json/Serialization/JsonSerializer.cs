@@ -58,7 +58,7 @@ namespace Bibim.Json.Serialization
 
             using (var sw = new StreamWriter(path, false, Encoding.UTF8))
             {
-                var writer = new JsonWriter(sw) { PrettyPrint = false };
+                var writer = new JsonWriter(sw) { PrettyPrint = true };
                 Serialize(writer, o);
             }
         }
@@ -70,7 +70,7 @@ namespace Bibim.Json.Serialization
 
             using (var sw = new StreamWriter(stream, Encoding.UTF8))
             {
-                var writer = new JsonWriter(sw) { PrettyPrint = false };
+                var writer = new JsonWriter(sw) { PrettyPrint = true };
                 Serialize(writer, o);
             }
         }
@@ -220,18 +220,27 @@ namespace Bibim.Json.Serialization
             }
 
             writer.WriteObjectStart();
-            int index = objectReferences.IndexOf(o);
-            if (index != -1)
+            if (o.GetType().IsClass)
             {
-                writer.WritePropertyName(IDPropertyName);
-                writer.Write(index);
+                int index = objectReferences.IndexOf(o);
+                if (index != -1)
+                {
+                    writer.WritePropertyName(IDPropertyName);
+                    writer.Write(index);
+                }
+                else
+                {
+                    objectReferences.Add(o);
+                    int id = objectReferences.Count - 1;
+                    writer.WritePropertyName(IDPropertyName);
+                    writer.Write(id);
+                    writer.WritePropertyName(TypePropertyName);
+                    writer.Write(o.GetType().FullName);
+                    SerializeToElement(writer, o, objectReferences);
+                }
             }
             else
             {
-                objectReferences.Add(o);
-                int id = objectReferences.Count - 1;
-                writer.WritePropertyName(IDPropertyName);
-                writer.Write(id);
                 writer.WritePropertyName(TypePropertyName);
                 writer.Write(o.GetType().FullName);
                 SerializeToElement(writer, o, objectReferences);
@@ -352,9 +361,12 @@ namespace Bibim.Json.Serialization
                 }
             }
 
-            int id = (int)properties[IDPropertyName];
-            if (0 <= id && id < objectReferences.Count && objectReferences[id] != null)
-                return objectReferences[id];
+            if (properties.ContainsKey(IDPropertyName))
+            {
+                int id = (int)properties[IDPropertyName];
+                if (0 <= id && id < objectReferences.Count && objectReferences[id] != null)
+                    return objectReferences[id];
+            }
 
             Type type = FindType((string)properties[TypePropertyName]);
             object result = Activator.CreateInstance(type);
