@@ -54,7 +54,7 @@
 #include <Bibim/Evals.h>
 #include <bibim/EvalSequenceBase.h>
 #include <Bibim/EvalSEquences.h>
-#include <Bibim/EvalTrees.h>
+#include <Bibim/EvalBoard.h>
 #include <Bibim/EvalVariables.h>
 #include <Bibim/SEquences.h>
 #  include <Bibim/Environment.Windows.h>
@@ -64,7 +64,7 @@
 #  include <Bibim/Geom2D.h>
 #  include <Bibim/Math.h>
 #  include <Bibim/Matrix4.h>
-#include <Bibim/EvalTrees.h>
+#include <Bibim/EvalBoard.h>
 #  include <Bibim/MemoryStream.h>
 #  include <Bibim/NullPointer.h>
 #  include <Bibim/Numerics.h>
