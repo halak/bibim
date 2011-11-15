@@ -250,7 +250,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                 #endregion
 
                 #region Image Asset을 저장합니다.
-                var readImage = new ReadImage();
+                var readImage = new ReadGameAsset();
                 var imageRecipe = new GameAssetRecipe()
                 {
                     Cook = readImage,
@@ -264,10 +264,13 @@ namespace Bibim.Asset.Pipeline.Recipes
                 {
                     string path = string.Format(imageOutputFormat, imageNumber++);
 
-                    readImage.TextureURI = Path.Combine(context.Directory, Path.ChangeExtension((string)item.Sheet.Tag, null));
-                    readImage.ClippingRectangle = new Rectangle(item.Bounds.X, item.Bounds.Y,
-                                                                item.Bounds.Width, item.Bounds.Height);
-                    readImage.AppliedTransform = item.AppliedTransform;
+                    readImage.Input = new Image()
+                    {
+                        TextureURI = Path.Combine(context.Directory, Path.ChangeExtension((string)item.Sheet.Tag, null)),
+                        ClippingRectangle = new Rectangle(item.Bounds.X, item.Bounds.Y,
+                                                          item.Bounds.Width, item.Bounds.Height),
+                        AppliedTransform = item.AppliedTransform,
+                    };
 
                     JsonSerializer.Instance.Serialize(Path.Combine(context.BaseDirectory, context.Directory, Path.ChangeExtension(path, "asset")), imageRecipe);
 
