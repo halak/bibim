@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.IO;
@@ -56,7 +58,7 @@ namespace Bibim.Json.Serialization
 
             using (var sw = new StreamWriter(path, false, Encoding.UTF8))
             {
-                var writer = new JsonWriter(sw) { PrettyPrint = true };
+                var writer = new JsonWriter(sw) { PrettyPrint = false };
                 Serialize(writer, o);
             }
         }
@@ -68,7 +70,7 @@ namespace Bibim.Json.Serialization
 
             using (var sw = new StreamWriter(stream, Encoding.UTF8))
             {
-                var writer = new JsonWriter(sw) { PrettyPrint = true };
+                var writer = new JsonWriter(sw) { PrettyPrint = false };
                 Serialize(writer, o);
             }
         }
@@ -90,93 +92,122 @@ namespace Bibim.Json.Serialization
             if (o == null)
                 return;
 
-            Type t = o.GetType();
-            foreach (var mi in t.GetMembers(memberFlags))
+            Action<string, object> writeValue = (key, value) =>
             {
-                object v = null;
-                Type declaredType = null;
-                if (mi is PropertyInfo)
+                writer.WritePropertyName(key);
+                if (value != null)
                 {
-                    var pi = (PropertyInfo)mi;
-
-                    if (pi.GetGetMethod() == null || pi.GetGetMethod().IsPublic == false ||
-                        pi.GetSetMethod() == null || pi.GetSetMethod().IsPublic == false)
-                        continue;
-
-                    v = pi.GetValue(o, null);
-                    declaredType = pi.PropertyType;
-                }
-                else if (mi is FieldInfo)
-                {
-                    var fi = (FieldInfo)mi;
-                    v = fi.GetValue(o);
-                    declaredType = fi.FieldType;
-                }
-                else
-                    continue;
-
-                if (mi.IsDefined(typeof(NonSerializedAttribute), true))
-                    continue;
-
-                writer.WritePropertyName(mi.Name);
-                if (v != null)
-                {
-                    if (v.GetType().IsValueType)
+                    if (value.GetType().IsValueType)
                     {
-                        if (v.GetType().IsPrimitive)
+                        if (value.GetType().IsPrimitive)
                         {
-                            if (v.GetType() == typeof(bool))
+                            if (value.GetType() == typeof(bool))
                             {
-                                writer.Write((bool)v);
+                                writer.Write((bool)value);
                             }
-                            else if (v.GetType() == typeof(sbyte) ||
-                                     v.GetType() == typeof(byte) ||
-                                     v.GetType() == typeof(short) ||
-                                     v.GetType() == typeof(ushort) ||
-                                     v.GetType() == typeof(int))
+                            else if (value.GetType() == typeof(sbyte) ||
+                                     value.GetType() == typeof(byte) ||
+                                     value.GetType() == typeof(short) ||
+                                     value.GetType() == typeof(ushort) ||
+                                     value.GetType() == typeof(int))
                             {
-                                writer.Write((int)Convert.ChangeType(v, typeof(int)));
+                                writer.Write((int)Convert.ChangeType(value, typeof(int)));
                             }
-                            else if (v.GetType() == typeof(uint) ||
-                                     v.GetType() == typeof(long))
+                            else if (value.GetType() == typeof(uint) ||
+                                     value.GetType() == typeof(long))
                             {
-                                writer.Write((long)Convert.ChangeType(v, typeof(long)));
+                                writer.Write((long)Convert.ChangeType(value, typeof(long)));
                             }
-                            else if (v.GetType() == typeof(ulong))
+                            else if (value.GetType() == typeof(ulong))
                             {
-                                writer.Write((ulong)v);
+                                writer.Write((ulong)value);
                             }
-                            else if (v.GetType() == typeof(float) ||
-                                     v.GetType() == typeof(double))
+                            else if (value.GetType() == typeof(float) ||
+                                     value.GetType() == typeof(double))
                             {
-                                writer.Write((double)Convert.ChangeType(v, typeof(double)));
+                                writer.Write((double)Convert.ChangeType(value, typeof(double)));
                             }
                             else
-                                throw new NotSupportedException(v.GetType().ToString());
+                                throw new NotSupportedException(value.GetType().ToString());
                         }
-                        else if (v.GetType().IsEnum)
-                            writer.Write(v.GetType().GetEnumName(v));
+                        else if (value.GetType().IsEnum)
+                            writer.Write(value.GetType().GetEnumName(value));
                         else
                         {
-                            TypeConverter tc = GetTypeConverter(v.GetType());
+                            TypeConverter tc = GetTypeConverter(value.GetType());
                             if (tc != null)
-                                writer.Write(tc.ConvertToString(v));
+                                writer.Write(tc.ConvertToString(value));
                             else
-                                WriteObjectAsElement(writer, v, objectReferences);
+                                WriteObjectAsElement(writer, value, objectReferences);
                         }
                     }
-                    else if (v.GetType().IsClass)
+                    else if (value.GetType().IsClass)
                     {
-                        if (v.GetType() == typeof(string))
-                            writer.Write((string)v);
+                        if (value.GetType() == typeof(string))
+                            writer.Write((string)value);
                         else
-                            WriteObjectAsElement(writer, v, objectReferences);
+                            WriteObjectAsElement(writer, value, objectReferences);
                     }
                     else
-                        throw new NotSupportedException(v.GetType().ToString());
+                        throw new NotSupportedException(value.GetType().ToString());
                 }
                 else
                     writer.Write((string)null);
+            };
+
+            if (o is IDictionary)
+            {
+                foreach (DictionaryEntry item in (IDictionary)o)
+                    writeValue(item.Key.ToString(), item.Value);
+            }
+            else if (o is NameValueCollection)
+            {
+                var nvc = (NameValueCollection)o;
+                for (int i = 0; i < nvc.Count; i++)
+                    writeValue(nvc.Keys[i], nvc[i]);
+            }
+            else if (o is StringDictionary)
+            {
+                foreach (DictionaryEntry item in (StringDictionary)o)
+                    writeValue((string)item.Key, (string)item.Value);
+            }
+            else if (o is HybridDictionary)
+            {
+                foreach (DictionaryEntry item in (HybridDictionary)o)
+                    writeValue(item.Key.ToString(), item.Value);
+            }
+            else
+            {
+                Type t = o.GetType();
+                foreach (var mi in t.FindMembers(MemberTypes.Field | MemberTypes.Property, memberFlags, (m, fc) => { return true; }, null))
+                {
+                    object v = null;
+                    Type declaredType = null;
+                    if (mi is PropertyInfo)
+                    {
+                        var pi = (PropertyInfo)mi;
+
+                        if (pi.GetGetMethod() == null || pi.GetGetMethod().IsPublic == false ||
+                            pi.GetSetMethod() == null || pi.GetSetMethod().IsPublic == false)
+                            continue;
+
+                        v = pi.GetValue(o, null);
+                        declaredType = pi.PropertyType;
+                    }
+                    else if (mi is FieldInfo)
+                    {
+                        var fi = (FieldInfo)mi;
+                        v = fi.GetValue(o);
+                        declaredType = fi.FieldType;
+                    }
+                    else
+                        continue;
+
+                    if (mi.IsDefined(typeof(NonSerializedAttribute), true))
+                        continue;
+
+                    writeValue(mi.Name, v);
+                }
             }
         }
 
@@ -330,54 +361,82 @@ namespace Bibim.Json.Serialization
 
             properties.Remove(IDPropertyName);
             properties.Remove(TypePropertyName);
-            foreach (var item in properties)
+
+            if (result is IDictionary)
             {
-                MemberInfo[] members = type.GetMember(item.Key, memberFlags);
-                if (members == null || members.Length == 0)
-                    continue;
+                var dictionary = (IDictionary)result;
+                foreach (var item in properties)
+                    dictionary.Add(item.Key, item.Value);
+            }
+            else if (result is StringDictionary)
+            {
+                var dictionary = (StringDictionary)result;
+                foreach (var item in properties)
+                    dictionary.Add(item.Key, (string)item.Value);
+            }
+            else if (result is NameValueCollection)
+            {
+                var dictionary = (NameValueCollection)result;
+                foreach (var item in properties)
+                    dictionary.Add(item.Key, (string)item.Value);
+            }
+            else if (result is HybridDictionary)
+            {
+                var dictionary = (HybridDictionary)result;
+                foreach (var item in properties)
+                    dictionary.Add(item.Key, item.Value);
+            }
+            else
+            {
+                foreach (var item in properties)
+                {
+                    MemberInfo[] members = type.GetMember(item.Key, memberFlags);
+                    if (members == null || members.Length == 0)
+                        continue;
 
-                Action<object> setValue = null; 
-                Type declaredType = null;
-                if (members[0] is PropertyInfo)
-                {
-                    var pi = (PropertyInfo)members[0];
-                    setValue = (v) => { pi.SetValue(result, v, null); };
-                    declaredType = pi.PropertyType;
-                }
-                else if (members[0] is FieldInfo)
-                {
-                    var fi = (FieldInfo)members[0];
-                    setValue = (v) => { fi.SetValue(result, v); };
-                    declaredType = fi.FieldType;
-                }
-                else
-                    continue;
-
-                if (item.Value == null)
-                {
-                    setValue(null);
-                    continue;
-                }
-
-                if (declaredType.IsValueType)
-                {
-                    if (declaredType.IsPrimitive)
-                        setValue(Convert.ChangeType(item.Value, declaredType));
-                    else if (declaredType.IsEnum)
-                        setValue(Enum.Parse(declaredType, (string)item.Value));
-                    else
+                    Action<object> setValue = null;
+                    Type declaredType = null;
+                    if (members[0] is PropertyInfo)
                     {
-                        if (item.Value is string)
-                        {
-                            var tc = GetTypeConverter(declaredType);
-                            setValue(tc.ConvertFromString((string)item.Value));
-                        }
-                        else
-                            setValue(item.Value);
+                        var pi = (PropertyInfo)members[0];
+                        setValue = (v) => { pi.SetValue(result, v, null); };
+                        declaredType = pi.PropertyType;
                     }
+                    else if (members[0] is FieldInfo)
+                    {
+                        var fi = (FieldInfo)members[0];
+                        setValue = (v) => { fi.SetValue(result, v); };
+                        declaredType = fi.FieldType;
+                    }
+                    else
+                        continue;
+
+                    if (item.Value == null)
+                    {
+                        setValue(null);
+                        continue;
+                    }
+
+                    if (declaredType.IsValueType)
+                    {
+                        if (declaredType.IsPrimitive)
+                            setValue(Convert.ChangeType(item.Value, declaredType));
+                        else if (declaredType.IsEnum)
+                            setValue(Enum.Parse(declaredType, (string)item.Value));
+                        else
+                        {
+                            if (item.Value is string)
+                            {
+                                var tc = GetTypeConverter(declaredType);
+                                setValue(tc.ConvertFromString((string)item.Value));
+                            }
+                            else
+                                setValue(item.Value);
+                        }
+                    }
+                    else
+                        setValue(item.Value);
                 }
-                else
-                    setValue(item.Value);
             }
 
             return result;
