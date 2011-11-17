@@ -44,4 +44,14 @@ namespace Bibim
     {
         looped = value;
     }
+
+    bool EvalTimeflow::GetNormalized() const
+    {
+        return normalized;
+    }
+
+    void EvalTimeflow::SetNormalized(bool value)
+    {
+        normalized = value;
+    }
 }

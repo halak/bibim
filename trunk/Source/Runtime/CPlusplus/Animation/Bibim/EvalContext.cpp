@@ -21,37 +21,55 @@ namespace Bibim
     template <>
     bool EvalContext::GetValue<bool>(const String& name)
     {
-        return variables->GetValue(name).CastBool();
+        if (variables)
+            return variables->GetValue(name).CastBool();
+        else
+            return false;
     }
 
     template <>
     short EvalContext::GetValue<short>(const String& name)
     {
-        return static_cast<short>(variables->GetValue(name).CastInt());
+        if (variables)
+            return static_cast<short>(variables->GetValue(name).CastInt());
+        else
+            return 0;
     }
 
     template <>
     int EvalContext::GetValue<int>(const String& name)
     {
-        return variables->GetValue(name).CastInt();
+        if (variables)
+            return variables->GetValue(name).CastInt();
+        else
+            return 0;
     }
 
     template <>
     longint EvalContext::GetValue<longint>(const String& name)
     {
-        return variables->GetValue(name).CastLongInt();
+        if (variables)
+            return variables->GetValue(name).CastLongInt();
+        else
+            return 0;
     }
 
     template <>
     float EvalContext::GetValue<float>(const String& name)
     {
-        return variables->GetValue(name).CastFloat();
+        if (variables)
+            return variables->GetValue(name).CastFloat();
+        else
+            return 0.0f;
     }
 
     template <>
     double EvalContext::GetValue<double>(const String& name)
     {
-        return static_cast<double>(variables->GetValue(name).CastFloat());
+        if (variables)
+            return static_cast<double>(variables->GetValue(name).CastFloat());
+        else
+            return 0.0;
     }
 
     template <>

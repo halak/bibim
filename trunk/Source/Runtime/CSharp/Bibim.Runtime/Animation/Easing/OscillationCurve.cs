@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Bibim.Animation
 {
-    [ClassID('E', 'C', 'O', '0')]
+    [ClassID('E', 'C', 'O', 'C')]
     public sealed class OscillationCurve : EasingCurve
     {
         #region Mode (Nested Enum)

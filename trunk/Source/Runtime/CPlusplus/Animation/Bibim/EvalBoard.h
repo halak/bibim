@@ -26,12 +26,14 @@
                 virtual ~EvalBoard();
 
                 EvalBase* Find(const String& name) const;
+                inline float GetDuration() const;
                 inline const ItemCollection& GetItems() const;
 
             private:
-                EvalBoard(std::vector<Item>& items);
+                EvalBoard(float duration, std::vector<Item>& items);
 
             private:
+                float duration;
                 ItemCollection items;
         };
     }

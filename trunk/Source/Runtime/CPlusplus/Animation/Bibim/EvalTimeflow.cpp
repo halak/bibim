@@ -9,12 +9,14 @@ namespace Bibim
     BBImplementsComponent(EvalTimeflow);
 
     EvalTimeflow::EvalTimeflow()
-        : timeline(nullptr),
+        : evaluatedTime(0.0f),
+          timeline(nullptr),
           time(0.0f),
           duration(0.0f),
           velocity(1.0f),
           stopBehavior(PauseAtStop),
           looped(true),
+          normalized(false),
           isUpdating(false)
     {
     }
@@ -53,6 +55,16 @@ namespace Bibim
                     time = 0.0f;
             }
         }
+
+        if (normalized)
+        {
+            if (duration > 0.0f)
+                evaluatedTime = time / duration;
+            else
+                evaluatedTime = 0.0f;
+        }
+        else
+            evaluatedTime = time;
     }
 
     void EvalTimeflow::Start()
@@ -90,11 +102,12 @@ namespace Bibim
     void EvalTimeflow::Reset()
     {
         time = 0.0f;
+        evaluatedTime = 0.0f;
     }
 
     float EvalTimeflow::Evaluate(EvalContext& /*context*/)
     {
-        return time;
+        return evaluatedTime;
     }
 
     void EvalTimeflow::SetTimeline(Timeline* value)
@@ -119,24 +132,28 @@ namespace Bibim
     void EvalTimeflow::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
+        evaluatedTime = 0.0f;
         timeline = static_cast<Timeline*>(reader.ReadModule(Timeline::ClassID));
         time = 0.0f;
         duration = reader.ReadFloat();
         velocity = reader.ReadFloat();
         stopBehavior = static_cast<Behavior>(reader.ReadByte());
         looped = reader.ReadBool();
+        normalized = reader.ReadBool();
     }
 
     void EvalTimeflow::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
+        evaluatedTime = o->evaluatedTime;
         timeline = o->timeline;
         time = o->time;
         duration = o->duration;
         velocity = o->velocity;
         stopBehavior = o->stopBehavior;
         looped = o->looped;
+        normalized = o->normalized;
         isUpdating = o->isUpdating;
 
         if (timeline != nullptr && isUpdating)

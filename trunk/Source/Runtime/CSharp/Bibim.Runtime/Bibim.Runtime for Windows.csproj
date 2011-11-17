@@ -98,6 +98,24 @@
     <Compile Include="Animation\Easing\OscillationCurve.cs" />
     <Compile Include="Animation\Evaluation\EvalBinaryOperatorTemplate.cs" />
     <Compile Include="Animation\Evaluation\EvalBoard.cs" />
+    <Compile Include="Animation\Evaluation\EvalCaches\EvalBoolCache.cs" />
+    <Compile Include="Animation\Evaluation\EvalCaches\EvalColorCache.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Animation\Evaluation\EvalCaches\EvalDoubleCache.cs" />
+    <Compile Include="Animation\Evaluation\EvalCaches\EvalFloatCache.cs" />
+    <Compile Include="Animation\Evaluation\EvalCaches\EvalIntCache.cs" />
+    <Compile Include="Animation\Evaluation\EvalCaches\EvalLongIntCache.cs" />
+    <Compile Include="Animation\Evaluation\EvalCaches\EvalPoint2Cache.cs" />
+    <Compile Include="Animation\Evaluation\EvalCaches\EvalPoint3Cache.cs" />
+    <Compile Include="Animation\Evaluation\EvalCaches\EvalPoint4Cache.cs" />
+    <Compile Include="Animation\Evaluation\EvalCaches\EvalRectCache.cs" />
+    <Compile Include="Animation\Evaluation\EvalCaches\EvalRectFCache.cs" />
+    <Compile Include="Animation\Evaluation\EvalCaches\EvalShortIntCache.cs" />
+    <Compile Include="Animation\Evaluation\EvalCaches\EvalVector2Cache.cs" />
+    <Compile Include="Animation\Evaluation\EvalCaches\EvalVector3Cache.cs" />
+    <Compile Include="Animation\Evaluation\EvalCaches\EvalVector4Cache.cs" />
+    <Compile Include="Animation\Evaluation\EvalCacheTemplate.cs" />
     <Compile Include="Animation\Evaluation\EvalInterpolators\EvalColorInterpolator.cs" />
     <Compile Include="Animation\Evaluation\EvalInterpolators\EvalDoubleInterpolator.cs" />
     <Compile Include="Animation\Evaluation\EvalInterpolators\EvalFloatInterpolator.cs" />
@@ -117,6 +135,23 @@
     <Compile Include="Animation\Evaluation\EvalOperators\EvalIntOperators.cs" />
     <Compile Include="Animation\Evaluation\EvalOperators\EvalLongIntOperators.cs" />
     <Compile Include="Animation\Evaluation\EvalOperators\EvalShortIntOperators.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalBoolSelector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalColorSelector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalDoubleSelector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalFloatSelector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalGameAssetSelector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalIntSelector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalLongIntSelector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalPoint2Selector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalPoint3Selector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalPoint4Selector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalRectSelector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalRectFSelector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalShortIntSelector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalVector2Selector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalVector3Selector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectors\EvalVector4Selector.cs" />
+    <Compile Include="Animation\Evaluation\EvalSelectorTemplate.cs" />
     <Compile Include="Animation\Evaluation\EvalTimeflow.cs" />
     <Compile Include="Animation\Evaluation\EvalConstants\EvalColorConstant.cs" />
     <Compile Include="Animation\Evaluation\EvalConstants\EvalPoint3Constant.cs" />
@@ -318,7 +353,6 @@
     <Compile Include="UI\Visuals\UIWindow.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Animation\Evaluation\EvalTrees\" />
     <Folder Include="Diagnostics\" />
     <Folder Include="FileSystem\" />
     <Folder Include="Framework\" />

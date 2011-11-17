@@ -231,7 +231,7 @@ namespace Bibim
         if (buffer->length < length)
             return false;
 
-        const int lengthDifference = buffer->length - length;
+        const int lengthDifference = buffer->length - length + 1;
         for (int i = 0; i < lengthDifference; i++)
         {
             int k = 0;

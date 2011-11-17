@@ -258,6 +258,8 @@ namespace Bibim.Json.Serialization
 
                     if (mi.IsDefined(typeof(NonSerializedAttribute), true))
                         continue;
+                    if (mi.IsDefined(typeof(System.Xml.Serialization.XmlIgnoreAttribute), true))
+                        continue;
 
                     writer.WritePropertyName(mi.Name);
                     Write(writer, v, objectReferences);

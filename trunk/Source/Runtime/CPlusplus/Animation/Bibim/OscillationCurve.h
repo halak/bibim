@@ -9,7 +9,7 @@
     {
         class OscillationCurve : public EasingCurve
         {
-            BBComponentClass(OscillationCurve, EasingCurve, 'E', 'C', 'O', '0');
+            BBComponentClass(OscillationCurve, EasingCurve, 'E', 'C', 'O', 'C');
             public:
                 enum OscillationMode
                 {

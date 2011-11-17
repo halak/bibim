@@ -27,7 +27,20 @@ namespace Bibim.Animation
         }
         #endregion
 
+        #region Fields
+        private float duration;
+        #endregion
+
         #region Properties
+        public float Duration
+        {
+            get { return duration; }
+            set
+            {
+                duration = Math.Max(value, 0.0f);
+            }
+        }
+
         public ItemCollection Items
         {
             get;
@@ -39,6 +52,7 @@ namespace Bibim.Animation
         public EvalBoard()
         {
             Items = new ItemCollection();
+            duration = 0.0f;
         }
         #endregion
     }

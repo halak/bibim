@@ -19,6 +19,7 @@ namespace Bibim.Animation
         #endregion
 
         #region Fields
+        private float evaluatedTime;
         private Timeline timeline;
         private float duration;
         private int lastTimestamp;
@@ -71,6 +72,12 @@ namespace Bibim.Animation
             set;
         }
 
+        public bool IsNormalized
+        {
+            get;
+            set;
+        }
+
         public Behavior StopBehavior
         {
             get;
@@ -80,22 +87,23 @@ namespace Bibim.Animation
 
         #region Constructors
         public EvalTimeflow()
-            : this(0.0f, 1.0f, Behavior.Pause, true)
+            : this(0.0f, 1.0f, Behavior.Pause, true, false)
         {
         }
 
         public EvalTimeflow(float duration)
-            : this(duration, 1.0f, Behavior.Pause, true)
+            : this(duration, 1.0f, Behavior.Pause, true, false)
         {
         }
 
-        public EvalTimeflow(float duration, float velocity, Behavior stopBehavior, bool isLooped)
+        public EvalTimeflow(float duration, float velocity, Behavior stopBehavior, bool isLooped, bool isNormalized)
         {
             Time = 0.0f;
             Duration = duration;
             Velocity = velocity;
             StopBehavior = stopBehavior;
             IsLooped = isLooped;
+            IsNormalized = isNormalized;
         }
         #endregion
 
@@ -128,6 +136,16 @@ namespace Bibim.Animation
                         Time = 0.0f;
                 }
             }
+
+            if (IsNormalized)
+            {
+                if (Duration > 0.0f)
+                    evaluatedTime = Time / Duration;
+                else
+                    evaluatedTime = 0.0f;
+            }
+            else
+                evaluatedTime = Time;
         }
         #endregion
 
@@ -166,11 +184,12 @@ namespace Bibim.Animation
         public override void Reset()
         {
             Time = 0.0f;
+            evaluatedTime = 0.0f;
         }
 
         public override float Evaluate(EvalContext context)
         {
-            return Time;
+            return evaluatedTime;
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Bibim.Animation
         {
             List<object> objMap = new List<object>();
             writer.Write(asset.ClassID);
+            writer.Write(asset.Duration);
             writer.Write((short)asset.Items.Count);
             foreach (var item in asset.Items)
             {
@@ -162,6 +163,41 @@ namespace Bibim.Animation
             Write(writer, o.Value2, objMap);
             Write(writer, o.Weight, objMap);
             Write(writer, o.EasingCurve, objMap);
+
+            return true;
+        }
+
+        private static bool WriteSelector<V>(AssetStreamWriter writer, EvalSelectorTemplate<V> o, IList<object> objMap)
+        {
+            if (WriteEval(writer, o, objMap) == false)
+                return false;
+
+            Write(writer, o.Condition, objMap);
+            if (o.Cases != null)
+            {
+                writer.Write((short)o.Cases.Count);
+                foreach (var item in o.Cases)
+                {
+                    writer.Write(item.Min);
+                    writer.Write(item.Max);
+                    Write(writer, item.Item, objMap);
+                }
+            }
+            else
+                writer.Write((short)0);
+
+            Write(writer, o.DefaultCase, objMap);
+
+            return true;
+        }
+
+        private static bool WriteCache<V>(AssetStreamWriter writer, EvalCacheTemplate<V> o, IList<object> objMap)
+        {
+            if (WriteEval(writer, o, objMap) == false)
+                return false;
+
+            Write(writer, o.Source, objMap);
+            writer.Write((byte)o.UpdateMode);
 
             return true;
         }
@@ -399,6 +435,36 @@ namespace Bibim.Animation
         private static void Write(AssetStreamWriter writer, EvalVector4Interpolator o, IList<object> objMap) { WriteInterpolator(writer, o, objMap); }
         #endregion
 
+        #region Write EvalSelector<T> derived classes
+        private static void Write(AssetStreamWriter writer, EvalColorSelector o, IList<object> objMap) { WriteSelector(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalDoubleSelector o, IList<object> objMap) { WriteSelector(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalFloatSelector o, IList<object> objMap) { WriteSelector(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalIntSelector o, IList<object> objMap) { WriteSelector(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalLongIntSelector o, IList<object> objMap) { WriteSelector(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalPoint2Selector o, IList<object> objMap) { WriteSelector(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalPoint3Selector o, IList<object> objMap) { WriteSelector(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalPoint4Selector o, IList<object> objMap) { WriteSelector(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalShortIntSelector o, IList<object> objMap) { WriteSelector(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalVector2Selector o, IList<object> objMap) { WriteSelector(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalVector3Selector o, IList<object> objMap) { WriteSelector(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalVector4Selector o, IList<object> objMap) { WriteSelector(writer, o, objMap); }
+        #endregion
+
+        #region Write EvalCache<T> derived classes
+        private static void Write(AssetStreamWriter writer, EvalColorCache o, IList<object> objMap) { WriteCache(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalDoubleCache o, IList<object> objMap) { WriteCache(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalFloatCache o, IList<object> objMap) { WriteCache(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalIntCache o, IList<object> objMap) { WriteCache(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalLongIntCache o, IList<object> objMap) { WriteCache(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalPoint2Cache o, IList<object> objMap) { WriteCache(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalPoint3Cache o, IList<object> objMap) { WriteCache(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalPoint4Cache o, IList<object> objMap) { WriteCache(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalShortIntCache o, IList<object> objMap) { WriteCache(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalVector2Cache o, IList<object> objMap) { WriteCache(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalVector3Cache o, IList<object> objMap) { WriteCache(writer, o, objMap); }
+        private static void Write(AssetStreamWriter writer, EvalVector4Cache o, IList<object> objMap) { WriteCache(writer, o, objMap); }
+        #endregion
+
         #region Write misc classes
         private static void Write(AssetStreamWriter writer, EvalTimeflow o, IList<object> objMap)
         {
@@ -410,6 +476,7 @@ namespace Bibim.Animation
             writer.Write(o.Velocity);
             writer.Write((byte)o.StopBehavior);
             writer.Write(o.IsLooped);
+            writer.Write(o.IsNormalized);
         }
 
         private static void Write(AssetStreamWriter writer, EvalUnitRandom o, IList<object> objMap)
@@ -418,7 +485,6 @@ namespace Bibim.Animation
                 return;
 
             writer.Write(o.InitialSeed);
-            writer.Write((byte)o.Cycle);
         }
         #endregion
 

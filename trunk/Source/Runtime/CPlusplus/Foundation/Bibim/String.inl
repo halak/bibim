@@ -261,6 +261,11 @@ namespace Bibim
         return right <= left;
     }
 
+    String operator + (const char* left, const String& right)
+    {
+        return String(String::AppendTag(), left, String::CharsLength(left), right.CStr(), right.GetLength());
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     int String::CopyChars(char* destination, const char* source)
