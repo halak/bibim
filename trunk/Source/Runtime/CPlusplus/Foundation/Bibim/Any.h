@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __BIBIM_SCRIPTOBJECT_H__
-#define __BIBIM_SCRIPTOBJECT_H__
+#ifndef __BIBIM_ANY_H__
+#define __BIBIM_ANY_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/Color.h>
@@ -14,7 +14,7 @@
 
     namespace Bibim
     {
-        class ScriptObject
+        class Any
         {
             public:
                 enum Type
@@ -43,24 +43,24 @@
                 };
 
             public:
-                inline ScriptObject();
-                inline ScriptObject(bool value);
-                inline ScriptObject(int value);
-                inline ScriptObject(longint value);
-                inline ScriptObject(float value);
-                inline ScriptObject(Color value);
-                inline ScriptObject(Point2 value);
-                inline ScriptObject(Point3 value);
-                inline ScriptObject(Point4 value);
-                inline ScriptObject(Vector2 value);
-                inline ScriptObject(Vector3 value);
-                inline ScriptObject(Vector4 value);
-                inline ScriptObject(const char* value);
-                inline ScriptObject(const String& value);
-                inline ScriptObject(SharedObject* value);
-                inline ScriptObject(void* value);
-                ScriptObject(const ScriptObject& original);
-                ~ScriptObject();
+                inline Any();
+                inline Any(bool value);
+                inline Any(int value);
+                inline Any(longint value);
+                inline Any(float value);
+                inline Any(Color value);
+                inline Any(Point2 value);
+                inline Any(Point3 value);
+                inline Any(Point4 value);
+                inline Any(Vector2 value);
+                inline Any(Vector3 value);
+                inline Any(Vector4 value);
+                inline Any(const char* value);
+                inline Any(const String& value);
+                inline Any(SharedObject* value);
+                inline Any(void* value);
+                Any(const Any& original);
+                ~Any();
 
                 inline Type GetType() const;
 
@@ -72,18 +72,18 @@
                 SharedObject* CastSharedObject() const;
                 void* CastLightObject() const;
 
-                ScriptObject& operator = (const ScriptObject& right);
-                       bool operator == (const ScriptObject& right) const;
-                inline bool operator != (const ScriptObject& right) const;
+                Any& operator = (const Any& right);
+                       bool operator == (const Any& right) const;
+                inline bool operator != (const Any& right) const;
 
                 static inline int SizeOf(Type value);
 
-                static ScriptObject ReadFromBytes(const byte* buffer, Type type);
-                static int WriteToBytes(byte* buffer, const ScriptObject& value);
-                static int WriteToBytes(byte* buffer, const ScriptObject& value, Type castType);
+                static Any ReadFromBytes(const byte* buffer, Type type);
+                static int WriteToBytes(byte* buffer, const Any& value);
+                static int WriteToBytes(byte* buffer, const Any& value, Type castType);
 
             public:
-                static const ScriptObject Void;
+                static const Any Void;
 
             private:
                 union Value
@@ -165,9 +165,9 @@
                 Value value;
         };
 
-        typedef ScriptObject::Type ScriptObjectType;
+        typedef Any::Type AnyType;
     }
 
-#   include <Bibim/ScriptObject.inl>
+#   include <Bibim/Any.inl>
 
 #endif

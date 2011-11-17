@@ -6,7 +6,7 @@
 #   include <Bibim/SharedObject.h>
 #   include <Bibim/MemoryStream.h>
 #   include <Bibim/Script.h>
-#   include <Bibim/ScriptObject.h>
+#   include <Bibim/Any.h>
 #   include <Bibim/ScriptStack.h>
 #   include <map>
 
@@ -27,28 +27,28 @@
                 ScriptThread(Script* script, int stackSize);
                 virtual ~ScriptThread();
 
-                ScriptObject Call(const String& name);
-                ScriptObject Call(const String& name, const ScriptObject& arg1);
-                ScriptObject Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2);
-                ScriptObject Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3);
-                ScriptObject Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4);
-                ScriptObject Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4, const ScriptObject& arg5);
+                Any Call(const String& name);
+                Any Call(const String& name, const Any& arg1);
+                Any Call(const String& name, const Any& arg1, const Any& arg2);
+                Any Call(const String& name, const Any& arg1, const Any& arg2, const Any& arg3);
+                Any Call(const String& name, const Any& arg1, const Any& arg2, const Any& arg3, const Any& arg4);
+                Any Call(const String& name, const Any& arg1, const Any& arg2, const Any& arg3, const Any& arg4, const Any& arg5);
 
-                ScriptObject Resume();
+                Any Resume();
 
                 inline Script* GetScript() const;
                 inline const ScriptStack& GetStack() const;
                 inline State GetState() const;
 
-                const ScriptObject& GetGlobal(int id) const;
-                void SetGlobal(int id, const ScriptObject& value);
+                const Any& GetGlobal(int id) const;
+                void SetGlobal(int id, const Any& value);
 
             private:
                 const Script::Function* BeginCall(const String& name, int numberOfArguments);
-                ScriptObject EndCall(const Script::Function* function);
-                void PushArgument(ScriptObjectType type, const ScriptObject& value);
+                Any EndCall(const Script::Function* function);
+                void PushArgument(AnyType type, const Any& value);
 
-                ScriptObject Run(const Script::Function* function, int topIndex);
+                Any Run(const Script::Function* function, int topIndex);
                 void ProcessInstruction(BinaryReader& reader);
 
                 inline void SetState(State value);
@@ -60,7 +60,7 @@
                 MemoryStreamPtr stream;
                 State state;
                 int nativeFunctionDepth;
-                std::map<int, ScriptObject> globalVariables;
+                std::map<int, Any> globalVariables;
 
                 const Script::Function* suspendedFunction;
                 int suspendedTopIndex;

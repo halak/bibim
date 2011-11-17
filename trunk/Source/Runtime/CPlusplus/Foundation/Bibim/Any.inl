@@ -1,112 +1,112 @@
 namespace Bibim
 {
-    ScriptObject::ScriptObject()
+    Any::Any()
         : type(VoidType)
     {
     }
 
-    ScriptObject::ScriptObject(bool value)
+    Any::Any(bool value)
         : type(BoolType),
           value(value)
     {
     }
 
-    ScriptObject::ScriptObject(int value)
+    Any::Any(int value)
         : type(IntType),
           value(value)
     {
     }
 
-    ScriptObject::ScriptObject(longint value)
+    Any::Any(longint value)
         : type(LongIntType),
           value(value)
     {
     }
 
-    ScriptObject::ScriptObject(float value)
+    Any::Any(float value)
         : type(FloatType),
           value(value)
     {
     }
 
-    ScriptObject::ScriptObject(Color value)
+    Any::Any(Color value)
         : type(ColorType),
           value(static_cast<int>(value.ToARGB()))
 
     {
     }
 
-    ScriptObject::ScriptObject(Point2 value)
+    Any::Any(Point2 value)
         : type(Int2Type),
           value(value.X, value.Y)
     {
     }
 
-    ScriptObject::ScriptObject(Point3 value)
+    Any::Any(Point3 value)
         : type(Int3Type),
           value(new SixteenBytes(value.X, value.Y, value.Z, 0))
     {
     }
 
-    ScriptObject::ScriptObject(Point4 value)
+    Any::Any(Point4 value)
         : type(Int4Type),
           value(new SixteenBytes(value.X, value.Y, value.Z, value.W))
     {
     }
 
-    ScriptObject::ScriptObject(Vector2 value)
+    Any::Any(Vector2 value)
         : type(Float2Type),
           value(value.X, value.Y)
     {
     }
 
-    ScriptObject::ScriptObject(Vector3 value)
+    Any::Any(Vector3 value)
         : type(Float3Type),
           value(new SixteenBytes(value.X, value.Y, value.Z, 0.0f))
     {
     }
 
-    ScriptObject::ScriptObject(Vector4 value)
+    Any::Any(Vector4 value)
         : type(Float4Type),
           value(new SixteenBytes(value.X, value.Y, value.Z, value.W))
     {
     }
 
-    ScriptObject::ScriptObject(const char* value)
+    Any::Any(const char* value)
         : type(StringType),
           value(new String(value))
     {
     }
 
-    ScriptObject::ScriptObject(const String& value)
+    Any::Any(const String& value)
         : type(StringType),
           value(new String(value))
     {
     }
 
-    ScriptObject::ScriptObject(SharedObject* value)
+    Any::Any(SharedObject* value)
         : type(SharedObjectType),
           value(new SharedObjectPtr(value))
     {
     }
 
-    ScriptObject::ScriptObject(void* value)
+    Any::Any(void* value)
         : type(LightObjectType),
           value(value)
     {
     }
 
-    ScriptObject::Type ScriptObject::GetType() const
+    Any::Type Any::GetType() const
     {
         return type;
     }
 
-    bool ScriptObject::operator != (const ScriptObject& right) const
+    bool Any::operator != (const Any& right) const
     {
         return !operator == (right);
     }
 
-    int ScriptObject::SizeOf(Type value)
+    int Any::SizeOf(Type value)
     {
         switch (value)
         {

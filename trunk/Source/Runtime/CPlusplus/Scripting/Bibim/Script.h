@@ -4,7 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameAsset.h>
-#   include <Bibim/ScriptObject.h>
+#   include <Bibim/Any.h>
 #   include <Bibim/String.h>
 #   include <vector>
 
@@ -19,8 +19,8 @@
                     String Name;
                     int Position;
                     int ArgumentStackSize;
-                    std::vector<ScriptObjectType> ReturnTypes;
-                    std::vector<ScriptObjectType> ParameterTypes;
+                    std::vector<AnyType> ReturnTypes;
+                    std::vector<AnyType> ParameterTypes;
                 };
 
             public:

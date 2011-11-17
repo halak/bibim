@@ -255,15 +255,17 @@ namespace LitJson
                     continue;
                 }
 
-                if ((int) str[i] >= 32 && (int) str[i] <= 126) {
-                    writer.Write (str[i]);
-                    continue;
-                }
+                writer.Write(str[i]);
 
-                // Default, turn into a \uXXXX sequence
-                IntToHex ((int) str[i], hex_seq);
-                writer.Write ("\\u");
-                writer.Write (hex_seq);
+                //if ((int) str[i] >= 32 && (int) str[i] <= 126) {
+                //    writer.Write (str[i]);
+                //    continue;
+                //}
+
+                //// Default, turn into a \uXXXX sequence
+                //IntToHex ((int) str[i], hex_seq);
+                //writer.Write ("\\u");
+                //writer.Write (hex_seq);
             }
 
             writer.Write ('"');
@@ -445,18 +447,18 @@ namespace LitJson
 
             PutString (property_name);
 
-            if (pretty_print) {
-                if (property_name.Length > context.Padding)
-                    context.Padding = property_name.Length;
+            //if (pretty_print) {
+            //    if (property_name.Length > context.Padding)
+            //        context.Padding = property_name.Length;
 
-                for (int i = context.Padding - property_name.Length;
-                     i >= 0; i--)
-                    writer.Write (' ');
+            //    for (int i = context.Padding - property_name.Length;
+            //         i >= 0; i--)
+            //        writer.Write (' ');
 
-                writer.Write (": ");
-            } else
-                writer.Write (':');
-
+            //    writer.Write (": ");
+            //} else
+            //    writer.Write (':');
+            writer.Write(" : ");
             context.ExpectingValue = true;
         }
     }
