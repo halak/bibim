@@ -122,15 +122,15 @@ namespace Bibim
     {
     }
 
-    ScriptObject ScriptThread::Call(const String& name)
+    Any ScriptThread::Call(const String& name)
     {
         if (const Script::Function* function = BeginCall(name, 0))
             return EndCall(function);
         else
-            return ScriptObject::Void;
+            return Any::Void;
     }
 
-    ScriptObject ScriptThread::Call(const String& name, const ScriptObject& arg1)
+    Any ScriptThread::Call(const String& name, const Any& arg1)
     {
         if (const Script::Function* function = BeginCall(name, 1))
         {
@@ -138,10 +138,10 @@ namespace Bibim
             return EndCall(function);
         }
         else
-            return ScriptObject::Void;
+            return Any::Void;
     }
 
-    ScriptObject ScriptThread::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2)
+    Any ScriptThread::Call(const String& name, const Any& arg1, const Any& arg2)
     {
         if (const Script::Function* function = BeginCall(name, 2))
         {
@@ -150,10 +150,10 @@ namespace Bibim
             return EndCall(function);
         }
         else
-            return ScriptObject::Void;
+            return Any::Void;
     }
 
-    ScriptObject ScriptThread::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3)
+    Any ScriptThread::Call(const String& name, const Any& arg1, const Any& arg2, const Any& arg3)
     {
         if (const Script::Function* function = BeginCall(name, 3))
         {
@@ -163,10 +163,10 @@ namespace Bibim
             return EndCall(function);
         }
         else
-            return ScriptObject::Void;
+            return Any::Void;
     }
 
-    ScriptObject ScriptThread::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4)
+    Any ScriptThread::Call(const String& name, const Any& arg1, const Any& arg2, const Any& arg3, const Any& arg4)
     {
         if (const Script::Function* function = BeginCall(name, 4))
         {
@@ -177,10 +177,10 @@ namespace Bibim
             return EndCall(function);
         }
         else
-            return ScriptObject::Void;
+            return Any::Void;
     }
 
-    ScriptObject ScriptThread::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4, const ScriptObject& arg5)
+    Any ScriptThread::Call(const String& name, const Any& arg1, const Any& arg2, const Any& arg3, const Any& arg4, const Any& arg5)
     {
         if (const Script::Function* function = BeginCall(name, 5))
         {
@@ -192,10 +192,10 @@ namespace Bibim
             return EndCall(function);
         }
         else
-            return ScriptObject::Void;
+            return Any::Void;
     }
 
-    ScriptObject ScriptThread::Resume()
+    Any ScriptThread::Resume()
     {
         BBAssert(state == Suspended);
         state = Running;
@@ -206,22 +206,22 @@ namespace Bibim
         return Run(temporarySuspendedFunction, temporarySuspendedTopIndex);
     }
 
-    const ScriptObject& ScriptThread::GetGlobal(int id) const
+    const Any& ScriptThread::GetGlobal(int id) const
     {
-        std::map<int, ScriptObject>::const_iterator it = globalVariables.find(id);
+        std::map<int, Any>::const_iterator it = globalVariables.find(id);
         if (it != globalVariables.end())
             return (*it).second;
         else
-            return ScriptObject::Void;
+            return Any::Void;
     }
 
-    void ScriptThread::SetGlobal(int id, const ScriptObject& value)
+    void ScriptThread::SetGlobal(int id, const Any& value)
     {
-        if (value != ScriptObject::Void)
+        if (value != Any::Void)
             globalVariables[id] = value;
         else
         {
-            std::map<int, ScriptObject>::iterator it = globalVariables.find(id);
+            std::map<int, Any>::iterator it = globalVariables.find(id);
             if (it != globalVariables.end())
                 globalVariables.erase(it);
         }
@@ -239,7 +239,7 @@ namespace Bibim
             // Return value를 보관할 영역을 확보합니다.
             const int count = static_cast<int>(function->ReturnTypes.size());
             for (int i = 0; i < count; i++)
-                stack.Push(ScriptObject::SizeOf(function->ReturnTypes[i]));
+                stack.Push(Any::SizeOf(function->ReturnTypes[i]));
 
             BBAssert(static_cast<int>(function->ParameterTypes.size()) == numberOfArguments);
 
@@ -249,7 +249,7 @@ namespace Bibim
             return nullptr;
     }
 
-    ScriptObject ScriptThread::EndCall(const Script::Function* function)
+    Any ScriptThread::EndCall(const Script::Function* function)
     {
         BBAssertDebug(function);
 
@@ -263,12 +263,12 @@ namespace Bibim
         return Run(function, topIndex);
     }
 
-    void ScriptThread::PushArgument(ScriptObjectType type, const ScriptObject& value)
+    void ScriptThread::PushArgument(AnyType type, const Any& value)
     {
-        ScriptObject::WriteToBytes(stack.Push(ScriptObject::SizeOf(type)), value, type);
+        Any::WriteToBytes(stack.Push(Any::SizeOf(type)), value, type);
     }
 
-    ScriptObject ScriptThread::Run(const Script::Function* function, int topIndex)
+    Any ScriptThread::Run(const Script::Function* function, int topIndex)
     {
         BinaryReader reader(stream);
 
@@ -279,9 +279,9 @@ namespace Bibim
 
         if (state == Running)
         {
-            ScriptObject result = ScriptObject::Void;
+            Any result = Any::Void;
             if (function->ReturnTypes.size() > 0)
-                result = ScriptObject::ReadFromBytes(stack.Peek(), function->ReturnTypes[0]);
+                result = Any::ReadFromBytes(stack.Peek(), function->ReturnTypes[0]);
 
             stack.Pop(function->ReturnTypes.size());
 
@@ -292,7 +292,7 @@ namespace Bibim
         {
             suspendedFunction = function;
             suspendedTopIndex = topIndex;
-            return ScriptObject::Void;
+            return Any::Void;
         }
     }
 

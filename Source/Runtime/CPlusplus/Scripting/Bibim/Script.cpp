@@ -49,11 +49,11 @@ namespace Bibim
             item.Position = reader.ReadInt();
             item.ArgumentStackSize = reader.ReadInt();
             item.ReturnTypes.resize(reader.ReadInt());
-            for (std::vector<ScriptObjectType>::size_type i = 0; i < item.ReturnTypes.size(); i++)
-                item.ReturnTypes[i] = static_cast<ScriptObjectType>(reader.ReadInt());
+            for (std::vector<AnyType>::size_type i = 0; i < item.ReturnTypes.size(); i++)
+                item.ReturnTypes[i] = static_cast<AnyType>(reader.ReadInt());
             item.ParameterTypes.resize(reader.ReadInt());
-            for (std::vector<ScriptObjectType>::size_type i = 0; i < item.ParameterTypes.size(); i++)
-                item.ParameterTypes[i] = static_cast<ScriptObjectType>(reader.ReadInt());
+            for (std::vector<AnyType>::size_type i = 0; i < item.ParameterTypes.size(); i++)
+                item.ParameterTypes[i] = static_cast<AnyType>(reader.ReadInt());
         }
 
         const int numberOfStrings = reader.ReadInt();

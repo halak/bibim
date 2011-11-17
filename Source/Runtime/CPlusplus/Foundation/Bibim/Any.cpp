@@ -1,12 +1,13 @@
-#include <Bibim/ScriptObject.h>
+#include <Bibim/PCH.h>
+#include <Bibim/Any.h>
 #include <Bibim/BinaryReader.h>
 #include <Bibim/BinaryWriter.h>
 
 namespace Bibim
 {
-    const ScriptObject ScriptObject::Void;
+    const Any Any::Void;
 
-    ScriptObject::ScriptObject(const ScriptObject& original)
+    Any::Any(const Any& original)
         : type(original.type)
     {
         switch (type)
@@ -43,7 +44,7 @@ namespace Bibim
         }
     }
 
-    ScriptObject::~ScriptObject()
+    Any::~Any()
     {
         switch (type)
         {
@@ -76,7 +77,7 @@ namespace Bibim
         }
     }
 
-    bool ScriptObject::CastBool() const
+    bool Any::CastBool() const
     {
         switch (type)
         {
@@ -97,7 +98,7 @@ namespace Bibim
         }
     }
 
-    int ScriptObject::CastInt() const
+    int Any::CastInt() const
     {
         switch (type)
         {
@@ -114,7 +115,7 @@ namespace Bibim
         }
     }
 
-    longint ScriptObject::CastLongInt() const
+    longint Any::CastLongInt() const
     {
         switch (type)
         {
@@ -131,7 +132,7 @@ namespace Bibim
         }
     }
 
-    float ScriptObject::CastFloat() const
+    float Any::CastFloat() const
     {
         switch (type)
         {
@@ -148,7 +149,7 @@ namespace Bibim
         }
     }
 
-    Color ScriptObject::CastColor() const
+    Color Any::CastColor() const
     {
         switch (type)
         {
@@ -159,7 +160,7 @@ namespace Bibim
         }
     }
 
-    SharedObject* ScriptObject::CastSharedObject() const
+    SharedObject* Any::CastSharedObject() const
     {
         if (type == SharedObjectType)
             return static_cast<SharedObjectPtr*>(value.POINTER)->GetPointee();
@@ -167,7 +168,7 @@ namespace Bibim
             return nullptr;
     }
 
-    void* ScriptObject::CastLightObject() const
+    void* Any::CastLightObject() const
     {
         switch (type)
         {
@@ -180,7 +181,7 @@ namespace Bibim
         }
     }
 
-    ScriptObject& ScriptObject::operator = (const ScriptObject& right)
+    Any& Any::operator = (const Any& right)
     {
         Type  oldType  = type;
         Value oldValue = value;
@@ -252,7 +253,7 @@ namespace Bibim
         return *this;
     }
 
-    bool ScriptObject::operator == (const ScriptObject& right) const
+    bool Any::operator == (const Any& right) const
     {
         if (type != right.type)
             return false;
@@ -322,12 +323,12 @@ namespace Bibim
         return false;
     }
 
-    ScriptObject ScriptObject::ReadFromBytes(const byte* buffer, Type type)
+    Any Any::ReadFromBytes(const byte* buffer, Type type)
     {
         switch (type)
         {
             case VoidType:
-                return ScriptObject::Void;
+                return Any::Void;
             case BoolType:
                 return BinaryReader::ToBool(buffer);
             case IntType:
@@ -367,13 +368,13 @@ namespace Bibim
                 // todo
                 break;
             default:
-                return ScriptObject::Void;
+                return Any::Void;
         }
 
-        return ScriptObject::Void;
+        return Any::Void;
     }
 
-    int ScriptObject::WriteToBytes(byte* buffer, const ScriptObject& value)
+    int Any::WriteToBytes(byte* buffer, const Any& value)
     {
         switch (value.type)
         {
@@ -430,7 +431,7 @@ namespace Bibim
         return 0;
     }
 
-    int ScriptObject::WriteToBytes(byte* buffer, const ScriptObject& value, Type castType)
+    int Any::WriteToBytes(byte* buffer, const Any& value, Type castType)
     {
         if (value.type == castType)
             return WriteToBytes(buffer, value);

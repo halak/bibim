@@ -170,6 +170,18 @@
 				Name="(Fundamental)"
 				>
 				<File
+					RelativePath=".\Foundation\Bibim\Any.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Any.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Any.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Foundation\Bibim\Color.h"
 					>
 				</File>
@@ -413,6 +425,18 @@
 			<Filter
 				Name="Utility"
 				>
+				<File
+					RelativePath=".\Foundation\Bibim\AnyStorage.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\AnyStorage.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\AnyStorage.inl"
+					>
+				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\Atomic.h"
 					>
@@ -2175,18 +2199,6 @@
 				</File>
 				<File
 					RelativePath=".\Scripting\Bibim\ScriptNativeFunctionTable.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Scripting\Bibim\ScriptObject.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Scripting\Bibim\ScriptObject.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Scripting\Bibim\ScriptObject.inl"
 					>
 				</File>
 				<File

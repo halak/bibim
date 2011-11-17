@@ -15,6 +15,7 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // 01. Foundation
             // (Fundamental)
+                class Any;
                 struct Color;
                 struct Colors;
                 struct Matrix4;
@@ -58,6 +59,7 @@
             // Mathematics
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Utility
+                BBForwardDeclareSmartPointerClass(AnyStorage);
                 template <typename T> class Property;
                 class RectStorage;
         ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -172,7 +174,6 @@
             // Scripting
                 BBForwardDeclareSmartPointerClass(Script);
                 class ScriptingContext;
-                class ScriptObject;
                 BBForwardDeclareSmartPointerClass(ScriptThread);
                 class ScriptStack;
             ////////////////////////////////////////////////////////////////////////////////////////////////////

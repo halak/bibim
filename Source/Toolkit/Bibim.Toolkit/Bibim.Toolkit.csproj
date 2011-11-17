@@ -144,7 +144,6 @@
     <Compile Include="Asset\Pipeline\Recipes\ImportPhotoshopDocument.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToBitmap.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ExportUILayoutAssets.cs" />
-    <Compile Include="Collections\Generic\SerializableDictionary.cs" />
     <Compile Include="DesignResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -224,6 +223,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Animation\EvalTrees\" />
+    <Folder Include="Collections\Generic\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

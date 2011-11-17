@@ -63,7 +63,7 @@ namespace Bibim
         returnCalled = true;
     }
 
-    void ScriptingContext::Return(const ScriptObject& value)
+    void ScriptingContext::Return(const Any& value)
     {
         BBAssert(numberOfReturnValues == 1 && returnCalled == false);
         returnCalled = true;
@@ -71,7 +71,7 @@ namespace Bibim
         throw;
     }
 
-    void ScriptingContext::Return(const ScriptObject& value1, const ScriptObject& value2)
+    void ScriptingContext::Return(const Any& value1, const Any& value2)
     {
         BBAssert(numberOfReturnValues == 2 && returnCalled == false);
         returnCalled = true;
@@ -79,7 +79,7 @@ namespace Bibim
         throw;
     }
 
-    void ScriptingContext::Return(const ScriptObject& value1, const ScriptObject& value2, const ScriptObject& value3)
+    void ScriptingContext::Return(const Any& value1, const Any& value2, const Any& value3)
     {
         BBAssert(numberOfReturnValues == 3 && returnCalled == false);
         returnCalled = true;
@@ -87,7 +87,7 @@ namespace Bibim
         throw;
     }
 
-    void ScriptingContext::Return(const ScriptObject& value1, const ScriptObject& value2, const ScriptObject& value3, const ScriptObject& value4)
+    void ScriptingContext::Return(const Any& value1, const Any& value2, const Any& value3, const Any& value4)
     {
         BBAssert(numberOfReturnValues == 4 && returnCalled == false);
         returnCalled = true;
@@ -95,7 +95,7 @@ namespace Bibim
         throw;
     }
 
-    void ScriptingContext::Return(const ScriptObject& value1, const ScriptObject& value2, const ScriptObject& value3, const ScriptObject& value4, const ScriptObject& value5)
+    void ScriptingContext::Return(const Any& value1, const Any& value2, const Any& value3, const Any& value4, const Any& value5)
     {
         BBAssert(numberOfReturnValues == 5 && returnCalled == false);
         returnCalled = true;
@@ -111,42 +111,42 @@ namespace Bibim
         thread->SetState(ScriptThread::Suspended);
     }
 
-    ScriptObject ScriptingContext::Call(const String& name)
+    Any ScriptingContext::Call(const String& name)
     {
         return thread->Call(name);
     }
 
-    ScriptObject ScriptingContext::Call(const String& name, const ScriptObject& arg1)
+    Any ScriptingContext::Call(const String& name, const Any& arg1)
     {
         return thread->Call(name, arg1);
     }
 
-    ScriptObject ScriptingContext::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2)
+    Any ScriptingContext::Call(const String& name, const Any& arg1, const Any& arg2)
     {
         return thread->Call(name, arg1, arg2);
     }
 
-    ScriptObject ScriptingContext::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3)
+    Any ScriptingContext::Call(const String& name, const Any& arg1, const Any& arg2, const Any& arg3)
     {
         return thread->Call(name, arg1, arg2, arg3);
     }
 
-    ScriptObject ScriptingContext::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4)
+    Any ScriptingContext::Call(const String& name, const Any& arg1, const Any& arg2, const Any& arg3, const Any& arg4)
     {
         return thread->Call(name, arg1, arg2, arg3, arg4);
     }
 
-    ScriptObject ScriptingContext::Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4, const ScriptObject& arg5)
+    Any ScriptingContext::Call(const String& name, const Any& arg1, const Any& arg2, const Any& arg3, const Any& arg4, const Any& arg5)
     {
         return thread->Call(name, arg1, arg2, arg3, arg4, arg5);
     }
 
-    const ScriptObject& ScriptingContext::GetGlobal(int id) const
+    const Any& ScriptingContext::GetGlobal(int id) const
     {
         return thread->GetGlobal(id);
     }
 
-    void ScriptingContext::SetGlobal(int id, const ScriptObject& value)
+    void ScriptingContext::SetGlobal(int id, const Any& value)
     {
         thread->SetGlobal(id, value);
     }

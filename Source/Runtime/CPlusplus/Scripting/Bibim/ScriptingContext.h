@@ -3,7 +3,7 @@
 #define __BIBIM_SCRIPTINGCONTEXT_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/ScriptObject.h>
+#   include <Bibim/Any.h>
 #   include <Bibim/String.h>
 
     namespace Bibim
@@ -23,23 +23,23 @@
                 String  GetStringArg(int index) const;
 
                 void Return();
-                void Return(const ScriptObject& value);
-                void Return(const ScriptObject& value1, const ScriptObject& value2);
-                void Return(const ScriptObject& value1, const ScriptObject& value2, const ScriptObject& value3);
-                void Return(const ScriptObject& value1, const ScriptObject& value2, const ScriptObject& value3, const ScriptObject& value4);
-                void Return(const ScriptObject& value1, const ScriptObject& value2, const ScriptObject& value3, const ScriptObject& value4, const ScriptObject& value5);
+                void Return(const Any& value);
+                void Return(const Any& value1, const Any& value2);
+                void Return(const Any& value1, const Any& value2, const Any& value3);
+                void Return(const Any& value1, const Any& value2, const Any& value3, const Any& value4);
+                void Return(const Any& value1, const Any& value2, const Any& value3, const Any& value4, const Any& value5);
 
                 void YieldReturn();
 
-                ScriptObject Call(const String& name);
-                ScriptObject Call(const String& name, const ScriptObject& arg1);
-                ScriptObject Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2);
-                ScriptObject Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3);
-                ScriptObject Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4);
-                ScriptObject Call(const String& name, const ScriptObject& arg1, const ScriptObject& arg2, const ScriptObject& arg3, const ScriptObject& arg4, const ScriptObject& arg5);
+                Any Call(const String& name);
+                Any Call(const String& name, const Any& arg1);
+                Any Call(const String& name, const Any& arg1, const Any& arg2);
+                Any Call(const String& name, const Any& arg1, const Any& arg2, const Any& arg3);
+                Any Call(const String& name, const Any& arg1, const Any& arg2, const Any& arg3, const Any& arg4);
+                Any Call(const String& name, const Any& arg1, const Any& arg2, const Any& arg3, const Any& arg4, const Any& arg5);
 
-                const ScriptObject& GetGlobal(int id) const;
-                void SetGlobal(int id, const ScriptObject& value);
+                const Any& GetGlobal(int id) const;
+                void SetGlobal(int id, const Any& value);
 
             private:
                 ScriptThread* thread;
