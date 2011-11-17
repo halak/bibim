@@ -4,14 +4,4 @@ namespace Bibim
     {
         return initialSeed;
     }
-
-    EvalUnitRandom::GenerationCycle EvalUnitRandom::GetCycle() const
-    {
-        return cycle;
-    }
-
-    void EvalUnitRandom::SetCycle(GenerationCycle value)
-    {
-        cycle = value;
-    }
 }

@@ -18,11 +18,11 @@ namespace Bibim
         return Clone(context);
     }
 
-    void GameComponent::OnRead(ComponentStreamReader& reader)
+    void GameComponent::OnRead(ComponentStreamReader& /*reader*/)
     {
     }
 
-    void GameComponent::OnCopy(const GameComponent* original, CloningContext& /*context*/)
+    void GameComponent::OnCopy(const GameComponent* /*original*/, CloningContext& /*context*/)
     {
     }
 }

@@ -54,21 +54,21 @@
                 GameAssetPtr value;
         };
 
-        typedef EvalConstantTemplate<bool,         'e', 'c', 'b', '_'> EvalBoolConstant;
-        typedef EvalConstantTemplate<short,        'e', 'c', 's', '_'> EvalShortIntConstant;
-        typedef EvalConstantTemplate<int,          'e', 'c', 'i', '_'> EvalIntConstant;
-        typedef EvalConstantTemplate<longint,      'e', 'c', 'l', '_'> EvalLongIntConstant;
-        typedef EvalConstantTemplate<float,        'e', 'c', 'f', '_'> EvalFloatConstant;
-        typedef EvalConstantTemplate<double,       'e', 'c', 'd', '_'> EvalDoubleConstant;
-        typedef EvalConstantTemplate<Color,        'e', 'c', 'c', '_'> EvalColorConstant;
-        typedef EvalConstantTemplate<Point2,       'e', 'c', 'p', '2'> EvalPoint2Constant;
-        typedef EvalConstantTemplate<Point3,       'e', 'c', 'p', '3'> EvalPoint3Constant;
-        typedef EvalConstantTemplate<Point4,       'e', 'c', 'p', '4'> EvalPoint4Constant;
-        typedef EvalConstantTemplate<Rect,         'e', 'c', 'r', '_'> EvalRectConstant;
-        typedef EvalConstantTemplate<RectF,        'e', 'c', 'R', 'f'> EvalRectFConstant;
-        typedef EvalConstantTemplate<Vector2,      'e', 'c', 'v', '2'> EvalVector2Constant;
-        typedef EvalConstantTemplate<Vector3,      'e', 'c', 'v', '3'> EvalVector3Constant;
-        typedef EvalConstantTemplate<Vector4,      'e', 'c', 'v', '4'> EvalVector4Constant;
+        typedef EvalConstantTemplate<bool,    'e', 'c', 'b', '_'> EvalBoolConstant;
+        typedef EvalConstantTemplate<short,   'e', 'c', 's', '_'> EvalShortIntConstant;
+        typedef EvalConstantTemplate<int,     'e', 'c', 'i', '_'> EvalIntConstant;
+        typedef EvalConstantTemplate<longint, 'e', 'c', 'l', '_'> EvalLongIntConstant;
+        typedef EvalConstantTemplate<float,   'e', 'c', 'f', '_'> EvalFloatConstant;
+        typedef EvalConstantTemplate<double,  'e', 'c', 'd', '_'> EvalDoubleConstant;
+        typedef EvalConstantTemplate<Color,   'e', 'c', 'c', '_'> EvalColorConstant;
+        typedef EvalConstantTemplate<Point2,  'e', 'c', 'p', '2'> EvalPoint2Constant;
+        typedef EvalConstantTemplate<Point3,  'e', 'c', 'p', '3'> EvalPoint3Constant;
+        typedef EvalConstantTemplate<Point4,  'e', 'c', 'p', '4'> EvalPoint4Constant;
+        typedef EvalConstantTemplate<Rect,    'e', 'c', 'r', '_'> EvalRectConstant;
+        typedef EvalConstantTemplate<RectF,   'e', 'c', 'R', 'f'> EvalRectFConstant;
+        typedef EvalConstantTemplate<Vector2, 'e', 'c', 'v', '2'> EvalVector2Constant;
+        typedef EvalConstantTemplate<Vector3, 'e', 'c', 'v', '3'> EvalVector3Constant;
+        typedef EvalConstantTemplate<Vector4, 'e', 'c', 'v', '4'> EvalVector4Constant;
 
         BBDeclareEvalClass(EvalBoolConstant);
         BBDeclareEvalClass(EvalShortIntConstant);

@@ -9,10 +9,8 @@ namespace Bibim
     BBImplementsComponent(EvalUnitRandom);
 
     EvalUnitRandom::EvalUnitRandom()
-        : value(0.0f),
-          seed(0),
-          initialSeed(0),
-          cycle(EachTime)
+        : seed(0),
+          initialSeed(0)
     {
     }
 
@@ -20,10 +18,10 @@ namespace Bibim
     {
     }
 
-    void EvalUnitRandom::Generate()
+    float EvalUnitRandom::Evaluate(EvalContext& /*context*/)
     {
         const int generatedValue = seed % 1001;
-        value = static_cast<float>(generatedValue) * 0.001f;
+        const float value = static_cast<float>(generatedValue) * 0.001f;
         seed = 49327 * (seed & 0xABCDABCD) + (seed >> 16);
 
         if (seed == 0)
@@ -33,23 +31,6 @@ namespace Bibim
             else
                 seed = static_cast<int>(Clock::GetCurrentMilliSeconds());
         }
-    }
-
-    void EvalUnitRandom::Start()
-    {
-        Reset();
-    }
-
-    void EvalUnitRandom::Reset()
-    {
-        if (cycle == ResetOrManual)
-            Generate();
-    }
-
-    float EvalUnitRandom::Evaluate(EvalContext& /*context*/)
-    {
-        if (cycle == EachTime)
-            Generate();
 
         return value;
     }
@@ -65,8 +46,6 @@ namespace Bibim
                 seed = initialSeed;
             else
                 seed = static_cast<int>(Clock::GetCurrentMilliSeconds());
-
-            Generate();
         }
     }
 
@@ -74,18 +53,14 @@ namespace Bibim
     {
         Base::OnRead(reader);
         initialSeed = reader.ReadInt();
-        cycle = static_cast<GenerationCycle>(reader.ReadByte());
         seed = initialSeed;
-        Generate();
     }
 
     void EvalUnitRandom::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
-        value = o->value;
         seed = o->seed;
         initialSeed = o->initialSeed;
-        cycle = o->cycle;
     }
 }

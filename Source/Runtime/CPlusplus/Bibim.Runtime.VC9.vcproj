@@ -2317,6 +2317,18 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Animation\Bibim\EvalCaches.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalCaches.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalCaches.inl"
+						>
+					</File>
+					<File
 						RelativePath=".\Animation\Bibim\EvalConstants.cpp"
 						>
 					</File>
@@ -2366,6 +2378,18 @@
 					</File>
 					<File
 						RelativePath=".\Animation\Bibim\Evals.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalSelectors.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalSelectors.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalSelectors.inl"
 						>
 					</File>
 					<File

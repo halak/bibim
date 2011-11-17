@@ -11,6 +11,7 @@
 #include <Bibim/EvalUnitRandom.h>
 #include <Bibim/EasingCurves.h>
 #include <Bibim/ElasticEasingCurves.h>
+#include <Bibim/AnyStorage.h>
 #include <Bibim/EvalTimeflow.h>
 #  include <Bibim/AssetLoadingTask.h>
 #include <Bibim/EvalInterpolators.h>
@@ -20,10 +21,12 @@
 #  include <Bibim/GameAsset.h>
 #  include <Bibim/GameAssetFactory.h>
 #include <Bibim/EvalUnaryOperators.h>
+#include <Bibim/EvalCaches.h>
 #include <Bibim/OscillationCurve.h>
 #include <Bibim/EvalContext.h>
 #  include <Bibim/GameAssetStorage.h>
 #  include <Bibim/PipedAssetProvider.h>
+#include <Bibim/EvalSelectors.h>
 #include <Bibim/EvalBinaryOperators.h>
 #   include <Bibim/UIColorMatrixEffect.h>
 #   include <Bibim/UIBlendingEffect.h>

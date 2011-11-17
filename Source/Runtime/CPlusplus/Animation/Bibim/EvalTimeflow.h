@@ -41,14 +41,18 @@
                 inline void SetStopBehavior(Behavior value);
                 inline bool GetLooped() const;
                 inline void SetLooped(bool value);
+                inline bool GetNormalized() const;
+                inline void SetNormalized(bool value);
 
             private:
+                float evaluatedTime;
                 Timeline* timeline;
                 float time;
                 float duration;
                 float velocity;
                 Behavior stopBehavior;
                 bool looped;
+                bool normalized;
                 bool isUpdating;
                 int lastTimestamp;
         };

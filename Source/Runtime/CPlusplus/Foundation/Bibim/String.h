@@ -126,6 +126,7 @@
                 friend inline bool operator >  (const char* left, const String& right);
                 friend inline bool operator <= (const char* left, const String& right);
                 friend inline bool operator >= (const char* left, const String& right);
+                friend inline String operator + (const char* left, const String& right);
 
                 static inline int CopyChars(char* destination, const char* source);
                 static inline int CopyChars(char* destination, const char* source, int length);
