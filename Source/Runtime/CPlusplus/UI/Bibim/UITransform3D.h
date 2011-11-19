@@ -37,6 +37,7 @@
 
                 inline Vector2 GetScale() const;
                 void SetScale(Vector2 value);
+                inline void SetScale(float value);
 
             private:
                 Vector3 localOffset;

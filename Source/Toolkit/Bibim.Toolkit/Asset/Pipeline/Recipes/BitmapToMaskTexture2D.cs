@@ -61,7 +61,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             for (int y = 0; y < input.Height; y++)
             {
                 for (int x = 0; x < input.Width; x++)
-                    buffer[(y * input.Height) + x] = input.GetPixel(x, y).R;
+                    buffer[(y * input.Width) + x] = input.GetPixel(x, y).R;
             }
 
             output.Tag = new SourceTexture2DCookingTag(input.Width, buffer);
