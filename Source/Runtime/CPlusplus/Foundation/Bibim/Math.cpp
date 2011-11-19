@@ -2,7 +2,6 @@
 #include <Bibim/Math.h>
 #include <Bibim/Assert.h>
 #include <cmath>
-#include <random>
 
 namespace Bibim
 {
@@ -125,18 +124,18 @@ namespace Bibim
         return crossProductSum > 0.0f;
     }
 
-    static std::tr1::linear_congruential<unsigned long, 16807, 0, 2147483647> globalRandomEngine;
-
     int Math::Random(int a, int b)
     {
-        std::tr1::uniform_int<int> u(Math::Min(a, b), Math::Max(a, b));
-        return u(globalRandomEngine);
+        return 0;
+        //std::tr1::uniform_int<int> u(Math::Min(a, b), Math::Max(a, b));
+        //return u(globalRandomEngine);
     }
 
     float Math::Random(float a, float b)
     {
-        std::tr1::uniform_real<float> u(Math::Min(a, b), Math::Max(a, b));
-        return u(globalRandomEngine);
+        return 0.0f;
+        //std::tr1::uniform_real<float> u(Math::Min(a, b), Math::Max(a, b));
+        //return u(globalRandomEngine);
     }
 
     Vector2 Math::Random(Vector2 a, Vector2 b)
