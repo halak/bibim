@@ -98,6 +98,21 @@ namespace Bibim.Asset
         #endregion
 
         #region Methods
+        public Layer FindLayer(string name)
+        {
+            foreach (var item in layers)
+            {
+                if (string.Compare(item.Name, name) == 0)
+                    return item;
+
+                Layer found = item.FindSubLayer(name, true);
+                if (found != null)
+                    return found;
+            }
+
+            return null;
+        }
+
         private void Load(Stream stream, bool ignoreImageResources, bool ignoreLayers, bool ignoreMergedBitmap)
         {
             Reader reader = new Reader(stream);

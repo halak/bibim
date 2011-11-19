@@ -14,7 +14,7 @@
         {
             BBStaticAssert(sizeof(allowedKeys) == sizeof(state.Keys));
 
-            if (window && window->GetHandle() == ::GetForegroundWindow())
+            if (window && window->GetHandle() == ::GetActiveWindow())
             {
                 int code = 0;
                 for (int i = 0; i < sizeof(allowedKeys) / sizeof(allowedKeys[0]); i++)

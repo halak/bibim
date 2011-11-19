@@ -29,4 +29,9 @@ namespace Bibim
     {
         return scale;
     }
+
+    void UITransform3D::SetScale(float value)
+    {
+        SetScale(Vector2(value, value));
+    }
 }
