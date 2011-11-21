@@ -160,6 +160,17 @@ namespace Bibim
         }
     }
 
+    String Any::CastString() const
+    {
+        switch (type)
+        {
+            case StringType:
+                return *static_cast<const String*>(value.POINTER);
+            default:
+                return String::Empty;
+        }
+    }
+
     SharedObject* Any::CastSharedObject() const
     {
         if (type == SharedObjectType)
