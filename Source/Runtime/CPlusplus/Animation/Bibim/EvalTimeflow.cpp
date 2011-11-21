@@ -92,9 +92,14 @@ namespace Bibim
                 break;
             case ResetAtStop:
                 time = 0.0f;
+                evaluatedTime = 0.0f;
                 break;
             case FinishAtStop:
                 time = duration;
+                if (normalized)
+                    evaluatedTime = 1.0f;
+                else
+                    evaluatedTime = duration;
                 break;
         }
     }

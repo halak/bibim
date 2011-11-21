@@ -69,6 +69,7 @@
                 longint CastLongInt() const;
                 float CastFloat() const;
                 Color CastColor() const;
+                String CastString() const;
                 SharedObject* CastSharedObject() const;
                 void* CastLightObject() const;
 

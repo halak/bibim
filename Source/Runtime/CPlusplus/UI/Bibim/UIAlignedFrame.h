@@ -47,6 +47,11 @@
                 inline Vector2 GetOffset() const;
                 void SetOffset(Vector2 value);
 
+                inline float GetOffsetX() const;
+                inline float GetOffsetY() const;
+                inline void SetOffsetX(float value);
+                inline void SetOffsetY(float value);
+
                 inline Vector2 GetSize() const;
                 void SetSize(Vector2 value);
 
