@@ -4,7 +4,6 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/SharedObject.h>
-#   include <Bibim/Ray2D.h>
 #   include <Bibim/Vector2.h>
 #   include <list>
 
@@ -37,7 +36,7 @@
                 inline float GetScale() const;
                        void  SetScale(float value);
 
-                virtual bool Raycast(const Ray2D& ray, RaycastReport2D& outReport, IRaycastCallback2D* callback) = 0;
+                virtual bool Raycast(Vector2 origin, Vector2 dir, RaycastReport2D& outReport, RaycastCallback2D* callback) = 0;
                 virtual void AppendTo(std::list<Vector2>& vertices) = 0;
 
                 static bool Intersect(Shape2D* left, Shape2D* right);

@@ -24,11 +24,10 @@
             inline bool operator != (const RaycastReport2D& right) const;
         };
 
-        class IRaycastCallback2D
+        class RaycastCallback2D
         {
             public:
-                virtual ~IRaycastCallback2D() { }
-
+                virtual ~RaycastCallback2D() { }
                 virtual bool OnHit(float distanceSquared) = 0;
         };
     }
