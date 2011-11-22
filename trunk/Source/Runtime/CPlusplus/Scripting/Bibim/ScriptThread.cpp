@@ -10,91 +10,94 @@
 
 namespace Bibim
 {
-    enum ScriptInstruction
+    struct ScriptInstruction
     {
-        NOP,
+        enum E
+        {
+            NOP,
 
-        Push1,
-        Push4,
-        Push8,
-        Push12,
-        Push16,
-        PushN,
-        PushLocalVariable,
-        PushGlobalVariable,
-        AllocateN,
-        Pop1,
-        Pop2,
-        Pop3,
-        Pop4,
-        PopN,
+            Push1,
+            Push4,
+            Push8,
+            Push12,
+            Push16,
+            PushN,
+            PushLocalVariable,
+            PushGlobalVariable,
+            AllocateN,
+            Pop1,
+            Pop2,
+            Pop3,
+            Pop4,
+            PopN,
 
-        Jump,
-        IfFalseThenJump,
-        CallScriptFunction,
-        CallNativeFunction,
-        Return,
-        Yield,
+            Jump,
+            IfFalseThenJump,
+            CallScriptFunction,
+            CallNativeFunction,
+            Return,
+            Yield,
 
-        LocalAssign,
-        GlobalAssign,
-        AddInt,
-        AddUInt,
-        AddLongInt,
-        AddFloat,
-        AddInt2,
-        AddInt3,
-        AddInt4,
-        AddFloat2,
-        AddFloat3,
-        AddFloat4,
-        SubtractInt,
-        SubtractUInt,
-        SubtractLongInt,
-        SubtractFloat,
-        SubtractInt2,
-        SubtractInt3,
-        SubtractInt4,
-        SubtractFloat2,
-        SubtractFloat3,
-        SubtractFloat4,
-        MultiplyInt,
-        TestEqualityInt,
-        TestInequalityInt,
+            LocalAssign,
+            GlobalAssign,
+            AddInt,
+            AddUInt,
+            AddLongInt,
+            AddFloat,
+            AddInt2,
+            AddInt3,
+            AddInt4,
+            AddFloat2,
+            AddFloat3,
+            AddFloat4,
+            SubtractInt,
+            SubtractUInt,
+            SubtractLongInt,
+            SubtractFloat,
+            SubtractInt2,
+            SubtractInt3,
+            SubtractInt4,
+            SubtractFloat2,
+            SubtractFloat3,
+            SubtractFloat4,
+            MultiplyInt,
+            TestEqualityInt,
+            TestInequalityInt,
 
-                    //ConcatenationOperator
-                    //AssignmentOperator = 9,
-                    //NegationOperator = 10,
-                    //AdditionOperator = 11,
-                    //SubtractionCommand = 12,
-                    //MultiplicationOperator = 13,
-                    //DivisionOperator = 14,
-                    //ModulusOperator = 15,
-                    //SquareBracketsOperator = 17,
-                    //LogicalANDOperator = 16,
-                    //LogicalOROperator = 17,
-                    //LogicalXOROperator = 18,
-                    //LogicalLeftShiftOperator = 19,
-                    //LogicalRightShiftOperator = 20,
-                    //LogicalNegation = 21,
-                    //EqualityOperator = 21,
-                    //InequalityOperator = 22,
-                    //LessThanOperator = 23,
-                    //GreaterThanOperator = 24,
-                    //LessThanOrEqualOperator = 25,
-                    //GreaterThanOrEqualOperator = 26,
-                    //ConditionalANDOperator = 27,
-                    //ConditionalOROperator = 28,
-                    //AdditionAssignmentOperator = 29,
-                    //SubtractionAssignmentOperator = 30,
-                    //MultiplicationAssignmentOperator = 31,
-                    //DivisionAssignmentOperator = 32,
-                    //ModulusAssignmentOperator = 33,
-                    //LogicalANDAssignmentOperator = 34,
-                    //LogicalORAssignmentOperator = 35,
-                    //LogicalXORAssignmentOperator = 36,
-                    //LogicalLeftShiftAssignmentOperator = 37,
-                    //LogicalRightShiftAssignmentOperator = 38,
+                        //ConcatenationOperator
+                        //AssignmentOperator = 9,
+                        //NegationOperator = 10,
+                        //AdditionOperator = 11,
+                        //SubtractionCommand = 12,
+                        //MultiplicationOperator = 13,
+                        //DivisionOperator = 14,
+                        //ModulusOperator = 15,
+                        //SquareBracketsOperator = 17,
+                        //LogicalANDOperator = 16,
+                        //LogicalOROperator = 17,
+                        //LogicalXOROperator = 18,
+                        //LogicalLeftShiftOperator = 19,
+                        //LogicalRightShiftOperator = 20,
+                        //LogicalNegation = 21,
+                        //EqualityOperator = 21,
+                        //InequalityOperator = 22,
+                        //LessThanOperator = 23,
+                        //GreaterThanOperator = 24,
+                        //LessThanOrEqualOperator = 25,
+                        //GreaterThanOrEqualOperator = 26,
+                        //ConditionalANDOperator = 27,
+                        //ConditionalOROperator = 28,
+                        //AdditionAssignmentOperator = 29,
+                        //SubtractionAssignmentOperator = 30,
+                        //MultiplicationAssignmentOperator = 31,
+                        //DivisionAssignmentOperator = 32,
+                        //ModulusAssignmentOperator = 33,
+                        //LogicalANDAssignmentOperator = 34,
+                        //LogicalORAssignmentOperator = 35,
+                        //LogicalXORAssignmentOperator = 36,
+                        //LogicalLeftShiftAssignmentOperator = 37,
+                        //LogicalRightShiftAssignmentOperator = 38,
+        };
     };
 
     ScriptThread::ScriptThread(Script* script)
@@ -298,33 +301,33 @@ namespace Bibim
 
     void ScriptThread::ProcessInstruction(BinaryReader& reader)
     {
-        const ScriptInstruction id = static_cast<ScriptInstruction>(reader.ReadByte());
+        const ScriptInstruction::E id = static_cast<ScriptInstruction::E>(reader.ReadByte());
         switch (id)
         {
-            case NOP:
+            case ScriptInstruction::NOP:
                 break;
-            case Push1:
+            case ScriptInstruction::Push1:
                 reader.Read(stack.Push(1), 1);
                 break;
-            case Push4:
+            case ScriptInstruction::Push4:
                 reader.Read(stack.Push(4), 4);
                 break;
-            case Push8:
+            case ScriptInstruction::Push8:
                 reader.Read(stack.Push(8), 8);
                 break;
-            case Push12:
+            case ScriptInstruction::Push12:
                 reader.Read(stack.Push(12), 12);
                 break;
-            case Push16:
+            case ScriptInstruction::Push16:
                 reader.Read(stack.Push(16), 16);
                 break;
-            case PushN:
+            case ScriptInstruction::PushN:
                 {
                     const int size = static_cast<int>(reader.ReadInt());
                     reader.Read(stack.Push(size), size);
                 }
                 break;
-            case PushLocalVariable:
+            case ScriptInstruction::PushLocalVariable:
                 {
                     const int stackIndex  = reader.ReadInt();
                     const int localOffset = reader.ReadInt();
@@ -333,35 +336,35 @@ namespace Bibim
                     Memory::Copy(stack.Push(size), size, &source[localOffset], size);
                 }
                 break;
-            case PushGlobalVariable:
+            case ScriptInstruction::PushGlobalVariable:
                 {
                 }
                 break;
-            case AllocateN:
+            case ScriptInstruction::AllocateN:
                 stack.Push(reader.ReadInt());
                 break;
-            case Pop1:
+            case ScriptInstruction::Pop1:
                 stack.Pop(1);
                 break;
-            case Pop2:
+            case ScriptInstruction::Pop2:
                 stack.Pop(2);
                 break;
-            case Pop3:
+            case ScriptInstruction::Pop3:
                 stack.Pop(3);
                 break;
-            case Pop4:
+            case ScriptInstruction::Pop4:
                 stack.Pop(4);
                 break;
-            case PopN:
+            case ScriptInstruction::PopN:
                 stack.Pop(reader.ReadInt());
                 break;
-            case Jump:
+            case ScriptInstruction::Jump:
                 {
                     const int newPosition = reader.ReadInt();
                     reader.GetSource()->Seek(newPosition, Stream::FromBegin);
                 }
                 break;
-            case IfFalseThenJump:
+            case ScriptInstruction::IfFalseThenJump:
                 {
                     const int newPosition = reader.ReadInt();
                     const bool condition = BinaryReader::ToBool(stack.Peek());
@@ -370,7 +373,7 @@ namespace Bibim
                         reader.GetSource()->Seek(newPosition, Stream::FromBegin);
                 }
                 break;
-            case CallScriptFunction:
+            case ScriptInstruction::CallScriptFunction:
                 {
                     const int functionPosition = reader.ReadInt();
                     const int numberOfArguments = static_cast<int>(reader.ReadInt());
@@ -380,7 +383,7 @@ namespace Bibim
                     reader.GetSource()->Seek(functionPosition, Stream::FromBegin);
                 }
                 break;
-            case CallNativeFunction:
+            case ScriptInstruction::CallNativeFunction:
                 {
                     const int functionID = reader.ReadInt();
                     const int numberOfReturnValues = reader.ReadInt();
@@ -393,7 +396,7 @@ namespace Bibim
                     nativeFunctionDepth--;
                 }
                 break;
-            case Return:
+            case ScriptInstruction::Return:
                 {
                     // Expected stack layout (Bottom-up)
                     // ========================================
@@ -408,14 +411,14 @@ namespace Bibim
                     reader.GetSource()->Seek(position, Stream::FromBegin);
                 }
                 break;
-            case Yield:
+            case ScriptInstruction::Yield:
                 {
                     // Script call -> Native call -> Script call -> Native 이 상황에서 Yield를 하면 thread-stack 엉켜 제대로 작동하지 않습니다.
                     BBAssert(nativeFunctionDepth == 0);
                     SetState(ScriptThread::Suspended);
                 }
                 break;
-            case LocalAssign:
+            case ScriptInstruction::LocalAssign:
                 {
                     const int stackIndex  = reader.ReadInt();
                     const int localOffset = reader.ReadInt();
@@ -428,11 +431,11 @@ namespace Bibim
                     stack.Pop(1);
                 }
                 break;
-            case GlobalAssign:
+            case ScriptInstruction::GlobalAssign:
                 {
                 }
                 break;
-            case AddInt:
+            case ScriptInstruction::AddInt:
                 {
                     const int operand1 = BinaryReader::ToInt(stack.GetAt(-2));
                     const int operand2 = BinaryReader::ToInt(stack.GetAt(-1));
@@ -440,43 +443,43 @@ namespace Bibim
                     BinaryWriter::From(stack.Push(sizeof(int)), static_cast<int>(operand1 + operand2));
                 }
                 break;
-            case AddUInt:
+            case ScriptInstruction::AddUInt:
                 {
                 }
                 break;
-            case AddLongInt:
+            case ScriptInstruction::AddLongInt:
                 {
                 }
                 break;
-            case AddFloat:
+            case ScriptInstruction::AddFloat:
                 {
                 }
                 break;
-            case AddInt2:
+            case ScriptInstruction::AddInt2:
                 {
                 }
                 break;
-            case AddInt3:
+            case ScriptInstruction::AddInt3:
                 {
                 }
                 break;
-            case AddInt4:
+            case ScriptInstruction::AddInt4:
                 {
                 }
                 break;
-            case AddFloat2:
+            case ScriptInstruction::AddFloat2:
                 {
                 }
                 break;
-            case AddFloat3:
+            case ScriptInstruction::AddFloat3:
                 {
                 }
                 break;
-            case AddFloat4:
+            case ScriptInstruction::AddFloat4:
                 {
                 }
                 break;
-            case SubtractInt:
+            case ScriptInstruction::SubtractInt:
                 {
                     const int operand1 = BinaryReader::ToInt(stack.GetAt(-2));
                     const int operand2 = BinaryReader::ToInt(stack.GetAt(-1));
@@ -484,43 +487,43 @@ namespace Bibim
                     BinaryWriter::From(stack.Push(sizeof(int)), static_cast<int>(operand1 - operand2));
                 }
                 break;
-            case SubtractUInt:
+            case ScriptInstruction::SubtractUInt:
                 {
                 }
                 break;
-            case SubtractLongInt:
+            case ScriptInstruction::SubtractLongInt:
                 {
                 }
                 break;
-            case SubtractFloat:
+            case ScriptInstruction::SubtractFloat:
                 {
                 }
                 break;
-            case SubtractInt2:
+            case ScriptInstruction::SubtractInt2:
                 {
                 }
                 break;
-            case SubtractInt3:
+            case ScriptInstruction::SubtractInt3:
                 {
                 }
                 break;
-            case SubtractInt4:
+            case ScriptInstruction::SubtractInt4:
                 {
                 }
                 break;
-            case SubtractFloat2:
+            case ScriptInstruction::SubtractFloat2:
                 {
                 }
                 break;
-            case SubtractFloat3:
+            case ScriptInstruction::SubtractFloat3:
                 {
                 }
                 break;
-            case SubtractFloat4:
+            case ScriptInstruction::SubtractFloat4:
                 {
                 }
                 break;
-            case MultiplyInt:
+            case ScriptInstruction::MultiplyInt:
                 {
                     const int operand1 = BinaryReader::ToInt(stack.GetAt(-2));
                     const int operand2 = BinaryReader::ToInt(stack.GetAt(-1));
@@ -528,7 +531,7 @@ namespace Bibim
                     BinaryWriter::From(stack.Push(sizeof(int)), static_cast<int>(operand1 * operand2));
                 }
                 break;
-            case TestEqualityInt:
+            case ScriptInstruction::TestEqualityInt:
                 {
                     const int operand1 = BinaryReader::ToInt(stack.GetAt(-2));
                     const int operand2 = BinaryReader::ToInt(stack.GetAt(-1));
@@ -536,7 +539,7 @@ namespace Bibim
                     BinaryWriter::From(stack.Push(sizeof(bool)), static_cast<bool>(operand1 == operand2));
                 }
                 break;
-            case TestInequalityInt:
+            case ScriptInstruction::TestInequalityInt:
                 {
                     const int operand1 = BinaryReader::ToInt(stack.GetAt(-2));
                     const int operand2 = BinaryReader::ToInt(stack.GetAt(-1));
@@ -545,71 +548,71 @@ namespace Bibim
                 }
                 break;
 
-        //    case NOPCommand:
+        //    case ScriptInstruction::NOPCommand:
         //        // 아무 것도 안합니다.
         //        break;
-        //    case PushInt32Command:
+        //    case ScriptInstruction::PushInt32Command:
         //        {
         //            stack.Push(reader.ReadInt());
         //        }
         //        break;
-        //    case PushUInt32Command:
+        //    case ScriptInstruction::PushUInt32Command:
         //        {
         //            stack.Push(reader.ReadUInt32());
         //        }
         //        break;
-        //    case PushStringCommand:
+        //    case ScriptInstruction::PushStringCommand:
         //        {
         //            stack.Push(reader.ReadString());
         //        }
         //        break;
-        //    case PushLocalVariableCommand:
+        //    case ScriptInstruction::PushLocalVariableCommand:
         //        {
         //            stack.Push(reader.ReadInt16());
         //        }
         //        break;
-        //    case PushGlobalVariableCommand:
+        //    case ScriptInstruction::PushGlobalVariableCommand:
         //        {
         //            stack.Push(reader.ReadString());
         //        }
         //        break;
-        //    case JumpCommand:
+        //    case ScriptInstruction::JumpCommand:
         //        {
         //        }
         //        break;
-        //    case IfTrueThenJumpCommand:
+        //    case ScriptInstruction::IfTrueThenJumpCommand:
         //        {
         //        }
         //        break;
-        //    case IfFalseThenJumpCommand:
+        //    case ScriptInstruction::IfFalseThenJumpCommand:
         //        {
         //        }
         //        break;
-        //    case IfTrueThenJumpElseJumpCommand:
+        //    case ScriptInstruction::IfTrueThenJumpElseJumpCommand:
         //        {
         //        }
         //        break;
-        //    case IfFalseThenJumpElseJumpCommand:
+        //    case ScriptInstruction::IfFalseThenJumpElseJumpCommand:
         //        {
         //        }
         //        break;
-        //    case CallCommand:
+        //    case ScriptInstruction::CallCommand:
         //        {
         //        }
         //        break;
-        //    case CallNativeCommand:
+        //    case ScriptInstruction::CallNativeCommand:
         //        {
         //        }
         //        break;
-        //    case ReturnCommand:
+        //    case ScriptInstruction::ReturnCommand:
         //        {
         //        }
         //        break;
-        //    case YieldCommand:
+        //    case ScriptInstruction::YieldCommand:
         //        {
         //        }
         //        break;
-        //    case LocalAssignmentOperator:
+        //    case ScriptInstruction::LocalAssignmentOperator:
         //        {
         //            const int16 localVariableIndex = reader.ReadInt16();
         //            ProcessInstruction(reader);
@@ -617,7 +620,7 @@ namespace Bibim
         //            stack.Pop(1);
         //        }
         //        break;
-        //    case GlobalAssignmentOperator:
+        //    case ScriptInstruction::GlobalAssignmentOperator:
         //        {
         //            stack.Push(reader.ReadString());
         //            ProcessInstruction(reader);
@@ -625,7 +628,7 @@ namespace Bibim
         //            stack.Pop(1); // SET
         //        }
         //        break;
-        //    case AdditionOperator:
+        //    case ScriptInstruction::AdditionOperator:
         //        {
         //            ProcessInstruction(reader);
         //            ProcessInstruction(reader);
@@ -635,11 +638,11 @@ namespace Bibim
         //            stack.Push(operand1.Value.CastTo<int>() + operand2.Value.CastTo<int>());
         //        }
         //        break;
-        //    case EqualityOperator:
+        //    case ScriptInstruction::EqualityOperator:
         //        {
         //        }
         //        break;
-        //    case InequalityOperator:
+        //    case ScriptInstruction::InequalityOperator:
         //        {
         //            ProcessInstruction(reader);
         //            ProcessInstruction(reader);

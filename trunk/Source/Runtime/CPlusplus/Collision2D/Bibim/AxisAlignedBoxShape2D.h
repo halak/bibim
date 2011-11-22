@@ -21,7 +21,7 @@
                 Vector2 GetScaledMin();
                 Vector2 GetScaledMax();
 
-                virtual bool Raycast(const Ray2D& ray, RaycastReport2D& outReport, IRaycastCallback2D* callback);
+                virtual bool Raycast(Vector2 origin, Vector2 direction, RaycastReport2D& outReport, RaycastCallback2D* callback);
                 virtual void AppendTo(std::list<Vector2>& vertices);
 
             private:

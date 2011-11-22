@@ -71,11 +71,11 @@ namespace Bibim
         scaledMax = GetMax() * GetScale();
     }
 
-    bool AxisAlignedBoxShape2D::Raycast(const Ray2D& ray, RaycastReport2D& outReport, IRaycastCallback2D* callback)
+    bool AxisAlignedBoxShape2D::Raycast(Vector2 origin, Vector2 direction, RaycastReport2D& outReport, RaycastCallback2D* callback)
     {
         float distance = 0.0f;
         Vector2 normal = Vector2::Zero;
-        if (Geom2D::RaycastAxisAlignedBox(ray.Origin, ray.Direction, GetScaledMin(), GetScaledMax(), distance, normal) && distance <= ray.Length)
+        if (Geom2D::RaycastAxisAlignedBox(origin, direction, GetScaledMin(), GetScaledMax(), distance, normal) && distance <= ray.Length)
         {
             if (callback == nullptr || callback->OnHit(distance * distance))
             {
