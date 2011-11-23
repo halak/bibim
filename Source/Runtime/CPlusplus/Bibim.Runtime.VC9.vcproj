@@ -942,6 +942,18 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Time\Bibim\TimelineGameComponent.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\TimelineGameComponent.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\TimelineGameComponent.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Time\Bibim\TimelineGameModule.cpp"
 					>
 				</File>
@@ -951,6 +963,18 @@
 				</File>
 				<File
 					RelativePath=".\Time\Bibim\TimelineGameModule.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\UpdateableGameComponent.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\UpdateableGameComponent.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Time\Bibim\UpdateableGameComponent.inl"
 					>
 				</File>
 				<File

@@ -33,7 +33,7 @@ namespace Bibim
 
     bool UIEffectStack::Push(UIEffectMap* item)
     {
-        ImagePtr mask;
+        ImagePtr mask = nullptr;
         return Push(item, mask);
     }
 

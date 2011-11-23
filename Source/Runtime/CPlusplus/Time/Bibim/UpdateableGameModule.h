@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __BIBIM_UPDATEABLEGAMECOMPONENT_H__
-#define __BIBIM_UPDATEABLEGAMECOMPONENT_H__
+#ifndef __BIBIM_UPDATEABLEGAMEMODULE_H__
+#define __BIBIM_UPDATEABLEGAMEMODULE_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
