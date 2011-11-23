@@ -32,7 +32,7 @@
 
 #       define BBImplementsComponent(classname) classname* classname::Clone() const \
                                                 { \
-                                                    CloningContext context; \
+                                                    Bibim::CloningContext context; \
                                                     return Clone(context); \
                                                 } \
                                                 classname* classname::Clone(Bibim::CloningContext& context) const \

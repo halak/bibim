@@ -458,6 +458,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Foundation\Bibim\Listeners.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Listeners.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Foundation\Bibim\Memory.h"
 					>
 				</File>
@@ -2317,10 +2325,6 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalCaches.cpp"
-						>
-					</File>
-					<File
 						RelativePath=".\Animation\Bibim\EvalCaches.h"
 						>
 					</File>
@@ -2378,10 +2382,6 @@
 					</File>
 					<File
 						RelativePath=".\Animation\Bibim\Evals.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalSelectors.cpp"
 						>
 					</File>
 					<File

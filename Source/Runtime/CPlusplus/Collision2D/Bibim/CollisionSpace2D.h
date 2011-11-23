@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
+#   include <Bibim/Listeners.h>
 #   include <vector>
 
     namespace Bibim
@@ -12,10 +13,10 @@
         {
             BBModuleClass(CollisionSpace2D, GameModule, 'C', 'O', 'S', '2');
             public:
-                class ICallback
+                class IEventListener
                 {
                     public:
-                        virtual ~ICallback() { }
+                        virtual ~IEventListener() { }
                         virtual void OnIntersected(Shape2D* a, Shape2D* b, int aGroup, int bGroup) = 0;
                 };
 
@@ -33,9 +34,9 @@
                 void Clear(int group);
                 bool Find(Shape2D* shape, int* outGroup, int* outIndex) const;
 
-                void AddCallback(ICallback* item);
-                void AddCallback(ICallback* item, SharedObject* object);
-                void RemoveCallback(ICallback* item);
+                void AddListener(IEventListener* item);
+                void AddListener(IEventListener* item, SharedObject* object);
+                bool RemoveListener(IEventListener* item);
 
                 int  GetGroup(Shape2D* shape) const;
                 void SetGroup(Shape2D* shape, int group);
@@ -56,8 +57,7 @@
             private:
                 std::vector<ShapeCollection>   shapes;
                 std::vector<BooleanCollection> collisionRelationships;
-                std::vector<ICallback*> callbacks;
-                std::vector<SharedObjectPtr> callbackObjects;
+                Listeners<IEventListener> listeners;
         };
     }
 
