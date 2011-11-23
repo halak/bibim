@@ -20,7 +20,7 @@ namespace Bibim
         return scale;
     }
 
-    unsigned int Shape2D::GetSpatialRevision() const
+    int Shape2D::GetSpatialRevision() const
     {
         return revision;
     }

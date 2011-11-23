@@ -9,14 +9,15 @@
     {
         class BoxShape2D : public Shape2D
         {
+            BBComponentClass(BoxShape2D, Shape2D, 'O', 'B', 'S', '2');
             public:
                 BoxShape2D();
                 virtual ~BoxShape2D();
 
-                Vector2 GetOrientation() const;
+                inline Vector2 GetOrientation() const;
                 void SetOrientation(Vector2 value);
 
-                Vector2 GetExtension() const;
+                inline Vector2 GetExtension() const;
                 void SetExtension(Vector2 value);
 
                 Vector2 GetCenter();
@@ -28,7 +29,7 @@
                 Vector2 GetP2();
                 Vector2 GetP3();
 
-                virtual bool Raycast(const Ray2D& ray, RaycastReport2D& outReport, IRaycastCallback2D* callback);
+                virtual bool Raycast(Vector2 origin, Vector2 direction, float length, RaycastReport2D& outReport, IRaycastCallback2D* callback);
                 virtual void AppendTo(std::list<Vector2>& vertices);
 
             private:
@@ -43,9 +44,10 @@
                 Vector2 rotatedUp;
                 Vector2 scaledExtension;
                 Vector2 p0, p1, p2, p3;
-                unsigned revision;
-        };
-        
+                int revision;
+        };   
     }
+
+#   include <Bibim/BoxShape2D.inl>
 
 #endif

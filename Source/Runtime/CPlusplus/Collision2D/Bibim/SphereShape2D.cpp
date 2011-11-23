@@ -1,11 +1,14 @@
 #include <Bibim/PCH.h>
 #include <Bibim/SphereShape2D.h>
+#include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Geom2D.h>
 #include <Bibim/Math.h>
 #include <Bibim/RaycastReport2D.h>
 
 namespace Bibim
 {
+    BBImplementsComponent(SphereShape2D);
+
     SphereShape2D::SphereShape2D()
         : Shape2D(Shape2D::SphereType),
           radius(0.0f),
@@ -58,15 +61,15 @@ namespace Bibim
         scaledRadiusSquared = scaledRadius * scaledRadius;
     }
 
-    bool SphereShape2D::Raycast(const Ray2D& ray, RaycastReport2D& outReport, IRaycastCallback2D* callback)
+    bool SphereShape2D::Raycast(Vector2 origin, Vector2 direction, float length, RaycastReport2D& outReport, IRaycastCallback2D* callback)
     {
         float distance = 0.0f;
-        if (Geom2D::RaycastSphere(ray.Origin, ray.Direction, GetPosition(), GetScaledRadiusSquared(), distance) && distance <= ray.Length)
+        if (Geom2D::RaycastSphere(origin, direction, GetPosition(), GetScaledRadiusSquared(), distance) && distance <= length)
         {
             if (callback == nullptr || callback->OnHit(distance * distance))
             {
                 outReport.ImpactShape = this;
-                outReport.ImpactPoint = ray.Origin + (ray.Direction * distance);
+                outReport.ImpactPoint = origin + (direction * distance);
                 outReport.ImpactNormal = outReport.ImpactPoint - GetPosition();
                 outReport.ImpactNormal.Normalize();
                 outReport.ImpactDistance = distance;
@@ -90,5 +93,22 @@ namespace Bibim
                                            center.Y + scaledRadius * Math::Cos(r)));
             }
         }
+    }
+
+    void SphereShape2D::OnRead(ComponentStreamReader& reader)
+    {
+        Base::OnRead(reader);
+        SetRadius(reader.ReadFloat());
+    }
+
+    void SphereShape2D::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        const This* o = static_cast<const This*>(original);
+        radius = o->radius;
+        radiusSquared = o->radiusSquared;
+        scaledRadius = o->scaledRadius;
+        scaledRadiusSquared = o->scaledRadiusSquared;
+        revision = o->revision;
     }
 }

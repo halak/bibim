@@ -3,14 +3,15 @@
 #define __BIBIM_SHAPE2D_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/SharedObject.h>
+#   include <Bibim/GameComponent.h>
 #   include <Bibim/Vector2.h>
 #   include <list>
 
     namespace Bibim
     {
-        class Shape2D : public SharedObject
+        class Shape2D : public GameComponent
         {
+            BBAbstractComponentClass(Shape2D, GameComponent);
             public:
                 enum Type
                 {
@@ -36,7 +37,7 @@
                 inline float GetScale() const;
                        void  SetScale(float value);
 
-                virtual bool Raycast(Vector2 origin, Vector2 dir, RaycastReport2D& outReport, RaycastCallback2D* callback) = 0;
+                virtual bool Raycast(Vector2 origin, Vector2 dir, float length, RaycastReport2D& outReport, IRaycastCallback2D* callback) = 0;
                 virtual void AppendTo(std::list<Vector2>& vertices) = 0;
 
                 static bool Intersect(Shape2D* left, Shape2D* right);
@@ -44,7 +45,7 @@
             protected:
                 Shape2D(Type type);
 
-                inline unsigned int GetSpatialRevision() const;
+                inline int GetSpatialRevision() const;
 
             private:
                 const Type type;
@@ -52,7 +53,7 @@
                 Vector2 position;
                 float   rotation;
                 float   scale;
-                unsigned int revision;
+                int revision;
 
             private:
                 Shape2D& operator = (const Shape2D&);

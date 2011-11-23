@@ -1,11 +1,14 @@
 #include <Bibim/PCH.h>
 #include <Bibim/SegmentShape2D.h>
+#include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Geom2D.h>
 #include <Bibim/Math.h>
 #include <Bibim/RaycastReport2D.h>
 
 namespace Bibim
 {
+    BBImplementsComponent(SegmentShape2D);
+
     SegmentShape2D::SegmentShape2D()
         : Shape2D(Shape2D::SegmentType),
           direction(Vector2::Zero),
@@ -22,11 +25,6 @@ namespace Bibim
     {
     }
 
-    Vector2 SegmentShape2D::GetDirection() const
-    {
-        return direction;
-    }
-
     void SegmentShape2D::SetDirection(Vector2 value)
     {
         if (value != Vector2::Zero)
@@ -39,11 +37,6 @@ namespace Bibim
         }
     }
 
-    float SegmentShape2D::GetFrontLength() const
-    {
-        return frontLength;
-    }
-
     void SegmentShape2D::SetFrontLength(float value)
     {
         value = Math::Max(value, 0.0f);
@@ -53,11 +46,6 @@ namespace Bibim
             frontLength = value;
             revision = 0;
         }
-    }
-
-    float SegmentShape2D::GetBackLength() const
-    {
-        return backLength;
     }
 
     void SegmentShape2D::SetBackLength(float value)
@@ -87,11 +75,6 @@ namespace Bibim
         return endPoint;
     }
 
-    float SegmentShape2D::GetLength() const
-    {
-        return GetFrontLength() + GetBackLength();
-    }
-
     Vector2 SegmentShape2D::GetRotatedDirection()
     {
         if (revision != GetSpatialRevision())
@@ -109,16 +92,16 @@ namespace Bibim
         endPoint   = GetPosition() + (rotatedDirection * GetFrontLength() * GetScale());
     }
 
-    bool SegmentShape2D::Raycast(const Ray2D& ray, RaycastReport2D& outReport, IRaycastCallback2D* callback)
+    bool SegmentShape2D::Raycast(Vector2 origin, Vector2 direction, float length, RaycastReport2D& outReport, IRaycastCallback2D* callback)
     {
         float distance = 0.0f;
-        if (Geom2D::RaycastSegment(ray.Origin, ray.Direction, ray.Length, GetStartPoint(), GetEndPoint(), distance))
+        if (Geom2D::RaycastSegment(origin, direction, length, GetStartPoint(), GetEndPoint(), distance))
         {
             if (callback == nullptr || callback->OnHit(distance * distance))
             {
                 const Vector2 rotatedDirection = GetRotatedDirection();
                 outReport.ImpactShape = this;
-                outReport.ImpactPoint = ray.Origin + (ray.Direction * distance);
+                outReport.ImpactPoint = origin + (direction * distance);
                 outReport.ImpactNormal = Vector2(rotatedDirection.Y, rotatedDirection.X);
                 outReport.ImpactDistance = distance;
                 if (outReport.ImpactNormal.Dot(rotatedDirection) > 0.0f)
@@ -138,5 +121,27 @@ namespace Bibim
             vertices.push_back(GetStartPoint());
             vertices.push_back(GetEndPoint());
         }
+    }
+
+    void SegmentShape2D::OnRead(ComponentStreamReader& reader)
+    {
+        Base::OnRead(reader);
+        direction = reader.ReadVector2();
+        frontLength = reader.ReadFloat();
+        backLength = reader.ReadFloat();
+        revision = 0;
+    }
+
+    void SegmentShape2D::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        const This* o = static_cast<const This*>(original);
+        direction = o->direction;
+        frontLength = o->frontLength;
+        backLength = o->backLength;
+        startPoint = o->startPoint;
+        endPoint = o->endPoint;
+        rotatedDirection = o->rotatedDirection;
+        revision = o->revision;
     }
 }
