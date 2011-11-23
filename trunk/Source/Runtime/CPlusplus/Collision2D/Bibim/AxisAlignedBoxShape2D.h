@@ -13,11 +13,11 @@
                 AxisAlignedBoxShape2D();
                 virtual ~AxisAlignedBoxShape2D();
 
-                Vector2 GetMin() const;
-                void    SetMin(Vector2 value);
+                inline Vector2 GetMin() const;
+                void SetMin(Vector2 value);
 
-                Vector2 GetMax() const;
-                void    SetMax(Vector2 value);
+                inline Vector2 GetMax() const;
+                void SetMax(Vector2 value);
 
                 Vector2 GetScaledMin();
                 Vector2 GetScaledMax();

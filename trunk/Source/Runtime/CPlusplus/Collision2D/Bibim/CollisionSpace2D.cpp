@@ -68,7 +68,7 @@ namespace Bibim
 
         if (Shape2D::Intersect(shapeA, shapeB))
         {
-            for (std::vector<ICallback*>::const_iterator it = callbacks.begin(); it != callbacks.end(); it++)
+            for (Listeners<IEventListener>::Iterator it = listeners.Begin(); it != listeners.End(); it++)
                 (*it)->OnIntersected(shapeA, shapeB, groupA, groupB);
         }
     }
@@ -94,7 +94,7 @@ namespace Bibim
                 return distanceSquared < *minimumDistanceSquared;
             }
 
-        } Callback(minimumDistanceSquared);
+        } EventListener(minimumDistanceSquared);
 
         const int numberOfGroups = GetNumberOfGroups();
         for (int i = 0; i < numberOfGroups; i++)
@@ -104,7 +104,7 @@ namespace Bibim
                 const int count = static_cast<int>(shapes[i].size());
                 for (int k = 0; k < count; k++)
                 {
-                    if (shapes[i][k]->Raycast(origin, direction, length, testReport, &Callback))
+                    if (shapes[i][k]->Raycast(origin, direction, length, testReport, &EventListener))
                     {
                         minimumDistanceSquared = testReport.ImpactDistance * testReport.ImpactDistance;
                         outReport = testReport;
@@ -168,27 +168,19 @@ namespace Bibim
         return false;
     }
 
-    void CollisionSpace2D::AddCallback(ICallback* item)
+    void CollisionSpace2D::AddListener(IEventListener* item)
     {
-        callbacks.push_back(item);
-        callbackObjects.push_back(nullptr);
+        listeners.Add(item);
     }
 
-    void CollisionSpace2D::AddCallback(ICallback* item, SharedObject* object)
+    void CollisionSpace2D::AddListener(IEventListener* item, SharedObject* object)
     {
-        callbacks.push_back(item);
-        callbackObjects.push_back(object);
+        listeners.Add(item, object);
     }
 
-    void CollisionSpace2D::RemoveCallback(ICallback* item)
+    bool CollisionSpace2D::RemoveListener(IEventListener* item)
     {
-        std::vector<ICallback*>::iterator it = std::find(callbacks.begin(), callbacks.end(), item);
-        if (it != callbacks.end())
-        {
-            const int index = std::distance(callbacks.begin(), it);
-            callbacks.erase(it);
-            callbackObjects.erase(callbackObjects.begin() + index);
-        }
+        return listeners.Remove(item);
     }
 
     int CollisionSpace2D::GetGroup(Shape2D* shape) const

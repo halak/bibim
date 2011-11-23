@@ -47,6 +47,6 @@
         };
     }
 
-#   include <Bibim/SegmentShape2D.h>
+#   include <Bibim/SegmentShape2D.inl>
 
 #endif
