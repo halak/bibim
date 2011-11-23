@@ -128,6 +128,8 @@
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Collision
                 class CollisionSpace2D;
+                class IRaycastCallback2D;
+                struct RaycastReport2D;
                 BBForwardDeclareSmartPointerClass(Shape2D);
                     BBForwardDeclareSmartPointerClass(AxisAlignedBoxShape2D);
                     BBForwardDeclareSmartPointerClass(BoxShape2D);
@@ -135,8 +137,6 @@
                     BBForwardDeclareSmartPointerClass(SegmentShape2D);
                     BBForwardDeclareSmartPointerClass(SphereShape2D);
                     BBForwardDeclareSmartPointerClass(UserShape2D);
-                struct RaycastReport2D;
-                class RaycastCallback2D;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Diagnostics
                 class Logger;

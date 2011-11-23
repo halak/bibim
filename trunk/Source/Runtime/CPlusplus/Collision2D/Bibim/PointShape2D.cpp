@@ -3,6 +3,8 @@
 
 namespace Bibim
 {
+    BBImplementsComponent(PointShape2D);
+
     PointShape2D::PointShape2D()
         : Shape2D(Shape2D::PointType)
     {
@@ -12,7 +14,7 @@ namespace Bibim
     {
     }
 
-    bool PointShape2D::Raycast(const Ray2D& /*ray*/, RaycastReport2D& /*outReport*/, IRaycastCallback2D* /*callback*/)
+    bool PointShape2D::Raycast(Vector2 /*origin*/, Vector2 /*direction*/, float /*length*/, RaycastReport2D& /*outReport*/, IRaycastCallback2D* /*callback*/)
     {
         return false;
     }
@@ -20,5 +22,15 @@ namespace Bibim
     void PointShape2D::AppendTo(std::list<Vector2>& vertices)
     {
         vertices.push_back(GetPosition());
+    }
+
+    void PointShape2D::OnRead(ComponentStreamReader& reader)
+    {
+        Base::OnRead(reader);
+    }
+
+    void PointShape2D::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
     }
 }

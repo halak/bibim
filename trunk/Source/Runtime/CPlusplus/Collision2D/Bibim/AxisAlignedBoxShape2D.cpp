@@ -1,11 +1,14 @@
 #include <Bibim/PCH.h>
 #include <Bibim/AxisAlignedBoxShape2D.h>
+#include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Geom2D.h>
 #include <Bibim/Math.h>
 #include <Bibim/RaycastReport2D.h>
 
 namespace Bibim
 {
+    BBImplementsComponent(AxisAlignedBoxShape2D);
+
     AxisAlignedBoxShape2D::AxisAlignedBoxShape2D()
         : Shape2D(Shape2D::AxisAlignedBoxType),
           min(Vector2::Zero),
@@ -20,11 +23,6 @@ namespace Bibim
     {
     }
 
-    Vector2 AxisAlignedBoxShape2D::GetMin() const
-    {
-        return min;
-    }
-
     void AxisAlignedBoxShape2D::SetMin(Vector2 value)
     {
         if (GetMin() != value)
@@ -32,11 +30,6 @@ namespace Bibim
             min = value;
             revision = 0;
         }
-    }
-
-    Vector2 AxisAlignedBoxShape2D::GetMax() const
-    {
-        return max;
     }
 
     void AxisAlignedBoxShape2D::SetMax(Vector2 value)
@@ -71,16 +64,16 @@ namespace Bibim
         scaledMax = GetMax() * GetScale();
     }
 
-    bool AxisAlignedBoxShape2D::Raycast(Vector2 origin, Vector2 direction, RaycastReport2D& outReport, RaycastCallback2D* callback)
+    bool AxisAlignedBoxShape2D::Raycast(Vector2 origin, Vector2 direction, float length, RaycastReport2D& outReport, IRaycastCallback2D* callback)
     {
         float distance = 0.0f;
         Vector2 normal = Vector2::Zero;
-        if (Geom2D::RaycastAxisAlignedBox(origin, direction, GetScaledMin(), GetScaledMax(), distance, normal) && distance <= ray.Length)
+        if (Geom2D::RaycastAxisAlignedBox(origin, direction, GetScaledMin(), GetScaledMax(), distance, normal) && distance <= length)
         {
             if (callback == nullptr || callback->OnHit(distance * distance))
             {
                 outReport.ImpactShape = this;
-                outReport.ImpactPoint = ray.Origin + (ray.Direction * distance);
+                outReport.ImpactPoint = origin + (direction * distance);
                 outReport.ImpactNormal = normal;
                 outReport.ImpactDistance = distance;
                 return true;
@@ -102,4 +95,24 @@ namespace Bibim
             vertices.push_back(Vector2(scaledMin.X, scaledMax.Y));
         }
     }
+
+    void AxisAlignedBoxShape2D::OnRead(ComponentStreamReader& reader)
+    {
+        Base::OnRead(reader);
+        min = reader.ReadVector2();
+        max = reader.ReadVector2();
+        revision = 0;
+    }
+
+    void AxisAlignedBoxShape2D::OnCopy(const GameComponent* original, CloningContext& context)
+    {
+        Base::OnCopy(original, context);
+        const This* o = static_cast<const This*>(original);
+        min = o->min;
+        max = o->max;
+        scaledMin = o->scaledMin;
+        scaledMax = o->scaledMax;
+        revision = o->revision;
+    }
+
 }

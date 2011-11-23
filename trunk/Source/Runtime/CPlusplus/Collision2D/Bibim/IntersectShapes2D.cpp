@@ -66,10 +66,7 @@ namespace Bibim
 
     bool IntersectShapes2D::PointUserShape(PointShape2D* left, UserShape2D* right)
     {
-        if (right->GetUserShape())
-            return right->GetUserShape()->IntersectPoint(right, left->GetPosition());
-        else
-            return false;
+        return right->IntersectPoint(left->GetPosition());
     }
 
     bool IntersectShapes2D::SegmentSegment(SegmentShape2D* left, SegmentShape2D* right)
@@ -94,10 +91,7 @@ namespace Bibim
 
     bool IntersectShapes2D::SegmentUserShape(SegmentShape2D* left, UserShape2D* right)
     {
-        if (right->GetUserShape())
-            return right->GetUserShape()->IntersectSegment(right, left->GetStartPoint(), left->GetEndPoint());
-        else
-            return false;
+        return right->IntersectSegment(left->GetStartPoint(), left->GetEndPoint());
     }
 
     bool IntersectShapes2D::SphereSphere(SphereShape2D* left, SphereShape2D* right)
@@ -119,10 +113,7 @@ namespace Bibim
 
     bool IntersectShapes2D::SphereUserShape(SphereShape2D* left, UserShape2D* right)
     {
-        if (right->GetUserShape())
-            return right->GetUserShape()->IntersectSphere(right, left->GetPosition(), left->GetScaledRadius());
-        else
-            return false;
+        return right->IntersectSphere(left->GetPosition(), left->GetScaledRadius());
     }
 
     bool IntersectShapes2D::AxisAlignedBoxAxisAlignedBox(AxisAlignedBoxShape2D* left, AxisAlignedBoxShape2D* right)
@@ -137,10 +128,7 @@ namespace Bibim
 
     bool IntersectShapes2D::AxisAlignedBoxUserShape(AxisAlignedBoxShape2D* left, UserShape2D* right)
     {
-        if (right->GetUserShape())
-            return right->GetUserShape()->IntersectAxisAlignedBox(right, left->GetScaledMin(), left->GetScaledMax());
-        else
-            return false;
+        return right->IntersectAxisAlignedBox(left->GetScaledMin(), left->GetScaledMax());
     }
 
     bool IntersectShapes2D::BoxBox(BoxShape2D* left, BoxShape2D* right)
@@ -150,17 +138,11 @@ namespace Bibim
 
     bool IntersectShapes2D::BoxUserShape(BoxShape2D* left, UserShape2D* right)
     {
-        if (right->GetUserShape())
-            return right->GetUserShape()->IntersectBox(right, left->GetCenter(), left->GetRotatedOrientation(), left->GetRotatedUp(), left->GetExtension());
-        else
-            return false;
+        return right->IntersectBox(left->GetCenter(), left->GetRotatedOrientation(), left->GetRotatedUp(), left->GetExtension());
     }
 
     bool IntersectShapes2D::UserShapeUserShape(UserShape2D* left, UserShape2D* right)
     {
-        if (left->GetUserShape() && right->GetUserShape())
-            return left->GetUserShape()->IntersectUserShape(left, right->GetUserShape().GetPointee());
-        else
-            return false;
+        return left->IntersectUserShape(right);
     }
 }

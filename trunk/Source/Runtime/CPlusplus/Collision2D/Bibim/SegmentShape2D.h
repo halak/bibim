@@ -9,26 +9,27 @@
     {
         class SegmentShape2D : public Shape2D
         {
+            BBComponentClass(SegmentShape2D, Shape2D, 'S', 'G', 'S', '2');
             public:
                 SegmentShape2D();
                 virtual ~SegmentShape2D();
 
-                Vector2 GetDirection() const;
+                inline Vector2 GetDirection() const;
                 void SetDirection(Vector2 value);
 
-                float GetFrontLength() const;
+                inline float GetFrontLength() const;
                 void SetFrontLength(float value);
 
-                float GetBackLength() const;
+                inline float GetBackLength() const;
                 void SetBackLength(float value);
 
-                float GetLength() const;
+                inline float GetLength() const;
 
                 Vector2 GetStartPoint();
                 Vector2 GetEndPoint();
                 Vector2 GetRotatedDirection();
 
-                virtual bool Raycast(const Ray2D& ray, RaycastReport2D& outReport, IRaycastCallback2D* callback);
+                virtual bool Raycast(Vector2 origin, Vector2 direction, float length, RaycastReport2D& outReport, IRaycastCallback2D* callback);
                 virtual void AppendTo(std::list<Vector2>& vertices);
 
             private:
@@ -42,8 +43,10 @@
                 Vector2 startPoint;
                 Vector2 endPoint;
                 Vector2 rotatedDirection;
-                unsigned int revision;
+                int revision;
         };
     }
+
+#   include <Bibim/SegmentShape2D.h>
 
 #endif

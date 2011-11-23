@@ -1,5 +1,6 @@
 #include <Bibim/TestBed.h>
 #include <Bibim/GameFramework.h>
+#include <Bibim/Any.h>
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/GameModuleNode.h>
 #include <Bibim/GameModuleTree.h>
@@ -53,8 +54,8 @@ class SpriteTest : public GameFramework
             ScriptPtr script = static_cast<Script*>(gas->Load("Script"));
             ScriptThreadPtr process = new ScriptThread(script);
             //process->Resume();
-            ScriptObject r1 = process->Call("Sum1To100");
-            ScriptObject r2 = process->Call("Factorial", 6);
+            Any r1 = process->Call("Sum1To100");
+            Any r2 = process->Call("Factorial", 6);
 
             storage = gas;
             uiDomain = uid;

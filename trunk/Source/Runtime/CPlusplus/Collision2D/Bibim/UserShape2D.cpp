@@ -8,37 +8,17 @@ namespace Bibim
     {
     }
 
-    UserShape2D::UserShape2D(IUserShape2DPtr UserShape2D)
-        : Shape2D(Shape2D::UserType),
-          userShape(UserShape2D)
-    {
-    }
-
     UserShape2D::~UserShape2D()
     {
     }
 
-    IUserShape2DPtr UserShape2D::GetUserShape()
+    void UserShape2D::OnRead(ComponentStreamReader& reader)
     {
-        return userShape;
+        Base::OnRead(reader);
     }
 
-    void UserShape2D::SerUserShape(IUserShape2DPtr value)
+    void UserShape2D::OnCopy(const GameComponent* original, CloningContext& context)
     {
-        userShape = value;
-    }
-
-    bool UserShape2D::Raycast(const Ray2D& ray, RaycastReport2D& outReport, IRaycastCallback2D* callback)
-    {
-        if (userShape)
-            return userShape->Raycast(this, ray, outReport, callback);
-        else
-            return false;
-    }
-
-    void UserShape2D::AppendTo(std::list<Vector2>& vertices)
-    {
-        if (userShape)
-            userShape->AppendTo(this, vertices);
+        Base::OnCopy(original, context);
     }
 }

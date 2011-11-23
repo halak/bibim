@@ -2558,11 +2558,19 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Collision2D\Bibim\AxisAlignedBoxShape2D.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Collision2D\Bibim\BoxShape2D.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Collision2D\Bibim\BoxShape2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\BoxShape2D.inl"
 					>
 				</File>
 				<File
@@ -2603,6 +2611,10 @@
 				</File>
 				<File
 					RelativePath=".\Collision2D\Bibim\SegmentShape2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\SegmentShape2D.inl"
 					>
 				</File>
 				<File

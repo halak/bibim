@@ -3,18 +3,14 @@
 #include <Bibim/Assert.h>
 #include <Bibim/Geom2D.h>
 #include <Bibim/Math.h>
-#include <Bibim/Number.h>
+#include <Bibim/Numerics.h>
 #include <Bibim/RaycastReport2D.h>
 #include <Bibim/Shape2D.h>
+#include <algorithm>
 
 namespace Bibim
 {
     CollisionSpace2D::CollisionSpace2D()
-    {
-    }
-
-    CollisionSpace2D::CollisionSpace2D(uint32 id)
-        : GameComponent(id)
     {
     }
 
@@ -71,15 +67,18 @@ namespace Bibim
         BBAssert(shapeA != shapeB);
 
         if (Shape2D::Intersect(shapeA, shapeB))
-            intersected.Emit(shapeA, shapeB, groupA, groupB);
+        {
+            for (std::vector<ICallback*>::const_iterator it = callbacks.begin(); it != callbacks.end(); it++)
+                (*it)->OnIntersected(shapeA, shapeB, groupA, groupB);
+        }
     }
 
-    bool CollisionSpace2D::Raycast(const Ray2D& ray, int group, RaycastReport2D& outReport)
+    bool CollisionSpace2D::Raycast(Vector2 origin, Vector2 direction, float length, int group, RaycastReport2D& outReport)
     {
         BBAssert(0 <= group && group < GetNumberOfGroups());
 
         RaycastReport2D testReport;
-        float minimumDistanceSquared = Number::MaxFloat;
+        float minimumDistanceSquared = Float::Max;
 
         struct ClosestHit : public IRaycastCallback2D
         {
@@ -105,7 +104,7 @@ namespace Bibim
                 const int count = static_cast<int>(shapes[i].size());
                 for (int k = 0; k < count; k++)
                 {
-                    if (shapes[i][k]->Raycast(ray, testReport, &Callback))
+                    if (shapes[i][k]->Raycast(origin, direction, length, testReport, &Callback))
                     {
                         minimumDistanceSquared = testReport.ImpactDistance * testReport.ImpactDistance;
                         outReport = testReport;
@@ -118,10 +117,10 @@ namespace Bibim
             }
         }
 
-        return minimumDistanceSquared != Number::MaxFloat;
+        return minimumDistanceSquared != Float::Max;
     }
 
-    void CollisionSpace2D::Add(Shape2DPtr shape, int group)
+    void CollisionSpace2D::Add(Shape2D* shape, int group)
     {
         if (Find(shape, nullptr, nullptr))
             throw std::invalid_argument("alreay exists shape.");
@@ -129,7 +128,7 @@ namespace Bibim
         shapes.at(group).push_back(shape);
     }
 
-    void CollisionSpace2D::Remove(Shape2DPtr shape)
+    void CollisionSpace2D::Remove(Shape2D* shape)
     {
         int outGroup = 0;
         int outIndex = 0;
@@ -147,7 +146,7 @@ namespace Bibim
         shapes.at(group).clear();
     }
 
-    bool CollisionSpace2D::Find(Shape2DPtr shape, int* outGroup, int* outIndex) const
+    bool CollisionSpace2D::Find(Shape2D* shape, int* outGroup, int* outIndex) const
     {
         for (std::vector<ShapeCollection>::const_iterator itGroup = shapes.begin(); itGroup != shapes.end(); itGroup++)
         {
@@ -169,7 +168,30 @@ namespace Bibim
         return false;
     }
 
-    int CollisionSpace2D::GetGroup(Shape2DPtr shape) const
+    void CollisionSpace2D::AddCallback(ICallback* item)
+    {
+        callbacks.push_back(item);
+        callbackObjects.push_back(nullptr);
+    }
+
+    void CollisionSpace2D::AddCallback(ICallback* item, SharedObject* object)
+    {
+        callbacks.push_back(item);
+        callbackObjects.push_back(object);
+    }
+
+    void CollisionSpace2D::RemoveCallback(ICallback* item)
+    {
+        std::vector<ICallback*>::iterator it = std::find(callbacks.begin(), callbacks.end(), item);
+        if (it != callbacks.end())
+        {
+            const int index = std::distance(callbacks.begin(), it);
+            callbacks.erase(it);
+            callbackObjects.erase(callbackObjects.begin() + index);
+        }
+    }
+
+    int CollisionSpace2D::GetGroup(Shape2D* shape) const
     {
         int group = 0;
         if (Find(shape, &group, nullptr))
@@ -178,7 +200,7 @@ namespace Bibim
             return -1;
     }
 
-    void CollisionSpace2D::SetGroup(Shape2DPtr shape, int group)
+    void CollisionSpace2D::SetGroup(Shape2D* shape, int group)
     {
         int existingGroup = 0;
         int existingIndex = 0;
@@ -227,10 +249,5 @@ namespace Bibim
     {
         collisionRelationships.at(groupA).at(groupB) = detectable;
         collisionRelationships.at(groupB).at(groupA) = detectable;
-    }
-
-    Signal<Shape2D*, Shape2D*, int, int>& CollisionSpace2D::Intersected()
-    {
-        return intersected;
     }
 }

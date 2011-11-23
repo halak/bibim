@@ -126,14 +126,14 @@ namespace Bibim
 
     int Math::Random(int a, int b)
     {
-        return 0;
+        return a + (b - a) / 2;
         //std::tr1::uniform_int<int> u(Math::Min(a, b), Math::Max(a, b));
         //return u(globalRandomEngine);
     }
 
     float Math::Random(float a, float b)
     {
-        return 0.0f;
+        return a + (b - a) / 2.0f;
         //std::tr1::uniform_real<float> u(Math::Min(a, b), Math::Max(a, b));
         //return u(globalRandomEngine);
     }
