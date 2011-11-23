@@ -1,3 +1,4 @@
+#include <Bibim/PCH.h>
 #include <Bibim/UpdateableGameModule.h>
 
 namespace Bibim

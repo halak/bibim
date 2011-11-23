@@ -17,7 +17,7 @@
                 {
                     public:
                         virtual ~IEventListener() { }
-                        virtual void OnIntersected(Shape2D* a, Shape2D* b, int aGroup, int bGroup) = 0;
+                        virtual void OnIntersected(Shape2D* shapeA, Shape2D* shapeB, int groupA, int groupB) = 0;
                 };
 
             public:
