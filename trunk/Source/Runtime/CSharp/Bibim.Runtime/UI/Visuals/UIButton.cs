@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Bibim.UI.Frames;
 
 namespace Bibim.UI.Visuals
 {
@@ -32,31 +31,25 @@ namespace Bibim.UI.Visuals
             }
         }
 
-        public UIWindow NormalWindow
-        {
-            get;
-            private set;
-        }
-
-        public UIWindow PushedWindow
-        {
-            get;
-            private set;
-        }
-
-        public UIWindow HoveringWindow
-        {
-            get;
-            private set;
-        }
-
-        public bool HideInactives
+        public UIVisual Normal
         {
             get;
             set;
         }
 
-        public bool StateSizeReferenced
+        public UIVisual Pushed
+        {
+            get;
+            set;
+        }
+
+        public UIVisual Hovering
+        {
+            get;
+            set;
+        }
+
+        public bool HideInactives
         {
             get;
             set;
@@ -66,12 +59,6 @@ namespace Bibim.UI.Visuals
         #region Constructors
         public UIButton()
         {
-            NormalWindow = new UIWindow() { Frame = new UIFittedFrame() };
-            PushedWindow = new UIWindow() { Frame = new UIFittedFrame() };
-            HoveringWindow = new UIWindow(){ Frame = new UIFittedFrame() };
-            Add(PushedWindow);
-            Add(HoveringWindow);
-            Add(NormalWindow);
         }
         #endregion
 

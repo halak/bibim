@@ -1,9 +1,8 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIButton.h>
 #include <Bibim/ComponentStreamReader.h>
-#include <Bibim/UIFittedFrame.h>
 #include <Bibim/UIMouseButtonEventArgs.h>
-#include <Bibim/UIWindow.h>
+#include <Bibim/UIVisual.h>
 
 namespace Bibim
 {
@@ -11,38 +10,58 @@ namespace Bibim
 
     UIButton::UIButton()
         : currentState(NormalState),
-          normalWindow(new UIWindow()),
-          pushedWindow(new UIWindow()),
-          hoveringWindow(new UIWindow()),
-          currentWindow(normalWindow),
-          hideInactives(true),
-          stateSizeReferenced(true)
+          normalVisual(),
+          pushedVisual(),
+          hoveringVisual(),
+          currentVisual(),
+          hideInactives(true)
     {
-        normalWindow->SetFrame(UIFittedFrame::Instance);
-        normalWindow->Show();
-        pushedWindow->SetFrame(UIFittedFrame::Instance);
-        pushedWindow->Hide();
-        hoveringWindow->SetFrame(UIFittedFrame::Instance);
-        hoveringWindow->Hide();
-        Add(hoveringWindow);
-        Add(pushedWindow);
-        Add(normalWindow);
     }
 
     UIButton::~UIButton()
     {
     }
 
-    Vector2 UIButton::GetDesiredSize()
+    void UIButton::SetNormal(UIVisual* value)
     {
-        if (GetStateSizeReferenced())
+        if (normalVisual != value)
         {
-            // 활성화된 상태의 첫번째 자식 객체는 배경일 확률이 높으므로 그 객체의 크기를 사용한다.
-            if (currentWindow && currentWindow->GetChildren().empty() == false)
-                return currentWindow->GetChildren().front()->GetDesiredSize();
-        }
+            if (normalVisual)
+                Remove(normalVisual);
 
-        return UIVisual::GetDesiredSize();
+            normalVisual = value;
+
+            if (normalVisual)
+                Add(normalVisual);
+        }
+    }
+
+    void UIButton::SetPushed(UIVisual* value)
+    {
+        if (pushedVisual != value)
+        {
+            if (pushedVisual)
+                Remove(pushedVisual);
+
+            pushedVisual = value;
+
+            if (pushedVisual)
+                Add(pushedVisual);
+        }
+    }
+
+    void UIButton::SetHovering(UIVisual* value)
+    {
+        if (hoveringVisual != value)
+        {
+            if (hoveringVisual)
+                Remove(hoveringVisual);
+
+            hoveringVisual = value;
+
+            if (hoveringVisual)
+                Add(hoveringVisual);
+        }
     }
 
     void UIButton::SetCurrentState(State value)
@@ -62,48 +81,57 @@ namespace Bibim
 
     void UIButton::UpdateLayout()
     {
-        currentWindow = OnUpdateLayout();
+        currentVisual = OnUpdateLayout();
     }
 
-    UIWindow* UIButton::OnUpdateLayout()
+    UIVisual* UIButton::OnUpdateLayout()
     {
-        UIWindow* activeWindow = nullptr;
+        UIVisual* activeVisual = nullptr;
         switch (currentState)
         {
             case NormalState:
-                activeWindow = normalWindow;
+                activeVisual = normalVisual;
                 break;
             case PushedState:
-                activeWindow = pushedWindow;
+                activeVisual = pushedVisual;
                 break;
             case HoveringState:
-                activeWindow = hoveringWindow;
+                activeVisual = hoveringVisual;
                 break;
         }
 
-        activeWindow->BringToFront();
-        activeWindow->Show();
+        if (activeVisual)
+        {
+            activeVisual->BringToFront();
+            activeVisual->Show();
+        }
 
         if (GetHideInactives())
         {
             switch (currentState)
             {
                 case NormalState:
-                    pushedWindow->Hide();
-                    hoveringWindow->Hide();
+                    if (pushedVisual)
+                        pushedVisual->Hide();
+                    if (hoveringVisual)
+                        hoveringVisual->Hide();
                     break;
                 case PushedState:
-                    normalWindow->Hide();
-                    hoveringWindow->Hide();
+                    if (normalVisual)
+                        normalVisual->Hide();
+                    if (hoveringVisual)
+                        hoveringVisual->Hide();
                     break;
                 case HoveringState:
-                    normalWindow->Hide();
-                    pushedWindow->Hide();
+                    if (normalVisual)
+                        normalVisual->Hide();
+                    if (pushedVisual)
+                        pushedVisual->Hide();
                     break;
             }
         }
 
-        return activeWindow;
+        return activeVisual;
     }
     
     void UIButton::OnMouseEnter(const UIMouseEventArgs& /*args*/)
@@ -135,9 +163,9 @@ namespace Bibim
     void UIButton::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        normalWindow = static_cast<UIWindow*>(reader.ReadComponent());
-        pushedWindow = static_cast<UIWindow*>(reader.ReadComponent());
-        hoveringWindow = static_cast<UIWindow*>(reader.ReadComponent());
+        normalVisual = static_cast<UIVisual*>(reader.ReadComponent());
+        pushedVisual = static_cast<UIVisual*>(reader.ReadComponent());
+        hoveringVisual = static_cast<UIVisual*>(reader.ReadComponent());
         hideInactives = reader.ReadBool();
         SetCurrentState(NormalState);
     }
@@ -146,9 +174,9 @@ namespace Bibim
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
-        normalWindow = context.Clone(o->normalWindow);
-        pushedWindow = context.Clone(o->pushedWindow);
-        hoveringWindow = context.Clone(o->hoveringWindow);
+        normalVisual = context.Clone(o->normalVisual);
+        pushedVisual = context.Clone(o->pushedVisual);
+        hoveringVisual = context.Clone(o->hoveringVisual);
         hideInactives = o->hideInactives;
         SetCurrentState(NormalState);
     }

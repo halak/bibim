@@ -5,7 +5,6 @@
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Image.h>
 #include <Bibim/UIDrawingContext.h>
-#include <Bibim/UIFrame.h>
 
 namespace Bibim
 {
@@ -21,19 +20,6 @@ namespace Bibim
 
     UISprite::~UISprite()
     {
-    }
-
-    Vector2 UISprite::GetDesiredSize()
-    {
-        if (GetAutoResize() && GetImage())
-        {
-            const int width = GetImage()->GetWidth();
-            const int height = GetImage()->GetHeight();
-            if (width != 0 && height != 0)
-                return Vector2(width, height);
-        }
-
-        return UIVisual::GetDesiredSize();
     }
 
     void UISprite::SetImage(Image* value)

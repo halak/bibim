@@ -9,7 +9,6 @@
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // UI
 #  include <Bibim/UI.h>
-#  include <Bibim/UIAlignedFrame.h>
 #  include <Bibim/UIAppEventDispatcher.h>
 #  include <Bibim/UIAsyncEventQueue.h>
 #  include <Bibim/UIButton.h>
@@ -25,9 +24,6 @@
 #  include <Bibim/UIEventHandler.h>
 #  include <Bibim/UIEventID.h>
 #  include <Bibim/UIEventMap.h>
-#  include <Bibim/UIFittedFrame.h>
-#  include <Bibim/UIFixedFrame.h>
-#  include <Bibim/UIFrame.h>
 #  include <Bibim/UIFunctionEventHandler.h>
 #  include <Bibim/UIFunctionTable.h>
 #  include <Bibim/UIGamePadEventArgs.h>
@@ -51,8 +47,6 @@
 #  include <Bibim/UISimpleDomain.h>
 #  include <Bibim/UISprite.h>
 #  include <Bibim/UITintEffect.h>
-#  include <Bibim/UITransform.h>
-#  include <Bibim/UITransform3D.h>
 #  include <Bibim/UIVideo.h>
 #  include <Bibim/UIVisual.h>
 #  include <Bibim/UIVisualVisitor.h>

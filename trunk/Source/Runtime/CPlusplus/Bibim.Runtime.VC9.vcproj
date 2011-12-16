@@ -1574,58 +1574,6 @@
 					>
 				</File>
 				<Filter
-					Name="Frames"
-					>
-					<File
-						RelativePath=".\UI\Bibim\UIAlignedFrame.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIAlignedFrame.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIAlignedFrame.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIFittedFrame.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIFittedFrame.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIFittedFrame.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIFixedFrame.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIFixedFrame.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIFixedFrame.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIFrame.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIFrame.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIFrame.inl"
-						>
-					</File>
-				</Filter>
-				<Filter
 					Name="Visuals"
 					>
 					<File
@@ -1734,6 +1682,22 @@
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIWindow.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIWindow3D.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIWindow3D.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIWindow3D.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIWindow3D.Windows.cpp"
 						>
 					</File>
 				</Filter>
@@ -2088,38 +2052,6 @@
 							>
 						</File>
 					</Filter>
-				</Filter>
-				<Filter
-					Name="Transforms"
-					>
-					<File
-						RelativePath=".\UI\Bibim\UITransform.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UITransform.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UITransform.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UITransform3D.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UITransform3D.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UITransform3D.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UITransform3D.Windows.cpp"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="Visitors"

@@ -14,8 +14,6 @@
                 UISprite();
                 virtual ~UISprite();
 
-                virtual Vector2 GetDesiredSize();
-
                 inline Image* GetImage() const;
                 void SetImage(Image* value);
 

@@ -1,5 +1,5 @@
 #include <Bibim/PCH.h>
-#include <Bibim/UITransform3D.h>
+#include <Bibim/UIWindow3D.h>
 #include <Bibim/UIVisualVisitor.h>
 
 #if (defined(BIBIM_PLATFORM_WINDOWS))
@@ -8,10 +8,8 @@
 
     namespace Bibim
     {
-        const Matrix4& UITransform3D::ComputeMatrix(UIVisualVisitor& visitor)
+        void UIWindow3D::UpdateMatrix(RectF bounds)
         {
-            const RectF bounds = visitor.GetCurrentBounds();
-
             if (matrixChanged || lastBounds != bounds)
             {
                 D3DXQUATERNION d3dRotation;
@@ -33,8 +31,6 @@
                 matrixChanged = false;
                 lastBounds = bounds;
             }
-
-            return matrix;
         }
     }
 

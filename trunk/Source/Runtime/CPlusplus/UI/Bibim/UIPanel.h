@@ -27,7 +27,6 @@
 
             protected:
                 void Add(UIVisual* item);
-                void Insert(int index, UIVisual* item);
                 bool Remove(UIVisual* item);
                 bool RemoveAt(int index);
                 void RemoveAll();
@@ -42,8 +41,10 @@
                 virtual void OnChildrenRemoved(const VisualCollection& children);
 
             private:
+                void Insert(int index, UIVisual* item);
                 void RemoveByIterator(VisualCollection::iterator it);
 
+                void OnChildZOrderChanged(UIVisual* child, int old);
                 void BringChildToFront(UIVisual* child);
                 void SendChildToBack(UIVisual* child);
 

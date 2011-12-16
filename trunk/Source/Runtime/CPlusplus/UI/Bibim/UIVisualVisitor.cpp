@@ -3,16 +3,14 @@
 #include <Bibim/Assert.h>
 #include <Bibim/Math.h>
 #include <Bibim/UIEffectMap.h>
-#include <Bibim/UIFrame.h>
 #include <Bibim/UIGeometryEffect.h>
-#include <Bibim/UITransform.h>
 #include <Bibim/UIVisual.h>
 #include <d3dx9.h>
 
 namespace Bibim
 {
     static const float BigFloat = 10000.0f;
-    static const RectF BigRect = RectF(-BigFloat, -BigFloat, BigFloat + BigFloat, BigFloat + BigFloat);
+    static const RectF BigRect = RectF(0.0f, 0.0f, 800.0f, 600.0f);
 
     UIVisualVisitor::UIVisualVisitor(const Matrix4& viewTransform, const Matrix4& projectionTransform, bool visibleOnly)
         : visibleOnly(visibleOnly),
@@ -111,7 +109,8 @@ namespace Bibim
 
         if (visibleOnly && target->IsVisible() == false)
             return;
-        if (target->GetFrame() == nullptr) // visible only가 아니더라도 Frame이 없으면 작업을 수행하지 않는다.
+        if (target->GetXMode() == UIVisual::UndefinedPosition ||
+            target->GetYMode() == UIVisual::UndefinedPosition) // visible only가 아니더라도 위치가 정해지지 않으면 수행하지 않습니다.
             return;
 
         UIVisual*const oldVisual = currentVisual;
@@ -134,11 +133,13 @@ namespace Bibim
         currentClippedBounds = RectF::Intersect(currentClippedBounds, currentBounds);
         parentTransform = currentTransform;
         parentTransformInv = currentTransformInv;
+        /*
         if (target->GetTransform())
         {
             currentTransform *= target->GetTransform()->ComputeMatrix(*this);
             currentTransformInv = Matrix4::Inversion(currentTransform);
         }
+        */
 
         OnVisit();
 

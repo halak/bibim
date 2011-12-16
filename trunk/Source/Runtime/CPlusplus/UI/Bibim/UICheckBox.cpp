@@ -1,7 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UICheckBox.h>
 #include <Bibim/ComponentStreamReader.h>
-#include <Bibim/UIFittedFrame.h>
 #include <Bibim/UIMouseEventArgs.h>
 #include <Bibim/UIWindow.h>
 
@@ -10,24 +9,57 @@ namespace Bibim
     BBImplementsComponent(UICheckBox);
 
     UICheckBox::UICheckBox()
-        : checkedNormalWindow(new UIWindow()),
-          checkedPushedWindow(new UIWindow()),
-          checkedHoveringWindow(new UIWindow()),
+        : checkedNormalVisual(),
+          checkedPushedVisual(),
+          checkedHoveringVisual(),
           checked(false)
     {
-        checkedNormalWindow->SetFrame(UIFittedFrame::Instance);
-        checkedNormalWindow->Hide();
-        checkedPushedWindow->SetFrame(UIFittedFrame::Instance);
-        checkedPushedWindow->Hide();
-        checkedHoveringWindow->SetFrame(UIFittedFrame::Instance);
-        checkedHoveringWindow->Hide();
-        Add(checkedHoveringWindow);
-        Add(checkedPushedWindow);
-        Add(checkedNormalWindow);
     }
 
     UICheckBox::~UICheckBox()
     {
+    }
+
+    void UICheckBox::SetCheckedNormal(UIVisual* value)
+    {
+        if (checkedNormalVisual != value)
+        {
+            if (checkedNormalVisual)
+                Remove(checkedNormalVisual);
+
+            checkedNormalVisual = value;
+
+            if (checkedNormalVisual)
+                Add(checkedNormalVisual);
+        }
+    }
+
+    void UICheckBox::SetCheckedPushed(UIVisual* value)
+    {
+        if (checkedPushedVisual != value)
+        {
+            if (checkedPushedVisual)
+                Remove(checkedPushedVisual);
+
+            checkedPushedVisual = value;
+
+            if (checkedPushedVisual)
+                Add(checkedPushedVisual);
+        }
+    }
+
+    void UICheckBox::SetCheckedHovering(UIVisual* value)
+    {
+        if (checkedHoveringVisual != value)
+        {
+            if (checkedHoveringVisual)
+                Remove(checkedHoveringVisual);
+
+            checkedHoveringVisual = value;
+
+            if (checkedHoveringVisual)
+                Add(checkedHoveringVisual);
+        }
     }
 
     void UICheckBox::SetChecked(bool value)
@@ -39,32 +71,35 @@ namespace Bibim
         }
     }
 
-    UIWindow* UICheckBox::OnUpdateLayout()
+    UIVisual* UICheckBox::OnUpdateLayout()
     {
-        UIWindow* const windows[] = 
+        UIVisual* const visuals[] = 
         {
-            GetNormalWindow(), GetPushedWindow(), GetHoveringWindow(),
-            checkedNormalWindow, checkedPushedWindow, checkedHoveringWindow,
+            GetNormal(), GetPushed(), GetHovering(),
+            checkedNormalVisual, checkedPushedVisual, checkedHoveringVisual,
         };
         BBStaticAssert(NormalState == 0 && PushedState == 1 && HoveringState == 2);
 
-        const int activeWindowIndex = static_cast<int>(GetCurrentState()) + ((checked) ? 3 : 0);
-        BBAssertDebug(0 <= activeWindowIndex && activeWindowIndex < sizeof(windows) / sizeof(windows[0]));
-        UIWindow* activeWindow = windows[activeWindowIndex];
+        const int activeVisualIndex = static_cast<int>(GetCurrentState()) + ((checked) ? 3 : 0);
+        BBAssertDebug(0 <= activeVisualIndex && activeVisualIndex < sizeof(visuals) / sizeof(visuals[0]));
+        UIVisual* activeVisual = visuals[activeVisualIndex];
 
-        activeWindow->BringToFront();
-        activeWindow->Show();
+        if (activeVisual)
+        {
+            activeVisual->BringToFront();
+            activeVisual->Show();
+        }
 
         if (GetHideInactives())
         {
-            for (int i = 0; i < sizeof(windows) / sizeof(windows[0]); i++)
+            for (int i = 0; i < sizeof(visuals) / sizeof(visuals[0]); i++)
             {
-                if (i != activeWindowIndex)
-                    windows[i]->Hide();
+                if (visuals[i] && i != activeVisualIndex)
+                    visuals[i]->Hide();
             }
         }
 
-        return activeWindow;
+        return activeVisual;
     }
 
     bool UICheckBox::OnMouseClick(const UIMouseEventArgs& /*args*/)
@@ -77,9 +112,9 @@ namespace Bibim
     void UICheckBox::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        checkedNormalWindow = static_cast<UIWindow*>(reader.ReadComponent());
-        checkedPushedWindow = static_cast<UIWindow*>(reader.ReadComponent());
-        checkedHoveringWindow = static_cast<UIWindow*>(reader.ReadComponent());
+        checkedNormalVisual = static_cast<UIVisual*>(reader.ReadComponent());
+        checkedPushedVisual = static_cast<UIVisual*>(reader.ReadComponent());
+        checkedHoveringVisual = static_cast<UIVisual*>(reader.ReadComponent());
         checked = reader.ReadBool();
     }
 
@@ -87,9 +122,9 @@ namespace Bibim
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
-        checkedNormalWindow = context.Clone(o->checkedNormalWindow);
-        checkedPushedWindow = context.Clone(o->checkedPushedWindow);
-        checkedHoveringWindow = context.Clone(o->checkedHoveringWindow);
+        checkedNormalVisual = context.Clone(o->checkedNormalVisual);
+        checkedPushedVisual = context.Clone(o->checkedPushedVisual);
+        checkedHoveringVisual = context.Clone(o->checkedHoveringVisual);
         checked = o->checked;
     }
 }
