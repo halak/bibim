@@ -1,18 +1,18 @@
 namespace Bibim
 {
-    UIWindow* UICheckBox::GetCheckedNormalWindow() const
+    UIVisual* UICheckBox::GetCheckedNormal() const
     {
-        return checkedNormalWindow;
+        return checkedNormalVisual;
     }
 
-    UIWindow* UICheckBox::GetCheckedPushedWindow() const
+    UIVisual* UICheckBox::GetCheckedPushed() const
     {
-        return checkedPushedWindow;
+        return checkedPushedVisual;
     }
 
-    UIWindow* UICheckBox::GetCheckedHoveringWindow() const
+    UIVisual* UICheckBox::GetCheckedHovering() const
     {
-        return checkedHoveringWindow;
+        return checkedHoveringVisual;
     }
 
     bool UICheckBox::GetChecked() const

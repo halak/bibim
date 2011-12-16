@@ -225,10 +225,6 @@ namespace Bibim
         GameComponentFactory::AddEntry<UIFunctionEventHandler>();
         GameComponentFactory::AddEntry<UISequentialEventHandler>();
         GameComponentFactory::AddEntry<UIEventMap>();
-        GameComponentFactory::AddEntry<UIAlignedFrame>();
-        GameComponentFactory::AddSingletonEntry<UIFittedFrame>();
-        GameComponentFactory::AddEntry<UIFixedFrame>();
-        GameComponentFactory::AddEntry<UITransform3D>();
         GameComponentFactory::AddEntry<UILabel>();
 //      GameComponentFactory::AddEntry<UIMarkupTextBox>();
         GameComponentFactory::AddEntry<UIPanel>();

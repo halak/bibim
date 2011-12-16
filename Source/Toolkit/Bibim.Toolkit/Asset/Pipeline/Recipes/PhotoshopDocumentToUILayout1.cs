@@ -9,7 +9,6 @@ using Bibim.Graphics;
 using Bibim.UI;
 using Bibim.UI.Effects;
 using Bibim.UI.Events;
-using Bibim.UI.Frames;
 using Bibim.UI.Visuals;
 using Image = Bibim.Graphics.Image;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
@@ -46,8 +45,15 @@ namespace Bibim.Asset.Pipeline.Recipes
             Vector2 windowSize = Vector2.Zero;
             windowSize.X = (float)input.Width;
             windowSize.Y = (float)input.Height;
-            UIWindow rootWindow = new UIWindow();
-            rootWindow.Frame = new UIAlignedFrame(UIAlignedFrame.Alignment.Center, Vector2.Zero, windowSize);
+            UIWindow rootWindow = new UIWindow()
+            {
+                XMode = UIPositionMode.Undefined,
+                YMode = UIPositionMode.Undefined,
+                WidthMode = UISizeMode.Absolute,
+                HeightMode = UISizeMode.Absolute,
+                Width = windowSize.X,
+                Height = windowSize.Y,
+            };
             foreach (PhotoshopDocument.Layer item in input.Layers)
                 AddChildTo(rootWindow, item);
             
@@ -111,11 +117,9 @@ namespace Bibim.Asset.Pipeline.Recipes
             bounds.X -= parentBounds.X;
             bounds.Y -= parentBounds.Y;
 
-            visual.Frame = new UIAlignedFrame(UIAlignedFrame.Alignment.LeftTop,
-                                              new Vector2((float)bounds.X, (float)bounds.Y),
-                                              new Vector2((float)bounds.Width, (float)bounds.Height));
+            visual.SetAbsoluteBounds(bounds.X, bounds.Y, bounds.Width, bounds.Height);
             visual.Opacity = (float)layer.Opacity / (float)byte.MaxValue;
-            visual.Shown = layer.Visible;
+            visual.Visibility = layer.Visible ? UIVisibility.Visible : UIVisibility.Invisible;
 
             BlendMode blendMode = ConvertToBlendMode(layer.BlendMode);
             if (blendMode != BlendMode.Normal)
@@ -175,11 +179,23 @@ namespace Bibim.Asset.Pipeline.Recipes
                 pushed = hovering;
 
             if (normal != null)
-                AddChildTo(button.NormalWindow, normal);
+            {
+                var window = new UIWindow();
+                button.Normal = window;
+                AddChildTo(window, normal);
+            }
             if (pushed != null)
-                AddChildTo(button.PushedWindow, pushed);
+            {
+                var window = new UIWindow();
+                button.Pushed = window;
+                AddChildTo(window, pushed);
+            }
             if (hovering != null)
-                AddChildTo(button.HoveringWindow, hovering);
+            {
+                var window = new UIWindow();
+                button.Hovering = window;
+                AddChildTo(window, hovering);
+            }
         }
 
         private static void Process(UIWindow window, PhotoshopDocument.Layer layer)

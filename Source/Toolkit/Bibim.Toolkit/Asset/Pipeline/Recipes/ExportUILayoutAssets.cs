@@ -8,7 +8,6 @@ using System.Text;
 using Bibim.Graphics;
 using Bibim.Json.Serialization;
 using Bibim.UI;
-using Bibim.UI.Frames;
 using Bibim.UI.Visuals;
 using Image = Bibim.Graphics.Image;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;

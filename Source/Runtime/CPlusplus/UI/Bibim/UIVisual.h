@@ -12,12 +12,46 @@
         {
             BBAbstractComponentClass(UIVisual, UIElement);
             public:
-                static const Property<float> OpacityProperty;
-                static const Property<bool>  ShownProperty;
+                enum PositionMode
+                {
+                    AbsolutePosition,
+                    RelativePosition,
+                    UndefinedPosition,
+                };
+
+                enum SizeMode
+                {
+                    AbsoluteSize,
+                    RelativeSize,
+                    ContentSize,
+                };
+
+                enum AnchorPoint
+                {
+                    LeftTop,
+                    LeftBottom,
+                    LeftMiddle,
+                    RightTop,
+                    RightBottom,
+                    RightMiddle,
+                    CenterTop,
+                    CenterBottom,
+                    Center,
+                };
+
+                enum Visibility
+                {
+                    Visible,
+                    Invisible,
+                    Collasped,
+                };
+
 
             public:
                 UIVisual();
                 virtual ~UIVisual();
+
+                RectF ComputeBounds(UIVisualVisitor& context);
 
                 inline void Show();
                 inline void Hide();
@@ -25,27 +59,51 @@
                 void BringToFront();
                 void SendToBack();
 
-                RectF ComputeBounds(UIVisualVisitor& visitor);
+                inline void SetAbsoluteBounds(int x, int y, int width, int height);
+                inline void SetAbsoluteBounds(float x, float y, float width, float height);
+                inline void SetRelativeBounds(float x, float y, float width, float height);
+
+                inline float GetX() const;
+                inline void  SetX(float value);
+
+                inline float GetY() const;
+                inline void  SetY(float value);
+
+                inline float GetWidth() const;
+                inline void  SetWidth(float value);
+
+                inline float GetHeight() const;
+                inline void  SetHeight(float value);
+
+                inline PositionMode GetXMode() const;
+                inline void SetXMode(PositionMode value);
+
+                inline PositionMode GetYMode() const;
+                inline void SetYMode(PositionMode value);
+
+                inline SizeMode GetWidthMode() const;
+                inline void SetWidthMode(SizeMode value);
+
+                inline SizeMode GetHeightMode() const;
+                inline void SetHeightMode(SizeMode value);
+
+                inline AnchorPoint GetAlignment() const;
+                inline void SetAlignment(AnchorPoint value);
 
                 inline float GetOpacity() const;
                 void SetOpacity(float value);
 
-                inline bool GetShown() const;
-                inline void SetShown(bool value);
+                inline Visibility GetVisibility() const;
+                inline void SetVisibility(Visibility value);
 
-                inline UIFrame* GetFrame() const;
-                void SetFrame(UIFrame* value);
-
-                inline UITransform* GetTransform() const;
-                void SetTransform(UITransform* value);
+                inline int GetZOrder() const;
+                void SetZOrder(int value);
 
                 inline UIEventMap* GetEventMap() const;
                 void SetEventMap(UIEventMap* value);
 
                 inline UIEffectMap* GetEffectMap() const;
                 void SetEffectMap(UIEffectMap* value);
-
-                inline virtual Vector2 GetDesiredSize();
 
                 inline UIPanel* GetParent() const;
 
@@ -76,6 +134,8 @@
                 virtual bool OnGamePadThumbstick(const UIGamePadEventArgs& args);
 
             private:
+                inline void SetBounds(float x, float y, float width, float height);
+
                 void SetParent(UIPanel* value);
 
                 void RaiseKeyDownEvent(const UIKeyboardEventArgs& args);
@@ -96,11 +156,18 @@
                 void RaiseGamePadThumbstickEvent(const UIGamePadEventArgs& args);
 
             private:
-                float opacity;
-                Vector2 size;
-                bool shown;
-                UIFramePtr frame;
-                UITransformPtr transform;
+                byte xMode;
+                byte yMode;
+                byte widthMode;
+                byte heightMode;
+                float x;
+                float y;
+                float width;
+                float height;
+                byte alignment;
+                byte opacity;
+                byte visibility;
+                byte zOrder;
                 UIEventMapPtr eventMap;
                 UIEffectMapPtr effectMap;
                 UIPanel* parent;

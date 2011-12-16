@@ -33,10 +33,23 @@ namespace Bibim.UI.Visuals
         #region Methods
         protected void Add(UIVisual item)
         {
-            Insert(children.Count, item);
+            if (item == null)
+                return;
+
+            int zOrder = item.ZOrder;
+            for (int i = children.Count - 1; i >= 0; i--)
+            {
+                if (zOrder >= children[i].ZOrder)
+                {
+                    Insert(i + 1, item);
+                    return;
+                }
+            }
+
+            Insert(0, item);
         }
 
-        protected void Insert(int index, UIVisual item)
+        private void Insert(int index, UIVisual item)
         {
             index = MathExtension.Clamp(index, 0, children.Count);
 
@@ -91,6 +104,18 @@ namespace Bibim.UI.Visuals
         }
 
         protected virtual void OnChildrenRemoved(UIVisual item)
+        {
+        }
+
+        internal void OnChildZOrderChanged(UIVisual child, int old)
+        {
+        }
+
+        internal void BringChildToFront(UIVisual child)
+        {
+        }
+
+        internal void SendChildToBack(UIVisual child)
         {
         }
         #endregion

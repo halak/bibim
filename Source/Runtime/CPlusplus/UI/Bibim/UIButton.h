@@ -22,23 +22,21 @@
                 UIButton();
                 virtual ~UIButton();
 
-                virtual Vector2 GetDesiredSize();
-
                 inline State GetCurrentState() const;
-                inline UIWindow* GetNormalWindow() const;
-                inline UIWindow* GetPushedWindow() const;
-                inline UIWindow* GetHoveringWindow() const;
-                inline UIWindow* GetCurrentWindow() const;
+                inline UIVisual* GetNormal() const;
+                void SetNormal(UIVisual* value);
+                inline UIVisual* GetPushed() const;
+                void SetPushed(UIVisual* value);
+                inline UIVisual* GetHovering() const;
+                void SetHovering(UIVisual* value);
+                inline UIVisual* GetCurrent() const;
 
                 inline bool GetHideInactives() const;
                 void SetHideInactives(bool value);
 
-                inline bool GetStateSizeReferenced() const;
-                inline void SetStateSizeReferenced(bool value);
-
             protected:
                 void UpdateLayout();
-                virtual UIWindow* OnUpdateLayout();
+                virtual UIVisual* OnUpdateLayout();
 
                 virtual void OnMouseEnter(const UIMouseEventArgs& args);
                 virtual void OnMouseLeave(const UIMouseEventArgs& args);
@@ -50,12 +48,11 @@
 
             private:
                 State currentState;
-                UIWindowPtr normalWindow;
-                UIWindowPtr pushedWindow;
-                UIWindowPtr hoveringWindow;
-                UIWindowPtr currentWindow;
+                UIVisualPtr normalVisual;
+                UIVisualPtr pushedVisual;
+                UIVisualPtr hoveringVisual;
+                UIVisualPtr currentVisual;
                 bool hideInactives;
-                bool stateSizeReferenced;
         };
     }
 

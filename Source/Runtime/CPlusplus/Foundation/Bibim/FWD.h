@@ -256,16 +256,6 @@
                     BBForwardDeclareSmartPointerClass(UIEventMap);
                     class UIFunctionTable;
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
-                // Frames
-                    BBForwardDeclareSmartPointerClass(UIFrame);
-                        BBForwardDeclareSmartPointerClass(UIAlignedFrame);
-                        BBForwardDeclareSmartPointerClass(UIFittedFrame);
-                        BBForwardDeclareSmartPointerClass(UIFixedFrame);
-                ////////////////////////////////////////////////////////////////////////////////////////////////////
-                // Transforms
-                    BBForwardDeclareSmartPointerClass(UITransform);
-                        BBForwardDeclareSmartPointerClass(UITransform3D);
-                ////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Visitors
                     class UIVisualVisitor;
                         class UIDrawingContext;
@@ -280,6 +270,7 @@
                             BBForwardDeclareSmartPointerClass(UIButton);
                                 BBForwardDeclareSmartPointerClass(UICheckBox);
                             BBForwardDeclareSmartPointerClass(UIWindow);
+                                BBForwardDeclareSmartPointerClass(UIWindow3D);
                         BBForwardDeclareSmartPointerClass(UISprite);
                         BBForwardDeclareSmartPointerClass(UIVideo);
     }

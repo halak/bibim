@@ -1,43 +1,47 @@
 #pragma once
-#ifndef __BIBIM_UITRANSFORM3D_H__
-#define __BIBIM_UITRANSFORM3D_H__
+#ifndef __BIBIM_UIWINDOW3D_H__
+#define __BIBIM_UIWINDOW3D_H__
 
-#   include <Bibim/UITransform.h>
+#   include <Bibim/FWD.h>
+#   include <Bibim/UIWindow.h>
+#   include <Bibim/Matrix4.h>
 #   include <Bibim/RectF.h>
 #   include <Bibim/Vector2.h>
 #   include <Bibim/Vector3.h>
 
     namespace Bibim
     {
-        class UITransform3D : public UITransform
+        class UIWindow3D : public UIWindow
         {
-            BBComponentClass(UITransform3D, UITransform, 'U' , 'T', '3', 'D');
+            BBComponentClass(UIWindow3D, UIWindow, 'U', 'W', 'N', '3');
             public:
-                UITransform3D();
-                virtual ~UITransform3D();
-
-                virtual const Matrix4& ComputeMatrix(UIVisualVisitor& visitor);
+                UIWindow3D();
+                explicit UIWindow3D(int childrenCapacity);
+                virtual ~UIWindow3D();
 
                 void Reset();
-
+                
                 inline Vector3 GetLocalOffset() const;
                 void SetLocalOffset(Vector3 value);
-
+                
                 inline Vector3 GetGlobalOffset() const;
                 void SetGlobalOffset(Vector3 value);
-
+                
                 inline Vector2 GetRotationCenter() const;
                 void SetRotationCenter(Vector2 value);
-
+                
                 inline Vector3 GetRotation() const;
                 void SetRotation(Vector3 value);
-
+                
                 inline Vector2 GetScaleCenter() const;
                 void SetScaleCenter(Vector2 value);
-
+                
                 inline Vector2 GetScale() const;
                 void SetScale(Vector2 value);
                 inline void SetScale(float value);
+
+            private:
+                void UpdateMatrix(RectF bounds);
 
             private:
                 Vector3 localOffset;
@@ -52,6 +56,6 @@
         };
     }
 
-#   include <Bibim/UITransform3D.inl>
+#   include <Bibim/UIWindow3D.inl>
 
 #endif

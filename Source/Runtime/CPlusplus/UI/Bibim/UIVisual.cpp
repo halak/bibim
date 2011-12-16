@@ -4,7 +4,6 @@
 #include <Bibim/Math.h>
 #include <Bibim/UIEffectMap.h>
 #include <Bibim/UIEventMap.h>
-#include <Bibim/UIFrame.h>
 #include <Bibim/UIGamePadEventArgs.h>
 #include <Bibim/UIKeyboardEventArgs.h>
 #include <Bibim/UIMouseButtonEventArgs.h>
@@ -12,18 +11,23 @@
 #include <Bibim/UIMouseWheelEventArgs.h>
 #include <Bibim/UIPickingContext.h>
 #include <Bibim/UIPanel.h>
-#include <Bibim/UITransform.h>
 
 namespace Bibim
 {
-    const Property<float> UIVisual::OpacityProperty(BBMakeFOURCC('O', 'P', 'A', 'C'), &UIVisual::GetOpacity, &UIVisual::SetOpacity);
-    const Property<bool>  UIVisual::ShownProperty(BBMakeFOURCC('S', 'H', 'O', 'W'), &UIVisual::GetShown, &UIVisual::SetShown);
-
     UIVisual::UIVisual()
-        : opacity(1.0f),
-          shown(true),
-          frame(nullptr),
-          transform(nullptr),
+        : UIElement(),
+          xMode(AbsolutePosition),
+          yMode(AbsolutePosition),
+          widthMode(RelativeSize),
+          heightMode(RelativeSize),
+          x(0.0f),
+          y(0.0f),
+          width(1.0f),
+          height(1.0f),
+          alignment(LeftTop),
+          opacity(255),
+          visibility(Visible),
+          zOrder(0),
           eventMap(nullptr),
           effectMap(nullptr),
           parent(nullptr)
@@ -32,6 +36,96 @@ namespace Bibim
 
     UIVisual::~UIVisual()
     {
+    }
+
+    RectF UIVisual::ComputeBounds(UIVisualVisitor& context)
+    {
+        const RectF bounds = context.GetCurrentBounds();
+        RectF result = RectF::Empty;
+
+        float offsetX = 0.0f;
+        float offsetY = 0.0f;
+        switch (xMode)
+        {
+            case AbsolutePosition:
+                offsetX = x;
+                break;
+            case RelativePosition:
+                offsetX = x * bounds.Width;
+                break;
+        }
+
+        switch (yMode)
+        {
+            case AbsolutePosition:
+                offsetY = y;
+                break;
+            case RelativePosition:
+                offsetY = y * bounds.Height;
+                break;
+        }
+
+        switch (widthMode)
+        {
+            case AbsoluteSize:
+                result.Width = width;
+                break;
+            case RelativeSize:
+                result.Width = width * bounds.Width;
+                break;
+        }
+
+        switch (heightMode)
+        {
+            case AbsoluteSize:
+                result.Height = height;
+                break;
+            case RelativeSize:
+                result.Height = height * bounds.Height;
+                break;
+        }
+
+        switch (alignment)
+        {
+            case LeftTop:
+                result.X = bounds.GetLeft() + offsetX;
+                result.Y = bounds.GetTop()  + offsetY;
+                break;
+            case LeftBottom:
+                result.X = bounds.GetLeft()   + offsetX;
+                result.Y = bounds.GetBottom() - offsetY - result.Height;
+                break;
+            case LeftMiddle:
+                result.X = bounds.GetLeft()   + offsetX;
+                result.Y = bounds.GetMiddle() + offsetY - result.Height * 0.5f;
+                break;
+            case RightTop:
+                result.X = bounds.GetRight() - offsetX - result.Width;
+                result.Y = bounds.GetTop()   + offsetY;
+                break;
+            case RightBottom:
+                result.X = bounds.GetRight()  - offsetX - result.Width;
+                result.Y = bounds.GetBottom() - offsetY - result.Height;
+                break;
+            case RightMiddle:
+                result.X = bounds.GetRight()  - offsetX - result.Width;
+                result.Y = bounds.GetMiddle() + offsetY - result.Height * 0.5f;
+                break;
+            case CenterTop:
+                result.X = bounds.GetCenter() + offsetX - result.Width * 0.5f;
+                result.Y = bounds.GetTop()    + offsetY;
+                break;
+            case CenterBottom:
+                result.X = bounds.GetCenter() + offsetX - result.Width * 0.5f;
+                result.Y = bounds.GetBottom() - offsetY - result.Height;
+                break;
+            case Center:
+                result.X = bounds.GetCenter() + offsetX - result.Width * 0.5f;
+                result.Y = bounds.GetMiddle() + offsetY - result.Height * 0.5f;
+                break;
+        }
+
+        return result;
     }
 
     void UIVisual::BringToFront()
@@ -46,24 +140,26 @@ namespace Bibim
             parent->SendChildToBack(this);
     }
 
-    RectF UIVisual::ComputeBounds(UIVisualVisitor& visitor)
-    {
-        return GetFrame()->ComputeBounds(visitor, GetDesiredSize());
-    }
-
     void UIVisual::SetOpacity(float value)
     {
-        opacity = Math::Clamp(value, 0.0f, 1.0f);
+        if (value <= 0.0f)
+            opacity = 0;
+        else if (value >= 1.0f)
+            opacity = 255;
+        else
+            opacity = static_cast<byte>(value * 255.0f);
     }
 
-    void UIVisual::SetFrame(UIFrame* value)
+    void UIVisual::SetZOrder(int value)
     {
-        frame = value;
-    }
-
-    void UIVisual::SetTransform(UITransform* value)
-    {
-        transform = value;
+        value = Math::Clamp(value, 0, 255);
+        if (static_cast<int>(zOrder) != value)
+        {
+            const int old = static_cast<int>(zOrder);
+            zOrder = static_cast<byte>(value);
+            if (parent)
+                parent->OnChildZOrderChanged(this, old);
+        }
     }
 
     void UIVisual::SetEventMap(UIEventMap* value)
@@ -96,11 +192,18 @@ namespace Bibim
     void UIVisual::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        opacity = reader.ReadFloat();
-        shown = reader.ReadBool();
-        size = reader.ReadVector2();
-        frame = static_cast<UIFrame*>(reader.ReadComponent());
-        transform = static_cast<UITransform*>(reader.ReadComponent());
+        xMode = reader.ReadByte();
+        yMode = reader.ReadByte();
+        widthMode = reader.ReadByte();
+        heightMode = reader.ReadByte();
+        x = reader.ReadFloat();
+        y = reader.ReadFloat();
+        width = reader.ReadFloat();
+        height = reader.ReadFloat();
+        alignment = reader.ReadByte();
+        opacity = reader.ReadByte();
+        visibility = reader.ReadByte();
+        zOrder = reader.ReadByte();
         eventMap = static_cast<UIEventMap*>(reader.ReadComponent());
         effectMap = static_cast<UIEffectMap*>(reader.ReadComponent());
     }
@@ -109,11 +212,18 @@ namespace Bibim
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
+        xMode = o->xMode;
+        yMode = o->yMode;
+        widthMode = o->widthMode;
+        heightMode = o->heightMode;
+        x = o->x;
+        y = o->y;
+        width = o->width;
+        height = o->height;
+        alignment = o->alignment;
         opacity = o->opacity;
-        shown = o->shown;
-        size = o->size;
-        frame = context.Clone(o->frame);
-        transform = context.Clone(o->transform);
+        visibility = o->visibility;
+        zOrder = o->zOrder;
         eventMap = context.Clone(o->eventMap);
         effectMap = context.Clone(o->effectMap);
     }

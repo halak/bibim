@@ -11,20 +11,6 @@ namespace Bibim.UI.Visuals
         #region Fields
         #endregion
 
-        #region Properties
-        public Vector2 FixedSize
-        {
-            get;
-            set;
-        }
-
-        public bool FixedSizeUsed
-        {
-            get;
-            set;
-        }
-        #endregion
-
         #region Constructors
         #endregion
 

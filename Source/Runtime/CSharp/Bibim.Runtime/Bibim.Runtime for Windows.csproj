@@ -324,13 +324,6 @@
     <Compile Include="UI\Events\UIMouseEventDispatcher.cs" />
     <Compile Include="UI\Events\UIMouseWheelEventArgs.cs" />
     <Compile Include="UI\Events\UISequentialEventHandler.cs" />
-    <Compile Include="UI\Frames\UIAlignedFrame.cs" />
-    <Compile Include="UI\Frames\UIAnchoredFrame.cs" />
-    <Compile Include="UI\Frames\UIFittedFrame.cs" />
-    <Compile Include="UI\Frames\UIFixedFrame.cs" />
-    <Compile Include="UI\Frames\UIFrame.cs" />
-    <Compile Include="UI\Transforms\UITransform.cs" />
-    <Compile Include="UI\Transforms\UITransform3D.cs" />
     <Compile Include="UI\UIDomain.cs" />
     <Compile Include="UI\UIDrawingContext.cs" />
     <Compile Include="UI\UIElement.cs" />
@@ -351,6 +344,7 @@
     <Compile Include="UI\Visuals\UIVideo.cs" />
     <Compile Include="UI\Visuals\UIVisual.cs" />
     <Compile Include="UI\Visuals\UIWindow.cs" />
+    <Compile Include="UI\Visuals\UIWindow3D.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Diagnostics\" />

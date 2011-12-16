@@ -1,13 +1,12 @@
 #include <Bibim/PCH.h>
-#include <Bibim/UITransform3D.h>
+#include <Bibim/UIWindow3D.h>
 #include <Bibim/ComponentStreamReader.h>
-#include <Bibim/UIVisualVisitor.h>
 
 namespace Bibim
 {
-    BBImplementsComponent(UITransform3D);
-
-    UITransform3D::UITransform3D()
+    BBImplementsComponent(UIWindow3D);
+    
+    UIWindow3D::UIWindow3D()
         : localOffset(Vector3::Zero),
           globalOffset(Vector3::Zero),
           rotationCenter(Vector2(0.5f, 0.5f)),
@@ -20,11 +19,25 @@ namespace Bibim
     {
     }
 
-    UITransform3D::~UITransform3D()
+    UIWindow3D::UIWindow3D(int childrenCapacity)
+        : Base(childrenCapacity),
+          localOffset(Vector3::Zero),
+          globalOffset(Vector3::Zero),
+          rotationCenter(Vector2(0.5f, 0.5f)),
+          rotation(Vector3::Zero),
+          scaleCenter(Vector2(0.5f, 0.5f)),
+          scale(Vector2::One),
+          matrix(),
+          lastBounds(RectF::Empty),
+          matrixChanged(true)
     {
     }
 
-    void UITransform3D::Reset()
+    UIWindow3D::~UIWindow3D()
+    {
+    }
+
+    void UIWindow3D::Reset()
     {
         localOffset = Vector3::Zero;
         globalOffset = Vector3::Zero;
@@ -34,7 +47,7 @@ namespace Bibim
         scale = Vector2::One;
     }
 
-    void UITransform3D::SetLocalOffset(Vector3 value)
+    void UIWindow3D::SetLocalOffset(Vector3 value)
     {
         if (localOffset != value)
         {
@@ -43,7 +56,7 @@ namespace Bibim
         }
     }
 
-    void UITransform3D::SetGlobalOffset(Vector3 value)
+    void UIWindow3D::SetGlobalOffset(Vector3 value)
     {
         if (globalOffset != value)
         {
@@ -52,7 +65,7 @@ namespace Bibim
         }
     }
 
-    void UITransform3D::SetRotationCenter(Vector2 value)
+    void UIWindow3D::SetRotationCenter(Vector2 value)
     {
         if (rotationCenter != value)
         {
@@ -61,7 +74,7 @@ namespace Bibim
         }
     }
 
-    void UITransform3D::SetRotation(Vector3 value)
+    void UIWindow3D::SetRotation(Vector3 value)
     {
         if (rotation != value)
         {
@@ -70,7 +83,7 @@ namespace Bibim
         }
     }
 
-    void UITransform3D::SetScaleCenter(Vector2 value)
+    void UIWindow3D::SetScaleCenter(Vector2 value)
     {
         if (scaleCenter != value)
         {
@@ -79,7 +92,7 @@ namespace Bibim
         }
     }
 
-    void UITransform3D::SetScale(Vector2 value)
+    void UIWindow3D::SetScale(Vector2 value)
     {
         if (scale != value)
         {
@@ -88,7 +101,7 @@ namespace Bibim
         }
     }
 
-    void UITransform3D::OnRead(ComponentStreamReader& reader)
+    void UIWindow3D::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
         localOffset = reader.ReadVector3();
@@ -100,10 +113,10 @@ namespace Bibim
         matrixChanged = true;
     }
 
-    void UITransform3D::OnCopy(const GameComponent* original, CloningContext& context)
+    void UIWindow3D::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
-        const UITransform3D* o = static_cast<const UITransform3D*>(original);
+        const UIWindow3D* o = static_cast<const UIWindow3D*>(original);
         localOffset = o->localOffset;
         globalOffset = o->globalOffset;
         rotationCenter = o->rotationCenter;

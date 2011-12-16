@@ -14,22 +14,25 @@
                 UICheckBox();
                 virtual ~UICheckBox();
 
-                inline UIWindow* GetCheckedNormalWindow() const;
-                inline UIWindow* GetCheckedPushedWindow() const;
-                inline UIWindow* GetCheckedHoveringWindow() const;
+                inline UIVisual* GetCheckedNormal() const;
+                void SetCheckedNormal(UIVisual* value);
+                inline UIVisual* GetCheckedPushed() const;
+                void SetCheckedPushed(UIVisual* value);
+                inline UIVisual* GetCheckedHovering() const;
+                void SetCheckedHovering(UIVisual* value);
 
                 inline bool GetChecked() const;
                 void SetChecked(bool value);
 
             protected:
-                virtual UIWindow* OnUpdateLayout();
+                virtual UIVisual* OnUpdateLayout();
 
                 virtual bool OnMouseClick(const UIMouseEventArgs& args);
 
             private:
-                UIWindowPtr checkedNormalWindow;
-                UIWindowPtr checkedPushedWindow;
-                UIWindowPtr checkedHoveringWindow;
+                UIVisualPtr checkedNormalVisual;
+                UIVisualPtr checkedPushedVisual;
+                UIVisualPtr checkedHoveringVisual;
                 bool checked;
         };
     }

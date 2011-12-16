@@ -6,8 +6,6 @@ using Bibim.Graphics;
 using Bibim.IO;
 using Bibim.UI.Effects;
 using Bibim.UI.Events;
-using Bibim.UI.Frames;
-using Bibim.UI.Transforms;
 using Bibim.UI.Visuals;
 
 namespace Bibim.UI
@@ -64,35 +62,13 @@ namespace Bibim.UI
                 Write(writer, (UIButton)o, objectDictionary);
             else if (t == typeof(UIWindow))
                 Write(writer, (UIWindow)o, objectDictionary);
+            else if (t == typeof(UIWindow3D))
+                Write(writer, (UIWindow3D)o, objectDictionary);
             else
                 throw new NotSupportedException(t.ToString());
         }
-
-        private static void WriteFrame(AssetStreamWriter writer, UIFrame o, List<object> objectDictionary)
-        {
-            if (WriteElement(writer, o, objectDictionary) == false)
-                return;
-
-            Type t = o.GetType();
-            if (t == typeof(UIFixedFrame))
-                Write(writer, (UIFixedFrame)o, objectDictionary);
-            else if (t == typeof(UIFittedFrame))
-                Write(writer, (UIFittedFrame)o, objectDictionary);
-            else if (t == typeof(UIAlignedFrame))
-                Write(writer, (UIAlignedFrame)o, objectDictionary);
-            else
-                throw new NotSupportedException(t.ToString());
-         }
 
         private static void WriteEventMap(AssetStreamWriter writer, UIEventMap o, List<object> objectDictionary)
-        {
-            if (WriteElement(writer, o, objectDictionary) == false)
-                return;
-
-            throw new NotImplementedException();
-        }
-
-        private static void WriteEvent(AssetStreamWriter writer, UIFrame o, List<object> objectDictionary)
         {
             if (WriteElement(writer, o, objectDictionary) == false)
                 return;
@@ -132,14 +108,6 @@ namespace Bibim.UI
             else
                 throw new NotSupportedException(t.ToString());
         }
-
-        private static void WriteTransform(AssetStreamWriter writer, UITransform o, List<object> objectDictionary)
-        {
-            if (WriteElement(writer, o, objectDictionary) == false)
-                return;
-
-            throw new NotImplementedException();
-        }
         #endregion
 
         #region WriteVisual
@@ -153,11 +121,18 @@ namespace Bibim.UI
         private static void Write(AssetStreamWriter writer, UIVisual o, List<object> objectDictionary)
         {
             Write(writer, (UIElement)o, objectDictionary);
-            writer.Write(o.Opacity);
-            writer.Write(o.Shown);
-            writer.Write(o.Size);
-            WriteFrame(writer, o.Frame, objectDictionary);
-            WriteTransform(writer, o.Transform, objectDictionary);
+            writer.Write((byte)o.XMode);
+            writer.Write((byte)o.YMode);
+            writer.Write((byte)o.WidthMode);
+            writer.Write((byte)o.HeightMode);
+            writer.Write(o.X);
+            writer.Write(o.Y);
+            writer.Write(o.Width);
+            writer.Write(o.Height);
+            writer.Write((byte)o.Alignment);
+            writer.Write((byte)(o.Opacity * 255.0f));
+            writer.Write((byte)o.Visibility);
+            writer.Write((byte)o.ZOrder);
             WriteEventMap(writer, o.EventMap, objectDictionary);
             WriteEffectMap(writer, o.EffectMap, objectDictionary);
         }
@@ -190,9 +165,9 @@ namespace Bibim.UI
         private static void Write(AssetStreamWriter writer, UIButton o, List<object> objectDictionary)
         {
             Write(writer, (UIPanel)o, objectDictionary);
-            WriteVisual(writer, o.NormalWindow, objectDictionary);
-            WriteVisual(writer, o.PushedWindow, objectDictionary);
-            WriteVisual(writer, o.HoveringWindow, objectDictionary);
+            WriteVisual(writer, o.Normal, objectDictionary);
+            WriteVisual(writer, o.Pushed, objectDictionary);
+            WriteVisual(writer, o.Hovering, objectDictionary);
             writer.Write(o.HideInactives);
         }
 
@@ -200,31 +175,16 @@ namespace Bibim.UI
         {
             Write(writer, (UIPanel)o, objectDictionary);
         }
-        #endregion
 
-        #region WriteFrame
-        private static void Write(AssetStreamWriter writer, UIFrame o, List<object> objectDictionary)
+        private static void Write(AssetStreamWriter writer, UIWindow3D o, List<object> objectDictionary)
         {
-            Write(writer, (UIElement)o, objectDictionary);
-        }
-
-        private static void Write(AssetStreamWriter writer, UIFixedFrame o, List<object> objectDictionary)
-        {
-            Write(writer, (UIFrame)o, objectDictionary);
-            writer.Write(o.Rectangle);
-        }
-
-        private static void Write(AssetStreamWriter writer, UIFittedFrame o, List<object> objectDictionary)
-        {
-            Write(writer, (UIFrame)o, objectDictionary);
-        }
-
-        private static void Write(AssetStreamWriter writer, UIAlignedFrame o, List<object> objectDictionary)
-        {
-            Write(writer, (UIFrame)o, objectDictionary);
-            writer.Write((byte)o.Align);
-            writer.Write(o.Offset);
-            writer.Write(o.Size);
+            Write(writer, (UIWindow)o, objectDictionary);
+            writer.Write(o.LocalOffset);
+            writer.Write(o.GlobalOffset);
+            writer.Write(o.RotationCenter);
+            writer.Write(o.Rotation);
+            writer.Write(o.ScaleCenter);
+            writer.Write(o.Scale);
         }
         #endregion
 

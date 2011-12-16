@@ -5,38 +5,28 @@ namespace Bibim
         return currentState;
     }
 
-    UIWindow* UIButton::GetNormalWindow() const
+    UIVisual* UIButton::GetNormal() const
     {
-        return normalWindow;
+        return normalVisual;
     }
 
-    UIWindow* UIButton::GetPushedWindow() const
+    UIVisual* UIButton::GetPushed() const
     {
-        return pushedWindow;
+        return pushedVisual;
     }
 
-    UIWindow* UIButton::GetHoveringWindow() const
+    UIVisual* UIButton::GetHovering() const
     {
-        return hoveringWindow;
+        return hoveringVisual;
     }
 
-    UIWindow* UIButton::GetCurrentWindow() const
+    UIVisual* UIButton::GetCurrent() const
     {
-        return currentWindow;
+        return currentVisual;
     }
 
     bool UIButton::GetHideInactives() const
     {
         return hideInactives;
-    }
-
-    bool UIButton::GetStateSizeReferenced() const
-    {
-        return stateSizeReferenced;
-    }
-
-    void UIButton::SetStateSizeReferenced(bool value)
-    {
-        stateSizeReferenced = value;
     }
 }
