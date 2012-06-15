@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     IDirect3DSurface9* RenderTargetTexture2D::GetD3DSurface() const
     {

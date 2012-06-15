@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UIMOUSEEVENTARGS_H__
 #define __BIBIM_UIMOUSEEVENTARGS_H__
 
@@ -10,6 +10,7 @@
     {
         class UIMouseEventArgs : public UIEventArgs
         {
+            protected: virtual void to_lua(lua_State *L) { type2lua(L, this); }
             public:
                 UIMouseEventArgs();
                 UIMouseEventArgs(UIVisual* target, Point2 position);

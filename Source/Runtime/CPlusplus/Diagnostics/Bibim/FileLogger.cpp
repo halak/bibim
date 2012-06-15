@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/FileLogger.h>
 #include <Bibim/FileStream.h>
 
@@ -60,17 +60,17 @@ namespace Bibim
 
     void FileLogger::Error(const char* category, const char* message)
     {
-        Write("<ERROR>       ", 14, category, message);
+        Write("<ERROR> ", 8, category, message);
     }
 
     void FileLogger::Warning(const char* category, const char* message)
     {
-        Write("<WARNING>     ", 14, category, message);
+        Write("<WARN>  ", 8, category, message);
     }
 
     void FileLogger::Information(const char* category, const char* message)
     {
-        Write("<INFORMATION> ", 14, category, message);
+        Write("<INFO>  ", 8, category, message);
     }
 
     void FileLogger::SetPath(const String& value)

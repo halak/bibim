@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     bool Keyboard::GetAllowKey(Key::Code code) const
     {

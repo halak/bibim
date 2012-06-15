@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/DisplaySwapChain.DX9.h>
 #include <Bibim/Assert.h>
 #include <Bibim/CheckedRelease.h>
@@ -40,7 +40,7 @@ namespace Bibim
            swapChain(nullptr),
            backBuffer(nullptr)
     {
-        // GraphicsDevice¿¡¼­ »ı¼ºÇÏ¹Ç·Î ¾Ë¾Æ¼­ Ãß°¡ÇÕ´Ï´Ù.
+        // GraphicsDeviceì—ì„œ ìƒì„±í•˜ë¯€ë¡œ ì•Œì•„ì„œ ì¶”ê°€í•©ë‹ˆë‹¤.
 
         swapChain = static_cast<IDirect3DSwapChain9*>(swapChainInterface);
 

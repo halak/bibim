@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/GlyphTable.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Glyph.h>
@@ -134,8 +134,8 @@ namespace Bibim
             return selectedSize;
         else
         {
-            // ���� �Ҵ��Ϸ��� �ؽ����� ũ�Ⱑ �۸��� ũ�⺸�� ������,
-            // ���� �ؽ����� ũ�⸦ �Ҵ��Ѵ�. ���� �ְ� �ؽ��� ũ�⺸�� ũ�ٸ� Point2::Zero�� ��ȯ�Ѵ�. (���� ��Ȳ��)
+            // 만약 할당하려는 텍스쳐의 크기가 글리프 크기보다 작으면,
+            // 다음 텍스쳐의 크기를 할당한다. 만약 최고 텍스쳐 크기보다 크다면 Point2::Zero를 반환한다. (예외 상황임)
             if (numberOfExisting < lastTextureSizeIndex)
                 return GetAdaptiveSurfaceSize(numberOfExisting + 1, width, height);
             else

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UPDATEABLE_INTERFACE__
 #define __BIBIM_UPDATEABLE_INTERFACE__
 

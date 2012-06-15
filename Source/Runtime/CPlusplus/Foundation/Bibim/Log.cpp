@@ -1,31 +1,40 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/Log.h>
 #include <algorithm>
 #include <vector>
 
 namespace Bibim
 {
-    // Add/Remove - Error/Warning/Information °£¿¡
-    // Multithreading ¹®Á¦°¡ ¹ß»ıÇÒ ¼ö ÀÖÁö¸¸
-    // Ãæµ¹ÇÒ ÀÏÀº °ÅÀÇ ¾øÀ»°Å¶ó ÆÇ´ÜÇÏ¿© µû·Î LockÃ³¸®´Â ¾ÈÇß½À´Ï´Ù.
-    // ³ªÁß¿¡ µ¿±âÈ­ ÀÛ¾÷À» ÇÏ°ÔµÇ¸é Read/Write LockÀ» ±¸ºĞÇÏ¿© Ã³¸®ÇØ¾ßÇÕ´Ï´Ù.
+    // Add/Remove - Error/Warning/Information ê°„ì—
+    // Multithreading ë¬¸ì œê°€ ë°œìƒí•  ìˆ˜ ìˆì§€ë§Œ
+    // ì¶©ëŒí•  ì¼ì€ ê±°ì˜ ì—†ì„ê±°ë¼ íŒë‹¨í•˜ì—¬ ë”°ë¡œ Lockì²˜ë¦¬ëŠ” ì•ˆí–ˆìŠµë‹ˆë‹¤.
+    // ë‚˜ì¤‘ì— ë™ê¸°í™” ì‘ì—…ì„ í•˜ê²Œë˜ë©´ Read/Write Lockì„ êµ¬ë¶„í•˜ì—¬ ì²˜ë¦¬í•´ì•¼í•©ë‹ˆë‹¤.
 
     static std::vector<Log::Listener*> listeners;
 
     void Log::Error(const char* category, const char* message)
     {
+        if (message == nullptr)
+            message = "";
+
         for (std::vector<Listener*>::const_iterator it = listeners.begin(); it != listeners.end(); it++)
             (*it)->Error(category, message);
     }
 
     void Log::Warning(const char* category, const char* message)
     {
+        if (message == nullptr)
+            message = "";
+
         for (std::vector<Listener*>::const_iterator it = listeners.begin(); it != listeners.end(); it++)
             (*it)->Warning(category, message);
     }
 
     void Log::Information(const char* category, const char* message)
     {
+        if (message == nullptr)
+            message = "";
+
         for (std::vector<Listener*>::const_iterator it = listeners.begin(); it != listeners.end(); it++)
             (*it)->Information(category, message);
     }

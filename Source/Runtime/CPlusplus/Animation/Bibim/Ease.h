@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_EASE_H__
 #define __BIBIM_EASE_H__
 
@@ -6,6 +6,7 @@
 
     namespace Bibim
     {
+        /// 고품격 수치 보간을 위한 Ease 함수들을 정의한 static class.
         class Ease
         {
             BBThisIsStaticClass(Ease);
@@ -42,7 +43,7 @@
                 static inline float OutBack(float t, float overshoot);
                 static inline float InOutBack(float t, float overshoot);
 
-                static const float DefaultBackOvershoot;
+                static const float DefaultBackOvershoot; ///< using InBack, OutBack, InOutBack
         };
     }
 

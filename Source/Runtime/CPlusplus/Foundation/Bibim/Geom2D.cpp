@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/Geom2D.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Math.h>
@@ -306,4 +306,31 @@ namespace Bibim
         else
             return false;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Vector2 Geom2D::GetClosestPoint(Vector2 origin, Vector2 direction, float length, Vector2 point)
+    {
+        return origin + (direction * Math::Clamp(direction.Dot(point - origin), 0.0f, length));
+    }
+
+    bool Geom2D::IsClockwise(Vector2 a, Vector2 b, Vector2 c)
+    {
+        // Right-handed
+        // http://www.dsource.org/projects/blaze/changeset/63
+        return ((b.X - a.X) * (c.Y - a.Y) - (c.X - a.X) * (b.Y - a.Y)) > 0.0f;
+    }
+
+    bool Geom2D::IsClockwise(const Vector2* points, int numberOfPoints)
+    {
+        const int last = numberOfPoints - 1;
+        float crossProductSum = (points[last].X * points[0].Y) - (points[0].X * points[last].Y);
+        for (int i = 0; i < last; i++)
+        {
+            crossProductSum += (points[i].X * points[i + 1].Y) - (points[i + 1].X * points[i].Y);
+        }
+
+        return crossProductSum > 0.0f;
+    }
+
 }

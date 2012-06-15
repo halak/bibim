@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_THREAD_WINDOWS_H__
 #define __BIBIM_THREAD_WINDOWS_H__
 

@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     UIAppEventDispatcher* UIEventMap::GetEventDispatcher() const
     {

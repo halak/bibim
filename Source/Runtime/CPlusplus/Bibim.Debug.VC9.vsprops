@@ -10,6 +10,6 @@
 	/>
 	<Tool
 		Name="VCLinkerTool"
-		AdditionalDependencies="Bibim.Runtime.Debug.VC9.lib winmm.lib d3d9.lib d3dx9d.lib freetype244_D.lib"
+		AdditionalDependencies="Bibim.Runtime.Debug.VC9.lib winmm.lib d3d9.lib d3dx9d.lib freetype244_D.lib lua.Debug.lib"
 	/>
 </VisualStudioPropertySheet>

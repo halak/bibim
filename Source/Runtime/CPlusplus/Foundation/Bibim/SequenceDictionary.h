@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #ifndef __BIBIM_SEQUENCEDICTIONARY_H__
 #define __BIBIM_SEQUENCEDICTIONARY_H__
 
@@ -8,9 +8,10 @@
 
     namespace Bibim
     {
-        /// Sequence Container·Î ±¸ÇöÇÑ String Dictionary.
-        /// °ªÀ» Ã¤¿ì°í OptizmieÇÑ ÀÌÈÄ¿¡´Â ºü¸£°Ô °Ë»öÇÒ ¼ö ÀÖ½À´Ï´Ù.
-        /// ¼º´É ¹®Á¦»ó multimap°ú °°ÀÌ °°Àº Key¸¦ °¡Áø ItemÀÌ ¿©·¯°³ Á¸ÀçÇÒ ¼ö ÀÖ½À´Ï´Ù.
+        /// @brief Sequence Containerë¡œ êµ¬í˜„ëœ String Dictionary.
+        /// 
+        /// ê°’ì„ ì±„ìš°ê³  Optizmieí•œ ì´í›„ì—ëŠ” ë¹ ë¥´ê²Œ ê²€ìƒ‰í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. <br />
+        /// ì„±ëŠ¥ ë¬¸ì œìƒ multimapê³¼ ê°™ì´ ê°™ì€ Keyë¥¼ ê°€ì§„ Itemì´ ì—¬ëŸ¬ê°œ ì¡´ì¬í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. <br />
         class SequenceDictionary
         {
             public:

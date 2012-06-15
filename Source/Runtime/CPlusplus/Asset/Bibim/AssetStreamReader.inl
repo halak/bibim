@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     void AssetStreamReader::Read(GameAssetPtr& outValue)
     {

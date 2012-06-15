@@ -85,6 +85,7 @@
     <Reference Include="Ionic.Zip">
       <HintPath>..\References\DotNetZipLib\zip-v1.9\Release\Ionic.Zip.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="System" />
     <Reference Include="System.Activities" />
     <Reference Include="System.Activities.Presentation" />
@@ -116,6 +117,12 @@
       <DependentUpon>ConsoleHtmlBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Consoles\RunScript.cs" />
+    <Compile Include="Controls\ObjectBox.xaml.cs">
+      <DependentUpon>ObjectBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ObjectRelationshipGrid.xaml.cs">
+      <DependentUpon>ObjectRelationshipGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -135,6 +142,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ConsoleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ObjectBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ObjectRelationshipGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -181,9 +196,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Icon.ico" />
   </ItemGroup>

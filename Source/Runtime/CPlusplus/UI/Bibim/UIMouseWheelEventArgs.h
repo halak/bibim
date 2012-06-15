@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UIMOUSEWHEELEVENTARGS_H__
 #define __BIBIM_UIMOUSEWHEELEVENTARGS_H__
 
@@ -9,6 +9,7 @@
     {
         class UIMouseWheelEventArgs : public UIMouseEventArgs
         {
+            protected: virtual void to_lua(lua_State *L) { type2lua(L, this); }
             public:
                 UIMouseWheelEventArgs();
                 UIMouseWheelEventArgs(UIVisual* target, Point2 position, int wheelDelta);

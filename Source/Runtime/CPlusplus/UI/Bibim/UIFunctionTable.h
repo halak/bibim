@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UIFUNCTIONTABLE_H__
 #define __BIBIM_UIFUNCTIONTABLE_H__
 
@@ -13,15 +13,16 @@
         {
             BBModuleClass(UIFunctionTable, GameModule, 'U', 'F', 'C', 'T');
             public:
-                typedef bool (*GlobalFunctionType)(const UIEventArgs&);
-                typedef GlobalFunctionType FunctionType;
+                typedef bool (*GlobalFunctionType)(const UIEventArgs&, void*);
+                typedef std::pair<GlobalFunctionType, void*> FunctionType;
                 typedef std::map<String, FunctionType> NamedFunctionMap;
 
             public:
                 UIFunctionTable();
                 virtual ~UIFunctionTable();
 
-                void Add(const String& name, GlobalFunctionType function);
+                inline void Add(const String& name, GlobalFunctionType function);
+                void Add(const String& name, GlobalFunctionType function, void* userData);
                 bool Remove(const String& name);
                 void Clear();
 

@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     const Timeline::ItemCollection& Timeline::GetItems() const
     {

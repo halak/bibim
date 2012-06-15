@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/UIEffectMap.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/UIGeometryEffect.h>
@@ -60,6 +60,17 @@ namespace Bibim
     void UIEffectMap::RemoveAll()
     {
         pixelEffects.clear();
+    }
+
+    UIPixelEffect* UIEffectMap::FindPixelEffect(const String& name)
+    {
+        for (PixelEffectCollection::const_iterator it = pixelEffects.begin(); it != pixelEffects.end(); it++)
+        {
+            if ((*it)->GetName() == name)
+                return (*it);
+        }
+
+        return nullptr;
     }
 
     void UIEffectMap::SetGeometryEffect(UIGeometryEffect* value)

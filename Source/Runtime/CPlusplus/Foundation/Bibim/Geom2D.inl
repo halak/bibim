@@ -1,10 +1,10 @@
-#include <Bibim/Math.h>
+ï»¿#include <Bibim/Math.h>
 
 namespace Bibim
 {
     bool Geom2D::IntersectPointSegment(Vector2 p, Vector2 a, Vector2 b)
     {
-        return GetPointSegmentDistanceSquared(p, a, b) < 0.01f; // ±Ù»ç °ª
+        return GetPointSegmentDistanceSquared(p, a, b) < 0.01f; // ê·¼ì‚¬ ê°’
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

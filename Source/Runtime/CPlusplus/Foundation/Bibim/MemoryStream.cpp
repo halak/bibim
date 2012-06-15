@@ -1,4 +1,4 @@
-#include <Bibim/MemoryStream.h>
+﻿#include <Bibim/MemoryStream.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Math.h>
 #include <Bibim/Memory.h>

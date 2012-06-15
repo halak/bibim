@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     GameAsset* GameAssetFactory::Create(StreamReader& reader)
     {

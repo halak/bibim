@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_POINTSHAPE2D__
 #define __BIBIM_POINTSHAPE2D__
 

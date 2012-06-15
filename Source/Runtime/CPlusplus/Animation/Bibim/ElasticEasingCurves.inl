@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     float ElasticEasingCurve::GetAmplitude() const
     {

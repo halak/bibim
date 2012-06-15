@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #ifndef __BIBIM_ASSERT_H__
 #define __BIBIM_ASSERT_H__
 
@@ -8,15 +8,15 @@
     {
 #       define BBBreak() { __asm int 3 }
 
-        /// Run-time¿¡ ½ÄÀ» Æò°¡ÇÏ¿© ½ÄÀÌ °ÅÁşÀÏ °æ¿ì ¾Ë·ÁÁİ´Ï´Ù.
+        /// Run-timeì— ì‹ì„ í‰ê°€í•˜ì—¬ ì‹ì´ ê±°ì§“ì¼ ê²½ìš° ì•Œë ¤ì¤ë‹ˆë‹¤.
 #       define BBAssert(exp) if (!(exp)) { Bibim::Assert(#exp, __FILE__, __LINE__); }
 
-        /// Compile-time¿¡ ½ÄÀ» Æò°¡ÇÏ¿© ½ÄÀÌ °ÅÁşÀÏ °æ¿ì ¾Ë·ÁÁİ´Ï´Ù.
-        /// °íÁ¤ ¹è¿­ Å©±â³ª »ó¼ö °Ë»çµî¿¡ ÀÌ¿ëÇÕ´Ï´Ù.
+        /// Compile-timeì— ì‹ì„ í‰ê°€í•˜ì—¬ ì‹ì´ ê±°ì§“ì¼ ê²½ìš° ì•Œë ¤ì¤ë‹ˆë‹¤.
+        /// ê³ ì • ë°°ì—´ í¬ê¸°ë‚˜ ìƒìˆ˜ ê²€ì‚¬ë“±ì— ì´ìš©í•©ë‹ˆë‹¤.
 #       define BBStaticAssert(exp) { char StaticAssertion[(exp) ? 1 : 0]; StaticAssertion[0] = '\0'; }
 
 #       if (defined(BIBIM_DEBUG))
-            /// Debug »óÅÂ¿¡¼­¸¸ ÀÛµ¿ÇÏ´Â ASSERT
+            /// Debug ìƒíƒœì—ì„œë§Œ ì‘ë™í•˜ëŠ” ASSERT
 #           define BBAssertDebug(exp) BBAssert(exp)
 #       else
 #           define BBAssertDebug(exp)

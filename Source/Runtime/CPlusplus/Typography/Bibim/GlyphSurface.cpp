@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/GlyphSurface.h>
 #include <Bibim/DynamicTexture2D.h>
 #include <Bibim/RectStorage.h>
@@ -18,14 +18,14 @@ namespace Bibim
 
     Rect GlyphSurface::Allocate(const void* buffer, int width, int height, int pitch)
     {
-        // Texture FilteringÀÇ ÀÌÀ¯·Î »óÇÏÁÂ¿ì 1Pixel¾¿À» ºñ¿öµÓ´Ï´Ù.
+        // Texture Filteringì˜ ì´ìœ ë¡œ ìƒí•˜ì¢Œìš° 1Pixelì”©ì„ ë¹„ì›Œë‘¡ë‹ˆë‹¤.
         Rect allocatedRect = storage->Allocate(width + 2, height + 2);
         if (allocatedRect != Rect::Empty)
         {
             DynamicTexture2D::LockedInfo lockedInfo;
             if (texture->Lock(lockedInfo, allocatedRect))
             {
-                // ºñ¿öµĞ ¿Ü°ûÀ» Åõ¸íÇÑ Pixel·Î Ã¤¿ó´Ï´Ù.
+                // ë¹„ì›Œë‘” ì™¸ê³½ì„ íˆ¬ëª…í•œ Pixelë¡œ ì±„ì›ë‹ˆë‹¤.
                 {
                     byte* destination = static_cast<byte*>(lockedInfo.GetBuffer());
                     const int destinationPitch = lockedInfo.GetPitch() / sizeof(*destination);
@@ -49,15 +49,15 @@ namespace Bibim
                         destination[x] = 0x00;
                 }
 
-                // ¹®ÀÚ¸¦ ±â·ÏÇÕ´Ï´Ù.
+                // ë¬¸ìë¥¼ ê¸°ë¡í•©ë‹ˆë‹¤.
                 {
                     byte* destination = static_cast<byte*>(lockedInfo.GetBuffer());
                     const int destinationPitch = lockedInfo.GetPitch() / sizeof(*destination);
                     const byte* source = static_cast<const byte*>(buffer);
                     const int sourcePitch = pitch;
 
-                    destination += destinationPitch; // y·Î ÇÑ Step.
-                    destination += 1;                // x·Î ÇÑ Step.
+                    destination += destinationPitch; // yë¡œ í•œ Step.
+                    destination += 1;                // xë¡œ í•œ Step.
                     for (int y = 0; y < height; ++y)
                     {
                         for (int x = 0; x < width; ++x)

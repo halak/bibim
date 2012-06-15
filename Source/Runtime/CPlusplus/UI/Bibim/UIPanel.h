@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UIPANEL_H__
 #define __BIBIM_UIPANEL_H__
 
@@ -20,7 +20,10 @@
                 virtual ~UIPanel();
 
                 UIVisual* FindChild(const String& name, bool searchAllChildren) const;
+                inline UIVisual* FindChildByChars(const char* name, bool searchAllChildren) const;
 
+                inline UIVisual* GetChildAt(int index) const;
+                inline int GetNumberOfChildren() const;
                 inline const VisualCollection& GetChildren() const;
 
                 virtual bool IsPanel() const;
@@ -56,5 +59,15 @@
     }
 
 #   include <Bibim/UIPanel.inl>
+
+    template<> inline void lua_tinker::push(lua_State* L, Bibim::UIPanel* value)
+	{
+        push(L, static_cast<lua_tinker::lua_value*>(value));
+	}
+
+	template<> inline void lua_tinker::push(lua_State* L, const Bibim::UIPanel* value)
+	{
+        push(L, const_cast<lua_tinker::lua_value*>(static_cast<const lua_tinker::lua_value*>(value)));
+	}
 
 #endif

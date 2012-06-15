@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     template <typename T, char a, char b, char c, char d>
     EvalVariableTemplate<T, a, b, c, d>* EvalVariableTemplate<T, a, b, c, d>::Clone() const

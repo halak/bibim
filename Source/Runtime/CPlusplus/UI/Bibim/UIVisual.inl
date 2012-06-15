@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     void UIVisual::Show()
     {
@@ -8,6 +8,14 @@ namespace Bibim
     void UIVisual::Hide()
     {
         SetVisibility(Collasped);
+    }
+
+    UIPixelEffect* UIVisual::FindEffectByChars(const char* name)
+    {
+        if (name)
+            return FindEffect(name);
+        else
+            return nullptr;
     }
 
     void UIVisual::SetBounds(float x, float y, float width, float height)
@@ -64,6 +72,12 @@ namespace Bibim
         y = value;
     }
 
+    void UIVisual::SetXY(float x, float y)
+    {
+        this->x = x;
+        this->y = y;
+    }
+
     float UIVisual::GetWidth() const
     {
         return width;
@@ -102,6 +116,12 @@ namespace Bibim
     void UIVisual::SetYMode(PositionMode value)
     {
         yMode = static_cast<byte>(value);
+    }
+
+    void UIVisual::SetXYMode(PositionMode xMode, PositionMode yMode)
+    {
+        this->xMode = static_cast<byte>(xMode);
+        this->yMode = static_cast<byte>(yMode);
     }
 
     UIVisual::SizeMode UIVisual::GetWidthMode() const
@@ -172,5 +192,71 @@ namespace Bibim
     bool UIVisual::IsVisible() const
     {
         return GetVisibility() == Visible && GetOpacity() > 0.0f;
+    }
+
+    const char* UIVisual::GetXModeAsChars() const
+    {
+        return ConvertFromPositionModeToString(GetXMode());
+    }
+
+    void UIVisual::SetXModeByChars(const char* value)
+    {
+        SetXMode(ConvertFromStringToPositionMode(value));
+    }
+
+    const char* UIVisual::GetYModeAsChars() const
+    {
+        return ConvertFromPositionModeToString(GetYMode());
+    }
+
+    void UIVisual::SetYModeByChars(const char* value)
+    {
+        SetYMode(ConvertFromStringToPositionMode(value));
+    }
+
+    void UIVisual::SetXYModeByChars(const char* xMode, const char* yMode)
+    {
+        SetXMode(ConvertFromStringToPositionMode(xMode));
+        SetYMode(ConvertFromStringToPositionMode(yMode));
+    }
+
+    const char* UIVisual::GetWidthModeAsChars() const
+    {
+        return ConvertFromSizeModeToString(GetWidthMode());
+    }
+
+    void UIVisual::SetWidthModeByChars(const char* value)
+    {
+        SetWidthMode(ConvertFromStringToSizeMode(value));
+    }
+
+    const char* UIVisual::GetHeightModeAsChars() const
+    {
+        return ConvertFromSizeModeToString(GetHeightMode());
+    }
+
+    void UIVisual::SetHeightModeByChars(const char* value)
+    {
+        SetHeightMode(ConvertFromStringToSizeMode(value));
+    }
+
+    const char* UIVisual::GetAlignmentAsChars() const
+    {
+        return ConvertFromAnchorPointToString(GetAlignment());
+    }
+
+    void UIVisual::SetAlignmentByChars(const char* value)
+    {
+        SetAlignment(ConvertFromStringToAnchorPoint(value));
+    }
+
+    const char* UIVisual::GetVisibilityAsChars() const
+    {
+        return ConvertFromVisibilityToString(GetVisibility());
+    }
+
+    void UIVisual::SetVisibilityByChars(const char* value)
+    {
+        SetVisibility(ConvertFromStringToVisibility(value));
     }
 }

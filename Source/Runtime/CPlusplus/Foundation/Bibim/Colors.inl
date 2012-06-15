@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     Colors::Item::Item()
         : Name(String::Empty),

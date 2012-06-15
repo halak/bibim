@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     bool FontCacheParameters::operator != (const FontCacheParameters& right) const
     {

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UIEFFECTMAP_H__
 #define __BIBIM_UIEFFECTMAP_H__
 
@@ -22,6 +22,7 @@
                 bool Remove(UIPixelEffect* item);
                 bool Remove(int index);
                 void RemoveAll();
+                UIPixelEffect* FindPixelEffect(const String& name);
 
                 inline UIGeometryEffect* GetGeometryEffect() const;
                 void SetGeometryEffect(UIGeometryEffect* value);

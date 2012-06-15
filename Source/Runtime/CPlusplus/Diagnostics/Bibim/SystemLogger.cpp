@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/SystemLogger.h>
 
 #if (defined(BIBIM_PLATFORM_WINDOWS))
@@ -70,16 +70,16 @@ namespace Bibim
 
     void SystemLogger::Error(const char* category, const char* message)
     {
-        Write("<ERROR>       ", category, message);
+        Write("<ERROR> ", category, message);
     }
 
     void SystemLogger::Warning(const char* category, const char* message)
     {
-        Write("<WARNING>     ", category, message);
+        Write("<WARN>  ", category, message);
     }
 
     void SystemLogger::Information(const char* category, const char* message)
     {
-        Write("<INFORMATION> ", category, message);
+        Write("<INFO>  ", category, message);
     }
 }

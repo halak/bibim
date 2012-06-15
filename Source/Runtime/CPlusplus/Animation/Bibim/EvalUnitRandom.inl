@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     int EvalUnitRandom::GetInitialSeed() const
     {

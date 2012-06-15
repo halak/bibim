@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     byte Color::Add(byte a, byte b)
     {

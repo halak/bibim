@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/UIMouseEventDispatcher.h>
 #include <Bibim/UIDomain.h>
 #include <Bibim/Mouse.h>
@@ -81,10 +81,10 @@ namespace Bibim
 
         if (targetVisual != lastTargetVisual)
         {
-            // °¡¸®Å°°í ÀÖ´Â Window°¡ ´Ş¶óÁö¸é,
-            // ÀÌÀü¿¡ °¡¸®Å² Window¿Í ±× ºÎ¸ğµé¿¡°Ô MouseLeave Event¸¦ ¹ß»ı½ÃÅ°°í
-            // ÇöÀç °¡¸®Å°°í ÀÖ´Â Window¿Í ±× ºÎ¸ğµé¿¡°Ô MouseEnter Event¸¦ ¹ß»ı½ÃÅµ´Ï´Ù.
-            // ¹°·Ğ µÎ WindowÀÇ °øÅëµÈ ºÎ¸ğµé¿¡°Ô´Â ¾Æ¹« Eventµµ ¹ß»ı½ÃÅ°Áö ¾Ê½À´Ï´Ù.
+            // ê°€ë¦¬í‚¤ê³  ìˆëŠ” Windowê°€ ë‹¬ë¼ì§€ë©´,
+            // ì´ì „ì— ê°€ë¦¬í‚¨ Windowì™€ ê·¸ ë¶€ëª¨ë“¤ì—ê²Œ MouseLeave Eventë¥¼ ë°œìƒì‹œí‚¤ê³ 
+            // í˜„ì¬ ê°€ë¦¬í‚¤ê³  ìˆëŠ” Windowì™€ ê·¸ ë¶€ëª¨ë“¤ì—ê²Œ MouseEnter Eventë¥¼ ë°œìƒì‹œí‚µë‹ˆë‹¤.
+            // ë¬¼ë¡  ë‘ Windowì˜ ê³µí†µëœ ë¶€ëª¨ë“¤ì—ê²ŒëŠ” ì•„ë¬´ Eventë„ ë°œìƒì‹œí‚¤ì§€ ì•ŠìŠµë‹ˆë‹¤.
 
             cachedEnterVisuals.clear();
             cachedLeaveVisuals.clear();

@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/OscillationCurve.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Math.h>

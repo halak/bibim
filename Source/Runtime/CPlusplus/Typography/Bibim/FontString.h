@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #ifndef __BIBIM_FONTSTRING_H__
 #define __BIBIM_FONTSTRING_H__
 
@@ -21,8 +21,8 @@
                 ~FontString();
 
                 /// Summary:
-                /// Glyphs¿¡ Index¿¡ ´ëÀÀÇÏ´Â Original Text·ÎºÎÅÍÀÇ Index¸¦ °¡Á®¿É´Ï´Ù.
-                /// ¿¹) "°¡³ª´Ù"ÀÇ '³ª'ºÎºĞÀº Glyphs Index´Â 1ÀÌÁö¸¸ Original Text·ÎºÎÅÍÀÇ Index´Â 2ÀÔ´Ï´Ù.
+                /// Glyphsì— Indexì— ëŒ€ì‘í•˜ëŠ” Original Textë¡œë¶€í„°ì˜ Indexë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
+                /// ì˜ˆ) "ê°€ë‚˜ë‹¤"ì˜ 'ë‚˜'ë¶€ë¶„ì€ Glyphs IndexëŠ” 1ì´ì§€ë§Œ Original Textë¡œë¶€í„°ì˜ IndexëŠ” 2ì…ë‹ˆë‹¤.
                 int ConvertToOriginalIndex(int index) const;
 
                 inline const String& GetText() const;

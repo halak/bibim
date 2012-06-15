@@ -1,8 +1,9 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_KEYS_H__
 #define __BIBIM_KEYS_H__
 
 #   include <Bibim/FWD.h>
+#   include <vector>
 
     namespace Bibim
     {
@@ -94,6 +95,16 @@
 
             static const int Count = 256;
             static const Code Codes[Count];
+
+            static void Setup();
+            static const char* ToString(Code value);
+            static Code Parse(const char* value);
+
+            typedef std::pair<const char*, Code> Entry;
+
+            private:
+                static std::vector<Entry> stringToCodeMap;
+                static std::vector<Entry> codeToStringMap;
         };
     }
 

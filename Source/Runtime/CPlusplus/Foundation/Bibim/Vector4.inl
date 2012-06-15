@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     Vector4::Vector4()
         : X(0.0f), Y(0.0f), Z(0.0f), W(0.0f)

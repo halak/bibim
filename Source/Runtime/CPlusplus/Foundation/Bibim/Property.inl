@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     PropertyBase::PropertyBase(int id)
         : id(id)

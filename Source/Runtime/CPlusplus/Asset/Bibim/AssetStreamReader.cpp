@@ -1,4 +1,4 @@
-#include <Bibim/AssetStreamReader.h>
+﻿#include <Bibim/AssetStreamReader.h>
 #include <Bibim/Assert.h>
 #include <Bibim/GameAsset.h>
 #include <Bibim/GameAssetStorage.h>

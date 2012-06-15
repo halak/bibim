@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/UIVisual.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Math.h>
@@ -128,6 +128,28 @@ namespace Bibim
         return result;
     }
 
+    void UIVisual::InsertEffect(UIPixelEffect* item)
+    {
+        if (effectMap == nullptr)
+            effectMap = new UIEffectMap();
+
+        effectMap->Insert(item);
+    }
+
+    void UIVisual::RemoveEffect(UIPixelEffect* item)
+    {
+        if (effectMap)
+            effectMap->Remove(item);
+    }
+
+    UIPixelEffect* UIVisual::FindEffect(const String& name)
+    {
+        if (effectMap)
+            return effectMap->FindPixelEffect(name);
+        else
+            return nullptr;
+    }
+
     void UIVisual::BringToFront()
     {
         if (parent)
@@ -189,6 +211,11 @@ namespace Bibim
         return false;
     }
 
+    bool UIVisual::CanPick() const
+    {
+        return false;
+    }
+
     void UIVisual::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
@@ -234,7 +261,7 @@ namespace Bibim
 
     void UIVisual::OnPick(UIPickingContext& context)
     {
-        if (context.Contains(context.GetCurrentClippedBounds()))
+        if (CanPick() && context.Contains(context.GetCurrentClippedBounds()))
             context.SetResult(this);
     }
 
@@ -416,4 +443,88 @@ namespace Bibim
     }
 
 #   undef RaiseRoutedEvent
+
+    UIVisual::PositionMode UIVisual::ConvertFromStringToPositionMode(const char* value)
+    {
+        if (_stricmp(value, "abs") == 0)        return AbsolutePosition;
+        else if (_stricmp(value, "rel") == 0)   return RelativePosition;
+        else                                    return UndefinedPosition;
+    }
+
+    const char* UIVisual::ConvertFromPositionModeToString(PositionMode value)
+    {
+        switch (value)
+        {
+            case AbsolutePosition:  return "ABS";
+            case RelativePosition:  return "REL";
+            default:                return "UNDEFINED";
+        }
+    }
+
+    UIVisual::SizeMode UIVisual::ConvertFromStringToSizeMode(const char* value)
+    {
+        if (_stricmp(value, "abs") == 0)        return AbsoluteSize;
+        else if (_stricmp(value, "rel") == 0)   return RelativeSize;
+        else                                    return ContentSize;
+    }
+
+    const char* UIVisual::ConvertFromSizeModeToString(SizeMode value)
+    {
+        switch (value)
+        {
+            case AbsolutePosition:  return "ABS";
+            case RelativePosition:  return "REL";
+            default:                return "CONTENT";
+        }
+    }
+
+    UIVisual::AnchorPoint UIVisual::ConvertFromStringToAnchorPoint(const char* value)
+    {
+        if (_stricmp(value, "LeftTop") == 0)            return LeftTop;
+        else if (_stricmp(value, "LeftBottom") == 0)    return LeftBottom;
+        else if (_stricmp(value, "LeftMiddle") == 0)    return LeftMiddle;
+        else if (_stricmp(value, "RightTop") == 0)      return RightTop;
+        else if (_stricmp(value, "RightBottom") == 0)   return RightBottom;
+        else if (_stricmp(value, "RightMiddle") == 0)   return RightMiddle;
+        else if (_stricmp(value, "CenterTop") == 0)     return CenterTop;
+        else if (_stricmp(value, "CenterBottom") == 0)  return CenterBottom;
+        else if (_stricmp(value, "Center") == 0)        return Center;
+        else                                            return LeftTop;
+    }
+
+    const char* UIVisual::ConvertFromAnchorPointToString(AnchorPoint value)
+    {
+        switch (value)
+        {
+            case LeftTop:       return "LeftTop";
+            case LeftBottom:    return "LeftBottom";
+            case LeftMiddle:    return "LeftMiddle";
+            case RightTop:      return "RightTop";
+            case RightBottom:   return "RightBottom";
+            case RightMiddle:   return "RightMiddle";
+            case CenterTop:     return "CenterTop";
+            case CenterBottom:  return "CenterBottom";
+            case Center:        return "Center";
+            default:            return "LeftTop";
+        }
+    }
+
+    UIVisual::Visibility UIVisual::ConvertFromStringToVisibility(const char* value)
+    {
+        if (_stricmp(value, "Visible") == 0)        return Visible;
+        else if (_stricmp(value, "Invisible") == 0) return Invisible;
+        else if (_stricmp(value, "Collasped") == 0) return Collasped;
+        else                                        return Visible;
+    }
+
+    const char* UIVisual::ConvertFromVisibilityToString(Visibility value)
+    {
+        switch (value)
+        {
+            case Visible:   return "Visible";
+            case Invisible: return "Invisible";
+            case Collasped: return "Collasped";
+            default:        return "Visible";
+        }
+    }
 }

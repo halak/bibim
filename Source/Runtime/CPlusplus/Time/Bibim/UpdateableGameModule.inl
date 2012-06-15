@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     bool UpdateableGameModule::Seal(int timestamp)
     {

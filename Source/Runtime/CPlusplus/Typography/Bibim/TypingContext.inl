@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     int TypingContext::GetCode() const
     {

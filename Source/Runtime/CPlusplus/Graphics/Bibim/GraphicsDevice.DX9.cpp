@@ -1,9 +1,8 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/GraphicsDevice.DX9.h>
 #include <Bibim/Assert.h>
 #include <Bibim/CheckedRelease.h>
 #include <Bibim/Colors.h>
-#include <Bibim/DisplaySwapChain.h>
 #include <Bibim/Exception.h>
 #include <Bibim/Log.h>
 #include <Bibim/RenderTargetTexture2D.h>
@@ -17,10 +16,25 @@ namespace Bibim
           d3dDevice(nullptr),
           d3dBackbufferSurface(nullptr),
           window(nullptr),
+          resolution(800, 600),
           defaultSwapChain(nullptr),
           viewport(Rect::Empty),
           fullscreen(false)
     {
+        ::ZeroMemory(&d3dCaps, sizeof(d3dCaps));
+    }
+
+    GraphicsDevice::GraphicsDevice(int resolutionWidth, int resolutionHeight)
+        : d3dObject(nullptr),
+          d3dDevice(nullptr),
+          d3dBackbufferSurface(nullptr),
+          window(nullptr),
+          resolution(resolutionWidth, resolutionHeight),
+          defaultSwapChain(nullptr),
+          viewport(Rect::Empty),
+          fullscreen(false)
+    {
+        BBAssert(resolutionWidth > 0 && resolutionHeight > 0);
         ::ZeroMemory(&d3dCaps, sizeof(d3dCaps));
     }
 
@@ -42,18 +56,12 @@ namespace Bibim
 
     void GraphicsDevice::BeginDraw()
     {
-        if (defaultSwapChain == nullptr)
-            GetD3DDevice()->BeginScene();
-        else
-            defaultSwapChain->BeginDraw();
+        GetD3DDevice()->BeginScene();
     }
 
     void GraphicsDevice::BeginDraw(RenderTargetTexture2D* renderTarget)
     {
         BBAssertDebug(renderTarget);
-
-        if (defaultSwapChain)
-            SetViewport(defaultSwapChain->GetViewport());
 
         GetD3DDevice()->GetRenderTarget(0, &d3dBackbufferSurface);
 
@@ -63,10 +71,7 @@ namespace Bibim
 
     void GraphicsDevice::EndDraw()
     {
-        if (defaultSwapChain == nullptr)
-            GetD3DDevice()->EndScene();
-        else
-            defaultSwapChain->EndDraw();
+        GetD3DDevice()->EndScene();
     }
 
     void GraphicsDevice::EndDraw(RenderTargetTexture2D* /*renderTarget*/)
@@ -78,10 +83,7 @@ namespace Bibim
 
     void GraphicsDevice::Present()
     {
-        if (defaultSwapChain == nullptr)
-            GetD3DDevice()->Present(nullptr, nullptr, nullptr, nullptr);
-        else
-            defaultSwapChain->Present();
+        GetD3DDevice()->Present(nullptr, nullptr, nullptr, nullptr);
     }
 
     void GraphicsDevice::SetWindow(Window* value)
@@ -129,14 +131,6 @@ namespace Bibim
         }
     }
 
-    DisplaySwapChain* GraphicsDevice::GetDefaultSwapChain()
-    {
-        if (defaultSwapChain == nullptr)
-            AcquireDefaultSwapChain();
-
-        return defaultSwapChain;
-    }
-
     void GraphicsDevice::InitializeDevice()
     {
         BBAssert(GetWindow());
@@ -179,8 +173,8 @@ namespace Bibim
         }
 
         D3DPRESENT_PARAMETERS d3dParameters;
-        d3dParameters.BackBufferWidth = GetWindow()->GetSize().X;
-        d3dParameters.BackBufferHeight = GetWindow()->GetSize().Y;
+        d3dParameters.BackBufferWidth = resolution.X;
+        d3dParameters.BackBufferHeight = resolution.Y;
         d3dParameters.BackBufferFormat = D3DFMT_UNKNOWN;
         d3dParameters.BackBufferCount = 1;
         d3dParameters.MultiSampleType = D3DMULTISAMPLE_NONE;
@@ -307,46 +301,13 @@ namespace Bibim
             BBAssert(d3dCaps.MaxSimultaneousTextures >= 2);
         }
 
-        SetViewport(Rect(Point2::Zero, GetWindow()->GetSize()));
+        SetViewport(Rect(Point2::Zero, resolution));
     }
 
     void GraphicsDevice::FinalizeDevice()
     {
         capabilities = GraphicsCapabilities();
         ::ZeroMemory(&d3dCaps, sizeof(d3dCaps));
-        delete defaultSwapChain;
-        defaultSwapChain = nullptr;
         CheckedRelease(d3dDevice);
-    }
-
-    void GraphicsDevice::AcquireDefaultSwapChain()
-    {
-        BBAssertDebug(defaultSwapChain == nullptr);
-        BBAssertDebug(swapChains.empty());
-
-        IDirect3DSwapChain9* d3dSwapChain = nullptr;
-        HRESULT result = D3D_OK;
-        result = GetD3DDevice()->GetSwapChain(0, &d3dSwapChain);
-        if (result != D3D_OK)
-            throw Exception("d3dDevice->GetSwapChain != D3D_OK");
-
-        defaultSwapChain = new DisplaySwapChain(this, window, d3dSwapChain);
-        swapChains.push_back(defaultSwapChain);
-    }
-
-    void GraphicsDevice::Add(DisplaySwapChain* item)
-    {
-        if (defaultSwapChain == nullptr)
-            AcquireDefaultSwapChain();
-
-        BBAssertDebug(std::find(swapChains.begin(), swapChains.end(), item) == swapChains.end());
-        swapChains.push_back(item);
-    }
-
-    void GraphicsDevice::Remove(DisplaySwapChain* item)
-    {
-        std::vector<DisplaySwapChain*>::iterator it = std::find(swapChains.begin(), swapChains.end(), item);
-        BBAssertDebug(it != swapChains.end());
-        swapChains.erase(it);
     }
 }

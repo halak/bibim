@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UISPRITE_H__
 #define __BIBIM_UISPRITE_H__
 
@@ -25,6 +25,8 @@
 
                 inline bool GetVerticalFlip() const;
                 inline void SetVerticalFlip(bool value);
+
+                virtual bool CanPick() const;
 
             protected:
                 virtual void OnDraw(UIDrawingContext& context);

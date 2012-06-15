@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_EASINGCURVES_H__
 #define __BIBIM_EASINGCURVES_H__
 
@@ -8,6 +8,8 @@
 
     namespace Bibim
     {
+        /// @brief 수치 보간을 위한 보간 곡선을 나타내는 GameComponent
+        /// 대부분의 보간 곡선은 Field를 필요로하지 않기 때문에 Singleton-object인 경우가 많습니다.
         class EasingCurve : public GameComponent
         {
             BBAbstractComponentClass(EasingCurve, GameComponent);
@@ -51,6 +53,10 @@
         BBDeclareStandardEasingCurveClass(EaseInCircularCurve,       Ease::InCircular,         'E', 'C', 'I', '6');
         BBDeclareStandardEasingCurveClass(EaseOutCircularCurve,      Ease::OutCircular,        'E', 'C', 'O', '6');
         BBDeclareStandardEasingCurveClass(EaseInOutCircularCurve,    Ease::InOutCircular,      'E', 'C', 'D', '6');
+
+        /// @class Bibim::LinearCurve
+        /// @brief 선형 보간 곡선
+        /// @see Ease::Linear(float)
 
 #       undef BBDeclareStandardEasingCurveClass
     }

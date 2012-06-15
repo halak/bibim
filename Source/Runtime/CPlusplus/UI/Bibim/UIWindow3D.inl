@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     Vector3 UIWindow3D::GetLocalOffset() const
     {

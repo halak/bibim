@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lua-5.1.4\src&quot;"
+				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,6 +105,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lua-5.1.4\src&quot;"
@@ -148,608 +149,8 @@
 	</References>
 	<Files>
 		<Filter
-			Name="01. Foundation"
+			Name="03. Game"
 			>
-			<File
-				RelativePath=".\Foundation\Bibim\Environment.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Foundation\Bibim\Environment.Windows.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Foundation\Bibim\Environment.Windows.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Foundation\Bibim\Environment.Windows.inl"
-				>
-			</File>
-			<Filter
-				Name="(Fundamental)"
-				>
-				<File
-					RelativePath=".\Foundation\Bibim\Any.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Any.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Any.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Color.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Color.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Colors.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Colors.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Colors.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Matrix4.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Matrix4.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Matrix4.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Matrix4.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\NullPointer.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Point2.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Point2.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Point2.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Point3.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Point3.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Point3.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Point4.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Point4.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Point4.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Rect.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Rect.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Rect.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\RectF.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\RectF.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\RectF.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\String.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\String.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\String.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Vector2.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Vector2.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Vector2.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Vector3.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Vector3.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Vector3.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Vector4.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Vector4.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Vector4.inl"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="(Object)"
-				>
-				<File
-					RelativePath=".\Foundation\Bibim\Object.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Object.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Object.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\PointerCasts.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\SharedObject.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\SharedObject.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\SharedObject.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\SharedPointer.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\SharedPointer.inl"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Container"
-				>
-				<File
-					RelativePath=".\Foundation\Bibim\SequenceDictionary.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\SequenceDictionary.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\SequenceDictionary.inl"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Mathematics"
-				>
-				<File
-					RelativePath=".\Foundation\Bibim\Geom2D.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Geom2D.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Geom2D.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Math.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Math.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Math.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Numerics.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Numerics.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Utility"
-				>
-				<File
-					RelativePath=".\Foundation\Bibim\AnyStorage.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\AnyStorage.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\AnyStorage.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Atomic.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Atomic.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Atomic.Windows.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\CheckedRelease.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Delete.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Listeners.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Listeners.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Memory.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Memory.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Property.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Property.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\RectStorage.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\RectStorage.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Exception"
-				>
-				<File
-					RelativePath=".\Foundation\Bibim\Exception.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Exception.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Exception.inl"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="IO"
-				>
-				<File
-					RelativePath=".\Foundation\Bibim\BinaryReader.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\BinaryReader.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\BinaryReader.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\BinaryWriter.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\BinaryWriter.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\BinaryWriter.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\DumpStream.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\DumpStream.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\DumpStream.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\MemoryStream.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\MemoryStream.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\MemoryStream.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Stream.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Stream.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Diagnostics"
-				>
-				<File
-					RelativePath=".\Foundation\Bibim\Assert.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Assert.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Log.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Log.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Log.inl"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="02. Framework"
-			>
-			<Filter
-				Name="(Module)"
-				>
-				<File
-					RelativePath=".\Module\Bibim\GameModule.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Module\Bibim\GameModule.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Module\Bibim\GameModule.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Module\Bibim\GameModuleFactory.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Module\Bibim\GameModuleFactory.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Module\Bibim\GameModuleFactory.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Module\Bibim\GameModuleNode.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Module\Bibim\GameModuleNode.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Module\Bibim\GameModuleNode.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Module\Bibim\GameModuleTree.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Module\Bibim\GameModuleTree.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Module\Bibim\GameModuleTree.inl"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="IPC"
-				>
-				<File
-					RelativePath=".\IPC\Bibim\PipeClientStream.h"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeClientStream.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeClientStream.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeClientStream.Windows.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeServerStream.h"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeServerStream.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeServerStream.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeServerStream.Windows.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeStream.h"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeStream.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeStream.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeStream.Windows.inl"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Threading"
-				>
-				<File
-					RelativePath=".\Threading\Bibim\AutoLocker.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\AutoLocker.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\Lock.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\Lock.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\Lock.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\ManualLocker.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\ManualLocker.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\ManualLocker.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\Thread.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\Thread.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\Thread.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\Thread.Windows.inl"
-					>
-				</File>
-			</Filter>
 			<Filter
 				Name="(Asset)"
 				>
@@ -855,8 +256,584 @@
 				</Filter>
 			</Filter>
 			<Filter
+				Name="Typography"
+				>
+				<File
+					RelativePath=".\Typography\Bibim\Font.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\Font.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\Font.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontCache.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontCache.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontCache.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontLibrary.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontLibrary.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontLibrary.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontString.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontString.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\FontString.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\Glyph.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\Glyph.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\Glyph.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\GlyphSurface.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\GlyphSurface.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\GlyphSurface.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\GlyphTable.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\GlyphTable.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\GlyphTable.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\TypingContext.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\TypingContext.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Typography\Bibim\TypingContext.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="(Component)"
+				>
+				<File
+					RelativePath=".\Component\Bibim\CloningContext.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\CloningContext.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\CloningContext.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\ComponentStreamReader.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\ComponentStreamReader.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\ComponentStreamReader.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\GameComponent.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\GameComponent.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Component\Bibim\GameComponent.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\GameComponentFactory.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\GameComponentFactory.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\GameComponentFactory.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="(Module)"
+				>
+				<File
+					RelativePath=".\Module\Bibim\GameModule.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Module\Bibim\GameModule.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Module\Bibim\GameModule.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Module\Bibim\GameModuleFactory.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Module\Bibim\GameModuleFactory.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Module\Bibim\GameModuleFactory.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Module\Bibim\GameModuleNode.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Module\Bibim\GameModuleNode.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Module\Bibim\GameModuleNode.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Module\Bibim\GameModuleTree.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Module\Bibim\GameModuleTree.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Module\Bibim\GameModuleTree.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Animation"
+				>
+				<Filter
+					Name="Evaluation"
+					>
+					<File
+						RelativePath=".\Animation\Bibim\EvalBinaryOperators.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalBinaryOperators.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalBoard.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalBoard.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalBoard.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalCaches.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalCaches.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalConstants.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalConstants.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalConstants.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalContext.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalContext.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalContext.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalInterpolators.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalInterpolators.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalRangedSequences.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalRangedSequences.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\Evals.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\Evals.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\Evals.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalSelectors.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalSelectors.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalSequenceBase.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalSequenceBase.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalSequences.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalSequences.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalTimeflow.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalTimeflow.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalTimeflow.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalUnaryOperators.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalUnaryOperators.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalUnitRandom.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalUnitRandom.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalUnitRandom.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalVariables.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EvalVariables.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\Sequences.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\Sequences.inl"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Easing"
+					>
+					<File
+						RelativePath=".\Animation\Bibim\Ease.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\Ease.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\Ease.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EasingCurves.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\EasingCurves.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\ElasticEasingCurves.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\ElasticEasingCurves.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\ElasticEasingCurves.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\OscillationCurve.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\OscillationCurve.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Animation\Bibim\OscillationCurve.inl"
+						>
+					</File>
+				</Filter>
+			</Filter>
+			<Filter
+				Name="Collision2D"
+				>
+				<File
+					RelativePath=".\Collision2D\Bibim\AxisAlignedBoxShape2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\AxisAlignedBoxShape2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\AxisAlignedBoxShape2D.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\BoxShape2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\BoxShape2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\BoxShape2D.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\CollisionSpace2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\CollisionSpace2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\IntersectShapes2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\IntersectShapes2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\PointShape2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\PointShape2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\RaycastReport2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\RaycastReport2D.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\SegmentShape2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\SegmentShape2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\SegmentShape2D.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\Shape2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\Shape2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\Shape2D.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\SphereShape2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\SphereShape2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\UserShape2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Collision2D\Bibim\UserShape2D.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Diagnostics"
+				>
+				<File
+					RelativePath=".\Diagnostics\Bibim\FileLogger.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\FileLogger.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\FileLogger.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\Logger.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\Logger.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\Logger.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\SystemLogger.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\SystemLogger.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Diagnostics\Bibim\SystemLogger.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="FileSystem"
+				>
+				<File
+					RelativePath=".\FileSystem\Bibim\FileStream.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\FileStream.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\FileStream.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\FileStream.Windows.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
 				Name="Framework"
 				>
+				<File
+					RelativePath=".\Framework\Bibim\Game.h"
+					>
+				</File>
 				<File
 					RelativePath=".\Framework\Bibim\GameFramework.h"
 					>
@@ -889,6 +866,206 @@
 					RelativePath=".\Framework\Bibim\GameWindow.Windows.inl"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="Gameplay"
+				>
+				<File
+					RelativePath=".\Gameplay\Bibim\BatchCommand.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\BatchCommand.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\BatchCommand.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\Command.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\Command.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\CommandHistory.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\CommandHistory.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\CommandHistory.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\CommandQueue.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\CommandQueue.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\CommandQueue.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\RestorableCommand.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\RestorableCommand.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Input"
+				>
+				<File
+					RelativePath=".\Input\Bibim\Key.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Key.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Keyboard.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Keyboard.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Keyboard.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Keyboard.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\KeyboardState.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\KeyboardState.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\KeyboardState.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Mouse.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Mouse.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Mouse.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\Mouse.Window.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\MouseState.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\MouseState.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\MouseState.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Scripting"
+				>
+				<File
+					RelativePath=".\Scripting\Bibim\Script.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\Script.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\Script.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptingContext.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptingContext.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptingContext.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptNativeFunctionTable.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptNativeFunctionTable.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptNativeFunctionTable.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptStack.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptStack.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptStack.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptThread.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptThread.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Scripting\Bibim\ScriptThread.inl"
+					>
+				</File>
+				<Filter
+					Name="Libraries"
+					>
+					<File
+						RelativePath=".\Scripting\Bibim\ScriptLibraryIO.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Scripting\Bibim\ScriptLibraryIO.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Time"
@@ -991,482 +1168,14 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="Gameplay"
+				Name="Startup"
 				>
 				<File
-					RelativePath=".\Gameplay\Bibim\BatchCommand.cpp"
+					RelativePath=".\Startup\Bibim\Startup.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Gameplay\Bibim\BatchCommand.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Gameplay\Bibim\BatchCommand.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Gameplay\Bibim\Command.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Gameplay\Bibim\Command.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Gameplay\Bibim\CommandHistory.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Gameplay\Bibim\CommandHistory.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Gameplay\Bibim\CommandHistory.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Gameplay\Bibim\CommandQueue.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Gameplay\Bibim\CommandQueue.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Gameplay\Bibim\CommandQueue.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Gameplay\Bibim\RestorableCommand.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Gameplay\Bibim\RestorableCommand.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Graphics"
-				>
-				<File
-					RelativePath=".\Graphics\Bibim\BlendMode.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\DisplaySwapChain.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\DynamicTexture2D.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\GraphicsCapabilities.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\GraphicsCapabilities.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\GraphicsCapabilities.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\GraphicsDevice.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\Image.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\Image.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\Image.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\ScreenshotPrinter.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\ScreenshotPrinter.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\ScreenshotPrinter.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\ShaderEffect.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\SourceTexture2D.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\Texture2D.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\Window.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\Window.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\Window.inl"
-					>
-				</File>
-				<Filter
-					Name="DX9"
-					>
-					<File
-						RelativePath=".\Graphics\Bibim\DisplaySwapChain.DX9.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\DisplaySwapChain.DX9.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\DisplaySwapChain.DX9.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\DynamicTexture2D.DX9.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\DynamicTexture2D.DX9.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\DynamicTexture2D.DX9.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\SourceTexture2D.DX9.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\SourceTexture2D.DX9.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\Texture2D.DX9.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\Texture2D.DX9.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\Texture2D.DX9.inl"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="GLES2"
-					>
-					<File
-						RelativePath=".\Graphics\Bibim\DisplaySwapChain.GLES2.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\DisplaySwapChain.GLES2.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\DisplaySwapChain.GLES2.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\DynamicTexture2D.GLES2.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\DynamicTexture2D.GLES2.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\DynamicTexture2D.GLES2.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\GraphicsDevice.GLES2.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\GraphicsDevice.GLES2.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\GraphicsDevice.GLES2.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.GLES2.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.GLES2.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.GLES2.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\ShaderEffect.GLES2.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\ShaderEffect.GLES2.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\Shadereffect.GLES2.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\SourceTexture2D.GLES2.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\SourceTexture2D.GLES2.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\SourceTexture2D.GLES2.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\Texture2D.GLES2.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\Texture2D.GLES2.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\Texture2D.GLES2.inl"
-						>
-					</File>
-				</Filter>
-			</Filter>
-			<Filter
-				Name="Input"
-				>
-				<File
-					RelativePath=".\Input\Bibim\Key.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\Key.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\Keyboard.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\Keyboard.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\Keyboard.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\Keyboard.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\KeyboardState.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\KeyboardState.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\KeyboardState.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\Mouse.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\Mouse.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\Mouse.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\Mouse.Window.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\MouseState.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\MouseState.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\MouseState.inl"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Typography"
-				>
-				<File
-					RelativePath=".\Typography\Bibim\Font.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\Font.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\Font.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\FontCache.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\FontCache.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\FontCache.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\FontLibrary.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\FontLibrary.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\FontLibrary.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\FontString.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\FontString.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\FontString.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\Glyph.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\Glyph.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\Glyph.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\GlyphSurface.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\GlyphSurface.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\GlyphSurface.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\GlyphTable.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\GlyphTable.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\GlyphTable.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\TypingContext.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\TypingContext.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\TypingContext.inl"
+					RelativePath=".\Startup\Bibim\Startup.h"
 					>
 				</File>
 			</Filter>
@@ -2107,511 +1816,791 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="FileSystem"
+				Name="Graphics"
 				>
 				<File
-					RelativePath=".\FileSystem\Bibim\FileStream.h"
+					RelativePath=".\Graphics\Bibim\BlendMode.h"
 					>
 				</File>
 				<File
-					RelativePath=".\FileSystem\Bibim\FileStream.Windows.cpp"
+					RelativePath=".\Graphics\Bibim\DisplaySwapChain.h"
 					>
 				</File>
 				<File
-					RelativePath=".\FileSystem\Bibim\FileStream.Windows.h"
+					RelativePath=".\Graphics\Bibim\DynamicTexture2D.h"
 					>
 				</File>
 				<File
-					RelativePath=".\FileSystem\Bibim\FileStream.Windows.inl"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Scripting"
-				>
-				<File
-					RelativePath=".\Scripting\Bibim\Script.cpp"
+					RelativePath=".\Graphics\Bibim\GraphicsCapabilities.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\Script.h"
+					RelativePath=".\Graphics\Bibim\GraphicsCapabilities.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\Script.inl"
+					RelativePath=".\Graphics\Bibim\GraphicsCapabilities.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptingContext.cpp"
+					RelativePath=".\Graphics\Bibim\GraphicsDevice.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptingContext.h"
+					RelativePath=".\Graphics\Bibim\Image.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptingContext.inl"
+					RelativePath=".\Graphics\Bibim\Image.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptNativeFunctionTable.cpp"
+					RelativePath=".\Graphics\Bibim\Image.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptNativeFunctionTable.h"
+					RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptNativeFunctionTable.inl"
+					RelativePath=".\Graphics\Bibim\ScreenshotPrinter.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptStack.cpp"
+					RelativePath=".\Graphics\Bibim\ScreenshotPrinter.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptStack.h"
+					RelativePath=".\Graphics\Bibim\ScreenshotPrinter.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptStack.inl"
+					RelativePath=".\Graphics\Bibim\ShaderEffect.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptThread.cpp"
+					RelativePath=".\Graphics\Bibim\SourceTexture2D.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptThread.h"
+					RelativePath=".\Graphics\Bibim\Texture2D.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptThread.inl"
+					RelativePath=".\Graphics\Bibim\Window.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\Window.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\Window.inl"
 					>
 				</File>
 				<Filter
-					Name="Libraries"
+					Name="DX9"
 					>
 					<File
-						RelativePath=".\Scripting\Bibim\ScriptLibraryIO.cpp"
+						RelativePath=".\Graphics\Bibim\DynamicTexture2D.DX9.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\Scripting\Bibim\ScriptLibraryIO.h"
-						>
-					</File>
-				</Filter>
-			</Filter>
-			<Filter
-				Name="(Component)"
-				>
-				<File
-					RelativePath=".\Component\Bibim\CloningContext.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Component\Bibim\CloningContext.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Component\Bibim\CloningContext.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Component\Bibim\ComponentStreamReader.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Component\Bibim\ComponentStreamReader.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Component\Bibim\ComponentStreamReader.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Component\Bibim\GameComponent.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Component\Bibim\GameComponent.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Component\Bibim\GameComponent.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\GameComponentFactory.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\GameComponentFactory.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\GameComponentFactory.inl"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Animation"
-				>
-				<Filter
-					Name="Evaluation"
-					>
-					<File
-						RelativePath=".\Animation\Bibim\EvalBinaryOperators.h"
+						RelativePath=".\Graphics\Bibim\DynamicTexture2D.DX9.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalBinaryOperators.inl"
+						RelativePath=".\Graphics\Bibim\DynamicTexture2D.DX9.inl"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalBoard.cpp"
+						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalBoard.h"
+						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalBoard.inl"
+						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.inl"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalCaches.h"
+						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalCaches.inl"
+						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalConstants.cpp"
+						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.inl"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalConstants.h"
+						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalConstants.inl"
+						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalContext.cpp"
+						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.inl"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalContext.h"
+						RelativePath=".\Graphics\Bibim\SourceTexture2D.DX9.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalContext.inl"
+						RelativePath=".\Graphics\Bibim\SourceTexture2D.DX9.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalInterpolators.h"
+						RelativePath=".\Graphics\Bibim\Texture2D.DX9.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalInterpolators.inl"
+						RelativePath=".\Graphics\Bibim\Texture2D.DX9.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalRangedSequences.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalRangedSequences.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\Evals.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\Evals.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\Evals.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalSelectors.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalSelectors.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalSequenceBase.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalSequenceBase.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalSequences.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalSequences.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalTimeflow.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalTimeflow.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalTimeflow.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalUnaryOperators.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalUnaryOperators.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalUnitRandom.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalUnitRandom.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalUnitRandom.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalVariables.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalVariables.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\Sequences.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\Sequences.inl"
+						RelativePath=".\Graphics\Bibim\Texture2D.DX9.inl"
 						>
 					</File>
 				</Filter>
 				<Filter
-					Name="Easing"
+					Name="GLES2"
 					>
 					<File
-						RelativePath=".\Animation\Bibim\Ease.cpp"
+						RelativePath=".\Graphics\Bibim\DynamicTexture2D.GLES2.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\Ease.h"
+						RelativePath=".\Graphics\Bibim\DynamicTexture2D.GLES2.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\Ease.inl"
+						RelativePath=".\Graphics\Bibim\DynamicTexture2D.GLES2.inl"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EasingCurves.cpp"
+						RelativePath=".\Graphics\Bibim\GraphicsDevice.GLES2.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EasingCurves.h"
+						RelativePath=".\Graphics\Bibim\GraphicsDevice.GLES2.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\ElasticEasingCurves.cpp"
+						RelativePath=".\Graphics\Bibim\GraphicsDevice.GLES2.inl"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\ElasticEasingCurves.h"
+						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.GLES2.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\ElasticEasingCurves.inl"
+						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.GLES2.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\OscillationCurve.cpp"
+						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.GLES2.inl"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\OscillationCurve.h"
+						RelativePath=".\Graphics\Bibim\ShaderEffect.GLES2.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\OscillationCurve.inl"
+						RelativePath=".\Graphics\Bibim\ShaderEffect.GLES2.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\Shadereffect.GLES2.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\SourceTexture2D.GLES2.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\SourceTexture2D.GLES2.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\SourceTexture2D.GLES2.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\Texture2D.GLES2.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\Texture2D.GLES2.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Graphics\Bibim\Texture2D.GLES2.inl"
 						>
 					</File>
 				</Filter>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="01. Foundation"
+			>
+			<Filter
+				Name="(Fundamental)"
+				>
+				<File
+					RelativePath=".\Foundation\Bibim\Any.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Any.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Any.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Color.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Color.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Colors.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Colors.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Colors.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Matrix4.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Matrix4.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Matrix4.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Matrix4.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\NullPointer.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Point2.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Point2.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Point2.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Point3.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Point3.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Point3.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Point4.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Point4.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Point4.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Rect.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Rect.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Rect.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\RectF.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\RectF.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\RectF.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\String.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\String.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\String.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Vector2.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Vector2.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Vector2.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Vector3.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Vector3.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Vector3.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Vector4.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Vector4.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Vector4.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Container"
+				>
+				<File
+					RelativePath=".\Foundation\Bibim\SequenceDictionary.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\SequenceDictionary.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\SequenceDictionary.inl"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="Diagnostics"
 				>
 				<File
-					RelativePath=".\Diagnostics\Bibim\FileLogger.cpp"
+					RelativePath=".\Foundation\Bibim\Assert.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Diagnostics\Bibim\FileLogger.h"
+					RelativePath=".\Foundation\Bibim\Assert.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Diagnostics\Bibim\FileLogger.inl"
+					RelativePath=".\Foundation\Bibim\Log.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Diagnostics\Bibim\Logger.cpp"
+					RelativePath=".\Foundation\Bibim\Log.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Diagnostics\Bibim\Logger.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Diagnostics\Bibim\Logger.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Diagnostics\Bibim\SystemLogger.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Diagnostics\Bibim\SystemLogger.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Diagnostics\Bibim\SystemLogger.inl"
+					RelativePath=".\Foundation\Bibim\Log.inl"
 					>
 				</File>
 			</Filter>
 			<Filter
-				Name="Collision2D"
+				Name="Mathematics"
 				>
 				<File
-					RelativePath=".\Collision2D\Bibim\AxisAlignedBoxShape2D.cpp"
+					RelativePath=".\Foundation\Bibim\Geom2D.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\AxisAlignedBoxShape2D.h"
+					RelativePath=".\Foundation\Bibim\Geom2D.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\AxisAlignedBoxShape2D.inl"
+					RelativePath=".\Foundation\Bibim\Geom2D.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\BoxShape2D.cpp"
+					RelativePath=".\Foundation\Bibim\Math.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\BoxShape2D.h"
+					RelativePath=".\Foundation\Bibim\Math.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\BoxShape2D.inl"
+					RelativePath=".\Foundation\Bibim\Math.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\CollisionSpace2D.cpp"
+					RelativePath=".\Foundation\Bibim\Numerics.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\CollisionSpace2D.h"
+					RelativePath=".\Foundation\Bibim\Numerics.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\IntersectShapes2D.cpp"
+					RelativePath=".\Foundation\Bibim\Numerics.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Utility"
+				>
+				<File
+					RelativePath=".\Foundation\Bibim\AnyStorage.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\IntersectShapes2D.h"
+					RelativePath=".\Foundation\Bibim\AnyStorage.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\PointShape2D.cpp"
+					RelativePath=".\Foundation\Bibim\AnyStorage.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\PointShape2D.h"
+					RelativePath=".\Foundation\Bibim\Atomic.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\RaycastReport2D.h"
+					RelativePath=".\Foundation\Bibim\Atomic.Windows.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\RaycastReport2D.inl"
+					RelativePath=".\Foundation\Bibim\Atomic.Windows.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\SegmentShape2D.cpp"
+					RelativePath=".\Foundation\Bibim\CheckedRelease.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\SegmentShape2D.h"
+					RelativePath=".\Foundation\Bibim\Delete.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\SegmentShape2D.inl"
+					RelativePath=".\Foundation\Bibim\Listeners.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\Shape2D.cpp"
+					RelativePath=".\Foundation\Bibim\Listeners.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\Shape2D.h"
+					RelativePath=".\Foundation\Bibim\Memory.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\Shape2D.inl"
+					RelativePath=".\Foundation\Bibim\Memory.Windows.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\SphereShape2D.cpp"
+					RelativePath=".\Foundation\Bibim\Property.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\SphereShape2D.h"
+					RelativePath=".\Foundation\Bibim\Property.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\UserShape2D.cpp"
+					RelativePath=".\Foundation\Bibim\RectStorage.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\UserShape2D.h"
+					RelativePath=".\Foundation\Bibim\RectStorage.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="(Object)"
+				>
+				<File
+					RelativePath=".\Foundation\Bibim\Object.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Object.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Object.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\PointerCasts.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\SharedObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\SharedObject.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\SharedObject.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\SharedPointer.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\SharedPointer.inl"
 					>
 				</File>
 			</Filter>
 		</Filter>
 		<Filter
-			Name="03. Startup"
+			Name="02. System"
 			>
 			<File
-				RelativePath=".\Startup\Bibim\Startup.cpp"
+				RelativePath=".\Foundation\Bibim\Environment.h"
 				>
 			</File>
 			<File
-				RelativePath=".\Startup\Bibim\Startup.h"
+				RelativePath=".\Foundation\Bibim\Environment.Windows.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Foundation\Bibim\Environment.Windows.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Foundation\Bibim\Environment.Windows.inl"
+				>
+			</File>
+			<Filter
+				Name="IPC"
+				>
+				<File
+					RelativePath=".\IPC\Bibim\PipeClientStream.h"
+					>
+				</File>
+				<File
+					RelativePath=".\IPC\Bibim\PipeClientStream.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\IPC\Bibim\PipeClientStream.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\IPC\Bibim\PipeClientStream.Windows.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\IPC\Bibim\PipeServerStream.h"
+					>
+				</File>
+				<File
+					RelativePath=".\IPC\Bibim\PipeServerStream.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\IPC\Bibim\PipeServerStream.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\IPC\Bibim\PipeServerStream.Windows.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\IPC\Bibim\PipeStream.h"
+					>
+				</File>
+				<File
+					RelativePath=".\IPC\Bibim\PipeStream.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\IPC\Bibim\PipeStream.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\IPC\Bibim\PipeStream.Windows.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Threading"
+				>
+				<File
+					RelativePath=".\Threading\Bibim\AutoLocker.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Threading\Bibim\AutoLocker.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Threading\Bibim\Lock.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Threading\Bibim\Lock.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Threading\Bibim\Lock.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Threading\Bibim\ManualLocker.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Threading\Bibim\ManualLocker.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Threading\Bibim\ManualLocker.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Threading\Bibim\Thread.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Threading\Bibim\Thread.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Threading\Bibim\Thread.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Threading\Bibim\Thread.Windows.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Net"
+				>
+			</Filter>
+			<Filter
+				Name="IO"
+				>
+				<File
+					RelativePath=".\Foundation\Bibim\BinaryReader.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\BinaryReader.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\BinaryReader.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\BinaryWriter.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\BinaryWriter.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\BinaryWriter.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\DumpStream.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\DumpStream.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\DumpStream.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\MemoryStream.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\MemoryStream.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\MemoryStream.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Stream.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Foundation\Bibim\Stream.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="04. References"
+			>
+			<File
+				RelativePath=".\References\lua_tinker\lua_tinker.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\References\lua_tinker\lua_tinker.h"
 				>
 			</File>
 		</Filter>

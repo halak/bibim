@@ -1,4 +1,4 @@
-#include <Bibim/UIEventMap.h>
+﻿#include <Bibim/UIEventMap.h>
 #include <Bibim/UIAppEventDispatcher.h>
 #include <Bibim/UIAsyncEventQueue.h>
 #include <Bibim/UIEventHandler.h>
@@ -62,7 +62,7 @@ namespace Bibim
             }
         }
 
-        return true;
+        return result;
     }
 
     void UIEventMap::AddHandler(const UIEventID& id, UIEventHandler* item)

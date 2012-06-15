@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+Ôªø#include <Bibim/PCH.h>
 #include <Bibim/FontLibrary.h>
 #include <Bibim/FontCache.h>
 #include <vector>
@@ -48,7 +48,7 @@ namespace Bibim
         FT_Init_FreeType(&library);
         ftLibrary = static_cast<void*>(library);
 
-        // TODO: ±€≤√ ∆˙¥ı / ±‚∫ª ±€≤√
+        // TODO: Í∏ÄÍº¥ Ìè¥Îçî / Í∏∞Î≥∏ Í∏ÄÍº¥
         std::vector<char> windowsDirectory;
         windowsDirectory.resize(GetWindowsDirectory(nullptr, 0) + 1, '\0');
         GetWindowsDirectory(&windowsDirectory[0], windowsDirectory.size());

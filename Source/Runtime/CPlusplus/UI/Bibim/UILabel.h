@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UILABEL_H__
 #define __BIBIM_UILABEL_H__
 
@@ -17,12 +17,15 @@
 
                 inline const String& GetText() const;
                 void SetText(const String& value);
+                inline void SetTextByChars(const char* value);
 
                 inline Font* GetFont() const;
                 void SetFont(Font* value);
 
                 inline bool GetAutoResize() const;
                 void SetAutoResize(bool value);
+
+                bool CanPick() const;
 
             protected:
                 virtual void OnDraw(UIDrawingContext& context);

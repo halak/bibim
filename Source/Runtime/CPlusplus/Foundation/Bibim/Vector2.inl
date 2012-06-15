@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     Vector2::Vector2()
         : X(0.0f), Y(0.0f)

@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/RectStorage.h>
 #include <Bibim/Assert.h>
 #include <algorithm>
@@ -51,9 +51,9 @@ namespace Bibim
         if (GetWidth() == 0 || GetHeight() == 0)
             return Rect::Empty;
 
-        // 1. ºó ¿µ¿ªÁß¿¡ Å©±â °°Àº ¿µ¿ªÀÌ ÀÖÀ¸¸é ¹Ù·Î ÇÒ´çÇÑ´Ù.
-        // 2. ºó ¿µ¿ªÁß¿¡ °¡·ÎÅ©±â³ª, ¼¼·ÎÅ©±â°¡ °°Àº°ÍÀÌ ÀÖÀ¸¸é ºĞÇÒÇØ ÇÒ´çÇÑ´Ù.
-        // 3. ºó ¿µ¿ªÁß °¡Àå °¡±î¿î ¿µ¿ªÀ» Ã£¾Æ¼­ ºĞÇÒÇØ ÇÒ´çÇÑ´Ù.
+        // 1. ë¹ˆ ì˜ì—­ì¤‘ì— í¬ê¸° ê°™ì€ ì˜ì—­ì´ ìˆìœ¼ë©´ ë°”ë¡œ í• ë‹¹í•œë‹¤.
+        // 2. ë¹ˆ ì˜ì—­ì¤‘ì— ê°€ë¡œí¬ê¸°ë‚˜, ì„¸ë¡œí¬ê¸°ê°€ ê°™ì€ê²ƒì´ ìˆìœ¼ë©´ ë¶„í• í•´ í• ë‹¹í•œë‹¤.
+        // 3. ë¹ˆ ì˜ì—­ì¤‘ ê°€ì¥ ê°€ê¹Œìš´ ì˜ì—­ì„ ì°¾ì•„ì„œ ë¶„í• í•´ í• ë‹¹í•œë‹¤.
 
         Rect nearest = Rect::Empty;
         RectCollection::iterator nearestIterator = freeRects.end();
@@ -142,8 +142,8 @@ namespace Bibim
 
     void RectStorage::Merge(RectCollection& Rects, RectCollection::iterator targetIterator)
     {
-        // targetIterator¿Í ÅëÇÕ °¡´ÉÇÑ ¿µ¿ªÀ» Ã£¾Æ¼­ ÅëÇÕÇÏ°í,
-        // ±×·¸°Ô ÅëÇÕµÈ ¿µ¿ªÀ» ´Ù¸¥ ¿µ¿ª°ú ÅëÇÕÇØº¸±â À§ÇØ Merge¸¦ Àç±ÍÈ£ÃâÇÑ´Ù.
+        // targetIteratorì™€ í†µí•© ê°€ëŠ¥í•œ ì˜ì—­ì„ ì°¾ì•„ì„œ í†µí•©í•˜ê³ ,
+        // ê·¸ë ‡ê²Œ í†µí•©ëœ ì˜ì—­ì„ ë‹¤ë¥¸ ì˜ì—­ê³¼ í†µí•©í•´ë³´ê¸° ìœ„í•´ Mergeë¥¼ ì¬ê·€í˜¸ì¶œí•œë‹¤.
 
         const Rect target = (*targetIterator);
         for (RectCollection::iterator it = Rects.begin(); it != Rects.end(); ++it)

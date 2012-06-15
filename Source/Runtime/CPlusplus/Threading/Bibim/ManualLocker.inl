@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     ManualLocker::ManualLocker(Bibim::Lock& lock)
         : lock(lock),

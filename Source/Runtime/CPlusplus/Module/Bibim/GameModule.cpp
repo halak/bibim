@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/GameModule.h>
 #include <Bibim/Assert.h>
 #include <Bibim/GameModuleNode.h>
@@ -34,7 +34,7 @@ namespace Bibim
     {
         if (id != value)
         {
-            // GameStructure³»¿¡ °°Àº IDÀÇ GameComponent°¡ µÎ °³ ÀÌ»ó Á¸ÀçÇÒ ¼ö ¾ø½À´Ï´Ù.
+            // GameStructureë‚´ì— ê°™ì€ IDì˜ GameComponentê°€ ë‘ ê°œ ì´ìƒ ì¡´ì¬í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
             BBAssertDebug(value != UnspecifiedID &&
                           node && node->GetTree() && node->GetTree()->Find(value) != nullptr);
 
@@ -55,7 +55,7 @@ namespace Bibim
 
             alive = value;
 
-            BBAssertDebug(GetStatus() != old); // Alive°¡ ¹Ù²î¸é Statusµµ ¹İµå½Ã ¹Ù²ò´Ï´Ù.
+            BBAssertDebug(GetStatus() != old); // Aliveê°€ ë°”ë€Œë©´ Statusë„ ë°˜ë“œì‹œ ë°”ë€ë‹ˆë‹¤.
 
             OnStatusChanged(old);
 
@@ -72,8 +72,8 @@ namespace Bibim
 
             active = value;
 
-            // DeadStatus¿¡¼± Active°¡ ¹Ù²î¾îµµ Status°¡ ¹Ù²îÁö ¾Êµí
-            // Active´Â Status¿¡ ¹«Á¶°ÇÀûÀ¸·Î ¿µÇâÀ» ÁÖÁö ¾Ê½À´Ï´Ù.
+            // DeadStatusì—ì„  Activeê°€ ë°”ë€Œì–´ë„ Statusê°€ ë°”ë€Œì§€ ì•Šë“¯
+            // ActiveëŠ” Statusì— ë¬´ì¡°ê±´ì ìœ¼ë¡œ ì˜í–¥ì„ ì£¼ì§€ ì•ŠìŠµë‹ˆë‹¤.
             if (alive)
                 OnStatusChanged(old);
         }

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_SHADEREFFECT_DX9_H__
 #define __BIBIM_SHADEREFFECT_DX9_H__
 

@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/GameModuleTree.h>
 #include <Bibim/Assert.h>
 #include <Bibim/GameModule.h>
@@ -63,7 +63,7 @@ namespace Bibim
             static void Do(GameModuleTree* tree, GameModuleNode* node)
             {
                 // Precondition
-                BBAssertDebug(tree->idNodes.find(node->GetModule()->GetID()) == tree->idNodes.end()); // GameModuleTree¿¡¼­ ÀÌ Method¸¦ È£ÃâÇÏ±â Àü¿¡ °Ë»çÇÏ¿© ¿¹¿Ü¸¦ ´øÁ®¾ßÇÕ´Ï´Ù.
+                BBAssertDebug(tree->idNodes.find(node->GetModule()->GetID()) == tree->idNodes.end()); // GameModuleTreeì—ì„œ ì´ Methodë¥¼ í˜¸ì¶œí•˜ê¸° ì „ì— ê²€ì‚¬í•˜ì—¬ ì˜ˆì™¸ë¥¼ ë˜ì ¸ì•¼í•©ë‹ˆë‹¤.
 
                 node->tree = tree;
 

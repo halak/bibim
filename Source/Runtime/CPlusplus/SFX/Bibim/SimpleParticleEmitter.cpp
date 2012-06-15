@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/SimpleParticleEmitter.h>
 #include <Bibim/Delete.h>
 #include <Bibim/Math.h>

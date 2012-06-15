@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     UIWindow* UIDomain::GetRoot() const
     {

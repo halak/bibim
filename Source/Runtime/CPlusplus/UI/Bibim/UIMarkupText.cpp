@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/UIMarkupText.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Colors.h>
@@ -68,18 +68,18 @@ namespace Bibim
         {
             if (originalText[index + 1] == open)
             {
-                // ¿©´Â ¹®ÀÚ°¡ ¿¬¼ÓÀûÀ¸·Î ½áÁ® ÀÖÀ» ¶§
-                // ¿©´Â ¹®ÀÚ ÇÏ³ª¸¦ Ãß°¡ÇÕ´Ï´Ù.
+                // ì—¬ëŠ” ë¬¸ìê°€ ì—°ì†ì ìœ¼ë¡œ ì¨ì ¸ ìˆì„ ë•Œ
+                // ì—¬ëŠ” ë¬¸ì í•˜ë‚˜ë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
                 AddSubText(subTextIndex, subTextLength + 1);
                 index += 2;
             }
             else
             {
-                // Á¾°áÀÚ¸¦ Ã£½À´Ï´Ù.
+                // ì¢…ê²°ìë¥¼ ì°¾ìŠµë‹ˆë‹¤.
                 const int closeIndex = originalText.Find(close, index + 1);
                 if (closeIndex != -1)
                 {
-                    // ±×Àü±îÁö ½×¾ÆµĞ ¹®ÀÚ¿­À» ±×´ë·Î Ãß°¡ÇÕ´Ï´Ù.
+                    // ê·¸ì „ê¹Œì§€ ìŒ“ì•„ë‘” ë¬¸ìì—´ì„ ê·¸ëŒ€ë¡œ ì¶”ê°€í•©ë‹ˆë‹¤.
                     AddSubText(subTextIndex, subTextLength);
 
                     const int contentIndex  = index + 1;
@@ -91,7 +91,7 @@ namespace Bibim
                 }
                 else
                 {
-                    // ¿­·È´Âµ¥ ¾È ´İÇôÀÖÀ» ¶§´Â Ãß°¡ÇÕ´Ï´Ù.
+                    // ì—´ë ¸ëŠ”ë° ì•ˆ ë‹«í˜€ìˆì„ ë•ŒëŠ” ì¶”ê°€í•©ë‹ˆë‹¤.
                     AddSubText(subTextIndex, subTextLength + 1);
                     index++;
                 }
@@ -99,7 +99,7 @@ namespace Bibim
         }
         else
         {
-            // ¸¶Áö¸· ¹®ÀÚ¿´À» ¶§´Â Ãß°¡ÇÕ´Ï´Ù.
+            // ë§ˆì§€ë§‰ ë¬¸ìì˜€ì„ ë•ŒëŠ” ì¶”ê°€í•©ë‹ˆë‹¤.
             AddSubText(subTextIndex, subTextLength + 1);
             index++;
         }
@@ -133,8 +133,8 @@ namespace Bibim
                     {
                         if (originalText[i + 1] == ']')
                         {
-                            // ']]' ÀÏ ¶§
-                            // ==> ']'¸¦ Ãß°¡ÇÕ´Ï´Ù.
+                            // ']]' ì¼ ë•Œ
+                            // ==> ']'ë¥¼ ì¶”ê°€í•©ë‹ˆë‹¤.
                             AddSubText(i, 1);
                             i += 2;
                             subTextIndex = i;
@@ -143,18 +143,18 @@ namespace Bibim
                     }
                     else
                     {
-                        // ']'·Î ³¡³µÀ» ¶§
+                        // ']'ë¡œ ëë‚¬ì„ ë•Œ
                         i++;
                         subTextLength++;
                     }
                     break;
-                case '\r': // °³Çà¹®ÀÚ Ã³¸® (Text Phrase ³ª´®)
+                case '\r': // ê°œí–‰ë¬¸ì ì²˜ë¦¬ (Text Phrase ë‚˜ëˆ”)
                     AddSubText(subTextIndex, subTextLength);
                     phrases.push_back(new NewLinePhrase());
 
                     i++;
 
-                    // '\r' ´ÙÀ½¿¡ '\n'ÀÌ ÀÌ¾îÁø´Ù¸é '\n'À» ¹«½ÃÇÕ´Ï´Ù.
+                    // '\r' ë‹¤ìŒì— '\n'ì´ ì´ì–´ì§„ë‹¤ë©´ '\n'ì„ ë¬´ì‹œí•©ë‹ˆë‹¤.
                     if (i < originalText.GetLength() && originalText[i] == '\n')
                         i++;
 
@@ -162,7 +162,7 @@ namespace Bibim
                     subTextLength = 0;
 
                     break;
-                case '\n': // °³Çà¹®ÀÚ Ã³¸® (Text Phrase ³ª´®)
+                case '\n': // ê°œí–‰ë¬¸ì ì²˜ë¦¬ (Text Phrase ë‚˜ëˆ”)
                     AddSubText(subTextIndex, subTextLength);
                     phrases.push_back(new NewLinePhrase());
 

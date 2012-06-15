@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/UIEventID.h>
 
 namespace Bibim
@@ -56,9 +56,26 @@ namespace Bibim
         {
             for (int i = 0; i < sizeof(EventNames) / sizeof(EventNames[0]); i++)
             {
-                if (EventNames[i] == name)
+                if (EventNames[i].EqualsIgnoreCase(name))
                     return static_cast<Type>(i);
             }
+
+            static const String click = "click";
+            static const String wheel = "wheel";
+            static const String mouseDown = "mousedown";
+            static const String mouseUp = "mouseup";
+            static const String mousePressing = "mousepressing";
+
+            if (name.EqualsIgnoreCase(click))
+                return MouseClickType;
+            else if (name.EqualsIgnoreCase(wheel))
+                return MouseWheelType;
+            else if (name.EqualsIgnoreCase(mouseDown))
+                return MouseButtonDownType;
+            else if (name.EqualsIgnoreCase(mouseUp))
+                return MouseButtonUpType;
+            else if (name.EqualsIgnoreCase(mousePressing))
+                return MouseButtonPressingType;
         }
 
         return UnknownType;

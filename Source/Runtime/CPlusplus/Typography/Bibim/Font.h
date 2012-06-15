@@ -1,10 +1,11 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_FONT_H__
 #define __BIBIM_FONT_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameAsset.h>
 #   include <Bibim/Color.h>
+#   include <Bibim/String.h>
 #   include <map>
 #   include <vector>
 
@@ -26,12 +27,13 @@
                 Vector2 Measure(const String& text, float boundary);
                 Vector2 Measure(const FontString& fontString);
                 Vector2 Measure(const FontString& fontString, float boundary);
-                
+
                 inline FontLibrary* GetLibrary() const;
                 void SetLibrary(FontLibrary* value);
 
                 const String& GetFaceURI() const;
                 void SetFaceURI(const String& value);
+                inline void SetFaceURIByChars(const char* value);
 
                 float GetSize() const;
                 void  SetSize(float value);

@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     RaycastReport2D::RaycastReport2D()
         : ImpactShape(0),

@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     Point4::Point4()
         : X(0), Y(0), Z(0), W(0)

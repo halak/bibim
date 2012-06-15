@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/Mouse.h>
 #include <Bibim/Window.h>
 
@@ -18,7 +18,7 @@
             state.IsLeftButtonPressed   = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0x0000;
             state.IsRightButtonPressed  = (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0x0000; 
             state.IsMiddleButtonPressed = (GetAsyncKeyState(VK_MBUTTON) & 0x8000) != 0x0000;
-            state.Wheel = window->GetWheel();
+            state.Wheel = 0;
             return state;
         }
 

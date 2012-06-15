@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_ENVIRONMENT_WINDOWS_H__
 #define __BIBIM_ENVIRONMENT_WINDOWS_H__
 
@@ -27,4 +27,4 @@
 
 #   include <Bibim/Environment.Windows.inl>
 
-#   endif
+#endif

@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     Shape2D::Type Shape2D::GetType() const
     {

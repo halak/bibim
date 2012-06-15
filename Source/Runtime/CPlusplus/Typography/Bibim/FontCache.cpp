@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/FontCache.h>
 #include <Bibim/FontLibrary.h>
 #include <Bibim/Glyph.h>
@@ -13,7 +13,7 @@ namespace Bibim
 {
     static FT_Vector ZeroVector = { 0, 0 };
 
-    // library 26.6 ½Ç¼ö°è¿Í C++ float ÁÂÇ¥°è¸¦ »óÈ£ º¯È¯ÇÑ´Ù.
+    // library 26.6 ì‹¤ìˆ˜ê³„ì™€ C++ float ì¢Œí‘œê³„ë¥¼ ìƒí˜¸ ë³€í™˜í•œë‹¤.
     // http://library.sourceforge.net/library2/docs/glyphs/glyphs-3.html
     static inline float F26D6ToFloat(FT_F26Dot6 value)
     {
@@ -163,7 +163,7 @@ namespace Bibim
           glowGlyphTable(nullptr)
     {
         String faceFilename = parameters.FaceURI;
-        int    faceIndex    = 0; // *.ttc ÆÄÀÏÀÏ °æ¿ì ÆùÆ®°¡ Á¸ÀçÇÏ´Â À§Ä¡ (TTC = TrueTypeCollection)
+        int    faceIndex    = 0; // *.ttc íŒŒì¼ì¼ ê²½ìš° í°íŠ¸ê°€ ì¡´ì¬í•˜ëŠ” ìœ„ì¹˜ (TTC = TrueTypeCollection)
 
         int separatorIndex = parameters.FaceURI.ReverseFind('?');
         if (separatorIndex != -1)
@@ -177,13 +177,13 @@ namespace Bibim
             const String newFaceFilepath = library->GetOSFontDirectory() + faceFilename;
             if (FT_New_Face(static_cast<FT_Library>(library->GetFTLibrary()), newFaceFilepath.CStr(), faceIndex, &primaryFace))
             {
-                // ERROR Ã³¸® (returnÇÏÁö´Â ¾ÊÀ½)
+                // ERROR ì²˜ë¦¬ (returní•˜ì§€ëŠ” ì•ŠìŒ)
             }
         }
 
         if (FT_Error error = FT_New_Face(static_cast<FT_Library>(library->GetFTLibrary()), library->GetAlternativeFace().CStr(), 0, &alternativeFace))
         {
-            // ERROR Ã³¸® (returnÇÏÁö´Â ¾ÊÀ½)
+            // ERROR ì²˜ë¦¬ (returní•˜ì§€ëŠ” ì•ŠìŒ)
         }
 
         const FT_F26Dot6 scaledFontSize = FloatToF26D6(parameters.FontSize * parameters.Scale);
@@ -197,7 +197,7 @@ namespace Bibim
         {
             if (FT_Error error = FT_Stroker_New(static_cast<FT_Library>(library->GetFTLibrary()), &stroker))
             {
-                // ERROR Ã³¸®
+                // ERROR ì²˜ë¦¬
             }
 
             const FT_F26Dot6 scaledStrokeSize = FloatToF26D6(parameters.StrokeSize * parameters.Scale);
@@ -245,7 +245,7 @@ namespace Bibim
         {
             struct SelectFace
             {
-                // µÎ Face¿¡¼­ Code¸¦ Ã£¾Æ¼­ ¹İÈ¯ÇÕ´Ï´Ù.
+                // ë‘ Faceì—ì„œ Codeë¥¼ ì°¾ì•„ì„œ ë°˜í™˜í•©ë‹ˆë‹¤.
                 static std::pair<FT_Face, unsigned int> Do(FT_Face primary, FT_Face alternative, int code)
                 {
                     if (primary)
@@ -266,10 +266,10 @@ namespace Bibim
                 }
             };
 
-            // GrayscaleÀ» º¸ÀåÇÏ´Â Bitmap ±¸Á¶Ã¼.
-            // ¿øº» BitmapÀÌ 8bpp¶ó¸é ±×´ë·Î º¸°üÇÏ°í,
-            // ¸¸¾à 8pp°¡ ¾Æ´Ï¶ó¸é 8pp·Î º¯È¯ÇÕ´Ï´Ù.
-            // »õ·ÎÀÌ »ı¼ºµÈ BitmapÀº ÀÚµ¿À¸·Î »èÁ¦µË´Ï´Ù.
+            // Grayscaleì„ ë³´ì¥í•˜ëŠ” Bitmap êµ¬ì¡°ì²´.
+            // ì›ë³¸ Bitmapì´ 8bppë¼ë©´ ê·¸ëŒ€ë¡œ ë³´ê´€í•˜ê³ ,
+            // ë§Œì•½ 8ppê°€ ì•„ë‹ˆë¼ë©´ 8ppë¡œ ë³€í™˜í•©ë‹ˆë‹¤.
+            // ìƒˆë¡œì´ ìƒì„±ëœ Bitmapì€ ìë™ìœ¼ë¡œ ì‚­ì œë©ë‹ˆë‹¤.
             struct GrayscaleBitmap
             {
                 FT_Library Library;

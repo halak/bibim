@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     MouseState::MouseState()
         : Position(Point2::Zero),

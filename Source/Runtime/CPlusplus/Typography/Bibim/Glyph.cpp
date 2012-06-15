@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/Glyph.h>
 #include <Bibim/GlyphSurface.h>
 #include <Bibim/Texture2D.h>

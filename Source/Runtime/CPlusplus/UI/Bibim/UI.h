@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_CD21CF35_0038_47A0_B1BE_1E929D93FC87_ALL_H__
 #define __BIBIM_CD21CF35_0038_47A0_B1BE_1E929D93FC87_ALL_H__
 

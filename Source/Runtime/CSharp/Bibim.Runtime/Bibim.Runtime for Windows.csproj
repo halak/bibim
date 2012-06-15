@@ -13,7 +13,7 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
-    <XnaProfile>HiDef</XnaProfile>
+    <XnaProfile>Reach</XnaProfile>
     <XnaCrossPlatformGroupID>9fee5a6e-531a-49aa-9593-155879e7a551</XnaCrossPlatformGroupID>
     <XnaOutputType>Library</XnaOutputType>
   </PropertyGroup>
@@ -250,8 +250,11 @@
     <Compile Include="Asset\GameAssetStatus.cs" />
     <Compile Include="ClassIDAttribute.cs" />
     <Compile Include="Collections\Generic\ReadOnlyDictionary.cs" />
+    <Compile Include="Framework\GameFramework.cs" />
+    <Compile Include="Framework\GameWindow.cs" />
     <Compile Include="GameComponent.cs" />
     <Compile Include="Graphics\BlendMode.cs" />
+    <Compile Include="Graphics\Window.cs" />
     <Compile Include="Graphics\GraphicsDevice.cs" />
     <Compile Include="Graphics\Image.cs" />
     <Compile Include="Graphics\ShaderEffect.cs" />
@@ -347,9 +350,9 @@
     <Compile Include="UI\Visuals\UIWindow3D.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Collision2D\" />
     <Folder Include="Diagnostics\" />
     <Folder Include="FileSystem\" />
-    <Folder Include="Framework\" />
     <Folder Include="Gameplay\" />
     <Folder Include="Input\" />
   </ItemGroup>

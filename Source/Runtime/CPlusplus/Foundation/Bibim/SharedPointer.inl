@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     template <typename T> SharedPointer<T>::SharedPointer()
         : pointee(0)

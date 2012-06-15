@@ -1,8 +1,14 @@
-namespace Bibim
+﻿namespace Bibim
 {
     FontLibrary* Font::GetLibrary() const
     {
         return library;
+    }
+
+    void Font::SetFaceURIByChars(const char* value)
+    {
+        if (value)
+            SetFaceURI(value);
     }
 
     Color Font::GetColor() const

@@ -1,4 +1,4 @@
-#include <Bibim/ScriptStack.h>
+﻿#include <Bibim/ScriptStack.h>
 #include <Bibim/Assert.h>
 
 namespace Bibim

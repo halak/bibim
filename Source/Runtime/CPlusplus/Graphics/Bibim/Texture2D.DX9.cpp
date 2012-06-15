@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/Texture2D.DX9.h>
 #include <Bibim/GraphicsDevice.h>
 #include <Bibim/CheckedRelease.h>

@@ -130,7 +130,7 @@ namespace Bibim.Asset.Pipeline
             GameAssetKitchen kitchen = Kitchen;
             taskQueue.Enqueue(() =>
                               {
-                                  try
+                                  //try
                                   {
                                       Trace.WriteLine(string.Format("start cooking. {0}", assetPath));
 
@@ -189,13 +189,14 @@ namespace Bibim.Asset.Pipeline
                                               fallback();
                                       }
                                   }
+                                      /*
                                   catch (Exception ex)
                                   {
                                       Trace.WriteLine(ex);
 
                                       if (fallback != null)
                                           fallback();
-                                  }
+                                  }*/
                               });
         }
 

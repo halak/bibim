@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     float Math::Atan2(Vector2 xy)
     {

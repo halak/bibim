@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UIELEMENT_H__
 #define __BIBIM_UIELEMENT_H__
 
@@ -24,6 +24,7 @@
                 inline void SetID(int value);
                 inline const String& GetName() const;
                 inline void SetName(const String& value);
+                inline void SetNameByChars(const char* value);
 
             private:
                 int id;

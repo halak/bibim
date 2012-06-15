@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/Vector3.h>
 #include <Bibim/Math.h>
 #include <Bibim/Numerics.h>
@@ -7,7 +7,7 @@ namespace Bibim
 {
     float Vector3::Normalize()
     {
-        // Å©±â°¡ 1ÀÌ¸é Normalize¸¦ ¼öÇàÇÏÁö ¾Ê½À´Ï´Ù.
+        // í¬ê¸°ê°€ 1ì´ë©´ Normalizeë¥¼ ìˆ˜í–‰í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
         if (Math::Equals(X * X + Y * Y + Z * Z, 1.0f))
             return 1.0f;
 

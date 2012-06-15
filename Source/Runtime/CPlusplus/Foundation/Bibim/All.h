@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_EE4DC99A_9525_41DB_817C_DD69923A2773_ALL_H__
 #define __BIBIM_EE4DC99A_9525_41DB_817C_DD69923A2773_ALL_H__
 
@@ -93,7 +93,6 @@
 #  include <Bibim/GameFramework.h>
 #  include <Bibim/GameFramework.Windows.h>
 #  include <Bibim/GameWindow.h>
-#  include <Bibim/GameWindow.Windows.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Gameplay

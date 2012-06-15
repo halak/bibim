@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_TIMELINEGAMECOMPONENT_H__
 #define __BIBIM_TIMELINEGAMECOMPONENT_H__
 
