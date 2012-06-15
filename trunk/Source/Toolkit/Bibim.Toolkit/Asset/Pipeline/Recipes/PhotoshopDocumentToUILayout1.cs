@@ -24,6 +24,12 @@ namespace Bibim.Asset.Pipeline.Recipes
             get;
             set;
         }
+
+        public bool ForceShowAll
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
@@ -60,7 +66,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             return new UILayout(rootWindow);
         }
 
-        private static void AddChildTo(UIWindow window, PhotoshopDocument.Layer layer)
+        private void AddChildTo(UIWindow window, PhotoshopDocument.Layer layer)
         {
             if (string.IsNullOrEmpty(layer.Name) ||
                 layer.Name.StartsWith("#") == false)
@@ -99,15 +105,38 @@ namespace Bibim.Asset.Pipeline.Recipes
                 }
                 else
                 {
-                    UIWindow childWindow = new UIWindow();
-                    childWindow.Name = name;
-                    window.AddChild(childWindow);
-                    Process(childWindow, layer);
+                    bool hasNormal = layer.FindSubLayer("#Normal", false) != null;
+                    bool hasPushed = layer.FindSubLayer("#Pushed", false) != null;
+                    bool hasHovering = layer.FindSubLayer("#Hovering", false) != null;
+                    bool hasCheckedNormal = layer.FindSubLayer("#CheckedNormal", false) != null;
+                    bool hasCheckedPushed = layer.FindSubLayer("#CheckedPushed", false) != null;
+                    bool hasCheckedHovering = layer.FindSubLayer("#CheckedHovering", false) != null;
+                    if (hasNormal && hasPushed && !hasCheckedNormal && !hasCheckedPushed)
+                    {
+                        UIButton button = new UIButton();
+                        button.Name = name;
+                        window.AddChild(button);
+                        Process(button, layer);
+                    }
+                    else if (hasNormal && hasPushed && hasCheckedNormal && hasCheckedPushed)
+                    {
+                        UICheckBox button = new UICheckBox();
+                        button.Name = name;
+                        window.AddChild(button);
+                        Process(button, layer);
+                    }
+                    else
+                    {
+                        UIWindow childWindow = new UIWindow();
+                        childWindow.Name = name;
+                        window.AddChild(childWindow);
+                        Process(childWindow, layer);
+                    }
                 }
             }
         }
 
-        private static void Process(UIVisual visual, PhotoshopDocument.Layer layer)
+        private void Process(UIVisual visual, PhotoshopDocument.Layer layer)
         {
             System.Drawing.Rectangle parentBounds = System.Drawing.Rectangle.Empty;
             if (layer.Group != null)
@@ -119,7 +148,10 @@ namespace Bibim.Asset.Pipeline.Recipes
 
             visual.SetAbsoluteBounds(bounds.X, bounds.Y, bounds.Width, bounds.Height);
             visual.Opacity = (float)layer.Opacity / (float)byte.MaxValue;
-            visual.Visibility = layer.Visible ? UIVisibility.Visible : UIVisibility.Invisible;
+            if (ForceShowAll)
+                visual.Visibility = UIVisibility.Visible;
+            else
+                visual.Visibility = layer.Visible ? UIVisibility.Visible : UIVisibility.Invisible;
 
             BlendMode blendMode = ConvertToBlendMode(layer.BlendMode);
             if (blendMode != BlendMode.Normal)
@@ -129,7 +161,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             }
         }
 
-        private static void Process(UISprite sprite, PhotoshopDocument.Layer layer)
+        private void Process(UISprite sprite, PhotoshopDocument.Layer layer)
         {
             Process((UIVisual)sprite, layer);
 
@@ -158,12 +190,12 @@ namespace Bibim.Asset.Pipeline.Recipes
             };
         }
 
-        private static void Process(UILabel label, PhotoshopDocument.Layer layer)
+        private void Process(UILabel label, PhotoshopDocument.Layer layer)
         {
             Process((UIVisual)label, layer);
         }
 
-        private static void Process(UIButton button, PhotoshopDocument.Layer layer)
+        private void Process(UIButton button, PhotoshopDocument.Layer layer)
         {
             Process((UIVisual)button, layer);
 
@@ -198,7 +230,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             }
         }
 
-        private static void Process(UIWindow window, PhotoshopDocument.Layer layer)
+        private void Process(UIWindow window, PhotoshopDocument.Layer layer)
         {
             Process((UIVisual)window, layer);
 

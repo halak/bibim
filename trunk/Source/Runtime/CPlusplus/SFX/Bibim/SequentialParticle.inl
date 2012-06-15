@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     SequentialParticle::SequentialParticle(float lifespan, Vector3 position, int spriteSequenceIndex)
         : Particle(lifespan, position),

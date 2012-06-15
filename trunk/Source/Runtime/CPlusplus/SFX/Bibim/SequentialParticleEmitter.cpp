@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/SequentialParticleEmitter.h>
 #include <Bibim/ColorRangeSequence.h>
 #include <Bibim/Delete.h>

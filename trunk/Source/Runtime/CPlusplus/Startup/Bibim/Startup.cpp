@@ -1,4 +1,4 @@
-#include <Bibim/Startup.h>
+﻿#include <Bibim/Startup.h>
 #include <Bibim/All.h>
 
 namespace Bibim
@@ -238,5 +238,7 @@ namespace Bibim
         BBBeginScriptNativeFunction()
             BBScriptNativeFunction(ScriptLibrary::IO::Print)
         BBEndScriptNativeFunction();
+
+        Key::Setup();
     }
 }

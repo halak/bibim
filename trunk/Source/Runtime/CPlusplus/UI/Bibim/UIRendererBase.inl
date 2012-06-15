@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     UIRendererBase::Effector::Effector()
         : shaderEffectNameHint(0x00000000),

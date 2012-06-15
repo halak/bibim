@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     AutoLocker::AutoLocker(Lock& lock)
         : lock(lock)

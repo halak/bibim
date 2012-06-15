@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/PipedAssetProvider.h>
 #include <Bibim/AssetLoadingTask.h>
 #include <Bibim/AssetStreamReader.h>

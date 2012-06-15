@@ -1,4 +1,4 @@
-#include <Bibim/Assert.h>
+﻿#include <Bibim/Assert.h>
 #include <Bibim/NullPointer.h>
 #include <cstring>
 #include <stdexcept>

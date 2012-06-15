@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/CollisionSpace2D.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Geom2D.h>
@@ -109,7 +109,7 @@ namespace Bibim
                         minimumDistanceSquared = testReport.ImpactDistance * testReport.ImpactDistance;
                         outReport = testReport;
 
-                        // °Å¸®°¡ 0ÀÌ¸é ´õ ÀÌ»ó °¡±î¿î ShapeÀÌ ÀÖÀ»¸®°¡ ¾øÀ¸¹Ç·Î Raycast¸¦ Á¾·áÇÕ´Ï´Ù.
+                        // ê±°ë¦¬ê°€ 0ì´ë©´ ë” ì´ìƒ ê°€ê¹Œìš´ Shapeì´ ìˆì„ë¦¬ê°€ ì—†ìœ¼ë¯€ë¡œ Raycastë¥¼ ì¢…ë£Œí•©ë‹ˆë‹¤.
                         if (Math::Equals(minimumDistanceSquared, 0.0f))
                             return true;
                     }
@@ -213,13 +213,13 @@ namespace Bibim
         std::vector<ShapeCollection> newShapes;
         std::vector<BooleanCollection>  newCollisionRelationships;
 
-        // »õ·Î¿î °ø°£À» Àâ½À´Ï´Ù.
+        // ìƒˆë¡œìš´ ê³µê°„ì„ ì¡ìŠµë‹ˆë‹¤.
         newShapes.resize(numberOfGroups);
         newCollisionRelationships.resize(numberOfGroups);
         for (std::vector<BooleanCollection>::iterator it = newCollisionRelationships.begin(); it != newCollisionRelationships.end(); it++)
             (*it).resize(numberOfGroups);
 
-        // ±âÁ¸ °ªÀ» »õ·Î¿î °ø°£¿¡ ´ëÀÔÇÕ´Ï´Ù.
+        // ê¸°ì¡´ ê°’ì„ ìƒˆë¡œìš´ ê³µê°„ì— ëŒ€ì…í•©ë‹ˆë‹¤.
         const int minimumSize = Math::Min(numberOfGroups, GetNumberOfGroups());
         for (int i = 0; i < minimumSize; i++)
         {

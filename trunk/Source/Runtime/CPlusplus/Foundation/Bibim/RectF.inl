@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     RectF::RectF()
         : X(0.0f), Y(0.0f), Width(0.0f), Height(0.0f)

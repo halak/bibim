@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #ifndef __BIBIM_FOUNDATION_H__
 #define __BIBIM_FOUNDATION_H__
 
@@ -6,7 +6,6 @@
     {
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Build Configuration
-#       define BIBIM_EXCEPTION
 //#     define BIBIM_USE_PRECOMPILEDHEADER
 
 #       if (defined(WINDOWS) || defined(WIN32) || defined(WIN64))
@@ -30,6 +29,13 @@
         typedef __int64       longint;
         typedef float         single;
 
+        typedef unsigned char       uchar;
+        typedef unsigned short      ushort;
+        typedef unsigned int        uint;
+        typedef unsigned long       ulong;
+        typedef __int64             int64;
+        typedef unsigned __int64    uint64;
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // FOURCC
 #       define BBMakeFOURCC(a, b, c, d) ((static_cast<int>(a) << 24) | \
@@ -49,7 +55,7 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Class Idioms
 
-        // Static class : static methods·Î¸¸ ÀÌ·ç¾îÁ® ÀÖ°í ÀÎ½ºÅÏ½ºÈ­(Instantiate) µÉ ¼ö ¾ø´Â class¸¦ ¸»ÇÕ´Ï´Ù.
+        // Static class : static methodsë¡œë§Œ ì´ë£¨ì–´ì ¸ ìžˆê³  ì¸ìŠ¤í„´ìŠ¤í™”(Instantiate) ë  ìˆ˜ ì—†ëŠ” classë¥¼ ë§í•©ë‹ˆë‹¤.
 #       define BBThisIsStaticClass(classname)   private: \
                                                     classname(); \
                                                     classname(const classname&); \

@@ -13,7 +13,7 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
-    <XnaProfile>HiDef</XnaProfile>
+    <XnaProfile>Reach</XnaProfile>
     <XnaCrossPlatformGroupID>0b77cee2-e57a-4739-b4d1-2f616b74885f</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
     <ApplicationIcon>Game.ico</ApplicationIcon>
@@ -120,7 +120,7 @@
       <Project>{557C1E3F-0E92-4D23-AA07-7A0650B5682F}</Project>
       <Name>Bibim.Runtime for Windows</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Halak.Bibim.TestBedContent\Bibim.TestBedContent.contentproj">
+    <ProjectReference Include="..\Bibim.TestBedContent\Bibim.TestBedContent.contentproj">
       <Project>{D975F912-25F0-4081-A323-5A432039D7E7}</Project>
       <Name>Bibim.TestBedContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>

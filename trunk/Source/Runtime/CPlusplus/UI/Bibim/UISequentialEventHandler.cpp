@@ -1,4 +1,4 @@
-#include <Bibim/UISequentialEventHandler.h>
+﻿#include <Bibim/UISequentialEventHandler.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <algorithm>
 

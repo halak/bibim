@@ -1,4 +1,4 @@
-#include <Bibim/TestBed.h>
+ï»¿#include <Bibim/TestBed.h>
 #include <Bibim/PipeClientStream.h>
 #include <iostream>
 using namespace Bibim;
@@ -14,9 +14,9 @@ void Bibim::TestBed::PipeStream(CommandLines commands)
 
         char r[100];
         int c = pipe->Read(r, 100);
-        std::cout << "¿­·È´Ù!" << std::endl;
+        std::cout << "ì—´ë ¸ë‹¤!" << std::endl;
         pipe->Disconnect();
     }
     else
-        std::cout << "¿­¾î¶ó-" << std::endl;
+        std::cout << "ì—´ì–´ë¼-" << std::endl;
 }

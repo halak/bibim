@@ -1,10 +1,10 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Log.h>
 
 namespace Bibim
 {
-    // TODO: Platform¿¡ ¸Â°Ô ¾Ë·ÁÁÖµµ·Ï ÇÕ´Ï´Ù.
+    // TODO: Platformì— ë§ê²Œ ì•Œë ¤ì£¼ë„ë¡ í•©ë‹ˆë‹¤.
     void Assert(const char* expression, const char* /*filename*/, int /*line*/)
     {
         Log::Error(expression);

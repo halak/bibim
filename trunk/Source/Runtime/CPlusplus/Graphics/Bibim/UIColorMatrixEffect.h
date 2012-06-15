@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UICOLORMATRIXEFFECT_H__
 #define __BIBIM_UICOLORMATRIXEFFECT_H__
 
@@ -21,17 +21,21 @@
 
                 virtual UIRenderer::Effector* CreateEffector(UIRenderer::Effector* parent, bool isShaderFunctionRendering);
 
+                inline void Reset();
+                inline void Grayscale(Vector4 value);
+                inline void GrayscaleRGBA(float r, float g, float b, float a);
+
                 inline Vector4 GetRed() const;
                 inline void SetRed(Vector4 value);
+                inline void SetRedRGBA(float r, float g, float b, float a);
 
                 inline Vector4 GetGreen() const;
                 inline void SetGreen(Vector4 value);
+                inline void SetGreenRGBA(float r, float g, float b, float a);
 
                 inline Vector4 GetBlue() const;
                 inline void SetBlue(Vector4 value);
-
-                inline Vector4 GetAlpha() const;
-                inline void SetAlpha(Vector4 value);
+                inline void SetBlueRGBA(float r, float g, float b, float a);
 
             public:
                 static const Vector4 DefaultRed;

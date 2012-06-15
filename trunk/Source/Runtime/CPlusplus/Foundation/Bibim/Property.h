@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 #ifndef __BIBIM_PROPERTY_H__
 #define __BIBIM_PROPERTY_H__
 
     namespace Bibim
     {
-        /// non-virtual ¼Ò¸êÀÚ´Â ÀÇµµÇÏ¿´½À´Ï´Ù.
-        /// PropertyBase¿¡¼­ ¼Ò¸êÀÚ¸¦ È£ÃâÇÏÁö ¾Êµµ·Ï ÇÕ´Ï´Ù.
+        /// non-virtual ì†Œë©¸ìëŠ” ì˜ë„í•˜ì˜€ìŠµë‹ˆë‹¤.
+        /// PropertyBaseì—ì„œ ì†Œë©¸ìë¥¼ í˜¸ì¶œí•˜ì§€ ì•Šë„ë¡ í•©ë‹ˆë‹¤.
         class PropertyBase
         {
             public:

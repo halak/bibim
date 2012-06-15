@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     bool UIPickingContext::Contains(const RectF& bounds)
     {

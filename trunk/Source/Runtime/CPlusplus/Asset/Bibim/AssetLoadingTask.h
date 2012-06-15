@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #ifndef __BIBIM_GAMEASSETLOADINGTASK_H__
 #define __BIBIM_GAMEASSETLOADINGTASK_H__
 
@@ -13,12 +13,12 @@
             public:
                 virtual ~AssetLoadingTask();
 
-                /// Background LoadingÀ» ½ÃÀÛÇÕ´Ï´Ù.
-                /// ÀÌ Method´Â º¸Åë Background Loading Thread¿¡¼­ È£ÃâµË´Ï´Ù.
+                /// Background Loadingì„ ì‹œì‘í•©ë‹ˆë‹¤.
+                /// ì´ MethodëŠ” ë³´í†µ Background Loading Threadì—ì„œ í˜¸ì¶œë©ë‹ˆë‹¤.
                 virtual void Execute() = 0;
-                /// ÇöÀç ÁøÇà ÁßÀÎ LoadingÀ» Ãë¼ÒÇÕ´Ï´Ù.
-                /// ÀÌ Method´Â º¸Åë Main Thread¿¡¼­ È£ÃâµÇ¸ç,
-                /// ´Ù¸¥ Thread¿¡¼­ Execute µÇ°í ÀÖ´Â »óÅÂÁö¸¸ ±× Thread´Â Á¤ÁöµÇ¾î ÀÖ½À´Ï´Ù.
+                /// í˜„ì¬ ì§„í–‰ ì¤‘ì¸ Loadingì„ ì·¨ì†Œí•©ë‹ˆë‹¤.
+                /// ì´ MethodëŠ” ë³´í†µ Main Threadì—ì„œ í˜¸ì¶œë˜ë©°,
+                /// ë‹¤ë¥¸ Threadì—ì„œ Execute ë˜ê³  ìˆëŠ” ìƒíƒœì§€ë§Œ ê·¸ ThreadëŠ” ì •ì§€ë˜ì–´ ìˆìŠµë‹ˆë‹¤.
                 virtual void Cancel();
 
                 inline const String& GetName() const;

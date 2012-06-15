@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/UIDrawingContext.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Font.h>
@@ -48,7 +48,9 @@ namespace Bibim
             image->GetTexture()->GetStatus() != GameAsset::CompletedStatus)
             return;
 
-        if (currentMask)
+        if (currentMask &&
+            currentMask->GetStatus() == GameAsset::CompletedStatus &&
+            currentMask->GetTexture()->GetStatus() == GameAsset::CompletedStatus)
         {
             Draw(bounds, clippedBounds, image, currentMask, horizontalFlip, verticalFlip);
             return;

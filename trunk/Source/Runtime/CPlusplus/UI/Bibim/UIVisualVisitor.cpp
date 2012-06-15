@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/UIVisualVisitor.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Math.h>
@@ -110,7 +110,7 @@ namespace Bibim
         if (visibleOnly && target->IsVisible() == false)
             return;
         if (target->GetXMode() == UIVisual::UndefinedPosition ||
-            target->GetYMode() == UIVisual::UndefinedPosition) // visible only°¡ ¾Æ´Ï´õ¶óµµ À§Ä¡°¡ Á¤ÇØÁöÁö ¾ÊÀ¸¸é ¼öÇàÇÏÁö ¾Ê½À´Ï´Ù.
+            target->GetYMode() == UIVisual::UndefinedPosition) // visible onlyê°€ ì•„ë‹ˆë”ë¼ë„ ìœ„ì¹˜ê°€ ì •í•´ì§€ì§€ ì•Šìœ¼ë©´ ìˆ˜í–‰í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
             return;
 
         UIVisual*const oldVisual = currentVisual;

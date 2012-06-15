@@ -1,4 +1,4 @@
-#include <Bibim/UIFunctionEventHandler.h>
+﻿#include <Bibim/UIFunctionEventHandler.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/UIFunctionTable.h>
 
@@ -9,7 +9,7 @@ namespace Bibim
     UIFunctionEventHandler::UIFunctionEventHandler()
         : table(nullptr),
           functionName(),
-          callable(nullptr),
+          callable(UIFunctionTable::FunctionType(nullptr, nullptr)),
           callableChanged(true)
     {
     }
@@ -17,7 +17,7 @@ namespace Bibim
     UIFunctionEventHandler::UIFunctionEventHandler(const UIFunctionTable* table, const String& functionName)
         : table(table),
           functionName(functionName),
-          callable(nullptr),
+          callable(UIFunctionTable::FunctionType(nullptr, nullptr)),
           callableChanged(true)
     {
     }
@@ -36,8 +36,8 @@ namespace Bibim
                 callable = GetTable()->Find(functionName);
         }
 
-        if (callable)
-            return (*callable)(args);
+        if (callable.first)
+            return (*(callable.first))(args, callable.second);
         else
             return false;
     }
@@ -47,7 +47,8 @@ namespace Bibim
         if (table != value)
         {
             table = value;
-            callable = nullptr;
+            callable.first  = nullptr;
+            callable.second = nullptr;
             callableChanged = true;
         }
     }
@@ -57,7 +58,8 @@ namespace Bibim
         if (functionName != value)
         {
             functionName = value;
-            callable = nullptr;
+            callable.first  = nullptr;
+            callable.second = nullptr;
             callableChanged = true;
         }
     }

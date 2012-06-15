@@ -1,4 +1,4 @@
-#include <Bibim/ManualLocker.h>
+﻿#include <Bibim/ManualLocker.h>
 #include <Bibim/Assert.h>
 
 namespace Bibim

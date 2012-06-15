@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/Assert.h>
 #include <Bibim/AssetProvider.h>
@@ -139,7 +139,7 @@ namespace Bibim
     void GameAssetStorage::SetAsset(const String& name, GameAsset* asset)
     {
         AssetTable::iterator it = assets.find(name);
-        BBAssert(it != assets.end()); // Preload¸¦ È£ÃâÇÒ ¶§ ÀÌ¹Ì ÇÒ´çÇØ ³õ¾Ò½À´Ï´Ù.
+        BBAssert(it != assets.end()); // Preloadë¥¼ í˜¸ì¶œí•  ë•Œ ì´ë¯¸ í• ë‹¹í•´ ë†“ì•˜ìŠµë‹ˆë‹¤.
 
         if (asset == nullptr)
             asset = BadAsset;

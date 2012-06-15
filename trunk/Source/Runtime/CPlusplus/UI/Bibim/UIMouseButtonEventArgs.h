@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UIMOUSEBUTTONEVENTARGS_H__
 #define __BIBIM_UIMOUSEBUTTONEVENTARGS_H__
 
@@ -10,6 +10,7 @@
     {
         class UIMouseButtonEventArgs : public UIMouseEventArgs
         {
+            protected: virtual void to_lua(lua_State *L) { type2lua(L, this); }
             public:
                 UIMouseButtonEventArgs();
                 UIMouseButtonEventArgs(UIVisual* target, Point2 position, Key::Code buttonCode);
@@ -21,6 +22,7 @@
                 virtual UIMouseButtonEventArgs* Clone() const;
 
                 inline Key::Code GetButtonCode() const;
+                inline const char* GetButtonCodeAsChars() const;
 
             private:
                 Key::Code buttonCode;

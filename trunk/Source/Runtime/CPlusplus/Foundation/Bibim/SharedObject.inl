@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     template <typename To> SharedPointer<To> SharedObject::This()
     {

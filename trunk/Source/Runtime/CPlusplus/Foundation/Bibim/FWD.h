@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_FWD_H__
 #define __BIBIM_FWD_H__
 
@@ -184,6 +184,7 @@
                     BBForwardDeclareSmartPointerClass(PipeServerStream);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Scripting
+                class LuaRuntimeEnvironment;
                 BBForwardDeclareSmartPointerClass(Script);
                 class ScriptingContext;
                 BBForwardDeclareSmartPointerClass(ScriptThread);

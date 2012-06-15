@@ -1,5 +1,6 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/Key.h>
+#include <algorithm>
 
 namespace Bibim
 {
@@ -66,4 +67,135 @@ namespace Bibim
 
         None,
     };
+
+    std::vector<Key::Entry> Key::stringToCodeMap;
+    std::vector<Key::Entry> Key::codeToStringMap;
+
+    struct CompareByString
+    {
+        bool operator () (Key::Entry a, Key::Entry b)
+        {
+            return _stricmp(a.first, b.first) < 0;
+        }
+    };
+
+    struct CompareByCode
+    {
+        bool operator () (Key::Entry a, Key::Entry b)
+        {
+            return a.second < b.second;
+        }
+    };
+
+    void Key::Setup()
+    {
+        stringToCodeMap.reserve(256);
+
+#       define BBAddKeyEntry(code) stringToCodeMap.push_back(Entry(#code, code));
+
+        BBAddKeyEntry(None);
+        BBAddKeyEntry(Enter);
+        BBAddKeyEntry(Shift);
+        BBAddKeyEntry(Ctrl);
+        BBAddKeyEntry(Alt);
+        BBAddKeyEntry(Escape);
+        BBAddKeyEntry(Space);
+        BBAddKeyEntry(Left);
+        BBAddKeyEntry(Up);
+        BBAddKeyEntry(Right);
+        BBAddKeyEntry(Down);
+        BBAddKeyEntry(D0);
+        BBAddKeyEntry(D1);
+        BBAddKeyEntry(D2);
+        BBAddKeyEntry(D3);
+        BBAddKeyEntry(D4);
+        BBAddKeyEntry(D5);
+        BBAddKeyEntry(D6);
+        BBAddKeyEntry(D7);
+        BBAddKeyEntry(D8);
+        BBAddKeyEntry(D9);
+        BBAddKeyEntry(A);
+        BBAddKeyEntry(B);
+        BBAddKeyEntry(C);
+        BBAddKeyEntry(D);
+        BBAddKeyEntry(E);
+        BBAddKeyEntry(F);
+        BBAddKeyEntry(G);
+        BBAddKeyEntry(H);
+        BBAddKeyEntry(I);
+        BBAddKeyEntry(J);
+        BBAddKeyEntry(K);
+        BBAddKeyEntry(L);
+        BBAddKeyEntry(M);
+        BBAddKeyEntry(N);
+        BBAddKeyEntry(O);
+        BBAddKeyEntry(P);
+        BBAddKeyEntry(Q);
+        BBAddKeyEntry(R);
+        BBAddKeyEntry(S);
+        BBAddKeyEntry(T);
+        BBAddKeyEntry(U);
+        BBAddKeyEntry(V);
+        BBAddKeyEntry(W);
+        BBAddKeyEntry(X);
+        BBAddKeyEntry(Y);
+        BBAddKeyEntry(Z);
+        BBAddKeyEntry(F1);
+        BBAddKeyEntry(F2);
+        BBAddKeyEntry(F3);
+        BBAddKeyEntry(F4);
+        BBAddKeyEntry(F5);
+        BBAddKeyEntry(F6);
+        BBAddKeyEntry(F7);
+        BBAddKeyEntry(F8);
+        BBAddKeyEntry(F9);
+        BBAddKeyEntry(F10);
+        BBAddKeyEntry(F11);
+        BBAddKeyEntry(F12);
+        BBAddKeyEntry(MouseLeftButton);
+        BBAddKeyEntry(MouseRightButton);
+        BBAddKeyEntry(MouseMiddleButton);
+        BBAddKeyEntry(GamePadA);
+        BBAddKeyEntry(GamePadB);
+        BBAddKeyEntry(GamePadX);
+        BBAddKeyEntry(GamePadY);
+        BBAddKeyEntry(GamePadUp);
+        BBAddKeyEntry(GamePadDown);
+        BBAddKeyEntry(GamePadLeft);
+        BBAddKeyEntry(GamePadRight);
+        BBAddKeyEntry(GamePadStart);
+        BBAddKeyEntry(GamePadBack);
+        BBAddKeyEntry(GamePadSelect);
+        BBAddKeyEntry(GamePadLeftThumb);
+        BBAddKeyEntry(GamePadRightThumb);
+        BBAddKeyEntry(GamePadLeftShoulder);
+        BBAddKeyEntry(GamePadRightShoulder);
+#       undef BBAddKeyEntry
+
+        codeToStringMap = stringToCodeMap;
+
+        std::sort(stringToCodeMap.begin(), stringToCodeMap.end(), CompareByString());
+        std::sort(codeToStringMap.begin(), codeToStringMap.end(), CompareByCode());
+    }
+
+    const char* Key::ToString(Code value)
+    {
+        std::vector<Entry>::const_iterator it = std::lower_bound(codeToStringMap.begin(), codeToStringMap.end(), Entry(nullptr, value), CompareByCode());
+        if ((*it).second == value)
+            return (*it).first;
+        else
+            return "None";
+    }
+
+    Key::Code Key::Parse(const char* value)
+    {
+        if (value == nullptr)
+            return None;
+
+        std::vector<Entry>::const_iterator it = std::lower_bound(stringToCodeMap.begin(), stringToCodeMap.end(), Entry(value, None), CompareByString());
+        if (_stricmp((*it).first, value) == 0)
+            return (*it).second;
+        else
+            return None;
+    }
 }

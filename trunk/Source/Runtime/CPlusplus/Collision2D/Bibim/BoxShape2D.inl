@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     Vector2 BoxShape2D::GetOrientation() const
     {

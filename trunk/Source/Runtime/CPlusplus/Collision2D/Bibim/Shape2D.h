@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_SHAPE2D_H__
 #define __BIBIM_SHAPE2D_H__
 

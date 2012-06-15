@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     ID3DXEffect* ShaderEffect::GetD3DEffect() const
     {

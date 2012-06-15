@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UIVISUAL_H__
 #define __BIBIM_UIVISUAL_H__
 
@@ -46,7 +46,6 @@
                     Collasped,
                 };
 
-
             public:
                 UIVisual();
                 virtual ~UIVisual();
@@ -55,6 +54,11 @@
 
                 inline void Show();
                 inline void Hide();
+
+                void InsertEffect(UIPixelEffect* item);
+                void RemoveEffect(UIPixelEffect* item);
+                UIPixelEffect* FindEffect(const String& name);
+                inline UIPixelEffect* FindEffectByChars(const char* name);
 
                 void BringToFront();
                 void SendToBack();
@@ -69,6 +73,8 @@
                 inline float GetY() const;
                 inline void  SetY(float value);
 
+                inline void SetXY(float x, float y);
+
                 inline float GetWidth() const;
                 inline void  SetWidth(float value);
 
@@ -80,6 +86,8 @@
 
                 inline PositionMode GetYMode() const;
                 inline void SetYMode(PositionMode value);
+
+                inline void SetXYMode(PositionMode xMode, PositionMode yMode);
 
                 inline SizeMode GetWidthMode() const;
                 inline void SetWidthMode(SizeMode value);
@@ -109,6 +117,27 @@
 
                 inline bool IsVisible() const;
                 virtual bool IsPanel() const;
+                virtual bool CanPick() const;
+
+                inline const char* GetXModeAsChars() const;
+                inline void SetXModeByChars(const char* value);
+
+                inline const char* GetYModeAsChars() const;
+                inline void SetYModeByChars(const char* value);
+
+                inline void SetXYModeByChars(const char* xMode, const char* yMode);
+
+                inline const char* GetWidthModeAsChars() const;
+                inline void SetWidthModeByChars(const char* value);
+
+                inline const char* GetHeightModeAsChars() const;
+                inline void SetHeightModeByChars(const char* value);
+
+                inline const char* GetAlignmentAsChars() const;
+                inline void SetAlignmentByChars(const char* value);
+
+                inline const char* GetVisibilityAsChars() const;
+                inline void SetVisibilityByChars(const char* value);
 
             protected:
                 virtual void OnDraw(UIDrawingContext& context);
@@ -156,6 +185,16 @@
                 void RaiseGamePadThumbstickEvent(const UIGamePadEventArgs& args);
 
             private:
+                static PositionMode ConvertFromStringToPositionMode(const char* value);
+                static const char* ConvertFromPositionModeToString(PositionMode value);
+                static SizeMode ConvertFromStringToSizeMode(const char* value);
+                static const char* ConvertFromSizeModeToString(SizeMode value);
+                static AnchorPoint ConvertFromStringToAnchorPoint(const char* value);
+                static const char* ConvertFromAnchorPointToString(AnchorPoint value);
+                static Visibility ConvertFromStringToVisibility(const char* value);
+                static const char* ConvertFromVisibilityToString(Visibility value);
+
+            private:
                 byte xMode;
                 byte yMode;
                 byte widthMode;
@@ -183,5 +222,15 @@
     }
 
 #   include <Bibim/UIVisual.inl>
+
+	template<> inline void lua_tinker::push(lua_State* L, Bibim::UIVisual* value)
+	{
+        push(L, static_cast<lua_tinker::lua_value*>(value));
+	}
+
+	template<> inline void lua_tinker::push(lua_State* L, const Bibim::UIVisual* value)
+	{
+        push(L, const_cast<lua_tinker::lua_value*>(static_cast<const lua_tinker::lua_value*>(value)));
+	}
 
 #endif

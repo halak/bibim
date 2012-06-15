@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/UIFunctionTable.h>
 
 namespace Bibim
@@ -11,9 +11,9 @@ namespace Bibim
     {
     }
 
-    void UIFunctionTable::Add(const String& name, GlobalFunctionType function)
+    void UIFunctionTable::Add(const String& name, GlobalFunctionType function, void* userData)
     {
-        items[name] = function;
+        items[name] = FunctionType(function, userData);
     }
 
     bool UIFunctionTable::Remove(const String& name)
@@ -39,6 +39,6 @@ namespace Bibim
         if (it != items.end())
             return (*it).second;
         else
-            return nullptr;
+            return FunctionType(nullptr, nullptr);
     }
 }

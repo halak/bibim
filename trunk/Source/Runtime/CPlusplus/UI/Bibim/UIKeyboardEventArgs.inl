@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     bool UIKeyboardEventArgs::Contains(Key::Code keyCode) const
     {
@@ -38,5 +38,35 @@ namespace Bibim
             case 3: return keyCode3;
             default: return Key::None;
         }
+    }
+
+    bool UIKeyboardEventArgs::ContainsByChars(const char* keyCode) const
+    {
+        return Contains(Key::Parse(keyCode));
+    }
+
+    const char* UIKeyboardEventArgs::GetKeyCode0AsChars() const
+    {
+        return Key::ToString(keyCode0);
+    }
+
+    const char* UIKeyboardEventArgs::GetKeyCode1AsChars() const
+    {
+        return Key::ToString(keyCode1);
+    }
+
+    const char* UIKeyboardEventArgs::GetKeyCode2AsChars() const
+    {
+        return Key::ToString(keyCode2);
+    }
+
+    const char* UIKeyboardEventArgs::GetKeyCode3AsChars() const
+    {
+        return Key::ToString(keyCode3);
+    }
+
+    const char* UIKeyboardEventArgs::GetKeyCodeAtAsChars(int index) const
+    {
+        return Key::ToString(GetKeyCodeAt(index));
     }
 }

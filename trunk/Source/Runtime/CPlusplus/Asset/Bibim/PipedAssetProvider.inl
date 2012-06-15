@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     const String& PipedAssetProvider::GetClientName() const
     {

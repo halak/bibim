@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_POINT4_H__
 #define __BIBIM_POINT4_H__
 

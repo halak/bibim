@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_SCRIPTING_IO_H__
 #define __BIBIM_SCRIPTING_IO_H__
 

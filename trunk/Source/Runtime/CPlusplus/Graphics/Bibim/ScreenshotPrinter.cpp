@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/ScreenshotPrinter.h>
 #include <Bibim/Assert.h>
 #include <Bibim/GraphicsDevice.h>
@@ -29,8 +29,8 @@ namespace Bibim
 
         if (renderTarget == nullptr)
         {
-            const Point2 size = graphicsDevice->GetWindow()->GetSize();
-            renderTarget = new RenderTargetTexture2D(graphicsDevice, size.X, size.Y);
+            const Rect viewport = graphicsDevice->GetViewport();
+            renderTarget = new RenderTargetTexture2D(graphicsDevice, viewport.Width, viewport.Height);
         }
 
         IDirect3DDevice9*  d3dDevice = graphicsDevice->GetD3DDevice();

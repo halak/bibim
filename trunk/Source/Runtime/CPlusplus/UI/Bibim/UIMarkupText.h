@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #ifndef __BIBIM_UIMARKUPTEXT_H__
 #define __BIBIM_UIMARKUPTEXT_H__
 
@@ -10,22 +10,22 @@
 
     namespace Bibim
     {
-        // Bibim¿ë Markup ±ÔÄ¢¿¡ ÀÇ°ÅÇÏ¿© ¹®ÀÚ¿­À» ºĞ¼®ÇÏ°í °á°ú¸¦ º¸°üÇÏ´Â class.
+        // Bibimìš© Markup ê·œì¹™ì— ì˜ê±°í•˜ì—¬ ë¬¸ìì—´ì„ ë¶„ì„í•˜ê³  ê²°ê³¼ë¥¼ ë³´ê´€í•˜ëŠ” class.
         // 
         // * |color|
-        //   ÀÌÈÄ ¹®ÀÚÀÇ »öÀ» ÁöÁ¤ÇÑ »ö(color)À¸·Î ¹Ù²ã¼­ Ãâ·ÂÇÏ°Ô ÇÕ´Ï´Ù.
-        //   Color::CanParse¿¡¼­ true¸¦ ¹İÈ¯¹Ş´Â ¹®ÀÚ¿­À» ³ÖÀ» ¼ö ÀÖ½À´Ï´Ù.
-        //   Á¸ÀçÇÏÁö ¾Ê´Â »öÀÌ¶ó¸é Àü¿ª ±âº» »öÀ¸·Î ¹Ù²ß´Ï´Ù.
+        //   ì´í›„ ë¬¸ìì˜ ìƒ‰ì„ ì§€ì •í•œ ìƒ‰(color)ìœ¼ë¡œ ë°”ê¿”ì„œ ì¶œë ¥í•˜ê²Œ í•©ë‹ˆë‹¤.
+        //   Color::CanParseì—ì„œ trueë¥¼ ë°˜í™˜ë°›ëŠ” ë¬¸ìì—´ì„ ë„£ì„ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+        //   ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ìƒ‰ì´ë¼ë©´ ì „ì—­ ê¸°ë³¸ ìƒ‰ìœ¼ë¡œ ë°”ê¿‰ë‹ˆë‹¤.
         // * [type:name]
         // * [type:name?key1=value1&key2=value2]
-        //   ÇöÀç Cursor À§Ä¡¿¡ Æ¯Á¤ Content¸¦ »ğÀÔÇÕ´Ï´Ù.
-        //   ¿¹¸¦µé¾î "halak.png"¶õ ±×¸²À» »ğÀÔÇÏ°í ½ÍÀ¸¸é,
-        //   [image:halak.png]ÀÇ ÇüÅÂ·Î ÀÛ¼ºÇÏ¸é µË´Ï´Ù.
-        //   ÀÌ¸§ ´ÙÀ½¿¡ '?'¸¦ ÀÔ·Â ÈÄ ¼¼ºÎ ¼Ó¼ºÀ» ¼³Á¤ÇÒ ¼ö ÀÖ½À´Ï´Ù.
-        //   ¼¼ºÎ ¼Ó¼ºÀº 'key=value'ÀÇ ÇüÅÂ·Î ÀÔ·ÂÇÒ ¼ö ÀÖÀ¸¸ç,
-        //   º¹¼öÀÇ ¼Ó¼ºÀº '&'·Î ±¸ºĞÇÕ´Ï´Ù.
+        //   í˜„ì¬ Cursor ìœ„ì¹˜ì— íŠ¹ì • Contentë¥¼ ì‚½ì…í•©ë‹ˆë‹¤.
+        //   ì˜ˆë¥¼ë“¤ì–´ "halak.png"ë€ ê·¸ë¦¼ì„ ì‚½ì…í•˜ê³  ì‹¶ìœ¼ë©´,
+        //   [image:halak.png]ì˜ í˜•íƒœë¡œ ì‘ì„±í•˜ë©´ ë©ë‹ˆë‹¤.
+        //   ì´ë¦„ ë‹¤ìŒì— '?'ë¥¼ ì…ë ¥ í›„ ì„¸ë¶€ ì†ì„±ì„ ì„¤ì •í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+        //   ì„¸ë¶€ ì†ì„±ì€ 'key=value'ì˜ í˜•íƒœë¡œ ì…ë ¥í•  ìˆ˜ ìˆìœ¼ë©°,
+        //   ë³µìˆ˜ì˜ ì†ì„±ì€ '&'ë¡œ êµ¬ë¶„í•©ë‹ˆë‹¤.
         //   [image:halak.png?scale=2,2&horizontalFlip=yes]
-        // * ÁÙ ³Ñ±èÀº '\r', '\n', '\r\n' ¸ğµÎ Çã¿ëÇÕ´Ï´Ù.
+        // * ì¤„ ë„˜ê¹€ì€ '\r', '\n', '\r\n' ëª¨ë‘ í—ˆìš©í•©ë‹ˆë‹¤.
         class UIMarkupText
         {
             public:
@@ -38,17 +38,17 @@
                     ContentPhraseType,
                 };
 
-                // Markup ¹®ÀÚ¿­À» ÀÌ·ç´Â ¿ä¼ÒÀÔ´Ï´Ù.
-                // Markup ¹®ÀÚ¿­Àº ¿©·¯°³ÀÇ Phrase·Î ±¸¼ºµË´Ï´Ù.
+                // Markup ë¬¸ìì—´ì„ ì´ë£¨ëŠ” ìš”ì†Œì…ë‹ˆë‹¤.
+                // Markup ë¬¸ìì—´ì€ ì—¬ëŸ¬ê°œì˜ Phraseë¡œ êµ¬ì„±ë©ë‹ˆë‹¤.
                 class Phrase
                 {
                     public:
-                        // PhraseÀÇ TypeÀ» °¡Á®¿É´Ï´Ù.
-                        // ¸ğµç ÆÄ»ı class´Â ´ÜÀÏ»ó¼Ó ÇÏ°íÀÖ±â ¶§¹®¿¡,
-                        // Type È®ÀÎ ÈÄ static_cast·Î º¯È¯ÇÏ¿© »ç¿ëÇÏ¸é µË´Ï´Ù. 
+                        // Phraseì˜ Typeì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
+                        // ëª¨ë“  íŒŒìƒ classëŠ” ë‹¨ì¼ìƒì† í•˜ê³ ìˆê¸° ë•Œë¬¸ì—,
+                        // Type í™•ì¸ í›„ static_castë¡œ ë³€í™˜í•˜ì—¬ ì‚¬ìš©í•˜ë©´ ë©ë‹ˆë‹¤. 
                         inline PhraseType GetType() const;
 
-                        // ¿øº» ¹®ÀÚ¿­¿¡¼­ Phrase°¡ Â÷ÁöÇÏ´Â ¿µ¿ªÀ» °¡Á®¿É´Ï´Ù.
+                        // ì›ë³¸ ë¬¸ìì—´ì—ì„œ Phraseê°€ ì°¨ì§€í•˜ëŠ” ì˜ì—­ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
                         inline int GetIndex() const;
                         inline int GetLength() const;
 
@@ -71,7 +71,7 @@
                         friend class UIMarkupText;
                 };
 
-                // ´Ü¼ø ¹®ÀÚ¿­À» °¡¸®Å°´Â Phrase.
+                // ë‹¨ìˆœ ë¬¸ìì—´ì„ ê°€ë¦¬í‚¤ëŠ” Phrase.
                 class TextPhrase : public Phrase
                 {
                     private:
@@ -84,8 +84,8 @@
                         friend class UIMarkupText;
                 };
 
-                // »õ LineÀÇ ½ÃÀÛÀ» °¡¸®Å°´Â Phrase.
-                // º°´Ù¸¥ Field°¡ ¾ø±â ¶§¹®¿¡ static_castÇÒ ÇÊ¿ä°¡ ¾ø½À´Ï´Ù.
+                // ìƒˆ Lineì˜ ì‹œì‘ì„ ê°€ë¦¬í‚¤ëŠ” Phrase.
+                // ë³„ë‹¤ë¥¸ Fieldê°€ ì—†ê¸° ë•Œë¬¸ì— static_castí•  í•„ìš”ê°€ ì—†ìŠµë‹ˆë‹¤.
                 class NewLinePhrase : public Phrase
                 {
                     private:
@@ -98,14 +98,14 @@
                         friend class UIMarkupText;
                 };
 
-                // ¹®ÀÚ »ö º¯È­¸¦ °¡¸®Å°´Â Phrase.
+                // ë¬¸ì ìƒ‰ ë³€í™”ë¥¼ ê°€ë¦¬í‚¤ëŠ” Phrase.
                 class ColorPhrase : public Phrase
                 {
                     public:
-                        // ¹Ù²Ü »öÀ» °¡Á®¿É´Ï´Ù.
+                        // ë°”ê¿€ ìƒ‰ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
                         inline Color GetColor() const;
-                        // »öÀÌ ÁöÁ¤µÇ¾î ÀÖ´ÂÁö È®ÀÎÇÕ´Ï´Ù.
-                        // ÀÌ MethodÀÇ °á°ú°¡ false¸é ±âº»»öÀ¸·Î ÀüÈ¯µË´Ï´Ù.
+                        // ìƒ‰ì´ ì§€ì •ë˜ì–´ ìˆëŠ”ì§€ í™•ì¸í•©ë‹ˆë‹¤.
+                        // ì´ Methodì˜ ê²°ê³¼ê°€ falseë©´ ê¸°ë³¸ìƒ‰ìœ¼ë¡œ ì „í™˜ë©ë‹ˆë‹¤.
                         inline bool  HasColor() const;
 
                     private:
@@ -122,7 +122,7 @@
                         friend class UIMarkupText;
                 };
 
-                // ±Û²Ã º¯È­¸¦ °¡¸®Å°´Â Phrase.
+                // ê¸€ê¼´ ë³€í™”ë¥¼ ê°€ë¦¬í‚¤ëŠ” Phrase.
                 class FontPhrase : public Phrase
                 {
                     private:

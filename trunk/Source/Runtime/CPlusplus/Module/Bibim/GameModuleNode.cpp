@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/GameModuleNode.h>
 #include <Bibim/Assert.h>
 #include <Bibim/GameModule.h>
@@ -71,13 +71,13 @@ namespace Bibim
 
         if (GameModuleNode* oldParent = item->parent)
         {
-            // Detach¸¦ °ÅÄ¡Áö ¾Ê°í Á÷Á¢ Á¦°ÅÇÕ´Ï´Ù.
+            // Detachë¥¼ ê±°ì¹˜ì§€ ì•Šê³  ì§ì ‘ ì œê±°í•©ë‹ˆë‹¤.
             NodeCollection::iterator it = std::find(oldParent->children.begin(), oldParent->children.end(), item);
             BBAssertDebug(it != oldParent->children.end());
             oldParent->children.erase(it);
             item->parent = nullptr;
 
-            // GameModuleTree::OnNodeDetachedÀÇ ¸í¼¼´ë·Î GameModuleTree°¡ ¹Ù²î¾úÀ» ¶§¸¸ È£ÃâÇÕ´Ï´Ù.
+            // GameModuleTree::OnNodeDetachedì˜ ëª…ì„¸ëŒ€ë¡œ GameModuleTreeê°€ ë°”ë€Œì—ˆì„ ë•Œë§Œ í˜¸ì¶œí•©ë‹ˆë‹¤.
             if (oldParent->tree && treeChanged)
                 oldParent->tree->OnNodeDetached(oldParent, item);
         }
@@ -88,7 +88,7 @@ namespace Bibim
         item->tree = tree;
         children.push_back(item);
 
-        // GameModuleTree::OnNodeAttachedÀÇ ¸í¼¼´ë·Î GameModuleTree°¡ ¹Ù²î¾úÀ» ¶§¸¸ È£ÃâÇÕ´Ï´Ù.
+        // GameModuleTree::OnNodeAttachedì˜ ëª…ì„¸ëŒ€ë¡œ GameModuleTreeê°€ ë°”ë€Œì—ˆì„ ë•Œë§Œ í˜¸ì¶œí•©ë‹ˆë‹¤.
         if (tree && treeChanged)
             tree->OnNodeAttached(this, item);
     }
@@ -101,7 +101,7 @@ namespace Bibim
             return false;
 
         NodeCollection::iterator it = std::find(children.begin(), children.end(), item);
-        BBAssertDebug(it != children.end()); // ÀÌ¹Ì itemÀÇ ºÎ¸ð°¡ thisÀÎÁö È®ÀÎÇß±â ¶§¹®¿¡ ¹Ýµå½Ã ÀÖ¾î¾ßÇÕ´Ï´Ù.
+        BBAssertDebug(it != children.end()); // ì´ë¯¸ itemì˜ ë¶€ëª¨ê°€ thisì¸ì§€ í™•ì¸í–ˆê¸° ë•Œë¬¸ì— ë°˜ë“œì‹œ ìžˆì–´ì•¼í•©ë‹ˆë‹¤.
         children.erase(it);
 
         item->parent = nullptr;
@@ -189,9 +189,9 @@ namespace Bibim
 
     GameModuleNode* GameModuleNode::FindChildNode(GameModule* item) const
     {
-        // ¿ø·¡´Â ¸ðµç ÀÚ½Ä NodeµéÀ» ¼øÈ¸ÇÏ¸ç °Ë»çÇØ¾ßÇÏÁö¸¸,
-        // GameModule¿¡¼­ ÀÚ½ÅÀ» °¡Áø Node¸¦ ¾Æ´Â °ü°è·Î ÃÖÀûÈ­ÇÒ ¼ö ÀÖ¾ú½À´Ï´Ù.
-        // GameModuleÀÇ Á¶»óNodeÁß this°¡ ÀÖ´ÂÁö È®ÀÎÇÕ´Ï´Ù.
+        // ì›ëž˜ëŠ” ëª¨ë“  ìžì‹ Nodeë“¤ì„ ìˆœíšŒí•˜ë©° ê²€ì‚¬í•´ì•¼í•˜ì§€ë§Œ,
+        // GameModuleì—ì„œ ìžì‹ ì„ ê°€ì§„ Nodeë¥¼ ì•„ëŠ” ê´€ê³„ë¡œ ìµœì í™”í•  ìˆ˜ ìžˆì—ˆìŠµë‹ˆë‹¤.
+        // GameModuleì˜ ì¡°ìƒNodeì¤‘ thisê°€ ìžˆëŠ”ì§€ í™•ì¸í•©ë‹ˆë‹¤.
 
         if (item->node == nullptr || item->node->tree != tree)
             return nullptr;
@@ -223,8 +223,8 @@ namespace Bibim
 
     void GameModuleNode::OnModuleAliveChanged()
     {
-        // Alive => »óÀ§ GameModule¿Í ÇÏÀ§ GameModuleµéÀ» ¸ðµÎ Alive·Î ¸¸µì´Ï´Ù.
-        // Dead  => ÇÏÀ§ GameModuleµéÀ» ¸ðµÎ Dead»óÅÂ·Î ¸¸µì´Ï´Ù.
+        // Alive => ìƒìœ„ GameModuleì™€ í•˜ìœ„ GameModuleë“¤ì„ ëª¨ë‘ Aliveë¡œ ë§Œë“­ë‹ˆë‹¤.
+        // Dead  => í•˜ìœ„ GameModuleë“¤ì„ ëª¨ë‘ Deadìƒíƒœë¡œ ë§Œë“­ë‹ˆë‹¤.
 
         const bool alive = module->GetAlive();
 

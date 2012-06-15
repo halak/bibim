@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/UIPanel.h>
 #include <Bibim/Assert.h>
 #include <Bibim/ComponentStreamReader.h>
@@ -68,6 +68,8 @@ namespace Bibim
         if (item == nullptr)
             return;
 
+        UIVisualPtr sharedItem = item;
+
         const int zOrder = item->GetZOrder();
         const int count = static_cast<int>(children.size());
         for (int i = count - 1; i >= 0; i--)
@@ -84,6 +86,8 @@ namespace Bibim
 
     void UIPanel::Insert(int index, UIVisual* item)
     {
+        UIVisualPtr sharedItem = item;
+
         index = Math::Clamp(index, 0, static_cast<int>(children.size()));
 
         if (item->GetParent())
@@ -166,7 +170,8 @@ namespace Bibim
                     return;
             }
 
-            context.SetResult(this);
+            if (CanPick())
+                context.SetResult(this);
         }
     }
 
@@ -194,7 +199,7 @@ namespace Bibim
         const int zOrder = child->GetZOrder();
         if (zOrder < old)
         {
-            if (it == children.begin()) // ÀÌ¹Ì ¸Ç µÚ¿¡ ÀÖÀ¸¹Ç·Î ¿Å±æ ÇÊ¿ä°¡ ¾ø½À´Ï´Ù.
+            if (it == children.begin()) // ì´ë¯¸ ë§¨ ë’¤ì— ìˆìœ¼ë¯€ë¡œ ì˜®ê¸¸ í•„ìš”ê°€ ì—†ìŠµë‹ˆë‹¤.
                 return;
 
             UIVisualPtr lockedChild = child;
@@ -221,7 +226,7 @@ namespace Bibim
         {
             BBAssertDebug(child->GetZOrder() > old);
 
-            if (it + 1 == children.end()) // ÀÌ¹Ì ¸Ç ¾Õ¿¡ ÀÖÀ¸¹Ç·Î ¿Å±æ ÇÊ¿ä°¡ ¾ø½À´Ï´Ù.
+            if (it + 1 == children.end()) // ì´ë¯¸ ë§¨ ì•ì— ìˆìœ¼ë¯€ë¡œ ì˜®ê¸¸ í•„ìš”ê°€ ì—†ìŠµë‹ˆë‹¤.
                 return;
 
             UIVisualPtr lockedChild = child;

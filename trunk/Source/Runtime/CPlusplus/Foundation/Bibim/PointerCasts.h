@@ -8,8 +8,11 @@
 
     namespace Bibim
     {
-        /// Raw-pointer가 가리키는 형식을 지정한 형식(To)으로 변환합니다.
-        /// C++ 표준 static_cast와 같습니다.
+        /// @brief Raw-pointer가 가리키는 형식을 입력한 형식으로 변환합니다.
+        /// @tparam To   변환할 형식
+        /// @tparam From 변환할 Raw-pointer의 형식 (보통 인자에 의하여 자동 추론됩니다)
+        /// @param  from 변환할 Raw-pointer
+        /// @sa C++ static_cast
         template <typename To, typename From> inline To* StaticCast(From* from)
         {
             return static_cast<To*>(from);

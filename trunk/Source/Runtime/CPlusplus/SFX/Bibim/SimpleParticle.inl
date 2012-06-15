@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     SimpleParticle::SimpleParticle(float lifespan,
                                    Vector3 position, Vector3 linearVelocity, Vector3 linearAcceleration,

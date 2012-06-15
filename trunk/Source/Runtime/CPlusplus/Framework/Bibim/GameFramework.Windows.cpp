@@ -1,14 +1,14 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/GameFramework.Windows.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Clock.h>
 #include <Bibim/GameModuleTree.h>
 #include <Bibim/GameModuleNode.h>
-#include <Bibim/GameWindow.h>
 #include <Bibim/GraphicsDevice.h>
 #include <Bibim/Math.h>
 #include <Bibim/Startup.h>
 #include <Bibim/Timeline.h>
+#include <Bibim/GameWindow.h>
 
 #if (defined(BIBIM_PLATFORM_WINDOWS))
 
@@ -36,11 +36,12 @@
 
             LPWSTR commandLine = ::GetCommandLineW();
             char utf8CommandLine[1024];
-            ::WideCharToMultiByte(CP_UTF8,
-                                  0,
-                                  commandLine, wcslen(commandLine),
-                                  utf8CommandLine, sizeof(utf8CommandLine),
-                                  NULL, NULL);
+            const int length = ::WideCharToMultiByte(CP_UTF8,
+                                                     0,
+                                                     commandLine, wcslen(commandLine),
+                                                     utf8CommandLine, sizeof(utf8CommandLine),
+                                                     NULL, NULL);
+            utf8CommandLine[length] = '\0';
             startupArgs = utf8CommandLine;
 
             //SYSTEM_INFO systemInfo = { 0, };
@@ -142,9 +143,6 @@
 
         void GameFramework::Initialize()
         {
-            if (window->GetSize() == Point2::Zero)
-                window->SetSize(Point2(800, 600));
-
             graphicsDevice->SetWindow(window);
             window->SetVisible(true);
         }

@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/Keyboard.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Window.h>
@@ -25,7 +25,7 @@
                     {
                         if ((allowField & k) != 0x00000000)
                         {
-                            const int vkCode = static_cast<int>(code); // ÀÏ´Ü ±×´ë·Î Mapping ÇßÀ¸¹Ç·Î ¹®Á¦ ¾ø´Ù.
+                            const int vkCode = static_cast<int>(code); // ì¼ë‹¨ ê·¸ëŒ€ë¡œ Mapping í–ˆìœ¼ë¯€ë¡œ ë¬¸ì œ ì—†ë‹¤.
 
                             if (GetAsyncKeyState(vkCode))
                                 keyStateField |= k;

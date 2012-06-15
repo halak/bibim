@@ -1,4 +1,4 @@
-#include <Bibim/ScriptNativeFunctionTable.h>
+﻿#include <Bibim/ScriptNativeFunctionTable.h>
 #include <map>
 
 namespace Bibim

@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     Particle::Particle()
         : Age(0.0f),

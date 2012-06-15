@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     template <typename T> T* CloningContext::Clone(const T* item)
     {

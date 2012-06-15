@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_ATOMIC_WINDOWS_H__
 #define __BIBIM_ATOMIC_WINDOWS_H__
 

@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/FontString.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Font.h>

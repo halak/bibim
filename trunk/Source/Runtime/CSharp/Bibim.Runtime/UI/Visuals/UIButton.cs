@@ -16,6 +16,9 @@ namespace Bibim.UI.Visuals
 
         #region Fields
         private StateCode state;
+        private UIVisual normal;
+        private UIVisual pushed;
+        private UIVisual hovering;
         #endregion
 
         #region Properties
@@ -33,20 +36,56 @@ namespace Bibim.UI.Visuals
 
         public UIVisual Normal
         {
-            get;
-            set;
+            get { return normal; }
+            set
+            {
+                if (normal != value)
+                {
+                    if (normal != null)
+                        Remove(normal);
+
+                    normal = value;
+
+                    if (normal != null)
+                        Add(normal);
+                }
+            }
         }
 
         public UIVisual Pushed
         {
-            get;
-            set;
+            get { return pushed; }
+            set
+            {
+                if (pushed != value)
+                {
+                    if (pushed != null)
+                        Remove(pushed);
+
+                    pushed = value;
+
+                    if (pushed != null)
+                        Add(pushed);
+                }
+            }
         }
 
         public UIVisual Hovering
         {
-            get;
-            set;
+            get { return hovering; }
+            set
+            {
+                if (hovering != value)
+                {
+                    if (hovering != null)
+                        Remove(hovering);
+
+                    hovering = value;
+
+                    if (hovering != null)
+                        Add(hovering);
+                }
+            }
         }
 
         public bool HideInactives
@@ -59,6 +98,7 @@ namespace Bibim.UI.Visuals
         #region Constructors
         public UIButton()
         {
+            HideInactives = true;
         }
         #endregion
 

@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     Vector4 UITintEffect::GetValue() const
     {

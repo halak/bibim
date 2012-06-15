@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_GRAPHICSDEVICE_DX9_H__
 #define __BIBIM_GRAPHICSDEVICE_DX9_H__
 
@@ -17,6 +17,7 @@
             BBModuleClass(GraphicsDevice, GameModule, 'G', 'R', 'P', 'D');
             public:
                 GraphicsDevice();
+                GraphicsDevice(int resolutionWidth, int resolutionHeight);
                 virtual ~GraphicsDevice();
 
                 void Clear();
@@ -60,6 +61,7 @@
                 IDirect3DSurface9* d3dBackbufferSurface;
                 D3DCAPS9 d3dCaps;
                 Window* window;
+                Point2 resolution;
 
                 GraphicsCapabilities capabilities;
                 DisplaySwapChain* defaultSwapChain;

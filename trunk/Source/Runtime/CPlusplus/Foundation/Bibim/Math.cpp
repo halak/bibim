@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/Math.h>
 #include <Bibim/Assert.h>
 #include <cmath>
@@ -98,30 +98,6 @@ namespace Bibim
     bool Math::Equals(Vector3 a, Vector3 b)
     {
         return Equals(a.X, b.X) && Equals(a.Y, b.Y) && Equals(a.Z, b.Z);
-    }
-
-    Vector2 Math::GetClosestPoint(Vector2 origin, Vector2 direction, float length, Vector2 point)
-    {
-        return origin + (direction * Clamp(direction.Dot(point - origin), 0.0f, length));
-    }
-
-    bool Math::IsClockwise(Vector2 a, Vector2 b, Vector2 c)
-    {
-        // Right-handed
-        // http://www.dsource.org/projects/blaze/changeset/63
-        return ((b.X - a.X) * (c.Y - a.Y) - (c.X - a.X) * (b.Y - a.Y)) > 0.0f;
-    }
-
-    bool Math::IsClockwise(const Vector2* points, int numberOfPoints)
-    {
-        const int last = numberOfPoints - 1;
-        float crossProductSum = (points[last].X * points[0].Y) - (points[0].X * points[last].Y);
-        for (int i = 0; i < last; i++)
-        {
-            crossProductSum += (points[i].X * points[i + 1].Y) - (points[i + 1].X * points[i].Y);
-        }
-
-        return crossProductSum > 0.0f;
     }
 
     int Math::Random(int a, int b)

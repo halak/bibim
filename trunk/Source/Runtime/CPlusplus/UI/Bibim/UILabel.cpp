@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/UILabel.h>
 #include <Bibim/Colors.h>
 #include <Bibim/ComponentStreamReader.h>
@@ -45,6 +45,11 @@ namespace Bibim
         {
             autoResize = value;
         }
+    }
+
+    bool UILabel::CanPick() const
+    {
+        return true;
     }
 
     void UILabel::OnDraw(UIDrawingContext& context)

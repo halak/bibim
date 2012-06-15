@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/ScriptingContext.h>
 #include <Bibim/Assert.h>
 #include <Bibim/BinaryReader.h>
@@ -105,8 +105,8 @@ namespace Bibim
 
     void ScriptingContext::YieldReturn()
     {
-        // Native ÇÔ¼ö¿¡¼­ YieldReturnÀº Call-stack¿¡ Native ÇÔ¼ö°¡ µü ÇÏ³ªÀÏ ¶§¸¸ °¡´ÉÇÕ´Ï´Ù.
-        // Script call -> Native call -> Script call -> Native ÀÌ »óÈ²¿¡¼­ YieldReturnÀ» ÇÏ¸é thread-stack ¾ûÄÑ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.
+        // Native í•¨ìˆ˜ì—ì„œ YieldReturnì€ Call-stackì— Native í•¨ìˆ˜ê°€ ë”± í•˜ë‚˜ì¼ ë•Œë§Œ ê°€ëŠ¥í•©ë‹ˆë‹¤.
+        // Script call -> Native call -> Script call -> Native ì´ ìƒí™©ì—ì„œ YieldReturnì„ í•˜ë©´ thread-stack ì—‰ì¼œ ì œëŒ€ë¡œ ìž‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
         BBAssert(thread->GetNativeFunctionDepth() == 1);
         thread->SetState(ScriptThread::Suspended);
     }

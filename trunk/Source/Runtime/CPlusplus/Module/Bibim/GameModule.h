@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #ifndef __BIBIM_GAMEMODULE_H__
 #define __BIBIM_GAMEMODULE_H__
 
@@ -13,7 +13,7 @@
                                                                 virtual int GetClassID() const { return ClassID; } \
                                                             private:
 
-        /// GameÀÌ¶õ ProgramÀ» ±¸¼ºÇÏ´Â ¿ä¼ÒÀÇ ±â¹İ class.
+        /// Gameì´ë€ Programì„ êµ¬ì„±í•˜ëŠ” ìš”ì†Œì˜ ê¸°ë°˜ class.
         class GameModule : public Object
         {
             BBAbstractModuleClass(GameModule, Object);

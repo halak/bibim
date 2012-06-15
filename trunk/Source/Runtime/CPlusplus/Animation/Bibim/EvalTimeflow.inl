@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     Timeline* EvalTimeflow::GetTimeline() const
     {

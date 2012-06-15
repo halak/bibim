@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/UIAppEventDispatcher.h>
 #include <Bibim/UIEventMap.h>
 
@@ -24,8 +24,8 @@ namespace Bibim
     
     void UIAppEventDispatcher::Subscribe(UIEventMap* subscriber, const UIEventID& id)
     {
-        // ÀÌ ÇÔ¼ö¸¦ È£ÃâÇÏ´Â UIEventMap¿¡¼­ Áßº¹µÈ UIEventID´Â ±¸µ¶À» ¿äÃ»ÇÏÁö ¾Ê´Â´Ù.
-        // ÇÏÁö¸¸ Bug°¡ ÀÖÀ» ¼ö ÀÖÀ¸´Ï Debug Build¿¡¼­´Â È®ÀÎÀ» ÇØº»´Ù.
+        // ì´ í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ëŠ” UIEventMapì—ì„œ ì¤‘ë³µëœ UIEventIDëŠ” êµ¬ë…ì„ ìš”ì²­í•˜ì§€ ì•ŠëŠ”ë‹¤.
+        // í•˜ì§€ë§Œ Bugê°€ ìˆì„ ìˆ˜ ìˆìœ¼ë‹ˆ Debug Buildì—ì„œëŠ” í™•ì¸ì„ í•´ë³¸ë‹¤.
 
         SubscriptionMap::iterator itBegin = subscriptionTable.lower_bound(id);
 

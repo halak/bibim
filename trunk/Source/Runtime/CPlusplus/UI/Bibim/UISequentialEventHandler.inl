@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     const UISequentialEventHandler::HandlerCollection& UISequentialEventHandler::GetHandlers() const
     {

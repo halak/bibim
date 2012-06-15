@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/UISprite.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Colors.h>
@@ -25,6 +25,11 @@ namespace Bibim
     void UISprite::SetImage(Image* value)
     {
         image = value;
+    }
+
+    bool UISprite::CanPick() const
+    {
+        return true;
     }
 
     void UISprite::OnDraw(UIDrawingContext& context)

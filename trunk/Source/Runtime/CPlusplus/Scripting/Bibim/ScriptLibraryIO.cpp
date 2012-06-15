@@ -1,4 +1,4 @@
-#include <Bibim/ScriptLibraryIO.h>
+﻿#include <Bibim/ScriptLibraryIO.h>
 #include <Bibim/ScriptingContext.h>
 #include <Bibim/Any.h>
 #include <Bibim/String.h>

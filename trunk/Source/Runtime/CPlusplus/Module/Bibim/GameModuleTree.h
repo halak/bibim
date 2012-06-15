@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #ifndef __BIBIM_GAMEMODULETREE_H__
 #define __BIBIM_GAMEMODULETREE_H__
 
@@ -22,8 +22,8 @@
             private:
                 void OnModuleIDChanged(GameModule* module, int old); // call in GameModule
 
-                // ¾Æ·¡ Attach/DetachÀÇ ÀÇ¹Ì´Â Tree·ÎÀÇ Attach/Detach¸¦ ÀÇ¹ÌÇÕ´Ï´Ù.
-                // ±×·¡¼­ °°Àº Container³»¿¡ GameModuleNodeÀÇ ÀÌµ¿(Deatch=>Attach)¿¡¼­´Â È£ÃâÇÒ ÇÊ¿ä ¾ø´Ù.
+                // ì•„ë˜ Attach/Detachì˜ ì˜ë¯¸ëŠ” Treeë¡œì˜ Attach/Detachë¥¼ ì˜ë¯¸í•©ë‹ˆë‹¤.
+                // ê·¸ë˜ì„œ ê°™ì€ Containerë‚´ì— GameModuleNodeì˜ ì´ë™(Deatch=>Attach)ì—ì„œëŠ” í˜¸ì¶œí•  í•„ìš” ì—†ë‹¤.
                 void OnNodeAttached(GameModuleNode* parent, GameModuleNode* child); // call in GameModuleNode
                 void OnNodeDetached(GameModuleNode* parent, GameModuleNode* child); // call in GameModuleNode
 

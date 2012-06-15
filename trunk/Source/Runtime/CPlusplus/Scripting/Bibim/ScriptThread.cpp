@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/ScriptThread.h>
 #include <Bibim/BinaryReader.h>
 #include <Bibim/BinaryWriter.h>
@@ -239,7 +239,7 @@ namespace Bibim
         {
             state = Running;
 
-            // Return value¸¦ º¸°üÇÒ ¿µ¿ªÀ» È®º¸ÇÕ´Ï´Ù.
+            // Return valueë¥¼ ë³´ê´€í•  ì˜ì—­ì„ í™•ë³´í•©ë‹ˆë‹¤.
             const int count = static_cast<int>(function->ReturnTypes.size());
             for (int i = 0; i < count; i++)
                 stack.Push(Any::SizeOf(function->ReturnTypes[i]));
@@ -413,7 +413,7 @@ namespace Bibim
                 break;
             case ScriptInstruction::Yield:
                 {
-                    // Script call -> Native call -> Script call -> Native ÀÌ »óÈ²¿¡¼­ Yield¸¦ ÇÏ¸é thread-stack ¾ûÄÑ Á¦´ë·Î ÀÛµ¿ÇÏÁö ¾Ê½À´Ï´Ù.
+                    // Script call -> Native call -> Script call -> Native ì´ ìƒí™©ì—ì„œ Yieldë¥¼ í•˜ë©´ thread-stack ì—‰ì¼œ ì œëŒ€ë¡œ ì‘ë™í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
                     BBAssert(nativeFunctionDepth == 0);
                     SetState(ScriptThread::Suspended);
                 }
@@ -549,7 +549,7 @@ namespace Bibim
                 break;
 
         //    case ScriptInstruction::NOPCommand:
-        //        // ¾Æ¹« °Íµµ ¾ÈÇÕ´Ï´Ù.
+        //        // ì•„ë¬´ ê²ƒë„ ì•ˆí•©ë‹ˆë‹¤.
         //        break;
         //    case ScriptInstruction::PushInt32Command:
         //        {

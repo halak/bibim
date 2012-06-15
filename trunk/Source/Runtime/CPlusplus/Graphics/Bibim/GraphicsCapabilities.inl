@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     const GraphicsCapabilities::DisplayModeCollection& GraphicsCapabilities::GetDisplayModes() const
     {

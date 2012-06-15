@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_VECTOR2_H__
 #define __BIBIM_VECTOR2_H__
 

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #ifndef __BIBIM_PARTICLE_H__
 #define __BIBIM_PARTICLE_H__
 
@@ -24,7 +24,7 @@
                 inline Particle(float lifespan, Vector3 position, Vector3 linearVelocity, Color tint);
 
             protected:
-                // Particle* ÀÎÃ¤·Î deleteÇÏÁö ¸»¶ó´Â ÀÇµµÀÔ´Ï´Ù.
+                // Particle* ì¸ì±„ë¡œ deleteí•˜ì§€ ë§ë¼ëŠ” ì˜ë„ì…ë‹ˆë‹¤.
                 inline ~Particle();
 
             private:

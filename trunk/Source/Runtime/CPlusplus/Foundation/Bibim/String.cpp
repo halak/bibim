@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+ï»¿#include <Bibim/PCH.h>
 #include <Bibim/String.h>
 #include <Bibim/Math.h>
 #include <ctype.h>
@@ -45,7 +45,7 @@ namespace Bibim
 
     void String::Insert(int index, const char* s, int length)
     {
-        // index == buffer->length·Î ÇÏ°ÔµÇ¸é ¸Ç ³¡¿¡ Ãß°¡.
+        // index == buffer->lengthë¡œ í•˜ê²Œë˜ë©´ ë§¨ ëì— ì¶”ê°€.
         BBAssertDebug(0 <= index && index <= buffer->length);
         if (buffer->length != 0)
             buffer.Reset(new StringBuffer(InsertTag(), buffer->s, buffer->length, index, s, length));

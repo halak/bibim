@@ -1,4 +1,4 @@
-#include <Bibim/AssetLoadingTask.h>
+﻿#include <Bibim/AssetLoadingTask.h>
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/Assert.h>
 

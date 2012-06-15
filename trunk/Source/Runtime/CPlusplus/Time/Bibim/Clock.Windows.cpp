@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+﻿#include <Bibim/PCH.h>
 #include <Bibim/Clock.h>
 
 #if (defined(BIBIM_PLATFORM_WINDOWS))

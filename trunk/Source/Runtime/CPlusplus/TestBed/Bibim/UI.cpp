@@ -1,10 +1,9 @@
-#include <Bibim/TestBed.h>
+﻿#include <Bibim/TestBed.h>
 #include <Bibim/GameFramework.h>
 #include <Bibim/Clock.h>
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/GameModuleNode.h>
 #include <Bibim/GameModuleTree.h>
-#include <Bibim/GameWindow.h>
 #include <Bibim/GraphicsDevice.h>
 #include <Bibim/Image.h>
 #include <Bibim/PipedAssetProvider.h>

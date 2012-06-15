@@ -1,4 +1,4 @@
-namespace Bibim
+﻿namespace Bibim
 {
     Image* UISprite::GetImage() const
     {

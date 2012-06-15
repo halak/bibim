@@ -1,10 +1,20 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_GAMECOMPONENT_H__
 #define __BIBIM_GAMECOMPONENT_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/SharedObject.h>
 #   include <Bibim/CloningContext.h>
+
+    extern "C" 
+    {
+#       include <lua.h>
+    }
+#   pragma warning(push)
+#   pragma warning(disable:4996)
+#   pragma warning(disable:4100)
+#   include <lua_tinker.h>
+#   pragma warning(pop)
 
     namespace Bibim
     {
@@ -14,6 +24,7 @@
                                                                 protected: \
                                                                     virtual void OnRead(Bibim::ComponentStreamReader& reader); \
                                                                     virtual void OnCopy(const Bibim::GameComponent* original, Bibim::CloningContext& context); \
+                                                                    virtual void to_lua(lua_State *L) { type2lua(L, this); } \
                                                                 private:
 
 #       define BBComponentClass(classname, parent, a, b, c, d)  BBAbstractComponentClass(classname, parent); \
@@ -61,7 +72,7 @@
                                                             } \
                                                             const SharedPointer<classname> classname::Instance = new classname();
 
-        class GameComponent : public SharedObject
+        class GameComponent : public SharedObject, public lua_tinker::lua_value
         {
             BBAbstractComponentClass(GameComponent, SharedObject);
             BBThisIsNoncopyableClass(GameComponent);
@@ -82,5 +93,15 @@
     }
 
 #   include <Bibim/GameComponent.inl>
+
+	template<> inline void lua_tinker::push(lua_State* L, Bibim::GameComponent* value)
+	{
+        push(L, static_cast<lua_tinker::lua_value*>(value));
+	}
+
+	template<> inline void lua_tinker::push(lua_State* L, const Bibim::GameComponent* value)
+	{
+        push(L, const_cast<lua_tinker::lua_value*>(static_cast<const lua_tinker::lua_value*>(value)));
+	}
 
 #endif
