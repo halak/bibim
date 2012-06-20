@@ -37,6 +37,12 @@ namespace Bibim.UI.Visuals
             get;
             set;
         }
+
+        public BitMask Mask
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors

@@ -34,4 +34,14 @@
     {
         verticalFlip = value;
     }
+
+    BitMask* UISprite::GetMask() const
+    {
+        return mask;
+    }
+
+    void UISprite::SetMask(BitMask* value)
+    {
+        mask = value;
+    }
 }

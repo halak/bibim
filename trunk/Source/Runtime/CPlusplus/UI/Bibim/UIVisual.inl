@@ -174,6 +174,16 @@
         return static_cast<int>(zOrder);
     }
 
+    bool UIVisual::GetPickable() const
+    {
+        return isPickable;
+    }
+
+    void UIVisual::SetPickable(bool value)
+    {
+        isPickable = value;
+    }
+
     UIEventMap* UIVisual::GetEventMap() const
     {
         return eventMap;

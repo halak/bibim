@@ -34,7 +34,7 @@ namespace Bibim
             Seal(timestamp))
             return;
 
-        UIVisual* target = domain->GetFocus();
+        UIVisualPtr target = domain->GetFocus();
         if (target == nullptr)
             target = domain->GetRoot();
         if (target == nullptr)

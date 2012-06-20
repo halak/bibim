@@ -164,6 +164,7 @@
                 class GraphicsDevice;
                 BBForwardDeclareSmartPointerClass(Image);
                 class ScreenshotPrinter;
+                BBForwardDeclareSmartPointerClass(BitMask);
                 BBForwardDeclareSmartPointerClass(ShaderEffect);
                 BBForwardDeclareSmartPointerClass(Texture2D);
                     BBForwardDeclareSmartPointerClass(DynamicTexture2D);

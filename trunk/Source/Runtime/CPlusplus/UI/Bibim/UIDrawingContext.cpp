@@ -288,9 +288,9 @@ namespace Bibim
                     clippingRect.Height *= th;
 
                     const RectF drawingRect = RectF(bounds.X + context.GetPosition().X + glyph->GetBitmapOffset().X,
-                                                                   bounds.Y + context.GetPosition().Y + glyph->GetBitmapOffset().Y,
-                                                                   glyph->GetBitmapSize().X,
-                                                                   glyph->GetBitmapSize().Y);
+                                                    bounds.Y + context.GetPosition().Y + glyph->GetBitmapOffset().Y,
+                                                    glyph->GetBitmapSize().X,
+                                                    glyph->GetBitmapSize().Y);
                     const Vector2 points[4] = 
                     {
                         Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetTop() - 0.5f),

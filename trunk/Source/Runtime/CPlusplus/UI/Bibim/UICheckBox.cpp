@@ -84,6 +84,9 @@ namespace Bibim
         BBAssertDebug(0 <= activeVisualIndex && activeVisualIndex < sizeof(visuals) / sizeof(visuals[0]));
         UIVisual* activeVisual = visuals[activeVisualIndex];
 
+        if (GetFrozen())
+            activeVisual = checked ? checkedNormalVisual : GetNormal();
+
         if (activeVisual)
         {
             activeVisual->BringToFront();
@@ -102,11 +105,15 @@ namespace Bibim
         return activeVisual;
     }
 
-    bool UICheckBox::OnMouseClick(const UIMouseEventArgs& /*args*/)
+    bool UICheckBox::OnMouseClick(const UIMouseEventArgs& args)
     {
-        checked = !checked;
-        UpdateLayout();
-        return false;
+        if (GetFrozen() == false)
+        {
+            checked = !checked;
+            UpdateLayout();
+        }
+
+        return Base::OnMouseClick(args);
     }
 
     void UICheckBox::OnRead(ComponentStreamReader& reader)

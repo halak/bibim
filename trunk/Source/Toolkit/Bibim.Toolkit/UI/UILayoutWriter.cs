@@ -144,6 +144,7 @@ namespace Bibim.UI
             writer.Write(o.AutoResize);
             writer.Write(o.HorizontalFlip);
             writer.Write(o.VerticalFlip);
+            writer.Write(o.Mask);
         }
 
         private static void Write(AssetStreamWriter writer, UILabel o, List<object> objectDictionary)
@@ -169,6 +170,7 @@ namespace Bibim.UI
             WriteVisual(writer, o.Pushed, objectDictionary);
             WriteVisual(writer, o.Hovering, objectDictionary);
             writer.Write(o.HideInactives);
+            writer.Write(o.IsFrozen);
         }
 
         private static void Write(AssetStreamWriter writer, UIWindow o, List<object> objectDictionary)

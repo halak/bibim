@@ -29,4 +29,9 @@
     {
         return hideInactives;
     }
+
+    bool UIButton::GetFrozen() const
+    {
+        return frozen;
+    }
 }

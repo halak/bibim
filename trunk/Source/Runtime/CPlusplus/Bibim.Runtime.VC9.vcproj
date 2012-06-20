@@ -1819,6 +1819,18 @@
 				Name="Graphics"
 				>
 				<File
+					RelativePath=".\Graphics\Bibim\BitMask.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\BitMask.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\BitMask.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Graphics\Bibim\BlendMode.h"
 					>
 				</File>

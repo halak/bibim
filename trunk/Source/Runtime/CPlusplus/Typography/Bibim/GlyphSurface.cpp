@@ -73,7 +73,7 @@ namespace Bibim
             }
 
             return Rect(allocatedRect.X + 1, allocatedRect.Y + 1,
-                             allocatedRect.Width - 2, allocatedRect.Height - 2);
+                        allocatedRect.Width - 2, allocatedRect.Height - 2);
         }
         else
             return Rect::Empty;

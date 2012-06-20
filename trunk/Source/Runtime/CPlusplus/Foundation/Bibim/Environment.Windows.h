@@ -12,14 +12,14 @@
             BBThisIsNoncopyableClass(Environment);
             public:
                 static inline const String& GetWorkingDirectory();
+                static inline const String& GetLocaleName();
 
             private:
                 Environment();
 
-                inline const String& PrivateGetWorkingDirectory() const;
-
             private:
                 String workingDirectory;
+                String localeName;
 
                 static Environment PrivateInstance;
         };

@@ -25,8 +25,6 @@
                 inline bool GetAutoResize() const;
                 void SetAutoResize(bool value);
 
-                bool CanPick() const;
-
             protected:
                 virtual void OnDraw(UIDrawingContext& context);
 

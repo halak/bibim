@@ -170,7 +170,7 @@ namespace Bibim
                     return;
             }
 
-            if (CanPick())
+            if (GetPickable())
                 context.SetResult(this);
         }
     }

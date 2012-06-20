@@ -112,6 +112,23 @@ namespace Bibim
         invLength = o->invLength;
     }
 
+    UIOpacityMaskEffect::FillStyle UIOpacityMaskEffect::ConvertFromStringToFillStyle(const char* value)
+    {
+             if (_stricmp(value, "Fan") == 0) return FanStyle;
+        else if (_stricmp(value, "Bar") == 0) return BarStyle;
+        else                                  return FanStyle;
+    }
+
+    const char* UIOpacityMaskEffect::ConvertFromFillStyleToString(FillStyle value)
+    {
+        switch (value)
+        {
+            case FanStyle: return "Fan";
+            case BarStyle: return "Bar";
+            default:       return "Fan";
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     UIOpacityMaskEffect::EffectorForShaderFunction::EffectorForShaderFunction(UIOpacityMaskEffect* effect)

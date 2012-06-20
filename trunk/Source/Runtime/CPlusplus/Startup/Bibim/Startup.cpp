@@ -25,6 +25,7 @@ namespace Bibim
 
         GameAssetFactory::AddEntry<Image>();
         GameAssetFactory::AddEntry<Script>();
+        GameAssetFactory::AddEntry<BitMask>();
         GameAssetFactory::AddEntry<SourceTexture2D>();
         GameAssetFactory::AddEntry<ShaderEffect>();
         GameAssetFactory::AddEntry<UILayout>();

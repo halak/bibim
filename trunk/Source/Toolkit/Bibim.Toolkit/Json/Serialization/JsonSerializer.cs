@@ -101,6 +101,8 @@ namespace Bibim.Json.Serialization
             {
                 if (o is string)
                     writer.Write((string)o);
+                else if (t == typeof(byte[]))
+                    writer.Write(Convert.ToBase64String((byte[])o));
                 else
                     WriteObject(writer, o, objectReferences);
             }
@@ -658,25 +660,31 @@ namespace Bibim.Json.Serialization
                         continue;
                     }
 
+                    object value;
+                    if (declaredType == typeof(byte[]))
+                        value = Convert.FromBase64String((string)item.Value);
+                    else
+                        value = item.Value;
+
                     if (declaredType.IsValueType)
                     {
                         if (declaredType.IsPrimitive)
-                            setValue(Convert.ChangeType(item.Value, declaredType));
+                            setValue(Convert.ChangeType(value, declaredType));
                         else if (declaredType.IsEnum)
-                            setValue(Enum.Parse(declaredType, (string)item.Value));
+                            setValue(Enum.Parse(declaredType, (string)value));
                         else
                         {
-                            if (item.Value is string)
+                            if (value is string)
                             {
                                 var tc = GetTypeConverter(declaredType);
-                                setValue(tc.ConvertFromString((string)item.Value));
+                                setValue(tc.ConvertFromString((string)value));
                             }
                             else
-                                setValue(item.Value);
+                                setValue(value);
                         }
                     }
                     else
-                        setValue(item.Value);
+                        setValue(value);
                 }
             }
 
