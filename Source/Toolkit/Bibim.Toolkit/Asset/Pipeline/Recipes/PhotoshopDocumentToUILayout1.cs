@@ -79,7 +79,8 @@ namespace Bibim.Asset.Pipeline.Recipes
             if (layer.IsGroup == false)
             {
                 if (string.Compare(type, "UIMarkupLabel", true) == 0 ||
-                    string.Compare(type, "MarkupLabel", true) == 0)
+                    string.Compare(type, "MarkupLabel", true) == 0 ||
+                    string.Compare(type, "Label", true) == 0)
                 {
                     UILabel label = new UILabel();
                     label.Name = name;
@@ -91,7 +92,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                     UISprite sprite = new UISprite();
                     sprite.Name = name;
                     window.AddChild(sprite);
-                    Process(sprite, layer);
+                    Process(sprite, layer, string.Compare(type, "MaskSprite", true) == 0);
                 }
             }
             else
@@ -161,7 +162,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             }
         }
 
-        private void Process(UISprite sprite, PhotoshopDocument.Layer layer)
+        private void Process(UISprite sprite, PhotoshopDocument.Layer layer, bool importMask)
         {
             Process((UIVisual)sprite, layer);
 
@@ -188,6 +189,9 @@ namespace Bibim.Asset.Pipeline.Recipes
             {
                 Tag = new ImageCookingTag(bitmap)
             };
+
+            if (importMask)
+                sprite.Mask = GenerateBitMask(bitmap);
         }
 
         private void Process(UILabel label, PhotoshopDocument.Layer layer)
@@ -326,6 +330,38 @@ namespace Bibim.Asset.Pipeline.Recipes
             }
 
             return result;
+        }
+
+        private static BitMask GenerateBitMask(Bitmap bitmap)
+        {
+            int width = bitmap.Width;
+            int height = bitmap.Height;
+            int pitch = 0;
+            if (width % 8 == 0)
+                pitch = (int)(width / 8);
+            else
+                pitch = (int)(width / 8) + 1;
+            byte[] buffer = new byte[pitch * height];
+
+            int baseIndex = 0;
+            for (int y = 0; y < height; y++, baseIndex += pitch)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    GDIColor c = bitmap.GetPixel(x, y);
+                    int index = baseIndex + (int)(x / 8);
+                    int mask = (0x00000080) >> (x % 8);
+                    if (c.A > 0)
+                        buffer[index] |= (byte)mask;
+                    else
+                    {
+                        mask = ~mask;
+                        buffer[index] &= (byte)mask;
+                    }
+                }
+            }
+
+            return new BitMask(width, height, pitch, buffer);
         }
     }
 }

@@ -78,6 +78,6 @@ namespace Bibim
                 return MouseButtonPressingType;
         }
 
-        return UnknownType;
+        return ApplicationType;
     }
 }

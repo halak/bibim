@@ -47,11 +47,6 @@ namespace Bibim
         }
     }
 
-    bool UILabel::CanPick() const
-    {
-        return true;
-    }
-
     void UILabel::OnDraw(UIDrawingContext& context)
     {
         UIVisual::OnDraw(context);

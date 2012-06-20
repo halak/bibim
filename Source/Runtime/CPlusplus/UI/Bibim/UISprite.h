@@ -26,16 +26,19 @@
                 inline bool GetVerticalFlip() const;
                 inline void SetVerticalFlip(bool value);
 
-                virtual bool CanPick() const;
+                inline BitMask* GetMask() const;
+                inline void SetMask(BitMask* value);
 
             protected:
                 virtual void OnDraw(UIDrawingContext& context);
+                virtual void OnPick(UIPickingContext& context);
 
             private:
                 ImagePtr image;
                 bool autoResize;
                 bool horizontalFlip;
                 bool verticalFlip;
+                BitMaskPtr mask;
         };
     }
 

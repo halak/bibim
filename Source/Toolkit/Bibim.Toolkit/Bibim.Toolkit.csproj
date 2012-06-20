@@ -151,6 +151,7 @@
     </Compile>
     <Compile Include="Design\PluginManager.cs" />
     <Compile Include="Graphics\BitmapSheet.cs" />
+    <Compile Include="Graphics\BitMaskWriter.cs" />
     <Compile Include="Graphics\ImageCookingTagDebuggerVisualizer.cs" />
     <Compile Include="Graphics\ImageCookingTag.cs" />
     <Compile Include="Graphics\ImageViewForm.cs">

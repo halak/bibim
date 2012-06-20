@@ -63,6 +63,8 @@
                 void BringToFront();
                 void SendToBack();
 
+                void Click();
+
                 inline void SetAbsoluteBounds(int x, int y, int width, int height);
                 inline void SetAbsoluteBounds(float x, float y, float width, float height);
                 inline void SetRelativeBounds(float x, float y, float width, float height);
@@ -107,6 +109,9 @@
                 inline int GetZOrder() const;
                 void SetZOrder(int value);
 
+                inline bool GetPickable() const;
+                inline void SetPickable(bool value);
+
                 inline UIEventMap* GetEventMap() const;
                 void SetEventMap(UIEventMap* value);
 
@@ -117,7 +122,6 @@
 
                 inline bool IsVisible() const;
                 virtual bool IsPanel() const;
-                virtual bool CanPick() const;
 
                 inline const char* GetXModeAsChars() const;
                 inline void SetXModeByChars(const char* value);
@@ -207,6 +211,7 @@
                 byte opacity;
                 byte visibility;
                 byte zOrder;
+                bool isPickable;
                 UIEventMapPtr eventMap;
                 UIEffectMapPtr effectMap;
                 UIPanel* parent;

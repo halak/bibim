@@ -253,6 +253,7 @@
     <Compile Include="Framework\GameFramework.cs" />
     <Compile Include="Framework\GameWindow.cs" />
     <Compile Include="GameComponent.cs" />
+    <Compile Include="Graphics\BitMask.cs" />
     <Compile Include="Graphics\BlendMode.cs" />
     <Compile Include="Graphics\Window.cs" />
     <Compile Include="Graphics\GraphicsDevice.cs" />

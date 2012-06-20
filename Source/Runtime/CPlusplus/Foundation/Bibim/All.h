@@ -105,13 +105,14 @@
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Graphics
 #  include <Bibim/DisplaySwapChain.h>
+#  include <Bibim/BitMask.h>
 #  include <Bibim/DynamicTexture2D.h>
 #  include <Bibim/GraphicsDevice.h>
 #  include <Bibim/SourceTexture2D.h>
 #  include <Bibim/Texture2D.h>
 #  include <Bibim/Window.h>
-#include <Bibim/RenderTargetTexture2D.h>
-#   include <Bibim/ScreenshotPrinter.h>
+#  include <Bibim/RenderTargetTexture2D.h>
+#  include <Bibim/ScreenshotPrinter.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Input

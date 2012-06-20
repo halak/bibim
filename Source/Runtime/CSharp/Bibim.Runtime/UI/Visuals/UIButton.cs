@@ -93,6 +93,12 @@ namespace Bibim.UI.Visuals
             get;
             set;
         }
+
+        public bool IsFrozen
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors

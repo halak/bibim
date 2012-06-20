@@ -35,6 +35,9 @@
                 inline FillStyle GetFill() const;
                 void SetFill(FillStyle value);
 
+                inline const char* GetFillAsChars() const;
+                inline void SetFillByChars(const char* value);
+
             private:
                 class EffectorForShaderFunction : public MaskEffector
                 {
@@ -80,6 +83,10 @@
                         virtual void Begin(UIRenderer* renderer);
                         virtual void End(UIRenderer* renderer);
                 };
+
+            private:
+                static FillStyle ConvertFromStringToFillStyle(const char* value);
+                static const char* ConvertFromFillStyleToString(FillStyle value);
 
             private:
                 float startPoint;

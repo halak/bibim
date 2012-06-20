@@ -11,6 +11,7 @@
 
 #include <new>
 #include <Bibim/String.h>
+#include <Bibim/SharedObject.h>
 
 namespace lua_tinker
 {
@@ -165,18 +166,33 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
 	template<typename T>
 	struct val2user : user
 	{
-		val2user() : user(new T) {}
+		val2user() : user(new T)
+        {
+            ((SharedObject*)m_p)->IncreaseReferenceCount();
+        }
 
 		template<typename T1>
-		val2user(T1 t1) : user(new T(t1)) {}
+		val2user(T1 t1) : user(new T(t1))
+        {
+            ((SharedObject*)m_p)->IncreaseReferenceCount();
+        }
 
 		template<typename T1, typename T2>
-		val2user(T1 t1, T2 t2) : user(new T(t1, t2)) {}
+		val2user(T1 t1, T2 t2) : user(new T(t1, t2))
+        {
+            ((SharedObject*)m_p)->IncreaseReferenceCount();
+        }
 
 		template<typename T1, typename T2, typename T3>
-		val2user(T1 t1, T2 t2, T3 t3) : user(new T(t1, t2, t3)) {}
+		val2user(T1 t1, T2 t2, T3 t3) : user(new T(t1, t2, t3))
+        {
+            ((SharedObject*)m_p)->IncreaseReferenceCount();
+        }
 
-		~val2user() { /*delete ((T*)m_p);*/ }
+		~val2user()
+        {
+            ((SharedObject*)m_p)->DecreaseReferenceCount();
+        }
 	};
 
 	template<typename T>

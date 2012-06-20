@@ -2,11 +2,11 @@
 {
     const String& Environment::GetWorkingDirectory()
     {
-        return PrivateInstance.PrivateGetWorkingDirectory();
+        return PrivateInstance.workingDirectory;
     }
 
-    const String& Environment::PrivateGetWorkingDirectory() const
+    const String& Environment::GetLocaleName()
     {
-        return workingDirectory;
+        return PrivateInstance.localeName;
     }
 }

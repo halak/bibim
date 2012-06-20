@@ -33,6 +33,8 @@
 
                 inline bool GetHideInactives() const;
                 void SetHideInactives(bool value);
+                inline bool GetFrozen() const;
+                void SetFrozen(bool value);
 
             protected:
                 void UpdateLayout();
@@ -42,6 +44,7 @@
                 virtual void OnMouseLeave(const UIMouseEventArgs& args);
                 virtual bool OnMouseButtonDown(const UIMouseButtonEventArgs& args);
                 virtual bool OnMouseButtonUp(const UIMouseButtonEventArgs& args);
+                virtual bool OnMouseClick(const UIMouseEventArgs& args);
 
             private:
                 void SetCurrentState(State value);
@@ -53,6 +56,7 @@
                 UIVisualPtr hoveringVisual;
                 UIVisualPtr currentVisual;
                 bool hideInactives;
+                bool frozen;
         };
     }
 

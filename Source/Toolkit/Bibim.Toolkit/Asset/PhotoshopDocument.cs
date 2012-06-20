@@ -273,10 +273,28 @@ namespace Bibim.Asset
                         }
                         #endregion
 
-                        #region Layer Global Mask정보를 읽어옵니다.
+                        #region Layer Global Mask 정보를 읽어옵니다.
+                        uint layerGlobalMaskSize = reader.ReadUInt32();
+                        if (layerGlobalMaskSize > 0)
                         {
-                            // 쓰지 않으므로 무시합니다.
+                            long layerGlobalMaskEndPosition = reader.BaseStream.Position + (long)layerGlobalMaskSize;
+
+                            reader.BaseStream.Position = layerGlobalMaskEndPosition;
                         }
+                        #endregion
+
+                        #region Layer 추가 정보를 읽어옵니다.
+                        /*
+                        while (reader.BaseStream.Position < sectionEndPosition)
+                        {
+                            string signature = new string(reader.ReadChars(4));
+                            string fourcc = new string(reader.ReadChars(4));
+                            uint additionalInfoLength = reader.ReadUInt32();
+                            long additionalInfoEndPosition = reader.BaseStream.Position + (long)additionalInfoLength;
+
+                            reader.BaseStream.Position = additionalInfoEndPosition;
+                        }
+                        */
                         #endregion
                     }
 

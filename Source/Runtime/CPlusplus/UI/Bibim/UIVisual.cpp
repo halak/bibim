@@ -28,6 +28,7 @@ namespace Bibim
           opacity(255),
           visibility(Visible),
           zOrder(0),
+          isPickable(true),
           eventMap(nullptr),
           effectMap(nullptr),
           parent(nullptr)
@@ -162,6 +163,11 @@ namespace Bibim
             parent->SendChildToBack(this);
     }
 
+    void UIVisual::Click()
+    {
+        RaiseMouseClickEvent(UIMouseEventArgs(this, Point2::Zero));
+    }
+
     void UIVisual::SetOpacity(float value)
     {
         if (value <= 0.0f)
@@ -211,11 +217,6 @@ namespace Bibim
         return false;
     }
 
-    bool UIVisual::CanPick() const
-    {
-        return false;
-    }
-
     void UIVisual::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
@@ -261,7 +262,7 @@ namespace Bibim
 
     void UIVisual::OnPick(UIPickingContext& context)
     {
-        if (CanPick() && context.Contains(context.GetCurrentClippedBounds()))
+        if (GetPickable() && context.Contains(context.GetCurrentClippedBounds()))
             context.SetResult(this);
     }
 

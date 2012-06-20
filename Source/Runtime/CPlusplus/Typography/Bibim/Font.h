@@ -73,12 +73,15 @@
 
                 inline Color GetColor() const;
                 void SetColor(Color value);
+                inline void SetColorRGB(byte r, byte g, byte b);
 
                 inline Color GetStrokeColor() const;
                 void SetStrokeColor(Color value);
+                inline void SetStrokeColorRGB(byte r, byte g, byte b);
 
                 inline Color GetGlowColor() const;
                 void SetGlowColor(Color value);
+                inline void SetGlowColorRGB(byte r, byte g, byte b);
 
                 inline float GetSpacing() const;
                 void SetSpacing(float value);

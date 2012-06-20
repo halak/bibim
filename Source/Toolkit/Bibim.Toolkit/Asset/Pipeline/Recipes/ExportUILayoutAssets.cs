@@ -19,6 +19,7 @@ namespace Bibim.Asset.Pipeline.Recipes
         #region Fields
         private string textureOutput;
         private string imageOutput;
+        private string maskOutput;
         #endregion
 
         #region Properties
@@ -55,6 +56,15 @@ namespace Bibim.Asset.Pipeline.Recipes
             set
             {
                 imageOutput = value ?? string.Empty;
+            }
+        }
+
+        public string MaskOutput
+        {
+            get { return maskOutput; }
+            set
+            {
+                maskOutput = value ?? string.Empty;
             }
         }
         #endregion
@@ -96,6 +106,7 @@ namespace Bibim.Asset.Pipeline.Recipes
 
             OptimizeAllSprites(context, sprites);
             MergeAllSprites(context, sprites);
+            ExportAllMasks(context, sprites);
 
             return input;
         }
@@ -283,6 +294,34 @@ namespace Bibim.Asset.Pipeline.Recipes
                     }
                 }
                 #endregion
+            }
+        }
+
+        private void ExportAllMasks(CookingContext context, ICollection<UISprite> sprites)
+        {
+            int maskNumber = 0;
+            string maskOutputFormat = context.ExpandVariables(MaskOutput);
+
+            var readMask = new ReadGameAsset();
+            var maskRecipe = new GameAssetRecipe()
+            {
+                Cook = readMask,
+                Author = GetType().FullName,
+                Comment = "Automatically generated.",
+            };
+
+            var masks = new List<BitMask>(sprites.Count);
+            foreach (var item in sprites)
+            {
+                if (item.Mask == null)
+                    continue;
+
+                string path = string.Format(maskOutputFormat, maskNumber++);
+
+                readMask.Input = item.Mask;
+
+                JsonSerializer.Instance.Serialize(Path.Combine(context.BaseDirectory, context.Directory, Path.ChangeExtension(path, "asset")), maskRecipe);
+                context.Store(Path.Combine(context.Directory, Path.ChangeExtension(path, null)), item.Mask);
             }
         }
     }

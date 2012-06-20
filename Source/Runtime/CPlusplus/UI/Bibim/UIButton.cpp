@@ -14,7 +14,8 @@ namespace Bibim
           pushedVisual(),
           hoveringVisual(),
           currentVisual(),
-          hideInactives(true)
+          hideInactives(true),
+          frozen(false)
     {
     }
 
@@ -79,6 +80,15 @@ namespace Bibim
         }
     }
 
+    void UIButton::SetFrozen(bool value)
+    {
+        if (frozen != value)
+        {
+            frozen = value;
+            UpdateLayout();
+        }
+    }
+
     void UIButton::UpdateLayout()
     {
         currentVisual = OnUpdateLayout();
@@ -87,18 +97,23 @@ namespace Bibim
     UIVisual* UIButton::OnUpdateLayout()
     {
         UIVisual* activeVisual = nullptr;
-        switch (currentState)
+        if (frozen == false)
         {
-            case NormalState:
-                activeVisual = normalVisual;
-                break;
-            case PushedState:
-                activeVisual = pushedVisual;
-                break;
-            case HoveringState:
-                activeVisual = hoveringVisual;
-                break;
+            switch (currentState)
+            {
+                case NormalState:
+                    activeVisual = normalVisual;
+                    break;
+                case PushedState:
+                    activeVisual = pushedVisual;
+                    break;
+                case HoveringState:
+                    activeVisual = hoveringVisual;
+                    break;
+            }
         }
+        else
+            activeVisual = normalVisual;
 
         if (activeVisual)
         {
@@ -136,7 +151,8 @@ namespace Bibim
     
     void UIButton::OnMouseEnter(const UIMouseEventArgs& /*args*/)
     {
-        SetCurrentState(HoveringState);
+        if (frozen == false)
+            SetCurrentState(HoveringState);
     }
 
     void UIButton::OnMouseLeave(const UIMouseEventArgs& /*args*/)
@@ -146,7 +162,7 @@ namespace Bibim
 
     bool UIButton::OnMouseButtonDown(const UIMouseButtonEventArgs& args)
     {
-        if (args.GetButtonCode() == Key::MouseLeftButton)
+        if (frozen == false && args.GetButtonCode() == Key::MouseLeftButton)
             SetCurrentState(PushedState);
 
         return false;
@@ -155,9 +171,19 @@ namespace Bibim
     bool UIButton::OnMouseButtonUp(const UIMouseButtonEventArgs& args)
     {
         if (args.GetButtonCode() == Key::MouseLeftButton)
-            SetCurrentState(HoveringState);
+        {
+            if (frozen == false)
+                SetCurrentState(HoveringState);
+            else
+                SetCurrentState(NormalState);
+        }
 
         return false;
+    }
+
+    bool UIButton::OnMouseClick(const UIMouseEventArgs& /*args*/)
+    {
+        return true;
     }
 
     void UIButton::OnRead(ComponentStreamReader& reader)
@@ -167,6 +193,7 @@ namespace Bibim
         pushedVisual = static_cast<UIVisual*>(reader.ReadComponent());
         hoveringVisual = static_cast<UIVisual*>(reader.ReadComponent());
         hideInactives = reader.ReadBool();
+        frozen = reader.ReadBool();
         SetCurrentState(NormalState);
     }
 
@@ -178,6 +205,7 @@ namespace Bibim
         pushedVisual = context.Clone(o->pushedVisual);
         hoveringVisual = context.Clone(o->hoveringVisual);
         hideInactives = o->hideInactives;
+        frozen = o->frozen;
         SetCurrentState(NormalState);
     }
 }

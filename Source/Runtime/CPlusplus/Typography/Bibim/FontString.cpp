@@ -61,6 +61,9 @@ namespace Bibim
         strokedGlyphs.clear();
         glowGlyphs.clear();
 
+        if (font->GetLibrary() == nullptr)
+            return;
+
         std::vector<wchar_t> wideCharacters;
         wideCharacters.resize(MultiByteToWideChar(CP_UTF8, 0, text.CStr(), text.GetLength(), nullptr, 0), L'\0');
         MultiByteToWideChar(CP_UTF8, 0, text.CStr(), text.GetLength(), &wideCharacters[0], wideCharacters.size());
