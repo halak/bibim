@@ -134,8 +134,9 @@
     <Compile Include="Asset\Pipeline\PipedGameAssetServer.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToMaskTexture2D.cs" />
     <Compile Include="Asset\Pipeline\Recipes\CompileShaderEffect.cs" />
-    <Compile Include="Asset\Pipeline\Recipes\PackBitmap.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToTexture2D.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\ExportImageSet.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToImageSet.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToUILayout1.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ReadGameAsset.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ReadRecipe.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Graphics\BitMaskWriter.cs" />
     <Compile Include="Graphics\ImageCookingTagDebuggerVisualizer.cs" />
     <Compile Include="Graphics\ImageCookingTag.cs" />
+    <Compile Include="Graphics\ImageSetWriter.cs" />
     <Compile Include="Graphics\ImageViewForm.cs">
       <SubType>Form</SubType>
     </Compile>

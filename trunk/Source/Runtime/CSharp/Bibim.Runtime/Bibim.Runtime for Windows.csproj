@@ -255,6 +255,7 @@
     <Compile Include="GameComponent.cs" />
     <Compile Include="Graphics\BitMask.cs" />
     <Compile Include="Graphics\BlendMode.cs" />
+    <Compile Include="Graphics\ImageSet.cs" />
     <Compile Include="Graphics\Window.cs" />
     <Compile Include="Graphics\GraphicsDevice.cs" />
     <Compile Include="Graphics\Image.cs" />

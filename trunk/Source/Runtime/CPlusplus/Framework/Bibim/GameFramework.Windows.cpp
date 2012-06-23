@@ -117,6 +117,11 @@
             }
         }
 
+        void GameFramework::Exit()
+        {
+            window->Close();
+        }
+
         void GameFramework::SetFixedTimeStep(bool value)
         {
             fixedTimeStep = value;

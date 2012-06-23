@@ -17,6 +17,7 @@
                     virtual ~GameFramework();
 
                     void Run();
+                    void Exit();
 
                     inline GameModuleTree* GetModules() const;
                     inline GameWindow*     GetWindow() const;

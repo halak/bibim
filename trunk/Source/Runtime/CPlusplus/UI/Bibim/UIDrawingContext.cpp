@@ -307,17 +307,23 @@ namespace Bibim
 
         if (fontString.GetFont()->GetGlowSize() > 0)
         {
-            DrawGlyphs::Do(this, context, renderer, bounds, clippedBounds, fontString.GetGlowGlyphs(), fontString.GetFont()->GetGlowColor());
+            Color glowColor = fontString.GetFont()->GetGlowColor();
+            glowColor.A = static_cast<byte>(static_cast<float>(glowColor.A) * GetCurrentOpacity());
+            DrawGlyphs::Do(this, context, renderer, bounds, clippedBounds, fontString.GetGlowGlyphs(), glowColor);
             context.Reset();
         }
 
         if (fontString.GetFont()->GetStrokeSize() > 0.0f)
         {
-            DrawGlyphs::Do(this, context, renderer, bounds, clippedBounds, fontString.GetStrokedGlyphs(), fontString.GetFont()->GetStrokeColor());
+            Color strokeColor = fontString.GetFont()->GetStrokeColor();
+            strokeColor.A = static_cast<byte>(static_cast<float>(strokeColor.A) * GetCurrentOpacity());
+            DrawGlyphs::Do(this, context, renderer, bounds, clippedBounds, fontString.GetStrokedGlyphs(), strokeColor);
             context.Reset();
         }
 
-        DrawGlyphs::Do(this, context, renderer, bounds, clippedBounds, fontString.GetRegularGlyphs(), fontString.GetFont()->GetColor());
+        Color color = fontString.GetFont()->GetColor();
+        color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
+        DrawGlyphs::Do(this, context, renderer, bounds, clippedBounds, fontString.GetRegularGlyphs(), color);
         renderer->EndBatch();
     }
 

@@ -205,6 +205,7 @@
 #  include <Bibim/UIGamePadEventDispatcher.h>
 #  include <Bibim/UIHandledDrawingContext.h>
 #  include <Bibim/Image.h>
+#  include <Bibim/ImageSet.h>
 #  include <Bibim/UIKeyboardEventArgs.h>
 #  include <Bibim/UIKeyboardEventDispatcher.h>
 #  include <Bibim/UILabel.h>
