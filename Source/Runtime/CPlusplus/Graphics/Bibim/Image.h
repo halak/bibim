@@ -12,7 +12,7 @@
     {
         class Image : public GameAsset
         {
-            BBSerializableAssetClass(SourceTexture2D, Texture2D, 'G', 'I', 'M', 'G');
+            BBSerializableAssetClass(Image, GameAsset, 'G', 'I', 'M', 'G');
             public:
                 enum Transform
                 {

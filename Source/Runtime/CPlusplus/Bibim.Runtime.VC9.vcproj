@@ -1871,6 +1871,18 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Graphics\Bibim\ImageSet.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\ImageSet.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\ImageSet.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.h"
 					>
 				</File>

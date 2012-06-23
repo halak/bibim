@@ -82,6 +82,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             BitmapSheetClusterSize = new Size(16, 16);
             textureOutput = "$(AssetName)_TEX{0}";
             imageOutput = "$(AssetName)_IMG{0}";
+            maskOutput = "$(AssetName)_MSK{0}";
         }
         #endregion
 
@@ -153,7 +154,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             var aTag = a.Tag as ImageCookingTag;
             var bTag = b.Tag as ImageCookingTag;
 
-            if (aTag != null && bTag != null)
+            if (aTag != null && aTag.Bitmap != null && bTag != null && bTag.Bitmap != null)
             {
                 int aWidth = a.ClippingRectangle.Width;
                 int aHeight = a.ClippingRectangle.Height;
@@ -205,7 +206,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             foreach (var item in sprites)
             {
                 var tag = item.Image.Tag as ImageCookingTag;
-                if (tag != null)
+                if (tag != null && tag.Bitmap != null)
                 {
                     List<UISprite> values = null;
                     if (spriteBitmaps.TryGetValue(tag.Bitmap, out values))

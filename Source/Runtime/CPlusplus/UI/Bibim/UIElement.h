@@ -23,6 +23,7 @@
                 inline int GetID() const;
                 inline void SetID(int value);
                 inline const String& GetName() const;
+                inline const char* GetNameAsChars() const;
                 inline void SetName(const String& value);
                 inline void SetNameByChars(const char* value);
 
