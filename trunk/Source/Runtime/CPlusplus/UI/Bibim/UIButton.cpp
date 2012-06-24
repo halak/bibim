@@ -2,6 +2,7 @@
 #include <Bibim/UIButton.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/UIMouseButtonEventArgs.h>
+#include <BIbim/UIPickingContext.h>
 #include <Bibim/UIVisual.h>
 
 namespace Bibim
@@ -147,6 +148,18 @@ namespace Bibim
         }
 
         return activeVisual;
+    }
+
+    void UIButton::OnPick(UIPickingContext& context)
+    {
+        Base::OnPick(context);
+        if (UIVisual* result = context.GetResult())
+        {
+            if (result == normalVisual ||
+                result == pushedVisual ||
+                result == hoveringVisual)
+                context.SetResult(this);
+        }
     }
     
     void UIButton::OnMouseEnter(const UIMouseEventArgs& /*args*/)

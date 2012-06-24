@@ -61,12 +61,12 @@ namespace Bibim.Asset.Pipeline.Recipes
                 Height = windowSize.Y,
             };
             foreach (PhotoshopDocument.Layer item in input.Layers)
-                AddChildTo(rootWindow, item);
+                AddChildTo(rootWindow, item, true);
             
             return new UILayout(rootWindow);
         }
 
-        private void AddChildTo(UIWindow window, PhotoshopDocument.Layer layer)
+        private void AddChildTo(UIWindow window, PhotoshopDocument.Layer layer, bool defaultPickable)
         {
             if (string.IsNullOrEmpty(layer.Name) ||
                 layer.Name.StartsWith("#") == false)
@@ -84,6 +84,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                 {
                     UILabel label = new UILabel();
                     label.Name = name;
+                    label.IsPickable = defaultPickable;
                     window.AddChild(label);
                     Process(label, layer);
                 }
@@ -91,6 +92,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                 {
                     UISprite sprite = new UISprite();
                     sprite.Name = name;
+                    sprite.IsPickable = defaultPickable;
                     window.AddChild(sprite);
                     Process(sprite, layer, string.Compare(type, "MaskSprite", true) == 0);
                 }
@@ -101,6 +103,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                 {
                     UIButton button = new UIButton();
                     button.Name = name;
+                    button.IsPickable = true;
                     window.AddChild(button);
                     Process(button, layer);
                 }
@@ -116,6 +119,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                     {
                         UIButton button = new UIButton();
                         button.Name = name;
+                        button.IsPickable = true;
                         window.AddChild(button);
                         Process(button, layer);
                     }
@@ -123,6 +127,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                     {
                         UICheckBox button = new UICheckBox();
                         button.Name = name;
+                        button.IsPickable = true;
                         window.AddChild(button);
                         Process(button, layer);
                     }
@@ -130,6 +135,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                     {
                         UIWindow childWindow = new UIWindow();
                         childWindow.Name = name;
+                        childWindow.IsPickable = defaultPickable;
                         window.AddChild(childWindow);
                         Process(childWindow, layer);
                     }
@@ -218,19 +224,19 @@ namespace Bibim.Asset.Pipeline.Recipes
             {
                 var window = new UIWindow();
                 button.Normal = window;
-                AddChildTo(window, normal);
+                AddChildTo(window, normal, false);
             }
             if (pushed != null)
             {
                 var window = new UIWindow();
                 button.Pushed = window;
-                AddChildTo(window, pushed);
+                AddChildTo(window, pushed, false);
             }
             if (hovering != null)
             {
                 var window = new UIWindow();
                 button.Hovering = window;
-                AddChildTo(window, hovering);
+                AddChildTo(window, hovering, false);
             }
         }
 
@@ -239,7 +245,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             Process((UIVisual)window, layer);
 
             for (int i = layer.SubLayers.Count - 1; i >= 0; i--)
-                AddChildTo(window, layer.SubLayers[i]);
+                AddChildTo(window, layer.SubLayers[i], true);
         }
 
         private static void ParseLayerName(string layerName, out string name, out string type)

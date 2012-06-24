@@ -40,6 +40,8 @@
                 void UpdateLayout();
                 virtual UIVisual* OnUpdateLayout();
 
+                virtual void OnPick(UIPickingContext& context);
+
                 virtual void OnMouseEnter(const UIMouseEventArgs& args);
                 virtual void OnMouseLeave(const UIMouseEventArgs& args);
                 virtual bool OnMouseButtonDown(const UIMouseButtonEventArgs& args);

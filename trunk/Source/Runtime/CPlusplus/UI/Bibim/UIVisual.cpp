@@ -42,6 +42,7 @@ namespace Bibim
     RectF UIVisual::ComputeBounds(UIVisualVisitor& context)
     {
         const RectF bounds = context.GetCurrentBounds();
+        const Vector2 contentSize = (widthMode == ContentSize || heightMode == ContentSize) ? GetContentSize() : Vector2::Zero;
         RectF result = RectF::Empty;
 
         float offsetX = 0.0f;
@@ -74,6 +75,9 @@ namespace Bibim
             case RelativeSize:
                 result.Width = width * bounds.Width;
                 break;
+            case ContentSize:
+                result.Width = width * contentSize.X;
+                break;
         }
 
         switch (heightMode)
@@ -83,6 +87,9 @@ namespace Bibim
                 break;
             case RelativeSize:
                 result.Height = height * bounds.Height;
+                break;
+            case ContentSize:
+                result.Height = height * contentSize.Y;
                 break;
         }
 
@@ -232,6 +239,7 @@ namespace Bibim
         opacity = reader.ReadByte();
         visibility = reader.ReadByte();
         zOrder = reader.ReadByte();
+        isPickable = reader.ReadBool();
         eventMap = static_cast<UIEventMap*>(reader.ReadComponent());
         effectMap = static_cast<UIEffectMap*>(reader.ReadComponent());
     }
@@ -252,8 +260,14 @@ namespace Bibim
         opacity = o->opacity;
         visibility = o->visibility;
         zOrder = o->zOrder;
+        isPickable = o->isPickable;
         eventMap = context.Clone(o->eventMap);
         effectMap = context.Clone(o->effectMap);
+    }
+
+    Vector2 UIVisual::GetContentSize()
+    {
+        return Vector2::Zero;
     }
 
     void UIVisual::OnDraw(UIDrawingContext& /*context*/)

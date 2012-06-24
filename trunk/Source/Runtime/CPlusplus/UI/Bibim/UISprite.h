@@ -30,6 +30,8 @@
                 inline void SetMask(BitMask* value);
 
             protected:
+                virtual Vector2 GetContentSize();
+
                 virtual void OnDraw(UIDrawingContext& context);
                 virtual void OnPick(UIPickingContext& context);
 

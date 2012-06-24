@@ -149,6 +149,12 @@ namespace Bibim.UI.Visuals
             }
         }
 
+        public bool IsPickable
+        {
+            get;
+            set;
+        }
+
         public UIEventMap EventMap
         {
             get;
