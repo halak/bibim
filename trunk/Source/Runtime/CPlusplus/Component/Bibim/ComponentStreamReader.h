@@ -27,6 +27,8 @@
                 void Read(GameAssetPtr& outValue);
                 void Read(GameComponentPtr& outValue);
 
+                inline GameModuleTree* GetModules() const;
+
             private:
                 inline GameAssetStorage* GetStorage();
 
