@@ -131,6 +131,7 @@ namespace Bibim
                 if (lastMouseState.IsLeftButtonPressed)
                 {
                     capturedVisual.Reset();
+
                     targetVisual->RaiseMouseButtonUpEvent(UIMouseButtonEventArgs(baseArgs, Key::MouseLeftButton));
 
                     if (pickedVisual == nullptr)

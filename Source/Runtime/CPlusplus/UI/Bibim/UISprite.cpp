@@ -29,6 +29,14 @@ namespace Bibim
         image = value;
     }
 
+    Vector2 UISprite::GetContentSize()
+    {
+        if (image)
+            return Vector2(image->GetWidth(), image->GetHeight());
+        else
+            return Vector2::Zero;
+    }
+
     void UISprite::OnDraw(UIDrawingContext& context)
     {
         UIVisual::OnDraw(context);

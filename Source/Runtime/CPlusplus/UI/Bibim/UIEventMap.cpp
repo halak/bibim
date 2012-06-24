@@ -35,8 +35,9 @@ namespace Bibim
 
             if (index < static_cast<int>(eventHandlers.size()))
             {
-                if (eventHandlers[index])
-                    result = eventHandlers[index]->Invoke(args);
+                UIEventHandlerPtr handler = eventHandlers[index];
+                if (handler)
+                    result = handler->Invoke(args);
             }
 
             if (asyncEventQueue)

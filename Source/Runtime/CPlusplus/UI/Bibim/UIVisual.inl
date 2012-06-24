@@ -144,6 +144,12 @@
         heightMode = static_cast<byte>(value);
     }
 
+    void UIVisual::SetSizeMode(SizeMode widthMode, SizeMode heightMode)
+    {
+        this->widthMode = static_cast<byte>(widthMode);
+        this->heightMode = static_cast<byte>(heightMode);
+    }
+
     UIVisual::AnchorPoint UIVisual::GetAlignment() const
     {
         return static_cast<AnchorPoint>(alignment);
@@ -226,8 +232,17 @@
 
     void UIVisual::SetXYModeByChars(const char* xMode, const char* yMode)
     {
-        SetXMode(ConvertFromStringToPositionMode(xMode));
-        SetYMode(ConvertFromStringToPositionMode(yMode));
+        if (yMode)
+        {
+            SetXMode(ConvertFromStringToPositionMode(xMode));
+            SetYMode(ConvertFromStringToPositionMode(yMode));
+        }
+        else
+        {
+            const PositionMode mode = ConvertFromStringToPositionMode(xMode);
+            SetXMode(mode);
+            SetYMode(mode);
+        }
     }
 
     const char* UIVisual::GetWidthModeAsChars() const
@@ -248,6 +263,21 @@
     void UIVisual::SetHeightModeByChars(const char* value)
     {
         SetHeightMode(ConvertFromStringToSizeMode(value));
+    }
+
+    void UIVisual::SetSizeModeByChars(const char* widthMode, const char* heightMode)
+    {
+        if (heightMode)
+        {
+            SetWidthMode(ConvertFromStringToSizeMode(widthMode));
+            SetHeightMode(ConvertFromStringToSizeMode(heightMode));
+        }
+        else
+        {
+            const SizeMode mode = ConvertFromStringToSizeMode(widthMode);
+            SetWidthMode(mode);
+            SetHeightMode(mode);
+        }
     }
 
     const char* UIVisual::GetAlignmentAsChars() const

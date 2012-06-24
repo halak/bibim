@@ -97,6 +97,8 @@
                 inline SizeMode GetHeightMode() const;
                 inline void SetHeightMode(SizeMode value);
 
+                inline void SetSizeMode(SizeMode widthMode, SizeMode heightMode);
+
                 inline AnchorPoint GetAlignment() const;
                 inline void SetAlignment(AnchorPoint value);
 
@@ -137,6 +139,8 @@
                 inline const char* GetHeightModeAsChars() const;
                 inline void SetHeightModeByChars(const char* value);
 
+                inline void SetSizeModeByChars(const char* widthMode, const char* heightMode);
+
                 inline const char* GetAlignmentAsChars() const;
                 inline void SetAlignmentByChars(const char* value);
 
@@ -144,6 +148,8 @@
                 inline void SetVisibilityByChars(const char* value);
 
             protected:
+                virtual Vector2 GetContentSize();
+
                 virtual void OnDraw(UIDrawingContext& context);
                 virtual void OnPick(UIPickingContext& context);
 
