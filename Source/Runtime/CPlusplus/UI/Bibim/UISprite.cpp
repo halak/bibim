@@ -29,6 +29,19 @@ namespace Bibim
         image = value;
     }
 
+    Texture2D* UISprite::GetTexture() const
+    {
+        if (image)
+            return image->GetTexture();
+        else
+            return nullptr;
+    }
+
+    void UISprite::SetTexture(Texture2D* value)
+    {
+        image = new Image(value);
+    }
+
     Vector2 UISprite::GetContentSize()
     {
         if (image)
