@@ -60,6 +60,10 @@ namespace Bibim.UI
                 Write(writer, (UIPanel)o, objectDictionary);
             else if (t == typeof(UIButton))
                 Write(writer, (UIButton)o, objectDictionary);
+            else if (t == typeof(UICheckBox))
+                Write(writer, (UICheckBox)o, objectDictionary);
+            else if (t == typeof(UIRadioButton))
+                Write(writer, (UIRadioButton)o, objectDictionary);
             else if (t == typeof(UIWindow))
                 Write(writer, (UIWindow)o, objectDictionary);
             else if (t == typeof(UIWindow3D))
@@ -172,6 +176,20 @@ namespace Bibim.UI
             WriteVisual(writer, o.Hovering, objectDictionary);
             writer.Write(o.HideInactives);
             writer.Write(o.IsFrozen);
+        }
+
+        private static void Write(AssetStreamWriter writer, UICheckBox o, List<object> objectDictionary)
+        {
+            Write(writer, (UIButton)o, objectDictionary);
+            WriteVisual(writer, o.CheckedNormal, objectDictionary);
+            WriteVisual(writer, o.CheckedPushed, objectDictionary);
+            WriteVisual(writer, o.CheckedHovering, objectDictionary);
+            writer.Write(o.IsChecked);
+        }
+
+        private static void Write(AssetStreamWriter writer, UIRadioButton o, List<object> objectDictionary)
+        {
+            Write(writer, (UICheckBox)o, objectDictionary);
         }
 
         private static void Write(AssetStreamWriter writer, UIWindow o, List<object> objectDictionary)

@@ -1346,6 +1346,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\UI\Bibim\UIRadioButton.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIRadioButton.h"
+						>
+					</File>
+					<File
 						RelativePath=".\UI\Bibim\UISprite.cpp"
 						>
 					</File>

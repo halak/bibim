@@ -189,6 +189,7 @@
 #  include <Bibim/UIAsyncEventQueue.h>
 #  include <Bibim/UIButton.h>
 #  include <Bibim/UICheckBox.h>
+#  include <Bibim/UIRadioButton.h>
 #  include <Bibim/UIDomain.h>
 #  include <Bibim/UIDrawingContext.h>
 #  include <Bibim/UIEffectMap.h>

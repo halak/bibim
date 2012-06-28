@@ -41,6 +41,35 @@ namespace Bibim
         mode = o->mode;
     }
 
+    BlendMode UIBlendingEffect::ConvertFromStringToBlendMode(const char* value)
+    {
+        if (_stricmp(value, "Normal") == 0)             return NormalBlend;
+        else if (_stricmp(value, "Add") == 0)           return AdditiveBlend;
+        else if (_stricmp(value, "Lighten") == 0)       return LightenBlend;
+        else if (_stricmp(value, "Darken") == 0)        return DarkenBlend;
+        else if (_stricmp(value, "Mul") == 0)           return MultiplyBlend;
+        else if (_stricmp(value, "Screen") == 0)        return ScreenBlend;
+        else if (_stricmp(value, "Additive") == 0)      return AdditiveBlend;
+        else if (_stricmp(value, "Muliply") == 0)       return MultiplyBlend;
+        else if (_stricmp(value, "Dodge") == 0)         return AdditiveBlend;
+        else if (_stricmp(value, "LinearDodge") == 0)   return AdditiveBlend;
+        else                                            return NormalBlend;
+    }
+    
+    const char* UIBlendingEffect::ConvertFromBlendModeToString(BlendMode value)
+    {
+        switch (value)
+        {
+            case NormalBlend:   return "Normal";
+            case AdditiveBlend: return "Add";
+            case LightenBlend:  return "Lighten";
+            case DarkenBlend:   return "Darken";
+            case MultiplyBlend: return "Mul";
+            case ScreenBlend:   return "Screen";
+            default:            return "Normal";
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     UIBlendingEffect::Effector::Effector(Effector* /*parent*/, UIBlendingEffect* effect)

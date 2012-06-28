@@ -232,6 +232,7 @@ namespace Bibim
         GameComponentFactory::AddEntry<UIPanel>();
         GameComponentFactory::AddEntry<UIButton>();
         GameComponentFactory::AddEntry<UICheckBox>();
+        GameComponentFactory::AddEntry<UIRadioButton>();
         GameComponentFactory::AddEntry<UIWindow>();
         GameComponentFactory::AddEntry<UISprite>();
         GameComponentFactory::AddEntry<UIVideo>();

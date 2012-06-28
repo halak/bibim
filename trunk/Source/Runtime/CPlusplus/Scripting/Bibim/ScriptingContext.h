@@ -23,11 +23,6 @@
                 String  GetStringArg(int index) const;
 
                 void Return();
-                void Return(const Any& value);
-                void Return(const Any& value1, const Any& value2);
-                void Return(const Any& value1, const Any& value2, const Any& value3);
-                void Return(const Any& value1, const Any& value2, const Any& value3, const Any& value4);
-                void Return(const Any& value1, const Any& value2, const Any& value3, const Any& value4, const Any& value5);
 
                 void YieldReturn();
 

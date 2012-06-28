@@ -68,6 +68,11 @@ namespace Bibim
         {
             checked = value;
             UpdateLayout();
+
+            if (checked)
+                OnChecked();
+            else
+                OnUnchecked();
         }
     }
 
@@ -111,9 +116,22 @@ namespace Bibim
         {
             checked = !checked;
             UpdateLayout();
+
+            if (checked)
+                OnChecked();
+            else
+                OnUnchecked();
         }
 
         return Base::OnMouseClick(args);
+    }
+
+    void UICheckBox::OnChecked()
+    {
+    }
+
+    void UICheckBox::OnUnchecked()
+    {
     }
 
     void UICheckBox::OnRead(ComponentStreamReader& reader)

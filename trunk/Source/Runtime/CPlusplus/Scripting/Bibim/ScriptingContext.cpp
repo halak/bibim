@@ -63,46 +63,6 @@ namespace Bibim
         returnCalled = true;
     }
 
-    void ScriptingContext::Return(const Any& value)
-    {
-        BBAssert(numberOfReturnValues == 1 && returnCalled == false);
-        returnCalled = true;
-
-        throw;
-    }
-
-    void ScriptingContext::Return(const Any& value1, const Any& value2)
-    {
-        BBAssert(numberOfReturnValues == 2 && returnCalled == false);
-        returnCalled = true;
-
-        throw;
-    }
-
-    void ScriptingContext::Return(const Any& value1, const Any& value2, const Any& value3)
-    {
-        BBAssert(numberOfReturnValues == 3 && returnCalled == false);
-        returnCalled = true;
-
-        throw;
-    }
-
-    void ScriptingContext::Return(const Any& value1, const Any& value2, const Any& value3, const Any& value4)
-    {
-        BBAssert(numberOfReturnValues == 4 && returnCalled == false);
-        returnCalled = true;
-
-        throw;
-    }
-
-    void ScriptingContext::Return(const Any& value1, const Any& value2, const Any& value3, const Any& value4, const Any& value5)
-    {
-        BBAssert(numberOfReturnValues == 5 && returnCalled == false);
-        returnCalled = true;
-
-        throw;
-    }
-
     void ScriptingContext::YieldReturn()
     {
         // Native 함수에서 YieldReturn은 Call-stack에 Native 함수가 딱 하나일 때만 가능합니다.
