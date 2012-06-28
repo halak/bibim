@@ -228,6 +228,9 @@
 #  include <Bibim/UIVisual.h>
 #  include <Bibim/UIVisualVisitor.h>
 #  include <Bibim/UIWindow.h>
+#   include <Bibim/UITransform.h>
+#   include <Bibim/UITransform2D.h>
+#   include <Bibim/UITransform3D.h>
 #   include <Bibim/UIMaskEffect.h>
 #   include <Bibim/UIOpacityMaskEffect.h>
 

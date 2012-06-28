@@ -329,6 +329,9 @@
     <Compile Include="UI\Events\UIMouseEventDispatcher.cs" />
     <Compile Include="UI\Events\UIMouseWheelEventArgs.cs" />
     <Compile Include="UI\Events\UISequentialEventHandler.cs" />
+    <Compile Include="UI\Transforms\UITransform.cs" />
+    <Compile Include="UI\Transforms\UITransform2D.cs" />
+    <Compile Include="UI\Transforms\UITransform3D.cs" />
     <Compile Include="UI\UIDomain.cs" />
     <Compile Include="UI\UIDrawingContext.cs" />
     <Compile Include="UI\UIElement.cs" />
@@ -350,7 +353,6 @@
     <Compile Include="UI\Visuals\UIVideo.cs" />
     <Compile Include="UI\Visuals\UIVisual.cs" />
     <Compile Include="UI\Visuals\UIWindow.cs" />
-    <Compile Include="UI\Visuals\UIWindow3D.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Collision2D\" />
