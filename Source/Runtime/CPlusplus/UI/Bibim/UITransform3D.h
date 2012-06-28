@@ -1,9 +1,9 @@
-﻿#pragma once
-#ifndef __BIBIM_UIWINDOW3D_H__
-#define __BIBIM_UIWINDOW3D_H__
+#pragma once
+#ifndef __BIBIM_UITransform3D_H__
+#define __BIBIM_UITransform3D_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/UIWindow.h>
+#   include <Bibim/UITransform.h>
 #   include <Bibim/Matrix4.h>
 #   include <Bibim/RectF.h>
 #   include <Bibim/Vector2.h>
@@ -11,16 +11,17 @@
 
     namespace Bibim
     {
-        class UIWindow3D : public UIWindow
+        class UITransform3D : public UITransform
         {
-            BBComponentClass(UIWindow3D, UIWindow, 'U', 'W', 'N', '3');
+            BBComponentClass(UITransform3D, UITransform, 'U', 'T', 'M', '3');
             public:
-                UIWindow3D();
-                explicit UIWindow3D(int childrenCapacity);
-                virtual ~UIWindow3D();
+                UITransform3D();
+                virtual ~UITransform3D();
+
+                virtual const Matrix4& ComputeMatrix(UIVisualVisitor& context);
 
                 void Reset();
-                
+
                 inline Vector3 GetLocalOffset() const;
                 void SetLocalOffset(Vector3 value);
                 
@@ -40,8 +41,12 @@
                 void SetScale(Vector2 value);
                 inline void SetScale(float value);
 
-            private:
-                void UpdateMatrix(RectF bounds);
+                inline void SetLocalOffsetXYZ(float x, float y, float z);
+                inline void SetGlobalOffsetXYZ(float x, float y, float z);
+                inline void SetRotationXYZ(float x, float y, float z);
+                inline void SetRotationCenterXY(float x, float y);
+                inline void SetScaleXY(float x, float y);
+                inline void SetScaleCenterXY(float x, float y);
 
             private:
                 Vector3 localOffset;
@@ -56,6 +61,6 @@
         };
     }
 
-#   include <Bibim/UIWindow3D.inl>
+#   include <Bibim/UITransform3D.inl>
 
 #endif

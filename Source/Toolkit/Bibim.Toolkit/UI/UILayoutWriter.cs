@@ -6,6 +6,7 @@ using Bibim.Graphics;
 using Bibim.IO;
 using Bibim.UI.Effects;
 using Bibim.UI.Events;
+using Bibim.UI.Transforms;
 using Bibim.UI.Visuals;
 
 namespace Bibim.UI
@@ -66,8 +67,6 @@ namespace Bibim.UI
                 Write(writer, (UIRadioButton)o, objectDictionary);
             else if (t == typeof(UIWindow))
                 Write(writer, (UIWindow)o, objectDictionary);
-            else if (t == typeof(UIWindow3D))
-                Write(writer, (UIWindow3D)o, objectDictionary);
             else
                 throw new NotSupportedException(t.ToString());
         }
@@ -112,6 +111,20 @@ namespace Bibim.UI
             else
                 throw new NotSupportedException(t.ToString());
         }
+
+        private static void WriteTransform(AssetStreamWriter writer, UITransform o, List<object> objectDictionary)
+        {
+            if (WriteElement(writer, o, objectDictionary) == false)
+                return;
+
+            Type t = o.GetType();
+            if (t == typeof(UITransform2D))
+                Write(writer, (UITransform2D)o, objectDictionary);
+            else if (t == typeof(UITransform3D))
+                Write(writer, (UITransform3D)o, objectDictionary);
+            else
+                throw new NotSupportedException(t.ToString());
+        }
         #endregion
 
         #region WriteVisual
@@ -140,6 +153,7 @@ namespace Bibim.UI
             writer.Write(o.IsPickable);
             WriteEventMap(writer, o.EventMap, objectDictionary);
             WriteEffectMap(writer, o.EffectMap, objectDictionary);
+            WriteTransform(writer, o.Transform, objectDictionary);
         }
 
         private static void Write(AssetStreamWriter writer, UISprite o, List<object> objectDictionary)
@@ -196,17 +210,6 @@ namespace Bibim.UI
         {
             Write(writer, (UIPanel)o, objectDictionary);
         }
-
-        private static void Write(AssetStreamWriter writer, UIWindow3D o, List<object> objectDictionary)
-        {
-            Write(writer, (UIWindow)o, objectDictionary);
-            writer.Write(o.LocalOffset);
-            writer.Write(o.GlobalOffset);
-            writer.Write(o.RotationCenter);
-            writer.Write(o.Rotation);
-            writer.Write(o.ScaleCenter);
-            writer.Write(o.Scale);
-        }
         #endregion
 
         #region WriteGeometryEffect
@@ -226,6 +229,23 @@ namespace Bibim.UI
         {
             Write(writer, (UIPixelEffect)o, objectDictionary);
             writer.Write((byte)o.Mode);
+        }
+        #endregion
+
+        #region WriteTransform
+        private static void Write(AssetStreamWriter writer, UITransform o, List<object> objectDictionary)
+        {
+            Write(writer, (UIElement)o, objectDictionary);
+        }
+
+        private static void Write(AssetStreamWriter writer, UITransform2D o, List<object> objectDictionary)
+        {
+            Write(writer, (UITransform)o, objectDictionary);
+        }
+
+        private static void Write(AssetStreamWriter writer, UITransform3D o, List<object> objectDictionary)
+        {
+            Write(writer, (UITransform)o, objectDictionary);
         }
         #endregion
     }

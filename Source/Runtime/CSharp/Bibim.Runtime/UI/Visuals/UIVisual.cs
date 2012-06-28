@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Bibim.UI.Effects;
 using Bibim.UI.Events;
+using Bibim.UI.Transforms;
 
 namespace Bibim.UI.Visuals
 {
@@ -162,6 +163,12 @@ namespace Bibim.UI.Visuals
         }
 
         public UIEffectMap EffectMap
+        {
+            get;
+            set;
+        }
+
+        public UITransform Transform
         {
             get;
             set;

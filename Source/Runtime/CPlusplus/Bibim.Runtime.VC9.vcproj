@@ -1401,22 +1401,6 @@
 						RelativePath=".\UI\Bibim\UIWindow.inl"
 						>
 					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIWindow3D.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIWindow3D.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIWindow3D.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIWindow3D.Windows.cpp"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="Events"
@@ -1819,6 +1803,42 @@
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIVisualVisitor.inl"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Transforms"
+					>
+					<File
+						RelativePath=".\UI\Bibim\UITransform.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UITransform.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UITransform2D.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UITransform2D.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UITransform2D.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UITransform3D.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UITransform3D.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UITransform3D.inl"
 						>
 					</File>
 				</Filter>

@@ -120,6 +120,9 @@
                 inline UIEffectMap* GetEffectMap() const;
                 void SetEffectMap(UIEffectMap* value);
 
+                inline UITransform* GetTransform() const;
+                void SetTransform(UITransform* value);
+
                 inline UIPanel* GetParent() const;
 
                 inline bool IsVisible() const;
@@ -220,6 +223,7 @@
                 bool isPickable;
                 UIEventMapPtr eventMap;
                 UIEffectMapPtr effectMap;
+                UITransformPtr transform;
                 UIPanel* parent;
 
                 friend class UIDrawingContext;

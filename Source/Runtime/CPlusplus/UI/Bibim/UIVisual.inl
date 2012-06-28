@@ -200,6 +200,11 @@
         return effectMap;
     }
 
+    UITransform* UIVisual::GetTransform() const
+    {
+        return transform;
+    }
+
     UIPanel* UIVisual::GetParent() const
     {
         return parent;

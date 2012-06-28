@@ -4,6 +4,7 @@
 #include <Bibim/Math.h>
 #include <Bibim/UIEffectMap.h>
 #include <Bibim/UIEventMap.h>
+#include <Bibim/UITransform.h>
 #include <Bibim/UIGamePadEventArgs.h>
 #include <Bibim/UIKeyboardEventArgs.h>
 #include <Bibim/UIMouseButtonEventArgs.h>
@@ -207,6 +208,11 @@ namespace Bibim
         effectMap = value;
     }
 
+    void UIVisual::SetTransform(UITransform* value)
+    {
+        transform = value;
+    }
+
     void UIVisual::SetParent(UIPanel* value)
     {
         if (parent != value)
@@ -242,6 +248,7 @@ namespace Bibim
         isPickable = reader.ReadBool();
         eventMap = static_cast<UIEventMap*>(reader.ReadComponent());
         effectMap = static_cast<UIEffectMap*>(reader.ReadComponent());
+        transform = static_cast<UITransform*>(reader.ReadComponent());
     }
 
     void UIVisual::OnCopy(const GameComponent* original, CloningContext& context)
@@ -263,6 +270,7 @@ namespace Bibim
         isPickable = o->isPickable;
         eventMap = context.Clone(o->eventMap);
         effectMap = context.Clone(o->effectMap);
+        transform = context.Clone(o->transform);
     }
 
     Vector2 UIVisual::GetContentSize()

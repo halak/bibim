@@ -4,6 +4,7 @@
 #include <Bibim/Math.h>
 #include <Bibim/UIEffectMap.h>
 #include <Bibim/UIGeometryEffect.h>
+#include <Bibim/UITransform.h>
 #include <Bibim/UIVisual.h>
 #include <d3dx9.h>
 
@@ -49,12 +50,13 @@ namespace Bibim
 
     Vector2 UIVisualVisitor::Project(Vector2 point) const
     {
-        //D3DXVECTOR3 d3dPoint = D3DXVECTOR3(point.X, point.Y, 0.0f);
+        /*
+        D3DXVECTOR3 d3dPoint = D3DXVECTOR3(point.X, point.Y, 0.0f);
 
-        //D3DXVec3Project(d3dPoints, sizeof(D3DXVECTOR3), nullptr, (D3DXMATRIX*)&projectionTransform, (D3DXMATRIX*)&viewTransform, (D3DXMATRIX*)&currentTransform, 4);
+        D3DXVec3Project(d3dPoint, sizeof(D3DXVECTOR3), nullptr, (D3DXMATRIX*)&projectionTransform, (D3DXMATRIX*)&viewTransform, (D3DXMATRIX*)&currentTransform, 4);
 
-        //inOutPoint0 = Vector2(d3dPoints[0].x, d3dPoints[0].y);
-
+        inOutPoint0 = Vector2(d3dPoints[0].x, d3dPoints[0].y);
+        */
         return point;
     }
 
@@ -133,13 +135,11 @@ namespace Bibim
         currentClippedBounds = RectF::Intersect(currentClippedBounds, currentBounds);
         parentTransform = currentTransform;
         parentTransformInv = currentTransformInv;
-        /*
         if (target->GetTransform())
         {
             currentTransform *= target->GetTransform()->ComputeMatrix(*this);
             currentTransformInv = Matrix4::Inversion(currentTransform);
         }
-        */
 
         OnVisit();
 
