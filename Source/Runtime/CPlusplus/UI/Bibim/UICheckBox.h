@@ -28,6 +28,8 @@
                 virtual UIVisual* OnUpdateLayout();
 
                 virtual bool OnMouseClick(const UIMouseEventArgs& args);
+                virtual void OnChecked();
+                virtual void OnUnchecked();
 
             private:
                 UIVisualPtr checkedNormalVisual;

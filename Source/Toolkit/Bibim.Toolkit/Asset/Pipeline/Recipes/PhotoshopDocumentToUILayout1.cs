@@ -107,6 +107,22 @@ namespace Bibim.Asset.Pipeline.Recipes
                     window.AddChild(button);
                     Process(button, layer);
                 }
+                else if (string.Compare(type, "CheckBox", true) == 0)
+                {
+                    UICheckBox button = new UICheckBox();
+                    button.Name = name;
+                    button.IsPickable = true;
+                    window.AddChild(button);
+                    Process(button, layer);
+                }
+                else if (string.Compare(type, "Radio", true) == 0)
+                {
+                    UIRadioButton button = new UIRadioButton();
+                    button.Name = name;
+                    button.IsPickable = true;
+                    window.AddChild(button);
+                    Process(button, layer);
+                }
                 else
                 {
                     bool hasNormal = layer.FindSubLayer("#Normal", false) != null;
@@ -123,7 +139,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                         window.AddChild(button);
                         Process(button, layer);
                     }
-                    else if (hasNormal && hasPushed && hasCheckedNormal && hasCheckedPushed)
+                    else if (hasNormal && hasCheckedNormal)
                     {
                         UICheckBox button = new UICheckBox();
                         button.Name = name;
@@ -238,6 +254,49 @@ namespace Bibim.Asset.Pipeline.Recipes
                 button.Hovering = window;
                 AddChildTo(window, hovering, false);
             }
+        }
+
+        private void Process(UICheckBox button, PhotoshopDocument.Layer layer)
+        {
+            Process((UIButton)button, layer);
+
+            PhotoshopDocument.Layer normal = layer.FindSubLayer("#CheckedNormal", true);
+            PhotoshopDocument.Layer pushed = layer.FindSubLayer("#CheckedPushed", true);
+            PhotoshopDocument.Layer hovering = layer.FindSubLayer("#CheckedFocusing", true);
+
+            if (hovering == null)
+                hovering = layer.FindSubLayer("#CheckedHovering", true);
+            if (hovering == null)
+                hovering = normal;
+            if (pushed == null)
+                pushed = hovering;
+
+            if (normal != null)
+            {
+                var window = new UIWindow();
+                button.CheckedNormal = window;
+                button.CheckedNormal.Visibility = UIVisibility.Invisible;
+                AddChildTo(window, normal, false);
+            }
+            if (pushed != null)
+            {
+                var window = new UIWindow();
+                button.CheckedPushed = window;
+                button.CheckedPushed.Visibility = UIVisibility.Invisible;
+                AddChildTo(window, pushed, false);
+            }
+            if (hovering != null)
+            {
+                var window = new UIWindow();
+                button.CheckedHovering = window;
+                button.CheckedHovering.Visibility = UIVisibility.Invisible;
+                AddChildTo(window, hovering, false);
+            }
+        }
+
+        private void Process(UIRadioButton button, PhotoshopDocument.Layer layer)
+        {
+            Process((UICheckBox)button, layer);
         }
 
         private void Process(UIWindow window, PhotoshopDocument.Layer layer)

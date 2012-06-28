@@ -24,6 +24,13 @@
                 inline BlendMode GetMode() const;
                 inline void SetMode(BlendMode value);
 
+                inline const char* GetModeAsChars() const;
+                inline void SetModeByChars(const char* value);
+
+            private:
+                static BlendMode ConvertFromStringToBlendMode(const char* value);
+                static const char* ConvertFromBlendModeToString(BlendMode value);
+
             private:
                 class Effector : public UIRenderer::Effector
                 {
