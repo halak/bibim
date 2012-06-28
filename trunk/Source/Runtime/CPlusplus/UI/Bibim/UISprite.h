@@ -17,6 +17,9 @@
                 inline Image* GetImage() const;
                 void SetImage(Image* value);
 
+                Texture2D* GetTexture() const;
+                void SetTexture(Texture2D* value);
+
                 inline bool GetAutoResize() const;
                 inline void SetAutoResize(bool value);
 

@@ -39,7 +39,7 @@
                 virtual ~DynamicTexture2D();
 
                 bool Lock(LockedInfo& outLockedInfo);
-                bool Lock(LockedInfo& outLockedInfo, const Rect& Rect);
+                bool Lock(LockedInfo& outLockedInfo, const Rect& rect);
                 void Unlock(LockedInfo& outLockedInfo);
 
                 inline bool IsLocked() const;

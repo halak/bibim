@@ -11,13 +11,24 @@
     {
         const MouseState& Mouse::GetState()
         {
+            HWND handle = static_cast<HWND>(window->GetHandle());
             POINT windowsMousePosition = { 0, 0 };
             ::GetCursorPos(&windowsMousePosition);
-            ::ScreenToClient(static_cast<HWND>(window->GetHandle()), &windowsMousePosition);
+            ::ScreenToClient(handle, &windowsMousePosition);
             state.Position = Point2(windowsMousePosition.x, windowsMousePosition.y);
-            state.IsLeftButtonPressed   = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0x0000;
-            state.IsRightButtonPressed  = (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0x0000; 
-            state.IsMiddleButtonPressed = (GetAsyncKeyState(VK_MBUTTON) & 0x8000) != 0x0000;
+            if (::GetForegroundWindow() == handle)
+            {
+                state.IsLeftButtonPressed   = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0x0000;
+                state.IsRightButtonPressed  = (GetAsyncKeyState(VK_RBUTTON) & 0x8000) != 0x0000;
+                state.IsMiddleButtonPressed = (GetAsyncKeyState(VK_MBUTTON) & 0x8000) != 0x0000;
+            }
+            else
+            {
+                state.IsLeftButtonPressed   = false;
+                state.IsRightButtonPressed  = false;
+                state.IsMiddleButtonPressed = false;
+            }
+
             state.Wheel = 0;
             return state;
         }
