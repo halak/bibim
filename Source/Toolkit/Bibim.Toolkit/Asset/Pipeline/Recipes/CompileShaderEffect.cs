@@ -98,7 +98,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                 throw new FileNotFoundException(string.Empty, input);
 
             context.AddDependency(input);
-            string outputFXOFileName = Path.GetTempFileName();
+            string outputFXOFileName = Path.GetFileName(Path.GetTempFileName());
             StringBuilder definesArguments = new StringBuilder();
             foreach (var item in defines)
             {
@@ -123,19 +123,20 @@ namespace Bibim.Asset.Pipeline.Recipes
 
             string compileMessage = process.StandardOutput.ReadToEnd();
             string compileErrorMessage = process.StandardError.ReadToEnd().Replace(input, assetPath);
+            string outputFXOFilePath = Path.Combine(Path.GetDirectoryName(input), outputFXOFileName);
 
             if (string.IsNullOrEmpty(compileErrorMessage))
             {
                 Trace.WriteLine(string.Format("Compile result\n{0}", compileMessage));
 
                 byte[] buffer = null;
-                using (var fs = new FileStream(outputFXOFileName, FileMode.Open, FileAccess.Read))
+                using (var fs = new FileStream(outputFXOFilePath, FileMode.Open, FileAccess.Read))
                 {
                     BinaryReader fxoReader = new BinaryReader(fs);
                     buffer = fxoReader.ReadBytes((int)fs.Length);
                 }
 
-                File.Delete(outputFXOFileName);
+                File.Delete(outputFXOFilePath);
 
                 return new ShaderEffect(null)
                 {
@@ -144,7 +145,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             }
             else
             {
-                File.Delete(outputFXOFileName);
+                File.Delete(outputFXOFilePath);
                 throw new InvalidDataException(string.Format("Compile failure.\n{0}\n{1}\n{2}", compileMessage, compileErrorMessage, args));
             }
         }
