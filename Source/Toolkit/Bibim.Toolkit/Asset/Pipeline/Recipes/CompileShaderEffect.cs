@@ -98,6 +98,29 @@ namespace Bibim.Asset.Pipeline.Recipes
                 throw new FileNotFoundException(string.Empty, input);
 
             context.AddDependency(input);
+
+            StringBuilder outputString = new StringBuilder();
+            foreach (var item in defines)
+            {
+                if (string.IsNullOrEmpty(item.Value))
+                    outputString.AppendLine(string.Format("#define {0}", item.Key));
+                else
+                    outputString.AppendLine(string.Format("#define {0} {1}", item.Key, item.Value));
+            }
+
+            using (var inputStream = new FileStream(input, FileMode.Open, FileAccess.Read))
+            {
+                var reader = new StreamReader(inputStream);
+                while (reader.EndOfStream == false)
+                    outputString.AppendLine(reader.ReadLine());
+            }
+
+            return new ShaderEffect(null)
+            {
+                Tag = new ShaderEffectCookingTag(outputString.ToString())
+            };
+
+            /*
             string outputFXOFileName = Path.GetFileName(Path.GetTempFileName());
             StringBuilder definesArguments = new StringBuilder();
             foreach (var item in defines)
@@ -148,6 +171,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                 File.Delete(outputFXOFilePath);
                 throw new InvalidDataException(string.Format("Compile failure.\n{0}\n{1}\n{2}", compileMessage, compileErrorMessage, args));
             }
+            */
         }
     }
 }

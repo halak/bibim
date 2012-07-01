@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Bibim.Asset;
+using Bibim.IO;
 
 namespace Bibim.Graphics
 {
@@ -14,8 +15,7 @@ namespace Bibim.Graphics
             writer.Write(asset.GraphicsDevice);
 
             var tag = (ShaderEffectCookingTag)asset.Tag;
-            writer.Write(tag.Buffer.Length);
-            writer.Write(tag.Buffer);
+            writer.WriteBibimString(tag.Code);
         }
     }
 }

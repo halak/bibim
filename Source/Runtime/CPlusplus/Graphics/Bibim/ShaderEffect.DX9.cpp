@@ -106,15 +106,20 @@ namespace Bibim
     GameAsset* ShaderEffect::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
     {
         GraphicsDevice* graphicsDevice = static_cast<GraphicsDevice*>(reader.ReadModule(GraphicsDevice::ClassID));
+        const String code = reader.ReadString();
+        /*
         const int length = reader.ReadInt();
         std::vector<byte> buffer;
         buffer.resize(length);
         reader.Read(&buffer[0], length);
+        */
+
+        
 
         ID3DXEffect* d3dEffect = nullptr;
         /*HRESULT r = */D3DXCreateEffect(graphicsDevice->GetD3DDevice(),
-                         &buffer[0],
-                         length,
+                         code.CStr(),
+                         code.GetLength(),
                          NULL, NULL, 0, 0, &d3dEffect, 0);
 
         return new ShaderEffect(graphicsDevice, d3dEffect);
