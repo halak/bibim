@@ -6,7 +6,7 @@ namespace Bibim.Graphics
 {
     public sealed class ShaderEffectCookingTag
     {
-        public byte[] Buffer
+        public string Code
         {
             get;
             set;
@@ -14,12 +14,12 @@ namespace Bibim.Graphics
 
         public ShaderEffectCookingTag()
         {
-            Buffer = null;
+            Code = string.Empty;
         }
 
-        public ShaderEffectCookingTag(byte[] buffer)
+        public ShaderEffectCookingTag(string code)
         {
-            Buffer = buffer;
+            Code = code;
         }
     }
 }
