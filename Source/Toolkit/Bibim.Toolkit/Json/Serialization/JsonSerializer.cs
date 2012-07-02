@@ -586,6 +586,8 @@ namespace Bibim.Json.Serialization
             }
 
             Type type = FindType((string)properties[TypePropertyName]);
+            if (type == null)
+                throw new InvalidDataException(string.Format("Type not found. {0}", (string)properties[TypePropertyName]));
             object result = Activator.CreateInstance(type, true);
 
             if (0 <= id)
