@@ -722,22 +722,29 @@ namespace Bibim.Json.Serialization
 
         private Type FindType(string fullName)
         {
-            Type result = null;
-            if (nameTypeDictionary.TryGetValue(fullName, out result))
-                return result;
-            else
+            try
             {
-                foreach (var item in AppDomain.CurrentDomain.GetAssemblies())
+                Type result = null;
+                if (nameTypeDictionary.TryGetValue(fullName, out result))
+                    return result;
+                else
                 {
-                    foreach (var t in item.GetExportedTypes())
+                    foreach (var item in AppDomain.CurrentDomain.GetAssemblies())
                     {
-                        if (t.FullName == fullName || t.AssemblyQualifiedName == fullName)
+                        foreach (var t in item.GetExportedTypes())
                         {
-                            nameTypeDictionary.Add(fullName, t);
-                            return t;
+                            if (t.FullName == fullName || t.AssemblyQualifiedName == fullName)
+                            {
+                                nameTypeDictionary.Add(fullName, t);
+                                return t;
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(string.Format("fullName:{0}", fullName), ex);
             }
 
             return null;
