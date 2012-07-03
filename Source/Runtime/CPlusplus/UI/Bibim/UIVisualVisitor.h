@@ -13,6 +13,7 @@
         {
             BBThisIsNoncopyableClass(UIVisualVisitor);
             public:
+                explicit UIVisualVisitor(bool visibleOnly);
                 UIVisualVisitor(const Matrix4& viewTransform, const Matrix4& projectionTransform, bool visibleOnly);
                 UIVisualVisitor(const Matrix4& viewTransform, const Matrix4& viewTransformInv, const Matrix4& projectionTransform, bool visibleOnly);
                 virtual ~UIVisualVisitor();

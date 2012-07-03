@@ -1758,6 +1758,18 @@
 					Name="Visitors"
 					>
 					<File
+						RelativePath=".\UI\Bibim\UIBoundsContext.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIBoundsContext.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIBoundsContext.inl"
+						>
+					</File>
+					<File
 						RelativePath=".\UI\Bibim\UIDrawingContext.cpp"
 						>
 					</File>

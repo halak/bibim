@@ -6,6 +6,7 @@
 namespace Bibim
 {
     const String String::Empty = String(EmptyStringTag());
+    const String String::NewLine = String("\r\n");
     const byte String::UTF8BOM[3] = { 0xEF, 0xBB, 0xBF };
 
     String::String(const char* s, int startIndex)
@@ -471,7 +472,7 @@ namespace Bibim
         if (buffer->length < index + length)
             return -1;
 
-        const int lengthDifference = buffer->length - (index + length);
+        const int lengthDifference = buffer->length - length;
         for (int i = index; i < lengthDifference; i++)
         {
             int k = 0;

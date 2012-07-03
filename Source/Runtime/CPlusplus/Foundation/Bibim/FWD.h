@@ -266,6 +266,7 @@
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Visitors
                     class UIVisualVisitor;
+                        class UIBoundsContext;
                         class UIDrawingContext;
                             class UIHandledDrawingContext;
                         class UIPickingContext;

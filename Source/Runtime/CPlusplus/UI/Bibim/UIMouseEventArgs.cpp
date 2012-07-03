@@ -12,6 +12,15 @@ namespace Bibim
     {
     }
 
+    UIMouseEventArgs::UIMouseEventArgs(UIVisual* target)
+        : UIEventArgs(target),
+          position(Point2::Zero),
+          isLeftButtonPressed(false),
+          isRightButtonPressed(false),
+          isMiddleButtonPressed(false)
+    {
+    }
+
     UIMouseEventArgs::UIMouseEventArgs(UIVisual* target, Point2 position)
         : UIEventArgs(target),
           position(position),
