@@ -173,7 +173,7 @@ namespace Bibim
 
     void UIVisual::Click()
     {
-        RaiseMouseClickEvent(UIMouseEventArgs(this, Point2::Zero));
+        RaiseMouseClickEvent(UIMouseEventArgs(this));
     }
 
     void UIVisual::SetOpacity(float value)

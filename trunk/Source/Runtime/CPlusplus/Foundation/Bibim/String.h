@@ -134,6 +134,7 @@
 
             public:
                 static const String Empty;
+                static const String NewLine;
                 static const byte UTF8BOM[3];
 
             public:

@@ -15,7 +15,7 @@ namespace Bibim
     {
     }
 
-    const Matrix4& UITransform2D::ComputeMatrix(UIVisualVisitor& context)
+    const Matrix4& UITransform2D::ComputeMatrix(UIVisualVisitor& /*context*/)
     {
         return Matrix4::Identity;
     }
@@ -32,6 +32,6 @@ namespace Bibim
     void UITransform2D::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
-        const This* o = static_cast<const This*>(original);
+        // const This* o = static_cast<const This*>(original);
     }
 }

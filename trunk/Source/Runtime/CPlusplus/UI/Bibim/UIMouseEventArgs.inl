@@ -5,6 +5,16 @@
         return position;
     }
 
+    int UIMouseEventArgs::GetPositionX() const
+    {
+        return position.X;
+    }
+
+    int UIMouseEventArgs::GetPositionY() const
+    {
+        return position.Y;
+    }
+
     bool UIMouseEventArgs::IsLeftButtonPressed() const
     {
         return isLeftButtonPressed;

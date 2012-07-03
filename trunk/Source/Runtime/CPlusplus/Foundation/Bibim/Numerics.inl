@@ -1,5 +1,17 @@
 ﻿namespace Bibim
 {
+    bool Bool::Parse(const char* s)
+    {
+        return Parse(s, String::CharsLength(s));
+    }
+
+    bool Bool::Parse(const String& s)
+    {
+        return Parse(s.CStr(), s.GetLength());
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     byte Byte::Parse(const char* s)
     {
         return Parse(s, String::CharsLength(s));

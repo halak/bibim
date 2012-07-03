@@ -1,5 +1,6 @@
 ﻿#include <Bibim/Environment.Windows.h>
 #include <windows.h>
+#include <Shlobj.h>
 
 namespace Bibim
 {
@@ -7,6 +8,23 @@ namespace Bibim
 
     Environment::Environment()
     {
+        {
+            const LCID locale = ::GetUserDefaultLCID();
+            const WORD langID = LOWORD(locale);
+            switch (langID)
+            {
+                case MAKELANGID(LANG_KOREAN, SUBLANG_KOREAN):
+                    localeName = "ko-KR";
+                    break;
+                case MAKELANGID(LANG_JAPANESE, SUBLANG_JAPANESE_JAPAN):
+                    localeName = "ja-JP";
+                    break;
+                default:
+                    localeName = "en-US";
+                    break;
+            }
+        }
+
         {
             const DWORD wideWorkingDirectoryLength = ::GetCurrentDirectoryW(0, nullptr);
             wchar_t* wideWorkingDirectoryBuffer = BBStackAlloc(wchar_t, wideWorkingDirectoryLength);
@@ -27,20 +45,30 @@ namespace Bibim
         }
 
         {
-            const LCID locale = ::GetUserDefaultLCID();
-            const WORD langID = LOWORD(locale);
-            switch (langID)
+            char appDataDirectoryBuffer[MAX_PATH];
+            HRESULT result = ::SHGetFolderPathA(nullptr, CSIDL_APPDATA, nullptr, SHGFP_TYPE_CURRENT, appDataDirectoryBuffer);
+            if (result == S_OK)
             {
-                case MAKELANGID(LANG_KOREAN, SUBLANG_KOREAN):
-                    localeName = "ko-KR";
-                    break;
-                case MAKELANGID(LANG_JAPANESE, SUBLANG_JAPANESE_JAPAN):
-                    localeName = "ja-JP";
-                    break;
-                default:
-                    localeName = "en-US";
-                    break;
+                appDataDirectoryBase = appDataDirectoryBuffer;
             }
         }
+    }
+
+    String Environment::GetAppDataPath(const String& appName, const String& filename)
+    {
+        const String directory = PrivateInstance.appDataDirectoryBase + "\\" + appName;
+
+        DWORD attributes = ::GetFileAttributesA(directory.CStr());
+        if (attributes == INVALID_FILE_ATTRIBUTES)
+        {
+            if (::CreateDirectoryA(directory.CStr(), nullptr))
+                return directory + "\\" + filename;
+            else
+                return PrivateInstance.workingDirectory + "\\" + filename;
+        }
+        else if ((attributes & FILE_ATTRIBUTE_DIRECTORY) != 0)
+            return directory + "\\" + filename;
+        else
+            return PrivateInstance.workingDirectory + "\\" + filename;
     }
 }

@@ -33,7 +33,7 @@ namespace Bibim
 
     void UIPickingContext::SetResult(UIVisual* value)
     {
-        result = value;
+        this->result = value;
     }
 
     void UIPickingContext::OnVisit()

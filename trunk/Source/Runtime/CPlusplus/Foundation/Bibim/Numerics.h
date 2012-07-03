@@ -7,6 +7,30 @@
 
     namespace Bibim
     {
+        /// @brief bool형에 관련된 정보와 Method가 정의된 class
+        ///
+        /// C++의 bool, C#의 System.Bool와 같습니다. <br/>
+        class Bool
+        {
+            BBThisIsStaticClass(Bool);
+            public:
+                /// @brief 입력받은 문자열을 bool형으로 변환하여 반환합니다.
+                /// 
+                /// 문자열이 Y, YES, T, TRUE, OK면 (대소문자 구분 안함) true를 아니면 false를 반환합니다.
+                static inline bool Parse(const char* s);
+                /// @copybrief   Byte::Parse(const char*)
+                /// @copydetails Byte::Parse(const char*)
+                static inline bool Parse(const String& s);
+                /// @copybrief   Parse(const char*)
+                /// @copydetails Parse(const char*)
+                static bool Parse(const char* s, int length);
+
+                /// @brief 입력받은 값을 문자열로 변환하여 반환합니다.
+                ///
+                /// true면 "YES", false면 "NO"를 반환합니다.
+                static const String& ToString(bool value);
+        };
+
         /// @brief byte형에 관련된 정보와 Method가 정의된 class
         ///
         /// byte형은 음수가 없는 8bit 정수형입니다. <br/>
@@ -30,6 +54,9 @@
                 /// @copybrief   Parse(const char*)
                 /// @copydetails Parse(const char*)
                 static byte Parse(const char* s, int length);
+
+                /// @brief 입력받은 값을 문자열로 변환하여 반환합니다.
+                static String ToString(byte value);
         };
 
         /// @brief short형에 관련된 정보와 Method가 정의된 class
@@ -55,6 +82,9 @@
                 /// @copybrief   Parse(const char*)
                 /// @copydetails Parse(const char*)
                 static short Parse(const char* s, int length);
+
+                /// @brief 입력받은 값을 문자열로 변환하여 반환합니다.
+                static String ToString(short value);
         };
 
         /// @brief int형에 관련된 정보와 Method가 정의된 class
@@ -80,6 +110,9 @@
                 /// @copybrief   Parse(const char*)
                 /// @copydetails Parse(const char*)
                 static int Parse(const char* s, int length);
+
+                /// @brief 입력받은 값을 문자열로 변환하여 반환합니다.
+                static String ToString(int value);
         };
 
         /// @brief longint형에 관련된 정보와 Method가 정의된 class
@@ -105,6 +138,9 @@
                 /// @copybrief   Parse(const char*)
                 /// @copydetails Parse(const char*)
                 static longint Parse(const char* s, int length);
+
+                /// @brief 입력받은 값을 문자열로 변환하여 반환합니다.
+                static String ToString(longint value);
         };
 
         /// @brief float형에 관련된 정보와 Method가 정의된 class
@@ -130,6 +166,9 @@
                 /// @copybrief   Parse(const char*)
                 /// @copydetails Parse(const char*)
                 static float Parse(const char* s, int length);
+
+                /// @brief 입력받은 값을 문자열로 변환하여 반환합니다.
+                static String ToString(float value);
         };
 
         /// @brief double형에 관련된 정보와 Method가 정의된 class
@@ -155,6 +194,9 @@
                 /// @copybrief   Parse(const char*)
                 /// @copydetails Parse(const char*)
                 static double Parse(const char* s, int length);
+
+                /// @brief 입력받은 값을 문자열로 변환하여 반환합니다.
+                static String ToString(double value);
         };
     }
 

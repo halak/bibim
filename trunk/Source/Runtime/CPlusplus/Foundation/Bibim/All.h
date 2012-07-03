@@ -219,6 +219,7 @@
 #  include <Bibim/UIMouseWheelEventArgs.h>
 #  include <Bibim/UIPanel.h>
 #  include <Bibim/UIPickingContext.h>
+#   include <Bibim/UIBoundsContext.h>
 #  include <Bibim/UIRenderer.h>
 #  include <Bibim/UISequentialEventHandler.h>
 #  include <Bibim/UISimpleDomain.h>
