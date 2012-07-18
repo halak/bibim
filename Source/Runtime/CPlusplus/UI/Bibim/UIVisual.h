@@ -83,6 +83,8 @@
                 inline float GetHeight() const;
                 inline void  SetHeight(float value);
 
+                inline void SetSize(float width, float height);
+
                 inline PositionMode GetXMode() const;
                 inline void SetXMode(PositionMode value);
 

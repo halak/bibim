@@ -98,6 +98,12 @@
         height = value > 0.0f ? value : 0.0f;
     }
 
+    void UIVisual::SetSize(float width, float height)
+    {
+        SetWidth(width);
+        SetHeight(height);
+    }
+
     UIVisual::PositionMode UIVisual::GetXMode() const
     {
         return static_cast<PositionMode>(xMode);

@@ -5,6 +5,7 @@
 
 #   define WIN32_LEAN_AND_MEAN
 #   include <windows.h>
+#   include <vector>
 
     namespace Bibim
     {
@@ -63,8 +64,12 @@
             if (title != value)
             {
                 title = value;
+
+                std::vector<wchar_t> wideCharacters;
+                wideCharacters.resize(MultiByteToWideChar(CP_UTF8, 0, title.CStr(), title.GetLength(), nullptr, 0) + 1, L'\0');
+                MultiByteToWideChar(CP_UTF8, 0, title.CStr(), title.GetLength(), &wideCharacters[0], wideCharacters.size());
                 
-                ::SetWindowText(static_cast<HWND>(handle), title.CStr());
+                ::SetWindowTextW(static_cast<HWND>(handle), &wideCharacters[0]);
             }
         }
 
