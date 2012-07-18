@@ -72,6 +72,11 @@
                 F11 = 0x7A,
                 F12 = 0x7B,
 
+                Insert = 0x2D,
+                Delete = 0x2E,
+                Home = 0x24,
+                End = 0x23,
+
                 MouseLeftButton = 0x01,
                 MouseRightButton = 0x02,
                 MouseMiddleButton = 0x04,

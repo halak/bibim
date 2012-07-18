@@ -18,6 +18,8 @@ namespace Bibim
           horizontalFlip(false),
           verticalFlip(false)
     {
+        SetSize(1.0f, 1.0f);
+        SetSizeMode(ContentSize, ContentSize);
     }
 
     UISprite::~UISprite()

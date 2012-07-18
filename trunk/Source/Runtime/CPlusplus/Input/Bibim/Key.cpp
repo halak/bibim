@@ -64,7 +64,10 @@ namespace Bibim
         F10,
         F11,
         F12,
-
+        Insert,
+        Delete,
+        Home,
+        End,
         None,
     };
 
@@ -152,6 +155,10 @@ namespace Bibim
         BBAddKeyEntry(F10);
         BBAddKeyEntry(F11);
         BBAddKeyEntry(F12);
+        BBAddKeyEntry(Insert);
+        BBAddKeyEntry(Delete);
+        BBAddKeyEntry(Home);
+        BBAddKeyEntry(End);
         BBAddKeyEntry(MouseLeftButton);
         BBAddKeyEntry(MouseRightButton);
         BBAddKeyEntry(MouseMiddleButton);
