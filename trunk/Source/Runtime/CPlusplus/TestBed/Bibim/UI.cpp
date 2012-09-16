@@ -1,9 +1,11 @@
 ﻿#include <Bibim/TestBed.h>
 #include <Bibim/GameFramework.h>
+#include <Bibim/BitMask.h>
 #include <Bibim/Clock.h>
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/GameModuleNode.h>
 #include <Bibim/GameModuleTree.h>
+#include <Bibim/GameWindow.h>
 #include <Bibim/GraphicsDevice.h>
 #include <Bibim/Image.h>
 #include <Bibim/PipedAssetProvider.h>
@@ -32,7 +34,8 @@ class UISample : public GameFramework
             FileAssetProvider*  fap = new FileAssetProvider(gas);
 
             UIWindowPtr window = new UIWindow();
-            window->SetFrame(new UIFixedFrame(RectF(0, 0, 800, 600)));
+            window->SetSize(800, 600);
+            window->SetSizeMode(UIVisual::AbsoluteSize);
 
             UIDomain*           uid = new UISimpleDomain(window);
             UIRenderer*         uir = new UIRenderer(GetGraphicsDevice(), gas, "Asset\\Shader");
@@ -45,7 +48,6 @@ class UISample : public GameFramework
             uiNode->AttachChild(uir);
 
             UISprite* sprite = new UISprite();
-            sprite->SetFrame(UIFittedFrame::Instance);
             sprite->SetImage(new Image(static_cast<Texture2D*>(gas->Load("Asset\\Background"))));
             sprite->SetEffectMap(new UIEffectMap());
             maskEffect = new UIOpacityMaskEffect(new Image(static_cast<Texture2D*>(gas->Load("Asset\\OpacityMap"))));
