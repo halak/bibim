@@ -91,6 +91,7 @@
                 inline PositionMode GetYMode() const;
                 inline void SetYMode(PositionMode value);
 
+                inline void SetXYMode(PositionMode xyMode);
                 inline void SetXYMode(PositionMode xMode, PositionMode yMode);
 
                 inline SizeMode GetWidthMode() const;
@@ -99,6 +100,7 @@
                 inline SizeMode GetHeightMode() const;
                 inline void SetHeightMode(SizeMode value);
 
+                inline void SetSizeMode(SizeMode sizeMode);
                 inline void SetSizeMode(SizeMode widthMode, SizeMode heightMode);
 
                 inline AnchorPoint GetAlignment() const;

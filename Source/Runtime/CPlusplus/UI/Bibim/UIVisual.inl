@@ -124,6 +124,12 @@
         yMode = static_cast<byte>(value);
     }
 
+    void UIVisual::SetXYMode(PositionMode xyMode)
+    {
+        this->xMode = static_cast<byte>(xyMode);
+        this->yMode = this->xMode;
+    }
+
     void UIVisual::SetXYMode(PositionMode xMode, PositionMode yMode)
     {
         this->xMode = static_cast<byte>(xMode);
@@ -148,6 +154,12 @@
     void UIVisual::SetHeightMode(SizeMode value)
     {
         heightMode = static_cast<byte>(value);
+    }
+
+    void UIVisual::SetSizeMode(SizeMode sizeMode)
+    {
+        this->widthMode = static_cast<byte>(sizeMode);
+        this->heightMode = this->widthMode;
     }
 
     void UIVisual::SetSizeMode(SizeMode widthMode, SizeMode heightMode)

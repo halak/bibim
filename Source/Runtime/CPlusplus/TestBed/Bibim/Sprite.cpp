@@ -1,9 +1,11 @@
 ﻿#include <Bibim/TestBed.h>
 #include <Bibim/GameFramework.h>
 #include <Bibim/Any.h>
+#include <Bibim/BitMask.h>
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/GameModuleNode.h>
 #include <Bibim/GameModuleTree.h>
+#include <Bibim/GameWindow.h>
 #include <Bibim/GraphicsDevice.h>
 #include <Bibim/PipedAssetProvider.h>
 #include <Bibim/FileAssetProvider.h>
@@ -32,7 +34,8 @@ class SpriteTest : public GameFramework
             FileAssetProvider*  fap = new FileAssetProvider(gas);
 
             UIWindowPtr window = new UIWindow();
-            window->SetFrame(new UIFixedFrame(RectF(0, 0, 800, 600)));
+            window->SetSize(800, 600);
+            window->SetSizeMode(UIVisual::AbsoluteSize);
 
             UIDomain*           uid = new UISimpleDomain(window);
             UIRenderer*         uir = new UIRenderer(GetGraphicsDevice(), gas, String::Empty);
