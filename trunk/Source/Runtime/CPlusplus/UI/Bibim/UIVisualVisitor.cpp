@@ -11,7 +11,7 @@
 namespace Bibim
 {
     static const float BigFloat = 10000.0f;
-    static const RectF BigRect = RectF(0.0f, 0.0f, 800.0f, 600.0f);
+    static const RectF BigRect = RectF(0.0f, 0.0f, 1024.0f, 768.0f);
 
     UIVisualVisitor::UIVisualVisitor(bool visibleOnly)
         : visibleOnly(visibleOnly),
@@ -171,8 +171,8 @@ namespace Bibim
 
     Vector2 UIVisualVisitor::UnprojectPoint(Vector2 point, const Matrix4& inversedTransform) const
     {
-        const float width  = 800.0f;
-        const float height = 600.0f;
+        const float width  = 1024.0f;
+        const float height = 768.0f;
         const D3DXVECTOR3 direction = D3DXVECTOR3(+(((2.0f * point.X) / width ) - 1.0f) / projectionTransform.M00,
                                                   -(((2.0f * point.Y) / height) - 1.0f) / projectionTransform.M11,
                                                   1.0f);
