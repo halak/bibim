@@ -16,7 +16,7 @@ namespace Bibim
           d3dDevice(nullptr),
           d3dBackbufferSurface(nullptr),
           window(nullptr),
-          resolution(800, 600),
+          resolution(1024, 768),
           defaultSwapChain(nullptr),
           viewport(Rect::Empty),
           fullscreen(false)
