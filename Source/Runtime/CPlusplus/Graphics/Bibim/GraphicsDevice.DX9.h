@@ -38,6 +38,8 @@
                 inline const Rect& GetViewport() const;
                 void SetViewport(const Rect& value);
 
+                inline Point2 GetResolution() const;
+
                 inline const GraphicsCapabilities& GetCapabilities() const;
 
                 DisplaySwapChain* GetDefaultSwapChain();

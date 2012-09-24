@@ -18,17 +18,36 @@
 
         GameFramework::GameFramework()
         {
+            Construct(0, 0);
+        }
+
+        GameFramework::GameFramework(int resolutionWidth, int resolutionHeight)
+        {
+            Construct(resolutionWidth, resolutionHeight);
+        }
+
+        GameFramework::~GameFramework()
+        {
+            delete modules;
+        }
+
+        void GameFramework::Construct(int resolutionWidth, int resolutionHeight)
+        {
             _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
             Startup::All();
 
             modules = new GameModuleTree();
             window = new GameWindow();
-            graphicsDevice = new GraphicsDevice();
+            if (resolutionWidth == 0 || resolutionHeight == 0)
+                graphicsDevice = new GraphicsDevice();
+            else
+                graphicsDevice = new GraphicsDevice(resolutionWidth, resolutionHeight);
             mainTimeline = new Timeline();
             fixedTimeStep = true;
             fixedElapsedTime = 1.0f / static_cast<float>(GeneralFPS);
             maxTimeInOneFrame = 1.0f;
             desiredFPS = GeneralFPS;
+            window->SetSize(graphicsDevice->GetResolution());
 
             modules->GetRoot()->AttachChild(window);
             modules->GetRoot()->AttachChild(graphicsDevice);
@@ -51,11 +70,6 @@
             //    sleepDuration = 1;
             //else
             //    sleepDuration = 0;
-        }
-
-        GameFramework::~GameFramework()
-        {
-            delete modules;
         }
 
         void GameFramework::Run()

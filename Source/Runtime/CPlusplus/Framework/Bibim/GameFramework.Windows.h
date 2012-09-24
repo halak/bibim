@@ -39,6 +39,9 @@
 
                 protected:
                     GameFramework();
+                    GameFramework(int resolutionWidth, int resolutionHeight);
+
+                    void Construct(int resolutionWidth, int resolutionHeight);
 
                     virtual void Initialize();
                     virtual void Finalize();
