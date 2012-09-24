@@ -48,7 +48,9 @@
                 Vector2 UnprojectPoint(Vector2 point, const Matrix4& inversedTransform) const;
 
             private:
-                 bool visibleOnly;
+                RectF viewport;
+                float fieldOfView;
+                bool visibleOnly;
 
                 UIVisualPtr currentVisual;
                 float currentOpacity;

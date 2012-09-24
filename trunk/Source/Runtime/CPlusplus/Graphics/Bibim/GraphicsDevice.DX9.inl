@@ -15,6 +15,11 @@
         return viewport;
     }
 
+    Point2 GraphicsDevice::GetResolution() const
+    {
+        return resolution;
+    }
+
     const GraphicsCapabilities& GraphicsDevice::GetCapabilities() const
     {
         return capabilities;
