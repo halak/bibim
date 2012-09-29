@@ -23,7 +23,7 @@
                 Vector2 GetScaledMax();
 
                 virtual bool Raycast(Vector2 origin, Vector2 direction, float length, RaycastReport2D& outReport, IRaycastCallback2D* callback);
-                virtual void AppendTo(std::list<Vector2>& vertices);
+                virtual void Build(Vertices& vertices);
 
             private:
                 void UpdateParameters();

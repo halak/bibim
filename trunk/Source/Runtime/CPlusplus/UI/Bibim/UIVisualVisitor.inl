@@ -1,5 +1,10 @@
 ﻿namespace Bibim
 {
+    const RectF& UIVisualVisitor::GetViewport() const
+    {
+        return viewport;
+    }
+
     bool UIVisualVisitor::GetVisibleOnly() const
     {
         return visibleOnly;

@@ -145,12 +145,9 @@ namespace Bibim
         return false;
     }
 
-    void BoxShape2D::AppendTo(std::list<Vector2>& vertices)
+    void BoxShape2D::Build(Vertices& vertices)
     {
-        vertices.push_back(GetP0());
-        vertices.push_back(GetP1());
-        vertices.push_back(GetP2());
-        vertices.push_back(GetP3());
+        vertices.Append(GetP0(), GetP1(), GetP2(), GetP3());
     }
 
     void BoxShape2D::OnRead(ComponentStreamReader& reader)

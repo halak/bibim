@@ -808,26 +808,6 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="FileSystem"
-				>
-				<File
-					RelativePath=".\FileSystem\Bibim\FileStream.h"
-					>
-				</File>
-				<File
-					RelativePath=".\FileSystem\Bibim\FileStream.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\FileSystem\Bibim\FileStream.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\FileSystem\Bibim\FileStream.Windows.inl"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="Framework"
 				>
 				<File
@@ -2110,6 +2090,26 @@
 						>
 					</File>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="FileSystem"
+				>
+				<File
+					RelativePath=".\FileSystem\Bibim\FileStream.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\FileStream.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\FileStream.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\FileStream.Windows.inl"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

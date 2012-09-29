@@ -83,16 +83,16 @@ namespace Bibim
         return false;
     }
 
-    void AxisAlignedBoxShape2D::AppendTo(std::list<Vector2>& vertices)
+    void AxisAlignedBoxShape2D::Build(Vertices& vertices)
     {
         if (GetScale() > 0.0f)
         {
             const Vector2 scaledMin = GetScaledMin();
             const Vector2 scaledMax = GetScaledMax();
-            vertices.push_back(Vector2(scaledMin.X, scaledMin.Y));
-            vertices.push_back(Vector2(scaledMax.X, scaledMin.Y));
-            vertices.push_back(Vector2(scaledMax.X, scaledMax.Y));
-            vertices.push_back(Vector2(scaledMin.X, scaledMax.Y));
+            vertices.Append(Vector2(scaledMin.X, scaledMin.Y),
+                            Vector2(scaledMax.X, scaledMin.Y),
+                            Vector2(scaledMax.X, scaledMax.Y),
+                            Vector2(scaledMin.X, scaledMax.Y));
         }
     }
 

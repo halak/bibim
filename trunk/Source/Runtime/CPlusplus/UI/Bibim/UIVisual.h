@@ -63,6 +63,8 @@
                 void BringToFront();
                 void SendToBack();
 
+                void AlignTo(AnchorPoint point);
+
                 void Click();
 
                 inline void SetAbsoluteBounds(int x, int y, int width, int height);
@@ -103,8 +105,11 @@
                 inline void SetSizeMode(SizeMode sizeMode);
                 inline void SetSizeMode(SizeMode widthMode, SizeMode heightMode);
 
-                inline AnchorPoint GetAlignment() const;
-                inline void SetAlignment(AnchorPoint value);
+                inline Vector2 GetOrigin() const;
+                inline void SetOrigin(Vector2 value);
+
+                inline AnchorPoint GetAnchorPoint() const;
+                inline void SetAnchorPoint(AnchorPoint value);
 
                 inline float GetOpacity() const;
                 void SetOpacity(float value);
@@ -132,6 +137,8 @@
                 inline bool IsVisible() const;
                 virtual bool IsPanel() const;
 
+                inline void AlignToByChars(const char* value);
+
                 inline const char* GetXModeAsChars() const;
                 inline void SetXModeByChars(const char* value);
 
@@ -148,8 +155,12 @@
 
                 inline void SetSizeModeByChars(const char* widthMode, const char* heightMode);
 
-                inline const char* GetAlignmentAsChars() const;
-                inline void SetAlignmentByChars(const char* value);
+                inline float GetOriginX() const;
+                inline float GetOriginY() const;
+                inline void SetOriginXY(float x, float y);
+
+                inline const char* GetAnchorPointAsChars() const;
+                inline void SetAnchorPointByChars(const char* value);
 
                 inline const char* GetVisibilityAsChars() const;
                 inline void SetVisibilityByChars(const char* value);
@@ -220,7 +231,8 @@
                 float y;
                 float width;
                 float height;
-                byte alignment;
+                Vector2 origin;
+                byte anchorPoint;
                 byte opacity;
                 byte visibility;
                 byte zOrder;

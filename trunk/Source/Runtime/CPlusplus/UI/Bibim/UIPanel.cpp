@@ -149,6 +149,12 @@ namespace Bibim
         OnChildrenRemoved(removingChildren);
     }
 
+    void UIPanel::DrawChild(UIDrawingContext& context, UIVisual* child)
+    {
+        if (child && child->GetParent() == this)
+            context.DrawChild(child);
+    }
+
     void UIPanel::DrawChildren(UIDrawingContext& context)
     {
         for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)

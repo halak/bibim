@@ -19,9 +19,9 @@ namespace Bibim
         return false;
     }
 
-    void PointShape2D::AppendTo(std::list<Vector2>& vertices)
+    void PointShape2D::Build(Vertices& vertices)
     {
-        vertices.push_back(GetPosition());
+        vertices.Append(GetPosition());
     }
 
     void PointShape2D::OnRead(ComponentStreamReader& reader)

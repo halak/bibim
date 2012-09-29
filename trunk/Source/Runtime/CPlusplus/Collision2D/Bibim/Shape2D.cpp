@@ -68,4 +68,50 @@ namespace Bibim
         scale = o->scale;
         revision = o->revision;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Shape2D::SimpleVertices::SimpleVertices()
+    {
+    }
+
+    Shape2D::SimpleVertices::~SimpleVertices()
+    {
+    }
+
+    void Shape2D::SimpleVertices::Clear()
+    {
+        v.clear();
+    }
+
+    void Shape2D::SimpleVertices::Append(Vector2 p0)
+    {
+        v.push_back(p0);
+    }
+
+    void Shape2D::SimpleVertices::Append(Vector2 p0, Vector2 p1)
+    {
+        v.push_back(p0);
+        v.push_back(p1);
+    }
+
+    void Shape2D::SimpleVertices::Append(Vector2 p0, Vector2 p1, Vector2 p2)
+    {
+        v.push_back(p0);
+        v.push_back(p1);
+        v.push_back(p2);
+    }
+
+    void Shape2D::SimpleVertices::Append(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3)
+    {
+        v.push_back(p0);
+        v.push_back(p1);
+        v.push_back(p2);
+        v.push_back(p3);
+    }
+
+    void Shape2D::SimpleVertices::Append(const std::vector<Vector2>& p)
+    {
+        v.insert(v.end(), p.begin(), p.end());
+    }
 }

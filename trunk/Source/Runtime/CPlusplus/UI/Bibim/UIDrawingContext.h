@@ -20,13 +20,17 @@
                 inline void Draw(Image* image, bool horizontalFlip, bool verticalFlip);
                 void Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, bool horizontalFlip, bool verticalFlip);
                 void Draw(Vector2 position, Texture2D* texture);
+                void Draw(Shape2D* shape, Color color);
 
                 inline void DrawString(Font* font, const String& text);
                 inline void DrawString(const FontString& fontString);
                 inline void DrawString(Vector2 position, Font* font, const String& text);
                 void DrawString(const RectF& bounds, const RectF& clippedBounds, Font* font, const String& text);
                 void DrawString(const RectF& bounds, const RectF& clippedBounds, const FontString& fontString);
+                void DrawLine(Vector2 p0, Vector2 p1, Color color);
+                void DrawLines(int count, Vector2* p, Color color);
                 void DrawRect(const RectF& bounds, float width, Color color);
+                void DrawCircle(Vector2 center, float radius, Color color);
 
                 void FillRect(const RectF& bounds, float width, Color color);
 
