@@ -168,14 +168,24 @@
         this->heightMode = static_cast<byte>(heightMode);
     }
 
-    UIVisual::AnchorPoint UIVisual::GetAlignment() const
+    Vector2 UIVisual::GetOrigin() const
     {
-        return static_cast<AnchorPoint>(alignment);
+        return origin;
     }
 
-    void UIVisual::SetAlignment(AnchorPoint value)
+    void UIVisual::SetOrigin(Vector2 value)
     {
-        alignment = static_cast<byte>(value);
+        origin = value;
+    }
+
+    UIVisual::AnchorPoint UIVisual::GetAnchorPoint() const
+    {
+        return static_cast<AnchorPoint>(anchorPoint);
+    }
+
+    void UIVisual::SetAnchorPoint(AnchorPoint value)
+    {
+        anchorPoint = static_cast<byte>(value);
     }
 
     float UIVisual::GetOpacity() const
@@ -231,6 +241,11 @@
     bool UIVisual::IsVisible() const
     {
         return GetVisibility() == Visible && GetOpacity() > 0.0f;
+    }
+
+    void UIVisual::AlignToByChars(const char* value)
+    {
+        AlignTo(ConvertFromStringToAnchorPoint(value));
     }
 
     const char* UIVisual::GetXModeAsChars() const
@@ -303,14 +318,29 @@
         }
     }
 
-    const char* UIVisual::GetAlignmentAsChars() const
+    float UIVisual::GetOriginX() const
     {
-        return ConvertFromAnchorPointToString(GetAlignment());
+        return GetOrigin().X;
     }
 
-    void UIVisual::SetAlignmentByChars(const char* value)
+    float UIVisual::GetOriginY() const
     {
-        SetAlignment(ConvertFromStringToAnchorPoint(value));
+        return GetOrigin().Y;
+    }
+    
+    void UIVisual::SetOriginXY(float x, float y)
+    {
+        SetOrigin(Vector2(x, y));
+    }
+
+    const char* UIVisual::GetAnchorPointAsChars() const
+    {
+        return ConvertFromAnchorPointToString(GetAnchorPoint());
+    }
+
+    void UIVisual::SetAnchorPointByChars(const char* value)
+    {
+        SetAnchorPoint(ConvertFromStringToAnchorPoint(value));
     }
 
     const char* UIVisual::GetVisibilityAsChars() const

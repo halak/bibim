@@ -34,6 +34,7 @@
                 bool RemoveAt(int index);
                 void RemoveAll();
 
+                void DrawChild(UIDrawingContext& context, UIVisual* child);
                 void DrawChildren(UIDrawingContext& context);
 
                 virtual void OnDraw(UIDrawingContext& context);

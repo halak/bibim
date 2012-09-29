@@ -35,6 +35,9 @@
                 void Setup(const std::vector<EffectorPtr>& effectors);
                 BlendMode Setup(BlendMode value);
 
+                void DrawLines(int count, const Vector2* p, Color color);
+                void DrawLines(int count, const Vector2* p, Color* c);
+
                 void DrawQuad(const Vector2* p, Color color);
                 void DrawQuad(const Vector2* p, Color color, const Vector2* uv,  Texture2D* texture);
                 void DrawQuad(const Vector2* p, Color color, const Vector2* uv1, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2);
@@ -118,6 +121,11 @@
                 void Flush();
                 void ReserveCachedQuads(int capacity);
                 void UpdateViewProjectionTransform();
+
+                inline void DrawPrimitives(D3DPRIMITIVETYPE primitiveType, int numberOfPrimitives);
+                inline void DrawPrimitives(D3DPRIMITIVETYPE primitiveType, int numberOfPrimitives, Texture2D* texture);
+                inline void DrawPrimitives(D3DPRIMITIVETYPE primitiveType, int numberOfPrimitives, Texture2D* texture, Texture2D* mask);
+                void DrawPrimitivesActually(D3DPRIMITIVETYPE primitiveType, PixelMode pixelMode, int numberOfPrimitives, Texture2D* texture, Texture2D* mask);
 
             private:
                 GraphicsDevice* graphicsDevice;

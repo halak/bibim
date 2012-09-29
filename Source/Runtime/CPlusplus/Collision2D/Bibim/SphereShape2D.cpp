@@ -80,7 +80,7 @@ namespace Bibim
         return false;
     }
 
-    void SphereShape2D::AppendTo(std::list<Vector2>& vertices)
+    void SphereShape2D::Build(Vertices& vertices)
     {
         const float scaledRadius = GetScaledRadius();
         if (scaledRadius > 0.0f)
@@ -89,8 +89,8 @@ namespace Bibim
             const float increment = Math::TwoPi / 32.0f;
             for (float r = 0.0f; r < Math::TwoPi; r += increment)
             {
-                vertices.push_back(Vector2(center.X + scaledRadius * Math::Sin(r),
-                                           center.Y + scaledRadius * Math::Cos(r)));
+                vertices.Append(Vector2(center.X + scaledRadius * Math::Sin(r),
+                                        center.Y + scaledRadius * Math::Cos(r)));
             }
         }
     }

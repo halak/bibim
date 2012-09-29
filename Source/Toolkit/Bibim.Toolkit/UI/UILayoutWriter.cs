@@ -146,7 +146,8 @@ namespace Bibim.UI
             writer.Write(o.Y);
             writer.Write(o.Width);
             writer.Write(o.Height);
-            writer.Write((byte)o.Alignment);
+            writer.Write(o.Origin);
+            writer.Write((byte)o.AnchorPoint);
             writer.Write((byte)(o.Opacity * 255.0f));
             writer.Write((byte)o.Visibility);
             writer.Write((byte)o.ZOrder);

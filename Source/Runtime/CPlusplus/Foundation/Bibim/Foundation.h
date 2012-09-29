@@ -49,7 +49,7 @@
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Macro Functions
-#       define BBStackAlloc(type, count) reinterpret_cast<type*>(_malloca(sizeof(type) * count))
+#       define BBStackAlloc(type, count) reinterpret_cast<type*>(_malloca(sizeof(type) * (count)))
 #       define BBStackFree(pointer) (_freea(pointer))
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////

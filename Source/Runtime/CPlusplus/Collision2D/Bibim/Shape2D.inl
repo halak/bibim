@@ -24,4 +24,11 @@
     {
         return revision;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    const std::list<Vector2>& Shape2D::SimpleVertices::GetData() const
+    {
+        return v;
+    }
 }

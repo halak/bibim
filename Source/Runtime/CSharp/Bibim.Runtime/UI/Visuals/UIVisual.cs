@@ -106,7 +106,13 @@ namespace Bibim.UI.Visuals
             set;
         }
 
-        public UIAnchorPoint Alignment
+        public Vector2 Origin
+        {
+            get;
+            set;
+        }
+
+        public UIAnchorPoint AnchorPoint
         {
             get;
             set;
@@ -197,7 +203,8 @@ namespace Bibim.UI.Visuals
             Y = 0.0f;
             Width = 1.0f;
             Height = 1.0f;
-            Alignment = UIAnchorPoint.LeftTop;
+            Origin = Vector2.Zero;
+            AnchorPoint = UIAnchorPoint.LeftTop;
             opacity = 255;
             Visibility = UIVisibility.Visible;
             zOrder = 0;

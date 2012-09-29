@@ -114,13 +114,10 @@ namespace Bibim
         return false;
     }
 
-    void SegmentShape2D::AppendTo(std::list<Vector2>& vertices)
+    void SegmentShape2D::Build(Vertices& vertices)
     {
         if (GetScale() > 0.0f && GetLength() > 0.0f)
-        {
-            vertices.push_back(GetStartPoint());
-            vertices.push_back(GetEndPoint());
-        }
+            vertices.Append(GetStartPoint(), GetEndPoint());
     }
 
     void SegmentShape2D::OnRead(ComponentStreamReader& reader)

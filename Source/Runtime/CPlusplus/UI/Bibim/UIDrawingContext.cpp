@@ -6,6 +6,8 @@
 #include <Bibim/GraphicsCapabilities.h>
 #include <Bibim/GraphicsDevice.h>
 #include <Bibim/Image.h>
+#include <Bibim/Math.h>
+#include <Bibim/Shape2D.h>
 #include <Bibim/UIRenderer.h>
 #include <Bibim/UIEffectStack.h>
 #include <Bibim/UIVisual.h>
@@ -252,6 +254,59 @@ namespace Bibim
         renderer->DrawQuad(points, color, RectF(0.0f, 0.0f, 1.0f, 1.0f), texture);
     }
 
+    void UIDrawingContext::Draw(Shape2D* shape, Color color)
+    {
+        if (shape == nullptr)
+            return;
+
+        class VisibleVertices : public Shape2D::Vertices
+        {
+            public:
+                VisibleVertices() { }
+                virtual ~VisibleVertices() { }
+
+                virtual void Append(Vector2 p0)
+                {
+                    data.push_back(p0);
+                }
+
+                virtual void Append(Vector2 p0, Vector2 p1)
+                {
+                    data.push_back(p0);
+                    data.push_back(p1);
+                }
+
+                virtual void Append(Vector2 p0, Vector2 p1, Vector2 p2)
+                {
+                    data.push_back(p0);
+                    data.push_back(p1);
+                    data.push_back(p2);
+                }
+
+                virtual void Append(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3)
+                {
+                    data.push_back(p0);
+                    data.push_back(p1);
+                    data.push_back(p2);
+                    data.push_back(p3);
+                }
+
+                virtual void Append(const std::vector<Vector2>& p)
+                { 
+                    data.insert(data.end(), p.begin(), p.end());
+                }
+
+            public:
+                std::vector<Vector2> data;
+        };
+
+        VisibleVertices v;
+        shape->Build(v);
+
+        if (v.data.empty() == false)
+            DrawLines(static_cast<int>(v.data.size()), &v.data[0], color);
+    }
+
     void UIDrawingContext::DrawString(const RectF& bounds, const RectF& clippedBounds, Font* font, const String& text)
     {
         DrawString(bounds, clippedBounds, FontString(font, text));
@@ -327,9 +382,46 @@ namespace Bibim
         renderer->EndBatch();
     }
 
+    void UIDrawingContext::DrawLine(Vector2 p0, Vector2 p1, Color color)
+    {
+        const Vector2 p[] = { p0, p1 };
+        color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
+        renderer->DrawLines(sizeof(p) / sizeof(p[0]), p, color);
+    }
+
+    void UIDrawingContext::DrawLines(int count, Vector2* p, Color color)
+    {
+        if (count <= 1)
+            return;
+
+        color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
+        renderer->DrawLines(count, p, color);
+    }
+
     void UIDrawingContext::DrawRect(const RectF& bounds, float width, Color color)
     {
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
+    }
+
+    void UIDrawingContext::DrawCircle(Vector2 center, float radius, Color color)
+    {
+        int count = 32;
+        Vector2* p = BBStackAlloc(Vector2, count + 1);
+
+        float r = 0.0f;
+        const float increment = Math::TwoPi / static_cast<float>(count);
+        for (int i = 0; i < count; i++, r += increment)
+        {
+            p[i] = Vector2(center.X + (radius * Math::Sin(r)),
+                           center.Y + (radius * Math::Cos(r)));
+        }
+
+        p[count] = p[0];
+
+        color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
+        renderer->DrawLines(count + 1, p, color);
+
+        BBStackFree(p);
     }
 
     void UIDrawingContext::FillRect(const RectF& bounds, float width, Color color)

@@ -330,6 +330,43 @@ namespace Bibim
             this->effects[i].Reset();
     }
 
+    void UIRenderer::DrawLines(int count, const Vector2* p, Color color)
+    {
+        if (count == 0)
+            return;
+        BBAssert(count > 0 && p);
+
+        Flush();
+
+        const D3DCOLOR d3dColor = color.ToARGB();
+        const int numberOfLines = count - 1;
+        Vertex* v = nullptr;
+        vb->Lock(0, sizeof(Vertex) * count, reinterpret_cast<void**>(&v), D3DLOCK_DISCARD);
+        for (int i = 0; i < count; i++)
+            v[i] = Vertex(p[i], d3dColor);
+        vb->Unlock();
+
+        DrawPrimitives(D3DPT_LINESTRIP, numberOfLines);
+    }
+
+    void UIRenderer::DrawLines(int count, const Vector2* p, Color* c)
+    {
+        if (count == 0)
+            return;
+        BBAssert(count > 0 && p);
+
+        Flush();
+
+        const int numberOfLines = count - 1;
+        Vertex* v = nullptr;
+        vb->Lock(0, sizeof(Vertex) * count, reinterpret_cast<void**>(&v), D3DLOCK_DISCARD);
+        for (int i = 0; i < count; i++)
+            v[i] = Vertex(p[i], c[i].ToARGB());
+        vb->Unlock();
+
+        DrawPrimitives(D3DPT_LINESTRIP, numberOfLines);
+    }
+
     void UIRenderer::DrawQuad(const Vector2* p, Color color)
     {
         BBAssert(p);
@@ -906,5 +943,22 @@ namespace Bibim
 
             lastViewport = currentViewport;
         }
+    }
+
+    void UIRenderer::DrawPrimitivesActually(D3DPRIMITIVETYPE primitiveType, PixelMode pixelMode, int numberOfPrimitives, Texture2D* texture, Texture2D* mask)
+    {
+        IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
+
+        BeginEffect(pixelMode);
+        if (texture)
+            d3dDevice->SetTexture(0, texture->GetD3DTexture());
+        else
+            d3dDevice->SetTexture(0, nullptr);
+        if (mask)
+            d3dDevice->SetTexture(1, mask->GetD3DTexture());
+        else
+            d3dDevice->SetTexture(1, nullptr);
+        d3dDevice->DrawPrimitive(primitiveType, 0, numberOfPrimitives);
+        EndEffect(pixelMode);
     }
 }

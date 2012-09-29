@@ -25,7 +25,8 @@ namespace Bibim
           y(0.0f),
           width(1.0f),
           height(1.0f),
-          alignment(LeftTop),
+          origin(Vector2::Zero),
+          anchorPoint(LeftTop),
           opacity(255),
           visibility(Visible),
           zOrder(0),
@@ -94,7 +95,7 @@ namespace Bibim
                 break;
         }
 
-        switch (alignment)
+        switch (anchorPoint)
         {
             case LeftTop:
                 result.X = bounds.GetLeft() + offsetX;
@@ -102,37 +103,40 @@ namespace Bibim
                 break;
             case LeftBottom:
                 result.X = bounds.GetLeft()   + offsetX;
-                result.Y = bounds.GetBottom() - offsetY - result.Height;
+                result.Y = bounds.GetBottom() - offsetY;
                 break;
             case LeftMiddle:
                 result.X = bounds.GetLeft()   + offsetX;
-                result.Y = bounds.GetMiddle() + offsetY - result.Height * 0.5f;
+                result.Y = bounds.GetMiddle() + offsetY;
                 break;
             case RightTop:
-                result.X = bounds.GetRight() - offsetX - result.Width;
+                result.X = bounds.GetRight() - offsetX;
                 result.Y = bounds.GetTop()   + offsetY;
                 break;
             case RightBottom:
-                result.X = bounds.GetRight()  - offsetX - result.Width;
-                result.Y = bounds.GetBottom() - offsetY - result.Height;
+                result.X = bounds.GetRight()  - offsetX;
+                result.Y = bounds.GetBottom() - offsetY;
                 break;
             case RightMiddle:
-                result.X = bounds.GetRight()  - offsetX - result.Width;
-                result.Y = bounds.GetMiddle() + offsetY - result.Height * 0.5f;
+                result.X = bounds.GetRight()  - offsetX;
+                result.Y = bounds.GetMiddle() + offsetY;
                 break;
             case CenterTop:
-                result.X = bounds.GetCenter() + offsetX - result.Width * 0.5f;
+                result.X = bounds.GetCenter() + offsetX;
                 result.Y = bounds.GetTop()    + offsetY;
                 break;
             case CenterBottom:
-                result.X = bounds.GetCenter() + offsetX - result.Width * 0.5f;
-                result.Y = bounds.GetBottom() - offsetY - result.Height;
+                result.X = bounds.GetCenter() + offsetX;
+                result.Y = bounds.GetBottom() - offsetY;
                 break;
             case Center:
-                result.X = bounds.GetCenter() + offsetX - result.Width * 0.5f;
-                result.Y = bounds.GetMiddle() + offsetY - result.Height * 0.5f;
+                result.X = bounds.GetCenter() + offsetX;
+                result.Y = bounds.GetMiddle() + offsetY;
                 break;
         }
+
+        result.X -= result.Width  * origin.X;
+        result.Y -= result.Height * origin.Y;
 
         return result;
     }
@@ -169,6 +173,42 @@ namespace Bibim
     {
         if (parent)
             parent->SendChildToBack(this);
+    }
+
+    void UIVisual::AlignTo(AnchorPoint point)
+    {
+        switch (point)
+        {
+            case LeftTop:
+                origin = Vector2(0.0f, 0.0f);
+                break;
+            case LeftBottom:
+                origin = Vector2(0.0f, 1.0f);
+                break;
+            case LeftMiddle:
+                origin = Vector2(0.0f, 0.5f);
+                break;
+            case RightTop:
+                origin = Vector2(1.0f, 0.0f);
+                break;
+            case RightBottom:
+                origin = Vector2(1.0f, 1.0f);
+                break;
+            case RightMiddle:
+                origin = Vector2(1.0f, 0.5f);
+                break;
+            case CenterTop:
+                origin = Vector2(0.5f, 0.0f);
+                break;
+            case CenterBottom:
+                origin = Vector2(0.5f, 1.0f);
+                break;
+            case Center:
+                origin = Vector2(0.5f, 0.5f);
+                break;
+        }
+
+        SetAnchorPoint(point);
     }
 
     void UIVisual::Click()
@@ -241,7 +281,8 @@ namespace Bibim
         y = reader.ReadFloat();
         width = reader.ReadFloat();
         height = reader.ReadFloat();
-        alignment = reader.ReadByte();
+        origin = reader.ReadVector2();
+        anchorPoint = reader.ReadByte();
         opacity = reader.ReadByte();
         visibility = reader.ReadByte();
         zOrder = reader.ReadByte();
@@ -263,7 +304,8 @@ namespace Bibim
         y = o->y;
         width = o->width;
         height = o->height;
-        alignment = o->alignment;
+        origin = o->origin;
+        anchorPoint = o->anchorPoint;
         opacity = o->opacity;
         visibility = o->visibility;
         zOrder = o->zOrder;
