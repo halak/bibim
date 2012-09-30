@@ -699,6 +699,15 @@ bool lua_tinker::table_obj::validate()
 	}
 }
 
+int lua_tinker::table_obj::len()
+{
+    if (validate())
+        return static_cast<int>(lua_objlen(m_L, m_index));
+    else
+        return 0;
+}
+
+
 /*---------------------------------------------------------------------------*/ 
 /* Table Object Holder                                                       */ 
 /*---------------------------------------------------------------------------*/ 
