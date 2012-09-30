@@ -871,6 +871,17 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
 		}
 
 		template<typename T>
+		void set(int index, T object)
+		{
+			if(validate())
+			{
+				lua_pushinteger(m_L, index);
+				push(m_L, object);
+				lua_settable(m_L, m_index);
+			}
+		}
+
+		template<typename T>
 		T get(const char* name)
 		{
 			if(validate())
@@ -885,6 +896,24 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
 
 			return pop<T>(m_L);
 		}
+
+		template<typename T>
+		T get(int index)
+		{
+			if(validate())
+			{
+				lua_pushinteger(m_L, index);
+				lua_gettable(m_L, m_index);
+			}
+			else
+			{
+				lua_pushnil(m_L);
+			}
+
+			return pop<T>(m_L);
+		}
+
+        int len();
 
 		lua_State*		m_L;
 		int				m_index;
@@ -908,10 +937,27 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
 		}
 
 		template<typename T>
+		void set(int index, T object)
+		{
+			m_obj->set(name, object);
+		}
+
+		template<typename T>
 		T get(const char* name)
 		{
 			return m_obj->get<T>(name);
 		}
+
+		template<typename T>
+		T get(int index)
+		{
+			return m_obj->get<T>(index);
+		}
+
+        int len()
+        {
+            return m_obj->len();
+        }
 
 		table_obj*		m_obj;
 	};
