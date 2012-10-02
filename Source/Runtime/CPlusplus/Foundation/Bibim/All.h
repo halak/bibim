@@ -101,6 +101,7 @@
 #  include <Bibim/CommandHistory.h>
 #  include <Bibim/CommandQueue.h>
 #  include <Bibim/RestorableCommand.h>
+#  include <Bibim/SpatialObject2D.h>
 #  include <Bibim/PathFinder.h>
 #  include <Bibim/JumpPointPathFinder.h>
 

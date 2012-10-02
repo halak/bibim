@@ -19,8 +19,9 @@
                 inline void Draw(Image* image);
                 inline void Draw(Image* image, bool horizontalFlip, bool verticalFlip);
                 void Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, bool horizontalFlip, bool verticalFlip);
-                void Draw(Vector2 position, Texture2D* texture);
                 void Draw(Shape2D* shape, Color color);
+                void DrawUnclipped(Vector2 position, Texture2D* texture);
+                void DrawUnclipped(Vector2 position, float rotation, Image* image);
 
                 inline void DrawString(Font* font, const String& text);
                 inline void DrawString(const FontString& fontString);
