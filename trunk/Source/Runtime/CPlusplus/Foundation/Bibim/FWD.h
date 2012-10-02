@@ -159,6 +159,7 @@
                 class CommandQueue;
                 BBForwardDeclareSmartPointerClass(PathFinder);
                     BBForwardDeclareSmartPointerClass(JumpPointPathFinder);
+                BBForwardDeclareSmartPointerClass(SpatialObject2D);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Graphics
                 class DisplaySwapChain;

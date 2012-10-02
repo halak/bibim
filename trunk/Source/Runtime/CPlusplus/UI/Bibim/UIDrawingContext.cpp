@@ -234,26 +234,6 @@ namespace Bibim
         renderer->DrawQuad(points, color, uv1, image->GetTexture(), uv2, maskImage->GetTexture());
     }
 
-    void UIDrawingContext::Draw(Vector2 position, Texture2D* texture)
-    {
-        BBAssertDebug(texture && renderer);
-
-        const RectF drawingRect = RectF(position.X,
-                                        position.Y,
-                                        static_cast<float>(texture->GetWidth()),
-                                        static_cast<float>(texture->GetHeight()));
-
-        const Vector2 points[] =
-        {
-            Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetTop() - 0.5f),
-            Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetTop() - 0.5f),
-            Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetBottom() - 0.5f),
-            Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetBottom() - 0.5f),
-        };
-        const Color color = Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity()));
-        renderer->DrawQuad(points, color, RectF(0.0f, 0.0f, 1.0f, 1.0f), texture);
-    }
-
     void UIDrawingContext::Draw(Shape2D* shape, Color color)
     {
         if (shape == nullptr)
@@ -305,6 +285,76 @@ namespace Bibim
 
         if (v.data.empty() == false)
             DrawLines(static_cast<int>(v.data.size()), &v.data[0], color);
+    }
+
+    void UIDrawingContext::DrawUnclipped(Vector2 position, Texture2D* texture)
+    {
+        BBAssertDebug(texture && renderer);
+
+        const RectF drawingRect = RectF(position.X,
+                                        position.Y,
+                                        static_cast<float>(texture->GetWidth()),
+                                        static_cast<float>(texture->GetHeight()));
+
+        const Vector2 points[] =
+        {
+            Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetTop() - 0.5f),
+            Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetTop() - 0.5f),
+            Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetBottom() - 0.5f),
+            Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetBottom() - 0.5f),
+        };
+        const Color color = Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity()));
+        renderer->DrawQuad(points, color, RectF(0.0f, 0.0f, 1.0f, 1.0f), texture);
+    }
+
+    void UIDrawingContext::DrawUnclipped(Vector2 position, float rotation, Image* image)
+    {
+        BBAssertDebug(image && image->GetTexture() && renderer);
+        if (image->GetStatus() != GameAsset::CompletedStatus ||
+            image->GetTexture()->GetStatus() != GameAsset::CompletedStatus)
+            return;
+
+        const float sin = Math::Sin(rotation);
+        const float cos = Math::Cos(rotation);
+        const float halfWidth  = static_cast<float>(image->GetClippingRect().Width) * 0.5f;
+        const float halfHeight = static_cast<float>(image->GetClippingRect().Height) * 0.5f;
+
+        Vector2 points[] =
+        {
+            Vector2(-halfWidth, -halfHeight),
+            Vector2(+halfWidth, -halfHeight),
+            Vector2(-halfWidth, +halfHeight),
+            Vector2(+halfWidth, +halfHeight),
+        };
+        points[0].Rotate(sin, cos);
+        points[1].Rotate(sin, cos);
+        points[2].Rotate(sin, cos);
+        points[3].Rotate(sin, cos);
+        points[0] += position;
+        points[1] += position;
+        points[2] += position;
+        points[3] += position;
+
+        const RectF clippingRect = image->GetNormalizedClippingRect();
+        Vector2 uv[4];
+        switch (image->GetAppliedTransform())
+        {
+            case Image::Identity:
+                uv[0] = Vector2(clippingRect.GetLeft(), clippingRect.GetTop());
+                uv[1] = Vector2(clippingRect.GetRight(), clippingRect.GetTop());
+                uv[2] = Vector2(clippingRect.GetLeft(), clippingRect.GetBottom());
+                uv[3] = Vector2(clippingRect.GetRight(), clippingRect.GetBottom());
+                break;
+            case Image::RotateCW90:
+                uv[0] = Vector2(clippingRect.GetRight(), clippingRect.GetTop());
+                uv[1] = Vector2(clippingRect.GetRight(), clippingRect.GetBottom());
+                uv[2] = Vector2(clippingRect.GetLeft(), clippingRect.GetTop());
+                uv[3] = Vector2(clippingRect.GetLeft(), clippingRect.GetBottom());
+                break;
+        }
+
+        const Color color = Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity()));
+        renderer->DrawQuad(points, color, uv, image->GetTexture());
     }
 
     void UIDrawingContext::DrawString(const RectF& bounds, const RectF& clippedBounds, Font* font, const String& text)

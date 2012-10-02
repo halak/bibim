@@ -902,6 +902,18 @@
 					RelativePath=".\Gameplay\Bibim\RestorableCommand.h"
 					>
 				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\SpatialObject2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\SpatialObject2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Gameplay\Bibim\SpatialObject2D.inl"
+					>
+				</File>
 				<Filter
 					Name="PathFinder"
 					>
