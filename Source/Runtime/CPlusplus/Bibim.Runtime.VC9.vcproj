@@ -902,6 +902,34 @@
 					RelativePath=".\Gameplay\Bibim\RestorableCommand.h"
 					>
 				</File>
+				<Filter
+					Name="PathFinder"
+					>
+					<File
+						RelativePath=".\Gameplay\Bibim\JumpPointPathFinder.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Gameplay\Bibim\JumpPointPathFinder.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Gameplay\Bibim\JumpPointPathFinder.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Gameplay\Bibim\PathFinder.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Gameplay\Bibim\PathFinder.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Gameplay\Bibim\PathFinder.inl"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Input"

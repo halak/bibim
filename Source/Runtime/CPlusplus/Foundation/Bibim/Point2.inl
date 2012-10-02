@@ -10,6 +10,11 @@
     {
     }
 
+    Point2::Point2(float x, float y)
+        : X(static_cast<int>(x)), Y(static_cast<int>(y))
+    {
+    }
+
     Point2::Point2(const Point2& original)
         : X(original.X), Y(original.Y)
     {

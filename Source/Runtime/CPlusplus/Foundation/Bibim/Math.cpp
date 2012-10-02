@@ -100,6 +100,17 @@ namespace Bibim
         return Equals(a.X, b.X) && Equals(a.Y, b.Y) && Equals(a.Z, b.Z);
     }
 
+    Vector2 Math::CatmullRom(Vector2 a, Vector2 b, Vector2 c, Vector2 d, float t)
+    {
+        return 0.5f * 
+                (
+                    (2.0f * b) + 
+                    ((-a + c) * (t)) +
+                    (((2.0f * a) - (5.0f * b) + (4.0f * c) - d) * (t * t)) + 
+                    ((-a + (3.0f * b) - (3.0f * c) + d) * (t * t * t))
+                );
+    }
+
     int Math::Random(int a, int b)
     {
         return a + (b - a) / 2;
