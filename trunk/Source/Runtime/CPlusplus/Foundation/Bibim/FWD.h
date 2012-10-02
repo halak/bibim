@@ -157,6 +157,8 @@
                         BBForwardDeclareSmartPointerClass(BatchCommand);
                 class CommandHistory;
                 class CommandQueue;
+                BBForwardDeclareSmartPointerClass(PathFinder);
+                    BBForwardDeclareSmartPointerClass(JumpPointPathFinder);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Graphics
                 class DisplaySwapChain;

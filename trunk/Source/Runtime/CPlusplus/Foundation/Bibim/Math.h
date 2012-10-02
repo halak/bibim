@@ -128,6 +128,8 @@
                 static inline Vector4 Lerp(Vector4 a, Vector4 b, float t);
                 static inline Color   Lerp(Color a, Color b, float t);
 
+                static Vector2 CatmullRom(Vector2 a, Vector2 b, Vector2 c, Vector2 d, float t);
+
                 static int     Random(int a, int b);
                 static float   Random(float a, float b);
                 static Vector2 Random(Vector2 a, Vector2 b);
