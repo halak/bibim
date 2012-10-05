@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Bibim.Animation;
 using Bibim.Graphics;
 
 namespace Bibim.UI.Visuals
 {
-    [ClassID('U', 'S', 'P', 'R')]
-    public sealed class UISprite : UIVisual
+    [ClassID('U', 'I', 'M', 'G')]
+    public sealed class UIImage : UIVisual
     {
         #region Fields
         #endregion
 
         #region Properties
-        public Sprite Source
+        public Image Source
+        {
+            get;
+            set;
+        }
+
+        public bool AutoResize
         {
             get;
             set;
@@ -28,6 +33,12 @@ namespace Bibim.UI.Visuals
         }
 
         public bool VerticalFlip
+        {
+            get;
+            set;
+        }
+
+        public BitMask Mask
         {
             get;
             set;

@@ -24,6 +24,8 @@
                 Image(const String& textureURI, const Rect& clippingRect);
                 Image(Texture2D* texture);
                 Image(Texture2D* texture, const Rect& clippingRect);
+                /// for drawing
+                Image(Texture2D* texture, const RectF& normalizedClippingRect, Transform appliedTransform);
                 virtual ~Image();
 
                 void Setup(Texture2D* texture);
@@ -35,6 +37,10 @@
                 inline int GetWidth() const;
                 inline int GetHeight() const;
                 inline Texture2D* GetTexture() const;
+
+            public:
+                static void  CalculateSize(int& outWidth, int& outHeight, const Rect& clippingRect, Transform transform);
+                static RectF CalculateNormalizedRect(const Rect& clippingRect, Texture2D* texture);
 
             private:
                 Image();

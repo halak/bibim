@@ -60,7 +60,8 @@
                 inline int GetRevision() const;
 
             protected:
-                GameAsset(); // call in derived classes, GameAssetStorage
+                inline GameAsset(); // call in derived classes, GameAssetStorage
+                inline GameAsset(Status status);
 
                 inline void SetStatus(Status value);
                 inline void IncreaseRevision();

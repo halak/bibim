@@ -1,18 +1,23 @@
-﻿namespace Bibim
+namespace Bibim
 {
-    Image* UISprite::GetImage() const
+    Sprite* UISprite::GetSource() const
     {
-        return image;
+        return source;
     }
 
-    bool UISprite::GetAutoResize() const
+    float UISprite::GetSpeed() const
     {
-        return autoResize;
+        return speed;
     }
 
-    void UISprite::SetAutoResize(bool value)
+    float UISprite::GetTime() const
     {
-        autoResize = value;
+        return time;
+    }
+
+    int UISprite::GetFrameIndex() const
+    {
+        return frameIndex;
     }
 
     bool UISprite::GetHorizontalFlip() const
@@ -35,13 +40,8 @@
         verticalFlip = value;
     }
 
-    BitMask* UISprite::GetMask() const
+    Timeline* UISprite::GetTimeline() const
     {
-        return mask;
-    }
-
-    void UISprite::SetMask(BitMask* value)
-    {
-        mask = value;
+        return timeline;
     }
 }

@@ -53,8 +53,8 @@ namespace Bibim.UI
             Type t = o.GetType();
             if (t == typeof(UIVisual))
                 Write(writer, (UIVisual)o, objectDictionary);
-            else if (t == typeof(UISprite))
-                Write(writer, (UISprite)o, objectDictionary);
+            else if (t == typeof(UIImage))
+                Write(writer, (UIImage)o, objectDictionary);
             else if (t == typeof(UILabel))
                 Write(writer, (UILabel)o, objectDictionary);
             else if (t == typeof(UIPanel))
@@ -157,10 +157,10 @@ namespace Bibim.UI
             WriteTransform(writer, o.Transform, objectDictionary);
         }
 
-        private static void Write(AssetStreamWriter writer, UISprite o, List<object> objectDictionary)
+        private static void Write(AssetStreamWriter writer, UIImage o, List<object> objectDictionary)
         {
             Write(writer, (UIVisual)o, objectDictionary);
-            writer.Write(o.Image);
+            writer.Write(o.Source);
             writer.Write(o.AutoResize);
             writer.Write(o.HorizontalFlip);
             writer.Write(o.VerticalFlip);

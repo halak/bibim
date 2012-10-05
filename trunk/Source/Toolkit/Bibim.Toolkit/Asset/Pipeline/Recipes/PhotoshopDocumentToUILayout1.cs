@@ -60,7 +60,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                 Width = windowSize.X,
                 Height = windowSize.Y,
             };
-            foreach (PhotoshopDocument.Layer item in input.Layers)
+            foreach (var item in input.Layers)
                 AddChildTo(rootWindow, item, true);
             
             return new UILayout(rootWindow);
@@ -90,11 +90,11 @@ namespace Bibim.Asset.Pipeline.Recipes
                 }
                 else
                 {
-                    UISprite sprite = new UISprite();
-                    sprite.Name = name;
-                    sprite.IsPickable = defaultPickable;
-                    window.AddChild(sprite);
-                    Process(sprite, layer, string.Compare(type, "MaskSprite", true) == 0);
+                    UIImage image = new UIImage();
+                    image.Name = name;
+                    image.IsPickable = defaultPickable;
+                    window.AddChild(image);
+                    Process(image, layer, string.Compare(type, "MaskImage", true) == 0);
                 }
             }
             else
@@ -184,15 +184,15 @@ namespace Bibim.Asset.Pipeline.Recipes
             }
         }
 
-        private void Process(UISprite sprite, PhotoshopDocument.Layer layer, bool importMask)
+        private void Process(UIImage image, PhotoshopDocument.Layer layer, bool importMask)
         {
-            Process((UIVisual)sprite, layer);
+            Process((UIVisual)image, layer);
 
             Bitmap bitmap = layer.Bitmap;
 
-            if (sprite.EffectMap != null)
+            if (image.EffectMap != null)
             {
-                UIBlendingEffect effect = (UIBlendingEffect)sprite.EffectMap.GetPixelEffect(UIBlendingEffect.ClassIndex);
+                UIBlendingEffect effect = (UIBlendingEffect)image.EffectMap.GetPixelEffect(UIBlendingEffect.ClassIndex);
                 switch (effect.Mode)
                 {
                     case BlendMode.Additive:
@@ -207,13 +207,13 @@ namespace Bibim.Asset.Pipeline.Recipes
                 }
             }
 
-            sprite.Image = new Image(string.Empty, Rectangle.Empty)
+            image.Source = new Image(string.Empty, Rectangle.Empty)
             {
                 Tag = new ImageCookingTag(bitmap)
             };
 
             if (importMask)
-                sprite.Mask = GenerateBitMask(bitmap);
+                image.Mask = GenerateBitMask(bitmap);
         }
 
         private void Process(UILabel label, PhotoshopDocument.Layer layer)

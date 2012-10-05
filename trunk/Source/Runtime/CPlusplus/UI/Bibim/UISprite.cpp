@@ -1,10 +1,10 @@
-﻿#include <Bibim/PCH.h>
+#include <Bibim/PCH.h>
 #include <Bibim/UISprite.h>
 #include <Bibim/Assert.h>
-#include <Bibim/BitMask.h>
 #include <Bibim/Colors.h>
 #include <Bibim/ComponentStreamReader.h>
-#include <Bibim/Image.h>
+#include <Bibim/Sprite.h>
+#include <Bibim/Timeline.h>
 #include <Bibim/UIDrawingContext.h>
 #include <Bibim/UIPickingContext.h>
 
@@ -13,41 +13,86 @@ namespace Bibim
     BBImplementsComponent(UISprite);
 
     UISprite::UISprite()
-        : image(nullptr),
-          autoResize(true),
+        : source(nullptr),
+          speed(1.0f),
+          time(0.0f),
+          frameIndex(0),
           horizontalFlip(false),
-          verticalFlip(false)
+          verticalFlip(false),
+          timeline(nullptr)
     {
         SetSize(1.0f, 1.0f);
         SetSizeMode(ContentSize, ContentSize);
+        updater.Owner = this;
     }
 
     UISprite::~UISprite()
     {
     }
 
-    void UISprite::SetImage(Image* value)
+    void UISprite::Update(float dt, int /*timestamp*/)
     {
-        image = value;
+        if (source == nullptr)
+            return;
+
+        time += dt * speed;
+        frameIndex = source->GetKeyframeIndex(time, frameIndex);
     }
 
-    Texture2D* UISprite::GetTexture() const
+    const Sprite::Keyframe* UISprite::GetCurrentFrame() const
     {
-        if (image)
-            return image->GetTexture();
-        else
-            return nullptr;
+        return source ? source->GetKeyframeAt(frameIndex) : nullptr;
     }
 
-    void UISprite::SetTexture(Texture2D* value)
+    void UISprite::SetSource(Sprite* value)
     {
-        image = new Image(value);
+        if (source != value)
+        {
+            source = value;
+            time = 0.0f;
+            frameIndex = 0;
+        }
+    }
+
+    void UISprite::SetSpeed(float value)
+    {
+        speed = value;
+    }
+
+    void UISprite::SetTime(float value)
+    {
+        if (time != value)
+        {
+            time = value;
+        }
+    }
+
+    void UISprite::SetFrameIndex(int value)
+    {
+        if (frameIndex != value)
+        {
+            frameIndex = value;
+        }
+    }
+
+    void UISprite::SetTimeline(Timeline* value)
+    {
+        if (timeline != value)
+        {
+            if (timeline)
+                timeline->Remove(&updater);
+
+            timeline = value;
+
+            if (timeline)
+                timeline->Add(&updater, this);
+        }
     }
 
     Vector2 UISprite::GetContentSize()
     {
-        if (image)
-            return Vector2(image->GetWidth(), image->GetHeight());
+        if (const Sprite::Keyframe* kf = GetCurrentFrame())
+            return Vector2(kf->Width, kf->Height);
         else
             return Vector2::Zero;
     }
@@ -56,55 +101,46 @@ namespace Bibim
     {
         UIVisual::OnDraw(context);
 
-        if (GetImage() == nullptr || GetImage()->GetTexture() == nullptr)
+        if (GetSource() == nullptr)
             return;
 
-        context.Draw(GetImage(), GetHorizontalFlip(), GetVerticalFlip());
-    }
-
-    void UISprite::OnPick(UIPickingContext& context)
-    {
-        if (GetPickable() && context.Contains(context.GetCurrentClippedBounds()))
+        if (const Sprite::Keyframe* kf = GetCurrentFrame())
         {
-            if (mask == nullptr || image == nullptr)
-                context.SetResult(this);
-            else
-            {
-                const RectF unclippedBounds = context.GetCurrentBounds();
-                const Rect clippingRect = image->GetClippingRect();
-
-                Vector2 p = context.GetCurrentPoint();
-                p.X -= unclippedBounds.X;
-                p.Y -= unclippedBounds.Y;
-                p.X *= static_cast<float>(clippingRect.Width) / unclippedBounds.Width;
-                p.Y *= static_cast<float>(clippingRect.Height) / unclippedBounds.Height;
-                p.X += 0.5f;
-                p.Y += 0.5f;
-
-                if (mask->GetPixel(static_cast<int>(p.X), static_cast<int>(p.Y)))
-                    context.SetResult(this);
-            }
+            Image image(kf->Texture, kf->NormalizedClippingRect, kf->AppliedTransform);
+            context.Draw(&image, GetHorizontalFlip(), GetVerticalFlip());
         }
     }
 
     void UISprite::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        image = static_cast<Image*>(reader.ReadAsset());
-        autoResize = reader.ReadBool();
+        source = static_cast<Sprite*>(reader.ReadAsset());
+        speed = reader.ReadFloat();
+        time = 0.0f;
+        frameIndex = 0;
         horizontalFlip = reader.ReadBool();
         verticalFlip = reader.ReadBool();
-        mask = static_cast<BitMask*>(reader.ReadAsset());
     }
 
     void UISprite::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
-        image = o->image;
-        autoResize = o->autoResize;
+        source = o->source;
+        time = o->time;
+        frameIndex = o->frameIndex;
         horizontalFlip = o->horizontalFlip;
         verticalFlip = o->verticalFlip;
-        mask = o->mask;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    UISprite::Updater::~Updater()
+    {
+    }
+
+    void UISprite::Updater::Update(float dt, int timestamp)
+    {
+        Owner->Update(dt, timestamp);
     }
 }

@@ -45,7 +45,7 @@
 #  include <Bibim/UIRenderer.h>
 #  include <Bibim/UISequentialEventHandler.h>
 #  include <Bibim/UISimpleDomain.h>
-#  include <Bibim/UISprite.h>
+#  include <Bibim/UIImage.h>
 #  include <Bibim/UITintEffect.h>
 #  include <Bibim/UIVideo.h>
 #  include <Bibim/UIVisual.h>

@@ -96,52 +96,10 @@ namespace Bibim.Asset.Pipeline.Recipes
                                                         BitmapSheetClusterSize.Width, BitmapSheetClusterSize.Height,
                                                         BitmapSheet.Options.PowerOfTwoSize | BitmapSheet.Options.RotatableMerging))
             {
-                #region Texture File과 Asset을 저장합니다.
-                var textureFileToStream = new FileToStream();
-                var textureRecipe = new GameAssetRecipe()
+                SaveTextureAssets(context, bitmapSheet, textureOutput, (source, textureURI, clippingRectangle, appliedTransform) =>
                 {
-                    Cook = new BitmapToTexture2D(new ImportBitmap(textureFileToStream)),
-                    Author = GetType().Name,
-                    Comment = "Automatically generated.",
-                };
-
-                string absoluteDirectory = Path.Combine(context.BaseDirectory, context.Directory);
-                if (Directory.Exists(absoluteDirectory) == false)
-                    Directory.CreateDirectory(absoluteDirectory);
-
-                int textureNumber = 0;
-                string textureOutputFormat = context.ExpandVariables(textureOutput);
-                foreach (Bitmap item in bitmapSheet.Sheets)
-                {
-                    Trace.Assert(item.Tag == null); // 밑에서 Tag를 직접 사용할 것이기 때문에 확인합니다.
-
-                    string path = string.Format(textureOutputFormat, textureNumber++);
-
-                    string textureFilePath = Path.ChangeExtension(path, "png");
-                    string fullPath = Path.Combine(absoluteDirectory, textureFilePath);
-                    string fullPathDirectory = Path.GetDirectoryName(fullPath);
-                    if (Directory.Exists(fullPathDirectory) == false)
-                        Directory.CreateDirectory(fullPathDirectory);
-
-                    item.Save(fullPath, ImageFormat.Png);
-                    item.Tag = textureFilePath;
-
-                    textureFileToStream.Input1 = Path.GetFileName(textureFilePath);
-
-                    JsonSerializer.Instance.Serialize(Path.ChangeExtension(fullPath, "asset"), textureRecipe);
-                }
-                #endregion
-
-                #region Image Asset을 저장합니다.
-                foreach (BitmapSheet.Element item in bitmapSheet.Elements)
-                {
-                    string textureURI = Path.Combine(context.Directory, Path.ChangeExtension((string)item.Sheet.Tag, null));
-                    var clippingRectangle = new Rectangle(item.Bounds.X, item.Bounds.Y,
-                                                          item.Bounds.Width, item.Bounds.Height);
-                    var appliedTransform = item.AppliedTransform;
-
                     List<Image> values = null;
-                    if (imageBitmaps.TryGetValue(item.Source, out values))
+                    if (imageBitmaps.TryGetValue(source, out values))
                     {
                         foreach (Image image in values)
                         {
@@ -150,11 +108,61 @@ namespace Bibim.Asset.Pipeline.Recipes
                             image.AppliedTransform = appliedTransform;
                         }
                     }
-                }
-                #endregion
+                });
             }
 
             return input;
+        }
+
+        public static void SaveTextureAssets(CookingContext context, BitmapSheet bitmapSheet, string textureOutput, Action<Bitmap, string, Rectangle, Image.Transform> f)
+        {
+            #region
+            var textureFileToStream = new FileToStream();
+            var textureRecipe = new GameAssetRecipe()
+            {
+                Cook = new BitmapToTexture2D(new ImportBitmap(textureFileToStream)),
+                Author = typeof(ExportImageSet).Name,
+                Comment = "Automatically generated.",
+            };
+
+            string absoluteDirectory = Path.Combine(context.BaseDirectory, context.Directory);
+            if (Directory.Exists(absoluteDirectory) == false)
+                Directory.CreateDirectory(absoluteDirectory);
+
+            int textureNumber = 0;
+            string textureOutputFormat = context.ExpandVariables(textureOutput);
+            foreach (Bitmap item in bitmapSheet.Sheets)
+            {
+                Trace.Assert(item.Tag == null); // 밑에서 Tag를 직접 사용할 것이기 때문에 확인합니다.
+
+                string path = string.Format(textureOutputFormat, textureNumber++);
+
+                string textureFilePath = Path.ChangeExtension(path, "png");
+                string fullPath = Path.Combine(absoluteDirectory, textureFilePath);
+                string fullPathDirectory = Path.GetDirectoryName(fullPath);
+                if (Directory.Exists(fullPathDirectory) == false)
+                    Directory.CreateDirectory(fullPathDirectory);
+
+                item.Save(fullPath, ImageFormat.Png);
+                item.Tag = textureFilePath;
+
+                textureFileToStream.Input1 = Path.GetFileName(textureFilePath);
+
+                JsonSerializer.Instance.Serialize(Path.ChangeExtension(fullPath, "asset"), textureRecipe);
+            }
+            #endregion
+
+            #region
+            foreach (BitmapSheet.Element item in bitmapSheet.Elements)
+            {
+                string textureURI = Path.Combine(context.Directory, Path.ChangeExtension((string)item.Sheet.Tag, null));
+                var clippingRectangle = new Rectangle(item.Bounds.X, item.Bounds.Y,
+                                                      item.Bounds.Width, item.Bounds.Height);
+                var appliedTransform = item.AppliedTransform;
+
+                f(item.Source, textureURI, clippingRectangle, appliedTransform);
+            }
+            #endregion
         }
     }
 }

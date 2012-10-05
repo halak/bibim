@@ -119,6 +119,9 @@
     <Compile Include="Animation\Sequences\Vector3SequenceWriter.cs" />
     <Compile Include="Animation\Sequences\Vector4SequenceWriter.cs" />
     <Compile Include="Animation\SequenceWriterTemplate.cs" />
+    <Compile Include="Animation\SpriteCookingTag.cs" />
+    <Compile Include="Animation\SpriteSetWriter.cs" />
+    <Compile Include="Animation\SpriteWriter.cs" />
     <Compile Include="Asset\AssetStreamWriter.cs" />
     <Compile Include="Asset\GameAssetWriter.cs" />
     <Compile Include="Asset\GameAssetWriterAttribute.cs" />
@@ -136,7 +139,9 @@
     <Compile Include="Asset\Pipeline\Recipes\CompileShaderEffect.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToTexture2D.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ExportImageSet.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\ExportSpriteSet.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToImageSet.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToSpriteSet.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToUILayout1.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ReadGameAsset.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ReadRecipe.cs" />

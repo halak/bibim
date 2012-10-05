@@ -101,48 +101,48 @@ namespace Bibim.Asset.Pipeline.Recipes
 
             UILayout input = Input.Cook(context);
 
-            List<UISprite> sprites = new List<UISprite>();
+            List<UIImage> images = new List<UIImage>();
             List<UILabel> labels = new List<UILabel>();
-            CollectObjects(input.Root, sprites, labels);
+            CollectObjects(input.Root, images, labels);
 
-            OptimizeAllSprites(context, sprites);
-            MergeAllSprites(context, sprites);
-            ExportAllMasks(context, sprites);
+            OptimizeAllImages(context, images);
+            MergeAllImages(context, images);
+            ExportAllMasks(context, images);
 
             return input;
         }
 
-        private static void CollectObjects(UIVisual visual, List<UISprite> sprites, List<UILabel> labels)
+        private static void CollectObjects(UIVisual visual, List<UIImage> images, List<UILabel> labels)
         {
-            if (visual is UISprite)
-                sprites.Add((UISprite)visual);
+            if (visual is UIImage)
+                images.Add((UIImage)visual);
             else if (visual is UILabel)
                 labels.Add((UILabel)visual);
             else if (visual is UIPanel)
             {
                 foreach (UIVisual item in ((UIPanel)visual).Children)
-                    CollectObjects(item, sprites, labels);
+                    CollectObjects(item, images, labels);
             }
         }
 
-        private void OptimizeAllSprites(CookingContext context, ICollection<UISprite> sprites)
+        private void OptimizeAllImages(CookingContext context, ICollection<UIImage> images)
         {
             var uniqueImages = new List<Image>();
-            foreach (var item in sprites)
+            foreach (var item in images)
             {
                 bool found = false;
                 foreach (var image in uniqueImages)
                 {
-                    if (EqualsImage(item.Image, image))
+                    if (EqualsImage(item.Source, image))
                     {
-                        item.Image = image;
+                        item.Source = image;
                         found = true;
                         break;
                     }
                 }
 
                 if (found == false)
-                    uniqueImages.Add(item.Image);
+                    uniqueImages.Add(item.Source);
             }
         }
 
@@ -200,26 +200,26 @@ namespace Bibim.Asset.Pipeline.Recipes
                 return false;
         }
 
-        private void MergeAllSprites(CookingContext context, ICollection<UISprite> sprites)
+        private void MergeAllImages(CookingContext context, ICollection<UIImage> images)
         {
-            var spriteBitmaps = new Dictionary<Bitmap, List<UISprite>>(sprites.Count);
-            foreach (var item in sprites)
+            var imageBitmaps = new Dictionary<Bitmap, List<UIImage>>(images.Count);
+            foreach (var item in images)
             {
-                var tag = item.Image.Tag as ImageCookingTag;
+                var tag = item.Source.Tag as ImageCookingTag;
                 if (tag != null && tag.Bitmap != null)
                 {
-                    List<UISprite> values = null;
-                    if (spriteBitmaps.TryGetValue(tag.Bitmap, out values))
+                    List<UIImage> values = null;
+                    if (imageBitmaps.TryGetValue(tag.Bitmap, out values))
                         values.Add(item);
                     else
                     {
-                        values = new List<UISprite>() { item };
-                        spriteBitmaps.Add(tag.Bitmap, values);
+                        values = new List<UIImage>() { item };
+                        imageBitmaps.Add(tag.Bitmap, values);
                     }
                 }
             }
 
-            using (var bitmapSheet = BitmapSheet.Create(spriteBitmaps.Keys,
+            using (var bitmapSheet = BitmapSheet.Create(imageBitmaps.Keys,
                                                         BitmapSheetSize.Width, BitmapSheetSize.Height,
                                                         BitmapSheetClusterSize.Width, BitmapSheetClusterSize.Height,
                                                         BitmapSheet.Options.PowerOfTwoSize | BitmapSheet.Options.RotatableMerging))
@@ -285,10 +285,10 @@ namespace Bibim.Asset.Pipeline.Recipes
 
                     JsonSerializer.Instance.Serialize(Path.Combine(context.BaseDirectory, context.Directory, Path.ChangeExtension(path, "asset")), imageRecipe);
 
-                    List<UISprite> values = null;
-                    if (spriteBitmaps.TryGetValue(item.Source, out values))
+                    List<UIImage> values = null;
+                    if (imageBitmaps.TryGetValue(item.Source, out values))
                     {
-                        context.Store(Path.Combine(context.Directory, Path.ChangeExtension(path, null)), values[0].Image);
+                        context.Store(Path.Combine(context.Directory, Path.ChangeExtension(path, null)), values[0].Source);
 
                         for (int i = 1; i < values.Count; i++)
                             values[i] = values[0];
@@ -298,7 +298,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             }
         }
 
-        private void ExportAllMasks(CookingContext context, ICollection<UISprite> sprites)
+        private void ExportAllMasks(CookingContext context, ICollection<UIImage> images)
         {
             int maskNumber = 0;
             string maskOutputFormat = context.ExpandVariables(MaskOutput);
@@ -311,8 +311,8 @@ namespace Bibim.Asset.Pipeline.Recipes
                 Comment = "Automatically generated.",
             };
 
-            var masks = new List<BitMask>(sprites.Count);
-            foreach (var item in sprites)
+            var masks = new List<BitMask>(images.Count);
+            foreach (var item in images)
             {
                 if (item.Mask == null)
                     continue;

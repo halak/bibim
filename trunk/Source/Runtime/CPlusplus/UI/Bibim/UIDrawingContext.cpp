@@ -85,8 +85,8 @@ namespace Bibim
                 break;
         }
 
-        clippingRect.X = clippingLeft;
-        clippingRect.Y = clippingTop;
+        clippingRect.X = (horizontalFlip == false) ? clippingLeft : clippingRight;
+        clippingRect.Y = (verticalFlip == false)   ? clippingTop  : clippingBottom;
         clippingRect.Width  = (horizontalFlip == false) ? clippingRight - clippingLeft : clippingLeft - clippingRight;
         clippingRect.Height = (verticalFlip   == false) ? clippingBottom - clippingTop : clippingTop - clippingBottom;
 
