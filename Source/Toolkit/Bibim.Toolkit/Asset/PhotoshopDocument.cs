@@ -147,7 +147,7 @@ namespace Bibim.Asset
                 if (colorMode != ColorModes.RGB)
                     throw new Exception(string.Format("{0} Color Format인 PSD는 읽어올 수 없습니다. (가능한 Color Format : RGB)", colorMode));
                 if (bitsPerPixel != 8)
-                    throw new Exception(string.Format("한 Pixel이 Channel당 {0} byte인 PSD는 읽어올 수 없습니다. (가능한 Bytes : 1 Byte", bitsPerPixel));
+                    throw new Exception(string.Format("한 Pixel이 Channel당 {0} byte인 PSD는 읽어올 수 없습니다. (가능한 Bytes : 1 Byte", bitsPerPixel / 8));
             }
             #endregion
 

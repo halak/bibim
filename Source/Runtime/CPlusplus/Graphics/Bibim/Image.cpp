@@ -46,19 +46,16 @@ namespace Bibim
           height(0),
           texture(texture)
     {
-        switch (appliedTransform)
-        {
-            case Identity:
-                width = clippingRect.Width;
-                height = clippingRect.Height;
-                break;
-            case RotateCW90:
-                width = clippingRect.Height;
-                height = clippingRect.Width;
-                break;
-        }
-
+        CalculateSize(width, height, clippingRect, appliedTransform);
         Setup(texture);
+    }
+
+    Image::Image(Texture2D* texture, const RectF& normalizedClippingRect, Transform appliedTransform)
+        : GameAsset(CompletedStatus),
+          texture(texture),
+          normalizedClippingRect(normalizedClippingRect),
+          appliedTransform(appliedTransform)
+    {
     }
 
     Image::~Image()
@@ -69,22 +66,38 @@ namespace Bibim
     {
         this->texture = texture;
 
+        normalizedClippingRect = CalculateNormalizedRect(clippingRect, texture);
+        SetStatus(texture ? CompletedStatus : FaultStatus);
+    }
+
+    void Image::CalculateSize(int& outWidth, int& outHeight, const Rect& clippingRect, Transform transform)
+    {
+        switch (transform)
+        {
+            case Identity:
+                outWidth = clippingRect.Width;
+                outHeight = clippingRect.Height;
+                break;
+            case RotateCW90:
+                outWidth = clippingRect.Height;
+                outHeight = clippingRect.Width;
+                break;
+        }
+    }
+
+    RectF Image::CalculateNormalizedRect(const Rect& clippingRect, Texture2D* texture)
+    {
         if (texture)
         {
             const float w = static_cast<float>(texture->GetSurfaceWidth());
             const float h = static_cast<float>(texture->GetSurfaceHeight());
-            this->normalizedClippingRect.X = static_cast<float>(clippingRect.X) / w;
-            this->normalizedClippingRect.Y = static_cast<float>(clippingRect.Y) / h;
-            this->normalizedClippingRect.Width = static_cast<float>(clippingRect.Width) / w;
-            this->normalizedClippingRect.Height = static_cast<float>(clippingRect.Height) / h;
-
-            SetStatus(CompletedStatus);
+            return RectF(static_cast<float>(clippingRect.X) / w,
+                         static_cast<float>(clippingRect.Y) / h,
+                         static_cast<float>(clippingRect.Width) / w,
+                         static_cast<float>(clippingRect.Height) / h);
         }
         else
-        {
-            this->normalizedClippingRect = RectF::Empty;
-            SetStatus(FaultStatus);
-        }
+            return RectF::Empty;
     }
 
     GameAsset* Image::Create(StreamReader& reader, GameAsset* /*existingInstance*/)

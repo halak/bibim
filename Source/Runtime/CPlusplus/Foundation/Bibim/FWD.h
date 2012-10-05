@@ -90,6 +90,8 @@
                 BBForwardDeclareSmartPointerClass(GameComponent);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Animation
+                BBForwardDeclareSmartPointerClass(Sprite);
+                BBForwardDeclareSmartPointerClass(SpriteSet);
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Evaluation
                     BBForwardDeclareSmartPointerClass(EvalBase);
@@ -276,6 +278,7 @@
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Visuals
                     BBForwardDeclareSmartPointerClass(UIVisual);
+                        BBForwardDeclareSmartPointerClass(UIImage);
                         BBForwardDeclareSmartPointerClass(UILabel);
                         BBForwardDeclareSmartPointerClass(UIMarkupTextBox);
                         BBForwardDeclareSmartPointerClass(UIPanel);

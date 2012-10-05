@@ -25,6 +25,8 @@ namespace Bibim
 
         GameAssetFactory::AddEntry<Image>();
         GameAssetFactory::AddEntry<ImageSet>();
+        GameAssetFactory::AddEntry<Sprite>();
+        GameAssetFactory::AddEntry<SpriteSet>();
         GameAssetFactory::AddEntry<Script>();
         GameAssetFactory::AddEntry<BitMask>();
         GameAssetFactory::AddEntry<SourceTexture2D>();
@@ -234,6 +236,7 @@ namespace Bibim
         GameComponentFactory::AddEntry<UICheckBox>();
         GameComponentFactory::AddEntry<UIRadioButton>();
         GameComponentFactory::AddEntry<UIWindow>();
+        GameComponentFactory::AddEntry<UIImage>();
         GameComponentFactory::AddEntry<UISprite>();
         GameComponentFactory::AddEntry<UIVideo>();
         GameComponentFactory::SortEntries();

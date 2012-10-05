@@ -2,7 +2,7 @@
 //#include <Bibim/UIMarkupTextBox.h>
 //#include <Bibim/Font.h>
 //#include <Bibim/UILabel.h>
-//#include <Bibim/UISprite.h>
+//#include <Bibim/UIImage.h>
 //
 //namespace Bibim
 //{

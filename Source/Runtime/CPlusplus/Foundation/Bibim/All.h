@@ -5,7 +5,6 @@
    // This file was "AUTOMATICALLY GENERATED" by Bibim Console (10/2/2011 2:13:14 PM)
    // > Halak.Bibim.Toolkit.Console.exe \class:cppfull.h \proj:[Project-Name] \src:[Source-Directory] \dest:[Header-File]
 
-
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Asset
 #include <Bibim/EvalUnitRandom.h>
@@ -116,6 +115,8 @@
 #  include <Bibim/Window.h>
 #  include <Bibim/RenderTargetTexture2D.h>
 #  include <Bibim/ScreenshotPrinter.h>
+#  include <Bibim/Sprite.h>
+#  include <Bibim/SpriteSet.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Input
@@ -226,10 +227,11 @@
 #  include <Bibim/UIRenderer.h>
 #  include <Bibim/UISequentialEventHandler.h>
 #  include <Bibim/UISimpleDomain.h>
-#  include <Bibim/UISprite.h>
+#  include <Bibim/UIImage.h>
 #  include <Bibim/UITintEffect.h>
 #  include <Bibim/UIVideo.h>
 #  include <Bibim/UIVisual.h>
+#  include <Bibim/UISprite.h>
 #  include <Bibim/UIVisualVisitor.h>
 #  include <Bibim/UIWindow.h>
 #   include <Bibim/UITransform.h>

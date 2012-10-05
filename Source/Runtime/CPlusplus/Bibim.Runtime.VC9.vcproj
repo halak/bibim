@@ -462,6 +462,30 @@
 			<Filter
 				Name="Animation"
 				>
+				<File
+					RelativePath=".\Animation\Bibim\Sprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Animation\Bibim\Sprite.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Animation\Bibim\Sprite.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Animation\Bibim\SpriteSet.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Animation\Bibim\SpriteSet.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Animation\Bibim\SpriteSet.inl"
+					>
+				</File>
 				<Filter
 					Name="Evaluation"
 					>
@@ -1327,6 +1351,18 @@
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UICheckBox.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIImage.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIImage.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIImage.inl"
 						>
 					</File>
 					<File
