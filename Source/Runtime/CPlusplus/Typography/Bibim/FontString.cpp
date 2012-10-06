@@ -11,20 +11,23 @@ namespace Bibim
 
     FontString::FontString()
         : text(String::Empty),
-          font(nullptr)
+          font(nullptr),
+          totalWidth(0.0f)
     {
     }
 
     FontString::FontString(Font* font, const char* text)
         : text(text),
-          font(font)
+          font(font),
+          totalWidth(0.0f)
     {
         FillGlyphs();
     }
 
     FontString::FontString(Font* font, const String& text)
         : text(text),
-          font(font)
+          font(font),
+          totalWidth(0.0f)
     {
         FillGlyphs();
     }
@@ -32,6 +35,7 @@ namespace Bibim
     FontString::FontString(const FontString& original)
         : text(original.text),
           font(original.font),
+          totalWidth(original.totalWidth),
           regularGlyphs(original.regularGlyphs),
           strokedGlyphs(original.strokedGlyphs),
           glowGlyphs(original.glowGlyphs)
@@ -57,6 +61,7 @@ namespace Bibim
 
     void FontString::FillGlyphs()
     {
+        totalWidth = 0.0f;
         regularGlyphs.clear();
         strokedGlyphs.clear();
         glowGlyphs.clear();
@@ -80,6 +85,7 @@ namespace Bibim
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
                     strokedGlyphs.push_back(font->GetStrokedGlyph(*it));
                     glowGlyphs.push_back(font->GetGlowGlyph(*it));
+                    totalWidth += glowGlyphs.back()->GetAdvance().X;
                 }
             }
             else
@@ -88,6 +94,7 @@ namespace Bibim
                 {
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
                     strokedGlyphs.push_back(font->GetStrokedGlyph(*it));
+                    totalWidth += strokedGlyphs.back()->GetAdvance().X;
                 }
             }
         }
@@ -100,6 +107,7 @@ namespace Bibim
                 {
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
                     glowGlyphs.push_back(font->GetGlowGlyph(*it));
+                    totalWidth += glowGlyphs.back()->GetAdvance().X;
                 }
             }
             else
@@ -107,6 +115,7 @@ namespace Bibim
                 for (std::vector<wchar_t>::const_iterator it = wideCharacters.begin(); it != wideCharacters.end(); it++)
                 {
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
+                    totalWidth += regularGlyphs.back()->GetAdvance().X;
                 }
             }
         }
@@ -130,6 +139,7 @@ namespace Bibim
     {
         text = original.text;
         font = original.font;
+        totalWidth = original.totalWidth;
         regularGlyphs = original.regularGlyphs;
         strokedGlyphs = original.strokedGlyphs;
         glowGlyphs = original.glowGlyphs;

@@ -27,6 +27,7 @@
 
                 inline const String& GetText() const;
                 inline Font* GetFont() const;
+                inline float GetTotalWidth() const;
                 inline const GlyphCollection& GetRegularGlyphs() const;
                 inline const GlyphCollection& GetStrokedGlyphs() const;
                 inline const GlyphCollection& GetGlowGlyphs() const;
@@ -44,6 +45,7 @@
             private:
                 String  text;
                 FontPtr font;
+                float totalWidth;
                 GlyphCollection regularGlyphs;
                 GlyphCollection strokedGlyphs;
                 GlyphCollection glowGlyphs;
