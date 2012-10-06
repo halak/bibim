@@ -47,6 +47,22 @@ namespace Bibim
         }
     }
 
+    Vector2 UILabel::GetContentSize()
+    {
+        if (font)
+        {
+            if (fontStringChanged)
+            {
+                fontStringChanged = false;
+                fontString = FontString(GetFont(), GetText());
+            }
+            
+            return Vector2(fontString.GetTotalWidth(), font->GetLineHeight());
+        }
+        else
+            return Vector2::Zero;
+    }
+
     void UILabel::OnDraw(UIDrawingContext& context)
     {
         UIVisual::OnDraw(context);

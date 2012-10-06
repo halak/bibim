@@ -10,6 +10,11 @@
         return font;
     }
 
+    float FontString::GetTotalWidth() const
+    {
+        return totalWidth;
+    }
+
     const FontString::GlyphCollection& FontString::GetRegularGlyphs() const
     {
         return regularGlyphs;

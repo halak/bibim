@@ -26,6 +26,8 @@
                 void SetAutoResize(bool value);
 
             protected:
+                virtual Vector2 GetContentSize();
+
                 virtual void OnDraw(UIDrawingContext& context);
 
             private:
