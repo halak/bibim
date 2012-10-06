@@ -57,8 +57,8 @@ namespace Bibim
 
             if (asyncEventQueue)
             {
-                HandlerDictionary::const_iterator itDelayed = appEventHandlers.find(id);
-                if (itDelayed != appEventHandlers.end())
+                HandlerDictionary::const_iterator itDelayed = delayedAppEventHandlers.find(id);
+                if (itDelayed != delayedAppEventHandlers.end())
                     asyncEventQueue->Enqueue((*itDelayed).second, args);
             }
         }
