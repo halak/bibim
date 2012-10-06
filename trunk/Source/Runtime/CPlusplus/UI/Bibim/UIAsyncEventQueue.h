@@ -26,7 +26,6 @@
                 void Enqueue(UIEventHandler* item, const UIEventArgs& args);
 
             private:
-                Timeline* timeline;
                 ItemCollection items;
         };
     }
