@@ -66,7 +66,7 @@ namespace Bibim
         strokedGlyphs.clear();
         glowGlyphs.clear();
 
-        if (font->GetLibrary() == nullptr)
+        if (font->GetLibrary() == nullptr || text.GetLength() == 0)
             return;
 
         std::vector<wchar_t> wideCharacters;

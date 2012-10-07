@@ -15,6 +15,8 @@ namespace Bibim
           fontString(FontString::Empty),
           autoResize(true)
     {
+        SetSize(1.0f, 1.0f);
+        SetSizeMode(ContentSize, ContentSize);
     }
 
     UILabel::~UILabel()
