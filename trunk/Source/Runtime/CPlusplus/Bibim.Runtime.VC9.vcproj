@@ -832,46 +832,6 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="Framework"
-				>
-				<File
-					RelativePath=".\Framework\Bibim\Game.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Framework\Bibim\GameFramework.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Framework\Bibim\GameFramework.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Framework\Bibim\GameFramework.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Framework\Bibim\GameFramework.Windows.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Framework\Bibim\GameWindow.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Framework\Bibim\GameWindow.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Framework\Bibim\GameWindow.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Framework\Bibim\GameWindow.Windows.inl"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="Gameplay"
 				>
 				<File
@@ -2184,6 +2144,46 @@
 				</File>
 				<File
 					RelativePath=".\FileSystem\Bibim\FileStream.Windows.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Framework"
+				>
+				<File
+					RelativePath=".\Framework\Bibim\Game.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\GameFramework.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\GameFramework.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\GameFramework.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\GameFramework.Windows.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\GameWindow.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\GameWindow.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\GameWindow.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\GameWindow.Windows.inl"
 					>
 				</File>
 			</Filter>
