@@ -186,6 +186,16 @@
 #  include <Bibim/TypingContext.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   // Collision
+#  include <Bibim/AxisALignedBoxShape2D.h>
+#  include <Bibim/BoxShape2D.h>
+#  include <Bibim/CollisionSpace2D.h>
+#  include <Bibim/PointShape2D.h>
+#  include <Bibim/SegmentShape2D.h>
+#  include <Bibim/SphereShape2D.h>
+#  include <Bibim/UserShape2D.h>
+
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // UI
 #   include <Bibim/GameComponentFactory.h>
 #  include <Bibim/UI.h>

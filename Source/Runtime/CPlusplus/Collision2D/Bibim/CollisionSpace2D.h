@@ -20,6 +20,8 @@
                         virtual void OnIntersected(Shape2D* shapeA, Shape2D* shapeB, int groupA, int groupB) = 0;
                 };
 
+                typedef std::vector<Shape2DPtr> ShapeCollection;
+
             public:
                 CollisionSpace2D();
                 virtual ~CollisionSpace2D();
@@ -30,8 +32,8 @@
 
                 void Add(Shape2D* shape, int group);
                 void Remove(Shape2D* shape);
-                void Clear();
-                void Clear(int group);
+                inline void Clear();
+                inline void Clear(int group);
                 bool Find(Shape2D* shape, int* outGroup, int* outIndex) const;
 
                 void AddListener(IEventListener* item);
@@ -41,15 +43,18 @@
                 int  GetGroup(Shape2D* shape) const;
                 void SetGroup(Shape2D* shape, int group);
 
-                int  GetNumberOfGroups() const;
+                inline int GetNumberOfGroups() const;
                 void SetNumberOfGroups(int numberOfGroups);
 
-                bool GetCollisionRelationship(int groupA, int groupB) const;
-                void SetCollisionRelationship(int groupA, int groupB, bool detectable);
+                inline bool GetCollisionRelationship(int groupA, int groupB) const;
+                inline void SetCollisionRelationship(int groupA, int groupB, bool detectable);
+
+                inline const ShapeCollection& GetShapes(int group) const;
 
             private:
-                typedef std::vector<Shape2DPtr> ShapeCollection;
-                typedef std::vector<bool>       BooleanCollection;
+                typedef std::vector<bool> BooleanCollection;
+
+                inline Shape2D* GetShapeUnsafely(int group, int index) const;
 
                 int  Detect(ShapeCollection& groupA, ShapeCollection& groupB, int groupANumber, int groupBNumber);
                 void Detect(Shape2D* shapeA, Shape2D* shapeB, int groupA, int groupB);
@@ -60,5 +65,7 @@
                 Listeners<IEventListener> listeners;
         };
     }
+
+#   include <Bibim/CollisionSpace2D.inl>
 
 #endif

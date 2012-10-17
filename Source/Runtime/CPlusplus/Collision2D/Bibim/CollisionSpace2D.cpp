@@ -136,16 +136,6 @@ namespace Bibim
             shapes[outGroup].erase(shapes[outGroup].begin() + outIndex);
     }
 
-    void CollisionSpace2D::Clear()
-    {
-        shapes.clear();
-    }
-
-    void CollisionSpace2D::Clear(int group)
-    {
-        shapes.at(group).clear();
-    }
-
     bool CollisionSpace2D::Find(Shape2D* shape, int* outGroup, int* outIndex) const
     {
         for (std::vector<ShapeCollection>::const_iterator itGroup = shapes.begin(); itGroup != shapes.end(); itGroup++)
@@ -203,11 +193,6 @@ namespace Bibim
         }
     }
 
-    int CollisionSpace2D::GetNumberOfGroups() const
-    {
-        return static_cast<int>(shapes.size());
-    }
-
     void CollisionSpace2D::SetNumberOfGroups(int numberOfGroups)
     {
         std::vector<ShapeCollection> newShapes;
@@ -230,16 +215,5 @@ namespace Bibim
 
         shapes = newShapes;
         collisionRelationships = newCollisionRelationships;
-    }
-
-    bool CollisionSpace2D::GetCollisionRelationship(int groupA, int groupB) const
-    {
-        return collisionRelationships.at(groupA).at(groupB);
-    }
-
-    void CollisionSpace2D::SetCollisionRelationship(int groupA, int groupB, bool detectable)
-    {
-        collisionRelationships.at(groupA).at(groupB) = detectable;
-        collisionRelationships.at(groupB).at(groupA) = detectable;
     }
 }

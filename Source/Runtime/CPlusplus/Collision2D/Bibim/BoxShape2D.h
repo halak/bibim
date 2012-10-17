@@ -32,6 +32,13 @@
                 virtual bool Raycast(Vector2 origin, Vector2 direction, float length, RaycastReport2D& outReport, IRaycastCallback2D* callback);
                 virtual void Build(Vertices& vertices);
 
+                inline float GetOrientationX() const;
+                inline float GetOrientationY() const;
+                inline void SetOrientationXY(float x, float y);
+                inline float GetExtensionX() const;
+                inline float GetExtensionY() const;
+                inline void SetExtensionXY(float x, float y);
+
             private:
                 void UpdateParameters();
 

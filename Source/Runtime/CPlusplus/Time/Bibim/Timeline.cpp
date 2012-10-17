@@ -35,6 +35,9 @@ namespace Bibim
         dt *= GetSpeed();
         for (ItemCollection::iterator it = temporaryItems.begin(); it != temporaryItems.end(); it++)
             (*it)->Update(dt, timestamp);
+
+        temporaryObjects.clear();
+        temporaryItems.clear();
     }
 
     void Timeline::Add(IUpdateable* item)
