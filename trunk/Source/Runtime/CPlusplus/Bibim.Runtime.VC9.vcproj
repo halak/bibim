@@ -727,6 +727,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Collision2D\Bibim\CollisionSpace2D.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Collision2D\Bibim\IntersectShapes2D.cpp"
 					>
 				</File>
