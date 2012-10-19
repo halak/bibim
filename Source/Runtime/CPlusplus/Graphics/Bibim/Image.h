@@ -24,7 +24,7 @@
                 Image(const String& textureURI, const Rect& clippingRect);
                 Image(Texture2D* texture);
                 Image(Texture2D* texture, const Rect& clippingRect);
-                /// for drawing
+                // for drawing
                 Image(Texture2D* texture, const RectF& normalizedClippingRect, Transform appliedTransform);
                 virtual ~Image();
 
