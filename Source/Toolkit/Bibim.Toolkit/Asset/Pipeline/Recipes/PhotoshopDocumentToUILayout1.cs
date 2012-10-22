@@ -397,7 +397,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             return result;
         }
 
-        private static BitMask GenerateBitMask(Bitmap bitmap)
+        public static BitMask GenerateBitMask(Bitmap bitmap)
         {
             int width = bitmap.Width;
             int height = bitmap.Height;

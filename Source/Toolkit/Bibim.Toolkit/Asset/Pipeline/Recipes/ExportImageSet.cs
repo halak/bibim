@@ -116,7 +116,21 @@ namespace Bibim.Asset.Pipeline.Recipes
 
         public static void SaveTextureAssets(CookingContext context, BitmapSheet bitmapSheet, string textureOutput, Action<Bitmap, string, Rectangle, Image.Transform> f)
         {
-            #region
+            SaveTextureAssets(context, bitmapSheet.Sheets, textureOutput, true);
+
+            foreach (BitmapSheet.Element item in bitmapSheet.Elements)
+            {
+                string textureURI = Path.Combine(context.Directory, Path.ChangeExtension((string)item.Sheet.Tag, null));
+                var clippingRectangle = new Rectangle(item.Bounds.X, item.Bounds.Y,
+                                                      item.Bounds.Width, item.Bounds.Height);
+                var appliedTransform = item.AppliedTransform;
+
+                f(item.Source, textureURI, clippingRectangle, appliedTransform);
+            }
+        }
+
+        public static void SaveTextureAssets(CookingContext context, IEnumerable<Bitmap> textures, string textureOutput, bool taggingEnabled)
+        {
             var textureFileToStream = new FileToStream();
             var textureRecipe = new GameAssetRecipe()
             {
@@ -131,7 +145,7 @@ namespace Bibim.Asset.Pipeline.Recipes
 
             int textureNumber = 0;
             string textureOutputFormat = context.ExpandVariables(textureOutput);
-            foreach (Bitmap item in bitmapSheet.Sheets)
+            foreach (Bitmap item in textures)
             {
                 Trace.Assert(item.Tag == null); // 밑에서 Tag를 직접 사용할 것이기 때문에 확인합니다.
 
@@ -144,25 +158,13 @@ namespace Bibim.Asset.Pipeline.Recipes
                     Directory.CreateDirectory(fullPathDirectory);
 
                 item.Save(fullPath, ImageFormat.Png);
-                item.Tag = textureFilePath;
+                if (taggingEnabled)
+                    item.Tag = textureFilePath;
 
                 textureFileToStream.Input1 = Path.GetFileName(textureFilePath);
 
                 JsonSerializer.Instance.Serialize(Path.ChangeExtension(fullPath, "asset"), textureRecipe);
             }
-            #endregion
-
-            #region
-            foreach (BitmapSheet.Element item in bitmapSheet.Elements)
-            {
-                string textureURI = Path.Combine(context.Directory, Path.ChangeExtension((string)item.Sheet.Tag, null));
-                var clippingRectangle = new Rectangle(item.Bounds.X, item.Bounds.Y,
-                                                      item.Bounds.Width, item.Bounds.Height);
-                var appliedTransform = item.AppliedTransform;
-
-                f(item.Source, textureURI, clippingRectangle, appliedTransform);
-            }
-            #endregion
         }
     }
 }

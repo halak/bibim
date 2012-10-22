@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 using System.Diagnostics;
 
@@ -11,13 +12,19 @@ namespace Bibim.Graphics
         public int Pitch
         {
             get;
-            set;
+            private set;
         }
 
         public byte[] Buffer
         {
             get;
-            set;
+            private set;
+        }
+
+        public Bitmap Bitmap
+        {
+            get;
+            private set;
         }
         #endregion
 
@@ -32,6 +39,11 @@ namespace Bibim.Graphics
 
             Pitch = pitch;
             Buffer = buffer;
+        }
+
+        public SourceTexture2DCookingTag(Bitmap bitmap)
+        {
+            Bitmap = bitmap;
         }
         #endregion
     }
