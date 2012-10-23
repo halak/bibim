@@ -15,7 +15,7 @@
                 BitMask(int width, int height, int pitch, std::vector<byte>& buffer);
                 virtual ~BitMask();
 
-                bool GetPixel(int x, int y);
+                bool GetPixel(int x, int y) const;
                 void SetPixel(int x, int y, bool value);
 
                 inline int GetWidth() const;

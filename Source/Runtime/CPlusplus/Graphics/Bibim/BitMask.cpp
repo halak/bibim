@@ -17,7 +17,7 @@ namespace Bibim
     {
     }
 
-    bool BitMask::GetPixel(int x, int y)
+    bool BitMask::GetPixel(int x, int y) const
     {
         x = Math::Clamp(x, 0, width - 1);
         y = Math::Clamp(y, 0, height - 1);
