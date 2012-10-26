@@ -24,4 +24,6 @@
 
 #   include <Bibim/UIWindow.inl>
 
+    BBBindLua(Bibim::UIWindow);
+
 #endif

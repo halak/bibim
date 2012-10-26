@@ -76,9 +76,6 @@
 
 #   include <Bibim/GameAsset.inl>
 
-    template<> inline void lua_tinker::push(lua_State* L, Bibim::GameAsset* value)
-	{
-        push(L, static_cast<lua_tinker::lua_value*>(value));
-	}
+    BBBindLua(Bibim::GameAsset);
 
 #endif

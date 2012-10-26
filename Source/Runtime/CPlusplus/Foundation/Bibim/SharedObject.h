@@ -5,7 +5,31 @@
 #   include <Bibim/Foundation.h>
 #   include <Bibim/Object.h>
 
-    namespace lua_tinker { template<typename T> struct val2user; }
+    namespace lua_tinker { template<typename T> struct val2user; template<typename T> struct ptr2user; }
+
+#   define BBBindLua(classname) \
+        template<> inline void lua_tinker::push(lua_State* L, classname* value) \
+        { \
+            push(L, static_cast<lua_tinker::lua_value*>(value)); \
+        } \
+        \
+        template<> inline void lua_tinker::push(lua_State* L, const classname* value) \
+        { \
+            push(L, const_cast<lua_tinker::lua_value*>(static_cast<const lua_tinker::lua_value*>(value))); \
+        } \
+	    template<> \
+        struct lua_tinker::ptr2user<classname> : lua_tinker::user \
+	    { \
+		    ptr2user(classname* t) : lua_tinker::user((void*)t) \
+            { \
+                ((classname*)m_p)->IncreaseReferenceCount(); \
+            } \
+            \
+		    ~ptr2user() \
+            { \
+                ((classname*)m_p)->DecreaseReferenceCount(); \
+            } \
+	    };
 
     namespace Bibim
     {
@@ -33,6 +57,7 @@
 
                 template <typename T> friend class SharedPointer;
                 template<typename T> friend struct lua_tinker::val2user;
+                template<typename T> friend struct lua_tinker::ptr2user;
 
             private:
                 SharedObject& operator = (const SharedObject&);
