@@ -35,12 +35,4 @@ namespace Bibim
 
 #include <Bibim/UIEventArgs.inl>
 
-template<> inline void lua_tinker::push(lua_State* L, Bibim::UIEventArgs* value)
-{
-    push(L, static_cast<lua_tinker::lua_value*>(value));
-}
-
-template<> inline void lua_tinker::push(lua_State* L, const Bibim::UIEventArgs* value)
-{
-    push(L, const_cast<lua_tinker::lua_value*>(static_cast<const lua_tinker::lua_value*>(value)));
-}
+BBBindLua(Bibim::UIEventArgs);

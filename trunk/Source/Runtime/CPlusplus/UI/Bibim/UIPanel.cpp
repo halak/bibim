@@ -30,6 +30,18 @@ namespace Bibim
             (*it)->SetParent(nullptr);
     }
 
+    void UIPanel::ShowChildren()
+    {
+        for (VisualCollection::iterator it = children.begin(); it != children.end(); it++)
+            (*it)->Show();
+    }
+
+    void UIPanel::HideChildren()
+    {
+        for (VisualCollection::iterator it = children.begin(); it != children.end(); it++)
+            (*it)->Hide();
+    }
+
     UIVisual* UIPanel::FindChild(const String& name, bool searchAllChildren) const
     {
         if (searchAllChildren)

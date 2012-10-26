@@ -19,6 +19,9 @@
                 explicit UIPanel(int childrenCapacity);
                 virtual ~UIPanel();
 
+                void ShowChildren();
+                void HideChildren();
+
                 UIVisual* FindChild(const String& name, bool searchAllChildren) const;
                 inline UIVisual* FindChildByChars(const char* name, bool searchAllChildren) const;
 
@@ -61,14 +64,6 @@
 
 #   include <Bibim/UIPanel.inl>
 
-    template<> inline void lua_tinker::push(lua_State* L, Bibim::UIPanel* value)
-	{
-        push(L, static_cast<lua_tinker::lua_value*>(value));
-	}
-
-	template<> inline void lua_tinker::push(lua_State* L, const Bibim::UIPanel* value)
-	{
-        push(L, const_cast<lua_tinker::lua_value*>(static_cast<const lua_tinker::lua_value*>(value)));
-	}
+    BBBindLua(Bibim::UIPanel);
 
 #endif

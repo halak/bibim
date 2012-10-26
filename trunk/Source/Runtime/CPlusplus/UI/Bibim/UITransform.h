@@ -20,14 +20,6 @@
         };
     }
 
-	template<> inline void lua_tinker::push(lua_State* L, Bibim::UITransform* value)
-	{
-        push(L, static_cast<lua_tinker::lua_value*>(value));
-	}
-
-	template<> inline void lua_tinker::push(lua_State* L, const Bibim::UITransform* value)
-	{
-        push(L, const_cast<lua_tinker::lua_value*>(static_cast<const lua_tinker::lua_value*>(value)));
-	}
+    BBBindLua(Bibim::UITransform);
 
 #endif

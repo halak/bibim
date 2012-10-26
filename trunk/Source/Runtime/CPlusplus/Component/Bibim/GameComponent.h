@@ -94,14 +94,6 @@
 
 #   include <Bibim/GameComponent.inl>
 
-	template<> inline void lua_tinker::push(lua_State* L, Bibim::GameComponent* value)
-	{
-        push(L, static_cast<lua_tinker::lua_value*>(value));
-	}
-
-	template<> inline void lua_tinker::push(lua_State* L, const Bibim::GameComponent* value)
-	{
-        push(L, const_cast<lua_tinker::lua_value*>(static_cast<const lua_tinker::lua_value*>(value)));
-	}
+    BBBindLua(Bibim::GameComponent);
 
 #endif
