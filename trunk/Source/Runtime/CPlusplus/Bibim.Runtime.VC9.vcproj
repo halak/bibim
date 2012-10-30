@@ -218,6 +218,18 @@
 					Name="Providers"
 					>
 					<File
+						RelativePath=".\Asset\Bibim\ArchiveAssetProvider.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\ArchiveAssetProvider.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\ArchiveAssetProvider.inl"
+						>
+					</File>
+					<File
 						RelativePath=".\Asset\Bibim\AssetProvider.cpp"
 						>
 					</File>
@@ -2134,6 +2146,30 @@
 			<Filter
 				Name="FileSystem"
 				>
+				<File
+					RelativePath=".\FileSystem\Bibim\Archive.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\Archive.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\Archive.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\ArchiveStream.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\ArchiveStream.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\ArchiveStream.inl"
+					>
+				</File>
 				<File
 					RelativePath=".\FileSystem\Bibim\FileStream.h"
 					>
