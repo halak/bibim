@@ -24,21 +24,9 @@ namespace Bibim
 
             virtual void Execute()
             {
-                const int dl = directory.GetLength();
-                const int nl = GetName().GetLength();
-                const int totalLength = dl + nl + 3 + 1;
-                char* filename = BBStackAlloc(char, totalLength);
-                String::CopyChars(&filename[0],       directory.CStr());
-                String::CopyChars(&filename[dl],      GetName().CStr());
-                String::CopyChars(&filename[dl + nl], ".ab");
-                filename[totalLength - 1] = '\0';
-
-                FileStreamPtr assetStream = new FileStream(filename, FileStream::ReadOnly);
-                AssetStreamReader reader(GetName(), assetStream, GetStorage(), true);
-                GameAsset* result = GameAssetFactory::Create(reader);
-                Register(result);
-
-                BBStackFree(filename);
+                GameAsset* result = FileAssetProvider::LoadActually(GetStorage(), directory, GetName(), true);
+                if (result != nullptr)
+                    Register(result);
             }
 
         private:
@@ -75,24 +63,7 @@ namespace Bibim
 
     GameAsset* FileAssetProvider::Load(const String& name)
     {
-        BBAssertDebug(GetStorage() != nullptr);
-
-        const int dl = directory.GetLength();
-        const int nl = name.GetLength();
-        const int totalLength = dl + nl + 3 + 1;
-        char* filename = BBStackAlloc(char, totalLength);
-        String::CopyChars(&filename[0],       directory.CStr());
-        String::CopyChars(&filename[dl],      name.CStr());
-        String::CopyChars(&filename[dl + nl], ".ab");
-        filename[totalLength - 1] = '\0';
-
-        FileStreamPtr assetStream = new FileStream(filename, FileStream::ReadOnly);
-        AssetStreamReader reader(name, assetStream, GetStorage());
-        GameAsset* result = GameAssetFactory::Create(reader);
-
-        BBStackFree(filename);
-
-        return result;
+        return LoadActually(GetStorage(), directory, name, false);
     }
 
     void FileAssetProvider::SetDirectory(const String& value)
@@ -105,5 +76,30 @@ namespace Bibim
             if (last != '\\')
                 directory.Append("\\");
         }
+    }
+
+    GameAsset* FileAssetProvider::LoadActually(GameAssetStorage* storage,
+                                               const String& directory,
+                                               const String& name,
+                                               bool isPriority)
+    {
+        BBAssertDebug(storage != nullptr);
+
+        const int dl = directory.GetLength();
+        const int nl = name.GetLength();
+        const int totalLength = dl + nl + 3 + 1;
+        char* filename = BBStackAlloc(char, totalLength);
+        String::CopyChars(&filename[0],       directory.CStr());
+        String::CopyChars(&filename[dl],      name.CStr());
+        String::CopyChars(&filename[dl + nl], ".ab");
+        filename[totalLength - 1] = '\0';
+
+        FileStreamPtr assetStream = new FileStream(filename, FileStream::ReadOnly);
+        AssetStreamReader reader(name, assetStream, storage, isPriority);
+        GameAsset* result = GameAssetFactory::Create(reader);
+
+        BBStackFree(filename);
+
+        return result;
     }
 }

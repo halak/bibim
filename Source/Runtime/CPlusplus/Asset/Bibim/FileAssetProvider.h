@@ -7,6 +7,7 @@
 
     namespace Bibim
     {
+        class FileAssetPreloadingTask;
         class FileAssetProvider : public AssetProvider
         {
             BBModuleClass(FileAssetProvider, AssetProvider, 'F', 'A', 'S', 'P');
@@ -23,7 +24,16 @@
                 void SetDirectory(const String& value);
 
             private:
+                static GameAsset* LoadActually(GameAssetStorage* storage,
+                                               const String& directory,
+                                               const String& name,
+                                               bool isPriority);
+
+            private:
                 String directory;
+
+            private:
+                friend class FileAssetPreloadingTask;
         };
     }
 
