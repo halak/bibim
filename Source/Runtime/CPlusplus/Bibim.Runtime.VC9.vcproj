@@ -2227,6 +2227,46 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Audio"
+				>
+				<File
+					RelativePath=".\Audio\Bibim\AudioDevice.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Audio\Bibim\AudioDevice.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Audio\Bibim\AudioDevice.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Audio\Bibim\BGM.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Audio\Bibim\BGM.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Audio\Bibim\BGM.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Audio\Bibim\SoundFX.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Audio\Bibim\SoundFX.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Audio\Bibim\SoundFX.inl"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="01. Foundation"
