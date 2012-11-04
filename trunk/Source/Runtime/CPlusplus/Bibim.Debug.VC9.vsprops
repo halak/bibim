@@ -10,6 +10,7 @@
 	/>
 	<Tool
 		Name="VCLinkerTool"
-		AdditionalDependencies="Bibim.Runtime.Debug.VC9.lib winmm.lib d3d9.lib d3dx9d.lib freetype244_D.lib lua.Debug.lib"
+		AdditionalDependencies="Bibim.Runtime.Debug.VC9.lib winmm.lib d3d9.lib d3dx9d.lib zlibd.lib libpngd.lib freetype244_D.lib lua.Debug.lib irrKlang.lib"
+		AdditionalLibraryDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Debug&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Debug\ZLib&quot;"
 	/>
 </VisualStudioPropertySheet>

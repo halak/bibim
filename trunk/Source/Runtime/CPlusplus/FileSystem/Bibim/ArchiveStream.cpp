@@ -21,10 +21,12 @@ namespace Bibim
 
     int ArchiveStream::Read(void* buffer, int size)
     {
+        return 0;
     }
 
     int ArchiveStream::Write(const void* buffer, int size)
     {
+        return 0;
     }
 
     void ArchiveStream::Flush()

@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -108,7 +108,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lua-5.1.4\src&quot;"
+				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"

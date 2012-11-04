@@ -8,8 +8,22 @@ namespace Bibim.Graphics
 {
     public sealed class SourceTexture2DCookingTag
     {
+        #region Compression
+        public enum CompressionType
+        {
+            Raw,
+            Png,
+        }
+        #endregion
+
         #region Properties
         public int Pitch
+        {
+            get;
+            private set;
+        }
+
+        public CompressionType Compression
         {
             get;
             private set;
@@ -34,10 +48,16 @@ namespace Bibim.Graphics
         }
 
         public SourceTexture2DCookingTag(int pitch, byte[] buffer)
+            : this(pitch, CompressionType.Raw, buffer)
+        {
+        }
+
+        public SourceTexture2DCookingTag(int pitch, CompressionType compression, byte[] buffer)
         {
             Debug.Assert(pitch >= 0);
 
             Pitch = pitch;
+            Compression = compression;
             Buffer = buffer;
         }
 

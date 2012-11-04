@@ -16,6 +16,7 @@
 #include <zlib.h>
 
 #include "png.h"
+#include "pngstruct.h"
 #include "pngfile.h"
 #include "cexcept.h"
 
@@ -29,6 +30,15 @@ static OPENFILENAME ofn;
 static png_structp png_ptr = NULL;
 static png_infop info_ptr = NULL;
 
+#undef PNG_STDIO_SUPPORTED
+
+#ifndef PNG_STDIO_SUPPORTED
+
+static void png_read_data(png_structp png_ptr, png_bytep data, png_size_t length);
+static void png_write_data(png_structp png_ptr, png_bytep data, png_size_t length);
+static void png_flush(png_structp png_ptr);
+
+#endif
 
 /* cexcept interface */
 
@@ -438,7 +448,7 @@ static void
 png_flush(png_structp png_ptr)
 {
    FILE *io_ptr;
-   io_ptr = (FILE *)CVT_PTR((png_ptr->io_ptr));
+   io_ptr = (FILE *)(png_ptr->io_ptr);
    if (io_ptr != NULL)
       fflush(io_ptr);
 }

@@ -167,6 +167,10 @@ namespace Bibim.Asset.Pipeline
                                                                                           {
                                                                                               stream.EndWrite(r);
                                                                                           }
+                                                                                          catch (IOException ex)
+                                                                                          {
+                                                                                              Trace.TraceWarning(ex.ToString());
+                                                                                          }
                                                                                           catch (Exception ex)
                                                                                           {
                                                                                               Trace.WriteLine(ex);
