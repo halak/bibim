@@ -24,8 +24,7 @@ namespace Bibim
 
             virtual void Execute()
             {
-                GameAsset* result = FileAssetProvider::LoadActually(GetStorage(), directory, GetName(), true);
-                if (result != nullptr)
+                if (GameAsset* result = FileAssetProvider::LoadActually(GetStorage(), directory, GetName(), true))
                     Register(result);
             }
 

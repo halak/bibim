@@ -129,6 +129,11 @@
                             BBForwardDeclareSmartPointerClass(EaseInOutElasticCurve);
                         BBForwardDeclareSmartPointerClass(OscillationCurve);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Audio
+                class AudioDevice;
+                class BGM;
+                class SoundFX;
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Collision
                 class CollisionSpace2D;
                 class IRaycastCallback2D;
