@@ -20,6 +20,7 @@ namespace Bibim.Graphics
 
             var tag = (SourceTexture2DCookingTag)asset.Tag;
             writer.Write(tag.Pitch);
+            writer.Write((byte)tag.Compression);
             writer.Write(tag.Buffer);
         }
     }
