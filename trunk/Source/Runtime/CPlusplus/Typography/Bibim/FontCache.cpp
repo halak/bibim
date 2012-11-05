@@ -243,6 +243,32 @@ namespace Bibim
             return result;
         else
         {
+            if (code == '\t')
+            {
+                static const float TabSize = 4.0f;
+                const Glyph* regularGlyph = GetGlyph(' ');
+
+                if (parameters.StrokeSize > 0.0f)
+                {
+                    if (const Glyph* strokedGlyph = strokedGlyphTable->Find(' '))
+                    {
+                        const Vector2 advance = strokedGlyph->GetAdvance();
+                        strokedGlyphTable->Add('\t',
+                                               Vector2(advance.X * TabSize, advance.Y),
+                                               Vector2::Zero,
+                                               Vector2::Zero,
+                                               nullptr, 0, 0, 0);
+                    }
+                }
+
+                const Vector2 advance = regularGlyph->GetAdvance();
+                return regularGlyphTable->Add('\t',
+                                              Vector2(advance.X * TabSize, advance.Y),
+                                              Vector2::Zero,
+                                              Vector2::Zero,
+                                              nullptr, 0, 0, 0);
+            }
+
             struct SelectFace
             {
                 // 두 Face에서 Code를 찾아서 반환합니다.
