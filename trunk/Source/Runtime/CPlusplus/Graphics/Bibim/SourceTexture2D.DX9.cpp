@@ -52,7 +52,7 @@ namespace Bibim
         png_get_IHDR(pngReader, pngInfo, &width, &height, &bitDepth, &colorType, NULL, NULL, NULL);
 
         png_size_t pitch = png_get_rowbytes(pngReader, pngInfo);
-        png_size_t channels = png_get_channels(pngReader, pngInfo);
+        // png_size_t channels = png_get_channels(pngReader, pngInfo);
 
         BBAssert(static_cast<int>(pitch) == destinationPitch);
 
@@ -67,9 +67,6 @@ namespace Bibim
         png_destroy_read_struct(&pngReader, &pngInfo, nullptr);
 
         BBStackFree(rows);
-
-        int x = reader.GetSource()->GetPosition();
-        int y = reader.GetSource()->GetLength();
 
         return true;
     }

@@ -16,7 +16,7 @@
 #include <Bibim/EvalInterpolators.h>
 #  include <Bibim/AssetProvider.h>
 #  include <Bibim/AssetStreamReader.h>
-#  include <Bibim/ArchiveAssetProvider.h>
+#  include <Bibim/MPQAssetProvider.h>
 #  include <Bibim/FileAssetProvider.h>
 #  include <Bibim/GameAsset.h>
 #  include <Bibim/GameAssetFactory.h>
@@ -33,8 +33,7 @@
 #include <Bibim/ShaderEffect.h>
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // FileSystem
-#  include <Bibim/Archive.h>
-#  include <Bibim/ArchiveStream.h>
+#  include <Bibim/MPQStream.h>
 #  include <Bibim/FileStream.h>
 #  include <Bibim/FileStream.Windows.h>
 #  include <Bibim/FileLogger.h>
@@ -203,6 +202,10 @@
 #  include <Bibim/SegmentShape2D.h>
 #  include <Bibim/SphereShape2D.h>
 #  include <Bibim/UserShape2D.h>
+
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   // GFX
+#   include <Bibim/SparkRenderer.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // UI

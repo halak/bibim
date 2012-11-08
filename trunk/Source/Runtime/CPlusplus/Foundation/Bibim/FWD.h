@@ -75,9 +75,9 @@
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
                 // Providers
                     class AssetProvider;
-                        class ArchiveAssetProvider;
-                        class PipedAssetProvider;
                         class FileAssetProvider;
+                        class MPQAssetProvider;
+                        class PipedAssetProvider;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // (Module)
                 class GameModule;
@@ -152,8 +152,7 @@
                     class OutputWindowLogger;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // FileSystem
-                class Archive;
-                BBForwardDeclareSmartPointerClass(ArchiveStream);
+                BBForwardDeclareSmartPointerClass(MPQStream);
                 BBForwardDeclareSmartPointerClass(FileStream);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Framework
