@@ -218,18 +218,6 @@
 					Name="Providers"
 					>
 					<File
-						RelativePath=".\Asset\Bibim\ArchiveAssetProvider.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\Asset\Bibim\ArchiveAssetProvider.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Asset\Bibim\ArchiveAssetProvider.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Asset\Bibim\AssetProvider.cpp"
 						>
 					</File>
@@ -251,6 +239,18 @@
 					</File>
 					<File
 						RelativePath=".\Asset\Bibim\FileAssetProvider.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\MPQAssetProvider.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\MPQAssetProvider.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\MPQAssetProvider.inl"
 						>
 					</File>
 					<File
@@ -2147,30 +2147,6 @@
 				Name="FileSystem"
 				>
 				<File
-					RelativePath=".\FileSystem\Bibim\Archive.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\FileSystem\Bibim\Archive.h"
-					>
-				</File>
-				<File
-					RelativePath=".\FileSystem\Bibim\Archive.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\FileSystem\Bibim\ArchiveStream.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\FileSystem\Bibim\ArchiveStream.h"
-					>
-				</File>
-				<File
-					RelativePath=".\FileSystem\Bibim\ArchiveStream.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\FileSystem\Bibim\FileStream.h"
 					>
 				</File>
@@ -2184,6 +2160,18 @@
 				</File>
 				<File
 					RelativePath=".\FileSystem\Bibim\FileStream.Windows.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\MPQStream.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\MPQStream.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\MPQStream.inl"
 					>
 				</File>
 			</Filter>
@@ -2264,6 +2252,18 @@
 				</File>
 				<File
 					RelativePath=".\Audio\Bibim\SoundFX.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="GFX"
+				>
+				<File
+					RelativePath=".\GFX\Bibim\SparkRenderer.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\GFX\Bibim\SparkRenderer.h"
 					>
 				</File>
 			</Filter>
