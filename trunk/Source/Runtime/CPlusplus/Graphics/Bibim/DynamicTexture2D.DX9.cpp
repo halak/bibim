@@ -3,6 +3,7 @@
 #include <Bibim/Assert.h>
 #include <Bibim/CheckedRelease.h>
 #include <Bibim/GraphicsDevice.h>
+#include <Bibim/Math.h>
 
 namespace Bibim
 {
@@ -50,15 +51,32 @@ namespace Bibim
         IDirect3DDevice9* d3dDevice = GetGraphicsDevice()->GetD3DDevice();
         IDirect3DTexture9* newD3DTexture = nullptr;
         HRESULT result = D3D_OK;
+
+        int sw = width;  // surface width
+        int sh = height; // surface height
+        if (GetGraphicsDevice()->GetD3DCaps().TextureCaps & D3DPTEXTURECAPS_POW2)
+        {
+            sw = Math::GetNearestPowerOfTwo(sw);
+            sh = Math::GetNearestPowerOfTwo(sh);
+        }
+
+        if (GetGraphicsDevice()->GetD3DCaps().TextureCaps & D3DPTEXTURECAPS_SQUAREONLY)
+        {
+            if (sw > sh)
+                sh = sw;
+            else
+                sw = sh;
+        }
+
         if (GetGraphicsDevice()->GetD3DCaps().Caps2 & D3DCAPS2_DYNAMICTEXTURES)
         {
-            result = d3dDevice->CreateTexture(width, height, 0, D3DUSAGE_DYNAMIC, d3dFormat, D3DPOOL_DEFAULT, &newD3DTexture, nullptr);
+            result = d3dDevice->CreateTexture(sw, sh, 0, D3DUSAGE_DYNAMIC, d3dFormat, D3DPOOL_DEFAULT, &newD3DTexture, nullptr);
             d3dLockableTexture = newD3DTexture;
         }
         else
         {
-            result = d3dDevice->CreateTexture(width, height, 0, 0, d3dFormat, D3DPOOL_SYSTEMMEM, &d3dSystemMemoryTexture, nullptr);
-            result = d3dDevice->CreateTexture(width, height, 0, 0, d3dFormat, D3DPOOL_DEFAULT, &newD3DTexture, nullptr);
+            result = d3dDevice->CreateTexture(sw, sh, 0, 0, d3dFormat, D3DPOOL_SYSTEMMEM, &d3dSystemMemoryTexture, nullptr);
+            result = d3dDevice->CreateTexture(sw, sh, 0, 0, d3dFormat, D3DPOOL_DEFAULT, &newD3DTexture, nullptr);
             d3dLockableTexture = d3dSystemMemoryTexture;
         }
 
@@ -68,7 +86,7 @@ namespace Bibim
             if (newD3DTexture->GetLevelDesc(0, &surfaceDesc) == D3D_OK)
                 Setup(newD3DTexture, width, height, static_cast<int>(surfaceDesc.Width), static_cast<int>(surfaceDesc.Height), pixelFormat);
             else
-                Setup(newD3DTexture, width, height, width, height, pixelFormat);
+                Setup(newD3DTexture, width, height, sw, sh, pixelFormat);
             
             IncreaseRevision();
             SetStatus(CompletedStatus);

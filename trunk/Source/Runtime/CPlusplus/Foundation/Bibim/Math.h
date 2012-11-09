@@ -94,6 +94,7 @@
 
                 static inline int Wrap(int value, int upper);
 
+                static inline bool IsPowerOfTwo(int value);
                 static int GetNearestPowerOfTwo(int value);
 
                 /// @brief 근사 비교법을 이용하여 입력한 두 값이 같은지 확인합니다.

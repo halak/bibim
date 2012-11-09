@@ -31,6 +31,7 @@
             private:
                 void __Construct__();
                 void __Construct__(lua_tinker::table t);
+                SPK::Group* CreateParticleGroup(lua_tinker::table t);
 
                 class Updater : public IUpdateable
                 {
