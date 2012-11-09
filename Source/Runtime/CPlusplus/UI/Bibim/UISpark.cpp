@@ -112,6 +112,26 @@ namespace Bibim
     {
         __Construct__();
 
+        particleSystem = System::create();
+
+        const int count = t.len();
+        if (count > 0)
+        {
+            for (int i = 1; i <= count; i++)
+            {
+                if (Group* group = CreateParticleGroup(t.get<lua_tinker::table>(i)))
+                    particleSystem->addGroup(group);
+            }
+        }
+        else
+        {
+            if (Group* group = CreateParticleGroup(t))
+                particleSystem->addGroup(group);
+        }
+    }
+
+    SPK::Group* UISpark::CreateParticleGroup(lua_tinker::table t)
+    {
 	    // Model
 	    Model* particleModel = Model::create(FLAG_RED | FLAG_GREEN | FLAG_BLUE | FLAG_ALPHA);
 	    particleModel->setParam(PARAM_ALPHA,0.8f); // constant alpha
@@ -133,9 +153,8 @@ namespace Bibim
 	    particleGroup->addModifier(obstacle);
 	    // particleGroup->setRenderer(particleRenderer);
 	    particleGroup->setGravity(Vector3D(0.0f, 1000.8f, 0.0f));
-    	
-	    particleSystem = System::create();
-	    particleSystem->addGroup(particleGroup);
+
+        return particleGroup;
     }
 
     void UISpark::OnRead(ComponentStreamReader& reader)
