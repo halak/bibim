@@ -202,6 +202,10 @@
                     BBForwardDeclareSmartPointerClass(PipeClientStream);
                     BBForwardDeclareSmartPointerClass(PipeServerStream);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // Net
+                class Http;
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Scripting
                 class LuaRuntimeEnvironment;
                 BBForwardDeclareSmartPointerClass(Script);

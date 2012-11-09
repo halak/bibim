@@ -291,6 +291,17 @@ namespace Bibim
         return result;
     }
 
+    int String::CharsFind(const char* s, char c)
+    {
+        int result = 0;
+        for (; *s != '\0'; s++, result++)
+        {
+            if (*s == c)
+                return result;
+        }
+        return -1;
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     String::CharRef::CharRef(String& s, int index)
