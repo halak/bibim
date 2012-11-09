@@ -727,6 +727,34 @@ bool lua_tinker::table_obj::has(int index)
         return false;
 }
 
+int lua_tinker::table_obj::type(const char* name)
+{
+	if(validate())
+	{
+		lua_pushstring(m_L, name);
+		lua_gettable(m_L, m_index);
+        const int result = lua_type(m_L, -1);
+        lua_pop(m_L, 1);
+        return result;
+	}
+    else
+        return LUA_TNIL;
+}
+
+int lua_tinker::table_obj::type(int index)
+{
+	if(validate())
+	{
+		lua_pushinteger(m_L, index);
+		lua_gettable(m_L, m_index);
+        const int result = lua_type(m_L, -1);
+        lua_pop(m_L, 1);
+        return result;
+	}
+	else
+        return LUA_TNIL;
+}
+
 int lua_tinker::table_obj::len()
 {
     if (validate())

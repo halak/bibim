@@ -31,7 +31,9 @@
             private:
                 void __Construct__();
                 void __Construct__(lua_tinker::table t);
-                SPK::Group* CreateParticleGroup(lua_tinker::table t);
+                
+                static SPK::Group* CreateParticleGroup(lua_tinker::table t);
+                static bool ToMinMax(const char* value, float& outMin, float& outMax);
 
                 class Updater : public IUpdateable
                 {

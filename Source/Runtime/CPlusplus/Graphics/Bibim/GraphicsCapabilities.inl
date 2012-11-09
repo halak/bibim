@@ -17,6 +17,6 @@
 
     bool GraphicsCapabilities::IsShaderSupported() const
     {
-        return vertexShaderVersion != VSNotSupported && pixelShaderVersion != PSNotSupported;
+        return vertexShaderVersion >= VS20 && pixelShaderVersion >= PS20;
     }
 }

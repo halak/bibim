@@ -131,6 +131,7 @@
                 static inline int CopyChars(char* destination, const char* source);
                 static inline int CopyChars(char* destination, const char* source, int length);
                 static inline int CharsLength(const char* s);
+                static inline int CharsFind(const char* s, char c);
 
             public:
                 static const String Empty;

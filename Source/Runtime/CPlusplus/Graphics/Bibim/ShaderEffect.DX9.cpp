@@ -3,7 +3,9 @@
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/CheckedRelease.h>
 #include <Bibim/GraphicsDevice.h>
+#include <Bibim/Log.h>
 #include <Bibim/Matrix4.h>
+#include <Bibim/Numerics.h>
 #include <Bibim/String.h>
 #include <Bibim/Texture2D.h>
 
@@ -106,34 +108,23 @@ namespace Bibim
     GameAsset* ShaderEffect::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
     {
         GraphicsDevice* graphicsDevice = static_cast<GraphicsDevice*>(reader.ReadModule(GraphicsDevice::ClassID));
-        const String code = reader.ReadString();
-        /*
-        const int length = reader.ReadInt();
-        std::vector<byte> buffer;
-        buffer.resize(length);
-        reader.Read(&buffer[0], length);
-        */
-
-        
+        const String code = reader.ReadString();       
 
         ID3DXEffect* d3dEffect = nullptr;
-        /*HRESULT r = */D3DXCreateEffect(graphicsDevice->GetD3DDevice(),
-                         code.CStr(),
-                         code.GetLength(),
-                         NULL, NULL, 0, 0, &d3dEffect, 0);
+        ID3DXBuffer* errorBuffer = nullptr;
+        HRESULT result = D3DXCreateEffect(graphicsDevice->GetD3DDevice(),
+                                          code.CStr(), code.GetLength(),
+                                          NULL, NULL, D3DXSHADER_OPTIMIZATION_LEVEL3, 0, &d3dEffect, &errorBuffer);
+        if (result != D3D_OK)
+        {
+            Log::Error("ShaderEffect", Int::ToString(result).CStr());
+
+            if (errorBuffer)
+                Log::Error("ShaderEffect", reinterpret_cast<const char*>(errorBuffer->GetBufferPointer()));
+
+            Log::Error("ShaderEffect", code.CStr());
+        }
 
         return new ShaderEffect(graphicsDevice, d3dEffect);
-        //const int width = static_cast<int>(reader.ReadInt16());
-        //const int height = static_cast<int>(reader.ReadInt16());
-        //const int surfaceWidth = static_cast<int>(reader.ReadInt16());
-        //const int surfaceHeight = static_cast<int>(reader.ReadInt16());
-        //const PixelFormat pixelFormat = static_cast<PixelFormat>(reader.ReadInt8());
-        //if (width == 0 || height == 0 || surfaceWidth == 0 || surfaceHeight == 0)
-        //    return nullptr;
-
-        //SourceTexture2D* texture = new SourceTexture2D(graphicsDevice, width, height, surfaceWidth, surfaceHeight, pixelFormat);
-        //reader.ReadAsync(new LoadingTask(reader, texture, surfaceHeight));
-
-        //return texture;
     }
 }

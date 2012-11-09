@@ -811,6 +811,10 @@
 				Name="Diagnostics"
 				>
 				<File
+					RelativePath=".\Diagnostics\Bibim\CrashDump.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\Diagnostics\Bibim\FileLogger.cpp"
 					>
 				</File>
@@ -2280,6 +2284,26 @@
 				</File>
 				<File
 					RelativePath=".\GFX\Bibim\SparkParticleEngine.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Net"
+				>
+				<File
+					RelativePath=".\Net\Bibim\Http.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Net\Bibim\Http.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Net\Bibim\Http.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Net\Bibim\Http.Windows.inl"
 					>
 				</File>
 			</Filter>

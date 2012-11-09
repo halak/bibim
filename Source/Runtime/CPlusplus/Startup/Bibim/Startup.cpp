@@ -1,10 +1,13 @@
 ﻿#include <Bibim/Startup.h>
 #include <Bibim/All.h>
+#include <Bibim/CrashDump.cpp>
 
 namespace Bibim
 {
     void Startup::All()
     {
+        InitializeCrashDump();
+
         GameAssetFactory::AddEntry<EvalBoard>();
         GameAssetFactory::AddEntry<BoolSequence>();
         GameAssetFactory::AddEntry<ShortIntSequence>();
