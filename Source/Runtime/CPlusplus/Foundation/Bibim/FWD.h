@@ -170,6 +170,10 @@
                     BBForwardDeclareSmartPointerClass(JumpPointPathFinder);
                 BBForwardDeclareSmartPointerClass(SpatialObject2D);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
+            // GFX
+                class SparkParticleEngine;
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Graphics
                 class DisplaySwapChain;
                 class GraphicsCapabilities;
@@ -184,6 +188,7 @@
                     BBForwardDeclareSmartPointerClass(RenderTargetTexture2D);
                     BBForwardDeclareSmartPointerClass(SourceTexture2D);
                 class Window;
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Input
                 class GamePad;
@@ -295,6 +300,7 @@
                             BBForwardDeclareSmartPointerClass(UIWindow);
                         BBForwardDeclareSmartPointerClass(UISprite);
                         BBForwardDeclareSmartPointerClass(UIVideo);
+                        BBForwardDeclareSmartPointerClass(UISpark);
     }
 
 #endif
