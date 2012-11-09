@@ -10,7 +10,7 @@
     {
         class CommandQueue : public TimelineGameModule
         {
-            BBModuleClass(CommandQueue, GameModule, 'C', 'M', 'D', 'Q');
+            BBModuleClass(CommandQueue, TimelineGameModule, 'C', 'M', 'D', 'Q');
             public:
                 class Event
                 {

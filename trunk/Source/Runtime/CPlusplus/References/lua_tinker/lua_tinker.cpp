@@ -699,6 +699,34 @@ bool lua_tinker::table_obj::validate()
 	}
 }
 
+bool lua_tinker::table_obj::has(const char* name)
+{
+	if(validate())
+	{
+		lua_pushstring(m_L, name);
+		lua_gettable(m_L, m_index);
+        const bool result = !lua_isnil(m_L, -1);
+        lua_pop(m_L, 1);
+        return result;
+	}
+    else
+        return false;
+}
+
+bool lua_tinker::table_obj::has(int index)
+{
+	if(validate())
+	{
+		lua_pushinteger(m_L, index);
+		lua_gettable(m_L, m_index);
+        const bool result = !lua_isnil(m_L, -1);
+        lua_pop(m_L, 1);
+        return result;
+	}
+	else
+        return false;
+}
+
 int lua_tinker::table_obj::len()
 {
     if (validate())

@@ -913,6 +913,9 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
 			return pop<T>(m_L);
 		}
 
+		bool has(const char* name);
+		bool has(int index);
+
         int len();
 
 		lua_State*		m_L;
@@ -953,6 +956,16 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
 		{
 			return m_obj->get<T>(index);
 		}
+
+        bool has(const char* name)
+        {
+            return m_obj->has(name);
+        }
+
+        bool has(int index)
+        {
+            return m_obj->has(index);
+        }
 
         int len()
         {
