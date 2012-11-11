@@ -38,6 +38,8 @@
                 void DrawLines(int count, const Vector2* p, Color color);
                 void DrawLines(int count, const Vector2* p, Color* c);
 
+                void DrawTriangles(int count, const Vector2* p, Color color);
+
                 void DrawQuad(const Vector2* p, Color color);
                 void DrawQuad(const Vector2* p, Color color, const Vector2* uv,  Texture2D* texture);
                 void DrawQuad(const Vector2* p, Color color, const Vector2* uv1, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2);

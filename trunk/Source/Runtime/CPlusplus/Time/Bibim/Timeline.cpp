@@ -34,7 +34,10 @@ namespace Bibim
 
         dt *= GetSpeed();
         for (ItemCollection::iterator it = temporaryItems.begin(); it != temporaryItems.end(); it++)
-            (*it)->Update(dt, timestamp);
+        {
+            if ((*it))
+                (*it)->Update(dt, timestamp);
+        }
 
         temporaryObjects.clear();
         temporaryItems.clear();
@@ -64,6 +67,7 @@ namespace Bibim
             const int index = std::distance(items.begin(), it);
             items.erase(it);
             objects.erase(objects.begin() + index);
+            temporaryItems[index] = nullptr;
             return true;
         }
         else

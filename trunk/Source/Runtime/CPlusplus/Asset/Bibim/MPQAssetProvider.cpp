@@ -3,18 +3,20 @@
 #include <Bibim/AssetLoadingTask.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/BinaryWriter.h>
-#include <Bibim/FileStream.h>
+#include <Bibim/MPQ.h>
+#include <Bibim/MPQStream.h>
 #include <BIbim/GameAssetFactory.h>
 #include <BIbim/GameAssetStorage.h>
+#include <StormLib.h>
 
 namespace Bibim
 {
     class MPQAssetPreloadingTask : public AssetPreloadingTask
     {
         public:
-            MPQAssetPreloadingTask(const String& name, GameAssetStorage* storage, const String& directory)
+            MPQAssetPreloadingTask(const String& name, GameAssetStorage* storage, MPQ* mpq)
                 : AssetPreloadingTask(name, storage),
-                  directory(directory)
+                  mpq(mpq)
             {
             }
 
@@ -24,12 +26,12 @@ namespace Bibim
 
             virtual void Execute()
             {
-                if (GameAsset* result = MPQAssetProvider::LoadActually(GetStorage(), directory, GetName(), true))
+                if (GameAsset* result = MPQAssetProvider::LoadActually(GetStorage(), mpq, GetName(), true))
                     Register(result);
             }
 
         private:
-            String directory;
+            MPQ* mpq;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -43,10 +45,10 @@ namespace Bibim
     {
     }
 
-    MPQAssetProvider::MPQAssetProvider(GameAssetStorage* storage, const String& directory)
-        : AssetProvider(storage)
+    MPQAssetProvider::MPQAssetProvider(GameAssetStorage* storage, MPQ* mpq)
+        : AssetProvider(storage),
+          mpq(mpq)
     {
-        SetDirectory(directory);
     }
 
     MPQAssetProvider::~MPQAssetProvider()
@@ -55,45 +57,37 @@ namespace Bibim
 
     bool MPQAssetProvider::Preload(const String& name)
     {
-        BBAssertDebug(GetStorage() != nullptr);
-        Add(new MPQAssetPreloadingTask(name, GetStorage(), directory));
+        BBAssertDebug(GetStorage() != nullptr && mpq != nullptr);
+        Add(new MPQAssetPreloadingTask(name, GetStorage(), mpq));
         return true;
     }
 
     GameAsset* MPQAssetProvider::Load(const String& name)
     {
-        return LoadActually(GetStorage(), directory, name, false);
+        BBAssertDebug(mpq != nullptr);
+        return LoadActually(GetStorage(), mpq, name, false);
     }
 
-    void MPQAssetProvider::SetDirectory(const String& value)
+    void MPQAssetProvider::SetMPQ(MPQ* value)
     {
-        directory = value;
-
-        if (directory.GetLength() > 0)
-        {
-            const char last = directory[directory.GetLength() - 1];
-            if (last != '\\')
-                directory.Append("\\");
-        }
+        mpq = value;
     }
 
     GameAsset* MPQAssetProvider::LoadActually(GameAssetStorage* storage,
-                                               const String& directory,
+                                               MPQ* mpq,
                                                const String& name,
                                                bool isPriority)
     {
         BBAssertDebug(storage != nullptr);
 
-        const int dl = directory.GetLength();
         const int nl = name.GetLength();
-        const int totalLength = dl + nl + 3 + 1;
+        const int totalLength = nl + 3 + 1;
         char* filename = BBStackAlloc(char, totalLength);
-        String::CopyChars(&filename[0],       directory.CStr());
-        String::CopyChars(&filename[dl],      name.CStr());
-        String::CopyChars(&filename[dl + nl], ".ab");
+        String::CopyChars(&filename[0],  name.CStr());
+        String::CopyChars(&filename[nl], ".ab");
         filename[totalLength - 1] = '\0';
 
-        FileStreamPtr assetStream = new FileStream(filename, FileStream::ReadOnly);
+        MPQStreamPtr assetStream = new MPQStream(mpq, filename);
         AssetStreamReader reader(name, assetStream, storage, isPriority);
         GameAsset* result = GameAssetFactory::Create(reader);
 

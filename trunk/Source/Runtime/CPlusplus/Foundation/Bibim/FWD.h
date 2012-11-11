@@ -55,6 +55,7 @@
                 BBForwardDeclareSmartPointerClass(Stream);
                     BBForwardDeclareSmartPointerClass(DumpStream);
                     BBForwardDeclareSmartPointerClass(MemoryStream);
+                    BBForwardDeclareSmartPointerClass(Win32Stream);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Mathematics
             ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -152,8 +153,9 @@
                     class OutputWindowLogger;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // FileSystem
-                BBForwardDeclareSmartPointerClass(MPQStream);
                 BBForwardDeclareSmartPointerClass(FileStream);
+                BBForwardDeclareSmartPointerClass(MPQ);
+                BBForwardDeclareSmartPointerClass(MPQStream);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Framework
                 class GameFrameworkBase;

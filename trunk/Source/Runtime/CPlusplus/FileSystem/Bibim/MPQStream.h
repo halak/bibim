@@ -12,7 +12,7 @@
         class MPQStream : public Stream
         {
             public:
-                MPQStream();
+                MPQStream(MPQ* mpq, const String& path);
                 virtual ~MPQStream();
 
                 void Close();
@@ -28,6 +28,9 @@
                 virtual bool CanRead() const;
                 virtual bool CanWrite() const;
                 virtual bool CanSeek() const;
+
+            private:
+                void* handle;
         };
     }
 

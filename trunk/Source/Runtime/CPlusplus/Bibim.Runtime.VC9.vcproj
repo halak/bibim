@@ -2179,6 +2179,18 @@
 					>
 				</File>
 				<File
+					RelativePath=".\FileSystem\Bibim\MPQ.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\MPQ.h"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\MPQ.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\FileSystem\Bibim\MPQStream.cpp"
 					>
 				</File>

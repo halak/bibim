@@ -12,12 +12,14 @@ namespace Bibim
 
     SparkParticleEngine::~SparkParticleEngine()
     {
-        if (SPKFactory::getInstance().getNbObjects() > 0)
+        SPKFactory& factory = SPKFactory::getInstance();
+
+        if (factory.getNbObjects() > 0)
         {
-            SPKFactory::getInstance().traceAll();
-            SPKFactory::getInstance().destroyAll();
+            factory.traceAll();
+            factory.destroyAll();
         }
 
-        SPKFactory::getInstance().destroyInstance();
+        factory.destroyInstance();
     }
 }
