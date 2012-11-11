@@ -52,9 +52,7 @@ namespace Bibim
 
     int FileStream::Read(void* buffer, int size)
     {
-        if (handle == INVALID_HANDLE_VALUE || size < 0 || canRead == false)
-            return -1;
-        if (size == 0)
+        if (handle == INVALID_HANDLE_VALUE || size <= 0 || canRead == false)
             return 0;
 
         DWORD readBytes = 0;
@@ -65,9 +63,7 @@ namespace Bibim
 
     int FileStream::Write(const void* buffer, int size)
     {
-        if (handle == INVALID_HANDLE_VALUE || size < 0 || canWrite == false)
-            return -1;
-        if (size == 0)
+        if (handle == INVALID_HANDLE_VALUE || size <= 0 || canWrite == false)
             return 0;
 
         DWORD writtenBytes = 0;

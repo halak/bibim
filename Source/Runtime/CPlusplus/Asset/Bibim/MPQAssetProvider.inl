@@ -1,7 +1,7 @@
 namespace Bibim
 {
-    const String& MPQAssetProvider::GetDirectory() const
+    MPQ* MPQAssetProvider::GetMPQ() const
     {
-        return directory;
+        return mpq;
     }
 }

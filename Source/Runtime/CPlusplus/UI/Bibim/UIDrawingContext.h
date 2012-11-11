@@ -22,6 +22,7 @@
                 void Draw(Shape2D* shape, Color color);
                 void DrawUnclipped(Vector2 position, Texture2D* texture);
                 void DrawUnclipped(Vector2 position, float rotation, Image* image);
+                void DrawUnclipped(Vector2 position, float rotation, Image* image, Color color);
 
                 inline void DrawString(Font* font, const String& text);
                 inline void DrawString(const FontString& fontString);
@@ -30,10 +31,10 @@
                 void DrawString(const RectF& bounds, const RectF& clippedBounds, const FontString& fontString);
                 void DrawLine(Vector2 p0, Vector2 p1, Color color);
                 void DrawLines(int count, Vector2* p, Color color);
-                void DrawRect(const RectF& bounds, float width, Color color);
+                void DrawRect(const RectF& bounds, Color color);
                 void DrawCircle(Vector2 center, float radius, Color color);
 
-                void FillRect(const RectF& bounds, float width, Color color);
+                void FillRect(const RectF& bounds, Color color);
 
             private:
                 void Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, Image* maskImage, bool horizontalFlip, bool verticalFlip);

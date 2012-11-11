@@ -14,23 +14,23 @@
             public:
                 MPQAssetProvider();
                 MPQAssetProvider(GameAssetStorage* storage);
-                MPQAssetProvider(GameAssetStorage* storage, const String& directory);
+                MPQAssetProvider(GameAssetStorage* storage, MPQ* mpq);
                 virtual ~MPQAssetProvider();
 
                 virtual bool Preload(const String& name);
                 virtual GameAsset* Load(const String& name);
 
-                inline const String& GetDirectory() const;
-                void SetDirectory(const String& value);
+                inline MPQ* GetMPQ() const;
+                void SetMPQ(MPQ* value);
 
             private:
                 static GameAsset* LoadActually(GameAssetStorage* storage,
-                                               const String& directory,
+                                               MPQ* mpq,
                                                const String& name,
                                                bool isPriority);
 
             private:
-                String directory;
+                MPQPtr mpq;
 
             private:
                 friend class MPQAssetPreloadingTask;

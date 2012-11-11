@@ -367,6 +367,27 @@ namespace Bibim
         DrawPrimitives(D3DPT_LINESTRIP, numberOfLines);
     }
 
+    void UIRenderer::DrawTriangles(int count, const Vector2* p, Color color)
+    {
+        if (count == 0)
+            return;
+        BBAssert(count > 0 && p);
+
+        Flush();
+
+        count -= (count % 3);
+
+        const D3DCOLOR d3dColor = color.ToARGB();
+        const int numberOfTriangles = static_cast<int>(count / 3);
+        Vertex* v = nullptr;
+        vb->Lock(0, sizeof(Vertex) * count, reinterpret_cast<void**>(&v), D3DLOCK_DISCARD);
+        for (int i = 0; i < count; i++)
+            v[i] = Vertex(p[i], d3dColor);
+        vb->Unlock();
+
+        DrawPrimitives(D3DPT_TRIANGLELIST, numberOfTriangles);
+    }
+
     void UIRenderer::DrawQuad(const Vector2* p, Color color)
     {
         BBAssert(p);

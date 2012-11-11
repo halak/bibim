@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
+#   include <Bibim/String.h>
 #   include <irrklang.h>
 
     namespace Bibim
@@ -14,6 +15,8 @@
             public:
                 AudioDevice();
                 virtual ~AudioDevice();
+
+                void AddArchive(MPQ* mpq);
 
                 inline irrklang::ISoundEngine* GetEngine() const;
 

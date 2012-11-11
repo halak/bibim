@@ -29,6 +29,7 @@ namespace Bibim
 
     BGM::~BGM()
     {
+        DropAliveBGM();
         DropAllDeadBGMs();
     }
 

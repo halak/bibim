@@ -188,6 +188,16 @@ namespace Bibim
         return strcmp(buffer->s, right) == 0;
     }
 
+    bool String::Equals(const char* right, int length) const
+    {
+        if (buffer->s == right)
+            return true;
+        if (buffer->length != length)
+            return false;
+
+        return strcmp(buffer->s, right) == 0;
+    }
+
     bool String::Equals(const String& right) const
     {
         if (buffer == right.buffer)
@@ -202,6 +212,16 @@ namespace Bibim
     {
         if (buffer->s == right)
             return true;
+
+        return _stricmp(buffer->s, right) == 0;
+    }
+
+    bool String::EqualsIgnoreCase(const char* right, int length) const
+    {
+        if (buffer->s == right)
+            return true;
+        if (buffer->length != length)
+            return false;
 
         return _stricmp(buffer->s, right) == 0;
     }

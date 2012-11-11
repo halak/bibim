@@ -177,16 +177,26 @@ void lua_tinker::dofile(lua_State *L, const char *filename)
 /*---------------------------------------------------------------------------*/ 
 void lua_tinker::dostring(lua_State *L, const char* buff)
 {
-	lua_tinker::dobuffer(L, buff, strlen(buff));
+	lua_tinker::dobuffer(L, buff, strlen(buff), "lua_tinker::dostring()");
+}
+
+void lua_tinker::dostring(lua_State *L, const char* buff, const char* name)
+{
+	lua_tinker::dobuffer(L, buff, strlen(buff), name);
 }
 
 /*---------------------------------------------------------------------------*/ 
 void lua_tinker::dobuffer(lua_State *L, const char* buff, size_t len)
 {
+    lua_tinker::dobuffer(L, buff, len, "lua_tinker::dobuffer()");
+}
+
+void lua_tinker::dobuffer(lua_State *L, const char* buff, size_t len, const char* name)
+{
 	lua_pushcclosure(L, on_error, 0);
 	int errfunc = lua_gettop(L);
 
-    if(luaL_loadbuffer(L, buff, len, "lua_tinker::dobuffer()") != 0)
+    if(luaL_loadbuffer(L, buff, len, name) == 0)
 	{
 		if(lua_pcall(L, 0, 0, errfunc) != 0)
 		{
@@ -818,6 +828,53 @@ lua_tinker::table::table(const table& input)
 lua_tinker::table::~table()
 {
 	m_obj->dec_ref();
+}
+
+lua_tinker::table::enumerator lua_tinker::table::enumerate()
+{
+    if (m_obj->validate())
+    {
+        lua_pushnil(m_obj->m_L);
+        lua_pushnil(m_obj->m_L);
+        return enumerator(this);
+    }
+    else
+        return enumerator(0);
+}
+
+lua_tinker::table::enumerator::enumerator(table* t)
+    : m_table(t)
+{
+}
+
+bool lua_tinker::table::enumerator::next()
+{
+    if (m_table == 0)
+        return false;
+
+    lua_State* L = m_table->m_obj->m_L;
+
+    lua_pop(L, 1);
+
+    if (lua_next(L, m_table->m_obj->m_index) != 0)
+    {
+        return true;
+    }
+    else
+    {
+        lua_pop(L, 1);
+        return false;
+    }
+}
+
+int lua_tinker::table::enumerator::key_type() const
+{
+    return lua_type(m_table->m_obj->m_L, -2);
+}
+
+int lua_tinker::table::enumerator::value_type() const
+{
+    return lua_type(m_table->m_obj->m_L, -1);
 }
 
 /*---------------------------------------------------------------------------*/ 

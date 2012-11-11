@@ -309,13 +309,16 @@ namespace Bibim
 
     void UIDrawingContext::DrawUnclipped(Vector2 position, float rotation, Image* image)
     {
+        DrawUnclipped(position, rotation, image, Color(255, 255, 255));
+    }
+
+    void UIDrawingContext::DrawUnclipped(Vector2 position, float rotation, Image* image, Color color)
+    {
         BBAssertDebug(image && image->GetTexture() && renderer);
         if (image->GetStatus() != GameAsset::CompletedStatus ||
             image->GetTexture()->GetStatus() != GameAsset::CompletedStatus)
             return;
 
-        const float sin = Math::Sin(rotation);
-        const float cos = Math::Cos(rotation);
         const float halfWidth  = static_cast<float>(image->GetClippingRect().Width) * 0.5f;
         const float halfHeight = static_cast<float>(image->GetClippingRect().Height) * 0.5f;
 
@@ -326,10 +329,15 @@ namespace Bibim
             Vector2(-halfWidth, +halfHeight),
             Vector2(+halfWidth, +halfHeight),
         };
-        points[0].Rotate(sin, cos);
-        points[1].Rotate(sin, cos);
-        points[2].Rotate(sin, cos);
-        points[3].Rotate(sin, cos);
+        if (rotation != 0.0f)
+        {
+            const float sin = Math::Sin(rotation);
+            const float cos = Math::Cos(rotation);
+            points[0].Rotate(sin, cos);
+            points[1].Rotate(sin, cos);
+            points[2].Rotate(sin, cos);
+            points[3].Rotate(sin, cos);
+        }
         points[0] += position;
         points[1] += position;
         points[2] += position;
@@ -353,7 +361,7 @@ namespace Bibim
                 break;
         }
 
-        const Color color = Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity()));
+        color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
         renderer->DrawQuad(points, color, uv, image->GetTexture());
     }
 
@@ -373,7 +381,7 @@ namespace Bibim
 
         struct DrawGlyphs
         {
-            static void Do(UIDrawingContext* self, TypingContext& context, UIRenderer* renderer, const RectF& bounds, const RectF& clippedBounds, const FontString::GlyphCollection& glyphs, Color color)
+            static void Do(UIDrawingContext* /*self*/, TypingContext& context, UIRenderer* renderer, const RectF& bounds, const RectF& /*clippedBounds*/, const FontString::GlyphCollection& glyphs, Color color)
             {
                 while (context.MoveNext())
                 {
@@ -448,9 +456,19 @@ namespace Bibim
         renderer->DrawLines(count, p, color);
     }
 
-    void UIDrawingContext::DrawRect(const RectF& bounds, float width, Color color)
+    void UIDrawingContext::DrawRect(const RectF& bounds, Color color)
     {
+        const Vector2 p[] =
+        {
+            Vector2(bounds.GetLeft(),  bounds.GetTop()),
+            Vector2(bounds.GetRight(), bounds.GetTop()),
+            Vector2(bounds.GetRight(), bounds.GetBottom()),
+            Vector2(bounds.GetLeft(),  bounds.GetBottom()),
+            Vector2(bounds.GetLeft(),  bounds.GetTop())
+        };
+
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
+        renderer->DrawLines(sizeof(p) / sizeof(p[0]), p, color);
     }
 
     void UIDrawingContext::DrawCircle(Vector2 center, float radius, Color color)
@@ -474,9 +492,21 @@ namespace Bibim
         BBStackFree(p);
     }
 
-    void UIDrawingContext::FillRect(const RectF& bounds, float width, Color color)
+    void UIDrawingContext::FillRect(const RectF& bounds, Color color)
     {
+        const Vector2 p[] = 
+        {
+            Vector2(bounds.GetLeft(),  bounds.GetTop()),
+            Vector2(bounds.GetRight(), bounds.GetTop()),
+            Vector2(bounds.GetLeft(),  bounds.GetBottom()),
+
+            Vector2(bounds.GetLeft(),  bounds.GetBottom()),
+            Vector2(bounds.GetRight(), bounds.GetTop()),
+            Vector2(bounds.GetRight(), bounds.GetBottom()),
+        };
+        
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
+        renderer->DrawTriangles(sizeof(p) / sizeof(p[0]), p, color);
     }
 
     void UIDrawingContext::OnBegan()

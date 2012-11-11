@@ -43,8 +43,10 @@
                 int CompareIgnoreCase(const String& right) const;
 
                 bool Equals(const char* right) const;
+                bool Equals(const char* right, int length) const;
                 bool Equals(const String& right) const;
                 bool EqualsIgnoreCase(const char* right) const;
+                bool EqualsIgnoreCase(const char* right, int length) const;
                 bool EqualsIgnoreCase(const String& right) const;
 
                 bool Contains(char c) const;

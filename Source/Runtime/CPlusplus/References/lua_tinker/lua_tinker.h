@@ -24,7 +24,9 @@ namespace lua_tinker
 	// excution
 	void	dofile(lua_State *L, const char *filename);
 	void	dostring(lua_State *L, const char* buff);
+    void	dostring(lua_State *L, const char* buff, const char* name);
 	void	dobuffer(lua_State *L, const char* buff, size_t sz);
+    void	dobuffer(lua_State *L, const char* buff, size_t sz, const char* name);
 
 	// debug helpers
 	void	enum_stack(lua_State *L);
@@ -930,6 +932,30 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
 	// Table Object Holder
 	struct table
 	{
+        struct enumerator
+        {
+            enumerator(table* t);
+
+            bool next();
+
+            int key_type() const;
+            int value_type() const;
+
+            template<typename T>
+            T key()
+            {
+                return read<T>(m_table->m_obj->m_L, -2);
+            }
+            
+            template<typename T>
+            T value()
+            {
+                return read<T>(m_table->m_obj->m_L, -1);
+            }
+
+            table* m_table;
+        };
+
 		table(lua_State* L);
 		table(lua_State* L, int index);
 		table(lua_State* L, const char* name);
@@ -984,6 +1010,8 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
         {
             return m_obj->len();
         }
+
+        enumerator enumerate();
 
 		table_obj*		m_obj;
 	};

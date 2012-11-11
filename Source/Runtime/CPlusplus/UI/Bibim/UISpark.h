@@ -31,9 +31,24 @@
             private:
                 void __Construct__();
                 void __Construct__(lua_tinker::table t);
-                
-                static SPK::Group* CreateParticleGroup(lua_tinker::table t);
-                static bool ToMinMax(const char* value, float& outMin, float& outMax);
+
+                static SPK::Group*    CreateParticleGroup(lua_tinker::table t);
+                static SPK::Emitter*  CreateParticleEmitter(lua_tinker::table t, int& outInitialParticles);
+                static SPK::Modifier* CreateParticleModifier(lua_tinker::table t);
+                static SPK::Zone*     CreateParticleZone(lua_tinker::table t);
+
+                struct MinMax
+                {
+                    float Min;
+                    float Max;
+                    bool IsValid;
+
+                    MinMax(const char* value);
+                    MinMax(lua_tinker::table& t, int key);
+                    MinMax(lua_tinker::table& t, const char* key);
+
+                    static bool TryParse(const char* value, float& outMin, float& outMax);
+                };
 
                 class Updater : public IUpdateable
                 {
@@ -49,7 +64,7 @@
 
             private:
                 SPK::System* particleSystem;
-                std::vector<ImagePtr> sources;
+                std::vector<ImagePtr> imagePalette;
                 Timeline* timeline;
                 Vector2 contentSize;
                 Updater updater;
