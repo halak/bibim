@@ -309,18 +309,23 @@ namespace Bibim
 
     void UIDrawingContext::DrawUnclipped(Vector2 position, float rotation, Image* image)
     {
-        DrawUnclipped(position, rotation, image, Color(255, 255, 255));
+        DrawUnclipped(position, rotation, 1.0f, image, Color(255, 255, 255));
     }
 
     void UIDrawingContext::DrawUnclipped(Vector2 position, float rotation, Image* image, Color color)
+    {
+        DrawUnclipped(position, rotation, 1.0f, image, color);
+    }
+
+    void UIDrawingContext::DrawUnclipped(Vector2 position, float rotation, float scale, Image* image, Color color)
     {
         BBAssertDebug(image && image->GetTexture() && renderer);
         if (image->GetStatus() != GameAsset::CompletedStatus ||
             image->GetTexture()->GetStatus() != GameAsset::CompletedStatus)
             return;
 
-        const float halfWidth  = static_cast<float>(image->GetClippingRect().Width) * 0.5f;
-        const float halfHeight = static_cast<float>(image->GetClippingRect().Height) * 0.5f;
+        const float halfWidth  = static_cast<float>(image->GetClippingRect().Width) * 0.5f * scale;
+        const float halfHeight = static_cast<float>(image->GetClippingRect().Height) * 0.5f * scale;
 
         Vector2 points[] =
         {

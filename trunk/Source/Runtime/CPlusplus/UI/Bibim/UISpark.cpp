@@ -99,6 +99,7 @@ namespace Bibim
 
                 context.DrawUnclipped(Vector2(p.position().x, p.position().y),
                                       p.getParamCurrentValue(PARAM_ANGLE),
+                                      p.getParamCurrentValue(PARAM_SIZE),
                                       imagePalette.at(imageIndex),
                                       Color(color));
             }
@@ -435,6 +436,8 @@ namespace Bibim
         }
 
         static const char*const ModifiersKey = "Modifiers";
+        static const std::string RotatorName = "Rotator";
+        bool rotatorModifierAdded = false;
         if (t.type(ModifiersKey) == LUA_TTABLE)
         {
             lua_tinker::table modifiers = t.get<lua_tinker::table>(ModifiersKey);
@@ -442,9 +445,17 @@ namespace Bibim
             for (int i = 1; i <= numberOfModifiers; i++)
             {
                 if (Modifier* modifier = CreateParticleModifier(modifiers.get<lua_tinker::table>(i)))
+                {
                     group->addModifier(modifier);
+
+                    if (modifier->getClassName() == RotatorName)
+                        rotatorModifierAdded = true;
+                }
             }
         }
+
+        if (rotatorModifierAdded == false && model->isEnabled(PARAM_ROTATION_SPEED))
+            group->addModifier(Rotator::create());
 
         MinMax gravity(t, "Gravity");
         if (gravity.IsValid)
@@ -536,12 +547,121 @@ namespace Bibim
 
     Modifier* UISpark::CreateParticleModifier(lua_tinker::table t)
     {
-            /*
-	        Plane* groundPlane = Plane::create();
-	        Obstacle* obstacle = Obstacle::create(groundPlane,INTERSECT_ZONE,0.6f,1.0f);
-            */
+        static const char*const ForceKey = "Force";
+        static const char*const EyeKey = "Eye";
+        static const char*const MassKey = "Mass";
 
-        return nullptr;
+        Modifier* modifier = nullptr;
+
+        if (t.type(ForceKey) == LUA_TTABLE)
+        {
+            lua_tinker::table force = t.get<lua_tinker::table>(ForceKey);
+
+            const float x = force.get<float>(1);
+            const float y = force.get<float>(2);
+
+            if (const char* factor = force.get<const char*>("Factor"))
+            {
+                static const String Size = "Size**";
+                static const String Mass = "Mass**";
+                static const String Angle = "Angle**";
+                static const String Image = "Image**";
+
+                ModelParam forceFactorParam = PARAM_SIZE;
+                if (Size.StartsWith(factor))
+                    forceFactorParam = PARAM_SIZE;
+                else if (Mass.StartsWith(factor))
+                    forceFactorParam = PARAM_MASS;
+                else if (Angle.StartsWith(factor))
+                    forceFactorParam = PARAM_ANGLE;
+                else if (Image.StartsWith(factor))
+                    forceFactorParam = PARAM_TEXTURE_INDEX;
+                else
+                    modifier = LinearForce::create(nullptr, INSIDE_ZONE, Vector3D(x, y));
+
+                if (modifier == nullptr)
+                {
+                    ForceFactor forceFactor = FACTOR_NONE;
+                    const int factorLength = String::CharsLength(factor);
+                    BBAssertDebug(factorLength >= 2);
+                    if (factor[factorLength - 1] == '*' &&
+                        factor[factorLength - 2] == '*')
+                        forceFactor = FACTOR_LINEAR;
+                    else
+                        forceFactor = FACTOR_SQUARE;
+
+                    modifier = LinearForce::create(nullptr, INSIDE_ZONE, Vector3D(x, y), forceFactor, forceFactorParam);
+                }
+            }
+            else
+                modifier = LinearForce::create(nullptr, INSIDE_ZONE, Vector3D(x, y));
+        }
+        else if (t.type(EyeKey) == LUA_TTABLE)
+        {
+            lua_tinker::table eye = t.get<lua_tinker::table>(EyeKey);
+            const float x = eye.get<float>(1);
+            const float y = eye.get<float>(2);
+            const float radius = eye.get<float>("Radius");
+            const float attraction = t.get<float>("Attraction");
+            const float rotation = t.get<float>("Rotation");
+
+            if (Vortex* vortex = Vortex::create(Vector3D(x, y), Vector3D(0.0f, 0.0f, 1.0f), rotation, attraction))
+            {
+                if (radius > 0.001f)
+                {
+                    vortex->setEyeRadius(radius);
+                    vortex->enableParticleKilling(true);
+                }
+                else
+                    vortex->enableParticleKilling(false);
+
+                modifier = vortex;
+            }
+        }
+        else if (t.has(MassKey))
+        {
+            const float mass = t.get<float>(MassKey);
+            const float distance = t.get<float>("Distance");
+            modifier = PointMass::create(nullptr, INSIDE_ZONE, mass, distance);
+        }
+
+        if (modifier)
+        {
+            if (const char* trigger = t.get<const char*>("Trigger"))
+            {
+                const int availableTriggers = modifier->getAvailableTriggers();
+
+                static const String Always = "Always";
+                static const String Inside = "Inside";
+                static const String Outside = "Outside";
+                static const String Intersect = "Intersect";
+                static const String Enter = "Enter";
+                static const String Exit = "Exit";
+
+                const int triggerLength = String::CharsLength(trigger);
+                if ((availableTriggers & ALWAYS) && Always.EqualsIgnoreCase(trigger, triggerLength))
+                    modifier->setTrigger(ALWAYS);
+                else if ((availableTriggers & INSIDE_ZONE) && Inside.EqualsIgnoreCase(trigger, triggerLength))
+                    modifier->setTrigger(INSIDE_ZONE);
+                else if ((availableTriggers & OUTSIDE_ZONE) && Outside.EqualsIgnoreCase(trigger, triggerLength))
+                    modifier->setTrigger(OUTSIDE_ZONE);
+                else if ((availableTriggers & INTERSECT_ZONE) && Intersect.EqualsIgnoreCase(trigger, triggerLength))
+                    modifier->setTrigger(INTERSECT_ZONE);
+                else if ((availableTriggers & ENTER_ZONE) && Enter.EqualsIgnoreCase(trigger, triggerLength))
+                    modifier->setTrigger(ENTER_ZONE);
+                else if ((availableTriggers & EXIT_ZONE) && Exit.EqualsIgnoreCase(trigger, triggerLength))
+                    modifier->setTrigger(EXIT_ZONE);
+            }
+
+            if (modifier->getTrigger() != ALWAYS)
+            {
+                static const char*const ZoneKey = "Zone";
+                if (t.type(ZoneKey) == LUA_TTABLE)
+                    modifier->setZone(CreateParticleZone(t.get<lua_tinker::table>(ZoneKey)));
+            }
+        }
+
+        return modifier;
     }
 
     Zone* UISpark::CreateParticleZone(lua_tinker::table t)
