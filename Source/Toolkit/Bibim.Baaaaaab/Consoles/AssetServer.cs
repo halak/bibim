@@ -256,14 +256,20 @@ namespace Bibim.Bab.Consoles
             using (var zipFile = new Ionic.Zip.ZipFile())
             {
                 string[] files = null;
-                
-                files = Directory.GetFiles(directory, "*." + GameAsset.BinaryFileExtension, SearchOption.AllDirectories);
-                foreach (string item in files)
-                    zipFile.AddFile(item, Path.GetDirectoryName(item.Substring(directory.Length + 1)));
 
-                files = Directory.GetFiles(directory, "*.lua", SearchOption.AllDirectories);
-                foreach (string item in files)
-                    zipFile.AddFile(item, Path.GetDirectoryName(item.Substring(directory.Length + 1)));
+                Action<string> collect = (extension) =>
+                {
+                    files = Directory.GetFiles(directory, "*." + extension, SearchOption.AllDirectories);
+                    foreach (string item in files)
+                        zipFile.AddFile(item, Path.GetDirectoryName(item.Substring(directory.Length + 1)));
+                };
+
+                collect(GameAsset.BinaryFileExtension);
+                collect("lua");
+                collect("ogg");
+                collect("wav");
+                collect("mp3");
+                collect("ttf");
 
                 Trace.WriteLine("Begin ZIP Creation");
                 zipFile.Save(Path.Combine(directory, zipFilePath));
