@@ -161,6 +161,10 @@
             SetWheel(GetWheel() + delta);
         }
 
+        void GameWindow::OnSnapShot()
+        {
+        }
+
         void GameWindow::CreateHandle()
         {
             WNDCLASSEX windowClass;
@@ -197,13 +201,27 @@
                         SetProp(windowHandle, instanceName, reinterpret_cast<HANDLE>(createStruct->lpCreateParams));
                         gameWindow = reinterpret_cast<GameWindow*>(createStruct->lpCreateParams);
                         gameWindow->OnCreated();
+
+                        // RegisterHotKey(windowHandle, IDHOT_SNAPDESKTOP, 0,       VK_SNAPSHOT);
+                        // RegisterHotKey(windowHandle, IDHOT_SNAPWINDOW,  MOD_ALT, VK_SNAPSHOT);
                     }
                     break;
                 case WM_MOUSEWHEEL:
                     gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
                     gameWindow->OnMouseWheel(GET_WHEEL_DELTA_WPARAM(wParam) / WHEEL_DELTA);
                     break;
+                case WM_HOTKEY:
+                    if (wParam == IDHOT_SNAPDESKTOP ||
+                        wParam == IDHOT_SNAPWINDOW)
+                    {
+                        gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
+                        gameWindow->OnSnapShot();
+                    }
+                    break;
                 case WM_DESTROY:
+                    // UnregisterHotKey(windowHandle, IDHOT_SNAPWINDOW);
+                    // UnregisterHotKey(windowHandle, IDHOT_SNAPDESKTOP);
+
                     gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
                     gameWindow->OnDestroy();
                     RemoveProp(windowHandle, instanceName);
