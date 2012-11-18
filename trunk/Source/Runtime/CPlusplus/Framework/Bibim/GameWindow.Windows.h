@@ -40,6 +40,7 @@
                 virtual void OnCreated();
                 virtual void OnDestroy();
                 virtual void OnMouseWheel(int delta);
+                virtual void OnSnapShot();
 
             private:
                 void CreateHandle();
