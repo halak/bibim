@@ -137,6 +137,9 @@ namespace Bibim
         {
             const int index = static_cast<int>(id.GetType());
 
+            if (index >= static_cast<int>(eventHandlers.size()))
+                return false;
+
             UIEventHandler* existingHandler = eventHandlers[index];
             if (existingHandler == nullptr)
                 return false;

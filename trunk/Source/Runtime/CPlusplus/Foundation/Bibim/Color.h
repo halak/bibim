@@ -23,6 +23,11 @@
             inline explicit Color(Vector4 rgba);
             inline Color(const Color& original);
 
+            inline float GetR() const;
+            inline float GetG() const;
+            inline float GetB() const;
+            inline float GetA() const;
+
             inline Vector3 ToVector3() const;
             inline Vector4 ToVector4() const;
             inline unsigned long ToRGBA() const;

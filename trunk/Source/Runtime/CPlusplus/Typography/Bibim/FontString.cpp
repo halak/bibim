@@ -73,6 +73,7 @@ namespace Bibim
         wideCharacters.resize(MultiByteToWideChar(CP_UTF8, 0, text.CStr(), text.GetLength(), nullptr, 0), L'\0');
         MultiByteToWideChar(CP_UTF8, 0, text.CStr(), text.GetLength(), &wideCharacters[0], wideCharacters.size());
 
+        const float spacing = font->GetSpacing();
         regularGlyphs.reserve(wideCharacters.size());
         if (font->GetStrokeSize() > 0.0f)
         {
@@ -85,7 +86,7 @@ namespace Bibim
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
                     strokedGlyphs.push_back(font->GetStrokedGlyph(*it));
                     glowGlyphs.push_back(font->GetGlowGlyph(*it));
-                    totalWidth += glowGlyphs.back()->GetAdvance().X;
+                    totalWidth += glowGlyphs.back()->GetAdvance().X * spacing;
                 }
             }
             else
@@ -94,7 +95,7 @@ namespace Bibim
                 {
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
                     strokedGlyphs.push_back(font->GetStrokedGlyph(*it));
-                    totalWidth += strokedGlyphs.back()->GetAdvance().X;
+                    totalWidth += strokedGlyphs.back()->GetAdvance().X * spacing;
                 }
             }
         }
@@ -107,7 +108,7 @@ namespace Bibim
                 {
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
                     glowGlyphs.push_back(font->GetGlowGlyph(*it));
-                    totalWidth += glowGlyphs.back()->GetAdvance().X;
+                    totalWidth += glowGlyphs.back()->GetAdvance().X * spacing;
                 }
             }
             else
@@ -115,7 +116,7 @@ namespace Bibim
                 for (std::vector<wchar_t>::const_iterator it = wideCharacters.begin(); it != wideCharacters.end(); it++)
                 {
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
-                    totalWidth += regularGlyphs.back()->GetAdvance().X;
+                    totalWidth += regularGlyphs.back()->GetAdvance().X * spacing;
                 }
             }
         }

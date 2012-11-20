@@ -10,7 +10,6 @@
     {
         class UIKeyboardEventArgs : public UIEventArgs
         {
-            protected: virtual void to_lua(lua_State *L) { type2lua(L, this); }
             public:
                 UIKeyboardEventArgs();
                 UIKeyboardEventArgs(UIVisual* target, Key::Code keyCode);
@@ -20,19 +19,14 @@
 
                 virtual UIKeyboardEventArgs* Clone() const;
 
+                virtual void Serialize(Serializer& context) const;
+
                 inline bool Contains(Key::Code keyCode) const;
                 inline Key::Code GetKeyCode0() const;
                 inline Key::Code GetKeyCode1() const;
                 inline Key::Code GetKeyCode2() const;
                 inline Key::Code GetKeyCode3() const;
                 inline Key::Code GetKeyCodeAt(int index) const;
-
-                inline bool ContainsByChars(const char* keyCode) const;
-                inline const char* GetKeyCode0AsChars() const;
-                inline const char* GetKeyCode1AsChars() const;
-                inline const char* GetKeyCode2AsChars() const;
-                inline const char* GetKeyCode3AsChars() const;
-                inline const char* GetKeyCodeAtAsChars(int index) const;
 
             private:
                 Key::Code keyCode0;

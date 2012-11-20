@@ -11,7 +11,6 @@
     {
         class UIMouseEventArgs : public UIEventArgs
         {
-            protected: virtual void to_lua(lua_State *L) { type2lua(L, this); }
             public:
                 UIMouseEventArgs();
                 explicit UIMouseEventArgs(UIVisual* target);
@@ -21,6 +20,8 @@
                 virtual ~UIMouseEventArgs();
 
                 virtual UIMouseEventArgs* Clone() const;
+
+                virtual void Serialize(Serializer& context) const;
 
                 inline Point2 GetPosition() const;
                 inline int GetPositionX() const;

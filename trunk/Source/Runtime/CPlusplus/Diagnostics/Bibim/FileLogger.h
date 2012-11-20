@@ -29,6 +29,7 @@
             private:
                 FileStreamPtr stream;
                 String path;
+                int lastFlushTime;
         };
     }
 

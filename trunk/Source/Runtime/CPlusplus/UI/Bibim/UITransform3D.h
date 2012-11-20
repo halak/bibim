@@ -22,6 +22,8 @@
 
                 void Reset();
 
+                void Rotate(Vector3 value);
+
                 inline Vector3 GetLocalOffset() const;
                 void SetLocalOffset(Vector3 value);
                 
@@ -40,6 +42,8 @@
                 inline Vector2 GetScale() const;
                 void SetScale(Vector2 value);
                 inline void SetScale(float value);
+
+                inline void RotateXYZ(float x, float y, float z);
 
                 inline void SetLocalOffsetXYZ(float x, float y, float z);
                 inline void SetGlobalOffsetXYZ(float x, float y, float z);

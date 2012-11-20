@@ -10,7 +10,6 @@
     {
         class UIMouseButtonEventArgs : public UIMouseEventArgs
         {
-            protected: virtual void to_lua(lua_State *L) { type2lua(L, this); }
             public:
                 UIMouseButtonEventArgs();
                 UIMouseButtonEventArgs(UIVisual* target, Point2 position, Key::Code buttonCode);
@@ -20,6 +19,8 @@
                 virtual ~UIMouseButtonEventArgs();
 
                 virtual UIMouseButtonEventArgs* Clone() const;
+
+                virtual void Serialize(Serializer& context) const;
 
                 inline Key::Code GetButtonCode() const;
                 inline const char* GetButtonCodeAsChars() const;

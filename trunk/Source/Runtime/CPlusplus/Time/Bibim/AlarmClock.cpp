@@ -168,12 +168,6 @@ namespace Bibim
 
         CallbackPtr sharedCallback = callback;
 
-        //if (group == 1000)
-        //{
-        //    callback->OnCancelled(this);
-        //    return;
-        //}
-
         BBAssertDebug(std::find(callbacks.begin(), callbacks.end(), callback) == callbacks.end());
 
         alarmCounters.push_back(AlarmCounter(tickTime, alaramTime));

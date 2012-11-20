@@ -9,12 +9,13 @@
     {
         class UIGamePadEventArgs : public UIEventArgs
         {
-            protected: virtual void to_lua(lua_State *L) { type2lua(L, this); }
             public:
                 UIGamePadEventArgs();
                 virtual ~UIGamePadEventArgs();
 
             private:
+                Vector2 leftThumbstick;
+                Vector2 rightThumbstick;
         };
     }
 

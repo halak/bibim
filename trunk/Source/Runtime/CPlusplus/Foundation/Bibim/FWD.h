@@ -304,6 +304,7 @@
                                 BBForwardDeclareSmartPointerClass(UICheckBox);
                                     BBForwardDeclareSmartPointerClass(UIRadioButton);
                             BBForwardDeclareSmartPointerClass(UIWindow);
+                        BBForwardDeclareSmartPointerClass(UIRect);
                         BBForwardDeclareSmartPointerClass(UISprite);
                         BBForwardDeclareSmartPointerClass(UIVideo);
                         BBForwardDeclareSmartPointerClass(UISpark);

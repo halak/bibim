@@ -64,14 +64,34 @@
     {
     }
 
+    float Color::GetR() const
+    {
+        return static_cast<float>(R) / 255.0f;
+    }
+
+    float Color::GetG() const
+    {
+        return static_cast<float>(G) / 255.0f;
+    }
+
+    float Color::GetB() const
+    {
+        return static_cast<float>(B) / 255.0f;
+    }
+
+    float Color::GetA() const
+    {
+        return static_cast<float>(A) / 255.0f;
+    }
+
     Vector3 Color::ToVector3() const
     {
-        return Vector3(static_cast<float>(R) / 255.0f, static_cast<float>(G) / 255.0f, static_cast<float>(B) / 255.0f);
+        return Vector3(GetR(), GetG(), GetB());
     }
 
     Vector4 Color::ToVector4() const
     {
-        return Vector4(static_cast<float>(R) / 255.0f, static_cast<float>(G) / 255.0f, static_cast<float>(B) / 255.0f, static_cast<float>(A) / 255.0f);
+        return Vector4(GetR(), GetG(), GetB(), GetA());
     }
 
     unsigned long Color::ToRGBA() const
@@ -119,10 +139,10 @@
 
     Color& Color::operator *= (Color right)
     {
-        R = Clamp(static_cast<float>(R) * (static_cast<float>(right.R) / 255.0f));
-        G = Clamp(static_cast<float>(G) * (static_cast<float>(right.G) / 255.0f));
-        B = Clamp(static_cast<float>(B) * (static_cast<float>(right.B) / 255.0f));
-        A = Clamp(static_cast<float>(A) * (static_cast<float>(right.A) / 255.0f));
+        R = Clamp(static_cast<float>(R) * right.GetR());
+        G = Clamp(static_cast<float>(G) * right.GetG());
+        B = Clamp(static_cast<float>(B) * right.GetB());
+        A = Clamp(static_cast<float>(A) * right.GetA());
         return *this;
     }
 
@@ -137,10 +157,10 @@
 
     Color& Color::operator /= (Color right)
     {
-        R = Clamp(static_cast<float>(R) / (static_cast<float>(right.R) / 255.0f));
-        G = Clamp(static_cast<float>(G) / (static_cast<float>(right.G) / 255.0f));
-        B = Clamp(static_cast<float>(B) / (static_cast<float>(right.B) / 255.0f));
-        A = Clamp(static_cast<float>(A) / (static_cast<float>(right.A) / 255.0f));
+        R = Clamp(static_cast<float>(R) / right.GetR());
+        G = Clamp(static_cast<float>(G) / right.GetG());
+        B = Clamp(static_cast<float>(B) / right.GetB());
+        A = Clamp(static_cast<float>(A) / right.GetA());
         return *this;
     }
 
@@ -171,10 +191,10 @@
 
     Color Color::operator * (Color right) const
     {
-        return Color(Clamp(static_cast<float>(R) * (static_cast<float>(right.R) / 255.0f)),
-                     Clamp(static_cast<float>(G) * (static_cast<float>(right.G) / 255.0f)),
-                     Clamp(static_cast<float>(B) * (static_cast<float>(right.B) / 255.0f)),
-                     Clamp(static_cast<float>(A) * (static_cast<float>(right.A) / 255.0f)));
+        return Color(Clamp(static_cast<float>(R) * right.GetR()),
+                     Clamp(static_cast<float>(G) * right.GetG()),
+                     Clamp(static_cast<float>(B) * right.GetB()),
+                     Clamp(static_cast<float>(A) * right.GetA()));
     }
 
     Color Color::operator * (float right) const
@@ -187,10 +207,10 @@
 
     Color Color::operator / (Color right) const
     {
-        return Color(Clamp(static_cast<float>(R) / (static_cast<float>(right.R) / 255.0f)),
-                     Clamp(static_cast<float>(G) / (static_cast<float>(right.G) / 255.0f)),
-                     Clamp(static_cast<float>(B) / (static_cast<float>(right.B) / 255.0f)),
-                     Clamp(static_cast<float>(A) / (static_cast<float>(right.A) / 255.0f)));
+        return Color(Clamp(static_cast<float>(R) / right.GetR()),
+                     Clamp(static_cast<float>(G) / right.GetG()),
+                     Clamp(static_cast<float>(B) / right.GetB()),
+                     Clamp(static_cast<float>(A) / right.GetA()));
     }
 
     Color Color::operator / (float right) const

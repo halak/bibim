@@ -41,4 +41,11 @@ namespace Bibim
     {
         return new UIMouseButtonEventArgs(*this);
     }
+
+    void UIMouseButtonEventArgs::Serialize(Serializer& context) const
+    {
+        UIMouseEventArgs::Serialize(context);
+        if (buttonCode != Key::None)
+            context.Push(Key::ToString(buttonCode));
+    }
 }
