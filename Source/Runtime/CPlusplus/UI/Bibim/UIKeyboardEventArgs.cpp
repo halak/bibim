@@ -47,4 +47,17 @@ namespace Bibim
     {
         return new UIKeyboardEventArgs(*this);
     }
+
+    void UIKeyboardEventArgs::Serialize(Serializer& context) const
+    {
+        UIEventArgs::Serialize(context);
+        if (keyCode0 != Key::None)
+            context.Push(Key::ToString(keyCode0));
+        if (keyCode1 != Key::None)
+            context.Push(Key::ToString(keyCode1));
+        if (keyCode2 != Key::None)
+            context.Push(Key::ToString(keyCode2));
+        if (keyCode3 != Key::None)
+            context.Push(Key::ToString(keyCode3));
+    }
 }

@@ -41,4 +41,10 @@ namespace Bibim
     {
         return new UIMouseWheelEventArgs(*this);
     }
+
+    void UIMouseWheelEventArgs::Serialize(Serializer& context) const
+    {
+        UIMouseEventArgs::Serialize(context);
+        context.Push(wheelDelta);
+    }
 }

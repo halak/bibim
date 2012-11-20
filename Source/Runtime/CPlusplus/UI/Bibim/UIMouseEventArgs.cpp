@@ -56,4 +56,14 @@ namespace Bibim
     {
         return new UIMouseEventArgs(*this);
     }
+
+    void UIMouseEventArgs::Serialize(Serializer& context) const
+    {
+        UIEventArgs::Serialize(context);
+        context.Push(position.X);
+        context.Push(position.Y);
+        context.Push(isLeftButtonPressed);
+        context.Push(isRightButtonPressed);
+        context.Push(isMiddleButtonPressed);
+    }
 }

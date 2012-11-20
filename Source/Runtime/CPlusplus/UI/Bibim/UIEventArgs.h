@@ -3,21 +3,23 @@
 #include <Bibim/FWD.h>
 #include <Bibim/SharedObject.h>
 
-extern "C" 
-{
-#   include <lua.h>
-}
-#pragma warning(push)
-#pragma warning(disable:4996)
-#pragma warning(disable:4100)
-#include <lua_tinker.h>
-#pragma warning(pop)
-
 namespace Bibim
 {
-    class UIEventArgs : public SharedObject, public lua_tinker::lua_value
+    class UIEventArgs : public SharedObject
     {
-        protected: virtual void to_lua(lua_State *L) { type2lua(L, this); }
+        public:
+            class Serializer
+            {
+                public:
+                    virtual ~Serializer() { }
+
+                    virtual void Push(SharedObject* value) = 0;
+                    virtual void Push(bool value) = 0;
+                    virtual void Push(int value) = 0;
+                    virtual void Push(float value) = 0;
+                    virtual void Push(const char* value) = 0;
+            };
+
         public:
             UIEventArgs();
             UIEventArgs(UIVisual* target);
@@ -25,6 +27,8 @@ namespace Bibim
             virtual ~UIEventArgs();
 
             virtual UIEventArgs* Clone() const;
+
+            virtual void Serialize(Serializer& context) const;
 
             inline UIVisual* GetTarget() const;
 
@@ -34,5 +38,3 @@ namespace Bibim
 }
 
 #include <Bibim/UIEventArgs.inl>
-
-BBBindLua(Bibim::UIEventArgs);

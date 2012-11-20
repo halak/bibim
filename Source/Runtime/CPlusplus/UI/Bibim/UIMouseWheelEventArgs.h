@@ -9,7 +9,6 @@
     {
         class UIMouseWheelEventArgs : public UIMouseEventArgs
         {
-            protected: virtual void to_lua(lua_State *L) { type2lua(L, this); }
             public:
                 UIMouseWheelEventArgs();
                 UIMouseWheelEventArgs(UIVisual* target, Point2 position, int wheelDelta);
@@ -19,6 +18,8 @@
                 virtual ~UIMouseWheelEventArgs();
 
                 virtual UIMouseWheelEventArgs* Clone() const;
+
+                virtual void Serialize(Serializer& context) const;
 
                 inline int GetWheelDelta() const;
 

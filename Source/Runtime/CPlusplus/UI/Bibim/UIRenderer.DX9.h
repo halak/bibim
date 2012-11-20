@@ -149,6 +149,7 @@
                 IDirect3DStateBlock9* d3dStateBlock;
                 IDirect3DVertexBuffer9* vb;
                 IDirect3DIndexBuffer9*  ib;
+                ID3DXLine* d3dLine;
                 Vertex* lockedVertices;
                 int vbSize;
 

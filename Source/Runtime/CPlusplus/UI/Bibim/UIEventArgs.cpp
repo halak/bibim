@@ -27,4 +27,9 @@ namespace Bibim
     {
         return new UIEventArgs(*this);
     }
+
+    void UIEventArgs::Serialize(Serializer& context) const
+    {
+        context.Push(target);
+    }
 }

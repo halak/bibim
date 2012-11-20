@@ -205,17 +205,18 @@
                         // RegisterHotKey(windowHandle, IDHOT_SNAPDESKTOP, 0,       VK_SNAPSHOT);
                         // RegisterHotKey(windowHandle, IDHOT_SNAPWINDOW,  MOD_ALT, VK_SNAPSHOT);
                     }
-                    break;
+                    return 0;
                 case WM_MOUSEWHEEL:
                     gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
                     gameWindow->OnMouseWheel(GET_WHEEL_DELTA_WPARAM(wParam) / WHEEL_DELTA);
-                    break;
+                    return 0;
                 case WM_HOTKEY:
                     if (wParam == IDHOT_SNAPDESKTOP ||
                         wParam == IDHOT_SNAPWINDOW)
                     {
                         gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
                         gameWindow->OnSnapShot();
+                        return 0;
                     }
                     break;
                 case WM_DESTROY:
@@ -226,12 +227,10 @@
                     gameWindow->OnDestroy();
                     RemoveProp(windowHandle, instanceName);
                     PostQuitMessage(0);
-                    break;
-                default:
-                    return DefWindowProc(windowHandle, message, wParam, lParam);
+                    return 0;
             }
 
-            return 0;
+            return DefWindowProc(windowHandle, message, wParam, lParam);
         }
     }
 

@@ -64,6 +64,15 @@ namespace Bibim
         scale = Vector2::One;
     }
 
+    void UITransform3D::Rotate(Vector3 value)
+    {
+        if (value != Vector3::Zero)
+        {
+            rotation += value;
+            matrixChanged = true;
+        }
+    }
+
     void UITransform3D::SetLocalOffset(Vector3 value)
     {
         if (localOffset != value)

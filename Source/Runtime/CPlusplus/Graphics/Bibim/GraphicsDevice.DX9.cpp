@@ -186,7 +186,7 @@ namespace Bibim
         d3dParameters.AutoDepthStencilFormat = D3DFMT_UNKNOWN;
         d3dParameters.Flags = 0x00000000;
         d3dParameters.FullScreen_RefreshRateInHz = 0;
-        d3dParameters.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+        d3dParameters.PresentationInterval = D3DPRESENT_INTERVAL_ONE;
 
         HRESULT result = D3D_OK;
 

@@ -1742,6 +1742,18 @@
 						>
 					</File>
 					<File
+						RelativePath=".\UI\Bibim\UIRect.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIRect.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIRect.inl"
+						>
+					</File>
+					<File
 						RelativePath=".\UI\Bibim\UISpark.cpp"
 						>
 					</File>

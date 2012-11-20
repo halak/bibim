@@ -146,7 +146,7 @@ namespace Bibim
     String Float::ToString(float value)
     {
         char result[64];
-        sprintf_s(result, "%.f", value);
+        sprintf_s(result, "%f", value);
         return result;
     }
 

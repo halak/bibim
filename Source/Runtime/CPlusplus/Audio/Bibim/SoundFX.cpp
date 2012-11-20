@@ -37,7 +37,7 @@ namespace Bibim
 
         StoppedSoundCollection temporaryStoppedSounds;
         {
-            AutoLocker locker(stoppedSoundsLock);
+            BBAutoLock(stoppedSoundsLock);
             temporaryStoppedSounds.swap(stoppedSounds);
         }
 

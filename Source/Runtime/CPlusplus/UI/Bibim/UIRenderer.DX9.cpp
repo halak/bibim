@@ -82,6 +82,7 @@ namespace Bibim
           storage(nullptr),
           fieldOfView(Math::PiOver4),
           d3dStateBlock(nullptr),
+          d3dLine(nullptr),
           vb(nullptr),
           ib(nullptr),
           lockedVertices(nullptr),
@@ -97,6 +98,7 @@ namespace Bibim
           shaderEffectDirectory(shaderEffectDirectory),
           fieldOfView(Math::PiOver4),
           d3dStateBlock(nullptr),
+          d3dLine(nullptr),
           vb(nullptr),
           ib(nullptr),
           lockedVertices(nullptr),
@@ -110,6 +112,7 @@ namespace Bibim
     UIRenderer::~UIRenderer()
     {
         CheckedRelease(d3dStateBlock);
+        CheckedRelease(d3dLine);
         CheckedRelease(vb);
         CheckedRelease(ib);
     }
@@ -117,6 +120,12 @@ namespace Bibim
     void UIRenderer::Begin()
     {
         IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();
+
+        if (d3dLine == nullptr)
+        {
+            if (D3DXCreateLine(d3dDevice, &d3dLine) == D3D_OK)
+                d3dLine->SetAntialias(TRUE);
+        }
 
         const D3DXMATRIX d3dViewTransform(GetViewTransform());
         const D3DXMATRIX d3dProjectionTransform(GetProjectionTransform());
@@ -339,14 +348,29 @@ namespace Bibim
         Flush();
 
         const D3DCOLOR d3dColor = color.ToARGB();
-        const int numberOfLines = count - 1;
-        Vertex* v = nullptr;
-        vb->Lock(0, sizeof(Vertex) * count, reinterpret_cast<void**>(&v), D3DLOCK_DISCARD);
-        for (int i = 0; i < count; i++)
-            v[i] = Vertex(p[i], d3dColor);
-        vb->Unlock();
+        if (d3dLine)
+        {
+            D3DXVECTOR3* v = BBStackAlloc(D3DXVECTOR3, count);
+            for (int i = 0; i < count; i++)
+                v[i] = D3DXVECTOR3(p[i].X, p[i].Y, 0.0f);
 
-        DrawPrimitives(D3DPT_LINESTRIP, numberOfLines);
+            d3dLine->Begin();
+            d3dLine->DrawTransform(v, count, &d3dMVPTransform, d3dColor);
+            d3dLine->End();
+
+            BBStackFree(v);
+        }
+        else
+        {
+            const int numberOfLines = count - 1;
+            Vertex* v = nullptr;
+            vb->Lock(0, sizeof(Vertex) * count, reinterpret_cast<void**>(&v), D3DLOCK_DISCARD);
+            for (int i = 0; i < count; i++)
+                v[i] = Vertex(p[i], d3dColor);
+            vb->Unlock();
+
+            DrawPrimitives(D3DPT_LINESTRIP, numberOfLines);
+        }
     }
 
     void UIRenderer::DrawLines(int count, const Vector2* p, Color* c)
