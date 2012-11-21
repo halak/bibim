@@ -68,6 +68,7 @@
                 Timeline* timeline;
                 Vector2 contentSize;
                 Updater updater;
+                bool isUpdateable;
         };
     }
 
