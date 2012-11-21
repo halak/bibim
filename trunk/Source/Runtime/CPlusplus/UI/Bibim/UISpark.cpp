@@ -51,7 +51,7 @@ namespace Bibim
 
     void UISpark::OnStep(float dt, int /*timestamp*/)
     {
-        if (particleSystem == nullptr)
+        if (particleSystem == nullptr || isUpdateable == false)
             return;
 
         const bool enabledAABBComputing = (GetWidthMode()  == ContentSize) || 
@@ -60,10 +60,6 @@ namespace Bibim
         particleSystem->enableAABBComputing(enabledAABBComputing);
 
         const bool isAlive = particleSystem->update(dt);
-
-        if (isAlive == false)
-        {
-        }
 
         if (enabledAABBComputing)
         {
@@ -80,6 +76,11 @@ namespace Bibim
 
         if (particleSystem == nullptr)
             return;
+
+        const RectF bounds = context.GetCurrentBounds();
+        particleSystem->setTransformPosition(Vector3D(bounds.GetCenter(), bounds.GetMiddle()));
+        particleSystem->updateTransform();
+        isUpdateable = true;
 
         typedef std::vector<Group*> Groups;
         const Groups& groups = particleSystem->getGroups();
@@ -112,6 +113,7 @@ namespace Bibim
         timeline = nullptr;
         contentSize = Vector2::Zero;
         updater.o = this;
+        isUpdateable = false;
 
         SetSize(1.0f, 1.0f);
         SetSizeMode(ContentSize, ContentSize);
@@ -627,6 +629,8 @@ namespace Bibim
 
         if (modifier)
         {
+            modifier->setLocalToSystem(true);
+
             if (const char* trigger = t.get<const char*>("Trigger"))
             {
                 const int availableTriggers = modifier->getAvailableTriggers();
