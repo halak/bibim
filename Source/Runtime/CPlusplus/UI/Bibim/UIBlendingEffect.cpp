@@ -19,6 +19,12 @@ namespace Bibim
     {
     }
 
+    UIBlendingEffect::UIBlendingEffect(const char* mode)
+        : Base(ClassIndex, true, true),
+          mode(ConvertFromStringToBlendMode(mode))
+    {
+    }
+
     UIBlendingEffect::~UIBlendingEffect()
     {
     }
@@ -43,7 +49,8 @@ namespace Bibim
 
     BlendMode UIBlendingEffect::ConvertFromStringToBlendMode(const char* value)
     {
-        if (_stricmp(value, "Normal") == 0)             return NormalBlend;
+             if (value == nullptr)                      return NormalBlend;
+        else if (_stricmp(value, "Normal") == 0)        return NormalBlend;
         else if (_stricmp(value, "Add") == 0)           return AdditiveBlend;
         else if (_stricmp(value, "Lighten") == 0)       return LightenBlend;
         else if (_stricmp(value, "Darken") == 0)        return DarkenBlend;

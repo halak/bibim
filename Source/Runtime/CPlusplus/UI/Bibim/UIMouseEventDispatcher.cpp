@@ -35,6 +35,12 @@ namespace Bibim
     {
     }
 
+    void UIMouseEventDispatcher::Reset()
+    {
+        capturedVisual.Reset();
+        lastTargetVisual.Reset();
+    }
+
     void UIMouseEventDispatcher::Update(float /*dt*/, int timestamp)
     {
         if (domain == nullptr ||

@@ -23,7 +23,10 @@
             inline Vector3 Cross(Vector3 right) const;
 
             float Normalize();
+            void Rotate(Vector3 axis, float rotation);
+            void Rotate(Vector3 axis, float sin, float cos);
             float GetLength() const;
+            float GetLengthSquared() const;
 
             inline Vector3  operator + () const;
             inline Vector3  operator - () const;

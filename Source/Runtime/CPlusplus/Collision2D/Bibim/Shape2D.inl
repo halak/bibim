@@ -25,16 +25,6 @@
         return revision;
     }
 
-    float Shape2D::GetPositionX() const
-    {
-        return position.X;
-    }
-
-    float Shape2D::GetPositionY() const
-    {
-        return position.Y;
-    }
-
     void Shape2D::SetPositionXY(float x, float y)
     {
         SetPosition(Vector2(x, y));

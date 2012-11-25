@@ -51,10 +51,7 @@ namespace Bibim
 
     void GraphicsDevice::Clear(Color color)
     {
-        HRESULT r = GetD3DDevice()->Clear(0, nullptr, D3DCLEAR_TARGET, D3DCOLOR_XRGB(color.R, color.G, color.B), 1.0f, 0);
-        if (D3DERR_DEVICELOST)
-        {
-        }
+        GetD3DDevice()->Clear(0, nullptr, D3DCLEAR_TARGET, D3DCOLOR_XRGB(color.R, color.G, color.B), 1.0f, 0);
     }
 
     void GraphicsDevice::BeginDraw()

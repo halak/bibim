@@ -44,12 +44,16 @@
                 void DrawQuad(const Vector2* p, Color color, const Vector2* uv,  Texture2D* texture);
                 void DrawQuad(const Vector2* p, Color color, const Vector2* uv1, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2);
 
-                void DrawQuad(const Vector2* p, Color color, const RectF& clippingRect,  Texture2D* texture);
+                void DrawQuad(const Vector2* p, Color color, const RectF& clippingRect, Texture2D* texture);
                 void DrawQuad(const Vector2* p, Color color, const RectF& clippingRect, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2);
 
                 void DrawQuad(const Vector2* p, Color* c);
                 void DrawQuad(const Vector2* p, Color* c, const Vector2* uv,  Texture2D* texture);
                 void DrawQuad(const Vector2* p, Color* c, const Vector2* uv1, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2);
+
+                void DrawQuad(const Vector3* p, Color color);
+                void DrawQuad(const Vector3* p, Color color, const Vector2* uv,  Texture2D* texture);
+                void DrawQuad(const Vector3* p, Color color, const Vector2* uv1, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2);
 
                 inline GraphicsDevice* GetGraphicsDevice() const;
                 void SetGraphicsDevice(GraphicsDevice* value);
@@ -79,6 +83,10 @@
                     inline Vertex(Vector2 position, D3DCOLOR color);
                     inline Vertex(Vector2 position, D3DCOLOR color, Vector2 texCoord1);
                     inline Vertex(Vector2 position, D3DCOLOR color, Vector2 texCoord1, Vector2 texCoord2);
+
+                    inline Vertex(Vector3 position, D3DCOLOR color);
+                    inline Vertex(Vector3 position, D3DCOLOR color, Vector2 texCoord1);
+                    inline Vertex(Vector3 position, D3DCOLOR color, Vector2 texCoord1, Vector2 texCoord2);
 
                     static const DWORD FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX2;
                 };

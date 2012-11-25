@@ -14,8 +14,6 @@
                 virtual ~UIGamePadEventArgs();
 
             private:
-                Vector2 leftThumbstick;
-                Vector2 rightThumbstick;
         };
     }
 

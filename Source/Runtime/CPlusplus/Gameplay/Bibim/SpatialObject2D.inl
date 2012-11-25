@@ -20,16 +20,6 @@ namespace Bibim
         return direction;
     }
 
-    float SpatialObject2D::GetPositionX() const
-    {
-        return position.X;
-    }
-
-    float SpatialObject2D::GetPositionY() const
-    {
-        return position.Y;
-    }
-
     void SpatialObject2D::SetPositionXY(float x, float y)
     {
         SetPosition(Vector2(x, y));
