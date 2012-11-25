@@ -207,7 +207,7 @@ namespace Bibim.UI.Visuals
             AnchorPoint = UIAnchorPoint.LeftTop;
             opacity = 255;
             Visibility = UIVisibility.Visible;
-            zOrder = 0;
+            zOrder = 128;
         }
         #endregion
 

@@ -36,6 +36,27 @@ namespace Bibim
     {
     }
 
+    UIRenderer::Vertex::Vertex(Vector3 position, D3DCOLOR color)
+        : Position(position.X, position.Y, position.Z),
+          Color(color)
+    {
+    }
+
+    UIRenderer::Vertex::Vertex(Vector3 position, D3DCOLOR color, Vector2 texCoord1)
+        : Position(position.X, position.Y, position.Z),
+          Color(color),
+          TexCoord1(texCoord1.X, texCoord1.Y)
+    {
+    }
+
+    UIRenderer::Vertex::Vertex(Vector3 position, D3DCOLOR color, Vector2 texCoord1, Vector2 texCoord2)
+        : Position(position.X, position.Y, position.Z),
+          Color(color),
+          TexCoord1(texCoord1.X, texCoord1.Y),
+          TexCoord2(texCoord2.X, texCoord2.Y)
+    {
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     UIRenderer::QuadSet::QuadSet()
@@ -503,6 +524,42 @@ namespace Bibim
         v[1] = Vertex(p[1], c[1].ToARGB(), uv1[1], uv2[1]);
         v[2] = Vertex(p[2], c[2].ToARGB(), uv1[2], uv2[2]);
         v[3] = Vertex(p[3], c[3].ToARGB(), uv1[3], uv2[3]);
+    }
+
+    void UIRenderer::DrawQuad(const Vector3* p, Color color)
+    {
+        BBAssert(p);
+
+        const D3DCOLOR d3dColor = color.ToARGB();
+        Vertex* v = Prepare(nullptr, nullptr);
+        v[0] = Vertex(p[0], d3dColor);
+        v[1] = Vertex(p[1], d3dColor);
+        v[2] = Vertex(p[2], d3dColor);
+        v[3] = Vertex(p[3], d3dColor);
+    }
+
+    void UIRenderer::DrawQuad(const Vector3* p, Color color, const Vector2* uv,  Texture2D* texture)
+    {
+        BBAssert(p && uv && texture);
+
+        const D3DCOLOR d3dColor = color.ToARGB();
+        Vertex* v = Prepare(texture, nullptr);
+        v[0] = Vertex(p[0], d3dColor, uv[0]);
+        v[1] = Vertex(p[1], d3dColor, uv[1]);
+        v[2] = Vertex(p[2], d3dColor, uv[2]);
+        v[3] = Vertex(p[3], d3dColor, uv[3]);
+    }
+
+    void UIRenderer::DrawQuad(const Vector3* p, Color color, const Vector2* uv1, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2)
+    {
+        BBAssert(p && uv1 && texture1 && uv2 && texture2);
+
+        const D3DCOLOR d3dColor = color.ToARGB();
+        Vertex* v = Prepare(texture1, texture2);
+        v[0] = Vertex(p[0], d3dColor, uv1[0], uv2[0]);
+        v[1] = Vertex(p[1], d3dColor, uv1[1], uv2[1]);
+        v[2] = Vertex(p[2], d3dColor, uv1[2], uv2[2]);
+        v[3] = Vertex(p[3], d3dColor, uv1[3], uv2[3]);
     }
 
     void UIRenderer::SetGraphicsDevice(GraphicsDevice* value)

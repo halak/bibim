@@ -25,8 +25,6 @@
                 inline Vector2 GetDirection() const;
                 void SetDirection(Vector2 value);
 
-                inline float GetPositionX() const;
-                inline float GetPositionY() const;
                 inline void SetPositionXY(float x, float y);
 
             private:

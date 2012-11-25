@@ -29,7 +29,7 @@ namespace Bibim
           anchorPoint(LeftTop),
           opacity(255),
           visibility(Visible),
-          zOrder(0),
+          zOrder(128),
           isPickable(true),
           eventMap(nullptr),
           effectMap(nullptr),
@@ -511,7 +511,8 @@ namespace Bibim
 
     UIVisual::PositionMode UIVisual::ConvertFromStringToPositionMode(const char* value)
     {
-        if (_stricmp(value, "abs") == 0)        return AbsolutePosition;
+             if (value == nullptr)              return UndefinedPosition;
+        else if (_stricmp(value, "abs") == 0)   return AbsolutePosition;
         else if (_stricmp(value, "rel") == 0)   return RelativePosition;
         else                                    return UndefinedPosition;
     }
@@ -528,7 +529,8 @@ namespace Bibim
 
     UIVisual::SizeMode UIVisual::ConvertFromStringToSizeMode(const char* value)
     {
-        if (_stricmp(value, "abs") == 0)        return AbsoluteSize;
+             if (value == nullptr)              return ContentSize;
+        else if (_stricmp(value, "abs") == 0)   return AbsoluteSize;
         else if (_stricmp(value, "rel") == 0)   return RelativeSize;
         else                                    return ContentSize;
     }
@@ -545,7 +547,8 @@ namespace Bibim
 
     UIVisual::AnchorPoint UIVisual::ConvertFromStringToAnchorPoint(const char* value)
     {
-        if (_stricmp(value, "LeftTop") == 0)            return LeftTop;
+             if (value == nullptr)                      return LeftTop;
+        else if (_stricmp(value, "LeftTop") == 0)       return LeftTop;
         else if (_stricmp(value, "LeftBottom") == 0)    return LeftBottom;
         else if (_stricmp(value, "LeftMiddle") == 0)    return LeftMiddle;
         else if (_stricmp(value, "RightTop") == 0)      return RightTop;
@@ -576,7 +579,8 @@ namespace Bibim
 
     UIVisual::Visibility UIVisual::ConvertFromStringToVisibility(const char* value)
     {
-        if (_stricmp(value, "Visible") == 0)        return Visible;
+             if (value == nullptr)                  return Visible;
+        else if (_stricmp(value, "Visible") == 0)   return Visible;
         else if (_stricmp(value, "Invisible") == 0) return Invisible;
         else if (_stricmp(value, "Collasped") == 0) return Collasped;
         else                                        return Visible;

@@ -17,6 +17,7 @@
             public:
                 UIBlendingEffect();
                 UIBlendingEffect(BlendMode mode);
+                UIBlendingEffect(const char* mode);
                 virtual ~UIBlendingEffect();
 
                 virtual UIRenderer::Effector* CreateEffector(UIRenderer::Effector* parent, bool isShaderFunctionRendering);

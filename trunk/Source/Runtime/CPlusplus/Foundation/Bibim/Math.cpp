@@ -2,6 +2,7 @@
 #include <Bibim/Math.h>
 #include <Bibim/Assert.h>
 #include <cmath>
+#include <cstdlib>
 
 namespace Bibim
 {
@@ -113,14 +114,16 @@ namespace Bibim
 
     int Math::Random(int a, int b)
     {
-        return a + (b - a) / 2;
+        return static_cast<int>(Random(static_cast<float>(a), static_cast<float>(b)));
+        // return a + (b - a) / 2;
         //std::tr1::uniform_int<int> u(Math::Min(a, b), Math::Max(a, b));
         //return u(globalRandomEngine);
     }
 
     float Math::Random(float a, float b)
     {
-        return a + (b - a) / 2.0f;
+        const float t = static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX);
+        return a + (b - a) * t;
         //std::tr1::uniform_real<float> u(Math::Min(a, b), Math::Max(a, b));
         //return u(globalRandomEngine);
     }

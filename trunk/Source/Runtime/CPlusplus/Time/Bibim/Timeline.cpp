@@ -67,7 +67,17 @@ namespace Bibim
             const int index = std::distance(items.begin(), it);
             items.erase(it);
             objects.erase(objects.begin() + index);
-            temporaryItems[index] = nullptr;
+            
+            const int count = static_cast<int>(temporaryItems.size());
+            for (int i = index; i < count; i++)
+            {
+                if (temporaryItems[i] == item)
+                {
+                    temporaryItems[i] = nullptr;
+                    break;
+                }
+            }
+
             return true;
         }
         else

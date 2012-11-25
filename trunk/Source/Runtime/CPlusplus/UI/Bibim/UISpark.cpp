@@ -12,6 +12,121 @@ using namespace SPK;
 
 namespace Bibim
 {
+    class SparkRenderer : public SPK::Renderer
+    {
+        public:
+            virtual ~SparkRenderer() { }
+
+            // 원래 SPK::Renderer의 순수 가상 함수는 모두 무시합니다.
+            virtual void setBlending(BlendingMode /*blendMode*/) { }
+            virtual void render(const Group& /*group*/) { }
+
+            virtual void Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette) = 0;
+    };
+
+    class DirectionalRenderer : public SparkRenderer
+    {
+        SPK_IMPLEMENT_REGISTERABLE(DirectionalRenderer)
+        public:
+            DirectionalRenderer() { }
+            virtual ~DirectionalRenderer() { }
+
+	        static DirectionalRenderer* create()
+	        {
+		        DirectionalRenderer* obj = new DirectionalRenderer();
+		        registerObject(obj);
+		        return obj;
+	        }
+
+            virtual void Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette);
+    };
+
+    class RandomAngleAxisRenderer : public SparkRenderer
+    {
+        SPK_IMPLEMENT_REGISTERABLE(RandomAngleAxisRenderer)
+        public:
+            static const int NumberOfAxes = 32;
+
+        public:
+            RandomAngleAxisRenderer();
+            virtual ~RandomAngleAxisRenderer() { }
+
+	        static RandomAngleAxisRenderer* create()
+	        {
+		        RandomAngleAxisRenderer* obj = new RandomAngleAxisRenderer();
+		        registerObject(obj);
+		        return obj;
+	        }
+
+            virtual void Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette);
+
+        private:
+            static Vector3 Axes[NumberOfAxes];
+            static bool AxesReady;
+    };
+
+    Vector3 RandomAngleAxisRenderer::Axes[NumberOfAxes];
+    bool RandomAngleAxisRenderer::AxesReady = false;
+
+    class SingleAngleAxisRenderer : public SparkRenderer
+    {
+        SPK_IMPLEMENT_REGISTERABLE(SingleAngleAxisRenderer)
+        public:
+            SingleAngleAxisRenderer(Vector3 axis);
+            virtual ~SingleAngleAxisRenderer() { }
+
+	        static SingleAngleAxisRenderer* create(Vector3 axis)
+	        {
+		        SingleAngleAxisRenderer* obj = new SingleAngleAxisRenderer(axis);
+		        registerObject(obj);
+		        return obj;
+	        }
+
+            virtual void Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette);
+
+        private:
+            Vector3 axis;
+    };
+
+    class MultipleAngleAxisRenderer : public SparkRenderer
+    {
+        SPK_IMPLEMENT_REGISTERABLE(MultipleAngleAxisRenderer)
+        public:
+            MultipleAngleAxisRenderer(std::vector<Vector3>& axes);
+            virtual ~MultipleAngleAxisRenderer() { }
+
+	        static MultipleAngleAxisRenderer* create(std::vector<Vector3>& axes)
+	        {
+		        MultipleAngleAxisRenderer* obj = new MultipleAngleAxisRenderer(axes);
+		        registerObject(obj);
+		        return obj;
+	        }
+
+            virtual void Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette);
+
+        private:
+            std::vector<Vector3> axes;
+    };
+
+#   define BEGIN_DRAW_PARTICLE(group, particleName) \
+        const int count = (group).getNbParticles(); \
+        for (int i = count - 1; i >= 0; i--) \
+        { \
+            const Particle& particleName = (group).getParticle(i);
+
+#   define END_DRAW_PARTICLE() }
+
+#   define PARTICLE_POSITION(particleName)  Vector2(particleName.position().x, particleName.position().y)
+#   define PARTICLE_IMAGE(particleName)     imagePalette.at(static_cast<int>(particleName.getParamCurrentValue(PARAM_TEXTURE_INDEX) + 0.5f))
+#   define PARTICLE_COLOR(particleName)     Color(Vector4(particleName.getR(), \
+                                                          particleName.getG(), \
+                                                          particleName.getB(), \
+                                                          particleName.getParamCurrentValue(PARAM_ALPHA)))
+#   define PARTICLE_ANGLE(particleName)     particleName.getParamCurrentValue(PARAM_ANGLE)
+#   define PARTICLE_SIZE(particleName)      particleName.getParamCurrentValue(PARAM_SIZE)
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     BBImplementsComponent(UISpark);
 
     UISpark::UISpark()
@@ -86,24 +201,21 @@ namespace Bibim
         const Groups& groups = particleSystem->getGroups();
         for (Groups::const_iterator it = groups.begin(); it != groups.end(); it++)
         {
-            const Group* g = (*it);
-            const int count = g->getNbParticles();
-            for (int i = count - 1; i >= 0; i--)
+            const Group& g = *(*it);
+            if (g.getRenderer() == nullptr)
             {
-                const Particle& p = g->getParticle(i);
-
-                const int imageIndex = static_cast<int>(p.getParamCurrentValue(PARAM_TEXTURE_INDEX) + 0.5f);
-                const Vector4 color = Vector4(p.getR(),
-                                              p.getG(),
-                                              p.getB(),
-                                              p.getParamCurrentValue(PARAM_ALPHA));
-
-                context.DrawUnclipped(Vector2(p.position().x, p.position().y),
-                                      p.getParamCurrentValue(PARAM_ANGLE),
-                                      p.getParamCurrentValue(PARAM_SIZE),
-                                      imagePalette.at(imageIndex),
-                                      Color(color));
+                BEGIN_DRAW_PARTICLE(g, p);
+                {
+                    context.DrawUnclipped(PARTICLE_POSITION(p),
+                                          PARTICLE_ANGLE(p),
+                                          PARTICLE_SIZE(p),
+                                          PARTICLE_IMAGE(p),
+                                          PARTICLE_COLOR(p));
+                }
+                END_DRAW_PARTICLE();
             }
+            else
+                static_cast<SparkRenderer*>(g.getRenderer())->Draw(context, g, imagePalette);
         }
     }
 
@@ -140,10 +252,9 @@ namespace Bibim
                 particleSystem->addGroup(group);
         }
 
-        static const char*const ImagesKey = "Images";
-        if (t.type(ImagesKey) == LUA_TTABLE)
+        if (t.type("Images") == LUA_TTABLE)
         {
-            lua_tinker::table images = t.get<lua_tinker::table>(ImagesKey);
+            lua_tinker::table images = t.get<lua_tinker::table>("Images");
             const int numberOfImages = images.len();
             for (int i = 1; i <= numberOfImages; i++)
                 imagePalette.push_back(images.get<Image*>(i));
@@ -180,7 +291,11 @@ namespace Bibim
                             if (String::CharsFind(value, '~') != -1)
                                 Random |= flags;
                             else
-                                Enable |= flags;
+                            {
+                                static const String Direction = "Direction";
+                                if (Direction.EqualsIgnoreCase(value) == false)
+                                    Enable |= flags;
+                            }
                         }
                         break;
                     case LUA_TTABLE:
@@ -262,19 +377,15 @@ namespace Bibim
                     Interpolator* interpolator = model->getInterpolator(param);
                     interpolator->setType(interpolationType, interpolationParam);
 
-                    static const char*const OffsetKey = "Offset";
-                    if (value.has(OffsetKey))
-                        interpolator->setScaleXVariation(value.get<float>(OffsetKey));
+                    if (value.has("Offset"))
+                        interpolator->setScaleXVariation(value.get<float>("Offset"));
 
-                    static const char*const ScaleKey = "Scale";
-                    if (value.has(ScaleKey))
-                        interpolator->setOffsetXVariation(value.get<float>(ScaleKey));
+                    if (value.has("Scale"))
+                        interpolator->setOffsetXVariation(value.get<float>("Scale"));
 
-                    static const char*const SineCurveKey = "SineCurve";
-                    static const char*const PolyCurveKey = "PolyCurve";
-                    if (value.type(SineCurveKey) == LUA_TTABLE)
+                    if (value.type("SineCurve") == LUA_TTABLE)
                     {
-                        lua_tinker::table sineCurve = value.get<lua_tinker::table>(SineCurveKey);
+                        lua_tinker::table sineCurve = value.get<lua_tinker::table>("SineCurve");
                         MinMax amplitude = MinMax(sineCurve, 2);
                         if (amplitude.IsValid)
                         {
@@ -287,9 +398,9 @@ namespace Bibim
                                                            Math::Max(sineCurve.get<int>(7), 4));
                         }
                     }
-                    else if (value.type(PolyCurveKey) == LUA_TTABLE)
+                    else if (value.type("PolyCurve") == LUA_TTABLE)
                     {
-                        lua_tinker::table polyCurve = value.get<lua_tinker::table>(PolyCurveKey);
+                        lua_tinker::table polyCurve = value.get<lua_tinker::table>("PolyCurve");
                         MinMax xRange = MinMax(polyCurve, 5);
                         if (xRange.IsValid)
                         {
@@ -394,6 +505,41 @@ namespace Bibim
         modelFlags.Set(t, "Angle", FLAG_ANGLE);
         modelFlags.Set(t, "AngularSpeed", FLAG_ROTATION_SPEED);
         modelFlags.Set(t, "Image", FLAG_TEXTURE_INDEX);
+
+        int angleAxisCount = 0;
+        bool isRandomAngleAxis = false;
+        switch (t.type("AngleAxis"))
+        {
+            case LUA_TSTRING:
+                if (const char* anleAxis = t.get<const char*>("AngleAxis"))
+                {
+                    static const String Random = "Random";
+                    if (Random.EqualsIgnoreCase(anleAxis))
+                    {
+                        angleAxisCount = RandomAngleAxisRenderer::NumberOfAxes;
+                        isRandomAngleAxis = true;
+                        modelFlags.Enable |= FLAG_CUSTOM_0;
+                        modelFlags.Random |= FLAG_CUSTOM_0;
+                    }
+                }
+                break;
+            case LUA_TTABLE:
+                {
+                    lua_tinker::table angleAxis = t.get<lua_tinker::table>("AngleAxis");
+                    if (angleAxis.type(1) == LUA_TNUMBER)
+                        angleAxisCount = 1;
+                    else
+                    {
+                        angleAxisCount = angleAxis.len();
+                        modelFlags.Enable |= FLAG_CUSTOM_0;
+                        modelFlags.Random |= FLAG_CUSTOM_0;
+                    }
+
+                    isRandomAngleAxis = false;
+                }
+                break;
+        }
+
 	    Model* model = Model::create(modelFlags.Enable | modelFlags.Mutable | modelFlags.Random | modelFlags.Interpolated,
                                      modelFlags.Mutable,
                                      modelFlags.Random,
@@ -408,21 +554,22 @@ namespace Bibim
         SetModelParams::Do(model, t, "AngularSpeed", PARAM_ROTATION_SPEED);
         SetModelParams::Do(model, t, "Image", PARAM_TEXTURE_INDEX);
 
+        if (angleAxisCount > 1)
+            model->setParam(PARAM_CUSTOM_0, 0, static_cast<float>(angleAxisCount) - 0.01f);
+
         MinMax lifetime(t, "Lifetime");
         if (lifetime.IsValid)
 	        model->setLifeTime(lifetime.Min, lifetime.Max);
 
-        static const char*const CapacityKey = "Capacity";
         int capacity = Pool<Particle>::DEFAULT_CAPACITY;
-        if (t.has(CapacityKey))
-            capacity = t.get<int>(CapacityKey);
+        if (t.has("Capacity"))
+            capacity = t.get<int>("Capacity");
 
 	    Group* group = Group::create(model, capacity);
 
-        static const char*const EmittersKey = "Emitters";
-        if (t.type(EmittersKey) == LUA_TTABLE)
+        if (t.type("Emitters") == LUA_TTABLE)
         {
-            lua_tinker::table emitters = t.get<lua_tinker::table>(EmittersKey);
+            lua_tinker::table emitters = t.get<lua_tinker::table>("Emitters");
             const int numberOfEmitters = emitters.len();
             for (int i = 1; i <= numberOfEmitters; i++)
             {
@@ -437,12 +584,11 @@ namespace Bibim
             }
         }
 
-        static const char*const ModifiersKey = "Modifiers";
-        static const std::string RotatorName = "Rotator";
         bool rotatorModifierAdded = false;
-        if (t.type(ModifiersKey) == LUA_TTABLE)
+        if (t.type("Modifiers") == LUA_TTABLE)
         {
-            lua_tinker::table modifiers = t.get<lua_tinker::table>(ModifiersKey);
+            static const std::string RotatorName = "Rotator";
+            lua_tinker::table modifiers = t.get<lua_tinker::table>("Modifiers");
             const int numberOfModifiers = modifiers.len();
             for (int i = 1; i <= numberOfModifiers; i++)
             {
@@ -463,9 +609,63 @@ namespace Bibim
         if (gravity.IsValid)
             group->setGravity(Vector3D(gravity.Min, gravity.Max, 0.0f));
 
-        static const char*const FrictionKey = "Friction";
-        if (t.has(FrictionKey))
-            group->setFriction(t.get<float>(FrictionKey));
+        if (t.has("Friction"))
+            group->setFriction(t.get<float>("Friction"));
+
+        if (angleAxisCount == 0)
+        {
+            if (const char* angle = t.get<const char*>("Angle"))
+            {
+                static const String Direction = "Direction";
+                if (Direction.EqualsIgnoreCase(angle))
+                    group->setRenderer(DirectionalRenderer::create());
+            }
+        }
+        else if (angleAxisCount > 0)
+        {
+            if (isRandomAngleAxis)
+                group->setRenderer(RandomAngleAxisRenderer::create());
+            else
+            {
+                BBAssertDebug(t.type("AngleAxis") == LUA_TTABLE);
+
+                lua_tinker::table angleAxis = t.get<lua_tinker::table>("AngleAxis");
+                if (angleAxisCount == 1)
+                {
+                    Vector3 axis = Vector3(angleAxis.get<float>(1),
+                                           angleAxis.get<float>(2),
+                                           angleAxis.get<float>(3));
+                    if (axis != Vector3::Zero)
+                    {
+                        axis.Normalize();
+                        group->setRenderer(SingleAngleAxisRenderer::create(axis));
+                    }
+                }
+                else
+                {
+                    const int count = angleAxis.len();
+                    std::vector<Vector3> axes;
+                    axes.reserve(count);
+                    for (int i = 1; i <= count; i++)
+                    {
+                        if (angleAxis.type(i) != LUA_TTABLE)
+                            continue;
+
+                        lua_tinker::table item = angleAxis.get<lua_tinker::table>(i);
+                        Vector3 axis = Vector3(item.get<float>(1),
+                                               item.get<float>(2),
+                                               item.get<float>(3));
+                        if (axis != Vector3::Zero)
+                        {
+                            axis.Normalize();
+                            axes.push_back(axis);
+                        }
+                    }
+
+                    group->setRenderer(MultipleAngleAxisRenderer::create(axes));
+                }
+            }
+        }
 
         return group;
     }
@@ -474,26 +674,23 @@ namespace Bibim
     {
         Emitter* emitter = nullptr;
 
-        static const char*const DirectionKey = "Direction";
-        switch (t.type(DirectionKey))
+        switch (t.type("Direction"))
         {
             case LUA_TSTRING:
                 {
-                    static const char*const NormalZone = "NormalZone";
-
                     static const String Normal = "NORMAL";
                     static const String InvertedNormal = "INVNORMAL";
                     static const String No = "NO";
                     static const String Random = "RANDOM";
-                    const char* direction = t.get<const char*>(DirectionKey);
+                    const char* direction = t.get<const char*>("Direction");
                     if (Normal.EqualsIgnoreCase(direction) ||
                         InvertedNormal.EqualsIgnoreCase(direction))
                     {
                         const bool invertedNormal = InvertedNormal.EqualsIgnoreCase(direction);
 
-                        if (t.type(NormalZone) == LUA_TTABLE)
+                        if (t.type("NormalZone") == LUA_TTABLE)
                         {
-                            Zone* normalZone = CreateParticleZone(t.get<lua_tinker::table>(NormalZone));
+                            Zone* normalZone = CreateParticleZone(t.get<lua_tinker::table>("NormalZone"));
                             emitter = NormalEmitter::create(normalZone, invertedNormal);
                         }
                         else
@@ -507,7 +704,7 @@ namespace Bibim
                 break;
             case LUA_TTABLE:
                 {
-                    lua_tinker::table dir = t.get<lua_tinker::table>(DirectionKey);
+                    lua_tinker::table dir = t.get<lua_tinker::table>("Direction");
                     
                     const Vector3D direction = Vector3D(dir.get<float>(1),
                                                         dir.get<float>(2));
@@ -524,19 +721,16 @@ namespace Bibim
         if (emitter == nullptr)
             emitter = RandomEmitter::create();
 
-        static const char*const TankKey = "Tank";
-        if (t.has(TankKey))
-            emitter->setTank(Math::Max(t.get<int>(TankKey), 1));
+        if (t.has("Tank"))
+            emitter->setTank(Math::Max(t.get<int>("Tank"), 1));
         else
             emitter->setTank(-1);
 
-        static const char*const FlowKey = "Flow";
-        if (t.has(FlowKey))
-            emitter->setFlow(Math::Max(t.get<float>(FlowKey), 0.0f));
+        if (t.has("Flow"))
+            emitter->setFlow(Math::Max(t.get<float>("Flow"), 0.0f));
 
-        static const char*const ZoneKey = "Zone";
-        if (t.type(ZoneKey) == LUA_TTABLE)
-            emitter->setZone(CreateParticleZone(t.get<lua_tinker::table>(ZoneKey)));
+        if (t.type("Zone") == LUA_TTABLE)
+            emitter->setZone(CreateParticleZone(t.get<lua_tinker::table>("Zone")));
 
         MinMax force(t, "Force");
         if (force.IsValid)
@@ -549,15 +743,11 @@ namespace Bibim
 
     Modifier* UISpark::CreateParticleModifier(lua_tinker::table t)
     {
-        static const char*const ForceKey = "Force";
-        static const char*const EyeKey = "Eye";
-        static const char*const MassKey = "Mass";
-
         Modifier* modifier = nullptr;
 
-        if (t.type(ForceKey) == LUA_TTABLE)
+        if (t.type("Force") == LUA_TTABLE)
         {
-            lua_tinker::table force = t.get<lua_tinker::table>(ForceKey);
+            lua_tinker::table force = t.get<lua_tinker::table>("Force");
 
             const float x = force.get<float>(1);
             const float y = force.get<float>(2);
@@ -598,9 +788,9 @@ namespace Bibim
             else
                 modifier = LinearForce::create(nullptr, INSIDE_ZONE, Vector3D(x, y));
         }
-        else if (t.type(EyeKey) == LUA_TTABLE)
+        else if (t.type("Eye") == LUA_TTABLE)
         {
-            lua_tinker::table eye = t.get<lua_tinker::table>(EyeKey);
+            lua_tinker::table eye = t.get<lua_tinker::table>("Eye");
             const float x = eye.get<float>(1);
             const float y = eye.get<float>(2);
             const float radius = eye.get<float>("Radius");
@@ -620,9 +810,9 @@ namespace Bibim
                 modifier = vortex;
             }
         }
-        else if (t.has(MassKey))
+        else if (t.has("Mass"))
         {
-            const float mass = t.get<float>(MassKey);
+            const float mass = t.get<float>("Mass");
             const float distance = t.get<float>("Distance");
             modifier = PointMass::create(nullptr, INSIDE_ZONE, mass, distance);
         }
@@ -659,9 +849,8 @@ namespace Bibim
 
             if (modifier->getTrigger() != ALWAYS)
             {
-                static const char*const ZoneKey = "Zone";
-                if (t.type(ZoneKey) == LUA_TTABLE)
-                    modifier->setZone(CreateParticleZone(t.get<lua_tinker::table>(ZoneKey)));
+                if (t.type("Zone") == LUA_TTABLE)
+                    modifier->setZone(CreateParticleZone(t.get<lua_tinker::table>("Zone")));
             }
         }
 
@@ -706,10 +895,9 @@ namespace Bibim
                                  Vector3D(halfWidth, halfHeight, 0.0f));
         }
 
-        static const char*const RadiusKey = "Radius";
-        if (t.has(RadiusKey))
+        if (t.has("Radius"))
         {
-            MinMax radius(t, RadiusKey);
+            MinMax radius(t, "Radius");
             if (radius.IsValid && radius.Min > 0.0f && radius.Max > 0.0f)
             {
                 if (radius.Min != radius.Max)
@@ -847,5 +1035,97 @@ namespace Bibim
     void UISpark::Updater::Update(float dt, int timestamp)
     {
         o->OnStep(dt, timestamp);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    void DirectionalRenderer::Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette)
+    {
+        BEGIN_DRAW_PARTICLE(group, p);
+        {
+            context.DrawUnclipped(PARTICLE_POSITION(p),
+                                  Math::Atan2(p.velocity().y, p.velocity().x),
+                                  PARTICLE_SIZE(p),
+                                  PARTICLE_IMAGE(p),
+                                  PARTICLE_COLOR(p));
+        }
+        END_DRAW_PARTICLE();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    RandomAngleAxisRenderer::RandomAngleAxisRenderer()
+    {
+        if (AxesReady == false)
+        {
+            AxesReady = true;
+
+            for (int i = 0; i < NumberOfAxes; i++)
+            {
+                Axes[i] = Vector3(Math::Random(-100, 100),
+                                  Math::Random(-100, 100),
+                                  Math::Random(-100, 100));
+                if (Axes[i] != Vector3::Zero)
+                    Axes[i].Normalize();
+                else
+                    Axes[i] = Vector3::UnitZ;
+            }
+        }
+    }
+
+    void RandomAngleAxisRenderer::Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette)
+    {
+        BEGIN_DRAW_PARTICLE(group, p);
+        {
+            context.DrawUnclipped(PARTICLE_POSITION(p),
+                                  PARTICLE_ANGLE(p),
+                                  Axes[static_cast<int>(p.getParamCurrentValue(PARAM_CUSTOM_0))],
+                                  PARTICLE_SIZE(p),
+                                  PARTICLE_IMAGE(p),
+                                  PARTICLE_COLOR(p));
+        }
+        END_DRAW_PARTICLE();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    SingleAngleAxisRenderer::SingleAngleAxisRenderer(Vector3 axis)
+        : axis(axis)
+    {
+    }
+
+    void SingleAngleAxisRenderer::Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette)
+    {
+        BEGIN_DRAW_PARTICLE(group, p);
+        {
+            context.DrawUnclipped(PARTICLE_POSITION(p),
+                                  PARTICLE_ANGLE(p),
+                                  axis,
+                                  PARTICLE_SIZE(p),
+                                  PARTICLE_IMAGE(p),
+                                  PARTICLE_COLOR(p));
+        }
+        END_DRAW_PARTICLE();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    MultipleAngleAxisRenderer::MultipleAngleAxisRenderer(std::vector<Vector3>& axes)
+    {
+        this->axes.swap(axes);
+    }
+
+    void MultipleAngleAxisRenderer::Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette)
+    {
+        BEGIN_DRAW_PARTICLE(group, p);
+        {
+            context.DrawUnclipped(PARTICLE_POSITION(p),
+                                  PARTICLE_ANGLE(p),
+                                  axes[static_cast<int>(p.getParamCurrentValue(PARAM_CUSTOM_0))],
+                                  PARTICLE_SIZE(p),
+                                  PARTICLE_IMAGE(p),
+                                  PARTICLE_COLOR(p));
+        }
+        END_DRAW_PARTICLE();
     }
 }

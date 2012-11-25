@@ -155,8 +155,6 @@
 
                 inline void SetSizeModeByChars(const char* widthMode, const char* heightMode);
 
-                inline float GetOriginX() const;
-                inline float GetOriginY() const;
                 inline void SetOriginXY(float x, float y);
 
                 inline const char* GetAnchorPointAsChars() const;

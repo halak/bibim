@@ -17,6 +17,15 @@
         { \
             push(L, const_cast<lua_tinker::lua_value*>(static_cast<const lua_tinker::lua_value*>(value))); \
         } \
+        template<> inline int lua_tinker::push_for_return(lua_State* L, classname* value) \
+        { \
+            return push_for_return(L, static_cast<lua_tinker::lua_value*>(value)); \
+        } \
+        \
+        template<> inline int lua_tinker::push_for_return(lua_State* L, const classname* value) \
+        { \
+            return push_for_return(L, const_cast<lua_tinker::lua_value*>(static_cast<const lua_tinker::lua_value*>(value))); \
+        } \
 	    template<> \
         struct lua_tinker::ptr2user<classname> : lua_tinker::user \
 	    { \

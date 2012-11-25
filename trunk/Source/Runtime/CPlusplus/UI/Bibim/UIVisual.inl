@@ -317,16 +317,6 @@
             SetHeightMode(mode);
         }
     }
-
-    float UIVisual::GetOriginX() const
-    {
-        return GetOrigin().X;
-    }
-
-    float UIVisual::GetOriginY() const
-    {
-        return GetOrigin().Y;
-    }
     
     void UIVisual::SetOriginXY(float x, float y)
     {

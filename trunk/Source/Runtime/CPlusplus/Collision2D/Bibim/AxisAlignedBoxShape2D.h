@@ -25,11 +25,7 @@
                 virtual bool Raycast(Vector2 origin, Vector2 direction, float length, RaycastReport2D& outReport, IRaycastCallback2D* callback);
                 virtual void Build(Vertices& vertices);
 
-                inline float GetMinX() const;
-                inline float GetMinY() const;
                 inline void SetMinXY(float x, float y);
-                inline float GetMaxX() const;
-                inline float GetMaxY() const;
                 inline void SetMaxXY(float x, float y);
 
             private:

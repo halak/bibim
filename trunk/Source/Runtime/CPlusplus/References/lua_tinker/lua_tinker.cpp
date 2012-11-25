@@ -443,95 +443,96 @@ Bibim::String lua_tinker::read(lua_State *L, int index)
 template<>
 void lua_tinker::push(lua_State *L, char ret)
 {
-	lua_pushnumber(L, ret);						
+	lua_pushnumber(L, ret);
 }
 
 template<>
 void lua_tinker::push(lua_State *L, unsigned char ret)
 {
-	lua_pushnumber(L, ret);						
+	lua_pushnumber(L, ret);
 }
 
 template<>
 void lua_tinker::push(lua_State *L, short ret)
 {
-	lua_pushnumber(L, ret);						
+	lua_pushnumber(L, ret);
 }
 
 template<>
 void lua_tinker::push(lua_State *L, unsigned short ret)
 {
-	lua_pushnumber(L, ret);						
+	lua_pushnumber(L, ret);
 }
 
 template<>
 void lua_tinker::push(lua_State *L, long ret)
 {
-	lua_pushnumber(L, ret);						
+	lua_pushnumber(L, ret);
 }
 
 template<>
 void lua_tinker::push(lua_State *L, unsigned long ret)
 {
-	lua_pushnumber(L, ret);						
+	lua_pushnumber(L, ret);
 }
 
 template<>
 void lua_tinker::push(lua_State *L, int ret)
 {
-	lua_pushnumber(L, ret);						
+	lua_pushnumber(L, ret);
 }
 
 template<>
 void lua_tinker::push(lua_State *L, unsigned int ret)
 {
-	lua_pushnumber(L, ret);						
+	lua_pushnumber(L, ret);
 }
 
 template<>
 void lua_tinker::push(lua_State *L, float ret)
 {
-	lua_pushnumber(L, ret);						
+	lua_pushnumber(L, ret);
 }
 
 template<>
 void lua_tinker::push(lua_State *L, double ret)
 {
-	lua_pushnumber(L, ret);						
+	lua_pushnumber(L, ret);
 }
 
 template<>
 void lua_tinker::push(lua_State *L, char* ret)
 {
-	lua_pushstring(L, ret);						
+	lua_pushstring(L, ret);
 }
 
 template<>
 void lua_tinker::push(lua_State *L, const char* ret)
 {
-	lua_pushstring(L, ret);						
+	lua_pushstring(L, ret);
 }
 
 template<>
 void lua_tinker::push(lua_State *L, bool ret)
 {
-	lua_pushboolean(L, ret);						
+	lua_pushboolean(L, ret);
 }
 
 template<>
 void lua_tinker::push(lua_State *L, lua_value* ret)
 {
-	if(ret) ret->to_lua(L); else lua_pushnil(L);	
+	if(ret) ret->to_lua(L); else lua_pushnil(L);
 }
 
 template<>
-void lua_tinker::push(lua_State *L, __int64 ret)			
+void lua_tinker::push(lua_State *L, __int64 ret)
 { 
 	*(__int64*)lua_newuserdata(L, sizeof(__int64)) = ret;
 	lua_pushstring(L, "__s64");
 	lua_gettable(L, LUA_GLOBALSINDEX);
 	lua_setmetatable(L, -2);
 }
+
 template<>
 void lua_tinker::push(lua_State *L, unsigned __int64 ret)
 {
@@ -551,6 +552,217 @@ template<>
 void lua_tinker::push(lua_State *L, const Bibim::String& ret)
 {
     lua_pushstring(L, ret.CStr());
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, char ret)
+{
+	lua_pushnumber(L, ret);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, unsigned char ret)
+{
+	lua_pushnumber(L, ret);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, short ret)
+{
+	lua_pushnumber(L, ret);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, unsigned short ret)
+{
+	lua_pushnumber(L, ret);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, long ret)
+{
+	lua_pushnumber(L, ret);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, unsigned long ret)
+{
+	lua_pushnumber(L, ret);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, int ret)
+{
+	lua_pushnumber(L, ret);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, unsigned int ret)
+{
+	lua_pushnumber(L, ret);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, float ret)
+{
+	lua_pushnumber(L, ret);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, double ret)
+{
+	lua_pushnumber(L, ret);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, char* ret)
+{
+	lua_pushstring(L, ret);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, const char* ret)
+{
+	lua_pushstring(L, ret);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, bool ret)
+{
+	lua_pushboolean(L, ret);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, lua_value* ret)
+{
+	if(ret) ret->to_lua(L); else lua_pushnil(L);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, __int64 ret)
+{ 
+	*(__int64*)lua_newuserdata(L, sizeof(__int64)) = ret;
+	lua_pushstring(L, "__s64");
+	lua_gettable(L, LUA_GLOBALSINDEX);
+	lua_setmetatable(L, -2);
+    return 1;
+}
+template<>
+int lua_tinker::push_for_return(lua_State *L, unsigned __int64 ret)
+{
+	*(unsigned __int64*)lua_newuserdata(L, sizeof(unsigned __int64)) = ret;
+	lua_pushstring(L, "__u64");
+	lua_gettable(L, LUA_GLOBALSINDEX);
+	lua_setmetatable(L, -2);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, lua_tinker::table ret)
+{
+	lua_pushvalue(L, ret.m_obj->m_index);
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, const Bibim::String& ret)
+{
+    lua_pushstring(L, ret.CStr());
+    return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, Bibim::Color ret)
+{
+    return push_for_return(L, ret.ToVector4());
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, Bibim::Point2 ret)
+{
+    lua_pushinteger(L, ret.X);
+    lua_pushinteger(L, ret.Y);
+    return 2;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, Bibim::Point3 ret)
+{
+    lua_pushinteger(L, ret.X);
+    lua_pushinteger(L, ret.Y);
+    lua_pushinteger(L, ret.Z);
+    return 3;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, Bibim::Point4 ret)
+{
+    lua_pushinteger(L, ret.X);
+    lua_pushinteger(L, ret.Y);
+    lua_pushinteger(L, ret.Z);
+    lua_pushinteger(L, ret.W);
+    return 4;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, Bibim::Rect ret)
+{
+    lua_pushinteger(L, ret.X);
+    lua_pushinteger(L, ret.Y);
+    lua_pushinteger(L, ret.Width);
+    lua_pushinteger(L, ret.Height);
+    return 3;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, Bibim::RectF ret)
+{
+    lua_pushnumber(L, ret.X);
+    lua_pushnumber(L, ret.Y);
+    lua_pushnumber(L, ret.Width);
+    lua_pushnumber(L, ret.Height);
+    return 4;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, Bibim::Vector2 ret)
+{
+    lua_pushnumber(L, ret.X);
+    lua_pushnumber(L, ret.Y);
+    return 2;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, Bibim::Vector3 ret)
+{
+    lua_pushnumber(L, ret.X);
+    lua_pushnumber(L, ret.Y);
+    lua_pushnumber(L, ret.Z);
+    return 3;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, Bibim::Vector4 ret)
+{
+    lua_pushnumber(L, ret.X);
+    lua_pushnumber(L, ret.Y);
+    lua_pushnumber(L, ret.Z);
+    lua_pushnumber(L, ret.W);
+    return 4;
 }
 
 /*---------------------------------------------------------------------------*/ 

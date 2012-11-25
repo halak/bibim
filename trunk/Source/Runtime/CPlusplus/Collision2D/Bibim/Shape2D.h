@@ -75,8 +75,6 @@
 
                 static bool Intersect(Shape2D* left, Shape2D* right);
 
-                inline float GetPositionX() const;
-                inline float GetPositionY() const;
                 inline void SetPositionXY(float x, float y);
 
             protected:
