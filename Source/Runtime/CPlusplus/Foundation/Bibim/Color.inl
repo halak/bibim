@@ -155,6 +155,15 @@
         return *this;
     }
 
+    Color& Color::operator *= (Vector4 right)
+    {
+        R = Clamp(static_cast<float>(R) * right.X);
+        G = Clamp(static_cast<float>(G) * right.Y);
+        B = Clamp(static_cast<float>(B) * right.Z);
+        A = Clamp(static_cast<float>(A) * right.W);
+        return *this;
+    }
+
     Color& Color::operator /= (Color right)
     {
         R = Clamp(static_cast<float>(R) / right.GetR());
@@ -203,6 +212,14 @@
                      Clamp(static_cast<float>(G) * right),
                      Clamp(static_cast<float>(B) * right),
                      Clamp(static_cast<float>(A) * right));
+    }
+
+    Color Color::operator * (Vector4 right) const
+    {
+        return Color(Clamp(static_cast<float>(R) * right.X),
+                     Clamp(static_cast<float>(G) * right.Y),
+                     Clamp(static_cast<float>(B) * right.Z),
+                     Clamp(static_cast<float>(A) * right.W));
     }
 
     Color Color::operator / (Color right) const

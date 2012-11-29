@@ -51,6 +51,7 @@
             private:
                 UIRenderer* renderer;
                 UIEffectStackPtr effectStack;
+                UIGeometryEffectPtr currentGeomEffect;
                 ImagePtr currentMask;
                 bool isDrawing;
 

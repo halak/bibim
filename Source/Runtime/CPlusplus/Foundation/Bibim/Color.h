@@ -38,6 +38,7 @@
             inline Color& operator -= (Color right);
             inline Color& operator *= (Color right);
             inline Color& operator *= (float right);
+            inline Color& operator *= (Vector4 right);
             inline Color& operator /= (Color right);
             inline Color& operator /= (float right);
 
@@ -45,6 +46,7 @@
             inline Color operator - (Color right) const;
             inline Color operator * (Color right) const;
             inline Color operator * (float right) const;
+            inline Color operator * (Vector4 right) const;
             inline Color operator / (Color right) const;
             inline Color operator / (float right) const;
 

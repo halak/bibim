@@ -9,4 +9,9 @@
     {
         this->value = value;
     }
+
+    void UITintEffect::SetValueRGBA(float r, float g, float b, float a)
+    {
+        SetValue(Vector4(r, g, b, a));
+    }
 }

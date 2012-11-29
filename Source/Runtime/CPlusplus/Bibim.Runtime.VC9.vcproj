@@ -1557,6 +1557,18 @@
 						Name="Geometry"
 						>
 						<File
+							RelativePath=".\UI\Bibim\UIAfterImageEffect.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UIAfterImageEffect.h"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UIAfterImageEffect.inl"
+							>
+						</File>
+						<File
 							RelativePath=".\UI\Bibim\UIGeometryEffect.cpp"
 							>
 						</File>
@@ -1566,18 +1578,6 @@
 						</File>
 						<File
 							RelativePath=".\UI\Bibim\UIGeometryEffect.inl"
-							>
-						</File>
-						<File
-							RelativePath=".\UI\Bibim\UISineCurveEffect.cpp"
-							>
-						</File>
-						<File
-							RelativePath=".\UI\Bibim\UISineCurveEffect.h"
-							>
-						</File>
-						<File
-							RelativePath=".\UI\Bibim\UISineCurveEffect.inl"
 							>
 						</File>
 						<File

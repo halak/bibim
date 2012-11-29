@@ -33,6 +33,18 @@
         Tint(Vector3(r, g, b));
     }
 
+    void UIColorMatrixEffect::Fill(Vector3 value)
+    {
+        red = Vector4(0.0f, 0.0f, 0.0f, value.X);
+        green = Vector4(0.0f, 0.0f, 0.0f, value.Y);
+        blue = Vector4(0.0f, 0.0f, 0.0f, value.Z);
+    }
+
+    void UIColorMatrixEffect::FillRGB(float r, float g, float b)
+    {
+        Fill(Vector3(r, g, b));
+    }
+
     Vector4 UIColorMatrixEffect::GetRed() const
     {
         return red;

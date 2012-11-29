@@ -1,27 +1,33 @@
-﻿#pragma once
-#ifndef __BIBIM_UITINTEFFECT_H__
-#define __BIBIM_UITINTEFFECT_H__
+#pragma once
+#ifndef __BIBIM_UIAFTERIMAGEEFFECT_H__
+#define __BIBIM_UIAFTERIMAGEEFFECT_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/UIGeometryEffect.h>
-#   include <Bibim/Vector4.h>
+#   include <Bibim/Matrix4.h>
+#   include <deque>
+#   include <map>
 
     namespace Bibim
     {
-        class UITintEffect : public UIGeometryEffect
+        class UIAfterImageEffect : public UIGeometryEffect
         {
-            BBComponentClass(UITintEffect, UIGeometryEffect, 'U', 'T', 'N', 'F');
+            BBComponentClass(UIAfterImageEffect, UIGeometryEffect, 'U', 'A', 'I', 'F');
             public:
-                static const int ClassIndex = 0;
+                static const int ClassIndex = 1;
 
             public:
-                UITintEffect();
-                UITintEffect(Vector4 value);
-                virtual ~UITintEffect();
+                UIAfterImageEffect();
+                virtual ~UIAfterImageEffect();
 
-                inline Vector4 GetValue() const;
-                inline void SetValue(Vector4 value);
-                inline void SetValueRGBA(float r, float g, float b, float a);
+                inline int GetSkippedFrames() const;
+                void SetSkippedFrames(int value);
+
+                inline int GetTotalFrames() const;
+                void SetTotalFrames(int value);
+
+                virtual void BeginDraw(UIDrawingContext& context, UIVisual* visual);
+                virtual void EndDraw(UIDrawingContext& context, UIVisual* visual);
 
                 virtual void DrawLines(UIRenderer* renderer, int count, Vector2* p, Color color);
                 virtual void DrawLines(UIRenderer* renderer, int count, Vector2* p, Color* c);
@@ -44,10 +50,19 @@
                 virtual void DrawQuad(UIRenderer* renderer, Vector3* p, Color color, Vector2* uv1, Texture2D* texture1, Vector2* uv2, Texture2D* texture2);
 
             private:
-                Vector4 value;
+                typedef std::deque<int> AICollection;
+                typedef std::map<UIVisual*, AICollection*> AIDictionary;
+
+            private:
+                int skippedFrames;
+                int totalFrames;
+
+                AICollection* currentAfterImages;
+                Matrix4 currentTransform;
+                AIDictionary afterImages;
         };
     }
 
-#   include <Bibim/UITintEffect.inl>
+#   include <Bibim/UIAfterImageEffect.inl>
 
 #endif

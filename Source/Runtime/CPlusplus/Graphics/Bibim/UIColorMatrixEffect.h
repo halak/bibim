@@ -26,6 +26,8 @@
                 inline void GrayscaleRGBA(float r, float g, float b, float a);
                 inline void Tint(Vector3 value);
                 inline void TintRGB(float r, float g, float b);
+                inline void Fill(Vector3 value);
+                inline void FillRGB(float r, float g, float b);
 
                 inline Vector4 GetRed() const;
                 inline void SetRed(Vector4 value);

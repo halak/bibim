@@ -13,7 +13,7 @@ namespace Bibim
                 public:
                     virtual ~Serializer() { }
 
-                    virtual void Push(SharedObject* value) = 0;
+                    virtual void Push(GameComponent* value) = 0;
                     virtual void Push(bool value) = 0;
                     virtual void Push(int value) = 0;
                     virtual void Push(float value) = 0;
