@@ -254,7 +254,7 @@
                     BBForwardDeclareSmartPointerClass(UIEffectMap);
                     BBForwardDeclareSmartPointerClass(UIEffectStack);
                     BBForwardDeclareSmartPointerClass(UIGeometryEffect);
-                        BBForwardDeclareSmartPointerClass(UISineCurveEffect);
+                        BBForwardDeclareSmartPointerClass(UIAfterImageEffect);
                         BBForwardDeclareSmartPointerClass(UITintEffect);
                     BBForwardDeclareSmartPointerClass(UIPixelEffect);
                         BBForwardDeclareSmartPointerClass(UIBlendingEffect);

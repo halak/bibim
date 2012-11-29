@@ -141,6 +141,22 @@ namespace Bibim
         return result;
     }
 
+    UIGeometryEffect* UIVisual::GetGeometryEffect() const
+    {
+        if (effectMap)
+            return effectMap->GetGeometryEffect();
+        else
+            return nullptr;
+    }
+
+    void UIVisual::SetGeometryEffect(UIGeometryEffect* value)
+    {
+        if (effectMap == nullptr)
+            effectMap = new UIEffectMap();
+
+        effectMap->SetGeometryEffect(value);
+    }
+
     void UIVisual::InsertEffect(UIPixelEffect* item)
     {
         if (effectMap == nullptr)

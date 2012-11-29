@@ -223,7 +223,6 @@
 #  include <Bibim/UIEffectMap.h>
 #  include <Bibim/UIElement.h>
 #  include <Bibim/UIEventArgs.h>
-#include <Bibim/UISineCurveEffect.h>
 #  include <Bibim/UIEventDispatcher.h>
 #  include <Bibim/UIEventHandler.h>
 #  include <Bibim/UIEventID.h>
@@ -252,6 +251,7 @@
 #  include <Bibim/UISequentialEventHandler.h>
 #  include <Bibim/UISimpleDomain.h>
 #  include <Bibim/UIImage.h>
+#  include <Bibim/UIAfterImageEffect.h>
 #  include <Bibim/UITintEffect.h>
 #  include <Bibim/UIVideo.h>
 #  include <Bibim/UIVisual.h>

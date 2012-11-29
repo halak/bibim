@@ -223,7 +223,7 @@ namespace Bibim
         GameComponentFactory::AddEntry<EaseInOutElasticCurve>();
         GameComponentFactory::AddEntry<OscillationCurve>();
 
-        GameComponentFactory::AddEntry<UISineCurveEffect>();
+        GameComponentFactory::AddEntry<UIAfterImageEffect>();
         GameComponentFactory::AddEntry<UITintEffect>();
         GameComponentFactory::AddEntry<UIBlendingEffect>();
         GameComponentFactory::AddEntry<UIColorMatrixEffect>();

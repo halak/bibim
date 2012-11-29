@@ -55,6 +55,9 @@
                 inline void Show();
                 inline void Hide();
 
+                UIGeometryEffect* GetGeometryEffect() const;
+                void SetGeometryEffect(UIGeometryEffect* value);
+
                 void InsertEffect(UIPixelEffect* item);
                 void RemoveEffect(UIPixelEffect* item);
                 UIPixelEffect* FindEffect(const String& name);

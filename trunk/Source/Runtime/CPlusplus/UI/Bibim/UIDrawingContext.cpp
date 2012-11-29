@@ -8,8 +8,10 @@
 #include <Bibim/Image.h>
 #include <Bibim/Math.h>
 #include <Bibim/Shape2D.h>
-#include <Bibim/UIRenderer.h>
+#include <Bibim/UIGeometryEffect.h>
+#include <Bibim/UIEffectMap.h>
 #include <Bibim/UIEffectStack.h>
+#include <Bibim/UIRenderer.h>
 #include <Bibim/UIVisual.h>
 #include <Bibim/Texture2D.h>
 #include <Bibim/TypingContext.h>
@@ -90,7 +92,7 @@ namespace Bibim
         clippingRect.Width  = (horizontalFlip == false) ? clippingRight - clippingLeft : clippingLeft - clippingRight;
         clippingRect.Height = (verticalFlip   == false) ? clippingBottom - clippingTop : clippingTop - clippingBottom;
 
-        const Vector2 points[] =
+        Vector2 points[] =
         {
             Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetTop() - 0.5f),
             Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetTop() - 0.5f),
@@ -116,7 +118,10 @@ namespace Bibim
         }
 
         const Color color = Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity()));
-        renderer->DrawQuad(points, color, uv, image->GetTexture());
+        if (currentGeomEffect)
+            currentGeomEffect->DrawQuad(renderer, points, color, uv, image->GetTexture());
+        else
+            renderer->DrawQuad(points, color, uv, image->GetTexture());
     }
 
     void UIDrawingContext::Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, Image* maskImage, bool horizontalFlip, bool verticalFlip)
@@ -188,7 +193,7 @@ namespace Bibim
         maskClippingRect.Width  = (horizontalFlip == false) ? maskClippingRight - maskClippingLeft : maskClippingLeft - maskClippingRight;
         maskClippingRect.Height = (verticalFlip   == false) ? maskClippingBottom - maskClippingTop : maskClippingTop - maskClippingBottom;
 
-        const Vector2 points[] =
+        Vector2 points[] =
         {
             Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetTop() - 0.5f),
             Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetTop() - 0.5f),
@@ -231,7 +236,10 @@ namespace Bibim
         }
 
         const Color color = Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity()));
-        renderer->DrawQuad(points, color, uv1, image->GetTexture(), uv2, maskImage->GetTexture());
+        if (currentGeomEffect)
+            currentGeomEffect->DrawQuad(renderer, points, color, uv1, image->GetTexture(), uv2, maskImage->GetTexture());
+        else
+            renderer->DrawQuad(points, color, uv1, image->GetTexture(), uv2, maskImage->GetTexture());
     }
 
     void UIDrawingContext::Draw(Shape2D* shape, Color color)
@@ -296,7 +304,7 @@ namespace Bibim
                                         static_cast<float>(texture->GetWidth()),
                                         static_cast<float>(texture->GetHeight()));
 
-        const Vector2 points[] =
+        Vector2 points[] =
         {
             Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetTop() - 0.5f),
             Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetTop() - 0.5f),
@@ -304,7 +312,10 @@ namespace Bibim
             Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetBottom() - 0.5f),
         };
         const Color color = Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity()));
-        renderer->DrawQuad(points, color, RectF(0.0f, 0.0f, 1.0f, 1.0f), texture);
+        if (currentGeomEffect)
+            currentGeomEffect->DrawQuad(renderer, points, color, RectF(0.0f, 0.0f, 1.0f, 1.0f), texture);
+        else
+            renderer->DrawQuad(points, color, RectF(0.0f, 0.0f, 1.0f, 1.0f), texture);
     }
 
     void UIDrawingContext::DrawUnclipped(Vector2 position, float rotation, Image* image)
@@ -367,7 +378,10 @@ namespace Bibim
         }
 
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
-        renderer->DrawQuad(points, color, uv, image->GetTexture());
+        if (currentGeomEffect)
+            currentGeomEffect->DrawQuad(renderer, points, color, uv, image->GetTexture());
+        else
+            renderer->DrawQuad(points, color, uv, image->GetTexture());
     }
 
     void UIDrawingContext::DrawUnclipped(Vector2 position, float rotation, Vector3 rotationAxis, float scale, Image* image, Color color)
@@ -425,7 +439,10 @@ namespace Bibim
         }
 
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
-        renderer->DrawQuad(points, color, uv, image->GetTexture());
+        if (currentGeomEffect)
+            currentGeomEffect->DrawQuad(renderer, points, color, uv, image->GetTexture());
+        else
+            renderer->DrawQuad(points, color, uv, image->GetTexture());
     }
 
     void UIDrawingContext::DrawString(const RectF& bounds, const RectF& clippedBounds, Font* font, const String& text)
@@ -444,7 +461,7 @@ namespace Bibim
 
         struct DrawGlyphs
         {
-            static void Do(UIDrawingContext* /*self*/, TypingContext& context, UIRenderer* renderer, const RectF& bounds, const RectF& /*clippedBounds*/, const FontString::GlyphCollection& glyphs, Color color)
+            static void Do(UIGeometryEffect* geomEffect, TypingContext& context, UIRenderer* renderer, const RectF& bounds, const RectF& /*clippedBounds*/, const FontString::GlyphCollection& glyphs, Color color)
             {
                 while (context.MoveNext())
                 {
@@ -467,14 +484,18 @@ namespace Bibim
                                                     bounds.Y + context.GetPosition().Y + glyph->GetBitmapOffset().Y,
                                                     glyph->GetBitmapSize().X,
                                                     glyph->GetBitmapSize().Y);
-                    const Vector2 points[4] = 
+                    Vector2 points[4] = 
                     {
                         Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetTop() - 0.5f),
                         Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetTop() - 0.5f),
                         Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetBottom() - 0.5f),
                         Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetBottom() - 0.5f),
                     };
-                    renderer->DrawQuad(points, color, clippingRect, glyph->GetTexture());
+
+                    if (geomEffect)
+                        geomEffect->DrawQuad(renderer, points, color, clippingRect, glyph->GetTexture());
+                    else
+                        renderer->DrawQuad(points, color, clippingRect, glyph->GetTexture());
                 }
             }
         };
@@ -485,7 +506,7 @@ namespace Bibim
         {
             Color glowColor = fontString.GetFont()->GetGlowColor();
             glowColor.A = static_cast<byte>(static_cast<float>(glowColor.A) * GetCurrentOpacity());
-            DrawGlyphs::Do(this, context, renderer, bounds, clippedBounds, fontString.GetGlowGlyphs(), glowColor);
+            DrawGlyphs::Do(currentGeomEffect, context, renderer, bounds, clippedBounds, fontString.GetGlowGlyphs(), glowColor);
             context.Reset();
         }
 
@@ -493,21 +514,25 @@ namespace Bibim
         {
             Color strokeColor = fontString.GetFont()->GetStrokeColor();
             strokeColor.A = static_cast<byte>(static_cast<float>(strokeColor.A) * GetCurrentOpacity());
-            DrawGlyphs::Do(this, context, renderer, bounds, clippedBounds, fontString.GetStrokedGlyphs(), strokeColor);
+            DrawGlyphs::Do(currentGeomEffect, context, renderer, bounds, clippedBounds, fontString.GetStrokedGlyphs(), strokeColor);
             context.Reset();
         }
 
         Color color = fontString.GetFont()->GetColor();
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
-        DrawGlyphs::Do(this, context, renderer, bounds, clippedBounds, fontString.GetRegularGlyphs(), color);
+        DrawGlyphs::Do(currentGeomEffect, context, renderer, bounds, clippedBounds, fontString.GetRegularGlyphs(), color);
+
         renderer->EndBatch();
     }
 
     void UIDrawingContext::DrawLine(Vector2 p0, Vector2 p1, Color color)
     {
-        const Vector2 p[] = { p0, p1 };
+        Vector2 p[] = { p0, p1 };
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
-        renderer->DrawLines(sizeof(p) / sizeof(p[0]), p, color);
+        if (currentGeomEffect)
+            currentGeomEffect->DrawLines(renderer, sizeof(p) / sizeof(p[0]), p, color);
+        else
+            renderer->DrawLines(sizeof(p) / sizeof(p[0]), p, color);
     }
 
     void UIDrawingContext::DrawLines(int count, Vector2* p, Color color)
@@ -516,12 +541,15 @@ namespace Bibim
             return;
 
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
-        renderer->DrawLines(count, p, color);
+        if (currentGeomEffect)
+            currentGeomEffect->DrawLines(renderer, count, p, color);
+        else
+            renderer->DrawLines(count, p, color);
     }
 
     void UIDrawingContext::DrawRect(const RectF& bounds, Color color)
     {
-        const Vector2 p[] =
+        Vector2 p[] =
         {
             Vector2(bounds.GetLeft(),  bounds.GetTop()),
             Vector2(bounds.GetRight(), bounds.GetTop()),
@@ -531,7 +559,10 @@ namespace Bibim
         };
 
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
-        renderer->DrawLines(sizeof(p) / sizeof(p[0]), p, color);
+        if (currentGeomEffect)
+            currentGeomEffect->DrawLines(renderer, sizeof(p) / sizeof(p[0]), p, color);
+        else
+            renderer->DrawLines(sizeof(p) / sizeof(p[0]), p, color);
     }
 
     void UIDrawingContext::DrawCircle(Vector2 center, float radius, Color color)
@@ -550,14 +581,17 @@ namespace Bibim
         p[count] = p[0];
 
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
-        renderer->DrawLines(count + 1, p, color);
+        if (currentGeomEffect)
+            currentGeomEffect->DrawLines(renderer, count + 1, p, color);
+        else
+            renderer->DrawLines(count + 1, p, color);
 
         BBStackFree(p);
     }
 
     void UIDrawingContext::FillRect(const RectF& bounds, Color color)
     {
-        const Vector2 p[] = 
+        Vector2 p[] = 
         {
             Vector2(bounds.GetLeft(),  bounds.GetTop()),
             Vector2(bounds.GetRight(), bounds.GetTop()),
@@ -569,7 +603,10 @@ namespace Bibim
         };
         
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
-        renderer->DrawTriangles(sizeof(p) / sizeof(p[0]), p, color);
+        if (currentGeomEffect)
+            currentGeomEffect->DrawTriangles(renderer, sizeof(p) / sizeof(p[0]), p, color);
+        else
+            renderer->DrawTriangles(sizeof(p) / sizeof(p[0]), p, color);
     }
 
     void UIDrawingContext::OnBegan()
@@ -583,24 +620,36 @@ namespace Bibim
     void UIDrawingContext::OnVisit()
     {
         ImagePtr oldMask = currentMask;
+        UIGeometryEffectPtr oldGeomEffect = currentGeomEffect;
 
-        if (GetCurrentVisual()->GetEffectMap())
+        UIEffectMap* effectMap = GetCurrentVisual()->GetEffectMap();
+
+        if (effectMap)
         {
-            if (effectStack->Push(GetCurrentVisual()->GetEffectMap(), currentMask))
+            if (effectStack->Push(effectMap, currentMask))
                 renderer->Setup(effectStack->GetTopEffectors());
+
+            if (effectMap->GetGeometryEffect())
+                currentGeomEffect = effectMap->GetGeometryEffect();
         }
 
         renderer->Setup(GetCurrentTransform());
+        if (currentGeomEffect)
+            currentGeomEffect->BeginDraw(*this, GetCurrentVisual());
         GetCurrentVisual()->OnDraw(*this);
+        if (currentGeomEffect)
+            currentGeomEffect->EndDraw(*this, GetCurrentVisual());
         renderer->Setup(GetCurrentTransform());
 
-        if (GetCurrentVisual()->GetEffectMap())
+        if (effectMap)
         {
             if (effectStack->Pop())
             {
                 currentMask = oldMask;
                 renderer->Setup(effectStack->GetTopEffectors());
             }
+
+            currentGeomEffect = oldGeomEffect;
         }
     }
 }

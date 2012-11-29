@@ -394,7 +394,7 @@ namespace Bibim
         }
     }
 
-    void UIRenderer::DrawLines(int count, const Vector2* p, Color* c)
+    void UIRenderer::DrawLines(int count, const Vector2* p, const Color* c)
     {
         if (count == 0)
             return;
@@ -493,7 +493,7 @@ namespace Bibim
         v[3] = Vertex(p[3], d3dColor, Vector2(clippingRect.GetRight(), clippingRect.GetBottom()), uv2[3]);
     }
 
-    void UIRenderer::DrawQuad(const Vector2* p, Color* c)
+    void UIRenderer::DrawQuad(const Vector2* p, const Color* c)
     {
         BBAssert(p && c);
 
@@ -504,7 +504,7 @@ namespace Bibim
         v[3] = Vertex(p[3], c[3].ToARGB());
     }
 
-    void UIRenderer::DrawQuad(const Vector2* p, Color* c, const Vector2* uv, Texture2D* texture)
+    void UIRenderer::DrawQuad(const Vector2* p, const Color* c, const Vector2* uv, Texture2D* texture)
     {
         BBAssert(p && c && uv && texture);
 
@@ -515,7 +515,7 @@ namespace Bibim
         v[3] = Vertex(p[3], c[3].ToARGB(), uv[3]);
     }
 
-    void UIRenderer::DrawQuad(const Vector2* p, Color* c, const Vector2* uv1, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2)
+    void UIRenderer::DrawQuad(const Vector2* p, const Color* c, const Vector2* uv1, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2)
     {
         BBAssert(p && c && uv1 && texture1 && uv2 && texture2);
 
