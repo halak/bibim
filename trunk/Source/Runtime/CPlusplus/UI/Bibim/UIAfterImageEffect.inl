@@ -9,4 +9,14 @@ namespace Bibim
     {
         return totalFrames;
     }
+
+    bool UIAfterImageEffect::GetActive() const
+    {
+        return active;
+    }
+
+    void UIAfterImageEffect::SetActive(bool value)
+    {
+        active = value;
+    }
 }

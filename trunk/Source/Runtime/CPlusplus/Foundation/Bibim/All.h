@@ -252,6 +252,7 @@
 #  include <Bibim/UISimpleDomain.h>
 #  include <Bibim/UIImage.h>
 #  include <Bibim/UIAfterImageEffect.h>
+#  include <Bibim/UISineCurveEffect.h>
 #  include <Bibim/UITintEffect.h>
 #  include <Bibim/UIVideo.h>
 #  include <Bibim/UIVisual.h>

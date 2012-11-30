@@ -29,4 +29,9 @@
     {
         Visit(target);
     }
+
+    UIRenderer* UIDrawingContext::GetRenderer() const
+    {
+        return renderer;
+    }
 }

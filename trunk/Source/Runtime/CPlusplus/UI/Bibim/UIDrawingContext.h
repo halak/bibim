@@ -38,6 +38,8 @@
 
                 void FillRect(const RectF& bounds, Color color);
 
+                inline UIRenderer* GetRenderer() const;
+
             private:
                 void Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, Image* maskImage, bool horizontalFlip, bool verticalFlip);
 

@@ -219,7 +219,7 @@ namespace Bibim
         }
 
         Vector2 uv2[4];
-        switch (image->GetAppliedTransform())
+        switch (maskImage->GetAppliedTransform())
         {
             case Image::Identity:
                 uv2[0] = Vector2(maskClippingRect.GetLeft(), maskClippingRect.GetTop());

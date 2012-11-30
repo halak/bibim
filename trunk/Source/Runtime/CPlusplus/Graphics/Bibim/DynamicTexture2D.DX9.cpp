@@ -70,13 +70,13 @@ namespace Bibim
 
         if (GetGraphicsDevice()->GetD3DCaps().Caps2 & D3DCAPS2_DYNAMICTEXTURES)
         {
-            result = d3dDevice->CreateTexture(sw, sh, 0, D3DUSAGE_DYNAMIC, d3dFormat, D3DPOOL_DEFAULT, &newD3DTexture, nullptr);
+            result = d3dDevice->CreateTexture(sw, sh, 1, D3DUSAGE_DYNAMIC, d3dFormat, D3DPOOL_DEFAULT, &newD3DTexture, nullptr);
             d3dLockableTexture = newD3DTexture;
         }
         else
         {
-            result = d3dDevice->CreateTexture(sw, sh, 0, 0, d3dFormat, D3DPOOL_SYSTEMMEM, &d3dSystemMemoryTexture, nullptr);
-            result = d3dDevice->CreateTexture(sw, sh, 0, 0, d3dFormat, D3DPOOL_DEFAULT, &newD3DTexture, nullptr);
+            result = d3dDevice->CreateTexture(sw, sh, 1, 0, d3dFormat, D3DPOOL_SYSTEMMEM, &d3dSystemMemoryTexture, nullptr);
+            result = d3dDevice->CreateTexture(sw, sh, 1, 0, d3dFormat, D3DPOOL_DEFAULT, &newD3DTexture, nullptr);
             d3dLockableTexture = d3dSystemMemoryTexture;
         }
 
