@@ -1581,6 +1581,18 @@
 							>
 						</File>
 						<File
+							RelativePath=".\UI\Bibim\UISineCurveEffect.cpp"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UISineCurveEffect.h"
+							>
+						</File>
+						<File
+							RelativePath=".\UI\Bibim\UISineCurveEffect.inl"
+							>
+						</File>
+						<File
 							RelativePath=".\UI\Bibim\UITintEffect.cpp"
 							>
 						</File>

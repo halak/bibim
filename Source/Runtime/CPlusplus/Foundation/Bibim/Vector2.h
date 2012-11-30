@@ -52,7 +52,20 @@
             static const Vector2 One;
             static const Vector2 Minimum;
             static const Vector2 Maximum;
+
+            template <int Index> inline static float Get(Vector2  value);
+            template <int Index> inline static void  Set(Vector2& o, float value);
+            template <int Index> inline static void  Add(Vector2& o, float value);
         };
+
+        template <> inline float Vector2::Get<0>(Vector2 value) { return value.X; }
+        template <> inline float Vector2::Get<1>(Vector2 value) { return value.Y; }
+
+        template <> inline void Vector2::Set<0>(Vector2& o, float value) { o.X = value; }
+        template <> inline void Vector2::Set<1>(Vector2& o, float value) { o.Y = value; }
+
+        template <> inline void Vector2::Add<0>(Vector2& o, float value) { o.X += value; }
+        template <> inline void Vector2::Add<1>(Vector2& o, float value) { o.Y += value; }
     }
 
 #   include <Bibim/Vector2.inl>

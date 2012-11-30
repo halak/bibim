@@ -14,9 +14,6 @@
         {
             BBComponentClass(UIAfterImageEffect, UIGeometryEffect, 'U', 'A', 'I', 'F');
             public:
-                static const int ClassIndex = 1;
-
-            public:
                 UIAfterImageEffect();
                 virtual ~UIAfterImageEffect();
 
@@ -25,6 +22,9 @@
 
                 inline int GetTotalFrames() const;
                 void SetTotalFrames(int value);
+
+                inline bool GetActive() const;
+                inline void SetActive(bool value);
 
                 virtual void BeginDraw(UIDrawingContext& context, UIVisual* visual);
                 virtual void EndDraw(UIDrawingContext& context, UIVisual* visual);
@@ -50,16 +50,37 @@
                 virtual void DrawQuad(UIRenderer* renderer, Vector3* p, Color color, Vector2* uv1, Texture2D* texture1, Vector2* uv2, Texture2D* texture2);
 
             private:
-                typedef std::deque<int> AICollection;
-                typedef std::map<UIVisual*, AICollection*> AIDictionary;
+                struct Frame
+                {
+                    Matrix4 transform;
+                    Vector2 positions[4];
+                    Color color;
+                    Vector2 uv[4];
+                    Texture2DPtr texture;
+
+                    Frame(const Matrix4& transform, Vector2* p4, Color c, Vector2* uv4, Texture2D* texture);
+                    Frame(const Matrix4& transform, Vector2* p4, Color c, RectF clippingRect, Texture2D* texture);
+                };
+
+                struct AfterImage
+                {
+                    std::deque<Frame> Frames;
+                    int SkippedFrames;
+                };
+
+                typedef std::map<UIVisual*, AfterImage*> AfterImageDictionary;
+
+            private:
+                inline byte GetOpacityDecrement() const;
 
             private:
                 int skippedFrames;
                 int totalFrames;
+                bool active;
 
-                AICollection* currentAfterImages;
+                AfterImage* currentAfterImage;
                 Matrix4 currentTransform;
-                AIDictionary afterImages;
+                AfterImageDictionary afterImages;
         };
     }
 

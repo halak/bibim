@@ -154,8 +154,9 @@ namespace Bibim
         d3dDevice->SetTransform(D3DTS_PROJECTION, &d3dProjectionTransform);
 
         d3dDevice->BeginStateBlock();
+        CheckedSetRenderState(d3dDevice, D3DRS_ALPHATESTENABLE, FALSE);
         CheckedSetRenderState(d3dDevice, D3DRS_ALPHABLENDENABLE, TRUE);
-        CheckedSetRenderState(d3dDevice, D3DRS_ALPHAFUNC, TRUE);
+        CheckedSetRenderState(d3dDevice, D3DRS_ALPHAFUNC, D3DCMP_ALWAYS);
         CheckedSetRenderState(d3dDevice, D3DRS_ALPHAREF, 0x00);
         CheckedSetRenderState(d3dDevice, D3DRS_BLENDOP, D3DBLENDOP_ADD);
         CheckedSetRenderState(d3dDevice, D3DRS_CLIPPING, TRUE);
@@ -171,14 +172,12 @@ namespace Bibim
         CheckedSetRenderState(d3dDevice, D3DRS_LIGHTING, FALSE);
         CheckedSetRenderState(d3dDevice, D3DRS_RANGEFOGENABLE, FALSE);
         CheckedSetRenderState(d3dDevice, D3DRS_SEPARATEALPHABLENDENABLE, FALSE);
-        CheckedSetRenderState(d3dDevice, D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
+        CheckedSetRenderState(d3dDevice, D3DRS_SHADEMODE, D3DSHADE_FLAT);
         CheckedSetRenderState(d3dDevice, D3DRS_SPECULARENABLE, FALSE);
         CheckedSetRenderState(d3dDevice, D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
         CheckedSetRenderState(d3dDevice, D3DRS_SRGBWRITEENABLE, FALSE);
         CheckedSetRenderState(d3dDevice, D3DRS_STENCILENABLE, FALSE);
         CheckedSetRenderState(d3dDevice, D3DRS_VERTEXBLEND, FALSE);
-        CheckedSetRenderState(d3dDevice, D3DRS_WRAP0, 0);
-        CheckedSetRenderState(d3dDevice, D3DRS_SEPARATEALPHABLENDENABLE, FALSE);
 
         CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
         CheckedSetTextureStageState(d3dDevice, 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
@@ -203,9 +202,9 @@ namespace Bibim
 
         CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_ADDRESSU, D3DTADDRESS_CLAMP);
         CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_ADDRESSV, D3DTADDRESS_CLAMP);
-        CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
-        CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
-        CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
+        CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_MAGFILTER, D3DTEXF_POINT);
+        CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_MINFILTER, D3DTEXF_POINT);
+        CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_MIPFILTER, D3DTEXF_POINT);
         CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_MAXMIPLEVEL, 0);
         CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_MIPMAPLODBIAS, 0);
         CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_SRGBTEXTURE, 0);

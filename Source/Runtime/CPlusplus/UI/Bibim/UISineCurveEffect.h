@@ -1,24 +1,45 @@
-﻿#pragma once
-#ifndef __BIBIM_UITINTEFFECT_H__
-#define __BIBIM_UITINTEFFECT_H__
+#pragma once
+#ifndef __BIBIM_UISINECURVEEFFECT_H__
+#define __BIBIM_UISINECURVEEFFECT_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/UIGeometryEffect.h>
-#   include <Bibim/Vector4.h>
+
+#   undef SetForm
 
     namespace Bibim
     {
-        class UITintEffect : public UIGeometryEffect
+        class UISineCurveEffect : public UIGeometryEffect
         {
-            BBComponentClass(UITintEffect, UIGeometryEffect, 'U', 'T', 'N', 'F');
+            BBComponentClass(UISineCurveEffect, UIGeometryEffect, 'U', 'S', 'N', 'F');
             public:
-                UITintEffect();
-                UITintEffect(Vector4 value);
-                virtual ~UITintEffect();
+                enum Form
+                {
+                    VerticalWave,
+                    VerticalPot,
+                    Left,
+                    Right,
+                    HorizontalWave,
+                    HorizontalPot,
+                    Top,
+                    Bottom,
+                };
 
-                inline Vector4 GetValue() const;
-                inline void SetValue(Vector4 value);
-                inline void SetValueRGBA(float r, float g, float b, float a);
+            public:
+                UISineCurveEffect();
+                virtual ~UISineCurveEffect();
+
+                inline float GetAmplitude() const;
+                void SetAmplitude(float value);
+
+                inline float GetOffset() const;
+                void SetOffset(float value);
+
+                inline float GetLength() const;
+                void SetLength(float value);
+
+                inline Form GetForm() const;
+                void SetForm(Form value);
 
                 virtual void DrawLines(UIRenderer* renderer, int count, Vector2* p, Color color);
                 virtual void DrawLines(UIRenderer* renderer, int count, Vector2* p, Color* c);
@@ -40,11 +61,24 @@
                 virtual void DrawQuad(UIRenderer* renderer, Vector3* p, Color color, Vector2* uv,  Texture2D* texture);
                 virtual void DrawQuad(UIRenderer* renderer, Vector3* p, Color color, Vector2* uv1, Texture2D* texture1, Vector2* uv2, Texture2D* texture2);
 
+                inline const char* GetFormAsChars() const;
+                inline void SetFormByChars(const char* value);
+
             private:
-                Vector4 value;
+                static Form ConvertFromStringToForm(const char* value);
+                static const char* ConvertFromFormToString(Form value);
+
+            private:
+                float amplitude;
+                float offset;
+                float length;
+                Form form;
+
+                float startAxisWeight;
+                float endAxisWeight;
         };
     }
 
-#   include <Bibim/UITintEffect.inl>
+#   include <Bibim/UISineCurveEffect.inl>
 
 #endif
