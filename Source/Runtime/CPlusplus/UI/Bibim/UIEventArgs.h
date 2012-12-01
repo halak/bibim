@@ -22,7 +22,7 @@ namespace Bibim
 
         public:
             UIEventArgs();
-            UIEventArgs(UIVisual* target);
+            explicit UIEventArgs(UIVisual* target);
             UIEventArgs(const UIEventArgs& original);
             virtual ~UIEventArgs();
 
