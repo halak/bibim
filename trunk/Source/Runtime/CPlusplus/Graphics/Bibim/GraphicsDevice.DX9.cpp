@@ -273,8 +273,8 @@ namespace Bibim
                     break;
             }
 
-            capabilities.vertexShaderVersion = GraphicsCapabilities::VSNotSupported;
-            capabilities.pixelShaderVersion  = GraphicsCapabilities::PSNotSupported;
+            // capabilities.vertexShaderVersion = GraphicsCapabilities::VSNotSupported;
+            // capabilities.pixelShaderVersion  = GraphicsCapabilities::PSNotSupported;
 
             if ((d3dCaps.Caps2 & D3DCAPS2_DYNAMICTEXTURES) == 0x00000000)
                 Log::Warning("Graphics", "This videocard is dynamic texture not supported.");
