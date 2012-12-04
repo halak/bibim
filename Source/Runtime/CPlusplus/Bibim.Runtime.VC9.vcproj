@@ -2327,19 +2327,19 @@
 				Name="Net"
 				>
 				<File
-					RelativePath=".\Net\Bibim\Http.h"
+					RelativePath=".\Net\Bibim\HttpClient.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\Http.Windows.cpp"
+					RelativePath=".\Net\Bibim\HttpClient.Windows.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\Http.Windows.h"
+					RelativePath=".\Net\Bibim\HttpClient.Windows.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\Http.Windows.inl"
+					RelativePath=".\Net\Bibim\HttpClient.Windows.inl"
 					>
 				</File>
 			</Filter>

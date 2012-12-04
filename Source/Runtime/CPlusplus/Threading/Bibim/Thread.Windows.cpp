@@ -12,7 +12,6 @@
             static DWORD WINAPI Procedure(LPVOID parameters)
             {
                 static_cast<Thread*>(parameters)->OnWork();
-                
                 return 0;
             }
         };
