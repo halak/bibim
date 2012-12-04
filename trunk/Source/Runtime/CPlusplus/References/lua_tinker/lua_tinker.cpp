@@ -1068,15 +1068,7 @@ bool lua_tinker::table::enumerator::next()
 
     lua_pop(L, 1);
 
-    if (lua_next(L, m_table->m_obj->m_index) != 0)
-    {
-        return true;
-    }
-    else
-    {
-        lua_pop(L, 1);
-        return false;
-    }
+    return lua_next(L, m_table->m_obj->m_index) != 0;
 }
 
 int lua_tinker::table::enumerator::key_type() const
