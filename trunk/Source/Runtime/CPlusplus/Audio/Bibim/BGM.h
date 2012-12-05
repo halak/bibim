@@ -34,8 +34,6 @@
                 inline float GetCrossfadeTime() const;
                 void SetCrossfadeTime(float value);
 
-                inline void ChangeByChars(const char* name);
-
             private:
                 void UpdateVolumes();
                 void DropAliveBGM();

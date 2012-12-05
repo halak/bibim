@@ -5,12 +5,6 @@
         return library;
     }
 
-    void Font::SetFaceURIByChars(const char* value)
-    {
-        if (value)
-            SetFaceURI(value);
-    }
-
     Color Font::GetColor() const
     {
         return color;

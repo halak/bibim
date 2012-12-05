@@ -22,44 +22,17 @@ namespace Bibim
 
     void UICheckBox::SetCheckedNormal(UIVisual* value)
     {
-        if (checkedNormalVisual != value)
-        {
-            if (checkedNormalVisual)
-                Remove(checkedNormalVisual);
-
-            checkedNormalVisual = value;
-
-            if (checkedNormalVisual)
-                Add(checkedNormalVisual);
-        }
+        SetStateTemplate(checkedNormalVisual, value);
     }
 
     void UICheckBox::SetCheckedPushed(UIVisual* value)
     {
-        if (checkedPushedVisual != value)
-        {
-            if (checkedPushedVisual)
-                Remove(checkedPushedVisual);
-
-            checkedPushedVisual = value;
-
-            if (checkedPushedVisual)
-                Add(checkedPushedVisual);
-        }
+        SetStateTemplate(checkedPushedVisual, value);
     }
 
     void UICheckBox::SetCheckedHovering(UIVisual* value)
     {
-        if (checkedHoveringVisual != value)
-        {
-            if (checkedHoveringVisual)
-                Remove(checkedHoveringVisual);
-
-            checkedHoveringVisual = value;
-
-            if (checkedHoveringVisual)
-                Add(checkedHoveringVisual);
-        }
+        SetStateTemplate(checkedHoveringVisual, value);
     }
 
     void UICheckBox::SetChecked(bool value)
@@ -85,7 +58,12 @@ namespace Bibim
         };
         BBStaticAssert(NormalState == 0 && PushedState == 1 && HoveringState == 2);
 
-        const int activeVisualIndex = static_cast<int>(GetCurrentState()) + ((checked) ? 3 : 0);
+        State state = GetCurrentState();
+        if (state == NormalState &&
+            IsFocused() && GetFocusVisible())
+            state = HoveringState;
+
+        const int activeVisualIndex = static_cast<int>(state) + ((checked) ? 3 : 0);
         BBAssertDebug(0 <= activeVisualIndex && activeVisualIndex < sizeof(visuals) / sizeof(visuals[0]));
         UIVisual* activeVisual = visuals[activeVisualIndex];
 

@@ -15,19 +15,8 @@
         return name;
     }
 
-    const char* UIElement::GetNameAsChars() const
-    {
-        return name.CStr();
-    }
-
     void UIElement::SetName(const String& value)
     {
         name = value;
-    }
-
-    void UIElement::SetNameByChars(const char* value)
-    {
-        if (value)
-            SetName(value);
     }
 }

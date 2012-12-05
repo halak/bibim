@@ -19,9 +19,4 @@ namespace Bibim
     {
         return crossfadeTime;
     }
-
-    void BGM::ChangeByChars(const char* name)
-    {
-        Change(name);
-    }
 }

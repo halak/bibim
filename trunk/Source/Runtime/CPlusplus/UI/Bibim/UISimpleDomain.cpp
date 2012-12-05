@@ -1,26 +1,32 @@
 ﻿#include <Bibim/PCH.h>
 #include <Bibim/UISimpleDomain.h>
+#include <Bibim/Assert.h>
 #include <Bibim/UIWindow.h>
 
 namespace Bibim
 {
     UISimpleDomain::UISimpleDomain()
+        : focus(nullptr)
     {
     }
 
     UISimpleDomain::UISimpleDomain(UIWindow* root)
-        : UIDomain(root)
+        : UIDomain(root),
+          focus(nullptr)
     {
     }
 
     UISimpleDomain::UISimpleDomain(UIWindow* root, UIVisual* focus)
         : UIDomain(root),
-          focus(focus)
+          focus(nullptr)
     {
+        SetFocus(focus);
     }
 
     UISimpleDomain::~UISimpleDomain()
     {
+        if (focus)
+            Blur(focus);
     }
 
     UIVisual* UISimpleDomain::GetFocus() const
@@ -30,6 +36,21 @@ namespace Bibim
 
     void UISimpleDomain::SetFocus(UIVisual* value)
     {
-        focus = value;
+        if (focus != value)
+        {
+            if (focus)
+                Blur(focus);
+
+            focus = value;
+
+            if (focus)
+                Focus(focus);
+        }
+    }
+
+    void UISimpleDomain::OnDestructed(UIVisual* visual)
+    {
+        BBAssert(focus == visual);
+        focus = nullptr;
     }
 }

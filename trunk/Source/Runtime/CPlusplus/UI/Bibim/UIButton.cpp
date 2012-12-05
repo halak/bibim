@@ -11,11 +11,11 @@ namespace Bibim
 
     UIButton::UIButton()
         : currentState(NormalState),
-          normalVisual(),
           pushedVisual(),
           hoveringVisual(),
           currentVisual(),
           hideInactives(true),
+          focusVisible(false),
           frozen(false)
     {
     }
@@ -24,46 +24,33 @@ namespace Bibim
     {
     }
 
+    void UIButton::SetStateTemplate(UIVisualPtr& field, UIVisual* value)
+    {
+        if (field != value)
+        {
+            if (field)
+                Remove(field);
+
+            field = value;
+
+            if (field)
+                Add(field);
+        }
+    }
+
     void UIButton::SetNormal(UIVisual* value)
     {
-        if (normalVisual != value)
-        {
-            if (normalVisual)
-                Remove(normalVisual);
-
-            normalVisual = value;
-
-            if (normalVisual)
-                Add(normalVisual);
-        }
+        SetStateTemplate(normalVisual, value);
     }
 
     void UIButton::SetPushed(UIVisual* value)
     {
-        if (pushedVisual != value)
-        {
-            if (pushedVisual)
-                Remove(pushedVisual);
-
-            pushedVisual = value;
-
-            if (pushedVisual)
-                Add(pushedVisual);
-        }
+        SetStateTemplate(pushedVisual, value);
     }
 
     void UIButton::SetHovering(UIVisual* value)
     {
-        if (hoveringVisual != value)
-        {
-            if (hoveringVisual)
-                Remove(hoveringVisual);
-
-            hoveringVisual = value;
-
-            if (hoveringVisual)
-                Add(hoveringVisual);
-        }
+        SetStateTemplate(hoveringVisual, value);
     }
 
     void UIButton::SetCurrentState(State value)
@@ -77,6 +64,15 @@ namespace Bibim
         if (hideInactives != value)
         {
             hideInactives = value;
+            UpdateLayout();
+        }
+    }
+
+    void UIButton::SetFocusVisible(bool value)
+    {
+        if (focusVisible != value)
+        {
+            focusVisible = value;
             UpdateLayout();
         }
     }
@@ -112,6 +108,12 @@ namespace Bibim
                     activeVisual = hoveringVisual;
                     break;
             }
+
+            if (activeVisual == normalVisual &&
+                IsFocused() && GetFocusVisible())
+            {
+                activeVisual = hoveringVisual;
+            }
         }
         else
             activeVisual = normalVisual;
@@ -124,26 +126,26 @@ namespace Bibim
 
         if (GetHideInactives())
         {
-            switch (currentState)
+            if (activeVisual == normalVisual)
             {
-                case NormalState:
-                    if (pushedVisual)
-                        pushedVisual->Hide();
-                    if (hoveringVisual)
-                        hoveringVisual->Hide();
-                    break;
-                case PushedState:
-                    if (normalVisual)
-                        normalVisual->Hide();
-                    if (hoveringVisual)
-                        hoveringVisual->Hide();
-                    break;
-                case HoveringState:
-                    if (normalVisual)
-                        normalVisual->Hide();
-                    if (pushedVisual)
-                        pushedVisual->Hide();
-                    break;
+                if (pushedVisual)
+                    pushedVisual->Hide();
+                if (hoveringVisual)
+                    hoveringVisual->Hide();
+            }
+            else if (activeVisual == pushedVisual)
+            {
+                if (normalVisual)
+                    normalVisual->Hide();
+                if (hoveringVisual)
+                    hoveringVisual->Hide();
+            }
+            else if (activeVisual == hoveringVisual)
+            {
+                if (normalVisual)
+                    normalVisual->Hide();
+                if (pushedVisual)
+                    pushedVisual->Hide();
             }
         }
 
@@ -161,7 +163,17 @@ namespace Bibim
                 context.SetResult(this);
         }
     }
-    
+
+    void UIButton::OnFocused()
+    {
+        UpdateLayout();
+    }
+
+    void UIButton::OnBlured()
+    {
+        UpdateLayout();
+    }
+
     void UIButton::OnMouseEnter(const UIMouseEventArgs& /*args*/)
     {
         if (frozen == false)
@@ -206,6 +218,7 @@ namespace Bibim
         pushedVisual = static_cast<UIVisual*>(reader.ReadComponent());
         hoveringVisual = static_cast<UIVisual*>(reader.ReadComponent());
         hideInactives = reader.ReadBool();
+        focusVisible = reader.ReadBool();
         frozen = reader.ReadBool();
         SetCurrentState(NormalState);
     }
@@ -218,6 +231,7 @@ namespace Bibim
         pushedVisual = context.Clone(o->pushedVisual);
         hoveringVisual = context.Clone(o->hoveringVisual);
         hideInactives = o->hideInactives;
+        focusVisible = o->focusVisible;
         frozen = o->frozen;
         SetCurrentState(NormalState);
     }

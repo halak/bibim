@@ -2,6 +2,7 @@
 #include <Bibim/UIVisual.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Math.h>
+#include <Bibim/UIDomain.h>
 #include <Bibim/UIEffectMap.h>
 #include <Bibim/UIEventMap.h>
 #include <Bibim/UITransform.h>
@@ -33,12 +34,19 @@ namespace Bibim
           isPickable(true),
           eventMap(nullptr),
           effectMap(nullptr),
-          parent(nullptr)
+          parent(nullptr),
+          focuser(nullptr)
     {
     }
 
     UIVisual::~UIVisual()
     {
+        if (focuser)
+        {
+            UIDomain* temporaryFocuser = focuser;
+            focuser = nullptr;
+            temporaryFocuser->OnDestructed(this);
+        }
     }
 
     RectF UIVisual::ComputeBounds(UIVisualVisitor& context)
@@ -281,6 +289,22 @@ namespace Bibim
         }
     }
 
+    void UIVisual::Focus(UIDomain* value)
+    {
+        if (focuser != value)
+        {
+            if (focuser)
+                focuser->OnDestructed(this);
+
+            focuser = value;
+
+            if (focuser)
+                RaiseFocusedEvent(UIEventArgs(this));
+            else
+                RaiseBluredEvent(UIEventArgs(this));
+        }
+    }
+
     bool UIVisual::IsPanel() const
     {
         return false;
@@ -344,6 +368,14 @@ namespace Bibim
     {
         if (GetPickable() && context.Contains(context.GetCurrentClippedBounds()))
             context.SetResult(this);
+    }
+
+    void UIVisual::OnFocused()
+    {
+    }
+
+    void UIVisual::OnBlured()
+    {
     }
 
     void UIVisual::OnParentChanged(UIPanel* /*old*/)
@@ -523,13 +555,27 @@ namespace Bibim
         RaiseRoutedEvent(OnGamePadThumbstick, RaiseGamePadThumbstickEvent, UIEventID::GamePadThumbstick, args);
     }
 
+    void UIVisual::RaiseFocusedEvent(const UIEventArgs& args)
+    {
+        OnFocused();
+        if (eventMap)
+            eventMap->RaiseEvent(UIEventID::Focused, args);
+    }
+
+    void UIVisual::RaiseBluredEvent(const UIEventArgs& args)
+    {
+        OnBlured();
+        if (eventMap)
+            eventMap->RaiseEvent(UIEventID::Blured, args);
+    }
+
 #   undef RaiseRoutedEvent
 
     UIVisual::PositionMode UIVisual::ConvertFromStringToPositionMode(const char* value)
     {
              if (value == nullptr)              return UndefinedPosition;
-        else if (_stricmp(value, "abs") == 0)   return AbsolutePosition;
-        else if (_stricmp(value, "rel") == 0)   return RelativePosition;
+        else if (_stricmp(value, "ABS") == 0)   return AbsolutePosition;
+        else if (_stricmp(value, "REL") == 0)   return RelativePosition;
         else                                    return UndefinedPosition;
     }
 
@@ -546,8 +592,8 @@ namespace Bibim
     UIVisual::SizeMode UIVisual::ConvertFromStringToSizeMode(const char* value)
     {
              if (value == nullptr)              return ContentSize;
-        else if (_stricmp(value, "abs") == 0)   return AbsoluteSize;
-        else if (_stricmp(value, "rel") == 0)   return RelativeSize;
+        else if (_stricmp(value, "ABS") == 0)   return AbsoluteSize;
+        else if (_stricmp(value, "REL") == 0)   return RelativeSize;
         else                                    return ContentSize;
     }
 

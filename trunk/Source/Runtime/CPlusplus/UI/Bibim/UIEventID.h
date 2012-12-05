@@ -29,7 +29,9 @@
                     GamePadButtonPressingType = 14,
                     GamePadTriggerType = 15,
                     GamePadThumbstickType = 16,
-                    ApplicationType = 17,
+                    FocusedType = 17,
+                    BluredType = 18,
+                    ApplicationType = 19,
                 };
 
                 static const UIEventID Unknown;
@@ -49,6 +51,8 @@
                 static const UIEventID GamePadButtonPressing;
                 static const UIEventID GamePadTrigger;
                 static const UIEventID GamePadThumbstick;
+                static const UIEventID Focused;
+                static const UIEventID Blured;
 
             public:
                 inline UIEventID();

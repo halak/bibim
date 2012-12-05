@@ -322,7 +322,7 @@ void lua_tinker::enum_stack(lua_State *L)
 template<>
 char* lua_tinker::read(lua_State *L, int index)
 {
-	return (char*)lua_tostring(L, index);				
+	return (char*)lua_tostring(L, index);
 }
 
 template<>
@@ -436,6 +436,7 @@ Bibim::String lua_tinker::read(lua_State *L, int index)
 {
     return Bibim::String(lua_tostring(L, index));
 }
+
 
 /*---------------------------------------------------------------------------*/ 
 /* push                                                                      */ 
@@ -679,13 +680,6 @@ int lua_tinker::push_for_return(lua_State *L, lua_tinker::table ret)
 }
 
 template<>
-int lua_tinker::push_for_return(lua_State *L, const Bibim::String& ret)
-{
-    lua_pushstring(L, ret.CStr());
-    return 1;
-}
-
-template<>
 int lua_tinker::push_for_return(lua_State *L, Bibim::Color ret)
 {
     return push_for_return(L, ret.ToVector4());
@@ -763,6 +757,13 @@ int lua_tinker::push_for_return(lua_State *L, Bibim::Vector4 ret)
     lua_pushnumber(L, ret.Z);
     lua_pushnumber(L, ret.W);
     return 4;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, const Bibim::String& ret)
+{
+    lua_pushstring(L, ret.CStr());
+    return 1;
 }
 
 /*---------------------------------------------------------------------------*/ 

@@ -14,15 +14,4 @@
     {
         return fill;
     }
-
-    const char* UIOpacityMaskEffect::GetFillAsChars() const
-    {
-        return ConvertFromFillStyleToString(GetFill());
-    }
-
-    void UIOpacityMaskEffect::SetFillByChars(const char* value)
-    {
-        if (value)
-            SetFill(ConvertFromStringToFillStyle(value));
-    }
 }

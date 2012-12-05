@@ -23,8 +23,15 @@
                 UIDomain();
                 UIDomain(UIWindow* root);
 
+                void Focus(UIVisual* target);
+                void Blur(UIVisual* target);
+
+                virtual void OnDestructed(UIVisual* visual) = 0;
+
             private:
                 UIWindowPtr root;
+
+                friend class UIVisual;
         };
     }
 

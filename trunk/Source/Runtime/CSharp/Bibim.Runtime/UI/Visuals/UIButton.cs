@@ -94,6 +94,12 @@ namespace Bibim.UI.Visuals
             set;
         }
 
+        public bool FocusVisible
+        {
+            get;
+            set;
+        }
+
         public bool IsFrozen
         {
             get;
@@ -105,6 +111,7 @@ namespace Bibim.UI.Visuals
         public UIButton()
         {
             HideInactives = true;
+            FocusVisible = false;
         }
         #endregion
 

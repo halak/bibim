@@ -22,4 +22,14 @@ namespace Bibim
     {
         root = value;
     }
+
+    void UIDomain::Focus(UIVisual* target)
+    {
+        target->Focus(this);
+    }
+
+    void UIDomain::Blur(UIVisual* target)
+    {
+        target->Focus(nullptr);
+    }
 }
