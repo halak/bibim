@@ -19,14 +19,4 @@ namespace Bibim
     {
         return form;
     }
-
-    const char* UISineCurveEffect::GetFormAsChars() const
-    {
-        return ConvertFromFormToString(GetForm());
-    }
-
-    void UISineCurveEffect::SetFormByChars(const char* value)
-    {
-        SetForm(ConvertFromStringToForm(value));
-    }
 }

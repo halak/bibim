@@ -10,14 +10,6 @@
         SetVisibility(Collasped);
     }
 
-    UIPixelEffect* UIVisual::FindEffectByChars(const char* name)
-    {
-        if (name)
-            return FindEffect(name);
-        else
-            return nullptr;
-    }
-
     void UIVisual::SetBounds(float x, float y, float width, float height)
     {
         this->x = x;
@@ -243,29 +235,9 @@
         return GetVisibility() == Visible && GetOpacity() > 0.0f;
     }
 
-    void UIVisual::AlignToByChars(const char* value)
+    bool UIVisual::IsFocused() const
     {
-        AlignTo(ConvertFromStringToAnchorPoint(value));
-    }
-
-    const char* UIVisual::GetXModeAsChars() const
-    {
-        return ConvertFromPositionModeToString(GetXMode());
-    }
-
-    void UIVisual::SetXModeByChars(const char* value)
-    {
-        SetXMode(ConvertFromStringToPositionMode(value));
-    }
-
-    const char* UIVisual::GetYModeAsChars() const
-    {
-        return ConvertFromPositionModeToString(GetYMode());
-    }
-
-    void UIVisual::SetYModeByChars(const char* value)
-    {
-        SetYMode(ConvertFromStringToPositionMode(value));
+        return focuser != nullptr;
     }
 
     void UIVisual::SetXYModeByChars(const char* xMode, const char* yMode)
@@ -281,26 +253,6 @@
             SetXMode(mode);
             SetYMode(mode);
         }
-    }
-
-    const char* UIVisual::GetWidthModeAsChars() const
-    {
-        return ConvertFromSizeModeToString(GetWidthMode());
-    }
-
-    void UIVisual::SetWidthModeByChars(const char* value)
-    {
-        SetWidthMode(ConvertFromStringToSizeMode(value));
-    }
-
-    const char* UIVisual::GetHeightModeAsChars() const
-    {
-        return ConvertFromSizeModeToString(GetHeightMode());
-    }
-
-    void UIVisual::SetHeightModeByChars(const char* value)
-    {
-        SetHeightMode(ConvertFromStringToSizeMode(value));
     }
 
     void UIVisual::SetSizeModeByChars(const char* widthMode, const char* heightMode)
@@ -321,25 +273,5 @@
     void UIVisual::SetOriginXY(float x, float y)
     {
         SetOrigin(Vector2(x, y));
-    }
-
-    const char* UIVisual::GetAnchorPointAsChars() const
-    {
-        return ConvertFromAnchorPointToString(GetAnchorPoint());
-    }
-
-    void UIVisual::SetAnchorPointByChars(const char* value)
-    {
-        SetAnchorPoint(ConvertFromStringToAnchorPoint(value));
-    }
-
-    const char* UIVisual::GetVisibilityAsChars() const
-    {
-        return ConvertFromVisibilityToString(GetVisibility());
-    }
-
-    void UIVisual::SetVisibilityByChars(const char* value)
-    {
-        SetVisibility(ConvertFromStringToVisibility(value));
     }
 }

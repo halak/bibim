@@ -43,4 +43,6 @@
 
 #   include <Bibim/UIGeometryEffect.inl>
 
+    BBBindLua(Bibim::UIGeometryEffect);
+
 #endif

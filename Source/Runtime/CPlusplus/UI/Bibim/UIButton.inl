@@ -30,6 +30,11 @@
         return hideInactives;
     }
 
+    bool UIButton::GetFocusVisible() const
+    {
+        return focusVisible;
+    }
+
     bool UIButton::GetFrozen() const
     {
         return frozen;

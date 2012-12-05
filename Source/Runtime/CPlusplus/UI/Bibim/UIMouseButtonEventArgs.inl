@@ -4,9 +4,4 @@
     {
         return buttonCode;
     }
-
-    const char* UIMouseButtonEventArgs::GetButtonCodeAsChars() const
-    {
-        return Key::ToString(buttonCode);
-    }
 }

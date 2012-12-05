@@ -18,7 +18,6 @@
                 virtual ~SpriteSet();
 
                 Sprite* Find(const String& name) const;
-                inline Sprite* FindByChars(const char* name) const;
 
             private:
                 typedef std::pair<String, SpritePtr> Item;

@@ -18,7 +18,6 @@
                 virtual ~ImageSet();
 
                 Image* Find(const String& name) const;
-                inline Image* FindByChars(const char* name) const;
 
             private:
                 typedef std::pair<String, ImagePtr> Item;

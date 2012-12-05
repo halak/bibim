@@ -23,7 +23,6 @@
                 virtual void Serialize(Serializer& context) const;
 
                 inline Key::Code GetButtonCode() const;
-                inline const char* GetButtonCodeAsChars() const;
 
             private:
                 Key::Code buttonCode;

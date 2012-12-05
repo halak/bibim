@@ -5,6 +5,16 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/Object.h>
 
+    extern "C" 
+    {
+#       include <lua.h>
+    }
+#   pragma warning(push)
+#   pragma warning(disable:4996)
+#   pragma warning(disable:4100)
+#   include <lua_tinker.h>
+#   pragma warning(pop)
+
     namespace Bibim
     {
 #       define BBAbstractModuleClass(classname, parent) ;

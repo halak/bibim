@@ -17,7 +17,6 @@
 
                 inline const String& GetText() const;
                 void SetText(const String& value);
-                inline void SetTextByChars(const char* value);
 
                 inline Font* GetFont() const;
                 void SetFont(Font* value);

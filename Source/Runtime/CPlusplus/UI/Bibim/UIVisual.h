@@ -61,7 +61,6 @@
                 void InsertEffect(UIPixelEffect* item);
                 void RemoveEffect(UIPixelEffect* item);
                 UIPixelEffect* FindEffect(const String& name);
-                inline UIPixelEffect* FindEffectByChars(const char* name);
 
                 void BringToFront();
                 void SendToBack();
@@ -138,33 +137,23 @@
                 inline UIPanel* GetParent() const;
 
                 inline bool IsVisible() const;
+                inline bool IsFocused() const;
                 virtual bool IsPanel() const;
 
-                inline void AlignToByChars(const char* value);
-
-                inline const char* GetXModeAsChars() const;
-                inline void SetXModeByChars(const char* value);
-
-                inline const char* GetYModeAsChars() const;
-                inline void SetYModeByChars(const char* value);
-
                 inline void SetXYModeByChars(const char* xMode, const char* yMode);
-
-                inline const char* GetWidthModeAsChars() const;
-                inline void SetWidthModeByChars(const char* value);
-
-                inline const char* GetHeightModeAsChars() const;
-                inline void SetHeightModeByChars(const char* value);
-
                 inline void SetSizeModeByChars(const char* widthMode, const char* heightMode);
 
                 inline void SetOriginXY(float x, float y);
 
-                inline const char* GetAnchorPointAsChars() const;
-                inline void SetAnchorPointByChars(const char* value);
-
-                inline const char* GetVisibilityAsChars() const;
-                inline void SetVisibilityByChars(const char* value);
+            public:
+                static PositionMode ConvertFromStringToPositionMode(const char* value);
+                static const char* ConvertFromPositionModeToString(PositionMode value);
+                static SizeMode ConvertFromStringToSizeMode(const char* value);
+                static const char* ConvertFromSizeModeToString(SizeMode value);
+                static AnchorPoint ConvertFromStringToAnchorPoint(const char* value);
+                static const char* ConvertFromAnchorPointToString(AnchorPoint value);
+                static Visibility ConvertFromStringToVisibility(const char* value);
+                static const char* ConvertFromVisibilityToString(Visibility value);
 
             protected:
                 virtual Vector2 GetContentSize();
@@ -172,6 +161,8 @@
                 virtual void OnDraw(UIDrawingContext& context);
                 virtual void OnPick(UIPickingContext& context);
 
+                virtual void OnFocused();
+                virtual void OnBlured();
                 virtual void OnParentChanged(UIPanel* old);
 
                 virtual bool OnKeyDown(const UIKeyboardEventArgs& args);
@@ -194,6 +185,7 @@
             private:
                 inline void SetBounds(float x, float y, float width, float height);
 
+                void Focus(UIDomain* value);
                 void SetParent(UIPanel* value);
 
                 void RaiseKeyDownEvent(const UIKeyboardEventArgs& args);
@@ -212,16 +204,8 @@
                 void RaiseGamePadButtonPressingEvent(const UIGamePadEventArgs& args);
                 void RaiseGamePadTriggerEvent(const UIGamePadEventArgs& args);
                 void RaiseGamePadThumbstickEvent(const UIGamePadEventArgs& args);
-
-            private:
-                static PositionMode ConvertFromStringToPositionMode(const char* value);
-                static const char* ConvertFromPositionModeToString(PositionMode value);
-                static SizeMode ConvertFromStringToSizeMode(const char* value);
-                static const char* ConvertFromSizeModeToString(SizeMode value);
-                static AnchorPoint ConvertFromStringToAnchorPoint(const char* value);
-                static const char* ConvertFromAnchorPointToString(AnchorPoint value);
-                static Visibility ConvertFromStringToVisibility(const char* value);
-                static const char* ConvertFromVisibilityToString(Visibility value);
+                void RaiseFocusedEvent(const UIEventArgs& args);
+                void RaiseBluredEvent(const UIEventArgs& args);
 
             private:
                 byte xMode;
@@ -242,6 +226,7 @@
                 UIEffectMapPtr effectMap;
                 UITransformPtr transform;
                 UIPanel* parent;
+                UIDomain* focuser;
 
                 friend class UIDrawingContext;
                 friend class UIPickingContext;
@@ -250,11 +235,24 @@
                 friend class UIGamdPadEventDispatcher;
                 friend class UITouchEventDispatcher;
                 friend class UIPanel;
+                friend class UIDomain;
         };
     }
 
 #   include <Bibim/UIVisual.inl>
 
     BBBindLua(Bibim::UIVisual);
+    BBBindLuaEnum(Bibim::UIVisual::PositionMode,
+                  Bibim::UIVisual::ConvertFromStringToPositionMode,
+                  Bibim::UIVisual::ConvertFromPositionModeToString);
+    BBBindLuaEnum(Bibim::UIVisual::SizeMode,
+                  Bibim::UIVisual::ConvertFromStringToSizeMode,
+                  Bibim::UIVisual::ConvertFromSizeModeToString);
+    BBBindLuaEnum(Bibim::UIVisual::AnchorPoint,
+                  Bibim::UIVisual::ConvertFromStringToAnchorPoint,
+                  Bibim::UIVisual::ConvertFromAnchorPointToString);
+    BBBindLuaEnum(Bibim::UIVisual::Visibility,
+                  Bibim::UIVisual::ConvertFromStringToVisibility,
+                  Bibim::UIVisual::ConvertFromVisibilityToString);
 
 #endif

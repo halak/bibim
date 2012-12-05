@@ -25,10 +25,7 @@
                 inline BlendMode GetMode() const;
                 inline void SetMode(BlendMode value);
 
-                inline const char* GetModeAsChars() const;
-                inline void SetModeByChars(const char* value);
-
-            private:
+            public:
                 static BlendMode ConvertFromStringToBlendMode(const char* value);
                 static const char* ConvertFromBlendModeToString(BlendMode value);
 
@@ -53,5 +50,9 @@
     }
 
 #   include <Bibim/UIBlendingEffect.inl>
+
+    BBBindLuaEnum(Bibim::BlendMode,
+                  Bibim::UIBlendingEffect::ConvertFromStringToBlendMode,
+                  Bibim::UIBlendingEffect::ConvertFromBlendModeToString);
 
 #endif

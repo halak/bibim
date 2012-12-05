@@ -1,13 +1,5 @@
 ﻿namespace Bibim
 {
-    UIVisual* UIPanel::FindChildByChars(const char* name, bool searchAllChildren) const
-    {
-        if (name)
-            return FindChild(name, searchAllChildren);
-        else
-            return nullptr;
-    }
-
     UIVisual* UIPanel::GetChildAt(int index) const
     {
         if (0 <= index && index < static_cast<int>(children.size()))

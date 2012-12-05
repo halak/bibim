@@ -19,8 +19,11 @@
                 virtual UIVisual* GetFocus() const;
                 virtual void SetFocus(UIVisual* value);
 
+            protected:
+                virtual void OnDestructed(UIVisual* visual);
+
             private:
-                UIVisualPtr focus;
+                UIVisual* focus;
         };
     }
 

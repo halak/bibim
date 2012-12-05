@@ -9,15 +9,4 @@
     {
         mode = value;
     }
-
-    const char* UIBlendingEffect::GetModeAsChars() const
-    {
-        return ConvertFromBlendModeToString(GetMode());
-    }
-
-    void UIBlendingEffect::SetModeByChars(const char* value)
-    {
-        if (value)
-            SetMode(ConvertFromStringToBlendMode(value));
-    }
 }

@@ -35,8 +35,9 @@
                 inline FillStyle GetFill() const;
                 void SetFill(FillStyle value);
 
-                inline const char* GetFillAsChars() const;
-                inline void SetFillByChars(const char* value);
+            public:
+                static FillStyle ConvertFromStringToFillStyle(const char* value);
+                static const char* ConvertFromFillStyleToString(FillStyle value);
 
             private:
                 class EffectorForShaderFunction : public MaskEffector
@@ -85,10 +86,6 @@
                 };
 
             private:
-                static FillStyle ConvertFromStringToFillStyle(const char* value);
-                static const char* ConvertFromFillStyleToString(FillStyle value);
-
-            private:
                 float startPoint;
                 float length;
                 FillStyle fill;
@@ -97,5 +94,9 @@
     }
 
 #   include <Bibim/UIOpacityMaskEffect.inl>
+
+    BBBindLuaEnum(Bibim::UIOpacityMaskEffect::FillStyle,
+                  Bibim::UIOpacityMaskEffect::ConvertFromStringToFillStyle,
+                  Bibim::UIOpacityMaskEffect::ConvertFromFillStyleToString);
 
 #endif

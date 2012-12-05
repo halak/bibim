@@ -61,10 +61,7 @@
                 virtual void DrawQuad(UIRenderer* renderer, Vector3* p, Color color, Vector2* uv,  Texture2D* texture);
                 virtual void DrawQuad(UIRenderer* renderer, Vector3* p, Color color, Vector2* uv1, Texture2D* texture1, Vector2* uv2, Texture2D* texture2);
 
-                inline const char* GetFormAsChars() const;
-                inline void SetFormByChars(const char* value);
-
-            private:
+            public:
                 static Form ConvertFromStringToForm(const char* value);
                 static const char* ConvertFromFormToString(Form value);
 
@@ -80,5 +77,9 @@
     }
 
 #   include <Bibim/UISineCurveEffect.inl>
+
+    BBBindLuaEnum(Bibim::UISineCurveEffect::Form,
+                  Bibim::UISineCurveEffect::ConvertFromStringToForm,
+                  Bibim::UISineCurveEffect::ConvertFromFormToString);
 
 #endif

@@ -5,7 +5,13 @@
 #   include <Bibim/Foundation.h>
 #   include <Bibim/Object.h>
 
-    namespace lua_tinker { template<typename T> struct val2user; template<typename T> struct ptr2user; }
+    namespace lua_tinker
+    {
+        template<typename T> struct val2user;
+        template<typename T> struct ptr2user;
+        template<typename T> struct lua2enum;
+        template<typename T> struct enum2lua;
+    }
 
 #   define BBBindLua(classname) \
         template<> inline void lua_tinker::push(lua_State* L, classname* value) \
@@ -39,6 +45,12 @@
                 ((classname*)m_p)->DecreaseReferenceCount(); \
             } \
 	    };
+
+#   define BBBindLuaEnum(enumname, toEnum, toString) \
+	    template<> \
+        struct lua_tinker::lua2enum<enumname> { static enumname invoke(lua_State *L, int index) { return toEnum(lua_tostring(L, index)); } }; \
+	    template<> \
+	    struct lua_tinker::enum2lua<enumname> { static void invoke(lua_State *L, enumname val) { lua_pushstring(L, toString(val)); } };
 
     namespace Bibim
     {

@@ -190,6 +190,7 @@ namespace Bibim.UI
             WriteVisual(writer, o.Pushed, objectDictionary);
             WriteVisual(writer, o.Hovering, objectDictionary);
             writer.Write(o.HideInactives);
+            writer.Write(o.FocusVisible);
             writer.Write(o.IsFrozen);
         }
 

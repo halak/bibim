@@ -33,14 +33,21 @@
 
                 inline bool GetHideInactives() const;
                 void SetHideInactives(bool value);
+                inline bool GetFocusVisible() const;
+                void SetFocusVisible(bool value);
                 inline bool GetFrozen() const;
                 void SetFrozen(bool value);
 
             protected:
+                void SetStateTemplate(UIVisualPtr& field, UIVisual* value);
+
                 void UpdateLayout();
                 virtual UIVisual* OnUpdateLayout();
 
                 virtual void OnPick(UIPickingContext& context);
+
+                virtual void OnFocused();
+                virtual void OnBlured();
 
                 virtual void OnMouseEnter(const UIMouseEventArgs& args);
                 virtual void OnMouseLeave(const UIMouseEventArgs& args);
@@ -58,6 +65,7 @@
                 UIVisualPtr hoveringVisual;
                 UIVisualPtr currentVisual;
                 bool hideInactives;
+                bool focusVisible;
                 bool frozen;
         };
     }
