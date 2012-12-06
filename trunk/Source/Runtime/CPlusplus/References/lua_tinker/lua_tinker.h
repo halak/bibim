@@ -800,6 +800,7 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
 	int meta_get(lua_State *L);
 	int meta_set(lua_State *L);
 	void meta_push(lua_State *L, const char* name);
+    int is(lua_State *L);
 
 	// class init
 	template<typename T>
@@ -824,6 +825,10 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
 
 		lua_pushstring(L, "__gc");
 		lua_pushcclosure(L, destroyer<T>, 0);
+		lua_rawset(L, -3);
+
+		lua_pushstring(L, "__is__");
+		lua_pushcclosure(L, is, 0);
 		lua_rawset(L, -3);
 
 		lua_settable(L, LUA_GLOBALSINDEX);

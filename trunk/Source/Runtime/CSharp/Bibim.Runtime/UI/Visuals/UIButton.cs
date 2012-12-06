@@ -110,6 +110,7 @@ namespace Bibim.UI.Visuals
         #region Constructors
         public UIButton()
         {
+            IsFocusable = true;
             HideInactives = true;
             FocusVisible = false;
         }

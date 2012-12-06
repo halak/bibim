@@ -31,7 +31,7 @@ namespace Bibim
           opacity(255),
           visibility(Visible),
           zOrder(128),
-          isPickable(true),
+          flags(DEFAULT_FLAGS),
           eventMap(nullptr),
           effectMap(nullptr),
           parent(nullptr),
@@ -326,7 +326,8 @@ namespace Bibim
         opacity = reader.ReadByte();
         visibility = reader.ReadByte();
         zOrder = reader.ReadByte();
-        isPickable = reader.ReadBool();
+        SetPickable(reader.ReadBool());
+        SetFocusable(reader.ReadBool());
         eventMap = static_cast<UIEventMap*>(reader.ReadComponent());
         effectMap = static_cast<UIEffectMap*>(reader.ReadComponent());
         transform = static_cast<UITransform*>(reader.ReadComponent());
@@ -349,7 +350,7 @@ namespace Bibim
         opacity = o->opacity;
         visibility = o->visibility;
         zOrder = o->zOrder;
-        isPickable = o->isPickable;
+        flags = o->flags;
         eventMap = context.Clone(o->eventMap);
         effectMap = context.Clone(o->effectMap);
         transform = context.Clone(o->transform);

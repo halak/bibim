@@ -18,6 +18,7 @@ namespace Bibim
           focusVisible(false),
           frozen(false)
     {
+        SetFocusable(true);
     }
 
     UIButton::~UIButton()

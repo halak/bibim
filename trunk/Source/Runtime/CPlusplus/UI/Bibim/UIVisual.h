@@ -125,6 +125,9 @@
                 inline bool GetPickable() const;
                 inline void SetPickable(bool value);
 
+                inline bool GetFocusable() const;
+                inline void SetFocusable(bool value);
+
                 inline UIEventMap* GetEventMap() const;
                 void SetEventMap(UIEventMap* value);
 
@@ -208,6 +211,11 @@
                 void RaiseBluredEvent(const UIEventArgs& args);
 
             private:
+                static const byte PICKALBE_BITFIELD  = (1<<0);
+                static const byte FOCUSABLE_BITFIELD = (1<<1);
+                static const byte DEFAULT_FLAGS = PICKALBE_BITFIELD;
+
+            private:
                 byte xMode;
                 byte yMode;
                 byte widthMode;
@@ -221,7 +229,7 @@
                 byte opacity;
                 byte visibility;
                 byte zOrder;
-                bool isPickable;
+                byte flags;
                 UIEventMapPtr eventMap;
                 UIEffectMapPtr effectMap;
                 UITransformPtr transform;

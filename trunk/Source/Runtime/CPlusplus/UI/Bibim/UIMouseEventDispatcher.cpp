@@ -128,7 +128,10 @@ namespace Bibim
                 else
                 {
                     capturedVisual = targetVisual;
-                    domain->SetFocus(targetVisual);
+
+                    if (targetVisual->GetFocusable())
+                        domain->SetFocus(targetVisual);
+
                     targetVisual->RaiseMouseButtonDownEvent(UIMouseButtonEventArgs(baseArgs, Key::MouseLeftButton));
                 }
             }
