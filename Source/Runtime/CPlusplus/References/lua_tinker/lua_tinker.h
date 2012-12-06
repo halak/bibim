@@ -472,7 +472,7 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
 		template<typename RVal>
 		static int invoke(lua_State *L) { return push_for_return<RVal>(L,(read<T*>(L,1)->*upvalue_<RVal(T::*)(T1,T2,T3,T4,T5)>(L))(read<remove_ref<T1>::type>(L,2),read<remove_ref<T2>::type>(L,3),read<remove_ref<T3>::type>(L,4),read<remove_ref<T4>::type>(L,5),read<remove_ref<T5>::type>(L,6))); }
 		template<>
-		static int invoke<void>(lua_State *L)  { (read<T*>(L,1)->*upvalue_<void(T::*)(T1,T2,T3,T4,T5)>(L))(read<remove_ref<T1>::type>(L,2),read<remove_ref<T2>::type>(L,3),read<remove_ref<T3>::type>(L,4),read<remove_ref<T4>::type>(L,5),read<remove_ref<T5>::type>(L,6)); return 0; }
+		static int invoke<void>(lua_State *L)  { (read<T*>(L,1)->*upvalue_<void(T::*)(T1,T2,T3,T4,T5)>(L))(read<remove_ref<T1>::type>(L,2),read<remove_ref<T2>::type>(L,3),read<remove_ref<T3>::type>(L,4),read<remove_ref<T4>::type>(L,5),read<remove_ref<T5>::type>(L,6)); lua_pushvalue(L, 1); return 1; }
 	};
 
 	template<typename T, typename T1, typename T2, typename T3, typename T4> 
@@ -481,7 +481,7 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
 		template<typename RVal>
 		static int invoke(lua_State *L) { return push_for_return<RVal>(L,(read<T*>(L,1)->*upvalue_<RVal(T::*)(T1,T2,T3,T4)>(L))(read<remove_ref<T1>::type>(L,2),read<remove_ref<T2>::type>(L,3),read<remove_ref<T3>::type>(L,4),read<remove_ref<T4>::type>(L,5))); }
 		template<>
-		static int invoke<void>(lua_State *L)  { (read<T*>(L,1)->*upvalue_<void(T::*)(T1,T2,T3,T4)>(L))(read<remove_ref<T1>::type>(L,2),read<remove_ref<T2>::type>(L,3),read<remove_ref<T3>::type>(L,4),read<remove_ref<T4>::type>(L,5)); return 0; }
+		static int invoke<void>(lua_State *L)  { (read<T*>(L,1)->*upvalue_<void(T::*)(T1,T2,T3,T4)>(L))(read<remove_ref<T1>::type>(L,2),read<remove_ref<T2>::type>(L,3),read<remove_ref<T3>::type>(L,4),read<remove_ref<T4>::type>(L,5)); lua_pushvalue(L, 1); return 1; }
 	};
 
 	template<typename T, typename T1, typename T2, typename T3> 
@@ -490,7 +490,7 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
 		template<typename RVal>
 		static int invoke(lua_State *L) { return push_for_return<RVal>(L,(read<T*>(L,1)->*upvalue_<RVal(T::*)(T1,T2,T3)>(L))(read<remove_ref<T1>::type>(L,2),read<remove_ref<T2>::type>(L,3),read<remove_ref<T3>::type>(L,4))); }
 		template<>
-		static int invoke<void>(lua_State *L)  { (read<T*>(L,1)->*upvalue_<void(T::*)(T1,T2,T3)>(L))(read<remove_ref<T1>::type>(L,2),read<remove_ref<T2>::type>(L,3),read<remove_ref<T3>::type>(L,4)); return 0; }
+		static int invoke<void>(lua_State *L)  { (read<T*>(L,1)->*upvalue_<void(T::*)(T1,T2,T3)>(L))(read<remove_ref<T1>::type>(L,2),read<remove_ref<T2>::type>(L,3),read<remove_ref<T3>::type>(L,4)); lua_pushvalue(L, 1); return 1; }
 	};
 
 	template<typename T, typename T1, typename T2> 
@@ -499,7 +499,7 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
 		template<typename RVal>
 		static int invoke(lua_State *L) { return push_for_return<RVal>(L,(read<T*>(L,1)->*upvalue_<RVal(T::*)(T1,T2)>(L))(read<remove_ref<T1>::type>(L,2),read<remove_ref<T2>::type>(L,3))); }
 		template<>
-		static int invoke<void>(lua_State *L)  { (read<T*>(L,1)->*upvalue_<void(T::*)(T1,T2)>(L))(read<remove_ref<T1>::type>(L,2),read<remove_ref<T2>::type>(L,3)); return 0; }
+		static int invoke<void>(lua_State *L)  { (read<T*>(L,1)->*upvalue_<void(T::*)(T1,T2)>(L))(read<remove_ref<T1>::type>(L,2),read<remove_ref<T2>::type>(L,3)); lua_pushvalue(L, 1); return 1; }
 	};
 
 	template<typename T, typename T1> 
@@ -508,7 +508,7 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
 		template<typename RVal>
 		static int invoke(lua_State *L) { return push_for_return<RVal>(L,(read<T*>(L,1)->*upvalue_<RVal(T::*)(T1)>(L))(read<remove_ref<T1>::type>(L,2))); }
 		template<>
-		static int invoke<void>(lua_State *L)  { (read<T*>(L,1)->*upvalue_<void(T::*)(T1)>(L))(read<remove_ref<T1>::type>(L,2)); return 0; }
+		static int invoke<void>(lua_State *L)  { (read<T*>(L,1)->*upvalue_<void(T::*)(T1)>(L))(read<remove_ref<T1>::type>(L,2)); lua_pushvalue(L, 1); return 1; }
 	};
 
 	template<typename T> 
@@ -517,7 +517,7 @@ template<typename A, typename B>		struct if_<false, A, B> { typedef B type; };
 		template<typename RVal>
 		static int invoke(lua_State *L) { return push_for_return<RVal>(L,(read<T*>(L,1)->*upvalue_<RVal(T::*)()>(L))()); }
 		template<>
-		static int invoke<void>(lua_State *L)  { (read<T*>(L,1)->*upvalue_<void(T::*)()>(L))(); return 0; }
+		static int invoke<void>(lua_State *L)  { (read<T*>(L,1)->*upvalue_<void(T::*)()>(L))(); lua_pushvalue(L, 1); return 1; }
 	};
 	
 	// push_functor

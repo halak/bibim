@@ -44,11 +44,27 @@ namespace Bibim
 
     UIVisual* UIPanel::FindChild(const String& name, bool searchAllChildren) const
     {
+        return FindChildByChars(name.CStr(), name.GetLength(), searchAllChildren);
+    }
+
+    UIVisual* UIPanel::FindChildByChars(const char* name, bool searchAllChildren) const
+    {
+        if (name)
+            return FindChildByChars(name, String::CharsLength(name), searchAllChildren);
+        else
+            return nullptr;
+    }
+
+    UIVisual* UIPanel::FindChildByChars(const char* name, int length, bool searchAllChildren) const
+    {
+        if (name == nullptr || length == 0)
+            return nullptr;
+
         if (searchAllChildren)
         {
             for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
             {
-                if ((*it)->GetName() == name)
+                if ((*it)->GetName().Equals(name, length))
                     return (*it);
 
                 if ((*it)->IsPanel())
@@ -62,7 +78,7 @@ namespace Bibim
         {
             for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
             {
-                if ((*it)->GetName() == name)
+                if ((*it)->GetName().Equals(name, length))
                     return (*it);
             }
         }
