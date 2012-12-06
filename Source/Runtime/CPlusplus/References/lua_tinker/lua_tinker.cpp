@@ -862,6 +862,45 @@ void lua_tinker::meta_push(lua_State *L, const char* name)
 }
 
 /*---------------------------------------------------------------------------*/ 
+int lua_tinker::is(lua_State *L)
+{
+    const int initialTop = lua_gettop(L);
+
+    const char* testName = lua_tostring(L, 2);
+
+    lua_getmetatable(L, 1);
+
+    for (int i = 0; ; i++)
+    {
+        if (lua_istable(L, -1) == false)
+        {
+            lua_pop(L, i + 1); // __parent(s) + initial metatable
+            BBAssertDebug(initialTop == lua_gettop(L));
+            lua_pushboolean(L, 0);
+            return 1;
+        }
+        else
+        {
+            lua_pushstring(L, "__name");
+        	lua_rawget(L, -2);
+
+            const char* className = lua_tostring(L, -1);
+            if (strcmp(testName, className) == 0)
+            {
+                lua_pop(L, i + 1 + 1); // __parent(s) + class name + initial metatable
+                BBAssertDebug(initialTop == lua_gettop(L));
+                lua_pushboolean(L, 1);
+                return 1;
+            }
+        }
+
+        lua_pop(L, 1); // class name
+        lua_pushstring(L, "__parent");
+        lua_rawget(L, -2);
+    }
+}
+
+/*---------------------------------------------------------------------------*/ 
 /* table object on stack                                                     */ 
 /*---------------------------------------------------------------------------*/ 
 lua_tinker::table_obj::table_obj(lua_State* L, int index)

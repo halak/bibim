@@ -202,12 +202,28 @@
 
     bool UIVisual::GetPickable() const
     {
-        return isPickable;
+        return (flags & PICKALBE_BITFIELD) != 0x00;
     }
 
     void UIVisual::SetPickable(bool value)
     {
-        isPickable = value;
+        if (value)
+            flags |= PICKALBE_BITFIELD;
+        else
+            flags &= ~PICKALBE_BITFIELD;
+    }
+
+    bool UIVisual::GetFocusable() const
+    {
+        return (flags & FOCUSABLE_BITFIELD) != 0x00;
+    }
+
+    void UIVisual::SetFocusable(bool value)
+    {
+        if (value)
+            flags |= FOCUSABLE_BITFIELD;
+        else
+            flags &= ~FOCUSABLE_BITFIELD;
     }
 
     UIEventMap* UIVisual::GetEventMap() const

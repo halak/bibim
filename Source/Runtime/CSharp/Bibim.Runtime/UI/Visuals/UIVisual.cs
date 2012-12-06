@@ -162,6 +162,12 @@ namespace Bibim.UI.Visuals
             set;
         }
 
+        public bool IsFocusable
+        {
+            get;
+            set;
+        }
+
         public UIEventMap EventMap
         {
             get;
@@ -208,6 +214,8 @@ namespace Bibim.UI.Visuals
             opacity = 255;
             Visibility = UIVisibility.Visible;
             zOrder = 128;
+            IsPickable = true;
+            IsFocusable = false;
         }
         #endregion
 

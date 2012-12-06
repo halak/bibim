@@ -152,6 +152,7 @@ namespace Bibim.UI
             writer.Write((byte)o.Visibility);
             writer.Write((byte)o.ZOrder);
             writer.Write(o.IsPickable);
+            writer.Write(o.IsFocusable);
             WriteEventMap(writer, o.EventMap, objectDictionary);
             WriteEffectMap(writer, o.EffectMap, objectDictionary);
             WriteTransform(writer, o.Transform, objectDictionary);
