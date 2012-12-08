@@ -12,10 +12,12 @@
         const MouseState& Mouse::GetState()
         {
             HWND handle = static_cast<HWND>(window->GetHandle());
-            POINT windowsMousePosition = { 0, 0 };
-            ::GetCursorPos(&windowsMousePosition);
-            ::ScreenToClient(handle, &windowsMousePosition);
-            state.Position = Point2(windowsMousePosition.x, windowsMousePosition.y);
+            CURSORINFO cursorInfo = { 0, };
+            cursorInfo.cbSize = sizeof(cursorInfo);
+            ::GetCursorInfo(&cursorInfo);
+            ::ScreenToClient(handle, &cursorInfo.ptScreenPos);
+            state.Position = Point2(cursorInfo.ptScreenPos.x, cursorInfo.ptScreenPos.y);
+            state.Wheel = 0;
             if (::GetForegroundWindow() == handle)
             {
                 state.IsLeftButtonPressed   = (GetAsyncKeyState(VK_LBUTTON) & 0x8000) != 0x0000;
@@ -28,8 +30,7 @@
                 state.IsRightButtonPressed  = false;
                 state.IsMiddleButtonPressed = false;
             }
-
-            state.Wheel = 0;
+            state.IsVisible = cursorInfo.flags != 0;
             return state;
         }
 
@@ -38,6 +39,15 @@
             POINT windowsMousePosition = { value.X, value.Y };
             ::ClientToScreen(static_cast<HWND>(window->GetHandle()), &windowsMousePosition);
             ::SetCursorPos(windowsMousePosition.x, windowsMousePosition.y);
+        }
+
+        void Mouse::SetVisible(bool value)
+        {
+            if (isVisible != value)
+            {
+                isVisible = value;
+                ::ShowCursor(value ? TRUE : FALSE);
+            }
         }
     }
 

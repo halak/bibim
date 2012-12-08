@@ -14,6 +14,7 @@
             inline KeyboardState();
             inline KeyboardState(const KeyboardState& original);
 
+            inline bool IsPressed() const;
             inline bool IsPressed(Key::Code code) const;
             inline bool IsReleased(Key::Code code) const;
 

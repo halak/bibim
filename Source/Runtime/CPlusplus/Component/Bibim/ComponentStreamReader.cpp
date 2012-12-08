@@ -72,6 +72,8 @@ namespace Bibim
         if (index == -1)
             return nullptr;
 
+        BBAssert(0 <= index);
+
         if (index >= static_cast<int>(localComponents.size()))
             localComponents.resize(index + 1);
 

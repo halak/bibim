@@ -14,7 +14,8 @@
             BBModuleClass(UIMouseEventDispatcher, UpdateableGameModule, 'U', 'I', 'M', 'S');
             public:
                 UIMouseEventDispatcher();
-                UIMouseEventDispatcher(UIDomain* domain, Mouse* mouse, UIRenderer* renderer);
+                UIMouseEventDispatcher(UIDomain* domain, Mouse* device, UIRenderer* renderer);
+                UIMouseEventDispatcher(UIDomain* domain, Mouse* device, UIRenderer* renderer, bool focusWhenHover);
                 virtual ~UIMouseEventDispatcher();
 
                 void Reset();
@@ -30,10 +31,15 @@
                 inline UIRenderer* GetRenderer() const;
                 inline void SetRenderer(UIRenderer* value);
 
+                inline bool GetFocusWhenHover() const;
+                inline void SetFocusWhenHover(bool value);
+
             private:
                 UIDomain* domain;
                 Mouse* device;
                 UIRenderer* renderer;
+                bool focusWhenHover;
+
                 UIVisualPtr capturedVisual;
                 UIVisualPtr lastTargetVisual;
                 MouseState  lastMouseState;

@@ -147,7 +147,10 @@ namespace Bibim
         currentBounds = bounds;
         if (currentVisual->GetEffectMap() && currentVisual->GetEffectMap()->GetGeometryEffect())
             currentGeometryEffect = currentVisual->GetEffectMap()->GetGeometryEffect();
-        currentClippedBounds = RectF::Intersect(currentClippedBounds, currentBounds);
+        if (target->GetPickable())
+            currentClippedBounds = RectF::Intersect(currentClippedBounds, currentBounds);
+        else
+            currentClippedBounds = currentBounds;
         parentTransform = currentTransform;
         parentTransformInv = currentTransformInv;
         if (target->GetTransform())

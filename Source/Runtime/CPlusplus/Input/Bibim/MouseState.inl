@@ -5,16 +5,18 @@
           Wheel(0),
           IsLeftButtonPressed(false),
           IsRightButtonPressed(false),
-          IsMiddleButtonPressed(false)
+          IsMiddleButtonPressed(false),
+          IsVisible(true)
     {
     }
 
-    MouseState::MouseState(Point2 position, int wheel, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed)
+    MouseState::MouseState(Point2 position, int wheel, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed, bool isVisible)
         : Position(position),
           Wheel(wheel),
           IsLeftButtonPressed(isLeftButtonPressed),
           IsRightButtonPressed(isRightButtonPressed),
-          IsMiddleButtonPressed(isMiddleButtonPressed)
+          IsMiddleButtonPressed(isMiddleButtonPressed),
+          IsVisible(isVisible)
     {
     }
 
@@ -23,7 +25,8 @@
           Wheel(original.Wheel),
           IsLeftButtonPressed(original.IsLeftButtonPressed),
           IsRightButtonPressed(original.IsRightButtonPressed),
-          IsMiddleButtonPressed(original.IsMiddleButtonPressed)
+          IsMiddleButtonPressed(original.IsMiddleButtonPressed),
+          IsVisible(original.IsVisible)
     {
     }
 
@@ -37,6 +40,7 @@
         IsLeftButtonPressed = right.IsLeftButtonPressed;
         IsRightButtonPressed = right.IsRightButtonPressed;
         IsMiddleButtonPressed = right.IsMiddleButtonPressed;
+        IsVisible = right.IsVisible;
         return *this;
     }
 
@@ -46,7 +50,8 @@
                Wheel == right.Wheel &&
                IsLeftButtonPressed == right.IsLeftButtonPressed &&
                IsRightButtonPressed == right.IsRightButtonPressed &&
-               IsMiddleButtonPressed == right.IsMiddleButtonPressed;
+               IsMiddleButtonPressed == right.IsMiddleButtonPressed &&
+               IsVisible == right.IsVisible;
     }
 
     bool MouseState::operator != (const MouseState& right) const

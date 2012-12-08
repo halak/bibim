@@ -14,9 +14,10 @@
             bool IsLeftButtonPressed;
             bool IsRightButtonPressed;
             bool IsMiddleButtonPressed;
+            bool IsVisible;
 
             inline MouseState();
-            inline MouseState(Point2 position, int wheel, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed);
+            inline MouseState(Point2 position, int wheel, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed, bool isVisible);
             inline MouseState(const MouseState& original);
 
             inline MouseState& operator = (const MouseState& right);

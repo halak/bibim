@@ -5,12 +5,14 @@
 namespace Bibim
 {
     Mouse::Mouse()
-        : window(nullptr)
+        : window(nullptr),
+          isVisible(true)
     {
     }
 
     Mouse::Mouse(Window* window)
-        : window(window)
+        : window(window),
+          isVisible(true)
     {
     }
 

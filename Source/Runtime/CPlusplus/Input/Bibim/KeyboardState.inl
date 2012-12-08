@@ -12,6 +12,17 @@
             Keys[i] = original.Keys[i];
     }
 
+    bool KeyboardState::IsPressed() const
+    {
+        for (int i = 0; i < sizeof(Keys) / sizeof(Keys[0]); i++)
+        {
+            if (Keys[i] != 0x00000000)
+                return true;
+        }
+
+        return false;
+    }
+
     bool KeyboardState::IsPressed(Key::Code code) const
     {
         const int index = static_cast<int>(static_cast<int>(code) / (sizeof(int) * 8));
