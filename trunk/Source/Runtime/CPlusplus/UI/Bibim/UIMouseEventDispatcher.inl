@@ -19,4 +19,14 @@
     {
         renderer = value;
     }
+
+    bool UIMouseEventDispatcher::GetFocusWhenHover() const
+    {
+        return focusWhenHover;
+    }
+
+    void UIMouseEventDispatcher::SetFocusWhenHover(bool value)
+    {
+        focusWhenHover = value;
+    }
 }

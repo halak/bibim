@@ -19,7 +19,11 @@
 
                 const MouseState& GetState();
 
+                inline void Show();
+                inline void Hide();
+
                 void SetPosition(Point2 value);
+                void SetVisible(bool value);
 
                 inline Window* GetWindow();
                 inline void SetWindow(Window* value);
@@ -27,6 +31,7 @@
             private:
                 Window* window;
                 MouseState state;
+                bool isVisible;
         };
     }
 

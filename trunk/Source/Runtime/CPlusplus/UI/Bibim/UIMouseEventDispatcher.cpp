@@ -15,6 +15,7 @@ namespace Bibim
         : domain(nullptr),
           device(nullptr),
           renderer(nullptr),
+          focusWhenHover(false),
           capturedVisual(nullptr),
           lastTargetVisual(nullptr),
           lastMouseState(MouseState::Empty)
@@ -25,6 +26,18 @@ namespace Bibim
         : domain(domain),
           device(device),
           renderer(renderer),
+          focusWhenHover(false),
+          capturedVisual(nullptr),
+          lastTargetVisual(nullptr),
+          lastMouseState(MouseState::Empty)
+    {
+    }
+
+    UIMouseEventDispatcher::UIMouseEventDispatcher(UIDomain* domain, Mouse* device, UIRenderer* renderer, bool focusWhenHover)
+        : domain(domain),
+          device(device),
+          renderer(renderer),
+          focusWhenHover(focusWhenHover),
           capturedVisual(nullptr),
           lastTargetVisual(nullptr),
           lastMouseState(MouseState::Empty)
@@ -75,8 +88,11 @@ namespace Bibim
             targetVisual = capturedVisual;
         else
         {
-            pickedVisual = Pick::Do(picker, rootWindow);
-            targetVisual = pickedVisual;
+            if (mouseState.IsVisible)
+            {
+                pickedVisual = Pick::Do(picker, rootWindow);
+                targetVisual = pickedVisual;
+            }
         }
 
         const UIMouseEventArgs baseArgs = UIMouseEventArgs(targetVisual,
@@ -114,6 +130,12 @@ namespace Bibim
 
             for (VisualVector::const_iterator it = cachedEnterVisuals.begin(); it != cachedEnterVisuals.end(); it++)
                 (*it)->RaiseMouseEnterEvent(baseArgs);
+
+            if (focusWhenHover)
+            {
+                if (targetVisual && targetVisual->GetFocusable())
+                    domain->SetFocus(targetVisual);
+            }
         }
 
         if (targetVisual && lastMouseState.Position != mouseState.Position)

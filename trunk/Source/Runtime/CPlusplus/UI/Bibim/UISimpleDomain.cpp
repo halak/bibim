@@ -36,6 +36,9 @@ namespace Bibim
 
     void UISimpleDomain::SetFocus(UIVisual* value)
     {
+        if (value && value->GetFocusable() == false)
+            return;
+
         if (focus != value)
         {
             if (focus)
