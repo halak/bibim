@@ -1,5 +1,15 @@
 ﻿namespace Bibim
 {
+    void UIButton::Freeze()
+    {
+        SetFrozen(true);
+    }
+
+    void UIButton::Unfreeze()
+    {
+        SetFrozen(false);
+    }
+
     UIButton::State UIButton::GetCurrentState() const
     {
         return currentState;

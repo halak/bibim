@@ -20,6 +20,9 @@
 
                 inline irrklang::ISoundEngine* GetEngine() const;
 
+                inline float GetDuration(const String& uri) const;
+                float GetDurationByChars(const char* uri) const;
+
             private:
                 irrklang::ISoundEngine* engine;
         };

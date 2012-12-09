@@ -26,10 +26,12 @@
                 UIVisual* FindChildByChars(const char* name, bool searchAllChildren) const;
                 UIVisual* FindChildByChars(const char* name, int length, bool searchAllChildren) const;
 
+                int GetChildIndex(UIVisual* item) const;
                 inline UIVisual* GetChildAt(int index) const;
                 inline int GetNumberOfChildren() const;
                 inline const VisualCollection& GetChildren() const;
 
+                bool IsAncestorOf(UIVisual* item) const;
                 virtual bool IsPanel() const;
 
             protected:

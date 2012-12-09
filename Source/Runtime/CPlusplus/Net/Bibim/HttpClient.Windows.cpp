@@ -464,8 +464,8 @@ namespace Bibim
 
                 delete request;
             }
-
-            Thread::Sleep(100);
+            else
+                Thread::Sleep(100);
         }
     }
 }

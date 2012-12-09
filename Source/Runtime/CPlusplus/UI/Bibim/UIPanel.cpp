@@ -60,35 +60,58 @@ namespace Bibim
         if (name == nullptr || length == 0)
             return nullptr;
 
+        for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+        {
+            if ((*it)->GetName().Equals(name, length))
+                return (*it);
+        }
+
         if (searchAllChildren)
         {
             for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
             {
-                if ((*it)->GetName().Equals(name, length))
-                    return (*it);
-
                 if ((*it)->IsPanel())
                 {
-                    if (UIVisual* found = static_cast<UIPanel*>((*it).GetPointee())->FindChild(name, true))
+                    if (UIVisual* found = StaticCast<UIPanel>(*it)->FindChildByChars(name, true))
                         return found;
                 }
-            }
-        }
-        else
-        {
-            for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
-            {
-                if ((*it)->GetName().Equals(name, length))
-                    return (*it);
             }
         }
 
         return nullptr;
     }
 
+    int UIPanel::GetChildIndex(UIVisual* item) const
+    {
+        if (item == nullptr || item->GetParent() != this)
+            return -1;
+
+        const int count = GetNumberOfChildren();
+        for (int i = 0; i < count; i++)
+        {
+            if (children[i] == item)
+                return i;
+        }
+
+        return -1;
+    }
+
     bool UIPanel::IsPanel() const
     {
         return true;
+    }
+
+    bool UIPanel::IsAncestorOf(UIVisual* item) const
+    {
+        while (item)
+        {
+            if (item == this)
+                return true;
+
+            item = item->GetParent();
+        }
+
+        return false;
     }
 
     void UIPanel::Add(UIVisual* item)
