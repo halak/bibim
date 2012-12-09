@@ -33,4 +33,6 @@
 
 #   include <Bibim/UIPixelEffect.inl>
 
+    BBBindLua(Bibim::UIPixelEffect);
+
 #endif

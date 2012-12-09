@@ -4,4 +4,9 @@ namespace Bibim
     {
         return engine;
     }
+
+    float AudioDevice::GetDuration(const String& uri) const
+    {
+        return GetDurationByChars(uri.CStr());
+    }
 }

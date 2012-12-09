@@ -79,6 +79,7 @@
                 inline float GetY() const;
                 inline void  SetY(float value);
 
+                inline Vector2 GetXY() const;
                 inline void SetXY(float x, float y);
 
                 inline float GetWidth() const;
@@ -87,6 +88,7 @@
                 inline float GetHeight() const;
                 inline void  SetHeight(float value);
 
+                inline Vector2 GetSize() const;
                 inline void SetSize(float width, float height);
 
                 inline PositionMode GetXMode() const;

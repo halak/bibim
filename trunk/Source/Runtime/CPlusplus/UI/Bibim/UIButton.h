@@ -22,6 +22,9 @@
                 UIButton();
                 virtual ~UIButton();
 
+                inline void Freeze();
+                inline void Unfreeze();
+
                 inline State GetCurrentState() const;
                 inline UIVisual* GetNormal() const;
                 void SetNormal(UIVisual* value);

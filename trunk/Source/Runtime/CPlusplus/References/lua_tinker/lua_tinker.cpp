@@ -866,6 +866,8 @@ int lua_tinker::is(lua_State *L)
 {
     const int initialTop = lua_gettop(L);
 
+    luaL_checkstring(L, 2);
+
     const char* testName = lua_tostring(L, 2);
 
     lua_getmetatable(L, 1);
@@ -882,7 +884,7 @@ int lua_tinker::is(lua_State *L)
         else
         {
             lua_pushstring(L, "__name");
-        	lua_rawget(L, -2);
+    	    lua_rawget(L, -2);
 
             const char* className = lua_tostring(L, -1);
             if (strcmp(testName, className) == 0)
@@ -898,6 +900,17 @@ int lua_tinker::is(lua_State *L)
         lua_pushstring(L, "__parent");
         lua_rawget(L, -2);
     }
+}
+
+int lua_tinker::eq(lua_State *L)
+{
+    BBAssert(lua_type(L, 1) == lua_type(L, 2));
+
+    const Bibim::SharedObject* a = read<Bibim::SharedObject*>(L, 1);
+    const Bibim::SharedObject* b = read<Bibim::SharedObject*>(L, 2);
+    lua_pushboolean(L, a == b);
+
+    return 1;
 }
 
 /*---------------------------------------------------------------------------*/ 

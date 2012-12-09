@@ -64,6 +64,11 @@
         y = value;
     }
 
+    Vector2 UIVisual::GetXY() const
+    {
+        return Vector2(x, y);
+    }
+
     void UIVisual::SetXY(float x, float y)
     {
         this->x = x;
@@ -88,6 +93,11 @@
     void UIVisual::SetHeight(float value)
     {
         height = value > 0.0f ? value : 0.0f;
+    }
+
+    Vector2 UIVisual::GetSize() const
+    {
+        return Vector2(width, height);
     }
 
     void UIVisual::SetSize(float width, float height)

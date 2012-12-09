@@ -102,4 +102,15 @@ namespace Bibim
         engine->addFileFactory(factory);
         factory->drop();
     }
+
+    float AudioDevice::GetDurationByChars(const char* uri) const
+    {
+        if (uri == nullptr)
+            return 0.0f;
+
+        if (ISoundSource* source = engine->getSoundSource(uri))
+            return static_cast<float>(source->getPlayLength()) * 0.001f;
+        else
+            return 0.0f;
+    }
 }
