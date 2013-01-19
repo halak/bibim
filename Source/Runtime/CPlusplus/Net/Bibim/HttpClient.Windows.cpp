@@ -341,17 +341,15 @@ namespace Bibim
         std::vector<char> response;
         if (responseLength != Int::Max)
         {
-            response.resize(responseLength + 1);
-            response.back() = '\0';
+            response.resize(responseLength);
 
             char* responsePointer = &response[0];
-            const char* responseBufferEnd = &response[responseLength];
             DWORD remainingSize = responseLength;
 
             static const DWORD DefaultTimeout = 10000;
             const DWORD startTime = ::GetTickCount();
 
-            while (responsePointer != responseBufferEnd)
+            while (remainingSize > 0)
             {
                 DWORD readSize = 0;
                 if (::InternetReadFile(handles.request, responsePointer, remainingSize, &readSize))
