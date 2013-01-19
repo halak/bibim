@@ -8,6 +8,7 @@
 #include <Bibim/Timeline.h>
 #include <Bibim/UIDrawingContext.h>
 #include <Bibim/UIPickingContext.h>
+#include <Bibim/UIWindow.h>
 using namespace SPK;
 
 namespace Bibim
@@ -159,6 +160,11 @@ namespace Bibim
         }
     }
 
+    void UISpark::SetAutoRemove(bool value)
+    {
+        autoRemove = value;
+    }
+
     Vector2 UISpark::GetContentSize()
     {
         return contentSize;
@@ -182,6 +188,13 @@ namespace Bibim
             const Vector3D min = particleSystem->getAABBMin();
             contentSize.X = max.x - min.x;
             contentSize.Y = max.y - min.y;
+        }
+
+        if (isAlive == false && autoRemove)
+        {
+            UIPanel* parent = GetParent();
+            if (parent && parent->IsWindow())
+                static_cast<UIWindow*>(parent)->RemoveChild(this);
         }
     }
 
@@ -226,6 +239,7 @@ namespace Bibim
         contentSize = Vector2::Zero;
         updater.o = this;
         isUpdateable = false;
+        autoRemove = false;
 
         SetSize(1.0f, 1.0f);
         SetSizeMode(ContentSize, ContentSize);

@@ -310,6 +310,11 @@ namespace Bibim
         return false;
     }
 
+    bool UIVisual::IsWindow() const
+    {
+        return false;
+    }
+
     void UIVisual::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);

@@ -4,4 +4,9 @@ namespace Bibim
     {
         return timeline;
     }
+
+    bool UISpark::GetAutoRemove() const
+    {
+        return autoRemove;
+    }
 }
