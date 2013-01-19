@@ -144,6 +144,7 @@
                 inline bool IsVisible() const;
                 inline bool IsFocused() const;
                 virtual bool IsPanel() const;
+                virtual bool IsWindow() const;
 
                 inline void SetXYModeByChars(const char* xMode, const char* yMode);
                 inline void SetSizeModeByChars(const char* widthMode, const char* heightMode);

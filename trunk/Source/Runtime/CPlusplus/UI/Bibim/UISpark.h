@@ -22,6 +22,9 @@
                 inline Timeline* GetTimeline() const;
                 void SetTimeline(Timeline* value);
 
+                inline bool GetAutoRemove() const;
+                void SetAutoRemove(bool value);
+
             protected:
                 virtual Vector2 GetContentSize();
 
@@ -69,6 +72,7 @@
                 Vector2 contentSize;
                 Updater updater;
                 bool isUpdateable;
+                bool autoRemove;
         };
     }
 

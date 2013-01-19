@@ -19,6 +19,11 @@ namespace Bibim
     {
     }
 
+    bool UIWindow::IsWindow() const
+    {
+        return true;
+    }
+
     void UIWindow::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);

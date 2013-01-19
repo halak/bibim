@@ -19,6 +19,8 @@
                 inline bool RemoveChild(UIVisual* item);
                 inline bool RemoveChildAt(int index);
                 inline void RemoveAllChildren();
+
+                virtual bool IsWindow() const;
         };
     }
 

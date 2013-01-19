@@ -864,7 +864,9 @@ void lua_tinker::meta_push(lua_State *L, const char* name)
 /*---------------------------------------------------------------------------*/ 
 int lua_tinker::is(lua_State *L)
 {
-    const int initialTop = lua_gettop(L);
+#   if (defined(BIBIM_DEBUG))
+        const int initialTop = lua_gettop(L);
+#   endif
 
     luaL_checkstring(L, 2);
 
