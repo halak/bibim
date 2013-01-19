@@ -165,6 +165,16 @@
         {
         }
 
+        bool GameWindow::OnCommand(int /*commandID*/, int /*controlID*/, void* /*handle*/)
+        {
+            return false;
+        }
+
+        bool GameWindow::OnPaint()
+        {
+            return false;
+        }
+
         void GameWindow::CreateHandle()
         {
             WNDCLASSEX windowClass;
@@ -206,6 +216,13 @@
                         // RegisterHotKey(windowHandle, IDHOT_SNAPWINDOW,  MOD_ALT, VK_SNAPSHOT);
                     }
                     return 0;
+                case WM_PAINT:
+                    {
+                        gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
+                        if (gameWindow->OnPaint())
+                            return 0;
+                    }
+                    break;
                 case WM_MOUSEWHEEL:
                     gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
                     gameWindow->OnMouseWheel(GET_WHEEL_DELTA_WPARAM(wParam) / WHEEL_DELTA);
@@ -217,6 +234,16 @@
                         gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
                         gameWindow->OnSnapShot();
                         return 0;
+                    }
+                    break;
+                case WM_COMMAND:
+                    {
+                        gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
+                        const int commandID = HIWORD(wParam);
+                        const int controlID = LOWORD(wParam);
+                        void* handle = reinterpret_cast<void*>(lParam);
+                        if (gameWindow->OnCommand(commandID, controlID, handle))
+                            return 0;
                     }
                     break;
                 case WM_DESTROY:

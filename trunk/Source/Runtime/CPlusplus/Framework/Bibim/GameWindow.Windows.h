@@ -41,6 +41,8 @@
                 virtual void OnDestroy();
                 virtual void OnMouseWheel(int delta);
                 virtual void OnSnapShot();
+                virtual bool OnCommand(int commandID, int controlID, void* handle);
+                virtual bool OnPaint();
 
             private:
                 void CreateHandle();
