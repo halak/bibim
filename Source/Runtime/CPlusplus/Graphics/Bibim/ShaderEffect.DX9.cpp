@@ -2,12 +2,12 @@
 #include <Bibim/ShaderEffect.DX9.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/CheckedRelease.h>
-#include <Bibim/GraphicsDevice.h>
+#include <Bibim/GraphicsDevice.DX9.h>
 #include <Bibim/Log.h>
 #include <Bibim/Matrix4.h>
 #include <Bibim/Numerics.h>
 #include <Bibim/String.h>
-#include <Bibim/Texture2D.h>
+#include <Bibim/Texture2D.DX9.h>
 
 namespace Bibim
 {

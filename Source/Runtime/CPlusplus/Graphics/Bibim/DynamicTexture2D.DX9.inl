@@ -8,8 +8,8 @@
     int DynamicTexture2D::LockedInfo::GetPitch() const
     {
         return pitch;
-
     }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     bool DynamicTexture2D::IsLocked() const

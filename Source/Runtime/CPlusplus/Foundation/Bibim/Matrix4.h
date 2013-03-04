@@ -47,6 +47,7 @@
             static Matrix4 Scaling(float value);
             static Matrix4 Scaling(Vector3 value);
             static Matrix4 Inversion(const Matrix4& value);
+            static Matrix4 Transpose(const Matrix4& value);
 
             friend Matrix4 operator * (float left, const Matrix4& right);
 

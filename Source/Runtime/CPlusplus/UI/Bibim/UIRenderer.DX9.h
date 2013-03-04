@@ -91,17 +91,6 @@
                     static const DWORD FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX2;
                 };
 
-                enum PixelMode
-                {
-                    ColorOnlyMode,
-                    ColorTextureOnlyMode,
-                    AlphaTextureOnlyMode,
-                    MaskedColorMode,
-                    MaskedColorTextureMode,
-                    MaskedAlphaTextureMode,
-                    NumberOfPixelModes,
-                };
-
                 struct QuadSet
                 {
                     int Count;
@@ -118,7 +107,6 @@
                 void InitializeNormalQuadSets();
                 void InitializeBatchQuadSets();
 
-                static PixelMode GetPixelMode(const Texture2D* texture, const Texture2D* mask);
                 Vertex* Prepare(Texture2D* texture, Texture2D* mask);
 
                 void BeginAlphaTextureMode();
@@ -128,7 +116,7 @@
                 void BeginOpacityMaskMode();
                 void EndOpacityMaskMode();
 
-                void Flush();
+                virtual void Flush();
                 void ReserveCachedQuads(int capacity);
                 void UpdateViewProjectionTransform();
 

@@ -2,11 +2,12 @@
 <VisualStudioPropertySheet
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="Bibim.Release.VC9"
+	Name="Bibim.Release.GLES2"
 	>
 	<Tool
 		Name="VCCLCompilerTool"
 		AdditionalIncludeDirectories=""
+		PreprocessorDefinitions="BIBIM_USE_OPENGLES2"
 	/>
 	<Tool
 		Name="VCLinkerTool"

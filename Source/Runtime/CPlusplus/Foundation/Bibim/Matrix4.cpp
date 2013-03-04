@@ -1,6 +1,7 @@
 ﻿#include <Bibim/PCH.h>
 #include <Bibim/Matrix4.h>
 #include <Bibim/Math.h>
+#include <d3dx9math.h>
 
 namespace Bibim
 {
@@ -205,6 +206,143 @@ namespace Bibim
                        0.0f,    value.Y, 0.0f,    0.0f,
                        0.0f,    0.0f,    value.Z, 0.0f,
                        0.0f,    0.0f,    0.0f,    1.0f);
+    }
+
+    Matrix4 Matrix4::Inversion(const Matrix4& value)
+    {
+        float const * const m = &value.M00;
+
+        float inv[16];
+        inv[0] = m[5]  * m[10] * m[15] - 
+                 m[5]  * m[11] * m[14] - 
+                 m[9]  * m[6]  * m[15] + 
+                 m[9]  * m[7]  * m[14] +
+                 m[13] * m[6]  * m[11] - 
+                 m[13] * m[7]  * m[10];
+
+        inv[4] = -m[4]  * m[10] * m[15] + 
+                  m[4]  * m[11] * m[14] + 
+                  m[8]  * m[6]  * m[15] - 
+                  m[8]  * m[7]  * m[14] - 
+                  m[12] * m[6]  * m[11] + 
+                  m[12] * m[7]  * m[10];
+
+        inv[8] = m[4]  * m[9]  * m[15] - 
+                 m[4]  * m[11] * m[13] - 
+                 m[8]  * m[5]  * m[15] + 
+                 m[8]  * m[7]  * m[13] + 
+                 m[12] * m[5]  * m[11] - 
+                 m[12] * m[7]  * m[9];
+
+        inv[12] = -m[4]  * m[9]  * m[14] + 
+                   m[4]  * m[10] * m[13] +
+                   m[8]  * m[5]  * m[14] - 
+                   m[8]  * m[6]  * m[13] - 
+                   m[12] * m[5]  * m[10] + 
+                   m[12] * m[6]  * m[9];
+
+        inv[1] = -m[1]  * m[10] * m[15] + 
+                  m[1]  * m[11] * m[14] + 
+                  m[9]  * m[2]  * m[15] - 
+                  m[9]  * m[3]  * m[14] - 
+                  m[13] * m[2]  * m[11] + 
+                  m[13] * m[3]  * m[10];
+
+        inv[5] = m[0]  * m[10] * m[15] - 
+                 m[0]  * m[11] * m[14] - 
+                 m[8]  * m[2]  * m[15] + 
+                 m[8]  * m[3]  * m[14] + 
+                 m[12] * m[2]  * m[11] - 
+                 m[12] * m[3]  * m[10];
+
+        inv[9] = -m[0]  * m[9]  * m[15] + 
+                  m[0]  * m[11] * m[13] + 
+                  m[8]  * m[1]  * m[15] - 
+                  m[8]  * m[3]  * m[13] - 
+                  m[12] * m[1]  * m[11] + 
+                  m[12] * m[3]  * m[9];
+
+        inv[13] = m[0]  * m[9]  * m[14] - 
+                  m[0]  * m[10] * m[13] - 
+                  m[8]  * m[1]  * m[14] + 
+                  m[8]  * m[2]  * m[13] + 
+                  m[12] * m[1]  * m[10] - 
+                  m[12] * m[2]  * m[9];
+
+        inv[2] = m[1]  * m[6] * m[15] - 
+                 m[1]  * m[7] * m[14] - 
+                 m[5]  * m[2] * m[15] + 
+                 m[5]  * m[3] * m[14] + 
+                 m[13] * m[2] * m[7] - 
+                 m[13] * m[3] * m[6];
+
+        inv[6] = -m[0]  * m[6] * m[15] + 
+                  m[0]  * m[7] * m[14] + 
+                  m[4]  * m[2] * m[15] - 
+                  m[4]  * m[3] * m[14] - 
+                  m[12] * m[2] * m[7] + 
+                  m[12] * m[3] * m[6];
+
+        inv[10] = m[0]  * m[5] * m[15] - 
+                  m[0]  * m[7] * m[13] - 
+                  m[4]  * m[1] * m[15] + 
+                  m[4]  * m[3] * m[13] + 
+                  m[12] * m[1] * m[7] - 
+                  m[12] * m[3] * m[5];
+
+        inv[14] = -m[0]  * m[5] * m[14] + 
+                   m[0]  * m[6] * m[13] + 
+                   m[4]  * m[1] * m[14] - 
+                   m[4]  * m[2] * m[13] - 
+                   m[12] * m[1] * m[6] + 
+                   m[12] * m[2] * m[5];
+
+        inv[3] = -m[1] * m[6] * m[11] + 
+                  m[1] * m[7] * m[10] + 
+                  m[5] * m[2] * m[11] - 
+                  m[5] * m[3] * m[10] - 
+                  m[9] * m[2] * m[7] + 
+                  m[9] * m[3] * m[6];
+
+        inv[7] = m[0] * m[6] * m[11] - 
+                 m[0] * m[7] * m[10] - 
+                 m[4] * m[2] * m[11] + 
+                 m[4] * m[3] * m[10] + 
+                 m[8] * m[2] * m[7] - 
+                 m[8] * m[3] * m[6];
+
+        inv[11] = -m[0] * m[5] * m[11] + 
+                   m[0] * m[7] * m[9] + 
+                   m[4] * m[1] * m[11] - 
+                   m[4] * m[3] * m[9] - 
+                   m[8] * m[1] * m[7] + 
+                   m[8] * m[3] * m[5];
+
+        inv[15] = m[0] * m[5] * m[10] - 
+                  m[0] * m[6] * m[9] - 
+                  m[4] * m[1] * m[10] + 
+                  m[4] * m[2] * m[9] + 
+                  m[8] * m[1] * m[6] - 
+                  m[8] * m[2] * m[5];
+
+        float determinant = m[0] * inv[0] + m[1] * inv[4] + m[2] * inv[8] + m[3] * inv[12];
+        if (determinant == 0.0f)
+            return Matrix4::Zero;
+
+        determinant = 1.0f / determinant;
+
+        for (int i = 0; i < 16; i++)
+            inv[i] = inv[i] * determinant;
+
+        return Matrix4(inv);
+    }
+
+    Matrix4 Matrix4::Transpose(const Matrix4& value)
+    {
+        return Matrix4(value.M00, value.M10, value.M20, value.M30,
+                       value.M01, value.M11, value.M21, value.M31,
+                       value.M02, value.M12, value.M22, value.M32,
+                       value.M03, value.M13, value.M23, value.M33);
     }
 
     Matrix4 operator * (float left, const Matrix4& right)

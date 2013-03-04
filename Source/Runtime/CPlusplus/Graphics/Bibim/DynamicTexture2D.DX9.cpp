@@ -2,7 +2,7 @@
 #include <Bibim/DynamicTexture2D.DX9.h>
 #include <Bibim/Assert.h>
 #include <Bibim/CheckedRelease.h>
-#include <Bibim/GraphicsDevice.h>
+#include <Bibim/GraphicsDevice.DX9.h>
 #include <Bibim/Math.h>
 
 namespace Bibim

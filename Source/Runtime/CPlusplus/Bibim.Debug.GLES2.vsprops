@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ks_c_5601-1987"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="Bibim.Debug.GLES2"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories=""
+		PreprocessorDefinitions="BIBIM_USE_OPENGLES2"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalDependencies="Bibim.Runtime.Debug.VC9.lib winmm.lib d3d9.lib d3dx9d.lib zlibd.lib libpngd.lib freetype244_D.lib lua.Debug.lib irrKlang.lib SPARK_debug.lib"
+		AdditionalLibraryDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Debug&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Debug\ZLib&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\StormLib\bin\StormLib\Win32\DebugAD&quot;"
+	/>
+</VisualStudioPropertySheet>

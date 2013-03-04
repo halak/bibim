@@ -1,6 +1,6 @@
 ﻿#include <Bibim/PCH.h>
 #include <Bibim/Texture2D.DX9.h>
-#include <Bibim/GraphicsDevice.h>
+#include <Bibim/GraphicsDevice.DX9.h>
 #include <Bibim/CheckedRelease.h>
 
 namespace Bibim
