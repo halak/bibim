@@ -5,7 +5,7 @@
 #include <Bibim/Colors.h>
 #include <Bibim/Exception.h>
 #include <Bibim/Log.h>
-#include <Bibim/RenderTargetTexture2D.h>
+#include <Bibim/RenderTargetTexture2D.DX9.h>
 #include <Bibim/Window.h>
 #include <algorithm>
 

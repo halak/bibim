@@ -3,7 +3,7 @@
 #define __BIBIM_SOURCETEXTURE2D_DX9_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/Texture2D.h>
+#   include <Bibim/Texture2D.DX9.h>
 #   include <Bibim/AssetLoadingTask.h>
 #   include <Bibim/AssetStreamReader.h>
 

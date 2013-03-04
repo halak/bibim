@@ -3,12 +3,20 @@
 #define __BIBIM_RENDERTARGETTEXTURE2D_GLES2_H__
 
 #   include <Bibim/FWD.h>
-#   include <Bibim/GameModule.h>
+#   include <Bibim/Texture2D.GLES2.h>
+#   include <Bibim/Rect.h>
 
     namespace Bibim
     {
+        class RenderTargetTexture2D : public Texture2D
+        {
+            BBAssetClass(RenderTargetTexture2D, Texture2D, 'R', 'T', 'X', '2');
+            public:
+                RenderTargetTexture2D(GraphicsDevice* graphicsDevice, int width, int height);
+                virtual ~RenderTargetTexture2D();
+        };
     }
 
-#   include <Bibim/DisplaySwapChain.GLES2.inl>
+#   include <Bibim/RenderTargetTexture2D.GLES2.inl>
 
 #endif

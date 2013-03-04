@@ -2,7 +2,7 @@
 <VisualStudioPropertySheet
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="Bibim.Debug.VC9"
+	Name="Bibim.Debug.DX9"
 	>
 	<Tool
 		Name="VCCLCompilerTool"

@@ -6,12 +6,12 @@
 #include <Bibim/CheckedRelease.h>
 #include <Bibim/Color.h>
 #include <Bibim/GameAssetStorage.h>
-#include <Bibim/GraphicsDevice.h>
+#include <Bibim/GraphicsDevice.DX9.h>
 #include <Bibim/Math.h>
 #include <Bibim/Memory.h>
 #include <Bibim/Matrix4.h>
-#include <Bibim/ShaderEffect.h>
-#include <Bibim/Texture2D.h>
+#include <Bibim/ShaderEffect.DX9.h>
+#include <Bibim/Texture2D.DX9.h>
 
 namespace Bibim
 {
@@ -623,34 +623,6 @@ namespace Bibim
         }
     }
 
-    UIRenderer::PixelMode UIRenderer::GetPixelMode(const Texture2D* texture, const Texture2D* mask)
-    {
-        if (texture)
-        {
-            if (texture->GetPixelFormat() == Texture2D::A8Pixels)
-            {
-                if (mask)
-                    return MaskedAlphaTextureMode;
-                else
-                    return AlphaTextureOnlyMode;
-            }
-            else
-            {
-                if (mask)
-                    return MaskedColorTextureMode;
-                else
-                    return ColorTextureOnlyMode;
-            }
-        }
-        else
-        {
-            if (mask)
-                return MaskedColorMode;
-            else
-                return ColorOnlyMode;
-        }
-    }
-
     UIRenderer::Vertex* UIRenderer::Prepare(Texture2D* texture, Texture2D* mask)
     {
         QuadSet* selectedQuadSet = nullptr;
@@ -720,30 +692,8 @@ namespace Bibim
 
             if (effects[index] == nullptr)
             {
-                const char* key = nullptr;
-                switch (mode)
-                {
-                    case ColorOnlyMode:
-                        key = "_A";
-                        break;
-                    case ColorTextureOnlyMode:
-                        key = "_B";
-                        break;
-                    case AlphaTextureOnlyMode:
-                        key = "_C";
-                        break;
-                    case MaskedColorMode:
-                        key = "_A";
-                        break;
-                    case MaskedColorTextureMode:
-                        key = "_B";
-                        break;
-                    case MaskedAlphaTextureMode:
-                        key = "_C";
-                        break;
-                }
-
-                effects[index] = static_cast<ShaderEffect*>(storage->Load(shaderEffectBaseURI + key));
+                const char* suffix = GetShaderEffectSuffix(mode);
+                effects[index] = static_cast<ShaderEffect*>(storage->Load(shaderEffectBaseURI + suffix));
             }
 
             if (effects[index])
@@ -1032,15 +982,10 @@ namespace Bibim
 
             D3DXMatrixPerspectiveFovLH(&d3dProjectionTransform, fieldOfView, aspect, 0.1f, 10000.0f);
 
-            D3DXMATRIX d3dViewTransformInv;
-            D3DXMATRIX d3dProjectionTransformInv;
-            D3DXMatrixInverse(&d3dViewTransformInv, nullptr, &d3dViewTransform);
-            D3DXMatrixInverse(&d3dProjectionTransformInv, nullptr, &d3dProjectionTransform);
-
             viewTransform = Matrix4(d3dViewTransform);
-            viewTransformInv = Matrix4(d3dViewTransformInv);
+            viewTransformInv = Matrix4::Inversion(viewTransform);
             projectionTransform = Matrix4(d3dProjectionTransform);
-            projectionTransformInv = Matrix4(d3dProjectionTransformInv);
+            projectionTransformInv = Matrix4::Inversion(projectionTransform);
 
             lastViewport = currentViewport;
         }

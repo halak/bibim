@@ -42,6 +42,21 @@
 
             protected:
                 UIRendererBase();
+
+                enum PixelMode
+                {
+                    ColorOnlyMode,
+                    ColorTextureOnlyMode,
+                    AlphaTextureOnlyMode,
+                    MaskedColorMode,
+                    MaskedColorTextureMode,
+                    MaskedAlphaTextureMode,
+                    NumberOfPixelModes,
+                };
+
+                static PixelMode GetPixelMode(const Texture2D* texture, const Texture2D* mask);
+
+                static const char* GetShaderEffectSuffix(PixelMode mode);
         };
 
 #define BBEffectorClass(classname)
