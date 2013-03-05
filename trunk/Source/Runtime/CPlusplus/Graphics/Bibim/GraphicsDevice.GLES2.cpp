@@ -12,36 +12,31 @@
 namespace Bibim
 {
     GraphicsDevice::GraphicsDevice()
-        : d3dObject(nullptr),
-          d3dDevice(nullptr),
-          d3dBackbufferSurface(nullptr),
+        : eglDisplay(nullptr),
+          eglSurface(nullptr),
+          eglContext(nullptr),
           window(nullptr),
           resolution(1024, 768),
-          defaultSwapChain(nullptr),
           viewport(Rect::Empty),
           fullscreen(false)
     {
-        ::ZeroMemory(&d3dCaps, sizeof(d3dCaps));
     }
 
     GraphicsDevice::GraphicsDevice(int resolutionWidth, int resolutionHeight)
-        : d3dObject(nullptr),
-          d3dDevice(nullptr),
-          d3dBackbufferSurface(nullptr),
+        : eglDisplay(nullptr),
+          eglSurface(nullptr),
+          eglContext(nullptr),
           window(nullptr),
           resolution(resolutionWidth, resolutionHeight),
-          defaultSwapChain(nullptr),
           viewport(Rect::Empty),
           fullscreen(false)
     {
         BBAssert(resolutionWidth > 0 && resolutionHeight > 0);
-        ::ZeroMemory(&d3dCaps, sizeof(d3dCaps));
     }
 
     GraphicsDevice::~GraphicsDevice()
     {
-        FinalizeDevice();
-        CheckedRelease(d3dObject);
+        FinalizeContext();
     }
 
     void GraphicsDevice::Clear()
@@ -51,51 +46,44 @@ namespace Bibim
 
     void GraphicsDevice::Clear(Color color)
     {
-        GetD3DDevice()->Clear(0, nullptr, D3DCLEAR_TARGET, D3DCOLOR_XRGB(color.R, color.G, color.B), 1.0f, 0);
+        const Vector4 colorVector = color.ToVector4();
+        glClearColor(colorVector.X, colorVector.Y, colorVector.Z, colorVector.W);
+        glClear(GL_COLOR_BUFFER_BIT);
     }
 
     void GraphicsDevice::BeginDraw()
     {
-        GetD3DDevice()->BeginScene();
     }
 
-    void GraphicsDevice::BeginDraw(RenderTargetTexture2D* renderTarget)
+    void GraphicsDevice::BeginDraw(RenderTargetTexture2D* /*renderTarget*/)
     {
-        BBAssertDebug(renderTarget);
-
-        GetD3DDevice()->GetRenderTarget(0, &d3dBackbufferSurface);
-
-        GetD3DDevice()->SetRenderTarget(0, renderTarget->GetD3DSurface());
-        GetD3DDevice()->BeginScene();
+        throw;
     }
 
     void GraphicsDevice::EndDraw()
     {
-        GetD3DDevice()->EndScene();
     }
 
     void GraphicsDevice::EndDraw(RenderTargetTexture2D* /*renderTarget*/)
     {
-        GetD3DDevice()->EndScene();
-        GetD3DDevice()->SetRenderTarget(0, d3dBackbufferSurface);
-        CheckedRelease(d3dBackbufferSurface);
+        throw;
     }
 
     void GraphicsDevice::Present()
     {
-        GetD3DDevice()->Present(nullptr, nullptr, nullptr, nullptr);
+        eglSwapBuffers(eglDisplay, eglSurface);
     }
 
     void GraphicsDevice::SetWindow(Window* value)
     {
         if (GetWindow() != value)
         {
-            FinalizeDevice();
+            FinalizeContext();
 
             window = value;
 
             if (GetWindow())
-                InitializeDevice();
+                InitializeContext();
         }
     }
 
@@ -114,27 +102,111 @@ namespace Bibim
         if (GetViewport() != value)
         {
             viewport = value;
-
-            const D3DVIEWPORT9 vp = 
-            {
-                value.X,      // X
-                value.Y,      // Y
-                value.Width,  // Width
-                value.Height, // Height
-                0.0f,         // MinZ
-                1.0f,         // MaxZ
-            };
-
-            HRESULT result = d3dDevice->SetViewport(&vp);
-            if (result != D3D_OK)
-                throw Exception("d3dDevice->SetViewport != D3D_OK");
+            glViewport(viewport.X, viewport.Y, viewport.Width, viewport.Height);
         }
     }
 
-    void GraphicsDevice::InitializeDevice()
+    void GraphicsDevice::InitializeContext()
     {
         BBAssert(GetWindow());
 
+        Window* window = GetWindow();
+
+        EGLNativeDisplayType nativeDisplay = static_cast<EGLNativeDisplayType>(window->GetDisplayHandle());
+        eglDisplay = eglGetDisplay(nativeDisplay);
+        if (eglDisplay == EGL_NO_DISPLAY)
+        {
+            // "Could not get EGL display"
+            // CloseNativeDisplay(nativeDisplay);
+            return;
+        }
+
+
+        EGLint major = 0;
+        EGLint minor = 0;
+        if (!eglInitialize(eglDisplay, &major, &minor))
+        {
+            // "Could not initialize EGL display"
+            // CloseNativeDisplay(nativeDisplay);
+            return;
+        }
+        if (major < 1 || minor < 4)
+        {
+            // Does not support EGL 1.4
+            // "System does not support at least EGL 1.4"
+            // CloseNativeDisplay(nativeDisplay);
+            return;
+        
+        }
+
+
+        // Obtain the first configuration with a depth buffer
+        EGLint attrs[] = { EGL_DEPTH_SIZE, 16, EGL_NONE };
+        EGLint numberOfConfigs =0;
+        EGLConfig eglConfig = 0;
+        if (!eglChooseConfig(eglDisplay, attrs, &eglConfig, 1, &numberOfConfigs))
+        {
+            // "Could not find valid EGL config"
+            // CloseNativeDisplay(nativeDisplay);
+            return;
+        }
+
+
+        // Get the native visual id
+        int nativeVisualID;
+        if (!eglGetConfigAttrib(eglDisplay, eglConfig, EGL_NATIVE_VISUAL_ID, &nativeVisualID))
+        {
+            // "Could not get native visual id"
+            // CloseNativeDisplay(nativeDisplay);
+            return;
+        }
+
+
+        EGLNativeWindowType nativeWindow = static_cast<EGLNativeWindowType>(window->GetHandle());
+        if (nativeWindow == nullptr)
+        {
+            // "Could not create window"
+            // CloseNativeDisplay(nativeDisplay);
+            return;
+        }
+
+
+        eglSurface = eglCreateWindowSurface(eglDisplay, eglConfig, nativeWindow, NULL);
+        if (eglSurface == EGL_NO_SURFACE)
+        {
+            // "Could not create EGL surface"
+            // DestroyNativeWin(nativeDisplay, nativeWin);
+            // CloseNativeDisplay(nativeDisplay);
+            return;
+        }
+
+
+        eglContext = eglCreateContext(eglDisplay, eglConfig, EGL_NO_CONTEXT, NULL);
+        if (eglContext == EGL_NO_CONTEXT)
+        {
+            // "Could not create EGL context"
+            // DestroyNativeWin(nativeDisplay, nativeWin);
+            // CloseNativeDisplay(nativeDisplay);
+            return;
+        }
+
+
+        if(!eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext))
+        {
+            // "Could not activate EGL context"
+            // DestroyNativeWin(nativeDisplay, nativeWin);
+            // CloseNativeDisplay(nativeDisplay);
+            return;
+        }
+
+
+        capabilities.displayModes;
+        capabilities.vertexShaderVersion = GraphicsCapabilities::VS20;
+        capabilities.pixelShaderVersion = GraphicsCapabilities::PS20;
+
+
+
+        /*
         if (d3dObject == nullptr)
         {
             d3dObject = Direct3DCreate9(D3D_SDK_VERSION);
@@ -300,14 +372,22 @@ namespace Bibim
             BBAssert(d3dCaps.MaxTextureBlendStages >= 4);
             BBAssert(d3dCaps.MaxSimultaneousTextures >= 2);
         }
+        */
 
         SetViewport(Rect(Point2::Zero, resolution));
     }
 
-    void GraphicsDevice::FinalizeDevice()
+    void GraphicsDevice::FinalizeContext()
     {
-        capabilities = GraphicsCapabilities();
-        ::ZeroMemory(&d3dCaps, sizeof(d3dCaps));
-        CheckedRelease(d3dDevice);
+        eglMakeCurrent(EGL_NO_DISPLAY, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+        if (eglDisplay)
+        {
+            if (eglContext)
+                eglDestroyContext(eglDisplay, eglContext);
+            if (eglSurface)
+                eglDestroySurface(eglDisplay, eglSurface);
+
+            eglTerminate(eglDisplay);
+        }
     }
 }

@@ -120,7 +120,6 @@
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Graphics
-#  include <Bibim/DisplaySwapChain.h>
 #  include <Bibim/BitMask.h>
 #  include <Bibim/DynamicTexture2D.h>
 #  include <Bibim/GraphicsDevice.h>

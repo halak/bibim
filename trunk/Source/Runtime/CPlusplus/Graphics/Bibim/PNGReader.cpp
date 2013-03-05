@@ -51,7 +51,15 @@ namespace Bibim
         png_size_t pitch = png_get_rowbytes(pngReader, pngInfo);
         // png_size_t channels = png_get_channels(pngReader, pngInfo);
 
-        BBAssert(static_cast<int>(pitch) == destinationPitch);
+        if (colorType == PNG_COLOR_TYPE_RGB_ALPHA)
+        {
+            BBAssert(static_cast<int>(pitch) == destinationPitch);
+        }
+        else if (colorType == PNG_COLOR_TYPE_RGB)
+        {
+            // RGBA가 아니라 RGB 3byte로 저장되어있기 때문에 표면 pitch의 3/4의 크기여야합니다.
+            BBAssert(static_cast<int>(pitch) == destinationPitch * 3 / 4);
+        }
 
         png_bytep* rows = BBStackAlloc(png_bytep, height);
         for (png_uint_32 i = 0; i < height; i++)
@@ -62,6 +70,23 @@ namespace Bibim
         png_read_end(pngReader, nullptr);
 
         png_destroy_read_struct(&pngReader, &pngInfo, nullptr);
+
+        if (colorType == PNG_COLOR_TYPE_RGB)
+        {
+            for (png_uint_32 i = 0; i < height; i++)
+            {
+                png_bytep row = rows[i];
+                for (int k = static_cast<int>(width - 1); k >= 0; k--)
+                {
+                    const int a = k * 4;
+                    const int b = k * 3;
+                    row[a + 0] = row[b + 0];
+                    row[a + 1] = row[b + 1];
+                    row[a + 2] = row[b + 2];
+                    row[a + 3] = 0xff;
+                }
+            }
+        }
 
         BBStackFree(rows);
 

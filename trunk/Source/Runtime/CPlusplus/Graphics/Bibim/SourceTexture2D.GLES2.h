@@ -30,7 +30,10 @@
                         virtual void Cancel();
 
                     private:
+                        SourceTexture2D* texture;
+                        /* HELLO
                         SourceTexture2DPtr texture;
+                        */
                         AssetStreamReader reader;
                         bool cancelled;
                 };

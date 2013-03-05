@@ -704,7 +704,7 @@ namespace Bibim
                     (*it)->Begin(this);
                 }
 
-                ID3DXEffect* d3dEffect = effects[index]->GetD3DEffect();
+                ID3DXEffect* d3dEffect = effects[index]->GetHandle();
                 d3dEffect->SetMatrix(d3dEffect->GetParameter(NULL, 0), &d3dMVPTransform);
                 d3dEffect->Begin(0, D3DXFX_DONOTSAVESTATE);
                 d3dEffect->BeginPass(0);
@@ -737,7 +737,7 @@ namespace Bibim
 
             if (effects[index])
             {
-                ID3DXEffect* d3dEffect = effects[index]->GetD3DEffect();
+                ID3DXEffect* d3dEffect = effects[index]->GetHandle();
                 d3dEffect->EndPass();
                 d3dEffect->End();
             }
@@ -837,8 +837,8 @@ namespace Bibim
         //        MaskVertex(D3DXVECTOR3(p[3].X, p[3].Y, 0.0f), d3dColor, D3DXVECTOR2(uv2[3].X, uv2[3].Y), D3DXVECTOR2(uv1[3].X, uv1[3].Y)),
         //    };
         //    d3dDevice->SetFVF(MaskVertex::FVF);
-        //    d3dDevice->SetTexture(0, maskTexture->GetD3DTexture());
-        //    d3dDevice->SetTexture(1, texture->GetD3DTexture());
+        //    d3dDevice->SetTexture(0, maskTexture->GetHandle());
+        //    d3dDevice->SetTexture(1, texture->GetHandle());
         //    d3dDevice->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, v, sizeof(MaskVertex));
         //    d3dDevice->SetTexture(0, nullptr);
         //    d3dDevice->SetTexture(1, nullptr);
@@ -891,11 +891,11 @@ namespace Bibim
 
             BeginEffect(item.Mode);
             if (item.KeyTexture)
-                d3dDevice->SetTexture(0, item.KeyTexture->GetD3DTexture());
+                d3dDevice->SetTexture(0, item.KeyTexture->GetHandle());
             else
                 d3dDevice->SetTexture(0, nullptr);
             if (item.KeyMask)
-                d3dDevice->SetTexture(1, item.KeyMask->GetD3DTexture());
+                d3dDevice->SetTexture(1, item.KeyMask->GetHandle());
             else
                 d3dDevice->SetTexture(1, nullptr);
             d3dDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST,
@@ -960,31 +960,25 @@ namespace Bibim
         const Rect currentViewport = graphicsDevice->GetViewport();
         if (currentViewport != lastViewport)
         {
-            const D3DXVECTOR2 viewportSize = D3DXVECTOR2(static_cast<float>(currentViewport.Width), static_cast<float>(currentViewport.Height));
-            const D3DXVECTOR2 halfViewportSize = D3DXVECTOR2(viewportSize.x * 0.5f, viewportSize.y * 0.5f);
-            const float aspect = viewportSize.x / viewportSize.y;
+            const Vector2 viewportSize = Vector2(currentViewport.Width, currentViewport.Height);
+            const Vector2 halfViewportSize = viewportSize * 0.5f;
+            const float aspect = viewportSize.X / viewportSize.Y;
 
-            D3DXMATRIX d3dViewTransform;
-            D3DXMATRIX d3dProjectionTransform;
+            const float distance = Math::Tan(Math::PiOver2 - (fieldOfView * 0.5f)) * halfViewportSize.X / aspect;
+            const Vector3 eye = Vector3(halfViewportSize.X, halfViewportSize.Y, -distance);
+            const Vector3 at = Vector3(halfViewportSize.X, halfViewportSize.Y, 0.0f);
+            const Vector3 up = Vector3(0.0f, 1.0f, 0.0f);
 
-            const float distance = Math::Tan(Math::PiOver2 - (fieldOfView * 0.5f)) * halfViewportSize.x / aspect;
-            const D3DXVECTOR3 eye = D3DXVECTOR3(halfViewportSize.x, halfViewportSize.y, -distance);
-            const D3DXVECTOR3 at = D3DXVECTOR3(halfViewportSize.x, halfViewportSize.y, 0.0f);
-            const D3DXVECTOR3 up = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-            D3DXMatrixLookAtLH(&d3dViewTransform, &eye, &at, &up);
-            D3DXMATRIX t;
-            D3DXMATRIX r;
-            D3DXMatrixTranslation(&t, 0.0f, -viewportSize.y, 0.0f);
-            D3DXMatrixRotationX(&r, Math::Pi);
-            D3DXMATRIX viewResult;
-            D3DXMatrixMultiply(&d3dViewTransform, &r, &d3dViewTransform);
-            D3DXMatrixMultiply(&d3dViewTransform, &t, &d3dViewTransform);
+            viewTransform = Matrix4::LookAt(eye, at, up);
+            viewTransform = Matrix4::RotationX(Math::Pi) * viewTransform;
+            viewTransform = Matrix4::Translation(Vector3(0.0f, -viewportSize.Y, 0.0f)) * viewTransform;
 
-            D3DXMatrixPerspectiveFovLH(&d3dProjectionTransform, fieldOfView, aspect, 0.1f, 10000.0f);
+            projectionTransform = Matrix4::PerspectiveFov(fieldOfView, aspect, 0.1f, 10000.0f);
 
-            viewTransform = Matrix4(d3dViewTransform);
+            D3DXMATRIX v;
+            D3DXMatrixPerspectiveFovLH((D3DXMATRIX*)&v, fieldOfView, aspect, 0.1f, 10000.0f);
+
             viewTransformInv = Matrix4::Inversion(viewTransform);
-            projectionTransform = Matrix4(d3dProjectionTransform);
             projectionTransformInv = Matrix4::Inversion(projectionTransform);
 
             lastViewport = currentViewport;
@@ -997,11 +991,11 @@ namespace Bibim
 
         BeginEffect(pixelMode);
         if (texture)
-            d3dDevice->SetTexture(0, texture->GetD3DTexture());
+            d3dDevice->SetTexture(0, texture->GetHandle());
         else
             d3dDevice->SetTexture(0, nullptr);
         if (mask)
-            d3dDevice->SetTexture(1, mask->GetD3DTexture());
+            d3dDevice->SetTexture(1, mask->GetHandle());
         else
             d3dDevice->SetTexture(1, nullptr);
         d3dDevice->DrawPrimitive(primitiveType, 0, numberOfPrimitives);

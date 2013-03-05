@@ -29,13 +29,13 @@
                 inline int GetSurfaceHeight() const;
                 inline PixelFormat GetPixelFormat() const;
 
-                inline IDirect3DTexture9* GetD3DTexture() const;
+                inline IDirect3DTexture9* GetHandle() const;
 
             protected:
                 Texture2D(GraphicsDevice* graphicsDevice);
                 Texture2D(GraphicsDevice* graphicsDevice, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
 
-                void Setup(IDirect3DTexture9* d3dTexture, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
+                void Setup(IDirect3DTexture9* handle, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
 
             private:
                 GraphicsDevice* graphicsDevice;
@@ -44,7 +44,7 @@
                 int surfaceWidth;
                 int surfaceHeight;
                 PixelFormat pixelFormat;
-                IDirect3DTexture9* d3dTexture;
+                IDirect3DTexture9* handle;
         };
     }
 

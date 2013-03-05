@@ -24,6 +24,7 @@ namespace Bibim
 
     void ScreenshotPrinter::BeginDraw()
     {
+#       if (defined(BIBIM_USE_DIRECTX9))
         if (graphicsDevice == nullptr || graphicsDevice->GetWindow() == nullptr)
             return;
 
@@ -38,15 +39,18 @@ namespace Bibim
 
         d3dDevice->SetRenderTarget(0, d3dSurface);
         d3dDevice->BeginScene();
+#       endif
     }
 
     void ScreenshotPrinter::EndDraw()
     {
+#       if (defined(BIBIM_USE_DIRECTX9))
         BBAssert(graphicsDevice && renderTarget);
 
         IDirect3DDevice9*  d3dDevice = graphicsDevice->GetD3DDevice();
         d3dDevice->EndScene();
         d3dDevice->SetRenderTarget(0, nullptr);
+#       endif
     }
 
     void ScreenshotPrinter::SetGraphicsDevice(GraphicsDevice* value)

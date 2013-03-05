@@ -11,10 +11,9 @@
 
 namespace Bibim
 {
-    ShaderEffect::Parameter::Parameter(ShaderEffect* effect, D3DXHANDLE handle, const D3DXPARAMETER_DESC& desc)
+    ShaderEffect::Parameter::Parameter(ShaderEffect* effect, GLint location)
         : effect(effect),
-          handle(handle),
-          desc(desc)
+          location(location)
     {
     }
 
@@ -24,78 +23,70 @@ namespace Bibim
 
     void ShaderEffect::Parameter::SetValue(bool value)
     {
-        BBAssert(desc.Class == D3DXPC_SCALAR && desc.Type == D3DXPT_BOOL);
-        effect->GetD3DEffect()->SetBool(handle, value);
+        glUseProgram(effect->GetHandle());
+        glUniform1i(location, value ? 1 : 0);
     }
 
     void ShaderEffect::Parameter::SetValue(int value)
     {
-        BBAssert(desc.Class == D3DXPC_SCALAR && desc.Type == D3DXPT_INT);
-        effect->GetD3DEffect()->SetInt(handle, value);
+        glUseProgram(effect->GetHandle());
+        glUniform1i(location, value);
     }
 
     void ShaderEffect::Parameter::SetValue(float value)
     {
-        BBAssert(desc.Class == D3DXPC_SCALAR && desc.Type == D3DXPT_FLOAT);
-        effect->GetD3DEffect()->SetFloat(handle, value);
+        glUseProgram(effect->GetHandle());
+        glUniform1f(location, value);
     }
 
     void ShaderEffect::Parameter::SetValue(Vector2 value)
     {
-        BBAssert(desc.Class == D3DXPC_VECTOR && desc.Type == D3DXPT_FLOAT);
-        const float values[] = { value.X, value.Y };
-        effect->GetD3DEffect()->SetFloatArray(handle, values, sizeof(values) / sizeof(values[0]));
+        glUseProgram(effect->GetHandle());
+        glUniform2f(location, value.X, value.Y);
     }
 
     void ShaderEffect::Parameter::SetValue(Vector3 value)
     {
-        BBAssert(desc.Class == D3DXPC_VECTOR && desc.Type == D3DXPT_FLOAT);
-        const float values[] = { value.X, value.Y, value.Z };
-        effect->GetD3DEffect()->SetFloatArray(handle, values, sizeof(values) / sizeof(values[0]));
+        glUseProgram(effect->GetHandle());
+        glUniform3f(location, value.X, value.Y, value.Z);
     }
 
     void ShaderEffect::Parameter::SetValue(Vector4 value)
     {
-        BBAssert(desc.Class == D3DXPC_VECTOR && desc.Type == D3DXPT_FLOAT);
-        const float values[] = { value.X, value.Y, value.Z, value.W };
-        effect->GetD3DEffect()->SetFloatArray(handle, values, sizeof(values) / sizeof(values[0]));
+        glUseProgram(effect->GetHandle());
+        glUniform4f(location, value.X, value.Y, value.Z, value.W);
     }
 
     void ShaderEffect::Parameter::SetValue(const Matrix4& value)
     {
-        BBAssert(desc.Class == D3DXPC_MATRIX_ROWS && desc.Type == D3DXPT_FLOAT);
-        const D3DXMATRIX matrix(value);
-        effect->GetD3DEffect()->SetMatrix(handle, &matrix);
+        glUseProgram(effect->GetHandle());
+        glUniformMatrix4fv(location, 1, GL_FALSE, value);
     }
 
-    void ShaderEffect::Parameter::SetValue(Texture2D* value)
+    void ShaderEffect::Parameter::SetValue(Texture2D* /*value*/)
     {
-        BBAssert(desc.Class == D3DXPC_OBJECT && desc.Type == D3DXPT_TEXTURE);
-        effect->GetD3DEffect()->SetTexture(handle, value->GetD3DTexture());
+        glUseProgram(effect->GetHandle());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ShaderEffect::ShaderEffect(GraphicsDevice* graphicsDevice, ID3DXEffect* d3dEffect)
+    ShaderEffect::ShaderEffect(GraphicsDevice* graphicsDevice, GLuint handle)
         : graphicsDevice(graphicsDevice),
-          d3dEffect(d3dEffect)
+          handle(handle)
     {
-        /*IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();*/
     }
 
     ShaderEffect::~ShaderEffect()
     {
-        CheckedRelease(d3dEffect);
+        if (handle)
+            glDeleteProgram(handle);
     }
 
     ShaderEffect::Parameter* ShaderEffect::FindParameter(const char* name)
     {
-        if (D3DXHANDLE handle = d3dEffect->GetParameterByName(nullptr, name))
-        {
-            D3DXPARAMETER_DESC desc = { 0, };
-            d3dEffect->GetParameterDesc(handle, &desc);
-            return new Parameter(this, handle, desc);
-        }
+        const int location = glGetUniformLocation(handle, name);
+        if (location >= 0)
+            return new Parameter(this, location);
         else
             return nullptr;
     }
@@ -105,26 +96,88 @@ namespace Bibim
         return FindParameter(name.CStr());
     }
 
+    static GLuint CompileShader(GLenum type, const char* sourceCode, int length)
+    {
+        BBAssertDebug(type == GL_VERTEX_SHADER || type == GL_FRAGMENT_SHADER);
+        
+        GLuint handle = glCreateShader(type);
+        glShaderSource(handle, 1, &sourceCode, &length);
+        glCompileShader(handle);
+
+        GLint status = 0;
+        glGetShaderiv(handle, GL_COMPILE_STATUS, &status);
+        if (status == GL_FALSE)
+        {
+            GLchar messages[256];
+            glGetShaderInfoLog(handle, sizeof(messages), 0, &messages[0]);
+
+            // "Failed to create a vertex shader.";
+            glDeleteShader(handle);
+            return 0;
+        }
+
+        return handle;
+    }
+
     GameAsset* ShaderEffect::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
     {
         GraphicsDevice* graphicsDevice = static_cast<GraphicsDevice*>(reader.ReadModule(GraphicsDevice::ClassID));
-        const String code = reader.ReadString();       
+        const String code = reader.ReadString();
 
-        ID3DXEffect* d3dEffect = nullptr;
-        ID3DXBuffer* errorBuffer = nullptr;
-        HRESULT result = D3DXCreateEffect(graphicsDevice->GetD3DDevice(),
-                                          code.CStr(), code.GetLength(),
-                                          NULL, NULL, D3DXSHADER_OPTIMIZATION_LEVEL3, 0, &d3dEffect, &errorBuffer);
-        if (result != D3D_OK)
+        static const String separator = "//////////";
+        const int index = code.Find(separator);
+        if (index == -1)
+            return nullptr;
+
+        const int vsCodeIndex = 0;
+        const int vsCodeLength = index;
+        const int fsCodeIndex = index + separator.GetLength();
+        const int fsCodeLength = code.GetLength() - fsCodeIndex;
+
+        GLuint vs = CompileShader(GL_VERTEX_SHADER,   &code.CStr()[vsCodeIndex], vsCodeLength);
+        GLuint fs = CompileShader(GL_FRAGMENT_SHADER, &code.CStr()[fsCodeIndex], fsCodeLength);
+
+        if (vs == 0 || fs == 0)
         {
-            Log::Error("ShaderEffect", Int::ToString(result).CStr());
+            if (vs)
+                glDeleteShader(vs);
+            if (fs)
+                glDeleteShader(fs);
 
-            if (errorBuffer)
-                Log::Error("ShaderEffect", reinterpret_cast<const char*>(errorBuffer->GetBufferPointer()));
-
-            Log::Error("ShaderEffect", code.CStr());
+            return nullptr;
         }
 
-        return new ShaderEffect(graphicsDevice, d3dEffect);
+        GLuint programHandle = glCreateProgram();
+        if (programHandle == 0)
+        {
+            glDeleteShader(vs);
+            glDeleteShader(fs);
+            return nullptr;
+        }
+
+        glAttachShader(programHandle, vs);
+        glAttachShader(programHandle, fs);
+
+        glLinkProgram(programHandle);
+
+        GLint status = 0;
+        glGetProgramiv(programHandle, GL_LINK_STATUS, &status);
+        if (status == GL_FALSE) 
+        {
+            GLchar messages[256];
+            glGetProgramInfoLog(programHandle, sizeof(messages), 0, &messages[0]);
+
+            // "Failed to link program."
+            glDeleteProgram(programHandle);
+            glDeleteShader(vs);
+            glDeleteShader(fs);
+            return nullptr;
+        }
+
+        // 이미 Program에 연결되었고 더 이상 쓰이지 않기 때문에 제거합니다.
+        glDeleteShader(vs);
+        glDeleteShader(fs);
+
+        return new ShaderEffect(graphicsDevice, programHandle);
     }
 }

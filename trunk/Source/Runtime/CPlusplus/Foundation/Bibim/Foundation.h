@@ -10,10 +10,9 @@
 
 #       if (defined(WINDOWS) || defined(WIN32) || defined(WIN64))
 #           define BIBIM_PLATFORM_WINDOWS
-#           ifndef BIBIM_USE_OPENGLES2
-#               define BIBIM_USE_DIRECTX9
-// #            define BIBIM_USE_OPENGL2
-#           endif
+// #        define BIBIM_USE_DIRECTX9
+// #        define BIBIM_USE_OPENGL2
+// #        define BIBIM_USE_OPENGLES2
 #       else
 #           define BIBIM_PLATFORM_UNKNOWN
 #       endif

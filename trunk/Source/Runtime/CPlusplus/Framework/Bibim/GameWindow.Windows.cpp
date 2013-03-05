@@ -148,6 +148,11 @@
             return handle;
         }
 
+        void* GameWindow::GetDisplayHandle() const
+        {
+            return nullptr;
+        }
+
         void GameWindow::OnCreated()
         {
         }

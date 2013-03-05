@@ -177,7 +177,6 @@
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Graphics
-                class DisplaySwapChain;
                 class GraphicsCapabilities;
                 class GraphicsDevice;
                 BBForwardDeclareSmartPointerClass(Image);

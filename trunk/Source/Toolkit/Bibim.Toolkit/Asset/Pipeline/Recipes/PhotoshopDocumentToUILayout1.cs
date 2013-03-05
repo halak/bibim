@@ -94,7 +94,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                     image.Name = name;
                     image.IsPickable = defaultPickable;
                     window.AddChild(image);
-                    Process(image, layer, string.Compare(type, "MaskImage", true) == 0);
+                    Process(image, layer, string.Compare(type, "MaskImage", true) == 0 || string.Compare(type, "MaskSprite", true) == 0);
                 }
             }
             else

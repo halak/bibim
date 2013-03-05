@@ -7,8 +7,8 @@
 #   include <Bibim/Color.h>
 #   include <Bibim/GraphicsCapabilities.h>
 #   include <Bibim/Rect.h>
+#   include <Bibim/GLES2.h>
 #   include <vector>
-#   include <d3d9.h>
 
     namespace Bibim
     {
@@ -42,37 +42,21 @@
 
                 inline const GraphicsCapabilities& GetCapabilities() const;
 
-                DisplaySwapChain* GetDefaultSwapChain();
-
-                inline IDirect3D9*       GetD3DObject();
-                inline IDirect3DDevice9* GetD3DDevice();
-                inline const D3DCAPS9&   GetD3DCaps() const;
+            private:
+                void InitializeContext();
+                void FinalizeContext();
 
             private:
-                void InitializeDevice();
-                void FinalizeDevice();
-
-                void AcquireDefaultSwapChain();
-
-                void Add(DisplaySwapChain* item);
-                void Remove(DisplaySwapChain* item);
-
-            private:
-                IDirect3D9*       d3dObject;
-                IDirect3DDevice9* d3dDevice;
-                IDirect3DSurface9* d3dBackbufferSurface;
-                D3DCAPS9 d3dCaps;
+                EGLDisplay eglDisplay;
+                EGLSurface eglSurface;
+                EGLContext eglContext;
                 Window* window;
                 Point2 resolution;
 
                 GraphicsCapabilities capabilities;
-                DisplaySwapChain* defaultSwapChain;
-                std::vector<DisplaySwapChain*> swapChains;
 
                 Rect viewport;
                 bool fullscreen;
-
-                friend class DisplaySwapChain;
         };
     }
 

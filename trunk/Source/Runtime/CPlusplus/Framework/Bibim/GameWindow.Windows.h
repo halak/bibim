@@ -32,6 +32,7 @@
                 bool GetActive() const;
 
                 virtual void* GetHandle() const;
+                virtual void* GetDisplayHandle() const;
 
             protected:
                 virtual ~GameWindow();

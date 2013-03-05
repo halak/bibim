@@ -8,7 +8,7 @@ using Bibim.Graphics;
 
 namespace Bibim.Asset.Pipeline.Recipes
 {
-    public sealed class CompileShaderEffect : CookingNode<ShaderEffect>
+    public abstract class CompileShaderEffect : CookingNode<ShaderEffect>
     {
         #region Fields
         private Dictionary<string, string> defines;
@@ -90,7 +90,7 @@ namespace Bibim.Asset.Pipeline.Recipes
         }
         #endregion
 
-        public override ShaderEffect Cook(CookingContext context)
+        public sealed override ShaderEffect Cook(CookingContext context)
         {
             string assetPath = Path.Combine(context.Directory, context.ExpandVariables(Input));
             string input = Path.Combine(context.BaseDirectory, assetPath);
@@ -99,25 +99,17 @@ namespace Bibim.Asset.Pipeline.Recipes
 
             context.AddDependency(input);
 
-            StringBuilder outputString = new StringBuilder();
-            foreach (var item in defines)
-            {
-                if (string.IsNullOrEmpty(item.Value))
-                    outputString.AppendLine(string.Format("#define {0}", item.Key));
-                else
-                    outputString.AppendLine(string.Format("#define {0} {1}", item.Key, item.Value));
-            }
-
+            List<string> codeLines = new List<string>();
             using (var inputStream = new FileStream(input, FileMode.Open, FileAccess.Read))
             {
                 var reader = new StreamReader(inputStream);
                 while (reader.EndOfStream == false)
-                    outputString.AppendLine(reader.ReadLine());
+                    codeLines.Add(reader.ReadLine());
             }
 
             return new ShaderEffect(null)
             {
-                Tag = new ShaderEffectCookingTag(outputString.ToString())
+                Tag = new ShaderEffectCookingTag(Preprocess(defines, codeLines))
             };
 
             /*
@@ -173,5 +165,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             }
             */
         }
+
+        protected abstract string Preprocess(Dictionary<string, string> defines, IList<string> codeLines);
     }
 }
