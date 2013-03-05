@@ -35,29 +35,13 @@ namespace Bibim
             return nullptr;
 
         SourceTexture2D* texture = new SourceTexture2D(graphicsDevice, width, height, surfaceWidth, surfaceHeight, pixelFormat);
-        AssetLoadingTask* task = new LoadingTask(reader, texture, surfaceHeight);
-        task->Execute();
-        delete task;
-        // reader.ReadAsync(new LoadingTask(reader, texture, surfaceHeight));
+
+        Read(texture, reader);
 
         return texture;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    SourceTexture2D::LoadingTask::LoadingTask(const AssetStreamReader& reader, SourceTexture2D* texture, int totalBytes)
-        : AssetLoadingTask(reader.GetName(), totalBytes),
-          texture(texture),
-          reader(reader),
-          cancelled(false)
-    {
-    }
-
-    SourceTexture2D::LoadingTask::~LoadingTask()
-    {
-    }
-
-    void SourceTexture2D::LoadingTask::Execute()
+    void SourceTexture2D::Read(SourceTexture2D* self, StreamReader& reader)
     {
         enum Compression
         {
@@ -67,12 +51,12 @@ namespace Bibim
 
         const int pitch = reader.ReadInt();
         if (pitch == 0)
-            texture->SetStatus(FaultStatus);
+            self->SetStatus(FaultStatus);
 
         const Compression compression = static_cast<Compression>(reader.ReadByte());
-        const int width  = texture->GetSurfaceWidth();
-        const int height = texture->GetSurfaceHeight();
-        const PixelFormat pixelFormat = texture->GetPixelFormat();
+        const int width  = self->GetSurfaceWidth();
+        const int height = self->GetSurfaceHeight();
+        const PixelFormat pixelFormat = self->GetPixelFormat();
 
         GLint glesFormat = GetGLESPixelFormat(pixelFormat);
         byte* destination = new byte [pitch * height];
@@ -80,17 +64,16 @@ namespace Bibim
         switch (compression)
         {
             case Raw:
-                for (int y = 0; y < height && cancelled == false; y++)
+                for (int y = 0; y < height; y++)
                 {
                     reader.Read(destination, pitch);
                     destination += destinationPitch;
-                    AddLoadedBytes(1);
-                }
+               }
                 break;
             case PNG:
                 {
                     if (PNGReader::Read(reader, destination, destinationPitch) == false)
-                        texture->SetStatus(FaultStatus);
+                        self->SetStatus(FaultStatus);
                 }
                 break;
         }
@@ -108,17 +91,12 @@ namespace Bibim
 
 	    glTexImage2D(GL_TEXTURE_2D, 0, glesFormat, width, height, 0, glesFormat, GL_UNSIGNED_BYTE, destination);
 
-        texture->Setup(textureHandle, texture->GetWidth(), texture->GetHeight(), width, height, pixelFormat);
-        texture->IncreaseRevision();
+        self->Setup(textureHandle, self->GetWidth(), self->GetHeight(), width, height, pixelFormat);
+        self->IncreaseRevision();
 
-        if (texture->GetStatus() == LoadingStatus)
-            texture->SetStatus(CompletedStatus);
+        if (self->GetStatus() == LoadingStatus)
+            self->SetStatus(CompletedStatus);
 
         delete [] destination;
-    }
-
-    void SourceTexture2D::LoadingTask::Cancel()
-    {
-        cancelled = true;
     }
 }
