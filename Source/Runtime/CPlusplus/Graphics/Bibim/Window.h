@@ -26,6 +26,7 @@
                 virtual void SetVisible(bool value) = 0;
 
                 virtual void* GetHandle() const = 0;
+                virtual void* GetDisplayHandle() const = 0;
 
                 inline int GetWheel() const;
 

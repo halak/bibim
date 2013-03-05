@@ -20,11 +20,12 @@ namespace Bibim
             texture->Unlock(*this);
     }
 
-    void DynamicTexture2D::LockedInfo::SetData(DynamicTexture2D* texture, void* buffer, int pitch)
+    void DynamicTexture2D::LockedInfo::SetData(DynamicTexture2D* texture, void* buffer, int pitch, Rect rect)
     {
         this->texture = texture;
         this->buffer = buffer;
         this->pitch = pitch;
+        this->rect = rect;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,7 +120,7 @@ namespace Bibim
         HRESULT result = d3dLockableTexture->LockRect(0, &lockInfo, &d3dLockingRect, 0x00000000);
         if (result == D3D_OK)
         {
-            outLockedInfo.SetData(this, lockInfo.pBits, static_cast<int>(lockInfo.Pitch));
+            outLockedInfo.SetData(this, lockInfo.pBits, static_cast<int>(lockInfo.Pitch), rect);
             SetStatus(LoadingStatus);
             isLocked = true;
             return true;
@@ -141,11 +142,11 @@ namespace Bibim
         if (d3dSystemMemoryTexture)
         {
             BBAssertDebug(d3dSystemMemoryTexture == d3dLockableTexture);
-            GetGraphicsDevice()->GetD3DDevice()->UpdateTexture(d3dSystemMemoryTexture, GetD3DTexture());
+            GetGraphicsDevice()->GetD3DDevice()->UpdateTexture(d3dSystemMemoryTexture, GetHandle());
         }
 
         isLocked = false;
         SetStatus(CompletedStatus);
-        outLockedInfo.SetData(nullptr, nullptr, 0);
+        outLockedInfo.SetData(nullptr, nullptr, 0, Rect::Empty);
     }
 }

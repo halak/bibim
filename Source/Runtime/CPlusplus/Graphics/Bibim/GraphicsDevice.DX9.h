@@ -42,8 +42,6 @@
 
                 inline const GraphicsCapabilities& GetCapabilities() const;
 
-                DisplaySwapChain* GetDefaultSwapChain();
-
                 inline IDirect3D9*       GetD3DObject();
                 inline IDirect3DDevice9* GetD3DDevice();
                 inline const D3DCAPS9&   GetD3DCaps() const;
@@ -51,11 +49,6 @@
             private:
                 void InitializeDevice();
                 void FinalizeDevice();
-
-                void AcquireDefaultSwapChain();
-
-                void Add(DisplaySwapChain* item);
-                void Remove(DisplaySwapChain* item);
 
             private:
                 IDirect3D9*       d3dObject;
@@ -66,13 +59,9 @@
                 Point2 resolution;
 
                 GraphicsCapabilities capabilities;
-                DisplaySwapChain* defaultSwapChain;
-                std::vector<DisplaySwapChain*> swapChains;
 
                 Rect viewport;
                 bool fullscreen;
-
-                friend class DisplaySwapChain;
         };
     }
 

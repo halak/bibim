@@ -5,6 +5,7 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/UIRendererBase.h>
 #   include <Bibim/BlendMode.h>
+#   include <Bibim/GLES2.h>
 #   include <Bibim/Matrix4.h>
 #   include <Bibim/Rect.h>
 #   include <Bibim/RectF.h>
@@ -13,7 +14,6 @@
 #   include <Bibim/Vector3.h>
 #   include <deque>
 #   include <vector>
-#   include <d3dx9.h>
 
     namespace Bibim
     {
@@ -73,57 +73,10 @@
                 inline const Matrix4& GetInversedProjectionTransform();
 
             private:
-                struct Vertex
-                {
-                    D3DXVECTOR3 Position;
-                    D3DCOLOR Color;
-                    D3DXVECTOR2 TexCoord1;
-                    D3DXVECTOR2 TexCoord2;
-
-                    inline Vertex(Vector2 position, D3DCOLOR color);
-                    inline Vertex(Vector2 position, D3DCOLOR color, Vector2 texCoord1);
-                    inline Vertex(Vector2 position, D3DCOLOR color, Vector2 texCoord1, Vector2 texCoord2);
-
-                    inline Vertex(Vector3 position, D3DCOLOR color);
-                    inline Vertex(Vector3 position, D3DCOLOR color, Vector2 texCoord1);
-                    inline Vertex(Vector3 position, D3DCOLOR color, Vector2 texCoord1, Vector2 texCoord2);
-
-                    static const DWORD FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX2;
-                };
-
-                struct QuadSet
-                {
-                    int Count;
-                    Texture2DPtr KeyTexture;
-                    Texture2DPtr KeyMask;
-                    PixelMode Mode;
-                    int StartIndex;
-                    int Capacity;
-
-                    inline QuadSet();
-                };
-
-            private:
-                void InitializeNormalQuadSets();
-                void InitializeBatchQuadSets();
-
-                Vertex* Prepare(Texture2D* texture, Texture2D* mask);
-
-                void BeginAlphaTextureMode();
-                void EndAlphaTextureMode();
                 void BeginEffect(PixelMode mode);
                 void EndEffect(PixelMode mode);
-                void BeginOpacityMaskMode();
-                void EndOpacityMaskMode();
 
-                virtual void Flush();
-                void ReserveCachedQuads(int capacity);
                 void UpdateViewProjectionTransform();
-
-                inline void DrawPrimitives(D3DPRIMITIVETYPE primitiveType, int numberOfPrimitives);
-                inline void DrawPrimitives(D3DPRIMITIVETYPE primitiveType, int numberOfPrimitives, Texture2D* texture);
-                inline void DrawPrimitives(D3DPRIMITIVETYPE primitiveType, int numberOfPrimitives, Texture2D* texture, Texture2D* mask);
-                void DrawPrimitivesActually(D3DPRIMITIVETYPE primitiveType, PixelMode pixelMode, int numberOfPrimitives, Texture2D* texture, Texture2D* mask);
 
             private:
                 GraphicsDevice* graphicsDevice;
@@ -135,23 +88,12 @@
                 Matrix4 projectionTransform;
                 Matrix4 projectionTransformInv;
                 Matrix4 worldTransform;
-                D3DXMATRIX d3dMVPTransform;
+                Matrix4 mvpTransform;
                 BlendMode blendMode;
 
                 ShaderEffectPtr          effects[NumberOfPixelModes];
                 std::vector<EffectorPtr> effectors;
                 String shaderEffectBaseURI;
-
-                IDirect3DStateBlock9* d3dStateBlock;
-                IDirect3DVertexBuffer9* vb;
-                IDirect3DIndexBuffer9*  ib;
-                ID3DXLine* d3dLine;
-                Vertex* lockedVertices;
-                int vbSize;
-
-                QuadSet quadSets[8];
-
-                bool isBatching;
 
                 Rect lastViewport;
 
@@ -163,6 +105,6 @@
         };
     }
 
-#   include <Bibim/UIRenderer.DX9.inl>
+#   include <Bibim/UIRenderer.GLES2.inl>
 
 #endif

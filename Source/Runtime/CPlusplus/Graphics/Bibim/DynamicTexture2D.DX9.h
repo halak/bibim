@@ -21,14 +21,16 @@
 
                         inline void* GetBuffer();
                         inline int GetPitch() const;
+                        inline Rect GetRect() const;
 
                     private:
-                        void SetData(DynamicTexture2D* texture, void* buffer, int pitch);
+                        void SetData(DynamicTexture2D* texture, void* buffer, int pitch, Rect rect);
 
                     private:
                         DynamicTexture2DPtr texture;
                         void* buffer;
                         int   pitch;
+                        Rect  rect;
 
                     private:
                         friend class DynamicTexture2D;

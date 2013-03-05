@@ -10,6 +10,11 @@
         return pitch;
     }
 
+    Rect DynamicTexture2D::LockedInfo::GetRect() const
+    {
+        return rect;
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     bool DynamicTexture2D::IsLocked() const

@@ -4,7 +4,7 @@
     "$type" : "Bibim.Asset.Pipeline.GameAssetRecipe",
     "Cook"  : {
         "$id" : 2,
-        "$type" : "Bibim.Asset.Pipeline.Recipes.CompileShaderEffect",
+        "$type" : "Bibim.Asset.Pipeline.Recipes.CompileHLSLShaderEffect",
         "Input" : "UI.fx",
         "Defines" : "INPUT_COLOR;MASKTEXTURE;FX_OPACITYMAPFAN"
     },

@@ -145,7 +145,7 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Debug GLES2|Win32"
+			Name="Debug.GLES2|Win32"
 			OutputDirectory="..\..\..\Product\Windows\Lib"
 			IntermediateDirectory="(Build)\Bibim.Runtime.$(ConfigurationName)"
 			ConfigurationType="4"
@@ -208,7 +208,7 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Release GLES2|Win32"
+			Name="Release.GLES2|Win32"
 			OutputDirectory="..\..\..\Product\Windows\Lib"
 			IntermediateDirectory="(Build)\Bibim.Runtime.$(ConfigurationName)"
 			ConfigurationType="4"
@@ -1390,7 +1390,7 @@
 					RelativePath=".\UI\Bibim\UIRenderer.DX9.cpp"
 					>
 					<FileConfiguration
-						Name="Debug GLES2|Win32"
+						Name="Debug.GLES2|Win32"
 						ExcludedFromBuild="true"
 						>
 						<Tool
@@ -1398,7 +1398,7 @@
 						/>
 					</FileConfiguration>
 					<FileConfiguration
-						Name="Release GLES2|Win32"
+						Name="Release.GLES2|Win32"
 						ExcludedFromBuild="true"
 						>
 						<Tool
@@ -1781,15 +1781,15 @@
 							>
 						</File>
 						<File
-							RelativePath=".\Graphics\Bibim\UIColorMatrixEffect.cpp"
+							RelativePath=".\UI\Bibim\UIColorMatrixEffect.cpp"
 							>
 						</File>
 						<File
-							RelativePath=".\Graphics\Bibim\UIColorMatrixEffect.h"
+							RelativePath=".\UI\Bibim\UIColorMatrixEffect.h"
 							>
 						</File>
 						<File
-							RelativePath=".\Graphics\Bibim\UIColorMatrixEffect.inl"
+							RelativePath=".\UI\Bibim\UIColorMatrixEffect.inl"
 							>
 						</File>
 						<File
@@ -2107,10 +2107,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\DisplaySwapChain.h"
-					>
-				</File>
-				<File
 					RelativePath=".\Graphics\Bibim\DynamicTexture2D.h"
 					>
 				</File>
@@ -2209,7 +2205,7 @@
 						RelativePath=".\Graphics\Bibim\DynamicTexture2D.DX9.cpp"
 						>
 						<FileConfiguration
-							Name="Debug GLES2|Win32"
+							Name="Debug.GLES2|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -2217,7 +2213,7 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release GLES2|Win32"
+							Name="Release.GLES2|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -2237,7 +2233,7 @@
 						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.cpp"
 						>
 						<FileConfiguration
-							Name="Debug GLES2|Win32"
+							Name="Debug.GLES2|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -2245,7 +2241,7 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release GLES2|Win32"
+							Name="Release.GLES2|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -2265,7 +2261,7 @@
 						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.cpp"
 						>
 						<FileConfiguration
-							Name="Debug GLES2|Win32"
+							Name="Debug.GLES2|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -2273,7 +2269,7 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release GLES2|Win32"
+							Name="Release.GLES2|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -2293,7 +2289,7 @@
 						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.cpp"
 						>
 						<FileConfiguration
-							Name="Debug GLES2|Win32"
+							Name="Debug.GLES2|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -2301,7 +2297,7 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release GLES2|Win32"
+							Name="Release.GLES2|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -2321,7 +2317,7 @@
 						RelativePath=".\Graphics\Bibim\SourceTexture2D.DX9.cpp"
 						>
 						<FileConfiguration
-							Name="Debug GLES2|Win32"
+							Name="Debug.GLES2|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -2329,7 +2325,7 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release GLES2|Win32"
+							Name="Release.GLES2|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -2345,7 +2341,7 @@
 						RelativePath=".\Graphics\Bibim\Texture2D.DX9.cpp"
 						>
 						<FileConfiguration
-							Name="Debug GLES2|Win32"
+							Name="Debug.GLES2|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -2353,7 +2349,7 @@
 							/>
 						</FileConfiguration>
 						<FileConfiguration
-							Name="Release GLES2|Win32"
+							Name="Release.GLES2|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool

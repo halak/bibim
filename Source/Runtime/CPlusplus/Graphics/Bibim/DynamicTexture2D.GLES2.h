@@ -5,6 +5,7 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/Texture2D.GLES2.h>
 #   include <Bibim/Rect.h>
+#   include <vector>
 
     namespace Bibim
     {
@@ -21,14 +22,16 @@
 
                         inline void* GetBuffer();
                         inline int GetPitch() const;
+                        inline Rect GetRect() const;
 
                     private:
-                        void SetData(DynamicTexture2D* texture, void* buffer, int pitch);
+                        void SetData(DynamicTexture2D* texture, void* buffer, int pitch, Rect rect);
 
                     private:
                         DynamicTexture2DPtr texture;
                         void* buffer;
                         int   pitch;
+                        Rect  rect;
 
                     private:
                         friend class DynamicTexture2D;
@@ -43,6 +46,11 @@
                 void Unlock(LockedInfo& outLockedInfo);
 
                 inline bool IsLocked() const;
+
+            private:
+                std::vector<byte> surface;
+                int pitch;
+                bool isLocked;
         };
     }
 

@@ -1,6 +1,8 @@
 ﻿#include <Bibim/PCH.h>
 #include <Bibim/Memory.h>
+#ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
+#endif
 #include <windows.h>
 
 namespace Bibim

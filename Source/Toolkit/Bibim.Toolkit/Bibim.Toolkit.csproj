@@ -139,6 +139,8 @@
     <Compile Include="Asset\Pipeline\GameAssetServer.cs" />
     <Compile Include="Asset\Pipeline\PipedGameAssetServer.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToMaskTexture2D.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\CompileGLSLShaderEffect.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\CompileHLSLShaderEffect.cs" />
     <Compile Include="Asset\Pipeline\Recipes\CompileShaderEffect.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToTexture2D.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ExportImageSet.cs" />

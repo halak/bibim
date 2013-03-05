@@ -4,7 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameAsset.h>
-#   include <d3dx9.h>
+#   include <Bibim/GLES2.h>
 
     namespace Bibim
     {
@@ -27,12 +27,11 @@
                         void SetValue(Texture2D* value);
 
                     private:
-                        Parameter(ShaderEffect* effect, D3DXHANDLE handle, const D3DXPARAMETER_DESC& desc);
+                        Parameter(ShaderEffect* effect, GLint location);
 
                     private:
                         ShaderEffect* effect;
-                        D3DXHANDLE handle;
-                        D3DXPARAMETER_DESC desc;
+                        GLint location;
 
                         friend class ShaderEffect;
                 };
@@ -44,14 +43,14 @@
                        Parameter* FindParameter(const char* name);
                 inline Parameter* FindParameter(const String& name);
 
-                inline ID3DXEffect* GetD3DEffect() const;
+                inline GLuint GetHandle() const;
 
             private:
-                ShaderEffect(GraphicsDevice* graphicsDevice, ID3DXEffect* d3dEffect);
+                ShaderEffect(GraphicsDevice* graphicsDevice, GLuint handle);
 
             private:
                 GraphicsDevice* graphicsDevice;
-                ID3DXEffect* d3dEffect;
+                GLuint handle;
         };
 
         typedef ShaderEffect::Parameter ShaderEffectParameter;

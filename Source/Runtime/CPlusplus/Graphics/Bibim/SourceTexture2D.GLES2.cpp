@@ -1,5 +1,5 @@
 ﻿#include <Bibim/PCH.h>
-#include <Bibim/SourceTexture2D.DX9.h>
+#include <Bibim/SourceTexture2D.GLES2.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/GraphicsDevice.GLES2.h>
@@ -35,7 +35,10 @@ namespace Bibim
             return nullptr;
 
         SourceTexture2D* texture = new SourceTexture2D(graphicsDevice, width, height, surfaceWidth, surfaceHeight, pixelFormat);
-        reader.ReadAsync(new LoadingTask(reader, texture, surfaceHeight));
+        AssetLoadingTask* task = new LoadingTask(reader, texture, surfaceHeight);
+        task->Execute();
+        delete task;
+        // reader.ReadAsync(new LoadingTask(reader, texture, surfaceHeight));
 
         return texture;
     }
@@ -62,41 +65,18 @@ namespace Bibim
             PNG,
         };
 
-        /*
         const int pitch = reader.ReadInt();
         if (pitch == 0)
             texture->SetStatus(FaultStatus);
 
         const Compression compression = static_cast<Compression>(reader.ReadByte());
-
-        IDirect3DDevice9* d3dDevice = texture->GetGraphicsDevice()->GetD3DDevice();
         const int width  = texture->GetSurfaceWidth();
         const int height = texture->GetSurfaceHeight();
         const PixelFormat pixelFormat = texture->GetPixelFormat();
 
-        D3DFORMAT d3dFormat = D3DFMT_UNKNOWN;
-        switch (pixelFormat)
-        {
-            case A8R8G8B8Pixels:
-                d3dFormat = D3DFMT_A8R8G8B8;
-                break;
-            case A8Pixels:
-                d3dFormat = D3DFMT_A8;
-                break;
-        }
-
-        IDirect3DTexture9* d3dTexture = nullptr;
-        IDirect3DTexture9* d3dSysMemTexture = nullptr;
-        HRESULT result = D3D_OK;
-        result = d3dDevice->CreateTexture(width, height, 1,
-                                          0, d3dFormat, D3DPOOL_DEFAULT, &d3dTexture, nullptr);
-        result = d3dDevice->CreateTexture(width, height, 1,
-                                          0, d3dFormat, D3DPOOL_SYSTEMMEM, &d3dSysMemTexture, nullptr);
-
-        D3DLOCKED_RECT d3dLockedRect;
-        d3dSysMemTexture->LockRect(0, &d3dLockedRect, nullptr, 0);
-        byte* destination = static_cast<byte*>(d3dLockedRect.pBits);
-        const int destinationPitch = static_cast<int>(d3dLockedRect.Pitch);
+        GLint glesFormat = GetGLESPixelFormat(pixelFormat);
+        byte* destination = new byte [pitch * height];
+        const int destinationPitch = pitch;
         switch (compression)
         {
             case Raw:
@@ -114,17 +94,27 @@ namespace Bibim
                 }
                 break;
         }
-        d3dSysMemTexture->UnlockRect(0);
 
-        d3dDevice->UpdateTexture(d3dSysMemTexture, d3dTexture);
-        d3dSysMemTexture->Release();
+        GLuint textureHandle = 0;
 
-        texture->Setup(d3dTexture, texture->GetWidth(), texture->GetHeight(), width, height, pixelFormat);
+        glActiveTexture(GL_TEXTURE0);
+        glGenTextures(1, &textureHandle);
+        glBindTexture(GL_TEXTURE_2D, textureHandle);
+
+	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	    glTexImage2D(GL_TEXTURE_2D, 0, glesFormat, width, height, 0, glesFormat, GL_UNSIGNED_BYTE, destination);
+
+        texture->Setup(textureHandle, texture->GetWidth(), texture->GetHeight(), width, height, pixelFormat);
         texture->IncreaseRevision();
-        */
 
         if (texture->GetStatus() == LoadingStatus)
             texture->SetStatus(CompletedStatus);
+
+        delete [] destination;
     }
 
     void SourceTexture2D::LoadingTask::Cancel()

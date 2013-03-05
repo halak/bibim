@@ -28,9 +28,10 @@ class SpriteTest : public GameFramework
         {
             GameFramework::Initialize();
             GetWindow()->SetTitle("Sprite");
+            GetWindow()->MoveToScreenCenter();
 
             GameAssetStorage*   gas = new GameAssetStorage(GetModules());
-            PipedAssetProvider* pap = new PipedAssetProvider(gas, "TestAssets", "SpriteSample");
+            PipedAssetProvider* pap = new PipedAssetProvider(gas, PipedAssetProvider::DefaultPipeName, "SpriteSample");
             FileAssetProvider*  fap = new FileAssetProvider(gas);
 
             UIWindowPtr window = new UIWindow();
@@ -38,7 +39,7 @@ class SpriteTest : public GameFramework
             window->SetSizeMode(UIVisual::AbsoluteSize);
 
             UIDomain*           uid = new UISimpleDomain(window);
-            UIRenderer*         uir = new UIRenderer(GetGraphicsDevice(), gas, String::Empty);
+            UIRenderer*         uir = new UIRenderer(GetGraphicsDevice(), gas, "Asset\\Shader");
 
             GameModuleNode* gasNode = GetModules()->GetRoot()->AttachChild(gas);
             gasNode->AttachChild(fap);
@@ -53,11 +54,11 @@ class SpriteTest : public GameFramework
             texture1 = static_cast<SourceTexture2D*>(gas->Load("Asset\\BigHello"));
             texture2 = static_cast<SourceTexture2D*>(gas->Load("Asset\\Background"));
 
-            ScriptPtr script = static_cast<Script*>(gas->Load("Script"));
-            ScriptThreadPtr process = new ScriptThread(script);
+            //ScriptPtr script = static_cast<Script*>(gas->Load("Script"));
+            //ScriptThreadPtr process = new ScriptThread(script);
             //process->Resume();
-            Any r1 = process->Call("Sum1To100");
-            Any r2 = process->Call("Factorial", 6);
+            //Any r1 = process->Call("Sum1To100");
+            ///Any r2 = process->Call("Factorial", 6);
 
             storage = gas;
             uiDomain = uid;
@@ -90,8 +91,8 @@ class SpriteTest : public GameFramework
 
                 virtual void OnBegan(UIHandledDrawingContext& context)
                 {
-                    context.Draw(Vector2(0.0f, 0.0f),   app->texture1);
-                    context.Draw(Vector2(256.0f, 0.0f), app->texture2);
+                    context.DrawUnclipped(Vector2(0.0f, 0.0f),   app->texture1);
+                    context.DrawUnclipped(Vector2(256.0f, 0.0f), app->texture2);
                 }
             };
             Handler handler(this);

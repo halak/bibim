@@ -36,6 +36,26 @@ namespace Bibim
     {
     }
 
+    Vector3 Matrix4::Transform(Vector3 value) const
+    {
+        const float x = value.X;
+        const float y = value.Y;
+        const float z = value.Z;
+        return Vector3(x*M00 + y*M10 + z*M20 + M30,
+                       x*M01 + y*M11 + z*M21 + M31,
+                       x*M02 + y*M12 + z*M22 + M32);
+    }
+
+    Vector3 Matrix4::TransformNormal(Vector3 value) const
+    {
+        const float x = value.X;
+        const float y = value.Y;
+        const float z = value.Z;
+        return Vector3(x*M00 + y*M10 + z*M20,
+                       x*M01 + y*M11 + z*M21,
+                       x*M02 + y*M12 + z*M22);
+    }
+
     Matrix4 Matrix4::operator + () const
     {
         return Matrix4(+M00, +M01, +M02, +M03,
@@ -343,6 +363,37 @@ namespace Bibim
                        value.M01, value.M11, value.M21, value.M31,
                        value.M02, value.M12, value.M22, value.M32,
                        value.M03, value.M13, value.M23, value.M33);
+    }
+
+    Matrix4 Matrix4::LookAt(Vector3 eye, Vector3 at, Vector3 up)
+    {
+        Vector3 zAxis = at - eye;
+        zAxis.Normalize();
+
+        Vector3 xAxis = up.Cross(zAxis);
+        xAxis.Normalize();
+
+        const Vector3 yAxis = zAxis.Cross(xAxis);
+
+        const float tx = -xAxis.Dot(eye);
+        const float ty = -yAxis.Dot(eye);
+        const float tz = -zAxis.Dot(eye);
+        return Matrix4(xAxis.X, yAxis.X, zAxis.X, 0.0f,
+                       xAxis.Y, yAxis.Y, zAxis.Y, 0.0f,
+                       xAxis.Z, yAxis.Z, zAxis.Z, 0.0f,
+                       tx,      ty,      tz,      1.0f);
+    }
+
+    Matrix4 Matrix4::PerspectiveFov(float fov, float aspect, float nearZ, float farZ)
+    {
+        const float h = 1.0f / Math::Tan(fov * 0.5f);
+        const float w = h / aspect;
+        const float distance = farZ - nearZ;
+
+        return Matrix4(w,    0.0f, 0.0f,                      0.0f,
+                       0.0f, h,    0.0f,                      0.0f,
+                       0.0f, 0.0f, farZ / distance,           1.0f,
+                       0.0f, 0.0f, -nearZ * farZ / distance,  0.0f);
     }
 
     Matrix4 operator * (float left, const Matrix4& right)

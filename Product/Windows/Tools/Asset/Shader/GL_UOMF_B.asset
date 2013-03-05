@@ -1,0 +1,14 @@
+﻿
+{
+    "$id" : 1,
+    "$type" : "Bibim.Asset.Pipeline.GameAssetRecipe",
+    "Cook"  : {
+        "$id" : 2,
+        "$type" : "Bibim.Asset.Pipeline.Recipes.CompileGLSLShaderEffect",
+        "Input" : "UI.glsl",
+        "Defines" : "INPUT_COLORTEXTURE;MASKTEXTURE;FX_OPACITYMAPFAN"
+    },
+    "Author" : "",
+    "Comment" : "",
+    "CanHotload" : false
+}

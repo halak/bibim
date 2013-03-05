@@ -30,10 +30,8 @@
         return pixelFormat;
     }
 
-    /*
-    IDirect3DTexture9* Texture2D::GetD3DTexture() const
+    GLuint Texture2D::GetHandle() const
     {
-        return d3dTexture;
+        return handle;
     }
-    */
 }

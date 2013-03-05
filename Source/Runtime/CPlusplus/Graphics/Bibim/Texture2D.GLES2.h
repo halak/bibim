@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameAsset.h>
+#   include <Bibim/GLES2.h>
 
     namespace Bibim
     {
@@ -28,13 +29,16 @@
                 inline int GetSurfaceHeight() const;
                 inline PixelFormat GetPixelFormat() const;
 
-                // inline IDirect3DTexture9* GetD3DTexture() const;
+                inline GLuint GetHandle() const;
 
             protected:
                 Texture2D(GraphicsDevice* graphicsDevice);
                 Texture2D(GraphicsDevice* graphicsDevice, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
 
-                // void Setup(IDirect3DTexture9* d3dTexture, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
+                void Setup(GLuint handle, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
+
+                static int GetBytesPerPixel(PixelFormat value);
+                static GLint GetGLESPixelFormat(PixelFormat value);
 
             private:
                 GraphicsDevice* graphicsDevice;
@@ -43,7 +47,7 @@
                 int surfaceWidth;
                 int surfaceHeight;
                 PixelFormat pixelFormat;
-                // IDirect3DTexture9* d3dTexture;
+                GLuint handle;
         };
     }
 

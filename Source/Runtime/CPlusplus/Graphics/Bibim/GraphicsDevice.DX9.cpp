@@ -17,7 +17,6 @@ namespace Bibim
           d3dBackbufferSurface(nullptr),
           window(nullptr),
           resolution(1024, 768),
-          defaultSwapChain(nullptr),
           viewport(Rect::Empty),
           fullscreen(false)
     {
@@ -30,7 +29,6 @@ namespace Bibim
           d3dBackbufferSurface(nullptr),
           window(nullptr),
           resolution(resolutionWidth, resolutionHeight),
-          defaultSwapChain(nullptr),
           viewport(Rect::Empty),
           fullscreen(false)
     {

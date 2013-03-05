@@ -44,14 +44,14 @@
                        Parameter* FindParameter(const char* name);
                 inline Parameter* FindParameter(const String& name);
 
-                inline ID3DXEffect* GetD3DEffect() const;
+                inline ID3DXEffect* GetHandle() const;
 
             private:
-                ShaderEffect(GraphicsDevice* graphicsDevice, ID3DXEffect* d3dEffect);
+                ShaderEffect(GraphicsDevice* graphicsDevice, ID3DXEffect* handle);
 
             private:
                 GraphicsDevice* graphicsDevice;
-                ID3DXEffect* d3dEffect;
+                ID3DXEffect* handle;
         };
 
         typedef ShaderEffect::Parameter ShaderEffectParameter;

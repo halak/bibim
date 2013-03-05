@@ -312,10 +312,15 @@ namespace Bibim
             Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetBottom() - 0.5f),
         };
         const Color color = Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity()));
+        const RectF clippingRect = RectF(0.0f,
+                                         0.0f,
+                                         static_cast<float>(texture->GetWidth())  / texture->GetSurfaceWidth(),
+                                         static_cast<float>(texture->GetHeight()) / texture->GetSurfaceHeight());
+        
         if (currentGeomEffect)
-            currentGeomEffect->DrawQuad(renderer, points, color, RectF(0.0f, 0.0f, 1.0f, 1.0f), texture);
+            currentGeomEffect->DrawQuad(renderer, points, color, clippingRect, texture);
         else
-            renderer->DrawQuad(points, color, RectF(0.0f, 0.0f, 1.0f, 1.0f), texture);
+            renderer->DrawQuad(points, color, clippingRect, texture);
     }
 
     void UIDrawingContext::DrawUnclipped(Vector2 position, float rotation, Image* image)

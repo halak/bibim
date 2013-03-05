@@ -22,6 +22,11 @@
             Matrix4(const float* values);
             Matrix4(const Matrix4& original);
 
+            Vector3 Transform(Vector3 value) const;
+            Vector3 TransformNormal(Vector3 value) const;
+
+            inline Vector3 GetTranslation() const;
+
             Matrix4 operator + () const;
             Matrix4 operator - () const;
 
@@ -48,6 +53,8 @@
             static Matrix4 Scaling(Vector3 value);
             static Matrix4 Inversion(const Matrix4& value);
             static Matrix4 Transpose(const Matrix4& value);
+            static Matrix4 LookAt(Vector3 eye, Vector3 at, Vector3 up);
+            static Matrix4 PerspectiveFov(float fov, float aspect, float nearZ, float farZ);
 
             friend Matrix4 operator * (float left, const Matrix4& right);
 

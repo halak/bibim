@@ -65,7 +65,7 @@ namespace Bibim
 
     Vector2 UIVisualVisitor::Project(Vector2 point) const
     {
-        /*
+        /* UNUSED
         D3DXVECTOR3 d3dPoint = D3DXVECTOR3(point.X, point.Y, 0.0f);
 
         D3DXVec3Project(d3dPoint, sizeof(D3DXVECTOR3), nullptr, (D3DXMATRIX*)&projectionTransform, (D3DXMATRIX*)&viewTransform, (D3DXMATRIX*)&currentTransform, 4);
@@ -87,6 +87,7 @@ namespace Bibim
 
     void UIVisualVisitor::Project(Vector2& inOutPoint0, Vector2& inOutPoint1, Vector2& inOutPoint2, Vector2& inOutPoint3) const
     {
+        /* UNUSED
         D3DXVECTOR3 d3dPoints[4] =
         {
             D3DXVECTOR3(inOutPoint0.X, inOutPoint0.Y, 0.0f),
@@ -101,10 +102,12 @@ namespace Bibim
         inOutPoint1 = Vector2(d3dPoints[1].x, d3dPoints[1].y);
         inOutPoint2 = Vector2(d3dPoints[2].x, d3dPoints[2].y);
         inOutPoint3 = Vector2(d3dPoints[3].x, d3dPoints[3].y);
+        */
     }
 
     void UIVisualVisitor::Project(Vector2* inOutPoints, int count) const
     {
+        /* UNUSED
         if (inOutPoints == nullptr || count == 0)
             return;
 
@@ -118,6 +121,7 @@ namespace Bibim
             inOutPoints[i] = Vector2(d3dPoints[i].x, d3dPoints[i].y);
 
         BBStackFree(d3dPoints);
+        */
     }
 
     void UIVisualVisitor::Visit(UIVisual* target)
@@ -172,30 +176,37 @@ namespace Bibim
         parentTransformInv = oldParentTransformInv;
     }
 
+    static Vector3 PlaneIntersectLine(Vector4 plane, Vector3 rayStart, Vector3 rayEnd)
+    {
+        const Vector3 direction = rayEnd - rayStart;
+        const Vector3 normal = Vector3(plane.X, plane.Y, plane.Z);
+        const float dot = direction.Dot(normal);
+        if (dot == 0.0f)
+            return Vector3(BigFloat, BigFloat, BigFloat);
+
+        const float t = (plane.W + normal.Dot(rayStart)) / dot;
+        return rayStart - (direction * t);
+    }
+
     Vector2 UIVisualVisitor::UnprojectPoint(Vector2 point, const Matrix4& inversedTransform) const
     {
         const RectF viewport = RectF(0, 0, 800, 600);
         const float width  = viewport.Width;
         const float height = viewport.Height;
-        const D3DXVECTOR3 direction = D3DXVECTOR3(+(((2.0f * point.X) / width ) - 1.0f) / projectionTransform.M00,
-                                                  -(((2.0f * point.Y) / height) - 1.0f) / projectionTransform.M11,
-                                                  1.0f);
+        const Vector3 direction = Vector3(+(((2.0f * point.X) / width ) - 1.0f) / projectionTransform.M00,
+                                          -(((2.0f * point.Y) / height) - 1.0f) / projectionTransform.M11,
+                                          1.0f);
 
-        const D3DXVECTOR3 rayDirection = D3DXVECTOR3((direction.x * viewTransformInv.M00 + direction.y * viewTransformInv.M10 + direction.z * viewTransformInv.M20),
-                                                     (direction.x * viewTransformInv.M01 + direction.y * viewTransformInv.M11 + direction.z * viewTransformInv.M21),
-                                                     (direction.x * viewTransformInv.M02 + direction.y * viewTransformInv.M12 + direction.z * viewTransformInv.M22));
-        const D3DXVECTOR3 rayOrigin = D3DXVECTOR3(viewTransformInv.M30, viewTransformInv.M31, viewTransformInv.M32);
+        const Vector3 rayOrigin = viewTransformInv.GetTranslation();
+        const Vector3 rayDirection = viewTransformInv.TransformNormal(direction);
 
-        D3DXVECTOR3 transformedRayOrigin;
-        D3DXVECTOR3 transformedRayDirection;
-        D3DXVec3TransformCoord(&transformedRayOrigin, &rayOrigin, (const D3DXMATRIX*)&inversedTransform);
-        D3DXVec3TransformNormal(&transformedRayDirection, &rayDirection, (const D3DXMATRIX*)&inversedTransform);
+        const Vector3 transformedRayOrigin = inversedTransform.Transform(rayOrigin);
+        const Vector3 transformedRayDirection = inversedTransform.TransformNormal(rayDirection);
 
-        D3DXVECTOR3 pointOnPlane;
-        const D3DXPLANE plane = D3DXPLANE(0.0f, 0.0f, 1.0f, 0.0f);
-        const D3DXVECTOR3 transformedRayEnd = transformedRayOrigin + (transformedRayDirection * BigFloat);
-        D3DXPlaneIntersectLine(&pointOnPlane, &plane, &transformedRayOrigin, &transformedRayEnd);
+        const Vector4 plane = Vector4(0.0f, 0.0f, 1.0f, 0.0f);
+        const Vector3 transformedRayEnd = transformedRayOrigin + (transformedRayDirection * BigFloat);
+        const Vector3 pointOnPlane = PlaneIntersectLine(plane, transformedRayOrigin, transformedRayEnd);
 
-        return Vector2(pointOnPlane.x, pointOnPlane.y);
+        return Vector2(pointOnPlane.X, pointOnPlane.Y);
     }
 }
