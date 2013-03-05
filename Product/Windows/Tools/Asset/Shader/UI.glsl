@@ -1,15 +1,5 @@
 uniform mat4 MVP;
 
-#if defined(FX_COLORMATRIX)
-uniform vec4 CMRed;
-uniform vec4 CMGreen;
-uniform vec4 CMBlue;
-#endif
-
-#if defined(FX_OPACITYMAPFAN) || defined(FX_OPACITYMAPBAR)
-uniform vec4 OMValues;
-#endif
-
 attribute vec4 Position;
 attribute vec4 Color;
 varying   vec4 fColor;
@@ -25,7 +15,7 @@ varying   vec2 fTexCoord2;
 void main()
 {
     gl_Position = MVP * Position;
-    fColor = Color;
+    fColor = Color * 0.0039215686274509803921568627451;
     
 #if defined(INPUT_COLORTEXTURE) || defined(INPUT_ALPHATEXTURE)
     fTexCoord1 = TexCoord1;
@@ -38,6 +28,16 @@ void main()
 ////////////////////////////////////////////////////////////////////////////////
 
 varying vec4 fColor;
+
+#if defined(FX_COLORMATRIX)
+uniform vec4 CMRed;
+uniform vec4 CMGreen;
+uniform vec4 CMBlue;
+#endif
+
+#if defined(FX_OPACITYMAPFAN) || defined(FX_OPACITYMAPBAR)
+uniform vec4 OMValues;
+#endif
 
 uniform sampler2D MainSampler;
 varying vec2 fTexCoord1;
@@ -52,9 +52,9 @@ void main()
 #if defined(INPUT_COLOR)
     vec4 result = fColor;
 #elif defined(INPUT_COLORTEXTURE)
-    vec4 result = texture(MainSampler, fTexCoord1);// * fColor;
+    vec4 result = texture(MainSampler, fTexCoord1) * fColor;
 #elif defined(INPUT_ALPHATEXTURE)
-    vec4 result = vec4(fColor.rgb, 0.5);//texture(MainSampler, fTexCoord1).a);// * fColor.a);
+    vec4 result = vec4(fColor.rgb, texture(MainSampler, fTexCoord1).a * fColor.a);
 #endif
 
 #if defined(MASKTEXTURE)
@@ -62,7 +62,7 @@ void main()
 #endif
 
 #if defined(FX_COLORMATRIX)
-    result = float4
+    result = vec4
     (
         dot(result.rgb, CMRed.rgb) + CMRed.a,
         dot(result.rgb, CMGreen.rgb) + CMGreen.a,
