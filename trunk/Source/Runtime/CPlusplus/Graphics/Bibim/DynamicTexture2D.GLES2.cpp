@@ -95,7 +95,13 @@ namespace Bibim
         glBindTexture(GL_TEXTURE_2D, GetHandle());
         glTexSubImage2D(GL_TEXTURE_2D,
                         0,
-                        0, 0, GetSurfaceWidth(), GetSurfaceHeight(), glesFormat, GL_UNSIGNED_BYTE, &surface[0]);
+                        0,
+                        lockedRect.Y,
+                        GetSurfaceWidth(),
+                        lockedRect.Height,
+                        glesFormat,
+                        GL_UNSIGNED_BYTE,
+                        &surface[lockedRect.Y * pitch]);
 
         isLocked = false;
         SetStatus(CompletedStatus);

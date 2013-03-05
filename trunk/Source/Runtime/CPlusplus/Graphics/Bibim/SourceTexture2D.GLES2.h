@@ -19,24 +19,7 @@
             private:
                 SourceTexture2D(GraphicsDevice* graphicsDevice, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
 
-            private:
-                class LoadingTask : public AssetLoadingTask
-                {
-                    public:
-                        LoadingTask(const AssetStreamReader& reader, SourceTexture2D* texture, int totalBytes);
-                        virtual ~LoadingTask();
-
-                        virtual void Execute();
-                        virtual void Cancel();
-
-                    private:
-                        SourceTexture2D* texture;
-                        /* HELLO
-                        SourceTexture2DPtr texture;
-                        */
-                        AssetStreamReader reader;
-                        bool cancelled;
-                };
+                static void Read(SourceTexture2D* self, StreamReader& reader);
         };
     }
 
