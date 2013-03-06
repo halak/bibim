@@ -32,12 +32,12 @@ namespace Bibim
             DirectionalRenderer() { }
             virtual ~DirectionalRenderer() { }
 
-	        static DirectionalRenderer* create()
-	        {
-		        DirectionalRenderer* obj = new DirectionalRenderer();
-		        registerObject(obj);
-		        return obj;
-	        }
+            static DirectionalRenderer* create()
+            {
+                DirectionalRenderer* obj = new DirectionalRenderer();
+                registerObject(obj);
+                return obj;
+            }
 
             virtual void Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette);
     };
@@ -52,12 +52,12 @@ namespace Bibim
             RandomAngleAxisRenderer();
             virtual ~RandomAngleAxisRenderer() { }
 
-	        static RandomAngleAxisRenderer* create()
-	        {
-		        RandomAngleAxisRenderer* obj = new RandomAngleAxisRenderer();
-		        registerObject(obj);
-		        return obj;
-	        }
+            static RandomAngleAxisRenderer* create()
+            {
+                RandomAngleAxisRenderer* obj = new RandomAngleAxisRenderer();
+                registerObject(obj);
+                return obj;
+            }
 
             virtual void Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette);
 
@@ -76,12 +76,12 @@ namespace Bibim
             SingleAngleAxisRenderer(Vector3 axis);
             virtual ~SingleAngleAxisRenderer() { }
 
-	        static SingleAngleAxisRenderer* create(Vector3 axis)
-	        {
-		        SingleAngleAxisRenderer* obj = new SingleAngleAxisRenderer(axis);
-		        registerObject(obj);
-		        return obj;
-	        }
+            static SingleAngleAxisRenderer* create(Vector3 axis)
+            {
+                SingleAngleAxisRenderer* obj = new SingleAngleAxisRenderer(axis);
+                registerObject(obj);
+                return obj;
+            }
 
             virtual void Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette);
 
@@ -96,12 +96,12 @@ namespace Bibim
             MultipleAngleAxisRenderer(std::vector<Vector3>& axes);
             virtual ~MultipleAngleAxisRenderer() { }
 
-	        static MultipleAngleAxisRenderer* create(std::vector<Vector3>& axes)
-	        {
-		        MultipleAngleAxisRenderer* obj = new MultipleAngleAxisRenderer(axes);
-		        registerObject(obj);
-		        return obj;
-	        }
+            static MultipleAngleAxisRenderer* create(std::vector<Vector3>& axes)
+            {
+                MultipleAngleAxisRenderer* obj = new MultipleAngleAxisRenderer(axes);
+                registerObject(obj);
+                return obj;
+            }
 
             virtual void Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette);
 
@@ -554,7 +554,7 @@ namespace Bibim
                 break;
         }
 
-	    Model* model = Model::create(modelFlags.Enable | modelFlags.Mutable | modelFlags.Random | modelFlags.Interpolated,
+        Model* model = Model::create(modelFlags.Enable | modelFlags.Mutable | modelFlags.Random | modelFlags.Interpolated,
                                      modelFlags.Mutable,
                                      modelFlags.Random,
                                      modelFlags.Interpolated);
@@ -573,13 +573,13 @@ namespace Bibim
 
         MinMax lifetime(t, "Lifetime");
         if (lifetime.IsValid)
-	        model->setLifeTime(lifetime.Min, lifetime.Max);
+            model->setLifeTime(lifetime.Min, lifetime.Max);
 
         int capacity = Pool<Particle>::DEFAULT_CAPACITY;
         if (t.has("Capacity"))
             capacity = t.get<int>("Capacity");
 
-	    Group* group = Group::create(model, capacity);
+        Group* group = Group::create(model, capacity);
 
         if (t.type("Emitters") == LUA_TTABLE)
         {
