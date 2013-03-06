@@ -4,6 +4,8 @@
 #include <limits.h>
 #include <cstdlib>
 
+// TODO: 코드 정리 좀 해야합니다.
+
 namespace Bibim
 {
     bool Bool::Parse(const char* s, int length)
@@ -52,7 +54,7 @@ namespace Bibim
         if (s == nullptr)
             return 0;
 
-        const int result = atoi(s);
+        const int result = std::atoi(s);
         if (result < Min)
             return Min;
         if (result > Max)
@@ -76,7 +78,7 @@ namespace Bibim
         if (s == nullptr)
             return 0;
 
-        const int result = atoi(s);
+        const int result = std::atoi(s);
         if (result < Min)
             return Min;
         if (result > Max)
@@ -105,9 +107,28 @@ namespace Bibim
 
     String Int::ToString(int value)
     {
-        char result[16];
-        _itoa_s(value, result, 10);
-        return result;
+        static const int BUFFER_LENGTH = 16;
+
+        const bool isNegative = (value < 0);
+        if (isNegative)
+            value = -value;
+
+        char s[BUFFER_LENGTH];
+        s[BUFFER_LENGTH - 1] = '\0';
+
+        int index = BUFFER_LENGTH - 2;
+        do
+        {
+            s[index--] = "0123456789"[value % 10];
+            value /= 10;
+        } while (value > 0);
+
+        if (isNegative)
+            s[index] = '-';
+        else
+            index++;
+
+        return String(&s[index], BUFFER_LENGTH - 1 - index);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,16 +139,41 @@ namespace Bibim
     longint LongInt::Parse(const char* s, int /*length*/)
     {
         if (s)
-            return static_cast<longint>(_atoi64(s)); // atoll
+        {
+#           if (defined(BIBIM_PLATFORM_WINDOWS))
+                return static_cast<longint>(_atoi64(s));
+#           else
+                return static_cast<longint>(atoll(s));
+#           endif
+        }
         else
             return 0;
     }
 
     String LongInt::ToString(longint value)
     {
-        char result[32];
-        _i64toa_s(value, result, sizeof(result), 10);
-        return result;
+        static const int BUFFER_LENGTH = 32;
+
+        const bool isNegative = (value < 0);
+        if (isNegative)
+            value = -value;
+
+        char s[BUFFER_LENGTH];
+        s[BUFFER_LENGTH - 1] = '\0';
+
+        int index = BUFFER_LENGTH - 2;
+        do
+        {
+            s[index--] = "0123456789"[value % 10];
+            value /= 10;
+        } while (value > 0);
+
+        if (isNegative)
+            s[index] = '-';
+        else
+            index++;
+
+        return String(&s[index], BUFFER_LENGTH - 1 - index);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,7 +184,7 @@ namespace Bibim
     float Float::Parse(const char* s, int /*length*/)
     {
         if (s)
-            return static_cast<float>(atof(s));
+            return static_cast<float>(std::atof(s));
         else
             return 0.0f;
     }

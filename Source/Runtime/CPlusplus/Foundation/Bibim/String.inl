@@ -284,6 +284,22 @@ namespace Bibim
         return i;
     }
 
+
+    
+    int String::CompareCharsIgnoreCase(const char* a, const char* b)
+    {
+#   if (defined(BIBIM_PLATFORM_WINDOWS))
+        return _stricmp(a, b);
+#   elif (defined(BIBIM_PLATFORM_UNIX))
+        return strcasecmp(a, b);
+#   endif
+    }
+
+    bool String::EqualsCharsIgnoreCase(const char* a, const char* b)
+    {
+        return CompareCharsIgnoreCase(a, b) == 0;
+    }
+
     int String::CharsLength(const char* s)
     {
         int result = 0;

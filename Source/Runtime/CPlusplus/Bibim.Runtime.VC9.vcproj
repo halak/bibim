@@ -2627,19 +2627,7 @@
 				Name="Audio"
 				>
 				<File
-					RelativePath=".\Audio\Bibim\AudioDevice.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\Audio\Bibim\AudioDevice.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Audio\Bibim\AudioDevice.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Audio\Bibim\BGM.cpp"
 					>
 				</File>
 				<File
@@ -2647,21 +2635,49 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Audio\Bibim\BGM.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Audio\Bibim\SoundFX.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\Audio\Bibim\SoundFX.h"
 					>
 				</File>
-				<File
-					RelativePath=".\Audio\Bibim\SoundFX.inl"
+				<Filter
+					Name="Irrklang"
 					>
-				</File>
+					<File
+						RelativePath=".\Audio\Bibim\AudioDevice.Irrklang.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Audio\Bibim\AudioDevice.Irrklang.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Audio\Bibim\AudioDevice.Irrklang.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Audio\Bibim\BGM.Irrklang.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Audio\Bibim\BGM.Irrklang.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Audio\Bibim\BGM.Irrklang.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\Audio\Bibim\SoundFX.Irrklang.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Audio\Bibim\SoundFX.Irrklang.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Audio\Bibim\SoundFX.Irrklang.inl"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="GFX"

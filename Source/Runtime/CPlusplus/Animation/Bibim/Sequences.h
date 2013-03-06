@@ -45,7 +45,7 @@
                 void UpdateStartTimes();
 
             private:
-                std::vector<Keyframe<T>> keyframes;
+                std::vector<Keyframe<T> > keyframes;
                 float duration;
                 bool startTimeChanged;
         };

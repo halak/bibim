@@ -142,6 +142,12 @@
     <Filter Include="04. References">
       <UniqueIdentifier>{79a147ac-c7b5-4fdd-bd1c-deacd938216e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Game\Audio\Android">
+      <UniqueIdentifier>{6e638c8f-c22a-46b8-9eb5-0776ec4c30a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Audio\Irrklang">
+      <UniqueIdentifier>{772e7250-8f6b-422d-8972-9be2545ca70e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Asset\Bibim\AssetLoadingTask.cpp">
@@ -317,9 +323,6 @@
     </ClCompile>
     <ClCompile Include="Gameplay\Bibim\PathFinder.cpp">
       <Filter>03. Game\Gameplay\PathFinder</Filter>
-    </ClCompile>
-    <ClCompile Include="Input\Bibim\Key.cpp">
-      <Filter>03. Game\Input</Filter>
     </ClCompile>
     <ClCompile Include="Input\Bibim\Keyboard.cpp">
       <Filter>03. Game\Input</Filter>
@@ -630,15 +633,6 @@
     <ClCompile Include="Framework\Bibim\GameWindow.Windows.cpp">
       <Filter>03. Game\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Audio\Bibim\AudioDevice.cpp">
-      <Filter>03. Game\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Audio\Bibim\BGM.cpp">
-      <Filter>03. Game\Audio</Filter>
-    </ClCompile>
-    <ClCompile Include="Audio\Bibim\SoundFX.cpp">
-      <Filter>03. Game\Audio</Filter>
-    </ClCompile>
     <ClCompile Include="GFX\Bibim\SparkParticleEngine.cpp">
       <Filter>03. Game\GFX</Filter>
     </ClCompile>
@@ -770,6 +764,30 @@
     </ClCompile>
     <ClCompile Include="FileSystem\Bibim\FileStream.iOS.cpp">
       <Filter>03. Game\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Bibim\Key.cpp">
+      <Filter>03. Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Clock.Android.cpp">
+      <Filter>03. Game\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\Bibim\AudioDevice.Android.cpp">
+      <Filter>03. Game\Audio\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\Bibim\BGM.Android.cpp">
+      <Filter>03. Game\Audio\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\Bibim\SoundFX.Android.cpp">
+      <Filter>03. Game\Audio\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\Bibim\AudioDevice.Irrklang.cpp">
+      <Filter>03. Game\Audio\Irrklang</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\Bibim\BGM.Irrklang.cpp">
+      <Filter>03. Game\Audio\Irrklang</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\Bibim\SoundFX.Irrklang.cpp">
+      <Filter>03. Game\Audio\Irrklang</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1328,15 +1346,6 @@
     <ClInclude Include="Framework\Bibim\GameWindow.Windows.h">
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Audio\Bibim\AudioDevice.h">
-      <Filter>03. Game\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Audio\Bibim\BGM.h">
-      <Filter>03. Game\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="Audio\Bibim\SoundFX.h">
-      <Filter>03. Game\Audio</Filter>
-    </ClInclude>
     <ClInclude Include="GFX\Bibim\SparkParticleEngine.h">
       <Filter>03. Game\GFX</Filter>
     </ClInclude>
@@ -1523,6 +1532,30 @@
     </ClInclude>
     <ClInclude Include="FileSystem\Bibim\FileStream.iOS.h">
       <Filter>03. Game\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\Bibim\AudioDevice.Android.h">
+      <Filter>03. Game\Audio\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\Bibim\SoundFX.Android.h">
+      <Filter>03. Game\Audio\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\Bibim\BGM.Android.h">
+      <Filter>03. Game\Audio\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\Bibim\AudioDevice.Irrklang.h">
+      <Filter>03. Game\Audio\Irrklang</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\Bibim\BGM.Irrklang.h">
+      <Filter>03. Game\Audio\Irrklang</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\Bibim\SoundFX.Irrklang.h">
+      <Filter>03. Game\Audio\Irrklang</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\Bibim\AudioDevice.h">
+      <Filter>03. Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\Bibim\SoundFX.h">
+      <Filter>03. Game\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1985,15 +2018,6 @@
     <None Include="Framework\Bibim\GameWindow.Windows.inl">
       <Filter>03. Game\Framework</Filter>
     </None>
-    <None Include="Audio\Bibim\AudioDevice.inl">
-      <Filter>03. Game\Audio</Filter>
-    </None>
-    <None Include="Audio\Bibim\BGM.inl">
-      <Filter>03. Game\Audio</Filter>
-    </None>
-    <None Include="Audio\Bibim\SoundFX.inl">
-      <Filter>03. Game\Audio</Filter>
-    </None>
     <None Include="GFX\Bibim\SparkParticleEngine.inl">
       <Filter>03. Game\GFX</Filter>
     </None>
@@ -2122,6 +2146,27 @@
     </None>
     <None Include="FileSystem\Bibim\FileStream.iOS.inl">
       <Filter>03. Game\FileSystem</Filter>
+    </None>
+    <None Include="Audio\Bibim\AudioDevice.Android.inl">
+      <Filter>03. Game\Audio\Android</Filter>
+    </None>
+    <None Include="Audio\Bibim\BGM.Android.inl">
+      <Filter>03. Game\Audio\Android</Filter>
+    </None>
+    <None Include="Audio\Bibim\SoundFX.Android.inl">
+      <Filter>03. Game\Audio\Android</Filter>
+    </None>
+    <None Include="Audio\Bibim\SoundFX.Irrklang.inl">
+      <Filter>03. Game\Audio\Irrklang</Filter>
+    </None>
+    <None Include="Audio\Bibim\AudioDevice.Irrklang.inl">
+      <Filter>03. Game\Audio\Irrklang</Filter>
+    </None>
+    <None Include="Audio\Bibim\BGM.Irrklang.inl">
+      <Filter>03. Game\Audio\Irrklang</Filter>
+    </None>
+    <None Include="Audio\Bibim\BGM.h">
+      <Filter>03. Game\Audio</Filter>
     </None>
   </ItemGroup>
 </Project>

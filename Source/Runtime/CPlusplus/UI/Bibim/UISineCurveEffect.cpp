@@ -2,6 +2,7 @@
 #include <Bibim/UISineCurveEffect.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Math.h>
+#include <Bibim/String.h>
 
 namespace Bibim
 {
@@ -485,18 +486,18 @@ namespace Bibim
 
     UISineCurveEffect::Form UISineCurveEffect::ConvertFromStringToForm(const char* value)
     {
-             if (value == nullptr)                       return VerticalWave;
-        else if (_stricmp(value, "Vertical") == 0)       return VerticalWave;
-        else if (_stricmp(value, "VerticalWave") == 0)   return VerticalWave;
-        else if (_stricmp(value, "VerticalPot") == 0)    return VerticalPot;
-        else if (_stricmp(value, "Horizontal") == 0)     return HorizontalWave;
-        else if (_stricmp(value, "HorizontalWave") == 0) return HorizontalWave;
-        else if (_stricmp(value, "HorizontalPot") == 0)  return HorizontalPot;
-        else if (_stricmp(value, "Left") == 0)           return Left;
-        else if (_stricmp(value, "Right") == 0)          return Right;
-        else if (_stricmp(value, "Top") == 0)            return Top;
-        else if (_stricmp(value, "Bottom") == 0)         return Bottom;
-        else                                             return VerticalWave;
+             if (value == nullptr)                                       return VerticalWave;
+        else if (String::EqualsCharsIgnoreCase(value, "Vertical"))       return VerticalWave;
+        else if (String::EqualsCharsIgnoreCase(value, "VerticalWave"))   return VerticalWave;
+        else if (String::EqualsCharsIgnoreCase(value, "VerticalPot"))    return VerticalPot;
+        else if (String::EqualsCharsIgnoreCase(value, "Horizontal"))     return HorizontalWave;
+        else if (String::EqualsCharsIgnoreCase(value, "HorizontalWave")) return HorizontalWave;
+        else if (String::EqualsCharsIgnoreCase(value, "HorizontalPot"))  return HorizontalPot;
+        else if (String::EqualsCharsIgnoreCase(value, "Left"))           return Left;
+        else if (String::EqualsCharsIgnoreCase(value, "Right"))          return Right;
+        else if (String::EqualsCharsIgnoreCase(value, "Top"))            return Top;
+        else if (String::EqualsCharsIgnoreCase(value, "Bottom"))         return Bottom;
+        else                                                             return VerticalWave;
     }
     
     const char* UISineCurveEffect::ConvertFromFormToString(Form value)

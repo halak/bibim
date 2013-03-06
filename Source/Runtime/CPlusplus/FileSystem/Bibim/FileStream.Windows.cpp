@@ -2,7 +2,7 @@
 #include <Bibim/FileStream.Windows.h>
 #include <Bibim/Math.h>
 #include <Bibim/Numerics.h>
-# include <windows.h>
+#include <windows.h>
 
 namespace Bibim
 {

@@ -37,7 +37,6 @@
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // FileSystem
 #  include <Bibim/FileStream.h>
-#  include <Bibim/FileStream.Windows.h>
 #  include <Bibim/MPQ.h>
 #  include <Bibim/MPQStream.h>
 #  include <Bibim/FileLogger.h>
@@ -67,7 +66,6 @@
 #include <Bibim/EvalBoard.h>
 #include <Bibim/EvalVariables.h>
 #include <Bibim/SEquences.h>
-#  include <Bibim/Environment.Windows.h>
 #  include <Bibim/Exception.h>
 #  include <Bibim/Foundation.h>
 #  include <Bibim/FWD.h>
@@ -97,7 +95,6 @@
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Framework
 #  include <Bibim/GameFramework.h>
-#  include <Bibim/GameFramework.Windows.h>
 #  include <Bibim/GameWindow.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -142,11 +139,8 @@
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // IPC
 #  include <Bibim/PipeClientStream.h>
-#  include <Bibim/PipeClientStream.Windows.h>
 #  include <Bibim/PipeServerStream.h>
-#  include <Bibim/PipeServerStream.Windows.h>
 #  include <Bibim/PipeStream.h>
-#  include <Bibim/PipeStream.Windows.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Module
@@ -173,10 +167,8 @@
 #  include <Bibim/Atomic.h>
 #  include <Bibim/AutoLocker.h>
 #  include <Bibim/Lock.h>
-#  include <Bibim/Lock.Windows.h>
 #  include <Bibim/ManualLocker.h>
 #  include <Bibim/Thread.h>
-#  include <Bibim/Thread.Windows.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Time

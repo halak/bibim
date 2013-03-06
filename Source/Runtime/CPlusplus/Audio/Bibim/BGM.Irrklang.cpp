@@ -1,7 +1,7 @@
 #include <Bibim/PCH.h>
-#include <Bibim/BGM.h>
+#include <Bibim/BGM.Irrklang.h>
 #include <Bibim/Assert.h>
-#include <Bibim/AudioDevice.h>
+#include <Bibim/AudioDevice.Irrklang.h>
 #include <Bibim/Math.h>
 using namespace irrklang;
 

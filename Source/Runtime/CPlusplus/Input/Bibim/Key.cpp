@@ -1,5 +1,6 @@
 ﻿#include <Bibim/PCH.h>
 #include <Bibim/Key.h>
+#include <Bibim/String.h>
 #include <algorithm>
 
 namespace Bibim
@@ -78,7 +79,7 @@ namespace Bibim
     {
         bool operator () (Key::Entry a, Key::Entry b)
         {
-            return _stricmp(a.first, b.first) < 0;
+            return String::CompareCharsIgnoreCase(a.first, b.first) < 0;
         }
     };
 
@@ -200,7 +201,7 @@ namespace Bibim
             return None;
 
         std::vector<Entry>::const_iterator it = std::lower_bound(stringToCodeMap.begin(), stringToCodeMap.end(), Entry(value, None), CompareByString());
-        if (_stricmp((*it).first, value) == 0)
+        if (String::EqualsCharsIgnoreCase((*it).first, value))
             return (*it).second;
         else
             return None;

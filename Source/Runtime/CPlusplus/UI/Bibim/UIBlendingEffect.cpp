@@ -49,18 +49,18 @@ namespace Bibim
 
     BlendMode UIBlendingEffect::ConvertFromStringToBlendMode(const char* value)
     {
-             if (value == nullptr)                      return NormalBlend;
-        else if (_stricmp(value, "Normal") == 0)        return NormalBlend;
-        else if (_stricmp(value, "Add") == 0)           return AdditiveBlend;
-        else if (_stricmp(value, "Lighten") == 0)       return LightenBlend;
-        else if (_stricmp(value, "Darken") == 0)        return DarkenBlend;
-        else if (_stricmp(value, "Mul") == 0)           return MultiplyBlend;
-        else if (_stricmp(value, "Screen") == 0)        return ScreenBlend;
-        else if (_stricmp(value, "Additive") == 0)      return AdditiveBlend;
-        else if (_stricmp(value, "Muliply") == 0)       return MultiplyBlend;
-        else if (_stricmp(value, "Dodge") == 0)         return AdditiveBlend;
-        else if (_stricmp(value, "LinearDodge") == 0)   return AdditiveBlend;
-        else                                            return NormalBlend;
+             if (value == nullptr)                                      return NormalBlend;
+        else if (String::EqualsCharsIgnoreCase(value, "Normal"))        return NormalBlend;
+        else if (String::EqualsCharsIgnoreCase(value, "Add"))           return AdditiveBlend;
+        else if (String::EqualsCharsIgnoreCase(value, "Lighten"))       return LightenBlend;
+        else if (String::EqualsCharsIgnoreCase(value, "Darken"))        return DarkenBlend;
+        else if (String::EqualsCharsIgnoreCase(value, "Mul"))           return MultiplyBlend;
+        else if (String::EqualsCharsIgnoreCase(value, "Screen"))        return ScreenBlend;
+        else if (String::EqualsCharsIgnoreCase(value, "Additive"))      return AdditiveBlend;
+        else if (String::EqualsCharsIgnoreCase(value, "Muliply"))       return MultiplyBlend;
+        else if (String::EqualsCharsIgnoreCase(value, "Dodge"))         return AdditiveBlend;
+        else if (String::EqualsCharsIgnoreCase(value, "LinearDodge"))   return AdditiveBlend;
+        else                                                            return NormalBlend;
     }
     
     const char* UIBlendingEffect::ConvertFromBlendModeToString(BlendMode value)
