@@ -74,6 +74,13 @@ namespace Bibim
         : graphicsDevice(graphicsDevice),
           handle(handle)
     {
+        positionLocation = glGetAttribLocation(handle, "Position");
+        colorLocation = glGetAttribLocation(handle, "Color");
+        texCoord1Location = glGetAttribLocation(handle, "TexCoord1");
+        texCoord2Location = glGetAttribLocation(handle, "TexCoord2");
+        mainSamplerLocation = glGetUniformLocation(handle, "MainSampler");
+        maskSamplerLocation = glGetUniformLocation(handle, "MaskSampler");
+        mvpTransformLocation = glGetUniformLocation(handle, "MVP");
     }
 
     ShaderEffect::~ShaderEffect()

@@ -88,12 +88,12 @@ namespace Bibim
     {
     }
 
-    void UIBlendingEffect::Effector::Begin(UIRenderer* renderer)
+    void UIBlendingEffect::Effector::Begin(UIRendererBase* renderer)
     {
         oldMode = renderer->Setup(mode);
     }
 
-    void UIBlendingEffect::Effector::End(UIRenderer* renderer)
+    void UIBlendingEffect::Effector::End(UIRendererBase* renderer)
     {
         renderer->Setup(oldMode);
     }

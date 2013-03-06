@@ -85,7 +85,7 @@ namespace Bibim
         return UnprojectPoint(point, parentTransformInv);
     }
 
-    void UIVisualVisitor::Project(Vector2& inOutPoint0, Vector2& inOutPoint1, Vector2& inOutPoint2, Vector2& inOutPoint3) const
+    void UIVisualVisitor::Project(Vector2& /*inOutPoint0*/, Vector2& /*inOutPoint1*/, Vector2& /*inOutPoint2*/, Vector2& /*inOutPoint3*/) const
     {
         /* UNUSED
         D3DXVECTOR3 d3dPoints[4] =
@@ -105,7 +105,7 @@ namespace Bibim
         */
     }
 
-    void UIVisualVisitor::Project(Vector2* inOutPoints, int count) const
+    void UIVisualVisitor::Project(Vector2* /*inOutPoints*/, int /*count*/) const
     {
         /* UNUSED
         if (inOutPoints == nullptr || count == 0)

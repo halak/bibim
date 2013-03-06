@@ -36,8 +36,8 @@
                         Effector(Effector* parent, UIBlendingEffect* effect);
                         virtual ~Effector();
 
-                        virtual void Begin(UIRenderer* renderer);
-                        virtual void End(UIRenderer* renderer);
+                        virtual void Begin(UIRendererBase* renderer);
+                        virtual void End(UIRendererBase* renderer);
 
                     private:
                         BlendMode mode;

@@ -65,7 +65,7 @@ float4 PSMain(VSInput input) : COLOR0
 #endif
 
 #if defined(MASKTEXTURE)
-    float4 mask = tex2D(MaskSampler, input.TexCoord2).a;
+    float mask = tex2D(MaskSampler, input.TexCoord2).a;
 #endif
 
 #if defined(FX_COLORMATRIX)
