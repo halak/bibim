@@ -538,3 +538,23 @@ ConversionResult ConvertUTF8toUTF16 (
     similarly unrolled loops.
 
    --------------------------------------------------------------------- */
+
+int GetUTF8Length(UTF16 value)
+{
+#define COUNTOF(x) (sizeof(x) / sizeof(x[0]))
+
+    const UTF16 source[1] = { value };
+    UTF8 target[8];
+
+    const UTF16* sourcePointer = source;
+    UTF8* targetPointer = target;
+    const ConversionResult result = ConvertUTF16toUTF8(&sourcePointer,
+                                                       sourcePointer + COUNTOF(source),
+                                                       &targetPointer,
+                                                       targetPointer + COUNTOF(target),
+                                                       strictConversion);
+    if (result == conversionOK)
+        return targetPointer - target;
+    else
+        return 0;
+}

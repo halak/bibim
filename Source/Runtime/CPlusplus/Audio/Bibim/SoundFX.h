@@ -4,7 +4,7 @@
 
 #   include <Bibim/Foundation.h>
 
-#   if (defined(BIBIM_PLATFORM_WINDOWS) && defined(BIBIM_PLATFORM_LINUX) && defined(BIBIM_PLATFORM_MACOS))
+#   if (defined(BIBIM_PLATFORM_WINDOWS) || defined(BIBIM_PLATFORM_LINUX) || defined(BIBIM_PLATFORM_MACOS))
 #       include <Bibim/SoundFX.Irrklang.h>
 #   elif (defined(BIBIM_PLATFORM_ANDROID))
 #       include <Bibim/SoundFX.Android.h>
