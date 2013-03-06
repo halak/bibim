@@ -3,6 +3,7 @@
 #define __BIBIM_LOCK_UNIX_H__
 
 #   include <Bibim/FWD.h>
+#   include <pthread.h>
 
     namespace Bibim
     {
@@ -19,6 +20,8 @@
                 bool TryAcquire();
 
             private:
+                mutable pthread_mutex_t mutex;
+
                 friend class AutoLocker;
                 friend class ManualLocker;
         };

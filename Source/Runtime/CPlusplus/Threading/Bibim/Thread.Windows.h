@@ -3,35 +3,19 @@
 #define __BIBIM_THREAD_WINDOWS_H__
 
 #   include <Bibim/FWD.h>
+#   include <Bibim/ThreadBase.h>
 
     namespace Bibim
     {
-        class Thread
+        class Thread : public ThreadBase
         {
             BBThisIsNoncopyableClass(Thread);
             public:
-                enum Priority
-                {
-                    LowestPriority,
-                    LowPriority,
-                    NormalPriority,
-                    HighestPriority,
-                    HighPriority,
-                };
-
-            public:
                 Thread();
-                Thread(bool autoStart);
                 virtual ~Thread();
 
-                void Resume();
-                void Suspend();
+                void Start();
                 void Join();
-
-                Priority GetPriority() const;
-                void SetPriority(Priority value);
-
-                inline int GetID() const;
 
             public:
                 static void Sleep();
@@ -43,16 +27,10 @@
                 virtual void OnWork() = 0;
 
             private:
-                void Construct(bool autoStart);
-
-            private:
-                int id;
                 void* handle;
 
                 struct Internal;
         };
     }
-
-#   include <Bibim/Thread.Windows.inl>
 
 #endif

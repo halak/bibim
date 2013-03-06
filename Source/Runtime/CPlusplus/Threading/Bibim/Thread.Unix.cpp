@@ -1,56 +1,60 @@
 #include <Bibim/PCH.h>
 #include <Bibim/Thread.Unix.h>
+#include <unistd.h>
 
 namespace Bibim
 {
-    Thread::Thread()
+    // bool Thread::IsInitialized = false;
+    struct Thread::Internal
     {
-        Construct(true);
-    }
+        static void* Procedure(void* parameters)
+        {
+            static_cast<Thread*>(parameters)->OnWork();
+            return nullptr;
+        }
+    };
 
-    Thread::Thread(bool autoStart)
+    Thread::Thread()
+        : handle(0)
     {
-        Construct(autoStart);
     }
 
     Thread::~Thread()
     {
+        if (handle)
+            pthread_detach(handle);
     }
 
-    void Thread::Resume()
+    void Thread::Start()
     {
-    }
+        if (handle)
+            return;
 
-    void Thread::Suspend()
-    {
+        pthread_create(&handle, nullptr, Internal::Procedure, this);
     }
 
     void Thread::Join()
     {
-    }
-
-    Thread::Priority Thread::GetPriority() const
-    {
-        return NormalPriority;
-    }
-
-    void Thread::SetPriority(Priority value)
-    {
+        if (handle)
+        {
+            pthread_join(handle, nullptr);
+            pthread_detach(handle);
+            handle = 0;
+        }
     }
 
     void Thread::Sleep()
     {
+        sleep(1);
     }
 
     void Thread::Sleep(int milliSeconds)
     {
+        sleep(milliSeconds);
     }
 
     void Thread::Exit()
     {
-    }
-
-    void Thread::Construct(bool autoStart)
-    {
+        pthread_exit(nullptr);
     }
 }

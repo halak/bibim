@@ -10,145 +10,13 @@ namespace Bibim
 {
     HttpClient::HttpClient()
     {
-        requestThread.Client = this;
     }
 
     HttpClient::~HttpClient()
     {
-        requestThread.RequestClose();
-        requestThread.Join();
-
-        ResponseCollection temporaryResponses;
-        responses.swap(temporaryResponses);
-
-        for (ResponseCollection::const_iterator it = temporaryResponses.begin(); it != temporaryResponses.end(); it++)
-            delete (*it);
     }
 
-    void HttpClient::Update(float /*dt*/, int /*timestamp*/)
-    {
-        if (responses.size() == 0)
-            return;
-
-        ResponseCollection temporaryResponses;
-        {
-            BBAutoLock(responsesLock);
-            responses.swap(temporaryResponses);
-        }
-
-        for (ResponseCollection::const_iterator it = temporaryResponses.begin(); it != temporaryResponses.end(); it++)
-        {
-            (*it)->Invoke();
-            delete (*it);
-        }
-    }
-
-    void HttpClient::GET(const String& url, Callback* callback)
-    {
-        std::vector<KeyValue> v;
-        DoRequest("GET", url, v, callback);
-    }
-
-    void HttpClient::GET(const String& url, const std::vector<KeyValue>& params, Callback* callback)
-    {
-        std::vector<KeyValue> v;
-        v.reserve(params.size());
-        for (std::vector<KeyValue>::const_iterator it = params.begin(); it != params.end(); it++)
-        {
-            if ((*it).first.IsEmpty() == false)
-                v.push_back(*it);
-        }
-        DoRequest("GET", url, v, callback);
-    }
-
-    void HttpClient::GET(const String& url, const std::map<String, String>& params, Callback* callback)
-    {
-        std::vector<KeyValue> v;
-        for (std::map<String, String>::const_iterator it = params.begin(); it != params.end(); it++)
-        {
-            if ((*it).first.IsEmpty() == false)
-                v.push_back(*it);
-        }
-        DoRequest("GET", url, v, callback);
-    }
-
-    void HttpClient::POST(const String& url, Callback* callback)
-    {
-        std::vector<KeyValue> v;
-        DoRequest("POST", url, v, callback);
-    }
-
-    void HttpClient::POST(const String& url, const std::vector<KeyValue>& params, Callback* callback)
-    {
-        std::vector<KeyValue> v;
-        v.reserve(params.size());
-        for (std::vector<KeyValue>::const_iterator it = params.begin(); it != params.end(); it++)
-        {
-            if ((*it).first.IsEmpty() == false)
-                v.push_back(*it);
-        }
-        DoRequest("POST", url, v, callback);
-    }
-
-    void HttpClient::POST(const String& url, const std::map<String, String>& params, Callback* callback)
-    {
-        std::vector<KeyValue> v;
-        for (std::map<String, String>::const_iterator it = params.begin(); it != params.end(); it++)
-        {
-            if ((*it).first.IsEmpty() == false)
-                v.push_back(*it);
-        }
-        DoRequest("POST", url, v, callback);
-    }
-
-    void HttpClient::DoRequest(const char* method, const String& url, std::vector<KeyValue>& params, Callback* callback)
-    {
-        requestThread.Add(new Request(method, url, params, userAgent, callback));
-    }
-
-    void HttpClient::OnResponse(Response* response)
-    {
-        BBAutoLock(responsesLock);
-        responses.push_back(response);
-    }
-
-    HttpClient::StatusCode HttpClient::NormalizeStatusCode(int statusCode)
-    {
-        if (200 <= statusCode && statusCode < 300)
-            return Ok;
-        else if (300 <= statusCode && statusCode < 400)
-            return Unknown;
-        else if (400 <= statusCode && statusCode < 500)
-        {
-            if (statusCode == 404)
-                return NotFound;
-            else if (statusCode == 408)
-                return Timeout;
-            else
-                return BadRequest;
-        }
-        else if (500 <= statusCode && statusCode < 600)
-            return ServerError;
-        else
-            return Unknown;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    HttpClient::Request::Request(const char* method, const String& url, std::vector<KeyValue>& params, const String& userAgent, Callback* callback)
-        : method(method),
-          url(url),
-          userAgent(userAgent),
-          callback(callback)
-    {
-        this->params.swap(params);
-    }
-
-    HttpClient::Request::~Request()
-    {
-    }
-
-    void HttpClient::Request::Run(HttpClient* client)
+    HttpClient::Response* HttpClient::OnRequest(Request* request)
     {
         struct LocalHandles
         {
@@ -194,26 +62,26 @@ namespace Bibim
         urlComponents.dwUrlPathLength = sizeof(urlPath) / sizeof(urlPath[0]);
         urlComponents.lpszExtraInfo = urlExtra;
         urlComponents.dwExtraInfoLength = sizeof(urlExtra) / sizeof(urlExtra[0]);
-        BOOL cracked = ::InternetCrackUrl(url.CStr(), url.GetLength(), ICU_ESCAPE, &urlComponents);
+        BOOL cracked = ::InternetCrackUrl(request->GetURL().CStr(), request->GetURL().GetLength(), ICU_ESCAPE, &urlComponents);
         if (cracked == FALSE)
-            return client->OnResponse(new Response(ClientError, callback));
+            return new Response(request, ClientError);
         if (urlComponents.nScheme != INTERNET_SCHEME_HTTP)
-            return client->OnResponse(new Response(ClientError, callback));
+            return new Response(request, ClientError);
 
         LocalHandles handles;
 
-        handles.session = ::InternetOpen(client->GetUserAgent().CStr(),
+        handles.session = ::InternetOpen(request->GetUserAgent().CStr(),
                                          INTERNET_OPEN_TYPE_PRECONFIG,
                                          NULL, NULL, 0);
         if (handles.session == NULL)
-            return client->OnResponse(new Response(ClientError, callback));
+            return new Response(request, ClientError);
 
         handles.connection = ::InternetConnect(handles.session,
                                                urlComponents.lpszHostName, urlComponents.nPort,
                                                NULL, NULL,
                                                INTERNET_SERVICE_HTTP, 0, NULL);
         if (handles.connection == NULL)
-            return client->OnResponse(new Response(ClientError, callback));
+            return new Response(request, ClientError);
 
         const int urlPathAndExtraLength = urlComponents.dwUrlPathLength + urlComponents.dwExtraInfoLength;
         char* urlPathAndExtra = BBStackAlloc(char, urlPathAndExtraLength + 1);
@@ -221,14 +89,14 @@ namespace Bibim
         String::CopyChars(&urlPathAndExtra[urlComponents.dwUrlPathLength], urlComponents.lpszExtraInfo);
         urlPathAndExtra[urlPathAndExtraLength] = '\0';
 
-        handles.request = ::HttpOpenRequest(handles.connection, method, urlPathAndExtra,
+        handles.request = ::HttpOpenRequest(handles.connection, request->GetMethod(), urlPathAndExtra,
                                             HTTP_VERSION, NULL, NULL,
                                             INTERNET_FLAG_RELOAD | INTERNET_FLAG_DONT_CACHE | INTERNET_FLAG_NO_COOKIES,
                                             NULL);
 
         BBStackFree(urlPathAndExtra);
         if (handles.request == NULL)
-            return client->OnResponse(new Response(ClientError, callback));
+            return new Response(request, ClientError);
 
         BOOL result = TRUE;
 
@@ -241,11 +109,12 @@ namespace Bibim
         result = ::InternetSetOption(handles.request, INTERNET_OPTION_SECURITY_FLAGS,
                                      &securityOptions, sizeof(securityOptions));
         if (result == FALSE)
-            return client->OnResponse(new Response(ClientError, callback));
+            return new Response(request, ClientError);
 
         int contentLength = 0;
-        if (params.empty() == false)
+        if (request->GetParams().empty() == false)
         {
+            const std::vector<KeyValue>& params = request->GetParams();
             for (std::vector<KeyValue>::const_iterator it = params.begin(); it != params.end(); it++)
             {
                 contentLength += (*it).first.GetLength();
@@ -272,11 +141,12 @@ namespace Bibim
         result = ::HttpAddRequestHeaders(handles.request, header, headerIndex,
                                          HTTP_ADDREQ_FLAG_ADD);
         if (result == FALSE)
-            return client->OnResponse(new Response(ClientError, callback));
+            return new Response(request, ClientError);
 
         char* content = nullptr;
         if (contentLength > 0)
         {
+            const std::vector<KeyValue>& params = request->GetParams();
             content = BBStackAlloc(char, contentLength + 1);
             int contentIndex = 0;
             for (std::vector<KeyValue>::const_iterator it = params.begin(); it != params.end(); it++)
@@ -297,9 +167,9 @@ namespace Bibim
         {
             const DWORD errorCode = ::GetLastError();
             if (errorCode == ERROR_INTERNET_TIMEOUT)
-                return client->OnResponse(new Response(Timeout, callback));
+                return new Response(request, Timeout);
             else
-                return client->OnResponse(new Response(ClientError, callback));
+                return new Response(request, ClientError);
         }
 
         DWORD querySize = 0;
@@ -336,7 +206,7 @@ namespace Bibim
         const int responseLength = queryContentLength;
 
         if (responseLength == 0)
-            return client->OnResponse(new Response(statusCode, callback));
+            return new Response(request, statusCode);
 
         std::vector<char> response;
         if (responseLength != Int::Max)
@@ -361,7 +231,7 @@ namespace Bibim
                     Thread::Sleep(10);
 
                 if (::GetTickCount() - startTime >= DefaultTimeout)
-                    return client->OnResponse(new Response(Timeout, callback));
+                    return new Response(request, Timeout);
             }
         }
         else
@@ -384,86 +254,9 @@ namespace Bibim
             }
         }
 
-        client->OnResponse(new Response(statusCode,
-                                        String(&response[0], 0, response.size()),
-                                        contentType,
-                                        callback));
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    HttpClient::Response::Response(StatusCode statusCode, Callback* callback)
-        : statusCode(statusCode),
-          callback(callback)
-    {
-    }
-
-    HttpClient::Response::Response(StatusCode statusCode, const String& content, const String& contentType, Callback* callback)
-        : statusCode(statusCode),
-          content(content),
-          contentType(contentType),
-          callback(callback)
-    {
-    }
-
-    HttpClient::Response::~Response()
-    {
-    }
-
-    void HttpClient::Response::Invoke()
-    {
-        callback->OnResponse(statusCode, content, contentType);
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    HttpClient::RequestThread::RequestThread()
-        : closed(false)
-    {
-    }
-
-    HttpClient::RequestThread::~RequestThread()
-    {
-        RequestQueue temporaryRequests;
-        {
-            BBAutoLock(requestQueueLock);
-            requestQueue.swap(temporaryRequests);
-        }
-
-        for (RequestQueue::iterator it = temporaryRequests.begin(); it != temporaryRequests.end(); it++)
-            delete (*it);
-    }
-
-    void HttpClient::RequestThread::Add(Request* request)
-    {
-        BBAutoLock(requestQueueLock);
-        requestQueue.push_back(request);
-    }
-
-    void HttpClient::RequestThread::RequestClose()
-    {
-        closed = true;
-    }
-
-    void HttpClient::RequestThread::OnWork()
-    {
-        while (closed == false)
-        {
-            if (requestQueue.empty() == false)
-            {
-                Request* request = nullptr;
-                {
-                    BBAutoLock(requestQueueLock);
-                    request = requestQueue.front();
-                    requestQueue.pop_front();
-                }
-
-                request->Run(Client);
-
-                delete request;
-            }
-            else
-                Thread::Sleep(100);
-        }
+        return new Response(request,
+                            statusCode,
+                            String(&response[0], 0, response.size()),
+                            contentType);
     }
 }

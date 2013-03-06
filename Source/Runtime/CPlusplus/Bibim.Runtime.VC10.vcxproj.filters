@@ -792,6 +792,12 @@
     <ClCompile Include="References\ConvertUTF\ConvertUTF.cpp">
       <Filter>04. References</Filter>
     </ClCompile>
+    <ClCompile Include="Net\Bibim\HttpClient.Curl.cpp">
+      <Filter>03. Game\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\Bibim\HttpClientBase.cpp">
+      <Filter>03. Game\Net</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset\Bibim\AssetLoadingTask.h">
@@ -1563,6 +1569,15 @@
     <ClInclude Include="References\ConvertUTF\ConvertUTF.h">
       <Filter>04. References</Filter>
     </ClInclude>
+    <ClInclude Include="Net\Bibim\HttpClient.Curl.h">
+      <Filter>03. Game\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\Bibim\HttpClientBase.h">
+      <Filter>03. Game\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Threading\Bibim\ThreadBase.h">
+      <Filter>02. System\Threading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Asset\Bibim\AssetLoadingTask.inl">
@@ -2138,9 +2153,6 @@
     <None Include="Foundation\Bibim\MemoryStream.inl">
       <Filter>02. System\IO</Filter>
     </None>
-    <None Include="Threading\Bibim\Thread.Unix.inl">
-      <Filter>02. System\Threading</Filter>
-    </None>
     <None Include="Foundation\Bibim\Environment.Android.inl">
       <Filter>02. System</Filter>
     </None>
@@ -2173,6 +2185,12 @@
     </None>
     <None Include="Audio\Bibim\BGM.h">
       <Filter>03. Game\Audio</Filter>
+    </None>
+    <None Include="Net\Bibim\HttpClient.Curl.inl">
+      <Filter>03. Game\Net</Filter>
+    </None>
+    <None Include="Net\Bibim\HttpClientBase.inl">
+      <Filter>03. Game\Net</Filter>
     </None>
   </ItemGroup>
 </Project>
