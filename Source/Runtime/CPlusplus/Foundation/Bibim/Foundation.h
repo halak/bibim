@@ -13,6 +13,9 @@
 // #        define BIBIM_USE_DIRECTX9
 // #        define BIBIM_USE_OPENGL2
 // #        define BIBIM_USE_OPENGLES2
+#       elif (defined(ANDROID))
+#           define BIBIM_PLATFORM_UNIX
+#           define BIBIM_PLATFORM_ANDROID
 #       else
 #           define BIBIM_PLATFORM_UNKNOWN
 #       endif
@@ -30,15 +33,15 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Fundamental Type Redefinition
         typedef unsigned char byte;
-        typedef __int64       longint;
+        typedef long long     longint;
         typedef float         single;
 
         typedef unsigned char       uchar;
         typedef unsigned short      ushort;
         typedef unsigned int        uint;
         typedef unsigned long       ulong;
-        typedef __int64             int64;
-        typedef unsigned __int64    uint64;
+        typedef long long           int64;
+        typedef unsigned long long  uint64;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // FOURCC
@@ -53,8 +56,13 @@
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Macro Functions
-#       define BBStackAlloc(type, count) reinterpret_cast<type*>(_malloca(sizeof(type) * (count)))
-#       define BBStackFree(pointer) (_freea(pointer))
+#       if (defined(BIBIM_PLATFORM_WINDOWS))
+#           define BBStackAlloc(type, count) reinterpret_cast<type*>(_malloca(sizeof(type) * (count)))
+#           define BBStackFree(pointer) (_freea(pointer))
+#       else
+#           define BBStackAlloc(type, count) (new type [count])
+#           define BBStackFree(pointer) (delete [] pointer)
+#       endif
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Class Idioms

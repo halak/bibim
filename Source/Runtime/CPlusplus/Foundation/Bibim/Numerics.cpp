@@ -2,7 +2,7 @@
 #include <Bibim/Numerics.h>
 #include <float.h>
 #include <limits.h>
-#include <stdlib.h>
+#include <cstdlib>
 
 namespace Bibim
 {
@@ -98,7 +98,7 @@ namespace Bibim
     int Int::Parse(const char* s, int /*length*/)
     {
         if (s)
-            return static_cast<int>(atoi(s));
+            return static_cast<int>(std::atoi(s));
         else
             return 0;
     }
@@ -118,7 +118,7 @@ namespace Bibim
     longint LongInt::Parse(const char* s, int /*length*/)
     {
         if (s)
-            return static_cast<longint>(_atoi64(s));
+            return static_cast<longint>(_atoi64(s)); // atoll
         else
             return 0;
     }
@@ -146,7 +146,7 @@ namespace Bibim
     String Float::ToString(float value)
     {
         char result[64];
-        sprintf_s(result, "%f", value);
+        sprintf(result, "%f", value);
         return result;
     }
 
@@ -158,7 +158,7 @@ namespace Bibim
     double Double::Parse(const char* s, int /*length*/)
     {
         if (s)
-            return static_cast<double>(atof(s));
+            return static_cast<double>(std::atof(s));
         else
             return 0.0;        
     }
@@ -166,7 +166,7 @@ namespace Bibim
     String Double::ToString(double value)
     {
         char result[64];
-        sprintf_s(result, "%.lf", value);
+        sprintf(result, "%.lf", value);
         return result;
     }
 }

@@ -14,43 +14,49 @@
     }
 
 #   define BBBindLua(classname) \
-        template<> inline void lua_tinker::push(lua_State* L, classname* value) \
+        namespace lua_tinker \
         { \
-            push(L, static_cast<lua_tinker::lua_value*>(value)); \
-        } \
-        \
-        template<> inline void lua_tinker::push(lua_State* L, const classname* value) \
-        { \
-            push(L, const_cast<lua_tinker::lua_value*>(static_cast<const lua_tinker::lua_value*>(value))); \
-        } \
-        template<> inline int lua_tinker::push_for_return(lua_State* L, classname* value) \
-        { \
-            return push_for_return(L, static_cast<lua_tinker::lua_value*>(value)); \
-        } \
-        \
-        template<> inline int lua_tinker::push_for_return(lua_State* L, const classname* value) \
-        { \
-            return push_for_return(L, const_cast<lua_tinker::lua_value*>(static_cast<const lua_tinker::lua_value*>(value))); \
-        } \
-        template<> \
-        struct lua_tinker::ptr2user<classname> : lua_tinker::user \
-        { \
-            ptr2user(classname* t) : lua_tinker::user((void*)t) \
+            template<> inline void push(lua_State* L, classname* value) \
             { \
-                ((classname*)m_p)->IncreaseReferenceCount(); \
+                push(L, static_cast<lua_value*>(value)); \
             } \
             \
-            ~ptr2user() \
+            template<> inline void push(lua_State* L, const classname* value) \
             { \
-                ((classname*)m_p)->DecreaseReferenceCount(); \
+                push(L, const_cast<lua_value*>(static_cast<const lua_value*>(value))); \
             } \
-        };
+            template<> inline int push_for_return(lua_State* L, classname* value) \
+            { \
+                return push_for_return(L, static_cast<lua_value*>(value)); \
+            } \
+            \
+            template<> inline int push_for_return(lua_State* L, const classname* value) \
+            { \
+                return push_for_return(L, const_cast<lua_value*>(static_cast<const lua_value*>(value))); \
+            } \
+            template<> \
+            struct ptr2user<classname> : user \
+            { \
+                ptr2user(classname* t) : user((void*)t) \
+                { \
+                    ((classname*)m_p)->IncreaseReferenceCount(); \
+                } \
+                \
+                ~ptr2user() \
+                { \
+                    ((classname*)m_p)->DecreaseReferenceCount(); \
+                } \
+            }; \
+        }
 
 #   define BBBindLuaEnum(enumname, toEnum, toString) \
-        template<> \
-        struct lua_tinker::lua2enum<enumname> { static enumname invoke(lua_State *L, int index) { return toEnum(lua_tostring(L, index)); } }; \
-        template<> \
-        struct lua_tinker::enum2lua<enumname> { static void invoke(lua_State *L, enumname val) { lua_pushstring(L, toString(val)); } };
+        namespace lua_tinker \
+        { \
+            template<> \
+            struct lua2enum<enumname> { static enumname invoke(lua_State *L, int index) { return toEnum(lua_tostring(L, index)); } }; \
+            template<> \
+            struct enum2lua<enumname> { static void invoke(lua_State *L, enumname val) { lua_pushstring(L, toString(val)); } }; \
+        }
 
     namespace Bibim
     {

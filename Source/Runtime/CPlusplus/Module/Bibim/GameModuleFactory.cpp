@@ -30,13 +30,13 @@ namespace Bibim
     {
         struct Compare
         {
-            bool operator () (const Entry& a, const Entry& b)
+            static bool Do(const Entry& a, const Entry& b)
             {
                 return a.ID < b.ID;
             }
         };
 
-        std::sort(Entries.begin(), Entries.end(), Compare());
+        std::sort(Entries.begin(), Entries.end(), Compare::Do);
     }
 
     GameModule* GameModuleFactory::Create(int id)

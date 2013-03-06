@@ -16,37 +16,37 @@ namespace Bibim
 
     float Math::Sqrt(float value)
     {
-        return std::sqrtf(value);
+        return std::sqrt(value);
     }
 
     float Math::Pow(float x, float y)
     {
-        return std::powf(x, y);
+        return std::pow(x, y);
     }
 
     float Math::Sin(float radian)
     {
-        return std::sinf(radian);
+        return std::sin(radian);
     }
 
     float Math::Cos(float radian)
     {
-        return std::cosf(radian);
+        return std::cos(radian);
     }
 
     float Math::Tan(float radian)
     {
-        return std::tanf(radian);    
+        return std::tan(radian);    
     }
 
     float Math::Asin(float radian)
     {
-        return std::asinf(radian);
+        return std::asin(radian);
     }
 
     float Math::Acos(float radian)
     {
-        return std::acosf(radian);
+        return std::acos(radian);
     }
 
     float Math::Atan2(float y, float x)
@@ -56,12 +56,12 @@ namespace Bibim
 
     float Math::Exp(float value)
     {
-        return std::expf(value);
+        return std::exp(value);
     }
 
     float Math::Mod(float a, float b)
     {
-        return std::fmodf(a, b);
+        return std::fmod(a, b);
     }
 
     double Mod(double a, double b)
