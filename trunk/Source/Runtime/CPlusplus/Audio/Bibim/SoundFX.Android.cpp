@@ -1,7 +1,7 @@
 #include <Bibim/PCH.h>
-#include <Bibim/SoundFX.h>
+#include <Bibim/SoundFX.Android.h>
 #include <Bibim/Assert.h>
-#include <Bibim/AudioDevice.h>
+#include <Bibim/AudioDevice.Android.h>
 #include <Bibim/AutoLocker.h>
 #include <Bibim/Math.h>
 using namespace irrklang;
@@ -13,7 +13,7 @@ namespace Bibim
           volume(1.0f),
           mute(false)
     {
-        eventListener = new EventListener(this);
+        // eventListener = new EventListener(this);
     }
 
     SoundFX::SoundFX(AudioDevice* audioDevice)
@@ -21,13 +21,13 @@ namespace Bibim
           volume(1.0f),
           mute(false)
     {
-        eventListener = new EventListener(this);
+        // eventListener = new EventListener(this);
     }
 
     SoundFX::~SoundFX()
     {
         DropAllSounds();
-        delete eventListener;
+        // delete eventListener;
     }
 
     void SoundFX::Update(float /*dt*/, int timestamp)
@@ -58,6 +58,7 @@ namespace Bibim
             items = &sounds.back();
         }
 
+        /*
         ISoundEngine* engine = audioDevice->GetEngine();
         ISound* sound = engine->play2D(name.CStr(), false, true);
         if (mute)
@@ -67,6 +68,7 @@ namespace Bibim
         sound->setSoundStopEventReceiver(eventListener, reinterpret_cast<void*>(group));
         sound->setIsPaused(false);
         items->push_back(sound);
+        */
     }
 
     void SoundFX::Stop()
@@ -81,9 +83,11 @@ namespace Bibim
             SoundCollection& items = (*itDict);
             for (SoundCollection::iterator it = items.begin(); it != items.end(); it++)
             {
+                /*
                 (*it)->setSoundStopEventReceiver(nullptr);
                 (*it)->stop();
                 (*it)->drop();
+                */
             }
         }
     }
@@ -97,9 +101,11 @@ namespace Bibim
 
             for (SoundCollection::iterator it = temporaryItems.begin(); it != temporaryItems.end(); it++)
             {
+                /*
                 (*it)->setSoundStopEventReceiver(nullptr);
                 (*it)->stop();
                 (*it)->drop();
+                */
             }
         }
     }
@@ -137,6 +143,7 @@ namespace Bibim
 
     void SoundFX::UpdateVolumes()
     {
+        /*
         if (mute)
         {
             for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); itDict++)
@@ -155,6 +162,7 @@ namespace Bibim
                     (*it)->setVolume(volume);
             }
         }
+        */
     }
 
     SoundFX::SoundCollection* SoundFX::FindSounds(int group)
@@ -181,24 +189,28 @@ namespace Bibim
 
     void SoundFX::SetInPauseAllSounds(bool value)
     {
+        /*
         for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); itDict++)
         {
             SoundCollection& items = (*itDict);
             for (SoundCollection::iterator it = items.begin(); it != items.end(); it++)
                 (*it)->setIsPaused(value);
         }
+        */
     }
 
     void SoundFX::SetInPauseAllSounds(int group, bool value)
     {
+        /*
         if (SoundCollection* items = FindSounds(group))
         {
             for (SoundCollection::iterator it = items->begin(); it != items->end(); it++)
                 (*it)->setIsPaused(value);
         }
+        */
     }
 
-    void SoundFX::DropSound(int group, irrklang::ISound* sound)
+    void SoundFX::DropSound(int group, void* sound)
     {
         if (SoundCollection* items = FindSounds(group))
         {
@@ -206,8 +218,10 @@ namespace Bibim
             {
                 if ((*it) == sound)
                 {
+                    /*
                     (*it)->setSoundStopEventReceiver(nullptr);
                     (*it)->drop();
+                    */
                     items->erase(it);
                     break;
                 }
@@ -227,14 +241,17 @@ namespace Bibim
             SoundCollection& items = (*itDict);
             for (SoundCollection::iterator it = items.begin(); it != items.end(); it++)
             {
+                /*
                 (*it)->setSoundStopEventReceiver(nullptr);
                 (*it)->drop();
+                */
             }
         }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /*
     SoundFX::EventListener::EventListener(SoundFX* sfx)
         : sfx(sfx)
     {
@@ -249,4 +266,5 @@ namespace Bibim
         AutoLocker locker(sfx->stoppedSoundsLock);
         sfx->stoppedSounds.push_back(std::pair<int, irrklang::ISound*>(group, sound));
     }
+    */
 }

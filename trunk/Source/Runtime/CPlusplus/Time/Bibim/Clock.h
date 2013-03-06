@@ -12,7 +12,6 @@
             public:
                 static float GetCurrent();
                 static int  GetCurrentMilliSeconds();
-                static bool IsHighResolution();
         };
     }
 

@@ -579,10 +579,10 @@ namespace Bibim
 
     UIVisual::PositionMode UIVisual::ConvertFromStringToPositionMode(const char* value)
     {
-             if (value == nullptr)              return UndefinedPosition;
-        else if (_stricmp(value, "ABS") == 0)   return AbsolutePosition;
-        else if (_stricmp(value, "REL") == 0)   return RelativePosition;
-        else                                    return UndefinedPosition;
+             if (value == nullptr)                             return UndefinedPosition;
+        else if (String::EqualsCharsIgnoreCase(value, "ABS"))  return AbsolutePosition;
+        else if (String::EqualsCharsIgnoreCase(value, "REL"))  return RelativePosition;
+        else                                                   return UndefinedPosition;
     }
 
     const char* UIVisual::ConvertFromPositionModeToString(PositionMode value)
@@ -597,10 +597,10 @@ namespace Bibim
 
     UIVisual::SizeMode UIVisual::ConvertFromStringToSizeMode(const char* value)
     {
-             if (value == nullptr)              return ContentSize;
-        else if (_stricmp(value, "ABS") == 0)   return AbsoluteSize;
-        else if (_stricmp(value, "REL") == 0)   return RelativeSize;
-        else                                    return ContentSize;
+             if (value == nullptr)                                 return ContentSize;
+        else if (String::EqualsCharsIgnoreCase(value, "ABS") == 0) return AbsoluteSize;
+        else if (String::EqualsCharsIgnoreCase(value, "REL") == 0) return RelativeSize;
+        else                                                       return ContentSize;
     }
 
     const char* UIVisual::ConvertFromSizeModeToString(SizeMode value)
@@ -615,17 +615,17 @@ namespace Bibim
 
     UIVisual::AnchorPoint UIVisual::ConvertFromStringToAnchorPoint(const char* value)
     {
-             if (value == nullptr)                      return LeftTop;
-        else if (_stricmp(value, "LeftTop") == 0)       return LeftTop;
-        else if (_stricmp(value, "LeftBottom") == 0)    return LeftBottom;
-        else if (_stricmp(value, "LeftMiddle") == 0)    return LeftMiddle;
-        else if (_stricmp(value, "RightTop") == 0)      return RightTop;
-        else if (_stricmp(value, "RightBottom") == 0)   return RightBottom;
-        else if (_stricmp(value, "RightMiddle") == 0)   return RightMiddle;
-        else if (_stricmp(value, "CenterTop") == 0)     return CenterTop;
-        else if (_stricmp(value, "CenterBottom") == 0)  return CenterBottom;
-        else if (_stricmp(value, "Center") == 0)        return Center;
-        else                                            return LeftTop;
+             if (value == nullptr)                                      return LeftTop;
+        else if (String::EqualsCharsIgnoreCase(value, "LeftTop"))       return LeftTop;
+        else if (String::EqualsCharsIgnoreCase(value, "LeftBottom"))    return LeftBottom;
+        else if (String::EqualsCharsIgnoreCase(value, "LeftMiddle"))    return LeftMiddle;
+        else if (String::EqualsCharsIgnoreCase(value, "RightTop"))      return RightTop;
+        else if (String::EqualsCharsIgnoreCase(value, "RightBottom"))   return RightBottom;
+        else if (String::EqualsCharsIgnoreCase(value, "RightMiddle"))   return RightMiddle;
+        else if (String::EqualsCharsIgnoreCase(value, "CenterTop"))     return CenterTop;
+        else if (String::EqualsCharsIgnoreCase(value, "CenterBottom"))  return CenterBottom;
+        else if (String::EqualsCharsIgnoreCase(value, "Center"))        return Center;
+        else                                                            return LeftTop;
     }
 
     const char* UIVisual::ConvertFromAnchorPointToString(AnchorPoint value)
@@ -647,11 +647,11 @@ namespace Bibim
 
     UIVisual::Visibility UIVisual::ConvertFromStringToVisibility(const char* value)
     {
-             if (value == nullptr)                  return Visible;
-        else if (_stricmp(value, "Visible") == 0)   return Visible;
-        else if (_stricmp(value, "Invisible") == 0) return Invisible;
-        else if (_stricmp(value, "Collasped") == 0) return Collasped;
-        else                                        return Visible;
+             if (value == nullptr)                                  return Visible;
+        else if (String::EqualsCharsIgnoreCase(value, "Visible"))   return Visible;
+        else if (String::EqualsCharsIgnoreCase(value, "Invisible")) return Invisible;
+        else if (String::EqualsCharsIgnoreCase(value, "Collasped")) return Collasped;
+        else                                                        return Visible;
     }
 
     const char* UIVisual::ConvertFromVisibilityToString(Visibility value)

@@ -57,7 +57,6 @@ namespace Bibim
 
     void GraphicsDevice::BeginDraw(RenderTargetTexture2D* /*renderTarget*/)
     {
-        throw;
     }
 
     void GraphicsDevice::EndDraw()
@@ -66,7 +65,6 @@ namespace Bibim
 
     void GraphicsDevice::EndDraw(RenderTargetTexture2D* /*renderTarget*/)
     {
-        throw;
     }
 
     void GraphicsDevice::Present()

@@ -54,7 +54,7 @@ namespace Bibim
         if (it != glyphs.end())
         {
             const Glyph* glyph = (*it).second;
-            glyphs.erase(it);
+            glyphs.erase((*it).first);
             delete glyph;
             return true;
         }

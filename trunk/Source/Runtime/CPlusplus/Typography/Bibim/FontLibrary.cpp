@@ -2,7 +2,7 @@
 #include <Bibim/FontLibrary.h>
 #include <Bibim/FontCache.h>
 #include <vector>
-#include <windows.h>
+//#include <windows.h>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
@@ -49,12 +49,12 @@ namespace Bibim
         ftLibrary = static_cast<void*>(library);
 
         // TODO: 글꼴 폴더 / 기본 글꼴
-        std::vector<char> windowsDirectory;
-        windowsDirectory.resize(GetWindowsDirectory(nullptr, 0) + 1, '\0');
-        GetWindowsDirectory(&windowsDirectory[0], windowsDirectory.size());
-        osFontDirectory = &windowsDirectory[0];
-        osFontDirectory += "\\Fonts\\";
+        // std::vector<char> windowsDirectory;
+        // windowsDirectory.resize(GetWindowsDirectory(nullptr, 0) + 1, '\0');
+        // GetWindowsDirectory(&windowsDirectory[0], windowsDirectory.size());
+        // osFontDirectory = &windowsDirectory[0];
+        // osFontDirectory += "\\Fonts\\";
 
-        alternativeFace = osFontDirectory + "gulim.ttc";
+        // alternativeFace = osFontDirectory + "gulim.ttc";
     }
 }

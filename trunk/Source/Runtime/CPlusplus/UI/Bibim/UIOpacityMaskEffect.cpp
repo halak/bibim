@@ -114,10 +114,10 @@ namespace Bibim
 
     UIOpacityMaskEffect::FillStyle UIOpacityMaskEffect::ConvertFromStringToFillStyle(const char* value)
     {
-             if (value == nullptr)            return FanStyle;
-        else if (_stricmp(value, "Fan") == 0) return FanStyle;
-        else if (_stricmp(value, "Bar") == 0) return BarStyle;
-        else                                  return FanStyle;
+             if (value == nullptr)                            return FanStyle;
+        else if (String::EqualsCharsIgnoreCase(value, "Fan")) return FanStyle;
+        else if (String::EqualsCharsIgnoreCase(value, "Bar")) return BarStyle;
+        else                                                  return FanStyle;
     }
 
     const char* UIOpacityMaskEffect::ConvertFromFillStyleToString(FillStyle value)

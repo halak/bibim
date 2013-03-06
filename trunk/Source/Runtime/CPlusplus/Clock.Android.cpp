@@ -1,20 +1,15 @@
-﻿#include <Bibim/PCH.h>
+#include <Bibim/PCH.h>
 #include <Bibim/Clock.h>
-#include <windows.h>
 
 namespace Bibim
 {
-    struct WindowsClock
+    struct AndroidClock
     {
-        static WindowsClock StaticInstance;
+        static AndroidClock StaticInstance;
 
-        __int64 StartTime;
-        double Frequency;
-        double FrequencyMilliSeconds;
-        bool IsHighResolution;
-
-        WindowsClock()
+        AndroidClock()
         {
+            /*
             LARGE_INTEGER frequencyInteger;
             if (QueryPerformanceFrequency(&frequencyInteger))
             {
@@ -32,10 +27,12 @@ namespace Bibim
                 FrequencyMilliSeconds = 0.0;
                 IsHighResolution = false;
             }
+            */
         }
 
         double GetCurrent()
         {
+            /*
             if (IsHighResolution)
             {
                 LARGE_INTEGER countInteger;
@@ -44,10 +41,12 @@ namespace Bibim
             }
             else
                 return static_cast<double>(timeGetTime()) * 0.001f;
+                */
         }
 
-        __int64 GetCurrentMilliSeconds()
+        int64 GetCurrentMilliSeconds()
         {
+            /*
             if (IsHighResolution)
             {
                 LARGE_INTEGER countInteger;
@@ -56,18 +55,19 @@ namespace Bibim
             }
             else
                 return static_cast<__int64>(timeGetTime());
+                */
         }
     };
 
-    WindowsClock WindowsClock::StaticInstance;
+    AndroidClock AndroidClock::StaticInstance;
 
     float Clock::GetCurrent()
     {
-        return static_cast<float>(WindowsClock::StaticInstance.GetCurrent());
+        return static_cast<float>(AndroidClock::StaticInstance.GetCurrent());
     }
 
     int Clock::GetCurrentMilliSeconds()
     {
-        return static_cast<int>(WindowsClock::StaticInstance.GetCurrentMilliSeconds());
+        return static_cast<int>(AndroidClock::StaticInstance.GetCurrentMilliSeconds());
     }
 }

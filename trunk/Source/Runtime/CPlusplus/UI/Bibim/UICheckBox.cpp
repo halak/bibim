@@ -68,7 +68,7 @@ namespace Bibim
         UIVisual* activeVisual = visuals[activeVisualIndex];
 
         if (GetFrozen())
-            activeVisual = checked ? checkedNormalVisual : GetNormal();
+            activeVisual = checked ? static_cast<UIVisual*>(checkedNormalVisual) : GetNormal();
 
         if (activeVisual)
         {

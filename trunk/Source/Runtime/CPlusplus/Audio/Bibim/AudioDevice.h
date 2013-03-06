@@ -2,32 +2,14 @@
 #ifndef __BIBIM_AUDIODEVICE_H__
 #define __BIBIM_AUDIODEVICE_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/GameModule.h>
-#   include <Bibim/String.h>
-#   include <irrklang.h>
+#   include <Bibim/Foundation.h>
 
-    namespace Bibim
-    {
-        class AudioDevice : public GameModule
-        {
-            BBModuleClass(AudioDevice, GameModule, 'A', 'U', 'D', 'D');
-            public:
-                AudioDevice();
-                virtual ~AudioDevice();
-
-                void AddArchive(MPQ* mpq);
-
-                inline irrklang::ISoundEngine* GetEngine() const;
-
-                inline float GetDuration(const String& uri) const;
-                float GetDurationByChars(const char* uri) const;
-
-            private:
-                irrklang::ISoundEngine* engine;
-        };
-    }
-
-#   include <Bibim/AudioDevice.inl>
+#   if (defined(BIBIM_PLATFORM_WINDOWS) && defined(BIBIM_PLATFORM_LINUX) && defined(BIBIM_PLATFORM_MACOS))
+#       include <Bibim/AudioDevice.Irrklang.h>
+#   elif (defined(BIBIM_PLATFORM_ANDROID))
+#       include <Bibim/AudioDevice.Android.h>
+#   elif (defined(BIBIM_PLATFORM_IOS))
+#       include <Bibim/AudioDevice.iOS.h>
+#   endif
 
 #endif

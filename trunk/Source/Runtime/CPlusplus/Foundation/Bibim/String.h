@@ -132,6 +132,8 @@
 
                 static inline int CopyChars(char* destination, const char* source);
                 static inline int CopyChars(char* destination, const char* source, int length);
+                static inline int CompareCharsIgnoreCase(const char* a, const char* b);
+                static inline bool EqualsCharsIgnoreCase(const char* a, const char* b);
                 static inline int CharsLength(const char* s);
                 static inline int CharsFind(const char* s, char c);
 

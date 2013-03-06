@@ -2,7 +2,6 @@
 #include <Bibim/AlarmClock.h>
 #include <Bibim/Assert.h>
 #include <algorithm>
-#include <windows.h>
 
 namespace Bibim
 {
