@@ -60,7 +60,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\$(ProjectName).$(ConfigurationName).lib"
+				OutputFile="$(OutDir)\$(ProjectName).$(ConfigurationName).vc9.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -123,7 +123,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\$(ProjectName).$(ConfigurationName).lib"
+				OutputFile="$(OutDir)\$(ProjectName).$(ConfigurationName).vc9.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
