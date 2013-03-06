@@ -1,11 +1,20 @@
 ﻿#pragma once
-#ifndef __BIBIM_ATOMIC_H__
-#define __BIBIM_ATOMIC_H__
+#ifndef __BIBIM_ATOMIC_WINDOWS_H__
+#define __BIBIM_ATOMIC_WINDOWS_H__
 
-#   include <Bibim/Foundation.h>
+#   include <Bibim/FWD.h>
 
-#   if (defined(BIBIM_PLATFORM_WINDOWS))
-#       include <Bibim/Atomic.Windows.h>
-#   endif
+    namespace Bibim
+    {
+        class Atomic
+        {
+            BBThisIsStaticClass(Atomic);
+            public:
+                static inline void Increment(long& variable);
+                static inline void Decrement(long& variable);
+        };
+    }
+
+#   include <Bibim/Atomic.inl>
 
 #endif
