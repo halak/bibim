@@ -24,7 +24,7 @@
                 bool TryAcquire();
 
             private:
-                CRITICAL_SECTION cs;
+                mutable CRITICAL_SECTION cs;
 
                 friend class AutoLocker;
                 friend class ManualLocker;

@@ -2714,6 +2714,18 @@
 					RelativePath=".\Net\Bibim\HttpClient.Windows.inl"
 					>
 				</File>
+				<File
+					RelativePath=".\Net\Bibim\HttpClientBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Net\Bibim\HttpClientBase.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Net\Bibim\HttpClientBase.inl"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -3180,10 +3192,6 @@
 				</File>
 				<File
 					RelativePath=".\Threading\Bibim\Thread.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\Thread.Windows.inl"
 					>
 				</File>
 			</Filter>

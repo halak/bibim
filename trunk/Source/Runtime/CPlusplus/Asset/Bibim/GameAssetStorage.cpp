@@ -88,16 +88,6 @@ namespace Bibim
 
     void GameAssetStorage::OnStatusChanged(Status /*old*/)
     {
-        switch (GetStatus())
-        {
-            case DeadStatus:
-                loadingThread.Suspend();
-                break;
-            case AliveStatus:
-            case ActiveStatus:
-                loadingThread.Resume();
-                break;
-        }
     }
 
     GameAsset* GameAssetStorage::LoadNew(const String& name)
@@ -198,13 +188,12 @@ namespace Bibim
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     GameAssetStorage::LoadingThread::LoadingThread()
-        : Thread(false),
-          currentTask(nullptr),
+        : currentTask(nullptr),
           totalBytes(0),
           loadedBytes(0),
           closed(false)
     {
-        Resume();
+        Start();
     }
 
     GameAssetStorage::LoadingThread::~LoadingThread()
@@ -236,12 +225,8 @@ namespace Bibim
     void GameAssetStorage::LoadingThread::RequestClose()
     {
         closed = true;
-        Suspend();
-
         if (currentTask)
             currentTask->Cancel();
-
-        Resume();
     }
 
     void GameAssetStorage::LoadingThread::ResetBackgroundLoadingStatus()

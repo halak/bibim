@@ -1,61 +1,31 @@
 #include <Bibim/PCH.h>
 #include <Bibim/Clock.h>
+#include <time.h>
 
 namespace Bibim
 {
     struct AndroidClock
     {
         static AndroidClock StaticInstance;
+        int64 startTime;
 
         AndroidClock()
         {
-            /*
-            LARGE_INTEGER frequencyInteger;
-            if (QueryPerformanceFrequency(&frequencyInteger))
-            {
-                LARGE_INTEGER startTimeInteger;
-                QueryPerformanceCounter(&startTimeInteger);
-
-                StartTime = startTimeInteger.QuadPart;
-                Frequency = 1.0 / static_cast<double>(frequencyInteger.QuadPart);
-                FrequencyMilliSeconds = Frequency * 1000.0;
-                IsHighResolution = true;
-            }
-            else
-            {
-                Frequency = 0.0;
-                FrequencyMilliSeconds = 0.0;
-                IsHighResolution = false;
-            }
-            */
+            struct timeval tv;
+            gettimeofday(&tv, NULL);
+            startTime = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
         }
 
         double GetCurrent()
         {
-            /*
-            if (IsHighResolution)
-            {
-                LARGE_INTEGER countInteger;
-                QueryPerformanceCounter(&countInteger);
-                return static_cast<double>(countInteger.QuadPart - StartTime) * Frequency;
-            }
-            else
-                return static_cast<double>(timeGetTime()) * 0.001f;
-                */
+            return static_cast<double>(GetCurrentMilliSeconds()) * 0.001;
         }
 
         int64 GetCurrentMilliSeconds()
         {
-            /*
-            if (IsHighResolution)
-            {
-                LARGE_INTEGER countInteger;
-                QueryPerformanceCounter(&countInteger);
-                return static_cast<__int64>(static_cast<double>(countInteger.QuadPart - StartTime) * FrequencyMilliSeconds);
-            }
-            else
-                return static_cast<__int64>(timeGetTime());
-                */
+            struct timeval tv;
+            gettimeofday(&tv, NULL);
+            return static_cast<int64>((tv.tv_sec * 1000) + (tv.tv_usec / 1000)) - startTime;
         }
     };
 
