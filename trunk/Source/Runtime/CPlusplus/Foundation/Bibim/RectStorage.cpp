@@ -129,24 +129,24 @@ namespace Bibim
             return Rect::Empty;
     }
 
-    void RectStorage::Deallocate(const Rect& Rect)
+    void RectStorage::Deallocate(const Rect& rect)
     {
-        RectCollection::iterator it = std::find(allocatedRects.begin(), allocatedRects.end(), Rect);
+        RectCollection::iterator it = std::find(allocatedRects.begin(), allocatedRects.end(), rect);
         if (it != allocatedRects.end())
         {
-            freeRects.push_front(Rect);
+            freeRects.push_front(rect);
             Merge(freeRects, freeRects.begin());
             allocatedRects.erase(it);
         }
     }
 
-    void RectStorage::Merge(RectCollection& Rects, RectCollection::iterator targetIterator)
+    void RectStorage::Merge(RectCollection& rects, RectCollection::iterator targetIterator)
     {
         // targetIterator와 통합 가능한 영역을 찾아서 통합하고,
         // 그렇게 통합된 영역을 다른 영역과 통합해보기 위해 Merge를 재귀호출한다.
 
         const Rect target = (*targetIterator);
-        for (RectCollection::iterator it = Rects.begin(); it != Rects.end(); ++it)
+        for (RectCollection::iterator it = rects.begin(); it != rects.end(); ++it)
         {
             if (it == targetIterator)
                 continue;
@@ -158,16 +158,16 @@ namespace Bibim
                 if (current.GetTop() == target.GetBottom())
                 {
                     current.SetTop(target.GetTop());
-                    Rects.erase(targetIterator);
-                    Merge(Rects, it);
+                    rects.erase(targetIterator);
+                    Merge(rects, it);
                     return;
                 }
 
                 if (current.GetBottom() == target.GetTop())
                 {
                     current.SetBottom(target.GetBottom());
-                    Rects.erase(targetIterator);
-                    Merge(Rects, it);
+                    rects.erase(targetIterator);
+                    Merge(rects, it);
                     return;
                 }
             }
@@ -177,16 +177,16 @@ namespace Bibim
                 if (current.GetLeft() == target.GetRight())
                 {
                     current.SetLeft(target.GetLeft());
-                    Rects.erase(targetIterator);
-                    Merge(Rects, it);
+                    rects.erase(targetIterator);
+                    Merge(rects, it);
                     return;
                 }
 
                 if (current.GetRight() == target.GetLeft())
                 {
                     current.SetRight(target.GetRight());
-                    Rects.erase(targetIterator);
-                    Merge(Rects, it);
+                    rects.erase(targetIterator);
+                    Merge(rects, it);
                     return;
                 }
             }

@@ -23,7 +23,7 @@
                 void Clear(int width, int height);
 
                 Rect Allocate(int width, int height);
-                void Deallocate(const Rect& Rect);
+                void Deallocate(const Rect& rect);
 
                 int GetWidth() const;
                 int GetHeight() const;
@@ -37,7 +37,7 @@
                 bool operator != (const RectStorage& right) const;
 
             private:
-                static void Merge(RectCollection& Rects, RectCollection::iterator targetIterator);
+                static void Merge(RectCollection& rects, RectCollection::iterator targetIterator);
 
             private:
                 int width;

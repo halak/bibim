@@ -597,10 +597,10 @@ namespace Bibim
 
     UIVisual::SizeMode UIVisual::ConvertFromStringToSizeMode(const char* value)
     {
-             if (value == nullptr)                                 return ContentSize;
-        else if (String::EqualsCharsIgnoreCase(value, "ABS") == 0) return AbsoluteSize;
-        else if (String::EqualsCharsIgnoreCase(value, "REL") == 0) return RelativeSize;
-        else                                                       return ContentSize;
+             if (value == nullptr)                            return ContentSize;
+        else if (String::EqualsCharsIgnoreCase(value, "ABS")) return AbsoluteSize;
+        else if (String::EqualsCharsIgnoreCase(value, "REL")) return RelativeSize;
+        else                                                  return ContentSize;
     }
 
     const char* UIVisual::ConvertFromSizeModeToString(SizeMode value)
