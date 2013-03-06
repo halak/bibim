@@ -1,0 +1,2076 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="03. Game">
+      <UniqueIdentifier>{10e5b491-cb30-450a-922e-258ee494dd75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\%28Asset%29">
+      <UniqueIdentifier>{ad777004-d95a-4e1d-916b-7198455cd525}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\%28Asset%29\Providers">
+      <UniqueIdentifier>{7d3015ba-e8dd-42f6-9fe9-f8088bb500f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Typography">
+      <UniqueIdentifier>{030e8e09-1ae6-4d40-8868-7237e7cdf477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\%28Component%29">
+      <UniqueIdentifier>{fe5c9a4c-1bde-43c8-b4c2-5185bb1efb93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\%28Module%29">
+      <UniqueIdentifier>{5615d687-6332-41cf-b790-b35f0a33c29d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Animation">
+      <UniqueIdentifier>{b457d9b8-2a25-4bd0-9427-019894910bbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Animation\Evaluation">
+      <UniqueIdentifier>{0eabff9f-2c37-4869-af64-4690b236a54a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Animation\Easing">
+      <UniqueIdentifier>{e70b7888-72d8-4abe-852f-925791f4dcb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Collision2D">
+      <UniqueIdentifier>{385d5937-8caf-46f2-85c3-e00e53cc510b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Diagnostics">
+      <UniqueIdentifier>{05f4ee7e-d56d-4e20-bc8c-8e00d830ff1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Gameplay">
+      <UniqueIdentifier>{05440513-dc5c-4844-ac1d-75b1e4e3f43f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Gameplay\PathFinder">
+      <UniqueIdentifier>{bdbbcae6-f432-4be3-b67c-d9fe0929ace0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Input">
+      <UniqueIdentifier>{f3afc6cb-aad7-4cfa-95e3-15b58fd9be8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Scripting">
+      <UniqueIdentifier>{490611d8-aec3-49fa-8acf-d6d1afe6689b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Scripting\Libraries">
+      <UniqueIdentifier>{2b5c4b1f-f383-439d-bc52-8997dfdbdb2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Time">
+      <UniqueIdentifier>{21bbd110-21c3-4700-8a44-0abb0939d704}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Startup">
+      <UniqueIdentifier>{b5f0ebc1-79f3-464e-a6eb-2aff8672a5bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\UI">
+      <UniqueIdentifier>{7d487e2d-cd05-45d5-807e-d483e531acc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\UI\Events">
+      <UniqueIdentifier>{4949f6e5-b4fe-4ae0-90b2-5b3591014a0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\UI\Effects">
+      <UniqueIdentifier>{6e19881b-2d25-4517-95a9-2fe8fe8fe843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\UI\Effects\Geometry">
+      <UniqueIdentifier>{13720639-ec1c-4692-aa91-81278d452ac0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\UI\Effects\Pixel">
+      <UniqueIdentifier>{28d03000-ae5b-4d89-b756-ca237372e796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\UI\Visuals">
+      <UniqueIdentifier>{cc1dd674-60e6-4e80-a46d-e27c404a3d1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\UI\Transforms">
+      <UniqueIdentifier>{1bb36dcc-84d2-450e-858c-c02b816b1e11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\UI\Visitors">
+      <UniqueIdentifier>{b6559376-a07f-4aa8-b57e-148201ac87c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Graphics">
+      <UniqueIdentifier>{d9a96df2-01f7-40a4-84a9-952e41e0bac8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Graphics\DX9">
+      <UniqueIdentifier>{111d8e5e-d29b-4bf3-acbe-69a66d65ab3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Graphics\GLES2">
+      <UniqueIdentifier>{5854e5d1-952b-4117-9c85-eb0684cb40ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\FileSystem">
+      <UniqueIdentifier>{6a664566-dbce-4983-82e9-6d59d9fe6ad0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Framework">
+      <UniqueIdentifier>{477cedc1-e416-4d36-8fdb-8547431fdcd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Audio">
+      <UniqueIdentifier>{37357b59-e319-4fc2-8083-58d13e2fa1e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\GFX">
+      <UniqueIdentifier>{a8b6ad1f-36bd-469b-aec0-ecfd22d02913}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Net">
+      <UniqueIdentifier>{03178203-36f5-4ec9-8623-2df14bba62b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Foundation">
+      <UniqueIdentifier>{e43b18ad-76cd-4b08-9179-de59f108fe18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Foundation\%28Fundamental%29">
+      <UniqueIdentifier>{40c89324-5c49-46ec-86d7-3651baa3d7d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Foundation\Container">
+      <UniqueIdentifier>{574a1284-02b1-473b-bf3f-3eed2b3f45ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Foundation\Diagnostics">
+      <UniqueIdentifier>{30909e91-ad06-46c1-992d-88149eb76b8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Foundation\Mathematics">
+      <UniqueIdentifier>{5deb2265-0a2b-4ee4-8b7e-7323a35e9813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Foundation\Utility">
+      <UniqueIdentifier>{84ee35e4-01e1-4345-9a55-7977288c0804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Foundation\%28Object%29">
+      <UniqueIdentifier>{f9baa7f8-3fb0-443a-834e-dcf0b2408d04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. System">
+      <UniqueIdentifier>{84521930-0e12-4c0f-9ccb-da7d42c3801a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. System\IPC">
+      <UniqueIdentifier>{9d5b16fc-a85f-48a6-8223-138431d29b06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. System\Threading">
+      <UniqueIdentifier>{86922ee0-eec2-49e0-9c95-87e02955e1f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. System\Net">
+      <UniqueIdentifier>{3409a641-9363-4f71-8812-2757aee325df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. System\IO">
+      <UniqueIdentifier>{a634bf3d-d236-4e96-9b41-7e272fa578ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. References">
+      <UniqueIdentifier>{79a147ac-c7b5-4fdd-bd1c-deacd938216e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Asset\Bibim\AssetLoadingTask.cpp">
+      <Filter>03. Game\%28Asset%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset\Bibim\AssetStreamReader.cpp">
+      <Filter>03. Game\%28Asset%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset\Bibim\GameAsset.cpp">
+      <Filter>03. Game\%28Asset%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset\Bibim\GameAssetFactory.cpp">
+      <Filter>03. Game\%28Asset%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset\Bibim\GameAssetStorage.cpp">
+      <Filter>03. Game\%28Asset%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset\Bibim\AssetProvider.cpp">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset\Bibim\FileAssetProvider.cpp">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset\Bibim\MPQAssetProvider.cpp">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset\Bibim\PipedAssetProvider.cpp">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClCompile>
+    <ClCompile Include="Typography\Bibim\Font.cpp">
+      <Filter>03. Game\Typography</Filter>
+    </ClCompile>
+    <ClCompile Include="Typography\Bibim\FontCache.cpp">
+      <Filter>03. Game\Typography</Filter>
+    </ClCompile>
+    <ClCompile Include="Typography\Bibim\FontLibrary.cpp">
+      <Filter>03. Game\Typography</Filter>
+    </ClCompile>
+    <ClCompile Include="Typography\Bibim\FontString.cpp">
+      <Filter>03. Game\Typography</Filter>
+    </ClCompile>
+    <ClCompile Include="Typography\Bibim\Glyph.cpp">
+      <Filter>03. Game\Typography</Filter>
+    </ClCompile>
+    <ClCompile Include="Typography\Bibim\GlyphSurface.cpp">
+      <Filter>03. Game\Typography</Filter>
+    </ClCompile>
+    <ClCompile Include="Typography\Bibim\GlyphTable.cpp">
+      <Filter>03. Game\Typography</Filter>
+    </ClCompile>
+    <ClCompile Include="Typography\Bibim\TypingContext.cpp">
+      <Filter>03. Game\Typography</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Bibim\CloningContext.cpp">
+      <Filter>03. Game\%28Component%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Bibim\ComponentStreamReader.cpp">
+      <Filter>03. Game\%28Component%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Bibim\GameComponent.cpp">
+      <Filter>03. Game\%28Component%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\GameComponentFactory.cpp">
+      <Filter>03. Game\%28Component%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Module\Bibim\GameModule.cpp">
+      <Filter>03. Game\%28Module%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Module\Bibim\GameModuleFactory.cpp">
+      <Filter>03. Game\%28Module%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Module\Bibim\GameModuleNode.cpp">
+      <Filter>03. Game\%28Module%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Module\Bibim\GameModuleTree.cpp">
+      <Filter>03. Game\%28Module%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\Bibim\Sprite.cpp">
+      <Filter>03. Game\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\Bibim\SpriteSet.cpp">
+      <Filter>03. Game\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\Bibim\EvalBoard.cpp">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\Bibim\EvalConstants.cpp">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\Bibim\EvalContext.cpp">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\Bibim\Evals.cpp">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\Bibim\EvalTimeflow.cpp">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\Bibim\EvalUnitRandom.cpp">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\Bibim\Ease.cpp">
+      <Filter>03. Game\Animation\Easing</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\Bibim\EasingCurves.cpp">
+      <Filter>03. Game\Animation\Easing</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\Bibim\ElasticEasingCurves.cpp">
+      <Filter>03. Game\Animation\Easing</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation\Bibim\OscillationCurve.cpp">
+      <Filter>03. Game\Animation\Easing</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision2D\Bibim\AxisAlignedBoxShape2D.cpp">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision2D\Bibim\BoxShape2D.cpp">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision2D\Bibim\CollisionSpace2D.cpp">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision2D\Bibim\IntersectShapes2D.cpp">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision2D\Bibim\PointShape2D.cpp">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision2D\Bibim\SegmentShape2D.cpp">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision2D\Bibim\Shape2D.cpp">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision2D\Bibim\SphereShape2D.cpp">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision2D\Bibim\UserShape2D.cpp">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Diagnostics\Bibim\CrashDump.cpp">
+      <Filter>03. Game\Diagnostics</Filter>
+    </ClCompile>
+    <ClCompile Include="Diagnostics\Bibim\FileLogger.cpp">
+      <Filter>03. Game\Diagnostics</Filter>
+    </ClCompile>
+    <ClCompile Include="Diagnostics\Bibim\Logger.cpp">
+      <Filter>03. Game\Diagnostics</Filter>
+    </ClCompile>
+    <ClCompile Include="Diagnostics\Bibim\SystemLogger.cpp">
+      <Filter>03. Game\Diagnostics</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\Bibim\BatchCommand.cpp">
+      <Filter>03. Game\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\Bibim\Command.cpp">
+      <Filter>03. Game\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\Bibim\CommandHistory.cpp">
+      <Filter>03. Game\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\Bibim\CommandQueue.cpp">
+      <Filter>03. Game\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\Bibim\RestorableCommand.cpp">
+      <Filter>03. Game\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\Bibim\SpatialObject2D.cpp">
+      <Filter>03. Game\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\Bibim\JumpPointPathFinder.cpp">
+      <Filter>03. Game\Gameplay\PathFinder</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay\Bibim\PathFinder.cpp">
+      <Filter>03. Game\Gameplay\PathFinder</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Bibim\Key.cpp">
+      <Filter>03. Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Bibim\Keyboard.cpp">
+      <Filter>03. Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Bibim\Keyboard.Windows.cpp">
+      <Filter>03. Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Bibim\KeyboardState.cpp">
+      <Filter>03. Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Bibim\Mouse.cpp">
+      <Filter>03. Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Bibim\Mouse.Window.cpp">
+      <Filter>03. Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Bibim\MouseState.cpp">
+      <Filter>03. Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripting\Bibim\Script.cpp">
+      <Filter>03. Game\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripting\Bibim\ScriptingContext.cpp">
+      <Filter>03. Game\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripting\Bibim\ScriptNativeFunctionTable.cpp">
+      <Filter>03. Game\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripting\Bibim\ScriptStack.cpp">
+      <Filter>03. Game\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripting\Bibim\ScriptThread.cpp">
+      <Filter>03. Game\Scripting</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripting\Bibim\ScriptLibraryIO.cpp">
+      <Filter>03. Game\Scripting\Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="Time\Bibim\AlarmClock.cpp">
+      <Filter>03. Game\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Time\Bibim\Clock.Windows.cpp">
+      <Filter>03. Game\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Time\Bibim\SubTimeline.cpp">
+      <Filter>03. Game\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Time\Bibim\Timeline.cpp">
+      <Filter>03. Game\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Time\Bibim\TimelineGameComponent.cpp">
+      <Filter>03. Game\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Time\Bibim\TimelineGameModule.cpp">
+      <Filter>03. Game\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Time\Bibim\UpdateableGameComponent.cpp">
+      <Filter>03. Game\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Time\Bibim\UpdateableGameModule.cpp">
+      <Filter>03. Game\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Startup\Bibim\Startup.cpp">
+      <Filter>03. Game\Startup</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIDomain.cpp">
+      <Filter>03. Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIElement.cpp">
+      <Filter>03. Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UILayout.cpp">
+      <Filter>03. Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIMarkupText.cpp">
+      <Filter>03. Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIRenderer.DX9.cpp">
+      <Filter>03. Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIRenderer.GLES2.cpp">
+      <Filter>03. Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIRendererBase.cpp">
+      <Filter>03. Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UISimpleDomain.cpp">
+      <Filter>03. Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIAppEventDispatcher.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIAsyncEventQueue.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIEventArgs.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIEventDispatcher.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIEventHandler.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIEventID.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIEventMap.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIFunctionEventHandler.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIFunctionTable.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIGamePadEventArgs.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIGamePadEventDispatcher.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIKeyboardEventArgs.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIKeyboardEventDispatcher.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIMouseButtonEventArgs.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIMouseEventArgs.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIMouseEventDispatcher.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIMouseWheelEventArgs.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UISequentialEventHandler.cpp">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIEffectMap.cpp">
+      <Filter>03. Game\UI\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIEffectStack.cpp">
+      <Filter>03. Game\UI\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIAfterImageEffect.cpp">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIGeometryEffect.cpp">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UISineCurveEffect.cpp">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UITintEffect.cpp">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIBlendingEffect.cpp">
+      <Filter>03. Game\UI\Effects\Pixel</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIColorMatrixEffect.cpp">
+      <Filter>03. Game\UI\Effects\Pixel</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIMaskEffect.cpp">
+      <Filter>03. Game\UI\Effects\Pixel</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIOpacityMaskEffect.cpp">
+      <Filter>03. Game\UI\Effects\Pixel</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIPixelEffect.cpp">
+      <Filter>03. Game\UI\Effects\Pixel</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIButton.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UICheckBox.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIImage.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UILabel.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIMarkupTextBox.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIPanel.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIRadioButton.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIRect.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UISpark.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UISprite.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIVideo.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIVisual.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIWindow.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UITransform.cpp">
+      <Filter>03. Game\UI\Transforms</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UITransform2D.cpp">
+      <Filter>03. Game\UI\Transforms</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UITransform3D.cpp">
+      <Filter>03. Game\UI\Transforms</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIBoundsContext.cpp">
+      <Filter>03. Game\UI\Visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIDrawingContext.cpp">
+      <Filter>03. Game\UI\Visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIHandledDrawingContext.cpp">
+      <Filter>03. Game\UI\Visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIPickingContext.cpp">
+      <Filter>03. Game\UI\Visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIVisualVisitor.cpp">
+      <Filter>03. Game\UI\Visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\BitMask.cpp">
+      <Filter>03. Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\GraphicsCapabilities.cpp">
+      <Filter>03. Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\Image.cpp">
+      <Filter>03. Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\ImageSet.cpp">
+      <Filter>03. Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\PNGReader.cpp">
+      <Filter>03. Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\ScreenshotPrinter.cpp">
+      <Filter>03. Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\Window.cpp">
+      <Filter>03. Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\DynamicTexture2D.DX9.cpp">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\GraphicsDevice.DX9.cpp">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\RenderTargetTexture2D.DX9.cpp">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\ShaderEffect.DX9.cpp">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\SourceTexture2D.DX9.cpp">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\Texture2D.DX9.cpp">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\DynamicTexture2D.GLES2.cpp">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\GraphicsDevice.GLES2.cpp">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\RenderTargetTexture2D.GLES2.cpp">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\ShaderEffect.GLES2.cpp">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\SourceTexture2D.GLES2.cpp">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\Texture2D.GLES2.cpp">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSystem\Bibim\FileStream.Windows.cpp">
+      <Filter>03. Game\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSystem\Bibim\MPQ.cpp">
+      <Filter>03. Game\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSystem\Bibim\MPQStream.cpp">
+      <Filter>03. Game\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Bibim\GameFramework.Windows.cpp">
+      <Filter>03. Game\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Bibim\GameWindow.Windows.cpp">
+      <Filter>03. Game\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\Bibim\AudioDevice.cpp">
+      <Filter>03. Game\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\Bibim\BGM.cpp">
+      <Filter>03. Game\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\Bibim\SoundFX.cpp">
+      <Filter>03. Game\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="GFX\Bibim\SparkParticleEngine.cpp">
+      <Filter>03. Game\GFX</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\Bibim\HttpClient.Windows.cpp">
+      <Filter>03. Game\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Any.cpp">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Colors.cpp">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Matrix4.cpp">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Point2.cpp">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Point3.cpp">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Point4.cpp">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Rect.cpp">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\RectF.cpp">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\String.cpp">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Vector2.cpp">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Vector3.cpp">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Vector4.cpp">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\SequenceDictionary.cpp">
+      <Filter>01. Foundation\Container</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Assert.cpp">
+      <Filter>01. Foundation\Diagnostics</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Log.cpp">
+      <Filter>01. Foundation\Diagnostics</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Geom2D.cpp">
+      <Filter>01. Foundation\Mathematics</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Math.cpp">
+      <Filter>01. Foundation\Mathematics</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Numerics.cpp">
+      <Filter>01. Foundation\Mathematics</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\AnyStorage.cpp">
+      <Filter>01. Foundation\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Memory.cpp">
+      <Filter>01. Foundation\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\RectStorage.cpp">
+      <Filter>01. Foundation\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Object.cpp">
+      <Filter>01. Foundation\%28Object%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\SharedObject.cpp">
+      <Filter>01. Foundation\%28Object%29</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Environment.Windows.cpp">
+      <Filter>02. System</Filter>
+    </ClCompile>
+    <ClCompile Include="IPC\Bibim\PipeClientStream.Windows.cpp">
+      <Filter>02. System\IPC</Filter>
+    </ClCompile>
+    <ClCompile Include="IPC\Bibim\PipeServerStream.Windows.cpp">
+      <Filter>02. System\IPC</Filter>
+    </ClCompile>
+    <ClCompile Include="IPC\Bibim\PipeStream.Windows.cpp">
+      <Filter>02. System\IPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Threading\Bibim\Lock.Windows.cpp">
+      <Filter>02. System\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Threading\Bibim\ManualLocker.cpp">
+      <Filter>02. System\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Threading\Bibim\Thread.Windows.cpp">
+      <Filter>02. System\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\BinaryReader.cpp">
+      <Filter>02. System\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\BinaryWriter.cpp">
+      <Filter>02. System\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\DumpStream.cpp">
+      <Filter>02. System\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\MemoryStream.cpp">
+      <Filter>02. System\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Stream.cpp">
+      <Filter>02. System\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="References\lua_tinker\lua_tinker.cpp">
+      <Filter>04. References</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Asset\Bibim\AssetLoadingTask.h">
+      <Filter>03. Game\%28Asset%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset\Bibim\AssetStreamReader.h">
+      <Filter>03. Game\%28Asset%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset\Bibim\GameAsset.h">
+      <Filter>03. Game\%28Asset%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset\Bibim\GameAssetFactory.h">
+      <Filter>03. Game\%28Asset%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset\Bibim\GameAssetStorage.h">
+      <Filter>03. Game\%28Asset%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset\Bibim\AssetProvider.h">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset\Bibim\FileAssetProvider.h">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset\Bibim\MPQAssetProvider.h">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset\Bibim\PipedAssetProvider.h">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClInclude>
+    <ClInclude Include="Typography\Bibim\Font.h">
+      <Filter>03. Game\Typography</Filter>
+    </ClInclude>
+    <ClInclude Include="Typography\Bibim\FontCache.h">
+      <Filter>03. Game\Typography</Filter>
+    </ClInclude>
+    <ClInclude Include="Typography\Bibim\FontLibrary.h">
+      <Filter>03. Game\Typography</Filter>
+    </ClInclude>
+    <ClInclude Include="Typography\Bibim\FontString.h">
+      <Filter>03. Game\Typography</Filter>
+    </ClInclude>
+    <ClInclude Include="Typography\Bibim\Glyph.h">
+      <Filter>03. Game\Typography</Filter>
+    </ClInclude>
+    <ClInclude Include="Typography\Bibim\GlyphSurface.h">
+      <Filter>03. Game\Typography</Filter>
+    </ClInclude>
+    <ClInclude Include="Typography\Bibim\GlyphTable.h">
+      <Filter>03. Game\Typography</Filter>
+    </ClInclude>
+    <ClInclude Include="Typography\Bibim\TypingContext.h">
+      <Filter>03. Game\Typography</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Bibim\CloningContext.h">
+      <Filter>03. Game\%28Component%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Bibim\ComponentStreamReader.h">
+      <Filter>03. Game\%28Component%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Bibim\GameComponent.h">
+      <Filter>03. Game\%28Component%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\GameComponentFactory.h">
+      <Filter>03. Game\%28Component%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\Bibim\GameModule.h">
+      <Filter>03. Game\%28Module%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\Bibim\GameModuleFactory.h">
+      <Filter>03. Game\%28Module%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\Bibim\GameModuleNode.h">
+      <Filter>03. Game\%28Module%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Module\Bibim\GameModuleTree.h">
+      <Filter>03. Game\%28Module%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\Sprite.h">
+      <Filter>03. Game\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\SpriteSet.h">
+      <Filter>03. Game\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\EvalBinaryOperators.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\EvalBoard.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\EvalCaches.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\EvalConstants.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\EvalContext.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\EvalInterpolators.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\EvalRangedSequences.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\Evals.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\EvalSelectors.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\EvalSequenceBase.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\EvalSequences.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\EvalTimeflow.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\EvalUnaryOperators.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\EvalUnitRandom.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\EvalVariables.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\Sequences.h">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\Ease.h">
+      <Filter>03. Game\Animation\Easing</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\EasingCurves.h">
+      <Filter>03. Game\Animation\Easing</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\ElasticEasingCurves.h">
+      <Filter>03. Game\Animation\Easing</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\Bibim\OscillationCurve.h">
+      <Filter>03. Game\Animation\Easing</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision2D\Bibim\AxisAlignedBoxShape2D.h">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision2D\Bibim\BoxShape2D.h">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision2D\Bibim\CollisionSpace2D.h">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision2D\Bibim\IntersectShapes2D.h">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision2D\Bibim\PointShape2D.h">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision2D\Bibim\RaycastReport2D.h">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision2D\Bibim\SegmentShape2D.h">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision2D\Bibim\Shape2D.h">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision2D\Bibim\SphereShape2D.h">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision2D\Bibim\UserShape2D.h">
+      <Filter>03. Game\Collision2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Diagnostics\Bibim\FileLogger.h">
+      <Filter>03. Game\Diagnostics</Filter>
+    </ClInclude>
+    <ClInclude Include="Diagnostics\Bibim\Logger.h">
+      <Filter>03. Game\Diagnostics</Filter>
+    </ClInclude>
+    <ClInclude Include="Diagnostics\Bibim\SystemLogger.h">
+      <Filter>03. Game\Diagnostics</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay\Bibim\BatchCommand.h">
+      <Filter>03. Game\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay\Bibim\Command.h">
+      <Filter>03. Game\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay\Bibim\CommandHistory.h">
+      <Filter>03. Game\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay\Bibim\CommandQueue.h">
+      <Filter>03. Game\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay\Bibim\RestorableCommand.h">
+      <Filter>03. Game\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay\Bibim\SpatialObject2D.h">
+      <Filter>03. Game\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay\Bibim\JumpPointPathFinder.h">
+      <Filter>03. Game\Gameplay\PathFinder</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay\Bibim\PathFinder.h">
+      <Filter>03. Game\Gameplay\PathFinder</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Bibim\Key.h">
+      <Filter>03. Game\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Bibim\Keyboard.h">
+      <Filter>03. Game\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Bibim\KeyboardState.h">
+      <Filter>03. Game\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Bibim\Mouse.h">
+      <Filter>03. Game\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Bibim\MouseState.h">
+      <Filter>03. Game\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripting\Bibim\Script.h">
+      <Filter>03. Game\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripting\Bibim\ScriptingContext.h">
+      <Filter>03. Game\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripting\Bibim\ScriptNativeFunctionTable.h">
+      <Filter>03. Game\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripting\Bibim\ScriptStack.h">
+      <Filter>03. Game\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripting\Bibim\ScriptThread.h">
+      <Filter>03. Game\Scripting</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripting\Bibim\ScriptLibraryIO.h">
+      <Filter>03. Game\Scripting\Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="Time\Bibim\AlarmClock.h">
+      <Filter>03. Game\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Time\Bibim\Clock.h">
+      <Filter>03. Game\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Time\Bibim\IUpdateable.h">
+      <Filter>03. Game\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Time\Bibim\SubTimeline.h">
+      <Filter>03. Game\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Time\Bibim\Timeline.h">
+      <Filter>03. Game\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Time\Bibim\TimelineGameComponent.h">
+      <Filter>03. Game\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Time\Bibim\TimelineGameModule.h">
+      <Filter>03. Game\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Time\Bibim\UpdateableGameComponent.h">
+      <Filter>03. Game\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Time\Bibim\UpdateableGameModule.h">
+      <Filter>03. Game\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="Startup\Bibim\Startup.h">
+      <Filter>03. Game\Startup</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UI.h">
+      <Filter>03. Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIDomain.h">
+      <Filter>03. Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIElement.h">
+      <Filter>03. Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UILayout.h">
+      <Filter>03. Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIMarkupText.h">
+      <Filter>03. Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIRenderer.DX9.h">
+      <Filter>03. Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIRenderer.GLES2.h">
+      <Filter>03. Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIRenderer.h">
+      <Filter>03. Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIRendererBase.h">
+      <Filter>03. Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UISimpleDomain.h">
+      <Filter>03. Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIAppEventDispatcher.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIAsyncEventQueue.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIEventArgs.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIEventDispatcher.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIEventHandler.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIEventID.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIEventMap.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIFunctionEventHandler.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIFunctionTable.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIGamePadEventArgs.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIGamePadEventDispatcher.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIKeyboardEventArgs.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIKeyboardEventDispatcher.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIMouseButtonEventArgs.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIMouseEventArgs.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIMouseEventDispatcher.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIMouseWheelEventArgs.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UISequentialEventHandler.h">
+      <Filter>03. Game\UI\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIEffectMap.h">
+      <Filter>03. Game\UI\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIEffectStack.h">
+      <Filter>03. Game\UI\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIAfterImageEffect.h">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIGeometryEffect.h">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UISineCurveEffect.h">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UITintEffect.h">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIBlendingEffect.h">
+      <Filter>03. Game\UI\Effects\Pixel</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIColorMatrixEffect.h">
+      <Filter>03. Game\UI\Effects\Pixel</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIMaskEffect.h">
+      <Filter>03. Game\UI\Effects\Pixel</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIOpacityMaskEffect.h">
+      <Filter>03. Game\UI\Effects\Pixel</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIPixelEffect.h">
+      <Filter>03. Game\UI\Effects\Pixel</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIButton.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UICheckBox.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIImage.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UILabel.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIMarkupTextBox.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIPanel.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIRadioButton.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIRect.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UISpark.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UISprite.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIVideo.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIVisual.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIWindow.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UITransform.h">
+      <Filter>03. Game\UI\Transforms</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UITransform2D.h">
+      <Filter>03. Game\UI\Transforms</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UITransform3D.h">
+      <Filter>03. Game\UI\Transforms</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIBoundsContext.h">
+      <Filter>03. Game\UI\Visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIDrawingContext.h">
+      <Filter>03. Game\UI\Visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIHandledDrawingContext.h">
+      <Filter>03. Game\UI\Visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIPickingContext.h">
+      <Filter>03. Game\UI\Visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIVisualVisitor.h">
+      <Filter>03. Game\UI\Visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\BitMask.h">
+      <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\BlendMode.h">
+      <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\DynamicTexture2D.h">
+      <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\GraphicsCapabilities.h">
+      <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\GraphicsDevice.h">
+      <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\Image.h">
+      <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\ImageSet.h">
+      <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\PNGReader.h">
+      <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\RenderTargetTexture2D.h">
+      <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\ScreenshotPrinter.h">
+      <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\ShaderEffect.h">
+      <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\SourceTexture2D.h">
+      <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\Texture2D.h">
+      <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\Window.h">
+      <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\DynamicTexture2D.DX9.h">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\GraphicsDevice.DX9.h">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\RenderTargetTexture2D.DX9.h">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\ShaderEffect.DX9.h">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\SourceTexture2D.DX9.h">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\Texture2D.DX9.h">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\DynamicTexture2D.GLES2.h">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\GLES2.h">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\GraphicsDevice.GLES2.h">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\RenderTargetTexture2D.GLES2.h">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\ShaderEffect.GLES2.h">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\SourceTexture2D.GLES2.h">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\Texture2D.GLES2.h">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem\Bibim\FileStream.h">
+      <Filter>03. Game\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem\Bibim\FileStream.Windows.h">
+      <Filter>03. Game\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem\Bibim\MPQ.h">
+      <Filter>03. Game\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem\Bibim\MPQStream.h">
+      <Filter>03. Game\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\Game.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\GameFramework.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\GameFramework.Windows.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\GameWindow.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\GameWindow.Windows.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\Bibim\AudioDevice.h">
+      <Filter>03. Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\Bibim\BGM.h">
+      <Filter>03. Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\Bibim\SoundFX.h">
+      <Filter>03. Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="GFX\Bibim\SparkParticleEngine.h">
+      <Filter>03. Game\GFX</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\Bibim\HttpClient.h">
+      <Filter>03. Game\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\Bibim\HttpClient.Windows.h">
+      <Filter>03. Game\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Any.h">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Color.h">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Colors.h">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Matrix4.h">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\NullPointer.h">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Point2.h">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Point3.h">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Point4.h">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Rect.h">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\RectF.h">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\String.h">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Vector2.h">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Vector3.h">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Vector4.h">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\SequenceDictionary.h">
+      <Filter>01. Foundation\Container</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Assert.h">
+      <Filter>01. Foundation\Diagnostics</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Log.h">
+      <Filter>01. Foundation\Diagnostics</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Geom2D.h">
+      <Filter>01. Foundation\Mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Math.h">
+      <Filter>01. Foundation\Mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Numerics.h">
+      <Filter>01. Foundation\Mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\AnyStorage.h">
+      <Filter>01. Foundation\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Atomic.h">
+      <Filter>01. Foundation\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\CheckedRelease.h">
+      <Filter>01. Foundation\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Delete.h">
+      <Filter>01. Foundation\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Listeners.h">
+      <Filter>01. Foundation\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Memory.h">
+      <Filter>01. Foundation\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Property.h">
+      <Filter>01. Foundation\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\RectStorage.h">
+      <Filter>01. Foundation\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Object.h">
+      <Filter>01. Foundation\%28Object%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\PointerCasts.h">
+      <Filter>01. Foundation\%28Object%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\SharedObject.h">
+      <Filter>01. Foundation\%28Object%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\SharedPointer.h">
+      <Filter>01. Foundation\%28Object%29</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Environment.h">
+      <Filter>02. System</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Environment.Windows.h">
+      <Filter>02. System</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\Bibim\PipeClientStream.h">
+      <Filter>02. System\IPC</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\Bibim\PipeClientStream.Windows.h">
+      <Filter>02. System\IPC</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\Bibim\PipeServerStream.h">
+      <Filter>02. System\IPC</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\Bibim\PipeServerStream.Windows.h">
+      <Filter>02. System\IPC</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\Bibim\PipeStream.h">
+      <Filter>02. System\IPC</Filter>
+    </ClInclude>
+    <ClInclude Include="IPC\Bibim\PipeStream.Windows.h">
+      <Filter>02. System\IPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Threading\Bibim\AutoLocker.h">
+      <Filter>02. System\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Threading\Bibim\Lock.h">
+      <Filter>02. System\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Threading\Bibim\Lock.Windows.h">
+      <Filter>02. System\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Threading\Bibim\ManualLocker.h">
+      <Filter>02. System\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Threading\Bibim\Thread.h">
+      <Filter>02. System\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Threading\Bibim\Thread.Windows.h">
+      <Filter>02. System\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\BinaryReader.h">
+      <Filter>02. System\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\BinaryWriter.h">
+      <Filter>02. System\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\DumpStream.h">
+      <Filter>02. System\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\MemoryStream.h">
+      <Filter>02. System\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Stream.h">
+      <Filter>02. System\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="References\lua_tinker\lua_tinker.h">
+      <Filter>04. References</Filter>
+    </ClInclude>
+    <ClInclude Include="Foundation\Bibim\All.h" />
+    <ClInclude Include="Foundation\Bibim\Foundation.h" />
+    <ClInclude Include="Foundation\Bibim\FWD.h" />
+    <ClInclude Include="Foundation\Bibim\PCH.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Asset\Bibim\AssetLoadingTask.inl">
+      <Filter>03. Game\%28Asset%29</Filter>
+    </None>
+    <None Include="Asset\Bibim\AssetStreamReader.inl">
+      <Filter>03. Game\%28Asset%29</Filter>
+    </None>
+    <None Include="Asset\Bibim\GameAsset.inl">
+      <Filter>03. Game\%28Asset%29</Filter>
+    </None>
+    <None Include="Asset\Bibim\GameAssetFactory.inl">
+      <Filter>03. Game\%28Asset%29</Filter>
+    </None>
+    <None Include="Asset\Bibim\GameAssetStorage.inl">
+      <Filter>03. Game\%28Asset%29</Filter>
+    </None>
+    <None Include="Asset\Bibim\AssetProvider.inl">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </None>
+    <None Include="Asset\Bibim\FileAssetProvider.inl">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </None>
+    <None Include="Asset\Bibim\MPQAssetProvider.inl">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </None>
+    <None Include="Asset\Bibim\PipedAssetProvider.inl">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </None>
+    <None Include="Typography\Bibim\Font.inl">
+      <Filter>03. Game\Typography</Filter>
+    </None>
+    <None Include="Typography\Bibim\FontCache.inl">
+      <Filter>03. Game\Typography</Filter>
+    </None>
+    <None Include="Typography\Bibim\FontLibrary.inl">
+      <Filter>03. Game\Typography</Filter>
+    </None>
+    <None Include="Typography\Bibim\FontString.inl">
+      <Filter>03. Game\Typography</Filter>
+    </None>
+    <None Include="Typography\Bibim\Glyph.inl">
+      <Filter>03. Game\Typography</Filter>
+    </None>
+    <None Include="Typography\Bibim\GlyphSurface.inl">
+      <Filter>03. Game\Typography</Filter>
+    </None>
+    <None Include="Typography\Bibim\GlyphTable.inl">
+      <Filter>03. Game\Typography</Filter>
+    </None>
+    <None Include="Typography\Bibim\TypingContext.inl">
+      <Filter>03. Game\Typography</Filter>
+    </None>
+    <None Include="Component\Bibim\CloningContext.inl">
+      <Filter>03. Game\%28Component%29</Filter>
+    </None>
+    <None Include="Component\Bibim\ComponentStreamReader.inl">
+      <Filter>03. Game\%28Component%29</Filter>
+    </None>
+    <None Include="Component\Bibim\GameComponent.inl">
+      <Filter>03. Game\%28Component%29</Filter>
+    </None>
+    <None Include="Graphics\Bibim\GameComponentFactory.inl">
+      <Filter>03. Game\%28Component%29</Filter>
+    </None>
+    <None Include="Module\Bibim\GameModule.inl">
+      <Filter>03. Game\%28Module%29</Filter>
+    </None>
+    <None Include="Module\Bibim\GameModuleFactory.inl">
+      <Filter>03. Game\%28Module%29</Filter>
+    </None>
+    <None Include="Module\Bibim\GameModuleNode.inl">
+      <Filter>03. Game\%28Module%29</Filter>
+    </None>
+    <None Include="Module\Bibim\GameModuleTree.inl">
+      <Filter>03. Game\%28Module%29</Filter>
+    </None>
+    <None Include="Animation\Bibim\Sprite.inl">
+      <Filter>03. Game\Animation</Filter>
+    </None>
+    <None Include="Animation\Bibim\SpriteSet.inl">
+      <Filter>03. Game\Animation</Filter>
+    </None>
+    <None Include="Animation\Bibim\EvalBinaryOperators.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\EvalBoard.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\EvalCaches.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\EvalConstants.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\EvalContext.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\EvalInterpolators.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\EvalRangedSequences.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\Evals.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\EvalSelectors.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\EvalSequenceBase.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\EvalSequences.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\EvalTimeflow.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\EvalUnaryOperators.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\EvalUnitRandom.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\EvalVariables.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\Sequences.inl">
+      <Filter>03. Game\Animation\Evaluation</Filter>
+    </None>
+    <None Include="Animation\Bibim\Ease.inl">
+      <Filter>03. Game\Animation\Easing</Filter>
+    </None>
+    <None Include="Animation\Bibim\ElasticEasingCurves.inl">
+      <Filter>03. Game\Animation\Easing</Filter>
+    </None>
+    <None Include="Animation\Bibim\OscillationCurve.inl">
+      <Filter>03. Game\Animation\Easing</Filter>
+    </None>
+    <None Include="Collision2D\Bibim\AxisAlignedBoxShape2D.inl">
+      <Filter>03. Game\Collision2D</Filter>
+    </None>
+    <None Include="Collision2D\Bibim\BoxShape2D.inl">
+      <Filter>03. Game\Collision2D</Filter>
+    </None>
+    <None Include="Collision2D\Bibim\CollisionSpace2D.inl">
+      <Filter>03. Game\Collision2D</Filter>
+    </None>
+    <None Include="Collision2D\Bibim\RaycastReport2D.inl">
+      <Filter>03. Game\Collision2D</Filter>
+    </None>
+    <None Include="Collision2D\Bibim\SegmentShape2D.inl">
+      <Filter>03. Game\Collision2D</Filter>
+    </None>
+    <None Include="Collision2D\Bibim\Shape2D.inl">
+      <Filter>03. Game\Collision2D</Filter>
+    </None>
+    <None Include="Diagnostics\Bibim\FileLogger.inl">
+      <Filter>03. Game\Diagnostics</Filter>
+    </None>
+    <None Include="Diagnostics\Bibim\Logger.inl">
+      <Filter>03. Game\Diagnostics</Filter>
+    </None>
+    <None Include="Diagnostics\Bibim\SystemLogger.inl">
+      <Filter>03. Game\Diagnostics</Filter>
+    </None>
+    <None Include="Gameplay\Bibim\BatchCommand.inl">
+      <Filter>03. Game\Gameplay</Filter>
+    </None>
+    <None Include="Gameplay\Bibim\CommandHistory.inl">
+      <Filter>03. Game\Gameplay</Filter>
+    </None>
+    <None Include="Gameplay\Bibim\CommandQueue.inl">
+      <Filter>03. Game\Gameplay</Filter>
+    </None>
+    <None Include="Gameplay\Bibim\SpatialObject2D.inl">
+      <Filter>03. Game\Gameplay</Filter>
+    </None>
+    <None Include="Gameplay\Bibim\JumpPointPathFinder.inl">
+      <Filter>03. Game\Gameplay\PathFinder</Filter>
+    </None>
+    <None Include="Gameplay\Bibim\PathFinder.inl">
+      <Filter>03. Game\Gameplay\PathFinder</Filter>
+    </None>
+    <None Include="Input\Bibim\Keyboard.inl">
+      <Filter>03. Game\Input</Filter>
+    </None>
+    <None Include="Input\Bibim\KeyboardState.inl">
+      <Filter>03. Game\Input</Filter>
+    </None>
+    <None Include="Input\Bibim\Mouse.inl">
+      <Filter>03. Game\Input</Filter>
+    </None>
+    <None Include="Input\Bibim\MouseState.inl">
+      <Filter>03. Game\Input</Filter>
+    </None>
+    <None Include="Scripting\Bibim\Script.inl">
+      <Filter>03. Game\Scripting</Filter>
+    </None>
+    <None Include="Scripting\Bibim\ScriptingContext.inl">
+      <Filter>03. Game\Scripting</Filter>
+    </None>
+    <None Include="Scripting\Bibim\ScriptNativeFunctionTable.inl">
+      <Filter>03. Game\Scripting</Filter>
+    </None>
+    <None Include="Scripting\Bibim\ScriptStack.inl">
+      <Filter>03. Game\Scripting</Filter>
+    </None>
+    <None Include="Scripting\Bibim\ScriptThread.inl">
+      <Filter>03. Game\Scripting</Filter>
+    </None>
+    <None Include="Time\Bibim\AlarmClock.inl">
+      <Filter>03. Game\Time</Filter>
+    </None>
+    <None Include="Time\Bibim\SubTimeline.inl">
+      <Filter>03. Game\Time</Filter>
+    </None>
+    <None Include="Time\Bibim\Timeline.inl">
+      <Filter>03. Game\Time</Filter>
+    </None>
+    <None Include="Time\Bibim\TimelineGameComponent.inl">
+      <Filter>03. Game\Time</Filter>
+    </None>
+    <None Include="Time\Bibim\TimelineGameModule.inl">
+      <Filter>03. Game\Time</Filter>
+    </None>
+    <None Include="Time\Bibim\UpdateableGameComponent.inl">
+      <Filter>03. Game\Time</Filter>
+    </None>
+    <None Include="Time\Bibim\UpdateableGameModule.inl">
+      <Filter>03. Game\Time</Filter>
+    </None>
+    <None Include="UI\Bibim\UIDomain.inl">
+      <Filter>03. Game\UI</Filter>
+    </None>
+    <None Include="UI\Bibim\UIElement.inl">
+      <Filter>03. Game\UI</Filter>
+    </None>
+    <None Include="UI\Bibim\UILayout.inl">
+      <Filter>03. Game\UI</Filter>
+    </None>
+    <None Include="UI\Bibim\UIMarkupText.inl">
+      <Filter>03. Game\UI</Filter>
+    </None>
+    <None Include="UI\Bibim\UIRenderer.DX9.inl">
+      <Filter>03. Game\UI</Filter>
+    </None>
+    <None Include="UI\Bibim\UIRenderer.GLES2.inl">
+      <Filter>03. Game\UI</Filter>
+    </None>
+    <None Include="UI\Bibim\UIRendererBase.inl">
+      <Filter>03. Game\UI</Filter>
+    </None>
+    <None Include="UI\Bibim\UIAppEventDispatcher.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIAsyncEventQueue.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIEventArgs.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIEventDispatcher.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIEventHandler.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIEventID.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIEventMap.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIFunctionEventHandler.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIFunctionTable.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIGamePadEventArgs.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIGamePadEventDispatcher.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIKeyboardEventArgs.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIKeyboardEventDispatcher.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIMouseButtonEventArgs.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIMouseEventArgs.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIMouseEventDispatcher.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIMouseWheelEventArgs.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UISequentialEventHandler.inl">
+      <Filter>03. Game\UI\Events</Filter>
+    </None>
+    <None Include="UI\Bibim\UIEffectMap.inl">
+      <Filter>03. Game\UI\Effects</Filter>
+    </None>
+    <None Include="UI\Bibim\UIEffectStack.inl">
+      <Filter>03. Game\UI\Effects</Filter>
+    </None>
+    <None Include="UI\Bibim\UIAfterImageEffect.inl">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </None>
+    <None Include="UI\Bibim\UIGeometryEffect.inl">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </None>
+    <None Include="UI\Bibim\UISineCurveEffect.inl">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </None>
+    <None Include="UI\Bibim\UITintEffect.inl">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </None>
+    <None Include="UI\Bibim\UIBlendingEffect.inl">
+      <Filter>03. Game\UI\Effects\Pixel</Filter>
+    </None>
+    <None Include="UI\Bibim\UIColorMatrixEffect.inl">
+      <Filter>03. Game\UI\Effects\Pixel</Filter>
+    </None>
+    <None Include="UI\Bibim\UIMaskEffect.inl">
+      <Filter>03. Game\UI\Effects\Pixel</Filter>
+    </None>
+    <None Include="UI\Bibim\UIOpacityMaskEffect.inl">
+      <Filter>03. Game\UI\Effects\Pixel</Filter>
+    </None>
+    <None Include="UI\Bibim\UIPixelEffect.inl">
+      <Filter>03. Game\UI\Effects\Pixel</Filter>
+    </None>
+    <None Include="UI\Bibim\UIButton.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="UI\Bibim\UICheckBox.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="UI\Bibim\UIImage.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="UI\Bibim\UILabel.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="UI\Bibim\UIMarkupTextBox.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="UI\Bibim\UIPanel.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="UI\Bibim\UIRect.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="UI\Bibim\UISpark.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="UI\Bibim\UISprite.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="UI\Bibim\UIVideo.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="UI\Bibim\UIVisual.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="UI\Bibim\UIWindow.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="UI\Bibim\UITransform2D.inl">
+      <Filter>03. Game\UI\Transforms</Filter>
+    </None>
+    <None Include="UI\Bibim\UITransform3D.inl">
+      <Filter>03. Game\UI\Transforms</Filter>
+    </None>
+    <None Include="UI\Bibim\UIBoundsContext.inl">
+      <Filter>03. Game\UI\Visitors</Filter>
+    </None>
+    <None Include="UI\Bibim\UIDrawingContext.inl">
+      <Filter>03. Game\UI\Visitors</Filter>
+    </None>
+    <None Include="UI\Bibim\UIHandledDrawingContext.inl">
+      <Filter>03. Game\UI\Visitors</Filter>
+    </None>
+    <None Include="UI\Bibim\UIPickingContext.inl">
+      <Filter>03. Game\UI\Visitors</Filter>
+    </None>
+    <None Include="UI\Bibim\UIVisualVisitor.inl">
+      <Filter>03. Game\UI\Visitors</Filter>
+    </None>
+    <None Include="Graphics\Bibim\BitMask.inl">
+      <Filter>03. Game\Graphics</Filter>
+    </None>
+    <None Include="Graphics\Bibim\GraphicsCapabilities.inl">
+      <Filter>03. Game\Graphics</Filter>
+    </None>
+    <None Include="Graphics\Bibim\Image.inl">
+      <Filter>03. Game\Graphics</Filter>
+    </None>
+    <None Include="Graphics\Bibim\ImageSet.inl">
+      <Filter>03. Game\Graphics</Filter>
+    </None>
+    <None Include="Graphics\Bibim\ScreenshotPrinter.inl">
+      <Filter>03. Game\Graphics</Filter>
+    </None>
+    <None Include="Graphics\Bibim\Window.inl">
+      <Filter>03. Game\Graphics</Filter>
+    </None>
+    <None Include="Graphics\Bibim\DynamicTexture2D.DX9.inl">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </None>
+    <None Include="Graphics\Bibim\GraphicsDevice.DX9.inl">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </None>
+    <None Include="Graphics\Bibim\RenderTargetTexture2D.DX9.inl">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </None>
+    <None Include="Graphics\Bibim\ShaderEffect.DX9.inl">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </None>
+    <None Include="Graphics\Bibim\Texture2D.DX9.inl">
+      <Filter>03. Game\Graphics\DX9</Filter>
+    </None>
+    <None Include="Graphics\Bibim\DynamicTexture2D.GLES2.inl">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </None>
+    <None Include="Graphics\Bibim\GraphicsDevice.GLES2.inl">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </None>
+    <None Include="Graphics\Bibim\RenderTargetTexture2D.GLES2.inl">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </None>
+    <None Include="Graphics\Bibim\Shadereffect.GLES2.inl">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </None>
+    <None Include="Graphics\Bibim\Texture2D.GLES2.inl">
+      <Filter>03. Game\Graphics\GLES2</Filter>
+    </None>
+    <None Include="FileSystem\Bibim\FileStream.Windows.inl">
+      <Filter>03. Game\FileSystem</Filter>
+    </None>
+    <None Include="FileSystem\Bibim\MPQ.inl">
+      <Filter>03. Game\FileSystem</Filter>
+    </None>
+    <None Include="FileSystem\Bibim\MPQStream.inl">
+      <Filter>03. Game\FileSystem</Filter>
+    </None>
+    <None Include="Framework\Bibim\GameFramework.Windows.inl">
+      <Filter>03. Game\Framework</Filter>
+    </None>
+    <None Include="Framework\Bibim\GameWindow.Windows.inl">
+      <Filter>03. Game\Framework</Filter>
+    </None>
+    <None Include="Audio\Bibim\AudioDevice.inl">
+      <Filter>03. Game\Audio</Filter>
+    </None>
+    <None Include="Audio\Bibim\BGM.inl">
+      <Filter>03. Game\Audio</Filter>
+    </None>
+    <None Include="Audio\Bibim\SoundFX.inl">
+      <Filter>03. Game\Audio</Filter>
+    </None>
+    <None Include="GFX\Bibim\SparkParticleEngine.inl">
+      <Filter>03. Game\GFX</Filter>
+    </None>
+    <None Include="Net\Bibim\HttpClient.Windows.inl">
+      <Filter>03. Game\Net</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Any.inl">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Color.inl">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Colors.inl">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Matrix4.inl">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Point2.inl">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Point3.inl">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Point4.inl">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Rect.inl">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\RectF.inl">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\String.inl">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Vector2.inl">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Vector3.inl">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Vector4.inl">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\SequenceDictionary.inl">
+      <Filter>01. Foundation\Container</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Log.inl">
+      <Filter>01. Foundation\Diagnostics</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Geom2D.inl">
+      <Filter>01. Foundation\Mathematics</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Math.inl">
+      <Filter>01. Foundation\Mathematics</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Numerics.inl">
+      <Filter>01. Foundation\Mathematics</Filter>
+    </None>
+    <None Include="Foundation\Bibim\AnyStorage.inl">
+      <Filter>01. Foundation\Utility</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Atomic.inl">
+      <Filter>01. Foundation\Utility</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Listeners.inl">
+      <Filter>01. Foundation\Utility</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Property.inl">
+      <Filter>01. Foundation\Utility</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Object.inl">
+      <Filter>01. Foundation\%28Object%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\SharedObject.inl">
+      <Filter>01. Foundation\%28Object%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\SharedPointer.inl">
+      <Filter>01. Foundation\%28Object%29</Filter>
+    </None>
+    <None Include="Foundation\Bibim\Environment.Windows.inl">
+      <Filter>02. System</Filter>
+    </None>
+    <None Include="IPC\Bibim\PipeClientStream.Windows.inl">
+      <Filter>02. System\IPC</Filter>
+    </None>
+    <None Include="IPC\Bibim\PipeServerStream.Windows.inl">
+      <Filter>02. System\IPC</Filter>
+    </None>
+    <None Include="IPC\Bibim\PipeStream.Windows.inl">
+      <Filter>02. System\IPC</Filter>
+    </None>
+    <None Include="Threading\Bibim\AutoLocker.inl">
+      <Filter>02. System\Threading</Filter>
+    </None>
+    <None Include="Threading\Bibim\ManualLocker.inl">
+      <Filter>02. System\Threading</Filter>
+    </None>
+    <None Include="Threading\Bibim\Thread.Windows.inl">
+      <Filter>02. System\Threading</Filter>
+    </None>
+    <None Include="Foundation\Bibim\BinaryReader.inl">
+      <Filter>02. System\IO</Filter>
+    </None>
+    <None Include="Foundation\Bibim\BinaryWriter.inl">
+      <Filter>02. System\IO</Filter>
+    </None>
+    <None Include="Foundation\Bibim\DumpStream.inl">
+      <Filter>02. System\IO</Filter>
+    </None>
+    <None Include="Foundation\Bibim\MemoryStream.inl">
+      <Filter>02. System\IO</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,861 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug.GLES2|Win32">
+      <Configuration>Debug.GLES2</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release.GLES2|Win32">
+      <Configuration>Release.GLES2</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{96CD7385-7B7D-4469-A86D-B19D660C595E}</ProjectGuid>
+    <RootNamespace>BibimRuntimeVC10</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Bibim.props" />
+    <Import Project="Bibim.Release.GLES2.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Bibim.props" />
+    <Import Project="Bibim.Debug.GLES2.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Bibim.props" />
+    <Import Project="Bibim.Release.DX9.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="Bibim.props" />
+    <Import Project="Bibim.Debug.DX9.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\Product\Windows\Lib\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">(Build)\Bibim.Runtime.$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\Product\Windows\Lib\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">(Build)\Bibim.Runtime.$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">..\..\..\Product\Windows\Lib\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">(Build)\Bibim.Runtime.$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">..\..\..\Product\Windows\Lib\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">(Build)\Bibim.Runtime.$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Bibim.Runtime.$(Configuration).VC10</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">Bibim.Runtime.$(Configuration).VC10</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">Bibim.Runtime.$(Configuration).VC10</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Bibim.Runtime.$(Configuration).VC10</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Lib />
+    <Lib>
+      <AdditionalDependencies>winmm.lib;d3d9.lib;d3dx9d.lib;zlibd.lib;libpngd.lib;freetype244_D.lib;lua.Debug.vc10.lib;irrKlang.lib;SPARK_debug.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)Lib\x86;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Debug;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Debug\ZLib;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\StormLib\bin\StormLib\Win32\DebugAD;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\objs\win32\vc2010;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lua-5.1.5\lib;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\irrKlang-1.4.0\lib\Win32-visualStudio;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\SPARK-1.5.5\lib\vc2010\static;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib />
+    <Lib>
+      <AdditionalDependencies>winmm.lib;d3d9.lib;d3dx9d.lib;zlib.lib;libpng.lib;freetype244.lib;lua.Release.vc10.lib;irrKlang.lib;SPARK.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)Lib\x86;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Release;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Release\ZLib;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\StormLib\bin\StormLib\Win32\ReleaseAD;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\objs\win32\vc2010;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lua-5.1.5\lib;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\irrKlang-1.4.0\lib\Win32-visualStudio;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\SPARK-1.5.5\lib\vc2010\static;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Lib />
+    <Lib>
+      <AdditionalDependencies>winmm.lib;libGLESv2.lib;libEGL.lib;zlibd.lib;libpngd.lib;freetype244_D.lib;lua.Debug.vc10.lib;irrKlang.lib;SPARK_debug.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\gles_sdk\x86;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Debug;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Debug\ZLib;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\StormLib\bin\StormLib\Win32\DebugAD;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\objs\win32\vc2010;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lua-5.1.5\lib;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\irrKlang-1.4.0\lib\Win32-visualStudio;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\SPARK-1.5.5\lib\vc2010\static;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib />
+    <Lib>
+      <AdditionalDependencies>winmm.lib;libGLESv2.lib;libEGL.lib;zlib.lib;libpng.lib;freetype244.lib;lua.Release.vc10.lib;irrKlang.lib;SPARK.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\gles_sdk\x86;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Release;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Release\ZLib;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\StormLib\bin\StormLib\Win32\ReleaseAD;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\objs\win32\vc2010;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lua-5.1.5\lib;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\irrKlang-1.4.0\lib\Win32-visualStudio;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\SPARK-1.5.5\lib\vc2010\static;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Asset\Bibim\AssetLoadingTask.cpp" />
+    <ClCompile Include="Asset\Bibim\AssetStreamReader.cpp" />
+    <ClCompile Include="Asset\Bibim\GameAsset.cpp" />
+    <ClCompile Include="Asset\Bibim\GameAssetFactory.cpp" />
+    <ClCompile Include="Asset\Bibim\GameAssetStorage.cpp" />
+    <ClCompile Include="Asset\Bibim\AssetProvider.cpp" />
+    <ClCompile Include="Asset\Bibim\FileAssetProvider.cpp" />
+    <ClCompile Include="Asset\Bibim\MPQAssetProvider.cpp" />
+    <ClCompile Include="Asset\Bibim\PipedAssetProvider.cpp" />
+    <ClCompile Include="Typography\Bibim\Font.cpp" />
+    <ClCompile Include="Typography\Bibim\FontCache.cpp" />
+    <ClCompile Include="Typography\Bibim\FontLibrary.cpp" />
+    <ClCompile Include="Typography\Bibim\FontString.cpp" />
+    <ClCompile Include="Typography\Bibim\Glyph.cpp" />
+    <ClCompile Include="Typography\Bibim\GlyphSurface.cpp" />
+    <ClCompile Include="Typography\Bibim\GlyphTable.cpp" />
+    <ClCompile Include="Typography\Bibim\TypingContext.cpp" />
+    <ClCompile Include="Component\Bibim\CloningContext.cpp" />
+    <ClCompile Include="Component\Bibim\ComponentStreamReader.cpp" />
+    <ClCompile Include="Component\Bibim\GameComponent.cpp" />
+    <ClCompile Include="Graphics\Bibim\GameComponentFactory.cpp" />
+    <ClCompile Include="Module\Bibim\GameModule.cpp" />
+    <ClCompile Include="Module\Bibim\GameModuleFactory.cpp" />
+    <ClCompile Include="Module\Bibim\GameModuleNode.cpp" />
+    <ClCompile Include="Module\Bibim\GameModuleTree.cpp" />
+    <ClCompile Include="Animation\Bibim\Sprite.cpp" />
+    <ClCompile Include="Animation\Bibim\SpriteSet.cpp" />
+    <ClCompile Include="Animation\Bibim\EvalBoard.cpp" />
+    <ClCompile Include="Animation\Bibim\EvalConstants.cpp" />
+    <ClCompile Include="Animation\Bibim\EvalContext.cpp" />
+    <ClCompile Include="Animation\Bibim\Evals.cpp" />
+    <ClCompile Include="Animation\Bibim\EvalTimeflow.cpp" />
+    <ClCompile Include="Animation\Bibim\EvalUnitRandom.cpp" />
+    <ClCompile Include="Animation\Bibim\Ease.cpp" />
+    <ClCompile Include="Animation\Bibim\EasingCurves.cpp" />
+    <ClCompile Include="Animation\Bibim\ElasticEasingCurves.cpp" />
+    <ClCompile Include="Animation\Bibim\OscillationCurve.cpp" />
+    <ClCompile Include="Collision2D\Bibim\AxisAlignedBoxShape2D.cpp" />
+    <ClCompile Include="Collision2D\Bibim\BoxShape2D.cpp" />
+    <ClCompile Include="Collision2D\Bibim\CollisionSpace2D.cpp" />
+    <ClCompile Include="Collision2D\Bibim\IntersectShapes2D.cpp" />
+    <ClCompile Include="Collision2D\Bibim\PointShape2D.cpp" />
+    <ClCompile Include="Collision2D\Bibim\SegmentShape2D.cpp" />
+    <ClCompile Include="Collision2D\Bibim\Shape2D.cpp" />
+    <ClCompile Include="Collision2D\Bibim\SphereShape2D.cpp" />
+    <ClCompile Include="Collision2D\Bibim\UserShape2D.cpp" />
+    <ClCompile Include="Diagnostics\Bibim\CrashDump.cpp" />
+    <ClCompile Include="Diagnostics\Bibim\FileLogger.cpp" />
+    <ClCompile Include="Diagnostics\Bibim\Logger.cpp" />
+    <ClCompile Include="Diagnostics\Bibim\SystemLogger.cpp" />
+    <ClCompile Include="Gameplay\Bibim\BatchCommand.cpp" />
+    <ClCompile Include="Gameplay\Bibim\Command.cpp" />
+    <ClCompile Include="Gameplay\Bibim\CommandHistory.cpp" />
+    <ClCompile Include="Gameplay\Bibim\CommandQueue.cpp" />
+    <ClCompile Include="Gameplay\Bibim\RestorableCommand.cpp" />
+    <ClCompile Include="Gameplay\Bibim\SpatialObject2D.cpp" />
+    <ClCompile Include="Gameplay\Bibim\JumpPointPathFinder.cpp" />
+    <ClCompile Include="Gameplay\Bibim\PathFinder.cpp" />
+    <ClCompile Include="Input\Bibim\Key.cpp" />
+    <ClCompile Include="Input\Bibim\Keyboard.cpp" />
+    <ClCompile Include="Input\Bibim\Keyboard.Windows.cpp" />
+    <ClCompile Include="Input\Bibim\KeyboardState.cpp" />
+    <ClCompile Include="Input\Bibim\Mouse.cpp" />
+    <ClCompile Include="Input\Bibim\Mouse.Window.cpp" />
+    <ClCompile Include="Input\Bibim\MouseState.cpp" />
+    <ClCompile Include="Scripting\Bibim\Script.cpp" />
+    <ClCompile Include="Scripting\Bibim\ScriptingContext.cpp" />
+    <ClCompile Include="Scripting\Bibim\ScriptNativeFunctionTable.cpp" />
+    <ClCompile Include="Scripting\Bibim\ScriptStack.cpp" />
+    <ClCompile Include="Scripting\Bibim\ScriptThread.cpp" />
+    <ClCompile Include="Scripting\Bibim\ScriptLibraryIO.cpp" />
+    <ClCompile Include="Time\Bibim\AlarmClock.cpp" />
+    <ClCompile Include="Time\Bibim\Clock.Windows.cpp" />
+    <ClCompile Include="Time\Bibim\SubTimeline.cpp" />
+    <ClCompile Include="Time\Bibim\Timeline.cpp" />
+    <ClCompile Include="Time\Bibim\TimelineGameComponent.cpp" />
+    <ClCompile Include="Time\Bibim\TimelineGameModule.cpp" />
+    <ClCompile Include="Time\Bibim\UpdateableGameComponent.cpp" />
+    <ClCompile Include="Time\Bibim\UpdateableGameModule.cpp" />
+    <ClCompile Include="Startup\Bibim\Startup.cpp" />
+    <ClCompile Include="UI\Bibim\UIDomain.cpp" />
+    <ClCompile Include="UI\Bibim\UIElement.cpp" />
+    <ClCompile Include="UI\Bibim\UILayout.cpp" />
+    <ClCompile Include="UI\Bibim\UIMarkupText.cpp" />
+    <ClCompile Include="UI\Bibim\UIRenderer.DX9.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIRenderer.GLES2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIRendererBase.cpp" />
+    <ClCompile Include="UI\Bibim\UISimpleDomain.cpp" />
+    <ClCompile Include="UI\Bibim\UIAppEventDispatcher.cpp" />
+    <ClCompile Include="UI\Bibim\UIAsyncEventQueue.cpp" />
+    <ClCompile Include="UI\Bibim\UIEventArgs.cpp" />
+    <ClCompile Include="UI\Bibim\UIEventDispatcher.cpp" />
+    <ClCompile Include="UI\Bibim\UIEventHandler.cpp" />
+    <ClCompile Include="UI\Bibim\UIEventID.cpp" />
+    <ClCompile Include="UI\Bibim\UIEventMap.cpp" />
+    <ClCompile Include="UI\Bibim\UIFunctionEventHandler.cpp" />
+    <ClCompile Include="UI\Bibim\UIFunctionTable.cpp" />
+    <ClCompile Include="UI\Bibim\UIGamePadEventArgs.cpp" />
+    <ClCompile Include="UI\Bibim\UIGamePadEventDispatcher.cpp" />
+    <ClCompile Include="UI\Bibim\UIKeyboardEventArgs.cpp" />
+    <ClCompile Include="UI\Bibim\UIKeyboardEventDispatcher.cpp" />
+    <ClCompile Include="UI\Bibim\UIMouseButtonEventArgs.cpp" />
+    <ClCompile Include="UI\Bibim\UIMouseEventArgs.cpp" />
+    <ClCompile Include="UI\Bibim\UIMouseEventDispatcher.cpp" />
+    <ClCompile Include="UI\Bibim\UIMouseWheelEventArgs.cpp" />
+    <ClCompile Include="UI\Bibim\UISequentialEventHandler.cpp" />
+    <ClCompile Include="UI\Bibim\UIEffectMap.cpp" />
+    <ClCompile Include="UI\Bibim\UIEffectStack.cpp" />
+    <ClCompile Include="UI\Bibim\UIAfterImageEffect.cpp" />
+    <ClCompile Include="UI\Bibim\UIGeometryEffect.cpp" />
+    <ClCompile Include="UI\Bibim\UISineCurveEffect.cpp" />
+    <ClCompile Include="UI\Bibim\UITintEffect.cpp" />
+    <ClCompile Include="UI\Bibim\UIBlendingEffect.cpp" />
+    <ClCompile Include="UI\Bibim\UIColorMatrixEffect.cpp" />
+    <ClCompile Include="UI\Bibim\UIMaskEffect.cpp" />
+    <ClCompile Include="UI\Bibim\UIOpacityMaskEffect.cpp" />
+    <ClCompile Include="UI\Bibim\UIPixelEffect.cpp" />
+    <ClCompile Include="UI\Bibim\UIButton.cpp" />
+    <ClCompile Include="UI\Bibim\UICheckBox.cpp" />
+    <ClCompile Include="UI\Bibim\UIImage.cpp" />
+    <ClCompile Include="UI\Bibim\UILabel.cpp" />
+    <ClCompile Include="UI\Bibim\UIMarkupTextBox.cpp" />
+    <ClCompile Include="UI\Bibim\UIPanel.cpp" />
+    <ClCompile Include="UI\Bibim\UIRadioButton.cpp" />
+    <ClCompile Include="UI\Bibim\UIRect.cpp" />
+    <ClCompile Include="UI\Bibim\UISpark.cpp" />
+    <ClCompile Include="UI\Bibim\UISprite.cpp" />
+    <ClCompile Include="UI\Bibim\UIVideo.cpp" />
+    <ClCompile Include="UI\Bibim\UIVisual.cpp" />
+    <ClCompile Include="UI\Bibim\UIWindow.cpp" />
+    <ClCompile Include="UI\Bibim\UITransform.cpp" />
+    <ClCompile Include="UI\Bibim\UITransform2D.cpp" />
+    <ClCompile Include="UI\Bibim\UITransform3D.cpp" />
+    <ClCompile Include="UI\Bibim\UIBoundsContext.cpp" />
+    <ClCompile Include="UI\Bibim\UIDrawingContext.cpp" />
+    <ClCompile Include="UI\Bibim\UIHandledDrawingContext.cpp" />
+    <ClCompile Include="UI\Bibim\UIPickingContext.cpp" />
+    <ClCompile Include="UI\Bibim\UIVisualVisitor.cpp" />
+    <ClCompile Include="Graphics\Bibim\BitMask.cpp" />
+    <ClCompile Include="Graphics\Bibim\GraphicsCapabilities.cpp" />
+    <ClCompile Include="Graphics\Bibim\Image.cpp" />
+    <ClCompile Include="Graphics\Bibim\ImageSet.cpp" />
+    <ClCompile Include="Graphics\Bibim\PNGReader.cpp" />
+    <ClCompile Include="Graphics\Bibim\ScreenshotPrinter.cpp" />
+    <ClCompile Include="Graphics\Bibim\Window.cpp" />
+    <ClCompile Include="Graphics\Bibim\DynamicTexture2D.DX9.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\GraphicsDevice.DX9.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\RenderTargetTexture2D.DX9.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\ShaderEffect.DX9.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\SourceTexture2D.DX9.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\Texture2D.DX9.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\DynamicTexture2D.GLES2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\GraphicsDevice.GLES2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\RenderTargetTexture2D.GLES2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\ShaderEffect.GLES2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\SourceTexture2D.GLES2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\Texture2D.GLES2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="FileSystem\Bibim\FileStream.Windows.cpp" />
+    <ClCompile Include="FileSystem\Bibim\MPQ.cpp" />
+    <ClCompile Include="FileSystem\Bibim\MPQStream.cpp" />
+    <ClCompile Include="Framework\Bibim\GameFramework.Windows.cpp" />
+    <ClCompile Include="Framework\Bibim\GameWindow.Windows.cpp" />
+    <ClCompile Include="Audio\Bibim\AudioDevice.cpp" />
+    <ClCompile Include="Audio\Bibim\BGM.cpp" />
+    <ClCompile Include="Audio\Bibim\SoundFX.cpp" />
+    <ClCompile Include="GFX\Bibim\SparkParticleEngine.cpp" />
+    <ClCompile Include="Net\Bibim\HttpClient.Windows.cpp" />
+    <ClCompile Include="Foundation\Bibim\Any.cpp" />
+    <ClCompile Include="Foundation\Bibim\Colors.cpp" />
+    <ClCompile Include="Foundation\Bibim\Matrix4.cpp" />
+    <ClCompile Include="Foundation\Bibim\Point2.cpp" />
+    <ClCompile Include="Foundation\Bibim\Point3.cpp" />
+    <ClCompile Include="Foundation\Bibim\Point4.cpp" />
+    <ClCompile Include="Foundation\Bibim\Rect.cpp" />
+    <ClCompile Include="Foundation\Bibim\RectF.cpp" />
+    <ClCompile Include="Foundation\Bibim\String.cpp" />
+    <ClCompile Include="Foundation\Bibim\Vector2.cpp" />
+    <ClCompile Include="Foundation\Bibim\Vector3.cpp" />
+    <ClCompile Include="Foundation\Bibim\Vector4.cpp" />
+    <ClCompile Include="Foundation\Bibim\SequenceDictionary.cpp" />
+    <ClCompile Include="Foundation\Bibim\Assert.cpp" />
+    <ClCompile Include="Foundation\Bibim\Log.cpp" />
+    <ClCompile Include="Foundation\Bibim\Geom2D.cpp" />
+    <ClCompile Include="Foundation\Bibim\Math.cpp" />
+    <ClCompile Include="Foundation\Bibim\Numerics.cpp" />
+    <ClCompile Include="Foundation\Bibim\AnyStorage.cpp" />
+    <ClCompile Include="Foundation\Bibim\Memory.cpp" />
+    <ClCompile Include="Foundation\Bibim\RectStorage.cpp" />
+    <ClCompile Include="Foundation\Bibim\Object.cpp" />
+    <ClCompile Include="Foundation\Bibim\SharedObject.cpp" />
+    <ClCompile Include="Foundation\Bibim\Environment.Windows.cpp" />
+    <ClCompile Include="IPC\Bibim\PipeClientStream.Windows.cpp" />
+    <ClCompile Include="IPC\Bibim\PipeServerStream.Windows.cpp" />
+    <ClCompile Include="IPC\Bibim\PipeStream.Windows.cpp" />
+    <ClCompile Include="Threading\Bibim\Lock.Windows.cpp" />
+    <ClCompile Include="Threading\Bibim\ManualLocker.cpp" />
+    <ClCompile Include="Threading\Bibim\Thread.Windows.cpp" />
+    <ClCompile Include="Foundation\Bibim\BinaryReader.cpp" />
+    <ClCompile Include="Foundation\Bibim\BinaryWriter.cpp" />
+    <ClCompile Include="Foundation\Bibim\DumpStream.cpp" />
+    <ClCompile Include="Foundation\Bibim\MemoryStream.cpp" />
+    <ClCompile Include="Foundation\Bibim\Stream.cpp" />
+    <ClCompile Include="References\lua_tinker\lua_tinker.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Asset\Bibim\AssetLoadingTask.h" />
+    <ClInclude Include="Asset\Bibim\AssetStreamReader.h" />
+    <ClInclude Include="Asset\Bibim\GameAsset.h" />
+    <ClInclude Include="Asset\Bibim\GameAssetFactory.h" />
+    <ClInclude Include="Asset\Bibim\GameAssetStorage.h" />
+    <ClInclude Include="Asset\Bibim\AssetProvider.h" />
+    <ClInclude Include="Asset\Bibim\FileAssetProvider.h" />
+    <ClInclude Include="Asset\Bibim\MPQAssetProvider.h" />
+    <ClInclude Include="Asset\Bibim\PipedAssetProvider.h" />
+    <ClInclude Include="Typography\Bibim\Font.h" />
+    <ClInclude Include="Typography\Bibim\FontCache.h" />
+    <ClInclude Include="Typography\Bibim\FontLibrary.h" />
+    <ClInclude Include="Typography\Bibim\FontString.h" />
+    <ClInclude Include="Typography\Bibim\Glyph.h" />
+    <ClInclude Include="Typography\Bibim\GlyphSurface.h" />
+    <ClInclude Include="Typography\Bibim\GlyphTable.h" />
+    <ClInclude Include="Typography\Bibim\TypingContext.h" />
+    <ClInclude Include="Component\Bibim\CloningContext.h" />
+    <ClInclude Include="Component\Bibim\ComponentStreamReader.h" />
+    <ClInclude Include="Component\Bibim\GameComponent.h" />
+    <ClInclude Include="Graphics\Bibim\GameComponentFactory.h" />
+    <ClInclude Include="Module\Bibim\GameModule.h" />
+    <ClInclude Include="Module\Bibim\GameModuleFactory.h" />
+    <ClInclude Include="Module\Bibim\GameModuleNode.h" />
+    <ClInclude Include="Module\Bibim\GameModuleTree.h" />
+    <ClInclude Include="Animation\Bibim\Sprite.h" />
+    <ClInclude Include="Animation\Bibim\SpriteSet.h" />
+    <ClInclude Include="Animation\Bibim\EvalBinaryOperators.h" />
+    <ClInclude Include="Animation\Bibim\EvalBoard.h" />
+    <ClInclude Include="Animation\Bibim\EvalCaches.h" />
+    <ClInclude Include="Animation\Bibim\EvalConstants.h" />
+    <ClInclude Include="Animation\Bibim\EvalContext.h" />
+    <ClInclude Include="Animation\Bibim\EvalInterpolators.h" />
+    <ClInclude Include="Animation\Bibim\EvalRangedSequences.h" />
+    <ClInclude Include="Animation\Bibim\Evals.h" />
+    <ClInclude Include="Animation\Bibim\EvalSelectors.h" />
+    <ClInclude Include="Animation\Bibim\EvalSequenceBase.h" />
+    <ClInclude Include="Animation\Bibim\EvalSequences.h" />
+    <ClInclude Include="Animation\Bibim\EvalTimeflow.h" />
+    <ClInclude Include="Animation\Bibim\EvalUnaryOperators.h" />
+    <ClInclude Include="Animation\Bibim\EvalUnitRandom.h" />
+    <ClInclude Include="Animation\Bibim\EvalVariables.h" />
+    <ClInclude Include="Animation\Bibim\Sequences.h" />
+    <ClInclude Include="Animation\Bibim\Ease.h" />
+    <ClInclude Include="Animation\Bibim\EasingCurves.h" />
+    <ClInclude Include="Animation\Bibim\ElasticEasingCurves.h" />
+    <ClInclude Include="Animation\Bibim\OscillationCurve.h" />
+    <ClInclude Include="Collision2D\Bibim\AxisAlignedBoxShape2D.h" />
+    <ClInclude Include="Collision2D\Bibim\BoxShape2D.h" />
+    <ClInclude Include="Collision2D\Bibim\CollisionSpace2D.h" />
+    <ClInclude Include="Collision2D\Bibim\IntersectShapes2D.h" />
+    <ClInclude Include="Collision2D\Bibim\PointShape2D.h" />
+    <ClInclude Include="Collision2D\Bibim\RaycastReport2D.h" />
+    <ClInclude Include="Collision2D\Bibim\SegmentShape2D.h" />
+    <ClInclude Include="Collision2D\Bibim\Shape2D.h" />
+    <ClInclude Include="Collision2D\Bibim\SphereShape2D.h" />
+    <ClInclude Include="Collision2D\Bibim\UserShape2D.h" />
+    <ClInclude Include="Diagnostics\Bibim\FileLogger.h" />
+    <ClInclude Include="Diagnostics\Bibim\Logger.h" />
+    <ClInclude Include="Diagnostics\Bibim\SystemLogger.h" />
+    <ClInclude Include="Gameplay\Bibim\BatchCommand.h" />
+    <ClInclude Include="Gameplay\Bibim\Command.h" />
+    <ClInclude Include="Gameplay\Bibim\CommandHistory.h" />
+    <ClInclude Include="Gameplay\Bibim\CommandQueue.h" />
+    <ClInclude Include="Gameplay\Bibim\RestorableCommand.h" />
+    <ClInclude Include="Gameplay\Bibim\SpatialObject2D.h" />
+    <ClInclude Include="Gameplay\Bibim\JumpPointPathFinder.h" />
+    <ClInclude Include="Gameplay\Bibim\PathFinder.h" />
+    <ClInclude Include="Input\Bibim\Key.h" />
+    <ClInclude Include="Input\Bibim\Keyboard.h" />
+    <ClInclude Include="Input\Bibim\KeyboardState.h" />
+    <ClInclude Include="Input\Bibim\Mouse.h" />
+    <ClInclude Include="Input\Bibim\MouseState.h" />
+    <ClInclude Include="Scripting\Bibim\Script.h" />
+    <ClInclude Include="Scripting\Bibim\ScriptingContext.h" />
+    <ClInclude Include="Scripting\Bibim\ScriptNativeFunctionTable.h" />
+    <ClInclude Include="Scripting\Bibim\ScriptStack.h" />
+    <ClInclude Include="Scripting\Bibim\ScriptThread.h" />
+    <ClInclude Include="Scripting\Bibim\ScriptLibraryIO.h" />
+    <ClInclude Include="Time\Bibim\AlarmClock.h" />
+    <ClInclude Include="Time\Bibim\Clock.h" />
+    <ClInclude Include="Time\Bibim\IUpdateable.h" />
+    <ClInclude Include="Time\Bibim\SubTimeline.h" />
+    <ClInclude Include="Time\Bibim\Timeline.h" />
+    <ClInclude Include="Time\Bibim\TimelineGameComponent.h" />
+    <ClInclude Include="Time\Bibim\TimelineGameModule.h" />
+    <ClInclude Include="Time\Bibim\UpdateableGameComponent.h" />
+    <ClInclude Include="Time\Bibim\UpdateableGameModule.h" />
+    <ClInclude Include="Startup\Bibim\Startup.h" />
+    <ClInclude Include="UI\Bibim\UI.h" />
+    <ClInclude Include="UI\Bibim\UIDomain.h" />
+    <ClInclude Include="UI\Bibim\UIElement.h" />
+    <ClInclude Include="UI\Bibim\UILayout.h" />
+    <ClInclude Include="UI\Bibim\UIMarkupText.h" />
+    <ClInclude Include="UI\Bibim\UIRenderer.DX9.h" />
+    <ClInclude Include="UI\Bibim\UIRenderer.GLES2.h" />
+    <ClInclude Include="UI\Bibim\UIRenderer.h" />
+    <ClInclude Include="UI\Bibim\UIRendererBase.h" />
+    <ClInclude Include="UI\Bibim\UISimpleDomain.h" />
+    <ClInclude Include="UI\Bibim\UIAppEventDispatcher.h" />
+    <ClInclude Include="UI\Bibim\UIAsyncEventQueue.h" />
+    <ClInclude Include="UI\Bibim\UIEventArgs.h" />
+    <ClInclude Include="UI\Bibim\UIEventDispatcher.h" />
+    <ClInclude Include="UI\Bibim\UIEventHandler.h" />
+    <ClInclude Include="UI\Bibim\UIEventID.h" />
+    <ClInclude Include="UI\Bibim\UIEventMap.h" />
+    <ClInclude Include="UI\Bibim\UIFunctionEventHandler.h" />
+    <ClInclude Include="UI\Bibim\UIFunctionTable.h" />
+    <ClInclude Include="UI\Bibim\UIGamePadEventArgs.h" />
+    <ClInclude Include="UI\Bibim\UIGamePadEventDispatcher.h" />
+    <ClInclude Include="UI\Bibim\UIKeyboardEventArgs.h" />
+    <ClInclude Include="UI\Bibim\UIKeyboardEventDispatcher.h" />
+    <ClInclude Include="UI\Bibim\UIMouseButtonEventArgs.h" />
+    <ClInclude Include="UI\Bibim\UIMouseEventArgs.h" />
+    <ClInclude Include="UI\Bibim\UIMouseEventDispatcher.h" />
+    <ClInclude Include="UI\Bibim\UIMouseWheelEventArgs.h" />
+    <ClInclude Include="UI\Bibim\UISequentialEventHandler.h" />
+    <ClInclude Include="UI\Bibim\UIEffectMap.h" />
+    <ClInclude Include="UI\Bibim\UIEffectStack.h" />
+    <ClInclude Include="UI\Bibim\UIAfterImageEffect.h" />
+    <ClInclude Include="UI\Bibim\UIGeometryEffect.h" />
+    <ClInclude Include="UI\Bibim\UISineCurveEffect.h" />
+    <ClInclude Include="UI\Bibim\UITintEffect.h" />
+    <ClInclude Include="UI\Bibim\UIBlendingEffect.h" />
+    <ClInclude Include="UI\Bibim\UIColorMatrixEffect.h" />
+    <ClInclude Include="UI\Bibim\UIMaskEffect.h" />
+    <ClInclude Include="UI\Bibim\UIOpacityMaskEffect.h" />
+    <ClInclude Include="UI\Bibim\UIPixelEffect.h" />
+    <ClInclude Include="UI\Bibim\UIButton.h" />
+    <ClInclude Include="UI\Bibim\UICheckBox.h" />
+    <ClInclude Include="UI\Bibim\UIImage.h" />
+    <ClInclude Include="UI\Bibim\UILabel.h" />
+    <ClInclude Include="UI\Bibim\UIMarkupTextBox.h" />
+    <ClInclude Include="UI\Bibim\UIPanel.h" />
+    <ClInclude Include="UI\Bibim\UIRadioButton.h" />
+    <ClInclude Include="UI\Bibim\UIRect.h" />
+    <ClInclude Include="UI\Bibim\UISpark.h" />
+    <ClInclude Include="UI\Bibim\UISprite.h" />
+    <ClInclude Include="UI\Bibim\UIVideo.h" />
+    <ClInclude Include="UI\Bibim\UIVisual.h" />
+    <ClInclude Include="UI\Bibim\UIWindow.h" />
+    <ClInclude Include="UI\Bibim\UITransform.h" />
+    <ClInclude Include="UI\Bibim\UITransform2D.h" />
+    <ClInclude Include="UI\Bibim\UITransform3D.h" />
+    <ClInclude Include="UI\Bibim\UIBoundsContext.h" />
+    <ClInclude Include="UI\Bibim\UIDrawingContext.h" />
+    <ClInclude Include="UI\Bibim\UIHandledDrawingContext.h" />
+    <ClInclude Include="UI\Bibim\UIPickingContext.h" />
+    <ClInclude Include="UI\Bibim\UIVisualVisitor.h" />
+    <ClInclude Include="Graphics\Bibim\BitMask.h" />
+    <ClInclude Include="Graphics\Bibim\BlendMode.h" />
+    <ClInclude Include="Graphics\Bibim\DynamicTexture2D.h" />
+    <ClInclude Include="Graphics\Bibim\GraphicsCapabilities.h" />
+    <ClInclude Include="Graphics\Bibim\GraphicsDevice.h" />
+    <ClInclude Include="Graphics\Bibim\Image.h" />
+    <ClInclude Include="Graphics\Bibim\ImageSet.h" />
+    <ClInclude Include="Graphics\Bibim\PNGReader.h" />
+    <ClInclude Include="Graphics\Bibim\RenderTargetTexture2D.h" />
+    <ClInclude Include="Graphics\Bibim\ScreenshotPrinter.h" />
+    <ClInclude Include="Graphics\Bibim\ShaderEffect.h" />
+    <ClInclude Include="Graphics\Bibim\SourceTexture2D.h" />
+    <ClInclude Include="Graphics\Bibim\Texture2D.h" />
+    <ClInclude Include="Graphics\Bibim\Window.h" />
+    <ClInclude Include="Graphics\Bibim\DynamicTexture2D.DX9.h" />
+    <ClInclude Include="Graphics\Bibim\GraphicsDevice.DX9.h" />
+    <ClInclude Include="Graphics\Bibim\RenderTargetTexture2D.DX9.h" />
+    <ClInclude Include="Graphics\Bibim\ShaderEffect.DX9.h" />
+    <ClInclude Include="Graphics\Bibim\SourceTexture2D.DX9.h" />
+    <ClInclude Include="Graphics\Bibim\Texture2D.DX9.h" />
+    <ClInclude Include="Graphics\Bibim\DynamicTexture2D.GLES2.h" />
+    <ClInclude Include="Graphics\Bibim\GLES2.h" />
+    <ClInclude Include="Graphics\Bibim\GraphicsDevice.GLES2.h" />
+    <ClInclude Include="Graphics\Bibim\RenderTargetTexture2D.GLES2.h" />
+    <ClInclude Include="Graphics\Bibim\ShaderEffect.GLES2.h" />
+    <ClInclude Include="Graphics\Bibim\SourceTexture2D.GLES2.h" />
+    <ClInclude Include="Graphics\Bibim\Texture2D.GLES2.h" />
+    <ClInclude Include="FileSystem\Bibim\FileStream.h" />
+    <ClInclude Include="FileSystem\Bibim\FileStream.Windows.h" />
+    <ClInclude Include="FileSystem\Bibim\MPQ.h" />
+    <ClInclude Include="FileSystem\Bibim\MPQStream.h" />
+    <ClInclude Include="Framework\Bibim\Game.h" />
+    <ClInclude Include="Framework\Bibim\GameFramework.h" />
+    <ClInclude Include="Framework\Bibim\GameFramework.Windows.h" />
+    <ClInclude Include="Framework\Bibim\GameWindow.h" />
+    <ClInclude Include="Framework\Bibim\GameWindow.Windows.h" />
+    <ClInclude Include="Audio\Bibim\AudioDevice.h" />
+    <ClInclude Include="Audio\Bibim\BGM.h" />
+    <ClInclude Include="Audio\Bibim\SoundFX.h" />
+    <ClInclude Include="GFX\Bibim\SparkParticleEngine.h" />
+    <ClInclude Include="Net\Bibim\HttpClient.h" />
+    <ClInclude Include="Net\Bibim\HttpClient.Windows.h" />
+    <ClInclude Include="Foundation\Bibim\Any.h" />
+    <ClInclude Include="Foundation\Bibim\Color.h" />
+    <ClInclude Include="Foundation\Bibim\Colors.h" />
+    <ClInclude Include="Foundation\Bibim\Matrix4.h" />
+    <ClInclude Include="Foundation\Bibim\NullPointer.h" />
+    <ClInclude Include="Foundation\Bibim\Point2.h" />
+    <ClInclude Include="Foundation\Bibim\Point3.h" />
+    <ClInclude Include="Foundation\Bibim\Point4.h" />
+    <ClInclude Include="Foundation\Bibim\Rect.h" />
+    <ClInclude Include="Foundation\Bibim\RectF.h" />
+    <ClInclude Include="Foundation\Bibim\String.h" />
+    <ClInclude Include="Foundation\Bibim\Vector2.h" />
+    <ClInclude Include="Foundation\Bibim\Vector3.h" />
+    <ClInclude Include="Foundation\Bibim\Vector4.h" />
+    <ClInclude Include="Foundation\Bibim\SequenceDictionary.h" />
+    <ClInclude Include="Foundation\Bibim\Assert.h" />
+    <ClInclude Include="Foundation\Bibim\Log.h" />
+    <ClInclude Include="Foundation\Bibim\Geom2D.h" />
+    <ClInclude Include="Foundation\Bibim\Math.h" />
+    <ClInclude Include="Foundation\Bibim\Numerics.h" />
+    <ClInclude Include="Foundation\Bibim\AnyStorage.h" />
+    <ClInclude Include="Foundation\Bibim\Atomic.h" />
+    <ClInclude Include="Foundation\Bibim\CheckedRelease.h" />
+    <ClInclude Include="Foundation\Bibim\Delete.h" />
+    <ClInclude Include="Foundation\Bibim\Listeners.h" />
+    <ClInclude Include="Foundation\Bibim\Memory.h" />
+    <ClInclude Include="Foundation\Bibim\Property.h" />
+    <ClInclude Include="Foundation\Bibim\RectStorage.h" />
+    <ClInclude Include="Foundation\Bibim\Object.h" />
+    <ClInclude Include="Foundation\Bibim\PointerCasts.h" />
+    <ClInclude Include="Foundation\Bibim\SharedObject.h" />
+    <ClInclude Include="Foundation\Bibim\SharedPointer.h" />
+    <ClInclude Include="Foundation\Bibim\Environment.h" />
+    <ClInclude Include="Foundation\Bibim\Environment.Windows.h" />
+    <ClInclude Include="IPC\Bibim\PipeClientStream.h" />
+    <ClInclude Include="IPC\Bibim\PipeClientStream.Windows.h" />
+    <ClInclude Include="IPC\Bibim\PipeServerStream.h" />
+    <ClInclude Include="IPC\Bibim\PipeServerStream.Windows.h" />
+    <ClInclude Include="IPC\Bibim\PipeStream.h" />
+    <ClInclude Include="IPC\Bibim\PipeStream.Windows.h" />
+    <ClInclude Include="Threading\Bibim\AutoLocker.h" />
+    <ClInclude Include="Threading\Bibim\Lock.h" />
+    <ClInclude Include="Threading\Bibim\Lock.Windows.h" />
+    <ClInclude Include="Threading\Bibim\ManualLocker.h" />
+    <ClInclude Include="Threading\Bibim\Thread.h" />
+    <ClInclude Include="Threading\Bibim\Thread.Windows.h" />
+    <ClInclude Include="Foundation\Bibim\BinaryReader.h" />
+    <ClInclude Include="Foundation\Bibim\BinaryWriter.h" />
+    <ClInclude Include="Foundation\Bibim\DumpStream.h" />
+    <ClInclude Include="Foundation\Bibim\MemoryStream.h" />
+    <ClInclude Include="Foundation\Bibim\Stream.h" />
+    <ClInclude Include="References\lua_tinker\lua_tinker.h" />
+    <ClInclude Include="Foundation\Bibim\All.h" />
+    <ClInclude Include="Foundation\Bibim\Foundation.h" />
+    <ClInclude Include="Foundation\Bibim\FWD.h" />
+    <ClInclude Include="Foundation\Bibim\PCH.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Asset\Bibim\AssetLoadingTask.inl" />
+    <None Include="Asset\Bibim\AssetStreamReader.inl" />
+    <None Include="Asset\Bibim\GameAsset.inl" />
+    <None Include="Asset\Bibim\GameAssetFactory.inl" />
+    <None Include="Asset\Bibim\GameAssetStorage.inl" />
+    <None Include="Asset\Bibim\AssetProvider.inl" />
+    <None Include="Asset\Bibim\FileAssetProvider.inl" />
+    <None Include="Asset\Bibim\MPQAssetProvider.inl" />
+    <None Include="Asset\Bibim\PipedAssetProvider.inl" />
+    <None Include="Typography\Bibim\Font.inl" />
+    <None Include="Typography\Bibim\FontCache.inl" />
+    <None Include="Typography\Bibim\FontLibrary.inl" />
+    <None Include="Typography\Bibim\FontString.inl" />
+    <None Include="Typography\Bibim\Glyph.inl" />
+    <None Include="Typography\Bibim\GlyphSurface.inl" />
+    <None Include="Typography\Bibim\GlyphTable.inl" />
+    <None Include="Typography\Bibim\TypingContext.inl" />
+    <None Include="Component\Bibim\CloningContext.inl" />
+    <None Include="Component\Bibim\ComponentStreamReader.inl" />
+    <None Include="Component\Bibim\GameComponent.inl" />
+    <None Include="Graphics\Bibim\GameComponentFactory.inl" />
+    <None Include="Module\Bibim\GameModule.inl" />
+    <None Include="Module\Bibim\GameModuleFactory.inl" />
+    <None Include="Module\Bibim\GameModuleNode.inl" />
+    <None Include="Module\Bibim\GameModuleTree.inl" />
+    <None Include="Animation\Bibim\Sprite.inl" />
+    <None Include="Animation\Bibim\SpriteSet.inl" />
+    <None Include="Animation\Bibim\EvalBinaryOperators.inl" />
+    <None Include="Animation\Bibim\EvalBoard.inl" />
+    <None Include="Animation\Bibim\EvalCaches.inl" />
+    <None Include="Animation\Bibim\EvalConstants.inl" />
+    <None Include="Animation\Bibim\EvalContext.inl" />
+    <None Include="Animation\Bibim\EvalInterpolators.inl" />
+    <None Include="Animation\Bibim\EvalRangedSequences.inl" />
+    <None Include="Animation\Bibim\Evals.inl" />
+    <None Include="Animation\Bibim\EvalSelectors.inl" />
+    <None Include="Animation\Bibim\EvalSequenceBase.inl" />
+    <None Include="Animation\Bibim\EvalSequences.inl" />
+    <None Include="Animation\Bibim\EvalTimeflow.inl" />
+    <None Include="Animation\Bibim\EvalUnaryOperators.inl" />
+    <None Include="Animation\Bibim\EvalUnitRandom.inl" />
+    <None Include="Animation\Bibim\EvalVariables.inl" />
+    <None Include="Animation\Bibim\Sequences.inl" />
+    <None Include="Animation\Bibim\Ease.inl" />
+    <None Include="Animation\Bibim\ElasticEasingCurves.inl" />
+    <None Include="Animation\Bibim\OscillationCurve.inl" />
+    <None Include="Collision2D\Bibim\AxisAlignedBoxShape2D.inl" />
+    <None Include="Collision2D\Bibim\BoxShape2D.inl" />
+    <None Include="Collision2D\Bibim\CollisionSpace2D.inl" />
+    <None Include="Collision2D\Bibim\RaycastReport2D.inl" />
+    <None Include="Collision2D\Bibim\SegmentShape2D.inl" />
+    <None Include="Collision2D\Bibim\Shape2D.inl" />
+    <None Include="Diagnostics\Bibim\FileLogger.inl" />
+    <None Include="Diagnostics\Bibim\Logger.inl" />
+    <None Include="Diagnostics\Bibim\SystemLogger.inl" />
+    <None Include="Gameplay\Bibim\BatchCommand.inl" />
+    <None Include="Gameplay\Bibim\CommandHistory.inl" />
+    <None Include="Gameplay\Bibim\CommandQueue.inl" />
+    <None Include="Gameplay\Bibim\SpatialObject2D.inl" />
+    <None Include="Gameplay\Bibim\JumpPointPathFinder.inl" />
+    <None Include="Gameplay\Bibim\PathFinder.inl" />
+    <None Include="Input\Bibim\Keyboard.inl" />
+    <None Include="Input\Bibim\KeyboardState.inl" />
+    <None Include="Input\Bibim\Mouse.inl" />
+    <None Include="Input\Bibim\MouseState.inl" />
+    <None Include="Scripting\Bibim\Script.inl" />
+    <None Include="Scripting\Bibim\ScriptingContext.inl" />
+    <None Include="Scripting\Bibim\ScriptNativeFunctionTable.inl" />
+    <None Include="Scripting\Bibim\ScriptStack.inl" />
+    <None Include="Scripting\Bibim\ScriptThread.inl" />
+    <None Include="Time\Bibim\AlarmClock.inl" />
+    <None Include="Time\Bibim\SubTimeline.inl" />
+    <None Include="Time\Bibim\Timeline.inl" />
+    <None Include="Time\Bibim\TimelineGameComponent.inl" />
+    <None Include="Time\Bibim\TimelineGameModule.inl" />
+    <None Include="Time\Bibim\UpdateableGameComponent.inl" />
+    <None Include="Time\Bibim\UpdateableGameModule.inl" />
+    <None Include="UI\Bibim\UIDomain.inl" />
+    <None Include="UI\Bibim\UIElement.inl" />
+    <None Include="UI\Bibim\UILayout.inl" />
+    <None Include="UI\Bibim\UIMarkupText.inl" />
+    <None Include="UI\Bibim\UIRenderer.DX9.inl" />
+    <None Include="UI\Bibim\UIRenderer.GLES2.inl" />
+    <None Include="UI\Bibim\UIRendererBase.inl" />
+    <None Include="UI\Bibim\UIAppEventDispatcher.inl" />
+    <None Include="UI\Bibim\UIAsyncEventQueue.inl" />
+    <None Include="UI\Bibim\UIEventArgs.inl" />
+    <None Include="UI\Bibim\UIEventDispatcher.inl" />
+    <None Include="UI\Bibim\UIEventHandler.inl" />
+    <None Include="UI\Bibim\UIEventID.inl" />
+    <None Include="UI\Bibim\UIEventMap.inl" />
+    <None Include="UI\Bibim\UIFunctionEventHandler.inl" />
+    <None Include="UI\Bibim\UIFunctionTable.inl" />
+    <None Include="UI\Bibim\UIGamePadEventArgs.inl" />
+    <None Include="UI\Bibim\UIGamePadEventDispatcher.inl" />
+    <None Include="UI\Bibim\UIKeyboardEventArgs.inl" />
+    <None Include="UI\Bibim\UIKeyboardEventDispatcher.inl" />
+    <None Include="UI\Bibim\UIMouseButtonEventArgs.inl" />
+    <None Include="UI\Bibim\UIMouseEventArgs.inl" />
+    <None Include="UI\Bibim\UIMouseEventDispatcher.inl" />
+    <None Include="UI\Bibim\UIMouseWheelEventArgs.inl" />
+    <None Include="UI\Bibim\UISequentialEventHandler.inl" />
+    <None Include="UI\Bibim\UIEffectMap.inl" />
+    <None Include="UI\Bibim\UIEffectStack.inl" />
+    <None Include="UI\Bibim\UIAfterImageEffect.inl" />
+    <None Include="UI\Bibim\UIGeometryEffect.inl" />
+    <None Include="UI\Bibim\UISineCurveEffect.inl" />
+    <None Include="UI\Bibim\UITintEffect.inl" />
+    <None Include="UI\Bibim\UIBlendingEffect.inl" />
+    <None Include="UI\Bibim\UIColorMatrixEffect.inl" />
+    <None Include="UI\Bibim\UIMaskEffect.inl" />
+    <None Include="UI\Bibim\UIOpacityMaskEffect.inl" />
+    <None Include="UI\Bibim\UIPixelEffect.inl" />
+    <None Include="UI\Bibim\UIButton.inl" />
+    <None Include="UI\Bibim\UICheckBox.inl" />
+    <None Include="UI\Bibim\UIImage.inl" />
+    <None Include="UI\Bibim\UILabel.inl" />
+    <None Include="UI\Bibim\UIMarkupTextBox.inl" />
+    <None Include="UI\Bibim\UIPanel.inl" />
+    <None Include="UI\Bibim\UIRect.inl" />
+    <None Include="UI\Bibim\UISpark.inl" />
+    <None Include="UI\Bibim\UISprite.inl" />
+    <None Include="UI\Bibim\UIVideo.inl" />
+    <None Include="UI\Bibim\UIVisual.inl" />
+    <None Include="UI\Bibim\UIWindow.inl" />
+    <None Include="UI\Bibim\UITransform2D.inl" />
+    <None Include="UI\Bibim\UITransform3D.inl" />
+    <None Include="UI\Bibim\UIBoundsContext.inl" />
+    <None Include="UI\Bibim\UIDrawingContext.inl" />
+    <None Include="UI\Bibim\UIHandledDrawingContext.inl" />
+    <None Include="UI\Bibim\UIPickingContext.inl" />
+    <None Include="UI\Bibim\UIVisualVisitor.inl" />
+    <None Include="Graphics\Bibim\BitMask.inl" />
+    <None Include="Graphics\Bibim\GraphicsCapabilities.inl" />
+    <None Include="Graphics\Bibim\Image.inl" />
+    <None Include="Graphics\Bibim\ImageSet.inl" />
+    <None Include="Graphics\Bibim\ScreenshotPrinter.inl" />
+    <None Include="Graphics\Bibim\Window.inl" />
+    <None Include="Graphics\Bibim\DynamicTexture2D.DX9.inl" />
+    <None Include="Graphics\Bibim\GraphicsDevice.DX9.inl" />
+    <None Include="Graphics\Bibim\RenderTargetTexture2D.DX9.inl" />
+    <None Include="Graphics\Bibim\ShaderEffect.DX9.inl" />
+    <None Include="Graphics\Bibim\Texture2D.DX9.inl" />
+    <None Include="Graphics\Bibim\DynamicTexture2D.GLES2.inl" />
+    <None Include="Graphics\Bibim\GraphicsDevice.GLES2.inl" />
+    <None Include="Graphics\Bibim\RenderTargetTexture2D.GLES2.inl" />
+    <None Include="Graphics\Bibim\Shadereffect.GLES2.inl" />
+    <None Include="Graphics\Bibim\Texture2D.GLES2.inl" />
+    <None Include="FileSystem\Bibim\FileStream.Windows.inl" />
+    <None Include="FileSystem\Bibim\MPQ.inl" />
+    <None Include="FileSystem\Bibim\MPQStream.inl" />
+    <None Include="Framework\Bibim\GameFramework.Windows.inl" />
+    <None Include="Framework\Bibim\GameWindow.Windows.inl" />
+    <None Include="Audio\Bibim\AudioDevice.inl" />
+    <None Include="Audio\Bibim\BGM.inl" />
+    <None Include="Audio\Bibim\SoundFX.inl" />
+    <None Include="GFX\Bibim\SparkParticleEngine.inl" />
+    <None Include="Net\Bibim\HttpClient.Windows.inl" />
+    <None Include="Foundation\Bibim\Any.inl" />
+    <None Include="Foundation\Bibim\Color.inl" />
+    <None Include="Foundation\Bibim\Colors.inl" />
+    <None Include="Foundation\Bibim\Matrix4.inl" />
+    <None Include="Foundation\Bibim\Point2.inl" />
+    <None Include="Foundation\Bibim\Point3.inl" />
+    <None Include="Foundation\Bibim\Point4.inl" />
+    <None Include="Foundation\Bibim\Rect.inl" />
+    <None Include="Foundation\Bibim\RectF.inl" />
+    <None Include="Foundation\Bibim\String.inl" />
+    <None Include="Foundation\Bibim\Vector2.inl" />
+    <None Include="Foundation\Bibim\Vector3.inl" />
+    <None Include="Foundation\Bibim\Vector4.inl" />
+    <None Include="Foundation\Bibim\SequenceDictionary.inl" />
+    <None Include="Foundation\Bibim\Log.inl" />
+    <None Include="Foundation\Bibim\Geom2D.inl" />
+    <None Include="Foundation\Bibim\Math.inl" />
+    <None Include="Foundation\Bibim\Numerics.inl" />
+    <None Include="Foundation\Bibim\AnyStorage.inl" />
+    <None Include="Foundation\Bibim\Atomic.inl" />
+    <None Include="Foundation\Bibim\Listeners.inl" />
+    <None Include="Foundation\Bibim\Property.inl" />
+    <None Include="Foundation\Bibim\Object.inl" />
+    <None Include="Foundation\Bibim\SharedObject.inl" />
+    <None Include="Foundation\Bibim\SharedPointer.inl" />
+    <None Include="Foundation\Bibim\Environment.Windows.inl" />
+    <None Include="IPC\Bibim\PipeClientStream.Windows.inl" />
+    <None Include="IPC\Bibim\PipeServerStream.Windows.inl" />
+    <None Include="IPC\Bibim\PipeStream.Windows.inl" />
+    <None Include="Threading\Bibim\AutoLocker.inl" />
+    <None Include="Threading\Bibim\ManualLocker.inl" />
+    <None Include="Threading\Bibim\Thread.Windows.inl" />
+    <None Include="Foundation\Bibim\BinaryReader.inl" />
+    <None Include="Foundation\Bibim\BinaryWriter.inl" />
+    <None Include="Foundation\Bibim\DumpStream.inl" />
+    <None Include="Foundation\Bibim\MemoryStream.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

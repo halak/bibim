@@ -6,7 +6,6 @@
 #include <Bibim/UIGeometryEffect.h>
 #include <Bibim/UITransform.h>
 #include <Bibim/UIVisual.h>
-#include <d3dx9.h>
 
 namespace Bibim
 {

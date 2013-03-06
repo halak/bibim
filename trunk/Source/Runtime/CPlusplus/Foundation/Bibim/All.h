@@ -172,7 +172,6 @@
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Threading
 #  include <Bibim/Atomic.h>
-#  include <Bibim/Atomic.Windows.h>
 #  include <Bibim/AutoLocker.h>
 #  include <Bibim/Lock.h>
 #  include <Bibim/Lock.Windows.h>
