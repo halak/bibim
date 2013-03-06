@@ -1,7 +1,6 @@
 ﻿#include <Bibim/PCH.h>
 #include <Bibim/Matrix4.h>
 #include <Bibim/Math.h>
-#include <d3dx9math.h>
 
 namespace Bibim
 {

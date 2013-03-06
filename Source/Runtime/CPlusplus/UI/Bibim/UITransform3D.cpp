@@ -4,7 +4,6 @@
 #include <Bibim/Math.h>
 #include <Bibim/Matrix4.h>
 #include <Bibim/UIVisualVisitor.h>
-#include <d3dx9math.h>
 
 namespace Bibim
 {

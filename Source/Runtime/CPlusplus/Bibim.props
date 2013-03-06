@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\Foundation;$(BIBIM_DIR)Source\Runtime\CPlusplus\Module;$(BIBIM_DIR)Source\Runtime\CPlusplus\Component;$(BIBIM_DIR)Source\Runtime\CPlusplus\Animation;$(BIBIM_DIR)Source\Runtime\CPlusplus\Asset;$(BIBIM_DIR)Source\Runtime\CPlusplus\Audio;$(BIBIM_DIR)Source\Runtime\CPlusplus\Collision2D;$(BIBIM_DIR)Source\Runtime\CPlusplus\Diagnostics;$(BIBIM_DIR)Source\Runtime\CPlusplus\Entity;$(BIBIM_DIR)Source\Runtime\CPlusplus\FileSystem;$(BIBIM_DIR)Source\Runtime\CPlusplus\Framework;$(BIBIM_DIR)Source\Runtime\CPlusplus\Gameplay;$(BIBIM_DIR)Source\Runtime\CPlusplus\GFX;$(BIBIM_DIR)Source\Runtime\CPlusplus\Graphics;$(BIBIM_DIR)Source\Runtime\CPlusplus\Input;$(BIBIM_DIR)Source\Runtime\CPlusplus\IPC;$(BIBIM_DIR)Source\Runtime\CPlusplus\Net;$(BIBIM_DIR)Source\Runtime\CPlusplus\Scripting;$(BIBIM_DIR)Source\Runtime\CPlusplus\Startup;$(BIBIM_DIR)Source\Runtime\CPlusplus\Threading;$(BIBIM_DIR)Source\Runtime\CPlusplus\Time;$(BIBIM_DIR)Source\Runtime\CPlusplus\Typography;$(BIBIM_DIR)Source\Runtime\CPlusplus\UI;$(BIBIM_DIR)Source\Runtime\CPlusplus\Windows;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lua-5.1.5\src;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lua_tinker;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\irrKlang-1.4.0\include;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\SPARK-1.5.5\include;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\StormLib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level4</WarningLevel>
+    </ClCompile>
+  </ItemDefinitionGroup>
+</Project>

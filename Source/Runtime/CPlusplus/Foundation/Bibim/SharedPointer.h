@@ -21,6 +21,12 @@
                     if (pointee)
                         pointee->IncreaseReferenceCount();
                 }
+#				if (defined(BIBIM_CPLUSPLUS_0X))
+				inline SharedPointer(std::nullptr_t)
+					: pointee(0)
+				{
+				}
+#				endif
                 inline ~SharedPointer();
 
                 inline void Reset();
@@ -58,6 +64,16 @@
                 {
                     return pointee != right;
                 }
+#				if (defined(BIBIM_CPLUSPLUS_0X))
+                bool operator == (std::nullptr_t) const
+                {
+                    return pointee == 0;
+                }
+                bool operator != (std::nullptr_t) const
+                {
+                    return pointee != 0;
+                }
+#				endif
 
                 inline operator T* () const;
                 inline T& operator * () const;
