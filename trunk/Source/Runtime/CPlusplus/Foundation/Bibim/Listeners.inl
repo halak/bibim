@@ -47,7 +47,7 @@
     template <typename T> void Listeners<T>::Clear()
     {
         items.clear();
-        objectes.clear();
+        objects.clear();
     }
 
     template <typename T> typename Listeners<T>::Iterator Listeners<T>::Begin() const

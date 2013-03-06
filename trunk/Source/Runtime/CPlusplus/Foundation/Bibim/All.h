@@ -82,7 +82,6 @@
 #  include <Bibim/PCH.h>
 #  include <Bibim/Point2.h>
 #  include <Bibim/PointerCasts.h>
-#  include <Bibim/Property.h>
 #  include <Bibim/Rect.h>
 #  include <Bibim/RectF.h>
 #  include <Bibim/RectStorage.h>

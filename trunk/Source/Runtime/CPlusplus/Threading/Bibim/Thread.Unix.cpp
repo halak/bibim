@@ -1,6 +1,5 @@
-﻿#include <Bibim/PCH.h>
-#include <Bibim/Thread.Windows.h>
-#include <windows.h>
+#include <Bibim/PCH.h>
+#include <Bibim/Thread.Unix.h>
 
 namespace Bibim
 {

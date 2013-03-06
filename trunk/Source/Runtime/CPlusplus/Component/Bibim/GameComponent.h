@@ -24,7 +24,7 @@
                                                                 protected: \
                                                                     virtual void OnRead(Bibim::ComponentStreamReader& reader); \
                                                                     virtual void OnCopy(const Bibim::GameComponent* original, Bibim::CloningContext& context); \
-                                                                    virtual void to_lua(lua_State *L) { type2lua(L, this); } \
+                                                                    virtual void to_lua(lua_State *L) { lua_tinker::type2lua(L, this); } \
                                                                 private:
 
 #       define BBComponentClass(classname, parent, a, b, c, d)  BBAbstractComponentClass(classname, parent); \

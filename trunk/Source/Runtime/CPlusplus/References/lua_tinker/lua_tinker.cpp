@@ -32,7 +32,7 @@ void lua_tinker::init(lua_State *L)
 static int tostring_s64(lua_State *L)
 {
     char temp[64];
-    sprintf_s(temp, sizeof(temp), "%I64d", *(__int64*)lua_topointer(L, 1));
+    sprintf(temp, /*sizeof(temp), */"%I64d", *(long long*)lua_topointer(L, 1));
     lua_pushstring(L, temp);
     return 1;
 }
@@ -40,21 +40,21 @@ static int tostring_s64(lua_State *L)
 /*---------------------------------------------------------------------------*/ 
 static int eq_s64(lua_State *L)
 {
-    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(__int64)) == 0);
+    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(long long)) == 0);
     return 1;
 }
 
 /*---------------------------------------------------------------------------*/ 
 static int lt_s64(lua_State *L)
 {
-    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(__int64)) < 0);
+    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(long long)) < 0);
     return 1;
 }
 
 /*---------------------------------------------------------------------------*/ 
 static int le_s64(lua_State *L)
 {
-    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(__int64)) <= 0);
+    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(long long)) <= 0);
     return 1;
 }
 
@@ -94,7 +94,7 @@ void lua_tinker::init_s64(lua_State *L)
 static int tostring_u64(lua_State *L)
 {
     char temp[64];
-    sprintf_s(temp, sizeof(temp), "%I64u", *(unsigned __int64*)lua_topointer(L, 1));
+    sprintf(temp, /*sizeof(temp), */"%I64u", *(unsigned long long*)lua_topointer(L, 1));
     lua_pushstring(L, temp);
     return 1;
 }
@@ -102,21 +102,21 @@ static int tostring_u64(lua_State *L)
 /*---------------------------------------------------------------------------*/ 
 static int eq_u64(lua_State *L)
 {
-    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(unsigned __int64)) == 0);
+    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(unsigned long long)) == 0);
     return 1;
 }
 
 /*---------------------------------------------------------------------------*/ 
 static int lt_u64(lua_State *L)
 {
-    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(unsigned __int64)) < 0);
+    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(unsigned long long)) < 0);
     return 1;
 }
 
 /*---------------------------------------------------------------------------*/ 
 static int le_u64(lua_State *L)
 {
-    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(unsigned __int64)) <= 0);
+    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(unsigned long long)) <= 0);
     return 1;
 }
 
@@ -259,7 +259,7 @@ void lua_tinker::print_error(lua_State *L, const char* fmt, ...)
 
     va_list args;
     va_start(args, fmt);
-    vsprintf_s(text, sizeof(text), fmt, args);
+    vsprintf(text, /*sizeof(text), */fmt, args);
     va_end(args);
 
     lua_pushstring(L, "_ALERT");
@@ -409,20 +409,20 @@ void lua_tinker::read(lua_State *L, int index)
 }
 
 template<>
-__int64 lua_tinker::read(lua_State *L, int index)
+long long lua_tinker::read(lua_State *L, int index)
 {
     if(lua_isnumber(L,index))
-        return (__int64)lua_tonumber(L, index);
+        return (long long)lua_tonumber(L, index);
     else
-        return *(__int64*)lua_touserdata(L, index);
+        return *(long long*)lua_touserdata(L, index);
 }
 template<>
-unsigned __int64 lua_tinker::read(lua_State *L, int index)
+unsigned long long lua_tinker::read(lua_State *L, int index)
 {
     if(lua_isnumber(L,index))
-        return (unsigned __int64)lua_tonumber(L, index);
+        return (unsigned long long)lua_tonumber(L, index);
     else
-        return *(unsigned __int64*)lua_touserdata(L, index);
+        return *(unsigned long long*)lua_touserdata(L, index);
 }
 
 template<>
@@ -526,18 +526,18 @@ void lua_tinker::push(lua_State *L, lua_value* ret)
 }
 
 template<>
-void lua_tinker::push(lua_State *L, __int64 ret)
+void lua_tinker::push(lua_State *L, long long ret)
 { 
-    *(__int64*)lua_newuserdata(L, sizeof(__int64)) = ret;
+    *(long long*)lua_newuserdata(L, sizeof(long long)) = ret;
     lua_pushstring(L, "__s64");
     lua_gettable(L, LUA_GLOBALSINDEX);
     lua_setmetatable(L, -2);
 }
 
 template<>
-void lua_tinker::push(lua_State *L, unsigned __int64 ret)
+void lua_tinker::push(lua_State *L, unsigned long long ret)
 {
-    *(unsigned __int64*)lua_newuserdata(L, sizeof(unsigned __int64)) = ret;
+    *(unsigned long long*)lua_newuserdata(L, sizeof(unsigned long long)) = ret;
     lua_pushstring(L, "__u64");
     lua_gettable(L, LUA_GLOBALSINDEX);
     lua_setmetatable(L, -2);
@@ -654,18 +654,18 @@ int lua_tinker::push_for_return(lua_State *L, lua_value* ret)
 }
 
 template<>
-int lua_tinker::push_for_return(lua_State *L, __int64 ret)
+int lua_tinker::push_for_return(lua_State *L, long long ret)
 { 
-    *(__int64*)lua_newuserdata(L, sizeof(__int64)) = ret;
+    *(long long*)lua_newuserdata(L, sizeof(long long)) = ret;
     lua_pushstring(L, "__s64");
     lua_gettable(L, LUA_GLOBALSINDEX);
     lua_setmetatable(L, -2);
     return 1;
 }
 template<>
-int lua_tinker::push_for_return(lua_State *L, unsigned __int64 ret)
+int lua_tinker::push_for_return(lua_State *L, unsigned long long ret)
 {
-    *(unsigned __int64*)lua_newuserdata(L, sizeof(unsigned __int64)) = ret;
+    *(unsigned long long*)lua_newuserdata(L, sizeof(unsigned long long)) = ret;
     lua_pushstring(L, "__u64");
     lua_gettable(L, LUA_GLOBALSINDEX);
     lua_setmetatable(L, -2);
@@ -855,7 +855,7 @@ int lua_tinker::meta_set(lua_State *L)
 }
 
 /*---------------------------------------------------------------------------*/ 
-void lua_tinker::meta_push(lua_State *L, const char* name)
+void lua_tinker::push_meta(lua_State *L, const char* name)
 {
     lua_pushstring(L, name);
     lua_gettable(L, LUA_GLOBALSINDEX);

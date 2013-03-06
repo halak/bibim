@@ -4,7 +4,6 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameComponent.h>
-#   include <Bibim/Property.h>
 #   include <Bibim/String.h>
 #   include <map>
 

@@ -27,7 +27,7 @@
                 class Vertices
                 {
                     public:
-                        virtual ~Vertices() = 0 { };
+                        virtual ~Vertices() { };
 
                         virtual void Append(Vector2 p0) = 0;
                         virtual void Append(Vector2 p0, Vector2 p1) = 0;

@@ -135,11 +135,11 @@
             case Float4Type:
                 return sizeof(float) * 4;
             case StringType:
-                throw;
+                return 0; // throw
             case SharedObjectType:
-                throw;
+                return 0; // throw
             case LightObjectType:
-                throw;
+                return 0; // throw
             default:
                 return 0;
         }

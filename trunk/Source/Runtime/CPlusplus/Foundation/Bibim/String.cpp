@@ -5,6 +5,13 @@
 
 namespace Bibim
 {
+#   if (defined(BIBIM_PLATFORM_WINDOWS))
+#       define stricmp _stricmp
+#   elif (defined(BIBIM_PLATFORM_UNIX))
+#       define stricmp strcasecmp
+#   endif
+
+
     const String String::Empty = String(EmptyStringTag());
     const String String::NewLine = String("\r\n");
     const byte String::UTF8BOM[3] = { 0xEF, 0xBB, 0xBF };
@@ -172,7 +179,7 @@ namespace Bibim
         if (right == nullptr)
             return +1;
 
-        return _stricmp(buffer->s, right);
+        return stricmp(buffer->s, right);
     }
 
     int String::CompareIgnoreCase(const String& right) const
@@ -213,7 +220,7 @@ namespace Bibim
         if (buffer->s == right)
             return true;
 
-        return _stricmp(buffer->s, right) == 0;
+        return stricmp(buffer->s, right) == 0;
     }
 
     bool String::EqualsIgnoreCase(const char* right, int length) const
@@ -223,7 +230,7 @@ namespace Bibim
         if (buffer->length != length)
             return false;
 
-        return _stricmp(buffer->s, right) == 0;
+        return stricmp(buffer->s, right) == 0;
     }
 
     bool String::EqualsIgnoreCase(const String& right) const
@@ -233,7 +240,7 @@ namespace Bibim
         if (buffer->length != right.buffer->length)
             return false;
 
-        return _stricmp(buffer->s, right.buffer->s) == 0;
+        return stricmp(buffer->s, right.buffer->s) == 0;
     }
 
     bool String::Contains(char c) const
@@ -637,7 +644,7 @@ namespace Bibim
 
     int String::ReverseFindIgnoreCaseTemplate(const char* /*s*/, int /*length*/, int /*index*/) const
     {
-        throw;
+        return -1;
     }
 
     int String::ReverseFindIgnoreCase(const char* s, int index) const

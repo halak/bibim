@@ -122,8 +122,7 @@ namespace Bibim
 
     void CollisionSpace2D::Add(Shape2D* shape, int group)
     {
-        if (Find(shape, nullptr, nullptr))
-            throw std::invalid_argument("alreay exists shape.");
+        BBAssert(Find(shape, nullptr, nullptr) == false);
 
         shapes.at(group).push_back(shape);
     }

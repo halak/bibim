@@ -6,6 +6,8 @@
 
 #   if (defined(BIBIM_PLATFORM_WINDOWS))
 #       include <Bibim/Lock.Windows.h>
+#   elif (defined(BIBIM_PLATFORM_UNIX))
+#       include <Bibim/Lock.Unix.h>
 #   endif
 
 #endif

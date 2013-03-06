@@ -13,13 +13,16 @@ namespace Bibim
 
         struct ComparePredicate
         {
-            bool operator () (const Item& a, const Item& b) const
+            static bool Do(const Item& a, const Item& b)
             {
                 return a.Name.Compare(b.Name) < 0;
             }
         };
 
-        ItemCollection::const_iterator it = std::lower_bound(items.begin(), items.end(), Item(name, Colors::TransparentBlack), ComparePredicate());
+        ItemCollection::const_iterator it = std::lower_bound(items.begin(),
+                                                             items.end(),
+                                                             Item(name, Colors::TransparentBlack),
+                                                             ComparePredicate::Do);
         if ((*it).Name == name)
             return &(*it).Value;
         else

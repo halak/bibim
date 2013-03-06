@@ -451,7 +451,7 @@ namespace Bibim
             switch (value.type)
             {
                 case VoidType:
-                    throw;
+                    return 0; // throw;
                 case BoolType:
                     switch (castType)
                     {
@@ -465,9 +465,9 @@ namespace Bibim
                             BinaryWriter::From(buffer, static_cast<float>(value.value.BOOLEAN ? 1.0f : 0.0f));
                             return sizeof(float);
                         case StringType:
-                            throw;
+                            return 0; // throw;
                         default:
-                            throw;
+                            return 0; // throw;
                     }
                     break;
                 case IntType:
@@ -483,9 +483,9 @@ namespace Bibim
                             BinaryWriter::From(buffer, static_cast<float>(value.value.INT));
                             return sizeof(float);
                         case StringType:
-                            throw;
+                            return 0; // throw;
                         default:
-                            throw;
+                            return 0; // throw;
                     }
                     break;
                 case LongIntType:
@@ -501,9 +501,9 @@ namespace Bibim
                             BinaryWriter::From(buffer, static_cast<float>(value.value.LONGINT));
                             return sizeof(float);
                         case StringType:
-                            throw;
+                            return 0; // throw;
                         default:
-                            throw;
+                            return 0; // throw;
                     }
                     break;
                 case FloatType:
@@ -519,33 +519,33 @@ namespace Bibim
                             BinaryWriter::From(buffer, static_cast<longint>(value.value.FLOAT));
                             return sizeof(longint);
                         case StringType:
-                            throw;
+                            return 0; // throw;
                         default:
-                            throw;
+                            return 0; // throw;
                     }
                     break;
                 case ColorType:
-                    throw;
+                    return 0; // throw;
                 case Int2Type:
-                    throw;
+                    return 0; // throw;
                 case Int3Type:
-                    throw;
+                    return 0; // throw;
                 case Int4Type:
-                    throw;
+                    return 0; // throw;
                 case Float2Type:
-                    throw;
+                    return 0; // throw;
                 case Float3Type:
-                    throw;
+                    return 0; // throw;
                 case Float4Type:
-                    throw;
+                    return 0; // throw;
                 case StringType:
-                    throw;
+                    return 0; // throw;
                 case SharedObjectType:
-                    throw;
+                    return 0; // throw;
                 case LightObjectType:
-                    throw;
+                    return 0; // throw;
                 default:
-                    throw;
+                    return 0; // throw;
             }
         }
     }

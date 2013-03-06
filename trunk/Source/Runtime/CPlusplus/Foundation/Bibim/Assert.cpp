@@ -9,6 +9,8 @@ namespace Bibim
     {
         Log::Error(expression);
 
+#       if (defined(BIBIM_PLATFORM_WINDOWS))
         __asm int 3
+#       endif
     }
 }
