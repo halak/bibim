@@ -128,7 +128,7 @@ namespace Bibim
         else
             index++;
 
-        return String(&s[index], BUFFER_LENGTH - 1 - index);
+        return String(&s[index], 0, BUFFER_LENGTH - 1 - index);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -173,7 +173,7 @@ namespace Bibim
         else
             index++;
 
-        return String(&s[index], BUFFER_LENGTH - 1 - index);
+        return String(&s[index], 0, BUFFER_LENGTH - 1 - index);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
