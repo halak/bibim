@@ -144,6 +144,8 @@ ConversionResult ConvertUTF32toUTF16 (
 
 Boolean isLegalUTF8Sequence(const UTF8 *source, const UTF8 *sourceEnd);
 
+int GetUTF8Length(UTF16 value);
+
 #ifdef __cplusplus
 }
 #endif

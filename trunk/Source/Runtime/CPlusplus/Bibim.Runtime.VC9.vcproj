@@ -3256,6 +3256,14 @@
 			Name="04. References"
 			>
 			<File
+				RelativePath=".\References\ConvertUTF\ConvertUTF.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\References\ConvertUTF\ConvertUTF.h"
+				>
+			</File>
+			<File
 				RelativePath=".\References\lua_tinker\lua_tinker.cpp"
 				>
 			</File>

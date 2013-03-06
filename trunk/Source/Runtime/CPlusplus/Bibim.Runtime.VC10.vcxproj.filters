@@ -789,6 +789,9 @@
     <ClCompile Include="Audio\Bibim\SoundFX.Irrklang.cpp">
       <Filter>03. Game\Audio\Irrklang</Filter>
     </ClCompile>
+    <ClCompile Include="References\ConvertUTF\ConvertUTF.cpp">
+      <Filter>04. References</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset\Bibim\AssetLoadingTask.h">
@@ -1556,6 +1559,9 @@
     </ClInclude>
     <ClInclude Include="Audio\Bibim\SoundFX.h">
       <Filter>03. Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="References\ConvertUTF\ConvertUTF.h">
+      <Filter>04. References</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
