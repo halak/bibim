@@ -2963,11 +2963,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Atomic.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Atomic.Windows.inl"
+					RelativePath=".\Foundation\Bibim\Atomic.inl"
 					>
 				</File>
 				<File
@@ -2987,11 +2983,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Memory.h"
+					RelativePath=".\Foundation\Bibim\Memory.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Memory.Windows.cpp"
+					RelativePath=".\Foundation\Bibim\Memory.h"
 					>
 				</File>
 				<File
