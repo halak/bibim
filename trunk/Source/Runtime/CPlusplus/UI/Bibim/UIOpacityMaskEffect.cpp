@@ -197,13 +197,13 @@ namespace Bibim
     {
     }
 
-    void UIOpacityMaskEffect::EffectorForFixedFunction::Begin(UIRenderer* renderer)
+    void UIOpacityMaskEffect::EffectorForFixedFunction::Begin(UIRendererBase* renderer)
     {
-        // renderer->BeginOpacityMaskMode();
+        renderer->BeginOpacityMaskMode();
     }
     
-    void UIOpacityMaskEffect::EffectorForFixedFunction::End(UIRenderer* renderer)
+    void UIOpacityMaskEffect::EffectorForFixedFunction::End(UIRendererBase* renderer)
     {
-        // renderer->EndOpacityMaskMode();
+        renderer->EndOpacityMaskMode();
     }
 }

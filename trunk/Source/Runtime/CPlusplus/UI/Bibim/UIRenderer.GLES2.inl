@@ -1,46 +1,17 @@
 ﻿namespace Bibim
 {
-    GraphicsDevice* UIRenderer::GetGraphicsDevice() const
+    void UIRenderer::DrawArrays(GLenum primitiveType, int numberOfVertices)
     {
-        return graphicsDevice;
+        DrawArraysActually(primitiveType, ColorOnlyMode, numberOfVertices, nullptr, nullptr);
     }
 
-    GameAssetStorage* UIRenderer::GetStorage() const
+    void UIRenderer::DrawArrays(GLenum primitiveType, int numberOfVertices, Texture2D* texture)
     {
-        return storage;
+        DrawArraysActually(primitiveType, ColorTextureOnlyMode, numberOfVertices, texture, nullptr);
     }
 
-    const String& UIRenderer::GetShaderEffectDirectory() const
+    void UIRenderer::DrawArrays(GLenum primitiveType, int numberOfVertices, Texture2D* texture, Texture2D* mask)
     {
-        return shaderEffectDirectory;
-    }
-
-    float UIRenderer::GetFieldOfView() const
-    {
-        return fieldOfView;
-    }
-
-    const Matrix4& UIRenderer::GetViewTransform()
-    {
-        UpdateViewProjectionTransform();
-        return viewTransform;
-    }
-
-    const Matrix4& UIRenderer::GetProjectionTransform()
-    {
-        UpdateViewProjectionTransform();
-        return projectionTransform;
-    }
-
-    const Matrix4& UIRenderer::GetInversedViewTransform()
-    {
-        UpdateViewProjectionTransform();
-        return viewTransformInv;
-    }
-
-    const Matrix4& UIRenderer::GetInversedProjectionTransform()
-    {
-        UpdateViewProjectionTransform();
-        return projectionTransformInv;
+        DrawArraysActually(primitiveType, MaskedColorTextureMode, numberOfVertices, texture, mask);
     }
 }

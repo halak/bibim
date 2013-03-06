@@ -44,6 +44,13 @@
                 inline Parameter* FindParameter(const String& name);
 
                 inline GLuint GetHandle() const;
+                inline GLuint GetPositionLocation() const;
+                inline GLuint GetColorLocation() const;
+                inline GLuint GetTexCoord1Location() const;
+                inline GLuint GetTexCoord2Location() const;
+                inline GLuint GetMainSamplerLocation() const;
+                inline GLuint GetMaskSamplerLocation() const;
+                inline GLuint GetMVPTransformLocation() const;
 
             private:
                 ShaderEffect(GraphicsDevice* graphicsDevice, GLuint handle);
@@ -51,6 +58,13 @@
             private:
                 GraphicsDevice* graphicsDevice;
                 GLuint handle;
+                GLuint positionLocation;
+                GLuint colorLocation;
+                GLuint texCoord1Location;
+                GLuint texCoord2Location;
+                GLuint mainSamplerLocation;
+                GLuint maskSamplerLocation;
+                GLuint mvpTransformLocation;
         };
 
         typedef ShaderEffect::Parameter ShaderEffectParameter;

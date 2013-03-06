@@ -81,8 +81,8 @@
                         EffectorForFixedFunction(UIOpacityMaskEffect* effect);
                         virtual ~EffectorForFixedFunction();
 
-                        virtual void Begin(UIRenderer* renderer);
-                        virtual void End(UIRenderer* renderer);
+                        virtual void Begin(UIRendererBase* renderer);
+                        virtual void End(UIRendererBase* renderer);
                 };
 
             private:

@@ -17,8 +17,13 @@
 
     namespace Bibim
     {
-#       define BBAbstractModuleClass(classname, parent) ;
-#       define BBModuleClass(classname, parent, a, b, c, d) public: \
+#       define BBAbstractModuleClass(classname, parent) private: \
+                                                            typedef classname This; \
+                                                            typedef parent Base;
+#       define BBModuleClass(classname, parent, a, b, c, d) private: \
+                                                                typedef classname This; \
+                                                                typedef parent Base; \
+                                                            public: \
                                                                 static const int ClassID = BBMakeFOURCC(a, b, c, d); \
                                                                 virtual int GetClassID() const { return ClassID; } \
                                                             private:
