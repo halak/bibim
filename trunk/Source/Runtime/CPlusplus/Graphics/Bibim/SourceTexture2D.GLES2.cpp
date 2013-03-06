@@ -84,12 +84,12 @@ namespace Bibim
         glGenTextures(1, &textureHandle);
         glBindTexture(GL_TEXTURE_2D, textureHandle);
 
-	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	    glTexImage2D(GL_TEXTURE_2D, 0, glesFormat, width, height, 0, glesFormat, GL_UNSIGNED_BYTE, destination);
+        glTexImage2D(GL_TEXTURE_2D, 0, glesFormat, width, height, 0, glesFormat, GL_UNSIGNED_BYTE, destination);
 
         self->Setup(textureHandle, self->GetWidth(), self->GetHeight(), width, height, pixelFormat);
         self->IncreaseRevision();
