@@ -1,4 +1,6 @@
-﻿namespace Bibim
+﻿#include <Bibim/ComponentStreamReader.h>
+
+namespace Bibim
 {
     template <typename T, typename TLeft, typename TRight, template <typename T, typename TLeft, typename TRight> class TOperator, char a, char b, char c, char d>
     EvalBinaryOperatorTemplate<T, TLeft, TRight, TOperator, a, b, c, d>* EvalBinaryOperatorTemplate<T, TLeft, TRight, TOperator, a, b, c, d>::Clone() const

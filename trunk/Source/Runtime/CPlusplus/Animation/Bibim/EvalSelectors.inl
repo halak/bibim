@@ -1,4 +1,6 @@
-﻿namespace Bibim
+﻿#include <Bibim/ComponentStreamReader.h>
+
+namespace Bibim
 {
     template <typename T, char a, char b, char c, char d>
     EvalSelectorTemplate<T, a, b, c, d>* EvalSelectorTemplate<T, a, b, c, d>::Clone() const
@@ -39,7 +41,7 @@
         const This* o = static_cast<const This*>(original);
         condition = context.Clone(o->condition);
         cases.reserve(o->cases.size());
-        for (CaseCollection::const_iterator it = o->cases.begin(); it != o->cases.end(); it++)
+        for (typename CaseCollection::const_iterator it = o->cases.begin(); it != o->cases.end(); it++)
         {
             const Case& item = (*it);
             cases.push_back(Case(item.Min, item.Max, context.Clone(item.Item)));

@@ -1,6 +1,6 @@
-﻿#pragma once
-#ifndef __BIBIM_GAMEFRAMEWORK_WINDOWS_H__
-#define __BIBIM_GAMEFRAMEWORK_WINDOWS_H__
+#pragma once
+#ifndef __BIBIM_GAMEFRAMEWORK_ANDROID_H__
+#define __BIBIM_GAMEFRAMEWORK_ANDROID_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameFrameworkBase.h>
@@ -25,6 +25,6 @@
         };
     }
 
-#   include <Bibim/GameFramework.Windows.inl>
+#   include <Bibim/GameFramework.Android.inl>
 
 #endif

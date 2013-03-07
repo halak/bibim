@@ -39,8 +39,8 @@ namespace Bibim
         if (duration2 == 0.0f)
             return;
 
-        const float clippedTime1 = GetLooped() ? Math::Mod(time, duration1) : Math::Min(time, duration1);
-        const float clippedTime2 = GetLooped() ? Math::Mod(time, duration2) : Math::Min(time, duration2);
+        const float clippedTime1 = this->GetLooped() ? Math::Mod(this->time, duration1) : Math::Min(this->time, duration1);
+        const float clippedTime2 = this->GetLooped() ? Math::Mod(this->time, duration2) : Math::Min(this->time, duration2);
 
         timeIndex1 = source1->GetKeyframeIndex(clippedTime1, timeIndex1);
         timeIndex2 = source2->GetKeyframeIndex(clippedTime2, timeIndex2);
