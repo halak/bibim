@@ -5,6 +5,7 @@
 #include <Bibim/Math.h>
 #include <Bibim/ShaderEffect.h>
 #include <Bibim/Texture2D.h>
+#include <Bibim/Log.h>
 
 namespace Bibim
 {

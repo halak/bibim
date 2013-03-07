@@ -10,6 +10,8 @@
         {
             BBThisIsStaticClass(Memory);
             public:
+                static void* Alloc(int size);
+                static void Free(void* pointer);
                 static void Fill(void* destination, int destinationLength);
                 static void Copy(void* destination, int destinationLength, const void* source, int sourceLength);
         };

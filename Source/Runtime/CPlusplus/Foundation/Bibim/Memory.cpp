@@ -1,9 +1,20 @@
 ﻿#include <Bibim/PCH.h>
 #include <Bibim/Memory.h>
 #include <cstring>
+#include <cstdlib>
 
 namespace Bibim
 {
+    void* Memory::Alloc(int size)
+    {
+        return std::malloc(size);
+    }
+
+    void Memory::Free(void* pointer)
+    {
+        std::free(pointer);
+    }
+
     void Memory::Fill(void* destination, int destinationLength)
     {
         std::memset(destination, 0, destinationLength);

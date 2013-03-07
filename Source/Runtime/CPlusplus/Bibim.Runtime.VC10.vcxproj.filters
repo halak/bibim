@@ -76,9 +76,6 @@
     <Filter Include="03. Game\UI\Transforms">
       <UniqueIdentifier>{1bb36dcc-84d2-450e-858c-c02b816b1e11}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Game\UI\Visitors">
-      <UniqueIdentifier>{b6559376-a07f-4aa8-b57e-148201ac87c1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Game\Graphics">
       <UniqueIdentifier>{d9a96df2-01f7-40a4-84a9-952e41e0bac8}</UniqueIdentifier>
     </Filter>
@@ -150,6 +147,9 @@
     </Filter>
     <Filter Include="03. Game\Android">
       <UniqueIdentifier>{f2095f10-bcfc-4f99-847c-9b4036c14a56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\UI\Visitors">
+      <UniqueIdentifier>{b6559376-a07f-4aa8-b57e-148201ac87c1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -78,7 +78,7 @@ namespace Bibim
                            &target,
                            target + wideCharacters.size(),
                            strictConversion);
-        //MEMORY:wideCharacters.resize(MultiByteToWideChar(CP_UTF8, 0, text.CStr(), text.GetLength(), nullptr, 0), L'\0');
+        wideCharacters.resize(target - reinterpret_cast<UTF16*>(&wideCharacters[0]));
 
         const float spacing = font->GetSpacing();
         regularGlyphs.reserve(wideCharacters.size());

@@ -51,7 +51,7 @@ class SpriteTest : public GameFramework
             //gas->Preload("Asset\\Background");
             //gas->Preload("Asset\\BigHello");
 
-            texture1 = static_cast<SourceTexture2D*>(gas->Load("Asset\\BigHello"));
+            texture1 = static_cast<SourceTexture2D*>(gas->Load("Asset\\Hello"));
             texture2 = static_cast<SourceTexture2D*>(gas->Load("Asset\\Background"));
 
             //ScriptPtr script = static_cast<Script*>(gas->Load("Script"));
