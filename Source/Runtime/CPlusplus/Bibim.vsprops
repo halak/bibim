@@ -11,6 +11,6 @@
 	/>
 	<Tool
 		Name="VCLinkerTool"
-		AdditionalLibraryDirectories="&quot;$(BIBIM_DIR)Product\Windows\Lib&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\objs\win32\vc2008&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lua-5.1.5\lib&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\irrKlang-1.4.0\lib\Win32-visualStudio&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\SPARK-1.5.5\lib\vc2008\static&quot;"
+		AdditionalLibraryDirectories="&quot;$(BIBIM_DIR)Product\Windows\Lib&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\objs\win32\vc2008&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lua-5.1.5\lib\Win32\vc9&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\irrKlang-1.4.0\lib\Win32-visualStudio&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\SPARK-1.5.5\lib\vc2008\static&quot;"
 	/>
 </VisualStudioPropertySheet>

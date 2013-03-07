@@ -15,6 +15,9 @@
             public:
                 virtual ~GameFramework();
 
+                void init();
+                void step();
+
             protected:
                 GameFramework();
                 GameFramework(int resolutionWidth, int resolutionHeight);

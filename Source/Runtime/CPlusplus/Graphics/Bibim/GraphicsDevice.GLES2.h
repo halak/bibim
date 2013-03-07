@@ -43,13 +43,17 @@
                 inline const GraphicsCapabilities& GetCapabilities() const;
 
             private:
+                void Construct(int width, int height);
                 void InitializeContext();
                 void FinalizeContext();
 
             private:
+#               if (defined(BIBIM_PLATFORM_WINDOWS))
                 EGLDisplay eglDisplay;
                 EGLSurface eglSurface;
                 EGLContext eglContext;
+#               endif
+
                 Window* window;
                 Point2 resolution;
 

@@ -23,4 +23,15 @@ namespace Bibim
                                      resolutionHeight,
                                      String::Empty);
     }
+    
+    void GameFramework::init()
+    {
+        Initialize();
+        PostInitialize();
+    }
+
+    void GameFramework::step()
+    {
+        StepFrame();
+    }
 }

@@ -6,6 +6,8 @@
 #   define WIN32_LEAN_AND_MEAN
 #   endif
 #   include <windows.h>
+#elif (defined(BIBIM_PLATFORM_ANDROID))
+#   include <android/log.h>
 #endif
 
 namespace Bibim
@@ -46,6 +48,8 @@ namespace Bibim
             (*s++) = '\0';
 #           if (defined(BIBIM_PLATFORM_WINDOWS))
                 ::OutputDebugString(full);
+#           elif (defined(BIBIM_PLATFORM_ANDROID))
+                __android_log_print(ANDROID_LOG_INFO, GetName().CStr(), full);
 #           endif
             BBStackFree(full);
         }
@@ -65,6 +69,8 @@ namespace Bibim
             (*s++) = '\0';
 #           if (defined(BIBIM_PLATFORM_WINDOWS))
                 ::OutputDebugString(full);
+#           elif (defined(BIBIM_PLATFORM_ANDROID))
+                __android_log_print(ANDROID_LOG_INFO, GetName().CStr(), full);
 #           endif
             BBStackFree(full);
         }

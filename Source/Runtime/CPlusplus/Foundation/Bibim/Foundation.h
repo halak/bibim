@@ -17,6 +17,7 @@
 #           define BIBIM_PLATFORM_UNIX
 #           define BIBIM_PLATFORM_ANDROID
 #       else
+#           error "UNKNOWN PLATFORM"
 #           define BIBIM_PLATFORM_UNKNOWN
 #       endif
 

@@ -4,8 +4,6 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameFrameworkBase.h>
-#   include <Bibim/String.h>
-#   include <deque>
 
     namespace Bibim
     {
