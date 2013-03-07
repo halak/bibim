@@ -8,8 +8,6 @@
 
 namespace Bibim
 {
-    static const int GeneralFPS = 60;
-
     GameFramework::GameFramework()
     {
         Construct(0, 0);

@@ -14,9 +14,7 @@
             BBThisIsNoncopyableClass(GameFramework);
             public:
                 virtual ~GameFramework();
-    
-                void Run();
-    
+
             protected:
                 GameFramework();
                 GameFramework(int resolutionWidth, int resolutionHeight);

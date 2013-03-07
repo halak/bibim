@@ -720,6 +720,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Foundation\Bibim\PCH.h" />
     <ClInclude Include="Framework\Bibim\GameFramework.Android.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -1085,7 +1086,6 @@
     <ClInclude Include="Foundation\Bibim\All.h" />
     <ClInclude Include="Foundation\Bibim\Foundation.h" />
     <ClInclude Include="Foundation\Bibim\FWD.h" />
-    <ClInclude Include="Foundation\Bibim\PCH.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Asset\Bibim\AssetLoadingTask.inl" />

@@ -47,7 +47,7 @@
 
             private:
                 String title;
-                Point size;
+                Point2 size;
         };
     }
 
