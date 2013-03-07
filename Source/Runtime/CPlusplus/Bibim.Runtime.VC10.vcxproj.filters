@@ -1529,7 +1529,6 @@
     <ClInclude Include="Foundation\Bibim\All.h" />
     <ClInclude Include="Foundation\Bibim\Foundation.h" />
     <ClInclude Include="Foundation\Bibim\FWD.h" />
-    <ClInclude Include="Foundation\Bibim\PCH.h" />
     <ClInclude Include="Threading\Bibim\Lock.Unix.h">
       <Filter>02. System\Threading</Filter>
     </ClInclude>
@@ -1593,6 +1592,7 @@
     <ClInclude Include="Framework\Bibim\GameFrameworkBase.h">
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="Foundation\Bibim\PCH.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Asset\Bibim\AssetLoadingTask.inl">
