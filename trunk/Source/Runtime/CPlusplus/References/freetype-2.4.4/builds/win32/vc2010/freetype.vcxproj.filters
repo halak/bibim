@@ -12,6 +12,9 @@
       <UniqueIdentifier>{2f25e08f-4756-429d-bae2-621d75cb12d6}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
+    <Filter Include="Source Files\unix">
+      <UniqueIdentifier>{c9cd3d63-7196-45f9-a9a7-369e828243d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\autofit\autofit.c">
@@ -131,6 +134,9 @@
     <ClCompile Include="..\..\..\src\winfonts\winfnt.c">
       <Filter>Source Files\FT_MODULES</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\unix\ftsystem.c">
+      <Filter>Source Files\unix</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\ft2build.h">
@@ -150,6 +156,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\freetype\config\ftstdlib.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\unix\ft2unix.h">
+      <Filter>Source Files\unix</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

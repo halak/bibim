@@ -26,6 +26,7 @@
                 return 0; \
             }
 #   else
+#       define BBMain(gameClass)
 #   endif
 
 #endif

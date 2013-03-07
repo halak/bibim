@@ -2,6 +2,7 @@
 #include <Bibim/FileStream.Android.h>
 #include <Bibim/Math.h>
 #include <Bibim/Numerics.h>
+#include <Bibim/Log.h>
 
 namespace Bibim
 {
@@ -10,6 +11,8 @@ namespace Bibim
           canRead(false),
           canWrite(false)
     {
+        Log::Information("FileSystem", path.CStr());
+
         char mode[3] = { 'r', 'b', '\0' };
         if (accessMode == ReadOnly)
             mode[0] = 'r';
@@ -19,10 +22,12 @@ namespace Bibim
         handle = std::fopen(path.CStr(), mode);
         if (handle == nullptr)
         {
+            Log::Information("FileSystem", "File Open Failed");
             canRead  = false;
             canWrite = false;
             return;
         }
+        Log::Information("FileSystem", "File Open Success");
 
         canRead  = (accessMode == FileStream::ReadOnly);
         canWrite = (accessMode == FileStream::WriteOnly);
