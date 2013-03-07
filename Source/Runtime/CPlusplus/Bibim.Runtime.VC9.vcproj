@@ -2607,6 +2607,18 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Framework\Bibim\GameFrameworkBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\GameFrameworkBase.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\GameFrameworkBase.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Framework\Bibim\GameWindow.h"
 					>
 				</File>
@@ -2910,10 +2922,6 @@
 			<Filter
 				Name="Diagnostics"
 				>
-				<File
-					RelativePath=".\Foundation\Bibim\Assert.cpp"
-					>
-				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\Assert.h"
 					>

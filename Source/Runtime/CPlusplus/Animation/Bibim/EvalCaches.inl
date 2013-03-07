@@ -1,4 +1,6 @@
-﻿namespace Bibim
+﻿#include <Bibim/ComponentStreamReader.h>
+
+namespace Bibim
 {
     template <typename T, char a, char b, char c, char d>
     EvalCacheTemplate<T, a, b, c, d>* EvalCacheTemplate<T, a, b, c, d>::Clone() const

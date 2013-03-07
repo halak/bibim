@@ -3,17 +3,18 @@
 #define __BIBIM_ASSERT_H__
 
 #   include <Bibim/Foundation.h>
+#   include <cassert>
 
     namespace Bibim
     {
 #       if (defined(BIBIM_PLATFORM_WINDOWS))
-#           define BBBreak() { __asm int 3 }
+#           define BBBreak() { assert(false && "break"); }
 #       else
 #           define BBBreak() { }
 #       endif
 
         /// Run-time에 식을 평가하여 식이 거짓일 경우 알려줍니다.
-#       define BBAssert(exp) if (!(exp)) { Bibim::Assert(#exp, __FILE__, __LINE__); }
+#       define BBAssert assert
 
         /// Compile-time에 식을 평가하여 식이 거짓일 경우 알려줍니다.
         /// 고정 배열 크기나 상수 검사등에 이용합니다.
@@ -21,12 +22,10 @@
 
 #       if (defined(BIBIM_DEBUG))
             /// Debug 상태에서만 작동하는 ASSERT
-#           define BBAssertDebug(exp) BBAssert(exp)
+#           define BBAssertDebug BBAssert
 #       else
 #           define BBAssertDebug(exp)
 #       endif
-
-        void Assert(const char* expression, const char* filename, int line);
     }
 
 #endif

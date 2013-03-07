@@ -184,7 +184,7 @@ namespace Bibim
         if (duration < 0.0f)
         {
             duration = 0.0f;
-            for (std::vector<Keyframe<T> >::const_iterator it = keyframes.begin(); it != keyframes.end(); it++)
+            for (typename std::vector<Keyframe<T> >::const_iterator it = keyframes.begin(); it != keyframes.end(); it++)
                 duration += (*it).Duration;
         }
 
@@ -201,7 +201,7 @@ namespace Bibim
     void SequenceTemplate<T, a, b, c, d>::UpdateStartTimes()
     {
         float time = 0.0f;
-        for (std::vector<Keyframe<T> >::iterator it = keyframes.begin(); it != keyframes.end(); it++)
+        for (typename std::vector<Keyframe<T> >::iterator it = keyframes.begin(); it != keyframes.end(); it++)
         {
             (*it).StartTime = time;
             time += (*it).Duration;

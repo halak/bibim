@@ -6,6 +6,8 @@
 
 #   if (defined(BIBIM_PLATFORM_WINDOWS))
 #       include <Bibim/GameFramework.Windows.h>
+#   elif (defined(BIBIM_PLATFORM_ANDROID))
+#       include <Bibim/GameFramework.Android.h>
 #   endif
 
 #endif

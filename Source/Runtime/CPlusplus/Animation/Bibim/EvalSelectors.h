@@ -40,7 +40,7 @@
                     if (condition)
                         condition->Start();
 
-                    for (CaseCollection::const_iterator it = cases.begin(); it != cases.end(); it++)
+                    for (typename CaseCollection::const_iterator it = cases.begin(); it != cases.end(); it++)
                     {
                         if ((*it).Item)
                             (*it).Item->Start();
@@ -55,7 +55,7 @@
                     if (condition)
                         condition->Stop();
 
-                    for (CaseCollection::const_iterator it = cases.begin(); it != cases.end(); it++)
+                    for (typename CaseCollection::const_iterator it = cases.begin(); it != cases.end(); it++)
                     {
                         if ((*it).Item)
                             (*it).Item->Stop();
@@ -70,7 +70,7 @@
                     if (condition)
                         condition->Reset();
 
-                    for (CaseCollection::const_iterator it = cases.begin(); it != cases.end(); it++)
+                    for (typename CaseCollection::const_iterator it = cases.begin(); it != cases.end(); it++)
                     {
                         if ((*it).Item)
                             (*it).Item->Reset();
@@ -85,7 +85,7 @@
                     if (condition)
                     {
                         const float conditionValue = condition->Evaluate(context);
-                        for (CaseCollection::const_iterator it = cases.begin(); it != cases.end(); it++)
+                        for (typename CaseCollection::const_iterator it = cases.begin(); it != cases.end(); it++)
                         {
                             const Case& item = (*it);
                             if (item.Min <= conditionValue && conditionValue <= item.Max)
@@ -104,8 +104,8 @@
                     return T();
                 }
 
-                EvalFloat* GetCondition() const { return source; }
-                void SetCondition(EvalFloat* value) { source = value; }
+                EvalFloat* GetCondition() const { return this->source; }
+                void SetCondition(EvalFloat* value) { this->source = value; }
 
                 const CaseCollection& GetCases() const { return cases; }
                 void SetCases(const CaseCollection& value) { cases = value; }

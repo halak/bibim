@@ -148,6 +148,9 @@
     <Filter Include="03. Game\Audio\Irrklang">
       <UniqueIdentifier>{772e7250-8f6b-422d-8972-9be2545ca70e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Game\Android">
+      <UniqueIdentifier>{f2095f10-bcfc-4f99-847c-9b4036c14a56}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Asset\Bibim\AssetLoadingTask.cpp">
@@ -678,9 +681,6 @@
     <ClCompile Include="Foundation\Bibim\SequenceDictionary.cpp">
       <Filter>01. Foundation\Container</Filter>
     </ClCompile>
-    <ClCompile Include="Foundation\Bibim\Assert.cpp">
-      <Filter>01. Foundation\Diagnostics</Filter>
-    </ClCompile>
     <ClCompile Include="Foundation\Bibim\Log.cpp">
       <Filter>01. Foundation\Diagnostics</Filter>
     </ClCompile>
@@ -768,9 +768,6 @@
     <ClCompile Include="Input\Bibim\Key.cpp">
       <Filter>03. Game\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Clock.Android.cpp">
-      <Filter>03. Game\Time</Filter>
-    </ClCompile>
     <ClCompile Include="Audio\Bibim\AudioDevice.Android.cpp">
       <Filter>03. Game\Audio\Android</Filter>
     </ClCompile>
@@ -797,6 +794,18 @@
     </ClCompile>
     <ClCompile Include="Net\Bibim\HttpClientBase.cpp">
       <Filter>03. Game\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Bibim\GameWindow.Android.cpp">
+      <Filter>03. Game\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Bibim\GameFramework.Android.cpp">
+      <Filter>03. Game\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Time\Bibim\Clock.Android.cpp">
+      <Filter>03. Game\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Bibim\GameFrameworkBase.cpp">
+      <Filter>03. Game\Framework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1340,9 +1349,6 @@
     <ClInclude Include="FileSystem\Bibim\MPQStream.h">
       <Filter>03. Game\FileSystem</Filter>
     </ClInclude>
-    <ClInclude Include="Framework\Bibim\Game.h">
-      <Filter>03. Game\Framework</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\Bibim\GameFramework.h">
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
@@ -1577,6 +1583,15 @@
     </ClInclude>
     <ClInclude Include="Threading\Bibim\ThreadBase.h">
       <Filter>02. System\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\GameFramework.Android.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\GameWindow.Android.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\GameFrameworkBase.h">
+      <Filter>03. Game\Framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2191,6 +2206,15 @@
     </None>
     <None Include="Net\Bibim\HttpClientBase.inl">
       <Filter>03. Game\Net</Filter>
+    </None>
+    <None Include="Framework\Bibim\GameFramework.Android.inl">
+      <Filter>03. Game\Framework</Filter>
+    </None>
+    <None Include="Framework\Bibim\GameWindow.Android.inl">
+      <Filter>03. Game\Framework</Filter>
+    </None>
+    <None Include="Framework\Bibim\GameFrameworkBase.inl">
+      <Filter>03. Game\Framework</Filter>
     </None>
   </ItemGroup>
 </Project>

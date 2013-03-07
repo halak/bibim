@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/FWD.h>
+#include <Bibim/Assert.h>
 
 #if (defined(BIBIM_PLATFORM_WINDOWS))
 #   include <windows.h>
@@ -122,17 +123,18 @@
                                                 unsigned int /*line*/,
                                                 uintptr_t /*pReserved*/)
             {
-                _asm int 3;
+                BBBreak();
             }
 
             static void PurecallHandler()
             {
-                _asm int 3;
+                BBBreak();
             }
 
             static int NewHandler(size_t /*size*/)
             {
-                _asm int 3;
+                BBBreak();
+                return 0;
             }
         }
 
@@ -147,4 +149,9 @@
         }
     }
 
+#   else
+    namespace Bibim
+    {
+        inline void InitializeCrashDump() { }
+    }
 #endif
