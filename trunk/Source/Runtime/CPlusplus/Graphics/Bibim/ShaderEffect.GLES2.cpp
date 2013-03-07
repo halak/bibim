@@ -8,6 +8,7 @@
 #include <Bibim/Numerics.h>
 #include <Bibim/String.h>
 #include <Bibim/Texture2D.GLES2.h>
+#include <Bibim/Log.h>
 
 namespace Bibim
 {
@@ -118,6 +119,8 @@ namespace Bibim
             GLchar messages[256];
             glGetShaderInfoLog(handle, sizeof(messages), 0, &messages[0]);
 
+            Log::Warning("ShaderEffect", messages);
+
             // "Failed to create a vertex shader.";
             glDeleteShader(handle);
             return 0;
@@ -173,6 +176,8 @@ namespace Bibim
         {
             GLchar messages[256];
             glGetProgramInfoLog(programHandle, sizeof(messages), 0, &messages[0]);
+
+            Log::Warning("ShaderEffect", messages);
 
             // "Failed to link program."
             glDeleteProgram(programHandle);

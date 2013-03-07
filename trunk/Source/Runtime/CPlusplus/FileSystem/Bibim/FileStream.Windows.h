@@ -5,7 +5,6 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/Stream.h>
 #   include <Bibim/String.h>
-#   include <vector>
 
     namespace Bibim
     {

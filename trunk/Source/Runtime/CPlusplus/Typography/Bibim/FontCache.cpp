@@ -1,12 +1,16 @@
 ﻿#include <Bibim/PCH.h>
 #include <Bibim/FontCache.h>
 #include <Bibim/FontLibrary.h>
+#include <Bibim/FileStream.h>
+#include <Bibim/Memory.h>
+#include <Bibim/Numerics.h>
 #include <Bibim/Glyph.h>
 #include <Bibim/GlyphTable.h>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_STROKER_H
 #include FT_BITMAP_H
+#include FT_SYSTEM_H
 
 namespace Bibim
 {
@@ -33,6 +37,59 @@ namespace Bibim
     {
         return static_cast<FT_F26Dot6>(value * 65536.0f);
     }
+
+    static unsigned long ReadStream(FT_Stream stream, unsigned long offset, unsigned char*  buffer, unsigned long count)
+    {
+        Stream* internalStream = static_cast<Stream*>(stream->descriptor.pointer);
+
+        internalStream->Seek(offset, Stream::FromBegin);
+
+        if (count > 0)
+            return internalStream->Read(buffer, count);
+        else
+            return 0;
+    }
+
+    static void CloseStream(FT_Stream stream)
+    {
+        delete static_cast<Stream*>(stream->descriptor.pointer);
+        Memory::Free(stream);
+    }
+
+    FT_Error FT_New_Face(FT_Library library, const String& path, FT_Long face_index, FT_Face* aface)
+    {
+        FileStream* internalStream = new FileStream(path, FileStream::ReadOnly);
+        if (internalStream->CanRead() == false)
+        {
+            delete internalStream;
+            return FT_Err_Invalid_Argument;
+        }
+
+        FT_Stream stream = static_cast<FT_Stream>(Memory::Alloc(sizeof(*stream)));;
+        stream->base = nullptr;
+        stream->size = internalStream->GetLength();
+        stream->pos = 0;
+        stream->read = ReadStream;
+        stream->close = CloseStream;
+        stream->pathname.value = 0; // 문서에 디버깅 용도로만 쓰이는거라고 명시되어 있습니다.
+        stream->descriptor.pointer = internalStream;
+        stream->limit = 0;
+        stream->memory = 0;
+        stream->cursor = 0;
+
+        FT_Open_Args  args;
+        args.flags = FT_OPEN_STREAM;
+        args.stream = stream;
+        args.memory_base = 0;
+        args.memory_size = 0;
+        args.pathname = 0;
+        args.driver = 0;
+        args.num_params = 0;
+        args.params = 0;
+
+        return FT_Open_Face(library, &args, face_index, aface);
+    }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -168,19 +225,26 @@ namespace Bibim
         if (separatorIndex != -1)
         {
             faceFilename = parameters.FaceURI.Substring(0, separatorIndex);
-            faceIndex    = atoi(parameters.FaceURI.Substring(separatorIndex + 1).CStr());
+            faceIndex    = Int::Parse(parameters.FaceURI.Substring(separatorIndex + 1).CStr());
         }
 
-        if (FT_Error error = FT_New_Face(static_cast<FT_Library>(library->GetFTLibrary()), faceFilename.CStr(), faceIndex, &primaryFace))
+        if (FT_Error error = FT_New_Face(static_cast<FT_Library>(library->GetFTLibrary()), faceFilename, faceIndex, &primaryFace))
         {
-            const String newFaceFilepath = library->GetOSFontDirectory() + faceFilename;
-            if (FT_New_Face(static_cast<FT_Library>(library->GetFTLibrary()), newFaceFilepath.CStr(), faceIndex, &primaryFace))
+            if (library->GetOSFontDirectory().IsEmpty() == false)
+            {
+                const String newFaceFilepath = library->GetOSFontDirectory() + faceFilename;
+                if (FT_New_Face(static_cast<FT_Library>(library->GetFTLibrary()), newFaceFilepath, faceIndex, &primaryFace))
+                {
+                    // ERROR 처리 (return하지는 않음)
+                }
+            }
+            else
             {
                 // ERROR 처리 (return하지는 않음)
             }
         }
 
-        if (FT_Error error = FT_New_Face(static_cast<FT_Library>(library->GetFTLibrary()), library->GetAlternativeFace().CStr(), 0, &alternativeFace))
+        if (FT_Error error = FT_New_Face(static_cast<FT_Library>(library->GetFTLibrary()), library->GetAlternativeFace(), 0, &alternativeFace))
         {
             // ERROR 처리 (return하지는 않음)
         }

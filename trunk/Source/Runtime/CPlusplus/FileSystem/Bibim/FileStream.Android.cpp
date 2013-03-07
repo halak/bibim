@@ -6,31 +6,28 @@
 
 namespace Bibim
 {
+    static AAssetManager* Assets = nullptr;
+
     FileStream::FileStream(const String& path, AccessMode accessMode)
         : handle(nullptr),
           canRead(false),
           canWrite(false)
     {
-        Log::Information("FileSystem", path.CStr());
+        if (Assets == nullptr || accessMode != ReadOnly)
+            return;
 
-        char mode[3] = { 'r', 'b', '\0' };
-        if (accessMode == ReadOnly)
-            mode[0] = 'r';
-        else if (accessMode == WriteOnly)
-            mode[0] = 'w';
-
-        handle = std::fopen(path.CStr(), mode);
+        String cleanPath = path;
+        cleanPath.Replace('\\', '/');
+        handle = AAssetManager_open(Assets, cleanPath.CStr(), AASSET_MODE_UNKNOWN);
         if (handle == nullptr)
         {
-            Log::Information("FileSystem", "File Open Failed");
             canRead  = false;
             canWrite = false;
             return;
         }
-        Log::Information("FileSystem", "File Open Success");
 
-        canRead  = (accessMode == FileStream::ReadOnly);
-        canWrite = (accessMode == FileStream::WriteOnly);
+        canRead  = (accessMode == ReadOnly);
+        canWrite = (accessMode == WriteOnly);
     }
 
     FileStream::~FileStream()
@@ -42,8 +39,7 @@ namespace Bibim
     {
         if (handle)
         {
-            Flush();
-            std::fclose(handle);
+            AAsset_close(handle);
             handle = nullptr;
         }
     }
@@ -53,24 +49,16 @@ namespace Bibim
         if (handle == nullptr || size <= 0 || canRead == false)
             return 0;
 
-
-        return static_cast<int>(std::fread(buffer, 1, size, handle));
+        return static_cast<int>(AAsset_read(handle, buffer, size));
     }
 
     int FileStream::Write(const void* buffer, int size)
     {
-        if (handle == nullptr || size <= 0 || canWrite == false)
-            return 0;
-
-        return static_cast<int>(std::fwrite(buffer, 1, size, handle));
+        return 0;
     }
 
     void FileStream::Flush()
     {
-        if (handle == nullptr || canWrite == false)
-            return;
-
-        std::fflush(handle);
     }
 
     int FileStream::Seek(int offset, SeekOrigin origin)
@@ -89,24 +77,17 @@ namespace Bibim
                 break;
         }
 
-        const int current = static_cast<int>(std::ftell(handle));
-        std::fseek(handle, offset, seekOrigin);
-        return current;
+        return static_cast<int>(AAsset_seek(handle, static_cast<int>(offset), seekOrigin));
     }
 
     int FileStream::GetPosition()
     {
-        return static_cast<int>(std::ftell(handle));
+        return static_cast<int>(AAsset_seek(handle, 0, SEEK_CUR));
     }
 
     int FileStream::GetLength()
     {
-        const int current = static_cast<int>(std::ftell(handle));
-        std::fseek(handle, 0, SEEK_END);
-        const int length = std::ftell(handle);
-        std::fseek(handle, current, SEEK_SET);
-
-        return length;
+        return static_cast<int>(AAsset_getLength(handle));
     }
 
     bool FileStream::CanRead() const
@@ -122,5 +103,10 @@ namespace Bibim
     bool FileStream::CanSeek() const
     {
         return true;
+    }
+
+    void FileStream::SetAssets(AAssetManager* value)
+    {
+        Assets = value;
     }
 }

@@ -5,6 +5,8 @@
 #include <Bibim/GraphicsDevice.GLES2.h>
 #include <Bibim/PNGReader.h>
 #include <Bibim/Stream.h>
+#include <Bibim/Log.h>
+#include <Bibim/Numerics.h>
 
 namespace Bibim
 {

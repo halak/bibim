@@ -106,7 +106,10 @@ namespace Bibim
 
     int FileStream::GetLength()
     {
-        return static_cast<int>(::GetFileSize(handle, nullptr));
+        if (handle != INVALID_HANDLE_VALUE)
+            return static_cast<int>(::GetFileSize(handle, nullptr));
+        else
+            return 0;
     }
 
     bool FileStream::CanRead() const
