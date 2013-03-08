@@ -145,9 +145,6 @@
     <Filter Include="03. Game\Audio\Irrklang">
       <UniqueIdentifier>{772e7250-8f6b-422d-8972-9be2545ca70e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Game\Android">
-      <UniqueIdentifier>{f2095f10-bcfc-4f99-847c-9b4036c14a56}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Game\UI\Visitors">
       <UniqueIdentifier>{b6559376-a07f-4aa8-b57e-148201ac87c1}</UniqueIdentifier>
     </Filter>
@@ -786,9 +783,6 @@
     <ClCompile Include="Audio\Bibim\SoundFX.Irrklang.cpp">
       <Filter>03. Game\Audio\Irrklang</Filter>
     </ClCompile>
-    <ClCompile Include="References\ConvertUTF\ConvertUTF.cpp">
-      <Filter>04. References</Filter>
-    </ClCompile>
     <ClCompile Include="Net\Bibim\HttpClient.Curl.cpp">
       <Filter>03. Game\Net</Filter>
     </ClCompile>
@@ -806,6 +800,12 @@
     </ClCompile>
     <ClCompile Include="Framework\Bibim\GameFrameworkBase.cpp">
       <Filter>03. Game\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Bibim\Mouse.Android.cpp">
+      <Filter>03. Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Bibim\Keyboard.Android.cpp">
+      <Filter>03. Game\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1570,9 +1570,6 @@
     </ClInclude>
     <ClInclude Include="Audio\Bibim\SoundFX.h">
       <Filter>03. Game\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="References\ConvertUTF\ConvertUTF.h">
-      <Filter>04. References</Filter>
     </ClInclude>
     <ClInclude Include="Net\Bibim\HttpClient.Curl.h">
       <Filter>03. Game\Net</Filter>

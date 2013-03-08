@@ -25,6 +25,9 @@
                 inline Window* GetWindow() const;
                 inline void SetWindow(Window* value);
 
+                void keyDown(Key::Code code);//MOBILE
+                void keyUp(Key::Code code);//MOBILE
+
             private:
                 void AllowDefaultKeys();
 

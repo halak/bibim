@@ -6,7 +6,7 @@
 #include <Bibim/Glyph.h>
 #include <Bibim/GlyphTable.h>
 #include <Bibim/String.h>
-#include <ConvertUTF.h>
+#include <utf8.h>
 
 namespace Bibim
 {
@@ -52,7 +52,7 @@ namespace Bibim
     int TypingContext::GetLength(int code)
     {
         const wchar_t wideCharacter = static_cast<wchar_t>(code);
-        return GetUTF8Length(wideCharacter);
+        return utf8::utf8_length(wideCharacter);
     }
 
     bool TypingContext::MoveNext()

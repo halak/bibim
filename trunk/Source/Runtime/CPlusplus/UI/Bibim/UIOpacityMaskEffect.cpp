@@ -68,7 +68,7 @@ namespace Bibim
                     return nullptr;
             default:
                 BBBreak();
-                break;
+                return nullptr;
         }
     }
 

@@ -72,8 +72,8 @@ namespace utf8
     template <typename octet_iterator>
     octet_iterator append(uint32_t cp, octet_iterator result)
     {
-        if (!utf8::internal::is_code_point_valid(cp))
-            throw invalid_code_point(cp);
+        //if (!utf8::internal::is_code_point_valid(cp))
+        //    throw invalid_code_point(cp);
 
         if (cp < 0x80)                        // one octet
             *(result++) = static_cast<uint8_t>(cp);
@@ -142,13 +142,16 @@ namespace utf8
             case internal::UTF8_OK :
                 break;
             case internal::NOT_ENOUGH_ROOM :
-                throw not_enough_room();
+                // throw not_enough_room();
+                break;
             case internal::INVALID_LEAD :
             case internal::INCOMPLETE_SEQUENCE :
             case internal::OVERLONG_SEQUENCE :
-                throw invalid_utf8(*it);
+                // throw invalid_utf8(*it);
+                break;
             case internal::INVALID_CODE_POINT :
-                throw invalid_code_point(cp);
+                // throw invalid_code_point(cp);
+                break;
         }
         return cp;
     }
@@ -214,16 +217,16 @@ namespace utf8
                     uint32_t trail_surrogate = utf8::internal::mask16(*start++);
                     if (utf8::internal::is_trail_surrogate(trail_surrogate))
                         cp = (cp << 10) + trail_surrogate + internal::SURROGATE_OFFSET;
-                    else
-                        throw invalid_utf16(static_cast<uint16_t>(trail_surrogate));
+                    // else
+                    //     throw invalid_utf16(static_cast<uint16_t>(trail_surrogate));
                 }
-                else
-                    throw invalid_utf16(static_cast<uint16_t>(cp));
+                // else
+                //     throw invalid_utf16(static_cast<uint16_t>(cp));
 
             }
             // Lone trail surrogate
-            else if (utf8::internal::is_trail_surrogate(cp))
-                throw invalid_utf16(static_cast<uint16_t>(cp));
+            // else if (utf8::internal::is_trail_surrogate(cp))
+            //    throw invalid_utf16(static_cast<uint16_t>(cp));
 
             result = utf8::append(cp, result);
         }
@@ -319,6 +322,14 @@ namespace utf8
           return temp;
       }
     }; // class iterator
+
+    inline int utf8_length(wchar_t c)
+    {
+        int length = 0;
+        internal::utf8_bytes_counter counter(&length);
+        utf16to8(&c, &c + 1, counter);
+        return length;
+    }
 
 } // namespace utf8
 
