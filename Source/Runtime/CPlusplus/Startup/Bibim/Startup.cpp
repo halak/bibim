@@ -8,7 +8,6 @@ namespace Bibim
     {
         InitializeCrashDump();
 
-        /*
         GameAssetFactory::AddEntry<EvalBoard>();
         GameAssetFactory::AddEntry<BoolSequence>();
         GameAssetFactory::AddEntry<ShortIntSequence>();
@@ -26,7 +25,6 @@ namespace Bibim
         GameAssetFactory::AddEntry<Vector3Sequence>();
         GameAssetFactory::AddEntry<Vector4Sequence>();
         GameAssetFactory::AddEntry<GameAssetSequence>();
-        */
 
         GameAssetFactory::AddEntry<Image>();
         GameAssetFactory::AddEntry<ImageSet>();
@@ -39,7 +37,6 @@ namespace Bibim
         GameAssetFactory::AddEntry<UILayout>();
         GameAssetFactory::SortEntries();
 
-        /*
         GameComponentFactory::AddEntry<EvalBoolConstant>();
         GameComponentFactory::AddEntry<EvalShortIntConstant>();
         GameComponentFactory::AddEntry<EvalIntConstant>();
@@ -225,7 +222,7 @@ namespace Bibim
         GameComponentFactory::AddEntry<EaseOutElasticCurve>();
         GameComponentFactory::AddEntry<EaseInOutElasticCurve>();
         GameComponentFactory::AddEntry<OscillationCurve>();
-
+        
         GameComponentFactory::AddEntry<UIAfterImageEffect>();
         GameComponentFactory::AddEntry<UISineCurveEffect>();
         GameComponentFactory::AddEntry<UITintEffect>();
@@ -246,13 +243,13 @@ namespace Bibim
         GameComponentFactory::AddEntry<UIImage>();
         GameComponentFactory::AddEntry<UISprite>();
         GameComponentFactory::AddEntry<UIVideo>();
-        GameComponentFactory::AddEntry<UISpark>();
+        // GameComponentFactory::AddEntry<UISpark>();
         GameComponentFactory::SortEntries();
-
+        
         BBBeginScriptNativeFunction()
             BBScriptNativeFunction(ScriptLibrary::IO::Print)
         BBEndScriptNativeFunction();
-        */
+        
 
         Key::Setup();
     }

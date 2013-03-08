@@ -277,6 +277,19 @@ namespace internal
         return utf8::internal::validate_next(it, end, ignored);
     }
 
+    struct utf8_bytes_counter
+    {
+        int* shared;
+        char dummy;
+
+        utf8_bytes_counter(int* shared) : shared(shared) { }
+        ~utf8_bytes_counter() { }
+
+        char&               operator *  ()    { return dummy; }
+        utf8_bytes_counter& operator ++ ()    { (*shared)++; return *this; }
+        utf8_bytes_counter& operator ++ (int) { (*shared)++; return *this; }
+    };
+
 } // namespace internal
 
     /// The library API - functions intended to be called by the users

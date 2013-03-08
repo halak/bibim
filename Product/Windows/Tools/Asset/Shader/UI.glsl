@@ -27,34 +27,34 @@ void main()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-varying vec4 fColor;
+varying highp vec4 fColor;
 
 #if defined(FX_COLORMATRIX)
-uniform vec4 CMRed;
-uniform vec4 CMGreen;
-uniform vec4 CMBlue;
+uniform highp vec4 CMRed;
+uniform highp vec4 CMGreen;
+uniform highp vec4 CMBlue;
 #endif
 
 #if defined(FX_OPACITYMAPFAN) || defined(FX_OPACITYMAPBAR)
-uniform vec4 OMValues;
+uniform highp vec4 OMValues;
 #endif
 
 uniform sampler2D MainSampler;
-varying vec2 fTexCoord1;
+varying highp vec2 fTexCoord1;
 
 #if defined(MASKTEXTURE)
 uniform sampler2D MaskSampler;
-varying vec2 fTexCoord2;
+varying highp vec2 fTexCoord2;
 #endif
 
 void main()
 {
 #if defined(INPUT_COLOR)
-    vec4 result = fColor;
+    highp vec4 result = fColor;
 #elif defined(INPUT_COLORTEXTURE)
-    vec4 result = texture(MainSampler, fTexCoord1) * fColor;
+    highp vec4 result = texture2D(MainSampler, fTexCoord1) * fColor;
 #elif defined(INPUT_ALPHATEXTURE)
-    vec4 result = vec4(fColor.rgb, texture(MainSampler, fTexCoord1).a * fColor.a);
+    highp vec4 result = vec4(fColor.rgb, texture2D(MainSampler, fTexCoord1).a * fColor.a);
 #endif
 
 #if defined(FX_COLORMATRIX)
@@ -68,7 +68,7 @@ void main()
 #endif
 
 #if defined(MASKTEXTURE)
-    lowp float mask = texture(MaskSampler, fTexCoord2).a;
+    lowp float mask = texture2D(MaskSampler, fTexCoord2).a;
 #endif
 
 #if defined(FX_OPACITYMAP)

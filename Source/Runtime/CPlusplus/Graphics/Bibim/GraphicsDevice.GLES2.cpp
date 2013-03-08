@@ -13,7 +13,7 @@ namespace Bibim
 {
     GraphicsDevice::GraphicsDevice()
     {
-        Construct(1024, 768);
+        Construct(720, 1184);
     }
 
     GraphicsDevice::GraphicsDevice(int resolutionWidth, int resolutionHeight)

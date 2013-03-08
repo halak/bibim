@@ -19,6 +19,20 @@ namespace Bibim
     {
     }
 
+    void Keyboard::keyDown(Key::Code code)//MOBILE
+    {
+        const int index = static_cast<int>(static_cast<int>(code) / (sizeof(int) * 8));
+        const int bit   = static_cast<int>(static_cast<int>(code) % (sizeof(int) * 8));
+        state.Keys[index] |= (0x80000000 >> bit);
+    }
+    
+    void Keyboard::keyUp(Key::Code code)//MOBILE
+    {
+        const int index = static_cast<int>(static_cast<int>(code) / (sizeof(int) * 8));
+        const int bit   = static_cast<int>(static_cast<int>(code) % (sizeof(int) * 8));
+        state.Keys[index] &= ~(0x80000000 >> bit);
+    }
+
     void Keyboard::AllowDefaultKeys()
     {
         for (int i = 0; i < sizeof(allowedKeys) / sizeof(allowedKeys[0]); i++)

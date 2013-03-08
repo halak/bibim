@@ -3,7 +3,7 @@
 #include <Bibim/Assert.h>
 #include <Bibim/Font.h>
 #include <Bibim/Glyph.h>
-#include <ConvertUTF.h>
+#include <utf8.h>
 
 namespace Bibim
 {
@@ -53,7 +53,7 @@ namespace Bibim
         {
             const int code = regularGlyphs[i]->GetCode();
             const wchar_t wideCharacter = static_cast<wchar_t>(code);
-            result += GetUTF8Length(wideCharacter);
+            result += utf8::utf8_length(wideCharacter);
         }
 
         return result;
@@ -70,15 +70,8 @@ namespace Bibim
             return;
 
         std::vector<wchar_t> wideCharacters;
-        wideCharacters.resize(text.GetLength(), 0);
-        const UTF8* source = reinterpret_cast<const UTF8*>(text.CStr());
-        UTF16* target = reinterpret_cast<UTF16*>(&wideCharacters[0]);
-        ConvertUTF8toUTF16(&source,
-                           source + text.GetLength(),
-                           &target,
-                           target + wideCharacters.size(),
-                           strictConversion);
-        wideCharacters.resize(target - reinterpret_cast<UTF16*>(&wideCharacters[0]));
+        wideCharacters.reserve(text.GetLength());
+        utf8::utf8to16(&text.CStr()[0], &text.CStr()[text.GetLength()], std::back_inserter(wideCharacters));
 
         const float spacing = font->GetSpacing();
         regularGlyphs.reserve(wideCharacters.size());
