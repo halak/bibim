@@ -8,7 +8,7 @@ using Bibim.Graphics;
 namespace Bibim.UI.Visuals
 {
     [ClassID('U', 'I', 'M', 'G')]
-    public sealed class UIImage : UIVisual
+    public class UIImage : UIVisual
     {
         #region Fields
         #endregion

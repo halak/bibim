@@ -24,6 +24,7 @@
                     AbsoluteSize,
                     RelativeSize,
                     ContentSize,
+                    AdjustiveSize,
                 };
 
                 enum AnchorPoint

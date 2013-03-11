@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C++ Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcurl", "lib\vc10libcurl.vcxproj", "{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "curlsrc", "src\vc10curlsrc.vcxproj", "{2F999049-53FA-4E02-930D-A2457DC22CC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		DLL Debug|Android = DLL Debug|Android
+		DLL Debug|Win32 = DLL Debug|Win32
+		DLL Release|Android = DLL Release|Android
+		DLL Release|Win32 = DLL Release|Win32
+		LIB Debug|Android = LIB Debug|Android
+		LIB Debug|Win32 = LIB Debug|Win32
+		LIB Release|Android = LIB Release|Android
+		LIB Release|Win32 = LIB Release|Win32
+		using libcurl DLL Debug|Android = using libcurl DLL Debug|Android
+		using libcurl DLL Debug|Win32 = using libcurl DLL Debug|Win32
+		using libcurl DLL Release|Android = using libcurl DLL Release|Android
+		using libcurl DLL Release|Win32 = using libcurl DLL Release|Win32
+		using libcurl LIB Debug|Android = using libcurl LIB Debug|Android
+		using libcurl LIB Debug|Win32 = using libcurl LIB Debug|Win32
+		using libcurl LIB Release|Android = using libcurl LIB Release|Android
+		using libcurl LIB Release|Win32 = using libcurl LIB Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.DLL Debug|Android.ActiveCfg = DLL Debug|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.DLL Debug|Android.Build.0 = DLL Debug|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.DLL Debug|Android.Deploy.0 = DLL Debug|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.DLL Debug|Win32.ActiveCfg = DLL Debug|Win32
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.DLL Debug|Win32.Build.0 = DLL Debug|Win32
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.DLL Release|Android.ActiveCfg = DLL Release|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.DLL Release|Android.Build.0 = DLL Release|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.DLL Release|Android.Deploy.0 = DLL Release|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.DLL Release|Win32.ActiveCfg = DLL Release|Win32
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.DLL Release|Win32.Build.0 = DLL Release|Win32
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.LIB Debug|Android.ActiveCfg = LIB Debug|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.LIB Debug|Win32.ActiveCfg = LIB Debug|Win32
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.LIB Debug|Win32.Build.0 = LIB Debug|Win32
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.LIB Release|Android.ActiveCfg = LIB Release|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.LIB Release|Android.Build.0 = LIB Release|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.LIB Release|Android.Deploy.0 = LIB Release|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.LIB Release|Win32.ActiveCfg = LIB Release|Win32
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.LIB Release|Win32.Build.0 = LIB Release|Win32
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl DLL Debug|Android.ActiveCfg = DLL Debug|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl DLL Debug|Android.Build.0 = DLL Debug|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl DLL Debug|Android.Deploy.0 = DLL Debug|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl DLL Debug|Win32.ActiveCfg = DLL Debug|Win32
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl DLL Debug|Win32.Build.0 = DLL Debug|Win32
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl DLL Release|Android.ActiveCfg = DLL Release|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl DLL Release|Android.Build.0 = DLL Release|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl DLL Release|Android.Deploy.0 = DLL Release|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl DLL Release|Win32.ActiveCfg = DLL Release|Win32
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl DLL Release|Win32.Build.0 = DLL Release|Win32
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl LIB Debug|Android.ActiveCfg = LIB Debug|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl LIB Debug|Android.Build.0 = LIB Debug|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl LIB Debug|Android.Deploy.0 = LIB Debug|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl LIB Debug|Win32.ActiveCfg = LIB Debug|Win32
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl LIB Debug|Win32.Build.0 = LIB Debug|Win32
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl LIB Release|Android.ActiveCfg = LIB Release|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl LIB Release|Android.Build.0 = LIB Release|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl LIB Release|Android.Deploy.0 = LIB Release|Android
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl LIB Release|Win32.ActiveCfg = LIB Release|Win32
+		{DE43C3E1-4305-48CE-A9AF-4DFAC5F8DD54}.using libcurl LIB Release|Win32.Build.0 = LIB Release|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.DLL Debug|Android.ActiveCfg = using libcurl LIB Release|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.DLL Debug|Win32.ActiveCfg = using libcurl DLL Debug|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.DLL Debug|Win32.Build.0 = using libcurl DLL Debug|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.DLL Release|Android.ActiveCfg = using libcurl LIB Release|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.DLL Release|Win32.ActiveCfg = using libcurl DLL Release|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.DLL Release|Win32.Build.0 = using libcurl DLL Release|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.LIB Debug|Android.ActiveCfg = using libcurl LIB Release|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.LIB Debug|Win32.ActiveCfg = using libcurl LIB Debug|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.LIB Debug|Win32.Build.0 = using libcurl LIB Debug|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.LIB Release|Android.ActiveCfg = using libcurl LIB Release|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.LIB Release|Win32.ActiveCfg = using libcurl LIB Release|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.LIB Release|Win32.Build.0 = using libcurl LIB Release|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.using libcurl DLL Debug|Android.ActiveCfg = using libcurl DLL Debug|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.using libcurl DLL Debug|Win32.ActiveCfg = using libcurl DLL Debug|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.using libcurl DLL Debug|Win32.Build.0 = using libcurl DLL Debug|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.using libcurl DLL Release|Android.ActiveCfg = using libcurl DLL Release|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.using libcurl DLL Release|Win32.ActiveCfg = using libcurl DLL Release|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.using libcurl DLL Release|Win32.Build.0 = using libcurl DLL Release|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.using libcurl LIB Debug|Android.ActiveCfg = using libcurl LIB Debug|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.using libcurl LIB Debug|Win32.ActiveCfg = using libcurl LIB Debug|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.using libcurl LIB Debug|Win32.Build.0 = using libcurl LIB Debug|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.using libcurl LIB Release|Android.ActiveCfg = using libcurl LIB Release|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.using libcurl LIB Release|Win32.ActiveCfg = using libcurl LIB Release|Win32
+		{2F999049-53FA-4E02-930D-A2457DC22CC4}.using libcurl LIB Release|Win32.Build.0 = using libcurl LIB Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -22,6 +22,7 @@
                 inline String(const String& original, int startIndex);
                 inline String(const String& original, int startIndex, int length);
                 inline ~String();
+                static String CFormat(const char* format, ...);
 
                 void Append(const char* s);
                 void Append(const char* s, int length);
@@ -197,6 +198,8 @@
                 struct AppendTag {};
                 String(AppendTag, const char* s1, int length1, const char* s2, int length2);
 
+                explicit String(int length);
+
                 struct InsertTag {};
                 inline void Insert(int index, const char* s, int length);
 
@@ -219,11 +222,13 @@
                     inline StringBuffer(const StringBuffer& original);
                     StringBuffer(EmptyStringTag);
                     StringBuffer(InsertTag, const char* s1, int length1, int index, const char* s2, int length2);
+                    explicit StringBuffer(int length);
                     inline virtual ~StringBuffer();
 
                     inline StringBuffer& operator = (const StringBuffer& right);
 
                     void Initialize(const char* s, int length);
+                    void UpdateHashCode();
 
                     char* s;
                     int length;

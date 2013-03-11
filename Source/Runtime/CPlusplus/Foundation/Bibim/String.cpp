@@ -2,6 +2,7 @@
 #include <Bibim/String.h>
 #include <Bibim/Math.h>
 #include <ctype.h>
+#include <cstdarg>
 
 namespace Bibim
 {
@@ -42,6 +43,33 @@ namespace Bibim
             else
                 buffer.Reset(new StringBuffer(s2, length2));
         }
+    }
+
+    String::String(int length)
+        : buffer(new StringBuffer(length))
+    {
+    }
+
+    String String::CFormat(const char* format, ...)
+    {
+        String result = String::Empty;
+
+        va_list args;
+        va_start(args, format);
+#       if (defined(BIBIM_COMPILER_MSVC))
+        const int length = _vscprintf(format, args);
+#       elif (defined(BIBIM_COMPILER_GCC))
+        const int length = vsnprintf(nullptr, 0, format, args);
+#       endif
+        if (length > 0)
+        {
+            result = String(length);
+            vsprintf(result.buffer->s, format, args);
+            result.buffer->UpdateHashCode();
+        }
+        va_end(args);
+
+        return result;
     }
 
     void String::Insert(int index, const char* s, int length)
@@ -727,6 +755,14 @@ namespace Bibim
         BBAssertDebug(destination - this->s == this->length);
         (*destination) = '\0';
     }
+
+    String::StringBuffer::StringBuffer(int length)
+        : s(new char [length + 1]),
+          length(length),
+          hashCode(0)
+    {
+        s[length] = '\0';
+    }
     
     void String::StringBuffer::Initialize(const char* s, int length)
     {
@@ -737,12 +773,22 @@ namespace Bibim
         this->hashCode = 0;
         char* destination = this->s;
         for (int i = 0; i < length; i++, destination++)
-        {
             (*destination) = s[i];
-            this->hashCode += static_cast<int>(s[i]) << i;
-        }
  
         BBAssertDebug(destination - this->s == this->length);
         (*destination) = '\0';
+
+        UpdateHashCode();
+    }
+
+    void String::StringBuffer::UpdateHashCode()
+    {
+        static const int HASHING_CHARACTER_COUNT = 64;
+
+        const int hashingCharacters = length < HASHING_CHARACTER_COUNT ? length : HASHING_CHARACTER_COUNT;
+
+        hashCode = 0;
+        for (int i = 0; i < hashingCharacters; i++)
+            hashCode += static_cast<int>(s[i]) << i;
     }
 }

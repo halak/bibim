@@ -135,7 +135,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -157,7 +157,7 @@
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -176,7 +176,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -198,7 +198,7 @@
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -217,7 +217,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
     <ClCompile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
@@ -317,11 +317,17 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Net\Bibim\HttpClient.Android.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Net\Bibim\HttpClient.Curl.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Net\Bibim\HttpClientBase.cpp" />
     <ClCompile Include="Threading\Bibim\Lock.Unix.cpp">
@@ -753,11 +759,17 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Net\Bibim\HttpClient.Android.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Net\Bibim\HttpClient.Curl.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Net\Bibim\HttpClientBase.h" />
     <ClInclude Include="Threading\Bibim\Lock.Unix.h">
@@ -1185,11 +1197,17 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </None>
+    <None Include="Net\Bibim\HttpClient.Android.inl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+    </None>
     <None Include="Net\Bibim\HttpClient.Curl.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </None>
     <None Include="Net\Bibim\HttpClientBase.inl" />
     <None Include="Typography\Bibim\Font.inl" />

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.Xna.Framework;
 using Bibim.Graphics;
 using Bibim.UI;
@@ -12,6 +13,7 @@ using Bibim.UI.Events;
 using Bibim.UI.Visuals;
 using Image = Bibim.Graphics.Image;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
+using GDIGraphics = System.Drawing.Graphics;
 using GDIColor = System.Drawing.Color;
 
 namespace Bibim.Asset.Pipeline.Recipes
@@ -74,7 +76,8 @@ namespace Bibim.Asset.Pipeline.Recipes
 
             string name;
             string type;
-            ParseLayerName(layer.Name, out name, out type);
+            Dictionary<string, string> args;
+            ParseLayerName(layer.Name, out name, out type, out args);
 
             if (layer.IsGroup == false)
             {
@@ -87,6 +90,55 @@ namespace Bibim.Asset.Pipeline.Recipes
                     label.IsPickable = defaultPickable;
                     window.AddChild(label);
                     Process(label, layer);
+                }
+                else if (string.Compare(type, "9Patch", true) == 0 ||
+                    string.Compare(type, "NinePatch", true) == 0 ||
+                    string.Compare(type, "9P", true) == 0)
+                {
+                    UIWindow childWindow = new UIWindow();
+                    childWindow.Name = name;
+                    childWindow.IsPickable = defaultPickable;
+                    window.AddChild(childWindow);
+                    Process((UIPanel)childWindow, layer);
+
+                    int leftBorder = int.Parse(args["0"] ?? "0");
+                    int topBorder = int.Parse(args["1"] ?? "0");
+                    int rightBorder = int.Parse(args["2"] ?? "0");
+                    int bottomBorder = int.Parse(args["3"] ?? "0");
+
+                    int horizontalBorder = leftBorder + rightBorder;
+                    int verticalBorder = topBorder + bottomBorder;
+
+                    int bw = layer.Bitmap.Width;
+                    int bh = layer.Bitmap.Height;
+                    Bitmap leftTopImage = ClipBitmap(layer.Bitmap, new Rectangle(0, 0, leftBorder, topBorder));
+                    Bitmap rightTopImage = ClipBitmap(layer.Bitmap, new Rectangle(bw - rightBorder, 0, rightBorder, topBorder));
+                    Bitmap leftBottomImage = ClipBitmap(layer.Bitmap, new Rectangle(0, bh - bottomBorder, leftBorder, bottomBorder));
+                    Bitmap rightBottomImage = ClipBitmap(layer.Bitmap, new Rectangle(bw - rightBorder, bh - bottomBorder, rightBorder, bottomBorder));
+                    Bitmap leftImage = ClipBitmap(layer.Bitmap, new Rectangle(0, topBorder, leftBorder, bh - verticalBorder));
+                    Bitmap topImage = ClipBitmap(layer.Bitmap, new Rectangle(leftBorder, 0, bw - horizontalBorder, topBorder));
+                    Bitmap rightImage = ClipBitmap(layer.Bitmap, new Rectangle(bw - rightBorder, topBorder, rightBorder, bh - verticalBorder));
+                    Bitmap bottomImage = ClipBitmap(layer.Bitmap, new Rectangle(leftBorder, bh - bottomBorder, bw - horizontalBorder, bottomBorder));
+                    Bitmap centerImage = ClipBitmap(layer.Bitmap, new Rectangle(leftBorder, topBorder, 16, 16));
+
+                    var images = new List<UIImage>(9);
+                    images.Add(CreateNinePatchPart(leftTopImage, UIAnchorPoint.LeftTop, new Vector2(0.0f, 0.0f), 0, 0, leftBorder, topBorder, UISizeMode.Absolute, UISizeMode.Absolute));
+                    images.Add(CreateNinePatchPart(rightTopImage, UIAnchorPoint.RightTop, new Vector2(1.0f, 0.0f), 0, 0, rightBorder, topBorder, UISizeMode.Absolute, UISizeMode.Absolute));
+                    images.Add(CreateNinePatchPart(leftBottomImage, UIAnchorPoint.LeftBottom, new Vector2(0.0f, 1.0f), 0, 0, leftBorder, bottomBorder, UISizeMode.Absolute, UISizeMode.Absolute));
+                    images.Add(CreateNinePatchPart(rightBottomImage, UIAnchorPoint.RightBottom, new Vector2(1.0f, 1.0f), 0, 0, rightBorder, bottomBorder, UISizeMode.Absolute, UISizeMode.Absolute));
+
+                    images.Add(CreateNinePatchPart(leftImage, UIAnchorPoint.LeftTop, new Vector2(0.0f, 0.0f), 0, topBorder, leftBorder, -verticalBorder, UISizeMode.Absolute, UISizeMode.Adjustive)); // left
+                    images.Add(CreateNinePatchPart(topImage, UIAnchorPoint.LeftTop, new Vector2(0.0f, 0.0f), leftBorder, 0, -horizontalBorder, topBorder, UISizeMode.Adjustive, UISizeMode.Absolute)); // top
+                    images.Add(CreateNinePatchPart(rightImage, UIAnchorPoint.RightTop, new Vector2(1.0f, 0.0f), 0, topBorder, rightBorder, -verticalBorder, UISizeMode.Absolute, UISizeMode.Adjustive)); // right
+                    images.Add(CreateNinePatchPart(bottomImage, UIAnchorPoint.LeftBottom, new Vector2(0.0f, 1.0f), leftBorder, 0, -horizontalBorder, bottomBorder, UISizeMode.Adjustive, UISizeMode.Absolute)); // bototm
+
+                    images.Add(CreateNinePatchPart(centerImage, UIAnchorPoint.LeftTop, new Vector2(0.0f, 0.0f), leftBorder, topBorder, -horizontalBorder, -verticalBorder, UISizeMode.Adjustive, UISizeMode.Adjustive));
+
+                    foreach (var item in images)
+                    {
+                        if (item != null)
+                            childWindow.AddChild(item);
+                    }
                 }
                 else
                 {
@@ -307,7 +359,31 @@ namespace Bibim.Asset.Pipeline.Recipes
                 AddChildTo(window, layer.SubLayers[i], true);
         }
 
-        private static void ParseLayerName(string layerName, out string name, out string type)
+        private UIImage CreateNinePatchPart(Bitmap bitmap, UIAnchorPoint anchor, Vector2 origin, int x, int y, int width, int height, UISizeMode widthMode, UISizeMode heightMode)
+        {
+            if (bitmap == null)
+                return null;
+
+            UIImage image = new UIImage();
+            image.AnchorPoint = anchor;
+            image.Origin = origin;
+            image.X = (float)x;
+            image.Y = (float)y;
+            image.XMode = UIPositionMode.Absolute;
+            image.YMode = UIPositionMode.Absolute;
+            image.Width = (float)width;
+            image.Height = (float)height;
+            image.WidthMode = widthMode;
+            image.HeightMode = heightMode;
+            image.Source = new Image(string.Empty, Rectangle.Empty)
+            {
+                Tag = new ImageCookingTag(bitmap)
+            };
+
+            return image;
+        }
+
+        private static void ParseLayerName(string layerName, out string name, out string type, out Dictionary<string, string> args)
         {
             layerName = layerName.Trim();
             int index = layerName.LastIndexOf(':');
@@ -315,11 +391,37 @@ namespace Bibim.Asset.Pipeline.Recipes
             {
                 name = layerName.Substring(1);
                 type = string.Empty;
+                args = new Dictionary<string, string>();
             }
             else
             {
                 name = layerName.Substring(1, index - 1).Trim();
                 type = layerName.Substring(index + 1).Trim();
+                args = new Dictionary<string,string>();
+
+                int argsStart = type.IndexOf('(');
+                if (argsStart != -1)
+                {
+                    argsStart += 1;
+                    int argsEnd = type.LastIndexOf(')');
+                    string argsText = null;
+                    if (argsEnd != -1)
+                        argsText = type.Substring(argsStart, argsEnd - argsStart);
+                    else
+                        argsText = type.Substring(argsStart);
+
+                    string[] argsArray = argsText.Split(',');
+                    for (int i = 0; i < argsArray.Length; i++)
+                    {
+                        string value = null;
+                        if (argsArray[i].Equals('_') == false)
+                            value = argsArray[i];
+
+                        args[i.ToString()] = value;
+                    }
+
+                    type = type.Substring(0, argsStart - 1).Trim();
+                }
             }
         }
 
@@ -427,6 +529,23 @@ namespace Bibim.Asset.Pipeline.Recipes
             }
 
             return new BitMask(width, height, pitch, buffer);
+        }
+
+        public static Bitmap ClipBitmap(Bitmap source, Rectangle rectangle)
+        {
+            if (rectangle.Width == 0 || rectangle.Height == 0)
+                return null;
+
+            var result = new Bitmap(rectangle.Width, rectangle.Height);
+            using (var g = GDIGraphics.FromImage(result))
+            {
+                g.DrawImage(source,
+                            new System.Drawing.Rectangle(0, 0, result.Width, result.Height),
+                            new System.Drawing.Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height),
+                            GraphicsUnit.Pixel);
+            }
+
+            return result;
         }
     }
 }

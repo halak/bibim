@@ -191,9 +191,7 @@ namespace Bibim
 
     String Float::ToString(float value)
     {
-        char result[64];
-        sprintf(result, "%f", value);
-        return result;
+        return String::CFormat("%f", value);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -211,8 +209,6 @@ namespace Bibim
 
     String Double::ToString(double value)
     {
-        char result[64];
-        sprintf(result, "%.lf", value);
-        return result;
+        return String::CFormat("%.lf", value);
     }
 }
