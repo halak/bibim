@@ -6,8 +6,6 @@
 
 #   if (defined(BIBIM_PLATFORM_WINDOWS))
 #       include <Bibim/HttpClient.Windows.h>
-#   elif (defined(BIBIM_PLATFORM_ANDROID))
-#       include <Bibim/HttpClient.Curl.h>
 #   else
 #       include <Bibim/HttpClient.Curl.h>
 #   endif
