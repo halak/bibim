@@ -20,6 +20,7 @@ namespace Bibim.UI.Visuals
         Absolute,
         Relative,
         Content,
+        Adjustive,
     }
 
     public enum UIAnchorPoint : byte
@@ -69,7 +70,7 @@ namespace Bibim.UI.Visuals
             get { return width; }
             set
             {
-                width = Math.Max(value, 0.0f);
+                width = value;
             }
         }
 
@@ -78,7 +79,7 @@ namespace Bibim.UI.Visuals
             get { return height; }
             set
             {
-                height = Math.Max(value, 0.0f);
+                height = value;
             }
         }
 

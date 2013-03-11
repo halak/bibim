@@ -82,7 +82,7 @@
 
     void UIVisual::SetWidth(float value)
     {
-        width = value > 0.0f ? value : 0.0f;
+        width = value;
     }
 
     float UIVisual::GetHeight() const
@@ -92,7 +92,7 @@
 
     void UIVisual::SetHeight(float value)
     {
-        height = value > 0.0f ? value : 0.0f;
+        height = value;
     }
 
     Vector2 UIVisual::GetSize() const

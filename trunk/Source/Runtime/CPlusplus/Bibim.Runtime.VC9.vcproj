@@ -42,8 +42,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
+				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -108,8 +108,8 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -170,8 +170,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
+				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -236,8 +236,8 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;"
+				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -2711,20 +2711,236 @@
 				Name="Net"
 				>
 				<File
+					RelativePath=".\Net\Bibim\HttpClient.Curl.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Net\Bibim\HttpClient.Curl.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Net\Bibim\HttpClient.Curl.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Net\Bibim\HttpClient.h"
 					>
 				</File>
 				<File
+					RelativePath=".\Net\Bibim\HttpClient.Null.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug.GLES2|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release.GLES2|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Net\Bibim\HttpClient.Null.h"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug.GLES2|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release.GLES2|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Net\Bibim\HttpClient.Null.inl"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug.GLES2|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release.GLES2|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\Net\Bibim\HttpClient.Windows.cpp"
 					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug.GLES2|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release.GLES2|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\Net\Bibim\HttpClient.Windows.h"
 					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug.GLES2|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release.GLES2|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\Net\Bibim\HttpClient.Windows.inl"
 					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug.GLES2|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release.GLES2|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+						/>
+					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\Net\Bibim\HttpClientBase.cpp"
@@ -3271,14 +3487,6 @@
 		<Filter
 			Name="04. References"
 			>
-			<File
-				RelativePath=".\References\ConvertUTF\ConvertUTF.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\References\ConvertUTF\ConvertUTF.h"
-				>
-			</File>
 			<File
 				RelativePath=".\References\lua_tinker\lua_tinker.cpp"
 				>

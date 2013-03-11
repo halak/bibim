@@ -45,12 +45,12 @@ namespace Bibim
 
     void Thread::Sleep()
     {
-        sleep(1);
+        usleep(1000);
     }
 
     void Thread::Sleep(int milliSeconds)
     {
-        sleep(milliSeconds);
+        usleep(milliSeconds * 1000);
     }
 
     void Thread::Exit()

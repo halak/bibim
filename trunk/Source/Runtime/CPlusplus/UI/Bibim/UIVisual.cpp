@@ -88,6 +88,9 @@ namespace Bibim
             case ContentSize:
                 result.Width = width * contentSize.X;
                 break;
+            case AdjustiveSize:
+                result.Width = bounds.Width + width;
+                break;
         }
 
         switch (heightMode)
@@ -100,6 +103,9 @@ namespace Bibim
                 break;
             case ContentSize:
                 result.Height = height * contentSize.Y;
+                break;
+            case AdjustiveSize:
+                result.Height = bounds.Height + height;
                 break;
         }
 
@@ -600,6 +606,7 @@ namespace Bibim
              if (value == nullptr)                            return ContentSize;
         else if (String::EqualsCharsIgnoreCase(value, "ABS")) return AbsoluteSize;
         else if (String::EqualsCharsIgnoreCase(value, "REL")) return RelativeSize;
+        else if (String::EqualsCharsIgnoreCase(value, "ADJ")) return AdjustiveSize;
         else                                                  return ContentSize;
     }
 
@@ -607,9 +614,10 @@ namespace Bibim
     {
         switch (value)
         {
-            case AbsolutePosition:  return "ABS";
-            case RelativePosition:  return "REL";
-            default:                return "CONTENT";
+            case AbsoluteSize:  return "ABS";
+            case RelativeSize:  return "REL";
+            case AdjustiveSize: return "ADJ";
+            default:            return "CONTENT";
         }
     }
 

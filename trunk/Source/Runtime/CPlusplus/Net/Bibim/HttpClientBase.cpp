@@ -1,9 +1,10 @@
 #include <Bibim/PCH.h>
 #include <Bibim/HttpClientBase.h>
 #include <Bibim/AutoLocker.h>
+#include <Bibim/Clock.h>
 #include <Bibim/Environment.h>
 #include <Bibim/Numerics.h>
-#include <Bibim/Clock.h>
+#include <Bibim/Log.h>
 
 namespace Bibim
 {
