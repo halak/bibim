@@ -807,9 +807,6 @@
     <ClCompile Include="Input\Bibim\Keyboard.Android.cpp">
       <Filter>03. Game\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Net\Bibim\HttpClient.Android.cpp">
-      <Filter>03. Game\Net</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset\Bibim\AssetLoadingTask.h">
@@ -1593,9 +1590,6 @@
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Foundation\Bibim\PCH.h" />
-    <ClInclude Include="Net\Bibim\HttpClient.Android.h">
-      <Filter>03. Game\Net</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Asset\Bibim\AssetLoadingTask.inl">
@@ -2218,9 +2212,6 @@
     </None>
     <None Include="Framework\Bibim\GameFrameworkBase.inl">
       <Filter>03. Game\Framework</Filter>
-    </None>
-    <None Include="Net\Bibim\HttpClient.Android.inl">
-      <Filter>03. Game\Net</Filter>
     </None>
   </ItemGroup>
 </Project>
