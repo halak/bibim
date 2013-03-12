@@ -114,6 +114,18 @@ namespace Bibim
         }
     }
 
+    void Font::SetFace(const byte* data, int length)
+    {
+        if (data == nullptr || length <= 0)
+            return;
+
+        parameters.FaceURI = String::Empty;
+        parameters.FaceData.resize(length);
+        parameters.FaceData.assign(&data[0], &data[length]);
+        cache.Reset();
+        IncreaseRevision();        
+    }
+
     float Font::GetSize() const
     {
         return parameters.FontSize;

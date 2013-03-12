@@ -5,6 +5,7 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameAsset.h>
 #   include <Bibim/String.h>
+#   include <vector>
 
     struct FT_FaceRec_;
     struct FT_StrokerRec_;
@@ -26,6 +27,7 @@
             float Scale;
             bool Hinting;
             bool IgnoreBitmap;
+            std::vector<byte> FaceData;
 
             FontCacheParameters();
             FontCacheParameters(const String& faceURI, float fontSize, float strokeSize, float weights, float shear, 

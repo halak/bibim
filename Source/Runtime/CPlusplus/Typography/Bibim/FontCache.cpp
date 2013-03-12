@@ -218,35 +218,49 @@ namespace Bibim
           strokedGlyphTable(nullptr),
           glowGlyphTable(nullptr)
     {
-        String faceFilename = parameters.FaceURI;
-        int    faceIndex    = 0; // *.ttc 파일일 경우 폰트가 존재하는 위치 (TTC = TrueTypeCollection)
-
-        int separatorIndex = parameters.FaceURI.ReverseFind('?');
-        if (separatorIndex != -1)
+        if (parameters.FaceURI.IsEmpty() == false)
         {
-            faceFilename = parameters.FaceURI.Substring(0, separatorIndex);
-            faceIndex    = Int::Parse(parameters.FaceURI.Substring(separatorIndex + 1).CStr());
-        }
+            String faceFilename = parameters.FaceURI;
+            int    faceIndex    = 0; // *.ttc 파일일 경우 폰트가 존재하는 위치 (TTC = TrueTypeCollection)
 
-        if (FT_Error error = FT_New_Face(static_cast<FT_Library>(library->GetFTLibrary()), faceFilename, faceIndex, &primaryFace))
-        {
-            if (library->GetOSFontDirectory().IsEmpty() == false)
+            int separatorIndex = parameters.FaceURI.ReverseFind('?');
+            if (separatorIndex != -1)
             {
-                const String newFaceFilepath = library->GetOSFontDirectory() + faceFilename;
-                if (FT_New_Face(static_cast<FT_Library>(library->GetFTLibrary()), newFaceFilepath, faceIndex, &primaryFace))
+                faceFilename = parameters.FaceURI.Substring(0, separatorIndex);
+                faceIndex    = Int::Parse(parameters.FaceURI.Substring(separatorIndex + 1).CStr());
+            }
+
+            if (FT_Error error = FT_New_Face(static_cast<FT_Library>(library->GetFTLibrary()), faceFilename, faceIndex, &primaryFace))
+            {
+                if (library->GetOSFontDirectory().IsEmpty() == false)
+                {
+                    const String newFaceFilepath = library->GetOSFontDirectory() + faceFilename;
+                    if (FT_New_Face(static_cast<FT_Library>(library->GetFTLibrary()), newFaceFilepath, faceIndex, &primaryFace))
+                    {
+                        // ERROR 처리 (return하지는 않음)
+                    }
+                }
+                else
                 {
                     // ERROR 처리 (return하지는 않음)
                 }
             }
-            else
+
+            if (FT_Error error = FT_New_Face(static_cast<FT_Library>(library->GetFTLibrary()), library->GetAlternativeFace(), 0, &alternativeFace))
             {
                 // ERROR 처리 (return하지는 않음)
             }
         }
-
-        if (FT_Error error = FT_New_Face(static_cast<FT_Library>(library->GetFTLibrary()), library->GetAlternativeFace(), 0, &alternativeFace))
+        else
         {
-            // ERROR 처리 (return하지는 않음)
+            if (FT_Error error = FT_New_Memory_Face(static_cast<FT_Library>(library->GetFTLibrary()),
+                                                    &parameters.FaceData[0],
+                                                    parameters.FaceData.size(),
+                                                    0,
+                                                    &primaryFace))
+            {
+                // ERROR 처리 (return하지는 않음)
+            }
         }
 
         const FT_F26Dot6 scaledFontSize = FloatToF26D6(parameters.FontSize * parameters.Scale);
@@ -276,9 +290,20 @@ namespace Bibim
 
         const FT_Face metricsFont = primaryFace ? primaryFace : alternativeFace;
         const FT_Size_Metrics& metrics = metricsFont->size->metrics;
-        ascender   = F26D6ToFloat(metrics.ascender) / parameters.Scale;
-        descender  = F26D6ToFloat(metrics.descender) / parameters.Scale;
-        lineHeight = F26D6ToFloat(metrics.height) / parameters.Scale;
+        ascender   = F26D6ToFloat(metrics.ascender);
+        descender  = F26D6ToFloat(metrics.descender);
+        lineHeight = F26D6ToFloat(metrics.height);
+
+        if (ascender == 0.0f)
+            ascender = parameters.FontSize * 0.5f;
+        if (descender == 0.0f)
+            descender = parameters.FontSize * 0.5f;
+        if (lineHeight == 0.0f)
+            lineHeight = parameters.FontSize;
+
+        ascender   /= parameters.Scale;
+        descender  /= parameters.Scale;
+        lineHeight /= parameters.Scale;
 
         regularGlyphTable = new GlyphTable(library->GetGraphicsDevice());
 

@@ -2587,10 +2587,6 @@
 				Name="Framework"
 				>
 				<File
-					RelativePath=".\Framework\Bibim\Game.h"
-					>
-				</File>
-				<File
 					RelativePath=".\Framework\Bibim\GameFramework.h"
 					>
 				</File>
@@ -2632,6 +2628,30 @@
 				</File>
 				<File
 					RelativePath=".\Framework\Bibim\GameWindow.Windows.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\Lua.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\Lua.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\Lua.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\StandardGame.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\StandardGame.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\StandardGame.inl"
 					>
 				</File>
 			</Filter>

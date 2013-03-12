@@ -304,6 +304,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Framework\Bibim\Lua.cpp" />
+    <ClCompile Include="Framework\Bibim\StandardGame.cpp" />
     <ClCompile Include="Input\Bibim\Key.cpp" />
     <ClCompile Include="Input\Bibim\Keyboard.Android.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
@@ -756,6 +758,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Framework\Bibim\Lua.h" />
+    <ClInclude Include="Framework\Bibim\StandardGame.EmbeddedFont.h" />
+    <ClInclude Include="Framework\Bibim\StandardGame.h" />
     <ClInclude Include="Net\Bibim\HttpClient.Curl.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
@@ -1191,6 +1196,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </None>
+    <None Include="Framework\Bibim\Lua.inl" />
+    <None Include="Framework\Bibim\StandardGame.inl" />
     <None Include="Net\Bibim\HttpClient.Curl.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>

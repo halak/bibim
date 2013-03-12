@@ -33,6 +33,7 @@
 
                 const String& GetFaceURI() const;
                 void SetFaceURI(const String& value);
+                void SetFace(const byte* data, int length);
 
                 float GetSize() const;
                 void  SetSize(float value);

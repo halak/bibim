@@ -10,7 +10,7 @@
 namespace Bibim
 {
     static const float BigFloat = 10000.0f;
-    static const RectF BigRect = RectF(0.0f, 0.0f, 800.0f, 600.0f);
+    static const RectF BigRect = RectF(0.0f, 0.0f, 480.0f, 800.0f);
 
     UIVisualVisitor::UIVisualVisitor(bool visibleOnly)
         : visibleOnly(visibleOnly),
