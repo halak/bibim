@@ -40,9 +40,6 @@
     <Filter Include="03. Game\Gameplay\PathFinder">
       <UniqueIdentifier>{bdbbcae6-f432-4be3-b67c-d9fe0929ace0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Game\Input">
-      <UniqueIdentifier>{f3afc6cb-aad7-4cfa-95e3-15b58fd9be8c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Game\Scripting">
       <UniqueIdentifier>{490611d8-aec3-49fa-8acf-d6d1afe6689b}</UniqueIdentifier>
     </Filter>
@@ -147,6 +144,9 @@
     </Filter>
     <Filter Include="03. Game\UI\Visitors">
       <UniqueIdentifier>{b6559376-a07f-4aa8-b57e-148201ac87c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Input">
+      <UniqueIdentifier>{f3afc6cb-aad7-4cfa-95e3-15b58fd9be8c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -806,6 +806,12 @@
     </ClCompile>
     <ClCompile Include="Input\Bibim\Keyboard.Android.cpp">
       <Filter>03. Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Bibim\Lua.cpp">
+      <Filter>03. Game\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Bibim\StandardGame.cpp">
+      <Filter>03. Game\Framework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1590,6 +1596,15 @@
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Foundation\Bibim\PCH.h" />
+    <ClInclude Include="Framework\Bibim\Lua.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\StandardGame.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\StandardGame.EmbeddedFont.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Asset\Bibim\AssetLoadingTask.inl">
@@ -2211,6 +2226,12 @@
       <Filter>03. Game\Framework</Filter>
     </None>
     <None Include="Framework\Bibim\GameFrameworkBase.inl">
+      <Filter>03. Game\Framework</Filter>
+    </None>
+    <None Include="Framework\Bibim\Lua.inl">
+      <Filter>03. Game\Framework</Filter>
+    </None>
+    <None Include="Framework\Bibim\StandardGame.inl">
       <Filter>03. Game\Framework</Filter>
     </None>
   </ItemGroup>

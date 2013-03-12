@@ -159,7 +159,9 @@
             // Framework
                 class GameFrameworkBase;
                     class GameFramework;
+                        class StandardGame;
                 class GameWindow;
+                class Lua;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Gameplay
                 BBForwardDeclareSmartPointerClass(Command);
