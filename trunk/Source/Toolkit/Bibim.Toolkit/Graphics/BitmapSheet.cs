@@ -132,7 +132,10 @@ namespace Bibim.Graphics
             var sortedInput = new List<Bitmap>(input);
             sortedInput.Sort((a, b) =>
             {
-                return (b.Width + b.Height).CompareTo(a.Width + a.Height);
+                // 가로와 세로를 각각 제곱을 하면서 한 방향이 지나치게 클 경우 큰 이미지로 인식하게 합니다.
+                int aWeight = (a.Width * a.Width) + (a.Height * a.Height);
+                int bWeight = (b.Width * b.Width) + (b.Height * b.Height);
+                return bWeight.CompareTo(aWeight);
             });
 
             var items = new List<Tuple<int, Bitmap, Rectangle, Image.Transform>>();
@@ -215,6 +218,17 @@ namespace Bibim.Graphics
                 {
                     case Image.Transform.Identity:
                         graphics[sheetIndex].DrawImageUnscaled(bitmap, rectangle.X, rectangle.Y);
+                        
+                        graphics[sheetIndex].DrawImage(bitmap, rectangle.Left - 1, rectangle.Top, new Rectangle(0, 0, 1, rectangle.Height), GraphicsUnit.Pixel);
+                        graphics[sheetIndex].DrawImage(bitmap, rectangle.Right, rectangle.Top, new Rectangle(bitmap.Width - 1, 0, 1, rectangle.Height), GraphicsUnit.Pixel);
+                        graphics[sheetIndex].DrawImage(bitmap, rectangle.Left, rectangle.Top - 1, new Rectangle(0, 0, rectangle.Width, 1), GraphicsUnit.Pixel);
+                        graphics[sheetIndex].DrawImage(bitmap, rectangle.Left, rectangle.Bottom, new Rectangle(0, bitmap.Height - 1, rectangle.Width, 1), GraphicsUnit.Pixel);
+
+                        var sheetBitmap = sheetBitmaps[sheetIndex];
+                        sheetBitmap.SetPixel(rectangle.Left - 1, rectangle.Top - 1, sheetBitmap.GetPixel(rectangle.Left, rectangle.Top));
+                        sheetBitmap.SetPixel(rectangle.Right + 0, rectangle.Top - 1, sheetBitmap.GetPixel(rectangle.Right - 1, rectangle.Top));
+                        sheetBitmap.SetPixel(rectangle.Left - 1, rectangle.Bottom + 0, sheetBitmap.GetPixel(rectangle.Left, rectangle.Bottom - 1));
+                        sheetBitmap.SetPixel(rectangle.Right + 0, rectangle.Bottom + 0, sheetBitmap.GetPixel(rectangle.Right - 1, rectangle.Bottom - 1));
                         break;
                     case Image.Transform.RotateCW90:
                         graphics[sheetIndex].TranslateTransform(+rectangle.X, +rectangle.Y);
