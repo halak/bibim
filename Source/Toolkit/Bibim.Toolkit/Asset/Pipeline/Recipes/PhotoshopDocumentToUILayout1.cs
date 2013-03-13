@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -364,6 +365,13 @@ namespace Bibim.Asset.Pipeline.Recipes
             if (bitmap == null)
                 return null;
 
+            if (IsSingleColor(bitmap))
+            {
+                var solidColor = bitmap.GetPixel(0, 0);
+                bitmap = new Bitmap(1, 1);
+                bitmap.SetPixel(0, 0, solidColor);
+            }
+
             UIImage image = new UIImage();
             image.AnchorPoint = anchor;
             image.Origin = origin;
@@ -546,6 +554,23 @@ namespace Bibim.Asset.Pipeline.Recipes
             }
 
             return result;
+        }
+
+        private static bool IsSingleColor(Bitmap source)
+        {
+            int w = source.Width;
+            int h = source.Height;
+            var firstColor = source.GetPixel(0, 0);
+            for (int y = 0; y < h; y++)
+            {
+                for (int x = 0; x < w; x++)
+                {
+                    if (source.GetPixel(x, y) != firstColor)
+                        return false;
+                }
+            }
+
+            return true;
         }
     }
 }

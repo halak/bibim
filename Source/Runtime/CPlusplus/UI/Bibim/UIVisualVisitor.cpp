@@ -189,7 +189,7 @@ namespace Bibim
 
     Vector2 UIVisualVisitor::UnprojectPoint(Vector2 point, const Matrix4& inversedTransform) const
     {
-        const RectF viewport = RectF(0, 0, 800, 600);
+        const RectF viewport = RectF(0, 0, 480, 800);
         const float width  = viewport.Width;
         const float height = viewport.Height;
         const Vector3 direction = Vector3(+(((2.0f * point.X) / width ) - 1.0f) / projectionTransform.M00,
