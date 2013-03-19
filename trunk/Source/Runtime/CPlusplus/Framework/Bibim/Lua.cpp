@@ -67,6 +67,75 @@ namespace Bibim
         lua_pushstring(state, LUA_DBLIBNAME);
         lua_call(state, 1, 0);
 
+        struct AdditionalStringLibrary
+        {
+            static int StartsWith(lua_State* L)
+            {
+                size_t selfLength = 0;
+                size_t prefixLength = 0;
+                const char* self = lua_tolstring(L, 1, &selfLength);
+                const char* prefix = lua_tolstring(L, 2, &prefixLength);
+
+                if (prefixLength <= selfLength)
+                {
+                    for (size_t i = 0; i < prefixLength; i++)
+                    {
+                        if (*self++ != *prefix++)
+                        {
+                            lua_pushboolean(L, 0);
+                            return 1;
+                        }
+                    }
+
+                    lua_pushboolean(L, 1);
+                    return 1;
+                }
+                else
+                {
+                    lua_pushboolean(L, 0);
+                    return 1;
+                }
+            }
+
+            static int EndsWith(lua_State* L)
+            {
+                size_t selfLength = 0;
+                size_t prefixLength = 0;
+                const char* self = lua_tolstring(L, 1, &selfLength);
+                const char* prefix = lua_tolstring(L, 2, &prefixLength);
+
+                if (prefixLength <= selfLength)
+                {
+                    self += selfLength - prefixLength;
+                    for (size_t i = 0; i < prefixLength; i++)
+                    {
+                        if (*self++ != *prefix++)
+                        {
+                            lua_pushboolean(L, 0);
+                            return 1;
+                        }
+                    }
+
+                    lua_pushboolean(L, 1);
+                    return 1;
+                }
+                else
+                {
+                    lua_pushboolean(L, 0);
+                    return 1;
+                }
+            }
+        };
+
+        const struct luaL_reg additionalStringLib [] = {
+            { "startswith", &AdditionalStringLibrary::StartsWith },
+            { "endswith", &AdditionalStringLibrary::EndsWith },
+            { NULL, NULL}  /* sentinel */
+        };
+    
+        luaL_register(state, LUA_STRLIBNAME, additionalStringLib);
+        lua_pop(state, 1);
+
         lua_tinker::def(state, "_ALERT", static_cast<void (*)(const char*)>(&Bibim::Log::Warning));
 
         lua_newtable(state);
@@ -117,12 +186,14 @@ namespace Bibim
             lua_tinker::class_def<Font>(L, "SetShear", &Font::SetShear);
             lua_tinker::class_def<Font>(L, "GetItalic", &Font::GetItalic);
             lua_tinker::class_def<Font>(L, "SetItalic", &Font::SetItalic);
-            lua_tinker::class_def<Font>(L, "GetGlowSize", &Font::GetGlowSize);
-            lua_tinker::class_def<Font>(L, "SetGlowSize", &Font::SetGlowSize);
-            lua_tinker::class_def<Font>(L, "GetGlowSpread", &Font::GetGlowSpread);
-            lua_tinker::class_def<Font>(L, "SetGlowSpread", &Font::SetGlowSpread);
-            lua_tinker::class_def<Font>(L, "GetGlowThickness", &Font::GetGlowThickness);
-            lua_tinker::class_def<Font>(L, "SetGlowThickness", &Font::SetGlowThickness);
+            lua_tinker::class_def<Font>(L, "GetShadowSize", &Font::GetShadowSize);
+            lua_tinker::class_def<Font>(L, "SetShadowSize", &Font::SetShadowSize);
+            lua_tinker::class_def<Font>(L, "GetShadowSpread", &Font::GetShadowSpread);
+            lua_tinker::class_def<Font>(L, "SetShadowSpread", &Font::SetShadowSpread);
+            lua_tinker::class_def<Font>(L, "GetShadowThickness", &Font::GetShadowThickness);
+            lua_tinker::class_def<Font>(L, "SetShadowThickness", &Font::SetShadowThickness);
+            lua_tinker::class_def<Font>(L, "GetShadowOffset", &Font::GetShadowOffset);
+            lua_tinker::class_def<Font>(L, "SetShadowOffset", &Font::SetShadowOffsetXY);
             lua_tinker::class_def<Font>(L, "GetScale", &Font::GetScale);
             lua_tinker::class_def<Font>(L, "SetScale", &Font::SetScale);
             lua_tinker::class_def<Font>(L, "GetHinting", &Font::GetHinting);
@@ -133,8 +204,8 @@ namespace Bibim
             lua_tinker::class_def<Font>(L, "SetColor", &Font::SetColorRGB);
             lua_tinker::class_def<Font>(L, "GetStrokeColor", &Font::GetStrokeColor);
             lua_tinker::class_def<Font>(L, "SetStrokeColor", &Font::SetStrokeColorRGB);
-            lua_tinker::class_def<Font>(L, "GetGlowColor", &Font::GetGlowColor);
-            lua_tinker::class_def<Font>(L, "SetGlowColor", &Font::SetGlowColorRGB);
+            lua_tinker::class_def<Font>(L, "GetShadowColor", &Font::GetShadowColor);
+            lua_tinker::class_def<Font>(L, "SetShadowColor", &Font::SetShadowColorRGB);
             lua_tinker::class_def<Font>(L, "GetSpacing", &Font::GetSpacing);
             lua_tinker::class_def<Font>(L, "SetSpacing", &Font::SetSpacing);
             lua_tinker::class_def<Font>(L, "GetAscender", &Font::GetAscender);

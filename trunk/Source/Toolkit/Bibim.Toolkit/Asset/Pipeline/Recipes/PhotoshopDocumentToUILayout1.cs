@@ -69,11 +69,11 @@ namespace Bibim.Asset.Pipeline.Recipes
             return new UILayout(rootWindow);
         }
 
-        private void AddChildTo(UIWindow window, PhotoshopDocument.Layer layer, bool defaultPickable)
+        private UIVisual AddChildTo(UIWindow window, PhotoshopDocument.Layer layer, bool defaultPickable)
         {
             if (string.IsNullOrEmpty(layer.Name) ||
                 layer.Name.StartsWith("#") == false)
-                return;
+                return null;
 
             string name;
             string type;
@@ -89,8 +89,11 @@ namespace Bibim.Asset.Pipeline.Recipes
                     UILabel label = new UILabel();
                     label.Name = name;
                     label.IsPickable = defaultPickable;
+                    if (args.ContainsKey("0"))
+                        label.Text = args["0"];
                     window.AddChild(label);
                     Process(label, layer);
+                    return label;
                 }
                 else if (string.Compare(type, "9Patch", true) == 0 ||
                     string.Compare(type, "NinePatch", true) == 0 ||
@@ -140,6 +143,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                         if (item != null)
                             childWindow.AddChild(item);
                     }
+                    return childWindow;
                 }
                 else
                 {
@@ -148,6 +152,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                     image.IsPickable = defaultPickable;
                     window.AddChild(image);
                     Process(image, layer, string.Compare(type, "MaskImage", true) == 0 || string.Compare(type, "MaskSprite", true) == 0);
+                    return image;
                 }
             }
             else
@@ -159,6 +164,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                     button.IsPickable = true;
                     window.AddChild(button);
                     Process(button, layer);
+                    return button;
                 }
                 else if (string.Compare(type, "CheckBox", true) == 0)
                 {
@@ -167,6 +173,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                     button.IsPickable = true;
                     window.AddChild(button);
                     Process(button, layer);
+                    return button;
                 }
                 else if (string.Compare(type, "Radio", true) == 0)
                 {
@@ -175,6 +182,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                     button.IsPickable = true;
                     window.AddChild(button);
                     Process(button, layer);
+                    return button;
                 }
                 else
                 {
@@ -191,6 +199,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                         button.IsPickable = true;
                         window.AddChild(button);
                         Process(button, layer);
+                        return button;
                     }
                     else if (hasNormal && hasCheckedNormal)
                     {
@@ -199,6 +208,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                         button.IsPickable = true;
                         window.AddChild(button);
                         Process(button, layer);
+                        return button;
                     }
                     else
                     {
@@ -207,8 +217,11 @@ namespace Bibim.Asset.Pipeline.Recipes
                         childWindow.IsPickable = defaultPickable;
                         window.AddChild(childWindow);
                         Process(childWindow, layer);
+                        return childWindow;
                     }
                 }
+
+                return null;
             }
         }
 
@@ -292,18 +305,21 @@ namespace Bibim.Asset.Pipeline.Recipes
             if (normal != null)
             {
                 var window = new UIWindow();
+                window.Name = "Normal";
                 button.Normal = window;
                 AddChildTo(window, normal, false);
             }
             if (pushed != null)
             {
                 var window = new UIWindow();
+                window.Name = "Pushed";
                 button.Pushed = window;
                 AddChildTo(window, pushed, false);
             }
             if (hovering != null)
             {
                 var window = new UIWindow();
+                window.Name = "Hovering";
                 button.Hovering = window;
                 AddChildTo(window, hovering, false);
             }
@@ -327,6 +343,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             if (normal != null)
             {
                 var window = new UIWindow();
+                window.Name = "CheckedNormal";
                 button.CheckedNormal = window;
                 button.CheckedNormal.Visibility = UIVisibility.Invisible;
                 AddChildTo(window, normal, false);
@@ -334,6 +351,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             if (pushed != null)
             {
                 var window = new UIWindow();
+                window.Name = "CheckedPushed";
                 button.CheckedPushed = window;
                 button.CheckedPushed.Visibility = UIVisibility.Invisible;
                 AddChildTo(window, pushed, false);
@@ -341,6 +359,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             if (hovering != null)
             {
                 var window = new UIWindow();
+                window.Name = "CheckedHovering";
                 button.CheckedHovering = window;
                 button.CheckedHovering.Visibility = UIVisibility.Invisible;
                 AddChildTo(window, hovering, false);

@@ -11,10 +11,11 @@ namespace Bibim.Typography
     {
         #region Fields
         private FontCacheParameter parameters;
+        private Vector2 shadowOffset;
         private float spacing;
         private Color color;
         private Color strokeColor;
-        private Color glowColor;
+        private Color shadowColor;
         #endregion
 
         #region Properties
@@ -89,40 +90,53 @@ namespace Bibim.Typography
             }
         }
 
-        public int GlowSize
+        public int ShadowSize
         {
-            get { return parameters.GlowSize; }
+            get { return parameters.ShadowSize; }
             set
             {
-                if (parameters.GlowSize != value)
+                if (parameters.ShadowSize != value)
                 {
-                    parameters.GlowSize = value;
+                    parameters.ShadowSize = value;
                     Revision++;
                 }
             }
         }
 
-        public float GlowSpread
+        public float ShadowSpread
         {
-            get { return parameters.GlowSpread; }
+            get { return parameters.ShadowSpread; }
             set
             {
-                if (parameters.GlowSpread != value)
+                if (parameters.ShadowSpread != value)
                 {
-                    parameters.GlowSpread = value;
+                    parameters.ShadowSpread = value;
                     Revision++;
                 }
             }
         }
 
-        public float GlowThickness
+        public float ShadowThickness
         {
-            get { return parameters.GlowThickness; }
+            get { return parameters.ShadowThickness; }
             set
             {
-                if (parameters.GlowThickness != value)
+                if (parameters.ShadowThickness != value)
                 {
-                    parameters.GlowThickness = value;
+                    parameters.ShadowThickness = value;
+                    Revision++;
+                }
+            }
+        }
+
+        public Vector2 ShadowOffset
+        {
+            get { return shadowOffset; }
+            set
+            {
+                if (shadowOffset != value)
+                {
+                    shadowOffset = value;
                     Revision++;
                 }
             }
@@ -206,14 +220,14 @@ namespace Bibim.Typography
             }
         }
 
-        public Color GlowColor
+        public Color ShadowColor
         {
-            get { return glowColor; }
+            get { return shadowColor; }
             set
             {
-                if (glowColor != value)
+                if (shadowColor != value)
                 {
-                    glowColor = value;
+                    shadowColor = value;
                     Revision++;
                 }
             }

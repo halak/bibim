@@ -305,6 +305,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Framework\Bibim\Lua.cpp" />
+    <ClCompile Include="Framework\Bibim\Preferences.Android.cpp" />
+    <ClCompile Include="Framework\Bibim\Preferences.iOS.cpp" />
+    <ClCompile Include="Framework\Bibim\Preferences.Windows.cpp" />
+    <ClCompile Include="Framework\Bibim\PreferencesBase.cpp" />
     <ClCompile Include="Framework\Bibim\StandardGame.cpp" />
     <ClCompile Include="Input\Bibim\Key.cpp" />
     <ClCompile Include="Input\Bibim\Keyboard.Android.cpp">
@@ -759,6 +763,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Framework\Bibim\Lua.h" />
+    <ClInclude Include="Framework\Bibim\Preferences.Android.h" />
+    <ClInclude Include="Framework\Bibim\Preferences.h" />
+    <ClInclude Include="Framework\Bibim\Preferences.iOS.h" />
+    <ClInclude Include="Framework\Bibim\Preferences.Windows.h" />
+    <ClInclude Include="Framework\Bibim\PreferencesBase.h" />
     <ClInclude Include="Framework\Bibim\StandardGame.EmbeddedFont.h" />
     <ClInclude Include="Framework\Bibim\StandardGame.h" />
     <ClInclude Include="Net\Bibim\HttpClient.Curl.h">
@@ -1197,6 +1206,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </None>
     <None Include="Framework\Bibim\Lua.inl" />
+    <None Include="Framework\Bibim\PreferencesBase.inl" />
     <None Include="Framework\Bibim\StandardGame.inl" />
     <None Include="Net\Bibim\HttpClient.Curl.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

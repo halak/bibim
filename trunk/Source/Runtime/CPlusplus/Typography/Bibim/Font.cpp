@@ -20,7 +20,7 @@ namespace Bibim
         : library(nullptr),
           color(Color(0, 0, 0, 255)),
           strokeColor(Color(0, 0, 0, 255)),
-          glowColor(Color(0, 0, 255)),
+          shadowColor(Color(0, 0, 255)),
           spacing(1.0f),
           parametersPointer(new FontCacheParameters()),
           parameters(*parametersPointer),
@@ -32,7 +32,7 @@ namespace Bibim
         : library(library),
           color(Color(0, 0, 0, 255)),
           strokeColor(Color(0, 0, 0, 255)),
-          glowColor(Color(0, 0, 255)),
+          shadowColor(Color(0, 0, 255)),
           spacing(1.0f),
           parametersPointer(new FontCacheParameters()),
           parameters(*parametersPointer),
@@ -44,7 +44,7 @@ namespace Bibim
         : library(original.library),
           color(original.color),
           strokeColor(original.strokeColor),
-          glowColor(original.glowColor),
+          shadowColor(original.shadowColor),
           spacing(original.spacing),
           parametersPointer(new FontCacheParameters(original.parameters)),
           parameters(*parametersPointer),
@@ -220,50 +220,64 @@ namespace Bibim
         }
     }
     
-    int Font::GetGlowSize() const
+    int Font::GetShadowSize() const
     {
-        return parameters.GlowSize;
+        return parameters.ShadowSize;
     }
 
-    void Font::SetGlowSize(int value)
+    void Font::SetShadowSize(int value)
     {
         value = Math::Max(value, 0);
-        if (parameters.GlowSize != value)
+        if (parameters.ShadowSize != value)
         {
-            parameters.GlowSize = value;
+            parameters.ShadowSize = value;
             cache.Reset();
             IncreaseRevision();
         }
     }
 
-    float Font::GetGlowSpread() const
+    float Font::GetShadowSpread() const
     {
-        return parameters.GlowSpread;
+        return parameters.ShadowSpread;
     }
 
-    void Font::SetGlowSpread(float value)
+    void Font::SetShadowSpread(float value)
     {
         value = Math::Max(value, 0.0001f);
-        if (parameters.GlowSpread != value)
+        if (parameters.ShadowSpread != value)
         {
-            parameters.GlowSpread = value;
+            parameters.ShadowSpread = value;
             cache.Reset();
             IncreaseRevision();
         }
     }
 
-    float Font::GetGlowThickness() const
+    float Font::GetShadowThickness() const
     {
-        return parameters.GlowThickness;
+        return parameters.ShadowThickness;
     }
 
-    void Font::SetGlowThickness(float value)
+    void Font::SetShadowThickness(float value)
     {
         value = Math::Clamp(value, 0.0001f, 0.9999f);
-        if (parameters.GlowThickness != value)
+        if (parameters.ShadowThickness != value)
         {
-            parameters.GlowThickness = value;
+            parameters.ShadowThickness = value;
             cache.Reset();
+            IncreaseRevision();
+        }
+    }
+
+    Vector2 Font::GetShadowOffset() const
+    {
+        return shadowOffset;
+    }
+
+    void Font::SetShadowOffset(Vector2 value)
+    {
+        if (shadowOffset != value)
+        {
+            shadowOffset = value;
             IncreaseRevision();
         }
     }
@@ -332,11 +346,11 @@ namespace Bibim
         }
     }
 
-    void Font::SetGlowColor(Color value)
+    void Font::SetShadowColor(Color value)
     {
-        if (glowColor != value)
+        if (shadowColor != value)
         {
-            glowColor = value;
+            shadowColor = value;
             IncreaseRevision();
         }
     }
@@ -364,9 +378,9 @@ namespace Bibim
             return nullptr;
     }
 
-    const Glyph* Font::GetGlowGlyph(int code) const
+    const Glyph* Font::GetShadowGlyph(int code) const
     {
-        if (const GlyphTable* t = GetCache()->GetGlowGlyphTable())
+        if (const GlyphTable* t = GetCache()->GetShadowGlyphTable())
             return t->Find(code);
         else
             return nullptr;
@@ -405,11 +419,11 @@ namespace Bibim
             return EmptyGlyphs;
     }
 
-    const Font::GlyphDictionary& Font::GetCachedGlowGlyphs() const
+    const Font::GlyphDictionary& Font::GetCachedShadowGlyphs() const
     {
         FontCache* c = GetCache();
-        if (c && c->GetGlowGlyphTable())
-            return c->GetGlowGlyphTable()->GetGlyphs();
+        if (c && c->GetShadowGlyphTable())
+            return c->GetShadowGlyphTable()->GetGlyphs();
         else
             return EmptyGlyphs;
     }
@@ -439,16 +453,17 @@ namespace Bibim
         result->parameters.StrokeSize = reader.ReadFloat();
         result->parameters.Weights = reader.ReadFloat();
         result->parameters.Shear = reader.ReadFloat();
-        result->parameters.GlowSize = reader.ReadInt();
-        result->parameters.GlowSpread = reader.ReadFloat();
-        result->parameters.GlowThickness = reader.ReadFloat();
+        result->parameters.ShadowSize = reader.ReadInt();
+        result->parameters.ShadowSpread = reader.ReadFloat();
+        result->parameters.ShadowThickness = reader.ReadFloat();
+        result->shadowOffset = reader.ReadVector2();
         result->parameters.Scale = reader.ReadFloat();
         result->parameters.Hinting = reader.ReadBool();
         result->parameters.IgnoreBitmap = reader.ReadBool();
         result->spacing = reader.ReadFloat();
         result->color = reader.ReadColor();
         result->strokeColor = reader.ReadColor();
-        result->glowColor = reader.ReadColor();
+        result->shadowColor = reader.ReadColor();
         result->IncreaseRevision();
         result->SetStatus(GameAsset::CompletedStatus);
 

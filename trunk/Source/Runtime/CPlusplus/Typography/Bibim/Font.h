@@ -53,14 +53,18 @@
                 bool GetItalic() const;
                 void SetItalic(bool value);
 
-                int GetGlowSize() const;
-                void SetGlowSize(int value);
+                int GetShadowSize() const;
+                void SetShadowSize(int value);
 
-                float GetGlowSpread() const;
-                void  SetGlowSpread(float value);
+                float GetShadowSpread() const;
+                void  SetShadowSpread(float value);
 
-                float GetGlowThickness() const;
-                void  SetGlowThickness(float value);
+                float GetShadowThickness() const;
+                void  SetShadowThickness(float value);
+
+                Vector2 GetShadowOffset() const;
+                void SetShadowOffset(Vector2 value);
+                inline void SetShadowOffsetXY(float x, float y);
 
                 float GetScale() const;
                 void  SetScale(float value);
@@ -79,16 +83,16 @@
                 void SetStrokeColor(Color value);
                 inline void SetStrokeColorRGB(byte r, byte g, byte b);
 
-                inline Color GetGlowColor() const;
-                void SetGlowColor(Color value);
-                inline void SetGlowColorRGB(byte r, byte g, byte b);
+                inline Color GetShadowColor() const;
+                void SetShadowColor(Color value);
+                inline void SetShadowColorRGB(byte r, byte g, byte b);
 
                 inline float GetSpacing() const;
                 void SetSpacing(float value);
 
                 const Glyph* GetRegularGlyph(int code) const;
                 const Glyph* GetStrokedGlyph(int code) const;
-                const Glyph* GetGlowGlyph(int code) const;
+                const Glyph* GetShadowGlyph(int code) const;
 
                 float GetAscender() const;
                 float GetDescender() const;
@@ -96,7 +100,7 @@
 
                 const GlyphDictionary& GetCachedRegularGlyphs() const;
                 const GlyphDictionary& GetCachedStrokedGlyphs() const;
-                const GlyphDictionary& GetCachedGlowGlyphs() const;
+                const GlyphDictionary& GetCachedShadowGlyphs() const;
 
             private:
                 FontCache* GetCache() const;
@@ -104,10 +108,11 @@
             private:
                 FontLibrary* library;
 
+                Vector2 shadowOffset;
                 float spacing;
                 Color color;
                 Color strokeColor;
-                Color glowColor;
+                Color shadowColor;
                 FontCacheParameters* parametersPointer;
                 FontCacheParameters& parameters;
                 mutable FontCachePtr cache;

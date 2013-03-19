@@ -11,9 +11,9 @@ namespace Bibim.Typography
         public float StrokeSize;
         public float Weights;
         public float Shear;
-        public int GlowSize;
-        public float GlowSpread;
-        public float GlowThickness;
+        public int ShadowSize;
+        public float ShadowSpread;
+        public float ShadowThickness;
         public float Scale;
         public bool Hinting;
         public bool IgnoreBitmap;

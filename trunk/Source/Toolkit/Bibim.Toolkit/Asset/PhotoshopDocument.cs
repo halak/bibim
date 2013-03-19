@@ -113,6 +113,44 @@ namespace Bibim.Asset
             return null;
         }
 
+        public void Scale(double sx, double sy)
+        {
+            if (sx <= 0.0 || sy <= 0.0)
+                return;
+
+            int newWidth = (int)((double)this.Width * sx);
+            int newHeight = (int)((double)this.Height * sy);
+
+            SetImageSizeActually(newWidth, newHeight, sx, sy);
+        }
+
+        public void SetImageSize(int width, int height)
+        {
+            if (width <= 0 || height <= 0)
+                return;
+
+            double scaleX = (double)width / (double)this.Width;
+            double scaleY = (double)height / (double)this.Height;
+
+            SetImageSizeActually(width, height, scaleX, scaleY);
+        }
+
+        private void SetImageSizeActually(int width, int height, double scaleX, double scaleY)
+        {
+            this.Width = width;
+            this.Height = height;
+
+            if (MergedBitmap != null)
+            {
+                var resizedBitmap = new Bitmap(MergedBitmap, width, height);
+                MergedBitmap.Dispose();
+                MergedBitmap = resizedBitmap;
+            }
+
+            foreach (var item in layers)
+                item.Scale(scaleX, scaleY);
+        }
+
         private void Load(Stream stream, bool ignoreImageResources, bool ignoreLayers, bool ignoreMergedBitmap)
         {
             Reader reader = new Reader(stream);

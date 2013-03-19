@@ -75,6 +75,25 @@ namespace Bibim
         }
     }
 
+    void GameAssetStorage::Store(const String& name, GameAsset* asset)
+    {
+        if (name.IsEmpty() || asset == nullptr)
+            return;
+
+        BBAssertDebug(FindName(asset) == String::Empty);
+
+        AssetTable::iterator it = assets.find(name);
+        if (it != assets.end())
+        {
+            // 주의
+            // 기존에 있던 애셋이 완전히 삭제될 경우 다른 쓰레드에서 로딩중인 애셋에서 메모리 접근 에러가 날 수 있습니다.
+            // 지금은 머리가 아파서 나중으로 미룹니다. (2013.03.18 11:57 PM)
+            (*it).second = asset;
+        }
+        else
+            assets.insert(AssetTable::value_type(name, asset));
+    }
+
     const String& GameAssetStorage::FindName(GameAsset* value) const
     {
         for (AssetTable::const_iterator it = assets.begin(); it != assets.end(); it++)

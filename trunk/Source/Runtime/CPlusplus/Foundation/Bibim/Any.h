@@ -133,6 +133,8 @@
 
             public:
                 static const Any Void;
+                static const Any True;
+                static const Any False;
 
             private:
                 union Value

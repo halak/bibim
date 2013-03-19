@@ -462,11 +462,16 @@ namespace Bibim
         if (fontString.GetText().IsEmpty())
             return;
 
-        TypingContext context(fontString, bounds.Width);
-
         struct DrawGlyphs
         {
-            static void Do(UIGeometryEffect* geomEffect, TypingContext& context, UIRenderer* renderer, const RectF& bounds, const RectF& /*clippedBounds*/, const FontString::GlyphCollection& glyphs, Color color)
+            static void Do(UIGeometryEffect* geomEffect,
+                           TypingContext& context,
+                           UIRenderer* renderer,
+                           const RectF& bounds,
+                           const RectF& /*clippedBounds*/,
+                           const FontString::GlyphCollection& glyphs,
+                           Color color,
+                           Vector2 offset)
             {
                 while (context.MoveNext())
                 {
@@ -485,8 +490,8 @@ namespace Bibim
                     clippingRect.Width  *= tw;
                     clippingRect.Height *= th;
 
-                    const RectF drawingRect = RectF(bounds.X + context.GetPosition().X + glyph->GetBitmapOffset().X,
-                                                    bounds.Y + context.GetPosition().Y + glyph->GetBitmapOffset().Y,
+                    const RectF drawingRect = RectF(bounds.X + context.GetPosition().X + glyph->GetBitmapOffset().X + offset.X,
+                                                    bounds.Y + context.GetPosition().Y + glyph->GetBitmapOffset().Y + offset.Y,
                                                     glyph->GetBitmapSize().X,
                                                     glyph->GetBitmapSize().Y);
                     Vector2 points[4] = 
@@ -505,13 +510,15 @@ namespace Bibim
             }
         };
 
+        TypingContext context(fontString, bounds.Width);
+
         renderer->BeginBatch();
 
-        if (fontString.GetFont()->GetGlowSize() > 0)
+        if (fontString.GetFont()->GetShadowSize() > 0)
         {
-            Color glowColor = fontString.GetFont()->GetGlowColor();
-            glowColor.A = static_cast<byte>(static_cast<float>(glowColor.A) * GetCurrentOpacity());
-            DrawGlyphs::Do(currentGeomEffect, context, renderer, bounds, clippedBounds, fontString.GetGlowGlyphs(), glowColor);
+            Color shadowColor = fontString.GetFont()->GetShadowColor();
+            shadowColor.A = static_cast<byte>(static_cast<float>(shadowColor.A) * GetCurrentOpacity());
+            DrawGlyphs::Do(currentGeomEffect, context, renderer, bounds, clippedBounds, fontString.GetShadowGlyphs(), shadowColor, fontString.GetFont()->GetShadowOffset());
             context.Reset();
         }
 
@@ -519,13 +526,13 @@ namespace Bibim
         {
             Color strokeColor = fontString.GetFont()->GetStrokeColor();
             strokeColor.A = static_cast<byte>(static_cast<float>(strokeColor.A) * GetCurrentOpacity());
-            DrawGlyphs::Do(currentGeomEffect, context, renderer, bounds, clippedBounds, fontString.GetStrokedGlyphs(), strokeColor);
+            DrawGlyphs::Do(currentGeomEffect, context, renderer, bounds, clippedBounds, fontString.GetStrokedGlyphs(), strokeColor, Vector2::Zero);
             context.Reset();
         }
 
         Color color = fontString.GetFont()->GetColor();
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
-        DrawGlyphs::Do(currentGeomEffect, context, renderer, bounds, clippedBounds, fontString.GetRegularGlyphs(), color);
+        DrawGlyphs::Do(currentGeomEffect, context, renderer, bounds, clippedBounds, fontString.GetRegularGlyphs(), color, Vector2::Zero);
 
         renderer->EndBatch();
     }

@@ -25,8 +25,8 @@
         return strokedGlyphs;
     }
 
-    const FontString::GlyphCollection& FontString::GetGlowGlyphs() const
+    const FontString::GlyphCollection& FontString::GetShadowGlyphs() const
     {
-        return glowGlyphs;
+        return shadowGlyphs;
     }
 }
