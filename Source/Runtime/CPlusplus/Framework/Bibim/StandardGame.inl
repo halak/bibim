@@ -10,6 +10,11 @@ namespace Bibim
         clearColor = value;
     }
 
+    Preferences* StandardGame::GetPreferences() const
+    {
+        return preferences;
+    }
+
     Keyboard* StandardGame::GetKeyboard() const
     {
         return keyboard;

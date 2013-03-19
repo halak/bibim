@@ -21,9 +21,9 @@
             float StrokeSize;
             float Weights;
             float Shear;
-            int GlowSize;
-            float GlowSpread;
-            float GlowThickness;
+            int ShadowSize;
+            float ShadowSpread;
+            float ShadowThickness;
             float Scale;
             bool Hinting;
             bool IgnoreBitmap;
@@ -31,7 +31,7 @@
 
             FontCacheParameters();
             FontCacheParameters(const String& faceURI, float fontSize, float strokeSize, float weights, float shear, 
-                                int glowSize, float glowSpread, float glowThickness,
+                                int shadowSize, float shadowSpread, float shadowThickness,
                                 float scale, bool hinting, bool ignoreBitmap);
             FontCacheParameters(const FontCacheParameters& original);
 
@@ -58,7 +58,7 @@
 
                 inline const GlyphTable* GetRegularGlyphTable() const;
                 inline const GlyphTable* GetStrokedGlyphTable() const;
-                inline const GlyphTable* GetGlowGlyphTable() const;
+                inline const GlyphTable* GetShadowGlyphTable() const;
 
             private:
                 FontCache(FontLibrary* library, const FontCacheParameters& parameters);
@@ -78,7 +78,7 @@
 
                 GlyphTable* regularGlyphTable;
                 GlyphTable* strokedGlyphTable;
-                GlyphTable* glowGlyphTable;
+                GlyphTable* shadowGlyphTable;
 
                 friend class FontLibrary;
         };

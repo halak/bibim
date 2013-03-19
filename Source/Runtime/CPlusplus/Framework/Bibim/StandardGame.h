@@ -19,6 +19,7 @@
                 inline Color GetClearColor() const;
                 inline void SetClearColor(Color value);
 
+                inline Preferences* GetPreferences() const;
                 inline Keyboard* GetKeyboard() const;
                 inline Mouse* GetMouse() const;
                 inline GameAssetStorage* GetAssetStorage() const;
@@ -72,6 +73,7 @@
 
             private:
                 Color clearColor;
+                Preferences* preferences;
                 Keyboard* keyboard;
                 Mouse* mouse;
                 GameAssetStorage* storage;

@@ -45,6 +45,7 @@
 
                 bool Preload(const String& name);
                 GameAsset* Load(const String& name);
+                void Store(const String& name, GameAsset* asset);
 
                 const String& FindName(GameAsset* value) const;
 

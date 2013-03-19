@@ -24,7 +24,7 @@ namespace Bibim
     GameAssetStorage* ComponentStreamReader::GetStorage()
     {
         if (storage == nullptr)
-            storage = static_cast<GameAssetStorage*>(modules->GetRoot()->FindChildByClassID(GameAssetStorage::ClassID));
+            storage = static_cast<GameAssetStorage*>(FindModuleByClassID(GameAssetStorage::ClassID));
 
         return storage;
     }

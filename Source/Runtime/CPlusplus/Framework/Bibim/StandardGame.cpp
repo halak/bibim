@@ -22,6 +22,7 @@
 #include <Bibim/Math.h>
 #include <Bibim/Mouse.h>
 #include <Bibim/PipedAssetProvider.h>
+#include <Bibim/Preferences.h>
 #include <Bibim/RenderTargetTexture2D.h>
 #include <Bibim/ScreenshotPrinter.h>
 #include <Bibim/SoundFX.h>
@@ -82,6 +83,9 @@ namespace Bibim
         GameFramework::Initialize();
 
         //MOBILE MPQPtr mainMPQ = new MPQ("Game.mpq");
+
+        preferences = new Preferences(gameName);
+        GetModules()->GetRoot()->AttachChild(preferences);
 
         keyboard = new Keyboard(GetWindow());
         mouse = new Mouse(GetWindow());
@@ -309,6 +313,92 @@ namespace Bibim
                 return nullptr;
         }
 
+        static int GetPreferenceItem(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            Preferences* preferences = game->GetPreferences();
+            if (preferences == nullptr)
+                return 0;
+
+            luaL_checktype(L, 1, LUA_TSTRING);
+
+            const String key = lua_tostring(L, 1);
+
+            const Any& value = preferences->GetValue(key);
+            switch (value.GetType())
+            {
+                case Any::VoidType:
+                    return 0;
+                case Any::BoolType:
+                    lua_pushboolean(L, value.CastBool());
+                    return 1;
+                case Any::IntType:
+                    lua_pushinteger(L, value.CastInt());
+                    return 1;
+                case Any::LongIntType:
+                    lua_pushnumber(L, static_cast<lua_Number>(value.CastLongInt()));
+                    return 1;
+                case Any::FloatType:
+                    lua_pushnumber(L, value.CastFloat());
+                    return 1;
+                case Any::StringType:
+                    lua_pushstring(L, value.CastString().CStr());
+                    return 1;
+                default:
+                    return 0;
+            }
+        }
+
+        static int SetPreferenceItem(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            Preferences* preferences = game->GetPreferences();
+            if (preferences == nullptr)
+                return 0;
+
+            luaL_checktype(L, 1, LUA_TSTRING);
+
+            const String key = lua_tostring(L, 1);
+            switch (lua_type(L, 2))
+            {
+                case LUA_TNIL:
+                    preferences->SetValue(key, Any::Void);
+                    break;
+                case LUA_TBOOLEAN:
+                    preferences->SetValue(key, lua_toboolean(L, 2) != 0);
+                    break;
+                case LUA_TNUMBER:
+                    preferences->SetValue(key, static_cast<int>(lua_tointeger(L, 2)));
+                    break;
+                case LUA_TSTRING:
+                    preferences->SetValue(key, String(lua_tostring(L, 2)));
+                    break;
+            }
+
+            return 0;
+        }
+
+        static int CommitPreferences(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            Preferences* preferences = game->GetPreferences();
+            if (preferences == nullptr)
+                return 0;
+
+            preferences->Commit();
+
+            return 0;
+        }
+
         static int SetTitle(lua_State* L)
         {
             StandardGame* game = GetGame(L);
@@ -464,6 +554,26 @@ namespace Bibim
                 lua_tinker::push(L, false);
 
             return 1;
+        }
+
+        static int Store(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            GameAssetStorage* assetStorage = game->GetAssetStorage();
+            if (assetStorage == nullptr)
+                return 0;
+
+            luaL_checktype(L, 1, LUA_TSTRING);
+            luaL_checktype(L, 2, LUA_TUSERDATA);
+
+            const String path = lua_tostring(L, 1);
+            if (GameAsset* asset = lua_tinker::read<GameAsset*>(L, 2))
+                assetStorage->Store(path, asset);
+
+            return 0;
         }
 
         static int Time(lua_State* L)
@@ -843,9 +953,7 @@ namespace Bibim
                 return 0;
 
             UIDomain* uiDomain = game->GetUIDomain();
-            if (uiDomain == nullptr ||
-                uiDomain->GetRoot() == nullptr ||
-                uiDomain->GetRoot()->GetNumberOfChildren() == 0)
+            if (uiDomain == nullptr)
                 return 0;
 
             UIPanel* root = nullptr;
@@ -1225,40 +1333,39 @@ namespace Bibim
                 int callbackIndex;
         };
 
-        static const int HTTP_METHOD_POST = 1;
-        static const int HTTP_METHOD_GET  = 2;
-
-        static void REQUEST(lua_State* L, int method)
+        static int REQUEST(lua_State* L)
         {
             StandardGame* game = GetGame(L);
             if (game == nullptr)
-                return;
+                return 0;
 
             HttpClient* http = game->GetHttpClient();
             if (http == nullptr)
-                return;
+                return 0;
 
             luaL_checkstring(L, 1);
+            luaL_checkstring(L, 2);
 
-            const char* url = lua_tostring(L, 1);
+            const char* method = lua_tostring(L, 1);
+            const char* url = lua_tostring(L, 2);
 
-            if (lua_isfunction(L, 2))
+            if (lua_isfunction(L, 3))
             {
                 SharedPointer<ScriptHttpCallback> callback = new ScriptHttpCallback(game->GetLua(),
-                                                                                    game->GetLua()->RegisterCallback(2));
+                                                                                    game->GetLua()->RegisterCallback(3));
 
-                if (method == HTTP_METHOD_POST)
+                if (String::EqualsCharsIgnoreCase(method, "POST"))
                     http->POST(url, callback);
-                else if (method == HTTP_METHOD_GET)
+                else if (String::EqualsCharsIgnoreCase(method, "GET"))
                     http->GET(url, callback);
             }
-            else if (lua_isfunction(L, 3))
+            else if (lua_isfunction(L, 4))
             {
                 std::vector<HttpClient::KeyValue> params;
-                if (lua_istable(L, 2))
+                if (lua_istable(L, 3))
                 {
                     lua_pushnil(L);
-                    while (lua_next(L, 2) != 0)
+                    while (lua_next(L, 3) != 0)
                     {
                         const int keyType = lua_type(L, -2);
                         const int valueType = lua_type(L, -1);
@@ -1284,29 +1391,16 @@ namespace Bibim
                     }
                 }
 
-                BBAssertDebug(lua_isfunction(L, 3));
+                BBAssertDebug(lua_isfunction(L, 4));
                 SharedPointer<ScriptHttpCallback> callback = new ScriptHttpCallback(game->GetLua(),
-                                                                                    game->GetLua()->RegisterCallback(3));
+                                                                                    game->GetLua()->RegisterCallback(4));
 
-                if (method == HTTP_METHOD_POST)
+                if (String::EqualsCharsIgnoreCase(method, "POST"))
                     http->POST(url, params, callback);
-                else if (method == HTTP_METHOD_GET)
+                else if (String::EqualsCharsIgnoreCase(method, "GET"))
                     http->GET(url, params, callback);
             }
-            else
-                return;
-        }
 
-
-        static int POST(lua_State* L)
-        {
-            REQUEST(L, HTTP_METHOD_POST);
-            return 0;
-        }
-
-        static int GET(lua_State* L)
-        {
-            REQUEST(L, HTTP_METHOD_GET);
             return 0;
         }
     }
@@ -1320,6 +1414,7 @@ namespace Bibim
             { "exit", &ExitGame },
             { "load", &Load },
             { "preload", &Preload },
+            { "store", &Store },
             { "time", &Time },
             { "timeout",  &AddTimeout },
             { "alarm", &AddAlarm },
@@ -1329,6 +1424,13 @@ namespace Bibim
             { "timeline", &GetTimeline },
             { "resetloadingstatus", &ResetLoadingStatus },
             { "loadingstatus", &LoadingStatus },
+            { NULL, NULL}  /* sentinel */
+        };
+
+        const struct luaL_reg preferencesLib [] = {
+            { "get", &GetPreferenceItem },
+            { "set", &SetPreferenceItem },
+            { "commit", &CommitPreferences },
             { NULL, NULL}  /* sentinel */
         };
 
@@ -1358,16 +1460,18 @@ namespace Bibim
             { "resume", &Resume },
             { NULL, NULL}  /* sentinel */
         };
-
-       const struct luaL_reg httpLib [] = {
-            { "get", &GET },
-            { "post", &POST },
+        
+        const struct luaL_reg httpLib [] = {
+            { "request", &REQUEST },
             { NULL, NULL}  /* sentinel */
         };
 
-       lua_State* state = GetState();
+        lua_State* state = GetState();
 
         luaL_register(state, "th", thLib);
+        lua_pop(state, 1);
+
+        luaL_register(state, "preferences", preferencesLib);
         lua_pop(state, 1);
 
         luaL_register(state, "ui", uiLib);

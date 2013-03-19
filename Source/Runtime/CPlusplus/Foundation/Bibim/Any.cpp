@@ -6,6 +6,8 @@
 namespace Bibim
 {
     const Any Any::Void;
+    const Any Any::True(true);
+    const Any Any::False(false);
 
     Any::Any(const Any& original)
         : type(original.type)

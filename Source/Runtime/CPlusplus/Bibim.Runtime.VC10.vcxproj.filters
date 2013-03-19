@@ -813,6 +813,18 @@
     <ClCompile Include="Framework\Bibim\StandardGame.cpp">
       <Filter>03. Game\Framework</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Bibim\Preferences.Android.cpp">
+      <Filter>03. Game\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Bibim\Preferences.iOS.cpp">
+      <Filter>03. Game\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Bibim\Preferences.Windows.cpp">
+      <Filter>03. Game\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Bibim\PreferencesBase.cpp">
+      <Filter>03. Game\Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset\Bibim\AssetLoadingTask.h">
@@ -1605,6 +1617,21 @@
     <ClInclude Include="Framework\Bibim\StandardGame.EmbeddedFont.h">
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="Framework\Bibim\Preferences.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\PreferencesBase.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\Preferences.Windows.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\Preferences.Android.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\Preferences.iOS.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Asset\Bibim\AssetLoadingTask.inl">
@@ -2232,6 +2259,9 @@
       <Filter>03. Game\Framework</Filter>
     </None>
     <None Include="Framework\Bibim\StandardGame.inl">
+      <Filter>03. Game\Framework</Filter>
+    </None>
+    <None Include="Framework\Bibim\PreferencesBase.inl">
       <Filter>03. Game\Framework</Filter>
     </None>
   </ItemGroup>

@@ -30,7 +30,7 @@
                 inline float GetTotalWidth() const;
                 inline const GlyphCollection& GetRegularGlyphs() const;
                 inline const GlyphCollection& GetStrokedGlyphs() const;
-                inline const GlyphCollection& GetGlowGlyphs() const;
+                inline const GlyphCollection& GetShadowGlyphs() const;
 
                 FontString& operator = (const char* text);
                 FontString& operator = (const String& text);
@@ -48,7 +48,7 @@
                 float totalWidth;
                 GlyphCollection regularGlyphs;
                 GlyphCollection strokedGlyphs;
-                GlyphCollection glowGlyphs;
+                GlyphCollection shadowGlyphs;
         };
     }
 

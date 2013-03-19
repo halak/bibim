@@ -162,6 +162,7 @@
                         class StandardGame;
                 class GameWindow;
                 class Lua;
+                class Preferences;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Gameplay
                 BBForwardDeclareSmartPointerClass(Command);

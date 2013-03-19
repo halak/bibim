@@ -14,6 +14,12 @@ namespace Bibim.Asset.Pipeline.Recipes
             set;
         }
 
+        public double Scale
+        {
+            get;
+            set;
+        }
+
         public bool IgnoreImageResources
         {
             get;
@@ -50,6 +56,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             IgnoreImageResources = ignoreImageResources;
             IgnoreLayers = ignoreLayers;
             IgnoreMergedBitmap = ignoreMergedBitmap;
+            Scale = 1.0;
         }
         #endregion
 
@@ -57,7 +64,13 @@ namespace Bibim.Asset.Pipeline.Recipes
         public override PhotoshopDocument Cook(CookingContext context)
         {
             using (var stream = Input.Cook(context))
-                return new PhotoshopDocument(stream, IgnoreImageResources, IgnoreLayers, IgnoreMergedBitmap);
+            {
+                var document = new PhotoshopDocument(stream, IgnoreImageResources, IgnoreLayers, IgnoreMergedBitmap);
+                if (Scale != 1.0)
+                    document.Scale(Scale, Scale);
+                
+                return document;
+            }
         }
         #endregion
     }

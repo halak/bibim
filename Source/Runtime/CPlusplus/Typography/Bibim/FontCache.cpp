@@ -98,9 +98,9 @@ namespace Bibim
           StrokeSize(0.0f),
           Weights(0.0f),
           Shear(0.0f),
-          GlowSize(0),
-          GlowSpread(0.0f),
-          GlowThickness(0.0f),
+          ShadowSize(0),
+          ShadowSpread(0.0f),
+          ShadowThickness(0.0f),
           Scale(1.0f),
           Hinting(true),
           IgnoreBitmap(false)
@@ -108,16 +108,16 @@ namespace Bibim
     }
 
     FontCacheParameters::FontCacheParameters(const String& faceURI, float fontSize, float strokeSize, float weights, float shear, 
-                                             int glowSize, float glowSpread, float glowThickness,
+                                             int shadowSize, float shadowSpread, float shadowThickness,
                                              float scale, bool hinting, bool ignoreBitmap)
         : FaceURI(faceURI),
           FontSize(fontSize),
           StrokeSize(strokeSize),
           Weights(weights),
           Shear(shear),
-          GlowSize(glowSize),
-          GlowSpread(glowSpread),
-          GlowThickness(glowThickness),
+          ShadowSize(shadowSize),
+          ShadowSpread(shadowSpread),
+          ShadowThickness(shadowThickness),
           Scale(scale),
           Hinting(hinting),
           IgnoreBitmap(ignoreBitmap)
@@ -130,9 +130,9 @@ namespace Bibim
           StrokeSize(original.StrokeSize),
           Weights(original.Weights),
           Shear(original.Shear),
-          GlowSize(original.GlowSize),
-          GlowSpread(original.GlowSpread),
-          GlowThickness(original.GlowThickness),
+          ShadowSize(original.ShadowSize),
+          ShadowSpread(original.ShadowSpread),
+          ShadowThickness(original.ShadowThickness),
           Scale(original.Scale),
           Hinting(original.Hinting),
           IgnoreBitmap(original.IgnoreBitmap)
@@ -147,9 +147,9 @@ namespace Bibim
         result += static_cast<unsigned int>(FloatToF26D6(StrokeSize));
         result += static_cast<unsigned int>(FloatToF26D6(Weights));
         result += static_cast<unsigned int>(FloatToF16D16(Shear));
-        result += static_cast<unsigned int>(GlowSize);
-        result += static_cast<unsigned int>(GlowSpread * 100.0f);
-        result += static_cast<unsigned int>(GlowThickness * 100.0f);
+        result += static_cast<unsigned int>(ShadowSize);
+        result += static_cast<unsigned int>(ShadowSpread * 100.0f);
+        result += static_cast<unsigned int>(ShadowThickness * 100.0f);
         result += static_cast<unsigned int>(Scale * 100.0f);
         result += static_cast<unsigned int>(Hinting ? 0x08000000 : 0x00000000);
         result += static_cast<unsigned int>(IgnoreBitmap ? 0x00800000 : 0x00000000);
@@ -163,9 +163,9 @@ namespace Bibim
         StrokeSize = right.StrokeSize;
         Weights = right.Weights;
         Shear = right.Shear;
-        GlowSize = right.GlowSize;
-        GlowSpread = right.GlowSpread;
-        GlowThickness = right.GlowThickness;
+        ShadowSize = right.ShadowSize;
+        ShadowSpread = right.ShadowSpread;
+        ShadowThickness = right.ShadowThickness;
         Scale = right.Scale;
         Hinting = right.Hinting;
         IgnoreBitmap = right.IgnoreBitmap;
@@ -174,21 +174,21 @@ namespace Bibim
 
     bool FontCacheParameters::operator == (const FontCacheParameters& right) const
     {
-        if (GlowSize > 0 && right.GlowSize > 0)
+        if (ShadowSize > 0 && right.ShadowSize > 0)
         {
             return (FaceURI                  == right.FaceURI &&
                     FloatToF26D6(FontSize)   == FloatToF26D6(right.FontSize) &&
                     FloatToF26D6(StrokeSize) == FloatToF26D6(right.StrokeSize) &&
                     FloatToF26D6(Weights)    == FloatToF26D6(right.Weights) &&
                     FloatToF16D16(Shear)     == FloatToF16D16(right.Shear) &&
-                    GlowSize                 == right.GlowSize &&
-                    GlowSpread               == right.GlowSpread &&
-                    GlowThickness            == right.GlowThickness &&
+                    ShadowSize               == right.ShadowSize &&
+                    ShadowSpread             == right.ShadowSpread &&
+                    ShadowThickness          == right.ShadowThickness &&
                     FloatToF26D6(Scale)      == FloatToF26D6(right.Scale) &&
                     Hinting                  == right.Hinting &&
                     IgnoreBitmap             == right.IgnoreBitmap);
         }
-        else if (GlowSize == 0 && right.GlowSize == 0)
+        else if (ShadowSize == 0 && right.ShadowSize == 0)
         {
             return (FaceURI                  == right.FaceURI &&
                     FloatToF26D6(FontSize)   == FloatToF26D6(right.FontSize) &&
@@ -216,7 +216,7 @@ namespace Bibim
           lineHeight(0.0f),
           regularGlyphTable(nullptr),
           strokedGlyphTable(nullptr),
-          glowGlyphTable(nullptr)
+          shadowGlyphTable(nullptr)
     {
         if (parameters.FaceURI.IsEmpty() == false)
         {
@@ -309,11 +309,34 @@ namespace Bibim
 
         if (stroker)
             strokedGlyphTable = new GlyphTable(library->GetGraphicsDevice());
+
+        if (parameters.ShadowSize == 1)
+        {
+            if (stroker)
+                shadowGlyphTable = strokedGlyphTable;
+            else
+                shadowGlyphTable = regularGlyphTable;
+        }
+        else if (parameters.ShadowSize > 1)
+            shadowGlyphTable = new GlyphTable(library->GetGraphicsDevice());
     }
 
     FontCache::~FontCache()
     {
-        delete glowGlyphTable;
+        if (parameters.ShadowSize > 1)
+            delete shadowGlyphTable;
+        else if (parameters.ShadowSize == 1)
+        {
+            if (stroker)
+            {
+                BBAssert(shadowGlyphTable == strokedGlyphTable);
+            }
+            else
+            {
+                BBAssert(shadowGlyphTable == regularGlyphTable);
+            }
+            // 그렇기 때문제 delete할 필요가 없습니다.
+        }
         delete strokedGlyphTable;
         delete regularGlyphTable;
 
@@ -443,6 +466,10 @@ namespace Bibim
                 transform[1][0], transform[1][1],
             };
             FT_Set_Transform(faceGlyphIndex.first, &ftTransform, &ZeroVector);
+
+            if (parameters.ShadowSize > 1)
+            {
+            }
 
             if (parameters.StrokeSize > 0.0f)
             {

@@ -2,6 +2,7 @@
 #include <Bibim/UILabel.h>
 #include <Bibim/Colors.h>
 #include <Bibim/ComponentStreamReader.h>
+#include <Bibim/GameModuleTree.h>
 #include <Bibim/Font.h>
 #include <Bibim/UIDrawingContext.h>
 

@@ -274,7 +274,7 @@ namespace Bibim.Asset
                 private set;
             }
 
-            public IList<Channel> Channels
+            private IList<Channel> Channels
             {
                 get { return readonlyChannels; }
             }
@@ -284,10 +284,10 @@ namespace Bibim.Asset
                 get { return readonlySubLayers; }
             }
 
-            public Mask Mask
+            private Mask Mask
             {
                 get;
-                private set;
+                set;
             }
 
             public Bitmap Bitmap
@@ -296,7 +296,7 @@ namespace Bibim.Asset
                 private set;
             }
 
-            public Channel this[ChannelID id]
+            private Channel this[ChannelID id]
             {
                 get { return sortedChannels[id]; }
             }
@@ -396,14 +396,13 @@ namespace Bibim.Asset
                         Name = reader.ReadPSDString();
 
                         // 4-byte Padding 시킵니다.
-                        long paddingSize = (reader.BaseStream.Position - namePosition) % 4;
+                        long paddingSize = (4 - ((reader.BaseStream.Position - namePosition) % 4)) % 4;
                         reader.BaseStream.Position += paddingSize;
                     }
                     #endregion
 
-                    #region Adjustment 정보를 읽어옵니다.
-                    {
-                    }
+                    #region Additional Layer 정보를 읽어옵니다.
+                    ReadAdditionalInfo(reader, extraDataEndPosition);
                     #endregion
 
                     reader.BaseStream.Position = extraDataEndPosition;
@@ -443,6 +442,27 @@ namespace Bibim.Asset
                 }
 
                 return result;
+            }
+
+            public void Scale(double scaleX, double scaleY)
+            {
+                int x = (int)((double)Rectangle.X * scaleX);
+                int y = (int)((double)Rectangle.Y * scaleY);
+                int w = (int)((double)Rectangle.Width * scaleY);
+                int h = (int)((double)Rectangle.Height * scaleY);
+                Rectangle = new Rectangle(x, y, w, h);
+
+                if (Bitmap != null)
+                {
+                    var resizedBitmap = new Bitmap(Bitmap, w, h);
+                    Bitmap.Dispose();
+                    Bitmap = resizedBitmap;
+                }
+
+                // Mask와 Channels도 Resize해야합니다.
+
+                foreach (var item in SubLayers)
+                    item.Scale(scaleX, scaleY);
             }
 
             internal void AddSubLayer(Layer item)
@@ -490,6 +510,135 @@ namespace Bibim.Asset
                 if (Mask != null)
                 {
                     Mask.ReadPixelData(sortedChannels[ChannelID.UserSppliedLayerMask], bitsPerPixel, reader);
+                }
+            }
+
+            private void ReadAdditionalInfo(Reader reader, long extraDataEndPosition)
+            {
+                while (reader.BaseStream.Position < extraDataEndPosition)
+                {
+                    string signature = new string(reader.ReadChars(4));
+                    if (signature != "8BIM")
+                        return;
+
+                    string fourcc = new string(reader.ReadChars(4));
+                    uint size = reader.ReadUInt32();
+                    long endPosition = reader.BaseStream.Position + (long)size;
+                    switch (fourcc)
+                    {
+                        case "luni": Read_luni(reader, size); break;
+                        case "TySh": Read_TySh(reader, size); break;
+                    }
+
+                    reader.BaseStream.Position = endPosition;
+                }
+            }
+
+            private void Read_luni(Reader reader, uint size)
+            {
+                uint stringLength = reader.ReadUInt32();
+                byte[] buffer = reader.ReadBytes((int)stringLength * 2);
+
+                Name = Encoding.BigEndianUnicode.GetString(buffer);
+            }
+
+            private void Read_TySh(Reader reader, uint size)
+            {
+                ushort version = reader.ReadUInt16();
+                double xx = reader.ReadDouble();
+                double xy = reader.ReadDouble();
+                double yz = reader.ReadDouble();
+                double yy = reader.ReadDouble();
+                double tx = reader.ReadDouble();
+                double ty = reader.ReadDouble();
+                ushort textVersion = reader.ReadUInt16();
+                uint descriptorVersion = reader.ReadUInt32();
+                ReadDescriptor(reader);
+                version = version;
+                xx = xx;
+                xy = xy;
+                yz = yz;
+                yy = yy;
+                tx = tx;
+                ty = ty;
+                textVersion = textVersion;
+                descriptorVersion = descriptorVersion;
+            }
+
+            private void ReadDescriptor(Reader reader)
+            {
+                uint nameLength = reader.ReadUInt32();
+                byte[] nameBuffer = reader.ReadBytes((int)nameLength * 2);
+                string name = Encoding.Default.GetString(nameBuffer);
+                nameLength = nameLength;
+                nameBuffer = nameBuffer;
+                name = name;
+
+                uint classIDLength = reader.ReadUInt32();
+                uint classID = 0;
+                string classIDName = string.Empty;
+                if (classIDLength == 0)
+                    classID = reader.ReadUInt32();
+                else
+                {
+                    byte[] classIDBuffer = reader.ReadBytes((int)classIDLength);
+                    classIDName = Encoding.Default.GetString(classIDBuffer);
+                }
+                classID = classID;
+                uint numberOfItems = reader.ReadUInt32();
+                for (uint i = 0; i < numberOfItems; i++)
+                {
+                    uint keyLength = reader.ReadUInt32();
+                    uint key = 0;
+                    string keyName = string.Empty;
+                    if (keyLength == 0)
+                        key = reader.ReadUInt32();
+                    else
+                    {
+                        byte[] keyBuffer = reader.ReadBytes((int)keyLength);
+                        keyName = Encoding.Default.GetString(keyBuffer);
+                    }
+
+                    string osType = new string(reader.ReadChars(4));
+                    switch (osType)
+                    {
+                        case "TEXT":
+                            uint valueLength = reader.ReadUInt32();
+                            byte[] valueBuffer = reader.ReadBytes((int)valueLength * 2);
+                            string s = Encoding.BigEndianUnicode.GetString(valueBuffer);
+                            s = s;
+                            break;
+                        case "enum":
+                            uint typeLength = reader.ReadUInt32();
+                            uint type = 0;
+                            string typeName = "";
+                            if (typeLength == 0)
+                                type = reader.ReadUInt32();
+                            else
+                            {
+                                typeName = new string(reader.ReadChars((int)typeLength));
+                            }
+                            type = type;
+                            typeName = typeName;
+
+                            uint enumLength = reader.ReadUInt32();
+                            uint enum_ = 0;
+                            string enumName = "";
+                            if (enumLength == 0)
+                                enum_ = reader.ReadUInt32();
+                            else
+                            {
+                                enumName = new string(reader.ReadChars((int)enumLength));
+                            }
+                            enum_ = enum_;
+                            enumName = enumName;
+                            break;
+                    }
+
+                    key = key;
+                    keyName = keyName;
+                    osType = osType;
+
                 }
             }
             #endregion

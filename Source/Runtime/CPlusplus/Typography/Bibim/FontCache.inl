@@ -42,8 +42,8 @@
         return strokedGlyphTable;
     }
 
-    const GlyphTable* FontCache::GetGlowGlyphTable() const
+    const GlyphTable* FontCache::GetShadowGlyphTable() const
     {
-        return glowGlyphTable;
+        return shadowGlyphTable;
     }
 }

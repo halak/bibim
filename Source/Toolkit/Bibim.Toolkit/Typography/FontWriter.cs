@@ -19,16 +19,17 @@ namespace Bibim.Typography
             writer.Write(asset.StrokeSize);
             writer.Write(asset.Weights);
             writer.Write(asset.Shear);
-            writer.Write(asset.GlowSize);
-            writer.Write(asset.GlowSpread);
-            writer.Write(asset.GlowThickness);
+            writer.Write(asset.ShadowSize);
+            writer.Write(asset.ShadowSpread);
+            writer.Write(asset.ShadowThickness);
+            writer.Write(asset.ShadowOffset);
             writer.Write(asset.Scale);
             writer.Write(asset.Hinting);
             writer.Write(asset.IgnoreBitmap);
             writer.Write(asset.Spacing);
             writer.Write(asset.Color);
             writer.Write(asset.StrokeColor);
-            writer.Write(asset.GlowColor);
+            writer.Write(asset.ShadowColor);
         }
     }
 }

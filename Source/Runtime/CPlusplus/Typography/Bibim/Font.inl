@@ -5,6 +5,11 @@
         return library;
     }
 
+    void Font::SetShadowOffsetXY(float x, float y)
+    {
+        SetShadowOffset(Vector2(x, y));
+    }
+
     Color Font::GetColor() const
     {
         return color;
@@ -25,14 +30,14 @@
         SetStrokeColor(Color(r, g, b));
     }
 
-    Color Font::GetGlowColor() const
+    Color Font::GetShadowColor() const
     {
-        return glowColor;
+        return shadowColor;
     }
 
-    void Font::SetGlowColorRGB(byte r, byte g, byte b) 
+    void Font::SetShadowColorRGB(byte r, byte g, byte b) 
     {
-        SetGlowColor(Color(r, g, b));
+        SetShadowColor(Color(r, g, b));
     }
 
     float Font::GetSpacing() const
