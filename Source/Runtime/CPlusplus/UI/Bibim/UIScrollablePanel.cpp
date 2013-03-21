@@ -94,9 +94,7 @@ namespace Bibim
         if (content == nullptr)
             return;
 
-        BBAssert(content->GetXMode() == UIVisual::AbsolutePosition &&
-                 content->GetYMode() == UIVisual::AbsolutePosition &&
-                 content->GetAnchorPoint() == UIVisual::LeftTop);
+        BBAssert(content->GetAnchorPoint() == UIVisual::LeftTop);
         BBAssertDebug(content->GetParent() == this); // 이기 때문에 content->ComputeBounds에서 올바른 값을 반환할 수 있습니다.
 
         const RectF bounds = context.GetCurrentBounds();

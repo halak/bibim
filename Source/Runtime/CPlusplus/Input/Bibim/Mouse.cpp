@@ -41,33 +41,39 @@ namespace Bibim
         state.Position = Point2(x, y);
     }
 
-    void Mouse::OnMouseLeftButtonDown(Window* /*window*/, int /*x*/, int /*y*/)
+    void Mouse::OnMouseLeftButtonDown(Window* /*window*/, int x, int y)
     {
+        state.Position = Point2(x, y);
         state.IsLeftButtonPressed = true;
     }
 
-    void Mouse::OnMouseLeftButtonUp(Window* /*window*/, int /*x*/, int /*y*/)
+    void Mouse::OnMouseLeftButtonUp(Window* /*window*/, int x, int y)
     {
+        state.Position = Point2(x, y);
         state.IsLeftButtonPressed = false;
     }
 
-    void Mouse::OnMouseMiddleButtonDown(Window* /*window*/, int /*x*/, int /*y*/)
+    void Mouse::OnMouseMiddleButtonDown(Window* /*window*/, int x, int y)
     {
+        state.Position = Point2(x, y);
         state.IsMiddleButtonPressed = true;
     }
 
-    void Mouse::OnMouseMiddleButtonUp(Window* /*window*/, int /*x*/, int /*y*/)
+    void Mouse::OnMouseMiddleButtonUp(Window* /*window*/, int x, int y)
     {
+        state.Position = Point2(x, y);
         state.IsMiddleButtonPressed = false;
     }
 
-    void Mouse::OnMouseRightButtonDown(Window* /*window*/, int /*x*/, int /*y*/)
+    void Mouse::OnMouseRightButtonDown(Window* /*window*/, int x, int y)
     {
+        state.Position = Point2(x, y);
         state.IsRightButtonPressed = true;
     }
 
-    void Mouse::OnMouseRightButtonUp(Window* /*window*/, int /*x*/, int /*y*/)
+    void Mouse::OnMouseRightButtonUp(Window* /*window*/, int x, int y)
     {
+        state.Position = Point2(x, y);
         state.IsRightButtonPressed = false;
     }
 

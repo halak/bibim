@@ -23,6 +23,10 @@
                 GameFramework(int width, int height);
     
                 void Construct(int width, int height);
+
+            public:
+                static GameFramework* Create();
+                static GameFramework* SingletonInstance;
         };
     }
 

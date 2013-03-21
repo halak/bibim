@@ -16,7 +16,8 @@ namespace Bibim
 
     GameWindow::GameWindow()
         : handle(nullptr),
-          visible(false)
+          visible(false),
+          isUserSizing(false)
     {
     }
 
@@ -214,8 +215,6 @@ namespace Bibim
 
     LRESULT CALLBACK GameWindow::Internal::WindowProcedure(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam)
     {
-        static const char* instanceName = "inst";
-
         switch (message)
         {
             case WM_PAINT:
@@ -274,11 +273,33 @@ namespace Bibim
                         return 0;
                 }
                 break;
+            case WM_ENTERSIZEMOVE:
+                GetGameWindow(windowHandle)->isUserSizing = true;
+                return 0;
+            case WM_EXITSIZEMOVE:
+                {
+                    RECT clientRect = { 0, 0, 0, 0 };
+                    ::GetClientRect(windowHandle, &clientRect);
+                    const Point2 newSize = Point2(clientRect.right - clientRect.left,
+                                                  clientRect.bottom - clientRect.top);
+                    GameWindow* o = GetGameWindow(windowHandle);
+                    o->isUserSizing = false;
+                    if (o->size != newSize)
+                    {
+                        o->size = newSize;
+                        o->RaiseResizedEvent();
+                    }
+                }
+                return 0;
             case WM_SIZE:
                 {
                     GameWindow* o = GetGameWindow(windowHandle);
-                    o->size = Point2(LOWORD(lParam), HIWORD(lParam));
-                    o->RaiseResizedEvent();
+                    if (wParam != SIZE_RESTORED ||
+                        o->isUserSizing == false)
+                    {
+                        o->size = Point2(LOWORD(lParam), HIWORD(lParam));
+                        o->RaiseResizedEvent();
+                    }
                 }
                 return 0;
             case WM_CREATE:

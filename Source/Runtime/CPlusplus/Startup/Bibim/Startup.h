@@ -25,8 +25,12 @@
                 g.Run(); \
                 return 0; \
             }
-#   else
-#       define BBMain(gameClass)
+#   elif (defined(BIBIM_PLATFORM_ANDROID))
+#       define BBMain(gameClass) \
+            Bibim::GameFramework* Bibim::GameFramework::Create() \
+            { \
+                return new gameClass(); \
+            }
 #   endif
 
 #endif
