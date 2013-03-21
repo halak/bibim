@@ -138,11 +138,11 @@ namespace Bibim
         storage = new GameAssetStorage(GetModules());
         GameModuleNode* storageNode = GetModules()->GetRoot()->AttachChild(storage);
         {
-            //MOBILE PipedAssetProvider* pap = new PipedAssetProvider(storage, PipedAssetProvider::DefaultPipeName, gameName);
+            PipedAssetProvider* pap = new PipedAssetProvider(storage, PipedAssetProvider::DefaultPipeName, gameName);
             //MOBILE MPQAssetProvider*   map = new MPQAssetProvider(storage, mainMPQ);
             FileAssetProvider*  fap = new FileAssetProvider(storage);
 
-            //MOBILE storageNode->AttachChild(pap);
+            storageNode->AttachChild(pap);
             //MOBILE storageNode->AttachChild(map);
             storageNode->AttachChild(fap);
         }
