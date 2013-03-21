@@ -53,6 +53,7 @@
                 Point2 position;
                 Point2 size;
                 bool visible;
+                bool isUserSizing;
 
                 struct Internal;
         };

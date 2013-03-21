@@ -163,7 +163,7 @@ namespace Bibim
         parentTransformInv = currentTransformInv;
         if (target->GetTransform())
         {
-            currentTransform *= target->GetTransform()->ComputeMatrix(*this);
+            currentTransform = target->GetTransform()->ComputeMatrix(*this) * currentTransform;
             currentTransformInv = Matrix4::Inversion(currentTransform);
         }
 
