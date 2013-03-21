@@ -14,8 +14,8 @@
             BBThisIsNoncopyableClass(UIVisualVisitor);
             public:
                 explicit UIVisualVisitor(bool visibleOnly);
-                UIVisualVisitor(const Matrix4& viewTransform, const Matrix4& projectionTransform, bool visibleOnly);
-                UIVisualVisitor(const Matrix4& viewTransform, const Matrix4& viewTransformInv, const Matrix4& projectionTransform, bool visibleOnly);
+                UIVisualVisitor(Point2 resolution, const Matrix4& viewTransform, const Matrix4& projectionTransform, bool visibleOnly);
+                UIVisualVisitor(Point2 resolution, const Matrix4& viewTransform, const Matrix4& viewTransformInv, const Matrix4& projectionTransform, bool visibleOnly);
                 virtual ~UIVisualVisitor();
 
                 Vector2 Project(Vector2 point) const;
@@ -48,7 +48,7 @@
                 Vector2 UnprojectPoint(Vector2 point, const Matrix4& inversedTransform) const;
 
             private:
-                RectF viewport;
+                Vector2 resolution;
                 float fieldOfView;
                 bool visibleOnly;
 

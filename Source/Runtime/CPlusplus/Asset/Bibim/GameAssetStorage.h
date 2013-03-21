@@ -47,6 +47,8 @@
                 GameAsset* Load(const String& name);
                 void Store(const String& name, GameAsset* asset);
 
+                void Restore();
+
                 const String& FindName(GameAsset* value) const;
 
                 inline GameModuleTree* GetModules() const;

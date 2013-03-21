@@ -107,6 +107,7 @@ namespace Bibim
     void UIRenderer::DrawQuads(Texture2D* texture, Texture2D* mask, int vertexStart, int /*numberOfVertices*/, int numberOfQuads)
     {   
         glActiveTexture(GL_TEXTURE0);
+        GLES2::CheckLastError("glActiveTexture");
         if (texture)
             glBindTexture(GL_TEXTURE_2D, texture->GetHandle());
         else
@@ -121,6 +122,7 @@ namespace Bibim
                        numberOfQuads * IndicesPerQuad / TrianglesPerQuad,
                        GL_UNSIGNED_SHORT,
                        &ib[static_cast<int>(vertexStart / VerticesPerQuad) * IndicesPerQuad]);
+        GLES2::CheckLastError("glDrawElements");
     }
 
     void UIRenderer::OnCreateQuadsCache(int vbSize, int numberOfIndices)
@@ -143,7 +145,9 @@ namespace Bibim
     {
         GLuint handle = effect->GetHandle();
         glUseProgram(handle);
+        GLES2::CheckLastError("glUseProgram");
         glUniformMatrix4fv(effect->GetMVPTransformLocation(), 1, GL_FALSE, mvpTransform);
+        GLES2::CheckLastError("glUniformMatrix4fv");
 
         if (mode != ColorOnlyMode)
             glUniform1i(effect->GetMainSamplerLocation(), 0);

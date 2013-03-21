@@ -1,23 +1,50 @@
 #include <Bibim/PCH.h>
-#include <Bibim/FileStream.iOS.h>
+#include <Bibim/FileStream.CRT.h>
+#include <Bibim/Assert.h>
+#include <Bibim/Environment.h>
 #include <Bibim/Math.h>
 #include <Bibim/Numerics.h>
 #include <Bibim/Log.h>
 
 namespace Bibim
 {
+    static bool IsAbsolutePath(const String& path)
+    {
+        if (path.GetLength() >= 2)
+        {
+            const char* s = path.CStr();
+            return (s[0] == '/' ||
+                    s[1] == ':' ||
+                    s[2] == ':');
+        }
+
+        return false;
+    }
+
     FileStream::FileStream(const String& path, AccessMode accessMode)
         : handle(nullptr),
           canRead(false),
           canWrite(false)
     {
+        if (path.IsEmpty())
+            return;
+
         char mode[3] = { 'r', 'b', '\0' };
         if (accessMode == ReadOnly)
             mode[0] = 'r';
         else if (accessMode == WriteOnly)
             mode[0] = 'w';
 
-        handle = std::fopen(path.CStr(), mode);
+        String cleanPath = path;
+        cleanPath.Replace('\\', '/');
+
+        if (IsAbsolutePath(cleanPath) == false)
+        {
+            BBAssert(cleanPath.CStr()[0] != '/');
+            cleanPath = Environment::GetWorkingDirectory() + cleanPath;
+        }
+
+        handle = std::fopen(cleanPath.CStr(), mode);
         if (handle == nullptr)
         {
             canRead  = false;
@@ -92,11 +119,17 @@ namespace Bibim
 
     int FileStream::GetPosition()
     {
-        return static_cast<int>(std::ftell(handle));
+        if (handle)
+            return static_cast<int>(std::ftell(handle));
+        else
+            return 0;
     }
 
     int FileStream::GetLength()
     {
+        if (handle == nullptr)
+            return 0;
+
         const int current = static_cast<int>(std::ftell(handle));
         std::fseek(handle, 0, SEEK_END);
         const int length = std::ftell(handle);

@@ -38,4 +38,10 @@ namespace Bibim
     {
         CheckedRelease(d3dSurface);
     }
+
+    void RenderTargetTexture2D::OnGraphicsDeviceLost(GraphicsDeviceBase* g)
+    {
+        CheckedRelease(d3dSurface);
+        Base::OnGraphicsDeviceLost(g);
+    }
 }

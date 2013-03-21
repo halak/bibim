@@ -6,11 +6,16 @@ namespace Bibim
 
     Environment::Environment()
     {
-        PrivateInstance.localeName = "ko-kr";
+    }
+
+    void Environment::Setup(const String& localeName, const String& workingDirectory)
+    {
+        PrivateInstance.localeName = localeName;
+        PrivateInstance.workingDirectory = workingDirectory;
     }
 
     String Environment::GetAppDataPath(const String& appName, const String& filename)
     {
-        return appName + "\\" + filename;
+        return PrivateInstance.workingDirectory + "/" + appName + "/" + filename;
     }
 }

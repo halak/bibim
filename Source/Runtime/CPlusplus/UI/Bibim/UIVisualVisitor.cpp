@@ -27,11 +27,12 @@ namespace Bibim
     {
     }
 
-    UIVisualVisitor::UIVisualVisitor(const Matrix4& viewTransform, const Matrix4& projectionTransform, bool visibleOnly)
-        : visibleOnly(visibleOnly),
+    UIVisualVisitor::UIVisualVisitor(Point2 resolution, const Matrix4& viewTransform, const Matrix4& projectionTransform, bool visibleOnly)
+        : resolution(resolution.X, resolution.Y),
+          visibleOnly(visibleOnly),
           currentOpacity(1.0f),
-          currentBounds(BigRect),
-          currentClippedBounds(BigRect),
+          currentBounds(0, 0, resolution.X, resolution.Y),
+          currentClippedBounds(0, 0, resolution.X, resolution.Y),
           currentTransform(Matrix4::Identity),
           currentTransformInv(Matrix4::Identity),
           parentTransform(Matrix4::Identity),
@@ -42,11 +43,12 @@ namespace Bibim
     {
     }
 
-    UIVisualVisitor::UIVisualVisitor(const Matrix4& viewTransform, const Matrix4& viewTransformInv, const Matrix4& projectionTransform, bool visibleOnly)
-        : visibleOnly(visibleOnly),
+    UIVisualVisitor::UIVisualVisitor(Point2 resolution, const Matrix4& viewTransform, const Matrix4& viewTransformInv, const Matrix4& projectionTransform, bool visibleOnly)
+        : resolution(resolution.X, resolution.Y),
+          visibleOnly(visibleOnly),
           currentOpacity(1.0f),
-          currentBounds(BigRect),
-          currentClippedBounds(BigRect),
+          currentBounds(0, 0, resolution.X, resolution.Y),
+          currentClippedBounds(0, 0, resolution.X, resolution.Y),
           currentTransform(Matrix4::Identity),
           currentTransformInv(Matrix4::Identity),
           parentTransform(Matrix4::Identity),
@@ -55,7 +57,10 @@ namespace Bibim
           viewTransformInv(viewTransformInv),
           projectionTransform(projectionTransform)
     {
-        BBAssertDebug(Matrix4::Inversion(viewTransform) == viewTransformInv);
+        if (resolution.X > 0 && resolution.Y > 0)
+        {
+            BBAssertDebug(Matrix4::Inversion(viewTransform) == viewTransformInv);
+        }
     }
 
     UIVisualVisitor::~UIVisualVisitor()
@@ -189,9 +194,8 @@ namespace Bibim
 
     Vector2 UIVisualVisitor::UnprojectPoint(Vector2 point, const Matrix4& inversedTransform) const
     {
-        const RectF viewport = RectF(0, 0, 480, 800);
-        const float width  = viewport.Width;
-        const float height = viewport.Height;
+        const float width  = resolution.X;
+        const float height = resolution.Y;
         const Vector3 direction = Vector3(+(((2.0f * point.X) / width ) - 1.0f) / projectionTransform.M00,
                                           -(((2.0f * point.Y) / height) - 1.0f) / projectionTransform.M11,
                                           1.0f);

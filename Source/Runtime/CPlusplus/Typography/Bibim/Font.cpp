@@ -38,6 +38,8 @@ namespace Bibim
           parameters(*parametersPointer),
           cache(nullptr)
     {
+        if (library)
+            library->Add(this);
     }
 
     Font::Font(const Font& original)
@@ -54,6 +56,9 @@ namespace Bibim
 
     Font::~Font()
     {
+        if (library)
+            library->Remove(this);
+
         delete parametersPointer;
     }
 
@@ -93,9 +98,15 @@ namespace Bibim
     {
         if (library != value)
         {
+            if (library)
+                library->Remove(this);
+
             library = value;
             cache.Reset();
             IncreaseRevision();
+
+            if (library)
+                library->Add(this);
         }
     }
 

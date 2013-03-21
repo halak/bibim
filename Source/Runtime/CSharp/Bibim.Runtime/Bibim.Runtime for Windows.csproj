@@ -352,6 +352,7 @@
     <Compile Include="UI\Visuals\UIPanel.cs" />
     <Compile Include="UI\Visuals\UIRadioButton.cs" />
     <Compile Include="UI\Visuals\UIImage.cs" />
+    <Compile Include="UI\Visuals\UIScrollablePanel.cs" />
     <Compile Include="UI\Visuals\UISprite.cs" />
     <Compile Include="UI\Visuals\UIVideo.cs" />
     <Compile Include="UI\Visuals\UIVisual.cs" />

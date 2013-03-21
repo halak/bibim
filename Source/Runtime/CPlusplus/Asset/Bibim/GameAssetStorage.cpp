@@ -94,6 +94,32 @@ namespace Bibim
             assets.insert(AssetTable::value_type(name, asset));
     }
 
+    void GameAssetStorage::Restore()
+    {
+        for (AssetTable::const_iterator it = assets.begin(); it != assets.end(); it++)
+        {
+            if ((*it).second && (*it).second->GetStatus() == GameAsset::DirtyStatus)
+            {
+                const String& name = (*it).first;
+                GameAsset* asset = (*it).second;
+                asset->SetStatus(GameAsset::LoadingStatus);
+
+                bool restoring = false;
+                for (ProviderCollection::const_iterator it = providers.begin(); it != providers.end(); it++)
+                {
+                    if ((*it)->Restore(name, asset))
+                    {
+                        restoring = true;
+                        break;
+                    }
+                }
+
+                if (restoring == false)
+                    asset->SetStatus(GameAsset::DirtyStatus);
+            }
+        }
+    }
+
     const String& GameAssetStorage::FindName(GameAsset* value) const
     {
         for (AssetTable::const_iterator it = assets.begin(); it != assets.end(); it++)

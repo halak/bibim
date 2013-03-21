@@ -63,6 +63,8 @@
             private:
                 FontCache(FontLibrary* library, const FontCacheParameters& parameters);
 
+                void Clear();
+
             private:
                 FontLibrary* library;
                 FontCacheParameters parameters;

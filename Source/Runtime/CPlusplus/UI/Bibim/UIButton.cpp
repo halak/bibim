@@ -2,7 +2,7 @@
 #include <Bibim/UIButton.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/UIMouseButtonEventArgs.h>
-#include <BIbim/UIPickingContext.h>
+#include <Bibim/UIPickingContext.h>
 #include <Bibim/UIVisual.h>
 
 namespace Bibim

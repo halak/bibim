@@ -25,7 +25,7 @@ namespace Bibim
     {
     }
 
-    GameAsset* SourceTexture2D::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
+    GameAsset* SourceTexture2D::Create(StreamReader& reader, GameAsset* existingInstance)
     {
         GraphicsDevice* graphicsDevice = static_cast<GraphicsDevice*>(reader.ReadModule(GraphicsDevice::ClassID));
         const int width = static_cast<int>(reader.ReadShortInt());
@@ -34,13 +34,14 @@ namespace Bibim
         const int surfaceHeight = static_cast<int>(reader.ReadShortInt());
         const PixelFormat pixelFormat = static_cast<PixelFormat>(reader.ReadByte());
         if (width == 0 || height == 0 || surfaceWidth == 0 || surfaceHeight == 0)
-            return nullptr;
+            return existingInstance;
 
-        SourceTexture2D* texture = new SourceTexture2D(graphicsDevice, width, height, surfaceWidth, surfaceHeight, pixelFormat);
+        if (existingInstance == nullptr)
+            existingInstance = new SourceTexture2D(graphicsDevice, width, height, surfaceWidth, surfaceHeight, pixelFormat);
 
-        Read(texture, reader);
+        Read(static_cast<SourceTexture2D*>(existingInstance), reader);
 
-        return texture;
+        return existingInstance;
     }
 
     void SourceTexture2D::Read(SourceTexture2D* self, StreamReader& reader)
@@ -81,17 +82,21 @@ namespace Bibim
         }
 
         GLuint textureHandle = 0;
-
         glActiveTexture(GL_TEXTURE0);
+        GLES2::CheckLastError("glActiveTexture");
         glGenTextures(1, &textureHandle);
+        GLES2::CheckLastError("glGenTextures");
         glBindTexture(GL_TEXTURE_2D, textureHandle);
+        GLES2::CheckLastError("glBindTexture");
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);//GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);//GL_NEAREST);
+        GLES2::CheckLastError("glTexParameteri");
 
         glTexImage2D(GL_TEXTURE_2D, 0, glesFormat, width, height, 0, glesFormat, GL_UNSIGNED_BYTE, destination);
+        GLES2::CheckLastError("glTexImage2D");
 
         self->Setup(textureHandle, self->GetWidth(), self->GetHeight(), width, height, pixelFormat);
         self->IncreaseRevision();

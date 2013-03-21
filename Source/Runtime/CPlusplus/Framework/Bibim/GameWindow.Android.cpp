@@ -46,7 +46,11 @@ namespace Bibim
 
     void GameWindow::SetSize(Point2 value)
     {
-        size = value;
+        if (size != value)
+        {
+            size = value;
+            RaiseResizedEvent();
+        }
     }
 
     bool GameWindow::GetVisible() const
@@ -62,7 +66,7 @@ namespace Bibim
     {
         return true;
     }
-
+    
     void* GameWindow::GetHandle() const
     {
         return nullptr;

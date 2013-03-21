@@ -5,10 +5,11 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameAsset.h>
 #   include <Bibim/GLES2.h>
+#   include <Bibim/GraphicsDeviceBase.h>
 
     namespace Bibim
     {
-        class ShaderEffect : public GameAsset
+        class ShaderEffect : public GameAsset, public GraphicsDeviceBase::LostEventListener
         {
             BBSerializableAssetClass(ShaderEffect, GameAsset, 'S', 'H', 'E', 'F');
             public:
@@ -53,7 +54,11 @@
                 inline GLuint GetMVPTransformLocation() const;
 
             private:
-                ShaderEffect(GraphicsDevice* graphicsDevice, GLuint handle);
+                ShaderEffect(GraphicsDevice* graphicsDevice);
+
+                void Setup(GLuint handle);
+
+                virtual void OnGraphicsDeviceLost(GraphicsDeviceBase* g);
 
             private:
                 GraphicsDevice* graphicsDevice;

@@ -47,6 +47,9 @@
                 inline bool IsLocked() const;
 
             private:
+                virtual void OnGraphicsDeviceLost(GraphicsDeviceBase* g);
+
+            private:
                 IDirect3DTexture9* d3dSystemMemoryTexture;
                 IDirect3DTexture9* d3dLockableTexture;
                 bool isLocked;

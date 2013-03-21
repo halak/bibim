@@ -251,6 +251,7 @@
 #  include <Bibim/UIVisual.h>
 #  include <Bibim/UISpark.h>
 #  include <Bibim/UIRect.h>
+#  include <Bibim/UIScrollablePanel.h>
 #  include <Bibim/UISprite.h>
 #  include <Bibim/UIVisualVisitor.h>
 #  include <Bibim/UIWindow.h>

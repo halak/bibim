@@ -4,11 +4,12 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameAsset.h>
+#   include <Bibim/GraphicsDevice.h>
 #   include <d3dx9.h>
 
     namespace Bibim
     {
-        class ShaderEffect : public GameAsset
+        class ShaderEffect : public GameAsset, public GraphicsDevice::LostEventListener
         {
             BBSerializableAssetClass(ShaderEffect, GameAsset, 'S', 'H', 'E', 'F');
             public:
@@ -47,7 +48,11 @@
                 inline ID3DXEffect* GetHandle() const;
 
             private:
-                ShaderEffect(GraphicsDevice* graphicsDevice, ID3DXEffect* handle);
+                ShaderEffect(GraphicsDevice* graphicsDevice);
+
+                void Setup(ID3DXEffect* handle);
+
+                virtual void OnGraphicsDeviceLost(GraphicsDeviceBase* g);
 
             private:
                 GraphicsDevice* graphicsDevice;

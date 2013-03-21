@@ -184,6 +184,15 @@ namespace Bibim.Asset.Pipeline.Recipes
                     Process(button, layer);
                     return button;
                 }
+                else if (string.Compare(type, "Scrollable", true) == 0)
+                {
+                    UIScrollablePanel panel = new UIScrollablePanel();
+                    panel.Name = name;
+                    panel.IsPickable = true;
+                    window.AddChild(panel);
+                    Process(panel, layer);
+                    return panel;
+                }
                 else
                 {
                     bool hasNormal = layer.FindSubLayer("#Normal", false) != null;
@@ -369,6 +378,21 @@ namespace Bibim.Asset.Pipeline.Recipes
         private void Process(UIRadioButton button, PhotoshopDocument.Layer layer)
         {
             Process((UICheckBox)button, layer);
+        }
+
+        private void Process(UIScrollablePanel panel, PhotoshopDocument.Layer layer)
+        {
+            Process((UIVisual)panel, layer);
+
+            PhotoshopDocument.Layer content = layer.FindSubLayer("#Content", true);
+
+            if (content != null)
+            {
+                var window = new UIWindow();
+                window.Name = "Content";
+                panel.Content = window;
+                AddChildTo(window, content, false);
+            }
         }
 
         private void Process(UIWindow window, PhotoshopDocument.Layer layer)

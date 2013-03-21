@@ -111,7 +111,7 @@ namespace Bibim
 
     bool DynamicTexture2D::Lock(LockedInfo& outLockedInfo, const Rect& rect)
     {
-        if (IsLocked())
+        if (IsLocked() || d3dLockableTexture == nullptr)
             return false;
 
         D3DLOCKED_RECT lockInfo = { 0, };
@@ -148,5 +148,11 @@ namespace Bibim
         isLocked = false;
         SetStatus(CompletedStatus);
         outLockedInfo.SetData(nullptr, nullptr, 0, Rect::Empty);
+    }
+
+    void DynamicTexture2D::OnGraphicsDeviceLost(GraphicsDeviceBase* g)
+    {
+        CheckedRelease(d3dSystemMemoryTexture);
+        Base::OnGraphicsDeviceLost(g);
     }
 }

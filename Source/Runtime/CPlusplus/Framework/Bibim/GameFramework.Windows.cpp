@@ -10,19 +10,19 @@ namespace Bibim
 {
     GameFramework::GameFramework()
     {
-        Construct(0, 0);
+        Construct(800, 600);
     }
 
-    GameFramework::GameFramework(int resolutionWidth, int resolutionHeight)
+    GameFramework::GameFramework(int width, int height)
     {
-        Construct(resolutionWidth, resolutionHeight);
+        Construct(width, height);
     }
 
     GameFramework::~GameFramework()
     {
     }
 
-    void GameFramework::Construct(int resolutionWidth, int resolutionHeight)
+    void GameFramework::Construct(int width, int height)
     {
         _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
@@ -34,7 +34,7 @@ namespace Bibim
                                                  utf8CommandLine, sizeof(utf8CommandLine),
                                                  NULL, NULL);
         utf8CommandLine[length] = '\0';
-        GameFrameworkBase::Construct(resolutionWidth, resolutionHeight, utf8CommandLine);
+        GameFrameworkBase::Construct(width, height, utf8CommandLine);
     }
 
     void GameFramework::Run()

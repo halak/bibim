@@ -18,6 +18,9 @@
                 inline IDirect3DSurface9* GetD3DSurface() const;
 
             private:
+                virtual void OnGraphicsDeviceLost(GraphicsDeviceBase* g);
+
+            private:
                 IDirect3DSurface9* d3dSurface;
         };
     }

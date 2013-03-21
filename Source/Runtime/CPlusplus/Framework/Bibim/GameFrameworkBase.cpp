@@ -23,23 +23,22 @@ namespace Bibim
         delete modules;
     }
 
-    void GameFrameworkBase::Construct(int resolutionWidth, int resolutionHeight, const String& startupArgs)
+    void GameFrameworkBase::Construct(int width, int height, const String& startupArgs)
     {
+        BBAssert(width >= 0 && height >= 0);
+
         Startup::All();
 
         modules = new GameModuleTree();
         window = new GameWindow();
-        if (resolutionWidth == 0 || resolutionHeight == 0)
-            graphicsDevice = new GraphicsDevice();
-        else
-            graphicsDevice = new GraphicsDevice(resolutionWidth, resolutionHeight);
+        window->SetSize(Point2(width, height));
+        graphicsDevice = new GraphicsDevice();
         mainTimeline = new Timeline();
         fixedTimeStep = true;
         fixedElapsedTime = 1.0f / static_cast<float>(GeneralFPS);
         maxTimeInOneFrame = 1.0f;
         desiredFPS = GeneralFPS;
         timestamp = 0;
-        window->SetSize(graphicsDevice->GetResolution());
 
         modules->GetRoot()->AttachChild(window);
         modules->GetRoot()->AttachChild(graphicsDevice);
@@ -79,8 +78,8 @@ namespace Bibim
 
     void GameFrameworkBase::Initialize()
     {
-        graphicsDevice->SetWindow(window);
         window->SetVisible(true);
+        graphicsDevice->SetWindow(window);
     }
 
     void GameFrameworkBase::Finalize()
@@ -116,9 +115,11 @@ namespace Bibim
             previousTime = currentTime;
         }
 
-        BeginDraw();
-        Draw();
-        EndDraw();
+        if (BeginDraw())
+        {
+            Draw();
+            EndDraw();
+        }
 
         timestamps.push_back(currentTime);
         if (static_cast<int>(timestamps.size()) > desiredFPS)
@@ -135,9 +136,9 @@ namespace Bibim
     {
     }
 
-    void GameFrameworkBase::BeginDraw()
+    bool GameFrameworkBase::BeginDraw()
     {
-        graphicsDevice->BeginDraw();
+        return graphicsDevice->BeginDraw();
     }
 
     void GameFrameworkBase::EndDraw()

@@ -10,23 +10,39 @@ namespace Bibim
     }
 
     Keyboard::Keyboard(Window* window)
-        : window(window)
+        : window(nullptr)
     {
         AllowDefaultKeys();
+        SetWindow(window);
     }
 
     Keyboard::~Keyboard()
     {
+        SetWindow(nullptr);
     }
 
-    void Keyboard::keyDown(Key::Code code)//MOBILE
+    void Keyboard::SetWindow(Window* value)
+    {
+        if (window != value)
+        {
+            if (window)
+                window->RemoveKeyboardEventListener(this);
+
+            window = value;
+
+            if (window)
+                window->AddKeyboardEventListener(this);
+        }
+    }
+
+    void Keyboard::OnKeyDown(Window* /*window*/, Key::Code code)
     {
         const int index = static_cast<int>(static_cast<int>(code) / (sizeof(int) * 8));
         const int bit   = static_cast<int>(static_cast<int>(code) % (sizeof(int) * 8));
         state.Keys[index] |= (0x80000000 >> bit);
     }
     
-    void Keyboard::keyUp(Key::Code code)//MOBILE
+    void Keyboard::OnKeyUp(Window* /*window*/, Key::Code code)
     {
         const int index = static_cast<int>(static_cast<int>(code) / (sizeof(int) * 8));
         const int bit   = static_cast<int>(static_cast<int>(code) % (sizeof(int) * 8));

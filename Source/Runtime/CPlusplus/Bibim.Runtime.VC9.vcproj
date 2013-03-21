@@ -358,7 +358,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\FileAssetProvider.cpp"
+						RelativePath=".\Asset\Bibim\FileAssetProvider.Default.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\FileAssetProvider.Default.h"
 						>
 					</File>
 					<File
@@ -366,7 +370,15 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\FileAssetProvider.inl"
+						RelativePath=".\Asset\Bibim\FileAssetProviderBase.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\FileAssetProviderBase.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\FileAssetProviderBase.inl"
 						>
 					</File>
 					<File
@@ -1096,10 +1108,6 @@
 				</File>
 				<File
 					RelativePath=".\Input\Bibim\Keyboard.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\Keyboard.Windows.cpp"
 					>
 				</File>
 				<File
@@ -1926,6 +1934,18 @@
 						>
 					</File>
 					<File
+						RelativePath=".\UI\Bibim\UIScrollablePanel.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIScrollablePanel.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIScrollablePanel.inl"
+						>
+					</File>
+					<File
 						RelativePath=".\UI\Bibim\UISpark.cpp"
 						>
 					</File>
@@ -2124,6 +2144,18 @@
 				</File>
 				<File
 					RelativePath=".\Graphics\Bibim\GraphicsDevice.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\GraphicsDeviceBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\GraphicsDeviceBase.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\GraphicsDeviceBase.inl"
 					>
 				</File>
 				<File
@@ -2398,6 +2430,42 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Graphics\Bibim\GLES2.cpp"
+						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Debug.GLES2|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release.GLES2|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
+					</File>
+					<File
 						RelativePath=".\Graphics\Bibim\GLES2.h"
 						>
 					</File>
@@ -2643,7 +2711,35 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Framework\Bibim\Preferences.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\Preferences.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\Preferences.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\PreferencesBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\PreferencesBase.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\PreferencesBase.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Framework\Bibim\StandardGame.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\StandardGame.EmbeddedFont.h"
 					>
 				</File>
 				<File

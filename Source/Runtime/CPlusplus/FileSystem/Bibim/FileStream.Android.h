@@ -5,8 +5,7 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/Stream.h>
 #   include <Bibim/String.h>
-#   include <android/asset_manager.h>
-#   include <android/asset_manager_jni.h>
+#   include <cstdio>
 
     namespace Bibim
     {
@@ -37,16 +36,15 @@
                 virtual bool CanWrite() const;
                 virtual bool CanSeek() const;
 
-            public:
-                static void SetAssets(AAssetManager* value);
+                static void SetAndroidAssetManager(void* value);
 
             private:
-                AAsset* handle;
+                FILE* handle;
+                void* asset;
+                int length;
                 bool canRead;
                 bool canWrite;
         };
     }
-
-#   include <Bibim/FileStream.Android.inl>
 
 #endif

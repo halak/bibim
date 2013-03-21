@@ -4,11 +4,12 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameAsset.h>
+#   include <Bibim/GraphicsDevice.h>
 #   include <d3dx9.h>
 
     namespace Bibim
     {
-        class Texture2D : public GameAsset
+        class Texture2D : public GameAsset, public GraphicsDevice::LostEventListener
         {
             public:
                 enum PixelFormat
@@ -36,6 +37,8 @@
                 Texture2D(GraphicsDevice* graphicsDevice, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
 
                 void Setup(IDirect3DTexture9* handle, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
+
+                virtual void OnGraphicsDeviceLost(GraphicsDeviceBase* g);
 
             private:
                 GraphicsDevice* graphicsDevice;

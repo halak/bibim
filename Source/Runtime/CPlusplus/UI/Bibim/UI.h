@@ -43,6 +43,7 @@
 #  include <Bibim/UIPanel.h>
 #  include <Bibim/UIPickingContext.h>
 #  include <Bibim/UIRenderer.h>
+#  include <Bibim/UIScrollablePanel.h>
 #  include <Bibim/UISequentialEventHandler.h>
 #  include <Bibim/UISimpleDomain.h>
 #  include <Bibim/UIImage.h>

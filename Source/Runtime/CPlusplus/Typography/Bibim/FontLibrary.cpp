@@ -1,5 +1,7 @@
 ﻿#include <Bibim/PCH.h>
 #include <Bibim/FontLibrary.h>
+#include <Bibim/Assert.h>
+#include <Bibim/Font.h>
 #include <Bibim/FontCache.h>
 #include <vector>
 #include <ft2build.h>
@@ -7,24 +9,23 @@
 
 namespace Bibim
 {
-    FontLibrary::FontLibrary()
-        : graphicsDevice(nullptr),
-          ftLibrary(nullptr)
-    {
-        Construct();
-    }
-
     FontLibrary::FontLibrary(GraphicsDevice* graphicsDevice)
         : graphicsDevice(graphicsDevice),
           ftLibrary(nullptr)
     {
         Construct();
+
+        if (GetGraphicsDevice())
+            GetGraphicsDevice()->AddLostEventListener(this);
     }
 
     FontLibrary::~FontLibrary()
     {
         caches.clear();
         FT_Done_FreeType(static_cast<FT_Library>(ftLibrary));
+
+        if (GetGraphicsDevice())
+            GetGraphicsDevice()->RemoveLostEventListener(this);
     }
 
     FontCache* FontLibrary::GetCache(const FontCacheParameters& parameters)
@@ -41,6 +42,12 @@ namespace Bibim
         return caches.back().second;
     }
 
+    void FontLibrary::SetGlobalScale(float value)
+    {
+        for (FontCollection::iterator it = fonts.begin(); it != fonts.end(); it++)
+            (*it)->SetScale(value);
+    }
+
     void FontLibrary::Construct()
     {
         FT_Library library = nullptr;
@@ -55,5 +62,26 @@ namespace Bibim
         // osFontDirectory += "\\Fonts\\";
 
         // alternativeFace = osFontDirectory + "gulim.ttc";
+    }
+
+    void FontLibrary::Add(Font* font)
+    {
+        fonts.insert(font);
+    }
+
+    void FontLibrary::Remove(Font* font)
+    {
+        fonts.erase(font);
+    }
+
+    void FontLibrary::OnGraphicsDeviceLost(GraphicsDeviceBase* g)
+    {
+        BBAssert(GetGraphicsDevice() == g);
+
+        for (FontCollection::iterator it = fonts.begin(); it != fonts.end(); it++)
+            (*it)->IncreaseRevision();
+        
+        for (CacheCollection::iterator it = caches.begin(); it != caches.end(); it++)
+            (*it).second->Clear();
     }
 }

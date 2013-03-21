@@ -1,5 +1,6 @@
 ﻿#include <Bibim/PCH.h>
 #include <Bibim/GameWindow.Windows.h>
+#include <Bibim/Log.h>
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <vector>
@@ -110,6 +111,8 @@ namespace Bibim
 
             const SIZE windowSize = { windowRect.right - windowRect.left, windowRect.bottom - windowRect.top };
             ::SetWindowPos(static_cast<HWND>(handle), nullptr, 0, 0, windowSize.cx, windowSize.cy, SWP_NOZORDER | SWP_NOMOVE | SWP_NOACTIVATE);
+
+            RaiseResizedEvent();
         }
     }
 
@@ -158,11 +161,6 @@ namespace Bibim
     {
     }
 
-    void GameWindow::OnMouseWheel(int delta)
-    {
-        SetWheel(GetWheel() + delta);
-    }
-
     void GameWindow::OnSnapShot()
     {
     }
@@ -199,62 +197,109 @@ namespace Bibim
                                                      nullptr, nullptr, GetModuleHandle(nullptr), this));
     }
 
+    static const char* INSTANCE_NAME = "inst";
+
+    static GameWindow* GetGameWindow(HWND windowHandle)
+    {
+        return reinterpret_cast<GameWindow*>(::GetProp(windowHandle, INSTANCE_NAME));
+    }
+
+    static void SetGameWindow(HWND windowHandle, GameWindow* value)
+    {
+        if (value)
+            ::SetProp(windowHandle, INSTANCE_NAME, reinterpret_cast<HANDLE>(value));
+        else
+            ::RemoveProp(windowHandle, INSTANCE_NAME);
+    }
+
     LRESULT CALLBACK GameWindow::Internal::WindowProcedure(HWND windowHandle, UINT message, WPARAM wParam, LPARAM lParam)
     {
         static const char* instanceName = "inst";
-        GameWindow* gameWindow = nullptr;
 
         switch (message)
         {
-            case WM_CREATE:
+            case WM_PAINT:
+                if (GetGameWindow(windowHandle)->OnPaint())
+                    return 0;
+
+                break;
+            case WM_KEYDOWN:
                 {
-                     const CREATESTRUCT* createStruct = reinterpret_cast<const CREATESTRUCT*>(lParam);
-
-                    SetProp(windowHandle, instanceName, reinterpret_cast<HANDLE>(createStruct->lpCreateParams));
-                    gameWindow = reinterpret_cast<GameWindow*>(createStruct->lpCreateParams);
-                    gameWindow->OnCreated();
-
-                    // RegisterHotKey(windowHandle, IDHOT_SNAPDESKTOP, 0,       VK_SNAPSHOT);
-                    // RegisterHotKey(windowHandle, IDHOT_SNAPWINDOW,  MOD_ALT, VK_SNAPSHOT);
+                    const bool previousKeyState = (lParam & (1 << 30)) != 0;
+                    if (previousKeyState == false)
+                        GetGameWindow(windowHandle)->RaiseKeyDownEvent(static_cast<Key::Code>(wParam));
                 }
                 return 0;
-            case WM_PAINT:
-                {
-                    gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
-                    if (gameWindow->OnPaint())
-                        return 0;
-                }
-                break;
+            case WM_KEYUP:
+                GetGameWindow(windowHandle)->RaiseKeyUpEvent(static_cast<Key::Code>(wParam));
+                return 0;
+            case WM_MOUSEMOVE:
+                GetGameWindow(windowHandle)->RaiseMouseMoveEvent(LOWORD(lParam), HIWORD(lParam));
+                return 0;
+            case WM_LBUTTONDOWN:
+                GetGameWindow(windowHandle)->RaiseMouseLeftButtonDownEvent(LOWORD(lParam), HIWORD(lParam));
+                return 0;
+            case WM_LBUTTONUP:
+                GetGameWindow(windowHandle)->RaiseMouseLeftButtonUpEvent(LOWORD(lParam), HIWORD(lParam));
+                return 0;
+            case WM_MBUTTONDOWN:
+                GetGameWindow(windowHandle)->RaiseMouseMiddleButtonDownEvent(LOWORD(lParam), HIWORD(lParam));
+                return 0;
+            case WM_MBUTTONUP:
+                GetGameWindow(windowHandle)->RaiseMouseMiddleButtonUpEvent(LOWORD(lParam), HIWORD(lParam));
+                return 0;
+            case WM_RBUTTONDOWN:
+                GetGameWindow(windowHandle)->RaiseMouseRightButtonDownEvent(LOWORD(lParam), HIWORD(lParam));
+                return 0;
+            case WM_RBUTTONUP:
+                GetGameWindow(windowHandle)->RaiseMouseRightButtonUpEvent(LOWORD(lParam), HIWORD(lParam));
+                return 0;
             case WM_MOUSEWHEEL:
-                gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
-                gameWindow->OnMouseWheel(GET_WHEEL_DELTA_WPARAM(wParam) / WHEEL_DELTA);
+                GetGameWindow(windowHandle)->RaiseMouseWheelEvent(GET_WHEEL_DELTA_WPARAM(wParam) / WHEEL_DELTA);
                 return 0;
             case WM_HOTKEY:
                 if (wParam == IDHOT_SNAPDESKTOP ||
                     wParam == IDHOT_SNAPWINDOW)
                 {
-                    gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
-                    gameWindow->OnSnapShot();
+                    GetGameWindow(windowHandle)->OnSnapShot();
                     return 0;
                 }
                 break;
             case WM_COMMAND:
                 {
-                    gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
                     const int commandID = HIWORD(wParam);
                     const int controlID = LOWORD(wParam);
                     void* handle = reinterpret_cast<void*>(lParam);
-                    if (gameWindow->OnCommand(commandID, controlID, handle))
+                    if (GetGameWindow(windowHandle)->OnCommand(commandID, controlID, handle))
                         return 0;
                 }
                 break;
+            case WM_SIZE:
+                {
+                    GameWindow* o = GetGameWindow(windowHandle);
+                    o->size = Point2(LOWORD(lParam), HIWORD(lParam));
+                    o->RaiseResizedEvent();
+                }
+                return 0;
+            case WM_CREATE:
+                {
+                     const CREATESTRUCT* createStruct = reinterpret_cast<const CREATESTRUCT*>(lParam);
+
+                    GameWindow* o = reinterpret_cast<GameWindow*>(createStruct->lpCreateParams);
+                    SetGameWindow(windowHandle, o);
+                    o->OnCreated();
+
+                    // RegisterHotKey(windowHandle, IDHOT_SNAPDESKTOP, 0,       VK_SNAPSHOT);
+                    // RegisterHotKey(windowHandle, IDHOT_SNAPWINDOW,  MOD_ALT, VK_SNAPSHOT);
+                }
+                return 0;
             case WM_DESTROY:
                 // UnregisterHotKey(windowHandle, IDHOT_SNAPWINDOW);
                 // UnregisterHotKey(windowHandle, IDHOT_SNAPDESKTOP);
 
-                gameWindow = reinterpret_cast<GameWindow*>(GetProp(windowHandle, instanceName));
-                gameWindow->OnDestroy();
-                RemoveProp(windowHandle, instanceName);
+                GameWindow* o = GetGameWindow(windowHandle);
+                o->OnDestroy();
+                RemoveProp(windowHandle, nullptr);
                 PostQuitMessage(0);
                 return 0;
         }

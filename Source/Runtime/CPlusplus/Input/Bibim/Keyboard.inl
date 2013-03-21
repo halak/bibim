@@ -1,5 +1,10 @@
 ﻿namespace Bibim
 {
+    const KeyboardState& Keyboard::GetState() const
+    {
+        return state;
+    }
+
     bool Keyboard::GetAllowKey(Key::Code code) const
     {
         const int index = static_cast<int>(static_cast<int>(code) / (sizeof(int) * 8));
@@ -20,10 +25,5 @@
     Window* Keyboard::GetWindow() const
     {
         return window;
-    }
-
-    void Keyboard::SetWindow(Window* value)
-    {
-        window = value;
     }
 }

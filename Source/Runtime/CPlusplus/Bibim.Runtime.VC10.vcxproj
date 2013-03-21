@@ -228,11 +228,12 @@
   <ItemGroup>
     <ClCompile Include="Asset\Bibim\AssetLoadingTask.cpp" />
     <ClCompile Include="Asset\Bibim\AssetStreamReader.cpp" />
+    <ClCompile Include="Asset\Bibim\FileAssetProvider.Default.cpp" />
+    <ClCompile Include="Asset\Bibim\FileAssetProviderBase.cpp" />
     <ClCompile Include="Asset\Bibim\GameAsset.cpp" />
     <ClCompile Include="Asset\Bibim\GameAssetFactory.cpp" />
     <ClCompile Include="Asset\Bibim\GameAssetStorage.cpp" />
     <ClCompile Include="Asset\Bibim\AssetProvider.cpp" />
-    <ClCompile Include="Asset\Bibim\FileAssetProvider.cpp" />
     <ClCompile Include="Asset\Bibim\MPQAssetProvider.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
@@ -265,15 +266,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="FileSystem\Bibim\FileStream.iOS.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    <ClCompile Include="FileSystem\Bibim\FileStream.CRT.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Foundation\Bibim\Environment.Android.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
@@ -310,13 +311,14 @@
     <ClCompile Include="Framework\Bibim\Preferences.Windows.cpp" />
     <ClCompile Include="Framework\Bibim\PreferencesBase.cpp" />
     <ClCompile Include="Framework\Bibim\StandardGame.cpp" />
-    <ClCompile Include="Input\Bibim\Key.cpp" />
-    <ClCompile Include="Input\Bibim\Keyboard.Android.cpp">
+    <ClCompile Include="Graphics\Bibim\GLES2.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Graphics\Bibim\GraphicsDeviceBase.cpp" />
+    <ClCompile Include="Input\Bibim\Key.cpp" />
     <ClCompile Include="Input\Bibim\Mouse.Android.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -336,6 +338,8 @@
     <ClCompile Include="Threading\Bibim\Lock.Unix.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Threading\Bibim\Thread.Unix.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
@@ -399,12 +403,6 @@
     <ClCompile Include="Gameplay\Bibim\JumpPointPathFinder.cpp" />
     <ClCompile Include="Gameplay\Bibim\PathFinder.cpp" />
     <ClCompile Include="Input\Bibim\Keyboard.cpp" />
-    <ClCompile Include="Input\Bibim\Keyboard.Windows.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Input\Bibim\KeyboardState.cpp" />
     <ClCompile Include="Input\Bibim\Mouse.cpp" />
     <ClCompile Include="Input\Bibim\Mouse.Window.cpp">
@@ -449,6 +447,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="UI\Bibim\UIRendererBase.cpp" />
+    <ClCompile Include="UI\Bibim\UIScrollablePanel.cpp" />
     <ClCompile Include="UI\Bibim\UISimpleDomain.cpp" />
     <ClCompile Include="UI\Bibim\UIAppEventDispatcher.cpp" />
     <ClCompile Include="UI\Bibim\UIAsyncEventQueue.cpp" />
@@ -683,6 +682,8 @@
   <ItemGroup>
     <ClInclude Include="Asset\Bibim\AssetLoadingTask.h" />
     <ClInclude Include="Asset\Bibim\AssetStreamReader.h" />
+    <ClInclude Include="Asset\Bibim\FileAssetProvider.Default.h" />
+    <ClInclude Include="Asset\Bibim\FileAssetProviderBase.h" />
     <ClInclude Include="Asset\Bibim\GameAsset.h" />
     <ClInclude Include="Asset\Bibim\GameAssetFactory.h" />
     <ClInclude Include="Asset\Bibim\GameAssetStorage.h" />
@@ -722,15 +723,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="FileSystem\Bibim\FileStream.iOS.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    <ClInclude Include="FileSystem\Bibim\FileStream.CRT.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Foundation\Bibim\Environment.Android.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
@@ -770,6 +771,7 @@
     <ClInclude Include="Framework\Bibim\PreferencesBase.h" />
     <ClInclude Include="Framework\Bibim\StandardGame.EmbeddedFont.h" />
     <ClInclude Include="Framework\Bibim\StandardGame.h" />
+    <ClInclude Include="Graphics\Bibim\GraphicsDeviceBase.h" />
     <ClInclude Include="Net\Bibim\HttpClient.Curl.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
@@ -783,6 +785,8 @@
     <ClInclude Include="Threading\Bibim\Lock.Unix.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Threading\Bibim\Thread.Unix.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
@@ -883,6 +887,7 @@
     <ClInclude Include="UI\Bibim\UIRenderer.GLES2.h" />
     <ClInclude Include="UI\Bibim\UIRenderer.h" />
     <ClInclude Include="UI\Bibim\UIRendererBase.h" />
+    <ClInclude Include="UI\Bibim\UIScrollablePanel.h" />
     <ClInclude Include="UI\Bibim\UISimpleDomain.h" />
     <ClInclude Include="UI\Bibim\UIAppEventDispatcher.h" />
     <ClInclude Include="UI\Bibim\UIAsyncEventQueue.h" />
@@ -1128,11 +1133,11 @@
   <ItemGroup>
     <None Include="Asset\Bibim\AssetLoadingTask.inl" />
     <None Include="Asset\Bibim\AssetStreamReader.inl" />
+    <None Include="Asset\Bibim\FileAssetProviderBase.inl" />
     <None Include="Asset\Bibim\GameAsset.inl" />
     <None Include="Asset\Bibim\GameAssetFactory.inl" />
     <None Include="Asset\Bibim\GameAssetStorage.inl" />
     <None Include="Asset\Bibim\AssetProvider.inl" />
-    <None Include="Asset\Bibim\FileAssetProvider.inl" />
     <None Include="Asset\Bibim\MPQAssetProvider.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
@@ -1160,17 +1165,17 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </None>
-    <None Include="FileSystem\Bibim\FileStream.Android.inl">
+    <None Include="FileSystem\Bibim\FileStream.CRT.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </None>
-    <None Include="FileSystem\Bibim\FileStream.iOS.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </None>
+    <None Include="FileSystem\Bibim\FileStream.Android.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
@@ -1208,6 +1213,7 @@
     <None Include="Framework\Bibim\Lua.inl" />
     <None Include="Framework\Bibim\PreferencesBase.inl" />
     <None Include="Framework\Bibim\StandardGame.inl" />
+    <None Include="Graphics\Bibim\GraphicsDeviceBase.inl" />
     <None Include="Net\Bibim\HttpClient.Curl.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
@@ -1313,6 +1319,7 @@
     <None Include="UI\Bibim\UIMouseEventArgs.inl" />
     <None Include="UI\Bibim\UIMouseEventDispatcher.inl" />
     <None Include="UI\Bibim\UIMouseWheelEventArgs.inl" />
+    <None Include="UI\Bibim\UIScrollablePanel.inl" />
     <None Include="UI\Bibim\UISequentialEventHandler.inl" />
     <None Include="UI\Bibim\UIEffectMap.inl" />
     <None Include="UI\Bibim\UIEffectStack.inl" />

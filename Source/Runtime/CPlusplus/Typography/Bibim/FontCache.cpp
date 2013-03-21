@@ -301,9 +301,9 @@ namespace Bibim
         if (lineHeight == 0.0f)
             lineHeight = parameters.FontSize;
 
-        ascender   /= parameters.Scale;
-        descender  /= parameters.Scale;
-        lineHeight /= parameters.Scale;
+        //ascender   /= parameters.Scale;
+        //descender  /= parameters.Scale;
+        //lineHeight /= parameters.Scale;
 
         regularGlyphTable = new GlyphTable(library->GetGraphicsDevice());
 
@@ -492,7 +492,7 @@ namespace Bibim
                     const Vector2 bitmapOffset = Vector2(static_cast<float>(strokedGlyphBitmap->left), GetAscender() - static_cast<float>(strokedGlyphBitmap->top));
                     const Vector2 bitmapSize   = Vector2(glyphBitmap.Bitmap->width, glyphBitmap.Bitmap->rows);
                     strokedGlyphTable->Add(code,
-                                           advance, bitmapOffset / parameters.Scale, bitmapSize / parameters.Scale,
+                                           advance / parameters.Scale, bitmapOffset / parameters.Scale, bitmapSize / parameters.Scale,
                                            glyphBitmap.Bitmap->buffer,
                                            glyphBitmap.Bitmap->width,
                                            glyphBitmap.Bitmap->rows,
@@ -521,5 +521,15 @@ namespace Bibim
                                           glyphBitmap.Bitmap->rows,
                                           glyphBitmap.Bitmap->pitch);
         }
+    }
+
+    void FontCache::Clear()
+    {
+        if (regularGlyphTable)
+            regularGlyphTable->Clear();
+        if (strokedGlyphTable)
+            strokedGlyphTable->Clear();
+        if (shadowGlyphTable)
+            shadowGlyphTable->Clear();
     }
 }

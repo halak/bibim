@@ -65,6 +65,8 @@ namespace Bibim.UI
                 Write(writer, (UICheckBox)o, objectDictionary);
             else if (t == typeof(UIRadioButton))
                 Write(writer, (UIRadioButton)o, objectDictionary);
+            else if (t == typeof(UIScrollablePanel))
+                Write(writer, (UIScrollablePanel)o, objectDictionary);
             else if (t == typeof(UIWindow))
                 Write(writer, (UIWindow)o, objectDictionary);
             else
@@ -207,6 +209,12 @@ namespace Bibim.UI
         private static void Write(AssetStreamWriter writer, UIRadioButton o, List<object> objectDictionary)
         {
             Write(writer, (UICheckBox)o, objectDictionary);
+        }
+
+        private static void Write(AssetStreamWriter writer, UIScrollablePanel o, List<object> objectDictionary)
+        {
+            Write(writer, (UIPanel)o, objectDictionary);
+            WriteVisual(writer, o.Content, objectDictionary);
         }
 
         private static void Write(AssetStreamWriter writer, UIWindow o, List<object> objectDictionary)

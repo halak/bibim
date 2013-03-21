@@ -34,6 +34,9 @@ namespace Bibim
     {
         const String path = Environment::GetAppDataPath(GetName(), "preferences");
         FileStreamPtr stream = new FileStream(path, FileStream::WriteOnly);
+        if (stream->CanWrite() == false)
+            return;
+
         stream->Write(document.CStr(), document.GetLength());
         stream->Close();
     }

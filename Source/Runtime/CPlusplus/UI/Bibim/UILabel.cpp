@@ -14,6 +14,7 @@ namespace Bibim
         : text(String::Empty),
           font(nullptr),
           fontString(FontString::Empty),
+          fontRevision(-1),
           autoResize(true)
     {
         SetSize(1.0f, 1.0f);
@@ -54,9 +55,10 @@ namespace Bibim
     {
         if (font)
         {
-            if (fontStringChanged)
+            if (fontStringChanged || fontRevision != GetFont()->GetRevision())
             {
                 fontStringChanged = false;
+                fontRevision = GetFont()->GetRevision();
                 fontString = FontString(GetFont(), GetText());
             }
             
@@ -73,9 +75,10 @@ namespace Bibim
         if (GetFont() == nullptr || GetText().IsEmpty())
             return;
 
-        if (fontStringChanged)
+        if (fontStringChanged || fontRevision != GetFont()->GetRevision())
         {
             fontStringChanged = false;
+            fontRevision = GetFont()->GetRevision();
             fontString = FontString(GetFont(), GetText());
         }
 
