@@ -11,6 +11,7 @@
 #include <Bibim/Glyph.h>
 #include <Bibim/GlyphTable.h>
 #include <Bibim/TypingContext.h>
+#include <utf8.h>
 
 namespace Bibim
 {
@@ -60,6 +61,14 @@ namespace Bibim
             library->Remove(this);
 
         delete parametersPointer;
+    }
+
+    void Font::Prepare(const String& text)
+    {
+        const char* current = &text.CStr()[0];
+        const char* end = &text.CStr()[text.GetLength()];
+        while (const int code = utf8::next(current, end))
+            GetRegularGlyph(code);
     }
 
     Vector2 Font::Measure(const String& text)

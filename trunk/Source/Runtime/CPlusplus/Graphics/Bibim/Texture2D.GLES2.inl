@@ -29,9 +29,4 @@
     {
         return pixelFormat;
     }
-
-    GLuint Texture2D::GetHandle() const
-    {
-        return handle;
-    }
 }

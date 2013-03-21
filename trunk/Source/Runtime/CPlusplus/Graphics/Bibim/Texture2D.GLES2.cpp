@@ -50,6 +50,11 @@ namespace Bibim
         this->pixelFormat = pixelFormat;
     }
 
+    GLuint Texture2D::GetHandle()
+    {
+        return handle;
+    }
+
     void Texture2D::OnGraphicsDeviceLost(GraphicsDeviceBase* g)
     {
         if (handle)

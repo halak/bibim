@@ -277,6 +277,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='LIB Release|Android'">
     <ClCompile>
       <AdditionalIncludeDirectories>.;..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HAVE_CONFIG_H</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>

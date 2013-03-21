@@ -6,6 +6,7 @@
 #   include <Bibim/GameAsset.h>
 #   include <Bibim/GLES2.h>
 #   include <Bibim/GraphicsDevice.h>
+#   include <Bibim/Rect.h>
 
     namespace Bibim
     {
@@ -30,7 +31,7 @@
                 inline int GetSurfaceHeight() const;
                 inline PixelFormat GetPixelFormat() const;
 
-                inline GLuint GetHandle() const;
+                virtual GLuint GetHandle();
 
             protected:
                 Texture2D(GraphicsDevice* graphicsDevice);
