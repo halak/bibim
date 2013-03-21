@@ -13,26 +13,27 @@ namespace Bibim
         : graphicsDevice(nullptr),
           storage(nullptr),
           fieldOfView(Math::PiOver4),
+          lockedVertices(nullptr),
           vbSize(0),
           isBatching(false),
-          lastViewport(-1, -1, -1, -1),
+          lastResolution(-1, -1),
           effectFileFormatHint(effectFileFormatHint),
           normalEffectFileName(MakeNormalEffectFileName(effectFileFormatHint))
     {
     }
 
     UIRendererBase::UIRendererBase(uint effectFileFormatHint, GraphicsDevice* graphicsDevice, GameAssetStorage* storage, const String& shaderEffectDirectory)
-        : graphicsDevice(nullptr),
+        : graphicsDevice(graphicsDevice),
           storage(storage),
           shaderEffectDirectory(shaderEffectDirectory),
           fieldOfView(Math::PiOver4),
+          lockedVertices(nullptr),
           vbSize(0),
           isBatching(false),
-          lastViewport(-1, -1, -1, -1),
+          lastResolution(-1, -1),
           effectFileFormatHint(effectFileFormatHint),
           normalEffectFileName(MakeNormalEffectFileName(effectFileFormatHint))
     {
-        SetGraphicsDevice(graphicsDevice);
     }
 
     UIRendererBase::~UIRendererBase()
@@ -288,7 +289,14 @@ namespace Bibim
 
     void UIRendererBase::SetGraphicsDevice(GraphicsDevice* value)
     {
-        graphicsDevice = value;
+        if (graphicsDevice != value)
+        {
+            GraphicsDevice* old = graphicsDevice;
+
+            graphicsDevice = value;
+
+            OnGraphicsDeviceChanged(old);
+        }
     }
 
     void UIRendererBase::SetStorage(GameAssetStorage* value)
@@ -308,7 +316,7 @@ namespace Bibim
         if (fieldOfView != value)
         {
             fieldOfView = value;
-            lastViewport = Rect(-1, -1, -1, -1);
+            lastResolution = Point2(-1, -1);
         }
     }
 
@@ -491,6 +499,10 @@ namespace Bibim
         OnCreateQuadsCache(vbSize, IndicesPerQuad * capacity);
     }
 
+    void UIRendererBase::OnGraphicsDeviceChanged(GraphicsDevice* /*old*/)
+    {
+    }
+
     String UIRendererBase::MakeNormalEffectFileName(uint hint)
     {
         if (hint != 0)
@@ -572,10 +584,10 @@ namespace Bibim
             return;
         }
 
-        const Rect currentViewport = graphicsDevice->GetViewport();
-        if (currentViewport != lastViewport)
+        const Point2 currentResolution = graphicsDevice->GetResolution();
+        if (currentResolution != lastResolution)
         {
-            const Vector2 viewportSize = Vector2(currentViewport.Width, currentViewport.Height);
+            const Vector2 viewportSize = Vector2(currentResolution.X, currentResolution.Y);
             const Vector2 halfViewportSize = viewportSize * 0.5f;
             const float aspect = viewportSize.X / viewportSize.Y;
 
@@ -593,7 +605,7 @@ namespace Bibim
             viewTransformInv = Matrix4::Inversion(viewTransform);
             projectionTransformInv = Matrix4::Inversion(projectionTransform);
 
-            lastViewport = currentViewport;
+            lastResolution = currentResolution;
         }
     }
 }

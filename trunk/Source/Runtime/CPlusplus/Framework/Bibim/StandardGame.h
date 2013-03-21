@@ -4,13 +4,15 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameFramework.h>
+#   include <Bibim/GraphicsDevice.h>
 #   include <Bibim/Log.h>
 #   include <Bibim/Lua.h>
 #   include <Bibim/String.h>
+#   include <Bibim/Window.h>
 
     namespace Bibim
     {
-        class StandardGame : public GameFramework, public Log::Listener
+        class StandardGame : public GameFramework, public Window::ResizeEventListener, public GraphicsDevice::RestoreEventListener, public Log::Listener
         {
             BBThisIsNoncopyableClass(StandardGame);
             public:
@@ -50,7 +52,8 @@
 
             protected:
                 StandardGame();
-                StandardGame(int resolutionWidth, int resolutionHeight);
+                StandardGame(Point2 windowSize);
+                StandardGame(Point2 windowSize, Point2 contentSize);
 
                 void Initialize(const String& gameName, const String& version, StandardGame::LuaBase* lua);
 
@@ -58,10 +61,15 @@
                 virtual void Draw();
 
             protected:
+                void MatchContentToWindow();
                 void ReloadUI();
 
                 virtual void ReloadScripts() = 0;
+
             private:
+                virtual void OnWindowResized(Window* window);
+                virtual void OnGraphicsDeviceRestore(GraphicsDeviceBase* g);
+                
                 static bool KeyDownHandler(const UIEventArgs& args, void* userData);
 
                 bool OnKeyDown(const UIEventArgs& args);
@@ -72,6 +80,7 @@
                 void OnLog(Color color, const char* category, const char* message);
 
             private:
+                Point2 contentSize;
                 Color clearColor;
                 Preferences* preferences;
                 Keyboard* keyboard;

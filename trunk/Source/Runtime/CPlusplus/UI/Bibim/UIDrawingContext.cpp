@@ -19,7 +19,10 @@
 namespace Bibim
 {
     UIDrawingContext::UIDrawingContext(UIRenderer* renderer)
-        : UIVisualVisitor(renderer->GetViewTransform(), renderer->GetInversedViewTransform(), renderer->GetProjectionTransform(), true),
+        : UIVisualVisitor(renderer->GetGraphicsDevice()->GetResolution(),
+                          renderer->GetViewTransform(),
+                          renderer->GetInversedViewTransform(),
+                          renderer->GetProjectionTransform(), true),
           renderer(renderer),
           isDrawing(false)
     {
@@ -468,7 +471,7 @@ namespace Bibim
                            TypingContext& context,
                            UIRenderer* renderer,
                            const RectF& bounds,
-                           const RectF& /*clippedBounds*/,
+                           const RectF& clippedBounds,
                            const FontString::GlyphCollection& glyphs,
                            Color color,
                            Vector2 offset)
@@ -477,6 +480,24 @@ namespace Bibim
                 {
                     const Glyph* glyph = glyphs[context.GetGlyphIndex()];
                     if (glyph->GetTexture() == nullptr)
+                        continue;
+
+                    const Vector2 bitmapSize = glyph->GetBitmapSize();
+                    RectF drawingRect = RectF(bounds.X + context.GetPosition().X + glyph->GetBitmapOffset().X + offset.X,
+                                              bounds.Y + context.GetPosition().Y + glyph->GetBitmapOffset().Y + offset.Y,
+                                              bitmapSize.X,
+                                              bitmapSize.Y);
+
+                    const float clippedLeft = Math::Max(clippedBounds.GetLeft() - drawingRect.GetLeft(), 0.0f);
+                    const float clippedTop = Math::Max(clippedBounds.GetTop() - drawingRect.GetTop(), 0.0f);
+                    const float clippedRight = Math::Max(drawingRect.GetRight() - clippedBounds.GetRight(), 0.0f);
+                    const float clippedBottom = Math::Max(drawingRect.GetBottom() - clippedBounds.GetBottom(), 0.0f);
+                    drawingRect.X += clippedLeft;
+                    drawingRect.Y += clippedTop;
+                    drawingRect.Width -= clippedRight + clippedLeft;
+                    drawingRect.Height -= clippedBottom + clippedTop;
+
+                    if (drawingRect.Width <= 0.0f || drawingRect.Height <= 0.0f)
                         continue;
 
                     const float tw = 1.0f / static_cast<float>(glyph->GetTexture()->GetWidth());
@@ -490,10 +511,11 @@ namespace Bibim
                     clippingRect.Width  *= tw;
                     clippingRect.Height *= th;
 
-                    const RectF drawingRect = RectF(bounds.X + context.GetPosition().X + glyph->GetBitmapOffset().X + offset.X,
-                                                    bounds.Y + context.GetPosition().Y + glyph->GetBitmapOffset().Y + offset.Y,
-                                                    glyph->GetBitmapSize().X,
-                                                    glyph->GetBitmapSize().Y);
+                    clippingRect.X += clippedLeft * tw;
+                    clippingRect.Y += clippedTop * th;
+                    clippingRect.Width -= (clippedRight + clippedLeft) * tw;
+                    clippingRect.Height -= (clippedBottom + clippedTop) * th;
+
                     Vector2 points[4] = 
                     {
                         Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetTop() - 0.5f),

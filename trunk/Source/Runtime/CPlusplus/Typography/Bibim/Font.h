@@ -118,6 +118,8 @@
                 mutable FontCachePtr cache;
 
                 static const GlyphDictionary EmptyGlyphs;
+
+                friend class FontLibrary;
         };
     }
 

@@ -140,6 +140,7 @@
                 void EndEffect(PixelMode mode);
 
                 void Flush();
+                void ReserveCachedQuads(int capacity);
 
                 virtual Vertex* LockVB(int size) = 0;
                 virtual void UnlockVB() = 0;
@@ -150,6 +151,8 @@
                 virtual void OnEffectEnded(PixelMode mode, ShaderEffect* effect) = 0;
                 virtual void OnTransformChanged(const Matrix4& newValue) = 0;
                 virtual void OnBlendModeChanged(BlendMode newValue) = 0;
+                
+                virtual void OnGraphicsDeviceChanged(GraphicsDevice* old);
 
             protected:
                 static const int TrianglesPerQuad = 2;
@@ -159,7 +162,6 @@
             private:
                 void InitializeNormalQuadSets();
                 void InitializeBatchQuadSets();
-                void ReserveCachedQuads(int capacity);
 
                 Vertex* Prepare(Texture2D* texture, Texture2D* mask);
 
@@ -193,7 +195,7 @@
 
                 bool isBatching;
 
-                Rect lastViewport;
+                Point2 lastResolution;
 
                 uint effectFileFormatHint;
                 String normalEffectFileName;

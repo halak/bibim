@@ -19,6 +19,7 @@
 
                 virtual bool Preload(const String& name);
                 virtual GameAsset* Load(const String& name);
+                virtual bool Restore(const String& name, GameAsset* asset);
 
                 inline MPQ* GetMPQ() const;
                 void SetMPQ(MPQ* value);

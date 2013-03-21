@@ -15,30 +15,16 @@ namespace Bibim
         : d3dObject(nullptr),
           d3dDevice(nullptr),
           d3dBackbufferSurface(nullptr),
-          window(nullptr),
-          resolution(1024, 768),
-          viewport(Rect::Empty),
-          fullscreen(false)
+          fullscreen(false),
+          deviceLost(false)
     {
-        ::ZeroMemory(&d3dCaps, sizeof(d3dCaps));
-    }
-
-    GraphicsDevice::GraphicsDevice(int resolutionWidth, int resolutionHeight)
-        : d3dObject(nullptr),
-          d3dDevice(nullptr),
-          d3dBackbufferSurface(nullptr),
-          window(nullptr),
-          resolution(resolutionWidth, resolutionHeight),
-          viewport(Rect::Empty),
-          fullscreen(false)
-    {
-        BBAssert(resolutionWidth > 0 && resolutionHeight > 0);
         ::ZeroMemory(&d3dCaps, sizeof(d3dCaps));
     }
 
     GraphicsDevice::~GraphicsDevice()
     {
-        FinalizeDevice();
+        Finalize();
+        CheckedRelease(d3dDevice);
         CheckedRelease(d3dObject);
     }
 
@@ -52,19 +38,31 @@ namespace Bibim
         GetD3DDevice()->Clear(0, nullptr, D3DCLEAR_TARGET, D3DCOLOR_XRGB(color.R, color.G, color.B), 1.0f, 0);
     }
 
-    void GraphicsDevice::BeginDraw()
+    bool GraphicsDevice::BeginDraw()
     {
-        GetD3DDevice()->BeginScene();
+        if (deviceLost)
+        {
+            ::Sleep(50);
+
+            if (GetD3DDevice() &&
+                GetD3DDevice()->TestCooperativeLevel() == D3DERR_DEVICELOST)
+                return false;
+            
+            Initialize();
+        }
+        
+        return GetD3DDevice()->BeginScene() == D3D_OK;
     }
 
-    void GraphicsDevice::BeginDraw(RenderTargetTexture2D* renderTarget)
+    bool GraphicsDevice::BeginDraw(RenderTargetTexture2D* renderTarget)
     {
         BBAssertDebug(renderTarget);
 
         GetD3DDevice()->GetRenderTarget(0, &d3dBackbufferSurface);
 
         GetD3DDevice()->SetRenderTarget(0, renderTarget->GetD3DSurface());
-        GetD3DDevice()->BeginScene();
+
+        return GetD3DDevice()->BeginScene() == D3D_OK;
     }
 
     void GraphicsDevice::EndDraw()
@@ -81,19 +79,14 @@ namespace Bibim
 
     void GraphicsDevice::Present()
     {
-        GetD3DDevice()->Present(nullptr, nullptr, nullptr, nullptr);
-    }
-
-    void GraphicsDevice::SetWindow(Window* value)
-    {
-        if (GetWindow() != value)
+        const HRESULT result = GetD3DDevice()->Present(nullptr, nullptr, nullptr, nullptr);
+        switch (result)
         {
-            FinalizeDevice();
-
-            window = value;
-
-            if (GetWindow())
-                InitializeDevice();
+            case D3DERR_DEVICELOST:
+            case D3DERR_DRIVERINTERNALERROR:
+            case D3DERR_DEVICENOTRESET:
+                Finalize();
+                break;
         }
     }
 
@@ -102,34 +95,18 @@ namespace Bibim
         if (GetFullscreen() != value)
         {
             fullscreen = value;
-
-            // TODO: Reinitialize Device
         }
     }
 
-    void GraphicsDevice::SetViewport(const Rect& value)
+    Point2 GraphicsDevice::GetResolution() const
     {
-        if (GetViewport() != value)
-        {
-            viewport = value;
-
-            const D3DVIEWPORT9 vp = 
-            {
-                value.X,      // X
-                value.Y,      // Y
-                value.Width,  // Width
-                value.Height, // Height
-                0.0f,         // MinZ
-                1.0f,         // MaxZ
-            };
-
-            HRESULT result = d3dDevice->SetViewport(&vp);
-            if (result != D3D_OK)
-                throw Exception("d3dDevice->SetViewport != D3D_OK");
-        }
+        if (Window* window = GetWindow())
+            return window->GetSize();
+        else
+            return Point2::Zero;
     }
 
-    void GraphicsDevice::InitializeDevice()
+    void GraphicsDevice::Initialize()
     {
         BBAssert(GetWindow());
 
@@ -170,15 +147,18 @@ namespace Bibim
             capabilities.displayModes.swap(modes);
         }
 
+        Window* window = GetWindow();
+        const Point2 windowSize = window->GetSize();
+
         D3DPRESENT_PARAMETERS d3dParameters;
-        d3dParameters.BackBufferWidth = resolution.X;
-        d3dParameters.BackBufferHeight = resolution.Y;
+        d3dParameters.BackBufferWidth = windowSize.X;
+        d3dParameters.BackBufferHeight = windowSize.Y;
         d3dParameters.BackBufferFormat = D3DFMT_UNKNOWN;
         d3dParameters.BackBufferCount = 1;
         d3dParameters.MultiSampleType = D3DMULTISAMPLE_NONE;
         d3dParameters.MultiSampleQuality = 0;
         d3dParameters.SwapEffect = D3DSWAPEFFECT_DISCARD;
-        d3dParameters.hDeviceWindow = static_cast<HWND>(GetWindow()->GetHandle());
+        d3dParameters.hDeviceWindow = static_cast<HWND>(window->GetHandle());
         d3dParameters.Windowed = GetFullscreen() ? FALSE : TRUE;
         d3dParameters.EnableAutoDepthStencil = FALSE;
         d3dParameters.AutoDepthStencilFormat = D3DFMT_UNKNOWN;
@@ -188,24 +168,33 @@ namespace Bibim
 
         HRESULT result = D3D_OK;
 
-        result = GetD3DObject()->CreateDevice(D3DADAPTER_DEFAULT,
-                                              D3DDEVTYPE_HAL,
-                                              d3dParameters.hDeviceWindow,
-                                              D3DCREATE_HARDWARE_VERTEXPROCESSING | D3DCREATE_MULTITHREADED,
-                                              &d3dParameters,
-                                              &d3dDevice);
-        if (result != D3D_OK)
+        if (d3dDevice == nullptr)
         {
             result = GetD3DObject()->CreateDevice(D3DADAPTER_DEFAULT,
                                                   D3DDEVTYPE_HAL,
                                                   d3dParameters.hDeviceWindow,
-                                                  D3DCREATE_SOFTWARE_VERTEXPROCESSING | D3DCREATE_MULTITHREADED,
+                                                  D3DCREATE_HARDWARE_VERTEXPROCESSING | D3DCREATE_MULTITHREADED,
                                                   &d3dParameters,
                                                   &d3dDevice);
-            if (result == D3D_OK)
-                Log::Information("Graphics", "device created by Software vertex processing.");
-            else
-                throw Exception("d3dObject->CreateDevice != D3D_OK");
+            if (result != D3D_OK)
+            {
+                result = GetD3DObject()->CreateDevice(D3DADAPTER_DEFAULT,
+                                                      D3DDEVTYPE_HAL,
+                                                      d3dParameters.hDeviceWindow,
+                                                      D3DCREATE_SOFTWARE_VERTEXPROCESSING | D3DCREATE_MULTITHREADED,
+                                                      &d3dParameters,
+                                                      &d3dDevice);
+                if (result == D3D_OK)
+                    Log::Information("Graphics", "device created by Software vertex processing.");
+                else
+                    throw Exception("d3dObject->CreateDevice != D3D_OK");
+            }
+        }
+        else
+        {
+            result = d3dDevice->Reset(&d3dParameters);
+            if (result != D3D_OK)
+                return;
         }
 
         if (d3dDevice->GetDeviceCaps(&d3dCaps) == D3D_OK)
@@ -299,13 +288,23 @@ namespace Bibim
             BBAssert(d3dCaps.MaxSimultaneousTextures >= 2);
         }
 
-        SetViewport(Rect(Point2::Zero, resolution));
+        const D3DVIEWPORT9 vp = { 0, 0, windowSize.X, windowSize.Y, 0.0f, 1.0f };
+        result = d3dDevice->SetViewport(&vp);
+        if (result != D3D_OK)
+            Log::Warning("Graphics", "Set viewport failed.");
+
+        deviceLost = false;
+
+        Base::Initialize();
     }
 
-    void GraphicsDevice::FinalizeDevice()
+    void GraphicsDevice::Finalize()
     {
+        Base::Finalize();
+
+        deviceLost = true;
+
         capabilities = GraphicsCapabilities();
         ::ZeroMemory(&d3dCaps, sizeof(d3dCaps));
-        CheckedRelease(d3dDevice);
     }
 }

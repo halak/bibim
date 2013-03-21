@@ -71,10 +71,26 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ShaderEffect::ShaderEffect(GraphicsDevice* graphicsDevice, GLuint handle)
+    ShaderEffect::ShaderEffect(GraphicsDevice* graphicsDevice)
         : graphicsDevice(graphicsDevice),
-          handle(handle)
+          handle(0)
     {
+        if (graphicsDevice)
+            graphicsDevice->AddLostEventListener(this);
+    }
+
+    ShaderEffect::~ShaderEffect()
+    {
+        if (handle)
+            glDeleteProgram(handle);
+
+        if (graphicsDevice)
+            graphicsDevice->RemoveLostEventListener(this);
+    }
+
+    void ShaderEffect::Setup(GLuint handle)
+    {
+        this->handle = handle;
         positionLocation = glGetAttribLocation(handle, "Position");
         colorLocation = glGetAttribLocation(handle, "Color");
         texCoord1Location = glGetAttribLocation(handle, "TexCoord1");
@@ -82,12 +98,6 @@ namespace Bibim
         mainSamplerLocation = glGetUniformLocation(handle, "MainSampler");
         maskSamplerLocation = glGetUniformLocation(handle, "MaskSampler");
         mvpTransformLocation = glGetUniformLocation(handle, "MVP");
-    }
-
-    ShaderEffect::~ShaderEffect()
-    {
-        if (handle)
-            glDeleteProgram(handle);
     }
 
     ShaderEffect::Parameter* ShaderEffect::FindParameter(const char* name)
@@ -129,7 +139,7 @@ namespace Bibim
         return handle;
     }
 
-    GameAsset* ShaderEffect::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
+    GameAsset* ShaderEffect::Create(StreamReader& reader, GameAsset* existingInstance)
     {
         GraphicsDevice* graphicsDevice = static_cast<GraphicsDevice*>(reader.ReadModule(GraphicsDevice::ClassID));
         const String code = reader.ReadString();
@@ -190,6 +200,22 @@ namespace Bibim
         glDeleteShader(vs);
         glDeleteShader(fs);
 
-        return new ShaderEffect(graphicsDevice, programHandle);
+        if (existingInstance == nullptr)
+            existingInstance = new ShaderEffect(graphicsDevice);
+
+        static_cast<ShaderEffect*>(existingInstance)->Setup(programHandle);
+
+        return existingInstance;
+    }
+
+    void ShaderEffect::OnGraphicsDeviceLost(GraphicsDeviceBase* g)
+    {
+        if (handle)
+        {
+            glDeleteProgram(handle);
+            handle = 0;
+        }
+
+        SetStatus(DirtyStatus);
     }
 }

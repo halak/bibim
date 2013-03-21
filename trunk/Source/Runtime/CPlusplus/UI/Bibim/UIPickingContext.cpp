@@ -1,12 +1,17 @@
 ﻿#include <Bibim/PCH.h>
 #include <Bibim/UIPickingContext.h>
+#include <Bibim/GraphicsDevice.h>
 #include <Bibim/UIRenderer.h>
 #include <Bibim/UIVisual.h>
 
 namespace Bibim
 {
     UIPickingContext::UIPickingContext(UIRenderer* renderer, Vector2 point)
-        : UIVisualVisitor(renderer->GetViewTransform(), renderer->GetInversedViewTransform(), renderer->GetProjectionTransform(), true),
+        : UIVisualVisitor(renderer->GetGraphicsDevice()->GetResolution(),
+                          renderer->GetViewTransform(),
+                          renderer->GetInversedViewTransform(),
+                          renderer->GetProjectionTransform(),
+                          true),
           point(point),
           currentPoint(point),
           result(nullptr)
@@ -14,7 +19,11 @@ namespace Bibim
     }
 
     UIPickingContext::UIPickingContext(UIRenderer* renderer, Vector2 point, bool visibleOnly)
-        : UIVisualVisitor(renderer->GetViewTransform(), renderer->GetInversedViewTransform(), renderer->GetProjectionTransform(), visibleOnly),
+        : UIVisualVisitor(renderer->GetGraphicsDevice()->GetResolution(),
+                          renderer->GetViewTransform(),
+                          renderer->GetInversedViewTransform(),
+                          renderer->GetProjectionTransform(),
+                          visibleOnly),
           point(point),
           currentPoint(point),
           result(nullptr)

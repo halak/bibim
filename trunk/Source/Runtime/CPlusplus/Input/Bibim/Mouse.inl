@@ -1,5 +1,10 @@
 ﻿namespace Bibim
 {
+    const MouseState& Mouse::GetState()
+    {
+        return state;
+    }
+
     void Mouse::Show()
     {
         SetVisible(true);
@@ -13,10 +18,5 @@
     Window* Mouse::GetWindow()
     {
         return window;
-    }
-
-    void Mouse::SetWindow(Window* value)
-    {
-        window = value;
     }
 }

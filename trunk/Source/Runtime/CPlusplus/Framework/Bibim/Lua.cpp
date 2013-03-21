@@ -36,13 +36,16 @@ namespace Bibim
     void Lua::DoFile(const String& path)
     {
         FileStreamPtr file = new FileStream(path, FileStream::ReadOnly);
-        const int length = file->GetLength();
-        std::vector<char> text;
-        text.resize(length + 1, '\0');
-        file->Read(&text[0], length);
-        file->Close();
+        if (file->CanRead())
+        {
+            const int length = file->GetLength();
+            std::vector<char> text;
+            text.resize(length + 1, '\0');
+            file->Read(&text[0], length);
+            file->Close();
 
-        lua_tinker::dostring(state, &text[0], path.CStr());
+            lua_tinker::dostring(state, &text[0], path.CStr());
+        }
     }
 
     void Lua::LoadLibraries()
@@ -401,6 +404,11 @@ namespace Bibim
         lua_tinker::class_add<UIRadioButton>(L, "UIRadioButton");
             lua_tinker::class_inh<UIRadioButton, UICheckBox>(L);
             lua_tinker::class_con<UIRadioButton>(L, lua_tinker::constructor<UIRadioButton>);
+        lua_tinker::class_add<UIScrollablePanel>(L, "UIScrollablePanel");
+            lua_tinker::class_inh<UIScrollablePanel, UIPanel>(L);
+            lua_tinker::class_con<UIScrollablePanel>(L, lua_tinker::constructor<UIScrollablePanel>);
+            lua_tinker::class_def<UIScrollablePanel>(L, "GetContent", &UIScrollablePanel::GetContent);
+            lua_tinker::class_def<UIScrollablePanel>(L, "SetContent", &UIScrollablePanel::SetContent);
         /*//MOBILE
         lua_tinker::class_add<UISpark>(L, "UISpark");
             lua_tinker::class_inh<UISpark, UIVisual>(L);

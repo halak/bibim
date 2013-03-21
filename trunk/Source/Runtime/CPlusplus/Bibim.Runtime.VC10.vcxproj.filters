@@ -168,9 +168,6 @@
     <ClCompile Include="Asset\Bibim\AssetProvider.cpp">
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </ClCompile>
-    <ClCompile Include="Asset\Bibim\FileAssetProvider.cpp">
-      <Filter>03. Game\%28Asset%29\Providers</Filter>
-    </ClCompile>
     <ClCompile Include="Asset\Bibim\MPQAssetProvider.cpp">
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </ClCompile>
@@ -325,9 +322,6 @@
       <Filter>03. Game\Gameplay\PathFinder</Filter>
     </ClCompile>
     <ClCompile Include="Input\Bibim\Keyboard.cpp">
-      <Filter>03. Game\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Input\Bibim\Keyboard.Windows.cpp">
       <Filter>03. Game\Input</Filter>
     </ClCompile>
     <ClCompile Include="Input\Bibim\KeyboardState.cpp">
@@ -756,12 +750,6 @@
     <ClCompile Include="Foundation\Bibim\Environment.iOS.cpp">
       <Filter>02. System</Filter>
     </ClCompile>
-    <ClCompile Include="FileSystem\Bibim\FileStream.Android.cpp">
-      <Filter>03. Game\FileSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="FileSystem\Bibim\FileStream.iOS.cpp">
-      <Filter>03. Game\FileSystem</Filter>
-    </ClCompile>
     <ClCompile Include="Input\Bibim\Key.cpp">
       <Filter>03. Game\Input</Filter>
     </ClCompile>
@@ -804,9 +792,6 @@
     <ClCompile Include="Input\Bibim\Mouse.Android.cpp">
       <Filter>03. Game\Input</Filter>
     </ClCompile>
-    <ClCompile Include="Input\Bibim\Keyboard.Android.cpp">
-      <Filter>03. Game\Input</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\Bibim\Lua.cpp">
       <Filter>03. Game\Framework</Filter>
     </ClCompile>
@@ -824,6 +809,27 @@
     </ClCompile>
     <ClCompile Include="Framework\Bibim\PreferencesBase.cpp">
       <Filter>03. Game\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIScrollablePanel.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset\Bibim\FileAssetProviderBase.cpp">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset\Bibim\FileAssetProvider.Default.cpp">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSystem\Bibim\FileStream.CRT.cpp">
+      <Filter>03. Game\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSystem\Bibim\FileStream.Android.cpp">
+      <Filter>03. Game\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\GraphicsDeviceBase.cpp">
+      <Filter>03. Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Bibim\GLES2.cpp">
+      <Filter>03. Game\Graphics\GLES2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1559,12 +1565,6 @@
     <ClInclude Include="Foundation\Bibim\Environment.iOS.h">
       <Filter>02. System</Filter>
     </ClInclude>
-    <ClInclude Include="FileSystem\Bibim\FileStream.Android.h">
-      <Filter>03. Game\FileSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="FileSystem\Bibim\FileStream.iOS.h">
-      <Filter>03. Game\FileSystem</Filter>
-    </ClInclude>
     <ClInclude Include="Audio\Bibim\AudioDevice.Android.h">
       <Filter>03. Game\Audio\Android</Filter>
     </ClInclude>
@@ -1632,6 +1632,24 @@
     <ClInclude Include="Framework\Bibim\Preferences.iOS.h">
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="UI\Bibim\UIScrollablePanel.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset\Bibim\FileAssetProviderBase.h">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset\Bibim\FileAssetProvider.Default.h">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem\Bibim\FileStream.CRT.h">
+      <Filter>03. Game\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem\Bibim\FileStream.Android.h">
+      <Filter>03. Game\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\GraphicsDeviceBase.h">
+      <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Asset\Bibim\AssetLoadingTask.inl">
@@ -1650,9 +1668,6 @@
       <Filter>03. Game\%28Asset%29</Filter>
     </None>
     <None Include="Asset\Bibim\AssetProvider.inl">
-      <Filter>03. Game\%28Asset%29\Providers</Filter>
-    </None>
-    <None Include="Asset\Bibim\FileAssetProvider.inl">
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </None>
     <None Include="Asset\Bibim\MPQAssetProvider.inl">
@@ -2213,12 +2228,6 @@
     <None Include="Foundation\Bibim\Environment.iOS.inl">
       <Filter>02. System</Filter>
     </None>
-    <None Include="FileSystem\Bibim\FileStream.Android.inl">
-      <Filter>03. Game\FileSystem</Filter>
-    </None>
-    <None Include="FileSystem\Bibim\FileStream.iOS.inl">
-      <Filter>03. Game\FileSystem</Filter>
-    </None>
     <None Include="Audio\Bibim\AudioDevice.Android.inl">
       <Filter>03. Game\Audio\Android</Filter>
     </None>
@@ -2263,6 +2272,21 @@
     </None>
     <None Include="Framework\Bibim\PreferencesBase.inl">
       <Filter>03. Game\Framework</Filter>
+    </None>
+    <None Include="UI\Bibim\UIScrollablePanel.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="Asset\Bibim\FileAssetProviderBase.inl">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </None>
+    <None Include="FileSystem\Bibim\FileStream.CRT.inl">
+      <Filter>03. Game\FileSystem</Filter>
+    </None>
+    <None Include="FileSystem\Bibim\FileStream.Android.inl">
+      <Filter>03. Game\FileSystem</Filter>
+    </None>
+    <None Include="Graphics\Bibim\GraphicsDeviceBase.inl">
+      <Filter>03. Game\Graphics</Filter>
     </None>
   </ItemGroup>
 </Project>

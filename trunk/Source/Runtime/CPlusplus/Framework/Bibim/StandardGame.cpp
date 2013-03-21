@@ -21,6 +21,7 @@
 #include <Bibim/Lua.h>
 #include <Bibim/Math.h>
 #include <Bibim/Mouse.h>
+#include <Bibim/Numerics.h>
 #include <Bibim/PipedAssetProvider.h>
 #include <Bibim/Preferences.h>
 #include <Bibim/RenderTargetTexture2D.h>
@@ -45,6 +46,7 @@
 #include <Bibim/UIRadioButton.h>
 #include <Bibim/UIRenderer.h>
 #include <Bibim/UISimpleDomain.h>
+#include <Bibim/UITransform3D.h>
 #include <Bibim/UIWindow.h>
 
 namespace Bibim
@@ -54,18 +56,42 @@ namespace Bibim
     ;
 
     StandardGame::StandardGame()
-        : clearColor(Colors::Black)
+        : clearColor(Colors::Black),
+          storage(nullptr),
+          fontLibrary(nullptr),
+          uiDomain(nullptr)
     {
+        GetWindow()->AddResizeEventListener(this);
+        GetGraphicsDevice()->AddRestoreEventListener(this);
     }
 
-    StandardGame::StandardGame(int resolutionWidth, int resolutionHeight)
-        : GameFramework(resolutionWidth, resolutionHeight),
-          clearColor(Colors::Black)
+    StandardGame::StandardGame(Point2 windowSize)
+        : GameFramework(windowSize.X, windowSize.Y),
+          contentSize(0, 0),
+          clearColor(Colors::Black),
+          storage(nullptr),
+          fontLibrary(nullptr),
+          uiDomain(nullptr)
     {
+        GetWindow()->AddResizeEventListener(this);
+        GetGraphicsDevice()->AddRestoreEventListener(this);
+    }
+
+    StandardGame::StandardGame(Point2 windowSize, Point2 contentSize)
+        : GameFramework(windowSize.X, windowSize.Y),
+          contentSize(contentSize),
+          clearColor(Colors::Black),
+          storage(nullptr),
+          uiDomain(nullptr)
+    {
+        GetWindow()->AddResizeEventListener(this);
+        GetGraphicsDevice()->AddRestoreEventListener(this);
     }
 
     StandardGame::~StandardGame()
     {
+        GetGraphicsDevice()->RemoveRestoreEventListener(this);
+        GetWindow()->RemoveResizeEventListener(this);
     }
     
     void StandardGame::Initialize(const String& gameName, const String& version, StandardGame::LuaBase* lua)
@@ -112,11 +138,11 @@ namespace Bibim
         storage = new GameAssetStorage(GetModules());
         GameModuleNode* storageNode = GetModules()->GetRoot()->AttachChild(storage);
         {
-            PipedAssetProvider* pap = new PipedAssetProvider(storage, PipedAssetProvider::DefaultPipeName, gameName);
+            //MOBILE PipedAssetProvider* pap = new PipedAssetProvider(storage, PipedAssetProvider::DefaultPipeName, gameName);
             //MOBILE MPQAssetProvider*   map = new MPQAssetProvider(storage, mainMPQ);
             FileAssetProvider*  fap = new FileAssetProvider(storage);
 
-            storageNode->AttachChild(pap);
+            //MOBILE storageNode->AttachChild(pap);
             //MOBILE storageNode->AttachChild(map);
             storageNode->AttachChild(fap);
         }
@@ -140,10 +166,16 @@ namespace Bibim
         httpClient->SetTimeline(GetMainTimeline());
 
         UIWindowPtr rootWindow = new UIWindow();
-        rootWindow->SetAbsoluteBounds(0, 0, 800, 600);
+        rootWindow->SetXY(0.0f, 0.0f);
+        rootWindow->SetXYMode(UIVisual::AbsolutePosition);
+        rootWindow->SetAnchorPoint(UIVisual::Center);
+        rootWindow->SetOrigin(Vector2(0.5f, 0.5f));
+
         uiDomain = new UISimpleDomain(rootWindow);
         GameModuleNode* uiDomainNode = GetModules()->GetRoot()->AttachChild(uiDomain);
         {
+            MatchContentToWindow();
+
             uiRenderer = new UIRenderer(GetGraphicsDevice(), storage, "Asset\\Shader");
             UIKeyboardEventDispatcher* ked = new UIKeyboardEventDispatcher(uiDomain, keyboard);
             UIMouseEventDispatcher*    med = new UIMouseEventDispatcher(uiDomain, mouse, uiRenderer, true);
@@ -262,6 +294,66 @@ namespace Bibim
         }
     }
 
+    void StandardGame::MatchContentToWindow()
+    {
+        if (GetUIDomain() == nullptr)
+            return;
+
+        UIWindow* rootWindow = GetUIDomain()->GetRoot();
+
+        const Point2 windowSize = GetWindow()->GetSize();
+
+        float scale = 1.0f;
+        if (contentSize.X != 0 || contentSize.Y != 0)
+        {
+            float xScale = Float::Max;
+            float yScale = Float::Max;
+            if (contentSize.X != 0)
+                xScale = static_cast<float>(windowSize.X) / static_cast<float>(contentSize.X);
+            if (contentSize.Y != 0)
+                yScale = static_cast<float>(windowSize.Y) / static_cast<float>(contentSize.Y);
+
+            scale = Math::Min(xScale, yScale);
+        }
+
+        if (Math::Equals(scale, 1.0f) == false)
+        {
+            UITransform3DPtr transform = new UITransform3D();
+            transform->SetScale(scale);
+            rootWindow->SetTransform(transform);
+        }
+        else
+        {
+            rootWindow->SetTransform(nullptr);
+            scale = 1.0f;
+        }
+
+        if (contentSize.X == 0)
+        {
+            rootWindow->SetWidth(1.0f / scale);
+            rootWindow->SetWidthMode(UIVisual::RelativeSize);
+        }
+        else
+        {
+            rootWindow->SetWidth(static_cast<float>(contentSize.X));
+            rootWindow->SetWidthMode(UIVisual::AbsoluteSize);
+        }
+
+        if (contentSize.Y == 0)
+        {
+            rootWindow->SetHeight(1.0f / scale);
+            rootWindow->SetHeightMode(UIVisual::RelativeSize);
+        }
+        else
+        {
+            rootWindow->SetHeight(static_cast<float>(contentSize.Y));
+            rootWindow->SetHeightMode(UIVisual::AbsoluteSize);
+        }
+
+        if (GetFontLibrary())
+            GetFontLibrary()->SetGlobalScale(scale);
+    }
+
     void StandardGame::ReloadUI()
     {
         alarmClock->CancelAll();
@@ -274,6 +366,19 @@ namespace Bibim
             lua->GC();
 
         ReloadScripts();
+    }
+
+    void StandardGame::OnWindowResized(Window* window)
+    {
+        BBAssert(GetWindow() == window);
+        MatchContentToWindow();
+    }
+
+    void StandardGame::OnGraphicsDeviceRestore(GraphicsDeviceBase* g)
+    {
+        BBAssert(GetGraphicsDevice() == g);
+        if (GetAssetStorage())
+            GetAssetStorage()->Restore();
     }
 
     bool StandardGame::KeyDownHandler(const UIEventArgs& args, void* userData)
@@ -295,6 +400,11 @@ namespace Bibim
         else if (keyboard.Contains(Key::Delete))
         {
             recentLog = String::Empty;
+            return true;
+        }
+        else if (keyboard.Contains(Key::F4))
+        {
+            GetGraphicsDevice()->SetFullscreen(!GetGraphicsDevice()->GetFullscreen());
             return true;
         }
         else

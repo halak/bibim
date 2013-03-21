@@ -23,7 +23,7 @@ namespace Bibim
     {
     }
 
-    GameAsset* SourceTexture2D::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
+    GameAsset* SourceTexture2D::Create(StreamReader& reader, GameAsset* existingInstance)
     {
         GraphicsDevice* graphicsDevice = static_cast<GraphicsDevice*>(reader.ReadModule(GraphicsDevice::ClassID));
         const int width = static_cast<int>(reader.ReadShortInt());
@@ -32,12 +32,14 @@ namespace Bibim
         const int surfaceHeight = static_cast<int>(reader.ReadShortInt());
         const PixelFormat pixelFormat = static_cast<PixelFormat>(reader.ReadByte());
         if (width == 0 || height == 0 || surfaceWidth == 0 || surfaceHeight == 0)
-            return nullptr;
+            return existingInstance;
 
-        SourceTexture2D* texture = new SourceTexture2D(graphicsDevice, width, height, surfaceWidth, surfaceHeight, pixelFormat);
-        reader.ReadAsync(new LoadingTask(reader, texture, surfaceHeight));
+        if (existingInstance == nullptr)
+            existingInstance = new SourceTexture2D(graphicsDevice, width, height, surfaceWidth, surfaceHeight, pixelFormat);
+        
+        reader.ReadAsync(new LoadingTask(reader, static_cast<SourceTexture2D*>(existingInstance), surfaceHeight));
 
-        return texture;
+        return existingInstance;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

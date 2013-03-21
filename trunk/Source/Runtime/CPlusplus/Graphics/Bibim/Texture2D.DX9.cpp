@@ -14,6 +14,8 @@ namespace Bibim
           pixelFormat(UnknownPixels),
           handle(nullptr)
     {
+        if (graphicsDevice)
+            graphicsDevice->AddLostEventListener(this);
     }
 
     Texture2D::Texture2D(GraphicsDevice* graphicsDevice, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat)
@@ -25,11 +27,16 @@ namespace Bibim
           pixelFormat(pixelFormat),
           handle(nullptr)
     {
+        if (graphicsDevice)
+            graphicsDevice->AddLostEventListener(this);
     }
 
     Texture2D::~Texture2D()
     {
         CheckedRelease(handle);
+
+        if (graphicsDevice)
+            graphicsDevice->RemoveLostEventListener(this);
     }
 
     void Texture2D::Setup(IDirect3DTexture9* handle, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat)
@@ -41,5 +48,12 @@ namespace Bibim
         this->surfaceWidth = surfaceWidth;
         this->surfaceHeight = surfaceHeight;
         this->pixelFormat = pixelFormat;
+    }
+
+    void Texture2D::OnGraphicsDeviceLost(GraphicsDeviceBase* g)
+    {
+        BBAssert(GetGraphicsDevice() == g);
+        CheckedRelease(handle);
+        SetStatus(DirtyStatus);
     }
 }

@@ -76,16 +76,25 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ShaderEffect::ShaderEffect(GraphicsDevice* graphicsDevice, ID3DXEffect* handle)
+    ShaderEffect::ShaderEffect(GraphicsDevice* graphicsDevice)
         : graphicsDevice(graphicsDevice),
-          handle(handle)
+          handle(nullptr)
     {
-        /*IDirect3DDevice9* d3dDevice = graphicsDevice->GetD3DDevice();*/
+        if (graphicsDevice)
+            graphicsDevice->AddLostEventListener(this);
     }
 
     ShaderEffect::~ShaderEffect()
     {
         CheckedRelease(handle);
+
+        if (graphicsDevice)
+            graphicsDevice->RemoveLostEventListener(this);
+    }
+
+    void ShaderEffect::Setup(ID3DXEffect* handle)
+    {
+        this->handle = handle;
     }
 
     ShaderEffect::Parameter* ShaderEffect::FindParameter(const char* name)
@@ -105,7 +114,7 @@ namespace Bibim
         return FindParameter(name.CStr());
     }
 
-    GameAsset* ShaderEffect::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
+    GameAsset* ShaderEffect::Create(StreamReader& reader, GameAsset* existingInstance)
     {
         GraphicsDevice* graphicsDevice = static_cast<GraphicsDevice*>(reader.ReadModule(GraphicsDevice::ClassID));
         const String code = reader.ReadString();       
@@ -125,6 +134,18 @@ namespace Bibim
             Log::Error("ShaderEffect", code.CStr());
         }
 
-        return new ShaderEffect(graphicsDevice, handle);
+        if (existingInstance == nullptr)
+            existingInstance = new ShaderEffect(graphicsDevice);
+
+        static_cast<ShaderEffect*>(existingInstance)->Setup(handle);
+
+        return existingInstance;
+    }
+
+    void ShaderEffect::OnGraphicsDeviceLost(GraphicsDeviceBase* g)
+    {
+        BBAssert(graphicsDevice == g);
+        CheckedRelease(handle);
+        SetStatus(DirtyStatus);
     }
 }

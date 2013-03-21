@@ -17,9 +17,9 @@
     
             protected:
                 GameFramework();
-                GameFramework(int resolutionWidth, int resolutionHeight);
+                GameFramework(int width, int height);
     
-                void Construct(int resolutionWidth, int resolutionHeight);
+                void Construct(int width, int height);
         };
     }
 

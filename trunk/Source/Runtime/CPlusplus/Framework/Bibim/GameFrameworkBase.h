@@ -37,7 +37,7 @@
             protected:
                 GameFrameworkBase();
  
-                void Construct(int resolutionWidth, int resolutionHeight, const String& startupArgs);
+                void Construct(int width, int height, const String& startupArgs);
     
                 virtual void Initialize();
                 virtual void Finalize();
@@ -47,7 +47,7 @@
                 virtual void Update(float dt, int timestamp);
                 virtual void Draw();
     
-                virtual void BeginDraw();
+                virtual bool BeginDraw();
                 virtual void EndDraw();
     
             private:

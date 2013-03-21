@@ -26,6 +26,7 @@
 
                 virtual bool Preload(const String& name);
                 virtual GameAsset* Load(const String& name);
+                virtual bool Restore(const String& name, GameAsset* asset);
 
                 inline const String& GetServerName() const;
                 void SetServerName(const String& value);

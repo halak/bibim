@@ -6,8 +6,8 @@
 #include <Bibim/DumpStream.h>
 #include <Bibim/FileStream.h>
 #include <Bibim/Environment.h>
-#include <BIbim/GameAssetFactory.h>
-#include <BIbim/GameAssetStorage.h>
+#include <Bibim/GameAssetFactory.h>
+#include <Bibim/GameAssetStorage.h>
 #include <Bibim/PipeClientStream.h>
 
 namespace Bibim
@@ -136,6 +136,11 @@ namespace Bibim
         }
         else
             return nullptr;
+    }
+
+    bool PipedAssetProvider::Restore(const String& name, GameAsset* asset)
+    {
+        return false;
     }
 
     void PipedAssetProvider::SetServerName(const String& value)

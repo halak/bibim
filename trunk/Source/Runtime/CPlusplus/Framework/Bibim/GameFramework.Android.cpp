@@ -1,5 +1,6 @@
 #include <Bibim/PCH.h>
 #include <Bibim/GameFramework.Android.h>
+#include <Bibim/Point2.h>
 
 namespace Bibim
 {
@@ -8,20 +9,18 @@ namespace Bibim
         Construct(0, 0);
     }
 
-    GameFramework::GameFramework(int resolutionWidth, int resolutionHeight)
+    GameFramework::GameFramework(int width, int height)
     {
-        Construct(resolutionWidth, resolutionHeight);
+        Construct(width, height);
     }
 
     GameFramework::~GameFramework()
     {
     }
 
-    void GameFramework::Construct(int resolutionWidth, int resolutionHeight)
+    void GameFramework::Construct(int width, int height)
     {
-        GameFrameworkBase::Construct(resolutionWidth,
-                                     resolutionHeight,
-                                     String::Empty);
+        GameFrameworkBase::Construct(width, height, String::Empty);
     }
     
     void GameFramework::init()

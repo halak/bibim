@@ -51,6 +51,7 @@
                     LoadingStatus = 1,
                     CompletedStatus = 2,
                     FaultStatus = 3,
+                    DirtyStatus = 4,
                 };
 
             public:

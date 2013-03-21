@@ -6,10 +6,11 @@
 #   include <Bibim/GameModule.h>
 #   include <Bibim/Key.h>
 #   include <Bibim/KeyboardState.h>
+#   include <Bibim/Window.h>
 
     namespace Bibim
     {
-        class Keyboard : public GameModule
+        class Keyboard : public GameModule, public Window::KeyboardEventListener
         {
             BBModuleClass(Keyboard, GameModule, 'K', 'B', 'D', '_');
             public:
@@ -20,16 +21,16 @@
                 inline bool GetAllowKey(Key::Code code) const;
                 inline void SetAllowKey(Key::Code code, bool allow);
 
-                const KeyboardState& GetState();
+                inline const KeyboardState& GetState() const;
 
                 inline Window* GetWindow() const;
-                inline void SetWindow(Window* value);
-
-                void keyDown(Key::Code code);//MOBILE
-                void keyUp(Key::Code code);//MOBILE
+                void SetWindow(Window* value);
 
             private:
                 void AllowDefaultKeys();
+
+                virtual void OnKeyDown(Window* window, Key::Code code);
+                virtual void OnKeyUp(Window* window, Key::Code code);
 
             private:
                 Window* window;

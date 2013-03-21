@@ -57,6 +57,8 @@ namespace Bibim
           vb(nullptr),
           ib(nullptr)
     {
+        if (GetGraphicsDevice())
+            GetGraphicsDevice()->AddLostEventListener(this);
     }
 
     UIRenderer::~UIRenderer()
@@ -65,6 +67,9 @@ namespace Bibim
         CheckedRelease(d3dLine);
         CheckedRelease(vb);
         CheckedRelease(ib);
+
+        if (GetGraphicsDevice())
+            GetGraphicsDevice()->RemoveLostEventListener(this);
     }
 
     void UIRenderer::Begin()
@@ -82,7 +87,7 @@ namespace Bibim
         d3dDevice->SetTransform(D3DTS_VIEW, &d3dViewTransform);
         d3dDevice->SetTransform(D3DTS_PROJECTION, &d3dProjectionTransform);
 
-        d3dDevice->BeginStateBlock();
+        // d3dDevice->BeginStateBlock();
         CheckedSetRenderState(d3dDevice, D3DRS_ALPHATESTENABLE, FALSE);
         CheckedSetRenderState(d3dDevice, D3DRS_ALPHABLENDENABLE, TRUE);
         CheckedSetRenderState(d3dDevice, D3DRS_ALPHAFUNC, D3DCMP_ALWAYS);
@@ -137,11 +142,9 @@ namespace Bibim
         CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_MAXMIPLEVEL, 0);
         CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_MIPMAPLODBIAS, 0);
         CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_SRGBTEXTURE, 0);
-        d3dDevice->EndStateBlock(&d3dStateBlock);
+        // d3dDevice->EndStateBlock(&d3dStateBlock);
 
         d3dDevice->SetFVF(VertexFVF);
-        d3dDevice->SetStreamSource(0, vb, 0, sizeof(Vertex));
-        d3dDevice->SetIndices(ib);
 
         Base::Begin();
     }
@@ -150,8 +153,8 @@ namespace Bibim
     {
         Base::End();
 
-        d3dStateBlock->Apply();
-        CheckedRelease(d3dStateBlock);
+        // d3dStateBlock->Apply();
+        // CheckedRelease(d3dStateBlock);
     }
 
     void UIRenderer::DrawLines(int count, const Vector2* p, Color color)
@@ -302,6 +305,9 @@ namespace Bibim
         CheckedRelease(vb);
         CheckedRelease(ib);
 
+        if (vbSize <= 0 || numberOfIndices <= 0)
+            return;
+
         HRESULT result = D3D_OK;
 
         const int ibSize = numberOfIndices * sizeof(WORD);
@@ -327,6 +333,9 @@ namespace Bibim
                 ib->Unlock();
             }
         }
+
+        d3dDevice->SetStreamSource(0, vb, 0, sizeof(Vertex));
+        d3dDevice->SetIndices(ib);
     }
 
     void UIRenderer::OnEffectBegan(PixelMode /*mode*/, ShaderEffect* effect)
@@ -413,5 +422,24 @@ namespace Bibim
             d3dDevice->SetTexture(1, nullptr);
         d3dDevice->DrawPrimitive(primitiveType, 0, numberOfPrimitives);
         EndEffect(pixelMode);
+    }
+
+    void UIRenderer::OnGraphicsDeviceChanged(GraphicsDevice* old)
+    {
+        if (old)
+            old->RemoveLostEventListener(this);
+
+        if (GetGraphicsDevice())
+            GetGraphicsDevice()->AddLostEventListener(this);
+    }
+
+    void UIRenderer::OnGraphicsDeviceLost(GraphicsDeviceBase* g)
+    {
+        BBAssert(GetGraphicsDevice() == g);
+        CheckedRelease(d3dStateBlock);
+        CheckedRelease(d3dLine);
+        CheckedRelease(vb);
+        CheckedRelease(ib);
+        ReserveCachedQuads(0);
     }
 }

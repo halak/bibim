@@ -5,8 +5,8 @@
 #include <Bibim/BinaryWriter.h>
 #include <Bibim/MPQ.h>
 #include <Bibim/MPQStream.h>
-#include <BIbim/GameAssetFactory.h>
-#include <BIbim/GameAssetStorage.h>
+#include <Bibim/GameAssetFactory.h>
+#include <Bibim/GameAssetStorage.h>
 #include <StormLib.h>
 
 namespace Bibim
@@ -66,6 +66,11 @@ namespace Bibim
     {
         BBAssertDebug(mpq != nullptr);
         return LoadActually(GetStorage(), mpq, name, false);
+    }
+
+    bool MPQAssetProvider::Restore(const String& name, GameAsset* asset)
+    {
+        return false;
     }
 
     void MPQAssetProvider::SetMPQ(MPQ* value)

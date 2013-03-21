@@ -68,17 +68,13 @@ namespace Bibim
         deletingGlyphs.swap(glyphs);
 
         for (GlyphDictionary::iterator it = deletingGlyphs.begin(); it != deletingGlyphs.end(); it++)
-        {
             delete (*it).second;
-        }
 
         SurfaceCollection deletingSurfaces;
         deletingSurfaces.swap(surfaces);
 
         for (SurfaceCollection::iterator it = deletingSurfaces.begin(); it != deletingSurfaces.end(); it++)
-        {
             delete (*it);
-        }
     }
 
     const Glyph* GlyphTable::Find(int code) const

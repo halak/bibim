@@ -66,7 +66,11 @@ namespace Bibim
     {
         const int id = reader.ReadInt();
         if (Entry* entry = FindEntry(id))
+        {
+            BBAssert(existingInstance == nullptr ||
+                     existingInstance->GetClassID() == id);
             return (*entry->Function)(reader, existingInstance);
+        }
         else
             return nullptr;
     }

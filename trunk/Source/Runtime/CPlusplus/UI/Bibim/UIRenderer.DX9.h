@@ -4,11 +4,12 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/UIRendererBase.h>
+#   include <Bibim/GraphicsDevice.h>
 #   include <d3dx9.h>
 
     namespace Bibim
     {
-        class UIRenderer : public UIRendererBase
+        class UIRenderer : public UIRendererBase, public GraphicsDevice::LostEventListener
         {
             BBModuleClass(UIRenderer, UIRendererBase, 'U', 'I', 'R', 'R');
             public:
@@ -44,6 +45,9 @@
                 inline void DrawPrimitives(D3DPRIMITIVETYPE primitiveType, int numberOfPrimitives, Texture2D* texture);
                 inline void DrawPrimitives(D3DPRIMITIVETYPE primitiveType, int numberOfPrimitives, Texture2D* texture, Texture2D* mask);
                 void DrawPrimitivesActually(D3DPRIMITIVETYPE primitiveType, PixelMode pixelMode, int numberOfPrimitives, Texture2D* texture, Texture2D* mask);
+
+                virtual void OnGraphicsDeviceChanged(GraphicsDevice* old);
+                virtual void OnGraphicsDeviceLost(GraphicsDeviceBase* g);
 
             private:
                 D3DXMATRIX d3dMVPTransform;

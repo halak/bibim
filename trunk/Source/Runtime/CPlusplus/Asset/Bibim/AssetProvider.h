@@ -18,6 +18,7 @@
 
                 virtual bool Preload(const String& name) = 0;
                 virtual GameAsset* Load(const String& name) = 0;
+                virtual bool Restore(const String& name, GameAsset* asset) = 0;
 
                 inline GameAssetStorage* GetStorage() const;
                 void SetStorage(GameAssetStorage* value);

@@ -33,6 +33,7 @@
                 String text;
                 FontPtr font;
                 FontString fontString;
+                int fontRevision;
                 bool fontStringChanged;
                 bool autoResize;
         };

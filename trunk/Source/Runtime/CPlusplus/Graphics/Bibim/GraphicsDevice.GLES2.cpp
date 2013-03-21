@@ -12,19 +12,18 @@
 namespace Bibim
 {
     GraphicsDevice::GraphicsDevice()
+        : fullscreen(false)
     {
-        Construct(720, 1184);
-    }
-
-    GraphicsDevice::GraphicsDevice(int resolutionWidth, int resolutionHeight)
-    {
-        BBAssert(resolutionWidth > 0 && resolutionHeight > 0);
-        Construct(resolutionWidth, resolutionHeight);
+#       if (defined(BIBIM_PLATFORM_WINDOWS))
+        eglDisplay = nullptr;
+        eglSurface = nullptr;
+        eglContext = nullptr;
+#       endif
     }
 
     GraphicsDevice::~GraphicsDevice()
     {
-        FinalizeContext();
+        Finalize();
     }
 
     void GraphicsDevice::Clear()
@@ -39,12 +38,14 @@ namespace Bibim
         glClear(GL_COLOR_BUFFER_BIT);
     }
 
-    void GraphicsDevice::BeginDraw()
+    bool GraphicsDevice::BeginDraw()
     {
+        return true;
     }
 
-    void GraphicsDevice::BeginDraw(RenderTargetTexture2D* /*renderTarget*/)
+    bool GraphicsDevice::BeginDraw(RenderTargetTexture2D* /*renderTarget*/)
     {
+        return true;
     }
 
     void GraphicsDevice::EndDraw()
@@ -62,19 +63,6 @@ namespace Bibim
 #       endif
     }
 
-    void GraphicsDevice::SetWindow(Window* value)
-    {
-        if (GetWindow() != value)
-        {
-            FinalizeContext();
-
-            window = value;
-
-            if (GetWindow())
-                InitializeContext();
-        }
-    }
-
     void GraphicsDevice::SetFullscreen(bool value)
     {
         if (GetFullscreen() != value)
@@ -85,29 +73,15 @@ namespace Bibim
         }
     }
 
-    void GraphicsDevice::SetViewport(const Rect& value)
+    Point2 GraphicsDevice::GetResolution() const
     {
-        if (GetViewport() != value)
-        {
-            viewport = value;
-            glViewport(viewport.X, viewport.Y, viewport.Width, viewport.Height);
-        }
+        if (Window* window = GetWindow())
+            return window->GetSize();
+        else
+            return Point2::Zero;
     }
 
-    void GraphicsDevice::Construct(int width, int height)
-    {
-#       if (defined(BIBIM_PLATFORM_WINDOWS))
-        eglDisplay = nullptr;
-        eglSurface = nullptr;
-        eglContext = nullptr;
-#       endif
-        window = nullptr;
-        resolution = Point2(width, height);
-        viewport = Rect::Empty;
-        fullscreen = false;
-    }
-
-    void GraphicsDevice::InitializeContext()
+    void GraphicsDevice::Initialize()
     {
 #       if (defined(BIBIM_PLATFORM_WINDOWS))
         BBAssert(GetWindow());
@@ -206,11 +180,16 @@ namespace Bibim
         capabilities.vertexShaderVersion = GraphicsCapabilities::VS20;
         capabilities.pixelShaderVersion = GraphicsCapabilities::PS20;
 
-        SetViewport(Rect(Point2::Zero, resolution));
+        const Point2 windowSize = GetWindow()->GetSize();
+        glViewport(0, 0, windowSize.X, windowSize.Y);
+
+        Base::Initialize();
     }
 
-    void GraphicsDevice::FinalizeContext()
+    void GraphicsDevice::Finalize()
     {
+        Base::Finalize();
+
 #       if (defined(BIBIM_PLATFORM_WINDOWS))
         eglMakeCurrent(EGL_NO_DISPLAY, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
         if (eglDisplay)
