@@ -2,6 +2,7 @@
 #include <Bibim/DynamicTexture2D.GLES2.h>
 #include <Bibim/Assert.h>
 #include <Bibim/GraphicsDevice.GLES2.h>
+#include <Bibim/Log.h>
 #include <Bibim/Math.h>
 
 namespace Bibim
@@ -32,7 +33,8 @@ namespace Bibim
     DynamicTexture2D::DynamicTexture2D(GraphicsDevice* graphicsDevice, int width, int height, PixelFormat pixelFormat)
         : Texture2D(graphicsDevice, width, height, width, height, pixelFormat),
           pitch(0),
-          isLocked(false)
+          isLocked(false),
+          dirtyRect(Rect::Empty)
     {
         const int sw = Math::Max(Math::GetNearestPowerOfTwo(width), Math::GetNearestPowerOfTwo(height));  // surface width
         const int sh = sw; // surface height
@@ -90,21 +92,36 @@ namespace Bibim
 
         const Rect lockedRect = outLockedInfo.GetRect();
 
-        GLint glesFormat = GetGLESPixelFormat(GetPixelFormat());
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, GetHandle());
-        glTexSubImage2D(GL_TEXTURE_2D,
-                        0,
-                        0,
-                        lockedRect.Y,
-                        GetSurfaceWidth(),
-                        lockedRect.Height,
-                        glesFormat,
-                        GL_UNSIGNED_BYTE,
-                        &surface[lockedRect.Y * pitch]);
+        if (dirtyRect.IsEmpty())
+            dirtyRect = lockedRect;
+        else
+            dirtyRect = Rect::Union(dirtyRect, lockedRect);
 
         isLocked = false;
         SetStatus(CompletedStatus);
         outLockedInfo.SetData(nullptr, nullptr, 0, Rect::Empty);
+    }
+
+    GLuint DynamicTexture2D::GetHandle()
+    {
+        if (dirtyRect.IsEmpty() == false)
+        {
+            GLint glesFormat = GetGLESPixelFormat(GetPixelFormat());
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, Base::GetHandle());
+            glTexSubImage2D(GL_TEXTURE_2D,
+                            0,
+                            0,
+                            dirtyRect.Y,
+                            GetSurfaceWidth(),
+                            dirtyRect.Height,
+                            glesFormat,
+                            GL_UNSIGNED_BYTE,
+                            &surface[dirtyRect.Y * pitch]);
+
+            dirtyRect = Rect::Empty;
+        }
+
+        return Base::GetHandle();
     }
 }

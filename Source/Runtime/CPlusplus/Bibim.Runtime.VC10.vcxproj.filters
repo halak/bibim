@@ -46,9 +46,6 @@
     <Filter Include="03. Game\Scripting\Libraries">
       <UniqueIdentifier>{2b5c4b1f-f383-439d-bc52-8997dfdbdb2c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Game\Time">
-      <UniqueIdentifier>{21bbd110-21c3-4700-8a44-0abb0939d704}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Game\Startup">
       <UniqueIdentifier>{b5f0ebc1-79f3-464e-a6eb-2aff8672a5bb}</UniqueIdentifier>
     </Filter>
@@ -147,6 +144,9 @@
     </Filter>
     <Filter Include="03. Game\Input">
       <UniqueIdentifier>{f3afc6cb-aad7-4cfa-95e3-15b58fd9be8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Time">
+      <UniqueIdentifier>{21bbd110-21c3-4700-8a44-0abb0939d704}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

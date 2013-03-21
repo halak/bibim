@@ -23,6 +23,8 @@
                 Font(const Font& original);
                 virtual ~Font();
 
+                void Prepare(const String& text);
+
                 Vector2 Measure(const String& text);
                 Vector2 Measure(const String& text, float boundary);
                 Vector2 Measure(const FontString& fontString);

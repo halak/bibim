@@ -47,10 +47,13 @@
 
                 inline bool IsLocked() const;
 
+                virtual GLuint GetHandle();
+
             private:
                 std::vector<byte> surface;
                 int pitch;
                 bool isLocked;
+                Rect dirtyRect;
         };
     }
 

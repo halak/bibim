@@ -222,7 +222,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -330,9 +330,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Net\Bibim\HttpClientBase.cpp" />
     <ClCompile Include="Threading\Bibim\Lock.Unix.cpp">
@@ -777,9 +774,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Net\Bibim\HttpClientBase.h" />
     <ClInclude Include="Threading\Bibim\Lock.Unix.h">
@@ -1219,9 +1213,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug.GLES2|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release.GLES2|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </None>
     <None Include="Net\Bibim\HttpClientBase.inl" />
     <None Include="Typography\Bibim\Font.inl" />
