@@ -138,7 +138,7 @@ namespace Bibim
             return nullptr;
     }
 
-    bool PipedAssetProvider::Restore(const String& name, GameAsset* asset)
+    bool PipedAssetProvider::Restore(const String& /*name*/, GameAsset* /*asset*/)
     {
         return false;
     }

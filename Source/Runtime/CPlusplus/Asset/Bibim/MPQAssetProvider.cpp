@@ -68,7 +68,7 @@ namespace Bibim
         return LoadActually(GetStorage(), mpq, name, false);
     }
 
-    bool MPQAssetProvider::Restore(const String& name, GameAsset* asset)
+    bool MPQAssetProvider::Restore(const String& /*name*/, GameAsset* /*asset*/)
     {
         return false;
     }
