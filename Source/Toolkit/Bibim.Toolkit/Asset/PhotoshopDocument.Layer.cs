@@ -527,7 +527,7 @@ namespace Bibim.Asset
                     switch (fourcc)
                     {
                         case "luni": Read_luni(reader, size); break;
-                        case "TySh": Read_TySh(reader, size); break;
+                        // case "TySh": Read_TySh(reader, size); break;
                     }
 
                     reader.BaseStream.Position = endPosition;
@@ -542,6 +542,7 @@ namespace Bibim.Asset
                 Name = Encoding.BigEndianUnicode.GetString(buffer);
             }
 
+            /*
             private void Read_TySh(Reader reader, uint size)
             {
                 ushort version = reader.ReadUInt16();
@@ -641,6 +642,7 @@ namespace Bibim.Asset
 
                 }
             }
+             * */
             #endregion
         }
         #endregion

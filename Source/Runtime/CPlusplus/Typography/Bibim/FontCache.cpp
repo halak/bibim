@@ -301,9 +301,9 @@ namespace Bibim
         if (lineHeight == 0.0f)
             lineHeight = parameters.FontSize;
 
-        //ascender   /= parameters.Scale;
-        //descender  /= parameters.Scale;
-        //lineHeight /= parameters.Scale;
+        ascender   /= parameters.Scale;
+        descender  /= parameters.Scale;
+        lineHeight /= parameters.Scale;
 
         regularGlyphTable = new GlyphTable(library->GetGraphicsDevice());
 
@@ -471,6 +471,8 @@ namespace Bibim
             {
             }
 
+            const float unscaledAscender = GetAscender() * parameters.Scale;
+
             if (parameters.StrokeSize > 0.0f)
             {
                 FT_Error result = 0;
@@ -489,7 +491,7 @@ namespace Bibim
                     GrayscaleBitmap glyphBitmap(static_cast<FT_Library>(library->GetFTLibrary()), strokedGlyphBitmap->bitmap);
 
                     const Vector2 advance = Vector2(F16D16ToFloat(strokedGlyph->advance.x), F16D16ToFloat(strokedGlyph->advance.y));
-                    const Vector2 bitmapOffset = Vector2(static_cast<float>(strokedGlyphBitmap->left), GetAscender() - static_cast<float>(strokedGlyphBitmap->top));
+                    const Vector2 bitmapOffset = Vector2(static_cast<float>(strokedGlyphBitmap->left), unscaledAscender - static_cast<float>(strokedGlyphBitmap->top));
                     const Vector2 bitmapSize   = Vector2(glyphBitmap.Bitmap->width, glyphBitmap.Bitmap->rows);
                     strokedGlyphTable->Add(code,
                                            advance / parameters.Scale, bitmapOffset / parameters.Scale, bitmapSize / parameters.Scale,
@@ -511,7 +513,7 @@ namespace Bibim
 
             FT_GlyphSlot renderedGlyph = faceGlyphIndex.first->glyph;
             const Vector2 advance = Vector2(F26D6ToFloat(renderedGlyph->advance.x), F26D6ToFloat(renderedGlyph->advance.y));
-            const Vector2 bitmapOffset = Vector2(static_cast<float>(renderedGlyph->bitmap_left), GetAscender() - static_cast<float>(renderedGlyph->bitmap_top));
+            const Vector2 bitmapOffset = Vector2(static_cast<float>(renderedGlyph->bitmap_left), unscaledAscender - static_cast<float>(renderedGlyph->bitmap_top));
             const Vector2 bitmapSize   = Vector2(glyphBitmap.Bitmap->width, glyphBitmap.Bitmap->rows);
 
             return regularGlyphTable->Add(code,

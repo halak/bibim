@@ -25,12 +25,16 @@
                 void SetResult(UIVisual* value);
 
             protected:
+                inline bool PickChild(UIVisual* target);
+
                 virtual void OnVisit();
 
             private:
                 Vector2 point;
                 Vector2 currentPoint;
                 UIVisual* result;
+
+                friend class UIPanel;
         };
     }
 

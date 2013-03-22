@@ -29,6 +29,7 @@ namespace Bibim
         }
         index = static_cast<int>(targets.size() - 1);
 
+        Ready(targets[index]);
         Visit(targets[index--]);
         return bounds;
     }

@@ -41,6 +41,7 @@ namespace Bibim
         renderer->Begin();
         OnBegan();
 
+        Ready(target);
         Visit(target);
 
         OnEnded();
@@ -74,6 +75,8 @@ namespace Bibim
         float clippingRight  = clippingRect.GetRight();
         float clippingBottom = clippingRect.GetBottom();
 
+        const float tw = static_cast<float>(image->GetTexture()->GetWidth());
+        const float th = static_cast<float>(image->GetTexture()->GetHeight());
         switch (image->GetAppliedTransform())
         {
             case Image::Identity:

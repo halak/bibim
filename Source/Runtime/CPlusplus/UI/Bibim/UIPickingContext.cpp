@@ -36,6 +36,7 @@ namespace Bibim
 
     bool UIPickingContext::Pick(UIVisual* target)
     {
+        Ready(target);
         Visit(target);
         return GetResult() != nullptr;
     }
