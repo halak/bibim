@@ -40,6 +40,7 @@
                 inline const Matrix4& GetProjectionTransform() const;
 
             protected:
+                void Ready(UIVisual* target);
                 void Visit(UIVisual* target);
 
                 virtual void OnVisit() = 0;

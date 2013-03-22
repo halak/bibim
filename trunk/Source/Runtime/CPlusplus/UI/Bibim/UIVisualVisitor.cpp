@@ -128,6 +128,12 @@ namespace Bibim
         */
     }
 
+    void UIVisualVisitor::Ready(UIVisual* target)
+    {
+        currentBounds = target->ComputeBounds(*this);
+        currentClippedBounds = currentBounds;
+    }
+
     void UIVisualVisitor::Visit(UIVisual* target)
     {
         BBAssert(target != nullptr);

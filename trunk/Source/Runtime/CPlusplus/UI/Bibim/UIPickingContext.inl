@@ -1,5 +1,11 @@
 ﻿namespace Bibim
 {
+    bool UIPickingContext::PickChild(UIVisual* target)
+    {
+        Visit(target);
+        return GetResult() != nullptr;
+    }
+
     bool UIPickingContext::Contains(const RectF& bounds)
     {
         return bounds.Contains(currentPoint);

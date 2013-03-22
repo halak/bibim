@@ -171,9 +171,6 @@
     <ClCompile Include="Asset\Bibim\MPQAssetProvider.cpp">
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </ClCompile>
-    <ClCompile Include="Asset\Bibim\PipedAssetProvider.cpp">
-      <Filter>03. Game\%28Asset%29\Providers</Filter>
-    </ClCompile>
     <ClCompile Include="Typography\Bibim\Font.cpp">
       <Filter>03. Game\Typography</Filter>
     </ClCompile>
@@ -831,6 +828,12 @@
     <ClCompile Include="Graphics\Bibim\GLES2.cpp">
       <Filter>03. Game\Graphics\GLES2</Filter>
     </ClCompile>
+    <ClCompile Include="Asset\Bibim\PipedAssetProvider.Default.cpp">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset\Bibim\PipedAssetProvider.Null.cpp">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset\Bibim\AssetLoadingTask.h">
@@ -855,9 +858,6 @@
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </ClInclude>
     <ClInclude Include="Asset\Bibim\MPQAssetProvider.h">
-      <Filter>03. Game\%28Asset%29\Providers</Filter>
-    </ClInclude>
-    <ClInclude Include="Asset\Bibim\PipedAssetProvider.h">
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\Font.h">
@@ -1650,6 +1650,15 @@
     <ClInclude Include="Graphics\Bibim\GraphicsDeviceBase.h">
       <Filter>03. Game\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Asset\Bibim\PipedAssetProvider.Default.h">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset\Bibim\PipedAssetProvider.h">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset\Bibim\PipedAssetProvider.Null.h">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Asset\Bibim\AssetLoadingTask.inl">
@@ -1671,9 +1680,6 @@
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </None>
     <None Include="Asset\Bibim\MPQAssetProvider.inl">
-      <Filter>03. Game\%28Asset%29\Providers</Filter>
-    </None>
-    <None Include="Asset\Bibim\PipedAssetProvider.inl">
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </None>
     <None Include="Typography\Bibim\Font.inl">
@@ -2287,6 +2293,9 @@
     </None>
     <None Include="Graphics\Bibim\GraphicsDeviceBase.inl">
       <Filter>03. Game\Graphics</Filter>
+    </None>
+    <None Include="Asset\Bibim\PipedAssetProvider.Default.inl">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
     </None>
   </ItemGroup>
 </Project>

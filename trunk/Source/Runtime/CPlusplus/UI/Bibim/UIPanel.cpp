@@ -223,7 +223,7 @@ namespace Bibim
         {
             for (VisualCollection::const_reverse_iterator it = children.rbegin(); it != children.rend(); it++)
             {
-                if (context.Pick(*it))
+                if (context.PickChild(*it))
                     return;
             }
 
