@@ -19,7 +19,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="..\..\..\Product\Windows\Lib"
-			IntermediateDirectory="(Build)\Bibim.Runtime.$(ConfigurationName)"
+			IntermediateDirectory="(Build)\$(PlatformName)\Bibim.Runtime.$(ConfigurationName).VC9"
 			ConfigurationType="4"
 			InheritedPropertySheets=".\Bibim.vsprops;.\Bibim.Debug.DX9.vsprops"
 			CharacterSet="2"
@@ -82,137 +82,9 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="..\..\..\Product\Windows\Lib"
-			IntermediateDirectory="(Build)\Bibim.Runtime.$(ConfigurationName)"
+			IntermediateDirectory="(Build)\$(PlatformName)\Bibim.Runtime.$(ConfigurationName).VC9"
 			ConfigurationType="4"
 			InheritedPropertySheets=".\Bibim.vsprops;.\Bibim.Release.DX9.vsprops"
-			CharacterSet="2"
-			WholeProgramOptimization="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				AdditionalOptions="/MP"
-				Optimization="2"
-				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
-				RuntimeLibrary="2"
-				EnableFunctionLevelLinking="true"
-				UsePrecompiledHeader="0"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\Bibim.Runtime.$(ConfigurationName).VC9.lib"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Debug.GLES2|Win32"
-			OutputDirectory="..\..\..\Product\Windows\Lib"
-			IntermediateDirectory="(Build)\Bibim.Runtime.$(ConfigurationName)"
-			ConfigurationType="4"
-			InheritedPropertySheets=".\Bibim.vsprops;.\Bibim.Debug.GLES2.vsprops"
-			CharacterSet="2"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
-				MinimalRebuild="true"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
-				UsePrecompiledHeader="0"
-				DebugInformationFormat="4"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\Bibim.Runtime.$(ConfigurationName).VC9.lib"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Release.GLES2|Win32"
-			OutputDirectory="..\..\..\Product\Windows\Lib"
-			IntermediateDirectory="(Build)\Bibim.Runtime.$(ConfigurationName)"
-			ConfigurationType="4"
-			InheritedPropertySheets=".\Bibim.vsprops;.\Bibim.Release.GLES2.vsprops"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
 			>
@@ -1401,22 +1273,6 @@
 				<File
 					RelativePath=".\UI\Bibim\UIRenderer.DX9.cpp"
 					>
-					<FileConfiguration
-						Name="Debug.GLES2|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release.GLES2|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\UI\Bibim\UIRenderer.DX9.h"
@@ -2240,22 +2096,6 @@
 					<File
 						RelativePath=".\Graphics\Bibim\DynamicTexture2D.DX9.cpp"
 						>
-						<FileConfiguration
-							Name="Debug.GLES2|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release.GLES2|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
 						RelativePath=".\Graphics\Bibim\DynamicTexture2D.DX9.h"
@@ -2268,22 +2108,6 @@
 					<File
 						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.cpp"
 						>
-						<FileConfiguration
-							Name="Debug.GLES2|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release.GLES2|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
 						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.h"
@@ -2296,22 +2120,6 @@
 					<File
 						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.cpp"
 						>
-						<FileConfiguration
-							Name="Debug.GLES2|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release.GLES2|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
 						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.h"
@@ -2324,22 +2132,6 @@
 					<File
 						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.cpp"
 						>
-						<FileConfiguration
-							Name="Debug.GLES2|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release.GLES2|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
 						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.h"
@@ -2352,22 +2144,6 @@
 					<File
 						RelativePath=".\Graphics\Bibim\SourceTexture2D.DX9.cpp"
 						>
-						<FileConfiguration
-							Name="Debug.GLES2|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release.GLES2|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
 						RelativePath=".\Graphics\Bibim\SourceTexture2D.DX9.h"
@@ -2376,22 +2152,6 @@
 					<File
 						RelativePath=".\Graphics\Bibim\Texture2D.DX9.cpp"
 						>
-						<FileConfiguration
-							Name="Debug.GLES2|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release.GLES2|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
 						RelativePath=".\Graphics\Bibim\Texture2D.DX9.h"
@@ -2446,22 +2206,6 @@
 						</FileConfiguration>
 						<FileConfiguration
 							Name="Release|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Debug.GLES2|Win32"
-							ExcludedFromBuild="true"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release.GLES2|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -2853,22 +2597,6 @@
 							Name="VCCLCompilerTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Debug.GLES2|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release.GLES2|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\Net\Bibim\HttpClient.Null.h"
@@ -2883,22 +2611,6 @@
 					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Debug.GLES2|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release.GLES2|Win32"
 						ExcludedFromBuild="true"
 						>
 						<Tool
@@ -2925,22 +2637,6 @@
 							Name="VCCustomBuildTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Debug.GLES2|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release.GLES2|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\Net\Bibim\HttpClient.Windows.cpp"
@@ -2955,22 +2651,6 @@
 					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Debug.GLES2|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release.GLES2|Win32"
 						ExcludedFromBuild="true"
 						>
 						<Tool
@@ -2997,22 +2677,6 @@
 							Name="VCCustomBuildTool"
 						/>
 					</FileConfiguration>
-					<FileConfiguration
-						Name="Debug.GLES2|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release.GLES2|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath=".\Net\Bibim\HttpClient.Windows.inl"
@@ -3027,22 +2691,6 @@
 					</FileConfiguration>
 					<FileConfiguration
 						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Debug.GLES2|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release.GLES2|Win32"
 						ExcludedFromBuild="true"
 						>
 						<Tool
