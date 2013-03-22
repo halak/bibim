@@ -41,9 +41,9 @@
                 inline Timeline* GetTimeline() const;
                 void SetTimeline(Timeline* value);
 
-            protected:
                 virtual Vector2 GetContentSize();
 
+            protected:
                 virtual void OnDraw(UIDrawingContext& context);
 
             private:

@@ -45,6 +45,7 @@ namespace Bibim
         if (vbSize == 0)
             ReserveCachedQuads(256);
 
+        worldTransform = Matrix4::Zero;
         InitializeNormalQuadSets();
         Setup(NormalBlend);
         Setup(std::vector<EffectorPtr>());

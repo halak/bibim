@@ -24,6 +24,10 @@
                 static inline void Warning(const char* message);
                 static inline void Information(const char* message);
 
+                static inline void Error(const char* category, const String& message);
+                static inline void Warning(const char* category, const String& message);
+                static inline void Information(const char* category, const String& message);
+
                 static void Error(const char* category, const char* message);
                 static void Warning(const char* category, const char* message);
                 static void Information(const char* category, const char* message);

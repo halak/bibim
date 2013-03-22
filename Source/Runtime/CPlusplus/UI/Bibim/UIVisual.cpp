@@ -246,6 +246,11 @@ namespace Bibim
         RaiseMouseClickEvent(UIMouseEventArgs(this));
     }
 
+    Vector2 UIVisual::GetContentSize()
+    {
+        return Vector2::Zero;
+    }
+
     void UIVisual::SetOpacity(float value)
     {
         if (value <= 0.0f)
@@ -365,11 +370,6 @@ namespace Bibim
         eventMap = context.Clone(o->eventMap);
         effectMap = context.Clone(o->effectMap);
         transform = context.Clone(o->transform);
-    }
-
-    Vector2 UIVisual::GetContentSize()
-    {
-        return Vector2::Zero;
     }
 
     void UIVisual::OnDraw(UIDrawingContext& /*context*/)

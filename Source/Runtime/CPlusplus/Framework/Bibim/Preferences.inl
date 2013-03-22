@@ -1,21 +1,21 @@
 namespace Bibim
 {
-    const String& PreferencesBase::GetName() const
+    const String& Preferences::GetName() const
     {
         return name;
     }
 
-    bool PreferencesBase::IsModified() const
+    bool Preferences::IsModified() const
     {
         return isModified;
     }
 
-    bool PreferencesBase::IsLoaded() const
+    bool Preferences::IsLoaded() const
     {
         return isLoaded;
     }
 
-    bool PreferencesBase::CanStore(Any::Type type)
+    bool Preferences::CanStore(Any::Type type)
     {
         switch (type)
         {

@@ -110,6 +110,10 @@
                 inline void SetSizeMode(SizeMode sizeMode);
                 inline void SetSizeMode(SizeMode widthMode, SizeMode heightMode);
 
+                virtual Vector2 GetContentSize();
+                inline float GetContentWidth();
+                inline float GetContentHeight();
+
                 inline Vector2 GetOrigin() const;
                 inline void SetOrigin(Vector2 value);
 
@@ -163,8 +167,6 @@
                 static const char* ConvertFromVisibilityToString(Visibility value);
 
             protected:
-                virtual Vector2 GetContentSize();
-
                 virtual void OnDraw(UIDrawingContext& context);
                 virtual void OnPick(UIPickingContext& context);
 

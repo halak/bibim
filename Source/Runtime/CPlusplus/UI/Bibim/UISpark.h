@@ -25,9 +25,9 @@
                 inline bool GetAutoRemove() const;
                 void SetAutoRemove(bool value);
 
-            protected:
                 virtual Vector2 GetContentSize();
 
+            protected:
                         void OnStep(float dt, int timestamp);
                 virtual void OnDraw(UIDrawingContext& context);
 

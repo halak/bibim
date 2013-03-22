@@ -294,11 +294,14 @@ namespace Bibim
             case WM_SIZE:
                 {
                     GameWindow* o = GetGameWindow(windowHandle);
-                    if (wParam != SIZE_RESTORED ||
-                        o->isUserSizing == false)
+                    if (wParam != SIZE_MINIMIZED)
                     {
-                        o->size = Point2(LOWORD(lParam), HIWORD(lParam));
-                        o->RaiseResizedEvent();
+                        if (wParam != SIZE_RESTORED ||
+                            o->isUserSizing == false)
+                        {
+                            o->size = Point2(LOWORD(lParam), HIWORD(lParam));
+                            o->RaiseResizedEvent();
+                        }
                     }
                 }
                 return 0;

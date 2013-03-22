@@ -75,8 +75,6 @@ namespace Bibim
         float clippingRight  = clippingRect.GetRight();
         float clippingBottom = clippingRect.GetBottom();
 
-        const float tw = static_cast<float>(image->GetTexture()->GetWidth());
-        const float th = static_cast<float>(image->GetTexture()->GetHeight());
         switch (image->GetAppliedTransform())
         {
             case Image::Identity:
@@ -588,11 +586,11 @@ namespace Bibim
     {
         Vector2 p[] =
         {
-            Vector2(bounds.GetLeft(),  bounds.GetTop()),
-            Vector2(bounds.GetRight(), bounds.GetTop()),
-            Vector2(bounds.GetRight(), bounds.GetBottom()),
-            Vector2(bounds.GetLeft(),  bounds.GetBottom()),
-            Vector2(bounds.GetLeft(),  bounds.GetTop())
+            Vector2(bounds.GetLeft()  - 0.5f, bounds.GetTop() - 0.5f),
+            Vector2(bounds.GetRight() - 0.5f, bounds.GetTop() - 0.5f),
+            Vector2(bounds.GetRight() - 0.5f, bounds.GetBottom() - 0.5f),
+            Vector2(bounds.GetLeft()  - 0.5f, bounds.GetBottom() - 0.5f),
+            Vector2(bounds.GetLeft()  - 0.5f, bounds.GetTop() - 0.5f)
         };
 
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
@@ -604,6 +602,9 @@ namespace Bibim
 
     void UIDrawingContext::DrawCircle(Vector2 center, float radius, Color color)
     {
+        center.X -= 0.5f;
+        center.Y -= 0.5f;
+
         int count = 32;
         Vector2* p = BBStackAlloc(Vector2, count + 1);
 
@@ -630,13 +631,13 @@ namespace Bibim
     {
         Vector2 p[] = 
         {
-            Vector2(bounds.GetLeft(),  bounds.GetTop()),
-            Vector2(bounds.GetRight(), bounds.GetTop()),
-            Vector2(bounds.GetLeft(),  bounds.GetBottom()),
+            Vector2(bounds.GetLeft()  - 0.5f, bounds.GetTop()    - 0.5f),
+            Vector2(bounds.GetRight() - 0.5f, bounds.GetTop()    - 0.5f),
+            Vector2(bounds.GetLeft()  - 0.5f, bounds.GetBottom() - 0.5f),
 
-            Vector2(bounds.GetLeft(),  bounds.GetBottom()),
-            Vector2(bounds.GetRight(), bounds.GetTop()),
-            Vector2(bounds.GetRight(), bounds.GetBottom()),
+            Vector2(bounds.GetLeft()  - 0.5f, bounds.GetBottom() - 0.5f),
+            Vector2(bounds.GetRight() - 0.5f, bounds.GetTop()    - 0.5f),
+            Vector2(bounds.GetRight() - 0.5f, bounds.GetBottom() - 0.5f),
         };
         
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());

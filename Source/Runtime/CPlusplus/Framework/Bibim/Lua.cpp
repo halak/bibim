@@ -288,6 +288,9 @@ namespace Bibim
             lua_tinker::class_def<UIVisual>(L, "GetHeightMode", &UIVisual::GetHeightMode);
             lua_tinker::class_def<UIVisual>(L, "SetHeightMode", &UIVisual::SetHeightMode);
             lua_tinker::class_def<UIVisual>(L, "SetSizeMode", &UIVisual::SetSizeModeByChars);
+            lua_tinker::class_def<UIVisual>(L, "GetContentSize", &UIVisual::GetContentSize);
+            lua_tinker::class_def<UIVisual>(L, "GetContentWidth", &UIVisual::GetContentWidth);
+            lua_tinker::class_def<UIVisual>(L, "GetContentHeight", &UIVisual::GetContentHeight);
             lua_tinker::class_def<UIVisual>(L, "GetOrigin", &UIVisual::GetOrigin);
             lua_tinker::class_def<UIVisual>(L, "SetOrigin", &UIVisual::SetOriginXY);
             lua_tinker::class_def<UIVisual>(L, "GetAnchorPoint", &UIVisual::GetAnchorPoint);

@@ -165,15 +165,19 @@ namespace Bibim
             currentClippedBounds = RectF::Intersect(currentClippedBounds, currentBounds);
         else
             currentClippedBounds = currentBounds;
-        parentTransform = currentTransform;
-        parentTransformInv = currentTransformInv;
-        if (target->GetTransform())
-        {
-            currentTransform = target->GetTransform()->ComputeMatrix(*this) * currentTransform;
-            currentTransformInv = Matrix4::Inversion(currentTransform);
-        }
 
-        OnVisit();
+        if (currentClippedBounds.Width > 0 && currentClippedBounds.Height > 0)
+        {
+            parentTransform = currentTransform;
+            parentTransformInv = currentTransformInv;
+            if (target->GetTransform())
+            {
+                currentTransform = target->GetTransform()->ComputeMatrix(*this) * currentTransform;
+                currentTransformInv = Matrix4::Inversion(currentTransform);
+            }
+
+            OnVisit();
+        }
 
         currentVisual = oldVisual;
         currentOpacity = oldOpacity;

@@ -24,9 +24,9 @@
                 inline bool GetAutoResize() const;
                 void SetAutoResize(bool value);
 
-            protected:
                 virtual Vector2 GetContentSize();
 
+            protected:
                 virtual void OnDraw(UIDrawingContext& context);
 
             private:

@@ -32,9 +32,9 @@
                 inline BitMask* GetMask() const;
                 inline void SetMask(BitMask* value);
 
-            protected:
                 virtual Vector2 GetContentSize();
 
+            protected:
                 virtual void OnDraw(UIDrawingContext& context);
                 virtual void OnPick(UIPickingContext& context);
 

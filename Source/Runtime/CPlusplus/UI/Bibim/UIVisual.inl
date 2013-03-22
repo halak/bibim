@@ -170,6 +170,16 @@
         this->heightMode = static_cast<byte>(heightMode);
     }
 
+    float UIVisual::GetContentWidth()
+    {
+        return GetContentSize().X;
+    }
+
+    float UIVisual::GetContentHeight()
+    {
+        return GetContentSize().Y;
+    }
+
     Vector2 UIVisual::GetOrigin() const
     {
         return origin;
