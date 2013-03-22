@@ -394,15 +394,19 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\PipedAssetProvider.cpp"
+						RelativePath=".\Asset\Bibim\PipedAssetProvider.Default.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\PipedAssetProvider.Default.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Asset\Bibim\PipedAssetProvider.Default.inl"
 						>
 					</File>
 					<File
 						RelativePath=".\Asset\Bibim\PipedAssetProvider.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Asset\Bibim\PipedAssetProvider.inl"
 						>
 					</File>
 				</Filter>
@@ -2711,27 +2715,15 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Framework\Bibim\Preferences.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\Framework\Bibim\Preferences.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\Preferences.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Framework\Bibim\Preferences.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Framework\Bibim\PreferencesBase.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Framework\Bibim\PreferencesBase.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Framework\Bibim\PreferencesBase.inl"
+					RelativePath=".\Framework\Bibim\Preferences.inl"
 					>
 				</File>
 				<File
