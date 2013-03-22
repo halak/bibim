@@ -338,6 +338,14 @@ namespace Bibim.Asset
 
                     reader.BaseStream.Position = sectionEndPosition;
                 }
+
+                #region Canvas 밖으로 나간 레이어 정보를 잘라냅니다.
+                // Canvas 밖에 있는 레이어 픽셀 정보는
+                // 포토샵을 통해서 확인하기도 힘들고 잘라내기조차도 번거롭기 때문에 
+                // 모두 잘라냅니다.
+                foreach (var item in layers)
+                    item.ClipByCanvas(width, height, true);
+                #endregion
             }
             #endregion
 

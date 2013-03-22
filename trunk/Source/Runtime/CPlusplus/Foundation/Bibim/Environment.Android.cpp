@@ -14,8 +14,8 @@ namespace Bibim
         PrivateInstance.workingDirectory = workingDirectory;
     }
 
-    String Environment::GetAppDataPath(const String& appName, const String& filename)
+    String Environment::GetAppDataPath(const String& /*appName*/, const String& filename)
     {
-        return PrivateInstance.workingDirectory + "/" + appName + "/" + filename;
+        return PrivateInstance.workingDirectory + filename;
     }
 }

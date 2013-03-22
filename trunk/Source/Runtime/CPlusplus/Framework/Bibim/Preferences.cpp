@@ -1,12 +1,15 @@
 #include <Bibim/PCH.h>
-#include <Bibim/PreferencesBase.h>
+#include <Bibim/Preferences.h>
+#include <Bibim/Environment.h>
+#include <Bibim/FileStream.h>
 #include <rapidjson/document.h>
 #include <rapidjson/stringbuffer.h>
 #include <rapidjson/writer.h>
+#include <vector>
 
 namespace Bibim
 {
-    PreferencesBase::PreferencesBase(const String& name)
+    Preferences::Preferences(const String& name)
         : name(name),
           isModified(false),
           isLoaded(false)
@@ -39,7 +42,7 @@ namespace Bibim
         }
     }
 
-    PreferencesBase::~PreferencesBase()
+    Preferences::~Preferences()
     {
         if (IsModified())
         {
@@ -48,7 +51,7 @@ namespace Bibim
         }
     }
 
-    const Any& PreferencesBase::GetValue(const String& key)
+    const Any& Preferences::GetValue(const String& key)
     {
         if (IsLoaded() == false)
             Update();
@@ -60,7 +63,7 @@ namespace Bibim
             return Any::Void;
     }
 
-    void PreferencesBase::SetValue(const String& key, const Any& value)
+    void Preferences::SetValue(const String& key, const Any& value)
     {
         if (key.IsEmpty())
             return;
@@ -87,7 +90,7 @@ namespace Bibim
         }
     }
 
-    void PreferencesBase::Update()
+    void Preferences::Update()
     {
         isLoaded = true;
 
@@ -128,7 +131,7 @@ namespace Bibim
         }
     }
 
-    void PreferencesBase::Commit()
+    void Preferences::Commit()
     {
         if (IsModified() == false || IsLoaded() == false)
             return;
@@ -161,5 +164,31 @@ namespace Bibim
             Save(s);
 
         isModified = false;
+    }
+
+    String Preferences::Load()
+    {
+        const String path = Environment::GetAppDataPath(GetName(), "preferences");
+        FileStreamPtr stream = new FileStream(path, FileStream::ReadOnly);
+        if (stream->CanRead() == false)
+            return String::Empty;
+
+        std::vector<char> buffer;
+        buffer.resize(stream->GetLength());
+        stream->Read(&buffer[0], buffer.size());
+        stream->Close();
+
+        return String(&buffer[0], 0, buffer.size());
+    }
+
+    void Preferences::Save(const String& document)
+    {
+        const String path = Environment::GetAppDataPath(GetName(), "preferences");
+        FileStreamPtr stream = new FileStream(path, FileStream::WriteOnly);
+        if (stream->CanWrite() == false)
+            return;
+
+        stream->Write(document.CStr(), document.GetLength());
+        stream->Close();
     }
 }

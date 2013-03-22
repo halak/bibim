@@ -168,6 +168,7 @@ namespace Bibim
         UIWindowPtr rootWindow = new UIWindow();
         rootWindow->SetXY(0.0f, 0.0f);
         rootWindow->SetXYMode(UIVisual::AbsolutePosition);
+        rootWindow->SetSizeMode(UIVisual::AbsoluteSize);
         rootWindow->SetAnchorPoint(UIVisual::Center);
         rootWindow->SetOrigin(Vector2(0.5f, 0.5f));
 
@@ -329,26 +330,14 @@ namespace Bibim
         }
 
         if (contentSize.X == 0)
-        {
-            rootWindow->SetWidth(1.0f / scale);
-            rootWindow->SetWidthMode(UIVisual::RelativeSize);
-        }
+            rootWindow->SetWidth(static_cast<float>(windowSize.X) / scale);
         else
-        {
             rootWindow->SetWidth(static_cast<float>(contentSize.X));
-            rootWindow->SetWidthMode(UIVisual::AbsoluteSize);
-        }
 
         if (contentSize.Y == 0)
-        {
-            rootWindow->SetHeight(1.0f / scale);
-            rootWindow->SetHeightMode(UIVisual::RelativeSize);
-        }
+            rootWindow->SetHeight(static_cast<float>(windowSize.Y) / scale);
         else
-        {
             rootWindow->SetHeight(static_cast<float>(contentSize.Y));
-            rootWindow->SetHeightMode(UIVisual::AbsoluteSize);
-        }
 
         if (GetFontLibrary())
             GetFontLibrary()->SetGlobalScale(scale);
