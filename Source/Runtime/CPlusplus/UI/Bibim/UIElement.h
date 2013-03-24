@@ -23,10 +23,13 @@
                 inline void SetID(int value);
                 inline const String& GetName() const;
                 inline void SetName(const String& value);
+                inline int GetTag() const;
+                inline void SetTag(int value);
 
             private:
                 int id;
                 String name;
+                int tag;
         };
     }
 

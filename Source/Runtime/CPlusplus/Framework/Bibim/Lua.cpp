@@ -251,6 +251,8 @@ namespace Bibim
             lua_tinker::class_def<UIElement>(L, "SetID", &UIElement::SetID);
             lua_tinker::class_def<UIElement>(L, "GetName", &UIElement::GetName);
             lua_tinker::class_def<UIElement>(L, "SetName", &UIElement::SetName);
+            lua_tinker::class_def<UIElement>(L, "GetTag", &UIElement::GetTag);
+            lua_tinker::class_def<UIElement>(L, "SetTag", &UIElement::SetTag);
         lua_tinker::class_add<UIVisual>(L, "UIVisual");
             lua_tinker::class_inh<UIVisual, UIElement>(L);
             lua_tinker::class_def<UIVisual>(L, "Show", &UIVisual::Show);
@@ -359,6 +361,7 @@ namespace Bibim
             lua_tinker::class_def<UIPanel>(L, "ShowChildren", &UIPanel::ShowChildren);
             lua_tinker::class_def<UIPanel>(L, "HideChildren", &UIPanel::HideChildren);
             lua_tinker::class_def<UIPanel>(L, "FindChild", static_cast<UIVisual* (UIPanel::*)(const char*, bool) const>(&UIPanel::FindChildByChars));
+            lua_tinker::class_def<UIPanel>(L, "FindChildByTag", &UIPanel::FindChildByTag);
             lua_tinker::class_def<UIPanel>(L, "GetChildIndex", &UIPanel::GetChildIndex);
             lua_tinker::class_def<UIPanel>(L, "GetChildAt", &UIPanel::GetChildAt);
             lua_tinker::class_def<UIPanel>(L, "GetNumberOfChildren", &UIPanel::GetNumberOfChildren);

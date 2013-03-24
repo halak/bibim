@@ -7,7 +7,8 @@ namespace Bibim
     const int UIElement::UnspecifiedID = -1;
 
     UIElement::UIElement()
-        : id(UnspecifiedID)
+        : id(UnspecifiedID),
+          tag(0)
     {
     }
 
@@ -20,6 +21,7 @@ namespace Bibim
         Base::OnRead(reader);
         id = reader.ReadInt();
         name = reader.ReadString();
+        tag = reader.ReadInt();
     }
 
     void UIElement::OnCopy(const GameComponent* original, CloningContext& context)
@@ -28,5 +30,6 @@ namespace Bibim
         const This* o = static_cast<const UIElement*>(original);
         id = o->id;
         name = o->name;
+        tag = o->tag;
     }
 }

@@ -23,6 +23,7 @@
                 void HideChildren();
 
                 UIVisual* FindChild(const String& name, bool searchAllChildren) const;
+                UIVisual* FindChildByTag(int tag, bool searchAllChildren) const;
                 UIVisual* FindChildByChars(const char* name, bool searchAllChildren) const;
                 UIVisual* FindChildByChars(const char* name, int length, bool searchAllChildren) const;
 

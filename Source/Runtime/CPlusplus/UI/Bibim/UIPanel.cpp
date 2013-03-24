@@ -47,6 +47,29 @@ namespace Bibim
         return FindChildByChars(name.CStr(), name.GetLength(), searchAllChildren);
     }
 
+    UIVisual* UIPanel::FindChildByTag(int tag, bool searchAllChildren) const
+    {
+        for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+        {
+            if ((*it)->GetTag() == tag)
+                return (*it);
+        }
+
+        if (searchAllChildren)
+        {
+            for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+            {
+                if ((*it)->IsPanel())
+                {
+                    if (UIVisual* found = StaticCast<UIPanel>(*it)->FindChildByTag(tag, true))
+                        return found;
+                }
+            }
+        }
+
+        return nullptr;
+    }
+
     UIVisual* UIPanel::FindChildByChars(const char* name, bool searchAllChildren) const
     {
         if (name)

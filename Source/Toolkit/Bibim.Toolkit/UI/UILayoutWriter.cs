@@ -137,6 +137,7 @@ namespace Bibim.UI
             writer.Write(o.ClassID);
             writer.Write(o.ID);
             writer.WriteBibimString(o.Name);
+            writer.Write(o.Tag);
         }
 
         private static void Write(AssetStreamWriter writer, UIVisual o, List<object> objectDictionary)

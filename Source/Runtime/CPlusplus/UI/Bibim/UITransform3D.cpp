@@ -12,9 +12,9 @@ namespace Bibim
     UITransform3D::UITransform3D()
         : localOffset(Vector3::Zero),
           globalOffset(Vector3::Zero),
-          rotationCenter(Vector2(0.5f, 0.5f)),
+          rotationCenter(Vector2(0.49f, 0.49f)),
           rotation(Vector3::Zero),
-          scaleCenter(Vector2(0.5f, 0.5f)),
+          scaleCenter(Vector2(0.49f, 0.49f)),
           scale(Vector2::One),
           matrix(),
           lastBounds(RectF::Empty),
@@ -90,9 +90,9 @@ namespace Bibim
     {
         localOffset = Vector3::Zero;
         globalOffset = Vector3::Zero;
-        rotationCenter = Vector2(0.5f, 0.5f);
+        rotationCenter = Vector2(0.49f, 0.49f);
         rotation = Vector3::Zero;
-        scaleCenter = Vector2(0.5f, 0.5f);
+        scaleCenter = Vector2(0.49f, 0.49f);
         scale = Vector2::One;
     }
 

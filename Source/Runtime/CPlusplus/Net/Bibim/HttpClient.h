@@ -5,7 +5,7 @@
 #   include <Bibim/Foundation.h>
 
 #   if (defined(BIBIM_PLATFORM_WINDOWS))
-#       include <Bibim/HttpClient.Windows.h>
+#       include <Bibim/HttpClient.Curl.h>
 #   else
 #       include <Bibim/HttpClient.Curl.h>
 #   endif

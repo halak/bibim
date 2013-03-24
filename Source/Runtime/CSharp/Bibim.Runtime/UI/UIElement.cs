@@ -33,6 +33,12 @@ namespace Bibim.UI
                 name = value ?? string.Empty;
             }
         }
+
+        public int Tag
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
@@ -50,6 +56,7 @@ namespace Bibim.UI
         {
             this.id = id;
             this.name = name ?? string.Empty;
+            this.Tag = 0;
         }
         #endregion
     }

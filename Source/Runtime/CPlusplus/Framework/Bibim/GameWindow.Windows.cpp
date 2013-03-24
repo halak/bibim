@@ -180,7 +180,7 @@ namespace Bibim
     {
         WNDCLASSEX windowClass;
         windowClass.cbSize = sizeof(windowClass);
-        windowClass.style = CS_DBLCLKS;
+        windowClass.style = 0;
         windowClass.lpfnWndProc = &Internal::WindowProcedure;
         windowClass.cbClsExtra = 0;
         windowClass.cbWndExtra = sizeof(this);
