@@ -90,6 +90,8 @@
                 String Substring(int startIndex) const;
                 String Substring(int startIndex, int length) const;
 
+                int Count(char c) const;
+
                 inline const char* CStr() const;
                 inline const char* GetCharPointer() const;
                 inline int GetLength() const;
@@ -131,6 +133,7 @@
                 friend inline bool operator >= (const char* left, const String& right);
                 friend inline String operator + (const char* left, const String& right);
 
+                static inline bool IsWhiteSpace(int c);
                 static inline int CopyChars(char* destination, const char* source);
                 static inline int CopyChars(char* destination, const char* source, int length);
                 static inline int CompareCharsIgnoreCase(const char* a, const char* b);
@@ -178,6 +181,8 @@
 
                         inline int GetCurrent() const;
                         inline int GetCurrentIndex() const;
+                        inline const char* GetBuffer() const;
+                        inline int GetLength() const;
 
                         inline UTF8CharEnumerator& operator = (const UTF8CharEnumerator& right);
 

@@ -229,16 +229,29 @@ namespace Bibim
         context.Draw(uiDomain->GetRoot());
         if (recentLog.IsEmpty() == false)
         {
-            static const Vector2 POSITION = Vector2(10.0f, 15.0f);
+            static const Point2 POSITION = Point2(10, 15);
+
+            const Point2 windowSize = GetWindow()->GetSize();
+            RectF bounds = RectF(POSITION.X,
+                                 POSITION.Y,
+                                 windowSize.X - (POSITION.X * 2),
+                                 windowSize.Y - (POSITION.Y * 2));
 
             const Color oldColor = recentLogFont->GetColor();
             recentLogFont->SetColor(Color(0, 0, 0));
-            context.DrawString(POSITION + Vector2(-1.0f, -1.0f), recentLogFont, recentLog);
-            context.DrawString(POSITION + Vector2(+1.0f, -1.0f), recentLogFont, recentLog);
-            context.DrawString(POSITION + Vector2(-1.0f, +1.0f), recentLogFont, recentLog);
-            context.DrawString(POSITION + Vector2(+1.0f, +1.0f), recentLogFont, recentLog);
+            bounds.X -= 1.0f;
+            bounds.Y -= 1.0f;
+            context.DrawString(bounds, recentLogFont, recentLog);
+            bounds.X += 2.0f;
+            context.DrawString(bounds, recentLogFont, recentLog);
+            bounds.Y += 2.0f;
+            context.DrawString(bounds, recentLogFont, recentLog);
+            bounds.X -= 2.0f;
+            context.DrawString(bounds, recentLogFont, recentLog);
             recentLogFont->SetColor(oldColor);
-            context.DrawString(POSITION, recentLogFont, recentLog);
+            bounds.X += 1.0f;
+            bounds.Y -= 1.0f;
+            context.DrawString(bounds, recentLogFont, recentLog);
         }
 
         GameFramework::Draw();
@@ -386,14 +399,14 @@ namespace Bibim
             ReloadUI();
             return true;
         }
-        else if (keyboard.Contains(Key::Delete))
-        {
-            recentLog = String::Empty;
-            return true;
-        }
         else if (keyboard.Contains(Key::F4))
         {
             GetGraphicsDevice()->SetFullscreen(!GetGraphicsDevice()->GetFullscreen());
+            return true;
+        }
+        else if (keyboard.Contains(Key::Delete))
+        {
+            recentLog = String::Empty;
             return true;
         }
         else

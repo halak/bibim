@@ -292,14 +292,12 @@ namespace Bibim
         const FT_Size_Metrics& metrics = metricsFont->size->metrics;
         ascender   = F26D6ToFloat(metrics.ascender);
         descender  = F26D6ToFloat(metrics.descender);
-        lineHeight = F26D6ToFloat(metrics.height);
+        lineHeight = F26D6ToFloat(metrics.height) + parameters.StrokeSize;
 
-        if (ascender == 0.0f)
-            ascender = parameters.FontSize * 0.5f;
-        if (descender == 0.0f)
-            descender = parameters.FontSize * 0.5f;
+        if (ascender == 0.0f && descender == 0.0f)
+            ascender = parameters.FontSize;
         if (lineHeight == 0.0f)
-            lineHeight = parameters.FontSize;
+            lineHeight = parameters.FontSize * 1.3f;
 
         ascender   /= parameters.Scale;
         descender  /= parameters.Scale;

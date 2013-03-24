@@ -36,16 +36,15 @@
                     inline int GetF() const { return H >= 0 ? G + H : G; }
                 };
 
-                class IGrid
+                BBForwardDeclareSmartPointerClass(Grid);
+                class Grid
                 {
                     public:
-                        virtual ~IGrid() { }
+                        virtual ~Grid() { }
 
                         virtual Node* GetNodeAt(int x, int y) = 0;
                         virtual bool IsWalkableAt(int x, int y) = 0;
                 };
-
-                BBForwardDeclareSmartPointerClass(Grid);
 
                 typedef std::vector<Point2> Point2Collection;
 
@@ -53,8 +52,8 @@
                 PathFinder();
                 virtual ~PathFinder();
 
-                virtual void Find(IGrid* grid, Point2 start, Point2 end, Point2Collection& outPath) = 0;
-                Point2Collection Find(IGrid* grid, Point2 start, Point2 end);
+                virtual void Find(Grid* grid, Point2 start, Point2 end, Point2Collection& outPath) = 0;
+                Point2Collection Find(Grid* grid, Point2 start, Point2 end);
         };
     }
 

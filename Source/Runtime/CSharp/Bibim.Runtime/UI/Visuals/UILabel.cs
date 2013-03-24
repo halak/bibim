@@ -27,12 +27,6 @@ namespace Bibim.UI.Visuals
             get;
             set;
         }
-
-        public bool AutoResize
-        {
-            get;
-            set;
-        }
         #endregion
 
         #region Constructors

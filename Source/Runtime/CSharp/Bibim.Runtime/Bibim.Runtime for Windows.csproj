@@ -348,7 +348,7 @@
     <Compile Include="UI\Visuals\UIButton.cs" />
     <Compile Include="UI\Visuals\UICheckBox.cs" />
     <Compile Include="UI\Visuals\UILabel.cs" />
-    <Compile Include="UI\Visuals\UIMarkupTextBox.cs" />
+    <Compile Include="UI\Visuals\UIDocument.cs" />
     <Compile Include="UI\Visuals\UIPanel.cs" />
     <Compile Include="UI\Visuals\UIRadioButton.cs" />
     <Compile Include="UI\Visuals\UIImage.cs" />

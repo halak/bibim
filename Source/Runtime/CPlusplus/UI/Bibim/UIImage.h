@@ -20,9 +20,6 @@
                 Texture2D* GetTexture() const;
                 void SetTexture(Texture2D* value);
 
-                inline bool GetAutoResize() const;
-                inline void SetAutoResize(bool value);
-
                 inline bool GetHorizontalFlip() const;
                 inline void SetHorizontalFlip(bool value);
 
@@ -40,7 +37,6 @@
 
             private:
                 ImagePtr source;
-                bool autoResize;
                 bool horizontalFlip;
                 bool verticalFlip;
                 BitMaskPtr mask;

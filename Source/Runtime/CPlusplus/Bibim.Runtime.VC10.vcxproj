@@ -301,7 +301,6 @@
     <ClCompile Include="UI\Bibim\UIDomain.cpp" />
     <ClCompile Include="UI\Bibim\UIElement.cpp" />
     <ClCompile Include="UI\Bibim\UILayout.cpp" />
-    <ClCompile Include="UI\Bibim\UIMarkupText.cpp" />
     <ClCompile Include="UI\Bibim\UIRenderer.DX9.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
@@ -346,7 +345,7 @@
     <ClCompile Include="UI\Bibim\UICheckBox.cpp" />
     <ClCompile Include="UI\Bibim\UIImage.cpp" />
     <ClCompile Include="UI\Bibim\UILabel.cpp" />
-    <ClCompile Include="UI\Bibim\UIMarkupTextBox.cpp" />
+    <ClCompile Include="UI\Bibim\UIDocument.cpp" />
     <ClCompile Include="UI\Bibim\UIPanel.cpp" />
     <ClCompile Include="UI\Bibim\UIRadioButton.cpp" />
     <ClCompile Include="UI\Bibim\UIRect.cpp" />
@@ -679,7 +678,6 @@
     <ClInclude Include="UI\Bibim\UIDomain.h" />
     <ClInclude Include="UI\Bibim\UIElement.h" />
     <ClInclude Include="UI\Bibim\UILayout.h" />
-    <ClInclude Include="UI\Bibim\UIMarkupText.h" />
     <ClInclude Include="UI\Bibim\UIRenderer.DX9.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
@@ -722,7 +720,7 @@
     <ClInclude Include="UI\Bibim\UICheckBox.h" />
     <ClInclude Include="UI\Bibim\UIImage.h" />
     <ClInclude Include="UI\Bibim\UILabel.h" />
-    <ClInclude Include="UI\Bibim\UIMarkupTextBox.h" />
+    <ClInclude Include="UI\Bibim\UIDocument.h" />
     <ClInclude Include="UI\Bibim\UIPanel.h" />
     <ClInclude Include="UI\Bibim\UIRadioButton.h" />
     <ClInclude Include="UI\Bibim\UIRect.h" />
@@ -1046,7 +1044,6 @@
     <None Include="UI\Bibim\UIDomain.inl" />
     <None Include="UI\Bibim\UIElement.inl" />
     <None Include="UI\Bibim\UILayout.inl" />
-    <None Include="UI\Bibim\UIMarkupText.inl" />
     <None Include="UI\Bibim\UIRenderer.DX9.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
@@ -1087,7 +1084,7 @@
     <None Include="UI\Bibim\UICheckBox.inl" />
     <None Include="UI\Bibim\UIImage.inl" />
     <None Include="UI\Bibim\UILabel.inl" />
-    <None Include="UI\Bibim\UIMarkupTextBox.inl" />
+    <None Include="UI\Bibim\UIDocument.inl" />
     <None Include="UI\Bibim\UIPanel.inl" />
     <None Include="UI\Bibim\UIRect.inl" />
     <None Include="UI\Bibim\UISpark.inl" />

@@ -11,6 +11,7 @@
     {
         class TypingContext
         {
+            BBThisIsNoncopyableClass(TypingContext);
             public:
                 TypingContext(Font* font, const String& text, float boundary);
                 TypingContext(const FontString& string, float boundary);
@@ -25,6 +26,7 @@
                 inline const Glyph* GetStrokedGlyph() const;
                 inline int GetIndex() const;
                 inline int GetGlyphIndex() const;
+                inline int GetLineNumber() const;
 
             private:
                 static inline int GetLength(int code);
@@ -40,10 +42,7 @@
                 const Glyph* currentStrokedGlyph;
                 int currentIndex;
                 int currentIndexFromOriginalText;
-
-            private:
-                TypingContext(const TypingContext&);
-                TypingContext& operator = (const TypingContext&);
+                int lineNumber;
         };
     }
 

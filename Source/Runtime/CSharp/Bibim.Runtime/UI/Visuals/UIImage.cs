@@ -20,12 +20,6 @@ namespace Bibim.UI.Visuals
             set;
         }
 
-        public bool AutoResize
-        {
-            get;
-            set;
-        }
-
         public bool HorizontalFlip
         {
             get;

@@ -28,4 +28,9 @@
     {
         return currentIndex - 1;
     }
+
+    int TypingContext::GetLineNumber() const
+    {
+        return lineNumber;
+    }
 }

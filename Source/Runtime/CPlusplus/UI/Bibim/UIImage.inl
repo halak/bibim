@@ -5,16 +5,6 @@
         return source;
     }
 
-    bool UIImage::GetAutoResize() const
-    {
-        return autoResize;
-    }
-
-    void UIImage::SetAutoResize(bool value)
-    {
-        autoResize = value;
-    }
-
     bool UIImage::GetHorizontalFlip() const
     {
         return horizontalFlip;

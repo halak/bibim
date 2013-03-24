@@ -135,7 +135,7 @@ namespace Bibim
         while (index1 < length)
         {
             const char c = buffer->s[index1];
-            if (c == ' ' || c == '\t')
+            if (String::IsWhiteSpace(c))
             {
                 index1++;
                 continue;
@@ -147,7 +147,7 @@ namespace Bibim
         while (index2 >= 0)
         {
             const char c = buffer->s[index2];
-            if (c == ' ' || c == '\t')
+            if (String::IsWhiteSpace(c))
             {
                 index2--;
                 continue;
@@ -703,6 +703,18 @@ namespace Bibim
             return String(*this);
 
         return String(buffer->s, startIndex, length);
+    }
+
+    int String::Count(char c) const
+    {
+        int count = 0;
+        for (int i = 0; i < buffer->length; i++)
+        {
+            if (buffer->s[i] == c)
+                count++;
+        }
+
+        return count;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

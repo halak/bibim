@@ -77,6 +77,7 @@ namespace Bibim
         regularGlyphs.reserve(wideCharacters.size());
         if (font->GetStrokeSize() > 0.0f)
         {
+            totalWidth += font->GetStrokeSize();
             strokedGlyphs.reserve(wideCharacters.size());
             if (font->GetShadowSize() > 0)
             {
@@ -98,6 +99,7 @@ namespace Bibim
                     totalWidth += strokedGlyphs.back()->GetAdvance().X * spacing;
                 }
             }
+            totalWidth += font->GetStrokeSize();
         }
         else
         {

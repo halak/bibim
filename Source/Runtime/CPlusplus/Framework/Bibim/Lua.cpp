@@ -319,8 +319,6 @@ namespace Bibim
             lua_tinker::class_def<UIImage>(L, "SetSource", &UIImage::SetSource);
             lua_tinker::class_def<UIImage>(L, "GetTexture", &UIImage::GetTexture);
             lua_tinker::class_def<UIImage>(L, "SetTexture", &UIImage::SetTexture);
-            lua_tinker::class_def<UIImage>(L, "GetAutoResize", &UIImage::GetAutoResize);
-            lua_tinker::class_def<UIImage>(L, "SetAutoResize", &UIImage::SetAutoResize);
             lua_tinker::class_def<UIImage>(L, "GetHorizontalFlip", &UIImage::GetHorizontalFlip);
             lua_tinker::class_def<UIImage>(L, "SetHorizontalFlip", &UIImage::SetHorizontalFlip);
             lua_tinker::class_def<UIImage>(L, "GetVerticalFlip", &UIImage::GetVerticalFlip);
@@ -332,8 +330,6 @@ namespace Bibim
             lua_tinker::class_def<UILabel>(L, "SetText", &UILabel::SetText);
             lua_tinker::class_def<UILabel>(L, "GetFont", &UILabel::GetFont);
             lua_tinker::class_def<UILabel>(L, "SetFont", &UILabel::SetFont);
-            lua_tinker::class_def<UILabel>(L, "GetAutoResize", &UILabel::GetAutoResize);
-            lua_tinker::class_def<UILabel>(L, "SetAutoResize", &UILabel::SetAutoResize);
         lua_tinker::class_add<UIRect>(L, "UIRect");
             lua_tinker::class_inh<UIRect, UIVisual>(L);
             lua_tinker::class_con<UIRect>(L, lua_tinker::constructor<UIRect>);
@@ -412,6 +408,21 @@ namespace Bibim
             lua_tinker::class_con<UIScrollablePanel>(L, lua_tinker::constructor<UIScrollablePanel>);
             lua_tinker::class_def<UIScrollablePanel>(L, "GetContent", &UIScrollablePanel::GetContent);
             lua_tinker::class_def<UIScrollablePanel>(L, "SetContent", &UIScrollablePanel::SetContent);
+        lua_tinker::class_add<UIDocument>(L, "UIDocument");
+            lua_tinker::class_inh<UIDocument, UIPanel>(L);
+            lua_tinker::class_con<UIDocument>(L, lua_tinker::constructor<UIDocument>);
+            lua_tinker::class_def<UIDocument>(L, "GetText", &UIDocument::GetText);
+            lua_tinker::class_def<UIDocument>(L, "SetText", &UIDocument::SetText);
+            lua_tinker::class_def<UIDocument>(L, "GetStyleSheet", &UIDocument::GetStyleSheet);
+            lua_tinker::class_def<UIDocument>(L, "SetStyleSheet", &UIDocument::SetStyleSheet);
+        lua_tinker::class_add<UIDocument::StyleSheet>(L, "UIDocumentStyleSheet");
+            lua_tinker::class_inh<UIDocument::StyleSheet, GameAsset>(L);
+            lua_tinker::class_con<UIDocument::StyleSheet>(L, lua_tinker::constructor<UIDocument::StyleSheet>);
+            lua_tinker::class_def<UIDocument::StyleSheet>(L, "Clear", &UIDocument::StyleSheet::Clear);
+            lua_tinker::class_def<UIDocument::StyleSheet>(L, "AddContent", &UIDocument::StyleSheet::AddContentXY);
+            lua_tinker::class_def<UIDocument::StyleSheet>(L, "AddDecoration", &UIDocument::StyleSheet::AddDecoration);
+            lua_tinker::class_def<UIDocument::StyleSheet>(L, "RemoveContent", &UIDocument::StyleSheet::RemoveContent);
+            lua_tinker::class_def<UIDocument::StyleSheet>(L, "RemoveDecoration", &UIDocument::StyleSheet::RemoveDecoration);
         /*//MOBILE
         lua_tinker::class_add<UISpark>(L, "UISpark");
             lua_tinker::class_inh<UISpark, UIVisual>(L);

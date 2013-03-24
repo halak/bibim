@@ -242,8 +242,10 @@ namespace utf8
                 *result++ = static_cast<uint16_t>((cp >> 10)   + internal::LEAD_OFFSET);
                 *result++ = static_cast<uint16_t>((cp & 0x3ff) + internal::TRAIL_SURROGATE_MIN);
             }
-            else
+            else if (cp > 0)
                 *result++ = static_cast<uint16_t>(cp);
+            else
+                break;
         }
         return result;
     }

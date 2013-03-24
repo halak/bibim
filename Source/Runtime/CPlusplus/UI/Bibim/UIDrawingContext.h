@@ -26,11 +26,11 @@
                 void DrawUnclipped(Vector2 position, float rotation, float scale, Image* image, Color color);
                 void DrawUnclipped(Vector2 position, float rotation, Vector3 rotationAxis, float scale, Image* image, Color color);
 
-                inline void DrawString(Font* font, const String& text);
-                inline void DrawString(const FontString& fontString);
                 inline void DrawString(Vector2 position, Font* font, const String& text);
-                void DrawString(const RectF& bounds, const RectF& clippedBounds, Font* font, const String& text);
+                inline void DrawString(const FontString& fontString);
+                void DrawString(RectF bounds, Font* font, const String& text);
                 void DrawString(const RectF& bounds, const RectF& clippedBounds, const FontString& fontString);
+
                 void DrawLine(Vector2 p0, Vector2 p1, Color color);
                 void DrawLines(int count, Vector2* p, Color color);
                 void DrawRect(const RectF& bounds, Color color);
