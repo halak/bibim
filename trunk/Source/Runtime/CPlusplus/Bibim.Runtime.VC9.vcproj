@@ -1259,18 +1259,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIMarkupText.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIMarkupText.h"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIMarkupText.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\UI\Bibim\UIRenderer.DX9.cpp"
 					>
 				</File>
@@ -1726,6 +1714,18 @@
 						>
 					</File>
 					<File
+						RelativePath=".\UI\Bibim\UIDocument.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIDocument.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIDocument.inl"
+						>
+					</File>
+					<File
 						RelativePath=".\UI\Bibim\UIImage.cpp"
 						>
 					</File>
@@ -1747,18 +1747,6 @@
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UILabel.inl"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIMarkupTextBox.cpp"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIMarkupTextBox.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIMarkupTextBox.inl"
 						>
 					</File>
 					<File

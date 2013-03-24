@@ -13,25 +13,17 @@ namespace Bibim
     TypingContext::TypingContext(Font* font, const String& text, float boundary)
         : fontString(new FontString(font, text)),
           fontStringLocalAllocated(true),
-          boundary(boundary),
-          currentPosition(Vector2::Zero),
-          currentGlyph(nullptr),
-          currentStrokedGlyph(nullptr),
-          currentIndex(0),
-          currentIndexFromOriginalText(0)
+          boundary(boundary)
     {
+        Reset();
     }
 
     TypingContext::TypingContext(const FontString& string, float boundary)
         : fontString(&string),
           fontStringLocalAllocated(false),
-          boundary(boundary),
-          currentPosition(Vector2::Zero),
-          currentGlyph(nullptr),
-          currentStrokedGlyph(nullptr),
-          currentIndex(0),
-          currentIndexFromOriginalText(0)
+          boundary(boundary)
     {
+        Reset();
     }
 
     TypingContext::~TypingContext()
@@ -42,11 +34,14 @@ namespace Bibim
 
     void TypingContext::Reset()
     {
-        currentPosition = Vector2::Zero;
+        const Font* font = fontString->GetFont();
+        currentPosition.X = font->GetStrokeSize();
+        currentPosition.Y = 0.0f;
         currentGlyph = nullptr;
         currentStrokedGlyph = nullptr;
         currentIndex = 0;
         currentIndexFromOriginalText = 0;
+        lineNumber = 0;
     }
 
     int TypingContext::GetLength(int code)
@@ -57,8 +52,9 @@ namespace Bibim
 
     bool TypingContext::MoveNext()
     {
-        const float spacing    = fontString->GetFont()->GetSpacing();
-        const float lineHeight = fontString->GetFont()->GetLineHeight();
+        const Font* font = fontString->GetFont();
+        const float spacing = font->GetSpacing();
+        const float lineHeight = font->GetLineHeight();
 
         if (currentGlyph)
         {
@@ -73,6 +69,7 @@ namespace Bibim
         {
             currentPosition.X = 0.0f;
             currentPosition.Y += lineHeight;
+            lineNumber++;
         }
 
         currentGlyph = fontString->GetRegularGlyphs()[currentIndex];
@@ -84,10 +81,12 @@ namespace Bibim
 
         currentIndex++;
 
-        if (currentPosition.X + (currentGlyph->GetAdvance().X * spacing) > boundary)
+        const float advanceX = currentGlyph->GetAdvance().X;
+        if (currentPosition.X + (advanceX * spacing) + font->GetStrokeSize() > boundary)
         {
             currentPosition.X = 0.0f;
             currentPosition.Y += lineHeight;
+            lineNumber++;
         }
 
         return true;

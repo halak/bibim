@@ -35,6 +35,7 @@ namespace Bibim
         GameAssetFactory::AddEntry<SourceTexture2D>();
         GameAssetFactory::AddEntry<ShaderEffect>();
         GameAssetFactory::AddEntry<UILayout>();
+        GameAssetFactory::AddEntry<UIDocument::StyleSheet>();
         GameAssetFactory::SortEntries();
 
         GameComponentFactory::AddEntry<EvalBoolConstant>();
@@ -234,8 +235,8 @@ namespace Bibim
         GameComponentFactory::AddEntry<UISequentialEventHandler>();
         GameComponentFactory::AddEntry<UIEventMap>();
         GameComponentFactory::AddEntry<UILabel>();
-//      GameComponentFactory::AddEntry<UIMarkupTextBox>();
         GameComponentFactory::AddEntry<UIPanel>();
+        GameComponentFactory::AddEntry<UIDocument>();
         GameComponentFactory::AddEntry<UIButton>();
         GameComponentFactory::AddEntry<UICheckBox>();
         GameComponentFactory::AddEntry<UIRadioButton>();

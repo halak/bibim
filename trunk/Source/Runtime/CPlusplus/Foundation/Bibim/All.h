@@ -231,8 +231,7 @@
 #  include <Bibim/UIKeyboardEventDispatcher.h>
 #  include <Bibim/UILabel.h>
 #  include <Bibim/UILayout.h>
-#  include <Bibim/UIMarkupText.h>
-#  include <Bibim/UIMarkupTextBox.h>
+#  include <Bibim/UIDocument.h>
 #  include <Bibim/UIMouseButtonEventArgs.h>
 #  include <Bibim/UIMouseEventArgs.h>
 #  include <Bibim/UIMouseEventDispatcher.h>

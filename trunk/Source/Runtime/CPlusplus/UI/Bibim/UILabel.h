@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/UIVisual.h>
+#   include <Bibim/Font.h>
 #   include <Bibim/FontString.h>
 
     namespace Bibim
@@ -15,14 +16,14 @@
                 UILabel();
                 virtual ~UILabel();
 
+                Font::Metric Measure();
+                Font::Metric Measure(float boundary);
+
                 inline const String& GetText() const;
                 void SetText(const String& value);
 
                 inline Font* GetFont() const;
                 void SetFont(Font* value);
-
-                inline bool GetAutoResize() const;
-                void SetAutoResize(bool value);
 
                 virtual Vector2 GetContentSize();
 
@@ -30,12 +31,14 @@
                 virtual void OnDraw(UIDrawingContext& context);
 
             private:
+                void UpdateFontString();
+
+            private:
                 String text;
                 FontPtr font;
                 FontString fontString;
                 int fontRevision;
                 bool fontStringChanged;
-                bool autoResize;
         };
     }
 

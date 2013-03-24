@@ -14,7 +14,6 @@ namespace Bibim
 
     UIImage::UIImage()
         : source(nullptr),
-          autoResize(true),
           horizontalFlip(false),
           verticalFlip(false)
     {
@@ -91,7 +90,6 @@ namespace Bibim
     {
         Base::OnRead(reader);
         source = static_cast<Image*>(reader.ReadAsset());
-        autoResize = reader.ReadBool();
         horizontalFlip = reader.ReadBool();
         verticalFlip = reader.ReadBool();
         mask = static_cast<BitMask*>(reader.ReadAsset());
@@ -102,7 +100,6 @@ namespace Bibim
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
         source = o->source;
-        autoResize = o->autoResize;
         horizontalFlip = o->horizontalFlip;
         verticalFlip = o->verticalFlip;
         mask = o->mask;

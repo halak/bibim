@@ -715,7 +715,7 @@ namespace Bibim.Asset
 
         private static bool IsVerticalLineTransparent(Bitmap bitmap, int y0, int y1, int x)
         {
-            for (int y = y0; y < y1; x++)
+            for (int y = y0; y < y1; y++)
             {
                 if (bitmap.GetPixel(x, y).A != 0)
                     return false;

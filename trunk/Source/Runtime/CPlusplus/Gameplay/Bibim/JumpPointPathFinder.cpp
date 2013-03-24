@@ -21,7 +21,7 @@ namespace Bibim
     {
     }
     
-    void JumpPointPathFinder::Find(IGrid* grid, Point2 start, Point2 end, Point2Collection& outPath)
+    void JumpPointPathFinder::Find(Grid* grid, Point2 start, Point2 end, Point2Collection& outPath)
     {
         if (grid == nullptr)
             return;

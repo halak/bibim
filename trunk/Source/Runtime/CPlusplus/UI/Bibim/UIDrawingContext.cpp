@@ -454,9 +454,10 @@ namespace Bibim
             renderer->DrawQuad(points, color, uv, image->GetTexture());
     }
 
-    void UIDrawingContext::DrawString(const RectF& bounds, const RectF& clippedBounds, Font* font, const String& text)
+    void UIDrawingContext::DrawString(RectF bounds, Font* font, const String& text)
     {
-        DrawString(bounds, clippedBounds, FontString(font, text));
+        static const RectF BigRect = RectF(-10000.0f, -10000.0f, 20000.0f, 20000.0f);
+        DrawString(bounds, BigRect, FontString(font, text));
     }
 
     void UIDrawingContext::DrawString(const RectF& bounds, const RectF& clippedBounds, const FontString& fontString)

@@ -202,14 +202,23 @@ namespace Bibim
 
     void UIPanel::DrawChild(UIDrawingContext& context, UIVisual* child)
     {
-        if (child && child->GetParent() == this)
-            context.DrawChild(child);
+        BBAssertDebug(child && child->GetParent() == this);
+
+        context.DrawChild(child);
     }
 
     void UIPanel::DrawChildren(UIDrawingContext& context)
     {
         for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
             context.DrawChild(*it);
+    }
+
+    void UIPanel::DrawChildren(UIDrawingContext& context, int startIndex, int count)
+    {
+        count = Math::Min(count, static_cast<int>(children.size()) - startIndex);
+        VisualCollection::const_iterator it = children.begin() + startIndex;
+        for (int i = 0; i < count; i++)
+            context.DrawChild(*it++);
     }
 
     void UIPanel::OnDraw(UIDrawingContext& context)

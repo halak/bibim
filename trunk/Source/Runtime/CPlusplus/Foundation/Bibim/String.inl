@@ -267,6 +267,17 @@ namespace Bibim
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
+    bool String::IsWhiteSpace(int c)
+    {
+        return (c == 0x20 ||
+                c == 0x09 ||
+                c == 0x0A ||
+                c == 0x0B ||
+                c == 0x0C ||
+                c == 0x0D ||
+                c == 0x85 ||
+                c == 0xA0);
+    }
 
     int String::CopyChars(char* destination, const char* source)
     {
@@ -442,7 +453,17 @@ namespace Bibim
 
     int String::UTF8CharEnumerator::GetCurrentIndex() const
     {
-        return index + 1;
+        return index;
+    }
+
+    const char* String::UTF8CharEnumerator::GetBuffer() const
+    {
+        return s;
+    }
+
+    int String::UTF8CharEnumerator::GetLength() const
+    {
+        return length;
     }
 
     String::UTF8CharEnumerator& String::UTF8CharEnumerator::operator = (const UTF8CharEnumerator& right)

@@ -17,6 +17,22 @@
             public:
                 typedef std::map<int, const Glyph*> GlyphDictionary;
 
+                struct Metric
+                {
+                    static const Metric Empty;
+
+                    Vector2 Size;
+                    Vector2 EndPosition;
+                    int LineCount;
+
+                    inline Metric(Vector2 size, Vector2 endPosition, int lineCount)
+                        : Size(size),
+                          EndPosition(endPosition),
+                          LineCount(lineCount)
+                    {
+                    }
+                };
+
             public:
                 Font();
                 Font(FontLibrary* library);
@@ -25,10 +41,10 @@
 
                 void Prepare(const String& text);
 
-                Vector2 Measure(const String& text);
-                Vector2 Measure(const String& text, float boundary);
-                Vector2 Measure(const FontString& fontString);
-                Vector2 Measure(const FontString& fontString, float boundary);
+                Metric Measure(const String& text);
+                Metric Measure(const String& text, float boundary);
+                Metric Measure(const FontString& fontString);
+                Metric Measure(const FontString& fontString, float boundary);
 
                 inline FontLibrary* GetLibrary() const;
                 void SetLibrary(FontLibrary* value);

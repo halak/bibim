@@ -69,6 +69,25 @@ namespace Bibim.Asset.Pipeline.Recipes
             return new UILayout(rootWindow);
         }
 
+        private UIVisual AddPanelChild(UIPanel parent, string name, PhotoshopDocument.Layer layer, bool defaultPickable, UIVisibility visibility = UIVisibility.Visible)
+        {
+            var result = new UIWindow();
+            if (layer.IsGroup)
+                Process(result, layer);
+            else
+                AddChildTo(result, layer, defaultPickable);
+
+            if (result != null)
+            {
+                result.Name = name;
+                result.IsPickable = defaultPickable;
+                result.Visibility = visibility;
+                return result;
+            }
+            else
+                return null;
+        }
+
         private UIVisual AddChildTo(UIWindow window, PhotoshopDocument.Layer layer, bool defaultPickable)
         {
             if (string.IsNullOrEmpty(layer.Name) ||
@@ -94,6 +113,18 @@ namespace Bibim.Asset.Pipeline.Recipes
                     window.AddChild(label);
                     Process(label, layer);
                     return label;
+                }
+                else if (string.Compare(type, "Document", true) == 0 ||
+                    string.Compare(type, "Doc", true) == 0)
+                {
+                    UIDocument document = new UIDocument();
+                    document.Name = name;
+                    document.IsPickable = defaultPickable;
+                    if (args.ContainsKey("0"))
+                        document.Text = args["0"];
+                    window.AddChild(document);
+                    Process(document, layer);
+                    return document;
                 }
                 else if (string.Compare(type, "9Patch", true) == 0 ||
                     string.Compare(type, "NinePatch", true) == 0 ||
@@ -312,26 +343,11 @@ namespace Bibim.Asset.Pipeline.Recipes
                 pushed = hovering;
 
             if (normal != null)
-            {
-                var window = new UIWindow();
-                window.Name = "Normal";
-                button.Normal = window;
-                AddChildTo(window, normal, false);
-            }
+                button.Normal = AddPanelChild(button, "Normal", normal, false);
             if (pushed != null)
-            {
-                var window = new UIWindow();
-                window.Name = "Pushed";
-                button.Pushed = window;
-                AddChildTo(window, pushed, false);
-            }
+                button.Pushed = AddPanelChild(button, "Pushed", pushed, false);
             if (hovering != null)
-            {
-                var window = new UIWindow();
-                window.Name = "Hovering";
-                button.Hovering = window;
-                AddChildTo(window, hovering, false);
-            }
+                button.Hovering = AddPanelChild(button, "Hovering", hovering, false);
         }
 
         private void Process(UICheckBox button, PhotoshopDocument.Layer layer)
@@ -350,34 +366,21 @@ namespace Bibim.Asset.Pipeline.Recipes
                 pushed = hovering;
 
             if (normal != null)
-            {
-                var window = new UIWindow();
-                window.Name = "CheckedNormal";
-                button.CheckedNormal = window;
-                button.CheckedNormal.Visibility = UIVisibility.Invisible;
-                AddChildTo(window, normal, false);
-            }
+                button.CheckedNormal = AddPanelChild(button, "CheckedNormal", normal, false, UIVisibility.Invisible);
             if (pushed != null)
-            {
-                var window = new UIWindow();
-                window.Name = "CheckedPushed";
-                button.CheckedPushed = window;
-                button.CheckedPushed.Visibility = UIVisibility.Invisible;
-                AddChildTo(window, pushed, false);
-            }
+                button.CheckedPushed = AddPanelChild(button, "CheckedPushed", pushed, false, UIVisibility.Invisible);
             if (hovering != null)
-            {
-                var window = new UIWindow();
-                window.Name = "CheckedHovering";
-                button.CheckedHovering = window;
-                button.CheckedHovering.Visibility = UIVisibility.Invisible;
-                AddChildTo(window, hovering, false);
-            }
+                button.CheckedHovering = AddPanelChild(button, "CheckedHovering", hovering, false, UIVisibility.Invisible);
         }
 
         private void Process(UIRadioButton button, PhotoshopDocument.Layer layer)
         {
             Process((UICheckBox)button, layer);
+        }
+
+        private void Process(UIDocument document, PhotoshopDocument.Layer layer)
+        {
+            Process((UIPanel)document, layer);
         }
 
         private void Process(UIScrollablePanel panel, PhotoshopDocument.Layer layer)
@@ -387,12 +390,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             PhotoshopDocument.Layer content = layer.FindSubLayer("#Content", true);
 
             if (content != null)
-            {
-                var window = new UIWindow();
-                window.Name = "Content";
-                panel.Content = window;
-                AddChildTo(window, content, false);
-            }
+                panel.Content = AddPanelChild(panel, "Content", content, true);
         }
 
         private void Process(UIWindow window, PhotoshopDocument.Layer layer)

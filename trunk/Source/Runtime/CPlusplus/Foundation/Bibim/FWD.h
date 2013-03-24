@@ -247,7 +247,6 @@
                     class UISimpleDomain;
                 BBForwardDeclareSmartPointerClass(UIElement);
                 BBForwardDeclareSmartPointerClass(UILayout);
-                class UIMarkupText;
                 BBForwardDeclareSmartPointerClass(UIRenderBuffer);
                 class UIRenderer;
                 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -300,11 +299,11 @@
                     BBForwardDeclareSmartPointerClass(UIVisual);
                         BBForwardDeclareSmartPointerClass(UIImage);
                         BBForwardDeclareSmartPointerClass(UILabel);
-                        BBForwardDeclareSmartPointerClass(UIMarkupTextBox);
                         BBForwardDeclareSmartPointerClass(UIPanel);
                             BBForwardDeclareSmartPointerClass(UIButton);
                                 BBForwardDeclareSmartPointerClass(UICheckBox);
                                     BBForwardDeclareSmartPointerClass(UIRadioButton);
+                            BBForwardDeclareSmartPointerClass(UIDocument);
                             BBForwardDeclareSmartPointerClass(UIScrollablePanel);
                             BBForwardDeclareSmartPointerClass(UIWindow);
                         BBForwardDeclareSmartPointerClass(UIRect);

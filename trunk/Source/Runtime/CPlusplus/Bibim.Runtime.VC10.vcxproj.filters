@@ -387,9 +387,6 @@
     <ClCompile Include="UI\Bibim\UILayout.cpp">
       <Filter>03. Game\UI</Filter>
     </ClCompile>
-    <ClCompile Include="UI\Bibim\UIMarkupText.cpp">
-      <Filter>03. Game\UI</Filter>
-    </ClCompile>
     <ClCompile Include="UI\Bibim\UIRenderer.DX9.cpp">
       <Filter>03. Game\UI</Filter>
     </ClCompile>
@@ -499,9 +496,6 @@
       <Filter>03. Game\UI\Visuals</Filter>
     </ClCompile>
     <ClCompile Include="UI\Bibim\UILabel.cpp">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </ClCompile>
-    <ClCompile Include="UI\Bibim\UIMarkupTextBox.cpp">
       <Filter>03. Game\UI\Visuals</Filter>
     </ClCompile>
     <ClCompile Include="UI\Bibim\UIPanel.cpp">
@@ -825,6 +819,9 @@
     <ClCompile Include="Framework\Bibim\Preferences.cpp">
       <Filter>03. Game\Framework</Filter>
     </ClCompile>
+    <ClCompile Include="UI\Bibim\UIDocument.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset\Bibim\AssetLoadingTask.h">
@@ -1103,9 +1100,6 @@
     <ClInclude Include="UI\Bibim\UILayout.h">
       <Filter>03. Game\UI</Filter>
     </ClInclude>
-    <ClInclude Include="UI\Bibim\UIMarkupText.h">
-      <Filter>03. Game\UI</Filter>
-    </ClInclude>
     <ClInclude Include="UI\Bibim\UIRenderer.DX9.h">
       <Filter>03. Game\UI</Filter>
     </ClInclude>
@@ -1218,9 +1212,6 @@
       <Filter>03. Game\UI\Visuals</Filter>
     </ClInclude>
     <ClInclude Include="UI\Bibim\UILabel.h">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </ClInclude>
-    <ClInclude Include="UI\Bibim\UIMarkupTextBox.h">
       <Filter>03. Game\UI\Visuals</Filter>
     </ClInclude>
     <ClInclude Include="UI\Bibim\UIPanel.h">
@@ -1638,6 +1629,9 @@
     <ClInclude Include="Framework\Bibim\Preferences.h">
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="UI\Bibim\UIDocument.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Asset\Bibim\AssetLoadingTask.inl">
@@ -1874,9 +1868,6 @@
     <None Include="UI\Bibim\UILayout.inl">
       <Filter>03. Game\UI</Filter>
     </None>
-    <None Include="UI\Bibim\UIMarkupText.inl">
-      <Filter>03. Game\UI</Filter>
-    </None>
     <None Include="UI\Bibim\UIRenderer.DX9.inl">
       <Filter>03. Game\UI</Filter>
     </None>
@@ -1983,9 +1974,6 @@
       <Filter>03. Game\UI\Visuals</Filter>
     </None>
     <None Include="UI\Bibim\UILabel.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="UI\Bibim\UIMarkupTextBox.inl">
       <Filter>03. Game\UI\Visuals</Filter>
     </None>
     <None Include="UI\Bibim\UIPanel.inl">
@@ -2275,6 +2263,9 @@
     </None>
     <None Include="Framework\Bibim\Preferences.inl">
       <Filter>03. Game\Framework</Filter>
+    </None>
+    <None Include="UI\Bibim\UIDocument.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
     </None>
   </ItemGroup>
 </Project>

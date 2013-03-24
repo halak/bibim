@@ -42,6 +42,7 @@
 
                 void DrawChild(UIDrawingContext& context, UIVisual* child);
                 void DrawChildren(UIDrawingContext& context);
+                void DrawChildren(UIDrawingContext& context, int startIndex, int count);
 
                 virtual void OnDraw(UIDrawingContext& context);
                 virtual void OnPick(UIPickingContext& context);

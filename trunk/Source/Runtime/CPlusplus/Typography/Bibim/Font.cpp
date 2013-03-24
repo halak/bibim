@@ -16,6 +16,7 @@
 namespace Bibim
 {
     const Font::GlyphDictionary Font::EmptyGlyphs;
+    const Font::Metric Font::Metric::Empty(Vector2::Zero, Vector2::Zero, 0);
 
     Font::Font()
         : library(nullptr),
@@ -71,36 +72,40 @@ namespace Bibim
             GetRegularGlyph(code);
     }
 
-    Vector2 Font::Measure(const String& text)
+    Font::Metric Font::Measure(const String& text)
     {
         return Measure(text, Float::Max);
     }
 
-    Vector2 Font::Measure(const String& text, float boundary)
+    Font::Metric Font::Measure(const String& text, float boundary)
     {
         return Measure(FontString(this, text), boundary);
     }
 
-    Vector2 Font::Measure(const FontString& fontString)
+    Font::Metric Font::Measure(const FontString& fontString)
     {
         return Measure(fontString, Float::Max);
     }
     
-    Vector2 Font::Measure(const FontString& fontString, float boundary)
+    Font::Metric Font::Measure(const FontString& fontString, float boundary)
     {
         BBAssert(fontString.GetFont() == this);
 
-       TypingContext context(fontString, boundary);
+        TypingContext context(fontString, boundary);
 
+        const float strokeSize = GetStrokeSize();
+        const float spacing = GetSpacing();
+        const float lineHeight = GetLineHeight();
         Vector2 result = Vector2::Zero;
         while (context.MoveNext())
         {
             const Vector2 current = context.GetPosition();
-            result.X = Math::Max(result.X, current.X + context.GetRegularGlyph()->GetAdvance().X);
-            result.Y = Math::Max(result.Y, current.Y + GetLineHeight());
+            const float advanceX = context.GetRegularGlyph()->GetAdvance().X;
+            result.X = Math::Max(result.X, current.X + advanceX * spacing + strokeSize);
+            result.Y = Math::Max(result.Y, current.Y + lineHeight);
         }
 
-        return result;
+        return Metric(result, context.GetPosition(), context.GetLineNumber() + 1);
     }
 
     void Font::SetLibrary(FontLibrary* value)

@@ -11,7 +11,7 @@ namespace Bibim
     {
     }
 
-    PathFinder::Point2Collection PathFinder::Find(IGrid* grid, Point2 start, Point2 end)
+    PathFinder::Point2Collection PathFinder::Find(Grid* grid, Point2 start, Point2 end)
     {
         Point2Collection result;
         Find(grid, start, end, result);

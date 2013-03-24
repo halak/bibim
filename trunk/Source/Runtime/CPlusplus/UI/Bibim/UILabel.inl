@@ -9,9 +9,4 @@
     {
         return font;
     }
-
-    bool UILabel::GetAutoResize() const
-    {
-        return autoResize;
-    }
 }

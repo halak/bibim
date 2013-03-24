@@ -4,13 +4,18 @@ using System.Text;
 
 namespace Bibim.UI.Visuals
 {
-    [ClassID('U', 'M', 'T', 'B')]
-    public sealed class UIMarkupTextBox : UIVisual
+    [ClassID('U', 'D', 'O', 'C')]
+    public sealed class UIDocument : UIPanel
     {
         #region Fields
         #endregion
 
         #region Properties
+        public string Text
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors

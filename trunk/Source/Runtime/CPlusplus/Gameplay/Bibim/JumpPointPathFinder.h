@@ -13,7 +13,7 @@
                 JumpPointPathFinder();
                 virtual ~JumpPointPathFinder();
 
-                virtual void Find(IGrid* grid, Point2 start, Point2 end, Point2Collection& outPath);
+                virtual void Find(Grid* grid, Point2 start, Point2 end, Point2Collection& outPath);
 
             private:
                 void IdentifySuccessors(Node* node);
@@ -21,7 +21,7 @@
                 void FindNeighbors(Node* node, Point2Collection& outValues) const;
 
             private:
-                IGrid* grid;
+                Grid* grid;
                 Point2 start;
                 Point2 end;
                 std::vector<Node*> openList;
