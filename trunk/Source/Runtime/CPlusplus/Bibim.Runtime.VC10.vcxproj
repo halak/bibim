@@ -93,10 +93,10 @@
     </ClCompile>
     <Lib />
     <Lib>
-      <AdditionalDependencies>winmm.lib;d3d9.lib;d3dx9d.lib;zlibd.lib;libpngd.lib;freetype244_D.lib;lua.Debug.lib;irrKlang.lib;SPARK_debug.lib</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;d3d9.lib;d3dx9d.lib;zlibd.lib;libpngd.lib;freetype244_D.lib;lua.Debug.lib;irrKlang.lib;SPARK_debug.lib;libcurld.lib;ws2_32.lib</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)Lib\x86;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Debug;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Debug\ZLib;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\StormLib\bin\StormLib\Win32\DebugAD;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\objs\win32\vc2010;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lua-5.1.5\lib\Win32\vc10;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\irrKlang-1.4.0\lib\Win32-visualStudio;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\SPARK-1.5.5\lib\vc2010\static;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)Lib\x86;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Debug;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Debug\ZLib;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\StormLib\bin\StormLib\Win32\DebugAD;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\objs\win32\vc2010;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lua-5.1.5\lib\Win32\vc10;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\irrKlang-1.4.0\lib\Win32-visualStudio;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\SPARK-1.5.5\lib\vc2010\static;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\lib\LIB-Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -114,10 +114,10 @@
     </ClCompile>
     <Lib />
     <Lib>
-      <AdditionalDependencies>winmm.lib;d3d9.lib;d3dx9d.lib;zlib.lib;libpng.lib;freetype244.lib;lua.Release.lib;irrKlang.lib;SPARK.lib</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;d3d9.lib;d3dx9d.lib;zlib.lib;libpng.lib;freetype244.lib;lua.Release.lib;irrKlang.lib;SPARK.lib;libcurl.lib;ws2_32.lib</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)Lib\x86;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Release;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Release\ZLib;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\StormLib\bin\StormLib\Win32\ReleaseAD;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\objs\win32\vc2010;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lua-5.1.5\lib\Win32\vc10;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\irrKlang-1.4.0\lib\Win32-visualStudio;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\SPARK-1.5.5\lib\vc2010\static;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)Lib\x86;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Release;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513\projects\visualc71\Win32_LIB_Release\ZLib;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\StormLib\bin\StormLib\Win32\ReleaseAD;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\objs\win32\vc2010;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lua-5.1.5\lib\Win32\vc10;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\irrKlang-1.4.0\lib\Win32-visualStudio;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\SPARK-1.5.5\lib\vc2010\static;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\lib\LIB-Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
@@ -206,10 +206,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Net\Bibim\HttpClient.Curl.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Net\Bibim\HttpClient.Curl.cpp" />
     <ClCompile Include="Net\Bibim\HttpClientBase.cpp" />
     <ClCompile Include="Threading\Bibim\Lock.Unix.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -453,6 +450,8 @@
     <ClCompile Include="Net\Bibim\HttpClient.Windows.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Foundation\Bibim\Any.cpp" />
     <ClCompile Include="Foundation\Bibim\Colors.cpp" />
@@ -580,10 +579,7 @@
     <ClInclude Include="Framework\Bibim\StandardGame.EmbeddedFont.h" />
     <ClInclude Include="Framework\Bibim\StandardGame.h" />
     <ClInclude Include="Graphics\Bibim\GraphicsDeviceBase.h" />
-    <ClInclude Include="Net\Bibim\HttpClient.Curl.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="Net\Bibim\HttpClient.Curl.h" />
     <ClInclude Include="Net\Bibim\HttpClientBase.h" />
     <ClInclude Include="Threading\Bibim\Lock.Unix.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -822,6 +818,8 @@
     <ClInclude Include="Net\Bibim\HttpClient.Windows.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Foundation\Bibim\Any.h" />
     <ClInclude Include="Foundation\Bibim\Color.h" />
@@ -968,10 +966,7 @@
     <None Include="Framework\Bibim\Preferences.inl" />
     <None Include="Framework\Bibim\StandardGame.inl" />
     <None Include="Graphics\Bibim\GraphicsDeviceBase.inl" />
-    <None Include="Net\Bibim\HttpClient.Curl.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </None>
+    <None Include="Net\Bibim\HttpClient.Curl.inl" />
     <None Include="Net\Bibim\HttpClientBase.inl" />
     <None Include="Typography\Bibim\Font.inl" />
     <None Include="Typography\Bibim\FontCache.inl" />
@@ -1166,6 +1161,8 @@
     <None Include="Net\Bibim\HttpClient.Windows.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </None>
     <None Include="Foundation\Bibim\Any.inl" />
     <None Include="Foundation\Bibim\Color.inl" />

@@ -73,7 +73,7 @@ namespace Bibim.Asset.Pipeline.Recipes
         {
             var result = new UIWindow();
             if (layer.IsGroup)
-                Process(result, layer);
+                Process(result, layer, defaultPickable);
             else
                 AddChildTo(result, layer, defaultPickable);
 
@@ -98,6 +98,13 @@ namespace Bibim.Asset.Pipeline.Recipes
             string type;
             Dictionary<string, string> args;
             ParseLayerName(layer.Name, out name, out type, out args);
+
+            if (layer.Name.Contains("Name"))
+            {
+                int i = 0;
+                i = 0;
+                i = i;
+            }
 
             if (layer.IsGroup == false)
             {
@@ -393,12 +400,12 @@ namespace Bibim.Asset.Pipeline.Recipes
                 panel.Content = AddPanelChild(panel, "Content", content, true);
         }
 
-        private void Process(UIWindow window, PhotoshopDocument.Layer layer)
+        private void Process(UIWindow window, PhotoshopDocument.Layer layer, bool defaultPickable = true)
         {
             Process((UIVisual)window, layer);
 
             for (int i = layer.SubLayers.Count - 1; i >= 0; i--)
-                AddChildTo(window, layer.SubLayers[i], true);
+                AddChildTo(window, layer.SubLayers[i], defaultPickable);
         }
 
         private UIImage CreateNinePatchPart(Bitmap bitmap, UIAnchorPoint anchor, Vector2 origin, int x, int y, int width, int height, UISizeMode widthMode, UISizeMode heightMode)
@@ -582,7 +589,7 @@ namespace Bibim.Asset.Pipeline.Recipes
 
         public static Bitmap ClipBitmap(Bitmap source, Rectangle rectangle)
         {
-            if (rectangle.Width == 0 || rectangle.Height == 0)
+            if (rectangle.Width <= 0 || rectangle.Height <= 0)
                 return null;
 
             var result = new Bitmap(rectangle.Width, rectangle.Height);

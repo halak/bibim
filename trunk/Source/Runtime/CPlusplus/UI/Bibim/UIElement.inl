@@ -19,4 +19,14 @@
     {
         name = value;
     }
+
+    int UIElement::GetTag() const
+    {
+        return tag;
+    }
+
+    void UIElement::SetTag(int value)
+    {
+        tag = value;
+    }
 }

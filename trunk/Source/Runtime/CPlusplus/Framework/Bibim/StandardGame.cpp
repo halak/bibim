@@ -1133,6 +1133,35 @@ namespace Bibim
             return 0;
         }
 
+        static int Children(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            UIDomain* uiDomain = game->GetUIDomain();
+            if (uiDomain == nullptr)
+                return 0;
+
+            luaL_checktype(L, 1, LUA_TUSERDATA);
+            luaL_checktype(L, 2, LUA_TFUNCTION);
+
+            UIPanel* target = lua_tinker::read<UIPanel*>(L, 1);
+            if (target == nullptr)
+                return 0;
+
+            typedef UIPanel::VisualCollection VisualCollection;
+            const VisualCollection& children = target->GetChildren();
+            for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+            {
+                lua_pushvalue(L, 2);
+                lua_tinker::push(L, static_cast<UIVisual*>(*it));
+                lua_call(L, 1, 0);
+            }
+
+            return 0;
+        }
+
         static int On(lua_State* L)
         {
             StandardGame* game = GetGame(L);
@@ -1548,6 +1577,7 @@ namespace Bibim
 
         const struct luaL_reg uiLib [] = {
             { "all", &All },
+            { "children", &Children },
             { "getroot", &GetRoot },
             { "root", &GetRoot },
             { "bounds", &Bounds },
