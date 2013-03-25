@@ -22,6 +22,11 @@ namespace Bibim
         }
     }
 
+    bool UIEditText::OnMouseClick(const UIMouseEventArgs& args)
+    {
+        return false;
+    }
+
     void UIEditText::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
