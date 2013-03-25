@@ -120,6 +120,14 @@ namespace Bibim
         }
     }
 
+    void GameAssetStorage::Reset()
+    {
+        loadingThread.RequestClose();
+        loadingThread.Join();
+        assets.clear();
+        loadingThread.Start();
+    }
+
     const String& GameAssetStorage::FindName(GameAsset* value) const
     {
         for (AssetTable::const_iterator it = assets.begin(); it != assets.end(); it++)
@@ -251,6 +259,12 @@ namespace Bibim
 
         for (TaskQueue::const_iterator it = temporaryQueue.begin(); it != temporaryQueue.end(); it++)
             delete (*it);
+    }
+
+    void GameAssetStorage::LoadingThread::Start()
+    {
+        closed = false;
+        Thread::Start();
     }
 
     void GameAssetStorage::LoadingThread::AddFirst(AssetLoadingTask* item)

@@ -1,5 +1,8 @@
 #include <Bibim/PCH.h>
 #include <Bibim/HttpClient.Curl.h>
+#include <Bibim/Stream.h>
+
+#define CURL_STATICLIB
 #include <curl/curl.h>
 
 namespace Bibim
@@ -18,12 +21,11 @@ namespace Bibim
     struct Body : NetworkStream
     {
         static const int ID = 1;
-        std::vector<char> content;
+        Stream* stream;
     };
 
     static size_t OnRecv(void* ptr, size_t size, size_t nmemb, void* stream)
     {
-        const char* source = reinterpret_cast<const char*>(ptr);
         switch (reinterpret_cast<NetworkStream*>(stream)->id)
         {
             case Header::ID:
@@ -31,7 +33,7 @@ namespace Bibim
                     static const String contentTypeKey = "Content-Type:";
 
                     Header* header = reinterpret_cast<Header*>(stream);
-                    String headerItem = String(source, 0, size * nmemb);
+                    String headerItem = String(reinterpret_cast<const char*>(ptr), 0, size * nmemb);
                     if (headerItem.StartsWith(contentTypeKey))
                         header->contentType = headerItem.Substring(contentTypeKey.GetLength());
                 }
@@ -39,13 +41,23 @@ namespace Bibim
             case Body::ID:
                 {
                     Body* body = reinterpret_cast<Body*>(stream);
-                    body->content.reserve(body->content.capacity() + size * nmemb);
-                    body->content.insert(body->content.end(), &source[0], &source[size * nmemb]);
+                    body->stream->Write(ptr, size * nmemb);
                 }
                 return nmemb;
             default:
                 return 0;
         }
+    }
+
+    // HttpClient friend function
+    int OnProgress(HttpClient::WithRequest* thiz, 
+                   double t, /* dltotal */ 
+                   double d, /* dlnow */ 
+                   double /*ultotal*/,
+                   double /*ulnow*/)
+    {
+        thiz->client->AddProgress(thiz->request, static_cast<int>(d), static_cast<int>(t));
+        return 0;
     }
 
     HttpClient::HttpClient()
@@ -84,8 +96,14 @@ namespace Bibim
                      method[2] == 'T')
                  curl_easy_setopt(curl, CURLOPT_PUT, 1L);
 
+            HttpClient::WithRequest o;
+            o.client = this;
+            o.request = request;
+
             curl_easy_setopt(curl, CURLOPT_URL, request->GetURL().CStr());
-            curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
+            curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0L);
+            curl_easy_setopt(curl, CURLOPT_PROGRESSFUNCTION, &OnProgress);
+            curl_easy_setopt(curl, CURLOPT_PROGRESSDATA, &o);
             curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 3L);
             curl_easy_setopt(curl, CURLOPT_USERAGENT, request->GetUserAgent().CStr());
             if (form)
@@ -95,8 +113,9 @@ namespace Bibim
             header.id = Header::ID;
             Body body;
             body.id = Body::ID;
+            body.stream = request->GetOutputStream();
 
-            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, OnRecv);
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &OnRecv);
             curl_easy_setopt(curl, CURLOPT_WRITEHEADER, &header);
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, &body);
 
@@ -109,7 +128,7 @@ namespace Bibim
                 curl_easy_cleanup(curl);
                 if (form)
                     curl_formfree(form);
-                return new Response(request, static_cast<StatusCode>(responseCode));
+                return new Response(request, static_cast<StatusCode>(responseCode), String::Empty);
             }
 
             curl_easy_cleanup(curl);
@@ -119,7 +138,6 @@ namespace Bibim
 
             return new Response(request,
                                 HttpClient::Ok,
-                                String(&body.content[0], 0, body.content.size()),
                                 header.contentType);
         }
         else
@@ -127,7 +145,7 @@ namespace Bibim
             if (form)
                 curl_formfree(form);
             
-            return new Response(request, ClientError);
+            return new Response(request, ClientError, String::Empty);
         }
     }
 }

@@ -49,6 +49,8 @@
 
                 void Restore();
 
+                void Reset();
+
                 const String& FindName(GameAsset* value) const;
 
                 inline GameModuleTree* GetModules() const;
@@ -71,6 +73,8 @@
                     public:
                         LoadingThread();
                         virtual ~LoadingThread();
+
+                        virtual void Start();
 
                         void AddFirst(AssetLoadingTask* item);
                         void AddLast(AssetLoadingTask* item);

@@ -35,7 +35,8 @@
                     public:
                         virtual ~Callback() { }
 
-                        virtual void OnResponse(StatusCode statusCode, const String& content, const String& contentType) = 0;
+                        virtual void OnProgress(const String& url, int current, int total) = 0;
+                        virtual void OnResponse(const String& url, StatusCode statusCode, Stream* outputStream, const String& contentType) = 0;
                 };
                 typedef SharedPointer<Callback> CallbackPtr;
 
@@ -45,12 +46,12 @@
 
                 virtual void Update(float dt, int timestamp);
 
-                void GET(const String& url, Callback* callback);
-                void GET(const String& url, const std::vector<KeyValue>& params, Callback* callback);
-                void GET(const String& url, const std::map<String, String>& params, Callback* callback);
-                void POST(const String& url, Callback* callback);
-                void POST(const String& url, const std::vector<KeyValue>& params, Callback* callback);
-                void POST(const String& url, const std::map<String, String>& params, Callback* callback);
+                void GET(const String& url, Stream* outputStream, Callback* callback);
+                void GET(const String& url, const std::vector<KeyValue>& params, Stream* outputStream, Callback* callback);
+                void GET(const String& url, const std::map<String, String>& params, Stream* outputStream, Callback* callback);
+                void POST(const String& url, Stream* outputStream, Callback* callback);
+                void POST(const String& url, const std::vector<KeyValue>& params, Stream* outputStream, Callback* callback);
+                void POST(const String& url, const std::map<String, String>& params, Stream* outputStream, Callback* callback);
 
                 inline const String& GetUserAgent() const;
                 inline void SetUserAgent(const String& value);
@@ -64,6 +65,7 @@
                         Request(const char* method, const String& url,
                                 std::vector<KeyValue>& params,
                                 const String& userAgent,
+                                Stream* outputStream,
                                 Callback* callback);
                         ~Request();
 
@@ -71,14 +73,17 @@
                         inline const String& GetURL() const;
                         inline const std::vector<KeyValue>& GetParams() const;
                         inline const String& GetUserAgent() const;
+                        inline Stream* GetOutputStream() const;
 
                     private:
                         const char* method;
                         String url;
                         std::vector<KeyValue> params;
                         String userAgent;
+                        StreamPtr outputStream;
                         CallbackPtr callback;
 
+                        friend class HttpClientBase;
                         friend class Response;
                 };
 
@@ -86,24 +91,27 @@
                 {
                     BBThisIsNoncopyableClass(Response);
                     public:
-                        Response(Request* request, StatusCode statusCode);
-                        Response(Request* request, StatusCode statusCode, const String& content, const String& contentType);
+                        Response(Request* request, StatusCode statusCode, const String& contentType);
                         ~Response();
 
                         void Invoke();
 
                     private:
+                        String url;
                         StatusCode statusCode;
-                        String content;
+                        std::vector<byte> content;
                         String contentType;
+                        StreamPtr outputStream;
                         CallbackPtr callback;
                 };
 
                 virtual Response* OnRequest(Request* request) = 0;
                 static StatusCode NormalizeStatusCode(int statusCode);
 
+                void AddProgress(Request* request, int current, int total);
+
             private:
-                void DoRequest(const char* method, const String& url, std::vector<KeyValue>& params, Callback* callback);
+                void DoRequest(const char* method, const String& url, std::vector<KeyValue>& params, Stream* outputStream, Callback* callback);
                 void AddResponse(Response* response);
 
                 typedef std::deque<Request*> RequestQueue;
@@ -131,10 +139,21 @@
                         bool closed;
                 };
 
+                struct Progress
+                {
+                    String url;
+                    int current;
+                    int total;
+                    Callback* callback;
+                };
+
             private:
                 RequestThread requestThread;
                 ResponseCollection responses;
                 Lock responsesLock;
+
+                std::vector<Progress> progresses;
+                Lock progressesLock;
 
                 String userAgent;
         };

@@ -15,7 +15,10 @@ namespace Bibim
             png_error(pngReader, "Read Error");
     }
 
-    bool PNGReader::Read(AssetStreamReader& reader, byte* destination, int destinationPitch)
+    bool PNGReader::Read(AssetStreamReader& reader,
+                         byte* destination,
+                         int destinationPitch,
+                         bool swapRedBlue)
     {
         byte signature[8];
         reader.Read(signature, sizeof(signature) / sizeof(signature[0]));
@@ -73,6 +76,10 @@ namespace Bibim
 
         if (colorType == PNG_COLOR_TYPE_RGB)
         {
+            const int RED   = swapRedBlue == false ? 0 : 2;
+            const int GREEN = 1;
+            const int BLUE  = swapRedBlue == false ? 2 : 0;
+
             for (png_uint_32 i = 0; i < height; i++)
             {
                 png_bytep row = rows[i];
@@ -80,10 +87,26 @@ namespace Bibim
                 {
                     const int a = k * 4;
                     const int b = k * 3;
-                    row[a + 0] = row[b + 0];
-                    row[a + 1] = row[b + 1];
-                    row[a + 2] = row[b + 2];
+                    row[a + 0] = row[b + RED];
+                    row[a + 1] = row[b + GREEN];
+                    row[a + 2] = row[b + BLUE];
                     row[a + 3] = 0xff;
+                }
+            }
+        }
+        else if (colorType == PNG_COLOR_TYPE_RGBA)
+        {
+            if (swapRedBlue)
+            {
+                for (png_uint_32 y = 0; y < height; y++)
+                {
+                    png_bytep row = rows[y];
+                    for (png_uint_32 x = 0; x < width; x++, row+=4)
+                    {
+                        const png_byte temporary = row[0];
+                        row[0] = row[2];
+                        row[2] = temporary;
+                    }
                 }
             }
         }

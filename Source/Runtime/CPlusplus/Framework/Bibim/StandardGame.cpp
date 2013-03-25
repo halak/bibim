@@ -8,6 +8,7 @@
 #include <Bibim/Colors.h>
 #include <Bibim/Environment.h>
 #include <Bibim/FileAssetProvider.h>
+#include <Bibim/FileStream.h>
 #include <Bibim/Font.h>
 #include <Bibim/FontLibrary.h>
 #include <Bibim/GameAssetStorage.h>
@@ -20,6 +21,7 @@
 #include <Bibim/Image.h>
 #include <Bibim/Lua.h>
 #include <Bibim/Math.h>
+#include <Bibim/MemoryStream.h>
 #include <Bibim/Mouse.h>
 #include <Bibim/Numerics.h>
 #include <Bibim/PipedAssetProvider.h>
@@ -162,7 +164,7 @@ namespace Bibim
 
         httpClient = new HttpClient();
         GetModules()->GetRoot()->AttachChild(httpClient);
-        httpClient->SetUserAgent(String::CFormat("Bibim/1.0 %s/%s(%s)", gameName.CStr(), version.CStr(), Environment::GetLocaleName().CStr()));
+        httpClient->SetUserAgent("Bibim/1.0;");
         httpClient->SetTimeline(GetMainTimeline());
 
         UIWindowPtr rootWindow = new UIWindow();
@@ -255,6 +257,14 @@ namespace Bibim
         }
 
         GameFramework::Draw();
+    }
+
+    void StandardGame::Restart()
+    {
+        if (GetAssetStorage())
+            GetAssetStorage()->Reset();
+
+        ReloadUI();
     }
 
     static const Color ErrorColor       = Color(237, 28, 36);
@@ -521,6 +531,17 @@ namespace Bibim
 
             const String title = lua_tostring(L, 1);
             game->GetWindow()->SetTitle(title);
+
+            return 0;
+        }
+
+        static int RestartGame(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            game->Restart();
 
             return 0;
         }
@@ -1442,10 +1463,13 @@ namespace Bibim
                 }
 
             protected:
-                void OnResponse(HttpClient::StatusCode statusCode, const String& content, const String& contentType)
+                virtual void OnProgress(const String& /*url*/, int /*current*/, int /*total*/) { }
+                virtual void OnResponse(const String& /*url*/, HttpClient::StatusCode statusCode, Stream* outputStream, const String& contentType)
                 {
                     if (callbackIndex == -1)
                         return;
+
+                    MemoryStream* stream = static_cast<MemoryStream*>(outputStream);
 
                     lua_State* L = lua->GetState();
 
@@ -1457,10 +1481,11 @@ namespace Bibim
                     lua_rawgeti(L, -1, callbackIndex);
 
                     // f();
+                    const char* contentBuffer = reinterpret_cast<const char*>(stream->GetBuffer());
                     BBAssert(lua_isfunction(L, -1));
                     lua_pushnumber(L, statusCode);
-                    lua_pushstring(L, content.CStr());
-                    lua_pushstring(L, contentType.CStr());
+                    lua_pushlstring(L, contentBuffer, stream->GetLength());
+                    lua_pushlstring(L, contentType.CStr(), contentType.GetLength());
                     if (lua_pcall(L, 3, 0, errfunc) != 0)
                         lua_pop(L, 1);
 
@@ -1472,6 +1497,82 @@ namespace Bibim
             private:
                 Lua* lua;
                 int callbackIndex;
+        };
+
+        class ScriptDownloadCallback : public HttpClient::Callback
+        {
+            public:
+                ScriptDownloadCallback(Lua* lua, int progressCallbackIndex, int completeCallbackIndex)
+                    : lua(lua),
+                      progressCallbackIndex(progressCallbackIndex),
+                      completeCallbackIndex(completeCallbackIndex)
+                {
+                }
+
+                virtual ~ScriptDownloadCallback()
+                {
+                    lua->UnregisterCallback(progressCallbackIndex);
+                    lua->UnregisterCallback(completeCallbackIndex);
+                }
+
+            protected:
+                virtual void OnProgress(const String& url, int current, int total)
+                {
+                    if (progressCallbackIndex == -1)
+                        return;
+
+                    lua_State* L = lua->GetState();
+
+                    lua_pushcclosure(L, &lua_tinker::on_error, 0);
+                    int errfunc = lua_gettop(L);
+
+                    // local f = _CALLBACKS[index]
+                    lua_getglobal(L, "_CALLBACKS");
+                    lua_rawgeti(L, -1, progressCallbackIndex);
+
+                    // f();
+                    BBAssert(lua_isfunction(L, -1));
+                    lua_pushlstring(L, url.CStr(), url.GetLength());
+                    lua_pushinteger(L, current);
+                    lua_pushinteger(L, total);
+                    if (lua_pcall(L, 3, 0, errfunc) != 0)
+                        lua_pop(L, 1);
+
+                    // pop _CALLBACKS
+                    // pop on_error
+                    lua_pop(L, 2);
+                }
+
+                virtual void OnResponse(const String& url, HttpClient::StatusCode statusCode, Stream* /*outputStream*/, const String& /*contentType*/)
+                {
+                    if (completeCallbackIndex == -1)
+                        return;
+
+                    lua_State* L = lua->GetState();
+
+                    lua_pushcclosure(L, &lua_tinker::on_error, 0);
+                    int errfunc = lua_gettop(L);
+
+                    // local f = _CALLBACKS[index]
+                    lua_getglobal(L, "_CALLBACKS");
+                    lua_rawgeti(L, -1, completeCallbackIndex);
+
+                    // f();
+                    BBAssert(lua_isfunction(L, -1));
+                    lua_pushlstring(L, url.CStr(), url.GetLength());
+                    lua_pushboolean(L, statusCode == HttpClient::Ok);
+                    if (lua_pcall(L, 2, 0, errfunc) != 0)
+                        lua_pop(L, 1);
+
+                    // pop _CALLBACKS
+                    // pop on_error
+                    lua_pop(L, 2);
+                }
+
+            private:
+                Lua* lua;
+                int progressCallbackIndex;
+                int completeCallbackIndex;
         };
 
         static int REQUEST(lua_State* L)
@@ -1489,6 +1590,7 @@ namespace Bibim
 
             const char* method = lua_tostring(L, 1);
             const char* url = lua_tostring(L, 2);
+            MemoryStreamPtr outputStream = MemoryStream::NewWritableStream(128, true);
 
             if (lua_isfunction(L, 3))
             {
@@ -1496,9 +1598,9 @@ namespace Bibim
                                                                                     game->GetLua()->RegisterCallback(3));
 
                 if (String::EqualsCharsIgnoreCase(method, "POST"))
-                    http->POST(url, callback);
+                    http->POST(url, outputStream, callback);
                 else if (String::EqualsCharsIgnoreCase(method, "GET"))
-                    http->GET(url, callback);
+                    http->GET(url, outputStream, callback);
             }
             else if (lua_isfunction(L, 4))
             {
@@ -1537,12 +1639,82 @@ namespace Bibim
                                                                                     game->GetLua()->RegisterCallback(4));
 
                 if (String::EqualsCharsIgnoreCase(method, "POST"))
-                    http->POST(url, params, callback);
+                    http->POST(url, params, outputStream, callback);
                 else if (String::EqualsCharsIgnoreCase(method, "GET"))
-                    http->GET(url, params, callback);
+                    http->GET(url, params, outputStream, callback);
             }
 
             return 0;
+        }
+
+        static int Download(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            HttpClient* http = game->GetHttpClient();
+            if (http == nullptr)
+                return 0;
+
+            luaL_checkstring(L, 1);
+            luaL_checkstring(L, 2);
+
+            const char* url = lua_tostring(L, 1);
+            const char* localPath = lua_tostring(L, 2);
+            int progressCallback = -1;
+            int downloadCllaback = -1;
+            
+            if (lua_isfunction(L, 3))
+            {
+                if (lua_isfunction(L, 4))
+                {
+                    progressCallback = game->GetLua()->RegisterCallback(3);
+                    downloadCllaback = game->GetLua()->RegisterCallback(4);
+                }
+                else
+                {
+                    progressCallback = -1;
+                    downloadCllaback = game->GetLua()->RegisterCallback(3);
+                }
+            }
+
+            SharedPointer< ScriptDownloadCallback> callback = new ScriptDownloadCallback(game->GetLua(),
+                                                                                        progressCallback,
+                                                                                        downloadCllaback);
+
+            FileStreamPtr outputStream = new FileStream(localPath, FileStream::WriteOnly);
+            if (outputStream->CanWrite())
+                http->GET(url, outputStream, callback);
+            else
+            {
+                // callback->OnResponse(url, HttpClient::ClientError, nullptr, String::Empty);
+            }
+            
+            return 0;
+        }
+
+        static int UserAgent(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            HttpClient* http = game->GetHttpClient();
+            if (http == nullptr)
+                return 0;
+
+            if (lua_isstring(L, 1))
+            {
+                http->SetUserAgent(lua_tostring(L, 1));
+                return 0;
+            }
+            else
+            {
+                const String& ua = http->GetUserAgent();
+                lua_pushlstring(L, ua.CStr(), ua.GetLength());
+                return 1;
+            }
         }
     }
 
@@ -1552,6 +1724,7 @@ namespace Bibim
     {
         const struct luaL_reg thLib [] = {
             { "title", &SetTitle },
+            { "restart", &RestartGame },
             { "exit", &ExitGame },
             { "load", &Load },
             { "preload", &Preload },
@@ -1605,6 +1778,8 @@ namespace Bibim
         
         const struct luaL_reg httpLib [] = {
             { "request", &REQUEST },
+            { "download", &Download },
+            { "useragent", &UserAgent },
             { NULL, NULL}  /* sentinel */
         };
 

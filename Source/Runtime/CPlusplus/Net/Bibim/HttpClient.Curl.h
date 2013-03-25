@@ -16,6 +16,13 @@
 
             private:
                 virtual Response* OnRequest(Request* request);
+
+                struct WithRequest
+                {
+                    HttpClient* client;
+                    HttpClient::Request* request;
+                };
+                friend int OnProgress(WithRequest* thiz, double t, double d, double ultotal, double ulnow);
         };
     }
 

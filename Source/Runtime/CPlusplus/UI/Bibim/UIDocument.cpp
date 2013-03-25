@@ -232,8 +232,6 @@ namespace Bibim
         float maxLineHeight = 0.0f;
         float maxAscender = 0.0f;
 
-        Font* lastestFont = nullptr;
-
         Vector2 position = Vector2::Zero;
         const VisualCollection& children = GetChildren();
         const int count = static_cast<int>(children.size());
