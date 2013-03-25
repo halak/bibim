@@ -5,25 +5,14 @@
 #include <Bibim/Math.h>
 #include <Bibim/Numerics.h>
 #include <Bibim/Log.h>
+#include <Bibim/Path.h>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
+#include <sys/stat.h>
 
 namespace Bibim
 {
     static AAssetManager* Assets = nullptr;
-
-    static bool IsAbsolutePath(const String& path)
-    {
-        if (path.GetLength() >= 2)
-        {
-            const char* s = path.CStr();
-            return (s[0] == '/' ||
-                    s[1] == ':' ||
-                    s[2] == ':');
-        }
-
-        return false;
-    }
 
     FileStream::FileStream(const String& path, AccessMode accessMode)
         : handle(nullptr),
@@ -45,7 +34,7 @@ namespace Bibim
         cleanPath.Replace('\\', '/');
 
         String absPath;
-        if (IsAbsolutePath(cleanPath) == false)
+        if (Path::IsAbsolutePath(cleanPath) == false)
         {
             BBAssert(cleanPath.CStr()[0] != '/');
             absPath = Environment::GetWorkingDirectory() + cleanPath;
@@ -54,6 +43,19 @@ namespace Bibim
             absPath = cleanPath;
 
         handle = std::fopen(absPath.CStr(), mode);
+        if (handle == nullptr)
+        {
+            if (accessMode == WriteOnly)
+            {
+                const String directory = Path::GetDirectory(absPath);
+                if (directory.IsEmpty() == false && 
+                    mkdir(directory.CStr(), 666) == 0)
+                {
+                    handle = std::fopen(absPath.CStr(), mode);
+                }
+            }
+        }
+
         if (handle == nullptr)
         {
             canRead  = false;

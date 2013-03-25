@@ -37,6 +37,7 @@
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // FileSystem
 #  include <Bibim/FileStream.h>
+#  include <Bibim/Path.h>
 #  include <Bibim/MPQ.h>
 #  include <Bibim/MPQStream.h>
 #  include <Bibim/FileLogger.h>

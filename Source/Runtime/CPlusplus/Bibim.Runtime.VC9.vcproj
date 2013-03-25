@@ -2386,6 +2386,14 @@
 					RelativePath=".\FileSystem\Bibim\MPQStream.inl"
 					>
 				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\Path.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\FileSystem\Bibim\Path.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="Framework"
