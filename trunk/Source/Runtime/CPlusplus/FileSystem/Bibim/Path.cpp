@@ -9,10 +9,7 @@ namespace Bibim
         if (directoryIndex == -1)
             directoryIndex = path.ReverseFind('/');
         
-        if (directoryIndex != -1)
-            return path.Substring(0, directoryIndex);
-        else
-            return String::Empty;
+        return path.Substring(0, directoryIndex);
     }
 
     bool Path::IsAbsolutePath(const String& path)

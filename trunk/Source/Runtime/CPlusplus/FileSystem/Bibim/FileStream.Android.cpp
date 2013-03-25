@@ -14,6 +14,25 @@ namespace Bibim
 {
     static AAssetManager* Assets = nullptr;
 
+    namespace
+    {
+        static bool ReadyDirectory(const String& base, const String& path)
+        {
+            // TODO: 현재는 재귀 구조이나 추후에 선형 구조로 바꾸길 바랍니다.
+
+            if (path.IsEmpty())
+                return true;
+            
+            String directory = Path::GetDirectory(path);
+
+            ReadyDirectory(base, directory);
+
+            mkdir((base + directory).CStr(), 0770);
+
+            return true;
+        }
+    }
+
     FileStream::FileStream(const String& path, AccessMode accessMode)
         : handle(nullptr),
           asset(nullptr),
@@ -47,12 +66,9 @@ namespace Bibim
         {
             if (accessMode == WriteOnly)
             {
-                const String directory = Path::GetDirectory(absPath);
-                if (directory.IsEmpty() == false && 
-                    mkdir(directory.CStr(), 666) == 0)
-                {
+                const String& workingDirectory = Environment::GetWorkingDirectory();
+                if (ReadyDirectory(workingDirectory, cleanPath))
                     handle = std::fopen(absPath.CStr(), mode);
-                }
             }
         }
 
