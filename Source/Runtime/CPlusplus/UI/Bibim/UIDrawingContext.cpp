@@ -18,6 +18,14 @@
 
 namespace Bibim
 {
+    namespace
+    {
+        static float cm(float v)
+        {
+            return static_cast<float>(static_cast<int>(v)) - 0.5f;
+        }
+    }
+
     UIDrawingContext::UIDrawingContext(UIRenderer* renderer)
         : UIVisualVisitor(renderer->GetGraphicsDevice()->GetResolution(),
                           renderer->GetViewTransform(),
@@ -84,10 +92,10 @@ namespace Bibim
                 clippingBottom -= clippingRect.Height * boundsClippedBottom;
                 break;
             case Image::RotateCW90:
-                clippingLeft   += clippingRect.Height * boundsClippedBottom;
-                clippingTop    += clippingRect.Width * boundsClippedLeft;
-                clippingRight  -= clippingRect.Height * boundsClippedTop;
-                clippingBottom -= clippingRect.Width * boundsClippedRight;
+                clippingLeft   += clippingRect.Width * boundsClippedBottom;
+                clippingTop    += clippingRect.Height * boundsClippedLeft;
+                clippingRight  -= clippingRect.Width * boundsClippedTop;
+                clippingBottom -= clippingRect.Height * boundsClippedRight;
                 break;
         }
 
@@ -98,10 +106,10 @@ namespace Bibim
 
         Vector2 points[] =
         {
-            Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetTop() - 0.5f),
-            Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetTop() - 0.5f),
-            Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetBottom() - 0.5f),
-            Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetBottom() - 0.5f),
+            Vector2(cm(clippedBounds.GetLeft()),  cm(clippedBounds.GetTop())),
+            Vector2(cm(clippedBounds.GetRight()), cm(clippedBounds.GetTop())),
+            Vector2(cm(clippedBounds.GetLeft()),  cm(clippedBounds.GetBottom())),
+            Vector2(cm(clippedBounds.GetRight()), cm(clippedBounds.GetBottom())),
         };
 
         Vector2 uv[4];
@@ -158,32 +166,32 @@ namespace Bibim
         switch (image->GetAppliedTransform())
         {
             case Image::Identity:
-                clippingLeft   += boundsClippedLeft;
-                clippingTop    += boundsClippedTop;
-                clippingRight  -= boundsClippedRight;
-                clippingBottom -= boundsClippedBottom;
+                clippingLeft   += clippingRect.Width * boundsClippedLeft;
+                clippingTop    += clippingRect.Height * boundsClippedTop;
+                clippingRight  -= clippingRect.Width * boundsClippedRight;
+                clippingBottom -= clippingRect.Height * boundsClippedBottom;
                 break;
             case Image::RotateCW90:
-                clippingLeft   += boundsClippedBottom;
-                clippingTop    += boundsClippedLeft;
-                clippingRight  -= boundsClippedTop;
-                clippingBottom -= boundsClippedRight;
+                clippingLeft   += clippingRect.Width * boundsClippedBottom;
+                clippingTop    += clippingRect.Height * boundsClippedLeft;
+                clippingRight  -= clippingRect.Width * boundsClippedTop;
+                clippingBottom -= clippingRect.Height * boundsClippedRight;
                 break;
         }
 
         switch (maskImage->GetAppliedTransform())
         {
             case Image::Identity:
-                maskClippingLeft   += boundsClippedLeft;
-                maskClippingTop    += boundsClippedTop;
-                maskClippingRight  -= boundsClippedRight;
-                maskClippingBottom -= boundsClippedBottom;
+                maskClippingLeft   += maskClippingRect.Width * boundsClippedLeft;
+                maskClippingTop    += maskClippingRect.Height * boundsClippedTop;
+                maskClippingRight  -= maskClippingRect.Width * boundsClippedRight;
+                maskClippingBottom -= maskClippingRect.Height * boundsClippedBottom;
                 break;
             case Image::RotateCW90:
-                maskClippingLeft   += boundsClippedBottom;
-                maskClippingTop    += boundsClippedLeft;
-                maskClippingRight  -= boundsClippedTop;
-                maskClippingBottom -= boundsClippedRight;
+                maskClippingLeft   += maskClippingRect.Width * boundsClippedBottom;
+                maskClippingTop    += maskClippingRect.Height * boundsClippedLeft;
+                maskClippingRight  -= maskClippingRect.Width * boundsClippedTop;
+                maskClippingBottom -= maskClippingRect.Height * boundsClippedRight;
                 break;
         }
 
@@ -199,10 +207,10 @@ namespace Bibim
 
         Vector2 points[] =
         {
-            Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetTop() - 0.5f),
-            Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetTop() - 0.5f),
-            Vector2(clippedBounds.GetLeft()  - 0.5f, clippedBounds.GetBottom() - 0.5f),
-            Vector2(clippedBounds.GetRight() - 0.5f, clippedBounds.GetBottom() - 0.5f),
+            Vector2(cm(clippedBounds.GetLeft()),  cm(clippedBounds.GetTop())),
+            Vector2(cm(clippedBounds.GetRight()), cm(clippedBounds.GetTop())),
+            Vector2(cm(clippedBounds.GetLeft()),  cm(clippedBounds.GetBottom())),
+            Vector2(cm(clippedBounds.GetRight()), cm(clippedBounds.GetBottom())),
         };
 
         Vector2 uv1[4];
@@ -310,10 +318,10 @@ namespace Bibim
 
         Vector2 points[] =
         {
-            Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetTop() - 0.5f),
-            Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetTop() - 0.5f),
-            Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetBottom() - 0.5f),
-            Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetBottom() - 0.5f),
+            Vector2(cm(drawingRect.GetLeft()),  cm(drawingRect.GetTop())),
+            Vector2(cm(drawingRect.GetRight()), cm(drawingRect.GetTop())),
+            Vector2(cm(drawingRect.GetLeft()),  cm(drawingRect.GetBottom())),
+            Vector2(cm(drawingRect.GetRight()), cm(drawingRect.GetBottom())),
         };
         const Color color = Color(Vector4(1.0f, 1.0f, 1.0f, GetCurrentOpacity()));
         const RectF clippingRect = RectF(0.0f,
@@ -520,10 +528,10 @@ namespace Bibim
 
                     Vector2 points[4] = 
                     {
-                        Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetTop() - 0.5f),
-                        Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetTop() - 0.5f),
-                        Vector2(drawingRect.GetLeft()  - 0.5f, drawingRect.GetBottom() - 0.5f),
-                        Vector2(drawingRect.GetRight() - 0.5f, drawingRect.GetBottom() - 0.5f),
+                        Vector2(cm(drawingRect.GetLeft()),  cm(drawingRect.GetTop())),
+                        Vector2(cm(drawingRect.GetRight()), cm(drawingRect.GetTop())),
+                        Vector2(cm(drawingRect.GetLeft()),  cm(drawingRect.GetBottom())),
+                        Vector2(cm(drawingRect.GetRight()), cm(drawingRect.GetBottom())),
                     };
 
                     if (geomEffect)
@@ -587,11 +595,11 @@ namespace Bibim
     {
         Vector2 p[] =
         {
-            Vector2(bounds.GetLeft()  - 0.5f, bounds.GetTop() - 0.5f),
-            Vector2(bounds.GetRight() - 0.5f, bounds.GetTop() - 0.5f),
-            Vector2(bounds.GetRight() - 0.5f, bounds.GetBottom() - 0.5f),
-            Vector2(bounds.GetLeft()  - 0.5f, bounds.GetBottom() - 0.5f),
-            Vector2(bounds.GetLeft()  - 0.5f, bounds.GetTop() - 0.5f)
+            Vector2(cm(bounds.GetLeft()),  cm(bounds.GetTop())),
+            Vector2(cm(bounds.GetRight()), cm(bounds.GetTop())),
+            Vector2(cm(bounds.GetRight()), cm(bounds.GetBottom())),
+            Vector2(cm(bounds.GetLeft()),  cm(bounds.GetBottom())),
+            Vector2(cm(bounds.GetLeft()),  cm(bounds.GetTop()))
         };
 
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
@@ -632,13 +640,13 @@ namespace Bibim
     {
         Vector2 p[] = 
         {
-            Vector2(bounds.GetLeft()  - 0.5f, bounds.GetTop()    - 0.5f),
-            Vector2(bounds.GetRight() - 0.5f, bounds.GetTop()    - 0.5f),
-            Vector2(bounds.GetLeft()  - 0.5f, bounds.GetBottom() - 0.5f),
+            Vector2(cm(bounds.GetLeft()),  cm(bounds.GetTop())),
+            Vector2(cm(bounds.GetRight()), cm(bounds.GetTop())),
+            Vector2(cm(bounds.GetLeft()),  cm(bounds.GetBottom())),
 
-            Vector2(bounds.GetLeft()  - 0.5f, bounds.GetBottom() - 0.5f),
-            Vector2(bounds.GetRight() - 0.5f, bounds.GetTop()    - 0.5f),
-            Vector2(bounds.GetRight() - 0.5f, bounds.GetBottom() - 0.5f),
+            Vector2(cm(bounds.GetLeft()),  cm(bounds.GetBottom())),
+            Vector2(cm(bounds.GetRight()), cm(bounds.GetTop())),
+            Vector2(cm(bounds.GetRight()), cm(bounds.GetBottom())),
         };
         
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());

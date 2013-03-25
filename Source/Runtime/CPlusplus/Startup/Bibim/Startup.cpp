@@ -235,6 +235,7 @@ namespace Bibim
         GameComponentFactory::AddEntry<UISequentialEventHandler>();
         GameComponentFactory::AddEntry<UIEventMap>();
         GameComponentFactory::AddEntry<UILabel>();
+        GameComponentFactory::AddEntry<UIEditText>();
         GameComponentFactory::AddEntry<UIPanel>();
         GameComponentFactory::AddEntry<UIDocument>();
         GameComponentFactory::AddEntry<UIButton>();
