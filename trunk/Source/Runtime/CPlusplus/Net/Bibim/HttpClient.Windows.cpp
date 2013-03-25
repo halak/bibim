@@ -4,6 +4,7 @@
 #include <Bibim/Environment.h>
 #include <Bibim/Numerics.h>
 #include <Bibim/Clock.h>
+#include <Bibim/Stream.h>
 #include <wininet.h>
 
 namespace Bibim
@@ -64,9 +65,9 @@ namespace Bibim
         urlComponents.dwExtraInfoLength = sizeof(urlExtra) / sizeof(urlExtra[0]);
         BOOL cracked = ::InternetCrackUrl(request->GetURL().CStr(), request->GetURL().GetLength(), ICU_ESCAPE, &urlComponents);
         if (cracked == FALSE)
-            return new Response(request, ClientError);
+            return new Response(request, ClientError, String::Empty);
         if (urlComponents.nScheme != INTERNET_SCHEME_HTTP)
-            return new Response(request, ClientError);
+            return new Response(request, ClientError, String::Empty);
 
         LocalHandles handles;
 
@@ -74,14 +75,14 @@ namespace Bibim
                                          INTERNET_OPEN_TYPE_PRECONFIG,
                                          NULL, NULL, 0);
         if (handles.session == NULL)
-            return new Response(request, ClientError);
+            return new Response(request, ClientError, String::Empty);
 
         handles.connection = ::InternetConnect(handles.session,
                                                urlComponents.lpszHostName, urlComponents.nPort,
                                                NULL, NULL,
                                                INTERNET_SERVICE_HTTP, 0, NULL);
         if (handles.connection == NULL)
-            return new Response(request, ClientError);
+            return new Response(request, ClientError, String::Empty);
 
         const int urlPathAndExtraLength = urlComponents.dwUrlPathLength + urlComponents.dwExtraInfoLength;
         char* urlPathAndExtra = BBStackAlloc(char, urlPathAndExtraLength + 1);
@@ -96,7 +97,7 @@ namespace Bibim
 
         BBStackFree(urlPathAndExtra);
         if (handles.request == NULL)
-            return new Response(request, ClientError);
+            return new Response(request, ClientError, String::Empty);
 
         BOOL result = TRUE;
 
@@ -109,7 +110,7 @@ namespace Bibim
         result = ::InternetSetOption(handles.request, INTERNET_OPTION_SECURITY_FLAGS,
                                      &securityOptions, sizeof(securityOptions));
         if (result == FALSE)
-            return new Response(request, ClientError);
+            return new Response(request, ClientError, String::Empty);
 
         int contentLength = 0;
         if (request->GetParams().empty() == false)
@@ -141,7 +142,7 @@ namespace Bibim
         result = ::HttpAddRequestHeaders(handles.request, header, headerIndex,
                                          HTTP_ADDREQ_FLAG_ADD);
         if (result == FALSE)
-            return new Response(request, ClientError);
+            return new Response(request, ClientError, String::Empty);
 
         char* content = nullptr;
         if (contentLength > 0)
@@ -167,9 +168,9 @@ namespace Bibim
         {
             const DWORD errorCode = ::GetLastError();
             if (errorCode == ERROR_INTERNET_TIMEOUT)
-                return new Response(request, Timeout);
+                return new Response(request, Timeout, String::Empty);
             else
-                return new Response(request, ClientError);
+                return new Response(request, ClientError, String::Empty);
         }
 
         DWORD querySize = 0;
@@ -206,14 +207,14 @@ namespace Bibim
         const int responseLength = queryContentLength;
 
         if (responseLength == 0)
-            return new Response(request, statusCode);
+            return new Response(request, statusCode, String::Empty);
 
-        std::vector<char> response;
+        std::vector<byte> response;
         if (responseLength != Int::Max)
         {
             response.resize(responseLength);
 
-            char* responsePointer = &response[0];
+            byte* responsePointer = &response[0];
             DWORD remainingSize = responseLength;
 
             static const DWORD DefaultTimeout = 10000;
@@ -231,12 +232,12 @@ namespace Bibim
                     Thread::Sleep(10);
 
                 if (::GetTickCount() - startTime >= DefaultTimeout)
-                    return new Response(request, Timeout);
+                    return new Response(request, Timeout, String::Empty);
             }
         }
         else
         {
-            char temporaryBuffer[4096 * 2];
+            byte temporaryBuffer[4096 * 2];
             for (;;)
             {
                 DWORD readSize = 0;
@@ -254,9 +255,11 @@ namespace Bibim
             }
         }
 
+        request->GetOutputStream()->Write(&response[0],
+                                          response.size());
+
         return new Response(request,
                             statusCode,
-                            String(&response[0], 0, response.size()),
                             contentType);
     }
 }

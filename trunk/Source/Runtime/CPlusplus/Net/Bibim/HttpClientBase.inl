@@ -31,4 +31,9 @@ namespace Bibim
     {
         return userAgent;
     }
+
+    Stream* HttpClientBase::Request::GetOutputStream() const
+    {
+        return outputStream;
+    }
 }

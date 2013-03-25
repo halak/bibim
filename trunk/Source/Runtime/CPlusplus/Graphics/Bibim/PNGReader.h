@@ -10,7 +10,10 @@
         {
             BBThisIsStaticClass(PNGReader);
             public:
-                static bool Read(AssetStreamReader& reader, byte* destination, int destinationPitch);
+                static bool Read(AssetStreamReader& reader,
+                                 byte* destination,
+                                 int destinationPitch,
+                                 bool swapRedBlue);
         };
     }
 

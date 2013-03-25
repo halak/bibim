@@ -18,6 +18,8 @@
             public:
                 virtual ~StandardGame();
 
+                void Restart();
+
                 inline Color GetClearColor() const;
                 inline void SetClearColor(Color value);
 

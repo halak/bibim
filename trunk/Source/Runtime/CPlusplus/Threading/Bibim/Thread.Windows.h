@@ -14,7 +14,7 @@
                 Thread();
                 virtual ~Thread();
 
-                void Start();
+                virtual void Start();
                 void Join();
 
             public:

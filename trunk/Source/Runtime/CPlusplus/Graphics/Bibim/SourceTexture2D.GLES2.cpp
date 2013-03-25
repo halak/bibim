@@ -75,7 +75,7 @@ namespace Bibim
                 break;
             case PNG:
                 {
-                    if (PNGReader::Read(reader, destination, destinationPitch) == false)
+                    if (PNGReader::Read(reader, destination, destinationPitch, false) == false)
                         self->SetStatus(FaultStatus);
                 }
                 break;
