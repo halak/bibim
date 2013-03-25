@@ -822,6 +822,9 @@
     <ClCompile Include="UI\Bibim\UIDocument.cpp">
       <Filter>03. Game\UI\Visuals</Filter>
     </ClCompile>
+    <ClCompile Include="FileSystem\Bibim\Path.cpp">
+      <Filter>03. Game\FileSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset\Bibim\AssetLoadingTask.h">
@@ -1631,6 +1634,9 @@
     </ClInclude>
     <ClInclude Include="UI\Bibim\UIDocument.h">
       <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSystem\Bibim\Path.h">
+      <Filter>03. Game\FileSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

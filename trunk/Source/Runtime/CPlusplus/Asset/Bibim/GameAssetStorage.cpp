@@ -256,7 +256,7 @@ namespace Bibim
             BBAutoLock(taskQueueLock);
             taskQueue.swap(temporaryQueue);
         }
-
+        
         for (TaskQueue::const_iterator it = temporaryQueue.begin(); it != temporaryQueue.end(); it++)
             delete (*it);
     }

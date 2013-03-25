@@ -2,6 +2,7 @@
 #include <Bibim/FileStream.Windows.h>
 #include <Bibim/Math.h>
 #include <Bibim/Numerics.h>
+#include <Bibim/Path.h>
 #include <windows.h>
 
 namespace Bibim
@@ -23,7 +24,27 @@ namespace Bibim
         else if (windowsAccessMode & GENERIC_WRITE)
             windowsCreationDisposition = CREATE_ALWAYS;
 
-        handle = ::CreateFile(path.CStr(), windowsAccessMode, FILE_SHARE_READ, nullptr, windowsCreationDisposition, FILE_ATTRIBUTE_NORMAL, nullptr);
+        handle = ::CreateFile(path.CStr(), windowsAccessMode, FILE_SHARE_READ,
+                              nullptr, windowsCreationDisposition, FILE_ATTRIBUTE_NORMAL, nullptr);
+        if (handle == INVALID_HANDLE_VALUE)
+        {
+            if (accessMode == WriteOnly)
+            {
+                const String directory = Path::GetDirectory(path);
+                if (directory.IsEmpty() == false &&
+                    ::CreateDirectory(directory.CStr(), nullptr))
+                {
+                    handle = ::CreateFile(path.CStr(),
+                                          windowsAccessMode,
+                                          FILE_SHARE_READ,
+                                          nullptr,
+                                          windowsCreationDisposition,
+                                          FILE_ATTRIBUTE_NORMAL,
+                                          nullptr);
+                }
+            }
+        }
+        
         if (handle == INVALID_HANDLE_VALUE)
         {
             canRead  = false;
