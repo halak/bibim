@@ -299,6 +299,7 @@
                     BBForwardDeclareSmartPointerClass(UIVisual);
                         BBForwardDeclareSmartPointerClass(UIImage);
                         BBForwardDeclareSmartPointerClass(UILabel);
+                            BBForwardDeclareSmartPointerClass(UIEditText);
                         BBForwardDeclareSmartPointerClass(UIPanel);
                             BBForwardDeclareSmartPointerClass(UIButton);
                                 BBForwardDeclareSmartPointerClass(UICheckBox);

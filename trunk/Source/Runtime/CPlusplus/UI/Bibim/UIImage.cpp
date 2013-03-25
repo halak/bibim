@@ -54,7 +54,7 @@ namespace Bibim
     void UIImage::OnDraw(UIDrawingContext& context)
     {
         UIVisual::OnDraw(context);
-
+        
         if (GetSource() == nullptr || GetSource()->GetTexture() == nullptr)
             return;
 

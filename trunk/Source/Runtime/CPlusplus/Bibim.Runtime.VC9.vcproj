@@ -1726,6 +1726,18 @@
 						>
 					</File>
 					<File
+						RelativePath=".\UI\Bibim\UIEditText.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIEditText.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIEditText.inl"
+						>
+					</File>
+					<File
 						RelativePath=".\UI\Bibim\UIImage.cpp"
 						>
 					</File>

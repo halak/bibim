@@ -297,6 +297,7 @@
     <ClCompile Include="Time\Bibim\UpdateableGameModule.cpp" />
     <ClCompile Include="Startup\Bibim\Startup.cpp" />
     <ClCompile Include="UI\Bibim\UIDomain.cpp" />
+    <ClCompile Include="UI\Bibim\UIEditText.cpp" />
     <ClCompile Include="UI\Bibim\UIElement.cpp" />
     <ClCompile Include="UI\Bibim\UILayout.cpp" />
     <ClCompile Include="UI\Bibim\UIRenderer.DX9.cpp">
@@ -674,6 +675,7 @@
     <ClInclude Include="Startup\Bibim\Startup.h" />
     <ClInclude Include="UI\Bibim\UI.h" />
     <ClInclude Include="UI\Bibim\UIDomain.h" />
+    <ClInclude Include="UI\Bibim\UIEditText.h" />
     <ClInclude Include="UI\Bibim\UIElement.h" />
     <ClInclude Include="UI\Bibim\UILayout.h" />
     <ClInclude Include="UI\Bibim\UIRenderer.DX9.h">
@@ -1039,6 +1041,7 @@
     <None Include="Time\Bibim\UpdateableGameComponent.inl" />
     <None Include="Time\Bibim\UpdateableGameModule.inl" />
     <None Include="UI\Bibim\UIDomain.inl" />
+    <None Include="UI\Bibim\UIEditText.inl" />
     <None Include="UI\Bibim\UIElement.inl" />
     <None Include="UI\Bibim\UILayout.inl" />
     <None Include="UI\Bibim\UIRenderer.DX9.inl">

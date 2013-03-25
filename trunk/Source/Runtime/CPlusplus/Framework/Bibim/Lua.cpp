@@ -46,6 +46,8 @@ namespace Bibim
 
             lua_tinker::dostring(state, &text[0], path.CStr());
         }
+        else
+            Log::Error("Lua", String::CFormat("Couldn't open lua file. (%s)", path.CStr()));
     }
 
     void Lua::LoadLibraries()
