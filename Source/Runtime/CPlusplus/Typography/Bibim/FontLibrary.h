@@ -51,6 +51,7 @@
                 CacheCollection caches;
                 FontCollection fonts;
                 void* ftLibrary;
+                float globalScale;
 
                 friend class Font;
         };

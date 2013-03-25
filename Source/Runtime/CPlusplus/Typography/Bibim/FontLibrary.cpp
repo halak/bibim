@@ -11,7 +11,8 @@ namespace Bibim
 {
     FontLibrary::FontLibrary(GraphicsDevice* graphicsDevice)
         : graphicsDevice(graphicsDevice),
-          ftLibrary(nullptr)
+          ftLibrary(nullptr),
+          globalScale(1.0f)
     {
         Construct();
 
@@ -44,6 +45,7 @@ namespace Bibim
 
     void FontLibrary::SetGlobalScale(float value)
     {
+        globalScale = value;
         for (FontCollection::iterator it = fonts.begin(); it != fonts.end(); it++)
             (*it)->SetScale(value);
     }
@@ -67,6 +69,7 @@ namespace Bibim
     void FontLibrary::Add(Font* font)
     {
         fonts.insert(font);
+        font->SetScale(globalScale);
     }
 
     void FontLibrary::Remove(Font* font)
