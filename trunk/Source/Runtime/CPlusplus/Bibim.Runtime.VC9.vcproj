@@ -967,6 +967,30 @@
 				Name="Input"
 				>
 				<File
+					RelativePath=".\Input\Bibim\IME.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\IME.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\IME.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\IMEBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\IMEBase.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Input\Bibim\IMEBase.inl"
+					>
+				</File>
+				<File
 					RelativePath=".\Input\Bibim\Key.cpp"
 					>
 				</File>

@@ -1,20 +1,41 @@
 #include <Bibim/PCH.h>
 #include <Bibim/UIEditText.h>
 #include <Bibim/ComponentStreamReader.h>
+#include <Bibim/Math.h>
 
 namespace Bibim
 {
     BBImplementsComponent(UIEditText);
 
     UIEditText::UIEditText()
+        : ime(nullptr),
+          format(IME::Plain),
+          maxLength(0),
+          frozen(false)
     {
     }
 
     UIEditText::~UIEditText()
     {
     }
-            
-    void UIEditText::SetFormat(Format value)
+
+    void UIEditText::SetIME(IME* value)
+    {
+        if (ime != value)
+        {
+            if (ime)
+            {
+            }
+
+            ime = value;
+
+            if (ime)
+            {
+            }
+        }
+    }
+
+    void UIEditText::SetFormat(IME::TextFormat value)
     {
         if (format != value)
         {
@@ -22,15 +43,56 @@ namespace Bibim
         }
     }
 
-    bool UIEditText::OnMouseClick(const UIMouseEventArgs& args)
+    void UIEditText::SetMaxLength(int value)
     {
-        return false;
+        value = Math::Max(value, 0);
+
+        if (maxLength != value)
+        {
+            maxLength = value;
+        }
+    }
+
+    void UIEditText::OnDraw(UIDrawingContext& context)
+    {
+        if (GetText().IsEmpty() && GetFont() && GetPlaceholder().IsEmpty() == false)
+        {
+            SetText(GetPlaceholder());
+            Base::OnDraw(context);
+            SetText(String::Empty);
+        }
+        else
+            Base::OnDraw(context);
+    }
+
+    bool UIEditText::OnMouseClick(const UIMouseEventArgs& /*args*/)
+    {
+        if (ime == nullptr || frozen)
+            return true;
+
+        if (GetMaxLength() > 0)
+            ime->Edit(GetText(), GetPlaceholder(), GetFormat(), GetMaxLength(), this);
+        else
+            ime->Edit(GetText(), GetPlaceholder(), GetFormat(), this);
+
+        return true;
+    }
+
+    void UIEditText::OnTextEdited(const String& text)
+    {
+        SetText(text);
+    }
+
+    void UIEditText::OnTextEditCancelled()
+    {
     }
 
     void UIEditText::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        format = static_cast<Format>(reader.ReadByte());
+        format = static_cast<IME::TextFormat>(reader.ReadByte());
+        placeholder = reader.ReadString();
+        maxLength = reader.ReadInt();
         frozen = reader.ReadBool();
     }
 
@@ -39,6 +101,29 @@ namespace Bibim
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
         format = o->format;
+        placeholder = o->placeholder;
+        maxLength = o->maxLength;
         frozen = o->frozen;
+    }
+
+    IME::TextFormat UIEditText::ConvertFromStringToFormat(const char* value)
+    {
+             if (value == nullptr)                                       return IME::Plain;
+        else if (String::EqualsCharsIgnoreCase(value, "Number"))         return IME::Number;
+        else if (String::EqualsCharsIgnoreCase(value, "Email"))          return IME::Email;
+        else if (String::EqualsCharsIgnoreCase(value, "Password"))       return IME::Password;
+        else                                                             return IME::Plain;
+    }
+
+    const char* UIEditText::ConvertFromFormatToString(IME::TextFormat value)
+    {
+        switch (value)
+        {
+            case IME::Plain:    return "Plain";
+            case IME::Number:   return "Number";
+            case IME::Email:    return "Email";
+            case IME::Password: return "Password";
+            default:            return "Default";
+        }
     }
 }

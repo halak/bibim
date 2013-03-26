@@ -133,6 +133,19 @@ namespace Bibim.Asset.Pipeline.Recipes
                     Process(document, layer);
                     return document;
                 }
+                else if (string.Compare(type, "Edit", true) == 0 ||
+                    string.Compare(type, "EditText", true) == 0 ||
+                    string.Compare(type, "EditBox", true) == 0)
+                {
+                    UIEditText editText = new UIEditText();
+                    editText.Name = name;
+                    editText.IsPickable = true;
+                    if (args.ContainsKey("0"))
+                        editText.Text = args["0"];
+                    window.AddChild(editText);
+                    Process(editText, layer);
+                    return editText;
+                }
                 else if (string.Compare(type, "9Patch", true) == 0 ||
                     string.Compare(type, "NinePatch", true) == 0 ||
                     string.Compare(type, "9P", true) == 0)
@@ -332,6 +345,11 @@ namespace Bibim.Asset.Pipeline.Recipes
         private void Process(UILabel label, PhotoshopDocument.Layer layer)
         {
             Process((UIVisual)label, layer);
+        }
+
+        private void Process(UIEditText label, PhotoshopDocument.Layer layer)
+        {
+            Process((UILabel)label, layer);
         }
 
         private void Process(UIButton button, PhotoshopDocument.Layer layer)

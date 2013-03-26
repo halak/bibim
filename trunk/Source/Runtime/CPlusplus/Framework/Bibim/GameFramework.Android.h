@@ -18,11 +18,16 @@
                 void init();
                 void step();
 
+                inline IME* GetIME() const;
+
             protected:
                 GameFramework();
                 GameFramework(int width, int height);
     
                 void Construct(int width, int height);
+
+            private:
+                IME* ime;
 
             public:
                 static GameFramework* Create();

@@ -828,6 +828,15 @@
     <ClCompile Include="UI\Bibim\UIEditText.cpp">
       <Filter>03. Game\UI\Visuals</Filter>
     </ClCompile>
+    <ClCompile Include="Input\Bibim\IMEBase.cpp">
+      <Filter>03. Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Bibim\IME.Windows.cpp">
+      <Filter>03. Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Bibim\IME.Android.cpp">
+      <Filter>03. Game\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset\Bibim\AssetLoadingTask.h">
@@ -1644,6 +1653,21 @@
     <ClInclude Include="UI\Bibim\UIEditText.h">
       <Filter>03. Game\UI\Visuals</Filter>
     </ClInclude>
+    <ClInclude Include="Input\Bibim\IMEBase.h">
+      <Filter>03. Game\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Bibim\IME.Windows.h">
+      <Filter>03. Game\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Bibim\IME.iOS.h">
+      <Filter>03. Game\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Bibim\IME.Android.h">
+      <Filter>03. Game\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\Bibim\IME.h">
+      <Filter>03. Game\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Asset\Bibim\AssetLoadingTask.inl">
@@ -2281,6 +2305,12 @@
     </None>
     <None Include="UI\Bibim\UIEditText.inl">
       <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="Input\Bibim\IMEBase.inl">
+      <Filter>03. Game\Input</Filter>
+    </None>
+    <None Include="Input\Bibim\IME.iOS.cpp">
+      <Filter>03. Game\Input</Filter>
     </None>
   </ItemGroup>
 </Project>

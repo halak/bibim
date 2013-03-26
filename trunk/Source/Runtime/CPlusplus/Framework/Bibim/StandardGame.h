@@ -26,6 +26,7 @@
                 inline Preferences* GetPreferences() const;
                 inline Keyboard* GetKeyboard() const;
                 inline Mouse* GetMouse() const;
+                inline IME* GetIME() const;
                 inline GameAssetStorage* GetAssetStorage() const;
                 inline AlarmClock* GetAlarmClock() const;
                 inline FontLibrary* GetFontLibrary() const;
@@ -87,6 +88,7 @@
                 Preferences* preferences;
                 Keyboard* keyboard;
                 Mouse* mouse;
+                IME* ime;
                 GameAssetStorage* storage;
                 AlarmClock* alarmClock;
                 FontLibrary* fontLibrary;

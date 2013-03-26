@@ -3,7 +3,11 @@
 #include <Bibim/Environment.h>
 #include <Bibim/FileStream.h>
 #include <Bibim/GameFramework.h>
+#include <Bibim/GameModuleTree.h>
+#include <Bibim/GameModuleNode.h>
 #include <Bibim/GameWindow.h>
+#include <Bibim/IME.h>
+#include <Bibim/Log.h>
 #include <Bibim/Key.h>
 #include <Bibim/Point2.h>
 #include <jni.h>
@@ -18,11 +22,13 @@ namespace Bibim
     GameFramework* GameFramework::SingletonInstance = nullptr;
 
     GameFramework::GameFramework()
+        : ime(nullptr)
     {
         Construct(0, 0);
     }
 
     GameFramework::GameFramework(int width, int height)
+        : ime(nullptr)
     {
         Construct(width, height);
     }
@@ -40,6 +46,9 @@ namespace Bibim
     {
         Initialize();
         PostInitialize();
+
+        GameModuleNode* moduleRoot = GetModules()->GetRoot();
+        ime = static_cast<IME*>(moduleRoot->FindChildByClassID(IME::ClassID));
     }
 
     void GameFramework::step()
@@ -58,10 +67,11 @@ Game* g = nullptr;
 
 extern "C" {
     JNIEXPORT void JNICALL Java_org_bibim_android_JNI_init(JNIEnv* env, jclass clazz,
+                                                           jobject context,
                                                            jint width, jint height,
                                                            jstring localeName, jstring workingDirectory,
                                                            jobject assetManager);
-    JNIEXPORT void JNICALL Java_org_bibim_android_JNI_step(JNIEnv* env, jclass clazz);
+    JNIEXPORT void JNICALL Java_org_bibim_android_JNI_step(JNIEnv* env, jclass clazz, jobject context);
 
     JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleMouseMove(JNIEnv* env, jclass clazz, jint x, jint y);
     JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleMouseLeftButtonDown(JNIEnv* env, jclass clazz, jint x, jint y);
@@ -73,12 +83,24 @@ extern "C" {
 
     JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleKeyDown(JNIEnv* env, jclass clazz, jint keyCode);
     JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleKeyUp(JNIEnv* env, jclass clazz, jint keyCode);
+
+    JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleIMESubmit(JNIEnv* env, jclass clazz, jint id, jstring text);
+    JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleIMECancel(JNIEnv* env, jclass clazz, jint id);
 };
 
 static Key::Code ConvertKeyCode(int androidKeyCode);
 static const Bibim::String ToString(JNIEnv* env, jstring s);
+template <typename T> static T* FindGameModule()
+{
+    GameModuleTree* modules = GameFramework::SingletonInstance->GetModules();
+    if (modules && modules->GetRoot())
+        return static_cast<T*>(modules->GetRoot()->FindChildByClassID(T::ClassID));
+    else
+        return nullptr;
+}
 
 JNIEXPORT void JNICALL Java_org_bibim_android_JNI_init(JNIEnv* env, jclass clazz,
+                                                       jobject context,
                                                        jint width, jint height,
                                                        jstring localeName, jstring workingDirectory,
                                                        jobject assetManager)
@@ -99,9 +121,30 @@ JNIEXPORT void JNICALL Java_org_bibim_android_JNI_init(JNIEnv* env, jclass clazz
     }
 }
 
-JNIEXPORT void JNICALL Java_org_bibim_android_JNI_step(JNIEnv* env, jclass clazz)
+JNIEXPORT void JNICALL Java_org_bibim_android_JNI_step(JNIEnv* env, jclass clazz, jobject context)
 {
     GameFramework::SingletonInstance->step();
+
+    //static int counter = 0;
+    //if (counter++ % 30 == 0)
+    {
+        IME* ime = GameFramework::SingletonInstance->GetIME();
+        if (ime && ime->HasAndroidRequest())
+        {
+            IME::Request request = ime->PopAndroidRequest();
+            
+            jclass jni = env->FindClass("org/bibim/android/JNI");
+            static const char* sig = "(Landroid/content/Context;ILjava/lang/String;Ljava/lang/String;II)V";
+            jmethodID edit = env->GetStaticMethodID(jni, "edit", sig);
+
+            jint id = static_cast<jint>(request.GetID());
+            jstring jniText = env->NewStringUTF(request.GetText().CStr());
+            jstring jniDesc = env->NewStringUTF(request.GetDescription().CStr());
+            jint textFormat = static_cast<jint>(request.GetFormat());
+            jint maxLength = static_cast<jint>(request.GetMaxLength());
+            env->CallStaticVoidMethod(jni, edit, context, id, jniText, jniDesc, textFormat, maxLength);
+        }
+    }
 }
 
 JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleMouseMove(JNIEnv* env, jclass clazz, jint x, jint y)
@@ -147,6 +190,18 @@ JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleKeyDown(JNIEnv* env, jcl
 JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleKeyUp(JNIEnv* env, jclass clazz, jint keyCode)
 {
     GameFramework::SingletonInstance->GetWindow()->RaiseKeyUpEvent(ConvertKeyCode(keyCode));
+}
+
+JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleIMESubmit(JNIEnv* env, jclass clazz, jint id, jstring text)
+{
+    if (IME* ime = GameFramework::SingletonInstance->GetIME())
+        ime->SubmitAndroidEdit(id, ToString(env, text));
+}
+
+JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleIMECancel(JNIEnv* env, jclass clazz, jint id)
+{
+    if (IME* ime = GameFramework::SingletonInstance->GetIME())
+        ime->CancelAndroidEdit(id);
 }
 
 static Key::Code ConvertKeyCode(int androidKeyCode)

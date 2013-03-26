@@ -25,6 +25,11 @@ namespace Bibim
         return mouse;
     }
 
+    IME* StandardGame::GetIME() const
+    {
+        return ime;
+    }
+
     GameAssetStorage* StandardGame::GetAssetStorage() const
     {
         return storage;

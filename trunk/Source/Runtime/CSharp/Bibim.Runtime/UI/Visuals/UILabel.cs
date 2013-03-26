@@ -6,7 +6,7 @@ using Bibim.Typography;
 namespace Bibim.UI.Visuals
 {
     [ClassID('U', 'L', 'B', 'L')]
-    public sealed class UILabel : UIVisual
+    public class UILabel : UIVisual
     {
         #region Fields
         private string text;

@@ -1,7 +1,6 @@
 package org.bibim.android;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
@@ -60,7 +59,7 @@ class SurfaceView extends GLSurfaceView {
         	workingDirectory += "/";
 
         /* Set the renderer responsible for frame rendering */
-        setRenderer(new Renderer(localeName, workingDirectory, getContext().getAssets()));
+        setRenderer(new Renderer(getContext(), localeName, workingDirectory));
     }
     
     private static class ContextFactory implements GLSurfaceView.EGLContextFactory {
@@ -321,14 +320,14 @@ class SurfaceView extends GLSurfaceView {
 	}
 
     private static class Renderer implements GLSurfaceView.Renderer {
+    	private Context context;
     	private String localeName;
     	private String workingDirectory;
-        private AssetManager assets;
         
-        public Renderer(String localeName, String workingDirectory, AssetManager assets) {
+        public Renderer(Context context, String localeName, String workingDirectory) {
+        	this.context = context;
             this.localeName = localeName;
             this.workingDirectory = workingDirectory;
-            this.assets = assets;
         }
         
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -337,11 +336,11 @@ class SurfaceView extends GLSurfaceView {
         
         public void onSurfaceChanged(GL10 gl, int width, int height) {
         	Log.i("BIBIM", String.format("onSurfaceChanged (%d, %d)", width, height));
-            JNI.init(width, height, localeName, workingDirectory, assets);
+            JNI.init(context, width, height, localeName, workingDirectory, context.getAssets());
         }
         
         public void onDrawFrame(GL10 gl) {
-            JNI.step();
+            JNI.step(context);
         }
     }
 }

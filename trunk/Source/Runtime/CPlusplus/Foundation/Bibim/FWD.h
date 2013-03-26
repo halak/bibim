@@ -195,6 +195,7 @@
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Input
                 class GamePad;
+                class IME;
                 class Keyboard;
                 struct KeyboardState;
                 class Mouse;
