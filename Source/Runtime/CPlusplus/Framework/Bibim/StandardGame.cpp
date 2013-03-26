@@ -19,6 +19,7 @@
 #include <Bibim/HttpClient.h>
 #include <Bibim/Keyboard.h>
 #include <Bibim/Image.h>
+#include <Bibim/IME.h>
 #include <Bibim/Lua.h>
 #include <Bibim/Math.h>
 #include <Bibim/MemoryStream.h>
@@ -36,6 +37,7 @@
 #include <Bibim/UIBoundsContext.h>
 #include <Bibim/UICheckBox.h>
 #include <Bibim/UIDrawingContext.h>
+#include <Bibim/UIEditText.h>
 #include <Bibim/UIEventMap.h>
 #include <Bibim/UIFunctionTable.h>
 #include <Bibim/UIFunctionEventHandler.h>
@@ -117,8 +119,10 @@ namespace Bibim
 
         keyboard = new Keyboard(GetWindow());
         mouse = new Mouse(GetWindow());
+        ime = new IME(GetWindow());
         GetModules()->GetRoot()->AttachChild(keyboard);
         GetModules()->GetRoot()->AttachChild(mouse);
+        GetModules()->GetRoot()->AttachChild(ime);
 
         AudioDevice* audioDevice = new AudioDevice();
         //MOBILE audioDevice->AddArchive(mainMPQ);
@@ -833,6 +837,21 @@ namespace Bibim
             return 1;
         }
 
+        static int GetIMEObject(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            IME* ime = game->GetIME();
+            if (ime)
+                lua_tinker::push(L, ime);
+            else
+                lua_pushnil(L);
+
+            return 1;
+        }
+
         static int ResetLoadingStatus(lua_State* L)
         {
             StandardGame* game = GetGame(L);
@@ -1135,7 +1154,10 @@ namespace Bibim
                 if (UIImageClassName.EqualsIgnoreCase(findingClassName))
                     findingClassIDs[0] = UIImage::ClassID;
                 else if (UILabelClassName.EqualsIgnoreCase(findingClassName))
+                {
                     findingClassIDs[0] = UILabel::ClassID;
+                    findingClassIDs[1] = UIEditText::ClassID;
+                }
                 else if (UIButtonClassName.EqualsIgnoreCase(findingClassName))
                 {
                     findingClassIDs[0] = UIButton::ClassID;
@@ -1736,6 +1758,7 @@ namespace Bibim
             { "cancelalarm", &CancelAlarm },
             { "lua", &GetLuaObject },
             { "timeline", &GetTimeline },
+            { "ime", &GetIMEObject },
             { "resetloadingstatus", &ResetLoadingStatus },
             { "loadingstatus", &LoadingStatus },
             { NULL, NULL}  /* sentinel */

@@ -264,6 +264,7 @@
     <Compile Include="Graphics\ShaderEffect.cs" />
     <Compile Include="Graphics\SourceTexture2D.cs" />
     <Compile Include="Graphics\Texture2D.cs" />
+    <Compile Include="Input\IME.cs" />
     <Compile Include="IO\BinaryReaderExtension.cs" />
     <Compile Include="Asset\FileAssetProvider.cs" />
     <Compile Include="Asset\GameAsset.cs" />
@@ -347,6 +348,7 @@
     <Compile Include="UI\UIVisualVisitor.cs" />
     <Compile Include="UI\Visuals\UIButton.cs" />
     <Compile Include="UI\Visuals\UICheckBox.cs" />
+    <Compile Include="UI\Visuals\UIEditText.cs" />
     <Compile Include="UI\Visuals\UILabel.cs" />
     <Compile Include="UI\Visuals\UIDocument.cs" />
     <Compile Include="UI\Visuals\UIPanel.cs" />
@@ -363,7 +365,6 @@
     <Folder Include="Diagnostics\" />
     <Folder Include="FileSystem\" />
     <Folder Include="Gameplay\" />
-    <Folder Include="Input\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

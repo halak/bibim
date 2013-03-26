@@ -57,6 +57,8 @@ namespace Bibim.UI
                 Write(writer, (UIImage)o, objectDictionary);
             else if (t == typeof(UILabel))
                 Write(writer, (UILabel)o, objectDictionary);
+            else if (t == typeof(UIEditText))
+                Write(writer, (UIEditText)o, objectDictionary);
             else if (t == typeof(UIPanel))
                 Write(writer, (UIPanel)o, objectDictionary);
             else if (t == typeof(UIButton))
@@ -177,6 +179,15 @@ namespace Bibim.UI
             Write(writer, (UIVisual)o, objectDictionary);
             writer.Write(o.Font);
             writer.WriteBibimString(o.Text);
+        }
+
+        private static void Write(AssetStreamWriter writer, UIEditText o, List<object> objectDictionary)
+        {
+            Write(writer, (UILabel)o, objectDictionary);
+            writer.Write((byte)o.Format);
+            writer.WriteBibimString(o.Placeholder);
+            writer.Write(o.MaxLength);
+            writer.Write(o.Frozen);
         }
 
         private static void Write(AssetStreamWriter writer, UIPanel o, List<object> objectDictionary)
