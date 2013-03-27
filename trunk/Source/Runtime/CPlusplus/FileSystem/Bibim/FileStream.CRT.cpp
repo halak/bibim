@@ -5,6 +5,7 @@
 #include <Bibim/Math.h>
 #include <Bibim/Numerics.h>
 #include <Bibim/Log.h>
+#include <Bibim/Path.h>
 
 namespace Bibim
 {
