@@ -31,6 +31,8 @@
             { \
                 return new gameClass(); \
             }
+#   elif (defined(BIBIM_PLATFORM_IOS))
+#       define BBMain(gameClass)
 #   endif
 
 #endif
