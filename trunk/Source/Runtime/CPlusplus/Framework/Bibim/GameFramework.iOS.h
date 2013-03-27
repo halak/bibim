@@ -14,7 +14,8 @@
                 virtual ~GameFramework();
 
                 void init();
-                void step();
+                void update();
+                void draw();
 
                 inline IME* GetIME() const;
 

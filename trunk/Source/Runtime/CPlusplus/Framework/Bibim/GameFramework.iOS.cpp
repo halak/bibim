@@ -46,8 +46,13 @@ namespace Bibim
         ime = static_cast<IME*>(moduleRoot->FindChildByClassID(IME::ClassID));
     }
 
-    void GameFramework::step()
+    void GameFramework::update()
     {
-        StepFrame();
+        UpdateFrame();
+    }
+
+    void GameFramework::draw()
+    {
+        DrawFrame();
     }
 }

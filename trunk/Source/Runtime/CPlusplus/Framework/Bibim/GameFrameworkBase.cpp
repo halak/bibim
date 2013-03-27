@@ -94,6 +94,12 @@ namespace Bibim
 
     void GameFrameworkBase::StepFrame()
     {
+        UpdateFrame();
+        DrawFrame();
+    }
+
+    void GameFrameworkBase::UpdateFrame()
+    {
         float previousTime = timestamps.back();
 
         const float currentTime = Clock::GetCurrent();
@@ -115,16 +121,18 @@ namespace Bibim
             previousTime = currentTime;
         }
 
+        timestamps.push_back(currentTime);
+        if (static_cast<int>(timestamps.size()) > desiredFPS)
+            timestamps.pop_front();
+    }
+
+    void GameFrameworkBase::DrawFrame()
+    {
         if (BeginDraw())
         {
             Draw();
             EndDraw();
         }
-
-        timestamps.push_back(currentTime);
-        if (static_cast<int>(timestamps.size()) > desiredFPS)
-            timestamps.pop_front();
-
     }
 
     void GameFrameworkBase::Update(float dt, int timestamp)

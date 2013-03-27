@@ -43,7 +43,11 @@
                 virtual void Finalize();
     
                 void PostInitialize();
+                
                 void StepFrame();
+                void UpdateFrame();
+                void DrawFrame();
+
                 virtual void Update(float dt, int timestamp);
                 virtual void Draw();
     
