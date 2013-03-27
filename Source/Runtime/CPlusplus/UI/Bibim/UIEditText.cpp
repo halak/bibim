@@ -10,7 +10,7 @@ namespace Bibim
     UIEditText::UIEditText()
         : ime(nullptr),
           format(IME::Plain),
-          maxLength(0),
+          maxLength(IME::NO_MAX_LENGTH),
           frozen(false)
     {
     }
@@ -23,15 +23,7 @@ namespace Bibim
     {
         if (ime != value)
         {
-            if (ime)
-            {
-            }
-
             ime = value;
-
-            if (ime)
-            {
-            }
         }
     }
 
@@ -70,10 +62,16 @@ namespace Bibim
         if (ime == nullptr || frozen)
             return true;
 
-        if (GetMaxLength() > 0)
-            ime->Edit(GetText(), GetPlaceholder(), GetFormat(), GetMaxLength(), this);
-        else
-            ime->Edit(GetText(), GetPlaceholder(), GetFormat(), this);
+        String editorDescription = GetEditorDescription();
+        if (editorDescription.IsEmpty())
+            editorDescription = GetPlaceholder();
+
+        ime->Edit(GetText(),
+                  GetEditorTitle(),
+                  editorDescription,
+                  GetFormat(),
+                  GetMaxLength(),
+                  this);
 
         return true;
     }
@@ -94,6 +92,8 @@ namespace Bibim
         placeholder = reader.ReadString();
         maxLength = reader.ReadInt();
         frozen = reader.ReadBool();
+        editorTitle = reader.ReadString();
+        editorDescription = reader.ReadString();
     }
 
     void UIEditText::OnCopy(const GameComponent* original, CloningContext& context)
@@ -104,6 +104,8 @@ namespace Bibim
         placeholder = o->placeholder;
         maxLength = o->maxLength;
         frozen = o->frozen;
+        editorTitle = o->editorTitle;
+        editorDescription = o->editorDescription;
     }
 
     IME::TextFormat UIEditText::ConvertFromStringToFormat(const char* value)

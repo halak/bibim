@@ -188,6 +188,8 @@ namespace Bibim.UI
             writer.WriteBibimString(o.Placeholder);
             writer.Write(o.MaxLength);
             writer.Write(o.Frozen);
+            writer.WriteBibimString(o.EditorTitle);
+            writer.WriteBibimString(o.EditorDescription);
         }
 
         private static void Write(AssetStreamWriter writer, UIPanel o, List<object> objectDictionary)

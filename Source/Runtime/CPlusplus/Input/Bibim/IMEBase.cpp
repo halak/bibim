@@ -19,16 +19,16 @@ namespace Bibim
     {
     }
 
-    void IMEBase::Edit(const String& text, const String& description, TextFormat format, Callback* callback)
-    {
-        Edit(text, description, format, 0, callback);
-    }
-
-    void IMEBase::Edit(const String& text, const String& description, TextFormat format, int maxLength, Callback* callback)
+    void IMEBase::Edit(const String& text,
+                       const String& title,
+                       const String& description,
+                       TextFormat format,
+                       int maxLength,
+                       Callback* callback)
     {
         const int callbackID = RegisterCallback(callback);
         if (callbackID != -1)
-            OnRequest(Request(this, callbackID, text, description, format, maxLength));
+            OnRequest(Request(this, callbackID, text, title, description, format, maxLength));
     }
 
     void IMEBase::SubmitEdit(int callbackID, const String& text)
@@ -77,10 +77,11 @@ namespace Bibim
     {
     }
 
-    IMEBase::Request::Request(IMEBase* ime, int id, const String& text, const String& description, TextFormat format, int maxLength)
+    IMEBase::Request::Request(IMEBase* ime, int id, const String& text, const String& title, const String& description, TextFormat format, int maxLength)
         : ime(ime),
           id(id),
           text(text),
+          title(title),
           description(description),
           format(format),
           maxLength(maxLength)
@@ -91,6 +92,7 @@ namespace Bibim
         : ime(original.ime),
           id(original.id),
           text(original.text),
+          title(original.title),
           description(original.description),
           format(original.format),
           maxLength(original.maxLength)
@@ -118,6 +120,7 @@ namespace Bibim
         ime = right.ime;
         id = right.id;
         text = right.text;
+        title = right.title;
         description = right.description;
         format = right.format;
         maxLength = right.maxLength;

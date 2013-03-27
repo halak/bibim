@@ -32,6 +32,18 @@ namespace Bibim.UI.Visuals
             get;
             set;
         }
+
+        public string EditorTitle
+        {
+            get;
+            set;
+        }
+
+        public string EditorDescription
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
@@ -41,6 +53,8 @@ namespace Bibim.UI.Visuals
             Placeholder = string.Empty;
             MaxLength = 0;
             Frozen = false;
+            EditorTitle = string.Empty;
+            EditorDescription = string.Empty;
         }
         #endregion
 

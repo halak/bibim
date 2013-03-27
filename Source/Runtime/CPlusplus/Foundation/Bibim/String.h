@@ -144,7 +144,8 @@
             public:
                 static const String Empty;
                 static const String NewLine;
-                static const byte UTF8BOM[3];
+                static const int UTF8BOMLength = 3;
+                static const byte UTF8BOM[UTF8BOMLength];
 
             public:
                 class CharRef

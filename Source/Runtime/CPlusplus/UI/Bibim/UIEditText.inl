@@ -34,4 +34,24 @@ namespace Bibim
     {
         frozen = value;
     }
+
+    const String& UIEditText::GetEditorTitle() const
+    {
+        return editorTitle;
+    }
+
+    void UIEditText::SetEditorTitle(const String& value)
+    {
+        editorTitle = value;
+    }
+
+    const String& UIEditText::GetEditorDescription() const
+    {
+        return editorDescription;
+    }
+
+    void UIEditText::SetEditorDescription(const String& value)
+    {
+        editorDescription = value;
+    }
 }

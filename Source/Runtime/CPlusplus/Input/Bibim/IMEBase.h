@@ -29,13 +29,19 @@
                         virtual void OnTextEditCancelled() = 0;
                 };
 
+                static const int NO_MAX_LENGTH = 0;
+
             public:
                 IMEBase();
                 IMEBase(Window* window);
                 virtual ~IMEBase();
 
-                void Edit(const String& text, const String& description, TextFormat format, Callback* callback);
-                void Edit(const String& text, const String& description, TextFormat format, int maxLength, Callback* callback);
+                void Edit(const String& text,
+                          const String& title,
+                          const String& description,
+                          TextFormat format,
+                          int maxLength,
+                          Callback* callback);
 
                 inline Window* GetWindow() const;
                 inline void SetWindow(Window* value);
@@ -53,6 +59,7 @@
 
                         inline int GetID() const;
                         inline const String& GetText() const;
+                        inline const String& GetTitle() const;
                         inline const String& GetDescription() const;
                         inline TextFormat GetFormat() const;
                         inline int GetMaxLength() const;
@@ -60,12 +67,13 @@
                         Request& operator = (const Request& right);
 
                     private:
-                        Request(IMEBase* ime, int id, const String& text, const String& description, TextFormat format, int maxLength);
+                        Request(IMEBase* ime, int id, const String& text, const String& title, const String& description, TextFormat format, int maxLength);
 
                     private:
                         IMEBase* ime;
                         int id;
                         String text;
+                        String title;
                         String description;
                         TextFormat format;
                         int maxLength;
