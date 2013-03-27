@@ -125,8 +125,8 @@ JNIEXPORT void JNICALL Java_org_bibim_android_JNI_step(JNIEnv* env, jclass clazz
 {
     GameFramework::SingletonInstance->step();
 
-    //static int counter = 0;
-    //if (counter++ % 30 == 0)
+    static int counter = 0;
+    if (counter++ % 30 == 0)
     {
         IME* ime = GameFramework::SingletonInstance->GetIME();
         if (ime && ime->HasAndroidRequest())
@@ -134,15 +134,16 @@ JNIEXPORT void JNICALL Java_org_bibim_android_JNI_step(JNIEnv* env, jclass clazz
             IME::Request request = ime->PopAndroidRequest();
             
             jclass jni = env->FindClass("org/bibim/android/JNI");
-            static const char* sig = "(Landroid/content/Context;ILjava/lang/String;Ljava/lang/String;II)V";
+            static const char* sig = "(Landroid/content/Context;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;II)V";
             jmethodID edit = env->GetStaticMethodID(jni, "edit", sig);
 
             jint id = static_cast<jint>(request.GetID());
             jstring jniText = env->NewStringUTF(request.GetText().CStr());
+            jstring jniTitle = env->NewStringUTF(request.GetTitle().CStr());
             jstring jniDesc = env->NewStringUTF(request.GetDescription().CStr());
             jint textFormat = static_cast<jint>(request.GetFormat());
             jint maxLength = static_cast<jint>(request.GetMaxLength());
-            env->CallStaticVoidMethod(jni, edit, context, id, jniText, jniDesc, textFormat, maxLength);
+            env->CallStaticVoidMethod(jni, edit, context, id, jniText, jniTitle, jniDesc, textFormat, maxLength);
         }
     }
 }

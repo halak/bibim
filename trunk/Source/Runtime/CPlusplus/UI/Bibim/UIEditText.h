@@ -30,6 +30,12 @@
                 inline bool GetFrozen() const;
                 inline void SetFrozen(bool value);
 
+                inline const String& GetEditorTitle() const;
+                inline void SetEditorTitle(const String& value);
+
+                inline const String& GetEditorDescription() const;
+                inline void SetEditorDescription(const String& value);
+
             public:
                 static IME::TextFormat ConvertFromStringToFormat(const char* value);
                 static const char* ConvertFromFormatToString(IME::TextFormat value);
@@ -49,6 +55,8 @@
                 String placeholder;
                 int maxLength;
                 bool frozen;
+                String editorTitle;
+                String editorDescription;
         };
     }
 

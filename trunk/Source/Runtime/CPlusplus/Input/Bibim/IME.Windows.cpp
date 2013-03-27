@@ -211,9 +211,11 @@ namespace Bibim
     void IME::OnRequest(const Request& request)
     {
         std::wstring wideText;
-        std::wstring wideDesc;
+        std::wstring wideTitle;
+        std::wstring wideDescription;
         UTF8ToUTF16(wideText, request.GetText().CStr());
-        UTF8ToUTF16(wideDesc, request.GetDescription().CStr());
+        UTF8ToUTF16(wideTitle, request.GetTitle().CStr());
+        UTF8ToUTF16(wideDescription, request.GetDescription().CStr());
 
         std::vector<WORD> context;
         static const DWORD DialogStyle = WS_CAPTION |
@@ -223,7 +225,11 @@ namespace Bibim
                                          WS_VISIBLE |
                                          DS_CENTER |
                                          DS_SETFONT;
-        AppendDialog(context, L"IME", 100, 100, 300, 100, DialogStyle, 0x00000000, 4);
+        AppendDialog(context,
+                     wideTitle.c_str(),
+                     100, 100, 300, 100,
+                     DialogStyle, 0x00000000,
+                     4); // Number of children
 
         DWORD editStyle = 0;
         switch (request.GetFormat())
@@ -239,7 +245,7 @@ namespace Bibim
         AppendControl(context,
                       IDDESC,
                       L"static",
-                      wideDesc.c_str(), 
+                      wideDescription.c_str(), 
                       0, 0, 0, 0,
                       WS_VISIBLE, 0);
         AppendControl(context,

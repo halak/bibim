@@ -40,11 +40,21 @@ namespace Bibim
         {
             const int length = file->GetLength();
             std::vector<char> text;
-            text.resize(length + 1, '\0');
+            text.resize(length + 1);
             file->Read(&text[0], length);
             file->Close();
+            text[length] = '\0';
 
-            lua_tinker::dostring(state, &text[0], path.CStr());
+            BBStaticAssert(String::UTF8BOMLength == 3);
+            int index = 0;
+            if (static_cast<byte>(text[0]) == String::UTF8BOM[0] &&
+                static_cast<byte>(text[1]) == String::UTF8BOM[1] &&
+                static_cast<byte>(text[2]) == String::UTF8BOM[2])
+            {
+                index = String::UTF8BOMLength;
+            }
+
+            lua_tinker::dostring(state, &text[index], path.CStr());
         }
         else
             Log::Error("Lua", String::CFormat("Couldn't open lua file. (%s)", path.CStr()));
@@ -347,6 +357,10 @@ namespace Bibim
             lua_tinker::class_def<UIEditText>(L, "SetMaxLength", &UIEditText::SetMaxLength);
             lua_tinker::class_def<UIEditText>(L, "GetFrozen", &UIEditText::GetFrozen);
             lua_tinker::class_def<UIEditText>(L, "SetFrozen", &UIEditText::SetFrozen);
+            lua_tinker::class_def<UIEditText>(L, "GetEditorTitle", &UIEditText::GetEditorTitle);
+            lua_tinker::class_def<UIEditText>(L, "SetEditorTitle", &UIEditText::SetEditorTitle);
+            lua_tinker::class_def<UIEditText>(L, "GetEditorDescription", &UIEditText::GetEditorDescription);
+            lua_tinker::class_def<UIEditText>(L, "SetEditorDescription", &UIEditText::SetEditorDescription);
         lua_tinker::class_add<UIRect>(L, "UIRect");
             lua_tinker::class_inh<UIRect, UIVisual>(L);
             lua_tinker::class_con<UIRect>(L, lua_tinker::constructor<UIRect>);

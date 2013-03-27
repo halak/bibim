@@ -21,6 +21,11 @@ namespace Bibim
         return text;
     }
 
+    const String& IMEBase::Request::GetTitle() const
+    {
+        return title;
+    }
+
     const String& IMEBase::Request::GetDescription() const
     {
         return description;
