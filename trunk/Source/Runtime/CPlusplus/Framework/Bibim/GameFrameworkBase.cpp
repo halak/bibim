@@ -27,7 +27,7 @@ namespace Bibim
     {
         BBAssert(width >= 0 && height >= 0);
 
-        Startup::All();
+        // Startup::All();
 
         modules = new GameModuleTree();
         window = new GameWindow();
