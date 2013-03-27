@@ -46,6 +46,8 @@
             protected:
                 inline void DrawChild(UIVisual* target);
 
+                inline Vector2 GetOrigin() const;
+
                 virtual void OnBegan();
                 virtual void OnEnded();
                 virtual void OnVisit();
