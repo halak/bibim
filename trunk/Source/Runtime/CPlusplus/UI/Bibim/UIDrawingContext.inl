@@ -25,6 +25,11 @@
         Visit(target);
     }
 
+    Vector2 UIDrawingContext::GetOrigin() const
+    {
+        return Vector2(GetCurrentBounds().X, GetCurrentBounds().Y);
+    }
+
     UIRenderer* UIDrawingContext::GetRenderer() const
     {
         return renderer;

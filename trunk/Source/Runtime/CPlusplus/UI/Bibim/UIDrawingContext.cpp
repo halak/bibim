@@ -262,45 +262,52 @@ namespace Bibim
         class VisibleVertices : public Shape2D::Vertices
         {
             public:
-                VisibleVertices() { }
+                VisibleVertices(Vector2 origin)
+                    : origin(origin)
+                {
+                }
+
                 virtual ~VisibleVertices() { }
 
                 virtual void Append(Vector2 p0)
                 {
-                    data.push_back(p0);
+                    data.push_back(origin + p0);
                 }
 
                 virtual void Append(Vector2 p0, Vector2 p1)
                 {
-                    data.push_back(p0);
-                    data.push_back(p1);
+                    data.push_back(origin + p0);
+                    data.push_back(origin + p1);
                 }
 
                 virtual void Append(Vector2 p0, Vector2 p1, Vector2 p2)
                 {
-                    data.push_back(p0);
-                    data.push_back(p1);
-                    data.push_back(p2);
+                    data.push_back(origin + p0);
+                    data.push_back(origin + p1);
+                    data.push_back(origin + p2);
                 }
 
                 virtual void Append(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3)
                 {
-                    data.push_back(p0);
-                    data.push_back(p1);
-                    data.push_back(p2);
-                    data.push_back(p3);
+                    data.push_back(origin + p0);
+                    data.push_back(origin + p1);
+                    data.push_back(origin + p2);
+                    data.push_back(origin + p3);
                 }
 
                 virtual void Append(const std::vector<Vector2>& p)
                 { 
-                    data.insert(data.end(), p.begin(), p.end());
+                    data.reserve(data.size() + p.size());
+                    for (std::vector<Vector2>::const_iterator it = p.begin(); it != p.end(); it++)
+                        data.push_back(origin + (*it));
                 }
 
             public:
+                Vector2 origin;
                 std::vector<Vector2> data;
         };
 
-        VisibleVertices v;
+        VisibleVertices v(GetOrigin());
         shape->Build(v);
 
         if (v.data.empty() == false)
