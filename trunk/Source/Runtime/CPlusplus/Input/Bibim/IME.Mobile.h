@@ -16,10 +16,10 @@
                 IME(Window* window);
                 virtual ~IME();
 
-                bool HasAndroidRequest() const;
-                Request PopAndroidRequest();
-                void SubmitAndroidEdit(int id, const String& text);
-                void CancelAndroidEdit(int id);
+                bool HasMobileRequest() const;
+                Request PopMobileRequest();
+                void SubmitMobileEdit(int id, const String& text);
+                void CancelMobileEdit(int id);
 
             private:
                 virtual void OnRequest(const Request& request);

@@ -15,7 +15,6 @@
                 static inline const String& GetWorkingDirectory();
                 static String GetAppDataPath(const String& appName, const String& filename);
 
-
                 static void Setup(const String& localeName, const String& workingDirectory);
 
             private:

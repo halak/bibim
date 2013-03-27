@@ -5,7 +5,6 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
 #   include <Bibim/String.h>
-#   include <irrklang.h>
 
     namespace Bibim
     {
@@ -18,12 +17,9 @@
 
                 inline float GetDuration(const String& uri) const;
                 float GetDurationByChars(const char* uri) const;
-
-            private:
-                irrklang::ISoundEngine* engine;
         };
     }
 
-#   include <Bibim/AudioDevice.Android.inl>
+#   include <Bibim/AudioDevice.AL.inl>
 
 #endif

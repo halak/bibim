@@ -1,10 +1,9 @@
 #include <Bibim/PCH.h>
-#include <Bibim/SoundFX.Android.h>
+#include <Bibim/SoundFX.AL.h>
 #include <Bibim/Assert.h>
-#include <Bibim/AudioDevice.Android.h>
+#include <Bibim/AudioDevice.AL.h>
 #include <Bibim/AutoLocker.h>
 #include <Bibim/Math.h>
-using namespace irrklang;
 
 namespace Bibim
 {
@@ -248,23 +247,4 @@ namespace Bibim
             }
         }
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /*
-    SoundFX::EventListener::EventListener(SoundFX* sfx)
-        : sfx(sfx)
-    {
-    }
-
-    void SoundFX::EventListener::OnSoundStopped(ISound* sound, E_STOP_EVENT_CAUSE reason, void* userData)
-    {
-        if (reason != irrklang::ESEC_SOUND_FINISHED_PLAYING)
-            return;
-
-        const int group = reinterpret_cast<int>(userData);
-        AutoLocker locker(sfx->stoppedSoundsLock);
-        sfx->stoppedSounds.push_back(std::pair<int, irrklang::ISound*>(group, sound));
-    }
-    */
 }

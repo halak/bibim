@@ -5,7 +5,6 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/TimelineGameModule.h>
 #   include <Bibim/String.h>
-#   include <irrklang.h>
 #   include <vector>
 
     namespace Bibim
@@ -53,6 +52,6 @@
         };
     }
 
-#   include <Bibim/BGM.Android.inl>
+#   include <Bibim/BGM.AL.inl>
 
 #endif

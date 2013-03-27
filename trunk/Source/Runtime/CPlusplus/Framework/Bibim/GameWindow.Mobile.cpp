@@ -1,5 +1,5 @@
 #include <Bibim/PCH.h>
-#include <Bibim/GameWindow.Android.h>
+#include <Bibim/GameWindow.Mobile.h>
 
 namespace Bibim
 {

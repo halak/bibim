@@ -38,13 +38,16 @@ namespace Bibim
         String cleanPath = path;
         cleanPath.Replace('\\', '/');
 
-        if (IsAbsolutePath(cleanPath) == false)
+        String absPath;
+        if (Path::IsAbsolutePath(cleanPath) == false)
         {
             BBAssert(cleanPath.CStr()[0] != '/');
-            cleanPath = Environment::GetWorkingDirectory() + cleanPath;
+            absPath = Environment::GetWorkingDirectory() + cleanPath;
         }
+        else
+            absPath = cleanPath;
 
-        handle = std::fopen(cleanPath.CStr(), mode);
+        handle = std::fopen(absPath.CStr(), mode);
         if (handle == nullptr)
         {
             canRead  = false;

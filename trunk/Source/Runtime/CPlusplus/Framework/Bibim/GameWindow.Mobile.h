@@ -51,6 +51,6 @@
         };
     }
 
-#   include <Bibim/GameWindow.Android.inl>
+#   include <Bibim/GameWindow.Mobile.inl>
 
 #endif

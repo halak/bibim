@@ -4,12 +4,12 @@
 
 namespace Bibim
 {
-    struct AndroidClock
+    struct UnixClock
     {
-        static AndroidClock StaticInstance;
+        static UnixClock StaticInstance;
         int64 startTime;
 
-        AndroidClock()
+        UnixClock()
         {
             struct timeval tv;
             gettimeofday(&tv, NULL);
@@ -29,15 +29,15 @@ namespace Bibim
         }
     };
 
-    AndroidClock AndroidClock::StaticInstance;
+    UnixClock UnixClock::StaticInstance;
 
     float Clock::GetCurrent()
     {
-        return static_cast<float>(AndroidClock::StaticInstance.GetCurrent());
+        return static_cast<float>(UnixClock::StaticInstance.GetCurrent());
     }
 
     int Clock::GetCurrentMilliSeconds()
     {
-        return static_cast<int>(AndroidClock::StaticInstance.GetCurrentMilliSeconds());
+        return static_cast<int>(UnixClock::StaticInstance.GetCurrentMilliSeconds());
     }
 }

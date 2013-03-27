@@ -6,10 +6,8 @@
 
 #   if (defined(BIBIM_PLATFORM_WINDOWS) || defined(BIBIM_PLATFORM_LINUX) || defined(BIBIM_PLATFORM_MACOS))
 #       include <Bibim/SoundFX.Irrklang.h>
-#   elif (defined(BIBIM_PLATFORM_ANDROID))
-#       include <Bibim/SoundFX.Android.h>
-#   elif (defined(BIBIM_PLATFORM_IOS))
-#       include <Bibim/SoundFX.iOS.h>
+#   else
+#       include <Bibim/SoundFX.AL.h>
 #   endif
 
 #endif
