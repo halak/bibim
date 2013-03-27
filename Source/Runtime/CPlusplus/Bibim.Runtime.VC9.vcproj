@@ -423,15 +423,15 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\GameComponentFactory.cpp"
+					RelativePath=".\Component\Bibim\GameComponentFactory.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\GameComponentFactory.h"
+					RelativePath=".\Component\Bibim\GameComponentFactory.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\GameComponentFactory.inl"
+					RelativePath=".\Component\Bibim\GameComponentFactory.inl"
 					>
 				</File>
 			</Filter>

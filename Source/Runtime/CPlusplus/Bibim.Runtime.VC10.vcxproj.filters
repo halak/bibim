@@ -204,9 +204,6 @@
     <ClCompile Include="Component\Bibim\GameComponent.cpp">
       <Filter>03. Game\%28Component%29</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Bibim\GameComponentFactory.cpp">
-      <Filter>03. Game\%28Component%29</Filter>
-    </ClCompile>
     <ClCompile Include="Module\Bibim\GameModule.cpp">
       <Filter>03. Game\%28Module%29</Filter>
     </ClCompile>
@@ -837,6 +834,9 @@
     <ClCompile Include="Input\Bibim\IME.Android.cpp">
       <Filter>03. Game\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Bibim\GameComponentFactory.cpp">
+      <Filter>03. Game\%28Component%29</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset\Bibim\AssetLoadingTask.h">
@@ -894,9 +894,6 @@
       <Filter>03. Game\%28Component%29</Filter>
     </ClInclude>
     <ClInclude Include="Component\Bibim\GameComponent.h">
-      <Filter>03. Game\%28Component%29</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Bibim\GameComponentFactory.h">
       <Filter>03. Game\%28Component%29</Filter>
     </ClInclude>
     <ClInclude Include="Module\Bibim\GameModule.h">
@@ -1668,6 +1665,9 @@
     <ClInclude Include="Input\Bibim\IME.h">
       <Filter>03. Game\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Component\Bibim\GameComponentFactory.h">
+      <Filter>03. Game\%28Component%29</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Asset\Bibim\AssetLoadingTask.inl">
@@ -1722,9 +1722,6 @@
       <Filter>03. Game\%28Component%29</Filter>
     </None>
     <None Include="Component\Bibim\GameComponent.inl">
-      <Filter>03. Game\%28Component%29</Filter>
-    </None>
-    <None Include="Graphics\Bibim\GameComponentFactory.inl">
       <Filter>03. Game\%28Component%29</Filter>
     </None>
     <None Include="Module\Bibim\GameModule.inl">
@@ -2311,6 +2308,9 @@
     </None>
     <None Include="Input\Bibim\IME.iOS.cpp">
       <Filter>03. Game\Input</Filter>
+    </None>
+    <None Include="Component\Bibim\GameComponentFactory.inl">
+      <Filter>03. Game\%28Component%29</Filter>
     </None>
   </ItemGroup>
 </Project>
