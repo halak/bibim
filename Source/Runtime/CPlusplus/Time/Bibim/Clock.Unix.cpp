@@ -1,6 +1,13 @@
 #include <Bibim/PCH.h>
 #include <Bibim/Clock.h>
-#include <time.h>
+#include <sys/time.h>
+
+static Bibim::int64 GetTimeOfDay()
+{
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+}
 
 namespace Bibim
 {
@@ -11,9 +18,7 @@ namespace Bibim
 
         UnixClock()
         {
-            struct timeval tv;
-            gettimeofday(&tv, NULL);
-            startTime = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+            startTime = GetTimeOfDay();
         }
 
         double GetCurrent()
@@ -23,9 +28,7 @@ namespace Bibim
 
         int64 GetCurrentMilliSeconds()
         {
-            struct timeval tv;
-            gettimeofday(&tv, NULL);
-            return static_cast<int64>((tv.tv_sec * 1000) + (tv.tv_usec / 1000)) - startTime;
+            return GetTimeOfDay() - startTime;
         }
     };
 
