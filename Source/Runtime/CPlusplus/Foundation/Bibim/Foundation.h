@@ -19,6 +19,7 @@
 #       elif (defined(__APPLE__))
 #           define BIBIM_PLATFORM_UNIX
 #           define BIBIM_PLATFORM_IOS
+#           define BIBIM_USE_OPENGLES2
 #       else
 #           error "UNKNOWN PLATFORM"
 #           define BIBIM_PLATFORM_UNKNOWN
@@ -37,10 +38,6 @@
 #       endif
 
 #       if (defined(_MSC_VER) && _MSC_VER > 1500)
-#           define BIBIM_CPLUSPLUS_0X
-#       endif
-        
-#       if (defined(__APPLE__))
 #           define BIBIM_CPLUSPLUS_0X
 #       endif
 
