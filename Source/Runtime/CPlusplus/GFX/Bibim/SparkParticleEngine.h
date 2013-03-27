@@ -4,6 +4,10 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
+#   pragma warning(push)
+#   pragma warning(disable : 4100)
+#   include <SPK.h>
+#   pragma warning(pop)
 
     namespace Bibim
     {
