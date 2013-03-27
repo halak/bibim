@@ -16,6 +16,9 @@
 #       elif (defined(ANDROID))
 #           define BIBIM_PLATFORM_UNIX
 #           define BIBIM_PLATFORM_ANDROID
+#       elif (defined(__APPLE__))
+#           define BIBIM_PLATFORM_UNIX
+#           define BIBIM_PLATFORM_IOS
 #       else
 #           error "UNKNOWN PLATFORM"
 #           define BIBIM_PLATFORM_UNKNOWN
@@ -34,6 +37,10 @@
 #       endif
 
 #       if (defined(_MSC_VER) && _MSC_VER > 1500)
+#           define BIBIM_CPLUSPLUS_0X
+#       endif
+        
+#       if (defined(__APPLE__))
 #           define BIBIM_CPLUSPLUS_0X
 #       endif
 
@@ -86,5 +93,9 @@
                                                         classname(const classname&); \
                                                         classname& operator = (const classname&);
     }
+
+#if (defined(__APPLE__))
+#    include <iostream>
+#endif
 
 #endif
