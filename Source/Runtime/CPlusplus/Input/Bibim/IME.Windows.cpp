@@ -1,5 +1,5 @@
 #include <Bibim/PCH.h>
-#include <Bibim/IME.h>
+#include <Bibim/IME.Windows.h>
 #include <vector>
 
 #ifndef WIN32_LEAN_AND_MEAN

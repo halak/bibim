@@ -6,10 +6,8 @@
 
 #   if (defined(BIBIM_PLATFORM_WINDOWS) || defined(BIBIM_PLATFORM_LINUX) || defined(BIBIM_PLATFORM_MACOS))
 #       include <Bibim/AudioDevice.Irrklang.h>
-#   elif (defined(BIBIM_PLATFORM_ANDROID))
-#       include <Bibim/AudioDevice.Android.h>
-#   elif (defined(BIBIM_PLATFORM_IOS))
-#       include <Bibim/AudioDevice.iOS.h>
+#   else
+#       include <Bibim/AudioDevice.AL.h>
 #   endif
 
 #endif

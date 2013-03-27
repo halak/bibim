@@ -15,7 +15,12 @@
     bool ManualLocker::TryLock()
     {
         if (lock.TryAcquire())
+        {
             lockCount++;
+            return true;
+        }
+        else
+            return false;
     }
 
     void ManualLocker::Unlock()

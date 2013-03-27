@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __BIBIM_GAMEFRAMEWORK_ANDROID_H__
-#define __BIBIM_GAMEFRAMEWORK_ANDROID_H__
+#ifndef __BIBIM_GAMEFRAMEWORK_IOS_H__
+#define __BIBIM_GAMEFRAMEWORK_IOS_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameFrameworkBase.h>
@@ -33,6 +33,6 @@
         };
     }
 
-#   include <Bibim/GameFramework.Android.inl>
+#   include <Bibim/GameFramework.iOS.inl>
 
 #endif

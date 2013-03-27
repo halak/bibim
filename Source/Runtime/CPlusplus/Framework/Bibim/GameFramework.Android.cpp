@@ -129,9 +129,9 @@ JNIEXPORT void JNICALL Java_org_bibim_android_JNI_step(JNIEnv* env, jclass clazz
     if (counter++ % 30 == 0)
     {
         IME* ime = GameFramework::SingletonInstance->GetIME();
-        if (ime && ime->HasAndroidRequest())
+        if (ime && ime->HasMobileRequest())
         {
-            IME::Request request = ime->PopAndroidRequest();
+            IME::Request request = ime->PopMobileRequest();
             
             jclass jni = env->FindClass("org/bibim/android/JNI");
             static const char* sig = "(Landroid/content/Context;ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;II)V";
@@ -196,13 +196,13 @@ JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleKeyUp(JNIEnv* env, jclas
 JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleIMESubmit(JNIEnv* env, jclass clazz, jint id, jstring text)
 {
     if (IME* ime = GameFramework::SingletonInstance->GetIME())
-        ime->SubmitAndroidEdit(id, ToString(env, text));
+        ime->SubmitMobileEdit(id, ToString(env, text));
 }
 
 JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleIMECancel(JNIEnv* env, jclass clazz, jint id)
 {
     if (IME* ime = GameFramework::SingletonInstance->GetIME())
-        ime->CancelAndroidEdit(id);
+        ime->CancelMobileEdit(id);
 }
 
 static Key::Code ConvertKeyCode(int androidKeyCode)

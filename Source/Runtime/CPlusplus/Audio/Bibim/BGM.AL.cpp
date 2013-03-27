@@ -1,9 +1,8 @@
 #include <Bibim/PCH.h>
-#include <Bibim/BGM.Android.h>
+#include <Bibim/BGM.AL.h>
 #include <Bibim/Assert.h>
-#include <Bibim/AudioDevice.Android.h>
+#include <Bibim/AudioDevice.AL.h>
 #include <Bibim/Math.h>
-using namespace irrklang;
 
 namespace Bibim
 {

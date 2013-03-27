@@ -6,10 +6,8 @@
 
 #   if (defined(BIBIM_PLATFORM_WINDOWS) || defined(BIBIM_PLATFORM_LINUX) || defined(BIBIM_PLATFORM_MACOS))
 #       include <Bibim/BGM.Irrklang.h>
-#   elif (defined(BIBIM_PLATFORM_ANDROID))
-#       include <Bibim/BGM.Android.h>
-#   elif (defined(BIBIM_PLATFORM_IOS))
-#       include <Bibim/BGM.iOS.h>
+#   else
+#       include <Bibim/BGM.AL.h>
 #   endif
 
 #endif

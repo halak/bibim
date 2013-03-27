@@ -1,5 +1,5 @@
 #include <Bibim/PCH.h>
-#include <Bibim/IME.h>
+#include <Bibim/IME.Mobile.h>
 
 namespace Bibim
 {
@@ -16,24 +16,24 @@ namespace Bibim
     {
     }
 
-    bool IME::HasAndroidRequest() const
+    bool IME::HasMobileRequest() const
     {
         return requests.empty() == false;
     }
 
-    IME::Request IME::PopAndroidRequest()
+    IME::Request IME::PopMobileRequest()
     {
         Request req = requests.front();
         requests.pop();
         return req;
     }
 
-    void IME::SubmitAndroidEdit(int id, const String& text)
+    void IME::SubmitMobileEdit(int id, const String& text)
     {
         SubmitEdit(id, text);
     }
 
-    void IME::CancelAndroidEdit(int id)
+    void IME::CancelMobileEdit(int id)
     {
         CancelEdit(id);
     }

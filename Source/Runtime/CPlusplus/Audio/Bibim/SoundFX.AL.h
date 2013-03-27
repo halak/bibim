@@ -38,20 +38,6 @@
                 void SetMute(bool value);
 
             private:
-                /*
-                class EventListener : public irrklang::ISoundStopEventReceiver
-                {
-                    public:
-                        EventListener(SoundFX* sfx);
-
-                        virtual void OnSoundStopped(void* sound, irrklang::E_STOP_EVENT_CAUSE reason, void* userData);
-
-                    private:
-                        SoundFX* sfx;
-                };
-                */
-
-            private:
                 typedef std::vector<void*> SoundCollection;
                 typedef std::vector<int>             SoundDictionaryKeys;
                 typedef std::vector<SoundCollection> SoundDictionaryValues;
@@ -77,6 +63,6 @@
         };
     }
 
-#   include <Bibim/SoundFX.Android.inl>
+#   include <Bibim/SoundFX.AL.inl>
 
 #endif
