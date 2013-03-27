@@ -1,5 +1,10 @@
 #include <Bibim/PCH.h>
 #include <Bibim/SparkParticleEngine.h>
+
+#pragma warning(push)
+#pragma warning(disable : 4100)
+#include <SPK.h>
+#pragma warning(pop)
 using namespace SPK;
 
 namespace Bibim
