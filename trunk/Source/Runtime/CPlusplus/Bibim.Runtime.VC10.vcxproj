@@ -164,6 +164,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Component\Bibim\GameComponentFactory.cpp" />
     <ClCompile Include="FileSystem\Bibim\FileStream.Android.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -241,7 +242,6 @@
     <ClCompile Include="Component\Bibim\CloningContext.cpp" />
     <ClCompile Include="Component\Bibim\ComponentStreamReader.cpp" />
     <ClCompile Include="Component\Bibim\GameComponent.cpp" />
-    <ClCompile Include="Graphics\Bibim\GameComponentFactory.cpp" />
     <ClCompile Include="Module\Bibim\GameModule.cpp" />
     <ClCompile Include="Module\Bibim\GameModuleFactory.cpp" />
     <ClCompile Include="Module\Bibim\GameModuleNode.cpp" />
@@ -555,6 +555,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Audio\Bibim\SoundFX.h" />
+    <ClInclude Include="Component\Bibim\GameComponentFactory.h" />
     <ClInclude Include="FileSystem\Bibim\FileStream.Android.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -629,7 +630,6 @@
     <ClInclude Include="Component\Bibim\CloningContext.h" />
     <ClInclude Include="Component\Bibim\ComponentStreamReader.h" />
     <ClInclude Include="Component\Bibim\GameComponent.h" />
-    <ClInclude Include="Graphics\Bibim\GameComponentFactory.h" />
     <ClInclude Include="Module\Bibim\GameModule.h" />
     <ClInclude Include="Module\Bibim\GameModuleFactory.h" />
     <ClInclude Include="Module\Bibim\GameModuleNode.h" />
@@ -962,6 +962,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </None>
+    <None Include="Component\Bibim\GameComponentFactory.inl" />
     <None Include="FileSystem\Bibim\FileStream.CRT.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -1015,7 +1016,6 @@
     <None Include="Component\Bibim\CloningContext.inl" />
     <None Include="Component\Bibim\ComponentStreamReader.inl" />
     <None Include="Component\Bibim\GameComponent.inl" />
-    <None Include="Graphics\Bibim\GameComponentFactory.inl" />
     <None Include="Module\Bibim\GameModule.inl" />
     <None Include="Module\Bibim\GameModuleFactory.inl" />
     <None Include="Module\Bibim\GameModuleNode.inl" />
