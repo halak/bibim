@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B099B3D1703C2160058C797 /* Asset in Resources */ = {isa = PBXBuildFile; fileRef = 8B099B3C1703C2160058C797 /* Asset */; };
+		8B099B521703D5CF0058C797 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8B099B511703D5CF0058C797 /* ViewController.mm */; };
+		8B099B571703D6160058C797 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B099B531703D6150058C797 /* ViewController_iPad.xib */; };
+		8B099B581703D6160058C797 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B099B551703D6150058C797 /* ViewController_iPhone.xib */; };
 		8B2F6F8E17035D4800107A5B /* libBibim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B2F6F8D1703548300107A5B /* libBibim.a */; };
 		8BA7A22917034ECE00B99726 /* Bibim.xcodeproj in Resources */ = {isa = PBXBuildFile; fileRef = 8BA7A22817034ECE00B99726 /* Bibim.xcodeproj */; };
 		8BA7A22E17034F2000B99726 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7A22D17034F2000B99726 /* Game.cpp */; };
@@ -21,11 +25,6 @@
 		8BDE8C55170320A7000C3C57 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BDE8C54170320A7000C3C57 /* Default.png */; };
 		8BDE8C57170320A7000C3C57 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BDE8C56170320A7000C3C57 /* Default@2x.png */; };
 		8BDE8C59170320A7000C3C57 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BDE8C58170320A7000C3C57 /* Default-568h@2x.png */; };
-		8BDE8C5B170320A7000C3C57 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8BDE8C5A170320A7000C3C57 /* Shader.fsh */; };
-		8BDE8C5D170320A7000C3C57 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 8BDE8C5C170320A7000C3C57 /* Shader.vsh */; };
-		8BDE8C60170320A7000C3C57 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8BDE8C5F170320A7000C3C57 /* ViewController.mm */; };
-		8BDE8C63170320A7000C3C57 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BDE8C61170320A7000C3C57 /* ViewController_iPhone.xib */; };
-		8BDE8C66170320A7000C3C57 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BDE8C64170320A7000C3C57 /* ViewController_iPad.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +38,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B099B3C1703C2160058C797 /* Asset */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Asset; path = Bibim.TestBed/Asset; sourceTree = "<group>"; };
+		8B099B501703D5CF0058C797 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8B099B511703D5CF0058C797 /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		8B099B541703D6150058C797 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		8B099B561703D6160058C797 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		8BA7A22817034ECE00B99726 /* Bibim.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Bibim.xcodeproj; path = ../Bibim/Bibim.xcodeproj; sourceTree = "<group>"; };
 		8BA7A22C17034F2000B99726 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		8BA7A22D17034F2000B99726 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
@@ -57,12 +61,6 @@
 		8BDE8C54170320A7000C3C57 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8BDE8C56170320A7000C3C57 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		8BDE8C58170320A7000C3C57 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		8BDE8C5A170320A7000C3C57 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
-		8BDE8C5C170320A7000C3C57 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
-		8BDE8C5E170320A7000C3C57 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8BDE8C5F170320A7000C3C57 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
-		8BDE8C62170320A7000C3C57 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
-		8BDE8C65170320A7000C3C57 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +91,7 @@
 		8BDE8C32170320A7000C3C57 = {
 			isa = PBXGroup;
 			children = (
+				8B099B3C1703C2160058C797 /* Asset */,
 				8BDE8C48170320A7000C3C57 /* Bibim.TestBed */,
 				8BDE8C3D170320A7000C3C57 /* Frameworks */,
 				8BDE8C3C170320A7000C3C57 /* Products */,
@@ -125,12 +124,10 @@
 			children = (
 				8BDE8C51170320A7000C3C57 /* AppDelegate.h */,
 				8BDE8C52170320A7000C3C57 /* AppDelegate.mm */,
-				8BDE8C5A170320A7000C3C57 /* Shader.fsh */,
-				8BDE8C5C170320A7000C3C57 /* Shader.vsh */,
-				8BDE8C5E170320A7000C3C57 /* ViewController.h */,
-				8BDE8C5F170320A7000C3C57 /* ViewController.mm */,
-				8BDE8C61170320A7000C3C57 /* ViewController_iPhone.xib */,
-				8BDE8C64170320A7000C3C57 /* ViewController_iPad.xib */,
+				8B099B501703D5CF0058C797 /* ViewController.h */,
+				8B099B511703D5CF0058C797 /* ViewController.mm */,
+				8B099B531703D6150058C797 /* ViewController_iPad.xib */,
+				8B099B551703D6150058C797 /* ViewController_iPhone.xib */,
 				8BDE8C49170320A7000C3C57 /* Supporting Files */,
 				8BA7A22C17034F2000B99726 /* Game.h */,
 				8BA7A22D17034F2000B99726 /* Game.cpp */,
@@ -223,11 +220,10 @@
 				8BDE8C55170320A7000C3C57 /* Default.png in Resources */,
 				8BDE8C57170320A7000C3C57 /* Default@2x.png in Resources */,
 				8BDE8C59170320A7000C3C57 /* Default-568h@2x.png in Resources */,
-				8BDE8C5B170320A7000C3C57 /* Shader.fsh in Resources */,
-				8BDE8C5D170320A7000C3C57 /* Shader.vsh in Resources */,
-				8BDE8C63170320A7000C3C57 /* ViewController_iPhone.xib in Resources */,
-				8BDE8C66170320A7000C3C57 /* ViewController_iPad.xib in Resources */,
 				8BA7A22917034ECE00B99726 /* Bibim.xcodeproj in Resources */,
+				8B099B3D1703C2160058C797 /* Asset in Resources */,
+				8B099B571703D6160058C797 /* ViewController_iPad.xib in Resources */,
+				8B099B581703D6160058C797 /* ViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,36 +236,36 @@
 			files = (
 				8BDE8C4F170320A7000C3C57 /* main.mm in Sources */,
 				8BDE8C53170320A7000C3C57 /* AppDelegate.mm in Sources */,
-				8BDE8C60170320A7000C3C57 /* ViewController.mm in Sources */,
 				8BA7A22E17034F2000B99726 /* Game.cpp in Sources */,
+				8B099B521703D5CF0058C797 /* ViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		8B099B531703D6150058C797 /* ViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8B099B541703D6150058C797 /* en */,
+			);
+			name = ViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+		8B099B551703D6150058C797 /* ViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8B099B561703D6160058C797 /* en */,
+			);
+			name = ViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
 		8BDE8C4B170320A7000C3C57 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				8BDE8C4C170320A7000C3C57 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		8BDE8C61170320A7000C3C57 /* ViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8BDE8C62170320A7000C3C57 /* en */,
-			);
-			name = ViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		8BDE8C64170320A7000C3C57 /* ViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8BDE8C65170320A7000C3C57 /* en */,
-			);
-			name = ViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
