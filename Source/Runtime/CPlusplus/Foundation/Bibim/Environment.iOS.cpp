@@ -6,6 +6,8 @@ namespace Bibim
 
     Environment::Environment()
     {
+        workingDirectory = String::Empty;
+        localeName = String::Empty;
     }
 
     String Environment::GetAppDataPath(const String& appName, const String& filename)
