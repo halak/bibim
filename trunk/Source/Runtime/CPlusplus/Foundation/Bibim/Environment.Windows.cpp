@@ -1,4 +1,5 @@
-﻿#include <Bibim/Environment.Windows.h>
+﻿#include <Bibim/PCH.h>
+#include <Bibim/Environment.Windows.h>
 #include <windows.h>
 #include <Shlobj.h>
 
