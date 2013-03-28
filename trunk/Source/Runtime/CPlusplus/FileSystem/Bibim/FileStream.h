@@ -8,8 +8,8 @@
 #       include <Bibim/FileStream.Windows.h>
 #   elif (defined(BIBIM_PLATFORM_ANDROID))
 #       include <Bibim/FileStream.Android.h>
-#   else
-#       include <Bibim/FileStream.CRT.h>
+#   elif (defined(BIBIM_PLATFORM_IOS))
+#       include <Bibim/FileStream.iOS.h>
 #   endif
 
 #endif
