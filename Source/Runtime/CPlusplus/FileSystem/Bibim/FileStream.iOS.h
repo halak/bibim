@@ -1,6 +1,6 @@
 #pragma once
-#ifndef __BIBIM_FILESTREAM_CRT_H__
-#define __BIBIM_FILESTREAM_CRT_H__
+#ifndef __BIBIM_FILESTREAM_IOS_H__
+#define __BIBIM_FILESTREAM_IOS_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/Stream.h>
@@ -43,6 +43,6 @@
         };
     }
 
-#   include <Bibim/FileStream.CRT.inl>
+#   include <Bibim/FileStream.iOS.inl>
 
 #endif
