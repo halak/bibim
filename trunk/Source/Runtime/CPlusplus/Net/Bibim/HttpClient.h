@@ -4,8 +4,8 @@
 
 #   include <Bibim/Foundation.h>
 
-#   if (defined(BIBIM_PLATFORM_WINDOWS))
-#       include <Bibim/HttpClient.Curl.h>
+#   if (defined(BIBIM_PLATFORM_IOS))
+#       include <Bibim/HttpClient.Null.h>
 #   else
 #       include <Bibim/HttpClient.Curl.h>
 #   endif
