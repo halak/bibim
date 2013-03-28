@@ -1,5 +1,5 @@
 #include <Bibim/PCH.h>
-#include <Bibim/FileStream.CRT.h>
+#include <Bibim/FileStream.iOS.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Environment.h>
 #include <Bibim/Math.h>
