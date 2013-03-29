@@ -42,7 +42,7 @@ namespace lua_tinker
     int     on_error(lua_State *L);
     void    print_error(lua_State *L, const char* fmt, ...);
     
-    void push_meta(lua_State *L, const char* name);
+    void    push_meta(lua_State *L, const char* name);
 
     // dynamic type extention
     struct lua_value
@@ -253,8 +253,7 @@ namespace lua_tinker
 				>::type
 			>::type::invoke(L, val);
 
-            const char* name = class_name<typename class_type<T>::type>::name();
-			push_meta(L, name);
+			push_meta(L, class_name<typename class_type<T>::type>::name());
 			lua_setmetatable(L, -2);
         } 
     };
@@ -277,88 +276,88 @@ namespace lua_tinker
 
     // read a value from lua stack 
     template<typename T>
-    T read(lua_State *L, int index)                { return lua2type<T>(L, index); }
+    T read(lua_State *L, int index)  { return lua2type<T>(L, index); }
 
-    template<>    char*                read(lua_State *L, int index);
-    template<>    const char*            read(lua_State *L, int index);
-    template<>    char                read(lua_State *L, int index);
-    template<>    unsigned char        read(lua_State *L, int index);
-    template<>    short                read(lua_State *L, int index);
-    template<>    unsigned short        read(lua_State *L, int index);
-    template<>    long                read(lua_State *L, int index);
-    template<>    unsigned long        read(lua_State *L, int index);
-    template<>    int                    read(lua_State *L, int index);
-    template<>    unsigned int        read(lua_State *L, int index);
-    template<>    float                read(lua_State *L, int index);
-    template<>    double                read(lua_State *L, int index);
-    template<>    bool                read(lua_State *L, int index);
-    template<>    void                read(lua_State *L, int index);
-    template<>    long long                read(lua_State *L, int index);
-    template<>    unsigned long long    read(lua_State *L, int index);
-    template<>    table                read(lua_State *L, int index);
-    template<>  Bibim::String       read(lua_State *L, int index);
+    template<> char*              read(lua_State *L, int index);
+    template<> const char*        read(lua_State *L, int index);
+    template<> char               read(lua_State *L, int index);
+    template<> unsigned char      read(lua_State *L, int index);
+    template<> short              read(lua_State *L, int index);
+    template<> unsigned short     read(lua_State *L, int index);
+    template<> long               read(lua_State *L, int index);
+    template<> unsigned long      read(lua_State *L, int index);
+    template<> int                read(lua_State *L, int index);
+    template<> unsigned int       read(lua_State *L, int index);
+    template<> float              read(lua_State *L, int index);
+    template<> double             read(lua_State *L, int index);
+    template<> bool               read(lua_State *L, int index);
+    template<> void               read(lua_State *L, int index);
+    template<> long long          read(lua_State *L, int index);
+    template<> unsigned long long read(lua_State *L, int index);
+    template<> table              read(lua_State *L, int index);
+    template<> Bibim::String      read(lua_State *L, int index);
 
     // push a value to lua stack 
     template<typename T>  
-    void push(lua_State *L, T ret)                    { type2lua<T>(L, ret); }
+    void push(lua_State *L, T ret)   { type2lua<T>(L, ret); }
     
-    template<>    void push(lua_State *L, char ret);
-    template<>    void push(lua_State *L, unsigned char ret);
-    template<>    void push(lua_State *L, short ret);
-    template<>    void push(lua_State *L, unsigned short ret);
-    template<>    void push(lua_State *L, long ret);
-    template<>    void push(lua_State *L, unsigned long ret);
-    template<>    void push(lua_State *L, int ret);
-    template<>    void push(lua_State *L, unsigned int ret);
-    template<>    void push(lua_State *L, float ret);
-    template<>    void push(lua_State *L, double ret);
-    template<>    void push(lua_State *L, char* ret);
-    template<>    void push(lua_State *L, const char* ret);
-    template<>    void push(lua_State *L, bool ret);
-    template<>    void push(lua_State *L, lua_value* ret);
-    template<>    void push(lua_State *L, long long ret);
-    template<>    void push(lua_State *L, unsigned long long ret);
-    template<>    void push(lua_State *L, table ret);
-    template<>    void push(lua_State *L, const Bibim::String& ret);
+    template<> void push(lua_State *L, char ret);
+    template<> void push(lua_State *L, unsigned char ret);
+    template<> void push(lua_State *L, short ret);
+    template<> void push(lua_State *L, unsigned short ret);
+    template<> void push(lua_State *L, long ret);
+    template<> void push(lua_State *L, unsigned long ret);
+    template<> void push(lua_State *L, int ret);
+    template<> void push(lua_State *L, unsigned int ret);
+    template<> void push(lua_State *L, float ret);
+    template<> void push(lua_State *L, double ret);
+    template<> void push(lua_State *L, char* ret);
+    template<> void push(lua_State *L, const char* ret);
+    template<> void push(lua_State *L, bool ret);
+    template<> void push(lua_State *L, lua_value* ret);
+    template<> void push(lua_State *L, long long ret);
+    template<> void push(lua_State *L, unsigned long long ret);
+    template<> void push(lua_State *L, table ret);
+    template<> void push(lua_State *L, const Bibim::String& ret);
 
     template<typename T>  
-    int push_for_return(lua_State *L, T ret)                    { type2lua<T>(L, ret); return 1; }
+    int push_for_return(lua_State *L, T ret) { type2lua<T>(L, ret); return 1; }
     
-    template<>    int push_for_return(lua_State *L, char ret);
-    template<>    int push_for_return(lua_State *L, unsigned char ret);
-    template<>    int push_for_return(lua_State *L, short ret);
-    template<>    int push_for_return(lua_State *L, unsigned short ret);
-    template<>    int push_for_return(lua_State *L, long ret);
-    template<>    int push_for_return(lua_State *L, unsigned long ret);
-    template<>    int push_for_return(lua_State *L, int ret);
-    template<>    int push_for_return(lua_State *L, unsigned int ret);
-    template<>    int push_for_return(lua_State *L, float ret);
-    template<>    int push_for_return(lua_State *L, double ret);
-    template<>    int push_for_return(lua_State *L, char* ret);
-    template<>    int push_for_return(lua_State *L, const char* ret);
-    template<>    int push_for_return(lua_State *L, bool ret);
-    template<>    int push_for_return(lua_State *L, lua_value* ret);
-    template<>    int push_for_return(lua_State *L, long long ret);
-    template<>    int push_for_return(lua_State *L, unsigned long long ret);
-    template<>    int push_for_return(lua_State *L, table ret);
+    template<> int push_for_return(lua_State *L, char ret);
+    template<> int push_for_return(lua_State *L, unsigned char ret);
+    template<> int push_for_return(lua_State *L, short ret);
+    template<> int push_for_return(lua_State *L, unsigned short ret);
+    template<> int push_for_return(lua_State *L, long ret);
+    template<> int push_for_return(lua_State *L, unsigned long ret);
+    template<> int push_for_return(lua_State *L, int ret);
+    template<> int push_for_return(lua_State *L, unsigned int ret);
+    template<> int push_for_return(lua_State *L, float ret);
+    template<> int push_for_return(lua_State *L, double ret);
+    template<> int push_for_return(lua_State *L, char* ret);
+    template<> int push_for_return(lua_State *L, const char* ret);
+    template<> int push_for_return(lua_State *L, bool ret);
+    template<> int push_for_return(lua_State *L, lua_value* ret);
+    template<> int push_for_return(lua_State *L, long long ret);
+    template<> int push_for_return(lua_State *L, unsigned long long ret);
+    template<> int push_for_return(lua_State *L, table ret);
 
-    template<>  int push_for_return(lua_State *L, Bibim::Color ret);
-    template<>  int push_for_return(lua_State *L, Bibim::Point2 ret);
-    template<>  int push_for_return(lua_State *L, Bibim::Point3 ret);
-    template<>  int push_for_return(lua_State *L, Bibim::Point4 ret);
-    template<>  int push_for_return(lua_State *L, Bibim::Rect ret);
-    template<>  int push_for_return(lua_State *L, Bibim::RectF ret);
-    template<>  int push_for_return(lua_State *L, Bibim::Vector2 ret);
-    template<>  int push_for_return(lua_State *L, Bibim::Vector3 ret);
-    template<>  int push_for_return(lua_State *L, Bibim::Vector4 ret);
-    template<>  int push_for_return(lua_State *L, const Bibim::String& ret);
+    template<> int push_for_return(lua_State *L, Bibim::Color ret);
+    template<> int push_for_return(lua_State *L, Bibim::Point2 ret);
+    template<> int push_for_return(lua_State *L, Bibim::Point3 ret);
+    template<> int push_for_return(lua_State *L, Bibim::Point4 ret);
+    template<> int push_for_return(lua_State *L, Bibim::Rect ret);
+    template<> int push_for_return(lua_State *L, Bibim::RectF ret);
+    template<> int push_for_return(lua_State *L, Bibim::Vector2 ret);
+    template<> int push_for_return(lua_State *L, Bibim::Vector3 ret);
+    template<> int push_for_return(lua_State *L, Bibim::Vector4 ret);
+    template<> int push_for_return(lua_State *L, const Bibim::String& ret);
 
     // pop a value from lua stack
     template<typename T>  
     T pop(lua_State *L) { T t = read<T>(L, -1); lua_pop(L, 1); return t; }
     
-    template<>    void    pop(lua_State *L);
-    template<>    table    pop(lua_State *L);
+    template<> void  pop(lua_State *L);
+    template<> table pop(lua_State *L);
 
     // functor
     template<typename RVal, typename T1=void, typename T2=void, typename T3=void, typename T4=void, typename T5=void>

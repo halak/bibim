@@ -60,6 +60,8 @@ class SurfaceView extends GLSurfaceView {
 
         /* Set the renderer responsible for frame rendering */
         setRenderer(new Renderer(getContext(), localeName, workingDirectory));
+        
+        this.setFocusableInTouchMode(true);
     }
     
     private static class ContextFactory implements GLSurfaceView.EGLContextFactory {
@@ -307,6 +309,16 @@ class SurfaceView extends GLSurfaceView {
 			default:
 				return super.onTouchEvent(event);
 		}
+	}
+    
+	@Override
+	public boolean onKeyDown(final int code, final KeyEvent event) {
+        this.queueEvent(new Runnable() {
+            public void run() {
+                JNI.handleKeyDown(code);
+            }
+        });
+        return true;
 	}
     
 	@Override
