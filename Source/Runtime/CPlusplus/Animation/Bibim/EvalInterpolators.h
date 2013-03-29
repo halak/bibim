@@ -17,7 +17,7 @@
             };
         }
 
-        template <typename T, template <typename T> class TOperator, char a, char b, char c, char d>
+        template <typename T, template <typename U> class TOperator, char a, char b, char c, char d>
         class EvalInterpolatorTemplate : public EvalTemplate<T>
         {
             BBComponentClass(EvalInterpolatorTemplate, EvalTemplate<T>, a, b, c, d);

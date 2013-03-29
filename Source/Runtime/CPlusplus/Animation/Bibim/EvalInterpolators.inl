@@ -2,14 +2,14 @@
 
 namespace Bibim
 {
-    template <typename T, template <typename T> class TOperator, char a, char b, char c, char d>
+    template <typename T, template <typename U> class TOperator, char a, char b, char c, char d>
     EvalInterpolatorTemplate<T, TOperator, a, b, c, d>* EvalInterpolatorTemplate<T, TOperator, a, b, c, d>::Clone() const
     {
         CloningContext context;
         return Clone(context);
     }
 
-    template <typename T, template <typename T> class TOperator, char a, char b, char c, char d>
+    template <typename T, template <typename U> class TOperator, char a, char b, char c, char d>
     EvalInterpolatorTemplate<T, TOperator, a, b, c, d>* EvalInterpolatorTemplate<T, TOperator, a, b, c, d>::Clone(CloningContext& context) const
     {
         This* clone = new This();
@@ -18,7 +18,7 @@ namespace Bibim
         return clone;
     }
 
-    template <typename T, template <typename T> class TOperator, char a, char b, char c, char d>
+    template <typename T, template <typename U> class TOperator, char a, char b, char c, char d>
     void EvalInterpolatorTemplate<T, TOperator, a, b, c, d>::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
@@ -28,7 +28,7 @@ namespace Bibim
         easingCurve = static_cast<EasingCurve*>(reader.ReadComponent());
     }
 
-    template <typename T, template <typename T> class TOperator, char a, char b, char c, char d>
+    template <typename T, template <typename U> class TOperator, char a, char b, char c, char d>
     void EvalInterpolatorTemplate<T, TOperator, a, b, c, d>::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);

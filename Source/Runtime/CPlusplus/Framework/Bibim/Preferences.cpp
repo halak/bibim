@@ -124,6 +124,9 @@ namespace Bibim
                 case rapidjson::kNumberType:
                     value = Any((*it).value.GetInt());
                     break;
+                default:
+                    value = Any::Void;
+                    break;
             }
 
             if (value != Any::Void)

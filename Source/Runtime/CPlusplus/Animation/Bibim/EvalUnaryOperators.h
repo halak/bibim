@@ -25,7 +25,7 @@
             };
         }
 
-        template <typename T, typename TOperand, template <typename T, typename TOperand> class TOperator, char a, char b, char c, char d>
+        template <typename T, typename TOperand, template <typename U, typename UOperand> class TOperator, char a, char b, char c, char d>
         class EvalUnaryOperatorTemplate : public EvalTemplate<T>
         {
             BBComponentClass(EvalUnaryOperatorTemplate, EvalTemplate<T>, a, b, c, d);

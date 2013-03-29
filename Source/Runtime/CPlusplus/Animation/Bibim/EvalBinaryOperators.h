@@ -51,7 +51,7 @@
             };
         }
 
-        template <typename T, typename TLeft, typename TRight, template <typename T, typename TLeft, typename TRight> class TOperator, char a, char b, char c, char d>
+        template <typename T, typename TLeft, typename TRight, template <typename U, typename ULeft, typename URight> class TOperator, char a, char b, char c, char d>
         class EvalBinaryOperatorTemplate : public EvalTemplate<T>
         {
             BBComponentClass(EvalBinaryOperatorTemplate, EvalTemplate<T>, a, b, c, d);

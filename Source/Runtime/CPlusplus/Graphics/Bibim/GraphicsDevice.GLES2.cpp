@@ -176,7 +176,7 @@ namespace Bibim
         }
 #       endif
 
-        capabilities.displayModes;
+        // capabilities.displayModes;
         capabilities.vertexShaderVersion = GraphicsCapabilities::VS20;
         capabilities.pixelShaderVersion = GraphicsCapabilities::PS20;
 
