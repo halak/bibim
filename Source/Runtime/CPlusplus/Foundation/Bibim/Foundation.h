@@ -37,7 +37,7 @@
 #           define BIBIM_COMPILER_GCC
 #       endif
 
-#       if (defined(_MSC_VER) && _MSC_VER > 1500)
+#       if (__cplusplus >= 201103L || (defined(_MSC_VER) && _MSC_VER  >= 1600))
 #           define BIBIM_CPLUSPLUS_0X
 #       endif
 
