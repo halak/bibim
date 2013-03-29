@@ -41,6 +41,8 @@ namespace lua_tinker
     void    enum_stack(lua_State *L);
     int     on_error(lua_State *L);
     void    print_error(lua_State *L, const char* fmt, ...);
+    
+    void push_meta(lua_State *L, const char* name);
 
     // dynamic type extention
     struct lua_value
@@ -251,7 +253,8 @@ namespace lua_tinker
 				>::type
 			>::type::invoke(L, val);
 
-			push_meta(L, class_name<typename class_type<T>::type>::name());
+            const char* name = class_name<typename class_type<T>::type>::name();
+			push_meta(L, name);
 			lua_setmetatable(L, -2);
         } 
     };
@@ -867,7 +870,6 @@ namespace lua_tinker
     // class helper
     int meta_get(lua_State *L);
     int meta_set(lua_State *L);
-    void push_meta(lua_State *L, const char* name);
     int is(lua_State *L);
     int eq(lua_State *L);
 

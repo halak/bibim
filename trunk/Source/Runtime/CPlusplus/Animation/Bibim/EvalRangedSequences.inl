@@ -49,10 +49,10 @@ namespace Bibim
         {
             const TKeyframe& k1 = source1->GetKeyframe(timeIndex1);
             const TKeyframe& k2 = source1->GetKeyframe(timeIndex1 + 1);
-            SetValue(InterpolateKeyframe(k1, k2, (clippedTime1 - k1.StartTime) / k1.Duration));
+            this->SetValue(InterpolateKeyframe(k1, k2, (clippedTime1 - k1.StartTime) / k1.Duration));
         }
         else
-            SetValue(source1->GetKeyframe(timeIndex1).Value);
+            this->SetValue(source1->GetKeyframe(timeIndex1).Value);
     }
 
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>

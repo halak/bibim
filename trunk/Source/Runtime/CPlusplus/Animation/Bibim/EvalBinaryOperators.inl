@@ -2,14 +2,14 @@
 
 namespace Bibim
 {
-    template <typename T, typename TLeft, typename TRight, template <typename T, typename TLeft, typename TRight> class TOperator, char a, char b, char c, char d>
+    template <typename T, typename TLeft, typename TRight, template <typename U, typename ULeft, typename URight> class TOperator, char a, char b, char c, char d>
     EvalBinaryOperatorTemplate<T, TLeft, TRight, TOperator, a, b, c, d>* EvalBinaryOperatorTemplate<T, TLeft, TRight, TOperator, a, b, c, d>::Clone() const
     {
         CloningContext context;
         return Clone(context);
     }
 
-    template <typename T, typename TLeft, typename TRight, template <typename T, typename TLeft, typename TRight> class TOperator, char a, char b, char c, char d>
+    template <typename T, typename TLeft, typename TRight, template <typename U, typename ULeft, typename URight> class TOperator, char a, char b, char c, char d>
     EvalBinaryOperatorTemplate<T, TLeft, TRight, TOperator, a, b, c, d>* EvalBinaryOperatorTemplate<T, TLeft, TRight, TOperator, a, b, c, d>::Clone(CloningContext& context) const
     {
         This* clone = new This();
@@ -18,7 +18,7 @@ namespace Bibim
         return clone;
     }
 
-    template <typename T, typename TLeft, typename TRight, template <typename T, typename TLeft, typename TRight> class TOperator, char a, char b, char c, char d>
+    template <typename T, typename TLeft, typename TRight, template <typename U, typename ULeft, typename URight> class TOperator, char a, char b, char c, char d>
     void EvalBinaryOperatorTemplate<T, TLeft, TRight, TOperator, a, b, c, d>::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
@@ -26,7 +26,7 @@ namespace Bibim
         right = static_cast<EvalRight*>(reader.ReadComponent());
     }
 
-    template <typename T, typename TLeft, typename TRight, template <typename T, typename TLeft, typename TRight> class TOperator, char a, char b, char c, char d>
+    template <typename T, typename TLeft, typename TRight, template <typename U, typename ULeft, typename URight> class TOperator, char a, char b, char c, char d>
     void EvalBinaryOperatorTemplate<T, TLeft, TRight, TOperator, a, b, c, d>::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
