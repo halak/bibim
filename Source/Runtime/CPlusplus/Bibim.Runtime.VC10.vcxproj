@@ -90,7 +90,6 @@
       <PrecompiledHeader>
       </PrecompiledHeader>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <WarningLevel>EnableAllWarnings</WarningLevel>
     </ClCompile>
     <Lib />
     <Lib>
@@ -112,7 +111,6 @@
       <PrecompiledHeader>
       </PrecompiledHeader>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <WarningLevel>EnableAllWarnings</WarningLevel>
     </ClCompile>
     <Lib />
     <Lib>
@@ -126,13 +124,11 @@
     <ClCompile>
       <CompileAs>CompileAsCpp</CompileAs>
       <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Warnings>AllWarnings</Warnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Warnings>AllWarnings</Warnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
