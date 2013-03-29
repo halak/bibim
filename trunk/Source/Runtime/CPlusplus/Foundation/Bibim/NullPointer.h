@@ -7,7 +7,7 @@
 
     namespace Bibim
     {
-#        ifndef BIBIM_CPLUSPLUS_0X
+#       ifndef BIBIM_CPLUSPLUS_0X
         static struct NullPointer
         {
             template <typename T> bool operator == (      T* right)                { return right ? false : true; }
@@ -30,7 +30,7 @@
             template <typename T> operator SharedPointer<T> () const { return SharedPointer<T>(); }
         
         } nullptr;
-#        endif
+#       endif
     }
 
 #endif
