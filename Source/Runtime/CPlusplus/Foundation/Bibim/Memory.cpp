@@ -25,7 +25,7 @@ namespace Bibim
 #       if (defined(BIBIM_PLATFORM_WINDOWS))
             ::memcpy_s(destination, destinationLength, source, sourceLength);
 #       else
-            destinationLength; // unused
+            BBUnusedParameter(destinationLength);
             std::memcpy(destination, source, sourceLength);
 #       endif
     }

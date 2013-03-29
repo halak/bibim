@@ -1468,7 +1468,7 @@ namespace Bibim
         {
             public:
                 ScriptHttpCallback()
-                    : lua(lua),
+                    : lua(nullptr),
                       callbackIndex(-1)
                 {
                 }
