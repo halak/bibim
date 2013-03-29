@@ -291,7 +291,7 @@ namespace SPK
 		{
 			if ((*it)->isActive())
 			{
-				int nb = (*it)->updateNumber(deltaTime);
+				unsigned int nb = (*it)->updateNumber(deltaTime);
 				if (nb > 0)
 				{
 					EmitterData data = {*it,nb};
