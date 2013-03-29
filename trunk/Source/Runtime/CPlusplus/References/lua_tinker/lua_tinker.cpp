@@ -403,8 +403,8 @@ bool lua_tinker::read(lua_State *L, int index)
 template<>
 void lua_tinker::read(lua_State *L, int index)
 {
-    L;
-    index;
+    L = L; // unused
+    index = index; // unused
     return;                                            
 }
 

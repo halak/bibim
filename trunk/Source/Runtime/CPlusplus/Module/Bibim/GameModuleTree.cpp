@@ -56,7 +56,7 @@ namespace Bibim
     {
         // Precondition
         BBAssertDebug(parent->tree == this);
-        parent; // for release compile warning
+        BBUnusedParameter(parent);
 
         struct SetContainerAndRegisterID
         {
@@ -85,7 +85,7 @@ namespace Bibim
     {
         // Precondition
         BBAssertDebug(parent->tree == this);
-        parent; // for release compile warning
+        BBUnusedParameter(parent);
 
         struct ResetContainerAndUnregisterID
         {
