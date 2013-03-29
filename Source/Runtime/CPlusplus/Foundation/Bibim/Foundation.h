@@ -75,6 +75,8 @@
 #           define BBStackFree(pointer) (delete [] pointer)
 #       endif
 
+#       define BBUnusedParameter(variable) { variable = variable }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Class Idioms
 
