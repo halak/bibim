@@ -561,7 +561,7 @@
 #  define CURL_PULL_SYS_SOCKET_H     1
 
 
-#elif (defined(__llvm__))
+#elif (defined(__APPLE__))
 #  define CURL_SIZEOF_LONG 4
 #  define CURL_TYPEOF_CURL_OFF_T int64_t
 #  define CURL_FORMAT_CURL_OFF_T "lld"
