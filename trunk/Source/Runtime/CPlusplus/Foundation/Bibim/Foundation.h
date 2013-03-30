@@ -10,12 +10,11 @@
 
 #       if (defined(WINDOWS) || defined(WIN32) || defined(WIN64))
 #           define BIBIM_PLATFORM_WINDOWS
-// #        define BIBIM_USE_DIRECTX9
-// #        define BIBIM_USE_OPENGL2
-// #        define BIBIM_USE_OPENGLES2
+#           define BIBIM_USE_DIRECTX9
 #       elif (defined(ANDROID))
 #           define BIBIM_PLATFORM_UNIX
 #           define BIBIM_PLATFORM_ANDROID
+#           define BIBIM_USE_OPENGLES2
 #       elif (defined(__APPLE__))
 #           define BIBIM_PLATFORM_UNIX
 #           define BIBIM_PLATFORM_IOS

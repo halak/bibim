@@ -3,6 +3,7 @@
 #include <Bibim/Assert.h>
 #include <Bibim/AudioDevice.Irrklang.h>
 #include <Bibim/Math.h>
+#include <irrklang.h>
 using namespace irrklang;
 
 namespace Bibim

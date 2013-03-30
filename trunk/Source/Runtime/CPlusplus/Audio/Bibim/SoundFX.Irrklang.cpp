@@ -4,10 +4,22 @@
 #include <Bibim/AudioDevice.Irrklang.h>
 #include <Bibim/AutoLocker.h>
 #include <Bibim/Math.h>
+#include <irrklang.h>
 using namespace irrklang;
 
 namespace Bibim
 {
+    class SoundFX::EventListener : public irrklang::ISoundStopEventReceiver
+    {
+        public:
+            EventListener(SoundFX* sfx);
+
+            virtual void OnSoundStopped(irrklang::ISound* sound, irrklang::E_STOP_EVENT_CAUSE reason, void* userData);
+
+        private:
+            SoundFX* sfx;
+    };
+
     SoundFX::SoundFX()
         : audioDevice(nullptr),
           volume(1.0f),

@@ -6,8 +6,9 @@
 #   include <Bibim/TimelineGameModule.h>
 #   include <Bibim/Lock.h>
 #   include <Bibim/String.h>
-#   include <irrklang.h>
 #   include <vector>
+
+    namespace irrklang { class ISound; };
 
     namespace Bibim
     {
@@ -39,16 +40,7 @@
                 void SetMute(bool value);
 
             private:
-                class EventListener : public irrklang::ISoundStopEventReceiver
-                {
-                    public:
-                        EventListener(SoundFX* sfx);
-
-                        virtual void OnSoundStopped(irrklang::ISound* sound, irrklang::E_STOP_EVENT_CAUSE reason, void* userData);
-
-                    private:
-                        SoundFX* sfx;
-                };
+                class EventListener;
 
             private:
                 typedef std::vector<irrklang::ISound*> SoundCollection;

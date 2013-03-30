@@ -18,10 +18,9 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\..\..\Product\Windows\Lib"
-			IntermediateDirectory="(Build)\$(PlatformName)\Bibim.Runtime.$(ConfigurationName).VC9"
+			OutputDirectory="..\..\..\Product\Lib\$(PlatformName)\$(ConfigurationName)\VC9"
+			IntermediateDirectory="(Build)\Runtime\$(PlatformName)\$(ConfigurationName)\VC9"
 			ConfigurationType="4"
-			InheritedPropertySheets=".\Bibim.vsprops;.\Bibim.Debug.DX9.vsprops"
 			CharacterSet="2"
 			>
 			<Tool
@@ -42,8 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
+				AdditionalIncludeDirectories="&quot;$(DXSDK_DIR)Include&quot;;&quot;.\Foundation&quot;;&quot;.\Module&quot;;&quot;.\Component&quot;;&quot;.\Asset&quot;;&quot;.\Animation&quot;;&quot;.\Audio&quot;;&quot;.\Collision2D&quot;;&quot;.\Diagnostics&quot;;&quot;.\FileSystem&quot;;&quot;.\Framework&quot;;&quot;.\Gameplay&quot;;&quot;.\GFX&quot;;&quot;.\Graphics&quot;;&quot;.\Input&quot;;&quot;.\IPC&quot;;&quot;.\Net&quot;;&quot;.\Scripting&quot;;&quot;.\Startup&quot;;&quot;.\Threading&quot;;&quot;.\Time&quot;;&quot;.\Typography&quot;;&quot;.\UI&quot;;&quot;.\References\lua-5.1.5\src&quot;;&quot;.\References\lua_tinker&quot;;&quot;.\References\utf8_v2_3_4\source&quot;;&quot;.\References\zlib-1.2.7&quot;;&quot;.\References\lpng1513&quot;;&quot;.\References\freetype-2.4.4\include&quot;;&quot;.\References\curl-7.29.0\include&quot;;&quot;.\References\rapidjson\include&quot;;&quot;.\References\irrKlang-1.4.0\include&quot;;&quot;.\References\SPARK-1.5.5\include&quot;;&quot;.\References\StormLib\src&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -61,7 +60,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\Bibim.Runtime.$(ConfigurationName).VC9.lib"
+				OutputFile="$(OutDir)\Bibim.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -77,14 +76,14 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine=""
 			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\..\..\Product\Windows\Lib"
-			IntermediateDirectory="(Build)\$(PlatformName)\Bibim.Runtime.$(ConfigurationName).VC9"
+			OutputDirectory="..\..\..\Product\Lib\$(PlatformName)\$(ConfigurationName)\VC9"
+			IntermediateDirectory="(Build)\Runtime\$(PlatformName)\$(ConfigurationName)\VC9"
 			ConfigurationType="4"
-			InheritedPropertySheets=".\Bibim.vsprops;.\Bibim.Release.DX9.vsprops"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
 			>
@@ -108,8 +107,8 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\zlib-1.2.7&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\lpng1513&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\freetype-2.4.4\include&quot;;&quot;$(BIBIM_DIR)Source\Runtime\CPlusplus\References\curl-7.29.0\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
+				AdditionalIncludeDirectories="&quot;$(DXSDK_DIR)Include&quot;;.\Foundation;.\Module;.\Component;.\Asset;.\Animation;.\Audio;.\Collision2D;.\Diagnostics;.\FileSystem;.\Framework;.\Gameplay;.\GFX;.\Graphics;.\Input;.\IPC;.\Net;.\Scripting;.\Startup;.\Threading;.\Time;.\Typography;.\UI;&quot;.\References\lua-5.1.5\src&quot;;.\References\lua_tinker;.\References\utf8_v2_3_4\source;&quot;.\References\zlib-1.2.7&quot;;.\References\lpng1513;&quot;.\References\freetype-2.4.4\include&quot;;&quot;.\References\curl-7.29.0\include&quot;;.\References\rapidjson\include;&quot;.\References\irrKlang-1.4.0\include&quot;;&quot;.\References\SPARK-1.5.5\include&quot;;.\References\StormLib\src"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -126,7 +125,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\Bibim.Runtime.$(ConfigurationName).VC9.lib"
+				OutputFile="$(OutDir)\Bibim.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -142,6 +141,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine=""
 			/>
 		</Configuration>
 	</Configurations>
@@ -3294,10 +3294,6 @@
 		</File>
 		<File
 			RelativePath=".\Foundation\Bibim\FWD.h"
-			>
-		</File>
-		<File
-			RelativePath=".\Foundation\Bibim\PCH.h"
 			>
 		</File>
 	</Files>

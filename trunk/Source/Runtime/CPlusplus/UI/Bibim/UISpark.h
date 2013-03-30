@@ -9,6 +9,8 @@
 #   include <Bibim/Timeline.h>
 #   include <vector>
 
+    namespace SPK { class System; class Group; class Emitter; class Modifier; class Zone; };
+
     namespace Bibim
     {
         class UISpark : public UIVisual

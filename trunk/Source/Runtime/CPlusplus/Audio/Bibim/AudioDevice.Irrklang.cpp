@@ -3,6 +3,7 @@
 #include <Bibim/Assert.h>
 #include <Bibim/MPQ.h>
 #include <Bibim/MPQStream.h>
+#include <irrklang.h>
 using namespace irrklang;
 
 namespace Bibim
