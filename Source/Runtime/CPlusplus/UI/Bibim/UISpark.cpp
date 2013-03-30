@@ -9,6 +9,10 @@
 #include <Bibim/UIDrawingContext.h>
 #include <Bibim/UIPickingContext.h>
 #include <Bibim/UIWindow.h>
+#pragma warning(push)
+#pragma warning(disable : 4100)
+#include <SPK.h>
+#pragma warning(pop)
 using namespace SPK;
 
 namespace Bibim

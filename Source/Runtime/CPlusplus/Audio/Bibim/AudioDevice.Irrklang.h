@@ -5,7 +5,8 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
 #   include <Bibim/String.h>
-#   include <irrklang.h>
+
+    namespace irrklang { class ISoundEngine; }
 
     namespace Bibim
     {

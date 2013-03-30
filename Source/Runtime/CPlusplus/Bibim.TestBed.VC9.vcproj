@@ -327,6 +327,10 @@
 			>
 		</File>
 		<File
+			RelativePath=".\Foundation\Bibim\PCH.h"
+			>
+		</File>
+		<File
 			RelativePath=".\TestBed\Bibim\PipeStream.cpp"
 			>
 		</File>
