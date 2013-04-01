@@ -1,8 +1,9 @@
 #import "BibimViewController.h"
 #include <Bibim/GameFramework.h>
 #include <Bibim/GameWindow.h>
-#include <Bibim/Point2.h>
+#include <Bibim/IME.h>
 #include <Bibim/Environment.h>
+#include <Bibim/Point2.h>
 using namespace Bibim;
 
 @interface BibimViewController () {
@@ -96,6 +97,63 @@ using namespace Bibim;
     }
 }
 
+
+
+#pragma mark - update & draw
+
+- (void)update
+{
+    game->update();
+    
+    static int counter = 0;
+    if (counter++ % 30 == 0) {
+        IME* ime = game->GetIME();
+        if (ime && ime->HasMobileRequest()) {
+            IME::Request request = ime->PopMobileRequest();
+            NSString* title = [NSString stringWithUTF8String:request.GetTitle().CStr()];
+            NSString* description = [NSString stringWithUTF8String:request.GetDescription().CStr()];
+            NSString* text = [NSString stringWithUTF8String:request.GetText().CStr()];
+            
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title
+                                                            message:description
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:@"Cancel", nil];
+            [alert setTag:request.GetID()];
+            
+            if (request.GetFormat() == IME::Password) {
+                [alert setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+            } else {
+                [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+            }
+            
+            [alert show];
+            
+            UITextField* textField = [alert textFieldAtIndex:0];
+            [textField setText:text];
+            UIKeyboardType keyboardType = UIKeyboardTypeDefault;
+            switch (request.GetFormat()) {
+                case IME::Number:
+                    keyboardType = UIKeyboardTypeNumberPad;
+                    break;
+                case IME::Email:
+                    keyboardType = UIKeyboardTypeEmailAddress;
+                    break;
+            }
+            
+            [textField setKeyboardType:keyboardType];
+        }
+    }
+}
+
+- (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
+{
+    game->draw();
+}
+
+
+#pragma mark - Input
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     Point2 xy = [self touchPoint:[touches anyObject]];
@@ -139,18 +197,24 @@ using namespace Bibim;
     game->GetWindow()->SetSize(Point2(w, h));
 }
 
-
-#pragma mark - GLKView and GLKViewController delegate methods
-
-- (void)update
+#pragma mark - UIAlertViewDelegate
+- (void)alertViewCancel:(UIAlertView *)alertView
 {
-    game->update();
+    if (IME* ime = game->GetIME()) {
+        ime->CancelMobileEdit(alertView.tag);
+    }
 }
 
-- (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    game->draw();
+    if (IME* ime = game->GetIME()) {
+        if (buttonIndex == alertView.cancelButtonIndex) {
+            UITextField* textField = [alertView textFieldAtIndex:0];
+            ime->SubmitMobileEdit(alertView.tag, [textField.text UTF8String]);
+        } else {
+            ime->CancelMobileEdit(alertView.tag);
+        }
+    }
 }
-
 
 @end
