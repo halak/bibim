@@ -66,11 +66,15 @@ namespace Bibim
         if (editorDescription.IsEmpty())
             editorDescription = GetPlaceholder();
 
+        int maxLength = GetMaxLength();
+        if (GetFormat() == IME::Number)
+            maxLength = Math::Min(maxLength, 12);
+
         ime->Edit(GetText(),
                   GetEditorTitle(),
                   editorDescription,
                   GetFormat(),
-                  GetMaxLength(),
+                  maxLength,
                   this);
 
         return true;

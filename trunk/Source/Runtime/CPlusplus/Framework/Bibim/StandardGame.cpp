@@ -1150,6 +1150,7 @@ namespace Bibim
                 static const String UIImageClassName = "UIImage";
                 static const String UILabelClassName = "UILabel";
                 static const String UIButtonClassName = "UIButton";
+                static const String UIEditTextClassName = "UIEditText";
 
                 if (UIImageClassName.EqualsIgnoreCase(findingClassName))
                     findingClassIDs[0] = UIImage::ClassID;
@@ -1163,6 +1164,10 @@ namespace Bibim
                     findingClassIDs[0] = UIButton::ClassID;
                     findingClassIDs[1] = UICheckBox::ClassID;
                     findingClassIDs[2] = UIRadioButton::ClassID;
+                }
+                else if (UIEditTextClassName.EqualsIgnoreCase(findingClassName))
+                {
+                    findingClassIDs[0] = UIEditText::ClassID;
                 }
             }
 
