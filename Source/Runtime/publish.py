@@ -163,7 +163,7 @@ def get_dependencies(platform, target, environment):
         if (debug):
             l += ['d3dx9d.lib']
         elif (release):
-            l += ['d3dx9d.lib']
+            l += ['d3dx9.lib']
      
     # ZLib & PNG & FreeType & Lua & SPARK
     if (win32):
