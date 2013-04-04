@@ -140,11 +140,59 @@ namespace Bibim
                     return 1;
                 }
             }
+
+            static int Split(lua_State* L)
+            {
+                size_t selfLength = 0;
+                size_t separatorLength = 0;                
+                const char* self = lua_tolstring(L, 1, &selfLength);
+                const char* separator = lua_tolstring(L, 2, &separatorLength);
+
+                int lastAddedIndex = 0;
+
+                lua_newtable(L);
+
+                size_t start = 0;
+                const size_t end = selfLength - separatorLength + 1;
+                for (size_t i = 0; i < end;)
+                {
+                    bool matched = true;
+                    for (size_t k = 0; k < separatorLength; k++)
+                    {
+                        if (self[i + k] != separator[k])
+                        {
+                            matched = false;
+                            break;
+                        }
+                    }
+
+                    if (matched)
+                    {
+                        lua_pushinteger(L, ++lastAddedIndex);
+                        lua_pushlstring(L, &self[start], i - start);
+                        lua_settable(L, -3);
+                        i += separatorLength;
+                        start = i;
+                    }
+                    else
+                        i++;
+                }
+
+                if (start < selfLength)
+                {
+                    lua_pushinteger(L, ++lastAddedIndex);
+                    lua_pushlstring(L, &self[start], selfLength - start);
+                    lua_settable(L, -3);
+                }
+
+                return 1;
+            }
         };
 
         const struct luaL_reg additionalStringLib [] = {
             { "startswith", &AdditionalStringLibrary::StartsWith },
             { "endswith", &AdditionalStringLibrary::EndsWith },
+            { "split", &AdditionalStringLibrary::Split },
             { NULL, NULL}  /* sentinel */
         };
     
