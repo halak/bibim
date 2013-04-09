@@ -602,6 +602,7 @@ namespace Bibim
             viewTransform = Matrix4::Translation(Vector3(0.0f, -viewportSize.Y, 0.0f)) * viewTransform;
 
             projectionTransform = Matrix4::PerspectiveFov(fieldOfView, aspect, 0.1f, 10000.0f);
+            // projectionTransform = Matrix4::Ortho(viewportSize.X, viewportSize.Y, 0.1f, 10000.0f);
 
             viewTransformInv = Matrix4::Inversion(viewTransform);
             projectionTransformInv = Matrix4::Inversion(projectionTransform);

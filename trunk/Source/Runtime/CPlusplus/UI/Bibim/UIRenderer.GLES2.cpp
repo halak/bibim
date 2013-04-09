@@ -87,6 +87,16 @@ namespace Bibim
         DrawArrays(GL_LINE_STRIP, count);
     }
 
+    void UIRenderer::DrawDebugLines(int count, const Vector2* p, Color color)
+    {
+        DrawLines(count, p, color);
+    }
+
+    void UIRenderer::DrawDebugLines(int count, const Vector2* p, const Color* c)
+    {
+        DrawLines(count, p, c);
+    }
+
     void UIRenderer::DrawTriangles(int count, const Vector2* p, Color color)
     {
         if (count == 0)

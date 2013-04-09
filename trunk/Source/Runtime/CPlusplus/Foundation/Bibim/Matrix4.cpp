@@ -395,6 +395,18 @@ namespace Bibim
                        0.0f, 0.0f, -nearZ * farZ / distance,  0.0f);
     }
 
+    Matrix4 Matrix4::Ortho(float width, float height, float nearZ, float farZ)
+    {
+        const float w = 2.0f / width;
+        const float h = 2.0f / height;
+        const float dz = farZ - nearZ;
+
+        return Matrix4(w,    0.0f, 0.0f,         0.0f,
+                       0.0f, h,    0.0f,         0.0f,
+                       0.0f, 0.0f, 1.0f / dz,    0.0f,
+                       0.0f, 0.0f, -nearZ / dz,  1.0f);
+    }
+
     Matrix4 operator * (float left, const Matrix4& right)
     {
         return right * left;

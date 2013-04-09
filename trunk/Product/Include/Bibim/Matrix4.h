@@ -55,6 +55,7 @@
             static Matrix4 Transpose(const Matrix4& value);
             static Matrix4 LookAt(Vector3 eye, Vector3 at, Vector3 up);
             static Matrix4 PerspectiveFov(float fov, float aspect, float nearZ, float farZ);
+            static Matrix4 Ortho(float width, float height, float nearZ, float farZ);
 
             friend Matrix4 operator * (float left, const Matrix4& right);
 

@@ -73,21 +73,6 @@ namespace Bibim
         }
     }
 
-    void UISineCurveEffect::DrawLines(UIRenderer* renderer, int count, Vector2* p, Color color)
-    {
-        Base::DrawLines(renderer, count, p, color);
-    }
-
-    void UISineCurveEffect::DrawLines(UIRenderer* renderer, int count, Vector2* p, Color* c)
-    {
-        Base::DrawLines(renderer, count, p, c);
-    }
-
-    void UISineCurveEffect::DrawTriangles(UIRenderer* renderer, int count, Vector2* p, Color color)
-    {
-        Base::DrawTriangles(renderer, count, p, color);
-    }
-
     void UISineCurveEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color)
     {
         switch (form)

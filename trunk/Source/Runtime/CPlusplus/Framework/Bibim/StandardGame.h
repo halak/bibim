@@ -23,6 +23,9 @@
                 inline Color GetClearColor() const;
                 inline void SetClearColor(Color value);
 
+                inline bool GetDebugDisplay() const;
+                inline void SetDebugDisplay(bool value);
+
                 inline Preferences* GetPreferences() const;
                 inline Keyboard* GetKeyboard() const;
                 inline Mouse* GetMouse() const;
@@ -85,6 +88,7 @@
             private:
                 Point2 contentSize;
                 Color clearColor;
+                bool debugDisplay;
                 Preferences* preferences;
                 Keyboard* keyboard;
                 Mouse* mouse;

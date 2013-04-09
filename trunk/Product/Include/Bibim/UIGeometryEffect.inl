@@ -20,6 +20,16 @@ namespace Bibim
         renderer->DrawLines(count, p, c);
     }
 
+    void UIGeometryEffect::DrawDebugLines(UIRenderer* renderer, int count, Vector2* p, Color color)
+    {
+        renderer->DrawLines(count, p, color);
+    }
+
+    void UIGeometryEffect::DrawDebugLines(UIRenderer* renderer, int count, Vector2* p, Color* c)
+    {
+        renderer->DrawLines(count, p, c);
+    }
+
     void UIGeometryEffect::DrawTriangles(UIRenderer* renderer, int count, Vector2* p, Color color)
     {
         renderer->DrawTriangles(count, p, color);

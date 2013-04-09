@@ -37,10 +37,12 @@
 #include <Bibim/UIBoundsContext.h>
 #include <Bibim/UICheckBox.h>
 #include <Bibim/UIDrawingContext.h>
+#include <Bibim/UIDocument.h>
 #include <Bibim/UIEditText.h>
 #include <Bibim/UIEventMap.h>
 #include <Bibim/UIFunctionTable.h>
 #include <Bibim/UIFunctionEventHandler.h>
+#include <Bibim/UIHandledDrawingContext.h>
 #include <Bibim/UIImage.h>
 #include <Bibim/UILabel.h>
 #include <Bibim/UIKeyboardEventDispatcher.h>
@@ -61,6 +63,7 @@ namespace Bibim
 
     StandardGame::StandardGame()
         : clearColor(Colors::Black),
+          debugDisplay(false),
           storage(nullptr),
           fontLibrary(nullptr),
           uiDomain(nullptr)
@@ -73,6 +76,7 @@ namespace Bibim
         : GameFramework(windowSize.X, windowSize.Y),
           contentSize(0, 0),
           clearColor(Colors::Black),
+          debugDisplay(false),
           storage(nullptr),
           fontLibrary(nullptr),
           uiDomain(nullptr)
@@ -85,6 +89,7 @@ namespace Bibim
         : GameFramework(windowSize.X, windowSize.Y),
           contentSize(contentSize),
           clearColor(Colors::Black),
+          debugDisplay(false),
           storage(nullptr),
           uiDomain(nullptr)
     {
@@ -230,8 +235,12 @@ namespace Bibim
     {
         if (clearColor.A > 0)
             GetGraphicsDevice()->Clear(clearColor);
+        
+        UIHandledDrawingContext::Handler* handler = nullptr;
+        if (GetDebugDisplay())
+            handler = UIHandledDrawingContext::BoundsVisualizer::GetInstance();
 
-        UIDrawingContext context(uiRenderer);
+        UIHandledDrawingContext context(uiRenderer, handler);
         context.Draw(uiDomain->GetRoot());
         if (recentLog.IsEmpty() == false)
         {
@@ -411,6 +420,11 @@ namespace Bibim
         if (keyboard.Contains(Key::F2))
         {
             ReloadUI();
+            return true;
+        }
+        else if (keyboard.Contains(Key::F3))
+        {
+            SetDebugDisplay(!GetDebugDisplay());
             return true;
         }
         else if (keyboard.Contains(Key::F4))
@@ -1151,6 +1165,7 @@ namespace Bibim
                 static const String UILabelClassName = "UILabel";
                 static const String UIButtonClassName = "UIButton";
                 static const String UIEditTextClassName = "UIEditText";
+                static const String UIDocumentClassName = "UIDocument";
 
                 if (UIImageClassName.EqualsIgnoreCase(findingClassName))
                     findingClassIDs[0] = UIImage::ClassID;
@@ -1168,6 +1183,10 @@ namespace Bibim
                 else if (UIEditTextClassName.EqualsIgnoreCase(findingClassName))
                 {
                     findingClassIDs[0] = UIEditText::ClassID;
+                }
+                else if (UIDocumentClassName.EqualsIgnoreCase(findingClassName))
+                {
+                    findingClassIDs[0] = UIDocument::ClassID;
                 }
             }
 

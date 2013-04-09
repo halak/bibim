@@ -41,11 +41,6 @@
                 inline Form GetForm() const;
                 void SetForm(Form value);
 
-                virtual void DrawLines(UIRenderer* renderer, int count, Vector2* p, Color color);
-                virtual void DrawLines(UIRenderer* renderer, int count, Vector2* p, Color* c);
-
-                virtual void DrawTriangles(UIRenderer* renderer, int count, Vector2* p, Color color);
-
                 virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color);
                 virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, Vector2* uv,  Texture2D* texture);
                 virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, Vector2* uv1, Texture2D* texture1, Vector2* uv2, Texture2D* texture2);

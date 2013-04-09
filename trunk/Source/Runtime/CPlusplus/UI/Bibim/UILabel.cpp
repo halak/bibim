@@ -62,7 +62,7 @@ namespace Bibim
         if (font)
         {
             UpdateFontString();
-            return Vector2(fontString.GetTotalWidth(), fontString.GetFont()->GetLineHeight());
+            return fontString.GetSize() + Vector2(font->GetShadowOffset().X, 0.0f);
         }
         else
             return Vector2::Zero;

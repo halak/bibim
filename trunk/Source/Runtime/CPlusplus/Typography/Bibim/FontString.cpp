@@ -3,6 +3,7 @@
 #include <Bibim/Assert.h>
 #include <Bibim/Font.h>
 #include <Bibim/Glyph.h>
+#include <Bibim/Math.h>
 #include <utf8.h>
 
 namespace Bibim
@@ -12,14 +13,14 @@ namespace Bibim
     FontString::FontString()
         : text(String::Empty),
           font(nullptr),
-          totalWidth(0.0f)
+          size(Vector2::Zero)
     {
     }
 
     FontString::FontString(Font* font, const char* text)
         : text(text),
           font(font),
-          totalWidth(0.0f)
+          size(Vector2::Zero)
     {
         FillGlyphs();
     }
@@ -27,7 +28,7 @@ namespace Bibim
     FontString::FontString(Font* font, const String& text)
         : text(text),
           font(font),
-          totalWidth(0.0f)
+          size(Vector2::Zero)
     {
         FillGlyphs();
     }
@@ -35,7 +36,7 @@ namespace Bibim
     FontString::FontString(const FontString& original)
         : text(original.text),
           font(original.font),
-          totalWidth(original.totalWidth),
+          size(original.size),
           regularGlyphs(original.regularGlyphs),
           strokedGlyphs(original.strokedGlyphs),
           shadowGlyphs(original.shadowGlyphs)
@@ -61,7 +62,7 @@ namespace Bibim
 
     void FontString::FillGlyphs()
     {
-        totalWidth = 0.0f;
+        size = Vector2::Zero;
         regularGlyphs.clear();
         strokedGlyphs.clear();
         shadowGlyphs.clear();
@@ -72,12 +73,62 @@ namespace Bibim
         std::vector<wchar_t> wideCharacters;
         wideCharacters.reserve(text.GetLength());
         utf8::utf8to16(&text.CStr()[0], &text.CStr()[text.GetLength()], std::back_inserter(wideCharacters));
+        
+        int lineCount = 1;
+        float lineWidth = 0.0f;
+        class Measurer
+        {
+            public:
+                Measurer()
+                    : lastCode(L'\0'),
+                      lineWidth(0.0f),
+                      lineCount(1),
+                      maxLineWidth(0.0f)
+                {
+                }
+
+                void Step(float width)
+                {
+                    lineWidth += width;
+                }
+
+                void Step(wchar_t code, float width)
+                {
+                    Step(width);
+
+                    if ((code == L'\r') || 
+                        (code == L'\n' && lastCode != L'\r'))
+                    {
+                        maxLineWidth = Math::Max(maxLineWidth, lineWidth);
+                        lineWidth = 0.0f;
+                        lineCount++;
+                    }
+                
+                    lastCode = code;
+                }
+
+                float GetMaxLineWidth() const
+                {
+                    if (maxLineWidth > 0.0f)
+                        return maxLineWidth;
+                    else
+                        return lineWidth;
+                }
+
+                int GetLineCount() const { return lineCount; }
+
+            private:
+                wchar_t lastCode;
+                float lineWidth;
+                int lineCount;
+                float maxLineWidth;
+        } measurer;
 
         const float spacing = font->GetSpacing();
         regularGlyphs.reserve(wideCharacters.size());
         if (font->GetStrokeSize() > 0.0f)
         {
-            totalWidth += font->GetStrokeSize();
+            measurer.Step(font->GetStrokeSize() * 2.0f);
             strokedGlyphs.reserve(wideCharacters.size());
             if (font->GetShadowSize() > 0)
             {
@@ -87,7 +138,7 @@ namespace Bibim
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
                     strokedGlyphs.push_back(font->GetStrokedGlyph(*it));
                     shadowGlyphs.push_back(font->GetShadowGlyph(*it));
-                    totalWidth += shadowGlyphs.back()->GetAdvance().X * spacing;
+                    measurer.Step(*it, shadowGlyphs.back()->GetAdvance().X * spacing);
                 }
             }
             else
@@ -96,10 +147,9 @@ namespace Bibim
                 {
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
                     strokedGlyphs.push_back(font->GetStrokedGlyph(*it));
-                    totalWidth += strokedGlyphs.back()->GetAdvance().X * spacing;
+                    measurer.Step(*it, strokedGlyphs.back()->GetAdvance().X * spacing);
                 }
             }
-            totalWidth += font->GetStrokeSize();
         }
         else
         {
@@ -110,7 +160,7 @@ namespace Bibim
                 {
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
                     shadowGlyphs.push_back(font->GetShadowGlyph(*it));
-                    totalWidth += shadowGlyphs.back()->GetAdvance().X * spacing;
+                    measurer.Step(*it, shadowGlyphs.back()->GetAdvance().X * spacing);
                 }
             }
             else
@@ -118,10 +168,13 @@ namespace Bibim
                 for (std::vector<wchar_t>::const_iterator it = wideCharacters.begin(); it != wideCharacters.end(); it++)
                 {
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
-                    totalWidth += regularGlyphs.back()->GetAdvance().X * spacing;
+                    measurer.Step(*it, regularGlyphs.back()->GetAdvance().X * spacing);
                 }
             }
         }
+
+        size.X = measurer.GetMaxLineWidth();
+        size.Y = static_cast<float>(measurer.GetLineCount()) * font->GetLineHeight();
     }
 
     FontString& FontString::operator = (const char* text)
@@ -142,7 +195,7 @@ namespace Bibim
     {
         text = original.text;
         font = original.font;
-        totalWidth = original.totalWidth;
+        size = original.size;
         regularGlyphs = original.regularGlyphs;
         strokedGlyphs = original.strokedGlyphs;
         shadowGlyphs = original.shadowGlyphs;

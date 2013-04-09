@@ -227,7 +227,7 @@ namespace Bibim.UI
 
         private static void Write(AssetStreamWriter writer, UIDocument o, List<object> objectDictionary)
         {
-            Write(writer, (UIVisual)o, objectDictionary);
+            Write(writer, (UIPanel)o, objectDictionary);
             writer.WriteBibimString(o.Text);
         }
 

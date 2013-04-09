@@ -19,6 +19,9 @@
                 inline virtual void DrawLines(UIRenderer* renderer, int count, Vector2* p, Color color);
                 inline virtual void DrawLines(UIRenderer* renderer, int count, Vector2* p, Color* c);
 
+                inline virtual void DrawDebugLines(UIRenderer* renderer, int count, Vector2* p, Color color);
+                inline virtual void DrawDebugLines(UIRenderer* renderer, int count, Vector2* p, Color* c);
+
                 inline virtual void DrawTriangles(UIRenderer* renderer, int count, Vector2* p, Color color);
 
                 inline virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color);

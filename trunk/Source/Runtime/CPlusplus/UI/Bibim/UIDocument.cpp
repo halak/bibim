@@ -86,8 +86,8 @@ namespace Bibim
         {
             switch (c)
             {
-                case '{': return '}';
                 case '[': return ']';
+                case '<': return '>';
                 case '(': return ')';
                 default:  return '\0';
             }
@@ -150,6 +150,7 @@ namespace Bibim
             return;
 
         stylesheetRevision = stylesheet->GetRevision();
+        lastBoundary = -1.0f; // invalid value
 
         std::stack<Font*> fontStack;
         if (const StyleSheet::Decoration* decoration = stylesheet->GetDecoration(String::Empty))
@@ -163,14 +164,14 @@ namespace Bibim
         {
             const int current = en.GetCurrent();
             const int startIndex = en.GetCurrentIndex();
-            if (current == '{' ||
+            if (current == '[' ||
                 current == '(' ||
-                current == '[')
+                current == '<')
             {
                 if (en.MoveNext() == false)
                     break;
                 if (current != en.GetCurrent())
-                    break;
+                    continue;
 
                 // 특수 문자들을 만나기 전 문자열을 일단 추가합니다.
                 if (startIndex != textIndex)
@@ -187,7 +188,7 @@ namespace Bibim
                 
                     switch (current)
                     {
-                        case '{':
+                        case '[':
                             ProcessDecoration(name, nameLength, fontStack);
                             break;
                         case '(':
@@ -198,7 +199,7 @@ namespace Bibim
                                 ascenders.push_back(0.0f);
                             }
                             break;
-                        case '[':
+                        case '<':
                             break;
                     }
                 

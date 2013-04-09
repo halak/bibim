@@ -393,6 +393,11 @@ def publish_library(platform, target, environment):
 
             
 if (__name__ == '__main__'):
+    import sys
+    header_only = (len(sys.argv) >= 2 and sys.argv[1] == 'header-only')
+    
+    print('publish headers...')
+
     for module in MODULES:
         copy_headers(module)
     copy_references_header('Cplusplus/References/lua-5.1.5/src/lua.h')
@@ -404,11 +409,13 @@ if (__name__ == '__main__'):
     copy_references_header('ObjectiveC/Bibim/Bibim/BibimAppDelegate.h')
     copy_references_header('ObjectiveC/Bibim/Bibim/BibimViewController.h')
     
-    publish_library(PLATFORM.WIN32, TARGET.DEBUG,   ENVIRONMENT.VC9)
-    publish_library(PLATFORM.WIN32, TARGET.RELEASE, ENVIRONMENT.VC9)
+    if (not header_only):
+        print('publish libraries...')
+        
+        publish_library(PLATFORM.WIN32, TARGET.DEBUG,   ENVIRONMENT.VC9)
+        publish_library(PLATFORM.WIN32, TARGET.RELEASE, ENVIRONMENT.VC9)
 
-    publish_library(PLATFORM.WIN32,   TARGET.DEBUG,   ENVIRONMENT.VC10)
-    publish_library(PLATFORM.WIN32,   TARGET.RELEASE, ENVIRONMENT.VC10)
-    publish_library(PLATFORM.ANDROID, TARGET.DEBUG,   ENVIRONMENT.VC10)
-    publish_library(PLATFORM.ANDROID, TARGET.RELEASE, ENVIRONMENT.VC10)
-    
+        publish_library(PLATFORM.WIN32,   TARGET.DEBUG,   ENVIRONMENT.VC10)
+        publish_library(PLATFORM.WIN32,   TARGET.RELEASE, ENVIRONMENT.VC10)
+        publish_library(PLATFORM.ANDROID, TARGET.DEBUG,   ENVIRONMENT.VC10)
+        publish_library(PLATFORM.ANDROID, TARGET.RELEASE, ENVIRONMENT.VC10)

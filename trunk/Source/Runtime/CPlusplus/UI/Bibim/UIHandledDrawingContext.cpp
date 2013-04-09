@@ -1,6 +1,14 @@
 ﻿#include <Bibim/PCH.h>
 #include <Bibim/UIHandledDrawingContext.h>
+#include <Bibim/BitMask.h>
+#include <Bibim/Colors.h>
 #include <Bibim/Math.h>
+#include <Bibim/UIVisual.h>
+#include <Bibim/UIImage.h>
+#include <Bibim/UIDocument.h>
+#include <Bibim/UILabel.h>
+#include <Bibim/UISprite.h>
+#include <Bibim/UIWindow.h>
 
 namespace Bibim
 {
@@ -10,7 +18,7 @@ namespace Bibim
     {
     }
 
-    UIHandledDrawingContext::UIHandledDrawingContext(UIRenderer* renderer, IHandler* handler)
+    UIHandledDrawingContext::UIHandledDrawingContext(UIRenderer* renderer, Handler* handler)
         : UIDrawingContext(renderer),
           handler(handler)
     {
@@ -46,9 +54,6 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    Color UIHandledDrawingContext::BoundsVisualizer::LineColor = Color(255, 255, 255);
-    float UIHandledDrawingContext::BoundsVisualizer::LineWidth = 2.0f;
-
     UIHandledDrawingContext::BoundsVisualizer::BoundsVisualizer()
     {
     }
@@ -57,28 +62,56 @@ namespace Bibim
     {
     }
 
-    Color UIHandledDrawingContext::BoundsVisualizer::GetLineColor()
+    namespace 
     {
-        return LineColor;
-    }
-    
-    void UIHandledDrawingContext::BoundsVisualizer::SetLineColor(Color value)
-    {
-        LineColor = value;
-    }
+        static Color GetBoundsColor(UIVisual* visual)
+        {
+            if (visual == nullptr)
+                return Colors::TransparentBlack;
 
-    float UIHandledDrawingContext::BoundsVisualizer::GetLineWidth()
-    {
-        return LineWidth;
-    }
+            switch (visual->GetClassID())
+            {
+                case UIImage::ClassID:
+                    return Colors::Blue;
+                case UILabel::ClassID:
+                    return Colors::Yellow;
+                case UISprite::ClassID:
+                    return Colors::Cyan;
+                case UIDocument::ClassID:
+                    return Colors::YellowGreen;
+                case UIWindow::ClassID:
+                    return Colors::White;
+            }
 
-    void UIHandledDrawingContext::BoundsVisualizer::SetLineWidth(float value)
-    {
-        LineWidth = Math::Max(value, 0.0f);
+            if (visual->IsPanel())
+                return Colors::Gray;
+            else
+                return Colors::Black;
+        }
     }
 
     void UIHandledDrawingContext::BoundsVisualizer::OnVisualBegan(UIHandledDrawingContext& context)
     {
-        context.DrawRect(context.GetCurrentBounds(), LineColor);
+        UIVisual* visual = context.GetCurrentVisual();
+        if (visual->IsPanel())
+        {
+            const Color boundsColor = GetBoundsColor(visual);
+
+            RectF bounds = context.GetCurrentBounds();
+            bounds.Inflate(+1.0f);
+            context.DrawDebugRect(bounds, boundsColor);
+            bounds.Inflate(-1.0f);
+            context.DrawDebugRect(bounds, boundsColor);
+            bounds.Inflate(-1.0f);
+            context.DrawDebugRect(bounds, boundsColor);
+        }
+    }
+
+    void UIHandledDrawingContext::BoundsVisualizer::OnVisualEnded(UIHandledDrawingContext& context)
+    {
+        UIVisual* visual = context.GetCurrentVisual();
+
+        if (visual->IsPanel() == false)
+            context.DrawDebugRect(context.GetCurrentBounds(), GetBoundsColor(visual));
     }
 }
