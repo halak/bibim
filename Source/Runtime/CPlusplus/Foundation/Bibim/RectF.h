@@ -33,6 +33,10 @@
             inline void SetRight(float value);
             inline void SetBottom(float value);
 
+            inline void Inflate(float all);
+            inline void Inflate(float horizontal, float vertical);
+            inline void Inflate(float left, float top, float right, float bottom);
+
             inline bool Contains(Vector2 p) const;
             bool Intersects(const RectF& other) const;
 

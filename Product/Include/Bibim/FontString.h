@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/String.h>
+#   include <Bibim/Vector2.h>
 #   include <vector>
 
     namespace Bibim
@@ -27,7 +28,7 @@
 
                 inline const String& GetText() const;
                 inline Font* GetFont() const;
-                inline float GetTotalWidth() const;
+                inline Vector2 GetSize() const;
                 inline const GlyphCollection& GetRegularGlyphs() const;
                 inline const GlyphCollection& GetStrokedGlyphs() const;
                 inline const GlyphCollection& GetShadowGlyphs() const;
@@ -45,7 +46,7 @@
             private:
                 String  text;
                 FontPtr font;
-                float totalWidth;
+                Vector2 size;
                 GlyphCollection regularGlyphs;
                 GlyphCollection strokedGlyphs;
                 GlyphCollection shadowGlyphs;

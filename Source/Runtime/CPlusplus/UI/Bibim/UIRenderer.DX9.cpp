@@ -180,14 +180,7 @@ namespace Bibim
         }
         else
         {
-            const int numberOfLines = count - 1;
-            Vertex* v = nullptr;
-            vb->Lock(0, sizeof(Vertex) * count, reinterpret_cast<void**>(&v), D3DLOCK_DISCARD);
-            for (int i = 0; i < count; i++)
-                v[i] = Vertex(p[i], d3dColor);
-            vb->Unlock();
-
-            DrawPrimitives(D3DPT_LINESTRIP, numberOfLines);
+            DrawDebugLines(count, p, color);
         }
     }
 
@@ -207,6 +200,30 @@ namespace Bibim
         vb->Unlock();
 
         DrawPrimitives(D3DPT_LINESTRIP, numberOfLines);
+    }
+
+    void UIRenderer::DrawDebugLines(int count, const Vector2* p, Color color)
+    {
+        if (count == 0)
+            return;
+        BBAssert(count > 0 && p);
+
+        Flush();
+
+        const D3DCOLOR d3dColor = color.ToARGB();
+        const int numberOfLines = count - 1;
+        Vertex* v = nullptr;
+        vb->Lock(0, sizeof(Vertex) * count, reinterpret_cast<void**>(&v), D3DLOCK_DISCARD);
+        for (int i = 0; i < count; i++)
+            v[i] = Vertex(p[i], d3dColor);
+        vb->Unlock();
+        
+        DrawPrimitives(D3DPT_LINESTRIP, numberOfLines);
+    }
+
+    void UIRenderer::DrawDebugLines(int count, const Vector2* p, const Color* c)
+    {
+        DrawLines(count, p, c);
     }
 
     void UIRenderer::DrawTriangles(int count, const Vector2* p, Color color)

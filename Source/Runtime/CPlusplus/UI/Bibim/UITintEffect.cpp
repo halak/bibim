@@ -33,6 +33,19 @@ namespace Bibim
         Base::DrawLines(renderer, count, p, c);
     }
 
+    void UITintEffect::DrawDebugLines(UIRenderer* renderer, int count, Vector2* p, Color color)
+    {
+        color *= value;
+        Base::DrawDebugLines(renderer, count, p, color);
+    }
+
+    void UITintEffect::DrawDebugLines(UIRenderer* renderer, int count, Vector2* p, Color* c)
+    {
+        for (int i = 0; i < count; i++)
+            c[i] *= value;
+        Base::DrawDebugLines(renderer, count, p, c);
+    }
+
     void UITintEffect::DrawTriangles(UIRenderer* renderer, int count, Vector2* p, Color color)
     {
         color *= value;

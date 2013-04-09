@@ -23,6 +23,9 @@
                 virtual void DrawLines(UIRenderer* renderer, int count, Vector2* p, Color color);
                 virtual void DrawLines(UIRenderer* renderer, int count, Vector2* p, Color* c);
 
+                virtual void DrawDebugLines(UIRenderer* renderer, int count, Vector2* p, Color color);
+                virtual void DrawDebugLines(UIRenderer* renderer, int count, Vector2* p, Color* c);
+
                 virtual void DrawTriangles(UIRenderer* renderer, int count, Vector2* p, Color color);
 
                 virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color);

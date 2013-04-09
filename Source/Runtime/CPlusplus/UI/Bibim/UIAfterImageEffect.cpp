@@ -90,21 +90,6 @@ namespace Bibim
         }
     }
 
-    void UIAfterImageEffect::DrawLines(UIRenderer* renderer, int count, Vector2* p, Color color)
-    {
-        Base::DrawLines(renderer, count, p, color);
-    }
-
-    void UIAfterImageEffect::DrawLines(UIRenderer* renderer, int count, Vector2* p, Color* c)
-    {
-        Base::DrawLines(renderer, count, p, c);
-    }
-
-    void UIAfterImageEffect::DrawTriangles(UIRenderer* renderer, int count, Vector2* p, Color color)
-    {
-        Base::DrawTriangles(renderer, count, p, color);
-    }
-
     void UIAfterImageEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color)
     {
         Base::DrawQuad(renderer, p, color);

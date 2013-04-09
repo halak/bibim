@@ -89,6 +89,24 @@
         Height = value - Y;
     }
 
+    void RectF::Inflate(float all)
+    {
+        Inflate(all, all, all, all);
+    }
+
+    void RectF::Inflate(float horizontal, float vertical)
+    {
+        Inflate(horizontal, vertical, horizontal, vertical);
+    }
+
+    void RectF::Inflate(float left, float top, float right, float bottom)
+    {
+        X -= left;
+        Y -= top;
+        Width += left + right;
+        Height += top + bottom;
+    }
+
     bool RectF::Contains(Vector2 p) const
     {
         return GetLeft() <= p.X && p.X <= GetRight() &&

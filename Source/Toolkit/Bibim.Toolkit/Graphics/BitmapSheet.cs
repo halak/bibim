@@ -168,14 +168,38 @@ namespace Bibim.Graphics
                     textureAtlases.Add(atlas);
                 }
 
-                Rectangle rectangle = atlas.Allocate(aw, ah);
-                Image.Transform appliedTransform = Image.Transform.Identity;
-                if (rectangle.IsEmpty)
+                Rectangle rectangle;
+                Image.Transform appliedTransform;
+                if (options.HasFlag(Options.RotatableMerging))
                 {
-                    Debug.Assert(options.HasFlag(Options.RotatableMerging));
-                    rectangle = atlas.Allocate(ah, aw);
-                    appliedTransform = Image.Transform.RotateCW90;
+                    if (aw * 4 < ah) // 세로 길이가 지나치게 길면 눕히고나서 붙여봅니다.
+                    {
+                        rectangle = atlas.Allocate(ah, aw);
+                        appliedTransform = Image.Transform.RotateCW90;
+                        if (rectangle.IsEmpty)
+                        {
+                            rectangle = atlas.Allocate(aw, ah);
+                            appliedTransform = Image.Transform.Identity;
+                        }
+                    }
+                    else
+                    {
+                        rectangle = atlas.Allocate(aw, ah);
+                        appliedTransform = Image.Transform.Identity;
+                        if (rectangle.IsEmpty)
+                        {
+                            rectangle = atlas.Allocate(ah, aw);
+                            appliedTransform = Image.Transform.RotateCW90;
+                        }
+                    }
                 }
+                else
+                {
+                    rectangle = atlas.Allocate(aw, ah);
+                    appliedTransform = Image.Transform.Identity;
+                    Trace.Assert(!rectangle.IsEmpty);
+                }
+
 
                 Rectangle bitmapRectangle = Rectangle.FromLTRB(rectangle.Left + margin,
                                                                rectangle.Top + margin,

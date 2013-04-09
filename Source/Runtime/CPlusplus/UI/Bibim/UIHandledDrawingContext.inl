@@ -1,11 +1,11 @@
 ﻿namespace Bibim
 {
-    UIHandledDrawingContext::IHandler* UIHandledDrawingContext::GetHandler() const
+    UIHandledDrawingContext::Handler* UIHandledDrawingContext::GetHandler() const
     {
         return handler;
     }
 
-    void UIHandledDrawingContext::SetHandler(IHandler* value)
+    void UIHandledDrawingContext::SetHandler(Handler* value)
     {
         handler = value;
     }

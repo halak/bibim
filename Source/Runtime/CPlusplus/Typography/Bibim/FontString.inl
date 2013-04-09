@@ -10,9 +10,9 @@
         return font;
     }
 
-    float FontString::GetTotalWidth() const
+    Vector2 FontString::GetSize() const
     {
-        return totalWidth;
+        return size;
     }
 
     const FontString::GlyphCollection& FontString::GetRegularGlyphs() const

@@ -23,6 +23,9 @@
                 void DrawLines(int count, const Vector2* p,       Color color);
                 void DrawLines(int count, const Vector2* p, const Color* c);
 
+                void DrawDebugLines(int count, const Vector2* p,       Color color);
+                void DrawDebugLines(int count, const Vector2* p, const Color* c);
+
                 void DrawTriangles(int count, const Vector2* p, Color color);
 
             private:

@@ -20,7 +20,7 @@ namespace Bibim
 {
     namespace
     {
-        static float cm(float v)
+        static inline float cm(float v)
         {
             return static_cast<float>(static_cast<int>(v)) - 0.5f;
         }
@@ -641,6 +641,46 @@ namespace Bibim
             renderer->DrawLines(count + 1, p, color);
 
         BBStackFree(p);
+    }
+
+    void UIDrawingContext::DrawDebugLine(Vector2 p0, Vector2 p1, Color color)
+    {
+        Vector2 p[] = { p0, p1 };
+        color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
+        if (currentGeomEffect)
+            currentGeomEffect->DrawDebugLines(renderer, sizeof(p) / sizeof(p[0]), p, color);
+        else
+            renderer->DrawDebugLines(sizeof(p) / sizeof(p[0]), p, color);
+    }
+
+    void UIDrawingContext::DrawDebugLines(int count, Vector2* p, Color color)
+    {
+        if (count <= 1)
+            return;
+
+        color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
+        if (currentGeomEffect)
+            currentGeomEffect->DrawDebugLines(renderer, count, p, color);
+        else
+            renderer->DrawDebugLines(count, p, color);
+    }
+
+    void UIDrawingContext::DrawDebugRect(const RectF& bounds, Color color)
+    {
+        Vector2 p[] =
+        {
+            Vector2(cm(bounds.GetLeft()),  cm(bounds.GetTop())),
+            Vector2(cm(bounds.GetRight()), cm(bounds.GetTop())),
+            Vector2(cm(bounds.GetRight()), cm(bounds.GetBottom())),
+            Vector2(cm(bounds.GetLeft()),  cm(bounds.GetBottom())),
+            Vector2(cm(bounds.GetLeft()),  cm(bounds.GetTop()))
+        };
+
+        color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
+        if (currentGeomEffect)
+            currentGeomEffect->DrawDebugLines(renderer, sizeof(p) / sizeof(p[0]), p, color);
+        else
+            renderer->DrawDebugLines(sizeof(p) / sizeof(p[0]), p, color);
     }
 
     void UIDrawingContext::FillRect(const RectF& bounds, Color color)
