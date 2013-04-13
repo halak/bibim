@@ -484,7 +484,10 @@ namespace Bibim
                     FT_BitmapGlyph strokedGlyphBitmap = reinterpret_cast<FT_BitmapGlyph>(strokedGlyph);
 
                     if (parameters.Weights > 0.0f)
-                        FT_Bitmap_Embolden(static_cast<FT_Library>(library->GetFTLibrary()), &strokedGlyphBitmap->bitmap, FloatToF26D6(parameters.Weights), 0);
+                    {
+                        const FT_Pos weights = FloatToF26D6(parameters.Weights);
+                        FT_Bitmap_Embolden(static_cast<FT_Library>(library->GetFTLibrary()), &strokedGlyphBitmap->bitmap, weights, weights);
+                    }
 
                     GrayscaleBitmap glyphBitmap(static_cast<FT_Library>(library->GetFTLibrary()), strokedGlyphBitmap->bitmap);
 
