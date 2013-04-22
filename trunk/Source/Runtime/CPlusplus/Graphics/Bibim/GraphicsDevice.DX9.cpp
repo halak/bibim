@@ -1,8 +1,8 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/GraphicsDevice.DX9.h>
 #include <Bibim/Assert.h>
 #include <Bibim/CheckedRelease.h>
-#include <Bibim/Colors.h>
+#include <Bibim/Color.h>
 #include <Bibim/Exception.h>
 #include <Bibim/Log.h>
 #include <Bibim/RenderTargetTexture2D.DX9.h>
@@ -30,7 +30,7 @@ namespace Bibim
 
     void GraphicsDevice::Clear()
     {
-        Clear(Colors::CornflowerBlue);
+        Clear(Color::CornflowerBlue);
     }
 
     void GraphicsDevice::Clear(Color color)

@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+#include <Bibim/Config.h>
 #include <Bibim/UISpark.h>
 #include <Bibim/Assert.h>
 #include <Bibim/ComponentStreamReader.h>

@@ -1,4 +1,4 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/Texture2D.GLES2.h>
 #include <Bibim/GraphicsDevice.GLES2.h>
 

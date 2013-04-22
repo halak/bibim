@@ -1,4 +1,4 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/GameWindow.Windows.h>
 #include <Bibim/Log.h>
 #define WIN32_LEAN_AND_MEAN

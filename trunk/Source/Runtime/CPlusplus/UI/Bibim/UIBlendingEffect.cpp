@@ -1,4 +1,4 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/UIBlendingEffect.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/ShaderEffect.h>

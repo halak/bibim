@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+#include <Bibim/Config.h>
 #include <Bibim/Preferences.h>
 #include <Bibim/Environment.h>
 #include <Bibim/FileStream.h>

@@ -1,7 +1,7 @@
-#include <Bibim/PCH.h>
+#include <Bibim/Config.h>
 #include <Bibim/UISprite.h>
 #include <Bibim/Assert.h>
-#include <Bibim/Colors.h>
+#include <Bibim/Color.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Sprite.h>
 #include <Bibim/Timeline.h>

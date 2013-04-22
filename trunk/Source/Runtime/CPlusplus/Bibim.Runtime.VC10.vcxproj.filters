@@ -624,9 +624,6 @@
     <ClCompile Include="Foundation\Bibim\Any.cpp">
       <Filter>01. Foundation\%28Fundamental%29</Filter>
     </ClCompile>
-    <ClCompile Include="Foundation\Bibim\Colors.cpp">
-      <Filter>01. Foundation\%28Fundamental%29</Filter>
-    </ClCompile>
     <ClCompile Include="Foundation\Bibim\Matrix4.cpp">
       <Filter>01. Foundation\%28Fundamental%29</Filter>
     </ClCompile>
@@ -839,6 +836,9 @@
     </ClCompile>
     <ClCompile Include="FileSystem\Bibim\FileStream.iOS.cpp">
       <Filter>03. Game\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Foundation\Bibim\Color.cpp">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1397,9 +1397,6 @@
     <ClInclude Include="Foundation\Bibim\Color.h">
       <Filter>01. Foundation\%28Fundamental%29</Filter>
     </ClInclude>
-    <ClInclude Include="Foundation\Bibim\Colors.h">
-      <Filter>01. Foundation\%28Fundamental%29</Filter>
-    </ClInclude>
     <ClInclude Include="Foundation\Bibim\Matrix4.h">
       <Filter>01. Foundation\%28Fundamental%29</Filter>
     </ClInclude>
@@ -1467,9 +1464,6 @@
       <Filter>01. Foundation\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Foundation\Bibim\Memory.h">
-      <Filter>01. Foundation\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Foundation\Bibim\Property.h">
       <Filter>01. Foundation\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Foundation\Bibim\RectStorage.h">
@@ -1592,7 +1586,6 @@
     <ClInclude Include="Framework\Bibim\GameFrameworkBase.h">
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Foundation\Bibim\PCH.h" />
     <ClInclude Include="Framework\Bibim\Lua.h">
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
@@ -1671,6 +1664,7 @@
     <ClInclude Include="FileSystem\Bibim\FileStream.iOS.h">
       <Filter>03. Game\FileSystem</Filter>
     </ClInclude>
+    <ClInclude Include="Foundation\Bibim\Config.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Asset\Bibim\AssetLoadingTask.inl">
@@ -2122,81 +2116,6 @@
     </None>
     <None Include="Net\Bibim\HttpClient.Windows.inl">
       <Filter>03. Game\Net</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Any.inl">
-      <Filter>01. Foundation\%28Fundamental%29</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Color.inl">
-      <Filter>01. Foundation\%28Fundamental%29</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Colors.inl">
-      <Filter>01. Foundation\%28Fundamental%29</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Matrix4.inl">
-      <Filter>01. Foundation\%28Fundamental%29</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Point2.inl">
-      <Filter>01. Foundation\%28Fundamental%29</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Point3.inl">
-      <Filter>01. Foundation\%28Fundamental%29</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Point4.inl">
-      <Filter>01. Foundation\%28Fundamental%29</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Rect.inl">
-      <Filter>01. Foundation\%28Fundamental%29</Filter>
-    </None>
-    <None Include="Foundation\Bibim\RectF.inl">
-      <Filter>01. Foundation\%28Fundamental%29</Filter>
-    </None>
-    <None Include="Foundation\Bibim\String.inl">
-      <Filter>01. Foundation\%28Fundamental%29</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Vector2.inl">
-      <Filter>01. Foundation\%28Fundamental%29</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Vector3.inl">
-      <Filter>01. Foundation\%28Fundamental%29</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Vector4.inl">
-      <Filter>01. Foundation\%28Fundamental%29</Filter>
-    </None>
-    <None Include="Foundation\Bibim\SequenceDictionary.inl">
-      <Filter>01. Foundation\Container</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Log.inl">
-      <Filter>01. Foundation\Diagnostics</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Geom2D.inl">
-      <Filter>01. Foundation\Mathematics</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Math.inl">
-      <Filter>01. Foundation\Mathematics</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Numerics.inl">
-      <Filter>01. Foundation\Mathematics</Filter>
-    </None>
-    <None Include="Foundation\Bibim\AnyStorage.inl">
-      <Filter>01. Foundation\Utility</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Atomic.inl">
-      <Filter>01. Foundation\Utility</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Listeners.inl">
-      <Filter>01. Foundation\Utility</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Property.inl">
-      <Filter>01. Foundation\Utility</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Object.inl">
-      <Filter>01. Foundation\%28Object%29</Filter>
-    </None>
-    <None Include="Foundation\Bibim\SharedObject.inl">
-      <Filter>01. Foundation\%28Object%29</Filter>
-    </None>
-    <None Include="Foundation\Bibim\SharedPointer.inl">
-      <Filter>01. Foundation\%28Object%29</Filter>
     </None>
     <None Include="Foundation\Bibim\Environment.Windows.inl">
       <Filter>02. System</Filter>

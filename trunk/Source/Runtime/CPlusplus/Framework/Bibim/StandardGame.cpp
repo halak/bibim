@@ -1,11 +1,10 @@
-#include <Bibim/PCH.h>
+#include <Bibim/Config.h>
 #include <Bibim/StandardGame.h>
 #include <Bibim/AlarmClock.h>
 #include <Bibim/AudioDevice.h>
 #include <Bibim/BitMask.h>
 #include <Bibim/BGM.h>
 #include <Bibim/Clock.h>
-#include <Bibim/Colors.h>
 #include <Bibim/Environment.h>
 #include <Bibim/FileAssetProvider.h>
 #include <Bibim/FileStream.h>
@@ -62,7 +61,7 @@ namespace Bibim
     ;
 
     StandardGame::StandardGame()
-        : clearColor(Colors::Black),
+        : clearColor(Color::Black),
           debugDisplay(false),
           storage(nullptr),
           fontLibrary(nullptr),
@@ -75,7 +74,7 @@ namespace Bibim
     StandardGame::StandardGame(Point2 windowSize)
         : GameFramework(windowSize.X, windowSize.Y),
           contentSize(0, 0),
-          clearColor(Colors::Black),
+          clearColor(Color::Black),
           debugDisplay(false),
           storage(nullptr),
           fontLibrary(nullptr),
@@ -88,7 +87,7 @@ namespace Bibim
     StandardGame::StandardGame(Point2 windowSize, Point2 contentSize)
         : GameFramework(windowSize.X, windowSize.Y),
           contentSize(contentSize),
-          clearColor(Colors::Black),
+          clearColor(Color::Black),
           debugDisplay(false),
           storage(nullptr),
           uiDomain(nullptr)
@@ -143,7 +142,7 @@ namespace Bibim
         recentLogFont = new Font(fontLibrary);
         recentLogFont->SetFace(EMBEDDED_FONT_DATA,
                                sizeof(EMBEDDED_FONT_DATA) / sizeof(EMBEDDED_FONT_DATA[0]));
-        recentLogFont->SetStrokeColor(Colors::Black);
+        recentLogFont->SetStrokeColor(Color::Black);
         GetModules()->GetRoot()->AttachChild(fontLibrary);
 
         storage = new GameAssetStorage(GetModules());

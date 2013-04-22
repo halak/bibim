@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+#include <Bibim/Config.h>
 #include <Bibim/HttpClient.Curl.h>
 #include <Bibim/Stream.h>
 

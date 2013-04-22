@@ -2,7 +2,6 @@
 #ifndef __BIBIM_ELASTICEASINGCURVES_H__
 #define __BIBIM_ELASTICEASINGCURVES_H__
 
-#   include <Bibim/PCH.h>
 #   include <Bibim/EasingCurves.h>
 
     namespace Bibim

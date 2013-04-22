@@ -1,4 +1,4 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/UIAppEventDispatcher.h>
 #include <Bibim/UIEventMap.h>
 

@@ -1,4 +1,4 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/FileLogger.h>
 #include <Bibim/FileStream.h>
 #include <Bibim/Clock.h>

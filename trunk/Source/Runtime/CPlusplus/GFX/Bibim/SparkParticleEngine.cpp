@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+#include <Bibim/Config.h>
 #include <Bibim/SparkParticleEngine.h>
 #pragma warning(push)
 #pragma warning(disable : 4100)

@@ -1,4 +1,4 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/ScriptThread.h>
 #include <Bibim/BinaryReader.h>
 #include <Bibim/BinaryWriter.h>

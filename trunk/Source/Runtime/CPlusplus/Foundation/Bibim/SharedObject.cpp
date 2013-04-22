@@ -1,4 +1,4 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/SharedObject.h>
 #include <Bibim/Atomic.h>
 

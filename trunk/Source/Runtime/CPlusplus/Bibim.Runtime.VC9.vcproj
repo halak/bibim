@@ -2759,27 +2759,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Any.inl"
+					RelativePath=".\Foundation\Bibim\Color.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\Color.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Color.inl"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Colors.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Colors.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Colors.inl"
 					>
 				</File>
 				<File
@@ -2788,10 +2772,6 @@
 				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\Matrix4.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Matrix4.inl"
 					>
 				</File>
 				<File
@@ -2807,19 +2787,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Point2.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\Point3.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\Point3.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Point3.inl"
 					>
 				</File>
 				<File
@@ -2831,19 +2803,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Point4.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\Rect.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\Rect.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Rect.inl"
 					>
 				</File>
 				<File
@@ -2855,19 +2819,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\RectF.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\String.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\String.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\String.inl"
 					>
 				</File>
 				<File
@@ -2879,10 +2835,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Vector2.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\Vector3.cpp"
 					>
 				</File>
@@ -2891,19 +2843,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Vector3.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\Vector4.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\Vector4.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Vector4.inl"
 					>
 				</File>
 			</Filter>
@@ -2916,10 +2860,6 @@
 				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\SequenceDictionary.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\SequenceDictionary.inl"
 					>
 				</File>
 			</Filter>
@@ -2938,10 +2878,6 @@
 					RelativePath=".\Foundation\Bibim\Log.h"
 					>
 				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Log.inl"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="Mathematics"
@@ -2955,10 +2891,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Geom2D.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\Math.cpp"
 					>
 				</File>
@@ -2967,19 +2899,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Math.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\Numerics.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\Numerics.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Numerics.inl"
 					>
 				</File>
 			</Filter>
@@ -2995,15 +2919,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\AnyStorage.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\Atomic.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Atomic.inl"
 					>
 				</File>
 				<File
@@ -3019,23 +2935,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Listeners.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\Memory.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\Memory.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Property.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\Property.inl"
 					>
 				</File>
 				<File
@@ -3059,10 +2963,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Object.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\PointerCasts.h"
 					>
 				</File>
@@ -3075,15 +2975,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\SharedObject.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\SharedPointer.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\SharedPointer.inl"
 					>
 				</File>
 			</Filter>
@@ -3286,6 +3178,10 @@
 		</Filter>
 		<File
 			RelativePath=".\Foundation\Bibim\All.h"
+			>
+		</File>
+		<File
+			RelativePath=".\Foundation\Bibim\Config.h"
 			>
 		</File>
 		<File

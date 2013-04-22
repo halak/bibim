@@ -18,6 +18,4 @@
         };
     }
 
-#   include <Bibim/Object.inl>
-
 #endif

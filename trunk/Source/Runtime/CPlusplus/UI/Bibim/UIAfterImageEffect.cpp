@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+#include <Bibim/Config.h>
 #include <Bibim/UIAfterImageEffect.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Math.h>
