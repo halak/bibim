@@ -1,6 +1,6 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/UILabel.h>
-#include <Bibim/Colors.h>
+#include <Bibim/Color.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/GameModuleTree.h>
 #include <Bibim/Font.h>

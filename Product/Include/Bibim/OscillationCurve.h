@@ -2,7 +2,6 @@
 #ifndef __BIBIM_OSCILLATIONCURVE_H__
 #define __BIBIM_OSCILLATIONCURVE_H__
 
-#   include <Bibim/PCH.h>
 #   include <Bibim/EasingCurves.h>
 
     namespace Bibim

@@ -1,4 +1,4 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/SystemLogger.h>
 
 #if (defined(BIBIM_PLATFORM_WINDOWS))

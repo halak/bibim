@@ -1,4 +1,4 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/UILayout.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/ComponentStreamReader.h>

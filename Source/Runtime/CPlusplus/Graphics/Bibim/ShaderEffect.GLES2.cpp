@@ -1,4 +1,4 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/ShaderEffect.GLES2.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/CheckedRelease.h>

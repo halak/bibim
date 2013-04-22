@@ -1,4 +1,4 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/CollisionSpace2D.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Geom2D.h>

@@ -6,8 +6,6 @@
     {
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Build Configuration
-//#     define BIBIM_USE_PRECOMPILEDHEADER
-
 #       if (defined(WINDOWS) || defined(WIN32) || defined(WIN64))
 #           define BIBIM_PLATFORM_WINDOWS
 #           define BIBIM_USE_DIRECTX9
@@ -94,6 +92,10 @@
 
 #if (defined(__APPLE__))
 #    include <iostream>
+#endif
+
+#if (defined(BIBIM_PLATFORM_WINDOWS))
+#    include <malloc.h>
 #endif
 
 #endif

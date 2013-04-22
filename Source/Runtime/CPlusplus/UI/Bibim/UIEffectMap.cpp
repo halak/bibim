@@ -1,4 +1,4 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/UIEffectMap.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/UIGeometryEffect.h>

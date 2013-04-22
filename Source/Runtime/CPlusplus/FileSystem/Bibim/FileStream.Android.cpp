@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+#include <Bibim/Config.h>
 #include <Bibim/FileStream.Android.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Environment.h>

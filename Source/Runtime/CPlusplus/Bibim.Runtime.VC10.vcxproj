@@ -155,6 +155,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="FileSystem\Bibim\Path.cpp" />
+    <ClCompile Include="Foundation\Bibim\Color.cpp" />
     <ClCompile Include="Foundation\Bibim\Environment.Android.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -450,7 +451,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Foundation\Bibim\Any.cpp" />
-    <ClCompile Include="Foundation\Bibim\Colors.cpp" />
     <ClCompile Include="Foundation\Bibim\Matrix4.cpp" />
     <ClCompile Include="Foundation\Bibim\Point2.cpp" />
     <ClCompile Include="Foundation\Bibim\Point3.cpp" />
@@ -552,6 +552,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="FileSystem\Bibim\Path.h" />
+    <ClInclude Include="Foundation\Bibim\Config.h" />
     <ClInclude Include="Foundation\Bibim\Environment.Android.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -562,7 +563,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Foundation\Bibim\PCH.h" />
     <ClInclude Include="Framework\Bibim\GameFramework.Android.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -837,7 +837,6 @@
     </ClInclude>
     <ClInclude Include="Foundation\Bibim\Any.h" />
     <ClInclude Include="Foundation\Bibim\Color.h" />
-    <ClInclude Include="Foundation\Bibim\Colors.h" />
     <ClInclude Include="Foundation\Bibim\Matrix4.h" />
     <ClInclude Include="Foundation\Bibim\NullPointer.h" />
     <ClInclude Include="Foundation\Bibim\Point2.h" />
@@ -861,7 +860,6 @@
     <ClInclude Include="Foundation\Bibim\Delete.h" />
     <ClInclude Include="Foundation\Bibim\Listeners.h" />
     <ClInclude Include="Foundation\Bibim\Memory.h" />
-    <ClInclude Include="Foundation\Bibim\Property.h" />
     <ClInclude Include="Foundation\Bibim\RectStorage.h" />
     <ClInclude Include="Foundation\Bibim\Object.h" />
     <ClInclude Include="Foundation\Bibim\PointerCasts.h" />
@@ -1186,31 +1184,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </None>
-    <None Include="Foundation\Bibim\Any.inl" />
-    <None Include="Foundation\Bibim\Color.inl" />
-    <None Include="Foundation\Bibim\Colors.inl" />
-    <None Include="Foundation\Bibim\Matrix4.inl" />
-    <None Include="Foundation\Bibim\Point2.inl" />
-    <None Include="Foundation\Bibim\Point3.inl" />
-    <None Include="Foundation\Bibim\Point4.inl" />
-    <None Include="Foundation\Bibim\Rect.inl" />
-    <None Include="Foundation\Bibim\RectF.inl" />
-    <None Include="Foundation\Bibim\String.inl" />
-    <None Include="Foundation\Bibim\Vector2.inl" />
-    <None Include="Foundation\Bibim\Vector3.inl" />
-    <None Include="Foundation\Bibim\Vector4.inl" />
-    <None Include="Foundation\Bibim\SequenceDictionary.inl" />
-    <None Include="Foundation\Bibim\Log.inl" />
-    <None Include="Foundation\Bibim\Geom2D.inl" />
-    <None Include="Foundation\Bibim\Math.inl" />
-    <None Include="Foundation\Bibim\Numerics.inl" />
-    <None Include="Foundation\Bibim\AnyStorage.inl" />
-    <None Include="Foundation\Bibim\Atomic.inl" />
-    <None Include="Foundation\Bibim\Listeners.inl" />
-    <None Include="Foundation\Bibim\Property.inl" />
-    <None Include="Foundation\Bibim\Object.inl" />
-    <None Include="Foundation\Bibim\SharedObject.inl" />
-    <None Include="Foundation\Bibim\SharedPointer.inl" />
     <None Include="Foundation\Bibim\Environment.Windows.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>

@@ -1,8 +1,9 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/String.h>
 #include <Bibim/Math.h>
 #include <ctype.h>
 #include <cstdarg>
+#include <cstdio>
 
 namespace Bibim
 {

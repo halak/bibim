@@ -34,6 +34,4 @@
         };
     }
 
-#   include <Bibim/AnyStorage.inl>
-
 #endif

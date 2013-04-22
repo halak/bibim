@@ -1,8 +1,8 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/GraphicsDevice.GLES2.h>
 #include <Bibim/Assert.h>
 #include <Bibim/CheckedRelease.h>
-#include <Bibim/Colors.h>
+#include <Bibim/Color.h>
 #include <Bibim/Exception.h>
 #include <Bibim/Log.h>
 #include <Bibim/RenderTargetTexture2D.GLES2.h>
@@ -28,7 +28,7 @@ namespace Bibim
 
     void GraphicsDevice::Clear()
     {
-        Clear(Colors::CornflowerBlue);
+        Clear(Color::CornflowerBlue);
     }
 
     void GraphicsDevice::Clear(Color color)

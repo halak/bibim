@@ -17,7 +17,6 @@
             // (Fundamental)
                 class Any;
                 struct Color;
-                struct Colors;
                 struct Matrix4;
                 struct Point2;
                 struct Point3;

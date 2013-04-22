@@ -58,6 +58,113 @@
             template <int Index> inline static void  Add(Vector2& o, float value);
         };
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Vector2::Vector2()
+            : X(0.0f), Y(0.0f)
+        {
+        }
+
+        Vector2::Vector2(int x, int y)
+            : X(static_cast<float>(x)), Y(static_cast<float>(y))
+        {
+        }
+
+        Vector2::Vector2(float x, float y)
+            : X(x), Y(y)
+        {
+        }
+
+        Vector2::Vector2(const Vector2& original)
+            : X(original.X), Y(original.Y)
+        {
+        }
+
+        float Vector2::Dot(Vector2 right) const
+        {
+            return (X * right.X) + (Y * right.Y);
+        }
+
+        Vector2 Vector2::operator + () const
+        {
+            return Vector2(+X, +Y);
+        }
+
+        Vector2 Vector2::operator - () const
+        {
+            return Vector2(-X, -Y);
+        }
+
+        Vector2& Vector2::operator = (const Vector2& right)
+        {
+            X = right.X;
+            Y = right.Y;
+            return *this;
+        }
+
+        Vector2& Vector2::operator += (const Vector2& right)
+        {
+            X += right.X;
+            Y += right.Y;
+            return *this;
+        }
+
+        Vector2& Vector2::operator -= (const Vector2& right)
+        {
+            X -= right.X;
+            Y -= right.Y;
+            return *this;
+        }
+
+        Vector2& Vector2::operator *= (float right)
+        {
+            X *= right;
+            Y *= right;
+            return *this;
+        }
+
+        Vector2& Vector2::operator /= (float right)
+        {
+            X /= right;
+            Y /= right;
+            return *this;
+        }
+
+        Vector2 Vector2::operator + (const Vector2& right) const
+        {
+            return Vector2(X + right.X, Y + right.Y);
+        }
+
+        Vector2 Vector2::operator - (const Vector2& right) const
+        {
+            return Vector2(X - right.X, Y - right.Y);
+        }
+
+        Vector2 Vector2::operator * (float right) const
+        {
+            return Vector2(X * right, Y * right);
+        }
+
+        Vector2 Vector2::operator / (float right) const
+        {
+            return Vector2(X / right, Y / right);
+        }
+
+        bool Vector2::operator == (const Vector2& right) const
+        {
+            return X == right.X && Y == right.Y;
+        }
+
+        bool Vector2::operator != (const Vector2& right) const
+        {
+            return !operator == (right);
+        }
+
+        Vector2 operator * (float left, const Vector2& right)
+        {
+            return Vector2(left * right.X, left * right.Y);
+        }
+
         template <> inline float Vector2::Get<0>(Vector2 value) { return value.X; }
         template <> inline float Vector2::Get<1>(Vector2 value) { return value.Y; }
 
@@ -67,7 +174,5 @@
         template <> inline void Vector2::Add<0>(Vector2& o, float value) { o.X += value; }
         template <> inline void Vector2::Add<1>(Vector2& o, float value) { o.Y += value; }
     }
-
-#   include <Bibim/Vector2.inl>
 
 #endif

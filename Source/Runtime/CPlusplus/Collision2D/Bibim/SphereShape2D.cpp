@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+#include <Bibim/Config.h>
 #include <Bibim/SphereShape2D.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Geom2D.h>

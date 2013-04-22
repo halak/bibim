@@ -55,7 +55,6 @@
 #  include <Bibim/Color.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/ComponentStreamReader.h>
-#  include <Bibim/Colors.h>
 #  include <Bibim/Delete.h>
 #  include <Bibim/Environment.h>
 #include <Bibim/EvalConstants.h>
@@ -78,7 +77,6 @@
 #  include <Bibim/NullPointer.h>
 #  include <Bibim/Numerics.h>
 #  include <Bibim/Object.h>
-#  include <Bibim/PCH.h>
 #  include <Bibim/Point2.h>
 #  include <Bibim/PointerCasts.h>
 #  include <Bibim/Rect.h>

@@ -1,4 +1,4 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/FontCache.h>
 #include <Bibim/FontLibrary.h>
 #include <Bibim/FileStream.h>

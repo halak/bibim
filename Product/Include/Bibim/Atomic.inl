@@ -11,8 +11,10 @@ namespace Bibim
     {
 #       if (defined(BIBIM_PLATFORM_WINDOWS))
             ::InterlockedIncrement(&variable);
+#       elif (defined(BIBIM_COMPILER_GCC))
+            __sync_fetch_and_add(&variable, 1);
 #       else
-            variable++; // TODO
+            variable++;
 #       endif
     }
 
@@ -20,8 +22,10 @@ namespace Bibim
     {
 #       if (defined(BIBIM_PLATFORM_WINDOWS))
             ::InterlockedDecrement(&variable);
+#       elif (defined(BIBIM_COMPILER_GCC))
+            __sync_fetch_and_sub(&variable, 1);
 #       else
-            variable--; // TODO
+            variable--;
 #       endif
     }
 }

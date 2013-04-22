@@ -1,4 +1,4 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/RenderTargetTexture2D.DX9.h>
 #include <Bibim/GraphicsDevice.DX9.h>
 #include <Bibim/Assert.h>

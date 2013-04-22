@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+#include <Bibim/Config.h>
 #include <Bibim/HttpClientBase.h>
 #include <Bibim/AutoLocker.h>
 #include <Bibim/Clock.h>

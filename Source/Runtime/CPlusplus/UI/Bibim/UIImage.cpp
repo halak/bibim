@@ -1,8 +1,8 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/UIImage.h>
 #include <Bibim/Assert.h>
 #include <Bibim/BitMask.h>
-#include <Bibim/Colors.h>
+#include <Bibim/Color.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Image.h>
 #include <Bibim/UIDrawingContext.h>

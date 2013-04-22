@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+#include <Bibim/Config.h>
 #include <Bibim/GraphicsDeviceBase.h>
 #include <Bibim/Assert.h>
 #include <algorithm>

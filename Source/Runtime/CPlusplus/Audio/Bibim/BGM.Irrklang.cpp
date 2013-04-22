@@ -1,4 +1,4 @@
-#include <Bibim/PCH.h>
+#include <Bibim/Config.h>
 #include <Bibim/BGM.Irrklang.h>
 #include <Bibim/Assert.h>
 #include <Bibim/AudioDevice.Irrklang.h>

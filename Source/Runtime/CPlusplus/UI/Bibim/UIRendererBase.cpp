@@ -1,4 +1,4 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/UIRendererBase.h>
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/GraphicsDevice.h>

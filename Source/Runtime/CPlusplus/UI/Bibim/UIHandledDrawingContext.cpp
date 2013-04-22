@@ -1,7 +1,7 @@
-﻿#include <Bibim/PCH.h>
+﻿#include <Bibim/Config.h>
 #include <Bibim/UIHandledDrawingContext.h>
 #include <Bibim/BitMask.h>
-#include <Bibim/Colors.h>
+#include <Bibim/Color.h>
 #include <Bibim/Math.h>
 #include <Bibim/UIVisual.h>
 #include <Bibim/UIImage.h>
@@ -67,26 +67,26 @@ namespace Bibim
         static Color GetBoundsColor(UIVisual* visual)
         {
             if (visual == nullptr)
-                return Colors::TransparentBlack;
+                return Color::TransparentBlack;
 
             switch (visual->GetClassID())
             {
                 case UIImage::ClassID:
-                    return Colors::Blue;
+                    return Color::Blue;
                 case UILabel::ClassID:
-                    return Colors::Yellow;
+                    return Color::Yellow;
                 case UISprite::ClassID:
-                    return Colors::Cyan;
+                    return Color::Cyan;
                 case UIDocument::ClassID:
-                    return Colors::YellowGreen;
+                    return Color::YellowGreen;
                 case UIWindow::ClassID:
-                    return Colors::White;
+                    return Color::White;
             }
 
             if (visual->IsPanel())
-                return Colors::Gray;
+                return Color::Gray;
             else
-                return Colors::Black;
+                return Color::Black;
         }
     }
 
