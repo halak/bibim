@@ -63,6 +63,8 @@
 
                 void Initialize(const String& gameName, const String& version, StandardGame::LuaBase* lua);
 
+                virtual BGM* CreateBGM(AudioDevice* audioDevice);
+
                 virtual void Finalize();
                 virtual void Draw();
 
