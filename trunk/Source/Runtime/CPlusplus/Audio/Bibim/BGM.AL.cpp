@@ -63,7 +63,7 @@ namespace Bibim
         }
     }
 
-    void BGM::Change(const String& name)
+    void BGM::Change(const String& name, float rewindTime)
     {
         if (name == aliveBGMName)
             return;

@@ -51,7 +51,7 @@ namespace Bibim
     void SequenceTemplate<T, a, b, c, d>::AddKeyframe(const Keyframe<T>& item)
     {
         if (item.Duration < 0.0f)
-            throw std::invalid_argument("item.Duration");
+            return;
 
         keyframes.push_back(item);
         startTimeChanged = true;
@@ -61,9 +61,9 @@ namespace Bibim
     void SequenceTemplate<T, a, b, c, d>::InsertKeyframe(int index, const Keyframe<T>& item)
     {
         if (index < 0 || index >= GetNumberOfKeyframes())
-            throw std::out_of_range("index");
+            return;
         if (item.Duration < 0.0f)
-            throw std::invalid_argument("item.Duration");
+            return;
 
         keyframes.insert(keyframes.begin() + index, item);
         startTimeChanged = true;
@@ -79,7 +79,7 @@ namespace Bibim
     void SequenceTemplate<T, a, b, c, d>::RemoveKeyframe(int index)
     {
         if (index < 0 || index >= GetNumberOfKeyframes())
-            throw std::out_of_range("index");
+            return;
 
         keyframes.erase(keyframes.begin() + index);
         startTimeChanged = true;
@@ -167,7 +167,7 @@ namespace Bibim
     void SequenceTemplate<T, a, b, c, d>::SetKeyframe(int index, const Keyframe<T>& item)
     {
         if (item.Duration < 0.0f)
-            throw std::invalid_argument("item.Duration");
+            return;
 
         if (keyframes[index].Duration != item.Duration)
         {
