@@ -130,7 +130,7 @@ namespace Bibim
 
         AudioDevice* audioDevice = new AudioDevice();
         //MOBILE audioDevice->AddArchive(mainMPQ);
-        bgm = new BGM(audioDevice);
+        bgm = CreateBGM(audioDevice);
         sfx = new SoundFX(audioDevice);
         bgm->SetTimeline(GetMainTimeline());
         sfx->SetTimeline(GetMainTimeline());
@@ -218,6 +218,11 @@ namespace Bibim
         }
 
         GameFramework::Initialize();
+    }
+
+    BGM* StandardGame::CreateBGM(AudioDevice* audioDevice)
+    {
+        return new BGM(audioDevice);
     }
 
     void StandardGame::Finalize()
@@ -1427,6 +1432,28 @@ namespace Bibim
             return 1;
         }
 
+        static int CrossfadeTimeBGM(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr || game->GetGraphicsDevice() == nullptr)
+                return 0;
+
+            BGM* bgm = game->GetBGM();
+            if (bgm == nullptr)
+                return 0;
+
+            if (lua_isnumber(L, 1))
+            {
+                bgm->SetCrossfadeTime(static_cast<float>(lua_tonumber(L, 1)));
+                return 0;
+            }
+            else
+            {
+                lua_pushnumber(L, bgm->GetCrossfadeTime());
+                return 1;
+            }
+        }
+
         static int Play(lua_State* L)
         {
             StandardGame* game = GetGame(L);
@@ -1818,6 +1845,7 @@ namespace Bibim
         const struct luaL_reg bgmLib [] = {
             { "change", &ChangeBGM },
             { "duration", &DurationBGM },
+            { "crossfade", &CrossfadeTimeBGM },
             { NULL, NULL}  /* sentinel */
         };
 
