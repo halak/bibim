@@ -1,6 +1,7 @@
 #include <Bibim/Config.h>
 #include <Bibim/BGM.Irrklang.h>
 #include <Bibim/Assert.h>
+#include <Bibim/AutoLocker.h>
 #include <Bibim/AudioDevice.Irrklang.h>
 #include <Bibim/Math.h>
 #include <irrklang.h>
@@ -8,14 +9,33 @@ using namespace irrklang;
 
 namespace Bibim
 {
+    union FloatOrPointer
+    {
+        float asFloat;
+        void* asPointer;
+    };
+
+    class BGM::EventListener : public irrklang::ISoundStopEventReceiver
+    {
+        public:
+            EventListener(BGM* bgm);
+
+            virtual void OnSoundStopped(irrklang::ISound* sound, irrklang::E_STOP_EVENT_CAUSE reason, void* userData);
+
+        private:
+            BGM* bgm;
+    };
+
     BGM::BGM()
         : audioDevice(nullptr),
           aliveBGM(nullptr),
           aliveBGMVolume(0.0f),
           volume(1.0f),
           crossfadeTime(1.0f),
+          bgmRewindTime(0.0f),
           mute(false)
     {
+        eventListener = new EventListener(this);
     }
 
     BGM::BGM(AudioDevice* audioDevice)
@@ -24,20 +44,37 @@ namespace Bibim
           aliveBGMVolume(0.0f),
           volume(1.0f),
           crossfadeTime(1.0f),
+          bgmRewindTime(0.0f),
           mute(false)
     {
+        eventListener = new EventListener(this);
     }
 
     BGM::~BGM()
     {
         DropAliveBGM();
         DropAllDeadBGMs();
+        delete eventListener;
     }
 
     void BGM::Update(float dt, int timestamp)
     {
         if (Seal(timestamp))
             return;
+
+        if (bgmRewindTime > 0.0f)
+        {
+            float rewindTime = 0.0f;
+            {
+                BBAutoLock(bgmRewindLock);
+                rewindTime = bgmRewindTime;
+                bgmRewindTime = 0.0f;
+            }
+
+            const String name = aliveBGMName;
+            DropAliveBGM();
+            Change(name, rewindTime, rewindTime);
+        }
 
         if (crossfadeTime > 0.0f)
         {
@@ -53,6 +90,7 @@ namespace Bibim
                 volume -= vd;
                 if (volume <= 0.0f)
                 {
+                    sound->setSoundStopEventReceiver(nullptr);
                     sound->setVolume(0.0f);
                     sound->drop();
                     it = deadBGMs.erase(it);
@@ -65,7 +103,7 @@ namespace Bibim
         }
     }
 
-    void BGM::Change(const String& name)
+    void BGM::Change(const String& name, float rewindTime, float startTime)
     {
         if (name == aliveBGMName)
             return;
@@ -89,7 +127,26 @@ namespace Bibim
                 aliveBGMVolume = 1.0f;
 
             irrklang::ISoundEngine* engine = audioDevice->GetEngine();
-            aliveBGM = engine->play2D(name.CStr(), true, true, false, ESM_AUTO_DETECT, false);
+
+            const bool track = startTime > 0.0f;
+            if (rewindTime > 0.0f)
+            {
+                aliveBGM = engine->play2D(name.CStr(), false, true, track, ESM_AUTO_DETECT, false);
+                if (aliveBGM)
+                {
+                    FloatOrPointer u;
+                    u.asFloat = rewindTime;
+                    aliveBGM->setSoundStopEventReceiver(eventListener, u.asPointer);
+                }
+            }
+            else
+                aliveBGM = engine->play2D(name.CStr(), true, true, track, ESM_AUTO_DETECT, false);
+
+            if (track)
+            {
+                const int positionInMS = static_cast<int>(startTime * 1000.0f);
+                aliveBGM->setPlayPosition(positionInMS);
+            }
 
             UpdateVolumes();
 
@@ -104,6 +161,8 @@ namespace Bibim
     {
         if (audioDevice != value)
         {
+            const String name = aliveBGMName;
+
             if (audioDevice)
             {
                 DropAliveBGM();
@@ -112,7 +171,7 @@ namespace Bibim
 
             audioDevice = value;
 
-            Change(aliveBGMName);
+            Change(name);
         }
     }
 
@@ -177,10 +236,13 @@ namespace Bibim
     {
         if (aliveBGM)
         {
+            aliveBGM->setSoundStopEventReceiver(nullptr);
             aliveBGM->setVolume(0.0f);
             aliveBGM->drop();
             aliveBGM = nullptr;
         }
+
+        aliveBGMName = String::Empty;
     }
 
     void BGM::DropAllDeadBGMs()
@@ -189,8 +251,29 @@ namespace Bibim
         temporaryDeadBGMs.swap(deadBGMs);
         for (std::vector<DeadBGM>::iterator it = temporaryDeadBGMs.begin(); it != temporaryDeadBGMs.end(); it++)
         {
-            (*it).first->setVolume(0.0f);
-            (*it).first->drop();
+            ISound* sound = (*it).first;
+            sound->setSoundStopEventReceiver(nullptr);
+            sound->setVolume(0.0f);
+            sound->drop();
         }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    BGM::EventListener::EventListener(BGM* bgm)
+        : bgm(bgm)
+    {
+    }
+
+    void BGM::EventListener::OnSoundStopped(ISound* sound, E_STOP_EVENT_CAUSE reason, void* userData)
+    {
+        if (reason != irrklang::ESEC_SOUND_FINISHED_PLAYING)
+            return;
+
+        FloatOrPointer u;
+        u.asPointer = userData;
+
+        AutoLocker lock(bgm->bgmRewindLock);
+        bgm->bgmRewindTime = u.asFloat;
     }
 }

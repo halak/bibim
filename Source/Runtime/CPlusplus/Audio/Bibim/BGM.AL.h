@@ -19,7 +19,8 @@
 
                 virtual void Update(float dt, int timestamp);
 
-                void Change(const String& name);
+                inline void Change(const String& name);
+                void Change(const String& name, float rewindTime);
 
                 inline AudioDevice* GetAudioDevice() const;
                 void SetAudioDevice(AudioDevice* value);

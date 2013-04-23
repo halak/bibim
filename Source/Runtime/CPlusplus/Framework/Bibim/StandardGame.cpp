@@ -1389,11 +1389,18 @@ namespace Bibim
         static int ChangeBGM(lua_State* L)
         {
             StandardGame* game = GetGame(L);
-            if (game == nullptr || game->GetGraphicsDevice() == nullptr)
+            if (game == nullptr)
                 return 0;
 
             if (BGM* bgm = game->GetBGM())
-                bgm->Change(lua_tinker::read<const char*>(L, 1));
+            {
+                const char* name = lua_tinker::read<const char*>(L, 1);
+
+                if (lua_isnumber(L, 2))
+                    bgm->Change(name, static_cast<float>(lua_tonumber(L, 2)));
+                else
+                    bgm->Change(name);
+            }
 
             return 0;
         }
