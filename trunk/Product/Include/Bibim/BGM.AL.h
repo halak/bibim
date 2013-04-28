@@ -35,7 +35,8 @@
                 void SetCrossfadeTime(float value);
 
             protected:
-                int GetPlayTime() const { return 0; }
+                void Rewind() { }
+                float GetPlayTime() const { return 0.0f; }
 
             private:
                 void UpdateVolumes();
