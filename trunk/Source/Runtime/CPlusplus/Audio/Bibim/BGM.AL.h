@@ -34,6 +34,9 @@
                 inline float GetCrossfadeTime() const;
                 void SetCrossfadeTime(float value);
 
+            protected:
+                int GetPlayTime() const { return 0; }
+
             private:
                 void UpdateVolumes();
                 void DropAliveBGM();
