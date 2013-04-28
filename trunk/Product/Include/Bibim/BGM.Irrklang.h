@@ -37,6 +37,9 @@
                 inline float GetCrossfadeTime() const;
                 void SetCrossfadeTime(float value);
 
+            protected:
+                int GetPlayTime() const;
+
             private:
                 void Change(const String& name, float rewindTime, float startTime);
 
