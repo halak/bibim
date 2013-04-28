@@ -212,7 +212,7 @@ namespace Bibim
         }
     }
 
-    int BGM::GetAlivePosition() const
+    int BGM::GetPlayTime() const
     {
         if (aliveBGM)
             return static_cast<int>(aliveBGM->getPlayPosition());
