@@ -212,6 +212,14 @@ namespace Bibim
         }
     }
 
+    int BGM::GetAlivePosition() const
+    {
+        if (aliveBGM)
+            return static_cast<int>(aliveBGM->getPlayPosition());
+        else
+            return 0;
+    }
+
     void BGM::UpdateVolumes()
     {
         if (mute)
