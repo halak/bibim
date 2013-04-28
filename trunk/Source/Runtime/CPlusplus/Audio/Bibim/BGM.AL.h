@@ -36,6 +36,7 @@
 
             protected:
                 void Rewind() { }
+                void Rewind(float /*time*/) { }
                 float GetPlayTime() const { return 0.0f; }
 
             private:

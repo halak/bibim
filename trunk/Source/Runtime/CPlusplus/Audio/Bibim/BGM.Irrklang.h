@@ -22,8 +22,6 @@
 
                 virtual void Update(float dt, int timestamp);
 
-
-
                 inline void Change(const String& name);
                 inline void Change(const String& name, float rewindTime);
 
@@ -40,7 +38,8 @@
                 void SetCrossfadeTime(float value);
 
             protected:
-                void Rewind();
+                inline void Rewind();
+                void Rewind(float time);
                 float GetPlayTime() const;
 
             private:

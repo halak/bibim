@@ -29,4 +29,9 @@ namespace Bibim
     {
         return crossfadeTime;
     }
+
+    void BGM::Rewind()
+    {
+        Rewind(0.0f);
+    }
 }
