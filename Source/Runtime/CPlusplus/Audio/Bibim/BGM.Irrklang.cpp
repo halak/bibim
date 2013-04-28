@@ -212,12 +212,18 @@ namespace Bibim
         }
     }
 
-    int BGM::GetPlayTime() const
+    void BGM::Rewind()
     {
         if (aliveBGM)
-            return static_cast<int>(aliveBGM->getPlayPosition());
+            aliveBGM->setPlayPosition(0);
+    }
+
+    float BGM::GetPlayTime() const
+    {
+        if (aliveBGM)
+            return static_cast<float>(aliveBGM->getPlayPosition()) * 0.001f;
         else
-            return 0;
+            return 0.0f;
     }
 
     void BGM::UpdateVolumes()
