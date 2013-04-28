@@ -212,10 +212,10 @@ namespace Bibim
         }
     }
 
-    void BGM::Rewind()
+    void BGM::Rewind(float time)
     {
         if (aliveBGM)
-            aliveBGM->setPlayPosition(0);
+            aliveBGM->setPlayPosition(static_cast<irrklang::ik_u32>(time * 1000.0f));
     }
 
     float BGM::GetPlayTime() const
