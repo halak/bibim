@@ -397,6 +397,11 @@ namespace Bibim
         ReloadScripts();
     }
 
+    void StandardGame::SetRecentLog(const String& value)
+    {
+        recentLog = value;
+    }
+
     void StandardGame::OnWindowResized(Window* window)
     {
         BBAssert(GetWindow() == window);
