@@ -71,6 +71,7 @@
             protected:
                 void MatchContentToWindow();
                 void ReloadUI();
+                void SetRecentLog(const String& value);
 
                 virtual void ReloadScripts() = 0;
 
