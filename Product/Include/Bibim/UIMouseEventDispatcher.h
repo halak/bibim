@@ -34,6 +34,8 @@
                 inline bool GetFocusWhenHover() const;
                 inline void SetFocusWhenHover(bool value);
 
+                inline UIVisual* GetLastTarget() const;
+
             private:
                 UIDomain* domain;
                 Mouse* device;

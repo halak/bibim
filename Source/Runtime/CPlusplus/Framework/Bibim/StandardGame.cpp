@@ -139,10 +139,12 @@ namespace Bibim
         GetModules()->GetRoot()->AttachChild(sfx);
 
         fontLibrary = new FontLibrary(GetGraphicsDevice());
-        recentLogFont = new Font(fontLibrary);
-        recentLogFont->SetFace(EMBEDDED_FONT_DATA,
-                               sizeof(EMBEDDED_FONT_DATA) / sizeof(EMBEDDED_FONT_DATA[0]));
-        recentLogFont->SetStrokeColor(Color::Black);
+
+
+        debugFont = new Font(fontLibrary);
+        debugFont->SetFace(EMBEDDED_FONT_DATA,
+                           sizeof(EMBEDDED_FONT_DATA) / sizeof(EMBEDDED_FONT_DATA[0]));
+        debugFont->SetColor(Color::White);
         GetModules()->GetRoot()->AttachChild(fontLibrary);
 
         storage = new GameAssetStorage(GetModules());
@@ -199,6 +201,8 @@ namespace Bibim
             ked->SetTimeline(GetMainTimeline());
             med->SetTimeline(GetMainTimeline());
             asyncEventQueue->SetTimeline(GetMainTimeline());
+
+            mouseEventDispatcher = med;
         }
         uiFunctions = new UIFunctionTable();
         uiFunctions->Add("OnKeyDown", &StandardGame::KeyDownHandler, this);
@@ -229,10 +233,39 @@ namespace Bibim
     {
         bgm->SetMute(true);
         Log::Remove(this);
-        recentLogFont.Reset();
+        debugFont.Reset();
         GetMainTimeline()->Clear();
         uiDomain->GetRoot()->RemoveAllChildren();
         GameFramework::Finalize();
+    }
+
+    static String GetFullName(UIVisual* target)
+    {
+        if (target->GetParent() == nullptr && target->GetName().IsEmpty())
+            return "<root>";
+
+        String fullName = String::Empty;
+
+        for (; target; target = target->GetParent())
+        {
+            String name = String::Empty;
+            if (target->GetName().IsEmpty())
+            {
+                if (target->GetParent())
+                    name = String::CFormat("[%d]", target->GetParent()->GetChildIndex(target));
+                else
+                    continue;
+            }
+            else
+                name = target->GetName();
+
+            if (fullName.IsEmpty())
+                fullName = name;
+            else
+                fullName = name + "." + fullName;
+        }
+
+        return fullName;
     }
 
     void StandardGame::Draw()
@@ -246,7 +279,26 @@ namespace Bibim
 
         UIHandledDrawingContext context(uiRenderer, handler);
         context.Draw(uiDomain->GetRoot());
+
+        String debugText = String::Empty;
+
+        if (GetDebugDisplay())
+        {
+            debugText.Append(String::CFormat("FPS: %.1f\n", GetFPS()));
+
+            if (UIVisual* lastTarget = mouseEventDispatcher->GetLastTarget())
+                debugText.Append(String::CFormat("Picked: %s\n", GetFullName(lastTarget).CStr()));
+        }
+
         if (recentLog.IsEmpty() == false)
+        {
+            if (debugText.IsEmpty() == false)
+                debugText.Append("------------------------------\n");
+
+            debugText.Append(recentLog);
+        }
+
+        if (debugText.IsEmpty() == false)
         {
             static const Point2 POSITION = Point2(10, 15);
 
@@ -256,24 +308,30 @@ namespace Bibim
                                  windowSize.X - (POSITION.X * 2),
                                  windowSize.Y - (POSITION.Y * 2));
 
-            const Color oldColor = recentLogFont->GetColor();
-            recentLogFont->SetColor(Color(0, 0, 0));
-            bounds.X -= 1.0f;
-            bounds.Y -= 1.0f;
-            context.DrawString(bounds, recentLogFont, recentLog);
-            bounds.X += 2.0f;
-            context.DrawString(bounds, recentLogFont, recentLog);
-            bounds.Y += 2.0f;
-            context.DrawString(bounds, recentLogFont, recentLog);
-            bounds.X -= 2.0f;
-            context.DrawString(bounds, recentLogFont, recentLog);
-            recentLogFont->SetColor(oldColor);
-            bounds.X += 1.0f;
-            bounds.Y -= 1.0f;
-            context.DrawString(bounds, recentLogFont, recentLog);
+            DrawDebugText(context, bounds, debugText);
         }
 
         GameFramework::Draw();
+    }
+
+    void StandardGame::DrawDebugText(UIDrawingContext& context, RectF bounds, const String& text)
+    {        
+        const Color oldColor = debugFont->GetColor();
+        debugFont->SetColor(Color(0, 0, 0));
+        bounds.X -= 1.0f;
+        bounds.Y -= 1.0f;
+        context.DrawString(bounds, debugFont, text);
+        bounds.X += 2.0f;
+        context.DrawString(bounds, debugFont, text);
+        bounds.Y += 2.0f;
+        context.DrawString(bounds, debugFont, text);
+        bounds.X -= 2.0f;
+        context.DrawString(bounds, debugFont, text);
+        debugFont->SetColor(oldColor);
+        bounds.X += 1.0f;
+        bounds.Y -= 1.0f;
+
+        context.DrawString(bounds, debugFont, text);
     }
 
     void StandardGame::Restart()
@@ -305,9 +363,9 @@ namespace Bibim
 
     void StandardGame::OnLog(Bibim::Color color, const char* /*category*/, const char* message)
     {
-        if (recentLogFont->GetColor() != color)
+        if (debugFont->GetColor() != color)
         {
-            recentLogFont->SetColor(color);
+            debugFont->SetColor(color);
             recentLog = String::Empty;
         }
 

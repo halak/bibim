@@ -29,4 +29,9 @@
     {
         focusWhenHover = value;
     }
+
+    UIVisual* UIMouseEventDispatcher::GetLastTarget() const
+    {
+        return lastTargetVisual;
+    }
 }

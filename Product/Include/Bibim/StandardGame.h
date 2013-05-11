@@ -67,6 +67,7 @@
 
                 virtual void Finalize();
                 virtual void Draw();
+                void DrawDebugText(UIDrawingContext& context, RectF bounds, const String& text);
 
             protected:
                 void MatchContentToWindow();
@@ -104,12 +105,13 @@
                 UIRenderer* uiRenderer;
                 UIFunctionTable* uiFunctions;
                 UIAsyncEventQueue* asyncEventQueue;
+                UIMouseEventDispatcher* mouseEventDispatcher;
                 ScreenshotPrinter* screenshotPrinter;
                 BGM* bgm;
                 SoundFX* sfx;
                 Lua* lua;
                 String  recentLog;
-                FontPtr recentLogFont;
+                FontPtr debugFont;
         };
     }
 
