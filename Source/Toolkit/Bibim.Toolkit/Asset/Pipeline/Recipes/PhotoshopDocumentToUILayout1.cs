@@ -148,7 +148,8 @@ namespace Bibim.Asset.Pipeline.Recipes
                 }
                 else if (string.Compare(type, "9Patch", true) == 0 ||
                     string.Compare(type, "NinePatch", true) == 0 ||
-                    string.Compare(type, "9P", true) == 0)
+                    string.Compare(type, "9P", true) == 0 ||
+                    string.Compare(type, "9P*", true) == 0)
                 {
                     UIWindow childWindow = new UIWindow();
                     childWindow.Name = name;
@@ -156,16 +157,38 @@ namespace Bibim.Asset.Pipeline.Recipes
                     window.AddChild(childWindow);
                     Process((UIPanel)childWindow, layer);
 
-                    int leftBorder = int.Parse(args["0"] ?? "0");
-                    int topBorder = int.Parse(args["1"] ?? "0");
-                    int rightBorder = int.Parse(args["2"] ?? "0");
-                    int bottomBorder = int.Parse(args["3"] ?? "0");
+                    int bw = layer.Bitmap.Width;
+                    int bh = layer.Bitmap.Height;
+
+                    int leftBorder = 0;
+                    int topBorder = 0;
+                    int rightBorder = 0;
+                    int bottomBorder = 0;
+                    switch (args.Count)
+                    {
+                        case 0:
+                            leftBorder = bw / 10;
+                            topBorder = bh / 10;
+                            rightBorder = leftBorder;
+                            bottomBorder = topBorder;
+                            break;
+                        case 1:
+                            leftBorder = int.Parse(args["0"] ?? "0");
+                            topBorder = leftBorder;
+                            rightBorder = leftBorder;
+                            bottomBorder = leftBorder;
+                            break;
+                        default:
+                            leftBorder = int.Parse(args["0"] ?? "0");
+                            topBorder = int.Parse(args["1"] ?? "0");
+                            rightBorder = int.Parse(args["2"] ?? "0");
+                            bottomBorder = int.Parse(args["3"] ?? "0");
+                            break;
+                    }
 
                     int horizontalBorder = leftBorder + rightBorder;
                     int verticalBorder = topBorder + bottomBorder;
 
-                    int bw = layer.Bitmap.Width;
-                    int bh = layer.Bitmap.Height;
                     Bitmap leftTopImage = ClipBitmap(layer.Bitmap, new Rectangle(0, 0, leftBorder, topBorder));
                     Bitmap rightTopImage = ClipBitmap(layer.Bitmap, new Rectangle(bw - rightBorder, 0, rightBorder, topBorder));
                     Bitmap leftBottomImage = ClipBitmap(layer.Bitmap, new Rectangle(0, bh - bottomBorder, leftBorder, bottomBorder));
@@ -187,7 +210,11 @@ namespace Bibim.Asset.Pipeline.Recipes
                     images.Add(CreateNinePatchPart(rightImage, UIAnchorPoint.RightTop, new Vector2(1.0f, 0.0f), 0, topBorder, rightBorder, -verticalBorder, UISizeMode.Absolute, UISizeMode.Adjustive)); // right
                     images.Add(CreateNinePatchPart(bottomImage, UIAnchorPoint.LeftBottom, new Vector2(0.0f, 1.0f), leftBorder, 0, -horizontalBorder, bottomBorder, UISizeMode.Adjustive, UISizeMode.Absolute)); // bototm
 
-                    images.Add(CreateNinePatchPart(centerImage, UIAnchorPoint.LeftTop, new Vector2(0.0f, 0.0f), leftBorder, topBorder, -horizontalBorder, -verticalBorder, UISizeMode.Adjustive, UISizeMode.Adjustive));
+                    bool forceSingleColor = false;
+                    if (string.Compare(type, "9P*", true) == 0)
+                        forceSingleColor = true;
+
+                    images.Add(CreateNinePatchPart(centerImage, UIAnchorPoint.LeftTop, new Vector2(0.0f, 0.0f), leftBorder, topBorder, -horizontalBorder, -verticalBorder, UISizeMode.Adjustive, UISizeMode.Adjustive, forceSingleColor = forceSingleColor));
 
                     foreach (var item in images)
                     {
@@ -426,12 +453,12 @@ namespace Bibim.Asset.Pipeline.Recipes
                 AddChildTo(window, layer.SubLayers[i], defaultPickable);
         }
 
-        private UIImage CreateNinePatchPart(Bitmap bitmap, UIAnchorPoint anchor, Vector2 origin, int x, int y, int width, int height, UISizeMode widthMode, UISizeMode heightMode)
+        private UIImage CreateNinePatchPart(Bitmap bitmap, UIAnchorPoint anchor, Vector2 origin, int x, int y, int width, int height, UISizeMode widthMode, UISizeMode heightMode, bool forceSingleColor = false)
         {
             if (bitmap == null)
                 return null;
 
-            if (IsSingleColor(bitmap))
+            if (forceSingleColor || IsSingleColor(bitmap))
             {
                 var solidColor = bitmap.GetPixel(0, 0);
                 bitmap = new Bitmap(1, 1);
