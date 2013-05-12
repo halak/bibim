@@ -187,12 +187,64 @@ namespace Bibim
 
                 return 1;
             }
+
+            static int Join(lua_State* L)
+            {
+                luaL_checktype(L, 1, LUA_TSTRING);
+                luaL_checktype(L, 2, LUA_TTABLE);
+
+                size_t separatorLength = 0;
+                const char* separator = lua_tolstring(L, 1, &separatorLength);
+
+                size_t resultLength = 0;
+                const size_t count = static_cast<int>(lua_objlen(L, 2));
+                if (count == 0)
+                    return 0;
+
+                for (size_t i = 1; i <= count; i++)
+                {
+                    lua_rawgeti(L, 2, i);
+                    luaL_checktype(L, -1, LUA_TSTRING);
+                    resultLength += lua_objlen(L, -1);
+                    resultLength += separatorLength;
+                    lua_pop(L, 1);
+                }
+                resultLength -= separatorLength;
+
+                std::vector<char> result;
+                result.resize(resultLength + 1);
+                char* buffer = &result[0];
+                for (size_t i = 1; i <= count; i++)
+                {
+                    lua_rawgeti(L, 2, i);
+
+                    size_t sourceLength = 0;
+                    const char* source = lua_tolstring(L, -1, &sourceLength);
+
+                    String::CopyChars(buffer, source, sourceLength);
+                    buffer += sourceLength;
+
+                    if (i != count)
+                    {
+                        String::CopyChars(buffer, separator, separatorLength);
+                        buffer += separatorLength;
+                    }
+                    
+                    lua_pop(L, 1);
+                }
+                result[resultLength] = '\0';
+
+                lua_pushlstring(L, &result[0], resultLength);
+
+                return 1;
+            }
         };
 
         const struct luaL_reg additionalStringLib [] = {
             { "startswith", &AdditionalStringLibrary::StartsWith },
             { "endswith", &AdditionalStringLibrary::EndsWith },
             { "split", &AdditionalStringLibrary::Split },
+            { "join", &AdditionalStringLibrary::Join },
             { NULL, NULL}  /* sentinel */
         };
     

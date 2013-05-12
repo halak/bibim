@@ -219,6 +219,7 @@ namespace Bibim
 
         AddText(text.Substring(textIndex), fontStack.top());
         afterSpaces.push_back(0);
+
         BBAssertDebug(GetNumberOfChildren() == static_cast<int>(afterSpaces.size()));
     }
 
@@ -232,6 +233,8 @@ namespace Bibim
         std::vector<UIVisual*> line;
         float maxLineHeight = 0.0f;
         float maxAscender = 0.0f;
+
+        BBAssertDebug(GetNumberOfChildren() == static_cast<int>(afterSpaces.size()));
 
         Vector2 position = Vector2::Zero;
         const VisualCollection& children = GetChildren();
@@ -368,7 +371,7 @@ namespace Bibim
         text = o->text;
         stylesheet = o->stylesheet;
         contentSize = o->contentSize;
-        stylesheetRevision = o->stylesheetRevision;
+        stylesheetRevision = -1;
     }
 
     /*
