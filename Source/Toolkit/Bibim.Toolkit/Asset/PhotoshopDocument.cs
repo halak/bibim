@@ -279,8 +279,8 @@ namespace Bibim.Asset
                                 for (int i = layers.Count - 1; i >= 0; i--)
                                 {
                                     Layer item = layers[i];
-                                    bool isEndLayerSetTag = (item.Name == "</Layer set>") ||
-                                                            (item.Name == "</Layer group>");
+                                    bool isEndLayerSetTag = (item.Name.StartsWith("</Layer set>")) ||
+                                                            (item.Name.StartsWith("</Layer group>"));
 
                                     if (layerStack.Count > 0 && isEndLayerSetTag == false)
                                         layerStack.Peek().AddSubLayer(item);

@@ -697,6 +697,11 @@ namespace Bibim.Asset
                 }
             }
              * */
+
+            public override string ToString()
+            {
+                return FullName;
+            }
             #endregion
         }
         #endregion
