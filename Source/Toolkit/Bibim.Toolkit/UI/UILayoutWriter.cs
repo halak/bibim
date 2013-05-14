@@ -168,7 +168,9 @@ namespace Bibim.UI
         private static void Write(AssetStreamWriter writer, UIImage o, List<object> objectDictionary)
         {
             Write(writer, (UIVisual)o, objectDictionary);
-            writer.Write(o.Source);
+            // EMBEDDED UIIMAGE
+            // writer.Write(o.Source); 
+            ImageWriter.WriteBody(writer, o.Source);
             writer.Write(o.HorizontalFlip);
             writer.Write(o.VerticalFlip);
             writer.Write(o.Mask);

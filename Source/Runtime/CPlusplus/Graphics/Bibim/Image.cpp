@@ -1,6 +1,7 @@
 ﻿#include <Bibim/Config.h>
 #include <Bibim/Image.h>
 #include <Bibim/AssetStreamReader.h>
+#include <Bibim/ComponentStreamReader.h>
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/Texture2D.h>
 
@@ -100,7 +101,19 @@ namespace Bibim
             return RectF::Empty;
     }
 
+    // TODO: AssetStreamReader, ComponentStreamReader 통합
+
     GameAsset* Image::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
+    {
+        const String textureURI = reader.ReadString();
+        const Rect clippingRect = reader.ReadRect();
+        const Transform appliedTransform = static_cast<Transform>(reader.ReadByte());
+        Texture2D* texture = static_cast<Texture2D*>(reader.GetStorage()->Load(textureURI));
+
+        return new Image(textureURI, clippingRect, appliedTransform, texture);
+    }
+
+    Image* Image::Create(ComponentStreamReader& reader)
     {
         const String textureURI = reader.ReadString();
         const Rect clippingRect = reader.ReadRect();

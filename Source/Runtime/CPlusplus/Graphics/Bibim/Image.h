@@ -39,6 +39,7 @@
                 inline Texture2D* GetTexture() const;
 
             public:
+                static Image* Create(ComponentStreamReader& reader);
                 static void  CalculateSize(int& outWidth, int& outHeight, const Rect& clippingRect, Transform transform);
                 static RectF CalculateNormalizedRect(const Rect& clippingRect, Texture2D* texture);
 
