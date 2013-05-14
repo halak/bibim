@@ -197,7 +197,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                     Bitmap topImage = ClipBitmap(layer.Bitmap, new Rectangle(leftBorder, 0, bw - horizontalBorder, topBorder));
                     Bitmap rightImage = ClipBitmap(layer.Bitmap, new Rectangle(bw - rightBorder, topBorder, rightBorder, bh - verticalBorder));
                     Bitmap bottomImage = ClipBitmap(layer.Bitmap, new Rectangle(leftBorder, bh - bottomBorder, bw - horizontalBorder, bottomBorder));
-                    Bitmap centerImage = ClipBitmap(layer.Bitmap, new Rectangle(leftBorder, topBorder, 16, 16));
+                    Bitmap centerImage = ClipBitmap(layer.Bitmap, new Rectangle(leftBorder, topBorder, Math.Max(bw - horizontalBorder, 1), Math.Max(bh - verticalBorder, 1)));
 
                     var images = new List<UIImage>(9);
                     images.Add(CreateNinePatchPart(leftTopImage, UIAnchorPoint.LeftTop, new Vector2(0.0f, 0.0f), 0, 0, leftBorder, topBorder, UISizeMode.Absolute, UISizeMode.Absolute));
@@ -214,7 +214,17 @@ namespace Bibim.Asset.Pipeline.Recipes
                     if (string.Compare(type, "9P*", true) == 0)
                         forceSingleColor = true;
 
-                    images.Add(CreateNinePatchPart(centerImage, UIAnchorPoint.LeftTop, new Vector2(0.0f, 0.0f), leftBorder, topBorder, -horizontalBorder, -verticalBorder, UISizeMode.Adjustive, UISizeMode.Adjustive, forceSingleColor = forceSingleColor));
+                    images.Add(CreateNinePatchPart(
+                        centerImage,
+                        UIAnchorPoint.LeftTop,
+                        new Vector2(0.0f, 0.0f),
+                        leftBorder,
+                        topBorder,
+                        -horizontalBorder,
+                        -verticalBorder,
+                        UISizeMode.Adjustive,
+                        UISizeMode.Adjustive,
+                        forceSingleColor: forceSingleColor));
 
                     foreach (var item in images)
                     {
