@@ -89,7 +89,9 @@ namespace Bibim
     void UIImage::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        source = static_cast<Image*>(reader.ReadAsset());
+        // EMBEDDED IMAGE
+        // source = static_cast<Image*>(reader.ReadAsset());
+        source = Image::Create(reader);
         horizontalFlip = reader.ReadBool();
         verticalFlip = reader.ReadBool();
         mask = static_cast<BitMask*>(reader.ReadAsset());

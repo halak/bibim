@@ -260,7 +260,9 @@ namespace Bibim.Asset.Pipeline.Recipes
                 }
                 #endregion
 
-                #region Image Asset을 저장합니다.
+                #region Image Asset을 저장합니다
+                // EMBEDDED UIIMAGE
+                /*
                 var readImage = new ReadGameAsset();
                 var imageRecipe = new GameAssetRecipe()
                 {
@@ -268,11 +270,14 @@ namespace Bibim.Asset.Pipeline.Recipes
                     Author = GetType().FullName,
                     Comment = "Automatically generated.",
                 };
+                */
 
                 int imageNumber = 0;
                 string imageOutputFormat = context.ExpandVariables(ImageOutput);
                 foreach (BitmapSheet.Element item in bitmapSheet.Elements)
                 {
+                    string textureURI = Path.Combine(context.Directory, Path.ChangeExtension((string)item.Sheet.Tag, null));
+                    /*
                     string path = string.Format(imageOutputFormat, imageNumber++);
 
                     readImage.Input = new Image()
@@ -284,14 +289,25 @@ namespace Bibim.Asset.Pipeline.Recipes
                     };
 
                     JsonSerializer.Instance.Serialize(Path.Combine(context.BaseDirectory, context.Directory, Path.ChangeExtension(path, "asset")), imageRecipe);
+                    */
 
                     List<UIImage> values = null;
                     if (imageBitmaps.TryGetValue(item.Source, out values))
                     {
+                        foreach (var image in values)
+                        {
+                            image.Source.TextureURI = textureURI;
+                            image.Source.ClippingRectangle = new Rectangle(item.Bounds.X, item.Bounds.Y,
+                                                                           item.Bounds.Width, item.Bounds.Height);
+                            image.Source.AppliedTransform = item.AppliedTransform;
+                        }
+
+                        /*
                         context.Store(Path.Combine(context.Directory, Path.ChangeExtension(path, null)), values[0].Source);
 
                         for (int i = 1; i < values.Count; i++)
                             values[i] = values[0];
+                         */
                     }
                 }
                 #endregion
