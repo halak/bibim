@@ -253,6 +253,7 @@ namespace Bibim.Graphics
                         sheetBitmap.SetPixel(rectangle.Right + 0, rectangle.Top - 1, sheetBitmap.GetPixel(rectangle.Right - 1, rectangle.Top));
                         sheetBitmap.SetPixel(rectangle.Left - 1, rectangle.Bottom + 0, sheetBitmap.GetPixel(rectangle.Left, rectangle.Bottom - 1));
                         sheetBitmap.SetPixel(rectangle.Right + 0, rectangle.Bottom + 0, sheetBitmap.GetPixel(rectangle.Right - 1, rectangle.Bottom - 1));
+
                         break;
                     case Image.Transform.RotateCW90:
                         graphics[sheetIndex].TranslateTransform(+rectangle.X, +rectangle.Y);

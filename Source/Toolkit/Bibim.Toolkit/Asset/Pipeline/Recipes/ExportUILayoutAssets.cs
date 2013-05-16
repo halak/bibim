@@ -270,10 +270,11 @@ namespace Bibim.Asset.Pipeline.Recipes
                     Author = GetType().FullName,
                     Comment = "Automatically generated.",
                 };
-                */
 
                 int imageNumber = 0;
                 string imageOutputFormat = context.ExpandVariables(ImageOutput);
+                */
+
                 foreach (BitmapSheet.Element item in bitmapSheet.Elements)
                 {
                     string textureURI = Path.Combine(context.Directory, Path.ChangeExtension((string)item.Sheet.Tag, null));
