@@ -93,7 +93,6 @@ namespace Bibim
                                           0, d3dFormat, D3DPOOL_DEFAULT, &d3dTexture, nullptr);
         result = d3dDevice->CreateTexture(width, height, 1,
                                           0, d3dFormat, D3DPOOL_SYSTEMMEM, &d3dSysMemTexture, nullptr);
-
         D3DLOCKED_RECT d3dLockedRect;
         d3dSysMemTexture->LockRect(0, &d3dLockedRect, nullptr, 0);
         byte* destination = static_cast<byte*>(d3dLockedRect.pBits);

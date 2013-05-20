@@ -123,24 +123,23 @@ namespace Bibim
 
             CURLcode result = curl_easy_perform(curl);
 
-            if (result != CURLE_OK)
-            {
-                long responseCode = 0;
-                curl_easy_getinfo(curl, CURLINFO_HTTP_CODE, &responseCode);
-                curl_easy_cleanup(curl);
-                if (form)
-                    curl_formfree(form);
-                return new Response(request, static_cast<StatusCode>(responseCode), String::Empty);
-            }
+            long responseCode = 0;
+            curl_easy_getinfo(curl, CURLINFO_HTTP_CODE, &responseCode);
 
             curl_easy_cleanup(curl);
 
             if (form)
                 curl_formfree(form);
 
+            String contentType;
+            if (result == CURLE_OK)
+                contentType = header.contentType;
+            else
+                contentType = String::Empty;
+
             return new Response(request,
-                                HttpClient::Ok,
-                                header.contentType);
+                                static_cast<StatusCode>(responseCode),
+                                contentType);
         }
         else
         {

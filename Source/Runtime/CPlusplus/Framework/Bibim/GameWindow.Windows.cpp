@@ -112,8 +112,6 @@ namespace Bibim
 
             const SIZE windowSize = { windowRect.right - windowRect.left, windowRect.bottom - windowRect.top };
             ::SetWindowPos(static_cast<HWND>(handle), nullptr, 0, 0, windowSize.cx, windowSize.cy, SWP_NOZORDER | SWP_NOMOVE | SWP_NOACTIVATE);
-
-            RaiseResizedEvent();
         }
     }
 
