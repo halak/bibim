@@ -75,14 +75,13 @@
                 void SetRecentLog(const String& value);
 
                 virtual void ReloadScripts() = 0;
+                virtual bool OnKeyDown(const UIEventArgs& args);
 
             private:
                 virtual void OnWindowResized(Window* window);
                 virtual void OnGraphicsDeviceRestore(GraphicsDeviceBase* g);
                 
                 static bool KeyDownHandler(const UIEventArgs& args, void* userData);
-
-                bool OnKeyDown(const UIEventArgs& args);
 
                 virtual void Error(const char* category, const char* message);
                 virtual void Warning(const char* category, const char* message);
