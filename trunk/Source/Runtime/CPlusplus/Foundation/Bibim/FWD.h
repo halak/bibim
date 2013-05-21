@@ -156,6 +156,7 @@
                 BBForwardDeclareSmartPointerClass(MPQStream);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Framework
+                class Clipboard;
                 class GameFrameworkBase;
                     class GameFramework;
                         class StandardGame;

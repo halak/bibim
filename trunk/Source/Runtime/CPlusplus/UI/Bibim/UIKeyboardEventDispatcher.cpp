@@ -42,6 +42,10 @@ namespace Bibim
 
         const KeyboardState& state = device->GetState();
 
+        const Key::Code ctrl = state.IsPressed(Key::Ctrl) ? Key::Ctrl : Key::None;
+        const Key::Code alt = state.IsPressed(Key::Alt) ? Key::Alt : Key::None;
+        const Key::Code shift = state.IsPressed(Key::Shift) ? Key::Shift : Key::None;
+
         int code = 0;
         for (int i = 0; i < sizeof(state.Keys) / sizeof(state.Keys[0]); i++)
         {
@@ -55,7 +59,9 @@ namespace Bibim
                 if (currentDown)
                 {
                     if (lastDown == false)
-                        target->RaiseKeyDownEvent(UIKeyboardEventArgs(target, static_cast<Key::Code>(code)));
+                        target->RaiseKeyDownEvent(UIKeyboardEventArgs(target,
+                                                                      static_cast<Key::Code>(code),
+                                                                      ctrl, alt, shift));
 
                     target->RaiseKeyPressingEvent(UIKeyboardEventArgs(target, static_cast<Key::Code>(code)));
                 }

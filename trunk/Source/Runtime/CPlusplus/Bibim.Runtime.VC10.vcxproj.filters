@@ -840,6 +840,15 @@
     <ClCompile Include="Foundation\Bibim\Color.cpp">
       <Filter>01. Foundation\%28Fundamental%29</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Bibim\Clipboard.Windows.cpp">
+      <Filter>03. Game\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Bibim\Clipboard.Android.cpp">
+      <Filter>03. Game\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework\Bibim\Clipboard.iOS.cpp">
+      <Filter>03. Game\Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset\Bibim\AssetLoadingTask.h">
@@ -1665,6 +1674,18 @@
       <Filter>03. Game\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="Foundation\Bibim\Config.h" />
+    <ClInclude Include="Framework\Bibim\Clipboard.Windows.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\Clipboard.Android.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\Clipboard.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Bibim\Clipboard.iOS.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Asset\Bibim\AssetLoadingTask.inl">

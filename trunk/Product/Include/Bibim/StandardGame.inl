@@ -85,6 +85,11 @@ namespace Bibim
         return lua;
     }
 
+    Clipboard* StandardGame::GetClipboard() const
+    {
+        return clipboard;
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     StandardGame* StandardGame::LuaBase::GetGame() const

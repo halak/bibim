@@ -2435,6 +2435,18 @@
 				Name="Framework"
 				>
 				<File
+					RelativePath=".\Framework\Bibim\Clipboard.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\Clipboard.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Bibim\Clipboard.Windows.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Framework\Bibim\GameFramework.h"
 					>
 				</File>
