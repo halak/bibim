@@ -4,6 +4,7 @@
 #include <Bibim/AudioDevice.h>
 #include <Bibim/BitMask.h>
 #include <Bibim/BGM.h>
+#include <Bibim/Clipboard.h>
 #include <Bibim/Clock.h>
 #include <Bibim/Environment.h>
 #include <Bibim/FileAssetProvider.h>
@@ -220,6 +221,9 @@ namespace Bibim
                 uiRoot->SetEventMap(new UIEventMap());
             uiRoot->GetEventMap()->AddHandler(UIEventID::KeyDown, handler);
         }
+
+        clipboard = new Clipboard();
+        GetModules()->GetRoot()->AttachChild(clipboard);
 
         GameFramework::Initialize();
     }
@@ -1858,6 +1862,40 @@ namespace Bibim
                 return 1;
             }
         }
+
+        static int SetClipboardText(lua_State* L)
+        {
+            luaL_checktype(L, 1, LUA_TSTRING);
+
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            Clipboard* clipboard = game->GetClipboard();
+            if (clipboard == nullptr)
+                return 0;
+
+            clipboard->SetText(lua_tostring(L, 1));
+
+            return 0;
+        }
+
+        static int GetClipboardText(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            Clipboard* clipboard = game->GetClipboard();
+            if (clipboard == nullptr)
+                return 0;
+
+            const String text = clipboard->GetText();
+            
+            lua_pushlstring(L, text.CStr(), text.GetLength());
+
+            return 1;
+        }
     }
 
 
@@ -1919,11 +1957,17 @@ namespace Bibim
             { "resume", &Resume },
             { NULL, NULL}  /* sentinel */
         };
-        
+
         const struct luaL_reg httpLib [] = {
             { "request", &REQUEST },
             { "download", &Download },
             { "useragent", &UserAgent },
+            { NULL, NULL}  /* sentinel */
+        };
+
+        const struct luaL_reg clipboardLib [] = {
+            { "set", &SetClipboardText },
+            { "get", &GetClipboardText },
             { NULL, NULL}  /* sentinel */
         };
 
@@ -1945,6 +1989,9 @@ namespace Bibim
         lua_pop(state, 1);
 
         luaL_register(state, "http", httpLib);
+        lua_pop(state, 1);
+
+        luaL_register(state, "clipboard", clipboardLib);
         lua_pop(state, 1);
 
         lua_getglobal(state, "ui");

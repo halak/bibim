@@ -7,6 +7,7 @@ namespace Bibim
 {
     const Key::Code Key::Codes[Count] = 
     {
+        Back,
         Enter,
         Shift,
         Ctrl,
@@ -98,6 +99,7 @@ namespace Bibim
 #       define BBAddKeyEntry(code) stringToCodeMap.push_back(Entry(#code, code));
 
         BBAddKeyEntry(None);
+        BBAddKeyEntry(Back);
         BBAddKeyEntry(Enter);
         BBAddKeyEntry(Shift);
         BBAddKeyEntry(Ctrl);

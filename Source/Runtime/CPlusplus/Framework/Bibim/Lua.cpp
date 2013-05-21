@@ -199,7 +199,10 @@ namespace Bibim
                 size_t resultLength = 0;
                 const size_t count = static_cast<int>(lua_objlen(L, 2));
                 if (count == 0)
-                    return 0;
+                {
+                    lua_pushstring(L, "");
+                    return 1;
+                }
 
                 for (size_t i = 1; i <= count; i++)
                 {
@@ -240,6 +243,107 @@ namespace Bibim
             }
         };
 
+        struct AdditionalMathLibrary
+        {
+            static int CatmullRom(lua_State* L)
+            {
+                const Vector2 v[] = {
+                    Vector2(static_cast<float>(lua_tonumber(L, 1)),
+                            static_cast<float>(lua_tonumber(L, 2))),
+                    Vector2(static_cast<float>(lua_tonumber(L, 3)),
+                            static_cast<float>(lua_tonumber(L, 4))),
+                    Vector2(static_cast<float>(lua_tonumber(L, 5)),
+                            static_cast<float>(lua_tonumber(L, 6))),
+                    Vector2(static_cast<float>(lua_tonumber(L, 7)),
+                            static_cast<float>(lua_tonumber(L, 8))),
+                };
+
+                const float t = static_cast<float>(lua_tonumber(L, 9));
+
+                const Vector2 result = Math::CatmullRom(v[0], v[1], v[2], v[3], t);
+
+                lua_pushnumber(L, static_cast<lua_Number>(result.X));
+                lua_pushnumber(L, static_cast<lua_Number>(result.Y));
+                return 2;
+            }
+
+            static int CatmullRomRoute(lua_State* L)
+            {
+                static const int POINTS = 1;
+                static const int SLICES = 2;
+                static const int FUNCTION = 3;
+
+                struct GetPoint
+                {
+                    static Vector2 Do(lua_State* L, int index)
+                    {
+                        lua_rawgeti(L, POINTS, index * 2 - 1);
+                        lua_rawgeti(L, POINTS, index * 2);
+                        const float x = static_cast<float>(lua_tonumber(L, -2));
+                        const float y = static_cast<float>(lua_tonumber(L, -1));
+                        lua_pop(L, 2);
+
+                        return Vector2(x, y);
+                    }
+                };
+
+                luaL_checktype(L, POINTS, LUA_TTABLE);
+                luaL_checktype(L, SLICES, LUA_TNUMBER);
+                luaL_checktype(L, FUNCTION, LUA_TFUNCTION);
+
+                const int slices = lua_tointeger(L, SLICES);
+
+                if (slices <= 1)
+                    return 0;
+
+                const size_t count = static_cast<int>(lua_objlen(L, POINTS) / 2);
+                if (count == 0)
+                    return 0;
+
+                float totalLength = 0.0f;
+                Vector2 lastPoint = GetPoint::Do(L, 2);
+                for (int i = 3; i <= count - 1; i++)
+                {
+                    const Vector2 currentPoint = GetPoint::Do(L, i);
+                    totalLength += Vector2::GetDistance(lastPoint, currentPoint);
+                    lastPoint = currentPoint;
+                }
+
+                const float sliceLength = totalLength / static_cast<float>(slices - 1);
+
+                int index = 4;
+                Vector2 a = GetPoint::Do(L, 1);
+                Vector2 b = GetPoint::Do(L, 2);
+                Vector2 c = GetPoint::Do(L, 3);
+                Vector2 d = GetPoint::Do(L, 4);
+                float distanceBToC = Vector2::GetDistance(b, c);
+                float currentDistance = 0.0f;
+                for (int i = 0; i < slices; i++)
+                {
+                    const float t = currentDistance / distanceBToC;
+                    const Vector2 v = Math::CatmullRom(a, b, c, d, t);
+                    lua_pushvalue(L, FUNCTION);
+                    lua_pushnumber(L, static_cast<lua_Number>(v.X));
+                    lua_pushnumber(L, static_cast<lua_Number>(v.Y));
+                    lua_call(L, 2, 0);
+
+                    currentDistance += sliceLength;
+
+                    while (currentDistance > distanceBToC)
+                    {
+                        currentDistance -= distanceBToC;
+                        a = b;
+                        b = c;
+                        c = d;
+                        d = GetPoint::Do(L, ++index);
+                        distanceBToC = Vector2::GetDistance(b, c);
+                    }
+                }
+
+                return 0;
+            }
+        };
+
         const struct luaL_reg additionalStringLib [] = {
             { "startswith", &AdditionalStringLibrary::StartsWith },
             { "endswith", &AdditionalStringLibrary::EndsWith },
@@ -247,8 +351,17 @@ namespace Bibim
             { "join", &AdditionalStringLibrary::Join },
             { NULL, NULL}  /* sentinel */
         };
+
+        const struct luaL_reg additionalMathLib [] = {
+            { "catmullrom", &AdditionalMathLibrary::CatmullRom },
+            { "catmullromroute", &AdditionalMathLibrary::CatmullRomRoute },
+            { NULL, NULL}  /* sentinel */
+        };
     
         luaL_register(state, LUA_STRLIBNAME, additionalStringLib);
+        lua_pop(state, 1);
+
+        luaL_register(state, LUA_MATHLIBNAME, additionalMathLib);
         lua_pop(state, 1);
 
         lua_tinker::def(state, "_ALERT", static_cast<void (*)(const char*)>(&Bibim::Log::Warning));

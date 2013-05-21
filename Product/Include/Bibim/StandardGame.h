@@ -39,6 +39,7 @@
                 inline UIDomain* GetUIDomain() const;
                 inline UIAsyncEventQueue* GetAsyncEventQueue() const;
                 inline Lua* GetLua() const;
+                inline Clipboard* GetClipboard() const;
 
             public:
                 class LuaBase : public Bibim::Lua
@@ -109,6 +110,7 @@
                 BGM* bgm;
                 SoundFX* sfx;
                 Lua* lua;
+                Clipboard* clipboard;
                 String  recentLog;
                 FontPtr debugFont;
         };
