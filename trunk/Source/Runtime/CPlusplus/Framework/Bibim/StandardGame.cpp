@@ -972,6 +972,16 @@ namespace Bibim
             return 4;
         }
 
+        static int CommandLine(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            lua_pushstring(L, game->GetStartupArgs().CStr());
+            return 1;
+        }
+
         class UIEventArgsSerializer : public UIEventArgs::Serializer
         {
             public:
@@ -1924,6 +1934,7 @@ namespace Bibim
             { "ime", &GetIMEObject },
             { "resetloadingstatus", &ResetLoadingStatus },
             { "loadingstatus", &LoadingStatus },
+            { "commandline", &CommandLine },
             { NULL, NULL}  /* sentinel */
         };
 
