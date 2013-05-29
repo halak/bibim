@@ -245,6 +245,21 @@ namespace Bibim
 
         struct AdditionalMathLibrary
         {
+            static int Clamp(lua_State* L)
+            {
+                luaL_checktype(L, 1, LUA_TNUMBER);
+                luaL_checktype(L, 2, LUA_TNUMBER);
+                luaL_checktype(L, 3, LUA_TNUMBER);
+
+                const lua_Number value = lua_tonumber(L, 1);
+                const lua_Number minValue = lua_tonumber(L, 2);
+                const lua_Number maxValue = lua_tonumber(L, 3);
+
+                lua_pushnumber(L, Math::Clamp(value, minValue, maxValue));
+
+                return 1;
+            }
+
             static int CatmullRom(lua_State* L)
             {
                 const Vector2 v[] = {
@@ -323,13 +338,14 @@ namespace Bibim
                     const float t = currentDistance / distanceBToC;
                     const Vector2 v = Math::CatmullRom(a, b, c, d, t);
                     lua_pushvalue(L, FUNCTION);
+                    lua_pushnumber(L, static_cast<lua_Number>(i));
                     lua_pushnumber(L, static_cast<lua_Number>(v.X));
                     lua_pushnumber(L, static_cast<lua_Number>(v.Y));
-                    lua_call(L, 2, 0);
+                    lua_call(L, 3, 0);
 
                     currentDistance += sliceLength;
 
-                    while (currentDistance > distanceBToC)
+                    while (currentDistance > distanceBToC && index < count)
                     {
                         currentDistance -= distanceBToC;
                         a = b;
@@ -353,6 +369,7 @@ namespace Bibim
         };
 
         const struct luaL_reg additionalMathLib [] = {
+            { "clamp", &AdditionalMathLibrary::Clamp },
             { "catmullrom", &AdditionalMathLibrary::CatmullRom },
             { "catmullromroute", &AdditionalMathLibrary::CatmullRomRoute },
             { NULL, NULL}  /* sentinel */
