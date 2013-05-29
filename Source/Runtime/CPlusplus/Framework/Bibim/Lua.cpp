@@ -241,6 +241,45 @@ namespace Bibim
 
                 return 1;
             }
+
+            static int ShortcutKeyable(lua_State* L)
+            {
+                if (lua_type(L, 1) != LUA_TSTRING)
+                    return 0;
+
+                size_t length = 0;
+                const char* s = lua_tolstring(L, 1, &length);
+
+                if (length == 0)
+                {
+                    lua_pushboolean(L, 0);
+                    return 1;
+                }
+
+                if ('0' <= s[0] && s[0] <= '9')
+                {
+                    lua_pushboolean(L, 0);
+                    return 1;
+                }
+
+                for (size_t i = 0; i < length; i++)
+                {
+                    const char c = s[i];
+                    const bool condition = ('0' <= c && c <= '9') ||
+                                           ('A' <= c && c <= 'Z') ||
+                                           ('a' <= c && c <= 'z') ||
+                                           (c == '_');
+
+                    if (condition == false)
+                    {
+                        lua_pushboolean(L, 0);
+                        return 1;
+                    }
+                }
+
+                lua_pushboolean(L, 1);
+                return 1;
+            }
         };
 
         struct AdditionalMathLibrary
@@ -365,6 +404,7 @@ namespace Bibim
             { "endswith", &AdditionalStringLibrary::EndsWith },
             { "split", &AdditionalStringLibrary::Split },
             { "join", &AdditionalStringLibrary::Join },
+            { "shortcutkeyable", &AdditionalStringLibrary::ShortcutKeyable },
             { NULL, NULL}  /* sentinel */
         };
 
