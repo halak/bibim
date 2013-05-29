@@ -289,6 +289,12 @@ namespace Bibim
                     }
                 }
                 return 0;
+            case WM_MOVE:
+                {
+                    GameWindow* o = GetGameWindow(windowHandle);
+                    o->position = Point2(LOWORD(lParam), HIWORD(lParam));
+                }
+                return 0;
             case WM_SIZE:
                 {
                     GameWindow* o = GetGameWindow(windowHandle);

@@ -103,7 +103,10 @@ namespace Bibim
         GetWindow()->RemoveResizeEventListener(this);
     }
     
-    void StandardGame::Initialize(const String& gameName, const String& version, StandardGame::LuaBase* lua)
+    void StandardGame::Initialize(const String& gameName,
+                                  const String& version,
+                                  StandardGame::LuaBase* lua,
+                                  bool windowMoveToScreenCenter)
     {
         Log::Add(this);
 
@@ -114,7 +117,9 @@ namespace Bibim
             GetModules()->GetRoot()->AttachChild(sl);
         }
 
-        GetWindow()->MoveToScreenCenter();
+        if (windowMoveToScreenCenter)
+            GetWindow()->MoveToScreenCenter();
+
         GameFramework::Initialize();
 
         //MOBILE MPQPtr mainMPQ = new MPQ("Game.mpq");

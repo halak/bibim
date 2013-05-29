@@ -12,7 +12,10 @@
 
     namespace Bibim
     {
-        class StandardGame : public GameFramework, public Window::ResizeEventListener, public GraphicsDevice::RestoreEventListener, public Log::Listener
+        class StandardGame : public GameFramework,
+                             public Window::ResizeEventListener,
+                             public GraphicsDevice::RestoreEventListener,
+                             public Log::Listener
         {
             BBThisIsNoncopyableClass(StandardGame);
             public:
@@ -62,7 +65,10 @@
                 StandardGame(Point2 windowSize);
                 StandardGame(Point2 windowSize, Point2 contentSize);
 
-                void Initialize(const String& gameName, const String& version, StandardGame::LuaBase* lua);
+                void Initialize(const String& gameName,
+                                const String& version,
+                                StandardGame::LuaBase* lua,
+                                bool windowMoveToScreenCenter = true);
 
                 virtual BGM* CreateBGM(AudioDevice* audioDevice);
 
