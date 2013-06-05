@@ -1299,9 +1299,12 @@ namespace Bibim
             luaL_checktype(L, 1, LUA_TUSERDATA);
             luaL_checktype(L, 2, LUA_TFUNCTION);
 
-            UIPanel* target = lua_tinker::read<UIPanel*>(L, 1);
-            if (target == nullptr)
+            UIVisual* visual = lua_tinker::read<UIVisual*>(L, 1);
+            if (visual == nullptr ||
+                visual->IsPanel() == false)
                 return 0;
+
+            UIPanel* target = static_cast<UIPanel*>(visual);
 
             typedef UIPanel::VisualCollection VisualCollection;
             const VisualCollection& children = target->GetChildren();
