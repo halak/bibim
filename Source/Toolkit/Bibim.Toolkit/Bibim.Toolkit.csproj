@@ -138,11 +138,13 @@
     <Compile Include="Asset\Pipeline\CookingNode.cs" />
     <Compile Include="Asset\Pipeline\GameAssetServer.cs" />
     <Compile Include="Asset\Pipeline\PipedGameAssetServer.cs" />
+    <Compile Include="Graphics\BitmapExtension.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToMaskTexture2D.cs" />
     <Compile Include="Asset\Pipeline\Recipes\CompileGLSLShaderEffect.cs" />
     <Compile Include="Asset\Pipeline\Recipes\CompileHLSLShaderEffect.cs" />
     <Compile Include="Asset\Pipeline\Recipes\CompileShaderEffect.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToTexture2D.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\DirectoryToImageSet.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ExportImageSet.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ExportSpriteSet.cs" />
     <Compile Include="Asset\Pipeline\Recipes\PhotoshopDocumentToImageSet.cs" />
