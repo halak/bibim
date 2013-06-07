@@ -64,6 +64,11 @@ namespace Bibim
         delete parametersPointer;
     }
 
+    Font* Font::Clone() const
+    {
+        return new Font(*this);
+    }
+
     void Font::Prepare(const String& text)
     {
         const char* current = &text.CStr()[0];

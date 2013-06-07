@@ -457,6 +457,7 @@ namespace Bibim
             lua_tinker::class_def<SpriteSet>(L, "Find", &SpriteSet::Find);
         lua_tinker::class_add<Font>(L, "Font");
             lua_tinker::class_inh<Font, GameAsset>(L);
+            lua_tinker::class_def<Font>(L, "Clone", &Font::Clone);
             lua_tinker::class_def<Font>(L, "GetFaceURI", &Font::GetFaceURI);
             lua_tinker::class_def<Font>(L, "SetFaceURI", &Font::SetFaceURI);
             lua_tinker::class_def<Font>(L, "GetSize", &Font::GetSize);
