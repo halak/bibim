@@ -39,6 +39,7 @@
                 Font(const Font& original);
                 virtual ~Font();
 
+                Font* Clone() const;
                 void Prepare(const String& text);
 
                 Metric Measure(const String& text);
