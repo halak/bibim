@@ -1169,6 +1169,31 @@ namespace Bibim
             return 1;
         }
 
+        static int Each(lua_State* L, UIPanel* current, int callbackIndex)
+        {
+            typedef UIPanel::VisualCollection VisualCollection;
+            const VisualCollection& children = current->GetChildren();
+            for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+            {
+                const int classID = (*it)->GetClassID();
+                bool childrenSkipped = false;
+
+                BBAssert(lua_isfunction(L, -1));
+                
+                lua_pushvalue(L, callbackIndex);
+                lua_tinker::push(L, static_cast<UIVisual*>(*it));
+                lua_call(L, 1, 1);
+                childrenSkipped = (lua_toboolean(L, -1) != 0);
+                
+                lua_pop(L, 1);
+
+                if (childrenSkipped == false && (*it)->IsPanel())
+                    Each(L, StaticCast<UIPanel>(*it), callbackIndex);
+            }
+
+            return 0;
+        }
+
         static int Each(lua_State* L, UIPanel* current, int callbackIndex, const int* findingClassID4)
         {
             typedef UIPanel::VisualCollection VisualCollection;
@@ -1281,7 +1306,10 @@ namespace Bibim
 
             BBStaticAssert(sizeof(findingClassIDs) / sizeof(findingClassIDs[0]) == 4);
 
-            Each(L, root, callbackIndex, findingClassIDs);
+            if (findingClassName)
+                Each(L, root, callbackIndex, findingClassIDs);
+            else
+                Each(L, root, callbackIndex);
 
             return 0;
         }

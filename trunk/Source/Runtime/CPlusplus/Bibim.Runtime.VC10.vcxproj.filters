@@ -10,9 +10,6 @@
     <Filter Include="03. Game\%28Asset%29\Providers">
       <UniqueIdentifier>{7d3015ba-e8dd-42f6-9fe9-f8088bb500f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Game\Typography">
-      <UniqueIdentifier>{030e8e09-1ae6-4d40-8868-7237e7cdf477}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Game\%28Component%29">
       <UniqueIdentifier>{fe5c9a4c-1bde-43c8-b4c2-5185bb1efb93}</UniqueIdentifier>
     </Filter>
@@ -148,6 +145,9 @@
     <Filter Include="03. Game\Audio\AL">
       <UniqueIdentifier>{6e638c8f-c22a-46b8-9eb5-0776ec4c30a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Game\UI\Typography">
+      <UniqueIdentifier>{030e8e09-1ae6-4d40-8868-7237e7cdf477}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Asset\Bibim\AssetLoadingTask.cpp">
@@ -172,28 +172,28 @@
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\Font.cpp">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\FontCache.cpp">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\FontLibrary.cpp">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\FontString.cpp">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\Glyph.cpp">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\GlyphSurface.cpp">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\GlyphTable.cpp">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\TypingContext.cpp">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Component\Bibim\CloningContext.cpp">
       <Filter>03. Game\%28Component%29</Filter>
@@ -876,28 +876,28 @@
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\Font.h">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\FontCache.h">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\FontLibrary.h">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\FontString.h">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\Glyph.h">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\GlyphSurface.h">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\GlyphTable.h">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\TypingContext.h">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Component\Bibim\CloningContext.h">
       <Filter>03. Game\%28Component%29</Filter>
@@ -1710,28 +1710,28 @@
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </None>
     <None Include="Typography\Bibim\Font.inl">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </None>
     <None Include="Typography\Bibim\FontCache.inl">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </None>
     <None Include="Typography\Bibim\FontLibrary.inl">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </None>
     <None Include="Typography\Bibim\FontString.inl">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </None>
     <None Include="Typography\Bibim\Glyph.inl">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </None>
     <None Include="Typography\Bibim\GlyphSurface.inl">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </None>
     <None Include="Typography\Bibim\GlyphTable.inl">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </None>
     <None Include="Typography\Bibim\TypingContext.inl">
-      <Filter>03. Game\Typography</Filter>
+      <Filter>03. Game\UI\Typography</Filter>
     </None>
     <None Include="Component\Bibim\CloningContext.inl">
       <Filter>03. Game\%28Component%29</Filter>
