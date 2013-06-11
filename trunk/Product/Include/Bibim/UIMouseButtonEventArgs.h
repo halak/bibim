@@ -12,8 +12,8 @@
         {
             public:
                 UIMouseButtonEventArgs();
-                UIMouseButtonEventArgs(UIVisual* target, Point2 position, Key::Code buttonCode);
-                UIMouseButtonEventArgs(UIVisual* target, Point2 position, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed, Key::Code buttonCode);
+                UIMouseButtonEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target, Point2 position, Key::Code buttonCode);
+                UIMouseButtonEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target, Point2 position, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed, Key::Code buttonCode);
                 UIMouseButtonEventArgs(const UIMouseEventArgs& base, Key::Code buttonCode);
                 UIMouseButtonEventArgs(const UIMouseButtonEventArgs& original);
                 virtual ~UIMouseButtonEventArgs();

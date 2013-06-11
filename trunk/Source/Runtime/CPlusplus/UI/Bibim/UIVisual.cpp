@@ -243,7 +243,7 @@ namespace Bibim
 
     void UIVisual::Click()
     {
-        RaiseMouseClickEvent(UIMouseEventArgs(this));
+        RaiseMouseClickEvent(UIMouseEventArgs(nullptr, this));
     }
 
     Vector2 UIVisual::GetContentSize()

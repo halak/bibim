@@ -95,7 +95,8 @@ namespace Bibim
             }
         }
 
-        const UIMouseEventArgs baseArgs = UIMouseEventArgs(targetVisual,
+        const UIMouseEventArgs baseArgs = UIMouseEventArgs(this,
+                                                           targetVisual,
                                                            mouseState.Position,
                                                            mouseState.IsLeftButtonPressed,
                                                            mouseState.IsRightButtonPressed,
@@ -225,6 +226,14 @@ namespace Bibim
             device = value;
             lastTargetVisual.Reset();
             lastMouseState = MouseState::Empty;
+        }
+    }
+
+    void UIMouseEventDispatcher::SetCapture(UIVisual* value)
+    {
+        if (capturedVisual != value)
+        {
+            capturedVisual = value;
         }
     }
 }

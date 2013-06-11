@@ -13,9 +13,9 @@
         {
             public:
                 UIMouseEventArgs();
-                explicit UIMouseEventArgs(UIVisual* target);
-                UIMouseEventArgs(UIVisual* target, Point2 position);
-                UIMouseEventArgs(UIVisual* target, Point2 position, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed);
+                UIMouseEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target);
+                UIMouseEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target, Point2 position);
+                UIMouseEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target, Point2 position, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed);
                 UIMouseEventArgs(const UIMouseEventArgs& original);
                 virtual ~UIMouseEventArgs();
 
@@ -23,6 +23,7 @@
 
                 virtual void Serialize(Serializer& context) const;
 
+                inline UIMouseEventDispatcher* GetDispatcher() const;
                 inline Point2 GetPosition() const;
                 inline int GetPositionX() const;
                 inline int GetPositionY() const;
@@ -31,6 +32,7 @@
                 inline bool IsMiddleButtonPressed() const;
 
             private:
+                UIMouseEventDispatcher* dispatcher;
                 Point2 position;
                 bool isLeftButtonPressed;
                 bool isRightButtonPressed;

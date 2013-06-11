@@ -59,16 +59,17 @@ namespace Bibim
                 if (currentDown)
                 {
                     if (lastDown == false)
-                        target->RaiseKeyDownEvent(UIKeyboardEventArgs(target,
+                        target->RaiseKeyDownEvent(UIKeyboardEventArgs(this,
+                                                                      target,
                                                                       static_cast<Key::Code>(code),
                                                                       ctrl, alt, shift));
 
-                    target->RaiseKeyPressingEvent(UIKeyboardEventArgs(target, static_cast<Key::Code>(code)));
+                    target->RaiseKeyPressingEvent(UIKeyboardEventArgs(this, target, static_cast<Key::Code>(code)));
                 }
                 else
                 {
                     if (lastDown)
-                        target->RaiseKeyUpEvent(UIKeyboardEventArgs(target, static_cast<Key::Code>(code)));
+                        target->RaiseKeyUpEvent(UIKeyboardEventArgs(this, target, static_cast<Key::Code>(code)));
                 }
             }
         }

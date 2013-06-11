@@ -9,14 +9,14 @@ namespace Bibim
     {
     }
 
-    UIMouseWheelEventArgs::UIMouseWheelEventArgs(UIVisual* target, Point2 position, int wheelDelta)
-        : UIMouseEventArgs(target, position),
+    UIMouseWheelEventArgs::UIMouseWheelEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target, Point2 position, int wheelDelta)
+        : UIMouseEventArgs(dispatcher, target, position),
           wheelDelta(wheelDelta)
     {
     }
 
-    UIMouseWheelEventArgs::UIMouseWheelEventArgs(UIVisual* target, Point2 position, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed, int wheelDelta)
-        : UIMouseEventArgs(target, position, isLeftButtonPressed, isRightButtonPressed, isMiddleButtonPressed),
+    UIMouseWheelEventArgs::UIMouseWheelEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target, Point2 position, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed, int wheelDelta)
+        : UIMouseEventArgs(dispatcher, target, position, isLeftButtonPressed, isRightButtonPressed, isMiddleButtonPressed),
           wheelDelta(wheelDelta)
     {
     }

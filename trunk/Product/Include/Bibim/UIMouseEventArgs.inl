@@ -1,5 +1,10 @@
 ﻿namespace Bibim
 {
+    UIMouseEventDispatcher* UIMouseEventArgs::GetDispatcher() const
+    {
+        return dispatcher;
+    }
+
     Point2 UIMouseEventArgs::GetPosition() const
     {
         return position;

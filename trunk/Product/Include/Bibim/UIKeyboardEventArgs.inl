@@ -1,5 +1,10 @@
 ﻿namespace Bibim
 {
+    UIKeyboardEventDispatcher* UIKeyboardEventArgs::GetDispatcher() const
+    {
+        return dispatcher;
+    }
+
     bool UIKeyboardEventArgs::Contains(Key::Code keyCode) const
     {
         return keyCode0 == keyCode ||
