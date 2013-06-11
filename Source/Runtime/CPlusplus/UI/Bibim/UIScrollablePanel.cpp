@@ -3,6 +3,7 @@
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Math.h>
 #include <Bibim/UIMouseButtonEventArgs.h>
+#include <Bibim/UIMouseEventDispatcher.h>
 #include <Bibim/UIDrawingContext.h>
 #include <Bibim/UIPickingContext.h>
 #include <Bibim/UIVisual.h>
@@ -56,12 +57,22 @@ namespace Bibim
         BBAssert(content->GetXMode() == UIVisual::AbsolutePosition &&
                  content->GetYMode() == UIVisual::AbsolutePosition);
 
-        const Point2 mousePositionDelta = args.GetPosition() - lastMousePosition;
+        const Point2 mousePosition = args.GetPosition();
+        const Point2 mousePositionDelta = mousePosition - lastMousePosition;
         
         lastMousePosition = args.GetPosition();
 
         content->SetX(content->GetX() + mousePositionDelta.X);
         content->SetY(content->GetY() + mousePositionDelta.Y);
+
+        // 어느 정도 스크롤이 되었다면 자기 자신을 캡쳐하도록 수정합니다.
+        const Point2 mousePositionDeltaFromStart = mousePosition - startMousePosition;
+        if (Math::Abs(mousePositionDeltaFromStart.X) > 8 ||
+            Math::Abs(mousePositionDeltaFromStart.Y) > 8) // 그냥 경험에 의해 정해진 값
+        {
+            if (args.GetDispatcher())
+                args.GetDispatcher()->SetCapture(this);
+        }
 
         return true;
     }
@@ -71,7 +82,8 @@ namespace Bibim
         if (args.GetButtonCode() == Key::MouseLeftButton)
         {
             isScrolling = true;
-            lastMousePosition = args.GetPosition();
+            startMousePosition = args.GetPosition(); 
+            lastMousePosition = startMousePosition;
             return true;
         }
         else

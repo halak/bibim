@@ -30,6 +30,11 @@
         focusWhenHover = value;
     }
 
+    UIVisual* UIMouseEventDispatcher::GetCapture() const
+    {
+        return capturedVisual;
+    }
+
     UIVisual* UIMouseEventDispatcher::GetLastTarget() const
     {
         return lastTargetVisual;

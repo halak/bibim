@@ -109,10 +109,7 @@ namespace Bibim
 
                 float GetMaxLineWidth() const
                 {
-                    if (maxLineWidth > 0.0f)
-                        return maxLineWidth;
-                    else
-                        return lineWidth;
+                    return Math::Max(maxLineWidth, lineWidth);
                 }
 
                 int GetLineCount() const { return lineCount; }

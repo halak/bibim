@@ -34,6 +34,9 @@
                 inline bool GetFocusWhenHover() const;
                 inline void SetFocusWhenHover(bool value);
 
+                inline UIVisual* GetCapture() const;
+                void SetCapture(UIVisual* value);
+
                 inline UIVisual* GetLastTarget() const;
 
             private:

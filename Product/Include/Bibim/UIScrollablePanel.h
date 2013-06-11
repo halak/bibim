@@ -32,6 +32,7 @@
                 UIVisualPtr content;
                 bool isScrolling;
                 Point2 lastMousePosition;
+                Point2 startMousePosition;
         };
     }
 

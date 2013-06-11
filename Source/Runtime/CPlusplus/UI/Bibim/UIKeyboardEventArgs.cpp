@@ -5,6 +5,7 @@ namespace Bibim
 {
     UIKeyboardEventArgs::UIKeyboardEventArgs()
         : UIEventArgs(nullptr),
+          dispatcher(nullptr),
           keyCode0(Key::None),
           keyCode1(Key::None),
           keyCode2(Key::None),
@@ -12,8 +13,9 @@ namespace Bibim
     {
     }
 
-    UIKeyboardEventArgs::UIKeyboardEventArgs(UIVisual* target, Key::Code keyCode)
+    UIKeyboardEventArgs::UIKeyboardEventArgs(UIKeyboardEventDispatcher* dispatcher, UIVisual* target, Key::Code keyCode)
         : UIEventArgs(target),
+          dispatcher(dispatcher),
           keyCode0(keyCode),
           keyCode1(Key::None),
           keyCode2(Key::None),
@@ -21,8 +23,9 @@ namespace Bibim
     {
     }
 
-    UIKeyboardEventArgs::UIKeyboardEventArgs(UIVisual* target, Key::Code keyCode0, Key::Code keyCode1, Key::Code keyCode2, Key::Code keyCode3)
+    UIKeyboardEventArgs::UIKeyboardEventArgs(UIKeyboardEventDispatcher* dispatcher, UIVisual* target, Key::Code keyCode0, Key::Code keyCode1, Key::Code keyCode2, Key::Code keyCode3)
         : UIEventArgs(target),
+          dispatcher(dispatcher),
           keyCode0(keyCode0),
           keyCode1(keyCode1),
           keyCode2(keyCode2),
@@ -32,6 +35,7 @@ namespace Bibim
 
     UIKeyboardEventArgs::UIKeyboardEventArgs(const UIKeyboardEventArgs& original)
         : UIEventArgs(original),
+          dispatcher(original.dispatcher),
           keyCode0(original.keyCode0),
           keyCode1(original.keyCode1),
           keyCode2(original.keyCode2),
