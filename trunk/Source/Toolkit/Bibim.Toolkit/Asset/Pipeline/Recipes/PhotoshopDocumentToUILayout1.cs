@@ -99,13 +99,6 @@ namespace Bibim.Asset.Pipeline.Recipes
             Dictionary<string, string> args;
             ParseLayerName(layer.Name, out name, out type, out args);
 
-            if (layer.Name.Contains("Name"))
-            {
-                int i = 0;
-                i = 0;
-                i = i;
-            }
-
             if (layer.IsGroup == false)
             {
                 if (string.Compare(type, "UIMarkupLabel", true) == 0 ||
@@ -317,8 +310,6 @@ namespace Bibim.Asset.Pipeline.Recipes
                         return childWindow;
                     }
                 }
-
-                return null;
             }
         }
 
