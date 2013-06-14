@@ -188,6 +188,7 @@ namespace Bibim
                 return 1;
             }
 
+            /*
             static int Join(lua_State* L)
             {
                 luaL_checktype(L, 1, LUA_TSTRING);
@@ -241,6 +242,7 @@ namespace Bibim
 
                 return 1;
             }
+            */
 
             static int ShortcutKeyable(lua_State* L)
             {
@@ -403,7 +405,7 @@ namespace Bibim
             { "startswith", &AdditionalStringLibrary::StartsWith },
             { "endswith", &AdditionalStringLibrary::EndsWith },
             { "split", &AdditionalStringLibrary::Split },
-            { "join", &AdditionalStringLibrary::Join },
+            // { "join", &AdditionalStringLibrary::Join },
             { "shortcutkeyable", &AdditionalStringLibrary::ShortcutKeyable },
             { NULL, NULL}  /* sentinel */
         };
@@ -425,6 +427,10 @@ namespace Bibim
 
         lua_newtable(state);
         lua_setglobal(state, "_CALLBACKS");
+
+#       if (defined(BIBIM_DEBUG))
+        lua_tinker::def(state, "DEBUG", true);
+#       endif
     }
 
     void Lua::LoadClasses()

@@ -238,33 +238,27 @@ namespace Bibim.Graphics
                     graphics[sheetIndex].Clear(Color.Transparent);
                 }
 
-                switch (appliedTransform)
+                if (appliedTransform == Image.Transform.RotateCW90)
                 {
-                    case Image.Transform.Identity:
-                        graphics[sheetIndex].DrawImageUnscaled(bitmap, rectangle.X, rectangle.Y);
-                        
-                        graphics[sheetIndex].DrawImage(bitmap, rectangle.Left - 1, rectangle.Top, new Rectangle(0, 0, 1, rectangle.Height), GraphicsUnit.Pixel);
-                        graphics[sheetIndex].DrawImage(bitmap, rectangle.Right, rectangle.Top, new Rectangle(bitmap.Width - 1, 0, 1, rectangle.Height), GraphicsUnit.Pixel);
-                        graphics[sheetIndex].DrawImage(bitmap, rectangle.Left, rectangle.Top - 1, new Rectangle(0, 0, rectangle.Width, 1), GraphicsUnit.Pixel);
-                        graphics[sheetIndex].DrawImage(bitmap, rectangle.Left, rectangle.Bottom, new Rectangle(0, bitmap.Height - 1, rectangle.Width, 1), GraphicsUnit.Pixel);
-
-                        var sheetBitmap = sheetBitmaps[sheetIndex];
-                        sheetBitmap.SetPixel(rectangle.Left - 1, rectangle.Top - 1, sheetBitmap.GetPixel(rectangle.Left, rectangle.Top));
-                        sheetBitmap.SetPixel(rectangle.Right + 0, rectangle.Top - 1, sheetBitmap.GetPixel(rectangle.Right - 1, rectangle.Top));
-                        sheetBitmap.SetPixel(rectangle.Left - 1, rectangle.Bottom + 0, sheetBitmap.GetPixel(rectangle.Left, rectangle.Bottom - 1));
-                        sheetBitmap.SetPixel(rectangle.Right + 0, rectangle.Bottom + 0, sheetBitmap.GetPixel(rectangle.Right - 1, rectangle.Bottom - 1));
-
-                        break;
-                    case Image.Transform.RotateCW90:
-                        graphics[sheetIndex].TranslateTransform(+rectangle.X, +rectangle.Y);
-                        graphics[sheetIndex].RotateTransform(90.0f);
-                        graphics[sheetIndex].TranslateTransform(-rectangle.X, -rectangle.Y - rectangle.Width);
-                        graphics[sheetIndex].DrawImageUnscaled(bitmap, rectangle.X, rectangle.Y);
-                        graphics[sheetIndex].ResetTransform();
-                        break;
-                    default:
-                        throw new NotSupportedException();
+                    graphics[sheetIndex].TranslateTransform(+rectangle.X, +rectangle.Y);
+                    graphics[sheetIndex].RotateTransform(90.0f);
+                    graphics[sheetIndex].TranslateTransform(-rectangle.X, -rectangle.Y - rectangle.Width + 1);
                 }
+
+                graphics[sheetIndex].DrawImageUnscaled(bitmap, rectangle.X, rectangle.Y);
+
+                graphics[sheetIndex].DrawImage(bitmap, rectangle.Left - 1, rectangle.Top, new Rectangle(0, 0, 1, rectangle.Height), GraphicsUnit.Pixel);
+                graphics[sheetIndex].DrawImage(bitmap, rectangle.Right, rectangle.Top, new Rectangle(bitmap.Width - 1, 0, 1, rectangle.Height), GraphicsUnit.Pixel);
+                graphics[sheetIndex].DrawImage(bitmap, rectangle.Left, rectangle.Top - 1, new Rectangle(0, 0, rectangle.Width, 1), GraphicsUnit.Pixel);
+                graphics[sheetIndex].DrawImage(bitmap, rectangle.Left, rectangle.Bottom, new Rectangle(0, bitmap.Height - 1, rectangle.Width, 1), GraphicsUnit.Pixel);
+
+                var sheetBitmap = sheetBitmaps[sheetIndex];
+                sheetBitmap.SetPixel(rectangle.Left - 1, rectangle.Top - 1, sheetBitmap.GetPixel(rectangle.Left, rectangle.Top));
+                sheetBitmap.SetPixel(rectangle.Right + 0, rectangle.Top - 1, sheetBitmap.GetPixel(rectangle.Right - 1, rectangle.Top));
+                sheetBitmap.SetPixel(rectangle.Left - 1, rectangle.Bottom + 0, sheetBitmap.GetPixel(rectangle.Left, rectangle.Bottom - 1));
+                sheetBitmap.SetPixel(rectangle.Right + 0, rectangle.Bottom + 0, sheetBitmap.GetPixel(rectangle.Right - 1, rectangle.Bottom - 1));
+
+                graphics[sheetIndex].ResetTransform();
 
                 elements.Add(new Element(sheetBitmaps[sheetIndex], bitmap, rectangle, appliedTransform));
             }

@@ -49,6 +49,7 @@ namespace Bibim.Animation
         {
             this.keyframes = new Keyframe[keyframes.Count];
             keyframes.CopyTo(this.keyframes, 0);
+            this.duration = 0.0f;
         }
         #endregion
 
