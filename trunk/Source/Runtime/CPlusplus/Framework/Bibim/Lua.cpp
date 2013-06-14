@@ -429,7 +429,7 @@ namespace Bibim
         lua_setglobal(state, "_CALLBACKS");
 
 #       if (defined(BIBIM_DEBUG))
-        lua_tinker::def(state, "DEBUG", true);
+        lua_tinker::set(state, "DEBUG", true);
 #       endif
     }
 
