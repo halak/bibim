@@ -431,6 +431,14 @@ namespace Bibim
 #       if (defined(BIBIM_DEBUG))
         lua_tinker::set(state, "DEBUG", true);
 #       endif
+
+#       if (defined(BIBIM_PLATFORM_WINDOWS))
+        lua_tinker::set(state, "PLATFORM", "Windows");
+#       elif (defined(BIBIM_PLATFORM_ANDROID))
+        lua_tinker::set(state, "PLATFORM", "Android");
+#       elif (defined(BIBIM_PLATFORM_IOS))
+        lua_tinker::set(state, "PLATFORM", "iOS");
+#       endif
     }
 
     void Lua::LoadClasses()
