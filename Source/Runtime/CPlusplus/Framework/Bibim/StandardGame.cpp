@@ -54,6 +54,7 @@
 #include <Bibim/UISimpleDomain.h>
 #include <Bibim/UITransform3D.h>
 #include <Bibim/UIWindow.h>
+#include <ctime>
 
 namespace Bibim
 {
@@ -809,7 +810,17 @@ namespace Bibim
             if (game == nullptr)
                 return 0;
 
-            lua_tinker::push(L, Clock::GetCurrentMilliSeconds());
+            lua_pushnumber(L, Clock::GetCurrentMilliSeconds());
+            return 1;
+        }
+
+        static int SystemTime(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            lua_pushnumber(L, time(NULL));
             return 1;
         }
 
@@ -1956,6 +1967,7 @@ namespace Bibim
             { "preload", &Preload },
             { "store", &Store },
             { "time", &Time },
+            { "systime", &SystemTime },
             { "timeout",  &AddTimeout },
             { "alarm", &AddAlarm },
             { "canceltimeout", &CancelAlarm },
