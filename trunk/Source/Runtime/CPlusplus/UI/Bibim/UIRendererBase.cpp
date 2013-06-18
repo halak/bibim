@@ -422,13 +422,13 @@ namespace Bibim
 
             if (effects[index])
             {
-                OnEffectBegan(mode, effects[index]);
-
                 for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); it++)
                 {
                     (*it)->Setup(effects[index]);
                     (*it)->Begin(this);
                 }
+
+                OnEffectBegan(mode, effects[index]);
             }
         }
         else
