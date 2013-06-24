@@ -222,7 +222,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             using (var bitmapSheet = BitmapSheet.Create(imageBitmaps.Keys,
                                                         BitmapSheetSize.Width, BitmapSheetSize.Height,
                                                         BitmapSheetClusterSize.Width, BitmapSheetClusterSize.Height,
-                                                        BitmapSheet.Options.PowerOfTwoSize | BitmapSheet.Options.RotatableMerging))
+                                                        BitmapSheet.Options.PowerOfTwoSize/* | BitmapSheet.Options.RotatableMerging*/))
             {
                 #region Texture File과 Asset을 저장합니다.
                 var textureFileToStream = new FileToStream();
