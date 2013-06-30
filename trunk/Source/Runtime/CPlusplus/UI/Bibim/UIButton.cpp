@@ -156,13 +156,12 @@ namespace Bibim
     void UIButton::OnPick(UIPickingContext& context)
     {
         Base::OnPick(context);
+
+        // Button의 자손 Visual이 Picking 되었으면
+        // Button의 Picking으로 처리합니다.
+        // (버튼 자식은 자동으로 IsPickable이 false란 의미)
         if (UIVisual* result = context.GetResult())
-        {
-            if (result == normalVisual ||
-                result == pushedVisual ||
-                result == hoveringVisual)
-                context.SetResult(this);
-        }
+            context.SetResult(this);
     }
 
     void UIButton::OnFocused()
