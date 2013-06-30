@@ -64,23 +64,22 @@ namespace Bibim.Asset.Pipeline.Recipes
                 Height = windowSize.Y,
             };
             foreach (var item in input.Layers)
-                AddChildTo(rootWindow, item, true);
+                AddChildTo(rootWindow, item);
             
             return new UILayout(rootWindow);
         }
 
-        private UIVisual AddPanelChild(UIPanel parent, string name, PhotoshopDocument.Layer layer, bool defaultPickable, UIVisibility visibility = UIVisibility.Visible)
+        private UIVisual AddPanelChild(UIPanel parent, string name, PhotoshopDocument.Layer layer, UIVisibility visibility = UIVisibility.Visible)
         {
             var result = new UIWindow();
             if (layer.IsGroup)
-                Process(result, layer, defaultPickable);
+                Process(result, layer);
             else
-                AddChildTo(result, layer, defaultPickable);
+                AddChildTo(result, layer);
 
             if (result != null)
             {
                 result.Name = name;
-                result.IsPickable = defaultPickable;
                 result.Visibility = visibility;
                 return result;
             }
@@ -88,7 +87,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                 return null;
         }
 
-        private UIVisual AddChildTo(UIWindow window, PhotoshopDocument.Layer layer, bool defaultPickable)
+        private UIVisual AddChildTo(UIWindow window, PhotoshopDocument.Layer layer)
         {
             if (string.IsNullOrEmpty(layer.Name) ||
                 layer.Name.StartsWith("#") == false)
@@ -107,7 +106,6 @@ namespace Bibim.Asset.Pipeline.Recipes
                 {
                     UILabel label = new UILabel();
                     label.Name = name;
-                    label.IsPickable = defaultPickable;
                     if (args.ContainsKey("0"))
                         label.Text = args["0"];
                     window.AddChild(label);
@@ -119,7 +117,6 @@ namespace Bibim.Asset.Pipeline.Recipes
                 {
                     UIDocument document = new UIDocument();
                     document.Name = name;
-                    document.IsPickable = defaultPickable;
                     if (args.ContainsKey("0"))
                         document.Text = args["0"];
                     window.AddChild(document);
@@ -132,7 +129,6 @@ namespace Bibim.Asset.Pipeline.Recipes
                 {
                     UIEditText editText = new UIEditText();
                     editText.Name = name;
-                    editText.IsPickable = true;
                     if (args.ContainsKey("0"))
                         editText.Text = args["0"];
                     window.AddChild(editText);
@@ -146,7 +142,6 @@ namespace Bibim.Asset.Pipeline.Recipes
                 {
                     UIWindow childWindow = new UIWindow();
                     childWindow.Name = name;
-                    childWindow.IsPickable = defaultPickable;
                     window.AddChild(childWindow);
                     Process((UIPanel)childWindow, layer);
 
@@ -230,7 +225,6 @@ namespace Bibim.Asset.Pipeline.Recipes
                 {
                     UIImage image = new UIImage();
                     image.Name = name;
-                    image.IsPickable = defaultPickable;
                     window.AddChild(image);
                     Process(image, layer, string.Compare(type, "MaskImage", true) == 0 || string.Compare(type, "MaskSprite", true) == 0);
                     return image;
@@ -242,7 +236,6 @@ namespace Bibim.Asset.Pipeline.Recipes
                 {
                     UIButton button = new UIButton();
                     button.Name = name;
-                    button.IsPickable = true;
                     window.AddChild(button);
                     Process(button, layer);
                     return button;
@@ -251,7 +244,6 @@ namespace Bibim.Asset.Pipeline.Recipes
                 {
                     UICheckBox button = new UICheckBox();
                     button.Name = name;
-                    button.IsPickable = true;
                     window.AddChild(button);
                     Process(button, layer);
                     return button;
@@ -260,7 +252,6 @@ namespace Bibim.Asset.Pipeline.Recipes
                 {
                     UIRadioButton button = new UIRadioButton();
                     button.Name = name;
-                    button.IsPickable = true;
                     window.AddChild(button);
                     Process(button, layer);
                     return button;
@@ -269,7 +260,6 @@ namespace Bibim.Asset.Pipeline.Recipes
                 {
                     UIScrollablePanel panel = new UIScrollablePanel();
                     panel.Name = name;
-                    panel.IsPickable = true;
                     window.AddChild(panel);
                     Process(panel, layer);
                     return panel;
@@ -286,7 +276,6 @@ namespace Bibim.Asset.Pipeline.Recipes
                     {
                         UIButton button = new UIButton();
                         button.Name = name;
-                        button.IsPickable = true;
                         window.AddChild(button);
                         Process(button, layer);
                         return button;
@@ -295,7 +284,6 @@ namespace Bibim.Asset.Pipeline.Recipes
                     {
                         UICheckBox button = new UICheckBox();
                         button.Name = name;
-                        button.IsPickable = true;
                         window.AddChild(button);
                         Process(button, layer);
                         return button;
@@ -304,7 +292,6 @@ namespace Bibim.Asset.Pipeline.Recipes
                     {
                         UIWindow childWindow = new UIWindow();
                         childWindow.Name = name;
-                        childWindow.IsPickable = defaultPickable;
                         window.AddChild(childWindow);
                         Process(childWindow, layer);
                         return childWindow;
@@ -396,11 +383,11 @@ namespace Bibim.Asset.Pipeline.Recipes
                 pushed = hovering;
 
             if (normal != null)
-                button.Normal = AddPanelChild(button, "Normal", normal, false);
+                button.Normal = AddPanelChild(button, "Normal", normal);
             if (pushed != null)
-                button.Pushed = AddPanelChild(button, "Pushed", pushed, false);
+                button.Pushed = AddPanelChild(button, "Pushed", pushed);
             if (hovering != null)
-                button.Hovering = AddPanelChild(button, "Hovering", hovering, false);
+                button.Hovering = AddPanelChild(button, "Hovering", hovering);
         }
 
         private void Process(UICheckBox button, PhotoshopDocument.Layer layer)
@@ -419,11 +406,11 @@ namespace Bibim.Asset.Pipeline.Recipes
                 pushed = hovering;
 
             if (normal != null)
-                button.CheckedNormal = AddPanelChild(button, "CheckedNormal", normal, false, UIVisibility.Invisible);
+                button.CheckedNormal = AddPanelChild(button, "CheckedNormal", normal, UIVisibility.Invisible);
             if (pushed != null)
-                button.CheckedPushed = AddPanelChild(button, "CheckedPushed", pushed, false, UIVisibility.Invisible);
+                button.CheckedPushed = AddPanelChild(button, "CheckedPushed", pushed, UIVisibility.Invisible);
             if (hovering != null)
-                button.CheckedHovering = AddPanelChild(button, "CheckedHovering", hovering, false, UIVisibility.Invisible);
+                button.CheckedHovering = AddPanelChild(button, "CheckedHovering", hovering, UIVisibility.Invisible);
         }
 
         private void Process(UIRadioButton button, PhotoshopDocument.Layer layer)
@@ -443,15 +430,15 @@ namespace Bibim.Asset.Pipeline.Recipes
             PhotoshopDocument.Layer content = layer.FindSubLayer("#Content", true);
 
             if (content != null)
-                panel.Content = AddPanelChild(panel, "Content", content, true);
+                panel.Content = AddPanelChild(panel, "Content", content);
         }
 
-        private void Process(UIWindow window, PhotoshopDocument.Layer layer, bool defaultPickable = true)
+        private void Process(UIWindow window, PhotoshopDocument.Layer layer)
         {
             Process((UIVisual)window, layer);
 
             for (int i = layer.SubLayers.Count - 1; i >= 0; i--)
-                AddChildTo(window, layer.SubLayers[i], defaultPickable);
+                AddChildTo(window, layer.SubLayers[i]);
         }
 
         private UIImage CreateNinePatchPart(Bitmap bitmap, UIAnchorPoint anchor, Vector2 origin, int x, int y, int width, int height, UISizeMode widthMode, UISizeMode heightMode, bool forceSingleColor = false)
