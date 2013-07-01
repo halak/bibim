@@ -27,6 +27,7 @@
                 void DrawUnclipped(Vector2 position, float rotation, Vector3 rotationAxis, float scale, Image* image, Color color);
 
                 inline void DrawString(Vector2 position, Font* font, const String& text);
+                inline void DrawString(Vector2 position, const FontString& fontString);
                 inline void DrawString(const FontString& fontString);
                 void DrawString(RectF bounds, Font* font, const String& text);
                 void DrawString(const RectF& bounds, const RectF& clippedBounds, const FontString& fontString);

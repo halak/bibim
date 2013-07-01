@@ -79,6 +79,6 @@ namespace Bibim
 
     void Mouse::OnMouseWheel(Window* /*window*/, int value)
     {
-        state.Wheel = value;
+        state.Wheel += value;
     }
 }

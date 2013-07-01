@@ -8,9 +8,9 @@
         return component;
     }
 
-    template <typename T> T* GameModuleNode::FindChild(bool searchAllChildren) const
+    template <typename T> T* GameModuleNode::FindChild() const
     {
-        return static_cast<T*>(FindChildByClassID(T::ClassID, searchAllChildren));
+        return static_cast<T*>(FindChildByClassID(T::ClassID));
     }
 
     GameModule* GameModuleNode::GetModule() const

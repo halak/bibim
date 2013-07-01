@@ -15,6 +15,12 @@
         DrawString(RectF(position.X, position.Y, 10000.0f, 10000.0f), font, text);
     }
 
+    void UIDrawingContext::DrawString(Vector2 position, const FontString& fontString)
+    {
+        static const RectF BigRect = RectF(-10000.0f, -10000.0f, 20000.0f, 20000.0f);
+        DrawString(RectF(position.X, position.Y, 10000.0f, 10000.0f), BigRect, fontString);
+    }
+
     void UIDrawingContext::DrawString(const FontString& fontString)
     {
         DrawString(GetCurrentBounds(), GetCurrentClippedBounds(), fontString);
