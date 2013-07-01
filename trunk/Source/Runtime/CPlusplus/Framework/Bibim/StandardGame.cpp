@@ -1357,6 +1357,14 @@ namespace Bibim
             return 0;
         }
 
+        static int SelfDetach(lua_State* L)
+        {
+            UIVisual* target = lua_tinker::read<UIVisual*>(L, 1);
+            const bool removed = UIWindow::RemoveFromParent(target);
+            lua_pushboolean(L, removed);
+            return 1;
+        }
+
         static int On(lua_State* L)
         {
             StandardGame* game = GetGame(L);
@@ -1991,6 +1999,7 @@ namespace Bibim
         const struct luaL_reg uiLib [] = {
             { "all", &All },
             { "children", &Children },
+            { "selfdetach", &SelfDetach },
             { "getroot", &GetRoot },
             { "root", &GetRoot },
             { "bounds", &Bounds },

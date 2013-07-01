@@ -21,6 +21,8 @@
                 inline void RemoveAllChildren();
 
                 virtual bool IsWindow() const;
+
+                static bool RemoveFromParent(UIVisual* item);
         };
     }
 

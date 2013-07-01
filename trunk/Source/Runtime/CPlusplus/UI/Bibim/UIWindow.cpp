@@ -24,6 +24,18 @@ namespace Bibim
         return true;
     }
 
+    bool UIWindow::RemoveFromParent(UIVisual* item)
+    {
+        if (item)
+        {
+            UIPanel* parent = item->GetParent();
+            if (parent && item->IsWindow())
+                return static_cast<UIWindow*>(parent)->RemoveChild(item);
+        }
+
+        return false;
+    }
+
     void UIWindow::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
