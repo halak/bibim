@@ -33,7 +33,7 @@
                 GameModuleNode* FindChildNode(GameModule* item) const;
                 GameModuleNode* FindChildNodeByClassID(int id) const;
 
-                template <typename T> T* FindChild(bool searchAllChildren) const;
+                template <typename T> T* FindChild() const;
 
                 inline GameModule* GetModule() const;
                 inline GameModuleNode* GetParnet() const;

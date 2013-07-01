@@ -17,6 +17,8 @@
                 GameModule* Find(int id) const;
                 GameModuleNode* FindNode(int id) const;
 
+                template <typename T> T* FindModule() const;
+
                 inline GameModuleNode* GetRoot() const;
 
             private:

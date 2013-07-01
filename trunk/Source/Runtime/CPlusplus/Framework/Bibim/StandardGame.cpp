@@ -457,7 +457,7 @@ namespace Bibim
         uiDomain->GetRoot()->RemoveAllChildren();
         uiDomain->SetFocus(uiDomain->GetRoot());
 
-        ((UIMouseEventDispatcher*)(GetModules()->GetRoot()->FindChildByClassID(UIMouseEventDispatcher::ClassID)))->Reset();
+        GetModules()->FindModule<UIMouseEventDispatcher>()->Reset();
 
         if (lua)
             lua->GC();
@@ -1498,7 +1498,7 @@ namespace Bibim
             if (game == nullptr || game->GetGraphicsDevice() == nullptr)
                 return 0;
 
-            UIRenderer* uiRenderer = static_cast<UIRenderer*>(game->GetModules()->GetRoot()->FindChildByClassID(UIRenderer::ClassID));
+            UIRenderer* uiRenderer = game->GetModules()->FindModule<UIRenderer>();
             if (uiRenderer == nullptr)
                 return 0;
 
