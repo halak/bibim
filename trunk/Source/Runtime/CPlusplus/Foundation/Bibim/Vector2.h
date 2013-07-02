@@ -21,6 +21,7 @@
             float Normalize();
             void Rotate(float rotation);
             void Rotate(float sin, float cos);
+            void Reflect(Vector2 normal);
             float GetLength() const;
             float GetLengthSquared() const;
 

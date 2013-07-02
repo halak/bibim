@@ -31,6 +31,13 @@ namespace Bibim
         Y = sin * v.X + cos * v.Y;
     }
 
+    void Vector2::Reflect(Vector2 normal)
+    {
+        const float dot = 2.0f * (Vector2(-X, -Y).Dot(normal));
+        X += dot * normal.X;
+        Y += dot * normal.Y;
+    }
+
     float Vector2::GetLength() const
     {
         return Math::Sqrt((X * X) + (Y * Y));

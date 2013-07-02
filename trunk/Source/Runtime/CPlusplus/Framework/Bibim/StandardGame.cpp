@@ -1,5 +1,6 @@
 #include <Bibim/Config.h>
 #include <Bibim/StandardGame.h>
+#include <Bibim/StandardGame.EmbeddedFont.h>
 #include <Bibim/AlarmClock.h>
 #include <Bibim/AudioDevice.h>
 #include <Bibim/BitMask.h>
@@ -58,10 +59,6 @@
 
 namespace Bibim
 {
-    byte EMBEDDED_FONT_DATA[] =
-        #include <Bibim/StandardGame.EmbeddedFont.h>
-    ;
-
     StandardGame::StandardGame()
         : clearColor(Color::Black),
           debugDisplay(false),
