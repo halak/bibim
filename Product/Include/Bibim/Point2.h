@@ -16,6 +16,8 @@
             inline Point2(float x, float y);
             inline Point2(const Point2& original);
 
+            inline int Dot(Point2 right) const;
+
             inline Point2 operator + () const;
             inline Point2 operator - () const;
 
@@ -59,6 +61,11 @@
         Point2::Point2(const Point2& original)
             : X(original.X), Y(original.Y)
         {
+        }
+
+        int Point2::Dot(Point2 right) const
+        {
+            return (X * right.X) + (Y * right.Y);
         }
 
         Point2 Point2::operator + () const

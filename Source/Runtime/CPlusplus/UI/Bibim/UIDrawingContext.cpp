@@ -703,6 +703,34 @@ namespace Bibim
             renderer->DrawTriangles(sizeof(p) / sizeof(p[0]), p, color);
     }
 
+    void UIDrawingContext::FillCircle(Vector2 center, float radius, Color color)
+    {
+        center.X -= 0.5f;
+        center.Y -= 0.5f;
+
+        int count = 32 * 3;
+        Vector2* p = BBStackAlloc(Vector2, count);
+
+        float r = 0.0f;
+        const float increment = Math::TwoPi / static_cast<float>(count / 3);
+        for (int i = 0; i < count; i += 3, r += increment)
+        {
+            p[i + 0] = center;
+            p[i + 1] = Vector2(center.X + (radius * Math::Sin(r + increment)),
+                               center.Y + (radius * Math::Cos(r + increment)));
+            p[i + 2] = Vector2(center.X + (radius * Math::Sin(r)),
+                               center.Y + (radius * Math::Cos(r)));
+        }
+
+        color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
+        if (currentGeomEffect)
+            currentGeomEffect->DrawTriangles(renderer, count, p, color);
+        else
+            renderer->DrawTriangles(count, p, color);
+
+        BBStackFree(p);
+    }
+
     void UIDrawingContext::OnBegan()
     {
     }

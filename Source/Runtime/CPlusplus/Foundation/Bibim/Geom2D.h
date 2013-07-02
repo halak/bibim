@@ -4,6 +4,7 @@
 
 #   include <Bibim/Foundation.h>
 #   include <Bibim/Math.h>
+#   include <Bibim/Point2.h>
 #   include <Bibim/Vector2.h>
 #   include <vector>
 
@@ -25,6 +26,7 @@
                     /// @pre
                     /// min.X < max.X <i>AND</i> <br />
                     /// min.Y < max.Y
+                    static int   GetPointAxisAlignedBoxDistanceSquared(Point2  p, Point2  min, Point2 max);
                     static float GetPointAxisAlignedBoxDistanceSquared(Vector2 p, Vector2 min, Vector2 max);
                 ///@}
 
@@ -40,6 +42,7 @@
                     /// @param[in] p 점 위치
                     /// @param[in] a 선분의 시작점 위치
                     /// @param[in] b 선분의 끝점 위치
+                    static int   GetPointSegmentDistanceSquared(Point2  p, Point2  a, Point2  b);
                     static float GetPointSegmentDistanceSquared(Vector2 p, Vector2 a, Vector2 b);
                 ///@}
 

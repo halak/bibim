@@ -6,6 +6,28 @@
 
 namespace Bibim
 {
+    // int Geom2D::GetPointAxisAlignedBoxDistanceSquared(Point2 p, Point2 min, Point2 max)
+    // float Geom2D::GetPointAxisAlignedBoxDistanceSquared(Vector2 p, Vector2 min, Vector2 max)
+    // 두 함수의 구현은 동일해야합니다.
+
+    int Geom2D::GetPointAxisAlignedBoxDistanceSquared(Point2 p, Point2 min, Point2 max)
+    {
+        int result = 0.0f;
+
+        BBAssert(!((p.X < min.X && p.X > max.X) || (p.Y < min.Y && p.Y > max.Y)));
+
+        if (p.X < min.X)
+            result += (min.X - p.X) * (min.X - p.X);
+        else if (p.X > max.X)
+            result += (p.X - max.X) * (p.X - max.X);
+        if (p.Y < min.Y)
+            result += (min.Y - p.Y) * (min.Y - p.Y);
+        else if (p.Y > max.Y)
+            result += (p.Y - max.Y) * (p.Y - max.Y);
+
+        return result;
+    }
+
     float Geom2D::GetPointAxisAlignedBoxDistanceSquared(Vector2 p, Vector2 min, Vector2 max)
     {
         float result = 0.0f;
@@ -25,6 +47,29 @@ namespace Bibim
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // int Geom2D::GetPointSegmentDistanceSquared(Point2 p, Point2 a, Point2 b)
+    // float Geom2D::GetPointSegmentDistanceSquared(Vector2 p, Vector2 a, Vector2 b)
+    // 두 함수의 구현은 동일해야합니다.
+
+    int Geom2D::GetPointSegmentDistanceSquared(Point2 p, Point2 a, Point2 b)
+    {
+        const Point2 ab = b - a;
+        const Point2 ap = p - a;
+        const Point2 bp = p - b;
+        const int e = ab.Dot(ap);
+
+        if (e > 0.0f)
+        {
+            const int f = ab.Dot(ab);
+            if (e >= f)
+                return bp.Dot(bp);
+            else
+                return ap.Dot(ap) - e * e / f;
+        }
+        else
+            return ap.Dot(ap);
+    }
 
     float Geom2D::GetPointSegmentDistanceSquared(Vector2 p, Vector2 a, Vector2 b)
     {

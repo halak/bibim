@@ -42,6 +42,7 @@
                 void DrawDebugRect(const RectF& bounds, Color color);
 
                 void FillRect(const RectF& bounds, Color color);
+                void FillCircle(Vector2 center, float radius, Color color);
 
                 inline UIRenderer* GetRenderer() const;
 
