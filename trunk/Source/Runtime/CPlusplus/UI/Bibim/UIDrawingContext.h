@@ -43,6 +43,7 @@
 
                 void FillRect(const RectF& bounds, Color color);
                 void FillCircle(Vector2 center, float radius, Color color);
+                void FillTriangles(int count, Vector2* p, Color color);
 
                 inline UIRenderer* GetRenderer() const;
 

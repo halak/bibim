@@ -731,6 +731,15 @@ namespace Bibim
         BBStackFree(p);
     }
 
+    void UIDrawingContext::FillTriangles(int count, Vector2* p, Color color)
+    {
+        color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
+        if (currentGeomEffect)
+            currentGeomEffect->DrawTriangles(renderer, count, p, color);
+        else
+            renderer->DrawTriangles(count, p, color);
+    }
+
     void UIDrawingContext::OnBegan()
     {
     }
