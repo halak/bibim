@@ -618,6 +618,19 @@ namespace Bibim
 
     void UIDrawingContext::DrawCircle(Vector2 center, float radius, Color color)
     {
+        DrawEllipse(center, radius, radius, color);
+    }
+
+    void UIDrawingContext::DrawEllipse(const RectF& bounds, Color color)
+    {
+        DrawEllipse(bounds.GetCenterPoint(),
+                    bounds.Width * 0.5f,
+                    bounds.Height * 0.5f,
+                    color);
+    }
+
+    void UIDrawingContext::DrawEllipse(Vector2 center, float xRadius, float yRadius, Color color)
+    {
         center.X -= 0.5f;
         center.Y -= 0.5f;
 
@@ -628,8 +641,8 @@ namespace Bibim
         const float increment = Math::TwoPi / static_cast<float>(count);
         for (int i = 0; i < count; i++, r += increment)
         {
-            p[i] = Vector2(center.X + (radius * Math::Sin(r)),
-                           center.Y + (radius * Math::Cos(r)));
+            p[i] = Vector2(center.X + (xRadius * Math::Sin(r)),
+                           center.Y + (yRadius * Math::Cos(r)));
         }
 
         p[count] = p[0];
@@ -705,6 +718,19 @@ namespace Bibim
 
     void UIDrawingContext::FillCircle(Vector2 center, float radius, Color color)
     {
+        FillEllipse(center, radius, radius, color);
+    }
+
+    void UIDrawingContext::FillEllipse(const RectF& bounds, Color color)
+    {
+        FillEllipse(bounds.GetCenterPoint(),
+                    bounds.Width * 0.5f,
+                    bounds.Height * 0.5f,
+                    color);
+    }
+
+    void UIDrawingContext::FillEllipse(Vector2 center, float xRadius, float yRadius, Color color)
+    {
         center.X -= 0.5f;
         center.Y -= 0.5f;
 
@@ -716,10 +742,10 @@ namespace Bibim
         for (int i = 0; i < count; i += 3, r += increment)
         {
             p[i + 0] = center;
-            p[i + 1] = Vector2(center.X + (radius * Math::Sin(r + increment)),
-                               center.Y + (radius * Math::Cos(r + increment)));
-            p[i + 2] = Vector2(center.X + (radius * Math::Sin(r)),
-                               center.Y + (radius * Math::Cos(r)));
+            p[i + 1] = Vector2(center.X + (xRadius * Math::Sin(r + increment)),
+                               center.Y + (yRadius * Math::Cos(r + increment)));
+            p[i + 2] = Vector2(center.X + (xRadius * Math::Sin(r)),
+                               center.Y + (yRadius * Math::Cos(r)));
         }
 
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());

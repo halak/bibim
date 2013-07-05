@@ -36,6 +36,8 @@
                 void DrawLines(int count, Vector2* p, Color color);
                 void DrawRect(const RectF& bounds, Color color);
                 void DrawCircle(Vector2 center, float radius, Color color);
+                void DrawEllipse(const RectF& bounds, Color color);
+                void DrawEllipse(Vector2 center, float xRadius, float yRadius, Color color);
 
                 void DrawDebugLine(Vector2 p0, Vector2 p1, Color color);
                 void DrawDebugLines(int count, Vector2* p, Color color);
@@ -43,6 +45,8 @@
 
                 void FillRect(const RectF& bounds, Color color);
                 void FillCircle(Vector2 center, float radius, Color color);
+                void FillEllipse(const RectF& bounds, Color color);
+                void FillEllipse(Vector2 center, float xRadius, float yRadius, Color color);
                 void FillTriangles(int count, Vector2* p, Color color);
 
                 inline UIRenderer* GetRenderer() const;

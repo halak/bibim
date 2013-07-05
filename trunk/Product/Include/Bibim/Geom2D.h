@@ -186,6 +186,15 @@
                     static bool RaycastBox(Vector2 origin, Vector2 direction, Vector2 center, Vector2 orientation, Vector2 extension, float& outDistance, Vector2& outNormal);
                 ///@}
 
+                ///@name Sweep
+                ///@{
+                    static bool SweepSphereSegment(Vector2 center, float radius, Vector2 direction, float length,
+                                                   Vector2 start, Vector2 end, float& outDistance);
+
+                    static bool SweepSphereAxisAlignedBox(Vector2 center, float radius, Vector2 direction, float length,
+                                                          Vector2 leftTop, Vector2 rightBottom, float& outDistance);
+                ///@}
+
                 ///@name Misc
                 ///@{
                     /// @brief 입력한 선분을 이루는 점 중 입력한 점과 가장 가까운 점의 위치를 반환합니다.

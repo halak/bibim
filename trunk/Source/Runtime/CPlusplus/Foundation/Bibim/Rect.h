@@ -26,6 +26,10 @@
             inline int GetCenter() const;
             inline int GetMiddle() const;
             inline Point2 GetCenterPoint() const;
+            inline Point2 GetLeftTop() const;
+            inline Point2 GetLeftBottom() const;
+            inline Point2 GetRightTop() const;
+            inline Point2 GetRightBottom() const;
 
             inline void SetLeft(int value);
             inline void SetTop(int value);
@@ -105,6 +109,26 @@
         Point2 Rect::GetCenterPoint() const
         {
             return Point2(GetCenter(), GetMiddle());
+        }
+
+        Point2 Rect::GetLeftTop() const
+        {
+            return Point2(GetLeft(), GetTop());
+        }
+
+        Point2 Rect::GetLeftBottom() const
+        {
+            return Point2(GetLeft(), GetBottom());
+        }
+
+        Point2 Rect::GetRightTop() const
+        {
+            return Point2(GetRight(), GetTop());
+        }
+
+        Point2 Rect::GetRightBottom() const
+        {
+            return Point2(GetRight(), GetBottom());
         }
 
         void Rect::SetLeft(int value)
