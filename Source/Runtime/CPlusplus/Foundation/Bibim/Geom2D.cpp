@@ -354,6 +354,56 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    bool Geom2D::SweepSphereSegment(Vector2 center, float radius, Vector2 direction, float length,
+                                    Vector2 start, Vector2 end, float& outDistance)
+    {
+        return false;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    bool Geom2D::SweepSphereAxisAlignedBox(Vector2 center, float radius, Vector2 direction, float length,
+                                           Vector2 leftTop, Vector2 rightBottom, float& outDistance)
+    {
+        // 미완성
+
+        const float left = leftTop.X - radius;
+        const float top = leftTop.Y - radius;
+        const float right = rightBottom.X + radius;
+        const float bottom = rightBottom.Y + radius;
+        
+        const Vector2 ss = center; // sphere start
+        const Vector2 se = ss + direction * length; // sphere end
+        const float r = 0.0f; //radius;
+
+        float distanceToLeft = 0.0f;      
+        if (IntersectSegmentSegment(ss, se, Vector2(left - r, top), Vector2(left - r, bottom), distanceToLeft) == false)
+            distanceToLeft = Float::Max;
+
+        float distanceToTop = 0.0f;
+        if (IntersectSegmentSegment(ss, se, Vector2(left,  top - r), Vector2(right, top - r), distanceToTop) == false)
+            distanceToTop = Float::Max;
+
+        float distanceToRight = 0.0f;
+        if (IntersectSegmentSegment(ss, se, Vector2(right + r, top), Vector2(right + r, bottom), distanceToRight) == false)
+            distanceToRight = Float::Max;
+
+        float distanceToBottom = 0.0f;
+        if (IntersectSegmentSegment(ss, se, Vector2(left,  bottom + r), Vector2(right, bottom + r), distanceToBottom) == false)
+            distanceToBottom = Float::Max;
+
+        outDistance = Math::Min(Math::Min(Math::Min(distanceToLeft, distanceToTop), distanceToRight), distanceToBottom);
+        if (outDistance != Float::Max)
+        {
+            outDistance *= length;
+            return true;
+        }
+        else
+            return false;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     Vector2 Geom2D::GetClosestPoint(Vector2 origin, Vector2 direction, float length, Vector2 point)
     {
         return origin + (direction * Math::Clamp(direction.Dot(point - origin), 0.0f, length));

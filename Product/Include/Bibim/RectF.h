@@ -27,6 +27,10 @@
             inline float GetCenter() const;
             inline float GetMiddle() const;
             inline Vector2 GetCenterPoint() const;
+            inline Vector2 GetLeftTop() const;
+            inline Vector2 GetLeftBottom() const;
+            inline Vector2 GetRightTop() const;
+            inline Vector2 GetRightBottom() const;
 
             inline void SetLeft(float value);
             inline void SetTop(float value);
@@ -116,6 +120,26 @@
         Vector2 RectF::GetCenterPoint() const
         {
             return Vector2(GetCenter(), GetMiddle());
+        }
+
+        Vector2 RectF::GetLeftTop() const
+        {
+            return Vector2(GetLeft(), GetTop());
+        }
+
+        Vector2 RectF::GetLeftBottom() const
+        {
+            return Vector2(GetLeft(), GetBottom());
+        }
+
+        Vector2 RectF::GetRightTop() const
+        {
+            return Vector2(GetRight(), GetTop());
+        }
+
+        Vector2 RectF::GetRightBottom() const
+        {
+            return Vector2(GetRight(), GetBottom());
         }
 
         void RectF::SetLeft(float value)
