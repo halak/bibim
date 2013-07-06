@@ -59,14 +59,14 @@ namespace SPK
 
 	void System::copyChildren(const Registerable& object,bool createBase)
 	{
-		const System& system = dynamic_cast<const System&>(object);
+		const System& system = static_cast<const System&>(object);
 		Registerable::copyChildren(system,createBase);
 
 		// we clear the copies of pointers pushed in the vectors by the copy constructor
 		groups.clear();
 
 		for (std::vector<Group*>::const_iterator it = system.groups.begin(); it != system.groups.end(); ++it)
-			groups.push_back(dynamic_cast<Group*>(copyChild(*it,createBase)));
+			groups.push_back(static_cast<Group*>(copyChild(*it,createBase)));
 	}
 
 	void System::destroyChildren(bool keepChildren)

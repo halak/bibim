@@ -122,20 +122,20 @@ namespace SPK
 
 	void Group::copyChildren(const Registerable& object,bool createBase)
 	{
-		const Group& group = dynamic_cast<const Group&>(object);
+		const Group& group = static_cast<const Group&>(object);
 		Registerable::copyChildren(group,createBase);
 
-		model = dynamic_cast<Model*>(copyChild(group.model,createBase));
-		renderer = dynamic_cast<Renderer*>(copyChild(group.renderer,createBase));
+		model = static_cast<Model*>(copyChild(group.model,createBase));
+		renderer = static_cast<Renderer*>(copyChild(group.renderer,createBase));
 
 		// we clear the copies of pointers pushed in the vectors by the copy constructor
 		emitters.clear();
 		modifiers.clear();
 
 		for (std::vector<Emitter*>::const_iterator it = group.emitters.begin(); it != group.emitters.end(); ++it)
-			emitters.push_back(dynamic_cast<Emitter*>(copyChild(*it,createBase)));
+			emitters.push_back(static_cast<Emitter*>(copyChild(*it,createBase)));
 		for (std::vector<Modifier*>::const_iterator it = group.modifiers.begin(); it != group.modifiers.end(); ++it)
-			modifiers.push_back(dynamic_cast<Modifier*>(copyChild(*it,createBase)));
+			modifiers.push_back(static_cast<Modifier*>(copyChild(*it,createBase)));
 	}
 
 	void Group::destroyChildren(bool keepChildren)

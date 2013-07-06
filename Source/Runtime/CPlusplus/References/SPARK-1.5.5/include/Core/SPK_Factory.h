@@ -32,33 +32,33 @@
 * @brief Creates a new registered object from an existing one
 *
 * This macro is simply a shortcut call to :<br>
-* <i>dynamic_cast<SPK::ClassName*>(SPK::SPKFactory::getInstance().create(arg)</i><br>
+* <i>static_cast<SPK::ClassName*>(SPK::SPKFactory::getInstance().create(arg)</i><br>
 * with <i>arg</i> being either an SPK_ID or a pointer to an object and ClassName being the class of the object.<br>
 * <br>
 * If the ID does not exist or the object is not registered, NULL is returned.<br>
 * <br>
-* Note that a bad_cast exception can be throw as there is a dynamic_cast call.
+* Note that a bad_cast exception can be throw as there is a static_cast call.
 * 
 * @since 1.03.00
 */
 #define SPK_Copy(ClassName,arg) \
-dynamic_cast<ClassName*>(SPK::SPKFactory::getInstance().copy(arg))
+static_cast<ClassName*>(SPK::SPKFactory::getInstance().copy(arg))
 
 /** 
 * @def SPK_Get(ClassName,ID)
 * @brief Gets a registered object
 *
 * This macro is simply a shortcut call to :<br>
-* <i>dynamic_cast<ClassName*>(SPK::SPKFactory::getInstance().get(ID)</i><br>
+* <i>static_cast<ClassName*>(SPK::SPKFactory::getInstance().get(ID)</i><br>
 * <br>
 * If the ID does not exist, NULL is returned.<br>
 * <br>
-* Note that a bad_cast exception can be throw as there is a dynamic_cast call.
+* Note that a bad_cast exception can be throw as there is a static_cast call.
 *
 * @since 1.03.00
 */
 #define SPK_Get(ClassName,ID) \
-dynamic_cast<ClassName*>(SPK::SPKFactory::getInstance().get(ID))
+static_cast<ClassName*>(SPK::SPKFactory::getInstance().get(ID))
 
 /** 
 * @def SPK_Copy(arg)

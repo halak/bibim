@@ -197,7 +197,7 @@ namespace IRR
 
 	inline bool IRRRenderer::checkBuffers(const Group& group)
 	{
-		currentBuffer = dynamic_cast<IRRBuffer*>(group.getBuffer(getBufferName(),getVBOFlag()));
+		currentBuffer = static_cast<IRRBuffer*>(group.getBuffer(getBufferName(),getVBOFlag()));
 		return currentBuffer != NULL;
 	}
 

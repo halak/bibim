@@ -3,6 +3,7 @@
 #define __BIBIM_GAMEMODULETREE_H__
 
 #   include <Bibim/FWD.h>
+#   include <Bibim/GameModuleNode.h>
 #   include <map>
 
     namespace Bibim

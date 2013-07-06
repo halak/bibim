@@ -41,14 +41,14 @@ namespace SPK
 
 	void ModifierGroup::copyChildren(const Registerable& object,bool createBase)
 	{
-		const ModifierGroup& modifier = dynamic_cast<const ModifierGroup&>(object);
+		const ModifierGroup& modifier = static_cast<const ModifierGroup&>(object);
 		Modifier::copyChildren(modifier,createBase);
 
 		// we clear the copies of pointers pushed in the vectors by the copy constructor
 		modifiers.clear();
 
 		for (std::vector<Modifier*>::const_iterator it = modifier.modifiers.begin(); it != modifier.modifiers.end(); ++it)
-			modifiers.push_back(dynamic_cast<Modifier*>(copyChild(*it,createBase)));	
+			modifiers.push_back(static_cast<Modifier*>(copyChild(*it,createBase)));	
 	}
 	
 	void ModifierGroup::destroyChildren(bool keepChildren)
