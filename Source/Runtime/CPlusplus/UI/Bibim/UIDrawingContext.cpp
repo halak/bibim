@@ -24,6 +24,11 @@ namespace Bibim
         {
             return static_cast<float>(static_cast<int>(v)) - 0.5f;
         }
+
+        static inline Vector2 cm(Vector2 v)
+        {
+            return Vector2(cm(v.X), cm(v.Y));
+        }
     }
 
     UIDrawingContext::UIDrawingContext(UIRenderer* renderer)
@@ -656,6 +661,92 @@ namespace Bibim
         BBStackFree(p);
     }
 
+    void UIDrawingContext::DrawRoundedRect(RectF bounds, float radius, Color color)
+    {
+        DrawRoundedRect(bounds, radius, radius, radius, radius, color);
+    }
+
+    void UIDrawingContext::DrawRoundedRect(RectF bounds, float leftTopRadius, float rightTopRadius, float leftBottomRadius, float rightBottomRadius, Color color)
+    {
+        bounds.X -= 0.5f;
+        bounds.Y -= 0.5f;
+
+        const float maxRadius = Math::Min(bounds.Width, bounds.Height) * 0.5f;
+        leftTopRadius = Math::Clamp(leftTopRadius, 0.0f, maxRadius);
+        rightTopRadius = Math::Clamp(rightTopRadius, 0.0f, maxRadius);
+        leftBottomRadius = Math::Clamp(leftBottomRadius, 0.0f, maxRadius);
+        rightBottomRadius = Math::Clamp(rightBottomRadius, 0.0f, maxRadius);
+
+        struct Rotator
+        {
+            float r;
+            float increment;
+            int count;
+
+            Rotator(float r, int count)
+                : r(r),
+                  increment(-Math::PiOver2 / static_cast<float>(count)),
+                  count(count)
+            {
+            }
+
+            Vector2* Rotate(Vector2* p, Vector2 center, float radius)
+            {
+                for (int i = 0; i < count; i++, r += increment)
+                {
+                    (*p++) = Vector2(center.X + (radius * Math::Sin(r)),
+                                     center.Y + (radius * Math::Cos(r)));
+                }
+
+                return p;
+            }
+        };
+
+        Rotator rotator(Math::Pi, 8);
+
+        int count = 8 * 4 + 6;
+        Vector2* p = BBStackAlloc(Vector2, count);
+
+        Vector2* current = p;
+
+        (*current++) = bounds.GetLeftTop() + Vector2(leftTopRadius, 0.0f);
+        (*current++) = bounds.GetRightTop() - Vector2(rightTopRadius, 0.0f);
+
+        current = rotator.Rotate(current,
+                                 bounds.GetRightTop() + Vector2(-rightTopRadius, +rightTopRadius),
+                                 rightTopRadius);
+
+        (*current++) = bounds.GetRightBottom() - Vector2(0.0f, rightBottomRadius);
+
+        current = rotator.Rotate(current,
+                                 bounds.GetRightBottom() + Vector2(-rightBottomRadius, -rightBottomRadius),
+                                 rightBottomRadius);
+
+        (*current++) = bounds.GetLeftBottom() + Vector2(leftBottomRadius, 0.0f);
+
+        current = rotator.Rotate(current,
+                                 bounds.GetLeftBottom() + Vector2(+leftBottomRadius, -leftBottomRadius),
+                                 leftBottomRadius);
+
+        (*current++) = bounds.GetLeftTop() + Vector2(0.0f, leftTopRadius);
+
+        current = rotator.Rotate(current,
+                                 bounds.GetLeftTop() + Vector2(+leftTopRadius, +leftTopRadius),
+                                 leftTopRadius);
+
+        (*current++) = (*p);
+
+        BBAssert(static_cast<int>(current - p) == count);
+
+        color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
+        if (currentGeomEffect)
+            currentGeomEffect->DrawLines(renderer, current - p, p, color);
+        else
+            renderer->DrawLines(current - p, p, color);
+
+        BBStackFree(p);
+    }
+
     void UIDrawingContext::DrawDebugLine(Vector2 p0, Vector2 p1, Color color)
     {
         Vector2 p[] = { p0, p1 };
@@ -753,6 +844,104 @@ namespace Bibim
             currentGeomEffect->DrawTriangles(renderer, count, p, color);
         else
             renderer->DrawTriangles(count, p, color);
+
+        BBStackFree(p);
+    }
+
+    void UIDrawingContext::FillRoundedRect(RectF bounds, float radius, Color color)
+    {
+        FillRoundedRect(bounds, radius, radius, radius, radius, color);
+    }
+
+    void UIDrawingContext::FillRoundedRect(RectF bounds, float leftTopRadius, float rightTopRadius, float leftBottomRadius, float rightBottomRadius, Color color)
+    {
+        bounds.X -= 0.5f;
+        bounds.Y -= 0.5f;
+
+        const Vector2 boundsCenter = bounds.GetCenterPoint();
+
+        const float maxRadius = Math::Min(bounds.Width, bounds.Height) * 0.5f;
+        leftTopRadius = Math::Clamp(leftTopRadius, 0.0f, maxRadius);
+        rightTopRadius = Math::Clamp(rightTopRadius, 0.0f, maxRadius);
+        leftBottomRadius = Math::Clamp(leftBottomRadius, 0.0f, maxRadius);
+        rightBottomRadius = Math::Clamp(rightBottomRadius, 0.0f, maxRadius);
+
+        struct Rotator
+        {
+            float r;
+            float increment;
+            int count;
+            Vector2 boundsCenter;
+
+            Rotator(float r, int count, Vector2 boundsCenter)
+                : r(r),
+                  increment(-Math::PiOver2 / static_cast<float>(count)),
+                  count(count),
+                  boundsCenter(boundsCenter)
+            {
+            }
+
+            Vector2* Rotate(Vector2* p, Vector2 center, float radius)
+            {
+                for (int i = 0; i < count; i++, r += increment)
+                {
+                    (*p++) = boundsCenter;
+                    (*p++) = Vector2(center.X + (radius * Math::Sin(r + increment)),
+                                     center.Y + (radius * Math::Cos(r + increment)));
+                    (*p++) = Vector2(center.X + (radius * Math::Sin(r)),
+                                     center.Y + (radius * Math::Cos(r)));
+                }
+
+                return p;
+            }
+        };
+
+        Rotator rotator(Math::Pi, 8, boundsCenter);
+
+        int count = (8 * 4 + 4) * 3;
+        Vector2* p = BBStackAlloc(Vector2, count);
+
+        Vector2* current = p;
+
+        (*current++) = boundsCenter;
+        (*current++) = bounds.GetLeftTop() + Vector2(leftTopRadius, 0.0f);
+        (*current++) = bounds.GetRightTop() - Vector2(rightTopRadius, 0.0f);
+
+        current = rotator.Rotate(current,
+                                 bounds.GetRightTop() + Vector2(-rightTopRadius, +rightTopRadius),
+                                 rightTopRadius);
+
+        (*current++) = boundsCenter;
+        (*current++) = bounds.GetRightTop() + Vector2(0.0f, rightTopRadius);
+        (*current++) = bounds.GetRightBottom() - Vector2(0.0f, rightBottomRadius);
+
+        current = rotator.Rotate(current,
+                                 bounds.GetRightBottom() + Vector2(-rightBottomRadius, -rightBottomRadius),
+                                 rightBottomRadius);
+
+        (*current++) = boundsCenter;
+        (*current++) = bounds.GetRightBottom() - Vector2(rightBottomRadius, 0.0f);
+        (*current++) = bounds.GetLeftBottom() + Vector2(leftBottomRadius, 0.0f);
+
+        current = rotator.Rotate(current,
+                                 bounds.GetLeftBottom() + Vector2(+leftBottomRadius, -leftBottomRadius),
+                                 leftBottomRadius);
+
+        (*current++) = boundsCenter;
+        (*current++) = bounds.GetLeftBottom() - Vector2(0.0f, leftBottomRadius);
+        (*current++) = bounds.GetLeftTop() + Vector2(0.0f, leftTopRadius);
+
+        current = rotator.Rotate(current,
+                                 bounds.GetLeftTop() + Vector2(+leftTopRadius, +leftTopRadius),
+                                 leftTopRadius);
+
+        BBAssert(static_cast<int>(current - p) == count);
+
+        color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
+        if (currentGeomEffect)
+            currentGeomEffect->DrawTriangles(renderer, current - p, p, color);
+        else
+            renderer->DrawTriangles(current - p, p, color);
 
         BBStackFree(p);
     }
