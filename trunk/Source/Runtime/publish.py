@@ -199,11 +199,13 @@ def get_dependencies(platform, target, environment):
             l += ['Cplusplus/References/lpng1513/projects/vstudio/Android/Debug Library/zlib.a']
             l += ['Cplusplus/References/freetype-2.4.4/objs/android/vc2010/freetype244_D.a']
             l += ['Cplusplus/References/lua-5.1.5/lib/Android/vc10/lua.Debug.a']
+            l += ['Cplusplus/References/SPARK-1.5.5/lib/vc2010/static/SPARK_android_debug.a']
         elif (release):
             l += ['Cplusplus/References/lpng1513/projects/vstudio/Android/Release Library/libpng.a']
             l += ['Cplusplus/References/lpng1513/projects/vstudio/Android/Release Library/zlib.a']
             l += ['Cplusplus/References/freetype-2.4.4/objs/android/vc2010/freetype244.a']
             l += ['Cplusplus/References/lua-5.1.5/lib/Android/vc10/lua.Debug.a']
+            l += ['Cplusplus/References/SPARK-1.5.5/lib/vc2010/static/SPARK_android.a']
     
     # irrKlang
     if (win32):
@@ -233,7 +235,7 @@ def get_dependencies(platform, target, environment):
             if (debug):
                 l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/DebugAD/VC10/StormLibDAD.lib']
             elif (release):
-                l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/ReleaseAD/VC10/StormLibRAD.lib']            
+                l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/ReleaseAD/VC10/StormLibRAD.lib']
     
     return l
         

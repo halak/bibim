@@ -740,7 +740,6 @@ namespace Bibim
             lua_tinker::class_def<UIDocument::StyleSheet>(L, "AddDecoration", &UIDocument::StyleSheet::AddDecoration);
             lua_tinker::class_def<UIDocument::StyleSheet>(L, "RemoveContent", &UIDocument::StyleSheet::RemoveContent);
             lua_tinker::class_def<UIDocument::StyleSheet>(L, "RemoveDecoration", &UIDocument::StyleSheet::RemoveDecoration);
-        /*//MOBILE
         lua_tinker::class_add<UISpark>(L, "UISpark");
             lua_tinker::class_inh<UISpark, UIVisual>(L);
             lua_tinker::class_con<UISpark>(L, lua_tinker::constructor<UISpark, lua_tinker::table>);
@@ -748,7 +747,6 @@ namespace Bibim
             lua_tinker::class_def<UISpark>(L, "SetTimeline", &UISpark::SetTimeline);
             lua_tinker::class_def<UISpark>(L, "GetAutoRemove", &UISpark::GetAutoRemove);
             lua_tinker::class_def<UISpark>(L, "SetAutoRemove", &UISpark::SetAutoRemove);
-        */
 
         lua_tinker::class_add<UIGeometryEffect>(L, "UIGeometryEffect");
             lua_tinker::class_inh<UIGeometryEffect, UIElement>(L);

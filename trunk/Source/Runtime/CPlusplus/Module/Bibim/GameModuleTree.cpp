@@ -2,7 +2,6 @@
 #include <Bibim/GameModuleTree.h>
 #include <Bibim/Assert.h>
 #include <Bibim/GameModule.h>
-#include <Bibim/GameModuleNode.h>
 
 namespace Bibim
 {

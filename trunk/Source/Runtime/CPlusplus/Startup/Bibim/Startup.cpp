@@ -246,7 +246,7 @@ namespace Bibim
         GameComponentFactory::AddEntry<UIImage>();
         GameComponentFactory::AddEntry<UISprite>();
         GameComponentFactory::AddEntry<UIVideo>();
-        // GameComponentFactory::AddEntry<UISpark>();
+        GameComponentFactory::AddEntry<UISpark>();
         GameComponentFactory::SortEntries();
         
         BBBeginScriptNativeFunction()
