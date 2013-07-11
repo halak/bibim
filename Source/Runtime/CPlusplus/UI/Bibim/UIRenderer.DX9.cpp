@@ -94,7 +94,7 @@ namespace Bibim
         CheckedSetRenderState(d3dDevice, D3DRS_ALPHAREF, 0x00);
         CheckedSetRenderState(d3dDevice, D3DRS_BLENDOP, D3DBLENDOP_ADD);
         CheckedSetRenderState(d3dDevice, D3DRS_CLIPPING, TRUE);
-        CheckedSetRenderState(d3dDevice, D3DRS_CULLMODE, D3DCULL_NONE);
+        CheckedSetRenderState(d3dDevice, D3DRS_CULLMODE, D3DCULL_CCW);
         CheckedSetRenderState(d3dDevice, D3DRS_CLIPPLANEENABLE, FALSE);
         CheckedSetRenderState(d3dDevice, D3DRS_COLORWRITEENABLE, D3DCOLORWRITEENABLE_ALPHA | D3DCOLORWRITEENABLE_BLUE | D3DCOLORWRITEENABLE_GREEN | D3DCOLORWRITEENABLE_RED);
         CheckedSetRenderState(d3dDevice, D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);

@@ -35,6 +35,11 @@ namespace Bibim
         SetScale(Vector2(value, value));
     }
 
+    Vector3 UITransform3D::TransformOrientationXYZ(float x, float y, float z)
+    {
+        return TransformOrientation(Vector3(x, y, z));
+    }
+
     void UITransform3D::RotateXYZ(float x, float y, float z)
     {
         Rotate(Vector3(x, y, z));
