@@ -43,8 +43,11 @@
                 void SetScale(Vector2 value);
                 inline void SetScale(float value);
 
+                Vector3 TransformOrientation(Vector3 value);
+
                 inline void RotateXYZ(float x, float y, float z);
 
+                inline Vector3 TransformOrientationXYZ(float x, float y, float z);
                 inline void SetLocalOffsetXYZ(float x, float y, float z);
                 inline void SetGlobalOffsetXYZ(float x, float y, float z);
                 inline void SetRotationXYZ(float x, float y, float z);

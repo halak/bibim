@@ -111,6 +111,9 @@ namespace SPK
 		virtual void copyChildren(const Registerable& object,bool createBase);
 		virtual void destroyChildren(bool keepChildren);
 
+        /// written by halak.
+        virtual void propagateUpdateTransform();
+
 	private :
 
 		bool inverted;
@@ -140,7 +143,14 @@ namespace SPK
 	inline Zone* NormalEmitter::getNormalZone() const
 	{
 		return normalZone;
-	}	
+	}
+
+    /// written by halak.
+	inline void NormalEmitter::propagateUpdateTransform()
+	{
+        Emitter::propagateUpdateTransform();
+		normalZone->updateTransform(this);
+	}
 }
 
 #endif

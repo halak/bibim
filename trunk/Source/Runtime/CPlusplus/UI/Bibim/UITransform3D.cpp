@@ -159,6 +159,11 @@ namespace Bibim
         }
     }
 
+    Vector3 UITransform3D::TransformOrientation(Vector3 value)
+    {
+        return RotationPitchYawRoll(rotation).TransformNormal(value);
+    }
+
     void UITransform3D::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);

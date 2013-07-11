@@ -459,6 +459,7 @@ namespace Bibim
             lua_tinker::class_inh<SourceTexture2D, Texture2D>(L);
         lua_tinker::class_add<Image>(L, "Image");
             lua_tinker::class_inh<Image, GameAsset>(L);
+            lua_tinker::class_con<Image>(L, lua_tinker::constructor<Image, Texture2D*>);
             lua_tinker::class_def<Image>(L, "GetWidth", &Image::GetWidth);
             lua_tinker::class_def<Image>(L, "GetHeight", &Image::GetHeight);
         lua_tinker::class_add<ImageSet>(L, "ImageSet");
@@ -817,6 +818,7 @@ namespace Bibim
             lua_tinker::class_inh<UITransform3D, UITransform>(L);
             lua_tinker::class_con<UITransform3D>(L, lua_tinker::constructor<UITransform3D>);
             lua_tinker::class_def<UITransform3D>(L, "Reset", &UITransform3D::Reset);
+            lua_tinker::class_def<UITransform3D>(L, "TransformOrientation", &UITransform3D::TransformOrientationXYZ);
             lua_tinker::class_def<UITransform3D>(L, "Rotate", &UITransform3D::RotateXYZ);
             lua_tinker::class_def<UITransform3D>(L, "GetLocalOffset", &UITransform3D::GetLocalOffset);
             lua_tinker::class_def<UITransform3D>(L, "SetLocalOffset", &UITransform3D::SetLocalOffsetXYZ);
