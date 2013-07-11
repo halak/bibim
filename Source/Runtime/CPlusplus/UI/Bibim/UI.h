@@ -18,6 +18,7 @@
 #  include <Bibim/UIEffectMap.h>
 #include <Bibim/UIOpacityMaskEffect.h>
 #include <Bibim/UIColorMatrixEffect.h>
+#include <Bibim/UIShape.h>
 #  include <Bibim/UIElement.h>
 #  include <Bibim/UIEventArgs.h>
 #  include <Bibim/UIEventDispatcher.h>
@@ -47,6 +48,8 @@
 #  include <Bibim/UISequentialEventHandler.h>
 #  include <Bibim/UISimpleDomain.h>
 #  include <Bibim/UIImage.h>
+#  include <Bibim/UIEllipse.h>
+#  include <Bibim/UIRoundedRect.h>
 #  include <Bibim/UITintEffect.h>
 #  include <Bibim/UIVideo.h>
 #  include <Bibim/UIVisual.h>

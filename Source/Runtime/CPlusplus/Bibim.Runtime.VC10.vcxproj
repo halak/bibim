@@ -308,6 +308,7 @@
     <ClCompile Include="UI\Bibim\UIDomain.cpp" />
     <ClCompile Include="UI\Bibim\UIEditText.cpp" />
     <ClCompile Include="UI\Bibim\UIElement.cpp" />
+    <ClCompile Include="UI\Bibim\UIEllipse.cpp" />
     <ClCompile Include="UI\Bibim\UILayout.cpp" />
     <ClCompile Include="UI\Bibim\UIRenderer.DX9.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
@@ -318,7 +319,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="UI\Bibim\UIRendererBase.cpp" />
+    <ClCompile Include="UI\Bibim\UIRoundedRect.cpp" />
     <ClCompile Include="UI\Bibim\UIScrollablePanel.cpp" />
+    <ClCompile Include="UI\Bibim\UIShape.cpp" />
     <ClCompile Include="UI\Bibim\UISimpleDomain.cpp" />
     <ClCompile Include="UI\Bibim\UIAppEventDispatcher.cpp" />
     <ClCompile Include="UI\Bibim\UIAsyncEventQueue.cpp" />
@@ -716,6 +719,7 @@
     <ClInclude Include="UI\Bibim\UIDomain.h" />
     <ClInclude Include="UI\Bibim\UIEditText.h" />
     <ClInclude Include="UI\Bibim\UIElement.h" />
+    <ClInclude Include="UI\Bibim\UIEllipse.h" />
     <ClInclude Include="UI\Bibim\UILayout.h" />
     <ClInclude Include="UI\Bibim\UIRenderer.DX9.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
@@ -724,7 +728,9 @@
     <ClInclude Include="UI\Bibim\UIRenderer.GLES2.h" />
     <ClInclude Include="UI\Bibim\UIRenderer.h" />
     <ClInclude Include="UI\Bibim\UIRendererBase.h" />
+    <ClInclude Include="UI\Bibim\UIRoundedRect.h" />
     <ClInclude Include="UI\Bibim\UIScrollablePanel.h" />
+    <ClInclude Include="UI\Bibim\UIShape.h" />
     <ClInclude Include="UI\Bibim\UISimpleDomain.h" />
     <ClInclude Include="UI\Bibim\UIAppEventDispatcher.h" />
     <ClInclude Include="UI\Bibim\UIAsyncEventQueue.h" />
@@ -1087,6 +1093,7 @@
     <None Include="UI\Bibim\UIDomain.inl" />
     <None Include="UI\Bibim\UIEditText.inl" />
     <None Include="UI\Bibim\UIElement.inl" />
+    <None Include="UI\Bibim\UIEllipse.inl" />
     <None Include="UI\Bibim\UILayout.inl" />
     <None Include="UI\Bibim\UIRenderer.DX9.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
@@ -1111,12 +1118,14 @@
     <None Include="UI\Bibim\UIMouseEventArgs.inl" />
     <None Include="UI\Bibim\UIMouseEventDispatcher.inl" />
     <None Include="UI\Bibim\UIMouseWheelEventArgs.inl" />
+    <None Include="UI\Bibim\UIRoundedRect.inl" />
     <None Include="UI\Bibim\UIScrollablePanel.inl" />
     <None Include="UI\Bibim\UISequentialEventHandler.inl" />
     <None Include="UI\Bibim\UIEffectMap.inl" />
     <None Include="UI\Bibim\UIEffectStack.inl" />
     <None Include="UI\Bibim\UIAfterImageEffect.inl" />
     <None Include="UI\Bibim\UIGeometryEffect.inl" />
+    <None Include="UI\Bibim\UIShape.inl" />
     <None Include="UI\Bibim\UISineCurveEffect.inl" />
     <None Include="UI\Bibim\UITintEffect.inl" />
     <None Include="UI\Bibim\UIBlendingEffect.inl" />

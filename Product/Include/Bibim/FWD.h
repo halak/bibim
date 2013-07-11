@@ -308,8 +308,11 @@
                             BBForwardDeclareSmartPointerClass(UIDocument);
                             BBForwardDeclareSmartPointerClass(UIScrollablePanel);
                             BBForwardDeclareSmartPointerClass(UIWindow);
-                        BBForwardDeclareSmartPointerClass(UIRect);
                         BBForwardDeclareSmartPointerClass(UISprite);
+                        BBForwardDeclareSmartPointerClass(UIShape);
+                            BBForwardDeclareSmartPointerClass(UIEllipse);
+                            BBForwardDeclareSmartPointerClass(UIRect);
+                            BBForwardDeclareSmartPointerClass(UIRoundedRect);
                         BBForwardDeclareSmartPointerClass(UIVideo);
                         BBForwardDeclareSmartPointerClass(UISpark);
     }
