@@ -13,7 +13,7 @@ namespace Bibim
         state = lua_newstate(alloc, this);
         if (state)
             lua_atpanic(state, &panic);
-
+        
         LoadLibraries();
         LoadClasses();
     }
@@ -647,13 +647,39 @@ namespace Bibim
             lua_tinker::class_def<UIEditText>(L, "SetEditorTitle", &UIEditText::SetEditorTitle);
             lua_tinker::class_def<UIEditText>(L, "GetEditorDescription", &UIEditText::GetEditorDescription);
             lua_tinker::class_def<UIEditText>(L, "SetEditorDescription", &UIEditText::SetEditorDescription);
+        lua_tinker::class_add<UIShape>(L, "UIShape");
+            lua_tinker::class_inh<UIShape, UIVisual>(L);
+            lua_tinker::class_def<UIShape>(L, "GetFillColorR", &UIShape::GetFillColorR);
+            lua_tinker::class_def<UIShape>(L, "GetFillColorG", &UIShape::GetFillColorG);
+            lua_tinker::class_def<UIShape>(L, "GetFillColorB", &UIShape::GetFillColorB);
+            lua_tinker::class_def<UIShape>(L, "SetFillColor", &UIShape::SetFillColorRGB);
+            lua_tinker::class_def<UIShape>(L, "GetLineColorR", &UIShape::GetLineColorR);
+            lua_tinker::class_def<UIShape>(L, "GetLineColorG", &UIShape::GetLineColorG);
+            lua_tinker::class_def<UIShape>(L, "GetLineColorB", &UIShape::GetLineColorB);
+            lua_tinker::class_def<UIShape>(L, "SetLineColor", &UIShape::SetLineColorRGB);
+        lua_tinker::class_add<UIEllipse>(L, "UIEllipse");
+            lua_tinker::class_inh<UIEllipse, UIShape>(L);
+            lua_tinker::class_con<UIEllipse>(L, lua_tinker::constructor<UIEllipse>);
         lua_tinker::class_add<UIRect>(L, "UIRect");
-            lua_tinker::class_inh<UIRect, UIVisual>(L);
+            lua_tinker::class_inh<UIRect, UIShape>(L);
             lua_tinker::class_con<UIRect>(L, lua_tinker::constructor<UIRect>);
-            lua_tinker::class_def<UIRect>(L, "GetFillColorR", &UIRect::GetFillColorR);
-            lua_tinker::class_def<UIRect>(L, "GetFillColorG", &UIRect::GetFillColorG);
-            lua_tinker::class_def<UIRect>(L, "GetFillColorB", &UIRect::GetFillColorB);
-            lua_tinker::class_def<UIRect>(L, "SetFillColor", &UIRect::SetFillColorRGB);
+        lua_tinker::class_add<UIRoundedRect>(L, "UIRoundedRect");
+            lua_tinker::class_inh<UIRoundedRect, UIShape>(L);
+            lua_tinker::class_con<UIRoundedRect>(L, lua_tinker::constructor<UIRoundedRect>);
+            lua_tinker::class_def<UIRoundedRect>(L, "GetLeftTopRadius", &UIRoundedRect::GetLeftTopRadius);
+            lua_tinker::class_def<UIRoundedRect>(L, "SetLeftTopRadius", &UIRoundedRect::SetLeftTopRadius);
+            lua_tinker::class_def<UIRoundedRect>(L, "GetRightTopRadius", &UIRoundedRect::GetRightTopRadius);
+            lua_tinker::class_def<UIRoundedRect>(L, "SetRightTopRadius", &UIRoundedRect::SetRightTopRadius);
+            lua_tinker::class_def<UIRoundedRect>(L, "GetLeftBottomRadius", &UIRoundedRect::GetLeftBottomRadius);
+            lua_tinker::class_def<UIRoundedRect>(L, "SetLeftBottomRadius", &UIRoundedRect::SetLeftBottomRadius);
+            lua_tinker::class_def<UIRoundedRect>(L, "GetRightBottomRadius", &UIRoundedRect::GetRightBottomRadius);
+            lua_tinker::class_def<UIRoundedRect>(L, "SetRightBottomRadius", &UIRoundedRect::SetRightBottomRadius);
+            lua_tinker::class_def<UIRoundedRect>(L, "Setup", &UIRoundedRect::Setup);
+            lua_tinker::class_def<UIRoundedRect>(L, "SetAllRadii", &UIRoundedRect::SetAllRadii);
+            lua_tinker::class_def<UIRoundedRect>(L, "SetLeftRadii", &UIRoundedRect::SetLeftRadii);
+            lua_tinker::class_def<UIRoundedRect>(L, "SetTopRadii", &UIRoundedRect::SetTopRadii);
+            lua_tinker::class_def<UIRoundedRect>(L, "SetRightRadii", &UIRoundedRect::SetRightRadii);
+            lua_tinker::class_def<UIRoundedRect>(L, "SetBottomRadii", &UIRoundedRect::SetBottomRadii);
         lua_tinker::class_add<UISprite>(L, "UISprite");
             lua_tinker::class_inh<UISprite, UIVisual>(L);
             lua_tinker::class_con<UISprite>(L, lua_tinker::constructor<UISprite>);

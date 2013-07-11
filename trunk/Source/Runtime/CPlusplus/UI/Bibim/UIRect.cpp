@@ -1,6 +1,5 @@
 #include <Bibim/Config.h>
 #include <Bibim/UIRect.h>
-#include <Bibim/ComponentStreamReader.h>
 #include <Bibim/UIDrawingContext.h>
 
 namespace Bibim
@@ -8,7 +7,6 @@ namespace Bibim
     BBImplementsComponent(UIRect);
 
     UIRect::UIRect()
-        : fillColor(0, 0, 0)
     {
     }
 
@@ -16,23 +14,23 @@ namespace Bibim
     {
     }
 
-    void UIRect::OnDraw(UIDrawingContext& context)
+    void UIRect::FillShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& bounds, Color color)
     {
-        UIVisual::OnDraw(context);
+        context.FillRect(clippedBounds, color);
+    }
 
-        context.FillRect(context.GetCurrentClippedBounds(), fillColor);
+    void UIRect::DrawShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& bounds, Color color)
+    {
+        context.DrawRect(clippedBounds, color);
     }
 
     void UIRect::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        fillColor = reader.ReadColor();
     }
 
     void UIRect::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
-        const This* o = static_cast<const This*>(original);
-        fillColor = o->fillColor;
     }
 }

@@ -1,18 +1,18 @@
 #pragma once
-#ifndef __BIBIM_UIRECT_H__
-#define __BIBIM_UIRECT_H__
+#ifndef __BIBIM_UIELLIPSE_H__
+#define __BIBIM_UIELLIPSE_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/UIShape.h>
 
     namespace Bibim
     {
-        class UIRect : public UIShape
+        class UIEllipse : public UIShape
         {
-            BBComponentClass(UIRect, UIShape, 'U', 'R', 'C', 'T');
+            BBComponentClass(UIEllipse, UIShape, 'U', 'E', 'P', 'S');
             public:
-                UIRect();
-                virtual ~UIRect();
+                UIEllipse();
+                virtual ~UIEllipse();
 
             protected:
                 virtual void FillShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& bounds, Color color);
@@ -20,6 +20,6 @@
         };
     }
 
-#   include <Bibim/UIRect.inl>
+#   include <Bibim/UIEllipse.inl>
 
 #endif

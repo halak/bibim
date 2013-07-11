@@ -849,6 +849,15 @@
     <ClCompile Include="Framework\Bibim\Clipboard.iOS.cpp">
       <Filter>03. Game\Framework</Filter>
     </ClCompile>
+    <ClCompile Include="UI\Bibim\UIRoundedRect.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIEllipse.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Bibim\UIShape.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset\Bibim\AssetLoadingTask.h">
@@ -1686,6 +1695,15 @@
     <ClInclude Include="Framework\Bibim\Clipboard.iOS.h">
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="UI\Bibim\UIRoundedRect.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIEllipse.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Bibim\UIShape.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Asset\Bibim\AssetLoadingTask.inl">
@@ -2254,6 +2272,15 @@
     </None>
     <None Include="FileSystem\Bibim\FileStream.iOS.inl">
       <Filter>03. Game\FileSystem</Filter>
+    </None>
+    <None Include="UI\Bibim\UIRoundedRect.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="UI\Bibim\UIEllipse.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </None>
+    <None Include="UI\Bibim\UIShape.inl">
+      <Filter>03. Game\UI\Visuals</Filter>
     </None>
   </ItemGroup>
 </Project>

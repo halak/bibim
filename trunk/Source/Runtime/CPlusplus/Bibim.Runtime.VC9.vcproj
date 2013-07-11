@@ -1762,6 +1762,18 @@
 						>
 					</File>
 					<File
+						RelativePath=".\UI\Bibim\UIEllipse.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIEllipse.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIEllipse.inl"
+						>
+					</File>
+					<File
 						RelativePath=".\UI\Bibim\UIImage.cpp"
 						>
 					</File>
@@ -1818,6 +1830,18 @@
 						>
 					</File>
 					<File
+						RelativePath=".\UI\Bibim\UIRoundedRect.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIRoundedRect.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIRoundedRect.inl"
+						>
+					</File>
+					<File
 						RelativePath=".\UI\Bibim\UIScrollablePanel.cpp"
 						>
 					</File>
@@ -1827,6 +1851,18 @@
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIScrollablePanel.inl"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIShape.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIShape.h"
+						>
+					</File>
+					<File
+						RelativePath=".\UI\Bibim\UIShape.inl"
 						>
 					</File>
 					<File
