@@ -63,8 +63,8 @@
 
                 inline Vector2 GetOrigin() const;
 
-                virtual void OnBegan();
-                virtual void OnEnded();
+                virtual void OnBegan(UIVisual* target);
+                virtual void OnEnded(UIVisual* target);
                 virtual void OnVisit();
 
             private:

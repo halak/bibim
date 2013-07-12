@@ -236,6 +236,6 @@ namespace Bibim
             }
         }
 
-        return queryStream &&queryStream->IsConnected();
+        return queryStream && queryStream->IsConnected();
     }
 }

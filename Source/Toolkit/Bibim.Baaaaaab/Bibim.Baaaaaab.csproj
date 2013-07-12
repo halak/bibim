@@ -129,6 +129,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="References\Controls\WpfPropertyGrid.cs" />
+    <Compile Include="UIInspectorWindow.xaml.cs">
+      <DependentUpon>UIInspectorWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="CommandLineWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -172,6 +175,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UIInspectorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -196,7 +203,6 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Icon.ico" />
   </ItemGroup>
@@ -242,6 +248,34 @@
       <Project>{2E731BA3-4E48-4245-BD3F-718E1B649545}</Project>
       <Name>Bibim.Toolkit</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\COLLAPSED.png" />
+    <Resource Include="Resources\INVISIBLE.png" />
+    <Resource Include="Resources\Pickable.png" />
+    <Resource Include="Resources\Unpickable.png" />
+    <Resource Include="Resources\VISIBLE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Classes\UIButton.png" />
+    <Resource Include="Resources\Classes\UICheckBox.png" />
+    <Resource Include="Resources\Classes\UIDocument.png" />
+    <Resource Include="Resources\Classes\UIEditText.png" />
+    <Resource Include="Resources\Classes\UIEllipse.png" />
+    <Resource Include="Resources\Classes\UIImage.png" />
+    <Resource Include="Resources\Classes\UILabel.png" />
+    <Resource Include="Resources\Classes\UIPanel.png" />
+    <Resource Include="Resources\Classes\UIRadioButton.png" />
+    <Resource Include="Resources\Classes\UIRect.png" />
+    <Resource Include="Resources\Classes\UIRoundedRect.png" />
+    <Resource Include="Resources\Classes\UIScrollablePanel.png" />
+    <Resource Include="Resources\Classes\UISpark.png" />
+    <Resource Include="Resources\Classes\UISprite.png" />
+    <Resource Include="Resources\Classes\UIVideo.png" />
+    <Resource Include="Resources\Classes\UIWindow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Classes\Default.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

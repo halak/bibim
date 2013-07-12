@@ -8,7 +8,9 @@
 #   include <Bibim/Log.h>
 #   include <Bibim/Lua.h>
 #   include <Bibim/String.h>
+#   include <Bibim/UIHandledDrawingContext.h>
 #   include <Bibim/Window.h>
+#   include <sstream>
 
     namespace Bibim
     {
@@ -19,6 +21,14 @@
         {
             BBThisIsNoncopyableClass(StandardGame);
             public:
+                enum DebugMode
+                {
+                    NoDebugMode,
+                    SimpleDebugDisplay,
+                    RemoteDebugging,
+                };
+
+            public:
                 virtual ~StandardGame();
 
                 void Restart();
@@ -26,8 +36,8 @@
                 inline Color GetClearColor() const;
                 inline void SetClearColor(Color value);
 
-                inline bool GetDebugDisplay() const;
-                inline void SetDebugDisplay(bool value);
+                inline DebugMode GetDebugMode() const;
+                void SetDebugMode(DebugMode value);
 
                 inline Preferences* GetPreferences() const;
                 inline Keyboard* GetKeyboard() const;
@@ -58,6 +68,33 @@
                     private:
                         StandardGame* game;
                         struct Internal;
+                };
+
+            protected:
+                class RemoteDebugger : public UIHandledDrawingContext::Handler
+                {
+                    public:
+                        RemoteDebugger();
+                        virtual ~RemoteDebugger();
+
+                    protected:
+                        virtual void OnBegan(UIHandledDrawingContext& context, UIVisual* target);
+                        virtual void OnEnded(UIHandledDrawingContext& context, UIVisual* target);
+                        virtual void OnVisualBegan(UIHandledDrawingContext& context);
+                        virtual void OnVisualEnded(UIHandledDrawingContext& context);
+
+                    private:
+                        bool TryConnectToServer();
+
+                        void Synchronize(const UIVisual* visual);
+
+                    private:
+                        int syncCountdown;
+                        PipeClientStreamPtr queryStream;
+                        std::ostringstream stringstream;
+                        void* selectedVisual;
+                        RectF selectedVisualBounds;
+                        RectF selectedVisualClippedBounds;
                 };
 
             protected:
@@ -98,7 +135,8 @@
             private:
                 Point2 contentSize;
                 Color clearColor;
-                bool debugDisplay;
+                DebugMode debugMode;
+                RemoteDebugger* remoteDebugger;
                 Preferences* preferences;
                 Keyboard* keyboard;
                 Mouse* mouse;

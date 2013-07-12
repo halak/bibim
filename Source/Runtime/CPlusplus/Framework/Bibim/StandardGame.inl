@@ -10,14 +10,9 @@ namespace Bibim
         clearColor = value;
     }
 
-    bool StandardGame::GetDebugDisplay() const
+    StandardGame::DebugMode StandardGame::GetDebugMode() const
     {
-        return debugDisplay;
-    }
-
-    void StandardGame::SetDebugDisplay(bool value)
-    {
-        debugDisplay = value;
+        return debugMode;
     }
 
     Preferences* StandardGame::GetPreferences() const

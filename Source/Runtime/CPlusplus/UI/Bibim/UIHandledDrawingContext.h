@@ -15,8 +15,8 @@
                     protected:
                         virtual ~Handler() { }
 
-                        virtual void OnBegan(UIHandledDrawingContext& /*context*/) { }
-                        virtual void OnEnded(UIHandledDrawingContext& /*context*/) { }
+                        virtual void OnBegan(UIHandledDrawingContext& /*context*/, UIVisual* /*root*/) { }
+                        virtual void OnEnded(UIHandledDrawingContext& /*context*/, UIVisual* /*root*/) { }
                         virtual void OnVisualBegan(UIHandledDrawingContext& /*context*/) { }
                         virtual void OnVisualEnded(UIHandledDrawingContext& /*context*/) { }
 
@@ -47,8 +47,8 @@
                 inline void SetHandler(Handler* value);
 
             protected:
-                virtual void OnBegan();
-                virtual void OnEnded();
+                virtual void OnBegan(UIVisual* root);
+                virtual void OnEnded(UIVisual* root);
                 virtual void OnVisit();
 
             private:
