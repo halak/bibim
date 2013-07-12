@@ -89,6 +89,10 @@ namespace Bibim.Bab
                     if (CommandLineArgs.ContainsKey("class"))
                         StartupUri = new Uri("ConsoleWindow.xaml", UriKind.Relative);
                 }
+                else if (string.Compare(args[0], "ui", true) == 0)
+                {
+                    StartupUri = new Uri("UIInspectorWindow.xaml", UriKind.Relative);
+                }
             }
             #endregion
 

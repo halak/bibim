@@ -1,0 +1,12 @@
+﻿<Window x:Class="Bibim.Bab.UIInspectorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="UIInspectorWindow"
+        Left="{Binding Source={StaticResource Settings}, Path=Default.UIInspectorWindowX}"
+        Top="{Binding Source={StaticResource Settings}, Path=Default.UIInspectorWindowY}"
+        Width="{Binding Source={StaticResource Settings}, Path=Default.UIInspectorWindowWidth}"
+        Height="{Binding Source={StaticResource Settings}, Path=Default.UIInspectorWindowHeight}">
+    <Grid>
+        <TreeView Margin="12" Name="treeView" SelectedItemChanged="OnTreeViewSelectedItemChanged" />
+    </Grid>
+</Window>

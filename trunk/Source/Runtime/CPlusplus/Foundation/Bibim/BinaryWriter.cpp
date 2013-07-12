@@ -72,13 +72,13 @@ namespace Bibim
     {
         BBAssertDebug(sourceStream != nullptr);
 
-        int writtenSize = 0;
+        //int writtenSize = 0;
 
-        writtenSize = sourceStream->Write(&length, sizeof(length));
-        BBAssert(writtenSize == sizeof(length));
+        /*writtenSize = */sourceStream->Write(&length, sizeof(length));
+        //BBAssert(writtenSize == sizeof(length));
 
-        writtenSize = sourceStream->Write(value, length);
-        BBAssert(writtenSize == length);
+        /*writtenSize = */sourceStream->Write(value, length);
+        //BBAssert(writtenSize == length);
     }
 
     void BinaryWriter::Write(const String& value)

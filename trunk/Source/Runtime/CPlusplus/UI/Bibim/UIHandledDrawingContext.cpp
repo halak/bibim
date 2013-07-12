@@ -28,16 +28,16 @@ namespace Bibim
     {
     }
 
-    void UIHandledDrawingContext::OnBegan()
+    void UIHandledDrawingContext::OnBegan(UIVisual* root)
     {
         if (handler)
-            handler->OnBegan(*this);
+            handler->OnBegan(*this, root);
     }
 
-    void UIHandledDrawingContext::OnEnded()
+    void UIHandledDrawingContext::OnEnded(UIVisual* root)
     {
         if (handler)
-            handler->OnEnded(*this);
+            handler->OnEnded(*this, root);
     }
 
     void UIHandledDrawingContext::OnVisit()

@@ -166,7 +166,7 @@ namespace Bibim
         else
             currentClippedBounds = currentBounds;
 
-        if (currentClippedBounds.Width > 0 && currentClippedBounds.Height > 0)
+        if (currentClippedBounds.Width > 0 && currentClippedBounds.Height > 0 && currentOpacity > 0.0f)
         {
             parentTransform = currentTransform;
             parentTransformInv = currentTransformInv;

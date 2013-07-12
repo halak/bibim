@@ -658,7 +658,7 @@ namespace Bibim
              if (value == nullptr)                                  return Visible;
         else if (String::EqualsCharsIgnoreCase(value, "Visible"))   return Visible;
         else if (String::EqualsCharsIgnoreCase(value, "Invisible")) return Invisible;
-        else if (String::EqualsCharsIgnoreCase(value, "Collasped")) return Collasped;
+        else if (String::EqualsCharsIgnoreCase(value, "Collapsed")) return Collasped;
         else                                                        return Visible;
     }
 
@@ -668,7 +668,7 @@ namespace Bibim
         {
             case Visible:   return "Visible";
             case Invisible: return "Invisible";
-            case Collasped: return "Collasped";
+            case Collasped: return "Collapsed";
             default:        return "Visible";
         }
     }

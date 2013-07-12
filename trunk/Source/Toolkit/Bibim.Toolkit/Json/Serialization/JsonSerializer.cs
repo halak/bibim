@@ -694,6 +694,125 @@ namespace Bibim.Json.Serialization
         }
         #endregion
 
+        #region Utility Methods
+        public static string SerializeData(object d)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static object DeserializeData(string s)
+        {
+            var reader = new JsonReader(s);
+            while (reader.Read())
+            {
+                switch (reader.Token)
+                {
+                    case JsonToken.None:
+                        return null;
+                    case JsonToken.ObjectStart:
+                        return ReadObjectData(reader);
+                    case JsonToken.PropertyName:
+                        throw new InvalidDataException();
+                    case JsonToken.ObjectEnd:
+                        throw new InvalidDataException();
+                    case JsonToken.ArrayStart:
+                        return ReadArrayData(reader);
+                    case JsonToken.ArrayEnd:
+                        throw new InvalidDataException();
+                    case JsonToken.Int:
+                    case JsonToken.Long:
+                    case JsonToken.Double:
+                    case JsonToken.String:
+                    case JsonToken.Boolean:
+                        return reader.Value;
+                    case JsonToken.Null:
+                        return null;
+                    default:
+                        return null;
+                }
+            }
+
+            return null;
+        }
+
+        private static List<object> ReadArrayData(JsonReader reader)
+        {
+            List<object> result = new List<object>();
+            bool exit = false;
+            while (exit == false && reader.Read())
+            {
+                switch (reader.Token)
+                {
+                    case JsonToken.None:
+                        throw new InvalidDataException();
+                    case JsonToken.ObjectStart:
+                        result.Add(ReadObjectData(reader));
+                        break;
+                    case JsonToken.PropertyName:
+                        throw new InvalidDataException();
+                    case JsonToken.ObjectEnd:
+                        throw new InvalidDataException();
+                    case JsonToken.ArrayStart:
+                        result.Add(ReadArrayData(reader));
+                        break;
+                    case JsonToken.ArrayEnd:
+                        exit = true;
+                        break;
+                    case JsonToken.Int:
+                    case JsonToken.Long:
+                    case JsonToken.Double:
+                    case JsonToken.String:
+                    case JsonToken.Boolean:
+                    case JsonToken.Null:
+                        result.Add(reader.Value);
+                        break;
+                }
+            }
+
+            return result;
+        }
+
+
+        private static object ReadObjectData(JsonReader reader)
+        {
+            var result = new Dictionary<string, object>();
+            string propertyName = null;
+            bool exit = false;
+            while (exit == false && reader.Read())
+            {
+                switch (reader.Token)
+                {
+                    case JsonToken.None:
+                        break;
+                    case JsonToken.ObjectStart:
+                        result.Add(propertyName, ReadObjectData(reader));
+                        break;
+                    case JsonToken.PropertyName:
+                        propertyName = (string)reader.Value;
+                        break;
+                    case JsonToken.ObjectEnd:
+                        exit = true;
+                        break;
+                    case JsonToken.ArrayStart:
+                        result.Add(propertyName, ReadArrayData(reader));
+                        break;
+                    case JsonToken.ArrayEnd:
+                        break;
+                    case JsonToken.Int:
+                    case JsonToken.Long:
+                    case JsonToken.Double:
+                    case JsonToken.String:
+                    case JsonToken.Boolean:
+                    case JsonToken.Null:
+                        result.Add(propertyName, reader.Value);
+                        break;
+                }
+            }
+
+            return result;
+        }
+        #endregion
+
         private TypeConverter GetTypeConverter(Type type)
         {
             TypeConverter result = null;

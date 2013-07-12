@@ -52,12 +52,12 @@ namespace Bibim
 
         isDrawing = true;
         renderer->Begin();
-        OnBegan();
+        OnBegan(target);
 
         Ready(target);
         Visit(target);
 
-        OnEnded();
+        OnEnded(target);
         renderer->End();
         isDrawing = false;
     }
@@ -636,8 +636,7 @@ namespace Bibim
 
     void UIDrawingContext::DrawEllipse(Vector2 center, float xRadius, float yRadius, Color color)
     {
-        center.X -= 0.5f;
-        center.Y -= 0.5f;
+        center = cm(center);
 
         int count = 32;
         Vector2* p = BBStackAlloc(Vector2, count + 1);
@@ -668,8 +667,8 @@ namespace Bibim
 
     void UIDrawingContext::DrawRoundedRect(RectF bounds, float leftTopRadius, float rightTopRadius, float leftBottomRadius, float rightBottomRadius, Color color)
     {
-        bounds.X -= 0.5f;
-        bounds.Y -= 0.5f;
+        bounds.X = cm(bounds.X);
+        bounds.Y = cm(bounds.Y);
 
         const float maxRadius = Math::Min(bounds.Width, bounds.Height) * 0.5f;
         leftTopRadius = Math::Clamp(leftTopRadius, 0.0f, maxRadius);
@@ -822,8 +821,7 @@ namespace Bibim
 
     void UIDrawingContext::FillEllipse(Vector2 center, float xRadius, float yRadius, Color color)
     {
-        center.X -= 0.5f;
-        center.Y -= 0.5f;
+        center = cm(center);
 
         int count = 32 * 3;
         Vector2* p = BBStackAlloc(Vector2, count);
@@ -855,8 +853,8 @@ namespace Bibim
 
     void UIDrawingContext::FillRoundedRect(RectF bounds, float leftTopRadius, float rightTopRadius, float leftBottomRadius, float rightBottomRadius, Color color)
     {
-        bounds.X -= 0.5f;
-        bounds.Y -= 0.5f;
+        bounds.X = cm(bounds.X);
+        bounds.Y = cm(bounds.Y);
 
         const Vector2 boundsCenter = bounds.GetCenterPoint();
 
@@ -955,11 +953,11 @@ namespace Bibim
             renderer->DrawTriangles(count, p, color);
     }
 
-    void UIDrawingContext::OnBegan()
+    void UIDrawingContext::OnBegan(UIVisual* /*target*/)
     {
     }
 
-    void UIDrawingContext::OnEnded()
+    void UIDrawingContext::OnEnded(UIVisual* /*target*/)
     {
     }
 
