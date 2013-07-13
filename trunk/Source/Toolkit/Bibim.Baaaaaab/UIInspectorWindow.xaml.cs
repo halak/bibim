@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.IO.Pipes;
 using System.Linq;
@@ -29,16 +30,22 @@ namespace Bibim.Bab
         private const uint UIDataPacketID = 44523;
         private const uint UIVisualSelectedPacketID = 44524;
 
-        private readonly BitmapImage VISIBLE = new BitmapImage(new Uri("/Resources/VISIBLE.png", UriKind.Relative));
-        private readonly BitmapImage INVISIBLE = new BitmapImage(new Uri("/Resources/INVISIBLE.png", UriKind.Relative));
-        private readonly BitmapImage COLLAPSED = new BitmapImage(new Uri("/Resources/COLLAPSED.png", UriKind.Relative));
-        private readonly BitmapImage PICKABLE = new BitmapImage(new Uri("/Resources/Pickable.png", UriKind.Relative));
-        private readonly BitmapImage UNPICKABLE = new BitmapImage(new Uri("/Resources/Unpickable.png", UriKind.Relative));
+        private static Uri GetEmbeddedResourceUri(string path)
+        {
+            return new Uri("pack://application:,,,/Bibim.Baaaaaab;component/Resources/" + path, UriKind.RelativeOrAbsolute);
+        }
+
+        private readonly BitmapFrame VISIBLE = BitmapFrame.Create(GetEmbeddedResourceUri("VISIBLE.png"));
+        private readonly BitmapFrame INVISIBLE = BitmapFrame.Create(GetEmbeddedResourceUri("INVISIBLE.png"));
+        private readonly BitmapFrame COLLAPSED = BitmapFrame.Create(GetEmbeddedResourceUri("COLLAPSED.png"));
+        private readonly BitmapFrame PICKABLE = BitmapFrame.Create(GetEmbeddedResourceUri("Pickable.png"));
+        private readonly BitmapFrame UNPICKABLE = BitmapFrame.Create(GetEmbeddedResourceUri("Unpickable.png"));
 
         private NamedPipeServerStream serverStream;
         private BinaryReader serverStreamReader;
         private BinaryWriter serverStreamWriter;
         private byte[] serverBuffer;
+        private DataTemplate treeViewHeaderTemplate;
 
         private long selectedVisualID;
 
@@ -46,13 +53,49 @@ namespace Bibim.Bab
         {
             InitializeComponent();
 
+            PreloadClassIcon();
             Ready();
             serverBuffer = new byte[16];
         }
 
         private void Synchronize(Dictionary<string, object> o)
         {
+            if (treeViewHeaderTemplate == null)
+            {
+                treeViewHeaderTemplate = new DataTemplate();
+
+                FrameworkElementFactory stackPanel = new FrameworkElementFactory(typeof(StackPanel));
+                stackPanel.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
+                stackPanel.SetValue(StackPanel.HorizontalAlignmentProperty, System.Windows.HorizontalAlignment.Center);
+                stackPanel.SetValue(StackPanel.VerticalAlignmentProperty, System.Windows.VerticalAlignment.Center);
+
+                FrameworkElementFactory classIcon = new FrameworkElementFactory(typeof(Image));
+                classIcon.SetValue(Image.SourceProperty, new Binding() { Converter = new AtValueConverter(0) });
+                stackPanel.AppendChild(classIcon);
+
+                FrameworkElementFactory nameLabel = new FrameworkElementFactory(typeof(TextBlock));
+                nameLabel.SetValue(TextBlock.MarginProperty, new Thickness(8, 0, 8, 0));
+                nameLabel.SetValue(TextBlock.TextProperty, new Binding() { Converter = new AtValueConverter(1) });
+                nameLabel.SetValue(TextBlock.ForegroundProperty, new Binding() { Converter = new AtValueConverter(2) });
+                stackPanel.AppendChild(nameLabel);
+
+                FrameworkElementFactory visibilityIcon = new FrameworkElementFactory(typeof(Image));
+                visibilityIcon.SetValue(Image.SourceProperty, new Binding() { Converter = new AtValueConverter(3) });
+                stackPanel.AppendChild(visibilityIcon);
+
+                FrameworkElementFactory pickableIcon = new FrameworkElementFactory(typeof(Image));
+                pickableIcon.SetValue(Image.SourceProperty, new Binding() { Converter = new AtValueConverter(4) });
+                stackPanel.AppendChild(pickableIcon);
+
+                treeViewHeaderTemplate.VisualTree = stackPanel;
+            }
+
+            // Stopwatch s = new Stopwatch();
+            // s.Start();
             Synchronize(treeView.Items, GetChildren(o));
+            // s.Stop();
+
+            // Trace.TraceInformation("Synchronize time: {0}", s.ElapsedMilliseconds);
         }
 
         private void Synchronize(ItemCollection subItems, List<object> children)
@@ -68,7 +111,10 @@ namespace Bibim.Bab
                 var subItem = FindTreeViewItem(subItems, GetID(child), findAllItems: false);
                 if (subItem == null)
                 {
-                    subItem = new TreeViewItem();
+                    subItem = new TreeViewItem()
+                    {
+                        HeaderTemplate = treeViewHeaderTemplate,
+                    };
                     ToolTipService.SetInitialShowDelay(subItem, 0);
                 }
 
@@ -83,64 +129,42 @@ namespace Bibim.Bab
                         else
                             throw new NotImplementedException();
                     }
-                    
+
                     subItems.Insert(i, subItem);
                 }
 
-                subItem.Tag = child;
+                subItem.Tag = GetID(child);
                 subItem.ToolTip = GenerateTooltip(child);
 
-                if (subItem.Header == null)
-                {
-                    subItem.Header = new StackPanel()
-                    {
-                        Orientation = Orientation.Horizontal,
-                        HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
-                        VerticalAlignment = System.Windows.VerticalAlignment.Center,
-                    };
-                }
-
-                var stack = (StackPanel)subItem.Header;
-
-                var classIcon = PrepareComponent<Image>(stack, "Class", 0);
-                var nameLabel = PrepareComponent<TextBlock>(stack, "Name", 1);
-                var visibilityIcon = PrepareComponent<Image>(stack, "Visibility", 2);
-                var pickableIcon = PrepareComponent<Image>(stack, "Pickable", 3);
-
-                if (classIcon.Source == null)
-                {
-                    string className = GetClassName(child);
-                    if (string.IsNullOrEmpty(className))
-                        className = "Default";
-
-                    classIcon.Source = new BitmapImage(new Uri(string.Format("/Resources/Classes/{0}.png", className), UriKind.Relative));
-                }
-
-                nameLabel.Text = GetName(child);
-                nameLabel.Margin = new Thickness(8, 0, 8, 0);
-                nameLabel.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
-                nameLabel.VerticalAlignment = System.Windows.VerticalAlignment.Center;
-
-                var visibility = GetVisibility(child);
-                switch (visibility)
+                object nameForeground = null;
+                object visibilityIcon = null;
+                switch (GetVisibility(child))
                 {
                     case UIVisibility.Visible:
-                        visibilityIcon.Source = VISIBLE;
+                        nameForeground = Brushes.Black;
+                        visibilityIcon = VISIBLE;
                         break;
                     case UIVisibility.Invisible:
-                        nameLabel.Foreground = Brushes.Gray;
-                        visibilityIcon.Source = INVISIBLE;
+                        nameForeground = Brushes.Gray;
+                        visibilityIcon = INVISIBLE;
                         break;
                     case UIVisibility.Collapsed:
-                        nameLabel.Foreground = Brushes.Gray;
-                        visibilityIcon.Source = COLLAPSED;
+                        nameForeground = Brushes.Gray;
+                        visibilityIcon = COLLAPSED;
                         break;
                 }
 
-                if (GetPickable(child))
-                    pickableIcon.Source = PICKABLE;
-                else
-                    pickableIcon.Source = UNPICKABLE;
+                object[] data = (object[])subItem.Header;
+                if (data == null)
+                {
+                    data = new object[5];
+                    subItem.Header = data;
+                }
+                data[0] = GetClassIcon(child);
+                data[1] = GetName(child);
+                data[2] = nameForeground;
+                data[3] = visibilityIcon;
+                data[4] = GetPickable(child) ? PICKABLE : UNPICKABLE;
 
                 changedItems.Add(subItem);
 
@@ -156,38 +180,28 @@ namespace Bibim.Bab
 
         private static TreeViewItem FindTreeViewItem(ItemCollection items, long id, bool findAllItems = true)
         {
-            foreach (TreeViewItem item in items)
+            if (findAllItems)
             {
-                var data = (Dictionary<string, object>)item.Tag;
-                if (GetID(data) == id)
-                    return item;
-
-                if (findAllItems)
+                foreach (TreeViewItem item in items)
                 {
+                    if ((long)item.Tag == id)
+                        return item;
+
                     var found = FindTreeViewItem(item.Items, id, true);
                     if (found != null)
                         return found;
                 }
             }
-
-            return null;
-        }
-
-        private static T PrepareComponent<T>(StackPanel header, string name, int index) where T : FrameworkElement, new()
-        {
-            foreach (FrameworkElement item in header.Children)
+            else
             {
-                if (item.Name == name)
-                    return (T)item;
+                foreach (TreeViewItem item in items)
+                {
+                    if ((long)item.Tag == id)
+                        return item;
+                }
             }
 
-            var newItem = new T()
-            {
-                Name = name
-            };
-            header.Children.Insert(index, newItem);
-
-            return newItem;
+            return null;
         }
 
         static object GenerateTooltip(Dictionary<string, object> o)
@@ -224,47 +238,57 @@ namespace Bibim.Bab
                 return string.Format("<0x{0}>", id.ToString("X"));
         }
 
-        static readonly Type[] IconEmbeddedClasses = 
+        static SortedList<int, ImageSource> ClassIconDictionary;
+        static void PreloadClassIcon()
         {
-            typeof(UIButton),
-            typeof(UICheckBox),
-            typeof(UIDocument),
-            typeof(UIEditText),
-            typeof(UIEllipse),
-            typeof(UIImage),
-            typeof(UILabel),
-            typeof(UIPanel),
-            typeof(UIRadioButton),
-            typeof(UIRect),
-            typeof(UIRoundedRect),
-            typeof(UIScrollablePanel),
-            typeof(UISpark),
-            typeof(UISprite),
-            typeof(UIVideo),
-            typeof(UIWindow),
-        };
-        static Dictionary<int, string> ClassSimpleDictionary;
-        static string GetClassName(Dictionary<string, object> o)
-        {
-            if (ClassSimpleDictionary == null)
+            if (ClassIconDictionary == null)
             {
-                ClassSimpleDictionary = new Dictionary<int,string>(IconEmbeddedClasses.Length);
-                
-                foreach (var item in IconEmbeddedClasses)
-                    ClassSimpleDictionary.Add(ClassIDAttribute.GetClassID(item), item.Name);
+                Type[] iconEmbeddedClasses = 
+                {
+                    typeof(UIButton),
+                    typeof(UICheckBox),
+                    typeof(UIDocument),
+                    typeof(UIEditText),
+                    typeof(UIEllipse),
+                    typeof(UIImage),
+                    typeof(UILabel),
+                    typeof(UIPanel),
+                    typeof(UIRadioButton),
+                    typeof(UIRect),
+                    typeof(UIRoundedRect),
+                    typeof(UIScrollablePanel),
+                    typeof(UISpark),
+                    typeof(UISprite),
+                    typeof(UIVideo),
+                    typeof(UIWindow),
+                };
+
+                ClassIconDictionary = new SortedList<int, ImageSource>(iconEmbeddedClasses.Length);
+                ClassIconDictionary.Add(0, BitmapFrame.Create(GetEmbeddedResourceUri("Classes/Default.png")));
+
+                foreach (var item in iconEmbeddedClasses)
+                {
+                    var uri = GetEmbeddedResourceUri(string.Format("Classes/{0}.png", item.Name));
+                    ClassIconDictionary.Add(ClassIDAttribute.GetClassID(item), BitmapFrame.Create(uri));
+                }
             }
+        }
+
+        static ImageSource GetClassIcon(Dictionary<string, object> o)
+        {
+            if (ClassIconDictionary == null)
+                PreloadClassIcon();
 
             object classIDObject = null;
             if (o.TryGetValue("class", out classIDObject))
             {
-                int classID = Convert.ToInt32(classIDObject);
-
-                string className = null;
-                if (ClassSimpleDictionary.TryGetValue(classID, out className))
-                    return className;
+                int classID = (int)classIDObject;
+                ImageSource classIcon = null;
+                if (ClassIconDictionary.TryGetValue(classID, out classIcon))
+                    return classIcon;
             }
 
-            return string.Empty;
+            return ClassIconDictionary[0];
         }
 
         static UIVisibility GetVisibility(Dictionary<string, object> o)
@@ -273,14 +297,17 @@ namespace Bibim.Bab
             if (o.TryGetValue("visibility", out valueObject))
             {
                 string value = (string)valueObject;
-                if (string.Compare(value, "VISIBLE", true) == 0)
-                    return UIVisibility.Visible;
-                else if (string.Compare(value, "INVISIBLE", true) == 0)
-                    return UIVisibility.Invisible;
-                else if (string.Compare(value, "COLLAPSED", true) == 0)
-                    return UIVisibility.Collapsed;
-                else
-                    return UIVisibility.Visible;
+                switch (value[0])
+                {
+                    case 'V':
+                        return UIVisibility.Visible;
+                    case 'I':
+                        return UIVisibility.Invisible;
+                    case 'C':
+                        return UIVisibility.Collapsed;
+                    default:
+                        return UIVisibility.Visible;
+                }
             }
             else
                 return UIVisibility.Visible;
@@ -387,8 +414,7 @@ namespace Bibim.Bab
                 var selectedTreeViewItem = (TreeViewItem)e.NewValue;
                 if (selectedTreeViewItem != null)
                 {
-                    var selectedVisual = (Dictionary<string, object>)selectedTreeViewItem.Tag;
-                    selectedVisualID = Convert.ToInt64(selectedVisual["id"]);
+                    selectedVisualID = (long)selectedTreeViewItem.Tag;
                 }
                 //else
                 //    selectedVisualID = 0;
@@ -396,5 +422,25 @@ namespace Bibim.Bab
             //else
             //    selectedVisualID = 0;
         }
+
+        private class AtValueConverter : IValueConverter
+        {
+            private int index;
+
+            public AtValueConverter(int index)
+            {
+                this.index = index;
+            }
+
+            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+            {
+                return ((object[])value)[index];
+            }
+
+            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+            {
+                return null;
+            }
+        };
     }
 }
