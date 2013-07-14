@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Bibim.Bab.Properties;
 using Bibim.IO;
 using Bibim.Json.Serialization;
@@ -48,6 +49,8 @@ namespace Bibim.Bab
         private DataTemplate treeViewHeaderTemplate;
 
         private long selectedVisualID;
+
+        private DispatcherTimer findingDispatcher;
 
         public UIInspectorWindow()
         {
@@ -90,12 +93,13 @@ namespace Bibim.Bab
                 treeViewHeaderTemplate.VisualTree = stackPanel;
             }
 
-            // Stopwatch s = new Stopwatch();
-            // s.Start();
+            //Stopwatch s = new Stopwatch();
+            //s.Start();
             Synchronize(treeView.Items, GetChildren(o));
-            // s.Stop();
+            //s.Stop();
+            //Trace.TraceInformation("Synchronize time: {0}", s.ElapsedMilliseconds);
 
-            // Trace.TraceInformation("Synchronize time: {0}", s.ElapsedMilliseconds);
+            HighlightTreeViewItemsByText(textBoxFind.Text);
         }
 
         private void Synchronize(ItemCollection subItems, List<object> children)
@@ -104,7 +108,6 @@ namespace Bibim.Bab
                 return;
 
             var changedItems = new List<object>(subItems.Count);
-
             for (int i = 0; i < children.Count; i++)
             {
                 var child = (Dictionary<string, object>)children[i];
@@ -178,6 +181,102 @@ namespace Bibim.Bab
             }
         }
 
+        private void HighlightTreeViewItemsByText(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                text = null;
+
+            //Stopwatch s = new Stopwatch();
+            //s.Start();
+            HighlightTreeViewItemsByText(treeView.Items, text);
+            //s.Stop();
+
+            //Trace.TraceInformation("Highlight time: {0}", s.ElapsedMilliseconds);
+        }
+
+        private static void HighlightTreeViewItemsByText(ItemCollection items, string text)
+        {
+            if (text != null)
+            {
+                foreach (TreeViewItem item in items)
+                {
+                    var name = GetName(item);
+                    if (text != null && name.Contains(text))
+                        item.FontWeight = FontWeights.Heavy;
+                    else
+                    {
+                        item.FontWeight = FontWeights.Normal;
+                        item.FontStyle = FontStyles.Normal;
+                    }
+
+                    HighlightTreeViewItemsByText(item.Items, text);
+                }
+            }
+            else
+            {
+                foreach (TreeViewItem item in items)
+                {
+                    item.FontWeight = FontWeights.Normal;
+                    item.FontStyle = FontStyles.Normal;
+                    HighlightTreeViewItemsByText(item.Items, text);
+                }
+            }
+        }
+
+        private void SelectNextTreeViewItemByText(string text)
+        {
+            var selectedItem = (TreeViewItem)treeView.SelectedItem;
+            TreeViewItem nextItem = null;
+            if (selectedItem != null)
+                nextItem = FindNextTreeViewItemBySubstring(GetContainer(selectedItem), selectedItem, text);
+
+            if (nextItem == null)
+                nextItem = FindNextTreeViewItemBySubstring(treeView.Items, null, text);
+
+            if (nextItem != null)
+            {
+                if (selectedItem != null && object.ReferenceEquals(selectedItem, nextItem) == false)
+                {
+                    selectedItem.IsSelected = false;
+                    selectedItem.FontStyle = FontStyles.Normal;
+                }
+
+                nextItem.IsSelected = true;
+                nextItem.FontStyle = FontStyles.Italic;
+                nextItem.BringIntoView();
+            }
+        }
+
+        private static TreeViewItem FindNextTreeViewItemBySubstring(ItemCollection items, TreeViewItem selectedItem, string text)
+        {
+            int firstIndex = 0;
+            if (selectedItem != null)
+                firstIndex = items.IndexOf(selectedItem) + 1;
+            for (int i = firstIndex; i < items.Count; i++)
+            {
+                var item = (TreeViewItem)items[i];
+                var name = GetName(item);
+                if (name.Contains(text))
+                    return item;
+
+                if (item.Items.Count > 0)
+                {
+                    var found = FindNextTreeViewItemBySubstring(item.Items, null, text);
+                    if (found != null)
+                        return found;
+                }
+            }
+
+            if (selectedItem != null)
+            {
+                var parent = selectedItem.Parent as TreeViewItem;
+                if (parent != null)
+                    return FindNextTreeViewItemBySubstring(GetContainer(parent), parent, text);
+            }
+
+            return null;
+        }
+
         private static TreeViewItem FindTreeViewItem(ItemCollection items, long id, bool findAllItems = true)
         {
             if (findAllItems)
@@ -204,6 +303,14 @@ namespace Bibim.Bab
             return null;
         }
 
+        private static ItemCollection GetContainer(TreeViewItem item)
+        {
+            if (item.Parent is TreeViewItem)
+                return ((TreeViewItem)item.Parent).Items;
+            else
+                return ((TreeView)item.Parent).Items;
+        }
+
         static object GenerateTooltip(Dictionary<string, object> o)
         {
             return string.Format(
@@ -219,6 +326,11 @@ namespace Bibim.Bab
         static long GetID(Dictionary<string, object> o)
         {
             return Convert.ToInt64(o["id"]);
+        }
+
+        static string GetName(TreeViewItem item)
+        {
+            return (string)((object[])item.Header)[1];
         }
 
         static string GetName(Dictionary<string, object> o)
@@ -421,6 +533,46 @@ namespace Bibim.Bab
             }
             //else
             //    selectedVisualID = 0;
+        }
+
+        private void textBoxFind_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (findingDispatcher == null)
+            {
+                findingDispatcher = new DispatcherTimer(TimeSpan.FromSeconds(0.5),
+                                                        DispatcherPriority.Normal,
+                                                        new EventHandler(findingDispatcher_Tick),
+                                                        Dispatcher);
+                findingDispatcher.Start();
+            }
+        }
+
+        void findingDispatcher_Tick(object sender, EventArgs e)
+        {
+            Trace.Assert(object.ReferenceEquals(sender, findingDispatcher));
+            var highlightingText = textBoxFind.Text;
+            var lastHighlightingText = (string)findingDispatcher.Tag;
+
+            if (highlightingText != lastHighlightingText)
+            {
+                HighlightTreeViewItemsByText(highlightingText);
+                findingDispatcher.Tag = highlightingText;
+            }
+        }
+
+        private void buttonFind_Click(object sender, RoutedEventArgs e)
+        {
+            SelectNextTreeViewItemByText(textBoxFind.Text);
+            e.Handled = true;
+        }
+
+        private void textBoxFind_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SelectNextTreeViewItemByText(textBoxFind.Text);
+                e.Handled = true;
+            }
         }
 
         private class AtValueConverter : IValueConverter

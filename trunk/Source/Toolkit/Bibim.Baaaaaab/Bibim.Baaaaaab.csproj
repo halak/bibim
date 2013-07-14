@@ -123,6 +123,7 @@
     <Compile Include="Controls\ObjectRelationshipGrid.xaml.cs">
       <DependentUpon>ObjectRelationshipGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PlaceholderTextBox.cs" />
     <Compile Include="Properties\Resources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -279,6 +280,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Inspector.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Themes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
