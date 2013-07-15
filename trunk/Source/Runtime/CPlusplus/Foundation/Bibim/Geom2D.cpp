@@ -110,19 +110,44 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    static inline int Signed2DTriArea(Point2 a, Point2 b, Point2 c)
+    {
+        return (a.X - c.X) * (b.Y - c.Y) - (a.Y - c.Y) * (b.X - c.X);
+    }
+
     static inline float Signed2DTriArea(Vector2 a, Vector2 b, Vector2 c)
     {
         return (a.X - c.X) * (b.Y - c.Y) - (a.Y - c.Y) * (b.X - c.X);
     }
 
+    bool Geom2D::IntersectSegmentSegment(Point2 a, Point2 b, Point2 c, Point2 d, float& outResult)
+    {
+        const int a1 = Signed2DTriArea(a, b, d);
+        const int a2 = Signed2DTriArea(a, b, c);
+        if (a1 * a2 < 0)
+        {
+            const int a3 = Signed2DTriArea(c, d, a);
+            const int a4 = a3 + a2 - a1;
+            if (a3 * a4 < 0)
+            {
+                outResult = static_cast<float>(a3) / static_cast<float>(a3 - a4);
+                return true;
+            }
+            else
+                return false;
+        }
+        else
+            return false;
+    }
+
     bool Geom2D::IntersectSegmentSegment(Vector2 a, Vector2 b, Vector2 c, Vector2 d, float& outResult)
     {
-        float a1 = Signed2DTriArea(a, b, d);
-        float a2 = Signed2DTriArea(a, b, c);
+        const float a1 = Signed2DTriArea(a, b, d);
+        const float a2 = Signed2DTriArea(a, b, c);
         if (a1 * a2 < 0.0f)
         {
-            float a3 = Signed2DTriArea(c, d, a);
-            float a4 = a3 + a2 - a1;
+            const float a3 = Signed2DTriArea(c, d, a);
+            const float a4 = a3 + a2 - a1;
             if (a3 * a4 < 0.0f)
             {
                 outResult = a3 / (a3 - a4);
@@ -363,39 +388,95 @@ namespace Bibim
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     bool Geom2D::SweepSphereAxisAlignedBox(Vector2 center, float radius, Vector2 direction, float length,
-                                           Vector2 leftTop, Vector2 rightBottom, float& outDistance)
+                                           Vector2 leftTop, Vector2 rightBottom,
+                                           float& outDistance, Vector2& outNormal)
     {
-        // 미완성
+        // 원과 AABB의 Sweep test의 원리는 기본적으로,
+        // 원의 반지름만큼 AABB를 확장하여 Rounded Rect로 만든 후 Raycast를 하는 것입니다.
+        //
+        // 최적화를 위하여 변, 모서리의 법선과 원의 진행방향이 비슷하면(Dot(a,b)>=0) Raycast를 수행하지 않습니다.
 
-        const float left = leftTop.X - radius;
-        const float top = leftTop.Y - radius;
-        const float right = rightBottom.X + radius;
-        const float bottom = rightBottom.Y + radius;
-        
-        const Vector2 ss = center; // sphere start
-        const Vector2 se = ss + direction * length; // sphere end
-        const float r = 0.0f; //radius;
+        const float left = leftTop.X;
+        const float top = leftTop.Y;
+        const float right = rightBottom.X;
+        const float bottom = rightBottom.Y;
 
-        float distanceToLeft = 0.0f;      
-        if (IntersectSegmentSegment(ss, se, Vector2(left - r, top), Vector2(left - r, bottom), distanceToLeft) == false)
-            distanceToLeft = Float::Max;
+        float closestDistance = Float::Max;
+        Vector2 closestNormal = Vector2::Zero;
 
-        float distanceToTop = 0.0f;
-        if (IntersectSegmentSegment(ss, se, Vector2(left,  top - r), Vector2(right, top - r), distanceToTop) == false)
-            distanceToTop = Float::Max;
-
-        float distanceToRight = 0.0f;
-        if (IntersectSegmentSegment(ss, se, Vector2(right + r, top), Vector2(right + r, bottom), distanceToRight) == false)
-            distanceToRight = Float::Max;
-
-        float distanceToBottom = 0.0f;
-        if (IntersectSegmentSegment(ss, se, Vector2(left,  bottom + r), Vector2(right, bottom + r), distanceToBottom) == false)
-            distanceToBottom = Float::Max;
-
-        outDistance = Math::Min(Math::Min(Math::Min(distanceToLeft, distanceToTop), distanceToRight), distanceToBottom);
-        if (outDistance != Float::Max)
+        // 상하좌우 각 변에 Raycast를 수행합니다.
         {
-            outDistance *= length;
+            const struct
+            {
+                Vector2 Normal;
+                Vector2 Start;
+                Vector2 End;
+            } data[] = {
+                { Vector2(-1.0f, 0.0f), Vector2(left - radius, top),     Vector2(left - radius, bottom)  },
+                { Vector2(0.0f, -1.0f), Vector2(left,  top - radius),    Vector2(right, top - radius)    },
+                { Vector2(+1.0f, 0.0f), Vector2(right + radius, top),    Vector2(right + radius, bottom) },
+                { Vector2(0.0f, +1.0f), Vector2(left,  bottom + radius), Vector2(right, bottom + radius) },
+            };
+
+            const Vector2 end = center + (direction * length);
+            for (int i = 0; i < sizeof(data) / sizeof(data[0]); i++)
+            {
+                if (direction.Dot(data[i].Normal) < 0.0f)
+                {
+                    // context.DrawLine(data[i].Start, data[i].End, Color::CornflowerBlue);
+
+                    float distance = 0.0f;
+                    if (Geom2D::IntersectSegmentSegment(center, end, data[i].Start, data[i].End, distance))
+                    {
+                        distance *= length;
+
+                        if (closestDistance > distance)
+                        {
+                            closestDistance = distance;
+                            closestNormal = data[i].Normal;
+                        }
+                    }
+                }
+            }
+        }
+
+        // 각 모서리에 Raycast를 수행합니다. (원과의 Raycast가 됩니다.)
+        {
+            static const float InvSqrt2 = 0.707106781186f;
+            const struct
+            {
+                Vector2 Normal;
+                Vector2 Center;
+            } data[] = {
+                { Vector2(-InvSqrt2, -InvSqrt2), Vector2(left,  top)    },
+                { Vector2(-InvSqrt2, +InvSqrt2), Vector2(left,  bottom) },
+                { Vector2(+InvSqrt2, -InvSqrt2), Vector2(right, top)    },
+                { Vector2(+InvSqrt2, +InvSqrt2), Vector2(right, bottom) },
+            };
+
+            for (int i = 0; i < sizeof(data) / sizeof(data[0]); i++)
+            {
+                if (direction.Dot(data[i].Normal) < 0.0f)
+                {
+                    // context.DrawCircle(data[i].Center, radius, Color::CornflowerBlue);
+
+                    float distance = 0.0f;
+                    if (Geom2D::RaycastSphere(center, direction, data[i].Center, radius * radius, distance) && distance <= length)
+                    {
+                        if (closestDistance > distance)
+                        {
+                            closestDistance = distance;
+                            closestNormal = data[i].Normal;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (closestDistance != Float::Max)
+        {
+            outDistance = closestDistance;
+            outNormal = closestNormal;
             return true;
         }
         else

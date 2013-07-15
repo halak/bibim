@@ -90,6 +90,21 @@
                     /// @param[in] b 첫번째 선분의 끝점 위치
                     /// @param[in] c 두번째 선분의 시작점 위치
                     /// @param[in] d 두번째 선분의 끝점 위치
+                    static inline bool IntersectSegmentSegment(Point2 a, Point2 b, Point2 c, Point2 d);
+
+                    /// @brief 입력한 두 선분이 서로 교차하는지 확인하고 교차하는 점의 위치도 반환합니다.
+                    /// @param[in] a 첫번째 선분의 시작점 위치
+                    /// @param[in] b 첫번째 선분의 끝점 위치
+                    /// @param[in] c 두번째 선분의 시작점 위치
+                    /// @param[in] d 두번째 선분의 끝점 위치
+                    /// @param[out] outResult 두 선분이 교차하는 점의 첫번째 선분을 기저로 한 위치 (교차점 = (a + (b - a) * outResult))
+                    static bool IntersectSegmentSegment(Point2 a, Point2 b, Point2 c, Point2 d, float& outResult);
+
+                    /// @brief 입력한 두 선분이 서로 교차하는지 확인합니다.
+                    /// @param[in] a 첫번째 선분의 시작점 위치
+                    /// @param[in] b 첫번째 선분의 끝점 위치
+                    /// @param[in] c 두번째 선분의 시작점 위치
+                    /// @param[in] d 두번째 선분의 끝점 위치
                     static inline bool IntersectSegmentSegment(Vector2 a, Vector2 b, Vector2 c, Vector2 d);
 
                     /// @brief 입력한 두 선분이 서로 교차하는지 확인하고 교차하는 점의 위치도 반환합니다.
@@ -192,7 +207,8 @@
                                                    Vector2 start, Vector2 end, float& outDistance);
 
                     static bool SweepSphereAxisAlignedBox(Vector2 center, float radius, Vector2 direction, float length,
-                                                          Vector2 leftTop, Vector2 rightBottom, float& outDistance);
+                                                          Vector2 leftTop, Vector2 rightBottom,
+                                                          float& outDistance, Vector2& outNormal);
                 ///@}
 
                 ///@name Misc
@@ -235,6 +251,12 @@
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        bool Geom2D::IntersectSegmentSegment(Point2 a, Point2 b, Point2 c, Point2 d)
+        {
+            float t = 0.0f;
+            return IntersectSegmentSegment(a, b, c, d, t);
+        }
 
         bool Geom2D::IntersectSegmentSegment(Vector2 a, Vector2 b, Vector2 c, Vector2 d)
         {
