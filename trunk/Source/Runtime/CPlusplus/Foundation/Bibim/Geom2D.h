@@ -206,9 +206,13 @@
                     static bool SweepSphereSegment(Vector2 center, float radius, Vector2 direction, float length,
                                                    Vector2 start, Vector2 end, float& outDistance);
 
-                    static bool SweepSphereAxisAlignedBox(Vector2 center, float radius, Vector2 direction, float length,
-                                                          Vector2 leftTop, Vector2 rightBottom,
-                                                          float& outDistance, Vector2& outNormal);
+                    static inline bool SweepSphereAxisAlignedBox(Vector2 center, float radius, Vector2 direction, float length,
+                                                                 Vector2 leftTop, Vector2 rightBottom,
+                                                                 float& outDistance, Vector2& outNormal);
+
+                    static inline bool SweepSphereAxisAlignedBoxInside(Vector2 center, float radius, Vector2 direction, float length,
+                                                                       Vector2 leftTop, Vector2 rightBottom,
+                                                                       float& outDistance, Vector2& outNormal);
                 ///@}
 
                 ///@name Misc
@@ -228,6 +232,12 @@
                     /// 입력한 점들이 시계방향으로 감기는지 확인합니다.
                     static bool IsClockwise(const Vector2* points, int numberOfPoints);
                 ///@}
+
+            private:
+                static bool SweepSphereAxisAlignedBoxActually(Vector2 center, float radius, Vector2 direction, float length,
+                                                              Vector2 leftTop, Vector2 rightBottom,
+                                                              float& outDistance, Vector2& outNormal,
+                                                              bool outside);
         };
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -274,6 +284,22 @@
                 return false;
 
             return true;
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        bool Geom2D::SweepSphereAxisAlignedBox(Vector2 center, float radius, Vector2 direction, float length,
+                                               Vector2 leftTop, Vector2 rightBottom,
+                                               float& outDistance, Vector2& outNormal)
+        {
+            return SweepSphereAxisAlignedBoxActually(center, radius, direction, length, leftTop, rightBottom, outDistance, outNormal, true);
+        }
+
+        bool Geom2D::SweepSphereAxisAlignedBoxInside(Vector2 center, float radius, Vector2 direction, float length,
+                                                     Vector2 leftTop, Vector2 rightBottom,
+                                                     float& outDistance, Vector2& outNormal)
+        {
+            return SweepSphereAxisAlignedBoxActually(center, radius, direction, length, leftTop, rightBottom, outDistance, outNormal, false);
         }
     }
 

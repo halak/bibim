@@ -124,11 +124,11 @@ namespace Bibim
     {
         const int a1 = Signed2DTriArea(a, b, d);
         const int a2 = Signed2DTriArea(a, b, c);
-        if (a1 * a2 < 0)
+        if (a1 * a2 <= 0)
         {
             const int a3 = Signed2DTriArea(c, d, a);
             const int a4 = a3 + a2 - a1;
-            if (a3 * a4 < 0)
+            if (a3 * a4 <= 0)
             {
                 outResult = static_cast<float>(a3) / static_cast<float>(a3 - a4);
                 return true;
@@ -144,11 +144,11 @@ namespace Bibim
     {
         const float a1 = Signed2DTriArea(a, b, d);
         const float a2 = Signed2DTriArea(a, b, c);
-        if (a1 * a2 < 0.0f)
+        if (a1 * a2 <= 0.0f)
         {
             const float a3 = Signed2DTriArea(c, d, a);
             const float a4 = a3 + a2 - a1;
-            if (a3 * a4 < 0.0f)
+            if (a3 * a4 <= 0.0f)
             {
                 outResult = a3 / (a3 - a4);
                 return true;
@@ -387,9 +387,10 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    bool Geom2D::SweepSphereAxisAlignedBox(Vector2 center, float radius, Vector2 direction, float length,
-                                           Vector2 leftTop, Vector2 rightBottom,
-                                           float& outDistance, Vector2& outNormal)
+    bool Geom2D::SweepSphereAxisAlignedBoxActually(Vector2 center, float radius, Vector2 direction, float length,
+                                                   Vector2 leftTop, Vector2 rightBottom,
+                                                   float& outDistance, Vector2& outNormal,
+                                                   bool outside)
     {
         // 원과 AABB의 Sweep test의 원리는 기본적으로,
         // 원의 반지름만큼 AABB를 확장하여 Rounded Rect로 만든 후 Raycast를 하는 것입니다.
@@ -400,6 +401,10 @@ namespace Bibim
         const float top = leftTop.Y;
         const float right = rightBottom.X;
         const float bottom = rightBottom.Y;
+        const float nd = outside ? +1.0f : -1.0f; // normal direction
+
+        if (outside == false)
+            radius = -radius;
 
         float closestDistance = Float::Max;
         Vector2 closestNormal = Vector2::Zero;
@@ -412,10 +417,10 @@ namespace Bibim
                 Vector2 Start;
                 Vector2 End;
             } data[] = {
-                { Vector2(-1.0f, 0.0f), Vector2(left - radius, top),     Vector2(left - radius, bottom)  },
-                { Vector2(0.0f, -1.0f), Vector2(left,  top - radius),    Vector2(right, top - radius)    },
-                { Vector2(+1.0f, 0.0f), Vector2(right + radius, top),    Vector2(right + radius, bottom) },
-                { Vector2(0.0f, +1.0f), Vector2(left,  bottom + radius), Vector2(right, bottom + radius) },
+                { Vector2(-1.0f, 0.0f) * nd, Vector2(left - radius, top),     Vector2(left - radius, bottom)  },
+                { Vector2(0.0f, -1.0f) * nd, Vector2(left,  top - radius),    Vector2(right, top - radius)    },
+                { Vector2(+1.0f, 0.0f) * nd, Vector2(right + radius, top),    Vector2(right + radius, bottom) },
+                { Vector2(0.0f, +1.0f) * nd, Vector2(left,  bottom + radius), Vector2(right, bottom + radius) },
             };
 
             const Vector2 end = center + (direction * length);
@@ -441,6 +446,7 @@ namespace Bibim
         }
 
         // 각 모서리에 Raycast를 수행합니다. (원과의 Raycast가 됩니다.)
+        if (outside)
         {
             static const float InvSqrt2 = 0.707106781186f;
             const struct
@@ -448,6 +454,7 @@ namespace Bibim
                 Vector2 Normal;
                 Vector2 Center;
             } data[] = {
+                // outside가 true일 경우에는 nd가 +1이기 때문에 구지 곱해주지 않습니다.
                 { Vector2(-InvSqrt2, -InvSqrt2), Vector2(left,  top)    },
                 { Vector2(-InvSqrt2, +InvSqrt2), Vector2(left,  bottom) },
                 { Vector2(+InvSqrt2, -InvSqrt2), Vector2(right, top)    },
