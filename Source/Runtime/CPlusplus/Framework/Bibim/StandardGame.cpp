@@ -403,6 +403,9 @@ namespace Bibim
 
     void StandardGame::OnLog(Bibim::Color color, const char* /*category*/, const char* message)
     {
+        if (debugFont == nullptr)
+            return;
+
         if (debugFont->GetColor() != color)
         {
             debugFont->SetColor(color);
