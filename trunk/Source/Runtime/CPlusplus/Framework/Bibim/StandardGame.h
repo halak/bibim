@@ -90,7 +90,7 @@
 
                     private:
                         int syncCountdown;
-                        PipeClientStreamPtr queryStream;
+                        StreamPtr queryStream;
                         std::ostringstream stringstream;
                         void* selectedVisual;
                         RectF selectedVisualBounds;
