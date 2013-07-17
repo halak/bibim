@@ -2134,7 +2134,6 @@ namespace Bibim
 
     StandardGame::RemoteDebugger::~RemoteDebugger()
     {
-        queryStream->Disconnect();
     }
 
     void StandardGame::RemoteDebugger::OnBegan(UIHandledDrawingContext& /*context*/, UIVisual* /*root*/)
@@ -2328,12 +2327,20 @@ namespace Bibim
     {
         const String DefaultPipeName = "BibimRemoteDebugger";
 
-        if (queryStream == nullptr)
+#       if (defined(BIBIM_PLATFORM_WINDOWS))
+        PipeClientStream* stream = StaticCast<PipeClientStream>(queryStream);
+
+        if (stream == nullptr)
         {
-            queryStream = new PipeClientStream(String::Empty, DefaultPipeName, PipeStream::ReadAndWrite);
-            queryStream->Connect();
+            stream = new PipeClientStream(String::Empty, DefaultPipeName, PipeStream::ReadAndWrite);
+            stream->Connect();
+
+            queryStream = stream;
         }
 
-        return queryStream && queryStream->IsConnected();
+        return stream && stream->IsConnected();
+#       else
+        return false;
+#       endif
     }
 }
