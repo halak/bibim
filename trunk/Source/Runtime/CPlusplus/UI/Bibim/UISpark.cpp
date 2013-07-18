@@ -113,22 +113,22 @@ namespace Bibim
             std::vector<Vector3> axes;
     };
 
-#   define BEGIN_DRAW_PARTICLE(group, particleName) \
+#   define BEGIN_DRAW_PARTICLE(group, particle) \
         const int count = (group).getNbParticles(); \
         for (int i = count - 1; i >= 0; i--) \
         { \
-            const Particle& particleName = (group).getParticle(i);
+            const Particle& particle = (group).getParticle(i);
 
 #   define END_DRAW_PARTICLE() }
 
-#   define PARTICLE_POSITION(particleName)  Vector2(particleName.position().x, particleName.position().y)
-#   define PARTICLE_IMAGE(particleName)     imagePalette.at(static_cast<int>(particleName.getParamCurrentValue(PARAM_TEXTURE_INDEX) + 0.5f))
-#   define PARTICLE_COLOR(particleName)     Color(Vector4(particleName.getR(), \
-                                                          particleName.getG(), \
-                                                          particleName.getB(), \
-                                                          particleName.getParamCurrentValue(PARAM_ALPHA)))
-#   define PARTICLE_ANGLE(particleName)     particleName.getParamCurrentValue(PARAM_ANGLE)
-#   define PARTICLE_SIZE(particleName)      particleName.getParamCurrentValue(PARAM_SIZE)
+#   define PARTICLE_POSITION(particle)  Vector2(particle.position().x, particle.position().y)
+#   define PARTICLE_IMAGE(particle)     imagePalette.at(static_cast<int>(particle.getParamCurrentValue(PARAM_TEXTURE_INDEX) + 0.5f))
+#   define PARTICLE_COLOR(particle)     Color(Vector4(particle.getR(), \
+                                                      particle.getG(), \
+                                                      particle.getB(), \
+                                                      particle.getParamCurrentValue(PARAM_ALPHA)))
+#   define PARTICLE_ANGLE(particle)     particle.getParamCurrentValue(PARAM_ANGLE)
+#   define PARTICLE_SIZE(particle)      particle.getParamCurrentValue(PARAM_SIZE)
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
