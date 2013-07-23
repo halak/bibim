@@ -7,7 +7,7 @@
 namespace Bibim
 {
     UIPickingContext::UIPickingContext(UIRenderer* renderer, Vector2 point)
-        : UIVisualVisitor(renderer->GetGraphicsDevice()->GetResolution(),
+        : UIVisualVisitor(renderer->GetGraphicsDevice()->GetViewportSize(),
                           renderer->GetViewTransform(),
                           renderer->GetInversedViewTransform(),
                           renderer->GetProjectionTransform(),
@@ -19,7 +19,7 @@ namespace Bibim
     }
 
     UIPickingContext::UIPickingContext(UIRenderer* renderer, Vector2 point, bool visibleOnly)
-        : UIVisualVisitor(renderer->GetGraphicsDevice()->GetResolution(),
+        : UIVisualVisitor(renderer->GetGraphicsDevice()->GetViewportSize(),
                           renderer->GetViewTransform(),
                           renderer->GetInversedViewTransform(),
                           renderer->GetProjectionTransform(),

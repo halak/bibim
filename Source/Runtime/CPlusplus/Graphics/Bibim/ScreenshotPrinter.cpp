@@ -30,8 +30,8 @@ namespace Bibim
 
         if (renderTarget == nullptr)
         {
-            const Point2 resolution = graphicsDevice->GetResolution();
-            renderTarget = new RenderTargetTexture2D(graphicsDevice, resolution.X, resolution.Y);
+            const Point2 viewportSize = graphicsDevice->GetViewportSize();
+            renderTarget = new RenderTargetTexture2D(graphicsDevice, viewportSize.X, viewportSize.Y);
         }
 
         IDirect3DDevice9*  d3dDevice = graphicsDevice->GetD3DDevice();

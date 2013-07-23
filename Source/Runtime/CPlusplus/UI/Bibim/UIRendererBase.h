@@ -195,7 +195,7 @@
 
                 bool isBatching;
 
-                Point2 lastResolution;
+                Point2 lastViewportSize;
 
                 uint effectFileFormatHint;
                 String normalEffectFileName;

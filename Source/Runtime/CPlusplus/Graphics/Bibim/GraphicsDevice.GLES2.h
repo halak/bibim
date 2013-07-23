@@ -32,7 +32,8 @@
                 inline bool GetFullscreen() const;
                 void SetFullscreen(bool value);
 
-                Point2 GetResolution() const;
+                Point2 GetViewportSize() const;
+                Point2 GetScreenSize() const;
 
                 inline const GraphicsCapabilities& GetCapabilities() const;
 

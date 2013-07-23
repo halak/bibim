@@ -32,7 +32,7 @@ namespace Bibim
     }
 
     UIDrawingContext::UIDrawingContext(UIRenderer* renderer)
-        : UIVisualVisitor(renderer->GetGraphicsDevice()->GetResolution(),
+        : UIVisualVisitor(renderer->GetGraphicsDevice()->GetViewportSize(),
                           renderer->GetViewTransform(),
                           renderer->GetInversedViewTransform(),
                           renderer->GetProjectionTransform(), true),

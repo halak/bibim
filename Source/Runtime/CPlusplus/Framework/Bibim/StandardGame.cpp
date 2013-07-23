@@ -63,7 +63,8 @@
 namespace Bibim
 {
     StandardGame::StandardGame()
-        : clearColor(Color::Black),
+        : fullscreen(false),
+          clearColor(Color::Black),
           debugMode(NoDebugMode),
           remoteDebugger(nullptr),
           storage(nullptr),
@@ -76,7 +77,9 @@ namespace Bibim
 
     StandardGame::StandardGame(Point2 windowSize)
         : GameFramework(windowSize.X, windowSize.Y),
+          windowSize(windowSize),
           contentSize(0, 0),
+          fullscreen(false),
           clearColor(Color::Black),
           debugMode(NoDebugMode),
           remoteDebugger(nullptr),
@@ -90,7 +93,9 @@ namespace Bibim
 
     StandardGame::StandardGame(Point2 windowSize, Point2 contentSize)
         : GameFramework(windowSize.X, windowSize.Y),
+          windowSize(windowSize),
           contentSize(contentSize),
+          fullscreen(false),
           clearColor(Color::Black),
           debugMode(NoDebugMode),
           remoteDebugger(nullptr),
@@ -353,6 +358,30 @@ namespace Bibim
         bounds.Y -= 1.0f;
 
         context.DrawString(bounds, debugFont, text);
+    }
+
+    void StandardGame::SetFullscreen(bool value)
+    {
+        if (GetFullscreen() != value)
+        {
+            fullscreen = value;
+
+            GameWindow* window = GetWindow();
+
+            if (GetFullscreen())
+            {
+                windowSize = window->GetSize();
+                window->SetFullscreenStyle(true);
+                window->SetPosition(Point2::Zero);
+                window->SetSize(GetGraphicsDevice()->GetScreenSize());
+            }
+            else
+            {
+                window->SetFullscreenStyle(false);
+                window->SetSize(windowSize);
+                window->MoveToScreenCenter();
+            }
+        }
     }
 
     void StandardGame::Restart()

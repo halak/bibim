@@ -29,7 +29,10 @@
                 virtual bool GetVisible() const;
                 virtual void SetVisible(bool value);
 
-                bool GetActive() const;
+                bool GetFullscreenStyle() const;
+                void SetFullscreenStyle(bool value);
+
+                bool IsForeground() const;
 
                 virtual void* GetHandle() const;
                 virtual void* GetDisplayHandle() const;

@@ -137,7 +137,24 @@ namespace Bibim
         }
     }
 
-    bool GameWindow::GetActive() const
+    bool GameWindow::GetFullscreenStyle() const
+    {
+        return ::GetWindowLong(static_cast<HWND>(handle), GWL_STYLE) == WS_POPUP;
+    }
+
+    void GameWindow::SetFullscreenStyle(bool value)
+    {
+        DWORD style = 0x00000000;
+        if (value)
+            style = WS_POPUP | WS_VISIBLE;
+        else
+            style = WS_OVERLAPPEDWINDOW | WS_VISIBLE;
+
+        ::SetWindowLong(static_cast<HWND>(handle), GWL_STYLE, style);
+        ::SetWindowPos(static_cast<HWND>(handle), HWND_TOP, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOREDRAW | SWP_NOACTIVATE | SWP_FRAMECHANGED | SWP_NOSENDCHANGING);
+    }
+
+    bool GameWindow::IsForeground() const
     {
         return ::GetForegroundWindow() == static_cast<HWND>(handle);
     }
@@ -191,7 +208,7 @@ namespace Bibim
         windowClass.hIconSm = windowClass.hIcon;
         RegisterClassEx(&windowClass);
 
-        handle = static_cast<void*>(::CreateWindowEx(0x00000000, ClassName, ClassName, WS_OVERLAPPEDWINDOW,
+        handle = static_cast<void*>(::CreateWindowEx(0x00000000, ClassName, "", WS_OVERLAPPEDWINDOW,
                                                      CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
                                                      nullptr, nullptr, GetModuleHandle(nullptr), this));
     }

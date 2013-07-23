@@ -4,10 +4,4 @@ namespace Bibim
     {
         return window;
     }
-
-    void GraphicsDeviceBase::Reset()
-    {
-        Finalize();
-        Initialize();
-    }
 }

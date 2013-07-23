@@ -6,7 +6,8 @@
 namespace Bibim
 {
     GraphicsDeviceBase::GraphicsDeviceBase()
-        : window(nullptr)
+        : window(nullptr),
+          isReset(false)
     {
     }
 
@@ -78,9 +79,19 @@ namespace Bibim
             (*it)->OnGraphicsDeviceLost(this);
     }
 
+    void GraphicsDeviceBase::Reset()
+    {
+        if (isReset)
+        {
+            Finalize();
+            Initialize();
+            isReset = false;
+        }
+    }
+
     void GraphicsDeviceBase::OnWindowResized(Window* window)
     {
         BBAssert(GetWindow() == window);
-        Reset();
+        isReset = true;
     }
 }

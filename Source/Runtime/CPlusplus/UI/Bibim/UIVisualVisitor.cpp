@@ -27,12 +27,12 @@ namespace Bibim
     {
     }
 
-    UIVisualVisitor::UIVisualVisitor(Point2 resolution, const Matrix4& viewTransform, const Matrix4& projectionTransform, bool visibleOnly)
-        : resolution(resolution.X, resolution.Y),
+    UIVisualVisitor::UIVisualVisitor(Point2 screenSize, const Matrix4& viewTransform, const Matrix4& projectionTransform, bool visibleOnly)
+        : screenSize(screenSize.X, screenSize.Y),
           visibleOnly(visibleOnly),
           currentOpacity(1.0f),
-          currentBounds(0, 0, resolution.X, resolution.Y),
-          currentClippedBounds(0, 0, resolution.X, resolution.Y),
+          currentBounds(0, 0, screenSize.X, screenSize.Y),
+          currentClippedBounds(0, 0, screenSize.X, screenSize.Y),
           currentTransform(Matrix4::Identity),
           currentTransformInv(Matrix4::Identity),
           parentTransform(Matrix4::Identity),
@@ -43,12 +43,12 @@ namespace Bibim
     {
     }
 
-    UIVisualVisitor::UIVisualVisitor(Point2 resolution, const Matrix4& viewTransform, const Matrix4& viewTransformInv, const Matrix4& projectionTransform, bool visibleOnly)
-        : resolution(resolution.X, resolution.Y),
+    UIVisualVisitor::UIVisualVisitor(Point2 screenSize, const Matrix4& viewTransform, const Matrix4& viewTransformInv, const Matrix4& projectionTransform, bool visibleOnly)
+        : screenSize(screenSize.X, screenSize.Y),
           visibleOnly(visibleOnly),
           currentOpacity(1.0f),
-          currentBounds(0, 0, resolution.X, resolution.Y),
-          currentClippedBounds(0, 0, resolution.X, resolution.Y),
+          currentBounds(0, 0, screenSize.X, screenSize.Y),
+          currentClippedBounds(0, 0, screenSize.X, screenSize.Y),
           currentTransform(Matrix4::Identity),
           currentTransformInv(Matrix4::Identity),
           parentTransform(Matrix4::Identity),
@@ -57,7 +57,7 @@ namespace Bibim
           viewTransformInv(viewTransformInv),
           projectionTransform(projectionTransform)
     {
-        if (resolution.X > 0 && resolution.Y > 0)
+        if (screenSize.X > 0 && screenSize.Y > 0)
         {
             BBAssertDebug(Matrix4::Inversion(viewTransform) == viewTransformInv);
         }
@@ -204,8 +204,8 @@ namespace Bibim
 
     Vector2 UIVisualVisitor::UnprojectPoint(Vector2 point, const Matrix4& inversedTransform) const
     {
-        const float width  = resolution.X;
-        const float height = resolution.Y;
+        const float width  = screenSize.X;
+        const float height = screenSize.Y;
         const Vector3 direction = Vector3(+(((2.0f * point.X) / width ) - 1.0f) / projectionTransform.M00,
                                           -(((2.0f * point.Y) / height) - 1.0f) / projectionTransform.M11,
                                           1.0f);
