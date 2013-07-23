@@ -14,7 +14,7 @@ namespace Bibim
           globalOffset(Vector3::Zero),
           rotationCenter(Vector2(0.49f, 0.49f)),
           rotation(Vector3::Zero),
-          scaleCenter(Vector2(0.49f, 0.49f)),
+          scaleCenter(Vector2(0.5f, 0.5f)),
           scale(Vector2::One),
           matrix(),
           lastBounds(RectF::Empty),
@@ -58,9 +58,11 @@ namespace Bibim
     Matrix4 Transformation(Vector3 scaleCenter, Vector3 scale, Vector3 rotationCenter, Vector3 rotation, Vector3 translation)
     {
         Matrix4 m = Matrix4::Translation(-scaleCenter);
-        m *= Matrix4::Scaling(scale);
+        if (scale != Vector3::One)
+            m *= Matrix4::Scaling(scale);
         m *= Matrix4::Translation(scaleCenter - rotationCenter);
-        m *= RotationPitchYawRoll(rotation);
+        if (rotation != Vector3::Zero)
+            m *= RotationPitchYawRoll(rotation);
         m *= Matrix4::Translation(rotationCenter + translation);
         return m;
     }
@@ -92,7 +94,7 @@ namespace Bibim
         globalOffset = Vector3::Zero;
         rotationCenter = Vector2(0.49f, 0.49f);
         rotation = Vector3::Zero;
-        scaleCenter = Vector2(0.49f, 0.49f);
+        scaleCenter = Vector2(0.5f, 0.5f);
         scale = Vector2::One;
     }
 
