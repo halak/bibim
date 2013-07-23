@@ -66,11 +66,20 @@ namespace Bibim
 
         const int pitch = reader.ReadInt();
         if (pitch == 0)
+        {
             texture->SetStatus(FaultStatus);
+            return;
+        }
 
         const Compression compression = static_cast<Compression>(reader.ReadByte());
 
         IDirect3DDevice9* d3dDevice = texture->GetGraphicsDevice()->GetD3DDevice();
+        if (d3dDevice == nullptr)
+        {
+            texture->SetStatus(FaultStatus);
+            return;
+        }
+
         const int width  = texture->GetSurfaceWidth();
         const int height = texture->GetSurfaceHeight();
         const PixelFormat pixelFormat = texture->GetPixelFormat();
@@ -91,8 +100,21 @@ namespace Bibim
         HRESULT result = D3D_OK;
         result = d3dDevice->CreateTexture(width, height, 1,
                                           0, d3dFormat, D3DPOOL_DEFAULT, &d3dTexture, nullptr);
+        if (result != D3D_OK)
+        {
+            texture->SetStatus(FaultStatus);
+            return;
+        }
+
         result = d3dDevice->CreateTexture(width, height, 1,
                                           0, d3dFormat, D3DPOOL_SYSTEMMEM, &d3dSysMemTexture, nullptr);
+        if (result != D3D_OK)
+        {
+            d3dTexture->Release();
+            texture->SetStatus(FaultStatus);
+            return;
+        }
+
         D3DLOCKED_RECT d3dLockedRect;
         d3dSysMemTexture->LockRect(0, &d3dLockedRect, nullptr, 0);
         byte* destination = static_cast<byte*>(d3dLockedRect.pBits);

@@ -16,7 +16,7 @@ namespace Bibim
           lockedVertices(nullptr),
           vbSize(0),
           isBatching(false),
-          lastResolution(-1, -1),
+          lastViewportSize(-1, -1),
           effectFileFormatHint(effectFileFormatHint),
           normalEffectFileName(MakeNormalEffectFileName(effectFileFormatHint))
     {
@@ -30,7 +30,7 @@ namespace Bibim
           lockedVertices(nullptr),
           vbSize(0),
           isBatching(false),
-          lastResolution(-1, -1),
+          lastViewportSize(-1, -1),
           effectFileFormatHint(effectFileFormatHint),
           normalEffectFileName(MakeNormalEffectFileName(effectFileFormatHint))
     {
@@ -317,7 +317,7 @@ namespace Bibim
         if (fieldOfView != value)
         {
             fieldOfView = value;
-            lastResolution = Point2(-1, -1);
+            lastViewportSize = Point2(-1, -1);
         }
     }
 
@@ -585,10 +585,10 @@ namespace Bibim
             return;
         }
 
-        const Point2 currentResolution = graphicsDevice->GetResolution();
-        if (currentResolution != lastResolution)
+        const Point2 currentViewportSize = graphicsDevice->GetViewportSize();
+        if (currentViewportSize != lastViewportSize)
         {
-            const Vector2 viewportSize = Vector2(currentResolution.X, currentResolution.Y);
+            const Vector2 viewportSize = Vector2(currentViewportSize.X, currentViewportSize.Y);
             const Vector2 halfViewportSize = viewportSize * 0.5f;
             const float aspect = viewportSize.X / viewportSize.Y;
 
@@ -607,7 +607,7 @@ namespace Bibim
             viewTransformInv = Matrix4::Inversion(viewTransform);
             projectionTransformInv = Matrix4::Inversion(projectionTransform);
 
-            lastResolution = currentResolution;
+            lastViewportSize = currentViewportSize;
         }
     }
 }

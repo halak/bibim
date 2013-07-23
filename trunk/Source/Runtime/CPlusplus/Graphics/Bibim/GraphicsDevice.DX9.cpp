@@ -40,6 +40,8 @@ namespace Bibim
 
     bool GraphicsDevice::BeginDraw()
     {
+        Reset();
+
         if (deviceLost)
         {
             ::Sleep(50);
@@ -98,12 +100,17 @@ namespace Bibim
         }
     }
 
-    Point2 GraphicsDevice::GetResolution() const
+    Point2 GraphicsDevice::GetViewportSize() const
     {
         if (Window* window = GetWindow())
             return window->GetSize();
         else
             return Point2::Zero;
+    }
+
+    Point2 GraphicsDevice::GetScreenSize() const
+    {
+        return Point2(::GetSystemMetrics(SM_CXSCREEN), ::GetSystemMetrics(SM_CYSCREEN));
     }
 
     void GraphicsDevice::Initialize()
@@ -194,7 +201,12 @@ namespace Bibim
         {
             result = d3dDevice->Reset(&d3dParameters);
             if (result != D3D_OK)
-                return;
+            {
+                Finalize();
+                CheckedRelease(d3dDevice);
+                CheckedRelease(d3dObject);
+                Initialize();
+            }
         }
 
         if (d3dDevice->GetDeviceCaps(&d3dCaps) == D3D_OK)

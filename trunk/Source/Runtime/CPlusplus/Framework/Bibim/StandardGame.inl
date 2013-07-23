@@ -1,5 +1,10 @@
 namespace Bibim
 {
+    bool StandardGame::GetFullscreen() const
+    {
+        return fullscreen;
+    }
+
     Color StandardGame::GetClearColor() const
     {
         return clearColor;

@@ -42,7 +42,7 @@
                 virtual void Initialize();
                 virtual void Finalize();
 
-                inline void Reset();
+                void Reset();
 
             private:
                 virtual void OnWindowResized(Window* window);
@@ -51,6 +51,8 @@
                 Window* window;
                 std::vector<LostEventListener*> lostEventListeners;
                 std::vector<RestoreEventListener*> restoreEventListeners;
+                bool isReset;
+                bool __padding__[3];
         };
     }
 

@@ -33,6 +33,9 @@
 
                 void Restart();
 
+                inline bool GetFullscreen() const;
+                void SetFullscreen(bool value);
+
                 inline Color GetClearColor() const;
                 inline void SetClearColor(Color value);
 
@@ -133,7 +136,10 @@
                 void OnLog(Color color, const char* category, const char* message);
 
             private:
+                Point2 windowSize;
                 Point2 contentSize;
+                bool fullscreen;
+                char __padding__[3];
                 Color clearColor;
                 DebugMode debugMode;
                 RemoteDebugger* remoteDebugger;

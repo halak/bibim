@@ -22,8 +22,11 @@
 
             public:
                 static inline void Error(const char* message);
+                static inline void Error(const String& message);
                 static inline void Warning(const char* message);
+                static inline void Warning(const String& message);
                 static inline void Information(const char* message);
+                static inline void Information(const String& message);
 
                 static inline void Error(const char* category, const String& message);
                 static inline void Warning(const char* category, const String& message);
@@ -44,14 +47,29 @@
             Error(nullptr, message);
         }
 
+        void Log::Error(const String& message)
+        {
+            Error(nullptr, message.CStr());
+        }
+
         void Log::Warning(const char* message)
         {
             Warning(nullptr, message);
         }
 
+        void Log::Warning(const String& message)
+        {
+            Warning(nullptr, message.CStr());
+        }
+
         void Log::Information(const char* message)
         {
             Information(nullptr, message);
+        }
+
+        void Log::Information(const String& message)
+        {
+            Information(nullptr, message.CStr());
         }
 
         void Log::Error(const char* category, const String& message)

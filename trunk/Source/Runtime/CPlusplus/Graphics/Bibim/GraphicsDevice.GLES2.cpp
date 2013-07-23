@@ -40,6 +40,7 @@ namespace Bibim
 
     bool GraphicsDevice::BeginDraw()
     {
+        Reset();
         return true;
     }
 
@@ -73,12 +74,17 @@ namespace Bibim
         }
     }
 
-    Point2 GraphicsDevice::GetResolution() const
+    Point2 GraphicsDevice::GetViewportSize() const
     {
         if (Window* window = GetWindow())
             return window->GetSize();
         else
             return Point2::Zero;
+    }
+
+    Point2 GraphicsDevice::GetScreenSize() const
+    {
+        return GetViewportSize();
     }
 
     void GraphicsDevice::Initialize()
@@ -118,7 +124,7 @@ namespace Bibim
 
         // Obtain the first configuration with a depth buffer
         EGLint attrs[] = { EGL_DEPTH_SIZE, 16, EGL_NONE };
-        EGLint numberOfConfigs =0;
+        EGLint numberOfConfigs = 0;
         EGLConfig eglConfig = 0;
         if (!eglChooseConfig(eglDisplay, attrs, &eglConfig, 1, &numberOfConfigs))
         {

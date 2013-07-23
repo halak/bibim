@@ -62,7 +62,16 @@ namespace Bibim
     {
     }
 
-    bool GameWindow::GetActive() const
+    bool GameWindow::GetFullscreenStyle() const
+    {
+        return true;
+    }
+
+    void GameWindow::SetFullscreenStyle(bool /*value*/)
+    {
+    }
+
+    bool GameWindow::IsForeground() const
     {
         return true;
     }
