@@ -49,8 +49,12 @@
             static Matrix4 RotationX(float value);
             static Matrix4 RotationY(float value);
             static Matrix4 RotationZ(float value);
+            static Matrix4 RotationPitchYawRoll(Vector3 value);
             static Matrix4 Scaling(float value);
             static Matrix4 Scaling(Vector3 value);
+            static Matrix4 Transformation(Vector3 scaleCenter, Vector3 scale,
+                                          Vector3 rotationCenter, Vector3 rotation,
+                                          Vector3 translation);
             static Matrix4 Inversion(const Matrix4& value);
             static Matrix4 Transpose(const Matrix4& value);
             static Matrix4 LookAt(Vector3 eye, Vector3 at, Vector3 up);

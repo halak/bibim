@@ -2257,7 +2257,7 @@ namespace Bibim
                     case UIVisual::RelativePosition:
                         return String::CFormat("%d%%", static_cast<int>(value * 100.0f));
                     default:
-                        return String::Empty;
+                        return "Undefined";
                 }
             }
 
@@ -2277,7 +2277,7 @@ namespace Bibim
                     case UIVisual::AdjustiveSize:
                         return String::CFormat("parent+%d", static_cast<int>(value));
                     default:
-                        return String::Empty;
+                        return "Unknown";
                 }
             }
 

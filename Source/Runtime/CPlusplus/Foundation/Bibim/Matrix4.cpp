@@ -211,6 +211,41 @@ namespace Bibim
                        0.0f, 0.0f, 0.0f, 1.0f);
     }
 
+    Matrix4 Matrix4::RotationPitchYawRoll(Vector3 value)
+    {
+        const float yaw   = value.Y * 0.5f;
+        const float pitch = value.X * 0.5f;
+        const float roll  = value.Z * 0.5f;
+        const float sy = Math::Sin(yaw);
+        const float cy = Math::Cos(yaw);
+        const float sr = Math::Sin(roll);
+        const float cr = Math::Cos(roll);
+        const float sp = Math::Sin(pitch);
+        const float cp = Math::Cos(pitch);
+        const Vector4 rotationQuaternion = Vector4(sy * cp * sr + cy * sp * cr,
+                                                   sy * cp * cr - cy * sp * sr,
+                                                   cy * cp * sr - sy * sp * cr,
+                                                   cy * cp * cr + sy * sp * sr);
+
+        const float x = rotationQuaternion.X;
+        const float y = rotationQuaternion.Y;
+        const float z = rotationQuaternion.Z;
+        const float w = rotationQuaternion.W;
+        return Matrix4(1.0f - 2.0f * (y * y + z * z),
+                       2.0f * (x * y + z * w),
+                       2.0f * (x * z - y * w),
+                       0.0f,
+                       2.0f * (x * y - z * w),
+                       1.0f - 2.0f * (x * x + z * z),
+                       2.0f * (y * z + x * w),
+                       0.0f,
+                       2.0f * (x * z + y * w),
+                       2.0f * (y * z - x * w),
+                       1.0f - 2.0f * (x * x + y * y),
+                       0.0f,
+                       0.0f, 0.0f, 0.0f, 1.0f);
+    }
+
     Matrix4 Matrix4::Scaling(float value)
     {
         return Matrix4(value, 0.0f,  0.0f,  0.0f,
@@ -362,6 +397,18 @@ namespace Bibim
                        value.M01, value.M11, value.M21, value.M31,
                        value.M02, value.M12, value.M22, value.M32,
                        value.M03, value.M13, value.M23, value.M33);
+    }
+
+    Matrix4 Matrix4::Transformation(Vector3 scaleCenter, Vector3 scale, Vector3 rotationCenter, Vector3 rotation, Vector3 translation)
+    {
+        Matrix4 m = Matrix4::Translation(-scaleCenter);
+        if (scale != Vector3::One)
+            m *= Matrix4::Scaling(scale);
+        m *= Matrix4::Translation(scaleCenter - rotationCenter);
+        if (rotation != Vector3::Zero)
+            m *= RotationPitchYawRoll(rotation);
+        m *= Matrix4::Translation(rotationCenter + translation);
+        return m;
     }
 
     Matrix4 Matrix4::LookAt(Vector3 eye, Vector3 at, Vector3 up)
