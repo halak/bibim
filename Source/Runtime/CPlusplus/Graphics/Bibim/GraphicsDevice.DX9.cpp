@@ -202,6 +202,7 @@ namespace Bibim
             result = d3dDevice->Reset(&d3dParameters);
             if (result != D3D_OK)
             {
+                // REFACTORING
                 Finalize();
                 CheckedRelease(d3dDevice);
                 CheckedRelease(d3dObject);
