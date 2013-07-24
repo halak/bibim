@@ -29,8 +29,13 @@
             private:
                 String serverName;
         };
-    }
 
-#   include <Bibim/PipeClientStream.Windows.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const String& PipeClientStream::GetServerName() const
+        {
+            return serverName;
+        }
+    }
 
 #endif

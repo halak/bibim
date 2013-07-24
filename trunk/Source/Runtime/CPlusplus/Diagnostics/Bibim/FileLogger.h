@@ -31,8 +31,13 @@
                 String path;
                 int lastFlushTime;
         };
-    }
 
-#   include <Bibim/FileLogger.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const String& FileLogger::GetPath() const
+        {
+            return path;
+        }
+    }
 
 #endif

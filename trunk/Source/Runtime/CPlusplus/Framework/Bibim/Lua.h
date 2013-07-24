@@ -45,8 +45,13 @@ extern "C"
 
                 struct Internal;
         };
-    }
 
-#   include <Bibim/Lua.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        lua_State* Lua::GetState() const
+        {
+            return state;
+        }
+    }
 
 #endif

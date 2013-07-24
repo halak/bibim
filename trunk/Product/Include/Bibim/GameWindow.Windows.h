@@ -62,6 +62,4 @@
         };
     }
 
-#   include <Bibim/GameWindow.Windows.inl>
-
 #endif

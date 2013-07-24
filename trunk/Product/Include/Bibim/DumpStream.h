@@ -32,8 +32,18 @@
                 StreamPtr baseStream;
                 StreamPtr outputStream;
         };
-    }
 
-#   include <Bibim/DumpStream.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Stream* DumpStream::GetBaseStream() const
+        {
+            return baseStream;
+        }
+
+        Stream* DumpStream::GetOutputStream() const
+        {
+            return outputStream;
+        }
+    }
 
 #endif

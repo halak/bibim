@@ -52,6 +52,8 @@
                 Status status;
         };
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         bool Socket::IsConnected() const
         {
             return status == Socket::Connected;

@@ -158,6 +158,8 @@
                 String userAgent;
         };
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         const String& HttpClientBase::GetUserAgent() const
         {
             return userAgent;

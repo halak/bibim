@@ -985,34 +985,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </None>
     <None Include="Component\Bibim\GameComponentFactory.inl" />
-    <None Include="Foundation\Bibim\Environment.Android.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </None>
-    <None Include="Foundation\Bibim\Environment.iOS.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </None>
-    <None Include="Framework\Bibim\GameFramework.Android.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </None>
-    <None Include="Framework\Bibim\GameFramework.iOS.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-    </None>
-    <None Include="Framework\Bibim\GameFrameworkBase.inl" />
-    <None Include="Framework\Bibim\GameWindow.Mobile.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </None>
-    <None Include="Framework\Bibim\Lua.inl" />
-    <None Include="Framework\Bibim\Preferences.inl" />
-    <None Include="Framework\Bibim\StandardGame.inl" />
     <None Include="Graphics\Bibim\GraphicsDeviceBase.inl" />
     <None Include="Input\Bibim\IMEBase.inl" />
     <None Include="Typography\Bibim\Font.inl" />
@@ -1057,9 +1029,6 @@
     <None Include="Collision2D\Bibim\RaycastReport2D.inl" />
     <None Include="Collision2D\Bibim\SegmentShape2D.inl" />
     <None Include="Collision2D\Bibim\Shape2D.inl" />
-    <None Include="Diagnostics\Bibim\FileLogger.inl" />
-    <None Include="Diagnostics\Bibim\Logger.inl" />
-    <None Include="Diagnostics\Bibim\SystemLogger.inl" />
     <None Include="Gameplay\Bibim\BatchCommand.inl" />
     <None Include="Gameplay\Bibim\CommandHistory.inl" />
     <None Include="Gameplay\Bibim\CommandQueue.inl" />
@@ -1175,14 +1144,6 @@
     <None Include="Graphics\Bibim\RenderTargetTexture2D.GLES2.inl" />
     <None Include="Graphics\Bibim\Shadereffect.GLES2.inl" />
     <None Include="Graphics\Bibim\Texture2D.GLES2.inl" />
-    <None Include="Framework\Bibim\GameFramework.Windows.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-    </None>
-    <None Include="Framework\Bibim\GameWindow.Windows.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-    </None>
     <None Include="Audio\Bibim\AudioDevice.Irrklang.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
@@ -1196,32 +1157,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </None>
     <None Include="GFX\Bibim\SparkParticleEngine.inl" />
-    <None Include="Foundation\Bibim\Environment.Windows.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-    </None>
-    <None Include="IPC\Bibim\PipeClientStream.Windows.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-    </None>
-    <None Include="IPC\Bibim\PipeServerStream.Windows.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-    </None>
-    <None Include="IPC\Bibim\PipeStream.Windows.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-    </None>
-    <None Include="Threading\Bibim\AutoLocker.inl" />
-    <None Include="Threading\Bibim\ManualLocker.inl" />
-    <None Include="Threading\Bibim\Thread.Windows.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-    </None>
-    <None Include="Foundation\Bibim\BinaryReader.inl" />
-    <None Include="Foundation\Bibim\BinaryWriter.inl" />
-    <None Include="Foundation\Bibim\DumpStream.inl" />
-    <None Include="Foundation\Bibim\MemoryStream.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

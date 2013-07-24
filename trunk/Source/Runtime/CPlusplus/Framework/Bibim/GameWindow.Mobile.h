@@ -54,6 +54,4 @@
         };
     }
 
-#   include <Bibim/GameWindow.Mobile.inl>
-
 #endif

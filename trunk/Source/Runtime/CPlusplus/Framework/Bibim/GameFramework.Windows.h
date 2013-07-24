@@ -23,6 +23,4 @@
         };
     }
 
-#   include <Bibim/GameFramework.Windows.inl>
-
 #endif

@@ -29,8 +29,18 @@
             private:
                 String name;
         };
-    }
 
-#   include <Bibim/SystemLogger.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const String& SystemLogger::GetName() const
+        {
+            return name;
+        }
+
+        void SystemLogger::SetName(const String& value)
+        {
+            name = value;   
+        }
+    }
 
 #endif
