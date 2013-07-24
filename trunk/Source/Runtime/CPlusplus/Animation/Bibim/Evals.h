@@ -76,6 +76,4 @@
         BBDeclareEvalClass(EvalGameAsset);
     }
 
-#   include <Bibim/Evals.inl>
-
 #endif

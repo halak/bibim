@@ -20,6 +20,4 @@
         };
     }
 
-#   include <Bibim/UIRect.inl>
-
 #endif

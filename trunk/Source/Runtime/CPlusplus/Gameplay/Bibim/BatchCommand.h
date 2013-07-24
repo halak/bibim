@@ -35,6 +35,4 @@
         };
     }
 
-#   include <Bibim/BatchCommand.inl>
-
 #endif

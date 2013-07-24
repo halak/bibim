@@ -57,6 +57,4 @@
         };
     }
 
-#   include <Bibim/PathFinder.inl>
-
 #endif

@@ -73,6 +73,4 @@
         };
     }
 
-#   include <Bibim/UIButton.inl>
-
 #endif

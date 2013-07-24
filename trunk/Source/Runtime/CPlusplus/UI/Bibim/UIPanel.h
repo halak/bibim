@@ -67,8 +67,6 @@
         };
     }
 
-#   include <Bibim/UIPanel.inl>
-
     BBBindLua(Bibim::UIPanel);
 
 #endif

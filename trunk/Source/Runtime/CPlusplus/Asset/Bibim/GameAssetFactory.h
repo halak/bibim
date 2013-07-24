@@ -22,8 +22,18 @@
                 static void AddEntry(int id, CreateFunction function);
                 static void SortEntries();
         };
-    }
 
-#    include <Bibim/GameAssetFactory.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        GameAsset* GameAssetFactory::Create(StreamReader& reader)
+        {
+            return Create(reader, nullptr);
+        }
+
+        template <typename T> void GameAssetFactory::AddEntry()
+        {
+            AddEntry(T::ClassID, &T::Create);
+        }
+    }
 
 #endif

@@ -59,6 +59,4 @@
         };
     }
 
-#   include <Bibim/GraphicsDevice.DX9.inl>
-
 #endif

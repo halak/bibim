@@ -54,6 +54,4 @@
         };
     }
 
-#   include <Bibim/GraphicsDevice.GLES2.inl>
-
 #endif

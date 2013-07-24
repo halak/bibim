@@ -93,6 +93,4 @@
         };
     }
 
-#   include <Bibim/Window.inl>
-
 #endif

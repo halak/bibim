@@ -120,6 +120,4 @@
         };
     }
 
-#   include <Bibim/UIDocument.inl>
-
 #endif

@@ -36,6 +36,4 @@
         };
     }
 
-#   include <Bibim/UIScrollablePanel.inl>
-
 #endif

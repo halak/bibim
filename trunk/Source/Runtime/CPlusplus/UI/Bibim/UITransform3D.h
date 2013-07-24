@@ -68,6 +68,4 @@
         };
     }
 
-#   include <Bibim/UITransform3D.inl>
-
 #endif

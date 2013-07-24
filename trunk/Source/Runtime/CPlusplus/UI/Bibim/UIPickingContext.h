@@ -38,6 +38,4 @@
         };
     }
 
-#   include <Bibim/UIPickingContext.inl>
-
 #endif

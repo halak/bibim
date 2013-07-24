@@ -46,6 +46,4 @@
         };
     }
 
-#   include <Bibim/Mouse.inl>
-
 #endif

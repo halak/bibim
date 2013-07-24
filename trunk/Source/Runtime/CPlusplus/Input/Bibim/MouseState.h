@@ -28,6 +28,4 @@
         };
     }
 
-#   include <Bibim/MouseState.inl>
-
 #endif

@@ -68,6 +68,4 @@
         };
     }
 
-#   include <Bibim/UIVisualVisitor.inl>
-
 #endif

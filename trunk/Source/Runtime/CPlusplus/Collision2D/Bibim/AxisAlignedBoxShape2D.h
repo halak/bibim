@@ -40,6 +40,4 @@
         };
     }
 
-#   include <Bibim/AxisAlignedBoxShape2D.inl>
-
 #endif

@@ -26,6 +26,4 @@
         };
     }
 
-#   include <Bibim/UIBoundsContext.inl>
-
 #endif

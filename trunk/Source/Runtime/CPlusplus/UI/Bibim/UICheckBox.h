@@ -39,6 +39,4 @@
         };
     }
 
-#   include <Bibim/UICheckBox.inl>
-
 #endif

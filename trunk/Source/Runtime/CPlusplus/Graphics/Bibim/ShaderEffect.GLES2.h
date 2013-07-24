@@ -76,6 +76,4 @@
         typedef SharedPointer<ShaderEffectParameter> ShaderEffectParameterPtr;
     }
 
-#   include <Bibim/ShaderEffect.GLES2.inl>
-
 #endif

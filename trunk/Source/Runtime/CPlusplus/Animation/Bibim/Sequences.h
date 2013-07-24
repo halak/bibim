@@ -107,6 +107,4 @@
         inline GameAsset* InterpolateKeyframe(const Keyframe<GameAssetPtr>& k1, const Keyframe<GameAssetPtr>& k2, float t);
     }
 
-#   include <Bibim/Sequences.inl>
-
 #endif

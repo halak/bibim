@@ -40,6 +40,4 @@
         };
     }
 
-#   include <Bibim/ScriptStack.inl>
-
 #endif

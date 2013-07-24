@@ -58,6 +58,4 @@
         };
     }
 
-#   include <Bibim/Sprite.inl>
-
 #endif

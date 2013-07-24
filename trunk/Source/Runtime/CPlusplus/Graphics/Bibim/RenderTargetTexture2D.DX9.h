@@ -25,6 +25,4 @@
         };
     }
 
-#   include <Bibim/RenderTargetTexture2D.DX9.inl>
-
 #endif

@@ -28,6 +28,4 @@
         };
     }
 
-#   include <Bibim/JumpPointPathFinder.inl>
-
 #endif

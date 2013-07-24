@@ -69,6 +69,4 @@
         };
     }
 
-#   include <Bibim/BGM.Irrklang.inl>
-
 #endif

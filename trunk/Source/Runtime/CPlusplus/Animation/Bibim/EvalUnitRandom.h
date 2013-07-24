@@ -30,6 +30,4 @@
         BBDeclareEvalClass(EvalUnitRandom);
     }
 
-#   include <Bibim/EvalUnitRandom.inl>
-
 #endif

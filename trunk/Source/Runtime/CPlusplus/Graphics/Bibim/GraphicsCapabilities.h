@@ -72,6 +72,4 @@
         typedef GraphicsCapabilities::PixelShader PixelShaderVersion;
     }
 
-#   include <Bibim/GraphicsCapabilities.inl>
-
 #endif

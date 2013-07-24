@@ -68,6 +68,4 @@
         };
     }
 
-#   include <Bibim/UIColorMatrixEffect.inl>
-
 #endif

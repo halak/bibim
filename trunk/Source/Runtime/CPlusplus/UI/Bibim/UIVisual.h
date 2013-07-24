@@ -253,8 +253,6 @@
         };
     }
 
-#   include <Bibim/UIVisual.inl>
-
     BBBindLua(Bibim::UIVisual);
     BBBindLuaEnum(Bibim::UIVisual::PositionMode,
                   Bibim::UIVisual::ConvertFromStringToPositionMode,

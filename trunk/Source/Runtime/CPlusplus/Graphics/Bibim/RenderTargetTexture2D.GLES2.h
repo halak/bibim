@@ -17,6 +17,4 @@
         };
     }
 
-#   include <Bibim/RenderTargetTexture2D.GLES2.inl>
-
 #endif

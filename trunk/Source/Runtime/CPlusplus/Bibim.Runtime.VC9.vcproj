@@ -163,19 +163,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Asset\Bibim\AssetLoadingTask.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Asset\Bibim\AssetStreamReader.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Asset\Bibim\AssetStreamReader.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Asset\Bibim\AssetStreamReader.inl"
 					>
 				</File>
 				<File
@@ -187,10 +179,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Asset\Bibim\GameAsset.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Asset\Bibim\GameAssetFactory.cpp"
 					>
 				</File>
@@ -199,19 +187,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Asset\Bibim\GameAssetFactory.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Asset\Bibim\GameAssetStorage.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Asset\Bibim\GameAssetStorage.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Asset\Bibim\GameAssetStorage.inl"
 					>
 				</File>
 				<Filter
@@ -223,10 +203,6 @@
 					</File>
 					<File
 						RelativePath=".\Asset\Bibim\AssetProvider.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Asset\Bibim\AssetProvider.inl"
 						>
 					</File>
 					<File
@@ -250,10 +226,6 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\FileAssetProviderBase.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Asset\Bibim\MPQAssetProvider.cpp"
 						>
 					</File>
@@ -262,19 +234,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\MPQAssetProvider.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Asset\Bibim\PipedAssetProvider.Default.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\Asset\Bibim\PipedAssetProvider.Default.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Asset\Bibim\PipedAssetProvider.Default.inl"
 						>
 					</File>
 					<File
@@ -395,19 +359,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Component\Bibim\CloningContext.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Component\Bibim\ComponentStreamReader.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Component\Bibim\ComponentStreamReader.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Component\Bibim\ComponentStreamReader.inl"
 					>
 				</File>
 				<File
@@ -419,19 +375,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Component\Bibim\GameComponent.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Component\Bibim\GameComponentFactory.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Component\Bibim\GameComponentFactory.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Component\Bibim\GameComponentFactory.inl"
 					>
 				</File>
 			</Filter>

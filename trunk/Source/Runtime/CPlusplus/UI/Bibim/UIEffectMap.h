@@ -34,6 +34,4 @@
         };
     }
 
-#   include <Bibim/UIEffectMap.inl>
-
 #endif

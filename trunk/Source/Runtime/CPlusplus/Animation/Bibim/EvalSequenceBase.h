@@ -56,6 +56,4 @@
         };
     }
 
-#   include <Bibim/EvalSequenceBase.inl>
-
 #endif

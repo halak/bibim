@@ -33,6 +33,4 @@
         };
     }
 
-#   include <Bibim/UIFunctionTable.inl>
-
 #endif

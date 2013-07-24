@@ -108,6 +108,4 @@
         BBDeclareEvalClass(EvalVector4Negation);
     }
 
-#   include <Bibim/EvalUnaryOperators.inl>
-
 #endif

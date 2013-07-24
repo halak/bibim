@@ -40,6 +40,4 @@
         };
     }
 
-#   include <Bibim/UIMaskEffect.inl>
-
 #endif

@@ -21,6 +21,4 @@
         };
     }
 
-#    include <Bibim/GameModuleFactory.inl>
-
 #endif

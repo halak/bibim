@@ -40,8 +40,13 @@
             private:
                 friend class FileAssetPreloadingTask;
         };
-    }
 
-#   include <Bibim/FileAssetProviderBase.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const String& FileAssetProviderBase::GetDirectory() const
+        {
+            return directory;
+        }
+    }
 
 #endif

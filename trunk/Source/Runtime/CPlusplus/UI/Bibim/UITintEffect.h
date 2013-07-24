@@ -48,6 +48,4 @@
         };
     }
 
-#   include <Bibim/UITintEffect.inl>
-
 #endif

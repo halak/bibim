@@ -32,6 +32,4 @@
         };
     }
 
-#   include <Bibim/BitMask.inl>
-
 #endif

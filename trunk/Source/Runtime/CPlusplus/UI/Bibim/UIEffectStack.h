@@ -41,6 +41,4 @@
         };
     }
 
-#   include <Bibim/UIEffectStack.inl>
-
 #endif

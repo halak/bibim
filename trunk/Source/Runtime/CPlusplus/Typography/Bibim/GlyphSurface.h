@@ -29,6 +29,4 @@
         };
     }
 
-#   include <Bibim/GlyphSurface.inl>
-
 #endif  

@@ -43,6 +43,4 @@
         };
     }
 
-#   include <Bibim/UIImage.inl>
-
 #endif

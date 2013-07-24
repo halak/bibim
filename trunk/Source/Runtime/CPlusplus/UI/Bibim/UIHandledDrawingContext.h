@@ -54,6 +54,4 @@
         };
     }
 
-#   include <Bibim/UIHandledDrawingContext.inl>
-
 #endif

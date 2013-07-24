@@ -20,6 +20,4 @@
         };
     }
 
-#   include <Bibim/UITransform2D.inl>
-
 #endif

@@ -53,6 +53,4 @@
         };
     }
 
-#    include <Bibim/FontString.inl>
-
 #endif

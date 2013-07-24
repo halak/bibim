@@ -58,6 +58,4 @@
         };
     }
 
-#   include <Bibim/UIRenderer.GLES2.inl>
-
 #endif

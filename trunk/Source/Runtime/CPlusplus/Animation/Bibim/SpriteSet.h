@@ -30,6 +30,4 @@
         };
     }
 
-#   include <Bibim/SpriteSet.inl>
-
 #endif

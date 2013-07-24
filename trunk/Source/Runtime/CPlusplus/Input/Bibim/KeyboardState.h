@@ -26,6 +26,4 @@
         };
     }
 
-#   include <Bibim/KeyboardState.inl>
-
 #endif

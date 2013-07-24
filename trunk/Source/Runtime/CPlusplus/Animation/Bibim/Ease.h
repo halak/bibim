@@ -47,6 +47,4 @@
         };
     }
 
-#   include <Bibim/Ease.inl>
-
 #endif

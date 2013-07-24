@@ -42,6 +42,4 @@
         };
     }
 
-#   include <Bibim/UILabel.inl>
-
 #endif

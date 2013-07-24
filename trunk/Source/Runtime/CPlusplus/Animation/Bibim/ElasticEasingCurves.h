@@ -60,6 +60,4 @@
         };
     }
 
-#   include <Bibim/ElasticEasingCurves.inl>
-
 #endif

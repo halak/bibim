@@ -46,6 +46,4 @@
         };
     }
 
-#   include <Bibim/TypingContext.inl>
-
 #endif

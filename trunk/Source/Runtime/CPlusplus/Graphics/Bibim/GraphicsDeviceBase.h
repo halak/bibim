@@ -56,6 +56,4 @@
         };
     }
 
-#   include <Bibim/GraphicsDeviceBase.inl>
-
 #endif

@@ -24,6 +24,4 @@
         };
     }
 
-#    include <Bibim/TimelineGameComponent.inl>
-
 #endif

@@ -57,6 +57,4 @@
         };
     }
 
-#   include <Bibim/DynamicTexture2D.GLES2.inl>
-
 #endif

@@ -123,6 +123,4 @@
         BBDeclareEvalClass(EvalVector4Interpolator);
     }
 
-#   include <Bibim/EvalInterpolators.inl>
-
 #endif

@@ -57,6 +57,4 @@
         };
     }
 
-#   include <Bibim/FontLibrary.inl>
-
 #endif
