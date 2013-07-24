@@ -1,28 +1,17 @@
 #pragma once
-#ifndef __BIBIM_FILESTREAM_IOS_H__
-#define __BIBIM_FILESTREAM_IOS_H__
+#ifndef __BIBIM_NETWORKSTREAM_H__
+#define __BIBIM_NETWORKSTREAM_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/Stream.h>
-#   include <Bibim/String.h>
-#   include <cstdio>
 
     namespace Bibim
     {
-        class FileStream : public Stream
+        class NetworkStream : public Stream
         {
             public:
-                enum AccessMode
-                {
-                    ReadOnly,
-                    WriteOnly,
-                };
-
-            public:
-                FileStream(const String& path, AccessMode accessMode);
-                virtual ~FileStream();
-
-                void Close();
+                NetworkStream(Socket* socket);
+                virtual ~NetworkStream();
 
                 virtual int Read(void* buffer, int size);
                 virtual int Write(const void* buffer, int size);
@@ -37,9 +26,7 @@
                 virtual bool CanSeek() const;
 
             private:
-                FILE* handle;
-                bool canRead;
-                bool canWrite;
+                SocketPtr socket;
         };
     }
 

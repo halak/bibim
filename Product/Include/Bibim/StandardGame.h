@@ -93,6 +93,7 @@
 
                     private:
                         int syncCountdown;
+                        SocketPtr socket;
                         StreamPtr queryStream;
                         std::ostringstream stringstream;
                         void* selectedVisual;

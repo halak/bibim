@@ -26,6 +26,4 @@
         };
     }
 
-#   include <Bibim/HttpClient.Curl.inl>
-
 #endif

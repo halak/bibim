@@ -29,13 +29,11 @@
                         static inline BoundsVisualizer* GetInstance();
 
                     protected:
+                        BoundsVisualizer();
                         virtual ~BoundsVisualizer();
 
                         virtual void OnVisualBegan(UIHandledDrawingContext& context);
                         virtual void OnVisualEnded(UIHandledDrawingContext& context);
-
-                    private:
-                        BoundsVisualizer();
                 };
 
             public:

@@ -41,7 +41,4 @@
                 bool canWrite;
         };
     }
-
-#   include <Bibim/FileStream.Windows.inl>
-
 #endif
