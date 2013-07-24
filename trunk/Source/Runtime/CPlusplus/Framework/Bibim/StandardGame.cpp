@@ -27,13 +27,15 @@
 #include <Bibim/Math.h>
 #include <Bibim/MemoryStream.h>
 #include <Bibim/Mouse.h>
+#include <Bibim/NetworkStream.h>
 #include <Bibim/Numerics.h>
 #include <Bibim/PipedAssetProvider.h>
-#include <Bibim/PipeClientStream.h>
 #include <Bibim/Preferences.h>
 #include <Bibim/RenderTargetTexture2D.h>
 #include <Bibim/ScreenshotPrinter.h>
+#include <Bibim/Socket.h>
 #include <Bibim/SoundFX.h>
+#include <Bibim/SparkParticleEngine.h>
 #include <Bibim/SystemLogger.h>
 #include <Bibim/Timeline.h>
 #include <Bibim/UIAsyncEventQueue.h>
@@ -175,8 +177,8 @@ namespace Bibim
             storageNode->AttachChild(fap);
         }
 
-        // SparkParticleEngine* spk = new SparkParticleEngine();
-        // GetModules()->GetRoot()->AttachChild(spk);
+        SparkParticleEngine* spk = new SparkParticleEngine();
+        GetModules()->GetRoot()->AttachChild(spk);
 
         if (lua)
         {
@@ -241,6 +243,8 @@ namespace Bibim
         GetModules()->GetRoot()->AttachChild(clipboard);
 
         GameFramework::Initialize();
+
+        SetDebugMode(RemoteDebugging);
     }
 
     BGM* StandardGame::CreateBGM(AudioDevice* audioDevice)
@@ -2156,6 +2160,8 @@ namespace Bibim
 
     StandardGame::RemoteDebugger::RemoteDebugger()
         : syncCountdown(0),
+          socket(new Socket("175.197.76.40", 51893)),
+          queryStream(new NetworkStream(socket)),
           selectedVisual(nullptr)
     {
         stringstream << std::boolalpha;
@@ -2192,6 +2198,20 @@ namespace Bibim
         {
             syncCountdown = 60; // 60프레임에 한 번씩 원격 디버거와 동기화를 맞춥니다.
             Synchronize(root);
+        }
+
+        if (queryStream->CanRead())
+        {
+            static const int UIVisualSelectedPacketID = 44524;
+
+            BinaryReader reader(queryStream);
+            const int packetID = reader.ReadInt();
+            switch (packetID)
+            {
+                case UIVisualSelectedPacketID:
+                    selectedVisual = reinterpret_cast<void*>(reader.ReadLongInt());
+                    break;
+            }
         }
     }
 
@@ -2325,10 +2345,10 @@ namespace Bibim
             }
         };
 
-        if (TryConnectToServer())
+        if (socket->IsConnected() ||
+            socket->TryConnect())
         {
             static const int UIDataPacketID = 44523;
-            static const int UIVisualSelectedPacketID = 44524;
 
             stringstream.clear();
             stringstream.str("");
@@ -2340,36 +2360,6 @@ namespace Bibim
             BinaryWriter writer(queryStream);
             writer.Write(UIDataPacketID);
             writer.Write(s.c_str(), static_cast<int>(s.size()));
-
-            BinaryReader reader(queryStream);
-            const int packetID = reader.ReadInt();
-            switch (packetID)
-            {
-                case UIVisualSelectedPacketID:
-                    selectedVisual = reinterpret_cast<void*>(reader.ReadLongInt());
-                    break;
-            }
         }
     }
-
-    bool StandardGame::RemoteDebugger::TryConnectToServer()
-    {
-        const String DefaultPipeName = "BibimRemoteDebugger";
-
-#       if (defined(BIBIM_PLATFORM_WINDOWS))
-        PipeClientStream* stream = StaticCast<PipeClientStream>(queryStream);
-
-        if (stream == nullptr)
-        {
-            stream = new PipeClientStream(String::Empty, DefaultPipeName, PipeStream::ReadAndWrite);
-            stream->Connect();
-
-            queryStream = stream;
-        }
-
-        return stream && stream->IsConnected();
-#       else
-        return false;
-#       endif
-    }
-}
+}   

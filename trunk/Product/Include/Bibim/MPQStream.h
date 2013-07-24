@@ -34,6 +34,4 @@
         };
     }
 
-#   include <Bibim/MPQStream.inl>
-
 #endif

@@ -2431,10 +2431,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\FileSystem\Bibim\FileStream.Windows.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\FileSystem\Bibim\MPQ.cpp"
 					>
 				</File>
@@ -2443,19 +2439,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\FileSystem\Bibim\MPQ.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\FileSystem\Bibim\MPQStream.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\FileSystem\Bibim\MPQStream.h"
-					>
-				</File>
-				<File
-					RelativePath=".\FileSystem\Bibim\MPQStream.inl"
 					>
 				</File>
 				<File
@@ -2651,10 +2639,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\HttpClient.Curl.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Net\Bibim\HttpClient.h"
 					>
 				</File>
@@ -2680,26 +2664,6 @@
 				</File>
 				<File
 					RelativePath=".\Net\Bibim\HttpClient.Null.h"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\Net\Bibim\HttpClient.Null.inl"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -2759,26 +2723,6 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\HttpClient.Windows.inl"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
 					RelativePath=".\Net\Bibim\HttpClientBase.cpp"
 					>
 				</File>
@@ -2787,7 +2731,19 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\HttpClientBase.inl"
+					RelativePath=".\Net\Bibim\NetworkStream.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Net\Bibim\NetworkStream.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Net\Bibim\Socket.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Net\Bibim\Socket.h"
 					>
 				</File>
 			</Filter>

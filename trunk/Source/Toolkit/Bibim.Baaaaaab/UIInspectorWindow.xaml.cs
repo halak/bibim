@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.IO.Pipes;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -42,13 +43,13 @@ namespace Bibim.Bab
         private readonly BitmapFrame PICKABLE = BitmapFrame.Create(GetEmbeddedResourceUri("Pickable.png"));
         private readonly BitmapFrame UNPICKABLE = BitmapFrame.Create(GetEmbeddedResourceUri("Unpickable.png"));
 
-        private NamedPipeServerStream serverStream;
+        private Socket serverSocket;
+        private Socket clientSocket;
+        private NetworkStream serverStream;
         private BinaryReader serverStreamReader;
         private BinaryWriter serverStreamWriter;
         private byte[] serverBuffer;
         private DataTemplate treeViewHeaderTemplate;
-
-        private long selectedVisualID;
 
         private DispatcherTimer findingDispatcher;
 
@@ -456,24 +457,35 @@ namespace Bibim.Bab
 
         private void Ready()
         {
+            if (serverSocket != null)
+                serverSocket.Dispose();
+
             if (serverStream != null)
                 serverStream.Dispose();
 
-            serverStream = new NamedPipeServerStream("BibimRemoteDebugger",
-                                                     PipeDirection.InOut,
-                                                     NamedPipeServerStream.MaxAllowedServerInstances,
-                                                     PipeTransmissionMode.Byte,
-                                                     PipeOptions.Asynchronous);
-            serverStreamReader = new BinaryReader(serverStream);
-            serverStreamWriter = new BinaryWriter(serverStream);
-            serverStream.BeginWaitForConnection(new AsyncCallback(OnConnected), null);
+            clientSocket = null;
+            serverStreamReader = null;
+            serverStreamWriter = null;
+
+            serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            {
+                NoDelay = true,
+            };
+            serverSocket.Bind(new IPEndPoint(IPAddress.Any, 51893));
+            serverSocket.Listen(100);
+
+            serverSocket.BeginAccept(new AsyncCallback(OnConnected), null);
         }
 
         private void OnConnected(IAsyncResult result)
         {
             if (result.IsCompleted)
             {
-                serverStream.EndWaitForConnection(result);
+                clientSocket = serverSocket.EndAccept(result);
+
+                serverStream = new NetworkStream(clientSocket);
+                serverStreamReader = new BinaryReader(serverStream);
+                serverStreamWriter = new BinaryWriter(serverStream);
                 serverStream.BeginRead(serverBuffer, 0, 4, new AsyncCallback(OnPacketReceived), null);
             }
             else
@@ -510,9 +522,6 @@ namespace Bibim.Bab
                     break;
             }
 
-            serverStreamWriter.Write(UIVisualSelectedPacketID);
-            serverStreamWriter.Write(selectedVisualID);
-
             serverStream.BeginRead(serverBuffer, 0, 4, new AsyncCallback(OnPacketReceived), null);
 
             if (postprocess != null)
@@ -524,9 +533,10 @@ namespace Bibim.Bab
             if (e.NewValue != null)
             {
                 var selectedTreeViewItem = (TreeViewItem)e.NewValue;
-                if (selectedTreeViewItem != null)
+                if (selectedTreeViewItem != null && serverStreamWriter != null)
                 {
-                    selectedVisualID = (long)selectedTreeViewItem.Tag;
+                    serverStreamWriter.Write(UIVisualSelectedPacketID);
+                    serverStreamWriter.Write((long)selectedTreeViewItem.Tag);
                 }
                 //else
                 //    selectedVisualID = 0;

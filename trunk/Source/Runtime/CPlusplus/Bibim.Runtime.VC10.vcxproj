@@ -219,6 +219,8 @@
     </ClCompile>
     <ClCompile Include="Net\Bibim\HttpClient.Curl.cpp" />
     <ClCompile Include="Net\Bibim\HttpClientBase.cpp" />
+    <ClCompile Include="Net\Bibim\NetworkStream.cpp" />
+    <ClCompile Include="Net\Bibim\Socket.cpp" />
     <ClCompile Include="Threading\Bibim\Lock.Unix.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -627,6 +629,8 @@
     <ClInclude Include="Input\Bibim\IMEBase.h" />
     <ClInclude Include="Net\Bibim\HttpClient.Curl.h" />
     <ClInclude Include="Net\Bibim\HttpClientBase.h" />
+    <ClInclude Include="Net\Bibim\NetworkStream.h" />
+    <ClInclude Include="Net\Bibim\Socket.h" />
     <ClInclude Include="Threading\Bibim\Lock.Unix.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -981,16 +985,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </None>
     <None Include="Component\Bibim\GameComponentFactory.inl" />
-    <None Include="FileSystem\Bibim\FileStream.iOS.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-    </None>
-    <None Include="FileSystem\Bibim\FileStream.Android.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </None>
     <None Include="Foundation\Bibim\Environment.Android.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -1021,8 +1015,6 @@
     <None Include="Framework\Bibim\StandardGame.inl" />
     <None Include="Graphics\Bibim\GraphicsDeviceBase.inl" />
     <None Include="Input\Bibim\IMEBase.inl" />
-    <None Include="Net\Bibim\HttpClient.Curl.inl" />
-    <None Include="Net\Bibim\HttpClientBase.inl" />
     <None Include="Typography\Bibim\Font.inl" />
     <None Include="Typography\Bibim\FontCache.inl" />
     <None Include="Typography\Bibim\FontLibrary.inl" />
@@ -1183,18 +1175,6 @@
     <None Include="Graphics\Bibim\RenderTargetTexture2D.GLES2.inl" />
     <None Include="Graphics\Bibim\Shadereffect.GLES2.inl" />
     <None Include="Graphics\Bibim\Texture2D.GLES2.inl" />
-    <None Include="FileSystem\Bibim\FileStream.Windows.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-    </None>
-    <None Include="FileSystem\Bibim\MPQ.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-    </None>
-    <None Include="FileSystem\Bibim\MPQStream.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-    </None>
     <None Include="Framework\Bibim\GameFramework.Windows.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
@@ -1216,12 +1196,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </None>
     <None Include="GFX\Bibim\SparkParticleEngine.inl" />
-    <None Include="Net\Bibim\HttpClient.Windows.inl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </None>
     <None Include="Foundation\Bibim\Environment.Windows.inl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>

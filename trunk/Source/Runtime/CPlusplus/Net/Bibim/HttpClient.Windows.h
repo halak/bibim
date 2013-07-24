@@ -19,6 +19,4 @@
         };
     }
 
-#   include <Bibim/HttpClient.Windows.inl>
-
 #endif

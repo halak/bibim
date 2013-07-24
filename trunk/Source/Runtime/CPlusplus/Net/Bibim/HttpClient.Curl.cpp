@@ -9,45 +9,48 @@
 
 namespace Bibim
 {
-    struct NetworkStream
+    namespace
     {
-        int id;
-    };
-
-    struct Header : public NetworkStream
-    {
-        static const int ID = 0;
-        String contentType;
-    };
-
-    struct Body : NetworkStream
-    {
-        static const int ID = 1;
-        Stream* stream;
-    };
-
-    static size_t OnRecv(void* ptr, size_t size, size_t nmemb, void* stream)
-    {
-        switch (reinterpret_cast<NetworkStream*>(stream)->id)
+        struct Data
         {
-            case Header::ID:
-                {
-                    static const String contentTypeKey = "Content-Type:";
+            int id;
+        };
 
-                    Header* header = reinterpret_cast<Header*>(stream);
-                    String headerItem = String(reinterpret_cast<const char*>(ptr), 0, size * nmemb);
-                    if (headerItem.StartsWith(contentTypeKey))
-                        header->contentType = headerItem.Substring(contentTypeKey.GetLength());
-                }
-                return nmemb;
-            case Body::ID:
-                {
-                    Body* body = reinterpret_cast<Body*>(stream);
-                    body->stream->Write(ptr, size * nmemb);
-                }
-                return nmemb;
-            default:
-                return 0;
+        struct Header : public Data
+        {
+            static const int ID = 0;
+            String contentType;
+        };
+
+        struct Body : Data
+        {
+            static const int ID = 1;
+            Stream* stream;
+        };
+
+        static size_t OnRecv(void* ptr, size_t size, size_t nmemb, void* stream)
+        {
+            switch (reinterpret_cast<Data*>(stream)->id)
+            {
+                case Header::ID:
+                    {
+                        static const String contentTypeKey = "Content-Type:";
+
+                        Header* header = reinterpret_cast<Header*>(stream);
+                        String headerItem = String(reinterpret_cast<const char*>(ptr), 0, size * nmemb);
+                        if (headerItem.StartsWith(contentTypeKey))
+                            header->contentType = headerItem.Substring(contentTypeKey.GetLength());
+                    }
+                    return nmemb;
+                case Body::ID:
+                    {
+                        Body* body = reinterpret_cast<Body*>(stream);
+                        body->stream->Write(ptr, size * nmemb);
+                    }
+                    return nmemb;
+                default:
+                    return 0;
+            }
         }
     }
 

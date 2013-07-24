@@ -1,6 +1,0 @@
-namespace Bibim
-{
-    HttpClient::HttpClient()
-    {
-    }
-}

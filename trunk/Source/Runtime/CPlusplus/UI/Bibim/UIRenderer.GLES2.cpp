@@ -41,6 +41,7 @@ namespace Bibim
         glDisable(GL_SAMPLE_COVERAGE);
         glDisable(GL_STENCIL_TEST);
         glDisable(GL_SCISSOR_TEST);
+        glLineWidth(1.0f);
 
         Base::Begin();
     }

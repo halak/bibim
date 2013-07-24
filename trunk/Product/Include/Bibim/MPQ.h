@@ -23,8 +23,11 @@
             private:
                 void* handle;
         };
-    }
 
-#   include <Bibim/MPQ.inl>
+        void* MPQ::GetHandle() const
+        {
+            return handle;
+        }
+    }
 
 #endif
