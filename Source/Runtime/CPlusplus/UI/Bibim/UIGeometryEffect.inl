@@ -1,6 +1,4 @@
-﻿#include <Bibim/UIRenderer.h>
-
-namespace Bibim
+﻿namespace Bibim
 {
     void UIGeometryEffect::BeginDraw(UIDrawingContext& /*context*/, UIVisual* /*visual*/)
     {

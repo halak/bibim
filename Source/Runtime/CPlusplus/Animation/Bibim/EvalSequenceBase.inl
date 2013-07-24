@@ -1,6 +1,4 @@
-﻿#include <Bibim/ComponentStreamReader.h>
-
-namespace Bibim
+﻿namespace Bibim
 {
     template <typename T>
     EvalSequenceBase<T>::EvalSequenceBase()

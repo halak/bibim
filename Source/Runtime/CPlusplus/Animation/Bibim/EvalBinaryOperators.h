@@ -5,6 +5,7 @@
 #   include <Bibim/FWD.h>
 #   include <Bibim/Evals.h>
 #   include <Bibim/Math.h>
+#   include <Bibim/ComponentStreamReader.h>
 
     namespace Bibim
     {

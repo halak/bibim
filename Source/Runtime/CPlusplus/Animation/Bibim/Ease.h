@@ -3,6 +3,7 @@
 #define __BIBIM_EASE_H__
 
 #   include <Bibim/FWD.h>
+#   include <Bibim/Math.h>
 
     namespace Bibim
     {

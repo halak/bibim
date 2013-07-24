@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameAsset.h>
+#   include <Bibim/Math.h>
 #   include <vector>
 
     namespace Bibim

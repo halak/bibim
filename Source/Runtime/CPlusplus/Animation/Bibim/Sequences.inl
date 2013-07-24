@@ -1,6 +1,4 @@
-﻿#include <Bibim/Math.h>
-
-namespace Bibim
+﻿namespace Bibim
 {
     template <typename T>
     Keyframe<T>::Keyframe()

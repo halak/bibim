@@ -4,6 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/UIElement.h>
+#   include <Bibim/UIRenderer.h>
 
     namespace Bibim
     {

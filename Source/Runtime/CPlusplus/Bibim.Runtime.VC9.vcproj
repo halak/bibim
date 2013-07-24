@@ -1011,19 +1011,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptingContext.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Scripting\Bibim\ScriptNativeFunctionTable.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Scripting\Bibim\ScriptNativeFunctionTable.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Scripting\Bibim\ScriptNativeFunctionTable.inl"
 					>
 				</File>
 				<File

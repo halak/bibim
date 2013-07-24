@@ -6,6 +6,7 @@
 #   include <Bibim/Evals.h>
 #   include <Bibim/EasingCurves.h>
 #   include <Bibim/Math.h>
+#   include <Bibim/ComponentStreamReader.h>
 
     namespace Bibim
     {
