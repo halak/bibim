@@ -30,6 +30,4 @@
         };
     }
 
-#   include <Bibim/UIAsyncEventQueue.inl>
-
 #endif

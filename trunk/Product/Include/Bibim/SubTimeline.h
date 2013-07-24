@@ -20,8 +20,13 @@
             private:
                 Timeline* parent;
         };
-    }
 
-#   include <Bibim/SubTimeline.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Timeline* SubTimeline::GetParent() const
+        {
+            return parent;
+        }
+    }
 
 #endif

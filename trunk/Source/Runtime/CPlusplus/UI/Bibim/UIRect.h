@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UIRECT_H__
 #define __BIBIM_UIRECT_H__
 

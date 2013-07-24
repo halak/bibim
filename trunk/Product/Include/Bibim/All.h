@@ -68,7 +68,6 @@
 #include <Bibim/EvalBoard.h>
 #include <Bibim/EvalVariables.h>
 #include <Bibim/SEquences.h>
-#  include <Bibim/Exception.h>
 #  include <Bibim/Foundation.h>
 #  include <Bibim/FWD.h>
 #  include <Bibim/Geom2D.h>

@@ -37,8 +37,13 @@
             private:
                 HandlerCollection handlers;
         };
-    }
 
-#   include <Bibim/UISequentialEventHandler.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const UISequentialEventHandler::HandlerCollection& UISequentialEventHandler::GetHandlers() const
+        {
+            return handlers;
+        }
+    }
 
 #endif

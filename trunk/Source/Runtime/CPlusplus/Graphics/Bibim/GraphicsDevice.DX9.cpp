@@ -3,7 +3,6 @@
 #include <Bibim/Assert.h>
 #include <Bibim/CheckedRelease.h>
 #include <Bibim/Color.h>
-#include <Bibim/Exception.h>
 #include <Bibim/Log.h>
 #include <Bibim/RenderTargetTexture2D.DX9.h>
 #include <Bibim/Window.h>
@@ -121,7 +120,7 @@ namespace Bibim
         {
             d3dObject = Direct3DCreate9(D3D_SDK_VERSION);
             if (d3dObject == nullptr)
-                throw Exception("GraphicsDevice::d3dObject == nullptr");
+                throw String("GraphicsDevice::d3dObject == nullptr");
 
             struct CollectDisplayModes
             {
@@ -194,7 +193,7 @@ namespace Bibim
                 if (result == D3D_OK)
                     Log::Information("Graphics", "device created by Software vertex processing.");
                 else
-                    throw Exception("d3dObject->CreateDevice != D3D_OK");
+                    throw String("d3dObject->CreateDevice != D3D_OK");
             }
         }
         else

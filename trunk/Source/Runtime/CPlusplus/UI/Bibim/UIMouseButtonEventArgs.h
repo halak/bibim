@@ -27,6 +27,13 @@
             private:
                 Key::Code buttonCode;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Key::Code UIMouseButtonEventArgs::GetButtonCode() const
+        {
+            return buttonCode;
+        }
     }
 
 #endif

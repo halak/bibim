@@ -61,8 +61,13 @@
 
         typedef ShaderEffect::Parameter ShaderEffectParameter;
         typedef SharedPointer<ShaderEffectParameter> ShaderEffectParameterPtr;
-    }
 
-#   include <Bibim/ShaderEffect.DX9.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        ID3DXEffect* ShaderEffect::GetHandle() const
+        {
+            return handle;
+        }
+    }
 
 #endif

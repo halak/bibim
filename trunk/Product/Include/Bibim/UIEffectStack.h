@@ -39,8 +39,13 @@
                 int maxDepth;
                 bool isShaderFunctionRendering;
         };
-    }
 
-#   include <Bibim/UIEffectStack.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const UIEffectStack::EffectorCollection& UIEffectStack::GetTopEffectors() const
+        {
+            return topEffectors;
+        }
+    }
 
 #endif

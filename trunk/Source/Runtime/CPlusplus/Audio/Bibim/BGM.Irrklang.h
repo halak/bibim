@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_BGM_IRRKLANG_H__
 #define __BIBIM_BGM_IRRKLANG_H__
 
@@ -67,6 +67,43 @@
                 float bgmRewindTime;
                 bool mute;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        void BGM::Change(const String& name)
+        {
+            Change(name, 0.0f, 0.0f);
+        }
+
+        void BGM::Change(const String& name, float rewindTime)
+        {
+            Change(name, rewindTime, 0.0f);
+        }
+
+        AudioDevice* BGM::GetAudioDevice() const
+        {
+            return audioDevice;
+        }
+
+        float BGM::GetVolume() const
+        {
+            return volume;
+        }
+
+        bool BGM::GetMute() const
+        {
+            return mute;
+        }
+
+        float BGM::GetCrossfadeTime() const
+        {
+            return crossfadeTime;
+        }
+
+        void BGM::Rewind()
+        {
+            Rewind(0.0f);
+        }
     }
 
 #endif

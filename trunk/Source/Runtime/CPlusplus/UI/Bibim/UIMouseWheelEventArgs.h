@@ -26,6 +26,13 @@
             private:
                 int wheelDelta;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        int UIMouseWheelEventArgs::GetWheelDelta() const
+        {
+            return wheelDelta;
+        }
     }
 
 #endif

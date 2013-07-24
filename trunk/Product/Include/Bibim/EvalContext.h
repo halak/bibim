@@ -30,6 +30,4 @@
         };
     }
 
-#   include <Bibim/EvalContext.inl>
-
 #endif

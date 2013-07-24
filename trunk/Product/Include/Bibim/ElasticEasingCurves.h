@@ -58,8 +58,18 @@
 
                 virtual float Ease(float t) const { return Ease::InOutElastic(t, GetAmplitude(), GetPeriod()); }
         };
-    }
 
-#   include <Bibim/ElasticEasingCurves.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        float ElasticEasingCurve::GetAmplitude() const
+        {
+            return amplitude;
+        }
+
+        float ElasticEasingCurve::GetPeriod() const
+        {
+            return period;
+        }
+    }
 
 #endif

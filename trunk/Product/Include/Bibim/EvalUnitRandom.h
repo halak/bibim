@@ -28,8 +28,13 @@
         };
 
         BBDeclareEvalClass(EvalUnitRandom);
-    }
 
-#   include <Bibim/EvalUnitRandom.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        int EvalUnitRandom::GetInitialSeed() const
+        {
+            return initialSeed;
+        }
+    }
 
 #endif

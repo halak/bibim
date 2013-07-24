@@ -91,6 +91,12 @@
                 std::vector<MouseEventListener*> mouseEventListeners;
                 std::vector<KeyboardEventListener*> keyboardEventListeners;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Window::Window()
+        {
+        }
     }
 
 #endif

@@ -27,8 +27,13 @@
             private:
                 Key::Code buttonCode;
         };
-    }
 
-#   include <Bibim/UIMouseButtonEventArgs.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Key::Code UIMouseButtonEventArgs::GetButtonCode() const
+        {
+            return buttonCode;
+        }
+    }
 
 #endif

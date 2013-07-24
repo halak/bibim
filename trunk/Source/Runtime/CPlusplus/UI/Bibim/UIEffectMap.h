@@ -32,6 +32,18 @@
                 UIGeometryEffectPtr geomEffect;
                 PixelEffectCollection pixelEffects;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        UIGeometryEffect* UIEffectMap::GetGeometryEffect() const
+        {
+            return geomEffect;
+        }
+
+        const UIEffectMap::PixelEffectCollection& UIEffectMap::GetPixelEffects() const
+        {
+            return pixelEffects;
+        }
     }
 
 #endif

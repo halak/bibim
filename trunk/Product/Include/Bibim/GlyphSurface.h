@@ -27,8 +27,18 @@
 
                 friend class GlyphTable;
         };
-    }
 
-#   include <Bibim/GlyphSurface.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const RectStorage& GlyphSurface::GetStorage() const
+        {
+            return *storage;
+        }
+
+        Texture2D* GlyphSurface::GetTexture() const
+        {
+            return StaticCast<Texture2D>(texture);
+        }
+    }
 
 #endif  

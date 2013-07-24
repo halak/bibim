@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_AUDIODEVICE_ANDROID_H__
 #define __BIBIM_AUDIODEVICE_ANDROID_H__
 
@@ -18,6 +18,13 @@
                 inline float GetDuration(const String& uri) const;
                 float GetDurationByChars(const char* uri) const;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        float AudioDevice::GetDuration(const String& uri) const
+        {
+            return GetDurationByChars(uri.CStr());
+        }
     }
 
 #endif

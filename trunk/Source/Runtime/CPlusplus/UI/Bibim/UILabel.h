@@ -40,6 +40,18 @@
                 int fontRevision;
                 bool fontStringChanged;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const String& UILabel::GetText() const
+        {
+            return text;
+        }
+
+        Font* UILabel::GetFont() const
+        {
+            return font;
+        }
     }
 
 #endif

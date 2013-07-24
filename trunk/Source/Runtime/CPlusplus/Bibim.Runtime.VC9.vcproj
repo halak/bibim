@@ -259,19 +259,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\Font.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Typography\Bibim\FontCache.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Typography\Bibim\FontCache.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\FontCache.inl"
 					>
 				</File>
 				<File
@@ -283,19 +275,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\FontLibrary.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Typography\Bibim\FontString.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Typography\Bibim\FontString.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\FontString.inl"
 					>
 				</File>
 				<File
@@ -307,19 +291,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\Glyph.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Typography\Bibim\GlyphSurface.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Typography\Bibim\GlyphSurface.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\GlyphSurface.inl"
 					>
 				</File>
 				<File
@@ -331,19 +307,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\GlyphTable.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Typography\Bibim\TypingContext.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Typography\Bibim\TypingContext.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Typography\Bibim\TypingContext.inl"
 					>
 				</File>
 			</Filter>
@@ -447,10 +415,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Animation\Bibim\Sprite.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Animation\Bibim\SpriteSet.cpp"
 					>
 				</File>
@@ -458,19 +422,11 @@
 					RelativePath=".\Animation\Bibim\SpriteSet.h"
 					>
 				</File>
-				<File
-					RelativePath=".\Animation\Bibim\SpriteSet.inl"
-					>
-				</File>
 				<Filter
 					Name="Evaluation"
 					>
 					<File
 						RelativePath=".\Animation\Bibim\EvalBinaryOperators.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalBinaryOperators.inl"
 						>
 					</File>
 					<File
@@ -482,15 +438,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalBoard.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Animation\Bibim\EvalCaches.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalCaches.inl"
 						>
 					</File>
 					<File
@@ -502,10 +450,6 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalConstants.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Animation\Bibim\EvalContext.cpp"
 						>
 					</File>
@@ -514,23 +458,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalContext.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Animation\Bibim\EvalInterpolators.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalInterpolators.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Animation\Bibim\EvalRangedSequences.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalRangedSequences.inl"
 						>
 					</File>
 					<File
@@ -542,15 +474,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\Evals.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Animation\Bibim\EvalSelectors.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalSelectors.inl"
 						>
 					</File>
 					<File
@@ -558,15 +482,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalSequenceBase.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Animation\Bibim\EvalSequences.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalSequences.inl"
 						>
 					</File>
 					<File
@@ -578,15 +494,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalTimeflow.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Animation\Bibim\EvalUnaryOperators.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\EvalUnaryOperators.inl"
 						>
 					</File>
 					<File
@@ -598,23 +506,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalUnitRandom.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Animation\Bibim\EvalVariables.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalVariables.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Animation\Bibim\Sequences.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\Sequences.inl"
 						>
 					</File>
 				</Filter>
@@ -627,10 +523,6 @@
 					</File>
 					<File
 						RelativePath=".\Animation\Bibim\Ease.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\Ease.inl"
 						>
 					</File>
 					<File
@@ -650,19 +542,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\ElasticEasingCurves.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Animation\Bibim\OscillationCurve.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\Animation\Bibim\OscillationCurve.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Animation\Bibim\OscillationCurve.inl"
 						>
 					</File>
 				</Filter>
@@ -679,10 +563,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\AxisAlignedBoxShape2D.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Collision2D\Bibim\BoxShape2D.cpp"
 					>
 				</File>
@@ -691,19 +571,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\BoxShape2D.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Collision2D\Bibim\CollisionSpace2D.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Collision2D\Bibim\CollisionSpace2D.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Collision2D\Bibim\CollisionSpace2D.inl"
 					>
 				</File>
 				<File
@@ -727,10 +599,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\RaycastReport2D.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Collision2D\Bibim\SegmentShape2D.cpp"
 					>
 				</File>
@@ -739,19 +607,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\SegmentShape2D.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Collision2D\Bibim\Shape2D.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Collision2D\Bibim\Shape2D.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Collision2D\Bibim\Shape2D.inl"
 					>
 				</File>
 				<File
@@ -815,10 +675,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Gameplay\Bibim\BatchCommand.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Gameplay\Bibim\Command.cpp"
 					>
 				</File>
@@ -835,19 +691,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Gameplay\Bibim\CommandHistory.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Gameplay\Bibim\CommandQueue.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Gameplay\Bibim\CommandQueue.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Gameplay\Bibim\CommandQueue.inl"
 					>
 				</File>
 				<File
@@ -866,10 +714,6 @@
 					RelativePath=".\Gameplay\Bibim\SpatialObject2D.h"
 					>
 				</File>
-				<File
-					RelativePath=".\Gameplay\Bibim\SpatialObject2D.inl"
-					>
-				</File>
 				<Filter
 					Name="PathFinder"
 					>
@@ -882,19 +726,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Gameplay\Bibim\JumpPointPathFinder.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Gameplay\Bibim\PathFinder.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\Gameplay\Bibim\PathFinder.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Gameplay\Bibim\PathFinder.inl"
 						>
 					</File>
 				</Filter>
@@ -923,10 +759,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\IMEBase.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Input\Bibim\Key.cpp"
 					>
 				</File>
@@ -943,10 +775,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\Keyboard.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Input\Bibim\KeyboardState.cpp"
 					>
 				</File>
@@ -955,19 +783,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\KeyboardState.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Input\Bibim\Mouse.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Input\Bibim\Mouse.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Input\Bibim\Mouse.inl"
 					>
 				</File>
 				<File
@@ -982,10 +802,6 @@
 					RelativePath=".\Input\Bibim\MouseState.h"
 					>
 				</File>
-				<File
-					RelativePath=".\Input\Bibim\MouseState.inl"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="Scripting"
@@ -996,10 +812,6 @@
 				</File>
 				<File
 					RelativePath=".\Scripting\Bibim\Script.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Scripting\Bibim\Script.inl"
 					>
 				</File>
 				<File
@@ -1027,19 +839,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptStack.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Scripting\Bibim\ScriptThread.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Scripting\Bibim\ScriptThread.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Scripting\Bibim\ScriptThread.inl"
 					>
 				</File>
 				<Filter
@@ -1067,10 +871,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\AlarmClock.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Time\Bibim\Clock.h"
 					>
 				</File>
@@ -1091,19 +891,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\SubTimeline.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Time\Bibim\Timeline.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Time\Bibim\Timeline.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Time\Bibim\Timeline.inl"
 					>
 				</File>
 				<File
@@ -1115,19 +907,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\TimelineGameComponent.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Time\Bibim\TimelineGameModule.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Time\Bibim\TimelineGameModule.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Time\Bibim\TimelineGameModule.inl"
 					>
 				</File>
 				<File
@@ -1139,19 +923,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\UpdateableGameComponent.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Time\Bibim\UpdateableGameModule.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Time\Bibim\UpdateableGameModule.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Time\Bibim\UpdateableGameModule.inl"
 					>
 				</File>
 			</Filter>
@@ -1183,19 +959,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIDomain.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\UI\Bibim\UIElement.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\UI\Bibim\UIElement.h"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIElement.inl"
 					>
 				</File>
 				<File
@@ -1207,19 +975,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UILayout.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\UI\Bibim\UIRenderer.DX9.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\UI\Bibim\UIRenderer.DX9.h"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIRenderer.DX9.inl"
 					>
 				</File>
 				<File
@@ -1247,10 +1007,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIRenderer.GLES2.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\UI\Bibim\UIRenderer.h"
 					>
 				</File>
@@ -1260,10 +1016,6 @@
 				</File>
 				<File
 					RelativePath=".\UI\Bibim\UIRendererBase.h"
-					>
-				</File>
-				<File
-					RelativePath=".\UI\Bibim\UIRendererBase.inl"
 					>
 				</File>
 				<File
@@ -1286,19 +1038,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIAppEventDispatcher.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIAsyncEventQueue.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIAsyncEventQueue.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIAsyncEventQueue.inl"
 						>
 					</File>
 					<File
@@ -1310,19 +1054,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEventArgs.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIEventDispatcher.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIEventDispatcher.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIEventDispatcher.inl"
 						>
 					</File>
 					<File
@@ -1334,19 +1070,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEventHandler.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIEventID.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIEventID.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIEventID.inl"
 						>
 					</File>
 					<File
@@ -1358,19 +1086,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEventMap.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIFunctionEventHandler.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIFunctionEventHandler.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIFunctionEventHandler.inl"
 						>
 					</File>
 					<File
@@ -1382,19 +1102,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIFunctionTable.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIGamePadEventArgs.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIGamePadEventArgs.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIGamePadEventArgs.inl"
 						>
 					</File>
 					<File
@@ -1406,19 +1118,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIGamePadEventDispatcher.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIKeyboardEventArgs.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIKeyboardEventArgs.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIKeyboardEventArgs.inl"
 						>
 					</File>
 					<File
@@ -1430,19 +1134,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIKeyboardEventDispatcher.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIMouseButtonEventArgs.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIMouseButtonEventArgs.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIMouseButtonEventArgs.inl"
 						>
 					</File>
 					<File
@@ -1454,19 +1150,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIMouseEventArgs.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIMouseEventDispatcher.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIMouseEventDispatcher.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIMouseEventDispatcher.inl"
 						>
 					</File>
 					<File
@@ -1478,19 +1166,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIMouseWheelEventArgs.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UISequentialEventHandler.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UISequentialEventHandler.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UISequentialEventHandler.inl"
 						>
 					</File>
 				</Filter>
@@ -1506,19 +1186,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEffectMap.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIEffectStack.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIEffectStack.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIEffectStack.inl"
 						>
 					</File>
 					<Filter
@@ -1533,19 +1205,11 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIAfterImageEffect.inl"
-							>
-						</File>
-						<File
 							RelativePath=".\UI\Bibim\UIGeometryEffect.cpp"
 							>
 						</File>
 						<File
 							RelativePath=".\UI\Bibim\UIGeometryEffect.h"
-							>
-						</File>
-						<File
-							RelativePath=".\UI\Bibim\UIGeometryEffect.inl"
 							>
 						</File>
 						<File
@@ -1557,19 +1221,11 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UISineCurveEffect.inl"
-							>
-						</File>
-						<File
 							RelativePath=".\UI\Bibim\UITintEffect.cpp"
 							>
 						</File>
 						<File
 							RelativePath=".\UI\Bibim\UITintEffect.h"
-							>
-						</File>
-						<File
-							RelativePath=".\UI\Bibim\UITintEffect.inl"
 							>
 						</File>
 					</Filter>
@@ -1585,19 +1241,11 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIBlendingEffect.inl"
-							>
-						</File>
-						<File
 							RelativePath=".\UI\Bibim\UIColorMatrixEffect.cpp"
 							>
 						</File>
 						<File
 							RelativePath=".\UI\Bibim\UIColorMatrixEffect.h"
-							>
-						</File>
-						<File
-							RelativePath=".\UI\Bibim\UIColorMatrixEffect.inl"
 							>
 						</File>
 						<File
@@ -1609,10 +1257,6 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIMaskEffect.inl"
-							>
-						</File>
-						<File
 							RelativePath=".\UI\Bibim\UIOpacityMaskEffect.cpp"
 							>
 						</File>
@@ -1621,19 +1265,11 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIOpacityMaskEffect.inl"
-							>
-						</File>
-						<File
 							RelativePath=".\UI\Bibim\UIPixelEffect.cpp"
 							>
 						</File>
 						<File
 							RelativePath=".\UI\Bibim\UIPixelEffect.h"
-							>
-						</File>
-						<File
-							RelativePath=".\UI\Bibim\UIPixelEffect.inl"
 							>
 						</File>
 					</Filter>
@@ -1650,19 +1286,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIButton.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UICheckBox.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UICheckBox.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UICheckBox.inl"
 						>
 					</File>
 					<File
@@ -1674,19 +1302,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIDocument.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIEditText.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIEditText.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIEditText.inl"
 						>
 					</File>
 					<File
@@ -1698,19 +1318,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEllipse.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIImage.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIImage.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIImage.inl"
 						>
 					</File>
 					<File
@@ -1722,19 +1334,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UILabel.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIPanel.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIPanel.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIPanel.inl"
 						>
 					</File>
 					<File
@@ -1754,19 +1358,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIRect.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIRoundedRect.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIRoundedRect.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIRoundedRect.inl"
 						>
 					</File>
 					<File
@@ -1778,19 +1374,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIScrollablePanel.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIShape.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIShape.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIShape.inl"
 						>
 					</File>
 					<File
@@ -1802,19 +1390,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UISpark.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UISprite.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UISprite.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UISprite.inl"
 						>
 					</File>
 					<File
@@ -1826,10 +1406,6 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIVideo.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIVisual.cpp"
 						>
 					</File>
@@ -1838,19 +1414,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIVisual.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIWindow.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIWindow.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIWindow.inl"
 						>
 					</File>
 				</Filter>
@@ -1874,19 +1442,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UITransform2D.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UITransform3D.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UITransform3D.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UITransform3D.inl"
 						>
 					</File>
 				</Filter>
@@ -1902,19 +1462,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIBoundsContext.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIDrawingContext.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIDrawingContext.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIDrawingContext.inl"
 						>
 					</File>
 					<File
@@ -1926,10 +1478,6 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIHandledDrawingContext.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIPickingContext.cpp"
 						>
 					</File>
@@ -1938,19 +1486,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIPickingContext.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\UI\Bibim\UIVisualVisitor.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\UI\Bibim\UIVisualVisitor.h"
-						>
-					</File>
-					<File
-						RelativePath=".\UI\Bibim\UIVisualVisitor.inl"
 						>
 					</File>
 				</Filter>
@@ -1964,10 +1504,6 @@
 				</File>
 				<File
 					RelativePath=".\Graphics\Bibim\BitMask.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\BitMask.inl"
 					>
 				</File>
 				<File
@@ -1987,10 +1523,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\GraphicsCapabilities.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Graphics\Bibim\GraphicsDevice.h"
 					>
 				</File>
@@ -2003,10 +1535,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\GraphicsDeviceBase.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Graphics\Bibim\Image.cpp"
 					>
 				</File>
@@ -2015,19 +1543,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\Image.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Graphics\Bibim\ImageSet.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Graphics\Bibim\ImageSet.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\ImageSet.inl"
 					>
 				</File>
 				<File
@@ -2051,10 +1571,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\ScreenshotPrinter.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Graphics\Bibim\ShaderEffect.h"
 					>
 				</File>
@@ -2074,10 +1590,6 @@
 					RelativePath=".\Graphics\Bibim\Window.h"
 					>
 				</File>
-				<File
-					RelativePath=".\Graphics\Bibim\Window.inl"
-					>
-				</File>
 				<Filter
 					Name="DX9"
 					>
@@ -2090,19 +1602,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\DynamicTexture2D.DX9.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.inl"
 						>
 					</File>
 					<File
@@ -2114,19 +1618,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.inl"
 						>
 					</File>
 					<File
@@ -2143,10 +1639,6 @@
 					</File>
 					<File
 						RelativePath=".\Graphics\Bibim\Texture2D.DX9.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\Texture2D.DX9.inl"
 						>
 					</File>
 				</Filter>
@@ -2175,10 +1667,6 @@
 					</File>
 					<File
 						RelativePath=".\Graphics\Bibim\DynamicTexture2D.GLES2.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\DynamicTexture2D.GLES2.inl"
 						>
 					</File>
 					<File
@@ -2230,10 +1718,6 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\GraphicsDevice.GLES2.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.GLES2.cpp"
 						>
 						<FileConfiguration
@@ -2258,10 +1742,6 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.GLES2.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Graphics\Bibim\ShaderEffect.GLES2.cpp"
 						>
 						<FileConfiguration
@@ -2283,10 +1763,6 @@
 					</File>
 					<File
 						RelativePath=".\Graphics\Bibim\ShaderEffect.GLES2.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\Shadereffect.GLES2.inl"
 						>
 					</File>
 					<File
@@ -2335,10 +1811,6 @@
 					</File>
 					<File
 						RelativePath=".\Graphics\Bibim\Texture2D.GLES2.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Graphics\Bibim\Texture2D.GLES2.inl"
 						>
 					</File>
 				</Filter>
@@ -2486,10 +1958,6 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Audio\Bibim\AudioDevice.Irrklang.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Audio\Bibim\BGM.Irrklang.cpp"
 						>
 					</File>
@@ -2498,19 +1966,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Audio\Bibim\BGM.Irrklang.inl"
-						>
-					</File>
-					<File
 						RelativePath=".\Audio\Bibim\SoundFX.Irrklang.cpp"
 						>
 					</File>
 					<File
 						RelativePath=".\Audio\Bibim\SoundFX.Irrklang.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Audio\Bibim\SoundFX.Irrklang.inl"
 						>
 					</File>
 				</Filter>
@@ -2524,10 +1984,6 @@
 				</File>
 				<File
 					RelativePath=".\GFX\Bibim\SparkParticleEngine.h"
-					>
-				</File>
-				<File
-					RelativePath=".\GFX\Bibim\SparkParticleEngine.inl"
 					>
 				</File>
 			</Filter>

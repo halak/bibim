@@ -46,6 +46,18 @@
                 FunctionTable functionTable;
                 StringCollection stringTable;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const Script::Buffer& Script::GetBuffer() const
+        {
+            return buffer;
+        }
+
+        const Script::StringCollection& Script::GetStringTable() const
+        {
+            return stringTable;
+        }
     }
 
 #endif

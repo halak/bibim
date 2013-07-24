@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_AUDIODEVICE_IRRKLANG_H__
 #define __BIBIM_AUDIODEVICE_IRRKLANG_H__
 
@@ -27,8 +27,18 @@
             private:
                 irrklang::ISoundEngine* engine;
         };
-    }
 
-#   include <Bibim/AudioDevice.Irrklang.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        irrklang::ISoundEngine* AudioDevice::GetEngine() const
+        {
+            return engine;
+        }
+
+        float AudioDevice::GetDuration(const String& uri) const
+        {
+            return GetDurationByChars(uri.CStr());
+        }
+    }
 
 #endif

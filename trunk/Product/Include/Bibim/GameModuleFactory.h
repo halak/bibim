@@ -19,8 +19,21 @@
                 static void AddEntry(int id, CreateFunction function);
                 static void SortEntries();
         };
-    }
 
-#    include <Bibim/GameModuleFactory.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        template <typename T> void GameModuleFactory::AddEntry()
+        {
+            struct Create
+            {
+                static GameModule* Do()
+                {
+                    return new T();
+                }
+            };
+
+            AddEntry(T::ClassID, &Create::Do);
+        }
+    }
 
 #endif

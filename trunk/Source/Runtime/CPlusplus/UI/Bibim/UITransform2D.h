@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UITRANSFORM2D_H__
 #define __BIBIM_UITRANSFORM2D_H__
 

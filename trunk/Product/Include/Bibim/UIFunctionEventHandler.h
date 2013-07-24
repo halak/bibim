@@ -32,8 +32,18 @@
                 UIFunctionTable::FunctionType callable;
                 bool callableChanged;
         };
-    }
 
-#   include <Bibim/UIFunctionEventHandler.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const UIFunctionTable* UIFunctionEventHandler::GetTable() const
+        {
+            return table;
+        }
+
+        const String& UIFunctionEventHandler::GetFunctionName() const
+        {
+            return functionName;
+        }
+    }
 
 #endif

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_PATHFINDER_H__
 #define __BIBIM_PATHFINDER_H__
 
@@ -56,7 +56,5 @@
                 Point2Collection Find(Grid* grid, Point2 start, Point2 end);
         };
     }
-
-#   include <Bibim/PathFinder.inl>
 
 #endif

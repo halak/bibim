@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_BItMASK_H__
 #define __BIBIM_BItMASK_H__
 
@@ -30,6 +30,23 @@
 
                 static const int BitsPerByte = 8;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        int BitMask::GetWidth() const
+        {
+            return width;
+        }
+
+        int BitMask::GetHeight() const
+        {
+            return height;
+        }
+
+        int BitMask::GetPitch() const
+        {
+            return pitch;
+        }
     }
 
 #endif

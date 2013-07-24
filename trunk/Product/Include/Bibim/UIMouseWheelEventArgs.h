@@ -26,8 +26,13 @@
             private:
                 int wheelDelta;
         };
-    }
 
-#   include <Bibim/UIMouseWheelEventArgs.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        int UIMouseWheelEventArgs::GetWheelDelta() const
+        {
+            return wheelDelta;
+        }
+    }
 
 #endif

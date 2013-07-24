@@ -74,8 +74,20 @@
         BBDeclareEvalClass(EvalVector3);
         BBDeclareEvalClass(EvalVector4);
         BBDeclareEvalClass(EvalGameAsset);
-    }
 
-#   include <Bibim/Evals.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        template <typename T>
+        void EvalTemplate<T>::OnRead(ComponentStreamReader& reader)
+        {
+            Base::OnRead(reader);
+        }
+
+        template <typename T>
+        void EvalTemplate<T>::OnCopy(const GameComponent* original, CloningContext& context)
+        {
+            Base::OnCopy(original, context);
+        }
+    }
 
 #endif

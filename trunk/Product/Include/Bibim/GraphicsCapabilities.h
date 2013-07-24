@@ -70,8 +70,28 @@
         typedef GraphicsCapabilities::DisplayModeCollection DisplayModeCollection;
         typedef GraphicsCapabilities::VertexShader VertexShaderVersion;
         typedef GraphicsCapabilities::PixelShader PixelShaderVersion;
-    }
 
-#   include <Bibim/GraphicsCapabilities.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const GraphicsCapabilities::DisplayModeCollection& GraphicsCapabilities::GetDisplayModes() const
+        {
+            return displayModes;
+        }
+
+        GraphicsCapabilities::VertexShader GraphicsCapabilities::GetVertexShaderVersion() const
+        {
+            return vertexShaderVersion;
+        }
+
+        GraphicsCapabilities::PixelShader GraphicsCapabilities::GetPixelShaderVersion() const
+        {
+            return pixelShaderVersion;
+        }
+
+        bool GraphicsCapabilities::IsShaderSupported() const
+        {
+            return vertexShaderVersion >= VS20 && pixelShaderVersion >= PS20;
+        }
+    }
 
 #endif

@@ -33,6 +33,13 @@
 
                 friend class UIVisual;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        UIWindow* UIDomain::GetRoot() const
+        {
+            return root;
+        }
     }
 
 #endif

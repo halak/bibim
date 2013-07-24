@@ -32,8 +32,18 @@
                 UIGeometryEffectPtr geomEffect;
                 PixelEffectCollection pixelEffects;
         };
-    }
 
-#   include <Bibim/UIEffectMap.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        UIGeometryEffect* UIEffectMap::GetGeometryEffect() const
+        {
+            return geomEffect;
+        }
+
+        const UIEffectMap::PixelEffectCollection& UIEffectMap::GetPixelEffects() const
+        {
+            return pixelEffects;
+        }
+    }
 
 #endif

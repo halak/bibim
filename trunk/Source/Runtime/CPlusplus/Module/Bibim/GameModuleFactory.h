@@ -19,6 +19,21 @@
                 static void AddEntry(int id, CreateFunction function);
                 static void SortEntries();
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        template <typename T> void GameModuleFactory::AddEntry()
+        {
+            struct Create
+            {
+                static GameModule* Do()
+                {
+                    return new T();
+                }
+            };
+
+            AddEntry(T::ClassID, &Create::Do);
+        }
     }
 
 #endif

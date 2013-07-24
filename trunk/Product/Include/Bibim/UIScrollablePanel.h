@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UISCROLLABLEPANEL_H__
 #define __BIBIM_UISCROLLABLEPANEL_H__
 
@@ -34,8 +34,13 @@
                 Point2 lastMousePosition;
                 Point2 startMousePosition;
         };
-    }
 
-#   include <Bibim/UIScrollablePanel.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        UIVisual* UIScrollablePanel::GetContent() const
+        {
+            return content;
+        }
+    }
 
 #endif

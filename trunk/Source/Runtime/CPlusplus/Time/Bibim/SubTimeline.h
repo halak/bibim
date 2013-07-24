@@ -20,6 +20,13 @@
             private:
                 Timeline* parent;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Timeline* SubTimeline::GetParent() const
+        {
+            return parent;
+        }
     }
 
 #endif

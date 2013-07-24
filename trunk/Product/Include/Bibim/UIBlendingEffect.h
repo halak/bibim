@@ -47,9 +47,19 @@
             private:
                 BlendMode mode;
         };
-    }
 
-#   include <Bibim/UIBlendingEffect.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        BlendMode UIBlendingEffect::GetMode() const
+        {
+            return mode;
+        }
+
+        void UIBlendingEffect::SetMode(BlendMode value)
+        {
+            mode = value;
+        }
+    }
 
     BBBindLuaEnum(Bibim::BlendMode,
                   Bibim::UIBlendingEffect::ConvertFromStringToBlendMode,
