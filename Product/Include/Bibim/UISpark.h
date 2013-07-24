@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UISPARK_H__
 #define __BIBIM_UISPARK_H__
 
@@ -76,8 +76,18 @@
                 bool isUpdateable;
                 bool autoRemove;
         };
-    }
 
-#   include <Bibim/UISpark.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Timeline* UISpark::GetTimeline() const
+        {
+            return timeline;
+        }
+
+        bool UISpark::GetAutoRemove() const
+        {
+            return autoRemove;
+        }
+    }
 
 #endif

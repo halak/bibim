@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_BGM_ANDROID_H__
 #define __BIBIM_BGM_ANDROID_H__
 
@@ -56,8 +56,33 @@
                 float crossfadeTime;
                 bool mute;
         };
-    }
 
-#   include <Bibim/BGM.AL.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        void BGM::Change(const String& name)
+        {
+            Change(name, 0.0f);
+        }
+
+        AudioDevice* BGM::GetAudioDevice() const
+        {
+            return audioDevice;
+        }
+
+        float BGM::GetVolume() const
+        {
+            return volume;
+        }
+
+        bool BGM::GetMute() const
+        {
+            return mute;
+        }
+
+        float BGM::GetCrossfadeTime() const
+        {
+            return crossfadeTime;
+        }
+    }
 
 #endif

@@ -31,8 +31,13 @@
             private:
                 NamedFunctionMap items;
         };
-    }
 
-#   include <Bibim/UIFunctionTable.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        void UIFunctionTable::Add(const String& name, GlobalFunctionType function)
+        {
+            Add(name, function, nullptr);
+        }
+    }
 
 #endif

@@ -36,8 +36,18 @@
                 float duration;
                 ItemCollection items;
         };
-    }
 
-#   include <Bibim/EvalBoard.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        float EvalBoard::GetDuration() const
+        {
+            return duration;
+        }
+
+        const EvalBoard::ItemCollection& EvalBoard::GetItems() const
+        {
+            return items;
+        }
+    }
 
 #endif

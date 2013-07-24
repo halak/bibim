@@ -23,8 +23,13 @@
             private:
                 IDirect3DSurface9* d3dSurface;
         };
-    }
 
-#   include <Bibim/RenderTargetTexture2D.DX9.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        IDirect3DSurface9* RenderTargetTexture2D::GetD3DSurface() const
+        {
+            return d3dSurface;
+        }
+    }
 
 #endif

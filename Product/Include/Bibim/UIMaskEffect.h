@@ -38,8 +38,20 @@
             private:
                 ImagePtr mask;
         };
-    }
 
-#   include <Bibim/UIMaskEffect.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Image* UIMaskEffect::MaskEffector::GetMask() const
+        {
+            return mask;
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Image* UIMaskEffect::GetMask() const
+        {
+            return mask;
+        }
+    }
 
 #endif

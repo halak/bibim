@@ -44,8 +44,18 @@
                 GlyphTable(const GlyphTable&);
                 GlyphTable& operator = (const GlyphTable&);
         };
-    }
 
-#   include <Bibim/GlyphTable.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const GlyphTable::GlyphDictionary& GlyphTable::GetGlyphs() const
+        {
+            return glyphs;
+        }
+
+        const GlyphTable::SurfaceCollection& GlyphTable::GetSurfaces() const
+        {
+            return surfaces;
+        }
+    }
 
 #endif

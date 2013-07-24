@@ -37,6 +37,13 @@
             private:
                 HandlerCollection handlers;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const UISequentialEventHandler::HandlerCollection& UISequentialEventHandler::GetHandlers() const
+        {
+            return handlers;
+        }
     }
 
 #endif

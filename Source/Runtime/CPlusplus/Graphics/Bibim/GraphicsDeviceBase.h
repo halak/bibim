@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_GRAPHICSDEVICE_BASE_H__
 #define __BIBIM_GRAPHICSDEVICE_BASE_H__
 
@@ -54,6 +54,13 @@
                 bool isReset;
                 bool __padding__[3];
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Window* GraphicsDeviceBase::GetWindow() const
+        {
+            return window;
+        }
     }
 
 #endif

@@ -52,6 +52,18 @@
 
                 bool fullscreen;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        bool GraphicsDevice::GetFullscreen() const
+        {
+            return fullscreen;
+        }
+
+        const GraphicsCapabilities& GraphicsDevice::GetCapabilities() const
+        {
+            return capabilities;
+        }
     }
 
 #endif

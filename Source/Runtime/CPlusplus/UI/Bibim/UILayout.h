@@ -20,6 +20,13 @@
             private:
                 UIWindowPtr root;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        UIWindow* UILayout::GetRoot() const
+        {
+            return root;
+        }
     }
 
 #endif

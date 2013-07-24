@@ -29,6 +29,23 @@
                 bool isShaderFunctionImplemented;
                 bool reserved[2];
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        int UIPixelEffect::GetSlotIndex() const
+        {
+            return slotIndex;
+        }
+
+        bool UIPixelEffect::IsFixedFunctionImplemented() const
+        {
+            return isFixedFunctionImplemented;
+        }
+
+        bool UIPixelEffect::IsShaderFunctionImplemented() const
+        {
+            return isShaderFunctionImplemented;
+        }
     }
 
     BBBindLua(Bibim::UIPixelEffect);

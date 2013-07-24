@@ -23,6 +23,13 @@
             private:
                 IDirect3DSurface9* d3dSurface;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        IDirect3DSurface9* RenderTargetTexture2D::GetD3DSurface() const
+        {
+            return d3dSurface;
+        }
     }
 
 #endif

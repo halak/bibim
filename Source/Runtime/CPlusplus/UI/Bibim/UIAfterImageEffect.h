@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UIAFTERIMAGEEFFECT_H__
 #define __BIBIM_UIAFTERIMAGEEFFECT_H__
 
@@ -77,6 +77,28 @@
                 Matrix4 currentTransform;
                 AfterImageDictionary afterImages;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        int UIAfterImageEffect::GetSkippedFrames() const
+        {
+            return skippedFrames;
+        }
+
+        int UIAfterImageEffect::GetTotalFrames() const
+        {
+            return totalFrames;
+        }
+
+        bool UIAfterImageEffect::GetActive() const
+        {
+            return active;
+        }
+
+        void UIAfterImageEffect::SetActive(bool value)
+        {
+            active = value;
+        }
     }
 
 #endif

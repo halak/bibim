@@ -40,14 +40,6 @@
             // Container
                 class SequenceDictionary;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
-            // Exception
-                class Exception;
-                    class BadArgumentException;
-                    class BadCastException;
-                    class NotSupportedException;
-                    class OutOfRangeException;
-                    class InvalidOperationException;
-            ////////////////////////////////////////////////////////////////////////////////////////////////////
             // IO
                 class BinaryReader;
                 class BinaryWriter;

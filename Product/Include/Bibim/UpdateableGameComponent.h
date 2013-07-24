@@ -21,8 +21,19 @@
             private:
                 int lastTimestamp;
         };
-    }
 
-#    include <Bibim/UpdateableGameComponent.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        bool UpdateableGameComponent::Seal(int timestamp)
+        {
+            if (lastTimestamp != timestamp)
+            {
+                lastTimestamp = timestamp;
+                return false;
+            }
+            else
+                return true;
+        }
+    }
 
 #endif

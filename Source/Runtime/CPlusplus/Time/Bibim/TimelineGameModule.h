@@ -22,6 +22,13 @@
             private:
                 Timeline* timeline;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Timeline* TimelineGameModule::GetTimeline() const
+        {
+            return timeline;
+        }
     }
 
 #endif

@@ -61,6 +61,13 @@
 
         typedef ShaderEffect::Parameter ShaderEffectParameter;
         typedef SharedPointer<ShaderEffectParameter> ShaderEffectParameterPtr;
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        ID3DXEffect* ShaderEffect::GetHandle() const
+        {
+            return handle;
+        }
     }
 
 #endif

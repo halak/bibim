@@ -32,6 +32,4 @@
 #       define BBEndScriptNativeFunction()   }; Bibim::ScriptNativeFunctionTable::AddRange(entries, sizeof(entries) / sizeof(entries[0]));
     }
 
-#   include <Bibim/ScriptNativeFunctionTable.inl>
-
 #endif

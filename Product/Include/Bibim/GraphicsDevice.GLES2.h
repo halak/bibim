@@ -52,8 +52,18 @@
 
                 bool fullscreen;
         };
-    }
 
-#   include <Bibim/GraphicsDevice.GLES2.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        bool GraphicsDevice::GetFullscreen() const
+        {
+            return fullscreen;
+        }
+
+        const GraphicsCapabilities& GraphicsDevice::GetCapabilities() const
+        {
+            return capabilities;
+        }
+    }
 
 #endif

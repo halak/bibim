@@ -40,8 +40,18 @@
                 int fontRevision;
                 bool fontStringChanged;
         };
-    }
 
-#   include <Bibim/UILabel.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const String& UILabel::GetText() const
+        {
+            return text;
+        }
+
+        Font* UILabel::GetFont() const
+        {
+            return font;
+        }
+    }
 
 #endif

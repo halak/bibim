@@ -36,6 +36,18 @@
                 float duration;
                 ItemCollection items;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        float EvalBoard::GetDuration() const
+        {
+            return duration;
+        }
+
+        const EvalBoard::ItemCollection& EvalBoard::GetItems() const
+        {
+            return items;
+        }
     }
 
 #endif

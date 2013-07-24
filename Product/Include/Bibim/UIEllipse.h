@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UIELLIPSE_H__
 #define __BIBIM_UIELLIPSE_H__
 
@@ -19,7 +19,5 @@
                 virtual void DrawShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& bounds, Color color);
         };
     }
-
-#   include <Bibim/UIEllipse.inl>
 
 #endif

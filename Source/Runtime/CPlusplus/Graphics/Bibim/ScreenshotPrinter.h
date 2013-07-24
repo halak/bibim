@@ -25,6 +25,13 @@
                 GraphicsDevice* graphicsDevice;
                 RenderTargetTexture2DPtr renderTarget;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        GraphicsDevice* ScreenshotPrinter::GetGraphicsDevice() const
+        {
+            return graphicsDevice;
+        }
     }
 
 #endif

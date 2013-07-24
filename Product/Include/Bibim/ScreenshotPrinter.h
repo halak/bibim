@@ -25,8 +25,13 @@
                 GraphicsDevice* graphicsDevice;
                 RenderTargetTexture2DPtr renderTarget;
         };
-    }
 
-#   include <Bibim/ScreenshotPrinter.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        GraphicsDevice* ScreenshotPrinter::GetGraphicsDevice() const
+        {
+            return graphicsDevice;
+        }
+    }
 
 #endif

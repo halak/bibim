@@ -39,6 +39,13 @@
                 int maxDepth;
                 bool isShaderFunctionRendering;
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const UIEffectStack::EffectorCollection& UIEffectStack::GetTopEffectors() const
+        {
+            return topEffectors;
+        }
     }
 
 #endif

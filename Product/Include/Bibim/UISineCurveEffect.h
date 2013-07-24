@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __BIBIM_UISINECURVEEFFECT_H__
 #define __BIBIM_UISINECURVEEFFECT_H__
 
@@ -69,9 +69,29 @@
                 float startAxisWeight;
                 float endAxisWeight;
         };
-    }
 
-#   include <Bibim/UISineCurveEffect.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        float UISineCurveEffect::GetAmplitude() const
+        {
+            return amplitude;
+        }
+
+        float UISineCurveEffect::GetOffset() const
+        {
+            return offset;
+        }
+
+        float UISineCurveEffect::GetLength() const
+        {
+            return length;
+        }
+
+        UISineCurveEffect::Form UISineCurveEffect::GetForm() const
+        {
+            return form;
+        }
+    }
 
     BBBindLuaEnum(Bibim::UISineCurveEffect::Form,
                   Bibim::UISineCurveEffect::ConvertFromStringToForm,

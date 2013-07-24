@@ -58,6 +58,18 @@
 
                 virtual float Ease(float t) const { return Ease::InOutElastic(t, GetAmplitude(), GetPeriod()); }
         };
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        float ElasticEasingCurve::GetAmplitude() const
+        {
+            return amplitude;
+        }
+
+        float ElasticEasingCurve::GetPeriod() const
+        {
+            return period;
+        }
     }
 
 #endif

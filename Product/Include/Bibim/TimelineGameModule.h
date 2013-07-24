@@ -22,8 +22,13 @@
             private:
                 Timeline* timeline;
         };
-    }
 
-#    include <Bibim/TimelineGameModule.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Timeline* TimelineGameModule::GetTimeline() const
+        {
+            return timeline;
+        }
+    }
 
 #endif

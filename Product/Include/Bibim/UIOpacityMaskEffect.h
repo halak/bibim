@@ -91,9 +91,24 @@
                 FillStyle fill;
                 float invLength;
         };
-    }
 
-#   include <Bibim/UIOpacityMaskEffect.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        float UIOpacityMaskEffect::GetStartPoint() const
+        {
+            return startPoint;
+        }
+
+        float UIOpacityMaskEffect::GetLength() const
+        {
+            return length;
+        }
+
+        UIOpacityMaskEffect::FillStyle UIOpacityMaskEffect::GetFill() const
+        {
+            return fill;
+        }
+    }
 
     BBBindLuaEnum(Bibim::UIOpacityMaskEffect::FillStyle,
                   Bibim::UIOpacityMaskEffect::ConvertFromStringToFillStyle,

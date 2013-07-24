@@ -28,6 +28,13 @@
         };
 
         BBDeclareEvalClass(EvalUnitRandom);
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        int EvalUnitRandom::GetInitialSeed() const
+        {
+            return initialSeed;
+        }
     }
 
 #endif

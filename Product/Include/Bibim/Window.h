@@ -91,8 +91,12 @@
                 std::vector<MouseEventListener*> mouseEventListeners;
                 std::vector<KeyboardEventListener*> keyboardEventListeners;
         };
-    }
 
-#   include <Bibim/Window.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        Window::Window()
+        {
+        }
+    }
 
 #endif

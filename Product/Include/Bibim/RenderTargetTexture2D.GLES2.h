@@ -15,8 +15,10 @@
                 RenderTargetTexture2D(GraphicsDevice* graphicsDevice, int width, int height);
                 virtual ~RenderTargetTexture2D();
         };
-    }
 
-#   include <Bibim/RenderTargetTexture2D.GLES2.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}
+    }
 
 #endif

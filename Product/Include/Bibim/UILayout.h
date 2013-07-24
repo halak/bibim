@@ -20,8 +20,13 @@
             private:
                 UIWindowPtr root;
         };
-    }
 
-#   include <Bibim/UILayout.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        UIWindow* UILayout::GetRoot() const
+        {
+            return root;
+        }
+    }
 
 #endif

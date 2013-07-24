@@ -47,7 +47,7 @@ def copy_headers(module_name):
 
     errors = []
     for name in names:
-        if (file_ext(name) not in ('h', 'inl')):
+        if (file_ext(name) not in ('h',)):
             continue
 
         srcname = os.path.join(src, name)

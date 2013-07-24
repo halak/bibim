@@ -46,8 +46,18 @@
                 FunctionTable functionTable;
                 StringCollection stringTable;
         };
-    }
 
-#   include <Bibim/Script.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const Script::Buffer& Script::GetBuffer() const
+        {
+            return buffer;
+        }
+
+        const Script::StringCollection& Script::GetStringTable() const
+        {
+            return stringTable;
+        }
+    }
 
 #endif

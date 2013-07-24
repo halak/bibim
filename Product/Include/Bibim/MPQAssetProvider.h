@@ -36,8 +36,13 @@
             private:
                 friend class MPQAssetPreloadingTask;
         };
-    }
 
-#   include <Bibim/MPQAssetProvider.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        MPQ* MPQAssetProvider::GetMPQ() const
+        {
+            return mpq;
+        }
+    }
 
 #endif

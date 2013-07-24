@@ -33,8 +33,13 @@
 
                 friend class UIVisual;
         };
-    }
 
-#   include <Bibim/UIDomain.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        UIWindow* UIDomain::GetRoot() const
+        {
+            return root;
+        }
+    }
 
 #endif
