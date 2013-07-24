@@ -19,7 +19,6 @@ MODULES = (
     'Module',
     'Net',
     'Scripting',
-    'SFX',
     'Startup',
     'Threading',
     'Time',

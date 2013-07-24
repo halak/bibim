@@ -1,6 +1,4 @@
-﻿#include <Bibim/ComponentStreamReader.h>
-
-namespace Bibim
+﻿namespace Bibim
 {
     template <typename T, template <typename U> class TOperator, char a, char b, char c, char d>
     EvalInterpolatorTemplate<T, TOperator, a, b, c, d>* EvalInterpolatorTemplate<T, TOperator, a, b, c, d>::Clone() const

@@ -1,6 +1,4 @@
-﻿#include <Bibim/Math.h>
-
-namespace Bibim
+﻿namespace Bibim
 {
     float Ease::Linear(float t)
     {

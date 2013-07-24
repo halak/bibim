@@ -1,6 +1,4 @@
-﻿#include <Bibim/ComponentStreamReader.h>
-
-namespace Bibim
+﻿namespace Bibim
 {
     template <typename T, typename TSequence, typename TKeyframe, char a, char b, char c, char d>
     EvalSequenceTemplate<T, TSequence, TKeyframe, a, b, c, d>::EvalSequenceTemplate()
