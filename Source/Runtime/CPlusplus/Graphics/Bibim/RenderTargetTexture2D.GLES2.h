@@ -15,10 +15,6 @@
                 RenderTargetTexture2D(GraphicsDevice* graphicsDevice, int width, int height);
                 virtual ~RenderTargetTexture2D();
         };
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-}
     }
 
 #endif
