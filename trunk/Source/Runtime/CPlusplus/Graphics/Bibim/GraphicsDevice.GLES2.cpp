@@ -3,7 +3,6 @@
 #include <Bibim/Assert.h>
 #include <Bibim/CheckedRelease.h>
 #include <Bibim/Color.h>
-#include <Bibim/Exception.h>
 #include <Bibim/Log.h>
 #include <Bibim/RenderTargetTexture2D.GLES2.h>
 #include <Bibim/Window.h>
