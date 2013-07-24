@@ -2160,7 +2160,7 @@ namespace Bibim
 
     StandardGame::RemoteDebugger::RemoteDebugger()
         : syncCountdown(0),
-          socket(new Socket("175.197.76.40", 51893)),
+          socket(new Socket("127.0.0.1", 51893)),
           queryStream(new NetworkStream(socket)),
           selectedVisual(nullptr)
     {
