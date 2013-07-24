@@ -31,8 +31,13 @@
                 static GameFramework* Create();
                 static GameFramework* SingletonInstance;
         };
-    }
 
-#   include <Bibim/GameFramework.Android.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        IME* GameFramework::GetIME() const
+        {
+            return ime;
+        }
+    }
 
 #endif

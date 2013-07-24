@@ -1865,15 +1865,6 @@
     <None Include="Collision2D\Bibim\Shape2D.inl">
       <Filter>03. Game\Collision2D</Filter>
     </None>
-    <None Include="Diagnostics\Bibim\FileLogger.inl">
-      <Filter>03. Game\Diagnostics</Filter>
-    </None>
-    <None Include="Diagnostics\Bibim\Logger.inl">
-      <Filter>03. Game\Diagnostics</Filter>
-    </None>
-    <None Include="Diagnostics\Bibim\SystemLogger.inl">
-      <Filter>03. Game\Diagnostics</Filter>
-    </None>
     <None Include="Gameplay\Bibim\BatchCommand.inl">
       <Filter>03. Game\Gameplay</Filter>
     </None>
@@ -2147,53 +2138,8 @@
     <None Include="Graphics\Bibim\Texture2D.GLES2.inl">
       <Filter>03. Game\Graphics\GLES2</Filter>
     </None>
-    <None Include="Framework\Bibim\GameFramework.Windows.inl">
-      <Filter>03. Game\Framework</Filter>
-    </None>
-    <None Include="Framework\Bibim\GameWindow.Windows.inl">
-      <Filter>03. Game\Framework</Filter>
-    </None>
     <None Include="GFX\Bibim\SparkParticleEngine.inl">
       <Filter>03. Game\GFX</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Environment.Windows.inl">
-      <Filter>02. System</Filter>
-    </None>
-    <None Include="IPC\Bibim\PipeClientStream.Windows.inl">
-      <Filter>02. System\IPC</Filter>
-    </None>
-    <None Include="IPC\Bibim\PipeServerStream.Windows.inl">
-      <Filter>02. System\IPC</Filter>
-    </None>
-    <None Include="IPC\Bibim\PipeStream.Windows.inl">
-      <Filter>02. System\IPC</Filter>
-    </None>
-    <None Include="Threading\Bibim\AutoLocker.inl">
-      <Filter>02. System\Threading</Filter>
-    </None>
-    <None Include="Threading\Bibim\ManualLocker.inl">
-      <Filter>02. System\Threading</Filter>
-    </None>
-    <None Include="Threading\Bibim\Thread.Windows.inl">
-      <Filter>02. System\Threading</Filter>
-    </None>
-    <None Include="Foundation\Bibim\BinaryReader.inl">
-      <Filter>02. System\IO</Filter>
-    </None>
-    <None Include="Foundation\Bibim\BinaryWriter.inl">
-      <Filter>02. System\IO</Filter>
-    </None>
-    <None Include="Foundation\Bibim\DumpStream.inl">
-      <Filter>02. System\IO</Filter>
-    </None>
-    <None Include="Foundation\Bibim\MemoryStream.inl">
-      <Filter>02. System\IO</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Environment.Android.inl">
-      <Filter>02. System</Filter>
-    </None>
-    <None Include="Foundation\Bibim\Environment.iOS.inl">
-      <Filter>02. System</Filter>
     </None>
     <None Include="Audio\Bibim\SoundFX.Irrklang.inl">
       <Filter>03. Game\Audio\Irrklang</Filter>
@@ -2207,18 +2153,6 @@
     <None Include="Audio\Bibim\BGM.h">
       <Filter>03. Game\Audio</Filter>
     </None>
-    <None Include="Framework\Bibim\GameFramework.Android.inl">
-      <Filter>03. Game\Framework</Filter>
-    </None>
-    <None Include="Framework\Bibim\GameFrameworkBase.inl">
-      <Filter>03. Game\Framework</Filter>
-    </None>
-    <None Include="Framework\Bibim\Lua.inl">
-      <Filter>03. Game\Framework</Filter>
-    </None>
-    <None Include="Framework\Bibim\StandardGame.inl">
-      <Filter>03. Game\Framework</Filter>
-    </None>
     <None Include="UI\Bibim\UIScrollablePanel.inl">
       <Filter>03. Game\UI\Visuals</Filter>
     </None>
@@ -2230,9 +2164,6 @@
     </None>
     <None Include="Asset\Bibim\PipedAssetProvider.Default.inl">
       <Filter>03. Game\%28Asset%29\Providers</Filter>
-    </None>
-    <None Include="Framework\Bibim\Preferences.inl">
-      <Filter>03. Game\Framework</Filter>
     </None>
     <None Include="UI\Bibim\UIDocument.inl">
       <Filter>03. Game\UI\Visuals</Filter>
@@ -2254,12 +2185,6 @@
     </None>
     <None Include="Audio\Bibim\SoundFX.AL.inl">
       <Filter>03. Game\Audio\AL</Filter>
-    </None>
-    <None Include="Framework\Bibim\GameWindow.Mobile.inl">
-      <Filter>03. Game\Framework</Filter>
-    </None>
-    <None Include="Framework\Bibim\GameFramework.iOS.inl">
-      <Filter>03. Game\Framework</Filter>
     </None>
     <None Include="UI\Bibim\UIRoundedRect.inl">
       <Filter>03. Game\UI\Visuals</Filter>

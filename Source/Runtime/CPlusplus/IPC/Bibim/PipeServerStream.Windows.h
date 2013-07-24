@@ -24,6 +24,4 @@
         };
     }
 
-#   include <Bibim/PipeServerStream.Windows.inl>
-
 #endif

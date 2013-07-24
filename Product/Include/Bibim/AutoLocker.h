@@ -19,8 +19,19 @@
         };
 
 #       define BBAutoLock(lock) Bibim::AutoLocker lock##Locker(lock);
-    }
 
-#   include <Bibim/AutoLocker.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        AutoLocker::AutoLocker(Lock& lock)
+            : lock(lock)
+        {
+            lock.Acquire();
+        }
+
+        AutoLocker::~AutoLocker()
+        {
+            lock.Unacquire();
+        }
+    }
 
 #endif

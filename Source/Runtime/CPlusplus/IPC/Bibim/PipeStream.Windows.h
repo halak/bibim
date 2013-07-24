@@ -50,8 +50,28 @@
                 String name;
                 AccessMode accessMode;
         };
-    }
 
-#   include <Bibim/PipeStream.Windows.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const String& PipeStream::GetName() const
+        {
+            return name;
+        }
+
+        PipeStream::AccessMode PipeStream::GetAccessMode() const
+        {
+            return accessMode;
+        }
+
+        HANDLE PipeStream::GetHandle() const
+        {
+            return handle;
+        }
+
+        void PipeStream::SetHandle(HANDLE value)
+        {
+            handle = value;
+        }
+    }
 
 #endif

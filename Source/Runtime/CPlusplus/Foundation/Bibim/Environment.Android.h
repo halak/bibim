@@ -26,8 +26,18 @@
                 
                 static Environment PrivateInstance;
         };
-    }
 
-#   include <Bibim/Environment.Android.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        const String& Environment::GetLocaleName()
+        {
+            return PrivateInstance.localeName;
+        }
+
+        const String& Environment::GetWorkingDirectory()
+        {
+            return PrivateInstance.workingDirectory;
+        }
+    }
 
 #endif

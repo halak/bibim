@@ -32,8 +32,13 @@
                 static GameFramework* Create();
                 static GameFramework* SingletonInstance;
         };
-    }
 
-#   include <Bibim/GameFramework.iOS.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        IME* GameFramework::GetIME() const
+        {
+            return ime;
+        }
+    }
 
 #endif

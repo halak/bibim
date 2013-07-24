@@ -839,10 +839,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Diagnostics\Bibim\FileLogger.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Diagnostics\Bibim\Logger.cpp"
 					>
 				</File>
@@ -851,19 +847,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Diagnostics\Bibim\Logger.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Diagnostics\Bibim\SystemLogger.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Diagnostics\Bibim\SystemLogger.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Diagnostics\Bibim\SystemLogger.inl"
 					>
 				</File>
 			</Filter>
@@ -2483,19 +2471,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\GameFramework.Windows.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Framework\Bibim\GameFrameworkBase.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Framework\Bibim\GameFrameworkBase.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Framework\Bibim\GameFrameworkBase.inl"
 					>
 				</File>
 				<File
@@ -2511,10 +2491,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\GameWindow.Windows.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Framework\Bibim\Lua.cpp"
 					>
 				</File>
@@ -2523,19 +2499,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\Lua.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Framework\Bibim\Preferences.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Framework\Bibim\Preferences.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Framework\Bibim\Preferences.inl"
 					>
 				</File>
 				<File
@@ -2548,10 +2516,6 @@
 				</File>
 				<File
 					RelativePath=".\Framework\Bibim\StandardGame.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Framework\Bibim\StandardGame.inl"
 					>
 				</File>
 			</Filter>
@@ -2999,10 +2963,6 @@
 				RelativePath=".\Foundation\Bibim\Environment.Windows.h"
 				>
 			</File>
-			<File
-				RelativePath=".\Foundation\Bibim\Environment.Windows.inl"
-				>
-			</File>
 			<Filter
 				Name="IPC"
 				>
@@ -3019,10 +2979,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\IPC\Bibim\PipeClientStream.Windows.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\IPC\Bibim\PipeServerStream.h"
 					>
 				</File>
@@ -3032,10 +2988,6 @@
 				</File>
 				<File
 					RelativePath=".\IPC\Bibim\PipeServerStream.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeServerStream.Windows.inl"
 					>
 				</File>
 				<File
@@ -3050,20 +3002,12 @@
 					RelativePath=".\IPC\Bibim\PipeStream.Windows.h"
 					>
 				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeStream.Windows.inl"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="Threading"
 				>
 				<File
 					RelativePath=".\Threading\Bibim\AutoLocker.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\AutoLocker.inl"
 					>
 				</File>
 				<File
@@ -3084,10 +3028,6 @@
 				</File>
 				<File
 					RelativePath=".\Threading\Bibim\ManualLocker.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Threading\Bibim\ManualLocker.inl"
 					>
 				</File>
 				<File
@@ -3119,19 +3059,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\BinaryReader.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\BinaryWriter.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\BinaryWriter.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\BinaryWriter.inl"
 					>
 				</File>
 				<File
@@ -3143,19 +3075,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\DumpStream.inl"
-					>
-				</File>
-				<File
 					RelativePath=".\Foundation\Bibim\MemoryStream.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Foundation\Bibim\MemoryStream.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Foundation\Bibim\MemoryStream.inl"
 					>
 				</File>
 				<File
