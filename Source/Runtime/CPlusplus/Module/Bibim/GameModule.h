@@ -78,6 +78,4 @@
         };
     }
 
-#   include <Bibim/GameModule.inl>
-
 #endif

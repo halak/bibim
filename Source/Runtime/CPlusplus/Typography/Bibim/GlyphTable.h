@@ -46,6 +46,4 @@
         };
     }
 
-#   include <Bibim/GlyphTable.inl>
-
 #endif

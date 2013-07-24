@@ -29,8 +29,13 @@
             private:
                 GameAssetStorage* storage;
         };
-    }
 
-#   include <Bibim/AssetProvider.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        GameAssetStorage* AssetProvider::GetStorage() const
+        {
+            return storage;
+        }
+    }
 
 #endif

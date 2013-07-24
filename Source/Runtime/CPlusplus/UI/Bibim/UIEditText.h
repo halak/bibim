@@ -60,8 +60,6 @@
         };
     }
 
-#   include <Bibim/UIEditText.inl>
-
     BBBindLua(Bibim::UIEditText);
     BBBindLuaEnum(Bibim::IME::TextFormat,
                   Bibim::UIEditText::ConvertFromStringToFormat,

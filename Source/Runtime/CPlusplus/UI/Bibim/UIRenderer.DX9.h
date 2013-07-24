@@ -64,6 +64,4 @@
         };
     }
 
-#   include <Bibim/UIRenderer.DX9.inl>
-
 #endif

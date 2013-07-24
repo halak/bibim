@@ -33,6 +33,4 @@
         };
     }
 
-#   include <Bibim/UIElement.inl>
-
 #endif

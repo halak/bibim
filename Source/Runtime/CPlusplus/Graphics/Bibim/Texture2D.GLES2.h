@@ -55,6 +55,4 @@
         };
     }
 
-#   include <Bibim/Texture2D.GLES2.inl>
-
 #endif

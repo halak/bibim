@@ -247,6 +247,4 @@
 //        };
     }
 
-#   include <Bibim/UIRendererBase.inl>
-
 #endif

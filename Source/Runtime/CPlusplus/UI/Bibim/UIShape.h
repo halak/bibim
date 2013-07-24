@@ -43,6 +43,4 @@
         };
     }
 
-#   include <Bibim/UIShape.inl>
-
 #endif

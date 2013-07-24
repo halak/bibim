@@ -66,6 +66,4 @@
         };
     }
 
-#   include <Bibim/CollisionSpace2D.inl>
-
 #endif

@@ -95,6 +95,4 @@
         };
     }
 
-#   include <Bibim/Shape2D.inl>
-
 #endif

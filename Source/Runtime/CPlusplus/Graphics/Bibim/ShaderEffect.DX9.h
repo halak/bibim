@@ -63,6 +63,4 @@
         typedef SharedPointer<ShaderEffectParameter> ShaderEffectParameterPtr;
     }
 
-#   include <Bibim/ShaderEffect.DX9.inl>
-
 #endif

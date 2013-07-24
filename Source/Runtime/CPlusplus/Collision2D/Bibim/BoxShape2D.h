@@ -51,6 +51,4 @@
         };   
     }
 
-#   include <Bibim/BoxShape2D.inl>
-
 #endif

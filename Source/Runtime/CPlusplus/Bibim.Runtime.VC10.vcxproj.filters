@@ -145,7 +145,7 @@
     <Filter Include="03. Game\Audio\AL">
       <UniqueIdentifier>{6e638c8f-c22a-46b8-9eb5-0776ec4c30a5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Game\UI\Typography">
+    <Filter Include="03. Game\Typography">
       <UniqueIdentifier>{030e8e09-1ae6-4d40-8868-7237e7cdf477}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -172,28 +172,28 @@
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\Font.cpp">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\FontCache.cpp">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\FontLibrary.cpp">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\FontString.cpp">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\Glyph.cpp">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\GlyphSurface.cpp">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\GlyphTable.cpp">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Typography\Bibim\TypingContext.cpp">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClCompile>
     <ClCompile Include="Component\Bibim\CloningContext.cpp">
       <Filter>03. Game\%28Component%29</Filter>
@@ -891,28 +891,28 @@
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\Font.h">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\FontCache.h">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\FontLibrary.h">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\FontString.h">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\Glyph.h">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\GlyphSurface.h">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\GlyphTable.h">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Typography\Bibim\TypingContext.h">
-      <Filter>03. Game\UI\Typography</Filter>
+      <Filter>03. Game\Typography</Filter>
     </ClInclude>
     <ClInclude Include="Component\Bibim\CloningContext.h">
       <Filter>03. Game\%28Component%29</Filter>
@@ -1718,482 +1718,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Asset\Bibim\AssetLoadingTask.inl">
-      <Filter>03. Game\%28Asset%29</Filter>
-    </None>
-    <None Include="Asset\Bibim\AssetStreamReader.inl">
-      <Filter>03. Game\%28Asset%29</Filter>
-    </None>
-    <None Include="Asset\Bibim\GameAsset.inl">
-      <Filter>03. Game\%28Asset%29</Filter>
-    </None>
-    <None Include="Asset\Bibim\GameAssetFactory.inl">
-      <Filter>03. Game\%28Asset%29</Filter>
-    </None>
-    <None Include="Asset\Bibim\GameAssetStorage.inl">
-      <Filter>03. Game\%28Asset%29</Filter>
-    </None>
-    <None Include="Asset\Bibim\AssetProvider.inl">
-      <Filter>03. Game\%28Asset%29\Providers</Filter>
-    </None>
-    <None Include="Asset\Bibim\MPQAssetProvider.inl">
-      <Filter>03. Game\%28Asset%29\Providers</Filter>
-    </None>
-    <None Include="Typography\Bibim\Font.inl">
-      <Filter>03. Game\UI\Typography</Filter>
-    </None>
-    <None Include="Typography\Bibim\FontCache.inl">
-      <Filter>03. Game\UI\Typography</Filter>
-    </None>
-    <None Include="Typography\Bibim\FontLibrary.inl">
-      <Filter>03. Game\UI\Typography</Filter>
-    </None>
-    <None Include="Typography\Bibim\FontString.inl">
-      <Filter>03. Game\UI\Typography</Filter>
-    </None>
-    <None Include="Typography\Bibim\Glyph.inl">
-      <Filter>03. Game\UI\Typography</Filter>
-    </None>
-    <None Include="Typography\Bibim\GlyphSurface.inl">
-      <Filter>03. Game\UI\Typography</Filter>
-    </None>
-    <None Include="Typography\Bibim\GlyphTable.inl">
-      <Filter>03. Game\UI\Typography</Filter>
-    </None>
-    <None Include="Typography\Bibim\TypingContext.inl">
-      <Filter>03. Game\UI\Typography</Filter>
-    </None>
-    <None Include="Component\Bibim\CloningContext.inl">
-      <Filter>03. Game\%28Component%29</Filter>
-    </None>
-    <None Include="Component\Bibim\ComponentStreamReader.inl">
-      <Filter>03. Game\%28Component%29</Filter>
-    </None>
-    <None Include="Component\Bibim\GameComponent.inl">
-      <Filter>03. Game\%28Component%29</Filter>
-    </None>
-    <None Include="Module\Bibim\GameModule.inl">
-      <Filter>03. Game\%28Module%29</Filter>
-    </None>
-    <None Include="Module\Bibim\GameModuleFactory.inl">
-      <Filter>03. Game\%28Module%29</Filter>
-    </None>
-    <None Include="Module\Bibim\GameModuleNode.inl">
-      <Filter>03. Game\%28Module%29</Filter>
-    </None>
-    <None Include="Module\Bibim\GameModuleTree.inl">
-      <Filter>03. Game\%28Module%29</Filter>
-    </None>
-    <None Include="Animation\Bibim\Sprite.inl">
-      <Filter>03. Game\Animation</Filter>
-    </None>
-    <None Include="Animation\Bibim\SpriteSet.inl">
-      <Filter>03. Game\Animation</Filter>
-    </None>
-    <None Include="Animation\Bibim\EvalBinaryOperators.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\EvalBoard.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\EvalCaches.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\EvalConstants.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\EvalContext.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\EvalInterpolators.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\EvalRangedSequences.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\Evals.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\EvalSelectors.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\EvalSequenceBase.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\EvalSequences.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\EvalTimeflow.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\EvalUnaryOperators.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\EvalUnitRandom.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\EvalVariables.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\Sequences.inl">
-      <Filter>03. Game\Animation\Evaluation</Filter>
-    </None>
-    <None Include="Animation\Bibim\Ease.inl">
-      <Filter>03. Game\Animation\Easing</Filter>
-    </None>
-    <None Include="Animation\Bibim\ElasticEasingCurves.inl">
-      <Filter>03. Game\Animation\Easing</Filter>
-    </None>
-    <None Include="Animation\Bibim\OscillationCurve.inl">
-      <Filter>03. Game\Animation\Easing</Filter>
-    </None>
-    <None Include="Collision2D\Bibim\AxisAlignedBoxShape2D.inl">
-      <Filter>03. Game\Collision2D</Filter>
-    </None>
-    <None Include="Collision2D\Bibim\BoxShape2D.inl">
-      <Filter>03. Game\Collision2D</Filter>
-    </None>
-    <None Include="Collision2D\Bibim\CollisionSpace2D.inl">
-      <Filter>03. Game\Collision2D</Filter>
-    </None>
-    <None Include="Collision2D\Bibim\RaycastReport2D.inl">
-      <Filter>03. Game\Collision2D</Filter>
-    </None>
-    <None Include="Collision2D\Bibim\SegmentShape2D.inl">
-      <Filter>03. Game\Collision2D</Filter>
-    </None>
-    <None Include="Collision2D\Bibim\Shape2D.inl">
-      <Filter>03. Game\Collision2D</Filter>
-    </None>
-    <None Include="Gameplay\Bibim\BatchCommand.inl">
-      <Filter>03. Game\Gameplay</Filter>
-    </None>
-    <None Include="Gameplay\Bibim\CommandHistory.inl">
-      <Filter>03. Game\Gameplay</Filter>
-    </None>
-    <None Include="Gameplay\Bibim\CommandQueue.inl">
-      <Filter>03. Game\Gameplay</Filter>
-    </None>
-    <None Include="Gameplay\Bibim\SpatialObject2D.inl">
-      <Filter>03. Game\Gameplay</Filter>
-    </None>
-    <None Include="Gameplay\Bibim\JumpPointPathFinder.inl">
-      <Filter>03. Game\Gameplay\PathFinder</Filter>
-    </None>
-    <None Include="Gameplay\Bibim\PathFinder.inl">
-      <Filter>03. Game\Gameplay\PathFinder</Filter>
-    </None>
-    <None Include="Input\Bibim\Keyboard.inl">
-      <Filter>03. Game\Input</Filter>
-    </None>
-    <None Include="Input\Bibim\KeyboardState.inl">
-      <Filter>03. Game\Input</Filter>
-    </None>
-    <None Include="Input\Bibim\Mouse.inl">
-      <Filter>03. Game\Input</Filter>
-    </None>
-    <None Include="Input\Bibim\MouseState.inl">
-      <Filter>03. Game\Input</Filter>
-    </None>
-    <None Include="Scripting\Bibim\Script.inl">
-      <Filter>03. Game\Scripting</Filter>
-    </None>
-    <None Include="Scripting\Bibim\ScriptingContext.inl">
-      <Filter>03. Game\Scripting</Filter>
-    </None>
-    <None Include="Scripting\Bibim\ScriptNativeFunctionTable.inl">
-      <Filter>03. Game\Scripting</Filter>
-    </None>
-    <None Include="Scripting\Bibim\ScriptStack.inl">
-      <Filter>03. Game\Scripting</Filter>
-    </None>
-    <None Include="Scripting\Bibim\ScriptThread.inl">
-      <Filter>03. Game\Scripting</Filter>
-    </None>
-    <None Include="Time\Bibim\AlarmClock.inl">
-      <Filter>03. Game\Time</Filter>
-    </None>
-    <None Include="Time\Bibim\SubTimeline.inl">
-      <Filter>03. Game\Time</Filter>
-    </None>
-    <None Include="Time\Bibim\Timeline.inl">
-      <Filter>03. Game\Time</Filter>
-    </None>
-    <None Include="Time\Bibim\TimelineGameComponent.inl">
-      <Filter>03. Game\Time</Filter>
-    </None>
-    <None Include="Time\Bibim\TimelineGameModule.inl">
-      <Filter>03. Game\Time</Filter>
-    </None>
-    <None Include="Time\Bibim\UpdateableGameComponent.inl">
-      <Filter>03. Game\Time</Filter>
-    </None>
-    <None Include="Time\Bibim\UpdateableGameModule.inl">
-      <Filter>03. Game\Time</Filter>
-    </None>
-    <None Include="UI\Bibim\UIDomain.inl">
-      <Filter>03. Game\UI</Filter>
-    </None>
-    <None Include="UI\Bibim\UIElement.inl">
-      <Filter>03. Game\UI</Filter>
-    </None>
-    <None Include="UI\Bibim\UILayout.inl">
-      <Filter>03. Game\UI</Filter>
-    </None>
-    <None Include="UI\Bibim\UIRenderer.DX9.inl">
-      <Filter>03. Game\UI</Filter>
-    </None>
-    <None Include="UI\Bibim\UIRenderer.GLES2.inl">
-      <Filter>03. Game\UI</Filter>
-    </None>
-    <None Include="UI\Bibim\UIRendererBase.inl">
-      <Filter>03. Game\UI</Filter>
-    </None>
-    <None Include="UI\Bibim\UIAppEventDispatcher.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIAsyncEventQueue.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIEventArgs.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIEventDispatcher.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIEventHandler.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIEventID.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIEventMap.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIFunctionEventHandler.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIFunctionTable.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIGamePadEventArgs.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIGamePadEventDispatcher.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIKeyboardEventArgs.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIKeyboardEventDispatcher.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIMouseButtonEventArgs.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIMouseEventArgs.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIMouseEventDispatcher.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIMouseWheelEventArgs.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UISequentialEventHandler.inl">
-      <Filter>03. Game\UI\Events</Filter>
-    </None>
-    <None Include="UI\Bibim\UIEffectMap.inl">
-      <Filter>03. Game\UI\Effects</Filter>
-    </None>
-    <None Include="UI\Bibim\UIEffectStack.inl">
-      <Filter>03. Game\UI\Effects</Filter>
-    </None>
-    <None Include="UI\Bibim\UIAfterImageEffect.inl">
-      <Filter>03. Game\UI\Effects\Geometry</Filter>
-    </None>
-    <None Include="UI\Bibim\UIGeometryEffect.inl">
-      <Filter>03. Game\UI\Effects\Geometry</Filter>
-    </None>
-    <None Include="UI\Bibim\UISineCurveEffect.inl">
-      <Filter>03. Game\UI\Effects\Geometry</Filter>
-    </None>
-    <None Include="UI\Bibim\UITintEffect.inl">
-      <Filter>03. Game\UI\Effects\Geometry</Filter>
-    </None>
-    <None Include="UI\Bibim\UIBlendingEffect.inl">
-      <Filter>03. Game\UI\Effects\Pixel</Filter>
-    </None>
-    <None Include="UI\Bibim\UIColorMatrixEffect.inl">
-      <Filter>03. Game\UI\Effects\Pixel</Filter>
-    </None>
-    <None Include="UI\Bibim\UIMaskEffect.inl">
-      <Filter>03. Game\UI\Effects\Pixel</Filter>
-    </None>
-    <None Include="UI\Bibim\UIOpacityMaskEffect.inl">
-      <Filter>03. Game\UI\Effects\Pixel</Filter>
-    </None>
-    <None Include="UI\Bibim\UIPixelEffect.inl">
-      <Filter>03. Game\UI\Effects\Pixel</Filter>
-    </None>
-    <None Include="UI\Bibim\UIButton.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="UI\Bibim\UICheckBox.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="UI\Bibim\UIImage.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="UI\Bibim\UILabel.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="UI\Bibim\UIPanel.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="UI\Bibim\UIRect.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="UI\Bibim\UISpark.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="UI\Bibim\UISprite.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="UI\Bibim\UIVideo.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="UI\Bibim\UIVisual.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="UI\Bibim\UIWindow.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="UI\Bibim\UITransform2D.inl">
-      <Filter>03. Game\UI\Transforms</Filter>
-    </None>
-    <None Include="UI\Bibim\UITransform3D.inl">
-      <Filter>03. Game\UI\Transforms</Filter>
-    </None>
-    <None Include="UI\Bibim\UIBoundsContext.inl">
-      <Filter>03. Game\UI\Visitors</Filter>
-    </None>
-    <None Include="UI\Bibim\UIDrawingContext.inl">
-      <Filter>03. Game\UI\Visitors</Filter>
-    </None>
-    <None Include="UI\Bibim\UIHandledDrawingContext.inl">
-      <Filter>03. Game\UI\Visitors</Filter>
-    </None>
-    <None Include="UI\Bibim\UIPickingContext.inl">
-      <Filter>03. Game\UI\Visitors</Filter>
-    </None>
-    <None Include="UI\Bibim\UIVisualVisitor.inl">
-      <Filter>03. Game\UI\Visitors</Filter>
-    </None>
-    <None Include="Graphics\Bibim\BitMask.inl">
-      <Filter>03. Game\Graphics</Filter>
-    </None>
-    <None Include="Graphics\Bibim\GraphicsCapabilities.inl">
-      <Filter>03. Game\Graphics</Filter>
-    </None>
-    <None Include="Graphics\Bibim\Image.inl">
-      <Filter>03. Game\Graphics</Filter>
-    </None>
-    <None Include="Graphics\Bibim\ImageSet.inl">
-      <Filter>03. Game\Graphics</Filter>
-    </None>
-    <None Include="Graphics\Bibim\ScreenshotPrinter.inl">
-      <Filter>03. Game\Graphics</Filter>
-    </None>
-    <None Include="Graphics\Bibim\Window.inl">
-      <Filter>03. Game\Graphics</Filter>
-    </None>
-    <None Include="Graphics\Bibim\DynamicTexture2D.DX9.inl">
-      <Filter>03. Game\Graphics\DX9</Filter>
-    </None>
-    <None Include="Graphics\Bibim\GraphicsDevice.DX9.inl">
-      <Filter>03. Game\Graphics\DX9</Filter>
-    </None>
-    <None Include="Graphics\Bibim\RenderTargetTexture2D.DX9.inl">
-      <Filter>03. Game\Graphics\DX9</Filter>
-    </None>
-    <None Include="Graphics\Bibim\ShaderEffect.DX9.inl">
-      <Filter>03. Game\Graphics\DX9</Filter>
-    </None>
-    <None Include="Graphics\Bibim\Texture2D.DX9.inl">
-      <Filter>03. Game\Graphics\DX9</Filter>
-    </None>
-    <None Include="Graphics\Bibim\DynamicTexture2D.GLES2.inl">
-      <Filter>03. Game\Graphics\GLES2</Filter>
-    </None>
-    <None Include="Graphics\Bibim\GraphicsDevice.GLES2.inl">
-      <Filter>03. Game\Graphics\GLES2</Filter>
-    </None>
-    <None Include="Graphics\Bibim\RenderTargetTexture2D.GLES2.inl">
-      <Filter>03. Game\Graphics\GLES2</Filter>
-    </None>
-    <None Include="Graphics\Bibim\Shadereffect.GLES2.inl">
-      <Filter>03. Game\Graphics\GLES2</Filter>
-    </None>
-    <None Include="Graphics\Bibim\Texture2D.GLES2.inl">
-      <Filter>03. Game\Graphics\GLES2</Filter>
-    </None>
-    <None Include="GFX\Bibim\SparkParticleEngine.inl">
-      <Filter>03. Game\GFX</Filter>
-    </None>
-    <None Include="Audio\Bibim\SoundFX.Irrklang.inl">
-      <Filter>03. Game\Audio\Irrklang</Filter>
-    </None>
-    <None Include="Audio\Bibim\AudioDevice.Irrklang.inl">
-      <Filter>03. Game\Audio\Irrklang</Filter>
-    </None>
-    <None Include="Audio\Bibim\BGM.Irrklang.inl">
-      <Filter>03. Game\Audio\Irrklang</Filter>
-    </None>
     <None Include="Audio\Bibim\BGM.h">
       <Filter>03. Game\Audio</Filter>
-    </None>
-    <None Include="UI\Bibim\UIScrollablePanel.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="Asset\Bibim\FileAssetProviderBase.inl">
-      <Filter>03. Game\%28Asset%29\Providers</Filter>
-    </None>
-    <None Include="Graphics\Bibim\GraphicsDeviceBase.inl">
-      <Filter>03. Game\Graphics</Filter>
-    </None>
-    <None Include="Asset\Bibim\PipedAssetProvider.Default.inl">
-      <Filter>03. Game\%28Asset%29\Providers</Filter>
-    </None>
-    <None Include="UI\Bibim\UIDocument.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="UI\Bibim\UIEditText.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="Input\Bibim\IMEBase.inl">
-      <Filter>03. Game\Input</Filter>
-    </None>
-    <None Include="Component\Bibim\GameComponentFactory.inl">
-      <Filter>03. Game\%28Component%29</Filter>
-    </None>
-    <None Include="Audio\Bibim\AudioDevice.AL.inl">
-      <Filter>03. Game\Audio\AL</Filter>
-    </None>
-    <None Include="Audio\Bibim\BGM.AL.inl">
-      <Filter>03. Game\Audio\AL</Filter>
-    </None>
-    <None Include="Audio\Bibim\SoundFX.AL.inl">
-      <Filter>03. Game\Audio\AL</Filter>
-    </None>
-    <None Include="UI\Bibim\UIRoundedRect.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="UI\Bibim\UIEllipse.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </None>
-    <None Include="UI\Bibim\UIShape.inl">
-      <Filter>03. Game\UI\Visuals</Filter>
     </None>
   </ItemGroup>
 </Project>

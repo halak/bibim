@@ -71,8 +71,6 @@
         };
     }
 
-#   include <Bibim/UISineCurveEffect.inl>
-
     BBBindLuaEnum(Bibim::UISineCurveEffect::Form,
                   Bibim::UISineCurveEffect::ConvertFromStringToForm,
                   Bibim::UISineCurveEffect::ConvertFromFormToString);

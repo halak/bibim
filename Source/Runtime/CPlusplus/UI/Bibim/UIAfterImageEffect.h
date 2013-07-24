@@ -79,6 +79,4 @@
         };
     }
 
-#   include <Bibim/UIAfterImageEffect.inl>
-
 #endif

@@ -51,6 +51,4 @@
         };
     }
 
-#   include <Bibim/CommandQueue.inl>
-
 #endif

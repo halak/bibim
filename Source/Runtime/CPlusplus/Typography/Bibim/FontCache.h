@@ -86,6 +86,4 @@
         };
     }
 
-#    include <Bibim/FontCache.inl>
-
 #endif

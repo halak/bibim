@@ -68,6 +68,4 @@
         };
     }
 
-#   include <Bibim/SoundFX.Irrklang.inl>
-
 #endif

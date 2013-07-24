@@ -40,6 +40,4 @@
         };
     }
 
-#   include <Bibim/OscillationCurve.inl>
-
 #endif

@@ -51,6 +51,4 @@
         };
     }
 
-#   include <Bibim/Texture2D.DX9.inl>
-
 #endif

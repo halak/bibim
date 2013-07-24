@@ -92,8 +92,6 @@
         };
     }
 
-#   include <Bibim/GameComponent.inl>
-
     BBBindLua(Bibim::GameComponent);
 
 #endif

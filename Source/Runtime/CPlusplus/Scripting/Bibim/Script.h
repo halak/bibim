@@ -48,6 +48,4 @@
         };
     }
 
-#   include <Bibim/Script.inl>
-
 #endif

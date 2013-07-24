@@ -38,6 +38,4 @@
         };
     }
 
-#   include <Bibim/Glyph.inl>
-
 #endif

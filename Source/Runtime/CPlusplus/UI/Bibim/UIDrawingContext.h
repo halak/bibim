@@ -78,6 +78,4 @@
         };
     }
 
-#   include <Bibim/UIDrawingContext.inl>
-
 #endif

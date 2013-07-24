@@ -66,6 +66,4 @@
         typedef SharedPointer<EvalGameAssetVariable> EvalGameAssetVariablePtr;
     }
 
-#   include <Bibim/EvalVariables.inl>
-
 #endif

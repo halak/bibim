@@ -44,6 +44,4 @@
         };
     }
 
-#   include <Bibim/UIRoundedRect.inl>
-
 #endif

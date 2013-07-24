@@ -46,6 +46,4 @@
         };
     }
 
-#   include <Bibim/CommandHistory.inl>
-
 #endif

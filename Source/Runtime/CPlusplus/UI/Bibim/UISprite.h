@@ -69,6 +69,4 @@
         };
     }
 
-#   include <Bibim/UISprite.inl>
-
 #endif

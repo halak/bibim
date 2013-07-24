@@ -27,6 +27,4 @@
         };
     }
 
-#   include <Bibim/ScreenshotPrinter.inl>
-
 #endif

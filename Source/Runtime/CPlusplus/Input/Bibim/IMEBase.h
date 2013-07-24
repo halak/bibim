@@ -99,6 +99,4 @@
         };
     }
 
-#   include <Bibim/IMEBase.inl>
-
 #endif

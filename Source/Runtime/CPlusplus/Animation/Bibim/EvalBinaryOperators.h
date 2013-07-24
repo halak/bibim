@@ -198,6 +198,4 @@
         BBDeclareEvalClass(EvalVector4Division);
     }
 
-#   include <Bibim/EvalBinaryOperators.inl>
-
 #endif

@@ -142,6 +142,4 @@
         };
     }
 
-#   include <Bibim/Font.inl>
-
 #endif

@@ -88,6 +88,4 @@
         BBDeclareEvalClass(EvalGameAssetConstant);
     }
 
-#   include <Bibim/EvalConstants.inl>
-
 #endif

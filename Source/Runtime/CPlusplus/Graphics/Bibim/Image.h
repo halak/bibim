@@ -58,6 +58,4 @@
         };
     }
 
-#   include <Bibim/Image.inl>
-
 #endif

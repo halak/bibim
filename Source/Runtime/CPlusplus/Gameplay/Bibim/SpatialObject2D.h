@@ -35,6 +35,4 @@
         };
     }
 
-#   include <Bibim/SpatialObject2D.inl>
-
 #endif

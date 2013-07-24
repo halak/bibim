@@ -69,6 +69,4 @@
         };
     }
 
-#   include <Bibim/ScriptThread.inl>
-
 #endif

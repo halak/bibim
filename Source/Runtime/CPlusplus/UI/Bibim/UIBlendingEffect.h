@@ -49,8 +49,6 @@
         };
     }
 
-#   include <Bibim/UIBlendingEffect.inl>
-
     BBBindLuaEnum(Bibim::BlendMode,
                   Bibim::UIBlendingEffect::ConvertFromStringToBlendMode,
                   Bibim::UIBlendingEffect::ConvertFromBlendModeToString);

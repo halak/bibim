@@ -23,6 +23,4 @@
         };
     }
 
-#    include <Bibim/UpdateableGameModule.inl>
-
 #endif

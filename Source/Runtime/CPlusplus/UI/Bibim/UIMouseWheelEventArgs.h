@@ -28,6 +28,4 @@
         };
     }
 
-#   include <Bibim/UIMouseWheelEventArgs.inl>
-
 #endif

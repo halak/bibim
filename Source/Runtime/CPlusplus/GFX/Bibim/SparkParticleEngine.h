@@ -16,6 +16,4 @@
         };
     }
 
-#   include <Bibim/SparkParticleEngine.inl>
-
 #endif

@@ -93,8 +93,6 @@
         };
     }
 
-#   include <Bibim/UIOpacityMaskEffect.inl>
-
     BBBindLuaEnum(Bibim::UIOpacityMaskEffect::FillStyle,
                   Bibim::UIOpacityMaskEffect::ConvertFromStringToFillStyle,
                   Bibim::UIOpacityMaskEffect::ConvertFromFillStyleToString);

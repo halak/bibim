@@ -47,6 +47,4 @@
         };
     }
 
-#   include <Bibim/SegmentShape2D.inl>
-
 #endif

@@ -30,6 +30,4 @@
         };
     }
 
-#   include <Bibim/ImageSet.inl>
-
 #endif

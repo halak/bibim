@@ -20,6 +20,4 @@
         };
     }
 
-#   include <Bibim/UIEllipse.inl>
-
 #endif

@@ -36,8 +36,13 @@
                 GameAssetStorage* storage;
                 std::vector<GameComponentPtr> localComponents;
         };
-    }
 
-#   include <Bibim/ComponentStreamReader.inl>
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        GameModuleTree* ComponentStreamReader::GetModules() const
+        {
+            return modules;
+        }
+    }
 
 #endif

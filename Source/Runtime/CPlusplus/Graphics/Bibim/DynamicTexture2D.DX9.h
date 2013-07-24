@@ -56,6 +56,4 @@
         };
     }
 
-#   include <Bibim/DynamicTexture2D.DX9.inl>
-
 #endif

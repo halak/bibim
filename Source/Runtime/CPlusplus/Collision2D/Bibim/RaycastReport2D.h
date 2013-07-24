@@ -32,6 +32,4 @@
         };
     }
 
-#   include <Bibim/RaycastReport2D.inl>
-
 #endif

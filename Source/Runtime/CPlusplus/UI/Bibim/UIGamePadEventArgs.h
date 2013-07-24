@@ -17,6 +17,4 @@
         };
     }
 
-#   include <Bibim/UIGamePadEventArgs.inl>
-
 #endif

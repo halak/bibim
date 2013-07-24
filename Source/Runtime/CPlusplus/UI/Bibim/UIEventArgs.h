@@ -1,4 +1,6 @@
 ﻿#pragma once
+#ifndef __BIBIM_UIEVENTARGS_H__
+#define __BIBIM_UIEVENTARGS_H__
 
 #include <Bibim/FWD.h>
 #include <Bibim/SharedObject.h>
@@ -37,4 +39,4 @@ namespace Bibim
     };
 }
 
-#include <Bibim/UIEventArgs.inl>
+#endif

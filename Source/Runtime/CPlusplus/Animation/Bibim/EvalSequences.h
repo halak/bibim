@@ -62,6 +62,4 @@
         typedef SharedPointer<EvalGameAssetSequence> EvalGameAssetSequencePtr;
     }
 
-#   include <Bibim/EvalSequences.inl>
-
 #endif
