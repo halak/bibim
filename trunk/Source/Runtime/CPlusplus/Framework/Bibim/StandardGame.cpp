@@ -243,8 +243,6 @@ namespace Bibim
         GetModules()->GetRoot()->AttachChild(clipboard);
 
         GameFramework::Initialize();
-
-        SetDebugMode(RemoteDebugging);
     }
 
     BGM* StandardGame::CreateBGM(AudioDevice* audioDevice)
