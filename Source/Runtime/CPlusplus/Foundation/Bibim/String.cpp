@@ -691,7 +691,7 @@ namespace Bibim
 
     String String::Substring(int startIndex, int length) const
     {
-        if (startIndex >= buffer->length - 1)
+        if (startIndex >= buffer->length - 1 || length <= 0)
             return String::Empty;
 
         if (startIndex < 0)

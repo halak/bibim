@@ -1435,10 +1435,14 @@ namespace Bibim
 
         static int SelfDetach(lua_State* L)
         {
-            UIVisual* target = lua_tinker::read<UIVisual*>(L, 1);
-            const bool removed = UIWindow::RemoveFromParent(target);
-            lua_pushboolean(L, removed);
-            return 1;
+            if (UIVisual* target = lua_tinker::read<UIVisual*>(L, 1))
+            {
+                const bool removed = UIWindow::RemoveFromParent(target);
+                lua_pushboolean(L, removed);
+                return 1;
+            }
+            else
+                return 0;
         }
 
         static int On(lua_State* L)
