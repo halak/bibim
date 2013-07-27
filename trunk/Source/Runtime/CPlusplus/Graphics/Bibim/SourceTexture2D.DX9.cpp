@@ -4,6 +4,7 @@
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/GraphicsDevice.DX9.h>
 #include <Bibim/PNGReader.h>
+#include <Bibim/JPEGReader.h>
 #include <Bibim/Stream.h>
 
 namespace Bibim
@@ -62,6 +63,7 @@ namespace Bibim
         {
             Raw,
             PNG,
+            JPEG,
         };
 
         const int pitch = reader.ReadInt();
@@ -130,10 +132,12 @@ namespace Bibim
                 }
                 break;
             case PNG:
-                {
-                    if (PNGReader::Read(reader, destination, destinationPitch, true) == false)
-                        texture->SetStatus(FaultStatus);
-                }
+                if (PNGReader::Read(reader, destination, destinationPitch, true) == false)
+                    texture->SetStatus(FaultStatus);
+                break;
+            case JPEG:
+                if (JPEGReader::Read(reader, destination, destinationPitch, true) == false)
+                    texture->SetStatus(FaultStatus);
                 break;
         }
         d3dSysMemTexture->UnlockRect(0);

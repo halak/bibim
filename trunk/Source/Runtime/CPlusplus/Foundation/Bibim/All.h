@@ -130,6 +130,7 @@
 #  include <Bibim/ScreenshotPrinter.h>
 #  include <Bibim/Sprite.h>
 #  include <Bibim/SpriteSet.h>
+#  include <Bibim/JPEGReader.h>
 #  include <Bibim/PNGReader.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -13,6 +13,7 @@ namespace Bibim.Graphics
         {
             Raw,
             Png,
+            Jpeg,
         }
         #endregion
 

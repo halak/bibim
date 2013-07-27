@@ -73,7 +73,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;.\Foundation;.\Module;.\Component;.\Asset;.\Animation;.\Audio;.\Collision2D;.\Diagnostics;.\FileSystem;.\Framework;.\Gameplay;.\GFX;.\Graphics;.\Input;.\IPC;.\Net;.\Scripting;.\Startup;.\Threading;.\Time;.\Typography;.\UI;.\References\lua-5.1.5\src;.\References\lua_tinker;.\References\utf8_v2_3_4\source;.\References\zlib-1.2.7;.\References\lpng1513;.\References\freetype-2.4.4\include;.\References\curl-7.29.0\include;.\References\rapidjson\include;.\References\irrKlang-1.4.0\include;.\References\SPARK-1.5.5\include;.\References\StormLib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;.\Foundation;.\Module;.\Component;.\Asset;.\Animation;.\Audio;.\Collision2D;.\Diagnostics;.\FileSystem;.\Framework;.\Gameplay;.\GFX;.\Graphics;.\Input;.\IPC;.\Net;.\Scripting;.\Startup;.\Threading;.\Time;.\Typography;.\UI;.\References\lua-5.1.5\src;.\References\lua_tinker;.\References\utf8_v2_3_4\source;.\References\zlib-1.2.7;.\References\lpng1513;.\References\freetype-2.4.4\include;.\References\curl-7.29.0\include;.\References\rapidjson\include;.\References\irrKlang-1.4.0\include;.\References\SPARK-1.5.5\include;.\References\StormLib\src;.\References\jpeg-9;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
@@ -88,7 +88,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;.\Foundation;.\Module;.\Component;.\Asset;.\Animation;.\Audio;.\Collision2D;.\Diagnostics;.\FileSystem;.\Framework;.\Gameplay;.\GFX;.\Graphics;.\Input;.\IPC;.\Net;.\Scripting;.\Startup;.\Threading;.\Time;.\Typography;.\UI;.\References\lua-5.1.5\src;.\References\lua_tinker;.\References\utf8_v2_3_4\source;.\References\zlib-1.2.7;.\References\lpng1513;.\References\freetype-2.4.4\include;.\References\curl-7.29.0\include;.\References\rapidjson\include;.\References\irrKlang-1.4.0\include;.\References\SPARK-1.5.5\include;.\References\StormLib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;.\Foundation;.\Module;.\Component;.\Asset;.\Animation;.\Audio;.\Collision2D;.\Diagnostics;.\FileSystem;.\Framework;.\Gameplay;.\GFX;.\Graphics;.\Input;.\IPC;.\Net;.\Scripting;.\Startup;.\Threading;.\Time;.\Typography;.\UI;.\References\lua-5.1.5\src;.\References\lua_tinker;.\References\utf8_v2_3_4\source;.\References\zlib-1.2.7;.\References\lpng1513;.\References\freetype-2.4.4\include;.\References\curl-7.29.0\include;.\References\rapidjson\include;.\References\irrKlang-1.4.0\include;.\References\SPARK-1.5.5\include;.\References\StormLib\src;.\References\jpeg-9;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Lib />
@@ -102,12 +102,12 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
     <ClCompile>
       <CompileAs>CompileAsCpp</CompileAs>
-      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;.\Foundation;.\Module;.\Component;.\Asset;.\Animation;.\Audio;.\Collision2D;.\Diagnostics;.\FileSystem;.\Framework;.\Gameplay;.\GFX;.\Graphics;.\Input;.\IPC;.\Net;.\Scripting;.\Startup;.\Threading;.\Time;.\Typography;.\UI;.\References\lua-5.1.5\src;.\References\lua_tinker;.\References\utf8_v2_3_4\source;.\References\zlib-1.2.7;.\References\lpng1513;.\References\freetype-2.4.4\include;.\References\curl-7.29.0\include;.\References\rapidjson\include;.\References\irrKlang-1.4.0\include;.\References\SPARK-1.5.5\include;.\References\StormLib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;.\Foundation;.\Module;.\Component;.\Asset;.\Animation;.\Audio;.\Collision2D;.\Diagnostics;.\FileSystem;.\Framework;.\Gameplay;.\GFX;.\Graphics;.\Input;.\IPC;.\Net;.\Scripting;.\Startup;.\Threading;.\Time;.\Typography;.\UI;.\References\lua-5.1.5\src;.\References\lua_tinker;.\References\utf8_v2_3_4\source;.\References\zlib-1.2.7;.\References\lpng1513;.\References\freetype-2.4.4\include;.\References\curl-7.29.0\include;.\References\rapidjson\include;.\References\irrKlang-1.4.0\include;.\References\SPARK-1.5.5\include;.\References\StormLib\src;.\References\jpeg-9;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;.\Foundation;.\Module;.\Component;.\Asset;.\Animation;.\Audio;.\Collision2D;.\Diagnostics;.\FileSystem;.\Framework;.\Gameplay;.\GFX;.\Graphics;.\Input;.\IPC;.\Net;.\Scripting;.\Startup;.\Threading;.\Time;.\Typography;.\UI;.\References\lua-5.1.5\src;.\References\lua_tinker;.\References\utf8_v2_3_4\source;.\References\zlib-1.2.7;.\References\lpng1513;.\References\freetype-2.4.4\include;.\References\curl-7.29.0\include;.\References\rapidjson\include;.\References\irrKlang-1.4.0\include;.\References\SPARK-1.5.5\include;.\References\StormLib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(DXSDK_DIR)Include;.\Foundation;.\Module;.\Component;.\Asset;.\Animation;.\Audio;.\Collision2D;.\Diagnostics;.\FileSystem;.\Framework;.\Gameplay;.\GFX;.\Graphics;.\Input;.\IPC;.\Net;.\Scripting;.\Startup;.\Threading;.\Time;.\Typography;.\UI;.\References\lua-5.1.5\src;.\References\lua_tinker;.\References\utf8_v2_3_4\source;.\References\zlib-1.2.7;.\References\lpng1513;.\References\freetype-2.4.4\include;.\References\curl-7.29.0\include;.\References\rapidjson\include;.\References\irrKlang-1.4.0\include;.\References\SPARK-1.5.5\include;.\References\StormLib\src;.\References\jpeg-9;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -203,6 +203,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Graphics\Bibim\GraphicsDeviceBase.cpp" />
+    <ClCompile Include="Graphics\Bibim\JPEGReader.cpp" />
     <ClCompile Include="Input\Bibim\IME.Mobile.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -434,8 +435,14 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="FileSystem\Bibim\MPQ.cpp" />
-    <ClCompile Include="FileSystem\Bibim\MPQStream.cpp" />
+    <ClCompile Include="FileSystem\Bibim\MPQ.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="FileSystem\Bibim\MPQStream.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Framework\Bibim\GameFramework.Windows.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
@@ -611,6 +618,7 @@
     <ClInclude Include="Framework\Bibim\StandardGame.EmbeddedFont.h" />
     <ClInclude Include="Framework\Bibim\StandardGame.h" />
     <ClInclude Include="Graphics\Bibim\GraphicsDeviceBase.h" />
+    <ClInclude Include="Graphics\Bibim\JPEGReader.h" />
     <ClInclude Include="Input\Bibim\IME.Mobile.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -830,8 +838,14 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="FileSystem\Bibim\MPQ.h" />
-    <ClInclude Include="FileSystem\Bibim\MPQStream.h" />
+    <ClInclude Include="FileSystem\Bibim\MPQ.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="FileSystem\Bibim\MPQStream.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Framework\Bibim\GameFramework.h" />
     <ClInclude Include="Framework\Bibim\GameFramework.Windows.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
