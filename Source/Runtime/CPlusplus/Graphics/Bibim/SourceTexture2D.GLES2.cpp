@@ -4,6 +4,7 @@
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/GraphicsDevice.GLES2.h>
 #include <Bibim/PNGReader.h>
+#include <Bibim/JPEGReader.h>
 #include <Bibim/Stream.h>
 #include <Bibim/Log.h>
 #include <Bibim/Numerics.h>
@@ -50,6 +51,7 @@ namespace Bibim
         {
             Raw,
             PNG,
+            JPEG,
         };
 
         const int pitch = reader.ReadInt();
@@ -71,13 +73,15 @@ namespace Bibim
                 {
                     reader.Read(destination, pitch);
                     destination += destinationPitch;
-               }
+                }
                 break;
             case PNG:
-                {
-                    if (PNGReader::Read(reader, destination, destinationPitch, false) == false)
-                        self->SetStatus(FaultStatus);
-                }
+                if (PNGReader::Read(reader, destination, destinationPitch, false) == false)
+                    self->SetStatus(FaultStatus);
+                break;
+            case JPEG:
+                if (JPEGReader::Read(reader, destination, destinationPitch, false) == false)
+                    self->SetStatus(FaultStatus);
                 break;
         }
 

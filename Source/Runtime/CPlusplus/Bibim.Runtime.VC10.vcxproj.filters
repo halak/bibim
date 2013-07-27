@@ -864,6 +864,9 @@
     <ClCompile Include="Net\Bibim\Socket.cpp">
       <Filter>03. Game\Net</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Bibim\JPEGReader.cpp">
+      <Filter>03. Game\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset\Bibim\AssetLoadingTask.h">
@@ -1715,6 +1718,9 @@
     </ClInclude>
     <ClInclude Include="Net\Bibim\Socket.h">
       <Filter>03. Game\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Bibim\JPEGReader.h">
+      <Filter>03. Game\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

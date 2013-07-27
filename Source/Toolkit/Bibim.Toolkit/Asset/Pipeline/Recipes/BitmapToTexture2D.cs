@@ -20,6 +20,12 @@ namespace Bibim.Asset.Pipeline.Recipes
             get;
             set;
         }
+
+        public bool ForceOpaque
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
@@ -28,9 +34,10 @@ namespace Bibim.Asset.Pipeline.Recipes
         {
         }
 
-        public BitmapToTexture2D(CookingNode<Bitmap> input)
+        public BitmapToTexture2D(CookingNode<Bitmap> input, bool forceOpaque = false)
         {
             Input = input;
+            ForceOpaque = forceOpaque;
         }
         #endregion
 
@@ -38,6 +45,7 @@ namespace Bibim.Asset.Pipeline.Recipes
         public override SourceTexture2D Cook(CookingContext context)
         {
             Bitmap input = Input.Cook(context);
+            var originalBitmap = input;
             int originalWidth = input.Width;
             int originalHeight = input.Height;
 
@@ -62,15 +70,34 @@ namespace Bibim.Asset.Pipeline.Recipes
 
             int bytesPerPixel = 4;
             var swappedBitmap = CreateRedBlueSwappedBitmap(input);
-            byte[] pngBuffer = GeneratePNGBuffer(swappedBitmap);
+
+            byte[] encodedBuffer = null;
+            var encodingType = SourceTexture2DCookingTag.CompressionType.Raw;
+            if (ForceOpaque || IsOpaque(originalBitmap))
+            {
+                byte[] jpegBuffer = GenerateJPEGBuffer(swappedBitmap);
+                byte[] pngBuffer = GeneratePNGBuffer(swappedBitmap);
+                if (jpegBuffer.Length < pngBuffer.Length)
+                {
+                    encodedBuffer = jpegBuffer;
+                    encodingType = SourceTexture2DCookingTag.CompressionType.Jpeg;
+                }
+                else
+                {
+                    encodedBuffer = pngBuffer;
+                    encodingType = SourceTexture2DCookingTag.CompressionType.Png;
+                }
+            }
+            else
+            {
+                encodedBuffer = GeneratePNGBuffer(swappedBitmap);
+                encodingType = SourceTexture2DCookingTag.CompressionType.Png;
+            }
+
             swappedBitmap.Dispose();
 
-            if (pngBuffer.Length <= input.Width * bytesPerPixel * input.Height)
-            {
-                output.Tag = new SourceTexture2DCookingTag(input.Width * bytesPerPixel,
-                                                           SourceTexture2DCookingTag.CompressionType.Png,
-                                                           pngBuffer);
-            }
+            if (encodedBuffer.Length <= input.Width * bytesPerPixel * input.Height)
+                output.Tag = new SourceTexture2DCookingTag(input.Width * bytesPerPixel, encodingType, encodedBuffer);
             else
             {
                 BitmapData bitmapData = input.LockBits(new Rectangle(0, 0, input.Width, input.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
@@ -118,8 +145,34 @@ namespace Bibim.Asset.Pipeline.Recipes
             using (var freeImage = new FreeImageBitmap(original))
             {
                 freeImage.Save(stream, FREE_IMAGE_FORMAT.FIF_PNG, FREE_IMAGE_SAVE_FLAGS.PNG_Z_BEST_COMPRESSION);
-                return stream.GetBuffer();
+                return stream.ToArray();
             }
+        }
+
+        public static byte[] GenerateJPEGBuffer(Bitmap original)
+        {
+            using (var stream = new MemoryStream(original.Width * 4 * original.Height / 8))
+            using (var freeImage = new FreeImageBitmap(original))
+            {
+                freeImage.Save(stream, FREE_IMAGE_FORMAT.FIF_JPEG, FREE_IMAGE_SAVE_FLAGS.JPEG_QUALITYSUPERB);
+                return stream.ToArray();
+            }
+        }
+
+        public static bool IsOpaque(Bitmap source)
+        {
+            int w = source.Width;
+            int h = source.Height;
+            for (int y = 0; y < h; y++)
+            {
+                for (int x = 0; x < w; x++)
+                {
+                    if (source.GetPixel(x, y).A < 254)
+                        return false;
+                }
+            }
+
+            return true;
         }
         #endregion
     }

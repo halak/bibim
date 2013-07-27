@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(DXSDK_DIR)Include&quot;;&quot;.\Foundation&quot;;&quot;.\Module&quot;;&quot;.\Component&quot;;&quot;.\Asset&quot;;&quot;.\Animation&quot;;&quot;.\Audio&quot;;&quot;.\Collision2D&quot;;&quot;.\Diagnostics&quot;;&quot;.\FileSystem&quot;;&quot;.\Framework&quot;;&quot;.\Gameplay&quot;;&quot;.\GFX&quot;;&quot;.\Graphics&quot;;&quot;.\Input&quot;;&quot;.\IPC&quot;;&quot;.\Net&quot;;&quot;.\Scripting&quot;;&quot;.\Startup&quot;;&quot;.\Threading&quot;;&quot;.\Time&quot;;&quot;.\Typography&quot;;&quot;.\UI&quot;;&quot;.\References\lua-5.1.5\src&quot;;&quot;.\References\lua_tinker&quot;;&quot;.\References\utf8_v2_3_4\source&quot;;&quot;.\References\zlib-1.2.7&quot;;&quot;.\References\lpng1513&quot;;&quot;.\References\freetype-2.4.4\include&quot;;&quot;.\References\curl-7.29.0\include&quot;;&quot;.\References\rapidjson\include&quot;;&quot;.\References\irrKlang-1.4.0\include&quot;;&quot;.\References\SPARK-1.5.5\include&quot;;&quot;.\References\StormLib\src&quot;"
+				AdditionalIncludeDirectories="&quot;$(DXSDK_DIR)Include&quot;;.\Foundation;.\Module;.\Component;.\Asset;.\Animation;.\Audio;.\Collision2D;.\Diagnostics;.\FileSystem;.\Framework;.\Gameplay;.\GFX;.\Graphics;.\Input;.\IPC;.\Net;.\Scripting;.\Startup;.\Threading;.\Time;.\Typography;.\UI;&quot;.\References\lua-5.1.5\src&quot;;.\References\lua_tinker;.\References\utf8_v2_3_4\source;&quot;.\References\zlib-1.2.7&quot;;.\References\lpng1513;&quot;.\References\freetype-2.4.4\include&quot;;&quot;.\References\curl-7.29.0\include&quot;;.\References\rapidjson\include;&quot;.\References\irrKlang-1.4.0\include&quot;;&quot;.\References\SPARK-1.5.5\include&quot;;.\References\StormLib\src;&quot;.\References\jpeg-9&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(DXSDK_DIR)Include&quot;;.\Foundation;.\Module;.\Component;.\Asset;.\Animation;.\Audio;.\Collision2D;.\Diagnostics;.\FileSystem;.\Framework;.\Gameplay;.\GFX;.\Graphics;.\Input;.\IPC;.\Net;.\Scripting;.\Startup;.\Threading;.\Time;.\Typography;.\UI;&quot;.\References\lua-5.1.5\src&quot;;.\References\lua_tinker;.\References\utf8_v2_3_4\source;&quot;.\References\zlib-1.2.7&quot;;.\References\lpng1513;&quot;.\References\freetype-2.4.4\include&quot;;&quot;.\References\curl-7.29.0\include&quot;;.\References\rapidjson\include;&quot;.\References\irrKlang-1.4.0\include&quot;;&quot;.\References\SPARK-1.5.5\include&quot;;.\References\StormLib\src"
+				AdditionalIncludeDirectories="&quot;$(DXSDK_DIR)Include&quot;;.\Foundation;.\Module;.\Component;.\Asset;.\Animation;.\Audio;.\Collision2D;.\Diagnostics;.\FileSystem;.\Framework;.\Gameplay;.\GFX;.\Graphics;.\Input;.\IPC;.\Net;.\Scripting;.\Startup;.\Threading;.\Time;.\Typography;.\UI;&quot;.\References\lua-5.1.5\src&quot;;.\References\lua_tinker;.\References\utf8_v2_3_4\source;&quot;.\References\zlib-1.2.7&quot;;.\References\lpng1513;&quot;.\References\freetype-2.4.4\include&quot;;&quot;.\References\curl-7.29.0\include&quot;;.\References\rapidjson\include;&quot;.\References\irrKlang-1.4.0\include&quot;;&quot;.\References\SPARK-1.5.5\include&quot;;.\References\StormLib\src;&quot;.\References\jpeg-9&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -1548,6 +1548,14 @@
 				</File>
 				<File
 					RelativePath=".\Graphics\Bibim\ImageSet.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\JPEGReader.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Graphics\Bibim\JPEGReader.h"
 					>
 				</File>
 				<File
