@@ -6,14 +6,14 @@
 namespace Bibim
 {
     MPQStream::MPQStream(MPQ* mpq, const String& path)
-        : handle(INVALID_HANDLE_VALUE)
+        : handle(nullptr)
     {
-        if (mpq == nullptr || mpq->GetHandle() == INVALID_HANDLE_VALUE)
+        if (mpq == nullptr || mpq->GetHandle() == nullptr)
             return;
 
-        HANDLE win32Handle = NULL;
-        if (SFileOpenFileEx(mpq->GetHandle(), path.CStr(), SFILE_OPEN_FROM_MPQ, &win32Handle))
-            handle = win32Handle;
+        HANDLE internalHandle = NULL;
+        if (SFileOpenFileEx(mpq->GetHandle(), path.CStr(), SFILE_OPEN_FROM_MPQ, &internalHandle))
+            handle = internalHandle;
     }
 
     MPQStream::~MPQStream()
@@ -23,16 +23,16 @@ namespace Bibim
 
     void MPQStream::Close()
     {
-        if (handle != INVALID_HANDLE_VALUE)
+        if (handle != nullptr)
         {
             SFileCloseFile(handle);
-            handle = INVALID_HANDLE_VALUE;
+            handle = nullptr;
         }
     }
 
     int MPQStream::Read(void* buffer, int size)
     {
-        if (handle == INVALID_HANDLE_VALUE || size <= 0)
+        if (handle == nullptr || size <= 0)
             return 0;
 
         DWORD readBytes = 0;
@@ -71,7 +71,7 @@ namespace Bibim
 
     int MPQStream::GetPosition()
     {
-        if (handle != INVALID_HANDLE_VALUE)
+        if (handle != nullptr)
             return static_cast<int>(::SFileSetFilePointer(handle, 0, nullptr, FILE_CURRENT));
         else
             return 0;
@@ -79,7 +79,7 @@ namespace Bibim
 
     int MPQStream::GetLength()
     {
-        if (handle != INVALID_HANDLE_VALUE)
+        if (handle != nullptr)
             return SFileGetFileSize(handle, nullptr);
         else
             return 0;

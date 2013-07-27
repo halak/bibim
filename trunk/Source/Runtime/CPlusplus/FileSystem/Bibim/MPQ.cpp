@@ -5,11 +5,11 @@
 namespace Bibim
 {
     MPQ::MPQ(const String& path)
-        : handle(INVALID_HANDLE_VALUE)
+        : handle(nullptr)
     {
-        HANDLE win32Handle = NULL;
-        if (SFileOpenArchive(path.CStr(), 0, STREAM_FLAG_READ_ONLY, &win32Handle))
-            handle = win32Handle;
+        HANDLE internalHandle = NULL;
+        if (SFileOpenArchive(path.CStr(), 0, STREAM_FLAG_READ_ONLY, &internalHandle))
+            handle = internalHandle;
         else
         {
             DWORD errorCode = ::GetLastError();
@@ -24,16 +24,16 @@ namespace Bibim
 
     void MPQ::Close()
     {
-        if (handle != INVALID_HANDLE_VALUE)
+        if (handle)
         {
             SFileCloseArchive(handle);
-            handle = INVALID_HANDLE_VALUE;
+            handle = nullptr;
         }
     }
 
     bool MPQ::Has(const String& path) const
     {
-        if (handle != INVALID_HANDLE_VALUE)
+        if (handle)
             return SFileHasFile(handle, path.CStr());
         else
             return false;
