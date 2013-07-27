@@ -232,10 +232,10 @@ def get_dependencies(platform, target, environment):
                 l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/ReleaseAD/VC9/StormLibRAD.lib']
         elif (vc10):
             if (debug):
-                l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/DebugAD/VC10/StormLibDAD.lib']
+                l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/DebugAD/VC10/StormLib.lib']
             elif (release):
-                l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/ReleaseAD/VC10/StormLibRAD.lib']
-    
+                l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/ReleaseAD/VC10/StormLib.lib']
+
     return l
         
 
