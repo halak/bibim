@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C++ Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "freetype", "freetype.vcxproj", "{B46BAC5C-3B1C-4A02-B28F-E40B65885AF3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Android = Debug|Android
+		Debug|Win32 = Debug|Win32
+		Release|Android = Release|Android
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B46BAC5C-3B1C-4A02-B28F-E40B65885AF3}.Debug|Android.ActiveCfg = Debug|Android
+		{B46BAC5C-3B1C-4A02-B28F-E40B65885AF3}.Debug|Android.Build.0 = Debug|Android
+		{B46BAC5C-3B1C-4A02-B28F-E40B65885AF3}.Debug|Android.Deploy.0 = Debug|Android
+		{B46BAC5C-3B1C-4A02-B28F-E40B65885AF3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B46BAC5C-3B1C-4A02-B28F-E40B65885AF3}.Debug|Win32.Build.0 = Debug|Win32
+		{B46BAC5C-3B1C-4A02-B28F-E40B65885AF3}.Release|Android.ActiveCfg = Release|Android
+		{B46BAC5C-3B1C-4A02-B28F-E40B65885AF3}.Release|Android.Build.0 = Release|Android
+		{B46BAC5C-3B1C-4A02-B28F-E40B65885AF3}.Release|Android.Deploy.0 = Release|Android
+		{B46BAC5C-3B1C-4A02-B28F-E40B65885AF3}.Release|Win32.ActiveCfg = Release|Win32
+		{B46BAC5C-3B1C-4A02-B28F-E40B65885AF3}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
