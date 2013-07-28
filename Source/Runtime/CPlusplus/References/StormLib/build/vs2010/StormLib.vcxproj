@@ -39,6 +39,8 @@
     <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\lib\$(Platform)\$(Configuration)\vs2010\</OutDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\lib\$(Platform)\$(Configuration)\vs2010\</OutDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)DAD</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectName)RAD</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
