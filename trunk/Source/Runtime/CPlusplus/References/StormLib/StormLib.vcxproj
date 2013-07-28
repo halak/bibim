@@ -41,6 +41,8 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='DebugAD|Win32'">./bin/$(ProjectName)/$(Platform)/$(Configuration)\VC10\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='ReleaseAD|Win32'">./bin/$(ProjectName)/$(Platform)/$(Configuration)\VC10\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='ReleaseAD|Win32'">./bin/$(ProjectName)/$(Platform)/$(Configuration)\VC10\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='ReleaseAD|Win32'">$(ProjectName)RAD</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='DebugAD|Win32'">$(ProjectName)DAD</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugAD|Win32'">
     <ClCompile>
@@ -56,9 +58,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Lib />
-    <PostBuildEvent>
-      <Command>StormLib.bat $(Platform) $(Configuration)</Command>
-    </PostBuildEvent>
+    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAD|Win32'">
     <ClCompile>
@@ -72,9 +72,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Lib />
-    <PostBuildEvent>
-      <Command>StormLib.bat $(Platform) $(Configuration)</Command>
-    </PostBuildEvent>
+    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="doc\History.txt" />
