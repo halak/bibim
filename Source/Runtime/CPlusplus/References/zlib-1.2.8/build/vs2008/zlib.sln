@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C++ Express 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "zlib.vcproj", "{F3501587-9462-4E61-BD50-5EE58B649BAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3501587-9462-4E61-BD50-5EE58B649BAB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F3501587-9462-4E61-BD50-5EE58B649BAB}.Debug|Win32.Build.0 = Debug|Win32
+		{F3501587-9462-4E61-BD50-5EE58B649BAB}.Release|Win32.ActiveCfg = Release|Win32
+		{F3501587-9462-4E61-BD50-5EE58B649BAB}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
