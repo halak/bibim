@@ -115,7 +115,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='LIB Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;..\include;..\..\zlib-1.2.7;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\include;..\..\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;BUILDING_LIBCURL;CURL_STATICLIB;HAVE_LIBZ;HAVE_ZLIB_H;HTTP_ONLY;CURL_DISABLE_CRYPTO_AUTH;CURL_DISABLE_PROXY;CURL_DISABLE_VERBOSE_STRINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -232,7 +232,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>.;..\include;..\..\zlib-1.2.7;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\include;..\..\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;BUILDING_LIBCURL;CURL_STATICLIB;HAVE_LIBZ;HAVE_ZLIB_H;HTTP_ONLY;CURL_DISABLE_CRYPTO_AUTH;CURL_DISABLE_PROXY;CURL_DISABLE_VERBOSE_STRINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -264,13 +264,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='LIB Debug|Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\include;..\..\zlib-1.2.7;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\include;..\..\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_CONFIG_H;HAVE_LIBZ;HAVE_ZLIB_H;HTTP_ONLY;CURL_DISABLE_CRYPTO_AUTH;CURL_DISABLE_PROXY</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='LIB Release|Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\include;..\..\zlib-1.2.7;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\include;..\..\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_CONFIG_H;HAVE_LIBZ;HAVE_ZLIB_H;HTTP_ONLY;CURL_DISABLE_CRYPTO_AUTH;CURL_DISABLE_PROXY;CURL_DISABLE_VERBOSE_STRINGS</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
