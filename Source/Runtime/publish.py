@@ -155,6 +155,7 @@ def get_dependencies(platform, target, environment):
     # Platform
     if (win32):
         l += ['winmm.lib']
+        l += ['ws2_32.lib']
     
     # DirectX9
     if (win32):
@@ -218,16 +219,21 @@ def get_dependencies(platform, target, environment):
     
     # curl
     if (win32):
-        l += ['ws2_32.lib']
-        if (debug):
-            l += ['Cplusplus/References/curl-7.29.0/lib/LIB-Debug/libcurld.lib']
-        elif (release):
-            l += ['Cplusplus/References/curl-7.29.0/lib/LIB-Release/libcurl.lib']
+        if (vc9):
+            if (debug):
+                l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Debug/vs2008/libcurl.lib']
+            elif (release):
+                l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Release/vs2008/libcurl.lib']
+        elif (vc10):
+            if (debug):
+                l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Debug/vs2010/libcurl.lib']
+            elif (release):
+                l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Release/vs2010/libcurl.lib']
     elif (android):
         if (debug):
-            l += ['Cplusplus/References/curl-7.29.0/Android/LIB Debug/libcurl.a']
+            l += ['Cplusplus/References/curl-7.29.0/build/Android/LIB Debug/vs2010/libcurl.a']
         elif (release):
-            l += ['Cplusplus/References/curl-7.29.0/Android/LIB Release/libcurl.a']
+            l += ['Cplusplus/References/curl-7.29.0/build/Android/LIB Release/vs2010/libcurl.a']
             
     # MPQ
     if (win32):
@@ -238,9 +244,9 @@ def get_dependencies(platform, target, environment):
                 l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/ReleaseAD/VC9/StormLibRAD.lib']
         elif (vc10):
             if (debug):
-                l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/DebugAD/VC10/StormLib.lib']
+                l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/DebugAD/VC10/StormLibDAD.lib']
             elif (release):
-                l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/ReleaseAD/VC10/StormLib.lib']
+                l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/ReleaseAD/VC10/StormLibRAD.lib']
 
     return l
         
