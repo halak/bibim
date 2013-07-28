@@ -165,88 +165,76 @@ def get_dependencies(platform, target, environment):
         elif (release):
             l += ['d3dx9.lib']
      
-    # ZLib & PNG & JPG & FreeType & Lua & SPARK
+    # ZLib & PNG & JPG & FreeType & Lua & SPARK & Curl
     if (win32):
         if (debug):
             if (vc9):
-                l += ['Cplusplus/References/lpng1513/projects/visualc71/Win32_LIB_Debug/ZLib/zlibd.lib']
-                l += ['Cplusplus/References/lpng1513/projects/visualc71/Win32_LIB_Debug/libpngd.lib']
+                l += ['Cplusplus/References/zlib-1.2.8/lib/Win32/Debug/vs2008/zlib.lib']
+                l += ['Cplusplus/References/libpng-1.6.3/lib/Win32/Debug/vs2008/libpng.lib']
                 l += ['Cplusplus/References/jpeg-9/lib/Win32/Debug/vs2008/libjpeg.lib']
                 l += ['Cplusplus/References/freetype-2.4.4/objs/win32/vc2008/freetype244_D.lib']
                 l += ['Cplusplus/References/lua-5.1.5/lib/Win32/vc9/lua.Debug.lib']
                 l += ['Cplusplus/References/SPARK-1.5.5/lib/vc2008/static/SPARK_debug.lib']
+                l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Debug/vs2008/libcurl.lib']
             elif (vc10):
-                l += ['Cplusplus/References/lpng1513/projects/vstudio/Debug Library/zlib.lib']
-                l += ['Cplusplus/References/lpng1513/projects/vstudio/Debug Library/libpng15.lib']
+                l += ['Cplusplus/References/zlib-1.2.8/lib/Win32/Debug/vs2010/zlib.lib']
+                l += ['Cplusplus/References/libpng-1.6.3/lib/Win32/Debug/vs2010/libpng.lib']
                 l += ['Cplusplus/References/jpeg-9/lib/Win32/Debug/vs2010/libjpeg.lib']
                 l += ['Cplusplus/References/freetype-2.4.4/objs/win32/vc2010/freetype244_D.lib']
                 l += ['Cplusplus/References/lua-5.1.5/lib/Win32/vc10/lua.Debug.lib']
                 l += ['Cplusplus/References/SPARK-1.5.5/lib/vc2010/static/SPARK_debug.lib']
+                l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Debug/vs2010/libcurl.lib']
         elif (release):
             if (vc9):
-                l += ['Cplusplus/References/lpng1513/projects/visualc71/Win32_LIB_Release/ZLib/zlib.lib']
-                l += ['Cplusplus/References/lpng1513/projects/visualc71/Win32_LIB_Release/libpng.lib']
+                l += ['Cplusplus/References/zlib-1.2.8/lib/Win32/Release/vs2008/zlib.lib']
+                l += ['Cplusplus/References/libpng-1.6.3/lib/Win32/Release/vs2008/libpng.lib']
                 l += ['Cplusplus/References/jpeg-9/lib/Win32/Release/vs2008/libjpeg.lib']
                 l += ['Cplusplus/References/freetype-2.4.4/objs/win32/vc2008/freetype244.lib']
                 l += ['Cplusplus/References/lua-5.1.5/lib/Win32/vc9/lua.Release.lib']
                 l += ['Cplusplus/References/SPARK-1.5.5/lib/vc2008/static/SPARK.lib']
+                l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Release/vs2008/libcurl.lib']
             elif (vc10):
-                l += ['Cplusplus/References/lpng1513/projects/vstudio/Release Library/zlib.lib']
-                l += ['Cplusplus/References/lpng1513/projects/vstudio/Release Library/libpng15.lib']
+                l += ['Cplusplus/References/zlib-1.2.8/lib/Win32/Release/vs2010/zlib.lib']
+                l += ['Cplusplus/References/libpng-1.6.3/lib/Win32/Release/vs2010/libpng.lib']
                 l += ['Cplusplus/References/jpeg-9/lib/Win32/Release/vs2010/libjpeg.lib']
                 l += ['Cplusplus/References/freetype-2.4.4/objs/win32/vc2010/freetype244.lib']
                 l += ['Cplusplus/References/lua-5.1.5/lib/Win32/vc10/lua.Release.lib']
                 l += ['Cplusplus/References/SPARK-1.5.5/lib/vc2010/static/SPARK.lib']
+                l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Release/vs2010/libcurl.lib']
     elif (android):
         if (debug):
-            l += ['Cplusplus/References/lpng1513/projects/vstudio/Android/Debug Library/libpng.a']
-            l += ['Cplusplus/References/lpng1513/projects/vstudio/Android/Debug Library/zlib.a']
+            l += ['Cplusplus/References/libpng-1.6.3/lib/Android/Debug/vs2010/libpng.a']
+            l += ['Cplusplus/References/zlib-1.2.8/lib/Android/Debug/vs2010/zlib.a']
             l += ['Cplusplus/References/jpeg-9/lib/Android/Debug/vs2010/libjpeg.a']
             l += ['Cplusplus/References/freetype-2.4.4/objs/android/vc2010/freetype244_D.a']
             l += ['Cplusplus/References/lua-5.1.5/lib/Android/vc10/lua.Debug.a']
             l += ['Cplusplus/References/SPARK-1.5.5/lib/vc2010/static/SPARK_android_debug.a']
+            l += ['Cplusplus/References/curl-7.29.0/build/Android/LIB Debug/vs2010/libcurl.a']
         elif (release):
-            l += ['Cplusplus/References/lpng1513/projects/vstudio/Android/Release Library/libpng.a']
-            l += ['Cplusplus/References/lpng1513/projects/vstudio/Android/Release Library/zlib.a']
+            l += ['Cplusplus/References/libpng-1.6.3/lib/Android/Release/vs2010/libpng.a']
+            l += ['Cplusplus/References/zlib-1.2.8/lib/Android/Release/vs2010/zlib.a']
             l += ['Cplusplus/References/jpeg-9/lib/Android/Debug/vs2010/libjpeg.a']
             l += ['Cplusplus/References/freetype-2.4.4/objs/android/vc2010/freetype244.a']
             l += ['Cplusplus/References/lua-5.1.5/lib/Android/vc10/lua.Debug.a']
             l += ['Cplusplus/References/SPARK-1.5.5/lib/vc2010/static/SPARK_android.a']
+            l += ['Cplusplus/References/curl-7.29.0/build/Android/LIB Release/vs2010/libcurl.a']
     
     # irrKlang
     if (win32):
-        l += ['Cplusplus/References/irrKlang-1.4.0/lib/Win32-visualStudio/irrKlang.lib']
-    
-    # curl
-    if (win32):
-        if (vc9):
-            if (debug):
-                l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Debug/vs2008/libcurl.lib']
-            elif (release):
-                l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Release/vs2008/libcurl.lib']
-        elif (vc10):
-            if (debug):
-                l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Debug/vs2010/libcurl.lib']
-            elif (release):
-                l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Release/vs2010/libcurl.lib']
-    elif (android):
-        if (debug):
-            l += ['Cplusplus/References/curl-7.29.0/build/Android/LIB Debug/vs2010/libcurl.a']
-        elif (release):
-            l += ['Cplusplus/References/curl-7.29.0/build/Android/LIB Release/vs2010/libcurl.a']
+        l += ['Cplusplus/References/irrKlang-1.4.0/lib/Win32-visualStudio/irrKlang.lib']            
             
     # MPQ
     if (win32):
         if (vc9):
             if (debug):
-                l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/DebugAD/VC9/StormLibDAD.lib']
+                l += ['Cplusplus/References/StormLib/lib/Win32/Debug/vs2008/StormLib.lib']
             elif (release):
-                l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/ReleaseAD/VC9/StormLibRAD.lib']
+                l += ['Cplusplus/References/StormLib/lib/Win32/Release/vs2008/StormLib.lib']
         elif (vc10):
             if (debug):
-                l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/DebugAD/VC10/StormLibDAD.lib']
+                l += ['Cplusplus/References/StormLib/lib/Win32/Debug/vs2010/StormLib.lib']
             elif (release):
-                l += ['Cplusplus/References/StormLib/bin/StormLib/Win32/ReleaseAD/VC10/StormLibRAD.lib']
+                l += ['Cplusplus/References/StormLib/lib/Win32/Release/vs2010/StormLib.lib']
 
     return l
         
