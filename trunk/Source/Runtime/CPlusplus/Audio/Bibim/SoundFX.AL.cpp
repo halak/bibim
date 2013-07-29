@@ -3,7 +3,15 @@
 #include <Bibim/Assert.h>
 #include <Bibim/AudioDevice.AL.h>
 #include <Bibim/AutoLocker.h>
+#include <Bibim/Log.h>
 #include <Bibim/Math.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
+#include <al.h>
+#include <alc.h>
+#else
+#include <AL/al.h>
+#include <AL/alc.h>
+#endif
 
 namespace Bibim
 {
@@ -56,6 +64,35 @@ namespace Bibim
             sounds.push_back(SoundCollection());
             items = &sounds.back();
         }
+
+        /*
+        ALenum e;
+
+        ALuint buffer[2];
+        alGenBuffers(2, buffer);
+        e = alGetError();
+        Log::Information(String::CFormat("%d", (int)e));
+
+        byte data[22050];
+        for (int i = 0; i < sizeof(data); i++)
+            data[i] = (byte)((Math::Sin(i / 22050.0 * 3.14159 * 2.0) * 128.0) + 127.0);
+        alBufferData(buffer[0], AL_FORMAT_MONO8, data, sizeof(data), 22050);
+        e = alGetError();
+        Log::Information(String::CFormat("%d", (int)e));
+
+        ALuint source;
+        alGenSources(1, &source);
+        e = alGetError();
+        Log::Information(String::CFormat("%d", (int)e));
+        alSourcei(source, AL_BUFFER, buffer[0]);
+        alSourcef(source, AL_PITCH, 1.0f);
+        alSourcef(source, AL_GAIN, 1.0f);
+
+        alSourcePlay(source);
+        e = alGetError();
+        Log::Information(String::CFormat("%d", (int)e));
+        e = e;
+        */
 
         /*
         ISoundEngine* engine = audioDevice->GetEngine();
@@ -209,7 +246,7 @@ namespace Bibim
         */
     }
 
-    void SoundFX::DropSound(int group, void* sound)
+    void SoundFX::DropSound(int group, uint sound)
     {
         if (SoundCollection* items = FindSounds(group))
         {

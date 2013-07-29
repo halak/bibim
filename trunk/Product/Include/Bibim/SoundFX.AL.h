@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __BIBIM_SOUNDFX_ANDROID_H__
-#define __BIBIM_SOUNDFX_ANDROID_H__
+#ifndef __BIBIM_SOUNDFX_AL_H__
+#define __BIBIM_SOUNDFX_AL_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/TimelineGameModule.h>
@@ -38,17 +38,17 @@
                 void SetMute(bool value);
 
             private:
-                typedef std::vector<void*> SoundCollection;
+                typedef std::vector<uint>            SoundCollection;
                 typedef std::vector<int>             SoundDictionaryKeys;
                 typedef std::vector<SoundCollection> SoundDictionaryValues;
-                typedef std::vector<std::pair<int, void*> > StoppedSoundCollection;
+                typedef std::vector<std::pair<int, uint> > StoppedSoundCollection;
 
                 void UpdateVolumes();
                 SoundCollection* FindSounds(int group);
                 const SoundCollection* FindSounds(int group) const;
                 void SetInPauseAllSounds(bool value);
                 void SetInPauseAllSounds(int group, bool value);
-                void DropSound(int group, void* sound);
+                void DropSound(int group, uint sound);
                 void DropAllSounds();
 
             private:

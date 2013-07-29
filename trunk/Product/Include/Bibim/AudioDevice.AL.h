@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __BIBIM_AUDIODEVICE_ANDROID_H__
-#define __BIBIM_AUDIODEVICE_ANDROID_H__
+#ifndef __BIBIM_AUDIODEVICE_AL_H__
+#define __BIBIM_AUDIODEVICE_AL_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/GameModule.h>
@@ -17,6 +17,10 @@
 
                 inline float GetDuration(const String& uri) const;
                 float GetDurationByChars(const char* uri) const;
+
+            private:
+                void* device;
+                void* context;
         };
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////

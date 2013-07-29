@@ -221,8 +221,15 @@ def get_dependencies(platform, target, environment):
     
     # irrKlang
     if (win32):
-        l += ['Cplusplus/References/irrKlang-1.4.0/lib/Win32-visualStudio/irrKlang.lib']            
-            
+        l += ['Cplusplus/References/irrKlang-1.4.0/lib/Win32-visualStudio/irrKlang.lib']
+        
+    # OpenAL
+    if (win32):
+        l += ['Cplusplus/References/OpenAL/PC/libs/Win32/OpenAL32.lib']
+    elif (android):
+        l += ['Cplusplus/References/OpenAL/Android/libs/armeabi/libopenal.so']
+        l += ['Cplusplus/References/OpenAL/Android/libs/armeabi/libopenalwrapper.so']
+        
     # MPQ
     if (win32):
         if (vc9):
