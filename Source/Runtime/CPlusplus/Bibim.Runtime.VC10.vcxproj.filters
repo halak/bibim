@@ -130,9 +130,6 @@
     <Filter Include="04. References">
       <UniqueIdentifier>{79a147ac-c7b5-4fdd-bd1c-deacd938216e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Game\Audio\Irrklang">
-      <UniqueIdentifier>{772e7250-8f6b-422d-8972-9be2545ca70e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Game\UI\Visitors">
       <UniqueIdentifier>{b6559376-a07f-4aa8-b57e-148201ac87c1}</UniqueIdentifier>
     </Filter>
@@ -737,15 +734,6 @@
     </ClCompile>
     <ClCompile Include="Input\Bibim\Key.cpp">
       <Filter>03. Game\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="Audio\Bibim\AudioDevice.Irrklang.cpp">
-      <Filter>03. Game\Audio\Irrklang</Filter>
-    </ClCompile>
-    <ClCompile Include="Audio\Bibim\BGM.Irrklang.cpp">
-      <Filter>03. Game\Audio\Irrklang</Filter>
-    </ClCompile>
-    <ClCompile Include="Audio\Bibim\SoundFX.Irrklang.cpp">
-      <Filter>03. Game\Audio\Irrklang</Filter>
     </ClCompile>
     <ClCompile Include="Net\Bibim\HttpClient.Curl.cpp">
       <Filter>03. Game\Net</Filter>
@@ -1582,15 +1570,6 @@
     </ClInclude>
     <ClInclude Include="Foundation\Bibim\Environment.iOS.h">
       <Filter>02. System</Filter>
-    </ClInclude>
-    <ClInclude Include="Audio\Bibim\AudioDevice.Irrklang.h">
-      <Filter>03. Game\Audio\Irrklang</Filter>
-    </ClInclude>
-    <ClInclude Include="Audio\Bibim\BGM.Irrklang.h">
-      <Filter>03. Game\Audio\Irrklang</Filter>
-    </ClInclude>
-    <ClInclude Include="Audio\Bibim\SoundFX.Irrklang.h">
-      <Filter>03. Game\Audio\Irrklang</Filter>
     </ClInclude>
     <ClInclude Include="Audio\Bibim\AudioDevice.h">
       <Filter>03. Game\Audio</Filter>

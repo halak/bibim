@@ -5,7 +5,7 @@
 #   include <Bibim/Foundation.h>
 
 #   if (defined(BIBIM_PLATFORM_WINDOWS) || defined(BIBIM_PLATFORM_LINUX) || defined(BIBIM_PLATFORM_MACOS))
-#       include <Bibim/AudioDevice.Irrklang.h>
+#       include <Bibim/AudioDevice.AL.h>
 #   else
 #       include <Bibim/AudioDevice.AL.h>
 #   endif

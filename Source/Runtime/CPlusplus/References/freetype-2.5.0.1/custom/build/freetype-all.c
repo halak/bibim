@@ -7,6 +7,11 @@
 #include "../../src/base/ftfstype.c"
 #include "../../src/base/ftgasp.c"
 #include "../../src/base/ftglyph.c"
+#if (defined(WIN32))
+#include "../../builds/win32/ftdebug.c"
+#else
+#include "../../src/base/ftdebug.c"
+#endif
 /*
 #include "../../src/gzip/ftgzip.c"
 #undef bits
@@ -43,7 +48,3 @@
 /* #include "../../src/cid/type1cid.c" */
 /* #include "../../src/type42/type42.c" */
 #include "../../src/winfonts/winfnt.c"
-
-#ifdef WIN32
-#include "../../builds/win32/ftdebug.c"
-#endif

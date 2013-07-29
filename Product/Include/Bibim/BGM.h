@@ -5,7 +5,7 @@
 #   include <Bibim/Foundation.h>
 
 #   if (defined(BIBIM_PLATFORM_WINDOWS) || defined(BIBIM_PLATFORM_LINUX) || defined(BIBIM_PLATFORM_MACOS))
-#       include <Bibim/BGM.Irrklang.h>
+#       include <Bibim/BGM.AL.h>
 #   else
 #       include <Bibim/BGM.AL.h>
 #   endif

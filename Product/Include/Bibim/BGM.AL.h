@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __BIBIM_BGM_ANDROID_H__
-#define __BIBIM_BGM_ANDROID_H__
+#ifndef __BIBIM_BGM_AL_H__
+#define __BIBIM_BGM_AL_H__
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/TimelineGameModule.h>
