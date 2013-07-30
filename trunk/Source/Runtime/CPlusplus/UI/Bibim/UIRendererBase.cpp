@@ -96,7 +96,7 @@ namespace Bibim
                 char* effectName = BBStackAlloc(char, effectNameLength + 1);
                 char* en = &effectName[shaderEffectDirectory.GetLength()];
                 String::CopyChars(effectName, shaderEffectDirectory.CStr());
-                en[0] = '\\';
+                en[0] = '/';
                 en++;
 
                 if (effectFileFormatHint != 0)
@@ -509,7 +509,7 @@ namespace Bibim
         if (hint != 0)
         {
             char buffer[10];
-            buffer[0] = '\\';
+            buffer[0] = '/';
             buffer[1] = BBFOURCCFirst(hint);
             buffer[2] = BBFOURCCSecond(hint);
             buffer[3] = BBFOURCCThird(hint);
@@ -522,7 +522,7 @@ namespace Bibim
             return buffer;
         }
         else
-            return "\\NORM";
+            return "/NORM";
     }
 
     UIRendererBase::PixelMode UIRendererBase::GetPixelMode(const Texture2D* texture, const Texture2D* mask)

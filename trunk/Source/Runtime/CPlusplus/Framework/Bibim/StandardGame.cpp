@@ -207,7 +207,7 @@ namespace Bibim
         {
             MatchContentToWindow();
 
-            uiRenderer = new UIRenderer(GetGraphicsDevice(), storage, "Asset\\Shader");
+            uiRenderer = new UIRenderer(GetGraphicsDevice(), storage, "Asset/Shader");
             UIKeyboardEventDispatcher* ked = new UIKeyboardEventDispatcher(uiDomain, keyboard);
             UIMouseEventDispatcher*    med = new UIMouseEventDispatcher(uiDomain, mouse, uiRenderer, true);
             asyncEventQueue = new UIAsyncEventQueue();

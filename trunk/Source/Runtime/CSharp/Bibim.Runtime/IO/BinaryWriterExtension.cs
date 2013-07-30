@@ -91,5 +91,20 @@ namespace Bibim.IO
             else
                 writer.Write((int)0);
         }
+
+        public static void WriteURI(this BinaryWriter writer, string value)
+        {
+            if (value.Contains("\\"))
+                value = value.Replace('\\', '/');
+
+            if (string.IsNullOrEmpty(value) == false)
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(value);
+                writer.Write(bytes.Length);
+                writer.Write(bytes);
+            }
+            else
+                writer.Write((int)0);
+        }
     }
 }

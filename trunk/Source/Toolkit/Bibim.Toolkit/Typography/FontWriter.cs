@@ -14,7 +14,7 @@ namespace Bibim.Typography
         {
             writer.Write(asset.ClassID);
             writer.Write(asset.Library);
-            writer.WriteBibimString(asset.FaceURI);
+            writer.WriteURI(asset.FaceURI);
             writer.Write(asset.FontSize);
             writer.Write(asset.StrokeSize);
             writer.Write(asset.Weights);

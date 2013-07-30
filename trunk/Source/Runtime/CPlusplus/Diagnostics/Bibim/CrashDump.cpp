@@ -61,7 +61,7 @@
                     GetModuleFileName(NULL, moduleFileNameCharacters, sizeof(moduleFileNameCharacters));
 
                     std::string moduleFileName = moduleFileNameCharacters;
-                    std::string::size_type filenameIndex = moduleFileName.rfind('\\');
+                    std::string::size_type filenameIndex = moduleFileName.rfind('/');
                     
                     SYSTEMTIME CurrentTime;
                     GetSystemTime(&CurrentTime);

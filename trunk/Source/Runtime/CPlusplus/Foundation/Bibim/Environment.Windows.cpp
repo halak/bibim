@@ -57,19 +57,19 @@ namespace Bibim
 
     String Environment::GetAppDataPath(const String& appName, const String& filename)
     {
-        const String directory = PrivateInstance.appDataDirectoryBase + "\\" + appName;
+        const String directory = PrivateInstance.appDataDirectoryBase + "/" + appName;
 
         DWORD attributes = ::GetFileAttributesA(directory.CStr());
         if (attributes == INVALID_FILE_ATTRIBUTES)
         {
             if (::CreateDirectoryA(directory.CStr(), nullptr))
-                return directory + "\\" + filename;
+                return directory + "/" + filename;
             else
-                return PrivateInstance.workingDirectory + "\\" + filename;
+                return PrivateInstance.workingDirectory + "/" + filename;
         }
         else if ((attributes & FILE_ATTRIBUTE_DIRECTORY) != 0)
-            return directory + "\\" + filename;
+            return directory + "/" + filename;
         else
-            return PrivateInstance.workingDirectory + "\\" + filename;
+            return PrivateInstance.workingDirectory + "/" + filename;
     }
 }

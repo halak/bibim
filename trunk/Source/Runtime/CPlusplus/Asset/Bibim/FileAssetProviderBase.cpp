@@ -80,8 +80,8 @@ namespace Bibim
         if (directory.GetLength() > 0)
         {
             const char last = directory[directory.GetLength() - 1];
-            if (last != '\\')
-                directory.Append("\\");
+            if (last != '/')
+                directory.Append("/");
         }
     }
 
