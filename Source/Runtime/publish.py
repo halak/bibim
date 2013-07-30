@@ -173,7 +173,7 @@ def get_dependencies(platform, target, environment):
                 l += ['Cplusplus/References/libpng-1.6.3/lib/Win32/Debug/vs2008/libpng.lib']
                 l += ['Cplusplus/References/jpeg-9/lib/Win32/Debug/vs2008/libjpeg.lib']
                 l += ['Cplusplus/References/freetype-2.5.0.1/custom/lib/Win32/Debug/vs2008/freetype.lib']
-                l += ['Cplusplus/References/lua-5.1.5/lib/Win32/vc9/lua.Debug.lib']
+                l += ['Cplusplus/References/lua-5.2.2/lib/Win32/Debug/vs2008/lua.lib']
                 l += ['Cplusplus/References/SPARK-1.5.5/lib/vc2008/static/SPARK_debug.lib']
                 l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Debug/vs2008/libcurl.lib']
             elif (vc10):
@@ -181,7 +181,7 @@ def get_dependencies(platform, target, environment):
                 l += ['Cplusplus/References/libpng-1.6.3/lib/Win32/Debug/vs2010/libpng.lib']
                 l += ['Cplusplus/References/jpeg-9/lib/Win32/Debug/vs2010/libjpeg.lib']
                 l += ['Cplusplus/References/freetype-2.5.0.1/custom/lib/Win32/Debug/vs2010/freetype.lib']
-                l += ['Cplusplus/References/lua-5.1.5/lib/Win32/vc10/lua.Debug.lib']
+                l += ['Cplusplus/References/lua-5.2.2/lib/Win32/Debug/vs2008/lua.lib']
                 l += ['Cplusplus/References/SPARK-1.5.5/lib/vc2010/static/SPARK_debug.lib']
                 l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Debug/vs2010/libcurl.lib']
         elif (release):
@@ -190,7 +190,7 @@ def get_dependencies(platform, target, environment):
                 l += ['Cplusplus/References/libpng-1.6.3/lib/Win32/Release/vs2008/libpng.lib']
                 l += ['Cplusplus/References/jpeg-9/lib/Win32/Release/vs2008/libjpeg.lib']
                 l += ['Cplusplus/References/freetype-2.5.0.1/custom/lib/Win32/Release/vs2008/freetype.lib']
-                l += ['Cplusplus/References/lua-5.1.5/lib/Win32/vc9/lua.Release.lib']
+                l += ['Cplusplus/References/lua-5.2.2/lib/Win32/Release/vs2008/lua.lib']
                 l += ['Cplusplus/References/SPARK-1.5.5/lib/vc2008/static/SPARK.lib']
                 l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Release/vs2008/libcurl.lib']
             elif (vc10):
@@ -198,7 +198,7 @@ def get_dependencies(platform, target, environment):
                 l += ['Cplusplus/References/libpng-1.6.3/lib/Win32/Release/vs2010/libpng.lib']
                 l += ['Cplusplus/References/jpeg-9/lib/Win32/Release/vs2010/libjpeg.lib']
                 l += ['Cplusplus/References/freetype-2.5.0.1/custom/lib/Win32/Release/vs2010/freetype.lib']
-                l += ['Cplusplus/References/lua-5.1.5/lib/Win32/vc10/lua.Release.lib']
+                l += ['Cplusplus/References/lua-5.2.2/lib/Win32/Release/vs2010/lua.lib']
                 l += ['Cplusplus/References/SPARK-1.5.5/lib/vc2010/static/SPARK.lib']
                 l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Release/vs2010/libcurl.lib']
     elif (android):
@@ -207,7 +207,7 @@ def get_dependencies(platform, target, environment):
             l += ['Cplusplus/References/zlib-1.2.8/lib/Android/Debug/vs2010/zlib.a']
             l += ['Cplusplus/References/jpeg-9/lib/Android/Debug/vs2010/libjpeg.a']
             l += ['Cplusplus/References/freetype-2.5.0.1/custom/lib/Android/Debug/vs2010/freetype.a']
-            l += ['Cplusplus/References/lua-5.1.5/lib/Android/vc10/lua.Debug.a']
+            l += ['Cplusplus/References/lua-5.2.2/lib/Android/Debug/vs2010/lua.a']
             l += ['Cplusplus/References/SPARK-1.5.5/lib/vc2010/static/SPARK_android_debug.a']
             l += ['Cplusplus/References/curl-7.29.0/build/Android/LIB Debug/vs2010/libcurl.a']
         elif (release):
@@ -215,7 +215,7 @@ def get_dependencies(platform, target, environment):
             l += ['Cplusplus/References/zlib-1.2.8/lib/Android/Release/vs2010/zlib.a']
             l += ['Cplusplus/References/jpeg-9/lib/Android/Release/vs2010/libjpeg.a']
             l += ['Cplusplus/References/freetype-2.5.0.1/custom/lib/Android/Release/vs2010/freetype.a']
-            l += ['Cplusplus/References/lua-5.1.5/lib/Android/vc10/lua.Release.a']
+            l += ['Cplusplus/References/lua-5.2.2/lib/Android/Release/vs2010/lua.a']
             l += ['Cplusplus/References/SPARK-1.5.5/lib/vc2010/static/SPARK_android.a']
             l += ['Cplusplus/References/curl-7.29.0/build/Android/LIB Release/vs2010/libcurl.a']
     
@@ -408,10 +408,10 @@ if (__name__ == '__main__'):
 
     for module in MODULES:
         copy_headers(module)
-    copy_references_header('Cplusplus/References/lua-5.1.5/src/lua.h')
-    copy_references_header('Cplusplus/References/lua-5.1.5/src/lauxlib.h')
-    copy_references_header('Cplusplus/References/lua-5.1.5/src/luaconf.h')
-    copy_references_header('Cplusplus/References/lua-5.1.5/src/lualib.h')
+    copy_references_header('Cplusplus/References/lua-5.2.2/src/lua.h')
+    copy_references_header('Cplusplus/References/lua-5.2.2/src/lauxlib.h')
+    copy_references_header('Cplusplus/References/lua-5.2.2/src/luaconf.h')
+    copy_references_header('Cplusplus/References/lua-5.2.2/src/lualib.h')
     copy_references_header('Cplusplus/References/lua_tinker/lua_tinker.h')
     
     copy_references_header('ObjectiveC/Bibim/Bibim/BibimAppDelegate.h')

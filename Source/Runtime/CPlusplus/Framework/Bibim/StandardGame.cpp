@@ -2047,7 +2047,7 @@ namespace Bibim
     StandardGame::LuaBase::LuaBase(StandardGame* game)
         : game(game)
     {
-        const struct luaL_reg thLib [] = {
+        const struct luaL_Reg thLib [] = {
             { "title", &SetTitle },
             { "restart", &RestartGame },
             { "exit", &ExitGame },
@@ -2069,14 +2069,14 @@ namespace Bibim
             { NULL, NULL}  /* sentinel */
         };
 
-        const struct luaL_reg preferencesLib [] = {
+        const struct luaL_Reg preferencesLib [] = {
             { "get", &GetPreferenceItem },
             { "set", &SetPreferenceItem },
             { "commit", &CommitPreferences },
             { NULL, NULL}  /* sentinel */
         };
 
-        const struct luaL_reg uiLib [] = {
+        const struct luaL_Reg uiLib [] = {
             { "all", &All },
             { "children", &Children },
             { "selfdetach", &SelfDetach },
@@ -2091,14 +2091,14 @@ namespace Bibim
             { NULL, NULL}  /* sentinel */
         };
 
-        const struct luaL_reg bgmLib [] = {
+        const struct luaL_Reg bgmLib [] = {
             { "change", &ChangeBGM },
             { "duration", &DurationBGM },
             { "crossfade", &CrossfadeTimeBGM },
             { NULL, NULL}  /* sentinel */
         };
 
-        const struct luaL_reg sfxLib [] = {
+        const struct luaL_Reg sfxLib [] = {
             { "play", &Play },
             { "stop", &Stop },
             { "pause", &Pause },
@@ -2106,14 +2106,14 @@ namespace Bibim
             { NULL, NULL}  /* sentinel */
         };
 
-        const struct luaL_reg httpLib [] = {
+        const struct luaL_Reg httpLib [] = {
             { "request", &REQUEST },
             { "download", &Download },
             { "useragent", &UserAgent },
             { NULL, NULL}  /* sentinel */
         };
 
-        const struct luaL_reg clipboardLib [] = {
+        const struct luaL_Reg clipboardLib [] = {
             { "set", &SetClipboardText },
             { "get", &GetClipboardText },
             { NULL, NULL}  /* sentinel */
@@ -2121,25 +2121,46 @@ namespace Bibim
 
         lua_State* state = GetState();
 
-        luaL_register(state, "th", thLib);
+        lua_newtable(state);
+        lua_setglobal(state, "th");
+        lua_getglobal(state, "th");
+        luaL_setfuncs(state, thLib, 0);
         lua_pop(state, 1);
 
-        luaL_register(state, "preferences", preferencesLib);
+        lua_newtable(state);
+        lua_setglobal(state, "preferences");
+        lua_getglobal(state, "preferences");
+        luaL_setfuncs(state, preferencesLib, 0);
         lua_pop(state, 1);
 
-        luaL_register(state, "ui", uiLib);
+        lua_newtable(state);
+        lua_setglobal(state, "ui");
+        lua_getglobal(state, "ui");
+        luaL_setfuncs(state, uiLib, 0);
         lua_pop(state, 1);
 
-        luaL_register(state, "bgm", bgmLib);
+        lua_newtable(state);
+        lua_setglobal(state, "bgm");
+        lua_getglobal(state, "bgm");
+        luaL_setfuncs(state, bgmLib, 0);
         lua_pop(state, 1);
 
-        luaL_register(state, "sfx", sfxLib);
+        lua_newtable(state);
+        lua_setglobal(state, "sfx");
+        lua_getglobal(state, "sfx");
+        luaL_setfuncs(state, sfxLib, 0);
         lua_pop(state, 1);
 
-        luaL_register(state, "http", httpLib);
+        lua_newtable(state);
+        lua_setglobal(state, "http");
+        lua_getglobal(state, "http");
+        luaL_setfuncs(state, httpLib, 0);
         lua_pop(state, 1);
 
-        luaL_register(state, "clipboard", clipboardLib);
+        lua_newtable(state);
+        lua_setglobal(state, "clipboard");
+        lua_getglobal(state, "clipboard");
+        luaL_setfuncs(state, clipboardLib, 0);
         lua_pop(state, 1);
 
         lua_getglobal(state, "ui");
