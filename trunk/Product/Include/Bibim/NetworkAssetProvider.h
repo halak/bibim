@@ -21,6 +21,7 @@
                 NetworkAssetProvider(GameAssetStorage* storage, const IPEndPoint& endPoint, const String& clientName);
                 virtual ~NetworkAssetProvider();
 
+                virtual Stream* Open(const String& name);
                 virtual bool Preload(const String& name);
                 virtual GameAsset* Load(const String& name);
                 virtual bool Restore(const String& name, GameAsset* asset);
@@ -38,7 +39,7 @@
                 inline void SetDumpCacheEnabled(bool value);
 
             private:
-                bool BeginLoad(const String& name, StreamPtr& outStream);
+                bool BeginLoad(const String& name, Stream*& outStream);
 
             private:
                 IPEndPoint endPoint;

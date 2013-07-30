@@ -156,15 +156,6 @@ namespace Bibim
         GetModules()->GetRoot()->AttachChild(bgm);
         GetModules()->GetRoot()->AttachChild(sfx);
 
-        fontLibrary = new FontLibrary(GetGraphicsDevice());
-
-
-        debugFont = new Font(fontLibrary);
-        debugFont->SetFace(EMBEDDED_FONT_DATA,
-                           sizeof(EMBEDDED_FONT_DATA) / sizeof(EMBEDDED_FONT_DATA[0]));
-        debugFont->SetColor(Color::White);
-        GetModules()->GetRoot()->AttachChild(fontLibrary);
-
         storage = new GameAssetStorage(GetModules());
         GameModuleNode* storageNode = GetModules()->GetRoot()->AttachChild(storage);
         {
@@ -176,6 +167,15 @@ namespace Bibim
             //MOBILE storageNode->AttachChild(map);
             storageNode->AttachChild(fap);
         }
+
+        fontLibrary = new FontLibrary(GetGraphicsDevice());
+        fontLibrary->SetAssetStorage(storage);
+
+        debugFont = new Font(fontLibrary);
+        debugFont->SetFace(EMBEDDED_FONT_DATA,
+                           sizeof(EMBEDDED_FONT_DATA) / sizeof(EMBEDDED_FONT_DATA[0]));
+        debugFont->SetColor(Color::White);
+        GetModules()->GetRoot()->AttachChild(fontLibrary);
 
         SparkParticleEngine* spk = new SparkParticleEngine();
         GetModules()->GetRoot()->AttachChild(spk);
@@ -816,7 +816,7 @@ namespace Bibim
                 int cancelIndex;
         };
 
-        static int Load(lua_State* L)
+        static int LoadAsset(lua_State* L)
         {
             StandardGame* game = GetGame(L);
             if (game == nullptr)
@@ -839,7 +839,7 @@ namespace Bibim
             return 0;
         }
 
-        static int Preload(lua_State* L)
+        static int PreloadAsset(lua_State* L)
         {
             StandardGame* game = GetGame(L);
             if (game == nullptr)
@@ -2043,7 +2043,6 @@ namespace Bibim
         }
     }
 
-
     StandardGame::LuaBase::LuaBase(StandardGame* game)
         : game(game)
     {
@@ -2051,8 +2050,8 @@ namespace Bibim
             { "title", &SetTitle },
             { "restart", &RestartGame },
             { "exit", &ExitGame },
-            { "load", &Load },
-            { "preload", &Preload },
+            { "load", &LoadAsset },
+            { "preload", &PreloadAsset },
             { "store", &Store },
             { "time", &Time },
             { "systime", &SystemTime },
@@ -2177,6 +2176,33 @@ namespace Bibim
 
     StandardGame::LuaBase::~LuaBase()
     {
+    }
+
+    void StandardGame::LuaBase::Load(const String& path)
+    {
+        GameAssetStorage* storage = GetGame()->GetAssetStorage();
+        if (storage == nullptr)
+            return;
+
+        StreamPtr stream = storage->Open(path);
+        if (stream)
+        {
+            BinaryReader reader(stream);
+            const int size = reader.ReadInt();
+            if (size > 0)
+            {
+                byte* data = BBStackAlloc(byte, size);
+                reader.Read(data, size);
+
+                Lua::DoBuffer(data, size, path);
+
+                BBStackFree(data);
+            }
+            else
+                Log::Error("Lua", String::CFormat("Couldn't open lua file. (%s)", path.CStr()));
+        }
+        else
+            Log::Error("Lua", String::CFormat("Couldn't open lua file. (%s)", path.CStr()));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2368,7 +2394,7 @@ namespace Bibim
             }
         };
 
-        if (socket->IsConnected() ||
+        if (socket->IsConnected() || 
             socket->TryConnect())
         {
             static const int UIDataPacketID = 44523;
@@ -2380,9 +2406,8 @@ namespace Bibim
 
             std::string s = stringstream.str();
 
-            BinaryWriter writer(queryStream);
-            writer.Write(UIDataPacketID);
-            writer.Write(s.c_str(), static_cast<int>(s.size()));
+            BinaryWriter::WriteTo(queryStream, UIDataPacketID);
+            BinaryWriter::WriteTo(queryStream, s.c_str(), static_cast<int>(s.size()));
         }
     }
 }   

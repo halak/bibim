@@ -24,6 +24,8 @@
                 virtual ~FontLibrary();
 
                 inline GraphicsDevice* GetGraphicsDevice() const;
+                inline GameAssetStorage* GetAssetStorage() const;
+                inline void SetAssetStorage(GameAssetStorage* value);
 
                 inline const String& GetOSFontDirectory() const;
 
@@ -46,6 +48,7 @@
 
             private:
                 GraphicsDevice* graphicsDevice;
+                GameAssetStorage* assetStorage;
                 String osFontDirectory;
                 String alternativeFace;
                 CacheCollection caches;
@@ -61,6 +64,16 @@
         GraphicsDevice* FontLibrary::GetGraphicsDevice() const
         {
             return graphicsDevice;
+        }
+
+        GameAssetStorage* FontLibrary::GetAssetStorage() const
+        {
+            return assetStorage;
+        }
+
+        void FontLibrary::SetAssetStorage(GameAssetStorage* value)
+        {
+            assetStorage = value;
         }
 
         const String& FontLibrary::GetOSFontDirectory() const

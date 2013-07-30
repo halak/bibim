@@ -19,12 +19,19 @@ namespace Bibim
     {
     }
 
-    template <typename T> T BinaryReader::ReadTemplate()
+    void* BinaryReader::ReadFrom(Stream* stream, void* buffer, int length)
     {
-        BBAssertDebug(sourceStream != nullptr);
+        BBAssertDebug(stream != nullptr);
+        stream->Read(buffer, length);
+        return buffer;        
+    }
+
+    template <typename T> T BinaryReader::ReadFromTemplate(Stream* stream)
+    {
+        BBAssertDebug(stream != nullptr);
 
         T result;
-        if (sourceStream->Read(&result, sizeof(T)) == sizeof(T))
+        if (stream->Read(&result, sizeof(T)) == sizeof(T))
             return result;
         else
         {
@@ -33,65 +40,55 @@ namespace Bibim
         }
     }
 
-    void* BinaryReader::Read(void* buffer, int length)
+    bool BinaryReader::ReadBoolFrom(Stream* stream)
     {
-        BBAssertDebug(sourceStream != nullptr);
-
-        if (sourceStream->Read(buffer, length) == length)
-            return buffer;
-        else
-            return nullptr;
+        return ReadFromTemplate<bool>(stream);
     }
 
-    bool BinaryReader::ReadBool()
+    byte BinaryReader::ReadByteFrom(Stream* stream)
     {
-        return ReadTemplate<bool>();
+        return ReadFromTemplate<byte>(stream);
     }
 
-    byte BinaryReader::ReadByte()
+    short BinaryReader::ReadShortIntFrom(Stream* stream)
     {
-        return ReadTemplate<byte>();
+        return ReadFromTemplate<short>(stream);
     }
 
-    short BinaryReader::ReadShortInt()
+    int BinaryReader::ReadIntFrom(Stream* stream)
     {
-        return ReadTemplate<short>();
+        return ReadFromTemplate<int>(stream);
     }
 
-    int BinaryReader::ReadInt()
+    longint BinaryReader::ReadLongIntFrom(Stream* stream)
     {
-        return ReadTemplate<int>();
+        return ReadFromTemplate<longint>(stream);
     }
 
-    longint BinaryReader::ReadLongInt()
+    float BinaryReader::ReadFloatFrom(Stream* stream)
     {
-        return ReadTemplate<longint>();
+        return ReadFromTemplate<float>(stream);
     }
 
-    float BinaryReader::ReadFloat()
+    double BinaryReader::ReadDoubleFrom(Stream* stream)
     {
-        return ReadTemplate<float>();
+        return ReadFromTemplate<double>(stream);
     }
 
-    double BinaryReader::ReadDouble()
+    String BinaryReader::ReadStringFrom(Stream* stream)
     {
-        return ReadTemplate<double>();
-    }
-
-    String BinaryReader::ReadString()
-    {
-        BBAssertDebug(sourceStream != nullptr);
+        BBAssertDebug(stream != nullptr);
 
         int readSize = 0;
         int length = 0;
         
-        readSize = sourceStream->Read(&length, sizeof(length));
+        readSize = stream->Read(&length, sizeof(length));
         BBAssert(readSize == sizeof(length));
 
         if (length > 0)
         {
             char* buffer = BBStackAlloc(char, length);
-            readSize = sourceStream->Read(buffer, length);
+            readSize = stream->Read(buffer, length);
             BBAssert(readSize == length);
             
             const String result = String(buffer, 0, length);
@@ -104,49 +101,49 @@ namespace Bibim
             return String::Empty;
     }
 
-    Color BinaryReader::ReadColor()
+    Color BinaryReader::ReadColorFrom(Stream* stream)
     {
-        return ReadTemplate<Color>();
+        return ReadFromTemplate<Color>(stream);
     }
 
-    Point2 BinaryReader::ReadPoint2()
+    Point2 BinaryReader::ReadPoint2From(Stream* stream)
     {
-        return ReadTemplate<Point2>();
+        return ReadFromTemplate<Point2>(stream);
     }
 
-    Point3 BinaryReader::ReadPoint3()
+    Point3 BinaryReader::ReadPoint3From(Stream* stream)
     {
-        return ReadTemplate<Point3>();
+        return ReadFromTemplate<Point3>(stream);
     }
 
-    Point4 BinaryReader::ReadPoint4()
+    Point4 BinaryReader::ReadPoint4From(Stream* stream)
     {
-        return ReadTemplate<Point4>();
+        return ReadFromTemplate<Point4>(stream);
     }
 
-    Rect BinaryReader::ReadRect()
+    Rect BinaryReader::ReadRectFrom(Stream* stream)
     {
-        return ReadTemplate<Rect>();
+        return ReadFromTemplate<Rect>(stream);
     }
 
-    RectF BinaryReader::ReadRectF()
+    RectF BinaryReader::ReadRectFFrom(Stream* stream)
     {
-        return ReadTemplate<RectF>();
+        return ReadFromTemplate<RectF>(stream);
     }
 
-    Vector2 BinaryReader::ReadVector2()
+    Vector2 BinaryReader::ReadVector2From(Stream* stream)
     {
-        return ReadTemplate<Vector2>();
+        return ReadFromTemplate<Vector2>(stream);
     }
 
-    Vector3 BinaryReader::ReadVector3()
+    Vector3 BinaryReader::ReadVector3From(Stream* stream)
     {
-        return ReadTemplate<Vector3>();
+        return ReadFromTemplate<Vector3>(stream);
     }
 
-    Vector4 BinaryReader::ReadVector4()
+    Vector4 BinaryReader::ReadVector4From(Stream* stream)
     {
-        return ReadTemplate<Vector4>();
+        return ReadFromTemplate<Vector4>(stream);
     }
 
     BinaryReader& BinaryReader::operator = (const BinaryReader& right)

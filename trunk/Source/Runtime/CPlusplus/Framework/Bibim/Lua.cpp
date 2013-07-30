@@ -33,31 +33,9 @@ namespace Bibim
         lua_gc(state, LUA_GCCOLLECT, 0);
     }
 
-    void Lua::DoFile(const String& path)
+    void Lua::DoBuffer(const byte* buffer, int size, const String& name)
     {
-        FileStreamPtr file = new FileStream(path, FileStream::ReadOnly);
-        if (file->CanRead())
-        {
-            const int length = file->GetLength();
-            std::vector<char> text;
-            text.resize(length + 1);
-            file->Read(&text[0], length);
-            file->Close();
-            text[length] = '\0';
-
-            BBStaticAssert(String::UTF8BOMLength == 3);
-            int index = 0;
-            if (static_cast<byte>(text[0]) == String::UTF8BOM[0] &&
-                static_cast<byte>(text[1]) == String::UTF8BOM[1] &&
-                static_cast<byte>(text[2]) == String::UTF8BOM[2])
-            {
-                index = String::UTF8BOMLength;
-            }
-
-            lua_tinker::dostring(state, &text[index], path.CStr());
-        }
-        else
-            Log::Error("Lua", String::CFormat("Couldn't open lua file. (%s)", path.CStr()));
+        lua_tinker::dobuffer(state, reinterpret_cast<const char*>(buffer), size, name.CStr());
     }
 
     void Lua::LoadLibraries()

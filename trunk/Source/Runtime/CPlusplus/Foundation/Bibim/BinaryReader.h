@@ -23,24 +23,24 @@
                 BinaryReader(const BinaryReader& original);
                 ~BinaryReader();
 
-                void*   Read(void* buffer, int length);
-                bool    ReadBool();
-                byte    ReadByte();
-                short   ReadShortInt();
-                int     ReadInt();
-                longint ReadLongInt();
-                float   ReadFloat();
-                double  ReadDouble();
-                String  ReadString();
-                Color   ReadColor();
-                Point2  ReadPoint2();
-                Point3  ReadPoint3();
-                Point4  ReadPoint4();
-                Rect    ReadRect();
-                RectF   ReadRectF();
-                Vector2 ReadVector2();
-                Vector3 ReadVector3();
-                Vector4 ReadVector4();
+                inline void*   Read(void* buffer, int length);
+                inline bool    ReadBool();
+                inline byte    ReadByte();
+                inline short   ReadShortInt();
+                inline int     ReadInt();
+                inline longint ReadLongInt();
+                inline float   ReadFloat();
+                inline double  ReadDouble();
+                inline String  ReadString();
+                inline Color   ReadColor();
+                inline Point2  ReadPoint2();
+                inline Point3  ReadPoint3();
+                inline Point4  ReadPoint4();
+                inline Rect    ReadRect();
+                inline RectF   ReadRectF();
+                inline Vector2 ReadVector2();
+                inline Vector3 ReadVector3();
+                inline Vector4 ReadVector4();
 
                 inline void Read(bool& outValue);
                 inline void Read(byte& outValue);
@@ -66,6 +66,25 @@
                 inline bool operator == (const BinaryReader& right) const;
                 inline bool operator != (const BinaryReader& right) const;
 
+                static  void*   ReadFrom(Stream* stream, void* buffer, int length);
+                static bool    ReadBoolFrom(Stream* stream);
+                static byte    ReadByteFrom(Stream* stream);
+                static short   ReadShortIntFrom(Stream* stream);
+                static int     ReadIntFrom(Stream* stream);
+                static longint ReadLongIntFrom(Stream* stream);
+                static float   ReadFloatFrom(Stream* stream);
+                static double  ReadDoubleFrom(Stream* stream);
+                static String  ReadStringFrom(Stream* stream);
+                static Color   ReadColorFrom(Stream* stream);
+                static Point2  ReadPoint2From(Stream* stream);
+                static Point3  ReadPoint3From(Stream* stream);
+                static Point4  ReadPoint4From(Stream* stream);
+                static Rect    ReadRectFrom(Stream* stream);
+                static RectF   ReadRectFFrom(Stream* stream);
+                static Vector2 ReadVector2From(Stream* stream);
+                static Vector3 ReadVector3From(Stream* stream);
+                static Vector4 ReadVector4From(Stream* stream);
+
                 static inline bool    ToBool(const byte* buffer);
                 static inline byte    ToByte(const byte* buffer);
                 static inline short   ToShortInt(const byte* buffer);
@@ -85,6 +104,7 @@
 
             private:
                 template <typename T> inline T ReadTemplate();
+                template <typename T> static inline T ReadFromTemplate(Stream* stream);
                 template <typename T> static inline T ToTemplate(const byte* buffer);
 
             private:
@@ -92,6 +112,96 @@
         };
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        void* BinaryReader::Read(void* buffer, int length)
+        {
+            return ReadFrom(sourceStream, buffer, length);
+        }
+
+        bool BinaryReader::ReadBool()
+        {
+            return ReadBoolFrom(sourceStream);
+        }
+
+        byte BinaryReader::ReadByte()
+        {
+            return ReadByteFrom(sourceStream);
+        }
+
+        short BinaryReader::ReadShortInt()
+        {
+            return ReadShortIntFrom(sourceStream);
+        }
+
+        int BinaryReader::ReadInt()
+        {
+            return ReadIntFrom(sourceStream);
+        }
+
+        longint BinaryReader::ReadLongInt()
+        {
+            return ReadLongIntFrom(sourceStream);
+        }
+
+        float BinaryReader::ReadFloat()
+        {
+            return ReadFloatFrom(sourceStream);
+        }
+
+        double BinaryReader::ReadDouble()
+        {
+            return ReadDoubleFrom(sourceStream);
+        }
+
+        String BinaryReader::ReadString()
+        {
+            return ReadStringFrom(sourceStream);
+        }
+
+        Color BinaryReader::ReadColor()
+        {
+            return ReadColorFrom(sourceStream);
+        }
+
+        Point2 BinaryReader::ReadPoint2()
+        {
+            return ReadPoint2From(sourceStream);
+        }
+
+        Point3 BinaryReader::ReadPoint3()
+        {
+            return ReadPoint3From(sourceStream);
+        }
+
+        Point4 BinaryReader::ReadPoint4()
+        {
+            return ReadPoint4From(sourceStream);
+        }
+
+        Rect BinaryReader::ReadRect()
+        {
+            return ReadRectFrom(sourceStream);
+        }
+
+        RectF BinaryReader::ReadRectF()
+        {
+            return ReadRectFFrom(sourceStream);
+        }
+
+        Vector2 BinaryReader::ReadVector2()
+        {
+            return ReadVector2From(sourceStream);
+        }
+
+        Vector3 BinaryReader::ReadVector3()
+        {
+            return ReadVector3From(sourceStream);
+        }
+
+        Vector4 BinaryReader::ReadVector4()
+        {
+            return ReadVector4From(sourceStream);
+        }
 
         void BinaryReader::Read(bool& outValue)
         {

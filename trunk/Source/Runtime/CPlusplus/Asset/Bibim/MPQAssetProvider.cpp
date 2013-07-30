@@ -55,6 +55,11 @@ namespace Bibim
     {
     }
 
+    Stream* MPQAssetProvider::Open(const String& name)
+    {
+        return OpenActually(mpq, name);
+    }
+
     bool MPQAssetProvider::Preload(const String& name)
     {
         BBAssertDebug(GetStorage() != nullptr && mpq != nullptr);
@@ -78,13 +83,8 @@ namespace Bibim
         mpq = value;
     }
 
-    GameAsset* MPQAssetProvider::LoadActually(GameAssetStorage* storage,
-                                               MPQ* mpq,
-                                               const String& name,
-                                               bool isPriority)
+    Stream* MPQAssetProvider::OpenActually(MPQ* mpq, const String& name)
     {
-        BBAssertDebug(storage != nullptr);
-
         const int nl = name.GetLength();
         const int totalLength = nl + 3 + 1;
         char* filename = BBStackAlloc(char, totalLength);
@@ -92,12 +92,27 @@ namespace Bibim
         String::CopyChars(&filename[nl], ".ab");
         filename[totalLength - 1] = '\0';
 
-        MPQStreamPtr assetStream = new MPQStream(mpq, filename);
-        AssetStreamReader reader(name, assetStream, storage, isPriority);
-        GameAsset* result = GameAssetFactory::Create(reader);
+        Stream* stream = new MPQStream(mpq, filename);
 
         BBStackFree(filename);
 
-        return result;
+        return stream;
+    }
+
+    GameAsset* MPQAssetProvider::LoadActually(GameAssetStorage* storage,
+                                               MPQ* mpq,
+                                               const String& name,
+                                               bool isPriority)
+    {
+        BBAssertDebug(storage != nullptr);
+
+        StreamPtr assetStream = OpenActually(mpq, name);
+        if (assetStream->CanRead())
+        {
+            AssetStreamReader reader(name, assetStream, storage, isPriority);
+            return GameAssetFactory::Create(reader);
+        }
+        else
+            return nullptr;
     }
 }

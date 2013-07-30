@@ -11,6 +11,7 @@ namespace Bibim
 {
     FontLibrary::FontLibrary(GraphicsDevice* graphicsDevice)
         : graphicsDevice(graphicsDevice),
+          assetStorage(nullptr),
           ftLibrary(nullptr),
           globalScale(1.0f)
     {

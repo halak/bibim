@@ -27,6 +27,19 @@ namespace Bibim
         loadingThread.Join();
     }
 
+    Stream* GameAssetStorage::Open(const String& name)
+    {
+        for (ProviderCollection::const_iterator it = providers.begin(); it != providers.end(); it++)
+        {
+            if (Stream* stream = (*it)->Open(name))
+            {
+                return stream;
+            }
+        }
+
+        return nullptr;
+    }
+
     bool GameAssetStorage::Preload(const String& name)
     {
         AssetTable::iterator it = assets.find(name);

@@ -83,9 +83,23 @@ namespace Bibim
     {
     }
 
+    Stream* NetworkAssetProvider::Open(const String& name)
+    {
+        Stream* stream = nullptr;
+        if (BeginLoad(name, stream))
+        {
+            if (dumpCacheEnabled)
+                return new DumpStream(stream, new FileStream(name + ".ab", FileStream::WriteOnly));
+            else
+                return stream;
+        }
+        else
+            return nullptr;
+    }
+
     bool NetworkAssetProvider::Preload(const String& name)
     {
-        StreamPtr stream;
+        Stream* stream = nullptr;
         if (BeginLoad(name, stream))
         {
             Add(new NetworkAssetPreloadingTask(name, GetStorage(), stream, dumpCacheEnabled));
@@ -97,16 +111,9 @@ namespace Bibim
 
     GameAsset* NetworkAssetProvider::Load(const String& name)
     {
-        StreamPtr stream;
-        if (BeginLoad(name, stream))
+        if (Stream* stream = Open(name))
         {
-            StreamPtr assetStream = nullptr;
-            if (dumpCacheEnabled)
-                assetStream = new DumpStream(stream, new FileStream(name + ".ab", FileStream::WriteOnly));
-            else
-                assetStream = stream;
-
-            AssetStreamReader reader(name, assetStream, GetStorage());
+            AssetStreamReader reader(name, stream, GetStorage());
             return GameAssetFactory::Create(reader);
         }
         else
@@ -129,22 +136,21 @@ namespace Bibim
         }
     }
 
-    bool NetworkAssetProvider::BeginLoad(const String& name, StreamPtr& outStream)
+    bool NetworkAssetProvider::BeginLoad(const String& name, Stream*& outStream)
     {
         BBAssertDebug(GetStorage() != nullptr);
 
         SocketPtr socket = new Socket(GetEndPoint());
         if (socket->TryConnect())
         {
-            StreamPtr stream = new NetworkStream(socket);
+            Stream* stream = new NetworkStream(socket);
 
-            BinaryWriter writer(stream);
-            writer.Write(clientName);
+            BinaryWriter::WriteTo(stream, clientName);
             if (workingDirectory.IsEmpty() == false)
-                writer.Write(workingDirectory);
+                BinaryWriter::WriteTo(stream, workingDirectory);
             else
-                writer.Write(Environment::GetWorkingDirectory());
-            writer.Write(name);
+                BinaryWriter::WriteTo(stream, Environment::GetWorkingDirectory());
+            BinaryWriter::WriteTo(stream, name);
 
             outStream = stream;
 

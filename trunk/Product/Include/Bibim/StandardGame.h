@@ -28,6 +28,23 @@
                     RemoteDebugging,
                 };
 
+                class LuaBase : public Bibim::Lua
+                {
+                    BBThisIsNoncopyableClass(LuaBase);
+                    BBModuleClass(LuaBase, Bibim::Lua, 'S', 'L', 'U', 'L');
+                    public:
+                        LuaBase(StandardGame* game);
+                        virtual ~LuaBase();
+
+                        void Load(const String& path);
+
+                        inline StandardGame* GetGame() const;
+
+                    private:
+                        StandardGame* game;
+                        struct Internal;
+                };
+
             public:
                 virtual ~StandardGame();
 
@@ -54,24 +71,8 @@
                 inline HttpClient* GetHttpClient() const;
                 inline UIDomain* GetUIDomain() const;
                 inline UIAsyncEventQueue* GetAsyncEventQueue() const;
-                inline Lua* GetLua() const;
+                inline LuaBase* GetLua() const;
                 inline Clipboard* GetClipboard() const;
-
-            public:
-                class LuaBase : public Bibim::Lua
-                {
-                    BBThisIsNoncopyableClass(LuaBase);
-                    BBModuleClass(LuaBase, Bibim::Lua, 'S', 'L', 'U', 'L');
-                    public:
-                        LuaBase(StandardGame* game);
-                        virtual ~LuaBase();
-
-                        inline StandardGame* GetGame() const;
-
-                    private:
-                        StandardGame* game;
-                        struct Internal;
-                };
 
             protected:
                 class RemoteDebugger : public UIHandledDrawingContext::Handler
@@ -160,7 +161,7 @@
                 ScreenshotPrinter* screenshotPrinter;
                 BGM* bgm;
                 SoundFX* sfx;
-                Lua* lua;
+                LuaBase* lua;
                 Clipboard* clipboard;
                 String  recentLog;
                 FontPtr debugFont;
@@ -248,7 +249,7 @@
             return asyncEventQueue;
         }
 
-        Lua* StandardGame::GetLua() const
+        StandardGame::LuaBase* StandardGame::GetLua() const
         {
             return lua;
         }

@@ -18,117 +18,117 @@ namespace Bibim
     {
     }
 
-    template <typename T> inline void BinaryWriter::WriteTemplate(T value)
+    template <typename T> inline void BinaryWriter::WriteToTemplate(Stream* stream, T value)
     {
-        BBAssertDebug(sourceStream != nullptr);
+        BBAssertDebug(stream != nullptr);
 
-        if (sourceStream->Write(&value, sizeof(T)) != sizeof(T))
+        if (stream->Write(&value, sizeof(T)) != sizeof(T))
         {
             // TODO: ERROR
         }
     }
 
-    void BinaryWriter::Write(bool value)
+    void BinaryWriter::WriteTo(Stream* stream, bool value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
-    void BinaryWriter::Write(byte value)
+    void BinaryWriter::WriteTo(Stream* stream, byte value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
-    void BinaryWriter::Write(short value)
+    void BinaryWriter::WriteTo(Stream* stream, short value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
-    void BinaryWriter::Write(int value)
+    void BinaryWriter::WriteTo(Stream* stream, int value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
-    void BinaryWriter::Write(longint value)
+    void BinaryWriter::WriteTo(Stream* stream, longint value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
-    void BinaryWriter::Write(float value)
+    void BinaryWriter::WriteTo(Stream* stream, float value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
-    void BinaryWriter::Write(double value)
+    void BinaryWriter::WriteTo(Stream* stream, double value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
-    void BinaryWriter::Write(const char* value)
+    void BinaryWriter::WriteTo(Stream* stream, const char* value)
     {
-        Write(value, strlen(value));
+        WriteTo(stream, value, String::CharsLength(value));
     }
 
-    void BinaryWriter::Write(const char* value, int length)
+    void BinaryWriter::WriteTo(Stream* stream, const char* value, int length)
     {
-        BBAssertDebug(sourceStream != nullptr);
+        BBAssertDebug(stream != nullptr);
 
         //int writtenSize = 0;
 
-        /*writtenSize = */sourceStream->Write(&length, sizeof(length));
+        /*writtenSize = */stream->Write(&length, sizeof(length));
         //BBAssert(writtenSize == sizeof(length));
 
-        /*writtenSize = */sourceStream->Write(value, length);
+        /*writtenSize = */stream->Write(value, length);
         //BBAssert(writtenSize == length);
     }
 
-    void BinaryWriter::Write(const String& value)
+    void BinaryWriter::WriteTo(Stream* stream, const String& value)
     {
-        Write(value.CStr(), value.GetLength());
+        WriteTo(stream, value.CStr(), value.GetLength());
     }
 
-    void BinaryWriter::Write(Color value)
+    void BinaryWriter::WriteTo(Stream* stream, Color value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
-    void BinaryWriter::Write(Point2 value)
+    void BinaryWriter::WriteTo(Stream* stream, Point2 value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
-    void BinaryWriter::Write(Point3 value)
+    void BinaryWriter::WriteTo(Stream* stream, Point3 value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
-    void BinaryWriter::Write(Point4 value)
+    void BinaryWriter::WriteTo(Stream* stream, Point4 value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
-    void BinaryWriter::Write(Rect value)
+    void BinaryWriter::WriteTo(Stream* stream, Rect value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
-    void BinaryWriter::Write(RectF value)
+    void BinaryWriter::WriteTo(Stream* stream, RectF value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
-    void BinaryWriter::Write(Vector2 value)
+    void BinaryWriter::WriteTo(Stream* stream, Vector2 value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
-    void BinaryWriter::Write(Vector3 value)
+    void BinaryWriter::WriteTo(Stream* stream, Vector3 value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
-    void BinaryWriter::Write(Vector4 value)
+    void BinaryWriter::WriteTo(Stream* stream, Vector4 value)
     {
-        WriteTemplate(value);
+        WriteToTemplate(stream, value);
     }
 
     BinaryWriter& BinaryWriter::operator = (const BinaryWriter& right)

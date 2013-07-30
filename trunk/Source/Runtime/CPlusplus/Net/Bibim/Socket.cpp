@@ -1,6 +1,7 @@
 #include <Bibim/Config.h>
 #include <Bibim/Socket.h>
 #include <Bibim/Log.h>
+#include <Bibim/Thread.h>
 
 #if defined(BIBIM_PLATFORM_WINDOWS)
 #   include <winsock2.h>

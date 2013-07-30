@@ -149,6 +149,8 @@
                 static const String NewLine;
                 static const int UTF8BOMLength = 3;
                 static const byte UTF8BOM[UTF8BOMLength];
+                static inline bool CheckUTF8BOM(byte a, byte b, byte c);
+                static inline bool CheckUTF8BOM(char a, char b, char c);
 
             public:
                 class CharRef
@@ -512,6 +514,7 @@
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
+
         bool String::IsWhiteSpace(int c)
         {
             return (c == 0x20 ||
@@ -572,6 +575,18 @@
                     return result;
             }
             return -1;
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        bool String::CheckUTF8BOM(byte a, byte b, byte c)
+        {
+            return UTF8BOM[0] == a && UTF8BOM[1] == b && UTF8BOM[2] == c;
+        }
+
+        bool String::CheckUTF8BOM(char a, char b, char c)
+        {
+            return CheckUTF8BOM(static_cast<byte>(a), static_cast<byte>(b), static_cast<byte>(c));
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
