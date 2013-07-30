@@ -22,7 +22,7 @@ namespace Bibim.Animation
             writer.Write((short)asset.Keyframes.Length);
             foreach (var item in asset.Keyframes)
             {
-                writer.WriteBibimString(item.TextureURI);
+                writer.WriteURI(item.TextureURI);
                 writer.Write(item.ClippingRectangle);
                 writer.Write((byte)item.AppliedTransform);
                 writer.Write(item.Origin);

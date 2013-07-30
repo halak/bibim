@@ -12,6 +12,8 @@ namespace Bibim
           canRead(false),
           canWrite(false)
     {
+        BBAssert(path.Contains('\\') == false);
+
         DWORD windowsAccessMode = 0x00000000;
         if (accessMode == ReadOnly)
             windowsAccessMode = GENERIC_READ;

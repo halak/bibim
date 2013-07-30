@@ -61,7 +61,7 @@ namespace Bibim
         // windowsDirectory.resize(GetWindowsDirectory(nullptr, 0) + 1, '\0');
         // GetWindowsDirectory(&windowsDirectory[0], windowsDirectory.size());
         // osFontDirectory = &windowsDirectory[0];
-        // osFontDirectory += "\\Fonts\\";
+        // osFontDirectory += "/Fonts/";
 
         // alternativeFace = osFontDirectory + "gulim.ttc";
     }

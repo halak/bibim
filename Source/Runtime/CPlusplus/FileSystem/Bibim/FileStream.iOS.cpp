@@ -27,6 +27,8 @@ namespace Bibim
           canRead(false),
           canWrite(false)
     {
+        BBAssert(path.Contains('\\') == false);
+
         if (path.IsEmpty())
             return;
 
@@ -36,17 +38,14 @@ namespace Bibim
         else if (accessMode == WriteOnly)
             mode[0] = 'w';
 
-        String cleanPath = path;
-        cleanPath.Replace('\\', '/');
-
         String absPath;
-        if (Path::IsAbsolutePath(cleanPath) == false)
+        if (Path::IsAbsolutePath(path) == false)
         {
-            BBAssert(cleanPath.CStr()[0] != '/');
-            absPath = Environment::GetWorkingDirectory() + cleanPath;
+            BBAssert(path.CStr()[0] != '/');
+            absPath = Environment::GetWorkingDirectory() + path;
         }
         else
-            absPath = cleanPath;
+            absPath = path;
 
         handle = std::fopen(absPath.CStr(), mode);
         if (handle == nullptr)

@@ -40,6 +40,8 @@ namespace Bibim
           canRead(false),
           canWrite(false)
     {
+        BBAssert(path.Contains('\\') == false);
+
         if (path.IsEmpty())
             return;
 
@@ -49,17 +51,14 @@ namespace Bibim
         else if (accessMode == WriteOnly)
             mode[0] = 'w';
 
-        String cleanPath = path;
-        cleanPath.Replace('\\', '/');
-
         String absPath;
-        if (Path::IsAbsolutePath(cleanPath) == false)
+        if (Path::IsAbsolutePath(path) == false)
         {
-            BBAssert(cleanPath.CStr()[0] != '/');
-            absPath = Environment::GetWorkingDirectory() + cleanPath;
+            BBAssert(path.CStr()[0] != '/');
+            absPath = Environment::GetWorkingDirectory() + path;
         }
         else
-            absPath = cleanPath;
+            absPath = path;
 
         handle = std::fopen(absPath.CStr(), mode);
         if (handle == nullptr)
@@ -67,7 +66,7 @@ namespace Bibim
             if (accessMode == WriteOnly)
             {
                 const String& workingDirectory = Environment::GetWorkingDirectory();
-                if (ReadyDirectory(workingDirectory, cleanPath))
+                if (ReadyDirectory(workingDirectory, path))
                     handle = std::fopen(absPath.CStr(), mode);
             }
         }
@@ -83,7 +82,7 @@ namespace Bibim
                 return;
 
             // 읽기 전용으로 열 경우에는 Asset도 한 번 살펴봅니다.
-            asset = AAssetManager_open(Assets, cleanPath.CStr(), AASSET_MODE_UNKNOWN);
+            asset = AAssetManager_open(Assets, path.CStr(), AASSET_MODE_UNKNOWN);
             if (asset == nullptr)
                 return;
 

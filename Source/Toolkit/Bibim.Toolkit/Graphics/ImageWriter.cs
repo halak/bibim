@@ -18,7 +18,7 @@ namespace Bibim.Graphics
 
         public static void WriteBody(AssetStreamWriter writer, Image asset)
         {
-            writer.WriteBibimString(asset.TextureURI);
+            writer.WriteURI(asset.TextureURI);
             writer.Write(asset.ClippingRectangle);
             writer.Write((byte)asset.AppliedTransform);
         }
