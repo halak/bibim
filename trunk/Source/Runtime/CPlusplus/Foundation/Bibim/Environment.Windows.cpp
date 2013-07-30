@@ -40,6 +40,7 @@ namespace Bibim
             workingDirectoryBuffer[workingDirectoryLength - 1] = '\0';
 
             workingDirectory = workingDirectoryBuffer;
+            workingDirectory.Replace('\\', '/');
 
             BBStackFree(workingDirectoryBuffer);
             BBStackFree(wideWorkingDirectoryBuffer);
@@ -51,6 +52,7 @@ namespace Bibim
             if (result == S_OK)
             {
                 appDataDirectoryBase = appDataDirectoryBuffer;
+                appDataDirectoryBase.Replace('\\', '/');
             }
         }
     }
