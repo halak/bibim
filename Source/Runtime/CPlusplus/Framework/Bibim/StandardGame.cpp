@@ -29,7 +29,7 @@
 #include <Bibim/Mouse.h>
 #include <Bibim/NetworkStream.h>
 #include <Bibim/Numerics.h>
-#include <Bibim/PipedAssetProvider.h>
+#include <Bibim/NetworkAssetProvider.h>
 #include <Bibim/Preferences.h>
 #include <Bibim/RenderTargetTexture2D.h>
 #include <Bibim/ScreenshotPrinter.h>
@@ -168,11 +168,11 @@ namespace Bibim
         storage = new GameAssetStorage(GetModules());
         GameModuleNode* storageNode = GetModules()->GetRoot()->AttachChild(storage);
         {
-            PipedAssetProvider* pap = new PipedAssetProvider(storage, PipedAssetProvider::DefaultPipeName, gameName);
+            NetworkAssetProvider* nap = new NetworkAssetProvider(storage, IPEndPoint(IPEndPoint::Localhost, NetworkAssetProvider::DefaultPort), gameName);
             //MOBILE MPQAssetProvider*   map = new MPQAssetProvider(storage, mainMPQ);
             FileAssetProvider*  fap = new FileAssetProvider(storage);
 
-            storageNode->AttachChild(pap);
+            storageNode->AttachChild(nap);
             //MOBILE storageNode->AttachChild(map);
             storageNode->AttachChild(fap);
         }
@@ -2183,7 +2183,7 @@ namespace Bibim
 
     StandardGame::RemoteDebugger::RemoteDebugger()
         : syncCountdown(0),
-          socket(new Socket("127.0.0.1", 51893)),
+          socket(new Socket(IPEndPoint(IPEndPoint::Localhost, 51893))),
           queryStream(new NetworkStream(socket)),
           selectedVisual(nullptr)
     {

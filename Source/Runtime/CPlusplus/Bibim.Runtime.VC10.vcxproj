@@ -123,14 +123,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Asset\Bibim\PipedAssetProvider.Default.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Asset\Bibim\PipedAssetProvider.Null.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Asset\Bibim\NetworkAssetProvider.cpp" />
     <ClCompile Include="Audio\Bibim\AudioDevice.AL.cpp" />
     <ClCompile Include="Audio\Bibim\BGM.AL.cpp" />
     <ClCompile Include="Audio\Bibim\SoundFX.AL.cpp" />
@@ -211,6 +204,7 @@
     </ClCompile>
     <ClCompile Include="Net\Bibim\HttpClient.Curl.cpp" />
     <ClCompile Include="Net\Bibim\HttpClientBase.cpp" />
+    <ClCompile Include="Net\Bibim\IPEndPoint.cpp" />
     <ClCompile Include="Net\Bibim\NetworkStream.cpp" />
     <ClCompile Include="Net\Bibim\Socket.cpp" />
     <ClCompile Include="Threading\Bibim\Lock.Unix.cpp">
@@ -474,18 +468,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="IPC\Bibim\PipeClientStream.Windows.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="IPC\Bibim\PipeServerStream.Windows.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="IPC\Bibim\PipeStream.Windows.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Threading\Bibim\Lock.Windows.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
@@ -516,15 +498,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Asset\Bibim\PipedAssetProvider.Default.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Asset\Bibim\PipedAssetProvider.h" />
-    <ClInclude Include="Asset\Bibim\PipedAssetProvider.Null.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="Asset\Bibim\NetworkAssetProvider.h" />
     <ClInclude Include="Audio\Bibim\AudioDevice.AL.h" />
     <ClInclude Include="Audio\Bibim\AudioDevice.h" />
     <ClInclude Include="Audio\Bibim\BGM.AL.h" />
@@ -601,6 +575,7 @@
     <ClInclude Include="Input\Bibim\IMEBase.h" />
     <ClInclude Include="Net\Bibim\HttpClient.Curl.h" />
     <ClInclude Include="Net\Bibim\HttpClientBase.h" />
+    <ClInclude Include="Net\Bibim\IPEndPoint.h" />
     <ClInclude Include="Net\Bibim\NetworkStream.h" />
     <ClInclude Include="Net\Bibim\Socket.h" />
     <ClInclude Include="Threading\Bibim\Lock.Unix.h">
@@ -868,30 +843,6 @@
     <ClInclude Include="Foundation\Bibim\Environment.Windows.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="IPC\Bibim\PipeClientStream.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="IPC\Bibim\PipeClientStream.Windows.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="IPC\Bibim\PipeServerStream.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="IPC\Bibim\PipeServerStream.Windows.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="IPC\Bibim\PipeStream.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="IPC\Bibim\PipeStream.Windows.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Threading\Bibim\AutoLocker.h" />
     <ClInclude Include="Threading\Bibim\Lock.h" />

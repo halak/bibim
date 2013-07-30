@@ -25,7 +25,7 @@
 #include <Bibim/OscillationCurve.h>
 #include <Bibim/EvalContext.h>
 #  include <Bibim/GameAssetStorage.h>
-#  include <Bibim/PipedAssetProvider.h>
+#  include <Bibim/NetworkAssetProvider.h>
 #include <Bibim/EvalSelectors.h>
 #include <Bibim/EvalBinaryOperators.h>
 #   include <Bibim/UIColorMatrixEffect.h>
@@ -141,12 +141,6 @@
 #  include <Bibim/KeyboardState.h>
 #  include <Bibim/Mouse.h>
 #  include <Bibim/MouseState.h>
-
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // IPC
-#  include <Bibim/PipeClientStream.h>
-#  include <Bibim/PipeServerStream.h>
-#  include <Bibim/PipeStream.h>
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // Module

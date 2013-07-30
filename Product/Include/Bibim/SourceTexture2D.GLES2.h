@@ -19,7 +19,7 @@
             private:
                 SourceTexture2D(GraphicsDevice* graphicsDevice, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
 
-                static void Read(SourceTexture2D* self, StreamReader& reader);
+                static void Read(SourceTexture2D* thiz, StreamReader& reader);
         };
     }
 

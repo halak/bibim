@@ -115,14 +115,8 @@
     <Filter Include="02. System">
       <UniqueIdentifier>{84521930-0e12-4c0f-9ccb-da7d42c3801a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. System\IPC">
-      <UniqueIdentifier>{9d5b16fc-a85f-48a6-8223-138431d29b06}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. System\Threading">
       <UniqueIdentifier>{86922ee0-eec2-49e0-9c95-87e02955e1f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. System\Net">
-      <UniqueIdentifier>{3409a641-9363-4f71-8812-2757aee325df}</UniqueIdentifier>
     </Filter>
     <Filter Include="02. System\IO">
       <UniqueIdentifier>{a634bf3d-d236-4e96-9b41-7e272fa578ff}</UniqueIdentifier>
@@ -684,15 +678,6 @@
     <ClCompile Include="Foundation\Bibim\Environment.Windows.cpp">
       <Filter>02. System</Filter>
     </ClCompile>
-    <ClCompile Include="IPC\Bibim\PipeClientStream.Windows.cpp">
-      <Filter>02. System\IPC</Filter>
-    </ClCompile>
-    <ClCompile Include="IPC\Bibim\PipeServerStream.Windows.cpp">
-      <Filter>02. System\IPC</Filter>
-    </ClCompile>
-    <ClCompile Include="IPC\Bibim\PipeStream.Windows.cpp">
-      <Filter>02. System\IPC</Filter>
-    </ClCompile>
     <ClCompile Include="Threading\Bibim\Lock.Windows.cpp">
       <Filter>02. System\Threading</Filter>
     </ClCompile>
@@ -771,12 +756,6 @@
     <ClCompile Include="Graphics\Bibim\GLES2.cpp">
       <Filter>03. Game\Graphics\GLES2</Filter>
     </ClCompile>
-    <ClCompile Include="Asset\Bibim\PipedAssetProvider.Default.cpp">
-      <Filter>03. Game\%28Asset%29\Providers</Filter>
-    </ClCompile>
-    <ClCompile Include="Asset\Bibim\PipedAssetProvider.Null.cpp">
-      <Filter>03. Game\%28Asset%29\Providers</Filter>
-    </ClCompile>
     <ClCompile Include="Framework\Bibim\Preferences.cpp">
       <Filter>03. Game\Framework</Filter>
     </ClCompile>
@@ -854,6 +833,12 @@
     </ClCompile>
     <ClCompile Include="Graphics\Bibim\JPEGReader.cpp">
       <Filter>03. Game\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset\Bibim\NetworkAssetProvider.cpp">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClCompile>
+    <ClCompile Include="Net\Bibim\IPEndPoint.cpp">
+      <Filter>03. Game\Net</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1502,24 +1487,6 @@
     <ClInclude Include="Foundation\Bibim\Environment.Windows.h">
       <Filter>02. System</Filter>
     </ClInclude>
-    <ClInclude Include="IPC\Bibim\PipeClientStream.h">
-      <Filter>02. System\IPC</Filter>
-    </ClInclude>
-    <ClInclude Include="IPC\Bibim\PipeClientStream.Windows.h">
-      <Filter>02. System\IPC</Filter>
-    </ClInclude>
-    <ClInclude Include="IPC\Bibim\PipeServerStream.h">
-      <Filter>02. System\IPC</Filter>
-    </ClInclude>
-    <ClInclude Include="IPC\Bibim\PipeServerStream.Windows.h">
-      <Filter>02. System\IPC</Filter>
-    </ClInclude>
-    <ClInclude Include="IPC\Bibim\PipeStream.h">
-      <Filter>02. System\IPC</Filter>
-    </ClInclude>
-    <ClInclude Include="IPC\Bibim\PipeStream.Windows.h">
-      <Filter>02. System\IPC</Filter>
-    </ClInclude>
     <ClInclude Include="Threading\Bibim\AutoLocker.h">
       <Filter>02. System\Threading</Filter>
     </ClInclude>
@@ -1616,15 +1583,6 @@
     <ClInclude Include="Graphics\Bibim\GraphicsDeviceBase.h">
       <Filter>03. Game\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Asset\Bibim\PipedAssetProvider.Default.h">
-      <Filter>03. Game\%28Asset%29\Providers</Filter>
-    </ClInclude>
-    <ClInclude Include="Asset\Bibim\PipedAssetProvider.h">
-      <Filter>03. Game\%28Asset%29\Providers</Filter>
-    </ClInclude>
-    <ClInclude Include="Asset\Bibim\PipedAssetProvider.Null.h">
-      <Filter>03. Game\%28Asset%29\Providers</Filter>
-    </ClInclude>
     <ClInclude Include="Framework\Bibim\Preferences.h">
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
@@ -1700,6 +1658,12 @@
     </ClInclude>
     <ClInclude Include="Graphics\Bibim\JPEGReader.h">
       <Filter>03. Game\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset\Bibim\NetworkAssetProvider.h">
+      <Filter>03. Game\%28Asset%29\Providers</Filter>
+    </ClInclude>
+    <ClInclude Include="Net\Bibim\IPEndPoint.h">
+      <Filter>03. Game\Net</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

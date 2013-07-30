@@ -68,7 +68,7 @@
                     class AssetProvider;
                         class FileAssetProvider;
                         class MPQAssetProvider;
-                        class PipedAssetProvider;
+                        class NetworkAssetProvider;
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // (Module)
                 class GameModule;
@@ -192,11 +192,6 @@
                 struct KeyboardState;
                 class Mouse;
                 struct MouseState;
-            ////////////////////////////////////////////////////////////////////////////////////////////////////
-            // IPC
-                BBForwardDeclareSmartPointerClass(PipeStream);
-                    BBForwardDeclareSmartPointerClass(PipeClientStream);
-                    BBForwardDeclareSmartPointerClass(PipeServerStream);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Net
                 class HttpClient;

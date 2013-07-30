@@ -38,26 +38,12 @@ namespace Bibim
         if (existingInstance == nullptr)
             existingInstance = new SourceTexture2D(graphicsDevice, width, height, surfaceWidth, surfaceHeight, pixelFormat);
         
-        reader.ReadAsync(new LoadingTask(reader, static_cast<SourceTexture2D*>(existingInstance), surfaceHeight));
+        Read(static_cast<SourceTexture2D*>(existingInstance), reader);
 
         return existingInstance;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    SourceTexture2D::LoadingTask::LoadingTask(const AssetStreamReader& reader, SourceTexture2D* texture, int totalBytes)
-        : AssetLoadingTask(reader.GetName(), totalBytes),
-          texture(texture),
-          reader(reader),
-          cancelled(false)
-    {
-    }
-
-    SourceTexture2D::LoadingTask::~LoadingTask()
-    {
-    }
-
-    void SourceTexture2D::LoadingTask::Execute()
+    void SourceTexture2D::Read(SourceTexture2D* thiz, StreamReader& reader)
     {
         enum Compression
         {
@@ -69,22 +55,22 @@ namespace Bibim
         const int pitch = reader.ReadInt();
         if (pitch == 0)
         {
-            texture->SetStatus(FaultStatus);
+            thiz->SetStatus(FaultStatus);
             return;
         }
 
         const Compression compression = static_cast<Compression>(reader.ReadByte());
 
-        IDirect3DDevice9* d3dDevice = texture->GetGraphicsDevice()->GetD3DDevice();
+        IDirect3DDevice9* d3dDevice = thiz->GetGraphicsDevice()->GetD3DDevice();
         if (d3dDevice == nullptr)
         {
-            texture->SetStatus(FaultStatus);
+            thiz->SetStatus(FaultStatus);
             return;
         }
 
-        const int width  = texture->GetSurfaceWidth();
-        const int height = texture->GetSurfaceHeight();
-        const PixelFormat pixelFormat = texture->GetPixelFormat();
+        const int width  = thiz->GetSurfaceWidth();
+        const int height = thiz->GetSurfaceHeight();
+        const PixelFormat pixelFormat = thiz->GetPixelFormat();
 
         D3DFORMAT d3dFormat = D3DFMT_UNKNOWN;
         switch (pixelFormat)
@@ -104,7 +90,7 @@ namespace Bibim
                                           0, d3dFormat, D3DPOOL_DEFAULT, &d3dTexture, nullptr);
         if (result != D3D_OK)
         {
-            texture->SetStatus(FaultStatus);
+            thiz->SetStatus(FaultStatus);
             return;
         }
 
@@ -113,7 +99,7 @@ namespace Bibim
         if (result != D3D_OK)
         {
             d3dTexture->Release();
-            texture->SetStatus(FaultStatus);
+            thiz->SetStatus(FaultStatus);
             return;
         }
 
@@ -124,20 +110,19 @@ namespace Bibim
         switch (compression)
         {
             case Raw:
-                for (int y = 0; y < height && cancelled == false; y++)
+                for (int y = 0; y < height; y++)
                 {
                     reader.Read(destination, pitch);
                     destination += destinationPitch;
-                    AddLoadedBytes(1);
                 }
                 break;
             case PNG:
                 if (PNGReader::Read(reader, destination, destinationPitch, true) == false)
-                    texture->SetStatus(FaultStatus);
+                    thiz->SetStatus(FaultStatus);
                 break;
             case JPEG:
                 if (JPEGReader::Read(reader, destination, destinationPitch, true) == false)
-                    texture->SetStatus(FaultStatus);
+                    thiz->SetStatus(FaultStatus);
                 break;
         }
         d3dSysMemTexture->UnlockRect(0);
@@ -145,15 +130,10 @@ namespace Bibim
         d3dDevice->UpdateTexture(d3dSysMemTexture, d3dTexture);
         d3dSysMemTexture->Release();
 
-        texture->Setup(d3dTexture, texture->GetWidth(), texture->GetHeight(), width, height, pixelFormat);
-        texture->IncreaseRevision();
+        thiz->Setup(d3dTexture, thiz->GetWidth(), thiz->GetHeight(), width, height, pixelFormat);
+        thiz->IncreaseRevision();
 
-        if (texture->GetStatus() == LoadingStatus)
-            texture->SetStatus(CompletedStatus);
-    }
-
-    void SourceTexture2D::LoadingTask::Cancel()
-    {
-        cancelled = true;
+        if (thiz->GetStatus() == LoadingStatus)
+            thiz->SetStatus(CompletedStatus);
     }
 }

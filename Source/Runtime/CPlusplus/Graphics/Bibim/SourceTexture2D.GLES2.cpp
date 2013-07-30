@@ -45,7 +45,7 @@ namespace Bibim
         return existingInstance;
     }
 
-    void SourceTexture2D::Read(SourceTexture2D* self, StreamReader& reader)
+    void SourceTexture2D::Read(SourceTexture2D* thiz, StreamReader& reader)
     {
         enum Compression
         {
@@ -56,12 +56,12 @@ namespace Bibim
 
         const int pitch = reader.ReadInt();
         if (pitch == 0)
-            self->SetStatus(FaultStatus);
+            thiz->SetStatus(FaultStatus);
 
         const Compression compression = static_cast<Compression>(reader.ReadByte());
-        const int width  = self->GetSurfaceWidth();
-        const int height = self->GetSurfaceHeight();
-        const PixelFormat pixelFormat = self->GetPixelFormat();
+        const int width  = thiz->GetSurfaceWidth();
+        const int height = thiz->GetSurfaceHeight();
+        const PixelFormat pixelFormat = thiz->GetPixelFormat();
 
         GLint glesFormat = GetGLESPixelFormat(pixelFormat);
         byte* destination = new byte [pitch * height];
@@ -77,11 +77,11 @@ namespace Bibim
                 break;
             case PNG:
                 if (PNGReader::Read(reader, destination, destinationPitch, false) == false)
-                    self->SetStatus(FaultStatus);
+                    thiz->SetStatus(FaultStatus);
                 break;
             case JPEG:
                 if (JPEGReader::Read(reader, destination, destinationPitch, false) == false)
-                    self->SetStatus(FaultStatus);
+                    thiz->SetStatus(FaultStatus);
                 break;
         }
 
@@ -102,11 +102,11 @@ namespace Bibim
         glTexImage2D(GL_TEXTURE_2D, 0, glesFormat, width, height, 0, glesFormat, GL_UNSIGNED_BYTE, destination);
         GLES2::CheckLastError("glTexImage2D");
 
-        self->Setup(textureHandle, self->GetWidth(), self->GetHeight(), width, height, pixelFormat);
-        self->IncreaseRevision();
+        thiz->Setup(textureHandle, thiz->GetWidth(), thiz->GetHeight(), width, height, pixelFormat);
+        thiz->IncreaseRevision();
 
-        if (self->GetStatus() == LoadingStatus)
-            self->SetStatus(CompletedStatus);
+        if (thiz->GetStatus() == LoadingStatus)
+            thiz->SetStatus(CompletedStatus);
 
         delete [] destination;
     }
