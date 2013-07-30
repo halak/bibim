@@ -56,6 +56,11 @@ namespace Bibim
     {
     }
 
+    Stream* FileAssetProviderBase::Open(const String& name)
+    {
+        return OpenActually(directory, name);
+    }
+
     bool FileAssetProviderBase::Preload(const String& name)
     {
         BBAssertDebug(GetStorage() != nullptr);
@@ -85,9 +90,22 @@ namespace Bibim
         }
     }
 
-    Stream* FileAssetProviderBase::Open(const char* filename)
+    Stream* FileAssetProviderBase::OpenActually(const String& directory, const String& name)
     {
-        return new FileStream(filename, FileStream::ReadOnly);
+        const int dl = directory.GetLength();
+        const int nl = name.GetLength();
+        const int totalLength = dl + nl + 3 + 1;
+        char* filename = BBStackAlloc(char, totalLength);
+        String::CopyChars(&filename[0],       directory.CStr());
+        String::CopyChars(&filename[dl],      name.CStr());
+        String::CopyChars(&filename[dl + nl], ".ab");
+        filename[totalLength - 1] = '\0';
+
+        Stream* stream = new FileStream(filename, FileStream::ReadOnly);
+
+        BBStackFree(filename);
+
+        return stream;
     }
 
     GameAsset* FileAssetProviderBase::LoadActually(GameAssetStorage* storage,
@@ -98,27 +116,13 @@ namespace Bibim
     {
         BBAssertDebug(storage != nullptr);
 
-        const int dl = directory.GetLength();
-        const int nl = name.GetLength();
-        const int totalLength = dl + nl + 3 + 1;
-        char* filename = BBStackAlloc(char, totalLength);
-        String::CopyChars(&filename[0],       directory.CStr());
-        String::CopyChars(&filename[dl],      name.CStr());
-        String::CopyChars(&filename[dl + nl], ".ab");
-        filename[totalLength - 1] = '\0';
-
-        GameAsset* result = nullptr;
-
-        StreamPtr assetStream = this->Open(filename);
-
-        if (assetStream->CanRead())
+        StreamPtr stream = OpenActually(directory, name);
+        if (stream->CanRead())
         {
-            AssetStreamReader reader(name, assetStream, storage, isPriority);
-            result = GameAssetFactory::Create(reader, existingInstance);
+            AssetStreamReader reader(name, stream, storage, isPriority);
+            return GameAssetFactory::Create(reader, existingInstance);
         }
-
-        BBStackFree(filename);
-
-        return result;
+        else
+            return nullptr;
     }
 }

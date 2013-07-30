@@ -28,12 +28,13 @@ extern "C"
 
                 void GC();
 
-                virtual void DoFile(const String& path);
-
                 int RegisterCallback(int index);
                 void UnregisterCallback(int callbackIndex);
 
                 inline lua_State* GetState() const;
+
+            protected:
+                void DoBuffer(const byte* buffer, int size, const String& name);
 
             private:
                 void LoadLibraries();

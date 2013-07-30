@@ -17,6 +17,7 @@
                 FileAssetProviderBase(GameAssetStorage* storage, const String& directory);
                 virtual ~FileAssetProviderBase();
 
+                virtual Stream* Open(const String& name);
                 virtual bool Preload(const String& name);
                 virtual GameAsset* Load(const String& name);
                 virtual bool Restore(const String& name, GameAsset* asset);
@@ -24,10 +25,8 @@
                 inline const String& GetDirectory() const;
                 void SetDirectory(const String& value);
 
-            protected:
-                virtual Stream* Open(const char* filename);
-
             private:
+                Stream* OpenActually(const String& directory, const String& name);
                 GameAsset* LoadActually(GameAssetStorage* storage,
                                         const String& directory,
                                         const String& name,

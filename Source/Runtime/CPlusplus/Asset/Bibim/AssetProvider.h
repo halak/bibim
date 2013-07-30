@@ -16,6 +16,7 @@
                 AssetProvider(GameAssetStorage* storage);
                 virtual ~AssetProvider();
 
+                virtual Stream* Open(const String& name) = 0;
                 virtual bool Preload(const String& name) = 0;
                 virtual GameAsset* Load(const String& name) = 0;
                 virtual bool Restore(const String& name, GameAsset* asset) = 0;

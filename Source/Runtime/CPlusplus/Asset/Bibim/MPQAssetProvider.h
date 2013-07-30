@@ -17,6 +17,7 @@
                 MPQAssetProvider(GameAssetStorage* storage, MPQ* mpq);
                 virtual ~MPQAssetProvider();
 
+                virtual Stream* Open(const String& name);
                 virtual bool Preload(const String& name);
                 virtual GameAsset* Load(const String& name);
                 virtual bool Restore(const String& name, GameAsset* asset);
@@ -25,6 +26,7 @@
                 void SetMPQ(MPQ* value);
 
             private:
+                static Stream* OpenActually(MPQ* mpq, const String& name);
                 static GameAsset* LoadActually(GameAssetStorage* storage,
                                                MPQ* mpq,
                                                const String& name,

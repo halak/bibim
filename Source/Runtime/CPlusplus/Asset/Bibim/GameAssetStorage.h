@@ -43,6 +43,7 @@
                 GameAssetStorage(GameModuleTree* modules);
                 virtual ~GameAssetStorage();
 
+                Stream* Open(const String& name);
                 bool Preload(const String& name);
                 GameAsset* Load(const String& name);
                 void Store(const String& name, GameAsset* asset);
