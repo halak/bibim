@@ -107,65 +107,18 @@ namespace Bibim.Asset.Pipeline.Recipes
                     codeLines.Add(reader.ReadLine());
             }
 
+            string code = Preprocess(defines, codeLines);
+            var result = Compile(code);
+            var byteCode = result.Item1;
+            var extra = result.Item2;
+
             return new ShaderEffect(null)
             {
-                Tag = new ShaderEffectCookingTag(Preprocess(defines, codeLines))
+                Tag = new ShaderEffectCookingTag(byteCode, extra)
             };
-
-            /*
-            string outputFXOFileName = Path.GetFileName(Path.GetTempFileName());
-            StringBuilder definesArguments = new StringBuilder();
-            foreach (var item in defines)
-            {
-                if (string.IsNullOrEmpty(item.Value))
-                    definesArguments.AppendFormat("/D {0} ", item.Key);
-                else
-                    definesArguments.AppendFormat("/D {0}={1} ", item.Key, item.Value);
-            }
-
-            string args = string.Format("/T fx_2_0 /Fo \"{1}\" {2} /Zi /nologo \"{0}\"", Path.GetFileName(input), outputFXOFileName, definesArguments.ToString());
-
-            ProcessStartInfo start = new ProcessStartInfo(@"Plugin\fxc.exe", args)
-            {
-                WorkingDirectory = Path.GetDirectoryName(input),
-                CreateNoWindow = true,
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-            };
-            Process process = Process.Start(start);
-            process.WaitForExit();
-
-            string compileMessage = process.StandardOutput.ReadToEnd();
-            string compileErrorMessage = process.StandardError.ReadToEnd().Replace(input, assetPath);
-            string outputFXOFilePath = Path.Combine(Path.GetDirectoryName(input), outputFXOFileName);
-
-            if (string.IsNullOrEmpty(compileErrorMessage))
-            {
-                Trace.WriteLine(string.Format("Compile result\n{0}", compileMessage));
-
-                byte[] buffer = null;
-                using (var fs = new FileStream(outputFXOFilePath, FileMode.Open, FileAccess.Read))
-                {
-                    BinaryReader fxoReader = new BinaryReader(fs);
-                    buffer = fxoReader.ReadBytes((int)fs.Length);
-                }
-
-                File.Delete(outputFXOFilePath);
-
-                return new ShaderEffect(null)
-                {
-                    Tag = new ShaderEffectCookingTag(buffer)
-                };
-            }
-            else
-            {
-                File.Delete(outputFXOFilePath);
-                throw new InvalidDataException(string.Format("Compile failure.\n{0}\n{1}\n{2}", compileMessage, compileErrorMessage, args));
-            }
-            */
         }
 
         protected abstract string Preprocess(Dictionary<string, string> defines, IList<string> codeLines);
+        protected abstract Tuple<byte[], int> Compile(string code);
     }
 }

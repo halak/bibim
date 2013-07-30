@@ -117,12 +117,17 @@ namespace Bibim
     GameAsset* ShaderEffect::Create(StreamReader& reader, GameAsset* existingInstance)
     {
         GraphicsDevice* graphicsDevice = static_cast<GraphicsDevice*>(reader.ReadModule(GraphicsDevice::ClassID));
-        const String code = reader.ReadString();       
+        
+        reader.ReadInt(); // NOT USED
+
+        const int codeLength = reader.ReadInt();
+        byte* code = BBStackAlloc(byte, codeLength);
+        reader.Read(code, codeLength);
 
         ID3DXEffect* handle = nullptr;
         ID3DXBuffer* errorBuffer = nullptr;
         HRESULT result = D3DXCreateEffect(graphicsDevice->GetD3DDevice(),
-                                          code.CStr(), code.GetLength(),
+                                          code, codeLength,
                                           NULL, NULL, D3DXSHADER_OPTIMIZATION_LEVEL3, 0, &handle, &errorBuffer);
         if (result != D3D_OK)
         {
@@ -130,14 +135,14 @@ namespace Bibim
 
             if (errorBuffer)
                 Log::Error("ShaderEffect", reinterpret_cast<const char*>(errorBuffer->GetBufferPointer()));
-
-            Log::Error("ShaderEffect", code.CStr());
         }
 
         if (existingInstance == nullptr)
             existingInstance = new ShaderEffect(graphicsDevice);
 
         static_cast<ShaderEffect*>(existingInstance)->Setup(handle);
+
+        BBStackFree(code);
 
         return existingInstance;
     }
