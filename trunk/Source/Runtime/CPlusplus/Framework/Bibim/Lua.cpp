@@ -62,25 +62,11 @@ namespace Bibim
 
     void Lua::LoadLibraries()
     {
-        lua_pushcfunction(state, &luaopen_base);
-        lua_pushstring(state, "");
-        lua_call(state, 1, 0);
-
-        lua_pushcfunction(state, &luaopen_table);
-        lua_pushstring(state, LUA_TABLIBNAME);
-        lua_call(state, 1, 0);
-
-        lua_pushcfunction(state, &luaopen_string);
-        lua_pushstring(state, LUA_STRLIBNAME);
-        lua_call(state, 1, 0);
-
-        lua_pushcfunction(state, &luaopen_math);
-        lua_pushstring(state, LUA_MATHLIBNAME);
-        lua_call(state, 1, 0);
-
-        lua_pushcfunction(state, &luaopen_debug);
-        lua_pushstring(state, LUA_DBLIBNAME);
-        lua_call(state, 1, 0);
+        luaL_requiref(state, "", &luaopen_base, 1);
+        luaL_requiref(state, LUA_TABLIBNAME,  &luaopen_table, 1);
+        luaL_requiref(state, LUA_STRLIBNAME,  &luaopen_string, 1);
+        luaL_requiref(state, LUA_MATHLIBNAME, &luaopen_math, 1);
+        luaL_requiref(state, LUA_DBLIBNAME,   &luaopen_debug, 1);
 
         struct AdditionalStringLibrary
         {
@@ -198,7 +184,7 @@ namespace Bibim
                 const char* separator = lua_tolstring(L, 1, &separatorLength);
 
                 size_t resultLength = 0;
-                const size_t count = static_cast<int>(lua_objlen(L, 2));
+                const size_t count = static_cast<int>(lua_rawlen(L, 2));
                 if (count == 0)
                 {
                     lua_pushstring(L, "");
@@ -209,7 +195,7 @@ namespace Bibim
                 {
                     lua_rawgeti(L, 2, i);
                     luaL_checktype(L, -1, LUA_TSTRING);
-                    resultLength += lua_objlen(L, -1);
+                    resultLength += lua_rawlen(L, -1);
                     resultLength += separatorLength;
                     lua_pop(L, 1);
                 }
@@ -352,7 +338,7 @@ namespace Bibim
                 if (slices <= 1)
                     return 0;
 
-                const size_t count = static_cast<int>(lua_objlen(L, POINTS) / 2);
+                const size_t count = static_cast<int>(lua_rawlen(L, POINTS) / 2);
                 if (count == 0)
                     return 0;
 
@@ -401,7 +387,7 @@ namespace Bibim
             }
         };
 
-        const struct luaL_reg additionalStringLib [] = {
+        const struct luaL_Reg additionalStringLib [] = {
             { "startswith", &AdditionalStringLibrary::StartsWith },
             { "endswith", &AdditionalStringLibrary::EndsWith },
             { "split", &AdditionalStringLibrary::Split },
@@ -410,17 +396,19 @@ namespace Bibim
             { NULL, NULL}  /* sentinel */
         };
 
-        const struct luaL_reg additionalMathLib [] = {
+        const struct luaL_Reg additionalMathLib [] = {
             { "clamp", &AdditionalMathLibrary::Clamp },
             { "catmullrom", &AdditionalMathLibrary::CatmullRom },
             { "catmullromroute", &AdditionalMathLibrary::CatmullRomRoute },
             { NULL, NULL}  /* sentinel */
         };
     
-        luaL_register(state, LUA_STRLIBNAME, additionalStringLib);
+        lua_getglobal(state, LUA_STRLIBNAME);
+        luaL_setfuncs(state, additionalStringLib, 0);
         lua_pop(state, 1);
 
-        luaL_register(state, LUA_MATHLIBNAME, additionalMathLib);
+        lua_getglobal(state, LUA_MATHLIBNAME);
+        luaL_setfuncs(state, additionalMathLib, 0);
         lua_pop(state, 1);
 
         lua_tinker::def(state, "_ALERT", static_cast<void (*)(const char*)>(&Bibim::Log::Warning));
