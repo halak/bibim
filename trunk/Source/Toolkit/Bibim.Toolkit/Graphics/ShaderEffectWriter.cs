@@ -15,7 +15,9 @@ namespace Bibim.Graphics
             writer.Write(asset.GraphicsDevice);
 
             var tag = (ShaderEffectCookingTag)asset.Tag;
-            writer.WriteBibimString(tag.Code);
+            writer.Write(tag.Extra);
+            writer.Write(tag.Code.Length);
+            writer.Write(tag.Code);
         }
     }
 }

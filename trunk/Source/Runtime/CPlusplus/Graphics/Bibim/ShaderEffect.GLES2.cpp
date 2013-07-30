@@ -142,20 +142,20 @@ namespace Bibim
     GameAsset* ShaderEffect::Create(StreamReader& reader, GameAsset* existingInstance)
     {
         GraphicsDevice* graphicsDevice = static_cast<GraphicsDevice*>(reader.ReadModule(GraphicsDevice::ClassID));
-        const String code = reader.ReadString();
-
-        static const String separator = "//////////";
-        const int index = code.Find(separator);
-        if (index == -1)
-            return nullptr;
+        const int hint = reader.ReadInt();
+        const int codeLength = reader.ReadInt();
+        char* code = BBStackAlloc(char, codeLength);
+        reader.Read(code, codeLength);
 
         const int vsCodeIndex = 0;
-        const int vsCodeLength = index;
-        const int fsCodeIndex = index + separator.GetLength();
-        const int fsCodeLength = code.GetLength() - fsCodeIndex;
+        const int vsCodeLength = hint;
+        const int fsCodeIndex = hint + 1;
+        const int fsCodeLength = codeLength - fsCodeIndex;
 
-        GLuint vs = CompileShader(GL_VERTEX_SHADER,   &code.CStr()[vsCodeIndex], vsCodeLength);
-        GLuint fs = CompileShader(GL_FRAGMENT_SHADER, &code.CStr()[fsCodeIndex], fsCodeLength);
+        GLuint vs = CompileShader(GL_VERTEX_SHADER,   &code[vsCodeIndex], vsCodeLength);
+        GLuint fs = CompileShader(GL_FRAGMENT_SHADER, &code[fsCodeIndex], fsCodeLength);
+
+        BBStackFree(code);
 
         if (vs == 0 || fs == 0)
         {

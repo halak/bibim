@@ -7,6 +7,10 @@ namespace Bibim.Asset.Pipeline.Recipes
 {
     public sealed class CompileGLSLShaderEffect : CompileShaderEffect
     {
+        #region
+        private static readonly string Separator = "//////////";
+        #endregion
+
         #region Constructors
         public CompileGLSLShaderEffect()
             : base()
@@ -40,6 +44,11 @@ namespace Bibim.Asset.Pipeline.Recipes
             return outputString.ToString();
         }
 
+        protected override Tuple<byte[], int> Compile(string code)
+        {
+            return Tuple.Create(Encoding.UTF8.GetBytes(code), code.IndexOf(Separator));
+        }
+
         private static void InsertDefines(IList<string> codeLines, int index, Dictionary<string, string> defines)
         {
             foreach (var item in defines)
@@ -55,7 +64,7 @@ namespace Bibim.Asset.Pipeline.Recipes
         {
             for (int i = 0; i < codeLines.Count; i++)
             {
-                if (codeLines[i].Contains("//////////"))
+                if (codeLines[i].Contains(Separator))
                 {
                     return i;
                 }

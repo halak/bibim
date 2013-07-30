@@ -181,6 +181,7 @@ namespace Bibim
             else
             { 
                 // TODO: ERROR Ã³¸®
+                /*
                 const int x = WSAGetLastError();
 #define XXX(val) if (x == val) { Log::Information(#val); }
                 XXX(WSANOTINITIALISED);
@@ -199,7 +200,7 @@ namespace Bibim
                 XXX(WSAECONNABORTED);
                 XXX(WSAETIMEDOUT);
                 XXX(WSAECONNRESET);
-#undef XXX
+#undef XXX*/
                 break;
             }
         }
