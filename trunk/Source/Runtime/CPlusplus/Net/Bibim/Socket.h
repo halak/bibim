@@ -4,7 +4,7 @@
 
 #   include <Bibim/FWD.h>
 #   include <Bibim/SharedObject.h>
-#   include <Bibim/String.h>
+#   include <Bibim/IPEndPoint.h>
 
     namespace Bibim
     {
@@ -18,7 +18,7 @@
                 };
                 
             public:
-                Socket(const char* ipAddress, int port);
+                explicit Socket(IPEndPoint endPoint);
                 ~Socket();
 
                 bool Connect();
@@ -47,8 +47,7 @@
 #               endif
 
                 HANDLE handle;
-                String hostname;
-                int port;
+                IPEndPoint endPoint;
                 Status status;
         };
 

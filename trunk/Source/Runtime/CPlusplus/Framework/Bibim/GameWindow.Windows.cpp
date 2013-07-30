@@ -308,8 +308,11 @@ namespace Bibim
                 return 0;
             case WM_MOVE:
                 {
+                    RECT windowRect;
+                    ::GetWindowRect(windowHandle, &windowRect);
+
                     GameWindow* o = GetGameWindow(windowHandle);
-                    o->position = Point2(LOWORD(lParam), HIWORD(lParam));
+                    o->position = Point2(windowRect.left, windowRect.top);
                 }
                 return 0;
             case WM_SIZE:

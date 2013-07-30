@@ -1,5 +1,6 @@
 #include <Bibim/Config.h>
 #include <Bibim/Socket.h>
+#include <Bibim/Log.h>
 
 #if defined(BIBIM_PLATFORM_WINDOWS)
 #   include <winsock2.h>
@@ -14,10 +15,9 @@
 
 namespace Bibim
 {
-    Socket::Socket(const char* ipAddress, int port)
+    Socket::Socket(IPEndPoint endPoint)
         : handle(INVALID_SOCKET),
-          hostname(ipAddress),
-          port(port),
+          endPoint(endPoint),
           status(Disconnected)
     {
     #   if (defined(BIBIM_PLATFORM_WINDOWS))
@@ -131,8 +131,8 @@ namespace Bibim
     {
         struct sockaddr_in addr = { 0, };
         addr.sin_family = AF_INET;
-        addr.sin_port = htons(port);
-        addr.sin_addr.s_addr = inet_addr(hostname.CStr());
+        addr.sin_port = htons(endPoint.GetPort());
+        addr.sin_addr.s_addr = endPoint.GetAddress();
         const int result = connect(handle, reinterpret_cast<const sockaddr*>(&addr), sizeof(addr));
         if (result == 0)
         {
@@ -163,10 +163,48 @@ namespace Bibim
 
     int Socket::Receive(void* buffer, int size)
     {
-        if (status == Connected)
-            return recv(handle, static_cast<char*>(buffer), size, 0);
-        else
+        if (status != Connected)
             return 0;
+
+        int index = 0;
+        while (index < size)
+        {
+            const int received = recv(handle, static_cast<char*>(buffer) + index, size - index, 0);
+            if (received > 0)
+                index += received;
+            else if (received == 0)
+            {
+                // TODO: ERROR 贸府
+                Log::Information("gracefully closed");
+                break;
+            }
+            else
+            { 
+                // TODO: ERROR 贸府
+                const int x = WSAGetLastError();
+#define XXX(val) if (x == val) { Log::Information(#val); }
+                XXX(WSANOTINITIALISED);
+                XXX(WSAENETDOWN);
+                XXX(WSAEFAULT);
+                XXX(WSAENOTCONN);
+                XXX(WSAEINTR);
+                XXX(WSAEINPROGRESS);
+                XXX(WSAENETRESET);
+                XXX(WSAENOTSOCK);
+                XXX(WSAEOPNOTSUPP);
+                XXX(WSAESHUTDOWN);
+                XXX(WSAEWOULDBLOCK);
+                XXX(WSAEMSGSIZE);
+                XXX(WSAEINVAL);
+                XXX(WSAECONNABORTED);
+                XXX(WSAETIMEDOUT);
+                XXX(WSAECONNRESET);
+#undef XXX
+                break;
+            }
+        }
+
+        return index;
     }
 
     bool Socket::CanSend() const

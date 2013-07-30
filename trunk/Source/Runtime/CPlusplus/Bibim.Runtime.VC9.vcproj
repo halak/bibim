@@ -234,15 +234,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\PipedAssetProvider.Default.cpp"
+						RelativePath=".\Asset\Bibim\NetworkAssetProvider.cpp"
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\PipedAssetProvider.Default.h"
-						>
-					</File>
-					<File
-						RelativePath=".\Asset\Bibim\PipedAssetProvider.h"
+						RelativePath=".\Asset\Bibim\NetworkAssetProvider.h"
 						>
 					</File>
 				</Filter>
@@ -2175,6 +2171,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Net\Bibim\IPEndPoint.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Net\Bibim\IPEndPoint.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Net\Bibim\NetworkStream.cpp"
 					>
 				</File>
@@ -2444,46 +2448,6 @@
 				>
 			</File>
 			<Filter
-				Name="IPC"
-				>
-				<File
-					RelativePath=".\IPC\Bibim\PipeClientStream.h"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeClientStream.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeClientStream.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeServerStream.h"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeServerStream.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeServerStream.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeStream.h"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeStream.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\IPC\Bibim\PipeStream.Windows.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="Threading"
 				>
 				<File
@@ -2522,10 +2486,6 @@
 					RelativePath=".\Threading\Bibim\Thread.Windows.h"
 					>
 				</File>
-			</Filter>
-			<Filter
-				Name="Net"
-				>
 			</Filter>
 			<Filter
 				Name="IO"

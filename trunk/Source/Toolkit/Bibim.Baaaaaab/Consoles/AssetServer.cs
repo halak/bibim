@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.IO.Compression;
-using System.IO.Pipes;
 using System.Text;
 using System.Threading;
 using System.Xml;
@@ -50,18 +49,15 @@ namespace Bibim.Bab.Consoles
             ////recipe.Cook = new ReadGameAsset(seq);
             ////GameAssetRecipe.Serialize("Hello.asset", recipe);
 
-            if (string.IsNullOrEmpty(pipeName))
-                pipeName = PipedAssetProvider.DefaultPipeName;
-
             Trace.WriteLine("================================");
             Trace.WriteLine("Halak Bibim Asset Server");
             Trace.WriteLine("================================");
             Trace.WriteLine(string.Format("Ready : {0}", pipeName));
 
-            GameModuleTree modules = new GameModuleTree();
-            GameAssetStorage assetStorage = new GameAssetStorage();
-            GameAssetKitchen assetKitchen = new GameAssetKitchen(assetStorage);
-            PipedGameAssetServer assetServer = new PipedGameAssetServer(assetKitchen, pipeName);
+            var modules = new GameModuleTree();
+            var assetStorage = new GameAssetStorage();
+            var assetKitchen = new GameAssetKitchen(assetStorage);
+            var assetServer = new NetworkGameAssetServer(assetKitchen);
             modules.Root.AttachChild(assetStorage);
             modules.Root.AttachChild(assetKitchen);
             modules.Root.AttachChild(assetServer);

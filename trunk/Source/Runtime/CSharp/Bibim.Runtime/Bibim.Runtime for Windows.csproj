@@ -250,6 +250,7 @@
     <Compile Include="Asset\AssetStreamReader.cs" />
     <Compile Include="Asset\GameAssetReader.cs" />
     <Compile Include="Asset\GameAssetStatus.cs" />
+    <Compile Include="Asset\NetworkAssetProvider.cs" />
     <Compile Include="ClassIDAttribute.cs" />
     <Compile Include="Collections\Generic\ReadOnlyDictionary.cs" />
     <Compile Include="Framework\GameFramework.cs" />
@@ -270,7 +271,6 @@
     <Compile Include="Asset\GameAsset.cs" />
     <Compile Include="Asset\GameAssetFactory.cs" />
     <Compile Include="Asset\GameAssetStorage.cs" />
-    <Compile Include="Asset\PipedAssetProvider.cs" />
     <Compile Include="FOURCC.cs" />
     <Compile Include="GameModule.cs" />
     <Compile Include="GameModuleFactory.cs" />
