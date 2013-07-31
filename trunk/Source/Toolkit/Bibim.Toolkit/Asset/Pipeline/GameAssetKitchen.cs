@@ -8,7 +8,7 @@ using Bibim.Json.Serialization;
 namespace Bibim.Asset.Pipeline
 {
     [ClassID('A', 'S', 'K', 'C')]
-    public sealed class GameAssetKitchen : GameModule
+    public sealed partial class GameAssetKitchen : GameModule
     {
         #region Properties
         public GameAssetStorage Storage
@@ -26,6 +26,7 @@ namespace Bibim.Asset.Pipeline
         public GameAssetKitchen(GameAssetStorage storage)
         {
             Storage = storage;
+            LoadEmbeddedRecipes();
         }
         #endregion
 
@@ -71,16 +72,31 @@ namespace Bibim.Asset.Pipeline
 
         private GameAssetRecipe BeginCook(string baseDirectory, string recipePath)
         {
+            GameAssetRecipe recipe = null;
             string absolutePath = Path.Combine(baseDirectory, recipePath);
             if (File.Exists(absolutePath) == false)
                 throw new FileNotFoundException("Recipe file not found.", absolutePath);
 
-            GameAssetRecipe recipe = JsonSerializer.Instance.Deserialize(absolutePath) as GameAssetRecipe;
+            recipe = JsonSerializer.Instance.Deserialize(absolutePath) as GameAssetRecipe;
 
             if (recipe != null && recipe.Cook != null)
                 return recipe;
+
+            using (var fs = new FileStream(absolutePath, FileMode.Open, FileAccess.Read))
+            {
+                var data = JsonSerializer.DeserializeData(fs) as Dictionary<string, object>;
+                if (data != null)
+                    recipe = CreateEmbeddedRecipe(absolutePath, data);
+
+                if (recipe != null)
+                    return recipe;
+            }
+
+            recipe = FindEmbeddedRecipe(absolutePath);
+            if (recipe != null)
+                return recipe;
             else
-                return null;
+                throw new InvalidDataException(string.Format("couldn't guess recipe. ({0})", absolutePath));
         }
         #endregion
 

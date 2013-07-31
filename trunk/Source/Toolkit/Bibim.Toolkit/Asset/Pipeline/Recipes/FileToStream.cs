@@ -38,12 +38,7 @@ namespace Bibim.Asset.Pipeline.Recipes
         {
         }
 
-        public FileToStream(string input)
-        {
-            Input1 = input;
-        }
-
-        public FileToStream(string input1, string input2, string input3, string input4)
+        public FileToStream(string input1 = null, string input2 = null, string input3 = null, string input4 = null)
         {
             Input1 = input1;
             Input2 = input2;

@@ -156,6 +156,15 @@ namespace Bibim
         GetModules()->GetRoot()->AttachChild(bgm);
         GetModules()->GetRoot()->AttachChild(sfx);
 
+        fontLibrary = new FontLibrary(GetGraphicsDevice());
+
+        debugFont = new Font(fontLibrary);
+        debugFont->SetFace(EMBEDDED_FONT_DATA,
+                           sizeof(EMBEDDED_FONT_DATA) / sizeof(EMBEDDED_FONT_DATA[0]));
+        debugFont->SetColor(Color::White);
+        GetModules()->GetRoot()->AttachChild(fontLibrary);
+
+
         storage = new GameAssetStorage(GetModules());
         GameModuleNode* storageNode = GetModules()->GetRoot()->AttachChild(storage);
         {
@@ -168,14 +177,7 @@ namespace Bibim
             storageNode->AttachChild(fap);
         }
 
-        fontLibrary = new FontLibrary(GetGraphicsDevice());
         fontLibrary->SetAssetStorage(storage);
-
-        debugFont = new Font(fontLibrary);
-        debugFont->SetFace(EMBEDDED_FONT_DATA,
-                           sizeof(EMBEDDED_FONT_DATA) / sizeof(EMBEDDED_FONT_DATA[0]));
-        debugFont->SetColor(Color::White);
-        GetModules()->GetRoot()->AttachChild(fontLibrary);
 
         SparkParticleEngine* spk = new SparkParticleEngine();
         GetModules()->GetRoot()->AttachChild(spk);

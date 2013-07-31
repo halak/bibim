@@ -181,7 +181,7 @@ def get_dependencies(platform, target, environment):
                 l += ['Cplusplus/References/libpng-1.6.3/lib/Win32/Debug/vs2010/libpng.lib']
                 l += ['Cplusplus/References/jpeg-9/lib/Win32/Debug/vs2010/libjpeg.lib']
                 l += ['Cplusplus/References/freetype-2.5.0.1/custom/lib/Win32/Debug/vs2010/freetype.lib']
-                l += ['Cplusplus/References/lua-5.2.2/lib/Win32/Debug/vs2008/lua.lib']
+                l += ['Cplusplus/References/lua-5.2.2/lib/Win32/Debug/vs2010/lua.lib']
                 l += ['Cplusplus/References/SPARK-1.5.5/lib/vc2010/static/SPARK_debug.lib']
                 l += ['Cplusplus/References/curl-7.29.0/build/Win32/LIB Debug/vs2010/libcurl.lib']
         elif (release):
