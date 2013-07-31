@@ -585,6 +585,9 @@ namespace Bibim.Json.Serialization
                     return objectReferences[id];
             }
 
+            if (properties.ContainsKey(TypePropertyName) == false)
+                return null;
+
             Type type = FindType((string)properties[TypePropertyName]);
             if (type == null)
                 throw new InvalidDataException(string.Format("Type not found. {0}", (string)properties[TypePropertyName]));
@@ -700,9 +703,19 @@ namespace Bibim.Json.Serialization
             throw new NotImplementedException();
         }
 
+        public static object DeserializeData(Stream stream)
+        {
+            using (var se = new StreamReader(stream, true))
+                return DeserializeData(new JsonReader(se));
+        }
+
         public static object DeserializeData(string s)
         {
-            var reader = new JsonReader(s);
+            return DeserializeData(new JsonReader(s));
+        }
+
+        private static object DeserializeData(JsonReader reader)
+        {
             while (reader.Read())
             {
                 switch (reader.Token)

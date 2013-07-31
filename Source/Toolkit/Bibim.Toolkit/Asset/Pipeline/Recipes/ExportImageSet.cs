@@ -131,14 +131,6 @@ namespace Bibim.Asset.Pipeline.Recipes
 
         public static void SaveTextureAssets(CookingContext context, IEnumerable<Bitmap> textures, string textureOutput, bool taggingEnabled)
         {
-            var textureFileToStream = new FileToStream();
-            var textureRecipe = new GameAssetRecipe()
-            {
-                Cook = new BitmapToTexture2D(new ImportBitmap(textureFileToStream)),
-                Author = typeof(ExportImageSet).Name,
-                Comment = "Automatically generated.",
-            };
-
             string absoluteDirectory = Path.Combine(context.BaseDirectory, context.Directory);
             if (Directory.Exists(absoluteDirectory) == false)
                 Directory.CreateDirectory(absoluteDirectory);
@@ -161,9 +153,10 @@ namespace Bibim.Asset.Pipeline.Recipes
                 if (taggingEnabled)
                     item.Tag = textureFilePath;
 
-                textureFileToStream.Input1 = Path.GetFileName(textureFilePath);
-
-                JsonSerializer.Instance.Serialize(Path.ChangeExtension(fullPath, "asset"), textureRecipe);
+                using (var fs = new FileStream(Path.ChangeExtension(fullPath, "asset"), FileMode.Create, FileAccess.Write))
+                {
+                    // png 파일은 자동 추론 되기 때문에 그냥 빈 파일만 생성합니다.
+                }
             }
         }
     }

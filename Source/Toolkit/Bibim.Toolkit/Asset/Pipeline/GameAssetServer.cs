@@ -157,7 +157,13 @@ namespace Bibim.Asset.Pipeline
                                           System.Buffer.BlockCopy(memoryStream.GetBuffer(), 0, cacheBuffer, 0, (int)memoryStream.Length);
 
                                           string[] dependencies = new string[report.Dependencies.Count];
-                                          report.Dependencies.CopyTo(dependencies, 0);
+                                          int dependenciesIndex = 0;
+                                          foreach (var item in report.Dependencies)
+                                          {
+                                              // 파일 시스템 감시자에서 넘긴 변경된 파일명과 비교해야하기 때문에 /에서 \\로 변환합니다.
+                                              dependencies[dependenciesIndex] = item.Replace('/', '\\');
+                                              dependenciesIndex++;
+                                          }
 
                                           lock (assetCachesLock)
                                               assetCaches[binaryAbsolutePath] = new AssetCache(cacheBuffer, dependencies);
