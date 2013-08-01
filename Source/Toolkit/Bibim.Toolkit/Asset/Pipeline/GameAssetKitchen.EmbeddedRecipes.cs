@@ -51,9 +51,9 @@ namespace Bibim.Asset.Pipeline
                     return CreateDirectoryImageSetRecipe(data.Get<string>("source") ?? "$(AssetName)",
                                                          data.Get("uniformSize", System.Drawing.Size.Empty));
                 case "imageset":
-                    return CreatePSDImageSetRecipe(data.Get<string>("source") ?? "$(AssetName)");
+                    return CreatePSDImageSetRecipe(data.Get<string>("source") ?? "$(AssetName).psd");
                 case "spriteset":
-                    return CreatePSDSpriteSetRecipe(data.Get<string>("source") ?? "$(AssetName)");
+                    return CreatePSDSpriteSetRecipe(data.Get<string>("source") ?? "$(AssetName).psd");
                 case "hlsl":
                     return CreateCompileHLSLShaderEffect(
                         data.Get<string>("base") ?? "UI.fx",

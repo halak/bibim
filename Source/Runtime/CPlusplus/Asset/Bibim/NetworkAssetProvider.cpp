@@ -20,6 +20,7 @@ namespace Bibim
             NetworkAssetPreloadingTask(const String& name, GameAssetStorage* storage, Stream* stream, bool dumpCacheEnabled)
                 : AssetPreloadingTask(name, storage),
                   stream(stream),
+                  storage(storage),
                   dumpCacheEnabled(dumpCacheEnabled),
                   cancelled(false)
             {
