@@ -505,6 +505,7 @@
     <ClInclude Include="Audio\Bibim\SoundFX.AL.h" />
     <ClInclude Include="Audio\Bibim\SoundFX.h" />
     <ClInclude Include="Component\Bibim\GameComponentFactory.h" />
+    <ClInclude Include="Diagnostics\Bibim\CrashDump.h" />
     <ClInclude Include="FileSystem\Bibim\FileStream.Android.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

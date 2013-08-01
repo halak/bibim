@@ -1665,6 +1665,9 @@
     <ClInclude Include="Net\Bibim\IPEndPoint.h">
       <Filter>03. Game\Net</Filter>
     </ClInclude>
+    <ClInclude Include="Diagnostics\Bibim\CrashDump.h">
+      <Filter>03. Game\Diagnostics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Audio\Bibim\BGM.h">
