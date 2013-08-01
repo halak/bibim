@@ -155,7 +155,7 @@
 				Name="(Asset)"
 				>
 				<File
-					RelativePath=".\Asset\Bibim\AssetLoadingTask.cpp"
+					RelativePath=".\Asset\AssetLoadingTask.cpp"
 					>
 				</File>
 				<File
@@ -163,7 +163,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Asset\Bibim\AssetStreamReader.cpp"
+					RelativePath=".\Asset\AssetStreamReader.cpp"
 					>
 				</File>
 				<File
@@ -171,7 +171,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Asset\Bibim\GameAsset.cpp"
+					RelativePath=".\Asset\GameAsset.cpp"
 					>
 				</File>
 				<File
@@ -179,7 +179,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Asset\Bibim\GameAssetFactory.cpp"
+					RelativePath=".\Asset\GameAssetFactory.cpp"
 					>
 				</File>
 				<File
@@ -187,7 +187,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Asset\Bibim\GameAssetStorage.cpp"
+					RelativePath=".\Asset\GameAssetStorage.cpp"
 					>
 				</File>
 				<File
@@ -198,7 +198,7 @@
 					Name="Providers"
 					>
 					<File
-						RelativePath=".\Asset\Bibim\AssetProvider.cpp"
+						RelativePath=".\Asset\AssetProvider.cpp"
 						>
 					</File>
 					<File
@@ -206,7 +206,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\FileAssetProvider.Default.cpp"
+						RelativePath=".\Asset\FileAssetProvider.Default.cpp"
 						>
 					</File>
 					<File
@@ -218,7 +218,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\FileAssetProviderBase.cpp"
+						RelativePath=".\Asset\FileAssetProviderBase.cpp"
 						>
 					</File>
 					<File
@@ -226,7 +226,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\MPQAssetProvider.cpp"
+						RelativePath=".\Asset\MPQAssetProvider.cpp"
 						>
 					</File>
 					<File
@@ -234,7 +234,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\NetworkAssetProvider.cpp"
+						RelativePath=".\Asset\NetworkAssetProvider.cpp"
 						>
 					</File>
 					<File
@@ -247,7 +247,7 @@
 				Name="Typography"
 				>
 				<File
-					RelativePath=".\Typography\Bibim\Font.cpp"
+					RelativePath=".\Typography\Font.cpp"
 					>
 				</File>
 				<File
@@ -255,7 +255,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\FontCache.cpp"
+					RelativePath=".\Typography\FontCache.cpp"
 					>
 				</File>
 				<File
@@ -263,7 +263,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\FontLibrary.cpp"
+					RelativePath=".\Typography\FontLibrary.cpp"
 					>
 				</File>
 				<File
@@ -271,7 +271,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\FontString.cpp"
+					RelativePath=".\Typography\FontString.cpp"
 					>
 				</File>
 				<File
@@ -279,7 +279,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\Glyph.cpp"
+					RelativePath=".\Typography\Glyph.cpp"
 					>
 				</File>
 				<File
@@ -287,7 +287,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\GlyphSurface.cpp"
+					RelativePath=".\Typography\GlyphSurface.cpp"
 					>
 				</File>
 				<File
@@ -295,7 +295,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\GlyphTable.cpp"
+					RelativePath=".\Typography\GlyphTable.cpp"
 					>
 				</File>
 				<File
@@ -303,7 +303,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\TypingContext.cpp"
+					RelativePath=".\Typography\TypingContext.cpp"
 					>
 				</File>
 				<File
@@ -315,7 +315,7 @@
 				Name="(Component)"
 				>
 				<File
-					RelativePath=".\Component\Bibim\CloningContext.cpp"
+					RelativePath=".\Component\CloningContext.cpp"
 					>
 				</File>
 				<File
@@ -323,7 +323,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Component\Bibim\ComponentStreamReader.cpp"
+					RelativePath=".\Component\ComponentStreamReader.cpp"
 					>
 				</File>
 				<File
@@ -331,7 +331,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Component\Bibim\GameComponent.cpp"
+					RelativePath=".\Component\GameComponent.cpp"
 					>
 				</File>
 				<File
@@ -339,7 +339,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Component\Bibim\GameComponentFactory.cpp"
+					RelativePath=".\Component\GameComponentFactory.cpp"
 					>
 				</File>
 				<File
@@ -351,7 +351,7 @@
 				Name="(Module)"
 				>
 				<File
-					RelativePath=".\Module\Bibim\GameModule.cpp"
+					RelativePath=".\Module\GameModule.cpp"
 					>
 				</File>
 				<File
@@ -363,7 +363,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Module\Bibim\GameModuleFactory.cpp"
+					RelativePath=".\Module\GameModuleFactory.cpp"
 					>
 				</File>
 				<File
@@ -375,7 +375,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Module\Bibim\GameModuleNode.cpp"
+					RelativePath=".\Module\GameModuleNode.cpp"
 					>
 				</File>
 				<File
@@ -387,7 +387,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Module\Bibim\GameModuleTree.cpp"
+					RelativePath=".\Module\GameModuleTree.cpp"
 					>
 				</File>
 				<File
@@ -403,7 +403,7 @@
 				Name="Animation"
 				>
 				<File
-					RelativePath=".\Animation\Bibim\Sprite.cpp"
+					RelativePath=".\Animation\Sprite.cpp"
 					>
 				</File>
 				<File
@@ -411,7 +411,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Animation\Bibim\SpriteSet.cpp"
+					RelativePath=".\Animation\SpriteSet.cpp"
 					>
 				</File>
 				<File
@@ -426,7 +426,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalBoard.cpp"
+						RelativePath=".\Animation\EvalBoard.cpp"
 						>
 					</File>
 					<File
@@ -438,7 +438,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalConstants.cpp"
+						RelativePath=".\Animation\EvalConstants.cpp"
 						>
 					</File>
 					<File
@@ -446,7 +446,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalContext.cpp"
+						RelativePath=".\Animation\EvalContext.cpp"
 						>
 					</File>
 					<File
@@ -462,7 +462,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\Evals.cpp"
+						RelativePath=".\Animation\Evals.cpp"
 						>
 					</File>
 					<File
@@ -482,7 +482,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalTimeflow.cpp"
+						RelativePath=".\Animation\EvalTimeflow.cpp"
 						>
 					</File>
 					<File
@@ -494,7 +494,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalUnitRandom.cpp"
+						RelativePath=".\Animation\EvalUnitRandom.cpp"
 						>
 					</File>
 					<File
@@ -514,7 +514,7 @@
 					Name="Easing"
 					>
 					<File
-						RelativePath=".\Animation\Bibim\Ease.cpp"
+						RelativePath=".\Animation\Ease.cpp"
 						>
 					</File>
 					<File
@@ -522,7 +522,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EasingCurves.cpp"
+						RelativePath=".\Animation\EasingCurves.cpp"
 						>
 					</File>
 					<File
@@ -530,7 +530,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\ElasticEasingCurves.cpp"
+						RelativePath=".\Animation\ElasticEasingCurves.cpp"
 						>
 					</File>
 					<File
@@ -538,7 +538,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\OscillationCurve.cpp"
+						RelativePath=".\Animation\OscillationCurve.cpp"
 						>
 					</File>
 					<File
@@ -551,7 +551,7 @@
 				Name="Collision2D"
 				>
 				<File
-					RelativePath=".\Collision2D\Bibim\AxisAlignedBoxShape2D.cpp"
+					RelativePath=".\Collision2D\AxisAlignedBoxShape2D.cpp"
 					>
 				</File>
 				<File
@@ -559,7 +559,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\BoxShape2D.cpp"
+					RelativePath=".\Collision2D\BoxShape2D.cpp"
 					>
 				</File>
 				<File
@@ -567,7 +567,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\CollisionSpace2D.cpp"
+					RelativePath=".\Collision2D\CollisionSpace2D.cpp"
 					>
 				</File>
 				<File
@@ -575,7 +575,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\IntersectShapes2D.cpp"
+					RelativePath=".\Collision2D\IntersectShapes2D.cpp"
 					>
 				</File>
 				<File
@@ -583,7 +583,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\PointShape2D.cpp"
+					RelativePath=".\Collision2D\PointShape2D.cpp"
 					>
 				</File>
 				<File
@@ -595,7 +595,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\SegmentShape2D.cpp"
+					RelativePath=".\Collision2D\SegmentShape2D.cpp"
 					>
 				</File>
 				<File
@@ -603,7 +603,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\Shape2D.cpp"
+					RelativePath=".\Collision2D\Shape2D.cpp"
 					>
 				</File>
 				<File
@@ -611,7 +611,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\SphereShape2D.cpp"
+					RelativePath=".\Collision2D\SphereShape2D.cpp"
 					>
 				</File>
 				<File
@@ -619,7 +619,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\UserShape2D.cpp"
+					RelativePath=".\Collision2D\UserShape2D.cpp"
 					>
 				</File>
 				<File
@@ -631,7 +631,7 @@
 				Name="Diagnostics"
 				>
 				<File
-					RelativePath=".\Diagnostics\Bibim\CrashDump.cpp"
+					RelativePath=".\Diagnostics\CrashDump.cpp"
 					>
 				</File>
 				<File
@@ -639,7 +639,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Diagnostics\Bibim\FileLogger.cpp"
+					RelativePath=".\Diagnostics\FileLogger.cpp"
 					>
 				</File>
 				<File
@@ -647,7 +647,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Diagnostics\Bibim\Logger.cpp"
+					RelativePath=".\Diagnostics\Logger.cpp"
 					>
 				</File>
 				<File
@@ -655,7 +655,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Diagnostics\Bibim\SystemLogger.cpp"
+					RelativePath=".\Diagnostics\SystemLogger.cpp"
 					>
 				</File>
 				<File
@@ -667,7 +667,7 @@
 				Name="Gameplay"
 				>
 				<File
-					RelativePath=".\Gameplay\Bibim\BatchCommand.cpp"
+					RelativePath=".\Gameplay\BatchCommand.cpp"
 					>
 				</File>
 				<File
@@ -675,7 +675,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Gameplay\Bibim\Command.cpp"
+					RelativePath=".\Gameplay\Command.cpp"
 					>
 				</File>
 				<File
@@ -683,7 +683,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Gameplay\Bibim\CommandHistory.cpp"
+					RelativePath=".\Gameplay\CommandHistory.cpp"
 					>
 				</File>
 				<File
@@ -691,7 +691,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Gameplay\Bibim\CommandQueue.cpp"
+					RelativePath=".\Gameplay\CommandQueue.cpp"
 					>
 				</File>
 				<File
@@ -699,7 +699,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Gameplay\Bibim\RestorableCommand.cpp"
+					RelativePath=".\Gameplay\RestorableCommand.cpp"
 					>
 				</File>
 				<File
@@ -707,7 +707,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Gameplay\Bibim\SpatialObject2D.cpp"
+					RelativePath=".\Gameplay\SpatialObject2D.cpp"
 					>
 				</File>
 				<File
@@ -718,7 +718,7 @@
 					Name="PathFinder"
 					>
 					<File
-						RelativePath=".\Gameplay\Bibim\JumpPointPathFinder.cpp"
+						RelativePath=".\Gameplay\JumpPointPathFinder.cpp"
 						>
 					</File>
 					<File
@@ -726,7 +726,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Gameplay\Bibim\PathFinder.cpp"
+						RelativePath=".\Gameplay\PathFinder.cpp"
 						>
 					</File>
 					<File
@@ -743,7 +743,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\IME.Windows.cpp"
+					RelativePath=".\Input\IME.Windows.cpp"
 					>
 				</File>
 				<File
@@ -751,7 +751,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\IMEBase.cpp"
+					RelativePath=".\Input\IMEBase.cpp"
 					>
 				</File>
 				<File
@@ -759,7 +759,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\Key.cpp"
+					RelativePath=".\Input\Key.cpp"
 					>
 				</File>
 				<File
@@ -767,7 +767,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\Keyboard.cpp"
+					RelativePath=".\Input\Keyboard.cpp"
 					>
 				</File>
 				<File
@@ -775,7 +775,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\KeyboardState.cpp"
+					RelativePath=".\Input\KeyboardState.cpp"
 					>
 				</File>
 				<File
@@ -783,7 +783,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\Mouse.cpp"
+					RelativePath=".\Input\Mouse.cpp"
 					>
 				</File>
 				<File
@@ -791,11 +791,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\Mouse.Window.cpp"
+					RelativePath=".\Input\Mouse.Window.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\MouseState.cpp"
+					RelativePath=".\Input\MouseState.cpp"
 					>
 				</File>
 				<File
@@ -807,7 +807,7 @@
 				Name="Scripting"
 				>
 				<File
-					RelativePath=".\Scripting\Bibim\Script.cpp"
+					RelativePath=".\Scripting\Script.cpp"
 					>
 				</File>
 				<File
@@ -815,7 +815,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptingContext.cpp"
+					RelativePath=".\Scripting\ScriptingContext.cpp"
 					>
 				</File>
 				<File
@@ -823,7 +823,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptNativeFunctionTable.cpp"
+					RelativePath=".\Scripting\ScriptNativeFunctionTable.cpp"
 					>
 				</File>
 				<File
@@ -831,7 +831,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptStack.cpp"
+					RelativePath=".\Scripting\ScriptStack.cpp"
 					>
 				</File>
 				<File
@@ -839,7 +839,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptThread.cpp"
+					RelativePath=".\Scripting\ScriptThread.cpp"
 					>
 				</File>
 				<File
@@ -850,7 +850,7 @@
 					Name="Libraries"
 					>
 					<File
-						RelativePath=".\Scripting\Bibim\ScriptLibraryIO.cpp"
+						RelativePath=".\Scripting\ScriptLibraryIO.cpp"
 						>
 					</File>
 					<File
@@ -863,7 +863,7 @@
 				Name="Time"
 				>
 				<File
-					RelativePath=".\Time\Bibim\AlarmClock.cpp"
+					RelativePath=".\Time\AlarmClock.cpp"
 					>
 				</File>
 				<File
@@ -875,7 +875,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\Clock.Windows.cpp"
+					RelativePath=".\Time\Clock.Windows.cpp"
 					>
 				</File>
 				<File
@@ -883,7 +883,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\SubTimeline.cpp"
+					RelativePath=".\Time\SubTimeline.cpp"
 					>
 				</File>
 				<File
@@ -891,7 +891,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\Timeline.cpp"
+					RelativePath=".\Time\Timeline.cpp"
 					>
 				</File>
 				<File
@@ -899,7 +899,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\TimelineGameComponent.cpp"
+					RelativePath=".\Time\TimelineGameComponent.cpp"
 					>
 				</File>
 				<File
@@ -907,7 +907,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\TimelineGameModule.cpp"
+					RelativePath=".\Time\TimelineGameModule.cpp"
 					>
 				</File>
 				<File
@@ -915,7 +915,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\UpdateableGameComponent.cpp"
+					RelativePath=".\Time\UpdateableGameComponent.cpp"
 					>
 				</File>
 				<File
@@ -923,7 +923,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\UpdateableGameModule.cpp"
+					RelativePath=".\Time\UpdateableGameModule.cpp"
 					>
 				</File>
 				<File
@@ -935,7 +935,7 @@
 				Name="Startup"
 				>
 				<File
-					RelativePath=".\Startup\Bibim\Startup.cpp"
+					RelativePath=".\Startup\Startup.cpp"
 					>
 				</File>
 				<File
@@ -951,7 +951,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIDomain.cpp"
+					RelativePath=".\UI\UIDomain.cpp"
 					>
 				</File>
 				<File
@@ -959,7 +959,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIElement.cpp"
+					RelativePath=".\UI\UIElement.cpp"
 					>
 				</File>
 				<File
@@ -967,7 +967,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UILayout.cpp"
+					RelativePath=".\UI\UILayout.cpp"
 					>
 				</File>
 				<File
@@ -975,7 +975,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIRenderer.DX9.cpp"
+					RelativePath=".\UI\UIRenderer.DX9.cpp"
 					>
 				</File>
 				<File
@@ -983,7 +983,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIRenderer.GLES2.cpp"
+					RelativePath=".\UI\UIRenderer.GLES2.cpp"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -1011,7 +1011,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIRendererBase.cpp"
+					RelativePath=".\UI\UIRendererBase.cpp"
 					>
 				</File>
 				<File
@@ -1019,7 +1019,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UISimpleDomain.cpp"
+					RelativePath=".\UI\UISimpleDomain.cpp"
 					>
 				</File>
 				<File
@@ -1030,7 +1030,7 @@
 					Name="Events"
 					>
 					<File
-						RelativePath=".\UI\Bibim\UIAppEventDispatcher.cpp"
+						RelativePath=".\UI\UIAppEventDispatcher.cpp"
 						>
 					</File>
 					<File
@@ -1038,7 +1038,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIAsyncEventQueue.cpp"
+						RelativePath=".\UI\UIAsyncEventQueue.cpp"
 						>
 					</File>
 					<File
@@ -1046,7 +1046,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEventArgs.cpp"
+						RelativePath=".\UI\UIEventArgs.cpp"
 						>
 					</File>
 					<File
@@ -1054,7 +1054,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEventDispatcher.cpp"
+						RelativePath=".\UI\UIEventDispatcher.cpp"
 						>
 					</File>
 					<File
@@ -1062,7 +1062,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEventHandler.cpp"
+						RelativePath=".\UI\UIEventHandler.cpp"
 						>
 					</File>
 					<File
@@ -1070,7 +1070,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEventID.cpp"
+						RelativePath=".\UI\UIEventID.cpp"
 						>
 					</File>
 					<File
@@ -1078,7 +1078,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEventMap.cpp"
+						RelativePath=".\UI\UIEventMap.cpp"
 						>
 					</File>
 					<File
@@ -1086,7 +1086,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIFunctionEventHandler.cpp"
+						RelativePath=".\UI\UIFunctionEventHandler.cpp"
 						>
 					</File>
 					<File
@@ -1094,7 +1094,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIFunctionTable.cpp"
+						RelativePath=".\UI\UIFunctionTable.cpp"
 						>
 					</File>
 					<File
@@ -1102,7 +1102,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIGamePadEventArgs.cpp"
+						RelativePath=".\UI\UIGamePadEventArgs.cpp"
 						>
 					</File>
 					<File
@@ -1110,7 +1110,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIGamePadEventDispatcher.cpp"
+						RelativePath=".\UI\UIGamePadEventDispatcher.cpp"
 						>
 					</File>
 					<File
@@ -1118,7 +1118,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIKeyboardEventArgs.cpp"
+						RelativePath=".\UI\UIKeyboardEventArgs.cpp"
 						>
 					</File>
 					<File
@@ -1126,7 +1126,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIKeyboardEventDispatcher.cpp"
+						RelativePath=".\UI\UIKeyboardEventDispatcher.cpp"
 						>
 					</File>
 					<File
@@ -1134,7 +1134,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIMouseButtonEventArgs.cpp"
+						RelativePath=".\UI\UIMouseButtonEventArgs.cpp"
 						>
 					</File>
 					<File
@@ -1142,7 +1142,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIMouseEventArgs.cpp"
+						RelativePath=".\UI\UIMouseEventArgs.cpp"
 						>
 					</File>
 					<File
@@ -1150,7 +1150,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIMouseEventDispatcher.cpp"
+						RelativePath=".\UI\UIMouseEventDispatcher.cpp"
 						>
 					</File>
 					<File
@@ -1158,7 +1158,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIMouseWheelEventArgs.cpp"
+						RelativePath=".\UI\UIMouseWheelEventArgs.cpp"
 						>
 					</File>
 					<File
@@ -1166,7 +1166,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UISequentialEventHandler.cpp"
+						RelativePath=".\UI\UISequentialEventHandler.cpp"
 						>
 					</File>
 					<File
@@ -1178,7 +1178,7 @@
 					Name="Effects"
 					>
 					<File
-						RelativePath=".\UI\Bibim\UIEffectMap.cpp"
+						RelativePath=".\UI\UIEffectMap.cpp"
 						>
 					</File>
 					<File
@@ -1186,7 +1186,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEffectStack.cpp"
+						RelativePath=".\UI\UIEffectStack.cpp"
 						>
 					</File>
 					<File
@@ -1197,7 +1197,7 @@
 						Name="Geometry"
 						>
 						<File
-							RelativePath=".\UI\Bibim\UIAfterImageEffect.cpp"
+							RelativePath=".\UI\UIAfterImageEffect.cpp"
 							>
 						</File>
 						<File
@@ -1205,7 +1205,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIGeometryEffect.cpp"
+							RelativePath=".\UI\UIGeometryEffect.cpp"
 							>
 						</File>
 						<File
@@ -1213,7 +1213,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UISineCurveEffect.cpp"
+							RelativePath=".\UI\UISineCurveEffect.cpp"
 							>
 						</File>
 						<File
@@ -1221,7 +1221,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UITintEffect.cpp"
+							RelativePath=".\UI\UITintEffect.cpp"
 							>
 						</File>
 						<File
@@ -1233,7 +1233,7 @@
 						Name="Pixel"
 						>
 						<File
-							RelativePath=".\UI\Bibim\UIBlendingEffect.cpp"
+							RelativePath=".\UI\UIBlendingEffect.cpp"
 							>
 						</File>
 						<File
@@ -1241,7 +1241,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIColorMatrixEffect.cpp"
+							RelativePath=".\UI\UIColorMatrixEffect.cpp"
 							>
 						</File>
 						<File
@@ -1249,7 +1249,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIMaskEffect.cpp"
+							RelativePath=".\UI\UIMaskEffect.cpp"
 							>
 						</File>
 						<File
@@ -1257,7 +1257,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIOpacityMaskEffect.cpp"
+							RelativePath=".\UI\UIOpacityMaskEffect.cpp"
 							>
 						</File>
 						<File
@@ -1265,7 +1265,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIPixelEffect.cpp"
+							RelativePath=".\UI\UIPixelEffect.cpp"
 							>
 						</File>
 						<File
@@ -1278,7 +1278,7 @@
 					Name="Visuals"
 					>
 					<File
-						RelativePath=".\UI\Bibim\UIButton.cpp"
+						RelativePath=".\UI\UIButton.cpp"
 						>
 					</File>
 					<File
@@ -1286,7 +1286,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UICheckBox.cpp"
+						RelativePath=".\UI\UICheckBox.cpp"
 						>
 					</File>
 					<File
@@ -1294,7 +1294,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIDocument.cpp"
+						RelativePath=".\UI\UIDocument.cpp"
 						>
 					</File>
 					<File
@@ -1302,7 +1302,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEditText.cpp"
+						RelativePath=".\UI\UIEditText.cpp"
 						>
 					</File>
 					<File
@@ -1310,7 +1310,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEllipse.cpp"
+						RelativePath=".\UI\UIEllipse.cpp"
 						>
 					</File>
 					<File
@@ -1318,7 +1318,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIImage.cpp"
+						RelativePath=".\UI\UIImage.cpp"
 						>
 					</File>
 					<File
@@ -1326,7 +1326,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UILabel.cpp"
+						RelativePath=".\UI\UILabel.cpp"
 						>
 					</File>
 					<File
@@ -1334,7 +1334,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIPanel.cpp"
+						RelativePath=".\UI\UIPanel.cpp"
 						>
 					</File>
 					<File
@@ -1342,7 +1342,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIRadioButton.cpp"
+						RelativePath=".\UI\UIRadioButton.cpp"
 						>
 					</File>
 					<File
@@ -1350,7 +1350,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIRect.cpp"
+						RelativePath=".\UI\UIRect.cpp"
 						>
 					</File>
 					<File
@@ -1358,7 +1358,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIRoundedRect.cpp"
+						RelativePath=".\UI\UIRoundedRect.cpp"
 						>
 					</File>
 					<File
@@ -1366,7 +1366,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIScrollablePanel.cpp"
+						RelativePath=".\UI\UIScrollablePanel.cpp"
 						>
 					</File>
 					<File
@@ -1374,7 +1374,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIShape.cpp"
+						RelativePath=".\UI\UIShape.cpp"
 						>
 					</File>
 					<File
@@ -1382,7 +1382,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UISpark.cpp"
+						RelativePath=".\UI\UISpark.cpp"
 						>
 					</File>
 					<File
@@ -1390,7 +1390,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UISprite.cpp"
+						RelativePath=".\UI\UISprite.cpp"
 						>
 					</File>
 					<File
@@ -1398,7 +1398,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIVideo.cpp"
+						RelativePath=".\UI\UIVideo.cpp"
 						>
 					</File>
 					<File
@@ -1406,7 +1406,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIVisual.cpp"
+						RelativePath=".\UI\UIVisual.cpp"
 						>
 					</File>
 					<File
@@ -1414,7 +1414,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIWindow.cpp"
+						RelativePath=".\UI\UIWindow.cpp"
 						>
 					</File>
 					<File
@@ -1426,7 +1426,7 @@
 					Name="Transforms"
 					>
 					<File
-						RelativePath=".\UI\Bibim\UITransform.cpp"
+						RelativePath=".\UI\UITransform.cpp"
 						>
 					</File>
 					<File
@@ -1434,7 +1434,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UITransform2D.cpp"
+						RelativePath=".\UI\UITransform2D.cpp"
 						>
 					</File>
 					<File
@@ -1442,7 +1442,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UITransform3D.cpp"
+						RelativePath=".\UI\UITransform3D.cpp"
 						>
 					</File>
 					<File
@@ -1454,7 +1454,7 @@
 					Name="Visitors"
 					>
 					<File
-						RelativePath=".\UI\Bibim\UIBoundsContext.cpp"
+						RelativePath=".\UI\UIBoundsContext.cpp"
 						>
 					</File>
 					<File
@@ -1462,7 +1462,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIDrawingContext.cpp"
+						RelativePath=".\UI\UIDrawingContext.cpp"
 						>
 					</File>
 					<File
@@ -1470,7 +1470,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIHandledDrawingContext.cpp"
+						RelativePath=".\UI\UIHandledDrawingContext.cpp"
 						>
 					</File>
 					<File
@@ -1478,7 +1478,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIPickingContext.cpp"
+						RelativePath=".\UI\UIPickingContext.cpp"
 						>
 					</File>
 					<File
@@ -1486,7 +1486,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIVisualVisitor.cpp"
+						RelativePath=".\UI\UIVisualVisitor.cpp"
 						>
 					</File>
 					<File
@@ -1499,7 +1499,7 @@
 				Name="Graphics"
 				>
 				<File
-					RelativePath=".\Graphics\Bibim\BitMask.cpp"
+					RelativePath=".\Graphics\BitMask.cpp"
 					>
 				</File>
 				<File
@@ -1515,7 +1515,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\GraphicsCapabilities.cpp"
+					RelativePath=".\Graphics\GraphicsCapabilities.cpp"
 					>
 				</File>
 				<File
@@ -1527,7 +1527,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\GraphicsDeviceBase.cpp"
+					RelativePath=".\Graphics\GraphicsDeviceBase.cpp"
 					>
 				</File>
 				<File
@@ -1535,7 +1535,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\Image.cpp"
+					RelativePath=".\Graphics\Image.cpp"
 					>
 				</File>
 				<File
@@ -1543,7 +1543,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\ImageSet.cpp"
+					RelativePath=".\Graphics\ImageSet.cpp"
 					>
 				</File>
 				<File
@@ -1551,7 +1551,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\JPEGReader.cpp"
+					RelativePath=".\Graphics\JPEGReader.cpp"
 					>
 				</File>
 				<File
@@ -1559,7 +1559,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\PNGReader.cpp"
+					RelativePath=".\Graphics\PNGReader.cpp"
 					>
 				</File>
 				<File
@@ -1571,7 +1571,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\ScreenshotPrinter.cpp"
+					RelativePath=".\Graphics\ScreenshotPrinter.cpp"
 					>
 				</File>
 				<File
@@ -1591,7 +1591,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\Window.cpp"
+					RelativePath=".\Graphics\Window.cpp"
 					>
 				</File>
 				<File
@@ -1602,7 +1602,7 @@
 					Name="DX9"
 					>
 					<File
-						RelativePath=".\Graphics\Bibim\DynamicTexture2D.DX9.cpp"
+						RelativePath=".\Graphics\DynamicTexture2D.DX9.cpp"
 						>
 					</File>
 					<File
@@ -1610,7 +1610,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.cpp"
+						RelativePath=".\Graphics\GraphicsDevice.DX9.cpp"
 						>
 					</File>
 					<File
@@ -1618,7 +1618,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.cpp"
+						RelativePath=".\Graphics\RenderTargetTexture2D.DX9.cpp"
 						>
 					</File>
 					<File
@@ -1626,7 +1626,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.cpp"
+						RelativePath=".\Graphics\ShaderEffect.DX9.cpp"
 						>
 					</File>
 					<File
@@ -1634,7 +1634,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\SourceTexture2D.DX9.cpp"
+						RelativePath=".\Graphics\SourceTexture2D.DX9.cpp"
 						>
 					</File>
 					<File
@@ -1642,7 +1642,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\Texture2D.DX9.cpp"
+						RelativePath=".\Graphics\Texture2D.DX9.cpp"
 						>
 					</File>
 					<File
@@ -1654,7 +1654,7 @@
 					Name="GLES2"
 					>
 					<File
-						RelativePath=".\Graphics\Bibim\DynamicTexture2D.GLES2.cpp"
+						RelativePath=".\Graphics\DynamicTexture2D.GLES2.cpp"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1678,7 +1678,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\GLES2.cpp"
+						RelativePath=".\Graphics\GLES2.cpp"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1702,7 +1702,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\GraphicsDevice.GLES2.cpp"
+						RelativePath=".\Graphics\GraphicsDevice.GLES2.cpp"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1726,7 +1726,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.GLES2.cpp"
+						RelativePath=".\Graphics\RenderTargetTexture2D.GLES2.cpp"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1750,7 +1750,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\ShaderEffect.GLES2.cpp"
+						RelativePath=".\Graphics\ShaderEffect.GLES2.cpp"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1774,7 +1774,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\SourceTexture2D.GLES2.cpp"
+						RelativePath=".\Graphics\SourceTexture2D.GLES2.cpp"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1798,7 +1798,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\Texture2D.GLES2.cpp"
+						RelativePath=".\Graphics\Texture2D.GLES2.cpp"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1831,7 +1831,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\FileSystem\Bibim\FileStream.Windows.cpp"
+					RelativePath=".\FileSystem\FileStream.Windows.cpp"
 					>
 				</File>
 				<File
@@ -1839,7 +1839,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\FileSystem\Bibim\MPQ.cpp"
+					RelativePath=".\FileSystem\MPQ.cpp"
 					>
 				</File>
 				<File
@@ -1847,7 +1847,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\FileSystem\Bibim\MPQStream.cpp"
+					RelativePath=".\FileSystem\MPQStream.cpp"
 					>
 				</File>
 				<File
@@ -1855,7 +1855,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\FileSystem\Bibim\Path.cpp"
+					RelativePath=".\FileSystem\Path.cpp"
 					>
 				</File>
 				<File
@@ -1871,7 +1871,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\Clipboard.Windows.cpp"
+					RelativePath=".\Framework\Clipboard.Windows.cpp"
 					>
 				</File>
 				<File
@@ -1883,7 +1883,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\GameFramework.Windows.cpp"
+					RelativePath=".\Framework\GameFramework.Windows.cpp"
 					>
 				</File>
 				<File
@@ -1891,7 +1891,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\GameFrameworkBase.cpp"
+					RelativePath=".\Framework\GameFrameworkBase.cpp"
 					>
 				</File>
 				<File
@@ -1903,7 +1903,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\GameWindow.Windows.cpp"
+					RelativePath=".\Framework\GameWindow.Windows.cpp"
 					>
 				</File>
 				<File
@@ -1911,7 +1911,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\Lua.cpp"
+					RelativePath=".\Framework\Lua.cpp"
 					>
 				</File>
 				<File
@@ -1919,7 +1919,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\Preferences.cpp"
+					RelativePath=".\Framework\Preferences.cpp"
 					>
 				</File>
 				<File
@@ -1927,7 +1927,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\StandardGame.cpp"
+					RelativePath=".\Framework\StandardGame.cpp"
 					>
 				</File>
 				<File
@@ -1958,7 +1958,7 @@
 					Name="Irrklang"
 					>
 					<File
-						RelativePath=".\Audio\Bibim\AudioDevice.Irrklang.cpp"
+						RelativePath=".\Audio\AudioDevice.Irrklang.cpp"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1998,7 +1998,7 @@
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath=".\Audio\Bibim\BGM.Irrklang.cpp"
+						RelativePath=".\Audio\BGM.Irrklang.cpp"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -2038,7 +2038,7 @@
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath=".\Audio\Bibim\SoundFX.Irrklang.cpp"
+						RelativePath=".\Audio\SoundFX.Irrklang.cpp"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -2082,7 +2082,7 @@
 					Name="AL"
 					>
 					<File
-						RelativePath=".\Audio\Bibim\AudioDevice.AL.cpp"
+						RelativePath=".\Audio\AudioDevice.AL.cpp"
 						>
 					</File>
 					<File
@@ -2090,7 +2090,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Audio\Bibim\BGM.AL.cpp"
+						RelativePath=".\Audio\BGM.AL.cpp"
 						>
 					</File>
 					<File
@@ -2098,7 +2098,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Audio\Bibim\SoundFX.AL.cpp"
+						RelativePath=".\Audio\SoundFX.AL.cpp"
 						>
 					</File>
 					<File
@@ -2111,7 +2111,7 @@
 				Name="GFX"
 				>
 				<File
-					RelativePath=".\GFX\Bibim\SparkParticleEngine.cpp"
+					RelativePath=".\GFX\SparkParticleEngine.cpp"
 					>
 				</File>
 				<File
@@ -2123,7 +2123,7 @@
 				Name="Net"
 				>
 				<File
-					RelativePath=".\Net\Bibim\HttpClient.Curl.cpp"
+					RelativePath=".\Net\HttpClient.Curl.cpp"
 					>
 				</File>
 				<File
@@ -2135,7 +2135,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\HttpClient.Null.cpp"
+					RelativePath=".\Net\HttpClient.Null.cpp"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -2175,7 +2175,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\HttpClient.Windows.cpp"
+					RelativePath=".\Net\HttpClient.Windows.cpp"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -2215,7 +2215,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\HttpClientBase.cpp"
+					RelativePath=".\Net\HttpClientBase.cpp"
 					>
 				</File>
 				<File
@@ -2223,7 +2223,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\IPEndPoint.cpp"
+					RelativePath=".\Net\IPEndPoint.cpp"
 					>
 				</File>
 				<File
@@ -2231,7 +2231,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\NetworkStream.cpp"
+					RelativePath=".\Net\NetworkStream.cpp"
 					>
 				</File>
 				<File
@@ -2239,7 +2239,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\Socket.cpp"
+					RelativePath=".\Net\Socket.cpp"
 					>
 				</File>
 				<File
@@ -2255,7 +2255,7 @@
 				Name="(Fundamental)"
 				>
 				<File
-					RelativePath=".\Foundation\Bibim\Any.cpp"
+					RelativePath=".\Foundation\Any.cpp"
 					>
 				</File>
 				<File
@@ -2263,7 +2263,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Color.cpp"
+					RelativePath=".\Foundation\Color.cpp"
 					>
 				</File>
 				<File
@@ -2271,7 +2271,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Matrix4.cpp"
+					RelativePath=".\Foundation\Matrix4.cpp"
 					>
 				</File>
 				<File
@@ -2283,7 +2283,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Point2.cpp"
+					RelativePath=".\Foundation\Point2.cpp"
 					>
 				</File>
 				<File
@@ -2291,7 +2291,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Point3.cpp"
+					RelativePath=".\Foundation\Point3.cpp"
 					>
 				</File>
 				<File
@@ -2299,7 +2299,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Point4.cpp"
+					RelativePath=".\Foundation\Point4.cpp"
 					>
 				</File>
 				<File
@@ -2307,7 +2307,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Rect.cpp"
+					RelativePath=".\Foundation\Rect.cpp"
 					>
 				</File>
 				<File
@@ -2315,7 +2315,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\RectF.cpp"
+					RelativePath=".\Foundation\RectF.cpp"
 					>
 				</File>
 				<File
@@ -2323,7 +2323,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\String.cpp"
+					RelativePath=".\Foundation\String.cpp"
 					>
 				</File>
 				<File
@@ -2331,7 +2331,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Vector2.cpp"
+					RelativePath=".\Foundation\Vector2.cpp"
 					>
 				</File>
 				<File
@@ -2339,7 +2339,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Vector3.cpp"
+					RelativePath=".\Foundation\Vector3.cpp"
 					>
 				</File>
 				<File
@@ -2347,7 +2347,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Vector4.cpp"
+					RelativePath=".\Foundation\Vector4.cpp"
 					>
 				</File>
 				<File
@@ -2359,7 +2359,7 @@
 				Name="Container"
 				>
 				<File
-					RelativePath=".\Foundation\Bibim\SequenceDictionary.cpp"
+					RelativePath=".\Foundation\SequenceDictionary.cpp"
 					>
 				</File>
 				<File
@@ -2375,7 +2375,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Log.cpp"
+					RelativePath=".\Foundation\Log.cpp"
 					>
 				</File>
 				<File
@@ -2387,7 +2387,7 @@
 				Name="Mathematics"
 				>
 				<File
-					RelativePath=".\Foundation\Bibim\Geom2D.cpp"
+					RelativePath=".\Foundation\Geom2D.cpp"
 					>
 				</File>
 				<File
@@ -2395,7 +2395,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Math.cpp"
+					RelativePath=".\Foundation\Math.cpp"
 					>
 				</File>
 				<File
@@ -2403,7 +2403,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Numerics.cpp"
+					RelativePath=".\Foundation\Numerics.cpp"
 					>
 				</File>
 				<File
@@ -2415,7 +2415,7 @@
 				Name="Utility"
 				>
 				<File
-					RelativePath=".\Foundation\Bibim\AnyStorage.cpp"
+					RelativePath=".\Foundation\AnyStorage.cpp"
 					>
 				</File>
 				<File
@@ -2439,7 +2439,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Memory.cpp"
+					RelativePath=".\Foundation\Memory.cpp"
 					>
 				</File>
 				<File
@@ -2447,7 +2447,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\RectStorage.cpp"
+					RelativePath=".\Foundation\RectStorage.cpp"
 					>
 				</File>
 				<File
@@ -2459,7 +2459,7 @@
 				Name="(Object)"
 				>
 				<File
-					RelativePath=".\Foundation\Bibim\Object.cpp"
+					RelativePath=".\Foundation\Object.cpp"
 					>
 				</File>
 				<File
@@ -2471,7 +2471,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\SharedObject.cpp"
+					RelativePath=".\Foundation\SharedObject.cpp"
 					>
 				</File>
 				<File
@@ -2492,7 +2492,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Foundation\Bibim\Environment.Windows.cpp"
+				RelativePath=".\Foundation\Environment.Windows.cpp"
 				>
 			</File>
 			<File
@@ -2511,7 +2511,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Threading\Bibim\Lock.Windows.cpp"
+					RelativePath=".\Threading\Lock.Windows.cpp"
 					>
 				</File>
 				<File
@@ -2519,7 +2519,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Threading\Bibim\ManualLocker.cpp"
+					RelativePath=".\Threading\ManualLocker.cpp"
 					>
 				</File>
 				<File
@@ -2531,7 +2531,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Threading\Bibim\Thread.Windows.cpp"
+					RelativePath=".\Threading\Thread.Windows.cpp"
 					>
 				</File>
 				<File
@@ -2543,7 +2543,7 @@
 				Name="IO"
 				>
 				<File
-					RelativePath=".\Foundation\Bibim\BinaryReader.cpp"
+					RelativePath=".\Foundation\BinaryReader.cpp"
 					>
 				</File>
 				<File
@@ -2551,7 +2551,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\BinaryWriter.cpp"
+					RelativePath=".\Foundation\BinaryWriter.cpp"
 					>
 				</File>
 				<File
@@ -2559,7 +2559,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\DumpStream.cpp"
+					RelativePath=".\Foundation\DumpStream.cpp"
 					>
 				</File>
 				<File
@@ -2567,7 +2567,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\MemoryStream.cpp"
+					RelativePath=".\Foundation\MemoryStream.cpp"
 					>
 				</File>
 				<File
@@ -2575,7 +2575,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Stream.cpp"
+					RelativePath=".\Foundation\Stream.cpp"
 					>
 				</File>
 				<File
