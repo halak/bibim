@@ -932,18 +932,6 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="Startup"
-				>
-				<File
-					RelativePath=".\Startup\Startup.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\Product\Include\Bibim\Startup.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="UI"
 				>
 				<File
@@ -1936,6 +1924,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\Product\Include\Bibim\StandardGame.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Framework\Startup.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Product\Include\Bibim\Startup.h"
 					>
 				</File>
 			</Filter>
