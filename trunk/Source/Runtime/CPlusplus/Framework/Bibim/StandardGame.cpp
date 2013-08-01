@@ -168,13 +168,16 @@ namespace Bibim
         storage = new GameAssetStorage(GetModules());
         GameModuleNode* storageNode = GetModules()->GetRoot()->AttachChild(storage);
         {
-            NetworkAssetProvider* nap = new NetworkAssetProvider(storage, IPEndPoint(IPEndPoint::Localhost, NetworkAssetProvider::DefaultPort), gameName);
-            //MOBILE MPQAssetProvider*   map = new MPQAssetProvider(storage, mainMPQ);
-            FileAssetProvider*  fap = new FileAssetProvider(storage);
+#           if (defined(BIBIM_PLATFORM_WINDOWS))
+            storageNode->AttachChild(new NetworkAssetProvider(storage,
+                                                              IPEndPoint(IPEndPoint::Localhost, NetworkAssetProvider::DefaultPort),
+                                                              gameName));
+#           endif
 
-            storageNode->AttachChild(nap);
+            //MOBILE MPQAssetProvider*   map = new MPQAssetProvider(storage, mainMPQ);
             //MOBILE storageNode->AttachChild(map);
-            storageNode->AttachChild(fap);
+            
+            storageNode->AttachChild(new FileAssetProvider(storage));
         }
 
         fontLibrary->SetAssetStorage(storage);
@@ -1264,15 +1267,12 @@ namespace Bibim
             const VisualCollection& children = current->GetChildren();
             for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
             {
-                const int classID = (*it)->GetClassID();
-                bool childrenSkipped = false;
-
                 BBAssert(lua_isfunction(L, -1));
                 
                 lua_pushvalue(L, callbackIndex);
                 lua_tinker::push(L, static_cast<UIVisual*>(*it));
                 lua_call(L, 1, 1);
-                childrenSkipped = (lua_toboolean(L, -1) != 0);
+                const bool childrenSkipped = (lua_toboolean(L, -1) != 0);
                 
                 lua_pop(L, 1);
 

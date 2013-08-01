@@ -144,7 +144,7 @@ namespace Bibim.Asset.Pipeline.Recipes
             using (var stream = new MemoryStream(original.Width * 4 * original.Height / 8))
             using (var freeImage = new FreeImageBitmap(original))
             {
-                freeImage.Save(stream, FREE_IMAGE_FORMAT.FIF_PNG, FREE_IMAGE_SAVE_FLAGS.PNG_Z_BEST_COMPRESSION);
+                freeImage.Save(stream, FREE_IMAGE_FORMAT.FIF_PNG, FREE_IMAGE_SAVE_FLAGS.PNG_Z_DEFAULT_COMPRESSION);
                 return stream.ToArray();
             }
         }

@@ -29,10 +29,15 @@ namespace Bibim.Json.Serialization
         public static Size Get(this Dictionary<string, object> thiz, string key, Size defaultValue)
         {
             var sizeObject = thiz.Get<List<object>>(key);
-            System.Drawing.Size size = System.Drawing.Size.Empty;
-            size.Width = (int)sizeObject[0];
-            size.Height = (int)sizeObject[1];
-            return size;
+            if (sizeObject != null)
+            {
+                System.Drawing.Size size = System.Drawing.Size.Empty;
+                size.Width = (int)sizeObject[0];
+                size.Height = (int)sizeObject[1];
+                return size;
+            }
+            else
+                return System.Drawing.Size.Empty;
         }
     }
 }

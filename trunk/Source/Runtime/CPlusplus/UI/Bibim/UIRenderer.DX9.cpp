@@ -329,8 +329,6 @@ namespace Bibim
 
         const int ibSize = numberOfIndices * sizeof(WORD);
         IDirect3DDevice9* d3dDevice = GetGraphicsDevice()->GetD3DDevice();
-        static const DWORD vbUsage = D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY;
-        static const D3DPOOL vbPool = D3DPOOL_DEFAULT;
         result = d3dDevice->CreateVertexBuffer(vbSize, D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY, VertexFVF, D3DPOOL_DEFAULT, &vb, nullptr);
         result = d3dDevice->CreateIndexBuffer(ibSize, D3DUSAGE_WRITEONLY, D3DFMT_INDEX16, D3DPOOL_DEFAULT, &ib, nullptr);
         if (result == D3D_OK)

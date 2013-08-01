@@ -118,7 +118,6 @@ namespace Bibim
         else
         {
             Update(currentTime - previousTime, timestamp++);
-            previousTime = currentTime;
         }
 
         timestamps.push_back(currentTime);

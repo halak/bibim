@@ -406,7 +406,12 @@ namespace Bibim
             m *= Matrix4::Scaling(scale);
         m *= Matrix4::Translation(scaleCenter - rotationCenter);
         if (rotation != Vector3::Zero)
-            m *= RotationPitchYawRoll(rotation);
+        {
+            m *= Matrix4::RotationX(-rotation.X);
+            m *= Matrix4::RotationY(-rotation.Y);
+            m *= Matrix4::RotationZ(-rotation.Z);
+            // m *= RotationPitchYawRoll(rotation);
+        }
         m *= Matrix4::Translation(rotationCenter + translation);
         return m;
     }
