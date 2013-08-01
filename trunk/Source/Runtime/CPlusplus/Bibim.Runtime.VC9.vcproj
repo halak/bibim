@@ -2378,6 +2378,14 @@
 					RelativePath="..\..\..\Product\Include\Bibim\Log.h"
 					>
 				</File>
+				<File
+					RelativePath=".\Foundation\Profiler.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\Product\Include\Bibim\Profiler.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="Mathematics"
