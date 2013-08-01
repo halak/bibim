@@ -635,6 +635,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Diagnostics\Bibim\CrashDump.h"
+					>
+				</File>
+				<File
 					RelativePath=".\Diagnostics\Bibim\FileLogger.cpp"
 					>
 				</File>
