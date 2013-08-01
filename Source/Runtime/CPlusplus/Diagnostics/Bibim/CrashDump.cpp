@@ -1,8 +1,10 @@
 #include <Bibim/Config.h>
 #include <Bibim/FWD.h>
+#include <Bibim/CrashDump.h>
 #include <Bibim/Assert.h>
 
 #if (defined(BIBIM_PLATFORM_WINDOWS))
+
 #   include <windows.h>
 
 #   pragma pack( push, before_imagehlp, 8 )
@@ -138,7 +140,7 @@
             }
         }
 
-        inline void InitializeCrashDump()
+        void CrashDump::Initialize()
         {
             ::SetUnhandledExceptionFilter(ExceptionFilter);
             ::_set_invalid_parameter_handler(InvalidParameterHandler);
@@ -150,8 +152,12 @@
     }
 
 #   else
+
     namespace Bibim
     {
-        inline void InitializeCrashDump() { }
+        void CrashDump::Initialize()
+        {
+        }
     }
+
 #endif

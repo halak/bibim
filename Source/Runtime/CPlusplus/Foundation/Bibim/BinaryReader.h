@@ -66,7 +66,7 @@
                 inline bool operator == (const BinaryReader& right) const;
                 inline bool operator != (const BinaryReader& right) const;
 
-                static  void*   ReadFrom(Stream* stream, void* buffer, int length);
+                static void*   ReadFrom(Stream* stream, void* buffer, int length);
                 static bool    ReadBoolFrom(Stream* stream);
                 static byte    ReadByteFrom(Stream* stream);
                 static short   ReadShortIntFrom(Stream* stream);
