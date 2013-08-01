@@ -31,20 +31,11 @@
     <Filter Include="03. Game\Diagnostics">
       <UniqueIdentifier>{05f4ee7e-d56d-4e20-bc8c-8e00d830ff1a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Game\Gameplay">
-      <UniqueIdentifier>{05440513-dc5c-4844-ac1d-75b1e4e3f43f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. Game\Gameplay\PathFinder">
-      <UniqueIdentifier>{bdbbcae6-f432-4be3-b67c-d9fe0929ace0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Game\Scripting">
       <UniqueIdentifier>{490611d8-aec3-49fa-8acf-d6d1afe6689b}</UniqueIdentifier>
     </Filter>
     <Filter Include="03. Game\Scripting\Libraries">
       <UniqueIdentifier>{2b5c4b1f-f383-439d-bc52-8997dfdbdb2c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. Game\Startup">
-      <UniqueIdentifier>{b5f0ebc1-79f3-464e-a6eb-2aff8672a5bb}</UniqueIdentifier>
     </Filter>
     <Filter Include="03. Game\UI">
       <UniqueIdentifier>{7d487e2d-cd05-45d5-807e-d483e531acc5}</UniqueIdentifier>
@@ -138,6 +129,12 @@
     </Filter>
     <Filter Include="03. Game\Typography">
       <UniqueIdentifier>{030e8e09-1ae6-4d40-8868-7237e7cdf477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Gameplay">
+      <UniqueIdentifier>{05440513-dc5c-4844-ac1d-75b1e4e3f43f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Gameplay\PathFinder">
+      <UniqueIdentifier>{bdbbcae6-f432-4be3-b67c-d9fe0929ace0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -362,9 +359,6 @@
     </ClCompile>
     <ClCompile Include="Time\UpdateableGameModule.cpp">
       <Filter>03. Game\Time</Filter>
-    </ClCompile>
-    <ClCompile Include="Startup\Startup.cpp">
-      <Filter>03. Game\Startup</Filter>
     </ClCompile>
     <ClCompile Include="UI\UIDomain.cpp">
       <Filter>03. Game\UI</Filter>
@@ -840,6 +834,9 @@
     <ClCompile Include="Net\IPEndPoint.cpp">
       <Filter>03. Game\Net</Filter>
     </ClCompile>
+    <ClCompile Include="Framework\Startup.cpp">
+      <Filter>03. Game\Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Product\Include\Bibim\AssetLoadingTask.h">
@@ -1099,9 +1096,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Product\Include\Bibim\UpdateableGameModule.h">
       <Filter>03. Game\Time</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Product\Include\Bibim\Startup.h">
-      <Filter>03. Game\Startup</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Product\Include\Bibim\UI.h">
       <Filter>03. Game\UI</Filter>
@@ -1667,6 +1661,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Product\Include\Bibim\CrashDump.h">
       <Filter>03. Game\Diagnostics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Product\Include\Bibim\Startup.h">
+      <Filter>03. Game\Framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -182,6 +182,7 @@
     <ClCompile Include="Framework\Lua.cpp" />
     <ClCompile Include="Framework\Preferences.cpp" />
     <ClCompile Include="Framework\StandardGame.cpp" />
+    <ClCompile Include="Framework\Startup.cpp" />
     <ClCompile Include="Graphics\GLES2.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -292,7 +293,6 @@
     <ClCompile Include="Time\TimelineGameModule.cpp" />
     <ClCompile Include="Time\UpdateableGameComponent.cpp" />
     <ClCompile Include="Time\UpdateableGameModule.cpp" />
-    <ClCompile Include="Startup\Startup.cpp" />
     <ClCompile Include="UI\UIDomain.cpp" />
     <ClCompile Include="UI\UIEditText.cpp" />
     <ClCompile Include="UI\UIElement.cpp" />
