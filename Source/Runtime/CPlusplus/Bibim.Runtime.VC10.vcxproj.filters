@@ -837,6 +837,9 @@
     <ClCompile Include="Framework\Startup.cpp">
       <Filter>03. Game\Framework</Filter>
     </ClCompile>
+    <ClCompile Include="Foundation\Profiler.cpp">
+      <Filter>01. Foundation\Diagnostics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Product\Include\Bibim\AssetLoadingTask.h">
@@ -1664,6 +1667,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Product\Include\Bibim\Startup.h">
       <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Product\Include\Bibim\Profiler.h">
+      <Filter>01. Foundation\Diagnostics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -150,6 +150,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Foundation\Profiler.cpp" />
     <ClCompile Include="Framework\Clipboard.Android.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -502,6 +503,7 @@
     <ClInclude Include="..\..\..\Product\Include\Bibim\AudioDevice.AL.h" />
     <ClInclude Include="..\..\..\Product\Include\Bibim\AudioDevice.h" />
     <ClInclude Include="..\..\..\Product\Include\Bibim\BGM.AL.h" />
+    <ClInclude Include="..\..\..\Product\Include\Bibim\Profiler.h" />
     <ClInclude Include="..\..\..\Product\Include\Bibim\SoundFX.AL.h" />
     <ClInclude Include="..\..\..\Product\Include\Bibim\SoundFX.h" />
     <ClInclude Include="..\..\..\Product\Include\Bibim\GameComponentFactory.h" />
