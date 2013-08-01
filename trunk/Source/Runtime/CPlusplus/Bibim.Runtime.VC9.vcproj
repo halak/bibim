@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(DXSDK_DIR)Include&quot;;.\Foundation;.\Module;.\Component;.\Asset;.\Animation;.\Audio;.\Collision2D;.\Diagnostics;.\FileSystem;.\Framework;.\Gameplay;.\GFX;.\Graphics;.\Input;.\IPC;.\Net;.\Scripting;.\Startup;.\Threading;.\Time;.\Typography;.\UI;&quot;.\References\lua-5.2.2\src&quot;;.\References\lua_tinker;.\References\utf8_v2_3_4\source;&quot;.\References\zlib-1.2.8&quot;;&quot;.\References\libpng-1.6.3&quot;;&quot;.\References\jpeg-9&quot;;&quot;.\References\freetype-2.5.0.1\custom&quot;;&quot;.\References\freetype-2.5.0.1\include&quot;;&quot;.\References\curl-7.29.0\include&quot;;.\References\rapidjson\include;&quot;.\References\irrKlang-1.4.0\include&quot;;.\References\OpenAL\PC\include;&quot;.\References\SPARK-1.5.5\include&quot;;.\References\StormLib\src"
+				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Product\Include&quot;;&quot;$(DXSDK_DIR)Include&quot;;&quot;.\References\lua-5.2.2\src&quot;;.\References\lua_tinker;.\References\utf8_v2_3_4\source;&quot;.\References\zlib-1.2.8&quot;;&quot;.\References\libpng-1.6.3&quot;;&quot;.\References\jpeg-9&quot;;&quot;.\References\freetype-2.5.0.1\custom&quot;;&quot;.\References\freetype-2.5.0.1\include&quot;;&quot;.\References\curl-7.29.0\include&quot;;.\References\rapidjson\include;&quot;.\References\irrKlang-1.4.0\include&quot;;.\References\OpenAL\PC\include;&quot;.\References\SPARK-1.5.5\include&quot;;.\References\StormLib\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(DXSDK_DIR)Include&quot;;.\Foundation;.\Module;.\Component;.\Asset;.\Animation;.\Audio;.\Collision2D;.\Diagnostics;.\FileSystem;.\Framework;.\Gameplay;.\GFX;.\Graphics;.\Input;.\IPC;.\Net;.\Scripting;.\Startup;.\Threading;.\Time;.\Typography;.\UI;&quot;.\References\lua-5.2.2\src&quot;;.\References\lua_tinker;.\References\utf8_v2_3_4\source;&quot;.\References\zlib-1.2.8&quot;;&quot;.\References\libpng-1.6.3&quot;;&quot;.\References\jpeg-9&quot;;&quot;.\References\freetype-2.5.0.1\custom&quot;;&quot;.\References\freetype-2.5.0.1\include&quot;;&quot;.\References\curl-7.29.0\include&quot;;.\References\rapidjson\include;&quot;.\References\irrKlang-1.4.0\include&quot;;.\References\OpenAL\PC\include;&quot;.\References\SPARK-1.5.5\include&quot;;.\References\StormLib\src"
+				AdditionalIncludeDirectories="&quot;$(BIBIM_DIR)Product\Include&quot;;&quot;$(DXSDK_DIR)Include&quot;;&quot;.\References\lua-5.2.2\src&quot;;.\References\lua_tinker;.\References\utf8_v2_3_4\source;&quot;.\References\zlib-1.2.8&quot;;&quot;.\References\libpng-1.6.3&quot;;&quot;.\References\jpeg-9&quot;;&quot;.\References\freetype-2.5.0.1\custom&quot;;&quot;.\References\freetype-2.5.0.1\include&quot;;&quot;.\References\curl-7.29.0\include&quot;;.\References\rapidjson\include;&quot;.\References\irrKlang-1.4.0\include&quot;;.\References\OpenAL\PC\include;&quot;.\References\SPARK-1.5.5\include&quot;;.\References\StormLib\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -159,7 +159,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Asset\Bibim\AssetLoadingTask.h"
+					RelativePath="..\..\..\Product\Include\Bibim\AssetLoadingTask.h"
 					>
 				</File>
 				<File
@@ -167,7 +167,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Asset\Bibim\AssetStreamReader.h"
+					RelativePath="..\..\..\Product\Include\Bibim\AssetStreamReader.h"
 					>
 				</File>
 				<File
@@ -175,7 +175,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Asset\Bibim\GameAsset.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GameAsset.h"
 					>
 				</File>
 				<File
@@ -183,7 +183,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Asset\Bibim\GameAssetFactory.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GameAssetFactory.h"
 					>
 				</File>
 				<File
@@ -191,7 +191,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Asset\Bibim\GameAssetStorage.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GameAssetStorage.h"
 					>
 				</File>
 				<Filter
@@ -202,7 +202,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\AssetProvider.h"
+						RelativePath="..\..\..\Product\Include\Bibim\AssetProvider.h"
 						>
 					</File>
 					<File
@@ -210,11 +210,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\FileAssetProvider.Default.h"
+						RelativePath="..\..\..\Product\Include\Bibim\FileAssetProvider.Default.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\FileAssetProvider.h"
+						RelativePath="..\..\..\Product\Include\Bibim\FileAssetProvider.h"
 						>
 					</File>
 					<File
@@ -222,7 +222,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\FileAssetProviderBase.h"
+						RelativePath="..\..\..\Product\Include\Bibim\FileAssetProviderBase.h"
 						>
 					</File>
 					<File
@@ -230,7 +230,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\MPQAssetProvider.h"
+						RelativePath="..\..\..\Product\Include\Bibim\MPQAssetProvider.h"
 						>
 					</File>
 					<File
@@ -238,7 +238,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Asset\Bibim\NetworkAssetProvider.h"
+						RelativePath="..\..\..\Product\Include\Bibim\NetworkAssetProvider.h"
 						>
 					</File>
 				</Filter>
@@ -251,7 +251,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\Font.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Font.h"
 					>
 				</File>
 				<File
@@ -259,7 +259,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\FontCache.h"
+					RelativePath="..\..\..\Product\Include\Bibim\FontCache.h"
 					>
 				</File>
 				<File
@@ -267,7 +267,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\FontLibrary.h"
+					RelativePath="..\..\..\Product\Include\Bibim\FontLibrary.h"
 					>
 				</File>
 				<File
@@ -275,7 +275,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\FontString.h"
+					RelativePath="..\..\..\Product\Include\Bibim\FontString.h"
 					>
 				</File>
 				<File
@@ -283,7 +283,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\Glyph.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Glyph.h"
 					>
 				</File>
 				<File
@@ -291,7 +291,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\GlyphSurface.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GlyphSurface.h"
 					>
 				</File>
 				<File
@@ -299,7 +299,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\GlyphTable.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GlyphTable.h"
 					>
 				</File>
 				<File
@@ -307,7 +307,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Typography\Bibim\TypingContext.h"
+					RelativePath="..\..\..\Product\Include\Bibim\TypingContext.h"
 					>
 				</File>
 			</Filter>
@@ -319,7 +319,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Component\Bibim\CloningContext.h"
+					RelativePath="..\..\..\Product\Include\Bibim\CloningContext.h"
 					>
 				</File>
 				<File
@@ -327,7 +327,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Component\Bibim\ComponentStreamReader.h"
+					RelativePath="..\..\..\Product\Include\Bibim\ComponentStreamReader.h"
 					>
 				</File>
 				<File
@@ -335,7 +335,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Component\Bibim\GameComponent.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GameComponent.h"
 					>
 				</File>
 				<File
@@ -343,7 +343,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Component\Bibim\GameComponentFactory.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GameComponentFactory.h"
 					>
 				</File>
 			</Filter>
@@ -355,7 +355,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Module\Bibim\GameModule.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GameModule.h"
 					>
 				</File>
 				<File
@@ -367,7 +367,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Module\Bibim\GameModuleFactory.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GameModuleFactory.h"
 					>
 				</File>
 				<File
@@ -379,7 +379,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Module\Bibim\GameModuleNode.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GameModuleNode.h"
 					>
 				</File>
 				<File
@@ -391,7 +391,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Module\Bibim\GameModuleTree.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GameModuleTree.h"
 					>
 				</File>
 				<File
@@ -407,7 +407,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Animation\Bibim\Sprite.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Sprite.h"
 					>
 				</File>
 				<File
@@ -415,14 +415,14 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Animation\Bibim\SpriteSet.h"
+					RelativePath="..\..\..\Product\Include\Bibim\SpriteSet.h"
 					>
 				</File>
 				<Filter
 					Name="Evaluation"
 					>
 					<File
-						RelativePath=".\Animation\Bibim\EvalBinaryOperators.h"
+						RelativePath="..\..\..\Product\Include\Bibim\EvalBinaryOperators.h"
 						>
 					</File>
 					<File
@@ -430,11 +430,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalBoard.h"
+						RelativePath="..\..\..\Product\Include\Bibim\EvalBoard.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalCaches.h"
+						RelativePath="..\..\..\Product\Include\Bibim\EvalCaches.h"
 						>
 					</File>
 					<File
@@ -442,7 +442,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalConstants.h"
+						RelativePath="..\..\..\Product\Include\Bibim\EvalConstants.h"
 						>
 					</File>
 					<File
@@ -450,15 +450,15 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalContext.h"
+						RelativePath="..\..\..\Product\Include\Bibim\EvalContext.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalInterpolators.h"
+						RelativePath="..\..\..\Product\Include\Bibim\EvalInterpolators.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalRangedSequences.h"
+						RelativePath="..\..\..\Product\Include\Bibim\EvalRangedSequences.h"
 						>
 					</File>
 					<File
@@ -466,19 +466,19 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\Evals.h"
+						RelativePath="..\..\..\Product\Include\Bibim\Evals.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalSelectors.h"
+						RelativePath="..\..\..\Product\Include\Bibim\EvalSelectors.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalSequenceBase.h"
+						RelativePath="..\..\..\Product\Include\Bibim\EvalSequenceBase.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalSequences.h"
+						RelativePath="..\..\..\Product\Include\Bibim\EvalSequences.h"
 						>
 					</File>
 					<File
@@ -486,11 +486,11 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalTimeflow.h"
+						RelativePath="..\..\..\Product\Include\Bibim\EvalTimeflow.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalUnaryOperators.h"
+						RelativePath="..\..\..\Product\Include\Bibim\EvalUnaryOperators.h"
 						>
 					</File>
 					<File
@@ -498,15 +498,15 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalUnitRandom.h"
+						RelativePath="..\..\..\Product\Include\Bibim\EvalUnitRandom.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EvalVariables.h"
+						RelativePath="..\..\..\Product\Include\Bibim\EvalVariables.h"
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\Sequences.h"
+						RelativePath="..\..\..\Product\Include\Bibim\Sequences.h"
 						>
 					</File>
 				</Filter>
@@ -518,7 +518,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\Ease.h"
+						RelativePath="..\..\..\Product\Include\Bibim\Ease.h"
 						>
 					</File>
 					<File
@@ -526,7 +526,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\EasingCurves.h"
+						RelativePath="..\..\..\Product\Include\Bibim\EasingCurves.h"
 						>
 					</File>
 					<File
@@ -534,7 +534,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\ElasticEasingCurves.h"
+						RelativePath="..\..\..\Product\Include\Bibim\ElasticEasingCurves.h"
 						>
 					</File>
 					<File
@@ -542,7 +542,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Animation\Bibim\OscillationCurve.h"
+						RelativePath="..\..\..\Product\Include\Bibim\OscillationCurve.h"
 						>
 					</File>
 				</Filter>
@@ -555,7 +555,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\AxisAlignedBoxShape2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\AxisAlignedBoxShape2D.h"
 					>
 				</File>
 				<File
@@ -563,7 +563,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\BoxShape2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\BoxShape2D.h"
 					>
 				</File>
 				<File
@@ -571,7 +571,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\CollisionSpace2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\CollisionSpace2D.h"
 					>
 				</File>
 				<File
@@ -579,7 +579,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\IntersectShapes2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\IntersectShapes2D.h"
 					>
 				</File>
 				<File
@@ -587,11 +587,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\PointShape2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\PointShape2D.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\RaycastReport2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\RaycastReport2D.h"
 					>
 				</File>
 				<File
@@ -599,7 +599,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\SegmentShape2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\SegmentShape2D.h"
 					>
 				</File>
 				<File
@@ -607,7 +607,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\Shape2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Shape2D.h"
 					>
 				</File>
 				<File
@@ -615,7 +615,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\SphereShape2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\SphereShape2D.h"
 					>
 				</File>
 				<File
@@ -623,7 +623,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Collision2D\Bibim\UserShape2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\UserShape2D.h"
 					>
 				</File>
 			</Filter>
@@ -635,7 +635,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Diagnostics\Bibim\CrashDump.h"
+					RelativePath="..\..\..\Product\Include\Bibim\CrashDump.h"
 					>
 				</File>
 				<File
@@ -643,7 +643,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Diagnostics\Bibim\FileLogger.h"
+					RelativePath="..\..\..\Product\Include\Bibim\FileLogger.h"
 					>
 				</File>
 				<File
@@ -651,7 +651,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Diagnostics\Bibim\Logger.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Logger.h"
 					>
 				</File>
 				<File
@@ -659,7 +659,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Diagnostics\Bibim\SystemLogger.h"
+					RelativePath="..\..\..\Product\Include\Bibim\SystemLogger.h"
 					>
 				</File>
 			</Filter>
@@ -671,7 +671,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Gameplay\Bibim\BatchCommand.h"
+					RelativePath="..\..\..\Product\Include\Bibim\BatchCommand.h"
 					>
 				</File>
 				<File
@@ -679,7 +679,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Gameplay\Bibim\Command.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Command.h"
 					>
 				</File>
 				<File
@@ -687,7 +687,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Gameplay\Bibim\CommandHistory.h"
+					RelativePath="..\..\..\Product\Include\Bibim\CommandHistory.h"
 					>
 				</File>
 				<File
@@ -695,7 +695,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Gameplay\Bibim\CommandQueue.h"
+					RelativePath="..\..\..\Product\Include\Bibim\CommandQueue.h"
 					>
 				</File>
 				<File
@@ -703,7 +703,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Gameplay\Bibim\RestorableCommand.h"
+					RelativePath="..\..\..\Product\Include\Bibim\RestorableCommand.h"
 					>
 				</File>
 				<File
@@ -711,7 +711,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Gameplay\Bibim\SpatialObject2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\SpatialObject2D.h"
 					>
 				</File>
 				<Filter
@@ -722,7 +722,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Gameplay\Bibim\JumpPointPathFinder.h"
+						RelativePath="..\..\..\Product\Include\Bibim\JumpPointPathFinder.h"
 						>
 					</File>
 					<File
@@ -730,7 +730,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Gameplay\Bibim\PathFinder.h"
+						RelativePath="..\..\..\Product\Include\Bibim\PathFinder.h"
 						>
 					</File>
 				</Filter>
@@ -739,7 +739,7 @@
 				Name="Input"
 				>
 				<File
-					RelativePath=".\Input\Bibim\IME.h"
+					RelativePath="..\..\..\Product\Include\Bibim\IME.h"
 					>
 				</File>
 				<File
@@ -747,7 +747,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\IME.Windows.h"
+					RelativePath="..\..\..\Product\Include\Bibim\IME.Windows.h"
 					>
 				</File>
 				<File
@@ -755,7 +755,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\IMEBase.h"
+					RelativePath="..\..\..\Product\Include\Bibim\IMEBase.h"
 					>
 				</File>
 				<File
@@ -763,7 +763,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\Key.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Key.h"
 					>
 				</File>
 				<File
@@ -771,7 +771,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\Keyboard.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Keyboard.h"
 					>
 				</File>
 				<File
@@ -779,7 +779,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\KeyboardState.h"
+					RelativePath="..\..\..\Product\Include\Bibim\KeyboardState.h"
 					>
 				</File>
 				<File
@@ -787,7 +787,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\Mouse.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Mouse.h"
 					>
 				</File>
 				<File
@@ -799,7 +799,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Input\Bibim\MouseState.h"
+					RelativePath="..\..\..\Product\Include\Bibim\MouseState.h"
 					>
 				</File>
 			</Filter>
@@ -811,7 +811,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\Script.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Script.h"
 					>
 				</File>
 				<File
@@ -819,7 +819,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptingContext.h"
+					RelativePath="..\..\..\Product\Include\Bibim\ScriptingContext.h"
 					>
 				</File>
 				<File
@@ -827,7 +827,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptNativeFunctionTable.h"
+					RelativePath="..\..\..\Product\Include\Bibim\ScriptNativeFunctionTable.h"
 					>
 				</File>
 				<File
@@ -835,7 +835,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptStack.h"
+					RelativePath="..\..\..\Product\Include\Bibim\ScriptStack.h"
 					>
 				</File>
 				<File
@@ -843,7 +843,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Scripting\Bibim\ScriptThread.h"
+					RelativePath="..\..\..\Product\Include\Bibim\ScriptThread.h"
 					>
 				</File>
 				<Filter
@@ -854,7 +854,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Scripting\Bibim\ScriptLibraryIO.h"
+						RelativePath="..\..\..\Product\Include\Bibim\ScriptLibraryIO.h"
 						>
 					</File>
 				</Filter>
@@ -867,11 +867,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\AlarmClock.h"
+					RelativePath="..\..\..\Product\Include\Bibim\AlarmClock.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\Clock.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Clock.h"
 					>
 				</File>
 				<File
@@ -879,7 +879,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\IUpdateable.h"
+					RelativePath="..\..\..\Product\Include\Bibim\IUpdateable.h"
 					>
 				</File>
 				<File
@@ -887,7 +887,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\SubTimeline.h"
+					RelativePath="..\..\..\Product\Include\Bibim\SubTimeline.h"
 					>
 				</File>
 				<File
@@ -895,7 +895,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\Timeline.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Timeline.h"
 					>
 				</File>
 				<File
@@ -903,7 +903,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\TimelineGameComponent.h"
+					RelativePath="..\..\..\Product\Include\Bibim\TimelineGameComponent.h"
 					>
 				</File>
 				<File
@@ -911,7 +911,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\TimelineGameModule.h"
+					RelativePath="..\..\..\Product\Include\Bibim\TimelineGameModule.h"
 					>
 				</File>
 				<File
@@ -919,7 +919,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\UpdateableGameComponent.h"
+					RelativePath="..\..\..\Product\Include\Bibim\UpdateableGameComponent.h"
 					>
 				</File>
 				<File
@@ -927,7 +927,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Time\Bibim\UpdateableGameModule.h"
+					RelativePath="..\..\..\Product\Include\Bibim\UpdateableGameModule.h"
 					>
 				</File>
 			</Filter>
@@ -939,7 +939,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Startup\Bibim\Startup.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Startup.h"
 					>
 				</File>
 			</Filter>
@@ -947,7 +947,7 @@
 				Name="UI"
 				>
 				<File
-					RelativePath=".\UI\Bibim\UI.h"
+					RelativePath="..\..\..\Product\Include\Bibim\UI.h"
 					>
 				</File>
 				<File
@@ -955,7 +955,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIDomain.h"
+					RelativePath="..\..\..\Product\Include\Bibim\UIDomain.h"
 					>
 				</File>
 				<File
@@ -963,7 +963,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIElement.h"
+					RelativePath="..\..\..\Product\Include\Bibim\UIElement.h"
 					>
 				</File>
 				<File
@@ -971,7 +971,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UILayout.h"
+					RelativePath="..\..\..\Product\Include\Bibim\UILayout.h"
 					>
 				</File>
 				<File
@@ -979,7 +979,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIRenderer.DX9.h"
+					RelativePath="..\..\..\Product\Include\Bibim\UIRenderer.DX9.h"
 					>
 				</File>
 				<File
@@ -1003,11 +1003,11 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIRenderer.GLES2.h"
+					RelativePath="..\..\..\Product\Include\Bibim\UIRenderer.GLES2.h"
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIRenderer.h"
+					RelativePath="..\..\..\Product\Include\Bibim\UIRenderer.h"
 					>
 				</File>
 				<File
@@ -1015,7 +1015,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UIRendererBase.h"
+					RelativePath="..\..\..\Product\Include\Bibim\UIRendererBase.h"
 					>
 				</File>
 				<File
@@ -1023,7 +1023,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\UI\Bibim\UISimpleDomain.h"
+					RelativePath="..\..\..\Product\Include\Bibim\UISimpleDomain.h"
 					>
 				</File>
 				<Filter
@@ -1034,7 +1034,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIAppEventDispatcher.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIAppEventDispatcher.h"
 						>
 					</File>
 					<File
@@ -1042,7 +1042,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIAsyncEventQueue.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIAsyncEventQueue.h"
 						>
 					</File>
 					<File
@@ -1050,7 +1050,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEventArgs.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIEventArgs.h"
 						>
 					</File>
 					<File
@@ -1058,7 +1058,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEventDispatcher.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIEventDispatcher.h"
 						>
 					</File>
 					<File
@@ -1066,7 +1066,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEventHandler.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIEventHandler.h"
 						>
 					</File>
 					<File
@@ -1074,7 +1074,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEventID.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIEventID.h"
 						>
 					</File>
 					<File
@@ -1082,7 +1082,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEventMap.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIEventMap.h"
 						>
 					</File>
 					<File
@@ -1090,7 +1090,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIFunctionEventHandler.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIFunctionEventHandler.h"
 						>
 					</File>
 					<File
@@ -1098,7 +1098,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIFunctionTable.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIFunctionTable.h"
 						>
 					</File>
 					<File
@@ -1106,7 +1106,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIGamePadEventArgs.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIGamePadEventArgs.h"
 						>
 					</File>
 					<File
@@ -1114,7 +1114,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIGamePadEventDispatcher.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIGamePadEventDispatcher.h"
 						>
 					</File>
 					<File
@@ -1122,7 +1122,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIKeyboardEventArgs.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIKeyboardEventArgs.h"
 						>
 					</File>
 					<File
@@ -1130,7 +1130,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIKeyboardEventDispatcher.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIKeyboardEventDispatcher.h"
 						>
 					</File>
 					<File
@@ -1138,7 +1138,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIMouseButtonEventArgs.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIMouseButtonEventArgs.h"
 						>
 					</File>
 					<File
@@ -1146,7 +1146,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIMouseEventArgs.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIMouseEventArgs.h"
 						>
 					</File>
 					<File
@@ -1154,7 +1154,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIMouseEventDispatcher.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIMouseEventDispatcher.h"
 						>
 					</File>
 					<File
@@ -1162,7 +1162,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIMouseWheelEventArgs.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIMouseWheelEventArgs.h"
 						>
 					</File>
 					<File
@@ -1170,7 +1170,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UISequentialEventHandler.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UISequentialEventHandler.h"
 						>
 					</File>
 				</Filter>
@@ -1182,7 +1182,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEffectMap.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIEffectMap.h"
 						>
 					</File>
 					<File
@@ -1190,7 +1190,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEffectStack.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIEffectStack.h"
 						>
 					</File>
 					<Filter
@@ -1201,7 +1201,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIAfterImageEffect.h"
+							RelativePath="..\..\..\Product\Include\Bibim\UIAfterImageEffect.h"
 							>
 						</File>
 						<File
@@ -1209,7 +1209,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIGeometryEffect.h"
+							RelativePath="..\..\..\Product\Include\Bibim\UIGeometryEffect.h"
 							>
 						</File>
 						<File
@@ -1217,7 +1217,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UISineCurveEffect.h"
+							RelativePath="..\..\..\Product\Include\Bibim\UISineCurveEffect.h"
 							>
 						</File>
 						<File
@@ -1225,7 +1225,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UITintEffect.h"
+							RelativePath="..\..\..\Product\Include\Bibim\UITintEffect.h"
 							>
 						</File>
 					</Filter>
@@ -1237,7 +1237,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIBlendingEffect.h"
+							RelativePath="..\..\..\Product\Include\Bibim\UIBlendingEffect.h"
 							>
 						</File>
 						<File
@@ -1245,7 +1245,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIColorMatrixEffect.h"
+							RelativePath="..\..\..\Product\Include\Bibim\UIColorMatrixEffect.h"
 							>
 						</File>
 						<File
@@ -1253,7 +1253,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIMaskEffect.h"
+							RelativePath="..\..\..\Product\Include\Bibim\UIMaskEffect.h"
 							>
 						</File>
 						<File
@@ -1261,7 +1261,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIOpacityMaskEffect.h"
+							RelativePath="..\..\..\Product\Include\Bibim\UIOpacityMaskEffect.h"
 							>
 						</File>
 						<File
@@ -1269,7 +1269,7 @@
 							>
 						</File>
 						<File
-							RelativePath=".\UI\Bibim\UIPixelEffect.h"
+							RelativePath="..\..\..\Product\Include\Bibim\UIPixelEffect.h"
 							>
 						</File>
 					</Filter>
@@ -1282,7 +1282,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIButton.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIButton.h"
 						>
 					</File>
 					<File
@@ -1290,7 +1290,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UICheckBox.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UICheckBox.h"
 						>
 					</File>
 					<File
@@ -1298,7 +1298,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIDocument.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIDocument.h"
 						>
 					</File>
 					<File
@@ -1306,7 +1306,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEditText.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIEditText.h"
 						>
 					</File>
 					<File
@@ -1314,7 +1314,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIEllipse.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIEllipse.h"
 						>
 					</File>
 					<File
@@ -1322,7 +1322,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIImage.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIImage.h"
 						>
 					</File>
 					<File
@@ -1330,7 +1330,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UILabel.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UILabel.h"
 						>
 					</File>
 					<File
@@ -1338,7 +1338,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIPanel.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIPanel.h"
 						>
 					</File>
 					<File
@@ -1346,7 +1346,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIRadioButton.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIRadioButton.h"
 						>
 					</File>
 					<File
@@ -1354,7 +1354,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIRect.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIRect.h"
 						>
 					</File>
 					<File
@@ -1362,7 +1362,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIRoundedRect.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIRoundedRect.h"
 						>
 					</File>
 					<File
@@ -1370,7 +1370,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIScrollablePanel.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIScrollablePanel.h"
 						>
 					</File>
 					<File
@@ -1378,7 +1378,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIShape.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIShape.h"
 						>
 					</File>
 					<File
@@ -1386,7 +1386,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UISpark.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UISpark.h"
 						>
 					</File>
 					<File
@@ -1394,7 +1394,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UISprite.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UISprite.h"
 						>
 					</File>
 					<File
@@ -1402,7 +1402,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIVideo.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIVideo.h"
 						>
 					</File>
 					<File
@@ -1410,7 +1410,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIVisual.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIVisual.h"
 						>
 					</File>
 					<File
@@ -1418,7 +1418,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIWindow.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIWindow.h"
 						>
 					</File>
 				</Filter>
@@ -1430,7 +1430,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UITransform.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UITransform.h"
 						>
 					</File>
 					<File
@@ -1438,7 +1438,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UITransform2D.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UITransform2D.h"
 						>
 					</File>
 					<File
@@ -1446,7 +1446,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UITransform3D.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UITransform3D.h"
 						>
 					</File>
 				</Filter>
@@ -1458,7 +1458,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIBoundsContext.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIBoundsContext.h"
 						>
 					</File>
 					<File
@@ -1466,7 +1466,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIDrawingContext.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIDrawingContext.h"
 						>
 					</File>
 					<File
@@ -1474,7 +1474,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIHandledDrawingContext.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIHandledDrawingContext.h"
 						>
 					</File>
 					<File
@@ -1482,7 +1482,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIPickingContext.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIPickingContext.h"
 						>
 					</File>
 					<File
@@ -1490,7 +1490,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\UI\Bibim\UIVisualVisitor.h"
+						RelativePath="..\..\..\Product\Include\Bibim\UIVisualVisitor.h"
 						>
 					</File>
 				</Filter>
@@ -1503,15 +1503,15 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\BitMask.h"
+					RelativePath="..\..\..\Product\Include\Bibim\BitMask.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\BlendMode.h"
+					RelativePath="..\..\..\Product\Include\Bibim\BlendMode.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\DynamicTexture2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\DynamicTexture2D.h"
 					>
 				</File>
 				<File
@@ -1519,11 +1519,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\GraphicsCapabilities.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GraphicsCapabilities.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\GraphicsDevice.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GraphicsDevice.h"
 					>
 				</File>
 				<File
@@ -1531,7 +1531,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\GraphicsDeviceBase.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GraphicsDeviceBase.h"
 					>
 				</File>
 				<File
@@ -1539,7 +1539,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\Image.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Image.h"
 					>
 				</File>
 				<File
@@ -1547,7 +1547,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\ImageSet.h"
+					RelativePath="..\..\..\Product\Include\Bibim\ImageSet.h"
 					>
 				</File>
 				<File
@@ -1555,7 +1555,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\JPEGReader.h"
+					RelativePath="..\..\..\Product\Include\Bibim\JPEGReader.h"
 					>
 				</File>
 				<File
@@ -1563,11 +1563,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\PNGReader.h"
+					RelativePath="..\..\..\Product\Include\Bibim\PNGReader.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\RenderTargetTexture2D.h"
 					>
 				</File>
 				<File
@@ -1575,19 +1575,19 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\ScreenshotPrinter.h"
+					RelativePath="..\..\..\Product\Include\Bibim\ScreenshotPrinter.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\ShaderEffect.h"
+					RelativePath="..\..\..\Product\Include\Bibim\ShaderEffect.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\SourceTexture2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\SourceTexture2D.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\Texture2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Texture2D.h"
 					>
 				</File>
 				<File
@@ -1595,7 +1595,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Graphics\Bibim\Window.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Window.h"
 					>
 				</File>
 				<Filter
@@ -1606,7 +1606,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\DynamicTexture2D.DX9.h"
+						RelativePath="..\..\..\Product\Include\Bibim\DynamicTexture2D.DX9.h"
 						>
 					</File>
 					<File
@@ -1614,7 +1614,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\GraphicsDevice.DX9.h"
+						RelativePath="..\..\..\Product\Include\Bibim\GraphicsDevice.DX9.h"
 						>
 					</File>
 					<File
@@ -1622,7 +1622,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.DX9.h"
+						RelativePath="..\..\..\Product\Include\Bibim\RenderTargetTexture2D.DX9.h"
 						>
 					</File>
 					<File
@@ -1630,7 +1630,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\ShaderEffect.DX9.h"
+						RelativePath="..\..\..\Product\Include\Bibim\ShaderEffect.DX9.h"
 						>
 					</File>
 					<File
@@ -1638,7 +1638,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\SourceTexture2D.DX9.h"
+						RelativePath="..\..\..\Product\Include\Bibim\SourceTexture2D.DX9.h"
 						>
 					</File>
 					<File
@@ -1646,7 +1646,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\Texture2D.DX9.h"
+						RelativePath="..\..\..\Product\Include\Bibim\Texture2D.DX9.h"
 						>
 					</File>
 				</Filter>
@@ -1674,7 +1674,7 @@
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\DynamicTexture2D.GLES2.h"
+						RelativePath="..\..\..\Product\Include\Bibim\DynamicTexture2D.GLES2.h"
 						>
 					</File>
 					<File
@@ -1698,7 +1698,7 @@
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\GLES2.h"
+						RelativePath="..\..\..\Product\Include\Bibim\GLES2.h"
 						>
 					</File>
 					<File
@@ -1722,7 +1722,7 @@
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\GraphicsDevice.GLES2.h"
+						RelativePath="..\..\..\Product\Include\Bibim\GraphicsDevice.GLES2.h"
 						>
 					</File>
 					<File
@@ -1746,7 +1746,7 @@
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\RenderTargetTexture2D.GLES2.h"
+						RelativePath="..\..\..\Product\Include\Bibim\RenderTargetTexture2D.GLES2.h"
 						>
 					</File>
 					<File
@@ -1770,7 +1770,7 @@
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\ShaderEffect.GLES2.h"
+						RelativePath="..\..\..\Product\Include\Bibim\ShaderEffect.GLES2.h"
 						>
 					</File>
 					<File
@@ -1794,7 +1794,7 @@
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\SourceTexture2D.GLES2.h"
+						RelativePath="..\..\..\Product\Include\Bibim\SourceTexture2D.GLES2.h"
 						>
 					</File>
 					<File
@@ -1818,7 +1818,7 @@
 						</FileConfiguration>
 					</File>
 					<File
-						RelativePath=".\Graphics\Bibim\Texture2D.GLES2.h"
+						RelativePath="..\..\..\Product\Include\Bibim\Texture2D.GLES2.h"
 						>
 					</File>
 				</Filter>
@@ -1827,7 +1827,7 @@
 				Name="FileSystem"
 				>
 				<File
-					RelativePath=".\FileSystem\Bibim\FileStream.h"
+					RelativePath="..\..\..\Product\Include\Bibim\FileStream.h"
 					>
 				</File>
 				<File
@@ -1835,7 +1835,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\FileSystem\Bibim\FileStream.Windows.h"
+					RelativePath="..\..\..\Product\Include\Bibim\FileStream.Windows.h"
 					>
 				</File>
 				<File
@@ -1843,7 +1843,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\FileSystem\Bibim\MPQ.h"
+					RelativePath="..\..\..\Product\Include\Bibim\MPQ.h"
 					>
 				</File>
 				<File
@@ -1851,7 +1851,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\FileSystem\Bibim\MPQStream.h"
+					RelativePath="..\..\..\Product\Include\Bibim\MPQStream.h"
 					>
 				</File>
 				<File
@@ -1859,7 +1859,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\FileSystem\Bibim\Path.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Path.h"
 					>
 				</File>
 			</Filter>
@@ -1867,7 +1867,7 @@
 				Name="Framework"
 				>
 				<File
-					RelativePath=".\Framework\Bibim\Clipboard.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Clipboard.h"
 					>
 				</File>
 				<File
@@ -1875,11 +1875,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\Clipboard.Windows.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Clipboard.Windows.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\GameFramework.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GameFramework.h"
 					>
 				</File>
 				<File
@@ -1887,7 +1887,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\GameFramework.Windows.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GameFramework.Windows.h"
 					>
 				</File>
 				<File
@@ -1895,11 +1895,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\GameFrameworkBase.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GameFrameworkBase.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\GameWindow.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GameWindow.h"
 					>
 				</File>
 				<File
@@ -1907,7 +1907,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\GameWindow.Windows.h"
+					RelativePath="..\..\..\Product\Include\Bibim\GameWindow.Windows.h"
 					>
 				</File>
 				<File
@@ -1915,7 +1915,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\Lua.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Lua.h"
 					>
 				</File>
 				<File
@@ -1923,7 +1923,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\Preferences.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Preferences.h"
 					>
 				</File>
 				<File
@@ -1931,11 +1931,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\StandardGame.EmbeddedFont.h"
+					RelativePath="..\..\..\Product\Include\Bibim\StandardGame.EmbeddedFont.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Framework\Bibim\StandardGame.h"
+					RelativePath="..\..\..\Product\Include\Bibim\StandardGame.h"
 					>
 				</File>
 			</Filter>
@@ -1943,15 +1943,15 @@
 				Name="Audio"
 				>
 				<File
-					RelativePath=".\Audio\Bibim\AudioDevice.h"
+					RelativePath="..\..\..\Product\Include\Bibim\AudioDevice.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Audio\Bibim\BGM.h"
+					RelativePath="..\..\..\Product\Include\Bibim\BGM.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Audio\Bibim\SoundFX.h"
+					RelativePath="..\..\..\Product\Include\Bibim\SoundFX.h"
 					>
 				</File>
 				<Filter
@@ -1968,12 +1968,28 @@
 								Name="VCCLCompilerTool"
 							/>
 						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
 					</File>
 					<File
-						RelativePath=".\Audio\Bibim\AudioDevice.Irrklang.h"
+						RelativePath="..\..\..\Product\Include\Bibim\AudioDevice.Irrklang.h"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCustomBuildTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -1992,12 +2008,28 @@
 								Name="VCCLCompilerTool"
 							/>
 						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
 					</File>
 					<File
-						RelativePath=".\Audio\Bibim\BGM.Irrklang.h"
+						RelativePath="..\..\..\Product\Include\Bibim\BGM.Irrklang.h"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCustomBuildTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -2016,12 +2048,28 @@
 								Name="VCCLCompilerTool"
 							/>
 						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCLCompilerTool"
+							/>
+						</FileConfiguration>
 					</File>
 					<File
-						RelativePath=".\Audio\Bibim\SoundFX.Irrklang.h"
+						RelativePath="..\..\..\Product\Include\Bibim\SoundFX.Irrklang.h"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
+							ExcludedFromBuild="true"
+							>
+							<Tool
+								Name="VCCustomBuildTool"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
 							ExcludedFromBuild="true"
 							>
 							<Tool
@@ -2038,7 +2086,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Audio\Bibim\AudioDevice.AL.h"
+						RelativePath="..\..\..\Product\Include\Bibim\AudioDevice.AL.h"
 						>
 					</File>
 					<File
@@ -2046,7 +2094,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Audio\Bibim\BGM.AL.h"
+						RelativePath="..\..\..\Product\Include\Bibim\BGM.AL.h"
 						>
 					</File>
 					<File
@@ -2054,7 +2102,7 @@
 						>
 					</File>
 					<File
-						RelativePath=".\Audio\Bibim\SoundFX.AL.h"
+						RelativePath="..\..\..\Product\Include\Bibim\SoundFX.AL.h"
 						>
 					</File>
 				</Filter>
@@ -2067,7 +2115,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\GFX\Bibim\SparkParticleEngine.h"
+					RelativePath="..\..\..\Product\Include\Bibim\SparkParticleEngine.h"
 					>
 				</File>
 			</Filter>
@@ -2079,11 +2127,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\HttpClient.Curl.h"
+					RelativePath="..\..\..\Product\Include\Bibim\HttpClient.Curl.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\HttpClient.h"
+					RelativePath="..\..\..\Product\Include\Bibim\HttpClient.h"
 					>
 				</File>
 				<File
@@ -2107,7 +2155,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\HttpClient.Null.h"
+					RelativePath="..\..\..\Product\Include\Bibim\HttpClient.Null.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -2147,7 +2195,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\HttpClient.Windows.h"
+					RelativePath="..\..\..\Product\Include\Bibim\HttpClient.Windows.h"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -2171,7 +2219,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\HttpClientBase.h"
+					RelativePath="..\..\..\Product\Include\Bibim\HttpClientBase.h"
 					>
 				</File>
 				<File
@@ -2179,7 +2227,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\IPEndPoint.h"
+					RelativePath="..\..\..\Product\Include\Bibim\IPEndPoint.h"
 					>
 				</File>
 				<File
@@ -2187,7 +2235,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\NetworkStream.h"
+					RelativePath="..\..\..\Product\Include\Bibim\NetworkStream.h"
 					>
 				</File>
 				<File
@@ -2195,7 +2243,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Net\Bibim\Socket.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Socket.h"
 					>
 				</File>
 			</Filter>
@@ -2211,7 +2259,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Any.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Any.h"
 					>
 				</File>
 				<File
@@ -2219,7 +2267,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Color.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Color.h"
 					>
 				</File>
 				<File
@@ -2227,11 +2275,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Matrix4.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Matrix4.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\NullPointer.h"
+					RelativePath="..\..\..\Product\Include\Bibim\NullPointer.h"
 					>
 				</File>
 				<File
@@ -2239,7 +2287,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Point2.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Point2.h"
 					>
 				</File>
 				<File
@@ -2247,7 +2295,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Point3.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Point3.h"
 					>
 				</File>
 				<File
@@ -2255,7 +2303,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Point4.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Point4.h"
 					>
 				</File>
 				<File
@@ -2263,7 +2311,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Rect.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Rect.h"
 					>
 				</File>
 				<File
@@ -2271,7 +2319,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\RectF.h"
+					RelativePath="..\..\..\Product\Include\Bibim\RectF.h"
 					>
 				</File>
 				<File
@@ -2279,7 +2327,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\String.h"
+					RelativePath="..\..\..\Product\Include\Bibim\String.h"
 					>
 				</File>
 				<File
@@ -2287,7 +2335,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Vector2.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Vector2.h"
 					>
 				</File>
 				<File
@@ -2295,7 +2343,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Vector3.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Vector3.h"
 					>
 				</File>
 				<File
@@ -2303,7 +2351,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Vector4.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Vector4.h"
 					>
 				</File>
 			</Filter>
@@ -2315,7 +2363,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\SequenceDictionary.h"
+					RelativePath="..\..\..\Product\Include\Bibim\SequenceDictionary.h"
 					>
 				</File>
 			</Filter>
@@ -2323,7 +2371,7 @@
 				Name="Diagnostics"
 				>
 				<File
-					RelativePath=".\Foundation\Bibim\Assert.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Assert.h"
 					>
 				</File>
 				<File
@@ -2331,7 +2379,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Log.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Log.h"
 					>
 				</File>
 			</Filter>
@@ -2343,7 +2391,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Geom2D.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Geom2D.h"
 					>
 				</File>
 				<File
@@ -2351,7 +2399,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Math.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Math.h"
 					>
 				</File>
 				<File
@@ -2359,7 +2407,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Numerics.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Numerics.h"
 					>
 				</File>
 			</Filter>
@@ -2371,23 +2419,23 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\AnyStorage.h"
+					RelativePath="..\..\..\Product\Include\Bibim\AnyStorage.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Atomic.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Atomic.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\CheckedRelease.h"
+					RelativePath="..\..\..\Product\Include\Bibim\CheckedRelease.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Delete.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Delete.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Listeners.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Listeners.h"
 					>
 				</File>
 				<File
@@ -2395,7 +2443,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Memory.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Memory.h"
 					>
 				</File>
 				<File
@@ -2403,7 +2451,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\RectStorage.h"
+					RelativePath="..\..\..\Product\Include\Bibim\RectStorage.h"
 					>
 				</File>
 			</Filter>
@@ -2415,11 +2463,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Object.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Object.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\PointerCasts.h"
+					RelativePath="..\..\..\Product\Include\Bibim\PointerCasts.h"
 					>
 				</File>
 				<File
@@ -2427,11 +2475,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\SharedObject.h"
+					RelativePath="..\..\..\Product\Include\Bibim\SharedObject.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\SharedPointer.h"
+					RelativePath="..\..\..\Product\Include\Bibim\SharedPointer.h"
 					>
 				</File>
 			</Filter>
@@ -2440,7 +2488,7 @@
 			Name="02. System"
 			>
 			<File
-				RelativePath=".\Foundation\Bibim\Environment.h"
+				RelativePath="..\..\..\Product\Include\Bibim\Environment.h"
 				>
 			</File>
 			<File
@@ -2448,18 +2496,18 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Foundation\Bibim\Environment.Windows.h"
+				RelativePath="..\..\..\Product\Include\Bibim\Environment.Windows.h"
 				>
 			</File>
 			<Filter
 				Name="Threading"
 				>
 				<File
-					RelativePath=".\Threading\Bibim\AutoLocker.h"
+					RelativePath="..\..\..\Product\Include\Bibim\AutoLocker.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Threading\Bibim\Lock.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Lock.h"
 					>
 				</File>
 				<File
@@ -2467,7 +2515,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Threading\Bibim\Lock.Windows.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Lock.Windows.h"
 					>
 				</File>
 				<File
@@ -2475,11 +2523,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Threading\Bibim\ManualLocker.h"
+					RelativePath="..\..\..\Product\Include\Bibim\ManualLocker.h"
 					>
 				</File>
 				<File
-					RelativePath=".\Threading\Bibim\Thread.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Thread.h"
 					>
 				</File>
 				<File
@@ -2487,7 +2535,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Threading\Bibim\Thread.Windows.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Thread.Windows.h"
 					>
 				</File>
 			</Filter>
@@ -2499,7 +2547,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\BinaryReader.h"
+					RelativePath="..\..\..\Product\Include\Bibim\BinaryReader.h"
 					>
 				</File>
 				<File
@@ -2507,7 +2555,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\BinaryWriter.h"
+					RelativePath="..\..\..\Product\Include\Bibim\BinaryWriter.h"
 					>
 				</File>
 				<File
@@ -2515,7 +2563,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\DumpStream.h"
+					RelativePath="..\..\..\Product\Include\Bibim\DumpStream.h"
 					>
 				</File>
 				<File
@@ -2523,7 +2571,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\MemoryStream.h"
+					RelativePath="..\..\..\Product\Include\Bibim\MemoryStream.h"
 					>
 				</File>
 				<File
@@ -2531,7 +2579,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Foundation\Bibim\Stream.h"
+					RelativePath="..\..\..\Product\Include\Bibim\Stream.h"
 					>
 				</File>
 			</Filter>
@@ -2549,19 +2597,19 @@
 			</File>
 		</Filter>
 		<File
-			RelativePath=".\Foundation\Bibim\All.h"
+			RelativePath="..\..\..\Product\Include\Bibim\All.h"
 			>
 		</File>
 		<File
-			RelativePath=".\Foundation\Bibim\Config.h"
+			RelativePath="..\..\..\Product\Include\Bibim\Config.h"
 			>
 		</File>
 		<File
-			RelativePath=".\Foundation\Bibim\Foundation.h"
+			RelativePath="..\..\..\Product\Include\Bibim\Foundation.h"
 			>
 		</File>
 		<File
-			RelativePath=".\Foundation\Bibim\FWD.h"
+			RelativePath="..\..\..\Product\Include\Bibim\FWD.h"
 			>
 		</File>
 	</Files>
