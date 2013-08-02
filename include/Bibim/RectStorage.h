@@ -2,49 +2,49 @@
 #ifndef __BIBIM_RECTSTORAGE_H__
 #define __BIBIM_RECTSTORAGE_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/Rect.h>
-#   include <list>
+#include <Bibim/FWD.h>
+#include <Bibim/Rect.h>
+#include <list>
 
-    namespace Bibim
+namespace Bibim
+{
+    class RectStorage
     {
-        class RectStorage
-        {
-            public:
-                typedef std::list<Rect> RectCollection;
+        public:
+            typedef std::list<Rect> RectCollection;
 
-            public:
-                RectStorage();
-                RectStorage(int width, int height);
-                RectStorage(const RectStorage& original);
-                ~RectStorage();
+        public:
+            RectStorage();
+            RectStorage(int width, int height);
+            RectStorage(const RectStorage& original);
+            ~RectStorage();
 
-                void Clear();
-                void Clear(int width, int height);
+            void Clear();
+            void Clear(int width, int height);
 
-                Rect Allocate(int width, int height);
-                void Deallocate(const Rect& rect);
+            Rect Allocate(int width, int height);
+            void Deallocate(const Rect& rect);
 
-                int GetWidth() const;
-                int GetHeight() const;
+            int GetWidth() const;
+            int GetHeight() const;
 
-                const RectCollection& GetFreeRects() const;
-                const RectCollection& GetAllocatedRects() const;
+            const RectCollection& GetFreeRects() const;
+            const RectCollection& GetAllocatedRects() const;
 
-                RectStorage& operator = (const RectStorage& right);
+            RectStorage& operator = (const RectStorage& right);
 
-                bool operator == (const RectStorage& right) const;
-                bool operator != (const RectStorage& right) const;
+            bool operator == (const RectStorage& right) const;
+            bool operator != (const RectStorage& right) const;
 
-            private:
-                static void Merge(RectCollection& rects, RectCollection::iterator targetIterator);
+        private:
+            static void Merge(RectCollection& rects, RectCollection::iterator targetIterator);
 
-            private:
-                int width;
-                int height;
-                RectCollection freeRects;
-                RectCollection allocatedRects;
-        };
-    }
+        private:
+            int width;
+            int height;
+            RectCollection freeRects;
+            RectCollection allocatedRects;
+    };
+}
 
 #endif

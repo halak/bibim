@@ -2,97 +2,97 @@
 #ifndef __BIBIM_IMAGE_H__
 #define __BIBIM_IMAGE_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/GameAsset.h>
-#   include <Bibim/Rect.h>
-#   include <Bibim/RectF.h>
-#   include <Bibim/String.h>
+#include <Bibim/FWD.h>
+#include <Bibim/GameAsset.h>
+#include <Bibim/Rect.h>
+#include <Bibim/RectF.h>
+#include <Bibim/String.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    class Image : public GameAsset
     {
-        class Image : public GameAsset
-        {
-            BBSerializableAssetClass(Image, GameAsset, 'G', 'I', 'M', 'G');
-            public:
-                enum Transform
-                {
-                    Identity,
-                    RotateCW90,
-                };
+        BBSerializableAssetClass(Image, GameAsset, 'G', 'I', 'M', 'G');
+        public:
+            enum Transform
+            {
+                Identity,
+                RotateCW90,
+            };
 
-            public:
-                Image(const String& textureURI, const Rect& clippingRect);
-                Image(Texture2D* texture);
-                Image(Texture2D* texture, const Rect& clippingRect);
-                // for drawing
-                Image(Texture2D* texture, const RectF& normalizedClippingRect, Transform appliedTransform);
-                virtual ~Image();
+        public:
+            Image(const String& textureURI, const Rect& clippingRect);
+            Image(Texture2D* texture);
+            Image(Texture2D* texture, const Rect& clippingRect);
+            // for drawing
+            Image(Texture2D* texture, const RectF& normalizedClippingRect, Transform appliedTransform);
+            virtual ~Image();
 
-                void Setup(Texture2D* texture);
+            void Setup(Texture2D* texture);
 
-                inline const String& GetTextureURI() const;
-                inline const Rect& GetClippingRect() const;
-                inline const RectF& GetNormalizedClippingRect() const;
-                inline Transform GetAppliedTransform() const;
-                inline int GetWidth() const;
-                inline int GetHeight() const;
-                inline Texture2D* GetTexture() const;
+            inline const String& GetTextureURI() const;
+            inline const Rect& GetClippingRect() const;
+            inline const RectF& GetNormalizedClippingRect() const;
+            inline Transform GetAppliedTransform() const;
+            inline int GetWidth() const;
+            inline int GetHeight() const;
+            inline Texture2D* GetTexture() const;
 
-            public:
-                static Image* Create(ComponentStreamReader& reader);
-                static void  CalculateSize(int& outWidth, int& outHeight, const Rect& clippingRect, Transform transform);
-                static RectF CalculateNormalizedRect(const Rect& clippingRect, Texture2D* texture);
+        public:
+            static Image* Create(ComponentStreamReader& reader);
+            static void  CalculateSize(int& outWidth, int& outHeight, const Rect& clippingRect, Transform transform);
+            static RectF CalculateNormalizedRect(const Rect& clippingRect, Texture2D* texture);
 
-            private:
-                Image();
-                Image(const String& textureURI, const Rect& clippingRect, Transform appliedTransform, Texture2D* texture);
+        private:
+            Image();
+            Image(const String& textureURI, const Rect& clippingRect, Transform appliedTransform, Texture2D* texture);
 
-            private:
-                String textureURI;
-                Rect clippingRect;
-                RectF normalizedClippingRect;
-                Transform appliedTransform;
-                int width;
-                int height;
-                Texture2DPtr texture;
-        };
+        private:
+            String textureURI;
+            Rect clippingRect;
+            RectF normalizedClippingRect;
+            Transform appliedTransform;
+            int width;
+            int height;
+            Texture2DPtr texture;
+    };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        const String& Image::GetTextureURI() const
-        {
-            return textureURI;
-        }
-
-        const Rect& Image::GetClippingRect() const
-        {
-            return clippingRect;
-        }
-        
-        const RectF& Image::GetNormalizedClippingRect() const
-        {
-            return normalizedClippingRect;
-        }
-
-        Image::Transform Image::GetAppliedTransform() const
-        {
-            return appliedTransform;
-        }
-
-        int Image::GetWidth() const
-        {
-            return width;
-        }
-
-        int Image::GetHeight() const
-        {
-            return height;
-        }
-
-        Texture2D* Image::GetTexture() const
-        {
-            return texture;
-        }
+    const String& Image::GetTextureURI() const
+    {
+        return textureURI;
     }
+
+    const Rect& Image::GetClippingRect() const
+    {
+        return clippingRect;
+    }
+    
+    const RectF& Image::GetNormalizedClippingRect() const
+    {
+        return normalizedClippingRect;
+    }
+
+    Image::Transform Image::GetAppliedTransform() const
+    {
+        return appliedTransform;
+    }
+
+    int Image::GetWidth() const
+    {
+        return width;
+    }
+
+    int Image::GetHeight() const
+    {
+        return height;
+    }
+
+    Texture2D* Image::GetTexture() const
+    {
+        return texture;
+    }
+}
 
 #endif

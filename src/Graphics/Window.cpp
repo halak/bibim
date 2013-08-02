@@ -1,5 +1,6 @@
 ﻿#include <Bibim/Config.h>
 #include <Bibim/Window.h>
+#include <Bibim/Assert.h>
 #include <algorithm>
 
 namespace Bibim

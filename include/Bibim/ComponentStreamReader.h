@@ -2,47 +2,47 @@
 #ifndef __BIBIM_COMPONENTSTREAMREADER_H__
 #define __BIBIM_COMPONENTSTREAMREADER_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/BinaryReader.h>
-#   include <vector>
+#include <Bibim/FWD.h>
+#include <Bibim/BinaryReader.h>
+#include <vector>
 
-    namespace Bibim
+namespace Bibim
+{
+    class ComponentStreamReader : public BinaryReader
     {
-        class ComponentStreamReader : public BinaryReader
-        {
-            BBThisIsNoncopyableClass(ComponentStreamReader);
-            public:
-                ComponentStreamReader(Stream* sourceStream, GameModuleTree* modules);
-                ~ComponentStreamReader();
+        BBThisIsNoncopyableClass(ComponentStreamReader);
+        public:
+            ComponentStreamReader(Stream* sourceStream, GameModuleTree* modules);
+            ~ComponentStreamReader();
 
-                GameModule* ReadModule();
-                GameModule* ReadModule(int defaultModuleClassID);
+            GameModule* ReadModule();
+            GameModule* ReadModule(int defaultModuleClassID);
 
-                GameModule* FindModuleByClassID(int classID);
+            GameModule* FindModuleByClassID(int classID);
 
-                GameAsset* ReadAsset();
-                GameComponent* ReadComponent();
-                
-                using BinaryReader::Read;
-                void Read(GameAssetPtr& outValue);
-                void Read(GameComponentPtr& outValue);
+            GameAsset* ReadAsset();
+            GameComponent* ReadComponent();
+            
+            using BinaryReader::Read;
+            void Read(GameAssetPtr& outValue);
+            void Read(GameComponentPtr& outValue);
 
-                inline GameModuleTree* GetModules() const;
-                
-                GameAssetStorage* GetStorage();
+            inline GameModuleTree* GetModules() const;
+            
+            GameAssetStorage* GetStorage();
 
-            private:
-                GameModuleTree* modules;
-                GameAssetStorage* storage;
-                std::vector<GameComponentPtr> localComponents;
-        };
+        private:
+            GameModuleTree* modules;
+            GameAssetStorage* storage;
+            std::vector<GameComponentPtr> localComponents;
+    };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        GameModuleTree* ComponentStreamReader::GetModules() const
-        {
-            return modules;
-        }
+    GameModuleTree* ComponentStreamReader::GetModules() const
+    {
+        return modules;
     }
+}
 
 #endif

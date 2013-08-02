@@ -2,59 +2,59 @@
 #ifndef __BIBIM_PATHFINDER_H__
 #define __BIBIM_PATHFINDER_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/SharedObject.h>
-#   include <Bibim/Point2.h>
-#   include <vector>
+#include <Bibim/FWD.h>
+#include <Bibim/SharedObject.h>
+#include <Bibim/Point2.h>
+#include <vector>
 
-    namespace Bibim
+namespace Bibim
+{
+    class PathFinder : public SharedObject
     {
-        class PathFinder : public SharedObject
-        {
-            public:
-                struct Node
+        public:
+            struct Node
+            {
+                int X;
+                int Y;
+                int G;
+                int H;
+                bool IsOpened;
+                bool IsClosed;
+                Node* Parent;
+
+                Node(int x, int y)
                 {
-                    int X;
-                    int Y;
-                    int G;
-                    int H;
-                    bool IsOpened;
-                    bool IsClosed;
-                    Node* Parent;
+                    X = x;
+                    Y = y;
+                    G = 0;
+                    H = -1;
+                    IsOpened = false;
+                    IsClosed = false;
+                    Parent = nullptr;
+                }
 
-                    Node(int x, int y)
-                    {
-                        X = x;
-                        Y = y;
-                        G = 0;
-                        H = -1;
-                        IsOpened = false;
-                        IsClosed = false;
-                        Parent = nullptr;
-                    }
+                inline int GetF() const { return H >= 0 ? G + H : G; }
+            };
 
-                    inline int GetF() const { return H >= 0 ? G + H : G; }
-                };
+            BBForwardDeclareSmartPointerClass(Grid);
+            class Grid
+            {
+                public:
+                    virtual ~Grid() { }
 
-                BBForwardDeclareSmartPointerClass(Grid);
-                class Grid
-                {
-                    public:
-                        virtual ~Grid() { }
+                    virtual Node* GetNodeAt(int x, int y) = 0;
+                    virtual bool IsWalkableAt(int x, int y) = 0;
+            };
 
-                        virtual Node* GetNodeAt(int x, int y) = 0;
-                        virtual bool IsWalkableAt(int x, int y) = 0;
-                };
+            typedef std::vector<Point2> Point2Collection;
 
-                typedef std::vector<Point2> Point2Collection;
+        public:
+            PathFinder();
+            virtual ~PathFinder();
 
-            public:
-                PathFinder();
-                virtual ~PathFinder();
-
-                virtual void Find(Grid* grid, Point2 start, Point2 end, Point2Collection& outPath) = 0;
-                Point2Collection Find(Grid* grid, Point2 start, Point2 end);
-        };
-    }
+            virtual void Find(Grid* grid, Point2 start, Point2 end, Point2Collection& outPath) = 0;
+            Point2Collection Find(Grid* grid, Point2 start, Point2 end);
+    };
+}
 
 #endif

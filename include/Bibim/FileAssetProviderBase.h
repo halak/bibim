@@ -2,50 +2,50 @@
 #ifndef __BIBIM_FILEASSETPROVIDERBASE_H__
 #define __BIBIM_FILEASSETPROVIDERBASE_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/AssetProvider.h>
+#include <Bibim/FWD.h>
+#include <Bibim/AssetProvider.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    class FileAssetPreloadingTask;
+    class FileAssetProviderBase : public AssetProvider
     {
-        class FileAssetPreloadingTask;
-        class FileAssetProviderBase : public AssetProvider
-        {
-            BBAbstractModuleClass(FileAssetProvider, AssetProvider);
-            public:
-                FileAssetProviderBase();
-                FileAssetProviderBase(GameAssetStorage* storage);
-                FileAssetProviderBase(GameAssetStorage* storage, const String& directory);
-                virtual ~FileAssetProviderBase();
+        BBAbstractModuleClass(FileAssetProvider, AssetProvider);
+        public:
+            FileAssetProviderBase();
+            FileAssetProviderBase(GameAssetStorage* storage);
+            FileAssetProviderBase(GameAssetStorage* storage, const String& directory);
+            virtual ~FileAssetProviderBase();
 
-                virtual Stream* Open(const String& name);
-                virtual bool Preload(const String& name);
-                virtual GameAsset* Load(const String& name);
-                virtual bool Restore(const String& name, GameAsset* asset);
+            virtual Stream* Open(const String& name);
+            virtual bool Preload(const String& name);
+            virtual GameAsset* Load(const String& name);
+            virtual bool Restore(const String& name, GameAsset* asset);
 
-                inline const String& GetDirectory() const;
-                void SetDirectory(const String& value);
+            inline const String& GetDirectory() const;
+            void SetDirectory(const String& value);
 
-            private:
-                Stream* OpenActually(const String& directory, const String& name);
-                GameAsset* LoadActually(GameAssetStorage* storage,
-                                        const String& directory,
-                                        const String& name,
-                                        bool isPriority,
-                                        GameAsset* existingInstance);
+        private:
+            Stream* OpenActually(const String& directory, const String& name);
+            GameAsset* LoadActually(GameAssetStorage* storage,
+                                    const String& directory,
+                                    const String& name,
+                                    bool isPriority,
+                                    GameAsset* existingInstance);
 
-            private:
-                String directory;
+        private:
+            String directory;
 
-            private:
-                friend class FileAssetPreloadingTask;
-        };
+        private:
+            friend class FileAssetPreloadingTask;
+    };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        const String& FileAssetProviderBase::GetDirectory() const
-        {
-            return directory;
-        }
+    const String& FileAssetProviderBase::GetDirectory() const
+    {
+        return directory;
     }
+}
 
 #endif

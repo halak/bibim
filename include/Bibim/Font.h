@@ -2,191 +2,191 @@
 #ifndef __BIBIM_FONT_H__
 #define __BIBIM_FONT_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/GameAsset.h>
-#   include <Bibim/Color.h>
-#   include <Bibim/String.h>
-#   include <map>
-#   include <vector>
+#include <Bibim/FWD.h>
+#include <Bibim/GameAsset.h>
+#include <Bibim/Color.h>
+#include <Bibim/String.h>
+#include <map>
+#include <vector>
 
-    namespace Bibim
+namespace Bibim
+{
+    class Font : public GameAsset
     {
-        class Font : public GameAsset
-        {
-            BBSerializableAssetClass(Font, GameAsset, 'F', 'O', 'N', 'T');
-            public:
-                typedef std::map<int, const Glyph*> GlyphDictionary;
+        BBSerializableAssetClass(Font, GameAsset, 'F', 'O', 'N', 'T');
+        public:
+            typedef std::map<int, const Glyph*> GlyphDictionary;
 
-                struct Metric
+            struct Metric
+            {
+                static const Metric Empty;
+
+                Vector2 Size;
+                Vector2 EndPosition;
+                int LineCount;
+
+                inline Metric(Vector2 size, Vector2 endPosition, int lineCount)
+                    : Size(size),
+                      EndPosition(endPosition),
+                      LineCount(lineCount)
                 {
-                    static const Metric Empty;
+                }
+            };
 
-                    Vector2 Size;
-                    Vector2 EndPosition;
-                    int LineCount;
+        public:
+            Font();
+            Font(FontLibrary* library);
+            Font(const Font& original);
+            virtual ~Font();
 
-                    inline Metric(Vector2 size, Vector2 endPosition, int lineCount)
-                        : Size(size),
-                          EndPosition(endPosition),
-                          LineCount(lineCount)
-                    {
-                    }
-                };
+            Font* Clone() const;
+            void Prepare(const String& text);
 
-            public:
-                Font();
-                Font(FontLibrary* library);
-                Font(const Font& original);
-                virtual ~Font();
+            Metric Measure(const String& text);
+            Metric Measure(const String& text, float boundary);
+            Metric Measure(const FontString& fontString);
+            Metric Measure(const FontString& fontString, float boundary);
 
-                Font* Clone() const;
-                void Prepare(const String& text);
+            inline FontLibrary* GetLibrary() const;
+            void SetLibrary(FontLibrary* value);
 
-                Metric Measure(const String& text);
-                Metric Measure(const String& text, float boundary);
-                Metric Measure(const FontString& fontString);
-                Metric Measure(const FontString& fontString, float boundary);
+            const String& GetFaceURI() const;
+            void SetFaceURI(const String& value);
+            void SetFace(const byte* data, int length);
 
-                inline FontLibrary* GetLibrary() const;
-                void SetLibrary(FontLibrary* value);
+            float GetSize() const;
+            void  SetSize(float value);
 
-                const String& GetFaceURI() const;
-                void SetFaceURI(const String& value);
-                void SetFace(const byte* data, int length);
+            float GetStrokeSize() const;
+            void  SetStrokeSize(float value);
 
-                float GetSize() const;
-                void  SetSize(float value);
+            float GetWeights() const;
+            void  SetWeights(float value);
 
-                float GetStrokeSize() const;
-                void  SetStrokeSize(float value);
+            bool GetBold() const;
+            void SetBold(bool value);
 
-                float GetWeights() const;
-                void  SetWeights(float value);
+            float GetShear() const;
+            void  SetShear(float value);
 
-                bool GetBold() const;
-                void SetBold(bool value);
+            bool GetItalic() const;
+            void SetItalic(bool value);
 
-                float GetShear() const;
-                void  SetShear(float value);
+            int GetShadowSize() const;
+            void SetShadowSize(int value);
 
-                bool GetItalic() const;
-                void SetItalic(bool value);
+            float GetShadowSpread() const;
+            void  SetShadowSpread(float value);
 
-                int GetShadowSize() const;
-                void SetShadowSize(int value);
+            float GetShadowThickness() const;
+            void  SetShadowThickness(float value);
 
-                float GetShadowSpread() const;
-                void  SetShadowSpread(float value);
+            Vector2 GetShadowOffset() const;
+            void SetShadowOffset(Vector2 value);
+            inline void SetShadowOffsetXY(float x, float y);
 
-                float GetShadowThickness() const;
-                void  SetShadowThickness(float value);
+            float GetScale() const;
+            void  SetScale(float value);
 
-                Vector2 GetShadowOffset() const;
-                void SetShadowOffset(Vector2 value);
-                inline void SetShadowOffsetXY(float x, float y);
+            bool GetHinting() const;
+            void SetHinting(bool value);
 
-                float GetScale() const;
-                void  SetScale(float value);
+            bool GetIgnoreBitmap() const;
+            void SetIgnoreBitmap(bool value);
 
-                bool GetHinting() const;
-                void SetHinting(bool value);
+            inline Color GetColor() const;
+            void SetColor(Color value);
+            inline void SetColorRGB(byte r, byte g, byte b);
 
-                bool GetIgnoreBitmap() const;
-                void SetIgnoreBitmap(bool value);
+            inline Color GetStrokeColor() const;
+            void SetStrokeColor(Color value);
+            inline void SetStrokeColorRGB(byte r, byte g, byte b);
 
-                inline Color GetColor() const;
-                void SetColor(Color value);
-                inline void SetColorRGB(byte r, byte g, byte b);
+            inline Color GetShadowColor() const;
+            void SetShadowColor(Color value);
+            inline void SetShadowColorRGB(byte r, byte g, byte b);
 
-                inline Color GetStrokeColor() const;
-                void SetStrokeColor(Color value);
-                inline void SetStrokeColorRGB(byte r, byte g, byte b);
+            inline float GetSpacing() const;
+            void SetSpacing(float value);
 
-                inline Color GetShadowColor() const;
-                void SetShadowColor(Color value);
-                inline void SetShadowColorRGB(byte r, byte g, byte b);
+            const Glyph* GetRegularGlyph(int code) const;
+            const Glyph* GetStrokedGlyph(int code) const;
+            const Glyph* GetShadowGlyph(int code) const;
 
-                inline float GetSpacing() const;
-                void SetSpacing(float value);
+            float GetAscender() const;
+            float GetDescender() const;
+            float GetLineHeight() const;
 
-                const Glyph* GetRegularGlyph(int code) const;
-                const Glyph* GetStrokedGlyph(int code) const;
-                const Glyph* GetShadowGlyph(int code) const;
+            const GlyphDictionary& GetCachedRegularGlyphs() const;
+            const GlyphDictionary& GetCachedStrokedGlyphs() const;
+            const GlyphDictionary& GetCachedShadowGlyphs() const;
 
-                float GetAscender() const;
-                float GetDescender() const;
-                float GetLineHeight() const;
+        private:
+            FontCache* GetCache() const;
 
-                const GlyphDictionary& GetCachedRegularGlyphs() const;
-                const GlyphDictionary& GetCachedStrokedGlyphs() const;
-                const GlyphDictionary& GetCachedShadowGlyphs() const;
+        private:
+            FontLibrary* library;
 
-            private:
-                FontCache* GetCache() const;
+            Vector2 shadowOffset;
+            float spacing;
+            Color color;
+            Color strokeColor;
+            Color shadowColor;
+            FontCacheParameters* parametersPointer;
+            FontCacheParameters& parameters;
+            mutable FontCachePtr cache;
 
-            private:
-                FontLibrary* library;
+            static const GlyphDictionary EmptyGlyphs;
 
-                Vector2 shadowOffset;
-                float spacing;
-                Color color;
-                Color strokeColor;
-                Color shadowColor;
-                FontCacheParameters* parametersPointer;
-                FontCacheParameters& parameters;
-                mutable FontCachePtr cache;
+            friend class FontLibrary;
+    };
 
-                static const GlyphDictionary EmptyGlyphs;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                friend class FontLibrary;
-        };
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        FontLibrary* Font::GetLibrary() const
-        {
-            return library;
-        }
-
-        void Font::SetShadowOffsetXY(float x, float y)
-        {
-            SetShadowOffset(Vector2(x, y));
-        }
-
-        Color Font::GetColor() const
-        {
-            return color;
-        }
-
-        void Font::SetColorRGB(byte r, byte g, byte b)
-        {
-            SetColor(Color(r, g, b));
-        }
-
-        Color Font::GetStrokeColor() const
-        {
-            return strokeColor;
-        }
-
-        void Font::SetStrokeColorRGB(byte r, byte g, byte b)
-        {
-            SetStrokeColor(Color(r, g, b));
-        }
-
-        Color Font::GetShadowColor() const
-        {
-            return shadowColor;
-        }
-
-        void Font::SetShadowColorRGB(byte r, byte g, byte b) 
-        {
-            SetShadowColor(Color(r, g, b));
-        }
-
-        float Font::GetSpacing() const
-        {
-            return spacing;
-        }
+    FontLibrary* Font::GetLibrary() const
+    {
+        return library;
     }
+
+    void Font::SetShadowOffsetXY(float x, float y)
+    {
+        SetShadowOffset(Vector2(x, y));
+    }
+
+    Color Font::GetColor() const
+    {
+        return color;
+    }
+
+    void Font::SetColorRGB(byte r, byte g, byte b)
+    {
+        SetColor(Color(r, g, b));
+    }
+
+    Color Font::GetStrokeColor() const
+    {
+        return strokeColor;
+    }
+
+    void Font::SetStrokeColorRGB(byte r, byte g, byte b)
+    {
+        SetStrokeColor(Color(r, g, b));
+    }
+
+    Color Font::GetShadowColor() const
+    {
+        return shadowColor;
+    }
+
+    void Font::SetShadowColorRGB(byte r, byte g, byte b) 
+    {
+        SetShadowColor(Color(r, g, b));
+    }
+
+    float Font::GetSpacing() const
+    {
+        return spacing;
+    }
+}
 
 #endif

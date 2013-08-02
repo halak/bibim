@@ -344,7 +344,7 @@ def publish_library(environment, platform, target):
     #         copy2(item, library_directory)
 
 
-def merge_cpp(directory):
+def merge_sources(directory):
     from datetime import datetime
 
     lines = ['#include <zlib.h>']
@@ -356,6 +356,29 @@ def merge_cpp(directory):
                 lines.append('#include "{0}/{1}"'.format(module, item))
 
     f = open(os.path.join(directory, 'Bibim-All.cpp'), 'w')
+    f.write('\n'.join(lines))
+    f.close()
+    
+def merge_headers(directory):
+    import uuid
+    from datetime import datetime
+
+    forward = str(uuid.uuid4()).upper().replace('-', '_')
+    
+    lines = []
+    lines.append('#pragma once')
+    lines.append('#ifndef BIBIM_ALL_{0}_H__'.format(forward))
+    lines.append('#define BIBIM_ALL_{0}_H__'.format(forward))
+    lines.append('')
+    lines.append('// Automatically generated in {0}'.format(datetime.now()))
+    lines.append('')
+    for item in os.listdir(directory):
+        if (file_ext(item) == 'h' and 'Irrklang' not in item):
+            lines.append('#include "{0}"'.format(item))
+    lines.append('')
+    lines.append('#endif')
+    
+    f = open(os.path.join(directory, 'All.h'), 'w')
     f.write('\n'.join(lines))
     f.close()
 
@@ -379,13 +402,15 @@ if (__name__ == '__main__'):
     
     # if (not header_only):
     print('publish libraries...')
-      
-    publish_library(ENVIRONMENT.VS2008, PLATFORM.WIN32, TARGET.DEBUG)
-    publish_library(ENVIRONMENT.VS2008, PLATFORM.WIN32, TARGET.RELEASE)
 
-    publish_library(ENVIRONMENT.VS2010, PLATFORM.WIN32,   TARGET.DEBUG)
-    publish_library(ENVIRONMENT.VS2010, PLATFORM.WIN32,   TARGET.RELEASE)
-    publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.DEBUG)
-    publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.RELEASE)
+    # publish_library(ENVIRONMENT.VS2008, PLATFORM.WIN32, TARGET.DEBUG)
+    # publish_library(ENVIRONMENT.VS2008, PLATFORM.WIN32, TARGET.RELEASE)
 
-    # merge_cpp('src')
+    # publish_library(ENVIRONMENT.VS2010, PLATFORM.WIN32,   TARGET.DEBUG)
+    # publish_library(ENVIRONMENT.VS2010, PLATFORM.WIN32,   TARGET.RELEASE)
+    # publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.DEBUG)
+    # publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.RELEASE)
+
+    # merge_sources('src')
+    
+    merge_headers('include/Bibim');

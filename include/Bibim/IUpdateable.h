@@ -2,17 +2,17 @@
 #ifndef __BIBIM_UPDATEABLE_INTERFACE__
 #define __BIBIM_UPDATEABLE_INTERFACE__
 
-#   include <Bibim/FWD.h>
+#include <Bibim/FWD.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    class IUpdateable
     {
-        class IUpdateable
-        {
-            public:
-                virtual ~IUpdateable() { }
+        public:
+            virtual ~IUpdateable() { }
 
-                virtual void Update(float dt, int timestamp) = 0;
-        };
-    }
+            virtual void Update(float dt, int timestamp) = 0;
+    };
+}
 
 #endif

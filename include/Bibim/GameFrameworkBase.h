@@ -2,114 +2,114 @@
 #ifndef __BIBIM_GAMEFRAMEWORK_BASE_H__
 #define __BIBIM_GAMEFRAMEWORK_BASE_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/String.h>
-#   include <deque>
+#include <Bibim/FWD.h>
+#include <Bibim/String.h>
+#include <deque>
 
-    namespace Bibim
+namespace Bibim
+{
+    class GameFrameworkBase
     {
-        class GameFrameworkBase
-        {
-            BBThisIsNoncopyableClass(GameFrameworkBase);
-            public:
-                virtual ~GameFrameworkBase();
-    
-                void Exit();
-    
-                inline GameModuleTree* GetModules() const;
-                inline GameWindow*     GetWindow() const;
-                inline GraphicsDevice* GetGraphicsDevice() const;
-                inline Timeline*       GetMainTimeline() const;
-    
-                inline const String& GetStartupArgs() const;
-    
-                inline bool GetFixedTimeStep() const;
-                       void SetFixedTimeStep(bool value);
-    
-                inline float GetFixedElapsedTime() const;
-                       void  SetFixedElapsedTime(float value);
-    
-                inline float GetMaxTimeInOneFrame() const;
-                       void  SetMaxTimeInOneFrame(float value);
-    
-                float GetFPS() const;
-    
-            protected:
-                GameFrameworkBase();
- 
-                void Construct(int width, int height, const String& startupArgs);
-    
-                virtual void Initialize();
-                virtual void Finalize();
-    
-                void PostInitialize();
-                
-                void StepFrame();
-                void UpdateFrame();
-                void DrawFrame();
+        BBThisIsNoncopyableClass(GameFrameworkBase);
+        public:
+            virtual ~GameFrameworkBase();
 
-                virtual void Update(float dt, int timestamp);
-                virtual void Draw();
-    
-                virtual bool BeginDraw();
-                virtual void EndDraw();
-    
-            private:
-                GameModuleTree* modules;
-                GameWindow* window;
-                GraphicsDevice* graphicsDevice;
-                Timeline* mainTimeline;
-                String startupArgs;
-    
-                bool  fixedTimeStep;
-                float fixedElapsedTime;
-                float maxTimeInOneFrame;
-                int  desiredFPS;
-                int  timestamp;
-                std::deque<float> timestamps;
-        };
+            void Exit();
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+            inline GameModuleTree* GetModules() const;
+            inline GameWindow*     GetWindow() const;
+            inline GraphicsDevice* GetGraphicsDevice() const;
+            inline Timeline*       GetMainTimeline() const;
 
-        GameModuleTree* GameFrameworkBase::GetModules() const
-        {
-            return modules;
-        }
+            inline const String& GetStartupArgs() const;
 
-        GameWindow* GameFrameworkBase::GetWindow() const
-        {
-            return window;
-        }
+            inline bool GetFixedTimeStep() const;
+                   void SetFixedTimeStep(bool value);
 
-        GraphicsDevice* GameFrameworkBase::GetGraphicsDevice() const
-        {
-            return graphicsDevice;
-        }
+            inline float GetFixedElapsedTime() const;
+                   void  SetFixedElapsedTime(float value);
 
-        Timeline* GameFrameworkBase::GetMainTimeline() const
-        {
-            return mainTimeline;
-        }
+            inline float GetMaxTimeInOneFrame() const;
+                   void  SetMaxTimeInOneFrame(float value);
 
-        const String& GameFrameworkBase::GetStartupArgs() const
-        {
-            return startupArgs;
-        }
+            float GetFPS() const;
 
-        bool GameFrameworkBase::GetFixedTimeStep() const
-        {
-            return fixedTimeStep;
-        }
+        protected:
+            GameFrameworkBase();
 
-        float GameFrameworkBase::GetFixedElapsedTime() const
-        {
-            return fixedElapsedTime;
-        }
+            void Construct(int width, int height, const String& startupArgs);
 
-        float GameFrameworkBase::GetMaxTimeInOneFrame() const
-        {
-            return maxTimeInOneFrame;
-        }
+            virtual void Initialize();
+            virtual void Finalize();
+
+            void PostInitialize();
+            
+            void StepFrame();
+            void UpdateFrame();
+            void DrawFrame();
+
+            virtual void Update(float dt, int timestamp);
+            virtual void Draw();
+
+            virtual bool BeginDraw();
+            virtual void EndDraw();
+
+        private:
+            GameModuleTree* modules;
+            GameWindow* window;
+            GraphicsDevice* graphicsDevice;
+            Timeline* mainTimeline;
+            String startupArgs;
+
+            bool  fixedTimeStep;
+            float fixedElapsedTime;
+            float maxTimeInOneFrame;
+            int  desiredFPS;
+            int  timestamp;
+            std::deque<float> timestamps;
+    };
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    GameModuleTree* GameFrameworkBase::GetModules() const
+    {
+        return modules;
     }
+
+    GameWindow* GameFrameworkBase::GetWindow() const
+    {
+        return window;
+    }
+
+    GraphicsDevice* GameFrameworkBase::GetGraphicsDevice() const
+    {
+        return graphicsDevice;
+    }
+
+    Timeline* GameFrameworkBase::GetMainTimeline() const
+    {
+        return mainTimeline;
+    }
+
+    const String& GameFrameworkBase::GetStartupArgs() const
+    {
+        return startupArgs;
+    }
+
+    bool GameFrameworkBase::GetFixedTimeStep() const
+    {
+        return fixedTimeStep;
+    }
+
+    float GameFrameworkBase::GetFixedElapsedTime() const
+    {
+        return fixedElapsedTime;
+    }
+
+    float GameFrameworkBase::GetMaxTimeInOneFrame() const
+    {
+        return maxTimeInOneFrame;
+    }
+}
 
 #endif

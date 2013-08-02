@@ -2,31 +2,31 @@
 #ifndef __BIBIM_SUBTIMELINE_H__
 #define __BIBIM_SUBTIMELINE_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/Timeline.h>
+#include <Bibim/FWD.h>
+#include <Bibim/Timeline.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    class SubTimeline : public Timeline
     {
-        class SubTimeline : public Timeline
-        {
-            BBModuleClass(SubTimeline, Timeline, 'S', 'B', 'T', 'L');
-            public:
-                SubTimeline();
-                virtual ~SubTimeline();
+        BBModuleClass(SubTimeline, Timeline, 'S', 'B', 'T', 'L');
+        public:
+            SubTimeline();
+            virtual ~SubTimeline();
 
-                inline Timeline* GetParent() const;
-                void SetParent(Timeline* value);
+            inline Timeline* GetParent() const;
+            void SetParent(Timeline* value);
 
-            private:
-                Timeline* parent;
-        };
+        private:
+            Timeline* parent;
+    };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        Timeline* SubTimeline::GetParent() const
-        {
-            return parent;
-        }
+    Timeline* SubTimeline::GetParent() const
+    {
+        return parent;
     }
+}
 
 #endif

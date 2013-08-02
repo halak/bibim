@@ -2,9 +2,11 @@
 #ifndef __BIBIM_DYNAMICTEXTURE2D_DX9_H__
 #define __BIBIM_DYNAMICTEXTURE2D_DX9_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/Texture2D.DX9.h>
-#   include <Bibim/Rect.h>
+#include <Bibim/FWD.h>
+#if (defined(BIBIM_USE_DIRECTX9))
+
+#include <Bibim/Texture2D.DX9.h>
+#include <Bibim/Rect.h>
 
     namespace Bibim
     {
@@ -80,4 +82,5 @@
         }
     }
 
+#endif
 #endif

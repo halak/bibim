@@ -2,22 +2,25 @@
 #ifndef __BIBIM_IME_WINDOWS_H__
 #define __BIBIM_IME_WINDOWS_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/IMEBase.h>
+#include <Bibim/FWD.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
 
-    namespace Bibim
+#include <Bibim/IMEBase.h>
+
+namespace Bibim
+{
+    class IME : public IMEBase
     {
-        class IME : public IMEBase
-        {
-            BBModuleClass(IME, IMEBase, 'I', 'M', 'E', '_');
-            public:
-                IME();
-                IME(Window* window);
-                virtual ~IME();
+        BBModuleClass(IME, IMEBase, 'I', 'M', 'E', '_');
+        public:
+            IME();
+            IME(Window* window);
+            virtual ~IME();
 
-            private:
-                virtual void OnRequest(const Request& request);
-        };
-    }
+        private:
+            virtual void OnRequest(const Request& request);
+    };
+}
 
+#endif
 #endif

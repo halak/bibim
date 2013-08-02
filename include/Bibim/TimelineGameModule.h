@@ -2,33 +2,33 @@
 #ifndef __BIBIM_TIMELINEGAMEMODULE_H__
 #define __BIBIM_TIMELINEGAMEMODULE_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/UpdateableGameModule.h>
+#include <Bibim/FWD.h>
+#include <Bibim/UpdateableGameModule.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    class TimelineGameModule : public UpdateableGameModule
     {
-        class TimelineGameModule : public UpdateableGameModule
-        {
-            BBAbstractModuleClass(TimelineGameModule, UpdateableGameModule);
-            public:
-                virtual ~TimelineGameModule();
+        BBAbstractModuleClass(TimelineGameModule, UpdateableGameModule);
+        public:
+            virtual ~TimelineGameModule();
 
-                inline Timeline* GetTimeline() const;
-                void SetTimeline(Timeline* value);
+            inline Timeline* GetTimeline() const;
+            void SetTimeline(Timeline* value);
 
-            protected:
-                TimelineGameModule();
+        protected:
+            TimelineGameModule();
 
-            private:
-                Timeline* timeline;
-        };
+        private:
+            Timeline* timeline;
+    };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        Timeline* TimelineGameModule::GetTimeline() const
-        {
-            return timeline;
-        }
+    Timeline* TimelineGameModule::GetTimeline() const
+    {
+        return timeline;
     }
+}
 
 #endif

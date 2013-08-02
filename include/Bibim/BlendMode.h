@@ -2,20 +2,20 @@
 #ifndef __BIBIM_BLENDMODE_H__
 #define __BIBIM_BLENDMODE_H__
 
-#   include <Bibim/FWD.h>
+#include <Bibim/FWD.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    enum BlendMode
     {
-        enum BlendMode
-        {
-            NormalBlend,
-            AdditiveBlend,
-            LightenBlend,
-            DarkenBlend,
-            MultiplyBlend,
-            ScreenBlend,
-            LinearDodgeBlend = AdditiveBlend,
-        };
-    }
+        NormalBlend,
+        AdditiveBlend,
+        LightenBlend,
+        DarkenBlend,
+        MultiplyBlend,
+        ScreenBlend,
+        LinearDodgeBlend = AdditiveBlend,
+    };
+}
 
 #endif

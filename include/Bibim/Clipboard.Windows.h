@@ -2,22 +2,25 @@
 #ifndef __BIBIM_CLIPBOARD_WINDOWS_H__
 #define __BIBIM_CLIPBOARD_WINDOWS_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/GameModule.h>
-#   include <Bibim/String.h>
+#include <Bibim/FWD.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
 
-    namespace Bibim
+#include <Bibim/GameModule.h>
+#include <Bibim/String.h>
+
+namespace Bibim
+{
+    class Clipboard : public GameModule
     {
-        class Clipboard : public GameModule
-        {
-            BBModuleClass(Clipboard, GameModule, 'C', 'L', 'I', 'P');
-            public:
-                Clipboard();
-                virtual ~Clipboard();
-                
-                String GetText() const;
-                void SetText(const String& value);
-        };
-    }
+        BBModuleClass(Clipboard, GameModule, 'C', 'L', 'I', 'P');
+        public:
+            Clipboard();
+            virtual ~Clipboard();
+            
+            String GetText() const;
+            void SetText(const String& value);
+    };
+}
 
+#endif
 #endif

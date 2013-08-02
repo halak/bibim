@@ -1,3 +1,7 @@
+#pragma once
+#ifndef __BIBIM_STANDARDGAME_EMBEDDEDFONT_H__
+#define __BIBIM_STANDARDGAME_EMBEDDEDFONT_H__
+
 #include <Bibim/FWD.h>
 
 namespace Bibim
@@ -580,3 +584,5 @@ namespace Bibim
 	    0x00,
     };
 }
+
+#endif

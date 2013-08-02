@@ -2,39 +2,39 @@
 #ifndef __BIBIM_EVALUNITRANDOM_H__
 #define __BIBIM_EVALUNITRANDOM_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/Evals.h>
+#include <Bibim/FWD.h>
+#include <Bibim/Evals.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    class EvalUnitRandom : public EvalFloat
     {
-        class EvalUnitRandom : public EvalFloat
-        {
-            BBComponentClass(EvalUnitRandom, EvalFloat, 'e', 'U', 'R', 'f');
-            public:
-                EvalUnitRandom();
-                virtual ~EvalUnitRandom();
+        BBComponentClass(EvalUnitRandom, EvalFloat, 'e', 'U', 'R', 'f');
+        public:
+            EvalUnitRandom();
+            virtual ~EvalUnitRandom();
 
-                virtual void Start() { }
-                virtual void Stop()  { }
-                virtual void Reset() { }
-                virtual float Evaluate(EvalContext& context);
+            virtual void Start() { }
+            virtual void Stop()  { }
+            virtual void Reset() { }
+            virtual float Evaluate(EvalContext& context);
 
-                inline int GetInitialSeed() const;
-                void SetInitialSeed(int value);
+            inline int GetInitialSeed() const;
+            void SetInitialSeed(int value);
 
-            private:
-                int seed;
-                int initialSeed;
-        };
+        private:
+            int seed;
+            int initialSeed;
+    };
 
-        BBDeclareEvalClass(EvalUnitRandom);
+    BBDeclareEvalClass(EvalUnitRandom);
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        int EvalUnitRandom::GetInitialSeed() const
-        {
-            return initialSeed;
-        }
+    int EvalUnitRandom::GetInitialSeed() const
+    {
+        return initialSeed;
     }
+}
 
 #endif

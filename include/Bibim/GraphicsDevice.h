@@ -2,12 +2,7 @@
 #ifndef __BIBIM_GRAPHICSDEVICE_H__
 #define __BIBIM_GRAPHICSDEVICE_H__
 
-#   include <Bibim/Config.h>
-
-#   if (defined(BIBIM_USE_DIRECTX9))
-#       include <Bibim/GraphicsDevice.DX9.h>
-#   elif (defined(BIBIM_USE_OPENGLES2))
-#       include <Bibim/GraphicsDevice.GLES2.h>
-#   endif
+#include <Bibim/GraphicsDevice.DX9.h>
+#include <Bibim/GraphicsDevice.GLES2.h>
 
 #endif

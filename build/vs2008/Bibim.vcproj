@@ -628,42 +628,6 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="Diagnostics"
-				>
-				<File
-					RelativePath="..\..\src\Diagnostics\CrashDump.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\CrashDump.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Diagnostics\FileLogger.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\FileLogger.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Diagnostics\Logger.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\Logger.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Diagnostics\SystemLogger.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\SystemLogger.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="Gameplay"
 				>
 				<File
@@ -846,18 +810,6 @@
 					RelativePath="..\..\include\Bibim\ScriptThread.h"
 					>
 				</File>
-				<Filter
-					Name="Libraries"
-					>
-					<File
-						RelativePath="..\..\src\Scripting\ScriptLibraryIO.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\include\Bibim\ScriptLibraryIO.h"
-						>
-					</File>
-				</Filter>
 			</Filter>
 			<Filter
 				Name="Time"
@@ -1782,46 +1734,6 @@
 				</Filter>
 			</Filter>
 			<Filter
-				Name="FileSystem"
-				>
-				<File
-					RelativePath="..\..\include\Bibim\FileStream.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\FileSystem\FileStream.Windows.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\FileStream.Windows.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\FileSystem\MPQ.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\MPQ.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\FileSystem\MPQStream.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\MPQStream.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\FileSystem\Path.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\Path.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="Framework"
 				>
 				<File
@@ -1961,54 +1873,6 @@
 					>
 				</File>
 			</Filter>
-			<Filter
-				Name="Net"
-				>
-				<File
-					RelativePath="..\..\src\Net\HttpClient.Curl.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\HttpClient.Curl.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\HttpClient.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Net\HttpClientBase.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\HttpClientBase.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Net\IPEndPoint.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\IPEndPoint.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Net\NetworkStream.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\NetworkStream.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Net\Socket.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\Socket.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="01. Foundation"
@@ -2134,22 +1998,6 @@
 				>
 				<File
 					RelativePath="..\..\include\Bibim\Assert.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Foundation\Log.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\Log.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Foundation\Profiler.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\Profiler.h"
 					>
 				</File>
 			</Filter>
@@ -2313,7 +2161,7 @@
 				Name="IO"
 				>
 				<File
-					RelativePath="..\..\src\Foundation\BinaryReader.cpp"
+					RelativePath="..\..\src\IO\BinaryReader.cpp"
 					>
 				</File>
 				<File
@@ -2321,7 +2169,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\BinaryWriter.cpp"
+					RelativePath="..\..\src\IO\BinaryWriter.cpp"
 					>
 				</File>
 				<File
@@ -2329,7 +2177,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\DumpStream.cpp"
+					RelativePath="..\..\src\IO\DumpStream.cpp"
 					>
 				</File>
 				<File
@@ -2337,7 +2185,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\MemoryStream.cpp"
+					RelativePath="..\..\src\IO\MemoryStream.cpp"
 					>
 				</File>
 				<File
@@ -2345,11 +2193,119 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Stream.cpp"
+					RelativePath="..\..\src\IO\Stream.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\include\Bibim\Stream.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Net"
+				>
+				<File
+					RelativePath="..\..\src\Net\HttpClient.Curl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\HttpClient.Curl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\HttpClient.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Net\HttpClientBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\HttpClientBase.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Net\IPEndPoint.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\IPEndPoint.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Net\NetworkStream.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\NetworkStream.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Net\Socket.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\Socket.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Diagnostics"
+				>
+				<File
+					RelativePath="..\..\src\Diagnostics\CrashDump.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\CrashDump.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Diagnostics\Log.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\Log.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="FileSystem"
+				>
+				<File
+					RelativePath="..\..\include\Bibim\FileStream.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\FileSystem\FileStream.Windows.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\FileStream.Windows.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\FileSystem\MPQ.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\MPQ.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\FileSystem\MPQStream.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\MPQStream.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\FileSystem\Path.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\Path.h"
 					>
 				</File>
 			</Filter>

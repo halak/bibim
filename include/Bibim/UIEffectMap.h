@@ -2,48 +2,48 @@
 #ifndef __BIBIM_UIEFFECTMAP_H__
 #define __BIBIM_UIEFFECTMAP_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/UIElement.h>
-#   include <vector>
+#include <Bibim/FWD.h>
+#include <Bibim/UIElement.h>
+#include <vector>
 
-    namespace Bibim
+namespace Bibim
+{
+    class UIEffectMap : public UIElement
     {
-        class UIEffectMap : public UIElement
-        {
-            BBComponentClass(UIEffectMap, UIElement, 'U', 'F', 'X', 'M');
-            public:
-                typedef std::vector<UIPixelEffectPtr> PixelEffectCollection;
+        BBComponentClass(UIEffectMap, UIElement, 'U', 'F', 'X', 'M');
+        public:
+            typedef std::vector<UIPixelEffectPtr> PixelEffectCollection;
 
-            public:
-                UIEffectMap();
-                virtual ~UIEffectMap();
+        public:
+            UIEffectMap();
+            virtual ~UIEffectMap();
 
-                void Insert(UIPixelEffect* item);
-                bool Remove(UIPixelEffect* item);
-                bool Remove(int index);
-                void RemoveAll();
-                UIPixelEffect* FindPixelEffect(const String& name);
+            void Insert(UIPixelEffect* item);
+            bool Remove(UIPixelEffect* item);
+            bool Remove(int index);
+            void RemoveAll();
+            UIPixelEffect* FindPixelEffect(const String& name);
 
-                inline UIGeometryEffect* GetGeometryEffect() const;
-                void SetGeometryEffect(UIGeometryEffect* value);
-                inline const PixelEffectCollection& GetPixelEffects() const;
+            inline UIGeometryEffect* GetGeometryEffect() const;
+            void SetGeometryEffect(UIGeometryEffect* value);
+            inline const PixelEffectCollection& GetPixelEffects() const;
 
-            private:
-                UIGeometryEffectPtr geomEffect;
-                PixelEffectCollection pixelEffects;
-        };
+        private:
+            UIGeometryEffectPtr geomEffect;
+            PixelEffectCollection pixelEffects;
+    };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        UIGeometryEffect* UIEffectMap::GetGeometryEffect() const
-        {
-            return geomEffect;
-        }
-
-        const UIEffectMap::PixelEffectCollection& UIEffectMap::GetPixelEffects() const
-        {
-            return pixelEffects;
-        }
+    UIGeometryEffect* UIEffectMap::GetGeometryEffect() const
+    {
+        return geomEffect;
     }
+
+    const UIEffectMap::PixelEffectCollection& UIEffectMap::GetPixelEffects() const
+    {
+        return pixelEffects;
+    }
+}
 
 #endif

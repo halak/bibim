@@ -2,41 +2,44 @@
 #ifndef __BIBIM_ENVIRONMENT_WINDOWS_H__
 #define __BIBIM_ENVIRONMENT_WINDOWS_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/String.h>
+#include <Bibim/FWD.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
 
-    namespace Bibim
+#include <Bibim/String.h>
+
+namespace Bibim
+{
+    class Environment
     {
-        class Environment
-        {
-            BBThisIsNoncopyableClass(Environment);
-            public:
-                static inline const String& GetLocaleName();
-                static inline const String& GetWorkingDirectory();
-                static String GetAppDataPath(const String& appName, const String& filename);
+        BBThisIsNoncopyableClass(Environment);
+        public:
+            static inline const String& GetLocaleName();
+            static inline const String& GetWorkingDirectory();
+            static String GetAppDataPath(const String& appName, const String& filename);
 
-            private:
-                Environment();
+        private:
+            Environment();
 
-            private:
-                String localeName;
-                String workingDirectory;
-                String appDataDirectoryBase;
+        private:
+            String localeName;
+            String workingDirectory;
+            String appDataDirectoryBase;
 
-                static Environment PrivateInstance;
-        };
+            static Environment PrivateInstance;
+    };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        const String& Environment::GetLocaleName()
-        {
-            return PrivateInstance.localeName;
-        }
-
-        const String& Environment::GetWorkingDirectory()
-        {
-            return PrivateInstance.workingDirectory;
-        }
+    const String& Environment::GetLocaleName()
+    {
+        return PrivateInstance.localeName;
     }
 
+    const String& Environment::GetWorkingDirectory()
+    {
+        return PrivateInstance.workingDirectory;
+    }
+}
+
+#endif
 #endif

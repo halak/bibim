@@ -2,28 +2,28 @@
 #ifndef __BIBIM_HTTPCLIENT_CURL_H__
 #define __BIBIM_HTTPCLIENT_CURL_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/HttpClientBase.h>
+#include <Bibim/FWD.h>
+#include <Bibim/HttpClientBase.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    class HttpClient : public HttpClientBase
     {
-        class HttpClient : public HttpClientBase
-        {
-            BBModuleClass(HttpClient, HttpClientBase, 'H', 'T', 'T', 'P');
-            public:
-                HttpClient();
-                virtual ~HttpClient();
+        BBModuleClass(HttpClient, HttpClientBase, 'H', 'T', 'T', 'P');
+        public:
+            HttpClient();
+            virtual ~HttpClient();
 
-            private:
-                virtual Response* OnRequest(Request* request);
+        private:
+            virtual Response* OnRequest(Request* request);
 
-                struct WithRequest
-                {
-                    HttpClient* client;
-                    HttpClient::Request* request;
-                };
-                friend int OnProgress(WithRequest* thiz, double t, double d, double ultotal, double ulnow);
-        };
-    }
+            struct WithRequest
+            {
+                HttpClient* client;
+                HttpClient::Request* request;
+            };
+            friend int OnProgress(WithRequest* thiz, double t, double d, double ultotal, double ulnow);
+    };
+}
 
 #endif

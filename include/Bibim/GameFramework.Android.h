@@ -2,42 +2,45 @@
 #ifndef __BIBIM_GAMEFRAMEWORK_ANDROID_H__
 #define __BIBIM_GAMEFRAMEWORK_ANDROID_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/GameFrameworkBase.h>
+#include <Bibim/FWD.h>
+#if (defined(BIBIM_PLATFORM_ANDROID))
 
-    namespace Bibim
+#include <Bibim/GameFrameworkBase.h>
+
+namespace Bibim
+{
+    class GameFramework : public GameFrameworkBase
     {
-        class GameFramework : public GameFrameworkBase
-        {
-            BBThisIsNoncopyableClass(GameFramework);
-            public:
-                virtual ~GameFramework();
+        BBThisIsNoncopyableClass(GameFramework);
+        public:
+            virtual ~GameFramework();
 
-                void init();
-                void step();
+            void init();
+            void step();
 
-                inline IME* GetIME() const;
+            inline IME* GetIME() const;
 
-            protected:
-                GameFramework();
-                GameFramework(int width, int height);
-    
-                void Construct(int width, int height);
+        protected:
+            GameFramework();
+            GameFramework(int width, int height);
 
-            private:
-                IME* ime;
+            void Construct(int width, int height);
 
-            public:
-                static GameFramework* Create();
-                static GameFramework* SingletonInstance;
-        };
+        private:
+            IME* ime;
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        public:
+            static GameFramework* Create();
+            static GameFramework* SingletonInstance;
+    };
 
-        IME* GameFramework::GetIME() const
-        {
-            return ime;
-        }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    IME* GameFramework::GetIME() const
+    {
+        return ime;
     }
+}
 
+#endif
 #endif

@@ -1,7 +1,7 @@
 #include <Bibim/Config.h>
-#if (defined(BIBIM_PLATFORM_WINDOWS))
-
 #include <Bibim/CrashDump.h>
+
+#if (defined(BIBIM_PLATFORM_WINDOWS))
 #include <Bibim/Assert.h>
 
 #   include <windows.h>
