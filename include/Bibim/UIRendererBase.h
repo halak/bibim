@@ -204,47 +204,48 @@ namespace Bibim
             friend class UIOpacityMaskEffect;
     };
 
-#   define BBEffectorClass(classname)   public: \
-                                            static void* operator new (size_t /*s*/) \
-                                            { \
-                                                return UIEffectorAllocator<classname>::Instance.Allocate(); \
-                                            } \
-                                            static void operator delete (void* p) \
-                                            { \
-                                                UIEffectorAllocator<classname>::Instance.Deallocate(p); \
-                                            }
-
-      template <typename T> class UIEffectorAllocator
-      {
-          public:
-              static UIEffectorAllocator Instance;
-
-          public:
-              void* Allocate()
-              {
-                  if (dynamicPool.empty())
-                      dynamicPool.push_back(new byte[sizeof(T)]);
-
-                  void* n = dynamicPool.front();
-                  dynamicPool.pop_front();
-                  return n;
-              }
-
-              void Deallocate(void* item)
-              {
-                  dynamicPool.push_front(item);
-              }
-
-          private:
-              UIEffectorAllocator()
-              {
-              }
-
-          private:
-              //byte fixedMem[sizeof(T)][64];
-              //bool fixedAlloc[64];
-              std::list<void*> dynamicPool;
-      };
+#   define BBEffectorClass(classname)
+//#   define BBEffectorClass(classname)   public: \
+//                                            static void* operator new (size_t /*s*/) \
+//                                            { \
+//                                                return UIEffectorAllocator<classname>::Instance.Allocate(); \
+//                                            } \
+//                                            static void operator delete (void* p) \
+//                                            { \
+//                                                UIEffectorAllocator<classname>::Instance.Deallocate(p); \
+//                                            }
+//
+//    template <typename T> class UIEffectorAllocator
+//    {
+//        public:
+//            static UIEffectorAllocator Instance;
+//
+//        public:
+//            void* Allocate()
+//            {
+//                if (dynamicPool.empty())
+//                    dynamicPool.push_back(new byte[sizeof(T)]);
+//
+//                void* n = dynamicPool.front();
+//                dynamicPool.pop_front();
+//                return n;
+//            }
+//
+//            void Deallocate(void* item)
+//            {
+//                dynamicPool.push_front(item);
+//            }
+//
+//        private:
+//            UIEffectorAllocator()
+//            {
+//            }
+//
+//        private:
+//            //byte fixedMem[sizeof(T)][64];
+//            //bool fixedAlloc[64];
+//            std::list<void*> dynamicPool;
+//    };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 

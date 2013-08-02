@@ -819,6 +819,12 @@
     <ClCompile Include="..\..\src\Diagnostics\Log.cpp">
       <Filter>02. System\Diagnostics</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Diagnostics\Performance.cpp">
+      <Filter>02. System\Diagnostics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Diagnostics\Statistics.cpp">
+      <Filter>02. System\Diagnostics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Bibim\AssetLoadingTask.h">
@@ -1630,6 +1636,12 @@
       <Filter>02. System\Diagnostics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Log.h">
+      <Filter>02. System\Diagnostics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Statistics.h">
+      <Filter>02. System\Diagnostics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Performance.h">
       <Filter>02. System\Diagnostics</Filter>
     </ClInclude>
   </ItemGroup>

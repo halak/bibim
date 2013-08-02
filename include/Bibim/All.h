@@ -1,8 +1,8 @@
 #pragma once
-#ifndef BIBIM_ALL_38EA4830_4F75_49E0_A3BB_328AB7755EE2_H__
-#define BIBIM_ALL_38EA4830_4F75_49E0_A3BB_328AB7755EE2_H__
+#ifndef BIBIM_ALL_353F7A44_51B2_435C_9025_4DA8337F58B1_H__
+#define BIBIM_ALL_353F7A44_51B2_435C_9025_4DA8337F58B1_H__
 
-// Automatically generated in 2013-08-02 21:28:54.634000
+// Automatically generated in 2013-08-02 22:08:46.107000
 
 #include "AlarmClock.h"
 #include "All.h"
@@ -148,6 +148,7 @@
 #include "OscillationCurve.h"
 #include "Path.h"
 #include "PathFinder.h"
+#include "Performance.h"
 #include "PNGReader.h"
 #include "Point2.h"
 #include "Point3.h"
@@ -192,6 +193,7 @@
 #include "StandardGame.EmbeddedFont.h"
 #include "StandardGame.h"
 #include "Startup.h"
+#include "Statistics.h"
 #include "Stream.h"
 #include "String.h"
 #include "SubTimeline.h"

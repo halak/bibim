@@ -165,9 +165,9 @@ def get_dependencies(environment, platform, target):
      
     # ZLib & PNG & JPG & FreeType & Lua & SPARK & Curl
     if (win32):
-        l += ['zlib.lib', 'libpng.lib', 'libjpeg.lib', 'freetype.lib', 'lua.lib', 'SPARK.lib', 'libcurl.lib']
+        l += ['libpng.lib', 'libjpeg.lib', 'freetype.lib', 'lua.lib', 'SPARK.lib', 'libcurl.lib', 'zlib.lib']
     elif (android):
-        l += ['zlib.a', 'libpng.a', 'libjpeg.a', 'freetype.a', 'lua.a', 'SPARK.a', 'libcurl.a']
+        l += ['libpng.a', 'libjpeg.a', 'freetype.a', 'lua.a', 'SPARK.a', 'libcurl.a', 'zlib.a']
     
     # irrKlang
     if (win32):
@@ -403,14 +403,14 @@ if (__name__ == '__main__'):
     # if (not header_only):
     print('publish libraries...')
 
-    # publish_library(ENVIRONMENT.VS2008, PLATFORM.WIN32, TARGET.DEBUG)
-    # publish_library(ENVIRONMENT.VS2008, PLATFORM.WIN32, TARGET.RELEASE)
+    publish_library(ENVIRONMENT.VS2008, PLATFORM.WIN32, TARGET.DEBUG)
+    publish_library(ENVIRONMENT.VS2008, PLATFORM.WIN32, TARGET.RELEASE)
 
-    # publish_library(ENVIRONMENT.VS2010, PLATFORM.WIN32,   TARGET.DEBUG)
-    # publish_library(ENVIRONMENT.VS2010, PLATFORM.WIN32,   TARGET.RELEASE)
-    # publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.DEBUG)
-    # publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.RELEASE)
+    publish_library(ENVIRONMENT.VS2010, PLATFORM.WIN32,   TARGET.DEBUG)
+    publish_library(ENVIRONMENT.VS2010, PLATFORM.WIN32,   TARGET.RELEASE)
+    publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.DEBUG)
+    publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.RELEASE)
 
-    # merge_sources('src')
+    merge_sources('src')
     
     merge_headers('include/Bibim');

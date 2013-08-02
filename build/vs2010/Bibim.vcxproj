@@ -122,6 +122,8 @@
     <ClCompile Include="..\..\src\Audio\SoundFX.AL.cpp" />
     <ClCompile Include="..\..\src\Component\GameComponentFactory.cpp" />
     <ClCompile Include="..\..\src\Diagnostics\Log.cpp" />
+    <ClCompile Include="..\..\src\Diagnostics\Performance.cpp" />
+    <ClCompile Include="..\..\src\Diagnostics\Statistics.cpp" />
     <ClCompile Include="..\..\src\FileSystem\FileStream.Android.cpp" />
     <ClCompile Include="..\..\src\FileSystem\FileStream.iOS.cpp" />
     <ClCompile Include="..\..\src\FileSystem\Path.cpp" />
@@ -351,6 +353,7 @@
     <ClInclude Include="..\..\include\Bibim\AudioDevice.AL.h" />
     <ClInclude Include="..\..\include\Bibim\AudioDevice.h" />
     <ClInclude Include="..\..\include\Bibim\BGM.AL.h" />
+    <ClInclude Include="..\..\include\Bibim\Performance.h" />
     <ClInclude Include="..\..\include\Bibim\SoundFX.AL.h" />
     <ClInclude Include="..\..\include\Bibim\SoundFX.h" />
     <ClInclude Include="..\..\include\Bibim\GameComponentFactory.h" />
@@ -385,6 +388,7 @@
     <ClInclude Include="..\..\include\Bibim\NetworkStream.h" />
     <ClInclude Include="..\..\include\Bibim\Socket.h" />
     <ClInclude Include="..\..\include\Bibim\Lock.Unix.h" />
+    <ClInclude Include="..\..\include\Bibim\Statistics.h" />
     <ClInclude Include="..\..\include\Bibim\Thread.Unix.h" />
     <ClInclude Include="..\..\include\Bibim\ThreadBase.h" />
     <ClInclude Include="..\..\include\Bibim\Font.h" />

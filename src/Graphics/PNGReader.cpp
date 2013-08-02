@@ -4,6 +4,7 @@
 #include <Bibim/GameAsset.h>
 #include <png.h>
 #include <pngstruct.h>
+#include <zlib.h>
 
 namespace Bibim
 {

@@ -1,8 +1,0 @@
-﻿<Window x:Class="Bibim.Bab.ConsoleHtmlBox"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ConsoleHtmlBox" Height="371" Width="839">
-    <Grid>
-        <WebBrowser Name="webBrowser" />
-    </Grid>
-</Window>
