@@ -1749,6 +1749,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\Framework\Dashboard.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\Dashboard.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\include\Bibim\GameFramework.h"
 					>
 				</File>
@@ -2258,6 +2266,14 @@
 				</File>
 				<File
 					RelativePath="..\..\include\Bibim\CrashDump.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Diagnostics\Diagnostics.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\Diagnostics.h"
 					>
 				</File>
 				<File

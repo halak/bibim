@@ -1,64 +1,7 @@
 #include <Bibim/Config.h>
 #include <Bibim/StandardGame.h>
 #include <Bibim/StandardGame.EmbeddedFont.h>
-#include <Bibim/AlarmClock.h>
-#include <Bibim/AudioDevice.h>
-#include <Bibim/BinaryReader.h>
-#include <Bibim/BinaryWriter.h>
-#include <Bibim/BitMask.h>
-#include <Bibim/BGM.h>
-#include <Bibim/Clipboard.h>
-#include <Bibim/Clock.h>
-#include <Bibim/Environment.h>
-#include <Bibim/FileAssetProvider.h>
-#include <Bibim/FileStream.h>
-#include <Bibim/Font.h>
-#include <Bibim/FontLibrary.h>
-#include <Bibim/GameAssetStorage.h>
-#include <Bibim/GameModuleNode.h>
-#include <Bibim/GameModuleTree.h>
-#include <Bibim/GameWindow.h>
-#include <Bibim/GraphicsDevice.h>
-#include <Bibim/HttpClient.h>
-#include <Bibim/Keyboard.h>
-#include <Bibim/Image.h>
-#include <Bibim/IME.h>
-#include <Bibim/Lua.h>
-#include <Bibim/Math.h>
-#include <Bibim/MemoryStream.h>
-#include <Bibim/Mouse.h>
-#include <Bibim/NetworkStream.h>
-#include <Bibim/Numerics.h>
-#include <Bibim/NetworkAssetProvider.h>
-#include <Bibim/Preferences.h>
-#include <Bibim/RenderTargetTexture2D.h>
-#include <Bibim/ScreenshotPrinter.h>
-#include <Bibim/Socket.h>
-#include <Bibim/SoundFX.h>
-#include <Bibim/SparkParticleEngine.h>
-#include <Bibim/Timeline.h>
-#include <Bibim/UIAsyncEventQueue.h>
-#include <Bibim/UIButton.h>
-#include <Bibim/UIBoundsContext.h>
-#include <Bibim/UICheckBox.h>
-#include <Bibim/UIDrawingContext.h>
-#include <Bibim/UIDocument.h>
-#include <Bibim/UIEditText.h>
-#include <Bibim/UIEventMap.h>
-#include <Bibim/UIFunctionTable.h>
-#include <Bibim/UIFunctionEventHandler.h>
-#include <Bibim/UIHandledDrawingContext.h>
-#include <Bibim/UIImage.h>
-#include <Bibim/UILabel.h>
-#include <Bibim/UIKeyboardEventDispatcher.h>
-#include <Bibim/UIKeyboardEventArgs.h>
-#include <Bibim/UIMouseEventDispatcher.h>
-#include <Bibim/UIMouseEventArgs.h>
-#include <Bibim/UIRadioButton.h>
-#include <Bibim/UIRenderer.h>
-#include <Bibim/UISimpleDomain.h>
-#include <Bibim/UITransform3D.h>
-#include <Bibim/UIWindow.h>
+#include <Bibim/All.h>
 #include <ctime>
 
 namespace Bibim
@@ -66,8 +9,7 @@ namespace Bibim
     StandardGame::StandardGame()
         : fullscreen(false),
           clearColor(Color::Black),
-          debugMode(NoDebugMode),
-          remoteDebugger(nullptr),
+          dashboard(nullptr),
           storage(nullptr),
           fontLibrary(nullptr),
           uiDomain(nullptr)
@@ -82,8 +24,7 @@ namespace Bibim
           contentSize(0, 0),
           fullscreen(false),
           clearColor(Color::Black),
-          debugMode(NoDebugMode),
-          remoteDebugger(nullptr),
+          dashboard(nullptr),
           storage(nullptr),
           fontLibrary(nullptr),
           uiDomain(nullptr)
@@ -98,8 +39,6 @@ namespace Bibim
           contentSize(contentSize),
           fullscreen(false),
           clearColor(Color::Black),
-          debugMode(NoDebugMode),
-          remoteDebugger(nullptr),
           storage(nullptr),
           uiDomain(nullptr)
     {
@@ -109,9 +48,14 @@ namespace Bibim
 
     StandardGame::~StandardGame()
     {
-        delete remoteDebugger;
         GetGraphicsDevice()->RemoveRestoreEventListener(this);
         GetWindow()->RemoveResizeEventListener(this);
+
+        if (dashboard)
+        {
+            delete dashboard;
+            dashboard = nullptr;
+        }
     }
     
     void StandardGame::Initialize(const String& gameName,
@@ -120,6 +64,8 @@ namespace Bibim
                                   bool windowMoveToScreenCenter)
     {
         // Log::Add(this);
+
+        dashboard = new Dashboard();
 
         if (windowMoveToScreenCenter)
             GetWindow()->MoveToScreenCenter();
@@ -289,23 +235,13 @@ namespace Bibim
     {
         if (clearColor.A > 0)
             GetGraphicsDevice()->Clear(clearColor);
-        
-        UIHandledDrawingContext::Handler* handler = nullptr;
-        switch (GetDebugMode())
-        {
-            case SimpleDebugDisplay:
-                handler = UIHandledDrawingContext::BoundsVisualizer::GetInstance();
-                break;
-            case RemoteDebugging:
-                handler = remoteDebugger;
-                break;
-        }
 
-        UIHandledDrawingContext context(uiRenderer, handler);
+        UIHandledDrawingContext context(uiRenderer, dashboard);
         context.Draw(uiDomain->GetRoot());
 
         String debugText = String::Empty;
 
+        /*
         if (GetDebugMode() != NoDebugMode)
         {
             debugText.Append(String::CFormat("FPS: %.1f\n", GetFPS()));
@@ -313,6 +249,7 @@ namespace Bibim
             if (UIVisual* lastTarget = mouseEventDispatcher->GetLastTarget())
                 debugText.Append(String::CFormat("Picked: %s\n", GetFullName(lastTarget).CStr()));
         }
+        */
 
         if (recentLog.IsEmpty() == false)
         {
@@ -388,25 +325,6 @@ namespace Bibim
             GetAssetStorage()->Reset();
 
         ReloadUI();
-    }
-
-    void StandardGame::SetDebugMode(DebugMode value)
-    {
-        if (debugMode != value)
-        {
-            debugMode = value;
-
-            if (debugMode == RemoteDebugging)
-            {
-                BBAssert(remoteDebugger == nullptr);
-                remoteDebugger = new RemoteDebugger();
-            }
-            else
-            {
-                delete remoteDebugger;
-                remoteDebugger = nullptr;
-            }
-        }
     }
 
     //static const Color ErrorColor       = Color(237, 28, 36);
@@ -561,18 +479,7 @@ namespace Bibim
         }
         else if (keyboard.Contains(Key::F3))
         {
-            if (GetDebugMode() != SimpleDebugDisplay)
-                SetDebugMode(SimpleDebugDisplay);
-            else
-                SetDebugMode(NoDebugMode);
-            return true;
-        }
-        else if (keyboard.Contains(Key::F4))
-        {
-            if (GetDebugMode() != RemoteDebugging)
-                SetDebugMode(RemoteDebugging);
-            else
-                SetDebugMode(NoDebugMode);
+            Log::Error("HELLO HELLO HELLO");
             return true;
         }
         else if (keyboard.Contains(Key::Alt) && keyboard.Contains(Key::Enter))
@@ -2196,211 +2103,5 @@ namespace Bibim
         }
         else
             Log::Error("Lua", String::CFormat("Couldn't open lua file. (%s)", path.CStr()));
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    StandardGame::RemoteDebugger::RemoteDebugger()
-        : syncCountdown(0),
-          socket(new Socket(IPEndPoint(IPEndPoint::Localhost, 51893))),
-          queryStream(new NetworkStream(socket)),
-          selectedVisual(nullptr)
-    {
-        stringstream << std::boolalpha;
-    }
-
-    StandardGame::RemoteDebugger::~RemoteDebugger()
-    {
-    }
-
-    void StandardGame::RemoteDebugger::OnBegan(UIHandledDrawingContext& /*context*/, UIVisual* /*root*/)
-    {
-        selectedVisualBounds = RectF::Empty;
-        selectedVisualClippedBounds = RectF::Empty;
-    }
-
-    void StandardGame::RemoteDebugger::OnEnded(UIHandledDrawingContext& context, UIVisual* root)
-    {
-        if (selectedVisualBounds.Width > 0.0f && selectedVisualBounds.Height > 0.0f)
-        {
-            const bool status = (Clock::GetCurrentMilliSeconds() % 500 < 250);
-            const Color outerColor = status ? Color::Yellow : Color::Gray;
-            const Color innerColor = status ? Color::Red    : Color::White;
-
-            RectF bounds = selectedVisualBounds;
-            bounds.Inflate(+1.0f);
-            context.DrawDebugRect(bounds, outerColor);
-            bounds.Inflate(-1.0f);
-            context.DrawDebugRect(bounds, innerColor);
-            bounds.Inflate(-1.0f);
-            context.DrawDebugRect(bounds, outerColor);
-        }
-
-        if (syncCountdown-- < 0)
-        {
-            syncCountdown = 60; // 60프레임에 한 번씩 원격 디버거와 동기화를 맞춥니다.
-            Synchronize(root);
-        }
-
-        if (queryStream->CanRead())
-        {
-            static const int UIVisualSelectedPacketID = 44524;
-
-            BinaryReader reader(queryStream);
-            const int packetID = reader.ReadInt();
-            switch (packetID)
-            {
-                case UIVisualSelectedPacketID:
-                    selectedVisual = reinterpret_cast<void*>(reader.ReadLongInt());
-                    break;
-            }
-        }
-    }
-
-    void StandardGame::RemoteDebugger::OnVisualBegan(UIHandledDrawingContext& context)
-    {
-    }
-
-    void StandardGame::RemoteDebugger::OnVisualEnded(UIHandledDrawingContext& context)
-    {
-        if (context.GetCurrentVisual() == selectedVisual)
-        {
-            selectedVisualBounds = context.GetCurrentBounds();
-            selectedVisualClippedBounds = context.GetCurrentClippedBounds();
-        }
-    }
-
-    void StandardGame::RemoteDebugger::Synchronize(const UIVisual* visual)
-    {
-        struct Jsonify
-        {
-            static void Property(std::ostream& sout, const char* key, const char* value, bool appendComma=true)
-            {
-                if (value == nullptr)
-                    return;
-
-                sout << '"' << key << '"' << ':' << '"' << value << '"';
-                if (appendComma)
-                    sout << ',';
-            }
-
-            static void Property(std::ostream& sout, const char* key, const String& value, bool appendComma=true)
-            {
-                Property(sout, key, value.CStr(), appendComma);
-            }
-
-            static void Property(std::ostream& sout, const char* key, bool value, bool appendComma=true)
-            {
-                sout << '"' << key << '"'  << ':' << value;
-                if (appendComma)
-                    sout << ',';
-            }
-
-            static void Property(std::ostream& sout, const char* key, int value, bool appendComma=true)
-            {
-                sout << '"' << key << '"'  << ':' << value;
-                if (appendComma)
-                    sout << ',';
-            }
-
-            static void Property(std::ostream& sout, const char* key, longint value, bool appendComma=true)
-            {
-                sout << '"' << key << '"'  << ':' << value;
-                if (appendComma)
-                    sout << ',';
-            }
-
-            static String Humanize(float value, UIVisual::PositionMode mode)
-            {
-                switch (mode)
-                {
-                    case UIVisual::AbsolutePosition:
-                        return String::CFormat("%d", static_cast<int>(value));
-                    case UIVisual::RelativePosition:
-                        return String::CFormat("%d%%", static_cast<int>(value * 100.0f));
-                    default:
-                        return "Undefined";
-                }
-            }
-
-            static String Humanize(float value, UIVisual::SizeMode mode)
-            {
-                switch (mode)
-                {
-                    case UIVisual::AbsoluteSize:
-                        return String::CFormat("%d", static_cast<int>(value));
-                    case UIVisual::RelativeSize:
-                        return String::CFormat("%d%%", static_cast<int>(value * 100.0f));
-                    case UIVisual::ContentSize:
-                        if (Math::Equals(value, 1.0f))
-                            return String("auto");
-                        else
-                            return String::CFormat("C%d%%", static_cast<int>(value * 100.0f));
-                    case UIVisual::AdjustiveSize:
-                        return String::CFormat("parent+%d", static_cast<int>(value));
-                    default:
-                        return "Unknown";
-                }
-            }
-
-            static void Do(const UIVisual* visual, std::ostream& sout)
-            {
-                const String x = Humanize(visual->GetX(), visual->GetXMode());
-                const String y = Humanize(visual->GetY(), visual->GetYMode());
-                const String width = Humanize(visual->GetWidth(), visual->GetHeightMode());
-                const String height = Humanize(visual->GetHeight(), visual->GetHeightMode());
-
-                sout << "{";
-                Property(sout, "id", reinterpret_cast<longint>(visual));
-                Property(sout, "class", visual->GetClassID());
-                Property(sout, "name", visual->GetName());
-                Property(sout, "xy", String::CFormat("%s, %s", x.CStr(), y.CStr()));
-                Property(sout, "size", String::CFormat("%s, %s", width.CStr(), height.CStr()));
-                Property(sout, "anchor", UIVisual::ConvertFromAnchorPointToString(visual->GetAnchorPoint()));
-                if (Math::Equals(visual->GetOrigin(), Vector2(0.5f, 0.5f)))
-                    Property(sout, "origin", "Center");
-                else
-                    Property(sout, "origin", String::CFormat("%d%%, %d%%", static_cast<int>(visual->GetOrigin().X * 100.0f),
-                                                                           static_cast<int>(visual->GetOrigin().Y * 100.0f)));
-                Property(sout, "visibility", UIVisual::ConvertFromVisibilityToString(visual->GetVisibility()));
-                Property(sout, "opacity", String::CFormat("%d%%", static_cast<int>(visual->GetOpacity() * 100.0f)));
-                Property(sout, "pickable", visual->GetPickable());
-                Property(sout, "focusable", visual->GetFocusable(), false);
-
-                if (visual->IsPanel())
-                {
-                    sout << ",";
-                    sout << "\"children\": [";
-                    typedef UIPanel::VisualCollection VisualCollection;
-                    const VisualCollection& children = static_cast<const UIPanel*>(visual)->GetChildren();
-                    for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
-                    {
-                        Jsonify::Do(*it, sout);
-
-                        if (it != children.end() - 1)
-                            sout << ",";
-                    }
-                    sout << "]";
-                }
-
-                sout << "}";
-            }
-        };
-
-        if (socket->IsConnected() || 
-            socket->TryConnect())
-        {
-            static const int UIDataPacketID = 44523;
-
-            stringstream.clear();
-            stringstream.str("");
-
-            Jsonify::Do(visual, stringstream);
-
-            std::string s = stringstream.str();
-
-            BinaryWriter::WriteTo(queryStream, UIDataPacketID);
-            BinaryWriter::WriteTo(queryStream, s.c_str(), static_cast<int>(s.size()));
-        }
     }
 }   

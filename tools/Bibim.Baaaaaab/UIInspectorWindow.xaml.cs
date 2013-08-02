@@ -511,6 +511,15 @@ namespace Bibim.Bab
             Action postprocess = null;
             switch (id)
             {
+                case 10001:
+                    int level = (int)serverStreamReader.ReadByte();
+                    string category = serverStreamReader.ReadBibimString();
+                    string message = serverStreamReader.ReadBibimString();
+                    postprocess = new Action(() => 
+                    {
+                        Trace.WriteLine(string.Format("[{0}] {1} / {2}", level, category, message));
+                    });
+                    break;
                 case UIDataPacketID:
                     string jsonString = serverStreamReader.ReadBibimString();
 

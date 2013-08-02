@@ -144,6 +144,7 @@ namespace Bibim
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Framework
             class Clipboard;
+            class Dashboard;
             class GameFrameworkBase;
                 class GameFramework;
                     class StandardGame;
