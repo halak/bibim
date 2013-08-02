@@ -28,9 +28,6 @@
     <Filter Include="03. Game\Collision2D">
       <UniqueIdentifier>{385d5937-8caf-46f2-85c3-e00e53cc510b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Game\Diagnostics">
-      <UniqueIdentifier>{05f4ee7e-d56d-4e20-bc8c-8e00d830ff1a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Game\Scripting">
       <UniqueIdentifier>{490611d8-aec3-49fa-8acf-d6d1afe6689b}</UniqueIdentifier>
     </Filter>
@@ -67,9 +64,6 @@
     <Filter Include="03. Game\Graphics\GLES2">
       <UniqueIdentifier>{5854e5d1-952b-4117-9c85-eb0684cb40ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Game\FileSystem">
-      <UniqueIdentifier>{6a664566-dbce-4983-82e9-6d59d9fe6ad0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Game\Framework">
       <UniqueIdentifier>{477cedc1-e416-4d36-8fdb-8547431fdcd3}</UniqueIdentifier>
     </Filter>
@@ -78,9 +72,6 @@
     </Filter>
     <Filter Include="03. Game\GFX">
       <UniqueIdentifier>{a8b6ad1f-36bd-469b-aec0-ecfd22d02913}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. Game\Net">
-      <UniqueIdentifier>{03178203-36f5-4ec9-8623-2df14bba62b9}</UniqueIdentifier>
     </Filter>
     <Filter Include="01. Foundation">
       <UniqueIdentifier>{e43b18ad-76cd-4b08-9179-de59f108fe18}</UniqueIdentifier>
@@ -135,6 +126,15 @@
     </Filter>
     <Filter Include="03. Game\Gameplay\PathFinder">
       <UniqueIdentifier>{bdbbcae6-f432-4be3-b67c-d9fe0929ace0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. System\Net">
+      <UniqueIdentifier>{03178203-36f5-4ec9-8623-2df14bba62b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. System\Diagnostics">
+      <UniqueIdentifier>{4b8779e4-c559-4953-9692-856a5ced9e34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. System\FileSystem">
+      <UniqueIdentifier>{6a664566-dbce-4983-82e9-6d59d9fe6ad0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -266,18 +266,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Collision2D\UserShape2D.cpp">
       <Filter>03. Game\Collision2D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Diagnostics\CrashDump.cpp">
-      <Filter>03. Game\Diagnostics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Diagnostics\FileLogger.cpp">
-      <Filter>03. Game\Diagnostics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Diagnostics\Logger.cpp">
-      <Filter>03. Game\Diagnostics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Diagnostics\SystemLogger.cpp">
-      <Filter>03. Game\Diagnostics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Gameplay\BatchCommand.cpp">
       <Filter>03. Game\Gameplay</Filter>
@@ -583,13 +571,13 @@
       <Filter>03. Game\Graphics\GLES2</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\FileSystem\FileStream.Windows.cpp">
-      <Filter>03. Game\FileSystem</Filter>
+      <Filter>02. System\FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\FileSystem\MPQ.cpp">
-      <Filter>03. Game\FileSystem</Filter>
+      <Filter>02. System\FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\FileSystem\MPQStream.cpp">
-      <Filter>03. Game\FileSystem</Filter>
+      <Filter>02. System\FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Framework\GameFramework.Windows.cpp">
       <Filter>03. Game\Framework</Filter>
@@ -636,9 +624,6 @@
     <ClCompile Include="..\..\src\Foundation\SequenceDictionary.cpp">
       <Filter>01. Foundation\Container</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Foundation\Log.cpp">
-      <Filter>01. Foundation\Diagnostics</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Foundation\Geom2D.cpp">
       <Filter>01. Foundation\Mathematics</Filter>
     </ClCompile>
@@ -675,21 +660,6 @@
     <ClCompile Include="..\..\src\Threading\Thread.Windows.cpp">
       <Filter>02. System\Threading</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Foundation\BinaryReader.cpp">
-      <Filter>02. System\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Foundation\BinaryWriter.cpp">
-      <Filter>02. System\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Foundation\DumpStream.cpp">
-      <Filter>02. System\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Foundation\MemoryStream.cpp">
-      <Filter>02. System\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Foundation\Stream.cpp">
-      <Filter>02. System\IO</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\extlibs\lua_tinker\lua_tinker.cpp">
       <Filter>04. References</Filter>
     </ClCompile>
@@ -709,10 +679,10 @@
       <Filter>03. Game\Input</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Net\HttpClient.Curl.cpp">
-      <Filter>03. Game\Net</Filter>
+      <Filter>02. System\Net</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Net\HttpClientBase.cpp">
-      <Filter>03. Game\Net</Filter>
+      <Filter>02. System\Net</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Framework\GameFramework.Android.cpp">
       <Filter>03. Game\Framework</Filter>
@@ -736,7 +706,7 @@
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\FileSystem\FileStream.Android.cpp">
-      <Filter>03. Game\FileSystem</Filter>
+      <Filter>02. System\FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Graphics\GraphicsDeviceBase.cpp">
       <Filter>03. Game\Graphics</Filter>
@@ -751,7 +721,7 @@
       <Filter>03. Game\UI\Visuals</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\FileSystem\Path.cpp">
-      <Filter>03. Game\FileSystem</Filter>
+      <Filter>02. System\FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\UI\UIEditText.cpp">
       <Filter>03. Game\UI\Visuals</Filter>
@@ -790,7 +760,7 @@
       <Filter>03. Game\Time</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\FileSystem\FileStream.iOS.cpp">
-      <Filter>03. Game\FileSystem</Filter>
+      <Filter>02. System\FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Foundation\Color.cpp">
       <Filter>01. Foundation\%28Fundamental%29</Filter>
@@ -814,10 +784,10 @@
       <Filter>03. Game\UI\Visuals</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Net\NetworkStream.cpp">
-      <Filter>03. Game\Net</Filter>
+      <Filter>02. System\Net</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Net\Socket.cpp">
-      <Filter>03. Game\Net</Filter>
+      <Filter>02. System\Net</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Graphics\JPEGReader.cpp">
       <Filter>03. Game\Graphics</Filter>
@@ -826,16 +796,34 @@
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Net\IPEndPoint.cpp">
-      <Filter>03. Game\Net</Filter>
+      <Filter>02. System\Net</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Framework\Startup.cpp">
       <Filter>03. Game\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Foundation\Profiler.cpp">
-      <Filter>01. Foundation\Diagnostics</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Input\Mouse.Windows.cpp">
       <Filter>03. Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\IO\DumpStream.cpp">
+      <Filter>02. System\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\IO\Stream.cpp">
+      <Filter>02. System\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\IO\MemoryStream.cpp">
+      <Filter>02. System\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\IO\BinaryReader.cpp">
+      <Filter>02. System\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\IO\BinaryWriter.cpp">
+      <Filter>02. System\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Diagnostics\CrashDump.cpp">
+      <Filter>02. System\Diagnostics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Diagnostics\Log.cpp">
+      <Filter>02. System\Diagnostics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1003,15 +991,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\UserShape2D.h">
       <Filter>03. Game\Collision2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\FileLogger.h">
-      <Filter>03. Game\Diagnostics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\Logger.h">
-      <Filter>03. Game\Diagnostics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\SystemLogger.h">
-      <Filter>03. Game\Diagnostics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\BatchCommand.h">
       <Filter>03. Game\Gameplay</Filter>
@@ -1353,16 +1332,16 @@
       <Filter>03. Game\Graphics\GLES2</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\FileStream.h">
-      <Filter>03. Game\FileSystem</Filter>
+      <Filter>02. System\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\FileStream.Windows.h">
-      <Filter>03. Game\FileSystem</Filter>
+      <Filter>02. System\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\MPQ.h">
-      <Filter>03. Game\FileSystem</Filter>
+      <Filter>02. System\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\MPQStream.h">
-      <Filter>03. Game\FileSystem</Filter>
+      <Filter>02. System\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\GameFramework.h">
       <Filter>03. Game\Framework</Filter>
@@ -1380,7 +1359,7 @@
       <Filter>03. Game\GFX</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\HttpClient.h">
-      <Filter>03. Game\Net</Filter>
+      <Filter>02. System\Net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Any.h">
       <Filter>01. Foundation\%28Fundamental%29</Filter>
@@ -1425,9 +1404,6 @@
       <Filter>01. Foundation\Container</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Assert.h">
-      <Filter>01. Foundation\Diagnostics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\Log.h">
       <Filter>01. Foundation\Diagnostics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Geom2D.h">
@@ -1536,10 +1512,10 @@
       <Filter>03. Game\Audio</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\HttpClient.Curl.h">
-      <Filter>03. Game\Net</Filter>
+      <Filter>02. System\Net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\HttpClientBase.h">
-      <Filter>03. Game\Net</Filter>
+      <Filter>02. System\Net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\ThreadBase.h">
       <Filter>02. System\Threading</Filter>
@@ -1569,7 +1545,7 @@
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\FileStream.Android.h">
-      <Filter>03. Game\FileSystem</Filter>
+      <Filter>02. System\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\GraphicsDeviceBase.h">
       <Filter>03. Game\Graphics</Filter>
@@ -1581,7 +1557,7 @@
       <Filter>03. Game\UI\Visuals</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Path.h">
-      <Filter>03. Game\FileSystem</Filter>
+      <Filter>02. System\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\UIEditText.h">
       <Filter>03. Game\UI\Visuals</Filter>
@@ -1617,7 +1593,7 @@
       <Filter>03. Game\Input</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\FileStream.iOS.h">
-      <Filter>03. Game\FileSystem</Filter>
+      <Filter>02. System\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Config.h" />
     <ClInclude Include="..\..\include\Bibim\Clipboard.Windows.h">
@@ -1642,10 +1618,10 @@
       <Filter>03. Game\UI\Visuals</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\NetworkStream.h">
-      <Filter>03. Game\Net</Filter>
+      <Filter>02. System\Net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Socket.h">
-      <Filter>03. Game\Net</Filter>
+      <Filter>02. System\Net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\JPEGReader.h">
       <Filter>03. Game\Graphics</Filter>
@@ -1654,16 +1630,16 @@
       <Filter>03. Game\%28Asset%29\Providers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\IPEndPoint.h">
-      <Filter>03. Game\Net</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\CrashDump.h">
-      <Filter>03. Game\Diagnostics</Filter>
+      <Filter>02. System\Net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Startup.h">
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\Profiler.h">
-      <Filter>01. Foundation\Diagnostics</Filter>
+    <ClInclude Include="..\..\include\Bibim\CrashDump.h">
+      <Filter>02. System\Diagnostics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Log.h">
+      <Filter>02. System\Diagnostics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,13 +11,11 @@
         {
             BBThisIsStaticClass(Log);
             public:
-                class Listener
+                enum Level
                 {
-                    public:
-                        virtual ~Listener() { }
-                        virtual void Error(const char* category, const char* message) = 0;
-                        virtual void Warning(const char* category, const char* message) = 0;
-                        virtual void Information(const char* category, const char* message) = 0;
+                    ErrorLevel,
+                    WarningLevel,
+                    InformationLevel,
                 };
 
             public:
@@ -32,12 +30,18 @@
                 static inline void Warning(const char* category, const String& message);
                 static inline void Information(const char* category, const String& message);
 
-                static void Error(const char* category, const char* message);
-                static void Warning(const char* category, const char* message);
-                static void Information(const char* category, const char* message);
+                static inline void Error(const char* category, const char* message);
+                static inline void Warning(const char* category, const char* message);
+                static inline void Information(const char* category, const char* message);
 
-                static void Add(Listener* item);
-                static void Remove(Listener* item);
+                static inline Stream* GetStream();
+                static void SetStream(Stream* value);
+
+            private:
+                static void Write(Level level, const char* category, const char* message);
+
+            private:
+                static StreamPtr stream;
         };
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,6 +89,26 @@
         void Log::Information(const char* category, const String& message)
         {
             Information(category, message.CStr());
+        }
+
+        void Log::Error(const char* category, const char* message)
+        {
+            Write(ErrorLevel, category, message);
+        }
+
+        void Log::Warning(const char* category, const char* message)
+        {
+            Write(WarningLevel, category, message);
+        }
+
+        void Log::Information(const char* category, const char* message)
+        {
+            Write(InformationLevel, category, message);
+        }
+
+        Stream* Log::GetStream()
+        {
+            return stream;
         }
     }
 

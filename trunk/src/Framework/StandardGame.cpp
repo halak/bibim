@@ -36,7 +36,6 @@
 #include <Bibim/Socket.h>
 #include <Bibim/SoundFX.h>
 #include <Bibim/SparkParticleEngine.h>
-#include <Bibim/SystemLogger.h>
 #include <Bibim/Timeline.h>
 #include <Bibim/UIAsyncEventQueue.h>
 #include <Bibim/UIButton.h>
@@ -120,14 +119,7 @@ namespace Bibim
                                   StandardGame::LuaBase* lua,
                                   bool windowMoveToScreenCenter)
     {
-        Log::Add(this);
-
-        {
-            //MOBILEFileLogger* fl = new FileLogger("TOUHOU PANIC LOG.txt");
-            SystemLogger* sl = new SystemLogger(gameName);
-            //MOBILEGetModules()->GetRoot()->AttachChild(fl);
-            GetModules()->GetRoot()->AttachChild(sl);
-        }
+        // Log::Add(this);
 
         if (windowMoveToScreenCenter)
             GetWindow()->MoveToScreenCenter();
@@ -258,7 +250,6 @@ namespace Bibim
     void StandardGame::Finalize()
     {
         bgm->SetMute(true);
-        Log::Remove(this);
         debugFont.Reset();
         GetMainTimeline()->Clear();
         uiDomain->GetRoot()->RemoveAllChildren();
@@ -418,59 +409,59 @@ namespace Bibim
         }
     }
 
-    static const Color ErrorColor       = Color(237, 28, 36);
-    static const Color WarningColor     = Color(255, 242, 0);
-    static const Color InformationColor = Color(37, 177, 76);
+    //static const Color ErrorColor       = Color(237, 28, 36);
+    //static const Color WarningColor     = Color(255, 242, 0);
+    //static const Color InformationColor = Color(37, 177, 76);
 
-    void StandardGame::Error(const char* category, const char* message)
-    {
-        OnLog(ErrorColor, category, message);
-    }
+    //void StandardGame::Error(const char* category, const char* message)
+    //{
+    //    // OnLog(ErrorColor, category, message);
+    //}
 
-    void StandardGame::Warning(const char* category, const char* message)
-    {
-        OnLog(WarningColor, category, message);
-    }
+    //void StandardGame::Warning(const char* category, const char* message)
+    //{
+    //    // OnLog(WarningColor, category, message);
+    //}
 
-    void StandardGame::Information(const char* /*category*/, const char* /*message*/)
-    {
-        // OnLog(InformationColor, category, message);
-    }
+    //void StandardGame::Information(const char* /*category*/, const char* /*message*/)
+    //{
+    //    // OnLog(InformationColor, category, message);
+    //}
 
-    void StandardGame::OnLog(Bibim::Color color, const char* /*category*/, const char* message)
-    {
-        if (debugFont == nullptr)
-            return;
+    //void StandardGame::OnLog(Bibim::Color color, const char* /*category*/, const char* message)
+    //{
+    //    if (debugFont == nullptr)
+    //        return;
 
-        if (debugFont->GetColor() != color)
-        {
-            debugFont->SetColor(color);
-            recentLog = String::Empty;
-        }
+    //    if (debugFont->GetColor() != color)
+    //    {
+    //        debugFont->SetColor(color);
+    //        recentLog = String::Empty;
+    //    }
 
-        recentLog += message;
-        recentLog += '\n';
+    //    recentLog += message;
+    //    recentLog += '\n';
 
-        int firstLineBreakIndex = -1;
-        int lineCount = 0;
-        const int length = recentLog.GetLength();
-        for (int i = 0; i < length; i++)
-        {
-            if (recentLog[i] == '\n')
-            {
-                if (firstLineBreakIndex == -1)
-                    firstLineBreakIndex = i;
+    //    int firstLineBreakIndex = -1;
+    //    int lineCount = 0;
+    //    const int length = recentLog.GetLength();
+    //    for (int i = 0; i < length; i++)
+    //    {
+    //        if (recentLog[i] == '\n')
+    //        {
+    //            if (firstLineBreakIndex == -1)
+    //                firstLineBreakIndex = i;
 
-                lineCount++;
+    //            lineCount++;
 
-                if (lineCount > 30)
-                {
-                    recentLog = recentLog.Substring(firstLineBreakIndex + 1);
-                    break;
-                }
-            }
-        }
-    }
+    //            if (lineCount > 30)
+    //            {
+    //                recentLog = recentLog.Substring(firstLineBreakIndex + 1);
+    //                break;
+    //            }
+    //        }
+    //    }
+    //}
 
     void StandardGame::MatchContentToWindow()
     {

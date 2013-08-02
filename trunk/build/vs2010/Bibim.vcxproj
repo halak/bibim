@@ -121,13 +121,13 @@
     <ClCompile Include="..\..\src\Audio\BGM.AL.cpp" />
     <ClCompile Include="..\..\src\Audio\SoundFX.AL.cpp" />
     <ClCompile Include="..\..\src\Component\GameComponentFactory.cpp" />
+    <ClCompile Include="..\..\src\Diagnostics\Log.cpp" />
     <ClCompile Include="..\..\src\FileSystem\FileStream.Android.cpp" />
     <ClCompile Include="..\..\src\FileSystem\FileStream.iOS.cpp" />
     <ClCompile Include="..\..\src\FileSystem\Path.cpp" />
     <ClCompile Include="..\..\src\Foundation\Color.cpp" />
     <ClCompile Include="..\..\src\Foundation\Environment.Android.cpp" />
     <ClCompile Include="..\..\src\Foundation\Environment.iOS.cpp" />
-    <ClCompile Include="..\..\src\Foundation\Profiler.cpp" />
     <ClCompile Include="..\..\src\Framework\Clipboard.Android.cpp" />
     <ClCompile Include="..\..\src\Framework\Clipboard.iOS.cpp" />
     <ClCompile Include="..\..\src\Framework\Clipboard.Windows.cpp" />
@@ -147,6 +147,11 @@
     <ClCompile Include="..\..\src\Input\IMEBase.cpp" />
     <ClCompile Include="..\..\src\Input\Key.cpp" />
     <ClCompile Include="..\..\src\Input\Mouse.Mobile.cpp" />
+    <ClCompile Include="..\..\src\IO\BinaryReader.cpp" />
+    <ClCompile Include="..\..\src\IO\BinaryWriter.cpp" />
+    <ClCompile Include="..\..\src\IO\DumpStream.cpp" />
+    <ClCompile Include="..\..\src\IO\MemoryStream.cpp" />
+    <ClCompile Include="..\..\src\IO\Stream.cpp" />
     <ClCompile Include="..\..\src\Net\HttpClient.Curl.cpp" />
     <ClCompile Include="..\..\src\Net\HttpClientBase.cpp" />
     <ClCompile Include="..\..\src\Net\IPEndPoint.cpp" />
@@ -192,9 +197,6 @@
     <ClCompile Include="..\..\src\Collision2D\SphereShape2D.cpp" />
     <ClCompile Include="..\..\src\Collision2D\UserShape2D.cpp" />
     <ClCompile Include="..\..\src\Diagnostics\CrashDump.cpp" />
-    <ClCompile Include="..\..\src\Diagnostics\FileLogger.cpp" />
-    <ClCompile Include="..\..\src\Diagnostics\Logger.cpp" />
-    <ClCompile Include="..\..\src\Diagnostics\SystemLogger.cpp" />
     <ClCompile Include="..\..\src\Gameplay\BatchCommand.cpp" />
     <ClCompile Include="..\..\src\Gameplay\Command.cpp" />
     <ClCompile Include="..\..\src\Gameplay\CommandHistory.cpp" />
@@ -321,7 +323,6 @@
     <ClCompile Include="..\..\src\Foundation\Vector3.cpp" />
     <ClCompile Include="..\..\src\Foundation\Vector4.cpp" />
     <ClCompile Include="..\..\src\Foundation\SequenceDictionary.cpp" />
-    <ClCompile Include="..\..\src\Foundation\Log.cpp" />
     <ClCompile Include="..\..\src\Foundation\Geom2D.cpp" />
     <ClCompile Include="..\..\src\Foundation\Math.cpp" />
     <ClCompile Include="..\..\src\Foundation\Numerics.cpp" />
@@ -334,11 +335,6 @@
     <ClCompile Include="..\..\src\Threading\Lock.Windows.cpp" />
     <ClCompile Include="..\..\src\Threading\ManualLocker.cpp" />
     <ClCompile Include="..\..\src\Threading\Thread.Windows.cpp" />
-    <ClCompile Include="..\..\src\Foundation\BinaryReader.cpp" />
-    <ClCompile Include="..\..\src\Foundation\BinaryWriter.cpp" />
-    <ClCompile Include="..\..\src\Foundation\DumpStream.cpp" />
-    <ClCompile Include="..\..\src\Foundation\MemoryStream.cpp" />
-    <ClCompile Include="..\..\src\Foundation\Stream.cpp" />
     <ClCompile Include="..\..\extlibs\lua_tinker\lua_tinker.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -356,7 +352,6 @@
     <ClInclude Include="..\..\include\Bibim\AudioDevice.AL.h" />
     <ClInclude Include="..\..\include\Bibim\AudioDevice.h" />
     <ClInclude Include="..\..\include\Bibim\BGM.AL.h" />
-    <ClInclude Include="..\..\include\Bibim\Profiler.h" />
     <ClInclude Include="..\..\include\Bibim\SoundFX.AL.h" />
     <ClInclude Include="..\..\include\Bibim\SoundFX.h" />
     <ClInclude Include="..\..\include\Bibim\GameComponentFactory.h" />
@@ -440,9 +435,6 @@
     <ClInclude Include="..\..\include\Bibim\Shape2D.h" />
     <ClInclude Include="..\..\include\Bibim\SphereShape2D.h" />
     <ClInclude Include="..\..\include\Bibim\UserShape2D.h" />
-    <ClInclude Include="..\..\include\Bibim\FileLogger.h" />
-    <ClInclude Include="..\..\include\Bibim\Logger.h" />
-    <ClInclude Include="..\..\include\Bibim\SystemLogger.h" />
     <ClInclude Include="..\..\include\Bibim\BatchCommand.h" />
     <ClInclude Include="..\..\include\Bibim\Command.h" />
     <ClInclude Include="..\..\include\Bibim\CommandHistory.h" />

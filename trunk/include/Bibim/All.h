@@ -42,8 +42,6 @@
 #  include <Bibim/Path.h>
 #  include <Bibim/MPQ.h>
 #  include <Bibim/MPQStream.h>
-#  include <Bibim/FileLogger.h>
-#  include <Bibim/SystemLogger.h>
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // GFX
 #   include <Bibim/SparkParticleEngine.h>
