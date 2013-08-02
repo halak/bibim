@@ -347,15 +347,16 @@ def publish_library(environment, platform, target):
 def merge_sources(directory):
     from datetime import datetime
 
-    lines = ['#include <zlib.h>']
+    lines = []
     lines.append('// Automatically generated in {0}'.format(datetime.now()))
     lines.append('')
+    lines.append('#include <zlib.h>')
     for module in MODULES:
         for item in os.listdir(os.path.join(directory, module)):
             if (file_ext(item) == 'cpp' and 'Irrklang' not in item):
                 lines.append('#include "{0}/{1}"'.format(module, item))
 
-    f = open(os.path.join(directory, 'Bibim-All.cpp'), 'w')
+    f = open(os.path.join(directory, 'Bibim.cpp'), 'w')
     f.write('\n'.join(lines))
     f.close()
     
