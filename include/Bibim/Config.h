@@ -20,8 +20,10 @@
 
 #if (defined(DEBUG) || defined(_DEBUG))
 #    define BIBIM_DEBUG
+#    define BIBIM_USE_DIAGNOSTICS
 #else
 #    define BIBIM_RELEASE
+#    define BIBIM_USE_DIAGNOSTICS
 #endif
 
 #if (defined(_MSC_VER))

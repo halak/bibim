@@ -973,20 +973,6 @@
 				<File
 					RelativePath="..\..\src\UI\UIRenderer.GLES2.cpp"
 					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\..\include\Bibim\UIRenderer.GLES2.h"
@@ -1642,20 +1628,6 @@
 					<File
 						RelativePath="..\..\src\Graphics\DynamicTexture2D.GLES2.cpp"
 						>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
 						RelativePath="..\..\include\Bibim\DynamicTexture2D.GLES2.h"
@@ -1678,20 +1650,6 @@
 					<File
 						RelativePath="..\..\src\Graphics\GLES2.cpp"
 						>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
 						RelativePath="..\..\include\Bibim\GLES2.h"
@@ -1714,20 +1672,6 @@
 					<File
 						RelativePath="..\..\src\Graphics\GraphicsDevice.GLES2.cpp"
 						>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
 						RelativePath="..\..\include\Bibim\GraphicsDevice.GLES2.h"
@@ -1750,20 +1694,6 @@
 					<File
 						RelativePath="..\..\src\Graphics\RenderTargetTexture2D.GLES2.cpp"
 						>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
 						RelativePath="..\..\include\Bibim\RenderTargetTexture2D.GLES2.h"
@@ -1786,20 +1716,6 @@
 					<File
 						RelativePath="..\..\src\Graphics\ShaderEffect.GLES2.cpp"
 						>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
 						RelativePath="..\..\include\Bibim\ShaderEffect.GLES2.h"
@@ -1822,20 +1738,6 @@
 					<File
 						RelativePath="..\..\src\Graphics\SourceTexture2D.GLES2.cpp"
 						>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
 						RelativePath="..\..\include\Bibim\SourceTexture2D.GLES2.h"
@@ -1858,20 +1760,6 @@
 					<File
 						RelativePath="..\..\src\Graphics\Texture2D.GLES2.cpp"
 						>
-						<FileConfiguration
-							Name="Debug|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
-						<FileConfiguration
-							Name="Release|Win32"
-							>
-							<Tool
-								Name="VCCLCompilerTool"
-							/>
-						</FileConfiguration>
 					</File>
 					<File
 						RelativePath="..\..\include\Bibim\Texture2D.GLES2.h"
