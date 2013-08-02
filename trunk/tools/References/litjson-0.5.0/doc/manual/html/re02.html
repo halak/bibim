@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>AllowSingleQuotedStrings</title><link rel="stylesheet" href="ld-default.css" type="text/css" /><meta name="generator" content="DocBook XSL-NS Stylesheets V1.73.1" /><link rel="start" href="index.html" title="LitJSON Manual" /><link rel="up" href="ch03.html#T.LitJson.JsonReader" title="1.1. JsonReader" /><link rel="prev" href="re01.html" title="AllowComments" /><link rel="next" href="re03.html" title="EndOfJson" /><link xmlns="" rel="stylesheet" href="ld-highlight.css" type="text/css" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">AllowSingleQuotedStrings</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="re01.html">Prev</a> </td><th width="60%" align="center">1.1. JsonReader</th><td width="20%" align="right"> <a accesskey="n" href="re03.html">Next</a></td></tr></table><hr /></div><div class="refentry" lang="en" xml:lang="en"><a id="P.LitJson.JsonReader.AllowSingleQuotedStrings"></a><div class="titlepage"></div><div class="refnamediv"><h2>AllowSingleQuotedStrings</h2><p>AllowSingleQuotedStrings — 
+      Specifies whether the reader accepts strings enclosed within single
+      quotes
+    </p></div><div class="refsection" lang="en" xml:lang="en"><a id="id2521975"></a><h2>Description</h2><code xmlns="" xmlns:ldf="http://lb.diptongonante.com/ns/litdoc/functions" class="fieldsynopsis"><span class="modifier">public </span><span class="type">bool </span><span class="varname">AllowSingleQuotedStrings </span>{ get; set; }</code><p>
+      An instance of <code class="classname"><a class="classname" href="ch03.html#T.LitJson.JsonReader" title="LitJson.JsonReader">JsonReader</a></code> can be configured to
+      accept strings delimited by the single quote character
+      (<code class="literal">'</code>), something which is not part of the strict JSON
+      grammar.
+    </p><p>
+      The value of this property is <code class="literal">true</code> by default.
+    </p></div><div class="refsection" lang="en" xml:lang="en"><a id="id2522024"></a><h2>Examples</h2><div class="example"><a id="id2522033"></a><p class="title"><b>Example 1.2. <code class="varname">AllowSingleQuotedStrings</code> examples</b></p><div class="example-contents"><div xmlns="" class="programlisting">
+<!-- Generator: GNU source-highlight 2.6
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span class="preproc">using</span><span class="normal"> LitJson</span><span class="symbol">;</span>
+
+<span class="keyword">class</span><span class="normal"> JsonSample</span>
+<span class="cbracket">{</span>
+<span class="normal">    </span><span class="type">void</span><span class="normal"> </span><span class="function">ReadJsonStrings </span><span class="symbol">()</span>
+<span class="normal">    </span><span class="cbracket">{</span>
+<span class="normal">        </span><span class="comment">// Notice the second element</span>
+<span class="normal">        </span><span class="type">string</span><span class="normal"> json </span><span class="symbol">=</span><span class="normal"> </span><span class="string">"[ </span><span class="specialchar">\"</span><span class="string">one</span><span class="specialchar">\"</span><span class="string">, 'two', </span><span class="specialchar">\"</span><span class="string">three</span><span class="specialchar">\"</span><span class="string"> ]"</span><span class="symbol">;</span>
+
+<span class="normal">        JsonReader reader </span><span class="symbol">=</span><span class="normal"> </span><span class="keyword">new</span><span class="normal"> </span><span class="function">JsonReader </span><span class="symbol">(</span><span class="normal">json</span><span class="symbol">);</span>
+
+<span class="normal">        </span><span class="keyword">while</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">reader</span><span class="symbol">.</span><span class="function">Read </span><span class="symbol">())</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">            </span><span class="comment">// Do something with the tokens read</span>
+<span class="normal">        </span><span class="cbracket">}</span>
+
+<span class="normal">        </span><span class="comment">// New instance to begin reading again</span>
+<span class="normal">        reader </span><span class="symbol">=</span><span class="normal"> </span><span class="keyword">new</span><span class="normal"> </span><span class="function">JsonReader </span><span class="symbol">(</span><span class="normal">json</span><span class="symbol">);</span>
+<span class="normal">        reader</span><span class="symbol">.</span><span class="normal">AllowSingleQuotedStrings </span><span class="symbol">=</span><span class="normal"> </span><span class="keyword">false</span><span class="symbol">;</span>
+
+<span class="normal">        </span><span class="keyword">while</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">reader</span><span class="symbol">.</span><span class="function">Read </span><span class="symbol">())</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">            </span><span class="comment">// An exception would be thrown here</span>
+<span class="normal">        </span><span class="cbracket">}</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+<span class="cbracket">}</span></tt></pre>
+</div></div></div><br class="example-break" /></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="re01.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html#T.LitJson.JsonReader">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="re03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">AllowComments </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> EndOfJson</td></tr></table></div></body></html>
