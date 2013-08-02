@@ -1,3 +1,1 @@
-@echo off
-
-SET BIBIM_DIR=%cd%
+SETX BIBIM_DIR %cd%\
