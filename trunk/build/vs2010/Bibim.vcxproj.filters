@@ -312,9 +312,6 @@
     <ClCompile Include="..\..\src\Input\Mouse.cpp">
       <Filter>03. Game\Input</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Input\Mouse.Window.cpp">
-      <Filter>03. Game\Input</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Input\MouseState.cpp">
       <Filter>03. Game\Input</Filter>
     </ClCompile>
@@ -603,9 +600,6 @@
     <ClCompile Include="..\..\src\GFX\SparkParticleEngine.cpp">
       <Filter>03. Game\GFX</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Net\HttpClient.Windows.cpp">
-      <Filter>03. Game\Net</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Foundation\Any.cpp">
       <Filter>01. Foundation\%28Fundamental%29</Filter>
     </ClCompile>
@@ -840,6 +834,10 @@
     <ClCompile Include="..\..\src\Foundation\Profiler.cpp">
       <Filter>01. Foundation\Diagnostics</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Input\Mouse.Windows.cpp">
+      <Filter>03. Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Bibim-All.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Bibim\AssetLoadingTask.h">
@@ -1383,9 +1381,6 @@
       <Filter>03. Game\GFX</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\HttpClient.h">
-      <Filter>03. Game\Net</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\HttpClient.Windows.h">
       <Filter>03. Game\Net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Any.h">

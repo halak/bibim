@@ -1,7 +1,12 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
+
 #include <Bibim/GameWindow.Windows.h>
 #include <Bibim/Log.h>
+
+#ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
+#endif
 #include <windows.h>
 #include <vector>
 
@@ -355,3 +360,5 @@ namespace Bibim
         return DefWindowProc(windowHandle, message, wParam, lParam);
     }
 }
+
+#endif

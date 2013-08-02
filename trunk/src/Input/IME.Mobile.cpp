@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_ANDROID) || defined(BIBIM_PLATFORM_IOS))
+
 #include <Bibim/IME.Mobile.h>
 
 namespace Bibim
@@ -43,3 +45,5 @@ namespace Bibim
         requests.push(request);
     }
 }
+
+#endif

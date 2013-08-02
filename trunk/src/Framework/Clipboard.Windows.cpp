@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
+
 #include <Bibim/Clipboard.Windows.h>
 #include <windows.h>
 
@@ -56,3 +58,5 @@ namespace Bibim
         }
     }
 }
+
+#endif

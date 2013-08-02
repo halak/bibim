@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_USE_DIRECTX9))
+
 #include <Bibim/DynamicTexture2D.DX9.h>
 #include <Bibim/Assert.h>
 #include <Bibim/CheckedRelease.h>
@@ -156,3 +158,5 @@ namespace Bibim
         Base::OnGraphicsDeviceLost(g);
     }
 }
+
+#endif

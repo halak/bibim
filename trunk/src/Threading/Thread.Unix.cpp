@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_UNIX))
+
 #include <Bibim/Thread.Unix.h>
 #include <unistd.h>
 
@@ -58,3 +60,5 @@ namespace Bibim
         pthread_exit(nullptr);
     }
 }
+
+#endif

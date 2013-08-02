@@ -21,6 +21,10 @@
                 template <typename T> static void AddEntry();
                 static void AddEntry(int id, CreateFunction function);
                 static void SortEntries();
+
+            private:
+                struct Entry;
+                static Entry* FindEntry(int id);
         };
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////

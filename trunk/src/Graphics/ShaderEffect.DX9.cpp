@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_USE_DIRECTX9))
+
 #include <Bibim/ShaderEffect.DX9.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/CheckedRelease.h>
@@ -154,3 +156,5 @@ namespace Bibim
         SetStatus(DirtyStatus);
     }
 }
+
+#endif

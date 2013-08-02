@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_ANDROID))
+
 #include <Bibim/FileStream.Android.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Environment.h>
@@ -219,3 +221,5 @@ namespace Bibim
         Assets = reinterpret_cast<AAssetManager*>(value);
     }
 }
+
+#endif

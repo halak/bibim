@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_IOS))
+
 #include <Bibim/Clipboard.iOS.h>
 
 namespace Bibim
@@ -20,3 +22,5 @@ namespace Bibim
     {
     }
 }
+
+#endif

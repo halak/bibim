@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
+
 #include <Bibim/Environment.Windows.h>
 #include <windows.h>
 #include <Shlobj.h>
@@ -75,3 +77,5 @@ namespace Bibim
             return PrivateInstance.workingDirectory + "/" + filename;
     }
 }
+
+#endif

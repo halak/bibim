@@ -3,7 +3,7 @@
 #define __BIBIM_GLES2_H__
 
 #   include <Bibim/Foundation.h>
-#   ifdef BIBIM_PLATFORM_IOS
+#   if (defined(BIBIM_PLATFORM_IOS))
 #       import <OpenGLES/ES2/gl.h>
 #       import <OpenGLES/ES2/glext.h>
 #   else

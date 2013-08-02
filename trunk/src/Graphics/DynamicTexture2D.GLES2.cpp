@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_USE_OPENGLES2))
+
 #include <Bibim/DynamicTexture2D.GLES2.h>
 #include <Bibim/Assert.h>
 #include <Bibim/GraphicsDevice.GLES2.h>
@@ -125,3 +127,5 @@ namespace Bibim
         return Base::GetHandle();
     }
 }
+
+#endif

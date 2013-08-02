@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_USE_DIRECTX9))
+
 #include <Bibim/Texture2D.DX9.h>
 #include <Bibim/GraphicsDevice.DX9.h>
 #include <Bibim/CheckedRelease.h>
@@ -57,3 +59,5 @@ namespace Bibim
         SetStatus(DirtyStatus);
     }
 }
+
+#endif

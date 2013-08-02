@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
+
 #include <Bibim/Thread.Windows.h>
 #include <windows.h>
 
@@ -58,3 +60,5 @@ namespace Bibim
         ::ExitThread(0);
     }
 }
+
+#endif

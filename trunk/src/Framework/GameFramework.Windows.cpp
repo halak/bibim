@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
+
 #include <Bibim/GameFramework.Windows.h>
 
 #ifndef WIN32_LEAN_AND_MEAN
@@ -64,3 +66,5 @@ namespace Bibim
         }
     }
 }
+
+#endif

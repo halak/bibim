@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_USE_DIRECTX9))
+
 #include <Bibim/UIRenderer.DX9.h>
 #include <Bibim/Assert.h>
 #include <Bibim/BinaryReader.h>
@@ -458,3 +460,5 @@ namespace Bibim
         ReserveCachedQuads(0);
     }
 }
+
+#endif

@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_USE_OPENGLES2))
+
 #include <Bibim/Texture2D.GLES2.h>
 #include <Bibim/GraphicsDevice.GLES2.h>
 
@@ -92,3 +94,5 @@ namespace Bibim
         }
     }
 }
+
+#endif

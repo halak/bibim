@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_USE_DIRECTX9))
+
 #include <Bibim/RenderTargetTexture2D.DX9.h>
 #include <Bibim/GraphicsDevice.DX9.h>
 #include <Bibim/Assert.h>
@@ -45,3 +47,5 @@ namespace Bibim
         Base::OnGraphicsDeviceLost(g);
     }
 }
+
+#endif
