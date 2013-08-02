@@ -215,7 +215,6 @@
     <ClCompile Include="..\..\src\Scripting\ScriptNativeFunctionTable.cpp" />
     <ClCompile Include="..\..\src\Scripting\ScriptStack.cpp" />
     <ClCompile Include="..\..\src\Scripting\ScriptThread.cpp" />
-    <ClCompile Include="..\..\src\Scripting\ScriptLibraryIO.cpp" />
     <ClCompile Include="..\..\src\Time\AlarmClock.cpp" />
     <ClCompile Include="..\..\src\Time\Clock.Windows.cpp" />
     <ClCompile Include="..\..\src\Time\SubTimeline.cpp" />
@@ -453,7 +452,6 @@
     <ClInclude Include="..\..\include\Bibim\ScriptNativeFunctionTable.h" />
     <ClInclude Include="..\..\include\Bibim\ScriptStack.h" />
     <ClInclude Include="..\..\include\Bibim\ScriptThread.h" />
-    <ClInclude Include="..\..\include\Bibim\ScriptLibraryIO.h" />
     <ClInclude Include="..\..\include\Bibim\AlarmClock.h" />
     <ClInclude Include="..\..\include\Bibim\Clock.h" />
     <ClInclude Include="..\..\include\Bibim\IUpdateable.h" />

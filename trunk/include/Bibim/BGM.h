@@ -2,7 +2,6 @@
 #ifndef __BIBIM_BGM_H__
 #define __BIBIM_BGM_H__
 
-#   include <Bibim/Config.h>
-#   include <Bibim/BGM.AL.h>
+#include <Bibim/BGM.AL.h>
 
 #endif

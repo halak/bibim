@@ -2,20 +2,20 @@
 #ifndef __BIBIM_OBJECT_H__
 #define __BIBIM_OBJECT_H__
 
-#   include <Bibim/Foundation.h>
+#include <Bibim/Foundation.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    class Object
     {
-        class Object
-        {
-            public:
-                virtual ~Object() { }
+        public:
+            virtual ~Object() { }
 
-                virtual int GetClassID() const;
+            virtual int GetClassID() const;
 
-            protected:
-                Object();
-        };
-    }
+        protected:
+            Object();
+    };
+}
 
 #endif

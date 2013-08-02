@@ -1,259 +1,281 @@
-﻿#pragma once
-#ifndef __BIBIM_EE4DC99A_9525_41DB_817C_DD69923A2773_ALL_H__
-#define __BIBIM_EE4DC99A_9525_41DB_817C_DD69923A2773_ALL_H__
+#pragma once
+#ifndef BIBIM_ALL_38EA4830_4F75_49E0_A3BB_328AB7755EE2_H__
+#define BIBIM_ALL_38EA4830_4F75_49E0_A3BB_328AB7755EE2_H__
 
-   // This file was "AUTOMATICALLY GENERATED" by Bibim Console (10/2/2011 2:13:14 PM)
-   // > Halak.Bibim.Toolkit.Console.exe \class:cppfull.h \proj:[Project-Name] \src:[Source-Directory] \dest:[Header-File]
+// Automatically generated in 2013-08-02 21:28:54.634000
 
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // Asset
-#include <Bibim/EvalUnitRandom.h>
-#include <Bibim/EasingCurves.h>
-#include <Bibim/ElasticEasingCurves.h>
-#include <Bibim/AnyStorage.h>
-#include <Bibim/EvalTimeflow.h>
-#  include <Bibim/AssetLoadingTask.h>
-#include <Bibim/EvalInterpolators.h>
-#  include <Bibim/AssetProvider.h>
-#  include <Bibim/AssetStreamReader.h>
-#  include <Bibim/MPQAssetProvider.h>
-#  include <Bibim/FileAssetProvider.h>
-#  include <Bibim/GameAsset.h>
-#  include <Bibim/GameAssetFactory.h>
-#include <Bibim/EvalUnaryOperators.h>
-#include <Bibim/EvalCaches.h>
-#include <Bibim/OscillationCurve.h>
-#include <Bibim/EvalContext.h>
-#  include <Bibim/GameAssetStorage.h>
-#  include <Bibim/NetworkAssetProvider.h>
-#include <Bibim/EvalSelectors.h>
-#include <Bibim/EvalBinaryOperators.h>
-#   include <Bibim/UIColorMatrixEffect.h>
-#   include <Bibim/UIBlendingEffect.h>
-#include <Bibim/ShaderEffect.h>
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // Net
-#   include <Bibim/HttpClient.h>
-#   include <Bibim/NetworkStream.h>
-#   include <Bibim/Socket.h>
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // FileSystem
-#  include <Bibim/FileStream.h>
-#  include <Bibim/Path.h>
-#  include <Bibim/MPQ.h>
-#  include <Bibim/MPQStream.h>
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // GFX
-#   include <Bibim/SparkParticleEngine.h>
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // Foundation
-#  include <Bibim/All.h>
-#  include <Bibim/Assert.h>
-#  include <Bibim/BinaryReader.h>
-#  include <Bibim/BinaryWriter.h>
-#  include <Bibim/CheckedRelease.h>
-#  include <Bibim/Color.h>
-#include <Bibim/AssetStreamReader.h>
-#include <Bibim/ComponentStreamReader.h>
-#  include <Bibim/Delete.h>
-#  include <Bibim/Environment.h>
-#include <Bibim/EvalConstants.h>
-#include <Bibim/EvalContext.h>
-#include <Bibim/EvalRangedSequences.h>
-#include <Bibim/Evals.h>
-#include <bibim/EvalSequenceBase.h>
-#include <Bibim/EvalSEquences.h>
-#include <Bibim/EvalBoard.h>
-#include <Bibim/EvalVariables.h>
-#include <Bibim/SEquences.h>
-#  include <Bibim/Foundation.h>
-#  include <Bibim/FWD.h>
-#  include <Bibim/Geom2D.h>
-#  include <Bibim/Math.h>
-#  include <Bibim/Matrix4.h>
-#include <Bibim/EvalBoard.h>
-#  include <Bibim/MemoryStream.h>
-#  include <Bibim/NullPointer.h>
-#  include <Bibim/Numerics.h>
-#  include <Bibim/Object.h>
-#  include <Bibim/Point2.h>
-#  include <Bibim/PointerCasts.h>
-#  include <Bibim/Rect.h>
-#  include <Bibim/RectF.h>
-#  include <Bibim/RectStorage.h>
-#  include <Bibim/SequenceDictionary.h>
-#  include <Bibim/SharedObject.h>
-#  include <Bibim/SharedPointer.h>
-#  include <Bibim/Stream.h>
-#  include <Bibim/String.h>
-#  include <Bibim/Vector2.h>
-#  include <Bibim/Vector3.h>
-#  include <Bibim/Vector4.h>
-
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // Framework
-#  include <Bibim/GameFramework.h>
-#  include <Bibim/StandardGame.h>
-#  include <Bibim/GameWindow.h>
-#  include <Bibim/Lua.h>
-#  include <Bibim/Preferences.h>
-#  include <Bibim/Clipboard.h>
-
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // Gameplay
-#  include <Bibim/BatchCommand.h>
-#  include <Bibim/Command.h>
-#  include <Bibim/CommandHistory.h>
-#  include <Bibim/CommandQueue.h>
-#  include <Bibim/RestorableCommand.h>
-#  include <Bibim/SpatialObject2D.h>
-#  include <Bibim/PathFinder.h>
-#  include <Bibim/JumpPointPathFinder.h>
-
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // Audio
-#  include <Bibim/AudioDevice.h>
-#  include <Bibim/BGM.h>
-#  include <Bibim/SoundFX.h>
-
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // Graphics
-#  include <Bibim/BitMask.h>
-#  include <Bibim/DynamicTexture2D.h>
-#  include <Bibim/GraphicsDevice.h>
-#  include <Bibim/SourceTexture2D.h>
-#  include <Bibim/Texture2D.h>
-#  include <Bibim/Window.h>
-#  include <Bibim/RenderTargetTexture2D.h>
-#  include <Bibim/ScreenshotPrinter.h>
-#  include <Bibim/Sprite.h>
-#  include <Bibim/SpriteSet.h>
-#  include <Bibim/JPEGReader.h>
-#  include <Bibim/PNGReader.h>
-
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // Input
-#  include <Bibim/IME.h>
-#  include <Bibim/Key.h>
-#  include <Bibim/Keyboard.h>
-#  include <Bibim/KeyboardState.h>
-#  include <Bibim/Mouse.h>
-#  include <Bibim/MouseState.h>
-
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // Module
-#  include <Bibim/GameModule.h>
-#  include <Bibim/GameModuleFactory.h>
-#  include <Bibim/GameModuleNode.h>
-#  include <Bibim/GameModuleTree.h>
-
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // Scripting
-#  include <Bibim/Script.h>
-#  include <Bibim/ScriptingContext.h>
-#  include <Bibim/ScriptThread.h>
-#  include <Bibim/ScriptStack.h>
-#   include <Bibim/ScriptLibraryIO.h>
-#include <bibim/ScriptNativeFunctionTable.h>
-
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // Startup
-#  include <Bibim/Startup.h>
-
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // Threading
-#  include <Bibim/Atomic.h>
-#  include <Bibim/AutoLocker.h>
-#  include <Bibim/Lock.h>
-#  include <Bibim/ManualLocker.h>
-#  include <Bibim/Thread.h>
-
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // Time
-#   include <Bibim/AlarmClock.h>
-#  include <Bibim/Clock.h>
-#  include <Bibim/SubTimeline.h>
-#  include <Bibim/Timeline.h>
-#  include <Bibim/TimelineGameModule.h>
-#  include <Bibim/UpdateableGameModule.h>
-
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // Typography
-#  include <Bibim/Font.h>
-#  include <Bibim/FontLibrary.h>
-#  include <Bibim/FontString.h>
-#  include <Bibim/Glyph.h>
-#  include <Bibim/GlyphSurface.h>
-#  include <Bibim/GlyphTable.h>
-#  include <Bibim/TypingContext.h>
-
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // Collision
-#  include <Bibim/AxisALignedBoxShape2D.h>
-#  include <Bibim/BoxShape2D.h>
-#  include <Bibim/CollisionSpace2D.h>
-#  include <Bibim/PointShape2D.h>
-#  include <Bibim/SegmentShape2D.h>
-#  include <Bibim/SphereShape2D.h>
-#  include <Bibim/UserShape2D.h>
-
-   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // UI
-#   include <Bibim/GameComponentFactory.h>
-#  include <Bibim/UI.h>
-#  include <Bibim/UIAppEventDispatcher.h>
-#  include <Bibim/UIAsyncEventQueue.h>
-#  include <Bibim/UIButton.h>
-#  include <Bibim/UICheckBox.h>
-#  include <Bibim/UIRadioButton.h>
-#  include <Bibim/UIDomain.h>
-#  include <Bibim/UIDrawingContext.h>
-#  include <Bibim/UIEffectMap.h>
-#  include <Bibim/UIElement.h>
-#  include <Bibim/UIEventArgs.h>
-#  include <Bibim/UIEventDispatcher.h>
-#  include <Bibim/UIEventHandler.h>
-#  include <Bibim/UIEventID.h>
-#  include <Bibim/UIEventMap.h>
-#  include <Bibim/UIFunctionEventHandler.h>
-#  include <Bibim/UIFunctionTable.h>
-#  include <Bibim/UIGamePadEventArgs.h>
-#  include <Bibim/UIGamePadEventDispatcher.h>
-#  include <Bibim/UIHandledDrawingContext.h>
-#  include <Bibim/Image.h>
-#  include <Bibim/ImageSet.h>
-#  include <Bibim/UIKeyboardEventArgs.h>
-#  include <Bibim/UIKeyboardEventDispatcher.h>
-#  include <Bibim/UILabel.h>
-#  include <Bibim/UIEditText.h>
-#  include <Bibim/UILayout.h>
-#  include <Bibim/UIDocument.h>
-#  include <Bibim/UIMouseButtonEventArgs.h>
-#  include <Bibim/UIMouseEventArgs.h>
-#  include <Bibim/UIMouseEventDispatcher.h>
-#  include <Bibim/UIMouseWheelEventArgs.h>
-#  include <Bibim/UIPanel.h>
-#  include <Bibim/UIPickingContext.h>
-#   include <Bibim/UIBoundsContext.h>
-#  include <Bibim/UIRenderer.h>
-#  include <Bibim/UISequentialEventHandler.h>
-#  include <Bibim/UISimpleDomain.h>
-#  include <Bibim/UIImage.h>
-#  include <Bibim/UIAfterImageEffect.h>
-#  include <Bibim/UISineCurveEffect.h>
-#  include <Bibim/UITintEffect.h>
-#  include <Bibim/UIVideo.h>
-#  include <Bibim/UIVisual.h>
-#  include <Bibim/UISpark.h>
-#  include <Bibim/UIRect.h>
-#  include <Bibim/UIScrollablePanel.h>
-#  include <Bibim/UISprite.h>
-#  include <Bibim/UIVisualVisitor.h>
-#  include <Bibim/UIWindow.h>
-#   include <Bibim/UITransform.h>
-#   include <Bibim/UITransform2D.h>
-#   include <Bibim/UITransform3D.h>
-#   include <Bibim/UIMaskEffect.h>
-#   include <Bibim/UIOpacityMaskEffect.h>
+#include "AlarmClock.h"
+#include "All.h"
+#include "Any.h"
+#include "AnyStorage.h"
+#include "Assert.h"
+#include "AssetLoadingTask.h"
+#include "AssetProvider.h"
+#include "AssetStreamReader.h"
+#include "Atomic.h"
+#include "AudioDevice.AL.h"
+#include "AudioDevice.h"
+#include "AutoLocker.h"
+#include "AxisAlignedBoxShape2D.h"
+#include "BatchCommand.h"
+#include "BGM.AL.h"
+#include "BGM.h"
+#include "BinaryReader.h"
+#include "BinaryWriter.h"
+#include "BitMask.h"
+#include "BlendMode.h"
+#include "BoxShape2D.h"
+#include "CheckedRelease.h"
+#include "Clipboard.Android.h"
+#include "Clipboard.h"
+#include "Clipboard.iOS.h"
+#include "Clipboard.Windows.h"
+#include "Clock.h"
+#include "CloningContext.h"
+#include "CollisionSpace2D.h"
+#include "Color.h"
+#include "Command.h"
+#include "CommandHistory.h"
+#include "CommandQueue.h"
+#include "ComponentStreamReader.h"
+#include "Config.h"
+#include "CrashDump.h"
+#include "Delete.h"
+#include "DumpStream.h"
+#include "DynamicTexture2D.DX9.h"
+#include "DynamicTexture2D.GLES2.h"
+#include "DynamicTexture2D.h"
+#include "Ease.h"
+#include "EasingCurves.h"
+#include "ElasticEasingCurves.h"
+#include "Environment.Android.h"
+#include "Environment.h"
+#include "Environment.iOS.h"
+#include "Environment.Windows.h"
+#include "EvalBinaryOperators.h"
+#include "EvalBoard.h"
+#include "EvalCaches.h"
+#include "EvalConstants.h"
+#include "EvalContext.h"
+#include "EvalInterpolators.h"
+#include "EvalRangedSequences.h"
+#include "Evals.h"
+#include "EvalSelectors.h"
+#include "EvalSequenceBase.h"
+#include "EvalSequences.h"
+#include "EvalTimeflow.h"
+#include "EvalUnaryOperators.h"
+#include "EvalUnitRandom.h"
+#include "EvalVariables.h"
+#include "FileAssetProvider.Default.h"
+#include "FileAssetProvider.h"
+#include "FileAssetProviderBase.h"
+#include "FileStream.Android.h"
+#include "FileStream.h"
+#include "FileStream.iOS.h"
+#include "FileStream.Windows.h"
+#include "Font.h"
+#include "FontCache.h"
+#include "FontLibrary.h"
+#include "FontString.h"
+#include "Foundation.h"
+#include "FWD.h"
+#include "GameAsset.h"
+#include "GameAssetFactory.h"
+#include "GameAssetStorage.h"
+#include "GameComponent.h"
+#include "GameComponentFactory.h"
+#include "GameFramework.Android.h"
+#include "GameFramework.h"
+#include "GameFramework.iOS.h"
+#include "GameFramework.Windows.h"
+#include "GameFrameworkBase.h"
+#include "GameModule.h"
+#include "GameModuleFactory.h"
+#include "GameModuleNode.h"
+#include "GameModuleTree.h"
+#include "GameWindow.h"
+#include "GameWindow.Mobile.h"
+#include "GameWindow.Windows.h"
+#include "Geom2D.h"
+#include "GLES2.h"
+#include "Glyph.h"
+#include "GlyphSurface.h"
+#include "GlyphTable.h"
+#include "GraphicsCapabilities.h"
+#include "GraphicsDevice.DX9.h"
+#include "GraphicsDevice.GLES2.h"
+#include "GraphicsDevice.h"
+#include "GraphicsDeviceBase.h"
+#include "HttpClient.Curl.h"
+#include "HttpClient.h"
+#include "HttpClientBase.h"
+#include "Image.h"
+#include "ImageSet.h"
+#include "IME.h"
+#include "IME.Mobile.h"
+#include "IME.Windows.h"
+#include "IMEBase.h"
+#include "IntersectShapes2D.h"
+#include "IPEndPoint.h"
+#include "IUpdateable.h"
+#include "JPEGReader.h"
+#include "JumpPointPathFinder.h"
+#include "Key.h"
+#include "Keyboard.h"
+#include "KeyboardState.h"
+#include "Listeners.h"
+#include "Lock.h"
+#include "Lock.Unix.h"
+#include "Lock.Windows.h"
+#include "Log.h"
+#include "Lua.h"
+#include "ManualLocker.h"
+#include "Math.h"
+#include "Matrix4.h"
+#include "Memory.h"
+#include "MemoryStream.h"
+#include "Mouse.h"
+#include "MouseState.h"
+#include "MPQ.h"
+#include "MPQAssetProvider.h"
+#include "MPQStream.h"
+#include "NetworkAssetProvider.h"
+#include "NetworkStream.h"
+#include "NullPointer.h"
+#include "Numerics.h"
+#include "Object.h"
+#include "OscillationCurve.h"
+#include "Path.h"
+#include "PathFinder.h"
+#include "PNGReader.h"
+#include "Point2.h"
+#include "Point3.h"
+#include "Point4.h"
+#include "PointerCasts.h"
+#include "PointShape2D.h"
+#include "Preferences.h"
+#include "RaycastReport2D.h"
+#include "Rect.h"
+#include "RectF.h"
+#include "RectStorage.h"
+#include "RenderTargetTexture2D.DX9.h"
+#include "RenderTargetTexture2D.GLES2.h"
+#include "RenderTargetTexture2D.h"
+#include "RestorableCommand.h"
+#include "ScreenshotPrinter.h"
+#include "Script.h"
+#include "ScriptingContext.h"
+#include "ScriptNativeFunctionTable.h"
+#include "ScriptStack.h"
+#include "ScriptThread.h"
+#include "SegmentShape2D.h"
+#include "SequenceDictionary.h"
+#include "Sequences.h"
+#include "ShaderEffect.DX9.h"
+#include "ShaderEffect.GLES2.h"
+#include "ShaderEffect.h"
+#include "Shape2D.h"
+#include "SharedObject.h"
+#include "SharedPointer.h"
+#include "Socket.h"
+#include "SoundFX.AL.h"
+#include "SoundFX.h"
+#include "SourceTexture2D.DX9.h"
+#include "SourceTexture2D.GLES2.h"
+#include "SourceTexture2D.h"
+#include "SparkParticleEngine.h"
+#include "SpatialObject2D.h"
+#include "SphereShape2D.h"
+#include "Sprite.h"
+#include "SpriteSet.h"
+#include "StandardGame.EmbeddedFont.h"
+#include "StandardGame.h"
+#include "Startup.h"
+#include "Stream.h"
+#include "String.h"
+#include "SubTimeline.h"
+#include "Texture2D.DX9.h"
+#include "Texture2D.GLES2.h"
+#include "Texture2D.h"
+#include "Thread.h"
+#include "Thread.Unix.h"
+#include "Thread.Windows.h"
+#include "ThreadBase.h"
+#include "Timeline.h"
+#include "TimelineGameComponent.h"
+#include "TimelineGameModule.h"
+#include "TypingContext.h"
+#include "UI.h"
+#include "UIAfterImageEffect.h"
+#include "UIAppEventDispatcher.h"
+#include "UIAsyncEventQueue.h"
+#include "UIBlendingEffect.h"
+#include "UIBoundsContext.h"
+#include "UIButton.h"
+#include "UICheckBox.h"
+#include "UIColorMatrixEffect.h"
+#include "UIDocument.h"
+#include "UIDomain.h"
+#include "UIDrawingContext.h"
+#include "UIEditText.h"
+#include "UIEffectMap.h"
+#include "UIEffectStack.h"
+#include "UIElement.h"
+#include "UIEllipse.h"
+#include "UIEventArgs.h"
+#include "UIEventDispatcher.h"
+#include "UIEventHandler.h"
+#include "UIEventID.h"
+#include "UIEventMap.h"
+#include "UIFunctionEventHandler.h"
+#include "UIFunctionTable.h"
+#include "UIGamePadEventArgs.h"
+#include "UIGamePadEventDispatcher.h"
+#include "UIGeometryEffect.h"
+#include "UIHandledDrawingContext.h"
+#include "UIImage.h"
+#include "UIKeyboardEventArgs.h"
+#include "UIKeyboardEventDispatcher.h"
+#include "UILabel.h"
+#include "UILayout.h"
+#include "UIMaskEffect.h"
+#include "UIMouseButtonEventArgs.h"
+#include "UIMouseEventArgs.h"
+#include "UIMouseEventDispatcher.h"
+#include "UIMouseWheelEventArgs.h"
+#include "UIOpacityMaskEffect.h"
+#include "UIPanel.h"
+#include "UIPickingContext.h"
+#include "UIPixelEffect.h"
+#include "UIRadioButton.h"
+#include "UIRect.h"
+#include "UIRenderer.DX9.h"
+#include "UIRenderer.GLES2.h"
+#include "UIRenderer.h"
+#include "UIRendererBase.h"
+#include "UIRoundedRect.h"
+#include "UIScrollablePanel.h"
+#include "UISequentialEventHandler.h"
+#include "UIShape.h"
+#include "UISimpleDomain.h"
+#include "UISineCurveEffect.h"
+#include "UISpark.h"
+#include "UISprite.h"
+#include "UITintEffect.h"
+#include "UITransform.h"
+#include "UITransform2D.h"
+#include "UITransform3D.h"
+#include "UIVideo.h"
+#include "UIVisual.h"
+#include "UIVisualVisitor.h"
+#include "UIWindow.h"
+#include "UpdateableGameComponent.h"
+#include "UpdateableGameModule.h"
+#include "UserShape2D.h"
+#include "Vector2.h"
+#include "Vector3.h"
+#include "Vector4.h"
+#include "Window.h"
 
 #endif

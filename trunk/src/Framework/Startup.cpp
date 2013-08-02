@@ -251,11 +251,6 @@ namespace Bibim
         GameComponentFactory::AddEntry<UIRoundedRect>();
         GameComponentFactory::AddEntry<UIEllipse>();
         GameComponentFactory::SortEntries();
-        
-        BBBeginScriptNativeFunction()
-            BBScriptNativeFunction(ScriptLibrary::IO::Print)
-        BBEndScriptNativeFunction();
-        
 
         Key::Setup();
     }

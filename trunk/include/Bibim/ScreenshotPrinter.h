@@ -2,36 +2,36 @@
 #ifndef __BIBIM_SCREENSHOTPRINTER_H__
 #define __BIBIM_SCREENSHOTPRINTER_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/GameModule.h>
+#include <Bibim/FWD.h>
+#include <Bibim/GameModule.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    class ScreenshotPrinter : public GameModule
     {
-        class ScreenshotPrinter : public GameModule
-        {
-            BBModuleClass(ScreenshotPrinter, GameModule, 'S', 'S', 'P', 'R');
-            public:
-                ScreenshotPrinter();
-                ScreenshotPrinter(GraphicsDevice* graphicsDevice);
-                virtual ~ScreenshotPrinter();
+        BBModuleClass(ScreenshotPrinter, GameModule, 'S', 'S', 'P', 'R');
+        public:
+            ScreenshotPrinter();
+            ScreenshotPrinter(GraphicsDevice* graphicsDevice);
+            virtual ~ScreenshotPrinter();
 
-                void BeginDraw();
-                void EndDraw();
+            void BeginDraw();
+            void EndDraw();
 
-                inline GraphicsDevice* GetGraphicsDevice() const;
-                void SetGraphicsDevice(GraphicsDevice* value);
+            inline GraphicsDevice* GetGraphicsDevice() const;
+            void SetGraphicsDevice(GraphicsDevice* value);
 
-            private:
-                GraphicsDevice* graphicsDevice;
-                RenderTargetTexture2DPtr renderTarget;
-        };
+        private:
+            GraphicsDevice* graphicsDevice;
+            RenderTargetTexture2DPtr renderTarget;
+    };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        GraphicsDevice* ScreenshotPrinter::GetGraphicsDevice() const
-        {
-            return graphicsDevice;
-        }
+    GraphicsDevice* ScreenshotPrinter::GetGraphicsDevice() const
+    {
+        return graphicsDevice;
     }
+}
 
 #endif

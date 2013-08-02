@@ -2,114 +2,114 @@
 #ifndef __BIBIM_LOG_H__
 #define __BIBIM_LOG_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/String.h>
+#include <Bibim/FWD.h>
+#include <Bibim/String.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    class Log
     {
-        class Log
-        {
-            BBThisIsStaticClass(Log);
-            public:
-                enum Level
-                {
-                    ErrorLevel,
-                    WarningLevel,
-                    InformationLevel,
-                };
+        BBThisIsStaticClass(Log);
+        public:
+            enum Level
+            {
+                ErrorLevel,
+                WarningLevel,
+                InformationLevel,
+            };
 
-            public:
-                static inline void Error(const char* message);
-                static inline void Error(const String& message);
-                static inline void Warning(const char* message);
-                static inline void Warning(const String& message);
-                static inline void Information(const char* message);
-                static inline void Information(const String& message);
+        public:
+            static inline void Error(const char* message);
+            static inline void Error(const String& message);
+            static inline void Warning(const char* message);
+            static inline void Warning(const String& message);
+            static inline void Information(const char* message);
+            static inline void Information(const String& message);
 
-                static inline void Error(const char* category, const String& message);
-                static inline void Warning(const char* category, const String& message);
-                static inline void Information(const char* category, const String& message);
+            static inline void Error(const char* category, const String& message);
+            static inline void Warning(const char* category, const String& message);
+            static inline void Information(const char* category, const String& message);
 
-                static inline void Error(const char* category, const char* message);
-                static inline void Warning(const char* category, const char* message);
-                static inline void Information(const char* category, const char* message);
+            static inline void Error(const char* category, const char* message);
+            static inline void Warning(const char* category, const char* message);
+            static inline void Information(const char* category, const char* message);
 
-                static inline Stream* GetStream();
-                static void SetStream(Stream* value);
+            static inline Stream* GetStream();
+            static void SetStream(Stream* value);
 
-            private:
-                static void Write(Level level, const char* category, const char* message);
+        private:
+            static void Write(Level level, const char* category, const char* message);
 
-            private:
-                static StreamPtr stream;
-        };
+        private:
+            static StreamPtr stream;
+    };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        void Log::Error(const char* message)
-        {
-            Error(nullptr, message);
-        }
-
-        void Log::Error(const String& message)
-        {
-            Error(nullptr, message.CStr());
-        }
-
-        void Log::Warning(const char* message)
-        {
-            Warning(nullptr, message);
-        }
-
-        void Log::Warning(const String& message)
-        {
-            Warning(nullptr, message.CStr());
-        }
-
-        void Log::Information(const char* message)
-        {
-            Information(nullptr, message);
-        }
-
-        void Log::Information(const String& message)
-        {
-            Information(nullptr, message.CStr());
-        }
-
-        void Log::Error(const char* category, const String& message)
-        {
-            Error(category, message.CStr());
-        }
-    
-        void Log::Warning(const char* category, const String& message)
-        {
-            Warning(category, message.CStr());
-        }
-    
-        void Log::Information(const char* category, const String& message)
-        {
-            Information(category, message.CStr());
-        }
-
-        void Log::Error(const char* category, const char* message)
-        {
-            Write(ErrorLevel, category, message);
-        }
-
-        void Log::Warning(const char* category, const char* message)
-        {
-            Write(WarningLevel, category, message);
-        }
-
-        void Log::Information(const char* category, const char* message)
-        {
-            Write(InformationLevel, category, message);
-        }
-
-        Stream* Log::GetStream()
-        {
-            return stream;
-        }
+    void Log::Error(const char* message)
+    {
+        Error(nullptr, message);
     }
+
+    void Log::Error(const String& message)
+    {
+        Error(nullptr, message.CStr());
+    }
+
+    void Log::Warning(const char* message)
+    {
+        Warning(nullptr, message);
+    }
+
+    void Log::Warning(const String& message)
+    {
+        Warning(nullptr, message.CStr());
+    }
+
+    void Log::Information(const char* message)
+    {
+        Information(nullptr, message);
+    }
+
+    void Log::Information(const String& message)
+    {
+        Information(nullptr, message.CStr());
+    }
+
+    void Log::Error(const char* category, const String& message)
+    {
+        Error(category, message.CStr());
+    }
+
+    void Log::Warning(const char* category, const String& message)
+    {
+        Warning(category, message.CStr());
+    }
+
+    void Log::Information(const char* category, const String& message)
+    {
+        Information(category, message.CStr());
+    }
+
+    void Log::Error(const char* category, const char* message)
+    {
+        Write(ErrorLevel, category, message);
+    }
+
+    void Log::Warning(const char* category, const char* message)
+    {
+        Write(WarningLevel, category, message);
+    }
+
+    void Log::Information(const char* category, const char* message)
+    {
+        Write(InformationLevel, category, message);
+    }
+
+    Stream* Log::GetStream()
+    {
+        return stream;
+    }
+}
 
 #endif

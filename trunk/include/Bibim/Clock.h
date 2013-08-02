@@ -2,17 +2,17 @@
 #ifndef __BIBIM_CLOCK_H__
 #define __BIBIM_CLOCK_H__
 
-#   include <Bibim/Foundation.h>
+#include <Bibim/Foundation.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    class Clock
     {
-        class Clock
-        {
-            BBThisIsStaticClass(Clock);
-            public:
-                static float GetCurrent();
-                static int  GetCurrentMilliSeconds();
-        };
-    }
+        BBThisIsStaticClass(Clock);
+        public:
+            static float GetCurrent();
+            static int  GetCurrentMilliSeconds();
+    };
+}
 
 #endif

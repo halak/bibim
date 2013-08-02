@@ -2,19 +2,19 @@
 #ifndef __BIBIM_PNGREADER_H__
 #define __BIBIM_PNGREADER_H__
 
-#   include <Bibim/FWD.h>
+#include <Bibim/FWD.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    class PNGReader
     {
-        class PNGReader
-        {
-            BBThisIsStaticClass(PNGReader);
-            public:
-                static bool Read(AssetStreamReader& reader,
-                                 byte* destination,
-                                 int destinationPitch,
-                                 bool swapRedBlue);
-        };
-    }
+        BBThisIsStaticClass(PNGReader);
+        public:
+            static bool Read(AssetStreamReader& reader,
+                             byte* destination,
+                             int destinationPitch,
+                             bool swapRedBlue);
+    };
+}
 
 #endif

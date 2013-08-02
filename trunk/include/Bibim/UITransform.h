@@ -2,24 +2,24 @@
 #ifndef __BIBIM_UITRANSFORM_H__
 #define __BIBIM_UITRANSFORM_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/UIElement.h>
+#include <Bibim/FWD.h>
+#include <Bibim/UIElement.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    class UITransform : public UIElement
     {
-        class UITransform : public UIElement
-        {
-            BBAbstractComponentClass(UITransform, UIElement);
-            public:
-                virtual ~UITransform();
-                
-                virtual const Matrix4& ComputeMatrix(UIVisualVisitor& context) = 0;
+        BBAbstractComponentClass(UITransform, UIElement);
+        public:
+            virtual ~UITransform();
+            
+            virtual const Matrix4& ComputeMatrix(UIVisualVisitor& context) = 0;
 
-            protected:
-                UITransform();
-        };
-    }
+        protected:
+            UITransform();
+    };
+}
 
-    BBBindLua(Bibim::UITransform);
+BBBindLua(Bibim::UITransform);
 
 #endif

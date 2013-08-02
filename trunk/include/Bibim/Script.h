@@ -2,62 +2,62 @@
 #ifndef __BIBIM_SCRIPT_H__
 #define __BIBIM_SCRIPT_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/GameAsset.h>
-#   include <Bibim/Any.h>
-#   include <Bibim/String.h>
-#   include <vector>
+#include <Bibim/FWD.h>
+#include <Bibim/GameAsset.h>
+#include <Bibim/Any.h>
+#include <Bibim/String.h>
+#include <vector>
 
-    namespace Bibim
+namespace Bibim
+{
+    class Script : public GameAsset
     {
-        class Script : public GameAsset
-        {
-            BBSerializableAssetClass(Script, GameAsset, 'S', 'C', 'R', 'T');
-            public:
-                struct Function
-                {
-                    String Name;
-                    int Position;
-                    int ArgumentStackSize;
-                    std::vector<AnyType> ReturnTypes;
-                    std::vector<AnyType> ParameterTypes;
-                };
+        BBSerializableAssetClass(Script, GameAsset, 'S', 'C', 'R', 'T');
+        public:
+            struct Function
+            {
+                String Name;
+                int Position;
+                int ArgumentStackSize;
+                std::vector<AnyType> ReturnTypes;
+                std::vector<AnyType> ParameterTypes;
+            };
 
-            public:
-                typedef std::vector<byte> Buffer;
-                typedef std::vector<String> StringCollection;
-                typedef std::vector<Function> FunctionTable;
+        public:
+            typedef std::vector<byte> Buffer;
+            typedef std::vector<String> StringCollection;
+            typedef std::vector<Function> FunctionTable;
 
-            public:
-                Script();
-                virtual ~Script();
+        public:
+            Script();
+            virtual ~Script();
 
-                const Function* Find(const String& name) const;
+            const Function* Find(const String& name) const;
 
-                inline const Buffer& GetBuffer() const;
-                inline const StringCollection& GetStringTable() const;
+            inline const Buffer& GetBuffer() const;
+            inline const StringCollection& GetStringTable() const;
 
-            private:
-                struct MoveTag {};
-                Script(Buffer& buffer, FunctionTable& functionTable, StringCollection& stringTable, MoveTag);
+        private:
+            struct MoveTag {};
+            Script(Buffer& buffer, FunctionTable& functionTable, StringCollection& stringTable, MoveTag);
 
-            private:
-                Buffer buffer;
-                FunctionTable functionTable;
-                StringCollection stringTable;
-        };
+        private:
+            Buffer buffer;
+            FunctionTable functionTable;
+            StringCollection stringTable;
+    };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        const Script::Buffer& Script::GetBuffer() const
-        {
-            return buffer;
-        }
-
-        const Script::StringCollection& Script::GetStringTable() const
-        {
-            return stringTable;
-        }
+    const Script::Buffer& Script::GetBuffer() const
+    {
+        return buffer;
     }
+
+    const Script::StringCollection& Script::GetStringTable() const
+    {
+        return stringTable;
+    }
+}
 
 #endif

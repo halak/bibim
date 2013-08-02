@@ -31,9 +31,6 @@
     <Filter Include="03. Game\Scripting">
       <UniqueIdentifier>{490611d8-aec3-49fa-8acf-d6d1afe6689b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Game\Scripting\Libraries">
-      <UniqueIdentifier>{2b5c4b1f-f383-439d-bc52-8997dfdbdb2c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Game\UI">
       <UniqueIdentifier>{7d487e2d-cd05-45d5-807e-d483e531acc5}</UniqueIdentifier>
     </Filter>
@@ -317,9 +314,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Scripting\ScriptThread.cpp">
       <Filter>03. Game\Scripting</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Scripting\ScriptLibraryIO.cpp">
-      <Filter>03. Game\Scripting\Libraries</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Time\AlarmClock.cpp">
       <Filter>03. Game\Time</Filter>
@@ -1045,9 +1039,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\ScriptThread.h">
       <Filter>03. Game\Scripting</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\ScriptLibraryIO.h">
-      <Filter>03. Game\Scripting\Libraries</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\AlarmClock.h">
       <Filter>03. Game\Time</Filter>

@@ -2,14 +2,8 @@
 #ifndef __BIBIM_CLIPBOARD_H__
 #define __BIBIM_CLIPBOARD_H__
 
-#   include <Bibim/Config.h>
-
-#   if (defined(BIBIM_PLATFORM_WINDOWS))
-#       include <Bibim/Clipboard.Windows.h>
-#   elif (defined(BIBIM_PLATFORM_ANDROID))
-#       include <Bibim/Clipboard.Android.h>
-#   elif (defined(BIBIM_PLATFORM_IOS))
-#       include <Bibim/Clipboard.iOS.h>
-#   endif
+#include <Bibim/Clipboard.Windows.h>
+#include <Bibim/Clipboard.Android.h>
+#include <Bibim/Clipboard.iOS.h>
 
 #endif

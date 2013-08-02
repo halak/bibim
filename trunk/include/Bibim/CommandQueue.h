@@ -2,82 +2,82 @@
 #ifndef __BIBIM_COMMANDQUEUE_H__
 #define __BIBIM_COMMANDQUEUE_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/TimelineGameModule.h>
-#   include <list>
+#include <Bibim/FWD.h>
+#include <Bibim/TimelineGameModule.h>
+#include <list>
 
-    namespace Bibim
+namespace Bibim
+{
+    class CommandQueue : public TimelineGameModule
     {
-        class CommandQueue : public TimelineGameModule
-        {
-            BBModuleClass(CommandQueue, TimelineGameModule, 'C', 'M', 'D', 'Q');
-            public:
-                class Event
-                {
-                    public:
-                        Event(float time, int frame, Command* command);
-                        Event(const Event& original);
+        BBModuleClass(CommandQueue, TimelineGameModule, 'C', 'M', 'D', 'Q');
+        public:
+            class Event
+            {
+                public:
+                    Event(float time, int frame, Command* command);
+                    Event(const Event& original);
 
-                        inline float GetTime() const;
-                        inline int GetFrame() const;
-                        inline Bibim::Command* GetCommand() const;
+                    inline float GetTime() const;
+                    inline int GetFrame() const;
+                    inline Bibim::Command* GetCommand() const;
 
-                        Event& operator = (const Event& original);
+                    Event& operator = (const Event& original);
 
-                    private:
-                        float time;
-                        int frame;
-                        CommandPtr command;
-                };
+                private:
+                    float time;
+                    int frame;
+                    CommandPtr command;
+            };
 
-                typedef std::list<Event> EventCollection;
+            typedef std::list<Event> EventCollection;
 
-            public:
-                CommandQueue();
-                virtual ~CommandQueue();
+        public:
+            CommandQueue();
+            virtual ~CommandQueue();
 
-                inline void Reset();
-                void Reset(float time, int frame);
-                virtual void Update(float dt, int timestamp);
+            inline void Reset();
+            void Reset(float time, int frame);
+            virtual void Update(float dt, int timestamp);
 
-                void Execute(Command* command);
+            void Execute(Command* command);
 
-                inline const EventCollection& GetEvents() const;
+            inline const EventCollection& GetEvents() const;
 
-            private:
-                float time;
-                int frame;
-                EventCollection events;
-        };
+        private:
+            float time;
+            int frame;
+            EventCollection events;
+    };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        float CommandQueue::Event::GetTime() const
-        {
-            return time;
-        }
-
-        int CommandQueue::Event::GetFrame() const
-        {
-            return frame;
-        }
-
-        Command* CommandQueue::Event::GetCommand() const
-        {
-            return command;
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        void CommandQueue::Reset()
-        {
-            Reset(0.0f, 0);
-        }
-
-        const CommandQueue::EventCollection& CommandQueue::GetEvents() const
-        {
-            return events;
-        }
+    float CommandQueue::Event::GetTime() const
+    {
+        return time;
     }
+
+    int CommandQueue::Event::GetFrame() const
+    {
+        return frame;
+    }
+
+    Command* CommandQueue::Event::GetCommand() const
+    {
+        return command;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    void CommandQueue::Reset()
+    {
+        Reset(0.0f, 0);
+    }
+
+    const CommandQueue::EventCollection& CommandQueue::GetEvents() const
+    {
+        return events;
+    }
+}
 
 #endif

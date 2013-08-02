@@ -2,50 +2,50 @@
 #ifndef __BIBIM_UIEFFECTSTACK_H__
 #define __BIBIM_UIEFFECTSTACK_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/SharedObject.h>
-#   include <Bibim/UIRenderer.h>
-#   include <vector>
+#include <Bibim/FWD.h>
+#include <Bibim/SharedObject.h>
+#include <Bibim/UIRenderer.h>
+#include <vector>
 
-    namespace Bibim
+namespace Bibim
+{
+    class UIEffectStack : public SharedObject
     {
-        class UIEffectStack : public SharedObject
-        {
-            public:
-                typedef std::vector<UIRenderer::EffectorPtr> EffectorCollection;
-                typedef std::vector<UIRenderer::EffectorPtr> EffectorMap;
+        public:
+            typedef std::vector<UIRenderer::EffectorPtr> EffectorCollection;
+            typedef std::vector<UIRenderer::EffectorPtr> EffectorMap;
 
-            public:
-                UIEffectStack();
-                UIEffectStack(bool isShaderFunctionRendering);
-                virtual ~UIEffectStack();
+        public:
+            UIEffectStack();
+            UIEffectStack(bool isShaderFunctionRendering);
+            virtual ~UIEffectStack();
 
-                bool Push(UIEffectMap* item);
-                bool Push(UIEffectMap* item, ImagePtr& outMask);
-                bool Pop();
-                void Clear();
+            bool Push(UIEffectMap* item);
+            bool Push(UIEffectMap* item, ImagePtr& outMask);
+            bool Pop();
+            void Clear();
 
-                inline const EffectorCollection& GetTopEffectors() const;
+            inline const EffectorCollection& GetTopEffectors() const;
 
-            private:
-                void ExpandClass(int newSize);
-                void ExpandDepth(int newSize);
+        private:
+            void ExpandClass(int newSize);
+            void ExpandDepth(int newSize);
 
-            private:
-                EffectorCollection topEffectors;
-                int depth;
-                EffectorMap map;
-                int numberOfClasses;
-                int maxDepth;
-                bool isShaderFunctionRendering;
-        };
+        private:
+            EffectorCollection topEffectors;
+            int depth;
+            EffectorMap map;
+            int numberOfClasses;
+            int maxDepth;
+            bool isShaderFunctionRendering;
+    };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        const UIEffectStack::EffectorCollection& UIEffectStack::GetTopEffectors() const
-        {
-            return topEffectors;
-        }
+    const UIEffectStack::EffectorCollection& UIEffectStack::GetTopEffectors() const
+    {
+        return topEffectors;
     }
+}
 
 #endif

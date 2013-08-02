@@ -2,22 +2,20 @@
 #ifndef __BIBIM_CHECKEDRELEASE_H__
 #define __BIBIM_CHECKEDRELEASE_H__
 
-#   include <Bibim/Config.h>
+#include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
 
-#   if (defined(BIBIM_PLATFORM_WINDOWS))
-
-        namespace Bibim
+namespace Bibim
+{
+    template <typename T> void CheckedRelease(T*& comObject)
+    {
+        if (comObject)
         {
-            template <typename T> void CheckedRelease(T*& comObject)
-            {
-                if (comObject)
-                {
-                    comObject->Release();
-                    comObject = 0;
-                }
-            }
+            comObject->Release();
+            comObject = 0;
         }
+    }
+}
 
-#   endif
-
+#endif
 #endif

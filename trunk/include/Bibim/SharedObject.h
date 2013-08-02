@@ -2,18 +2,18 @@
 #ifndef __BIBIM_SHAREDOBJECT_H__
 #define __BIBIM_SHAREDOBJECT_H__
 
-#   include <Bibim/Foundation.h>
-#   include <Bibim/Object.h>
+#include <Bibim/Foundation.h>
+#include <Bibim/Object.h>
 
-    namespace lua_tinker
-    {
-        template<typename T> struct val2user;
-        template<typename T> struct ptr2user;
-        template<typename T> struct lua2enum;
-        template<typename T> struct enum2lua;
-    }
+namespace lua_tinker
+{
+    template<typename T> struct val2user;
+    template<typename T> struct ptr2user;
+    template<typename T> struct lua2enum;
+    template<typename T> struct enum2lua;
+}
 
-#   define BBBindLua(classname) \
+#define BBBindLua(classname) \
         namespace lua_tinker \
         { \
             template<> inline void push(lua_State* L, classname* value) \
@@ -49,7 +49,7 @@
             }; \
         }
 
-#   define BBBindLuaEnum(enumname, toEnum, toString) \
+#define BBBindLuaEnum(enumname, toEnum, toString) \
         namespace lua_tinker \
         { \
             template<> \
@@ -58,47 +58,47 @@
             struct enum2lua<enumname> { static void invoke(lua_State *L, enumname val) { lua_pushstring(L, toString(val)); } }; \
         }
 
-    namespace Bibim
+namespace Bibim
+{
+    class SharedObject;
+    template <typename T> class SharedPointer;
+
+    class SharedObject : public Object
     {
-        class SharedObject;
-        template <typename T> class SharedPointer;
+        public:
+            virtual ~SharedObject();
 
-        class SharedObject : public Object
-        {
-            public:
-                virtual ~SharedObject();
+        protected:
+            SharedObject();
+            SharedObject(const SharedObject& original);
 
-            protected:
-                SharedObject();
-                SharedObject(const SharedObject& original);
+            template <typename To> SharedPointer<To> This();
+            template <typename To, typename ThisType> SharedPointer<To> This(ThisType* thisInstance);
 
-                template <typename To> SharedPointer<To> This();
-                template <typename To, typename ThisType> SharedPointer<To> This(ThisType* thisInstance);
+        private:
+            void IncreaseReferenceCount();
+            void DecreaseReferenceCount();
 
-            private:
-                void IncreaseReferenceCount();
-                void DecreaseReferenceCount();
+        private:
+            long referenceCount;
 
-            private:
-                long referenceCount;
+            template <typename T> friend class SharedPointer;
+            template<typename T> friend struct lua_tinker::val2user;
+            template<typename T> friend struct lua_tinker::ptr2user;
 
-                template <typename T> friend class SharedPointer;
-                template<typename T> friend struct lua_tinker::val2user;
-                template<typename T> friend struct lua_tinker::ptr2user;
+        private:
+            SharedObject& operator = (const SharedObject&);
+    };
 
-            private:
-                SharedObject& operator = (const SharedObject&);
-        };
-
-        template <typename To> SharedPointer<To> SharedObject::This()
-        {
-            return SharedPointer<To>(static_cast<To*>(this));
-        }
-
-        template <typename To, typename ThisType> SharedPointer<To> SharedObject::This(ThisType* thisInstance)
-        {
-            return SharedPointer<To>(static_cast<To*>(thisInstance));
-        }
+    template <typename To> SharedPointer<To> SharedObject::This()
+    {
+        return SharedPointer<To>(static_cast<To*>(this));
     }
+
+    template <typename To, typename ThisType> SharedPointer<To> SharedObject::This(ThisType* thisInstance)
+    {
+        return SharedPointer<To>(static_cast<To*>(thisInstance));
+    }
+}
 
 #endif

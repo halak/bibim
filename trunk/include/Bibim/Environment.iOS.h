@@ -2,8 +2,10 @@
 #ifndef __BIBIM_ENVIRONMENT_IOS_H__
 #define __BIBIM_ENVIRONMENT_IOS_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/String.h>
+#include <Bibim/FWD.h>
+#if (defined(BIBIM_PLATFORM_IOS))
+
+#include <Bibim/String.h>
 
     namespace Bibim
     {
@@ -43,4 +45,5 @@
         }
     }
 
+#endif
 #endif

@@ -2,116 +2,116 @@
 #ifndef __BIBIM_UIOPACITYMASKEFFECT_H__
 #define __BIBIM_UIOPACITYMASKEFFECT_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/UIMaskEffect.h>
-#   include <Bibim/Vector4.h>
+#include <Bibim/FWD.h>
+#include <Bibim/UIMaskEffect.h>
+#include <Bibim/Vector4.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    class UIOpacityMaskEffect : public UIMaskEffect
     {
-        class UIOpacityMaskEffect : public UIMaskEffect
-        {
-            BBComponentClass(UIOpacityMaskEffect, UIMaskEffect, 'U', 'O', 'M', 'F');
-            public:
-                enum FillStyle
-                {
-                    FanStyle,
-                    BarStyle,
-                };
+        BBComponentClass(UIOpacityMaskEffect, UIMaskEffect, 'U', 'O', 'M', 'F');
+        public:
+            enum FillStyle
+            {
+                FanStyle,
+                BarStyle,
+            };
 
-            public:
-                UIOpacityMaskEffect();
-                UIOpacityMaskEffect(Image* mask);
-                UIOpacityMaskEffect(Image* mask, float startPoint, float length, FillStyle fill);
-                virtual ~UIOpacityMaskEffect();
+        public:
+            UIOpacityMaskEffect();
+            UIOpacityMaskEffect(Image* mask);
+            UIOpacityMaskEffect(Image* mask, float startPoint, float length, FillStyle fill);
+            virtual ~UIOpacityMaskEffect();
 
-                virtual UIRenderer::Effector* CreateEffector(UIRenderer::Effector* parent, bool isShaderFunctionRendering);
+            virtual UIRenderer::Effector* CreateEffector(UIRenderer::Effector* parent, bool isShaderFunctionRendering);
 
-                inline float GetStartPoint() const;
-                void SetStartPoint(float value);
+            inline float GetStartPoint() const;
+            void SetStartPoint(float value);
 
-                inline float GetLength() const;
-                void SetLength(float value);
+            inline float GetLength() const;
+            void SetLength(float value);
 
-                inline FillStyle GetFill() const;
-                void SetFill(FillStyle value);
+            inline FillStyle GetFill() const;
+            void SetFill(FillStyle value);
 
-            public:
-                static FillStyle ConvertFromStringToFillStyle(const char* value);
-                static const char* ConvertFromFillStyleToString(FillStyle value);
+        public:
+            static FillStyle ConvertFromStringToFillStyle(const char* value);
+            static const char* ConvertFromFillStyleToString(FillStyle value);
 
-            private:
-                class EffectorForShaderFunction : public MaskEffector
-                {
-                    BBEffectorClass(EffectorForShaderFunction);
-                    public:
-                        EffectorForShaderFunction(UIOpacityMaskEffect* effect);
-                        virtual ~EffectorForShaderFunction();
-                };
+        private:
+            class EffectorForShaderFunction : public MaskEffector
+            {
+                BBEffectorClass(EffectorForShaderFunction);
+                public:
+                    EffectorForShaderFunction(UIOpacityMaskEffect* effect);
+                    virtual ~EffectorForShaderFunction();
+            };
 
-                class FanEffectorForShaderFunction : public MaskEffector
-                {
-                    BBEffectorClass(FanEffectorForShaderFunction);
-                    public:
-                        FanEffectorForShaderFunction(UIOpacityMaskEffect* effect);
-                        virtual ~FanEffectorForShaderFunction();
+            class FanEffectorForShaderFunction : public MaskEffector
+            {
+                BBEffectorClass(FanEffectorForShaderFunction);
+                public:
+                    FanEffectorForShaderFunction(UIOpacityMaskEffect* effect);
+                    virtual ~FanEffectorForShaderFunction();
 
-                        virtual void Setup(ShaderEffect* effect);
+                    virtual void Setup(ShaderEffect* effect);
 
-                    private:
-                        Vector4 unifiedValue;
-                };
+                private:
+                    Vector4 unifiedValue;
+            };
 
-                class BarEffectorForShaderFunction : public MaskEffector
-                {
-                    BBEffectorClass(BarEffectorForShaderFunction);
-                    public:
-                        BarEffectorForShaderFunction(UIOpacityMaskEffect* effect);
-                        virtual ~BarEffectorForShaderFunction();
+            class BarEffectorForShaderFunction : public MaskEffector
+            {
+                BBEffectorClass(BarEffectorForShaderFunction);
+                public:
+                    BarEffectorForShaderFunction(UIOpacityMaskEffect* effect);
+                    virtual ~BarEffectorForShaderFunction();
 
-                        virtual void Setup(ShaderEffect* effect);
+                    virtual void Setup(ShaderEffect* effect);
 
-                    private:
-                        Vector4 unifiedValue;
-                };
+                private:
+                    Vector4 unifiedValue;
+            };
 
-                class EffectorForFixedFunction : public MaskEffector
-                {
-                    BBEffectorClass(EffectorForFixedFunction);
-                    public:
-                        EffectorForFixedFunction(UIOpacityMaskEffect* effect);
-                        virtual ~EffectorForFixedFunction();
+            class EffectorForFixedFunction : public MaskEffector
+            {
+                BBEffectorClass(EffectorForFixedFunction);
+                public:
+                    EffectorForFixedFunction(UIOpacityMaskEffect* effect);
+                    virtual ~EffectorForFixedFunction();
 
-                        virtual void Begin(UIRendererBase* renderer);
-                        virtual void End(UIRendererBase* renderer);
-                };
+                    virtual void Begin(UIRendererBase* renderer);
+                    virtual void End(UIRendererBase* renderer);
+            };
 
-            private:
-                float startPoint;
-                float length;
-                FillStyle fill;
-                float invLength;
-        };
+        private:
+            float startPoint;
+            float length;
+            FillStyle fill;
+            float invLength;
+    };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        float UIOpacityMaskEffect::GetStartPoint() const
-        {
-            return startPoint;
-        }
-
-        float UIOpacityMaskEffect::GetLength() const
-        {
-            return length;
-        }
-
-        UIOpacityMaskEffect::FillStyle UIOpacityMaskEffect::GetFill() const
-        {
-            return fill;
-        }
+    float UIOpacityMaskEffect::GetStartPoint() const
+    {
+        return startPoint;
     }
 
-    BBBindLuaEnum(Bibim::UIOpacityMaskEffect::FillStyle,
-                  Bibim::UIOpacityMaskEffect::ConvertFromStringToFillStyle,
-                  Bibim::UIOpacityMaskEffect::ConvertFromFillStyleToString);
+    float UIOpacityMaskEffect::GetLength() const
+    {
+        return length;
+    }
+
+    UIOpacityMaskEffect::FillStyle UIOpacityMaskEffect::GetFill() const
+    {
+        return fill;
+    }
+}
+
+BBBindLuaEnum(Bibim::UIOpacityMaskEffect::FillStyle,
+              Bibim::UIOpacityMaskEffect::ConvertFromStringToFillStyle,
+              Bibim::UIOpacityMaskEffect::ConvertFromFillStyleToString);
 
 #endif

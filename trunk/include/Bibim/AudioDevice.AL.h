@@ -2,33 +2,33 @@
 #ifndef __BIBIM_AUDIODEVICE_AL_H__
 #define __BIBIM_AUDIODEVICE_AL_H__
 
-#   include <Bibim/FWD.h>
-#   include <Bibim/GameModule.h>
-#   include <Bibim/String.h>
+#include <Bibim/FWD.h>
+#include <Bibim/GameModule.h>
+#include <Bibim/String.h>
 
-    namespace Bibim
+namespace Bibim
+{
+    class AudioDevice : public GameModule
     {
-        class AudioDevice : public GameModule
-        {
-            BBModuleClass(AudioDevice, GameModule, 'A', 'U', 'D', 'D');
-            public:
-                AudioDevice();
-                virtual ~AudioDevice();
+        BBModuleClass(AudioDevice, GameModule, 'A', 'U', 'D', 'D');
+        public:
+            AudioDevice();
+            virtual ~AudioDevice();
 
-                inline float GetDuration(const String& uri) const;
-                float GetDurationByChars(const char* uri) const;
+            inline float GetDuration(const String& uri) const;
+            float GetDurationByChars(const char* uri) const;
 
-            private:
-                void* device;
-                void* context;
-        };
+        private:
+            void* device;
+            void* context;
+    };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        float AudioDevice::GetDuration(const String& uri) const
-        {
-            return GetDurationByChars(uri.CStr());
-        }
+    float AudioDevice::GetDuration(const String& uri) const
+    {
+        return GetDurationByChars(uri.CStr());
     }
+}
 
 #endif
