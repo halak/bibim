@@ -137,11 +137,6 @@
                     BBForwardDeclareSmartPointerClass(SphereShape2D);
                     BBForwardDeclareSmartPointerClass(UserShape2D);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
-            // Diagnostics
-                class Logger;
-                    class FileLogger;
-                    class OutputWindowLogger;
-            ////////////////////////////////////////////////////////////////////////////////////////////////////
             // FileSystem
                 BBForwardDeclareSmartPointerClass(FileStream);
                 BBForwardDeclareSmartPointerClass(MPQ);

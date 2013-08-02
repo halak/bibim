@@ -16,8 +16,7 @@
     {
         class StandardGame : public GameFramework,
                              public Window::ResizeEventListener,
-                             public GraphicsDevice::RestoreEventListener,
-                             public Log::Listener
+                             public GraphicsDevice::RestoreEventListener
         {
             BBThisIsNoncopyableClass(StandardGame);
             public:
@@ -132,10 +131,11 @@
                 
                 static bool KeyDownHandler(const UIEventArgs& args, void* userData);
 
-                virtual void Error(const char* category, const char* message);
-                virtual void Warning(const char* category, const char* message);
-                virtual void Information(const char* category, const char* message);
-                void OnLog(Color color, const char* category, const char* message);
+                //Log::Listener
+                //virtual void Error(const char* category, const char* message);
+                //virtual void Warning(const char* category, const char* message);
+                //virtual void Information(const char* category, const char* message);
+                //void OnLog(Color color, const char* category, const char* message);
 
             private:
                 Point2 windowSize;
