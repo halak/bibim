@@ -837,7 +837,6 @@
     <ClCompile Include="..\..\src\Input\Mouse.Windows.cpp">
       <Filter>03. Game\Input</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Bibim-All.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Bibim\AssetLoadingTask.h">

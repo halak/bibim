@@ -418,6 +418,12 @@ namespace Bibim
                 break;
         }
 
+        /* DEBUG_OVERDRAWN
+        blendOp  = D3DBLENDOP_ADD;
+        srcBlend = D3DBLEND_ONE;
+        dstBlend = D3DBLEND_ONE;
+        */
+
         IDirect3DDevice9* d3dDevice = GetGraphicsDevice()->GetD3DDevice();
         CheckedSetRenderState(d3dDevice, D3DRS_BLENDOP, blendOp);
         CheckedSetRenderState(d3dDevice, D3DRS_SRCBLEND, srcBlend);

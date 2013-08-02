@@ -47,7 +47,10 @@ namespace Bibim
 
         worldTransform = Matrix4::Zero;
         InitializeNormalQuadSets();
-        Setup(NormalBlend);
+        if (blendMode == NormalBlend)
+            OnBlendModeChanged(NormalBlend);
+        else
+            Setup(NormalBlend);
         Setup(std::vector<EffectorPtr>());
     }
 
