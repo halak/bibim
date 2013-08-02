@@ -10,7 +10,6 @@
 #include <Bibim/String.h>
 #include <Bibim/UIHandledDrawingContext.h>
 #include <Bibim/Window.h>
-#include <sstream>
 
 namespace Bibim
 {
@@ -20,13 +19,6 @@ namespace Bibim
     {
         BBThisIsNoncopyableClass(StandardGame);
         public:
-            enum DebugMode
-            {
-                NoDebugMode,
-                SimpleDebugDisplay,
-                RemoteDebugging,
-            };
-
             class LuaBase : public Bibim::Lua
             {
                 BBThisIsNoncopyableClass(LuaBase);
@@ -55,9 +47,6 @@ namespace Bibim
             inline Color GetClearColor() const;
             inline void SetClearColor(Color value);
 
-            inline DebugMode GetDebugMode() const;
-            void SetDebugMode(DebugMode value);
-
             inline Preferences* GetPreferences() const;
             inline Keyboard* GetKeyboard() const;
             inline Mouse* GetMouse() const;
@@ -72,34 +61,6 @@ namespace Bibim
             inline UIAsyncEventQueue* GetAsyncEventQueue() const;
             inline LuaBase* GetLua() const;
             inline Clipboard* GetClipboard() const;
-
-        protected:
-            class RemoteDebugger : public UIHandledDrawingContext::Handler
-            {
-                public:
-                    RemoteDebugger();
-                    virtual ~RemoteDebugger();
-
-                protected:
-                    virtual void OnBegan(UIHandledDrawingContext& context, UIVisual* target);
-                    virtual void OnEnded(UIHandledDrawingContext& context, UIVisual* target);
-                    virtual void OnVisualBegan(UIHandledDrawingContext& context);
-                    virtual void OnVisualEnded(UIHandledDrawingContext& context);
-
-                private:
-                    bool TryConnectToServer();
-
-                    void Synchronize(const UIVisual* visual);
-
-                private:
-                    int syncCountdown;
-                    SocketPtr socket;
-                    StreamPtr queryStream;
-                    std::ostringstream stringstream;
-                    void* selectedVisual;
-                    RectF selectedVisualBounds;
-                    RectF selectedVisualClippedBounds;
-            };
 
         protected:
             StandardGame();
@@ -143,8 +104,7 @@ namespace Bibim
             bool fullscreen;
             char __padding__[3];
             Color clearColor;
-            DebugMode debugMode;
-            RemoteDebugger* remoteDebugger;
+            Dashboard* dashboard;
             Preferences* preferences;
             Keyboard* keyboard;
             Mouse* mouse;
@@ -182,11 +142,6 @@ namespace Bibim
     void StandardGame::SetClearColor(Color value)
     {
         clearColor = value;
-    }
-
-    StandardGame::DebugMode StandardGame::GetDebugMode() const
-    {
-        return debugMode;
     }
 
     Preferences* StandardGame::GetPreferences() const

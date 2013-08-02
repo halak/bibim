@@ -40,6 +40,7 @@
 #include "ComponentStreamReader.h"
 #include "Config.h"
 #include "CrashDump.h"
+#include "Dashboard.h"
 #include "Delete.h"
 #include "DumpStream.h"
 #include "DynamicTexture2D.DX9.h"

@@ -34,14 +34,8 @@ namespace Bibim
             static inline void Warning(const char* category, const char* message);
             static inline void Information(const char* category, const char* message);
 
-            static inline Stream* GetStream();
-            static void SetStream(Stream* value);
-
         private:
             static void Write(Level level, const char* category, const char* message);
-
-        private:
-            static StreamPtr stream;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -104,11 +98,6 @@ namespace Bibim
     void Log::Information(const char* category, const char* message)
     {
         Write(InformationLevel, category, message);
-    }
-
-    Stream* Log::GetStream()
-    {
-        return stream;
     }
 }
 

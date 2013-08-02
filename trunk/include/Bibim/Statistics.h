@@ -17,6 +17,10 @@ namespace Bibim
             static StreamPtr stream;
     };
 
+#   if (defined(BIBIM_USE_DIAGNOSTICS))
+#   else
+#   endif
+
     Stream* Statistics::GetStream()
     {
         return stream;
