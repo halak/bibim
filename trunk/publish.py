@@ -165,81 +165,27 @@ def get_dependencies(environment, platform, target):
      
     # ZLib & PNG & JPG & FreeType & Lua & SPARK & Curl
     if (win32):
-        if (debug):
-            if (vs2008):
-                l += ['extlibs/zlib-1.2.8/lib/Win32/Debug/vs2008/zlib.lib']
-                l += ['extlibs/libpng-1.6.3/lib/Win32/Debug/vs2008/libpng.lib']
-                l += ['extlibs/jpeg-9/lib/Win32/Debug/vs2008/libjpeg.lib']
-                l += ['extlibs/freetype-2.5.0.1/custom/lib/Win32/Debug/vs2008/freetype.lib']
-                l += ['extlibs/lua-5.2.2/lib/Win32/Debug/vs2008/lua.lib']
-                l += ['extlibs/SPARK-1.5.5/lib/vc2008/static/SPARK_debug.lib']
-                l += ['extlibs/curl-7.29.0/build/Win32/LIB Debug/vs2008/libcurl.lib']
-            elif (vs2010):
-                l += ['extlibs/zlib-1.2.8/lib/Win32/Debug/vs2010/zlib.lib']
-                l += ['extlibs/libpng-1.6.3/lib/Win32/Debug/vs2010/libpng.lib']
-                l += ['extlibs/jpeg-9/lib/Win32/Debug/vs2010/libjpeg.lib']
-                l += ['extlibs/freetype-2.5.0.1/custom/lib/Win32/Debug/vs2010/freetype.lib']
-                l += ['extlibs/lua-5.2.2/lib/Win32/Debug/vs2010/lua.lib']
-                l += ['extlibs/SPARK-1.5.5/lib/vc2010/static/SPARK_debug.lib']
-                l += ['extlibs/curl-7.29.0/build/Win32/LIB Debug/vs2010/libcurl.lib']
-        elif (release):
-            if (vs2008):
-                l += ['extlibs/zlib-1.2.8/lib/Win32/Release/vs2008/zlib.lib']
-                l += ['extlibs/libpng-1.6.3/lib/Win32/Release/vs2008/libpng.lib']
-                l += ['extlibs/jpeg-9/lib/Win32/Release/vs2008/libjpeg.lib']
-                l += ['extlibs/freetype-2.5.0.1/custom/lib/Win32/Release/vs2008/freetype.lib']
-                l += ['extlibs/lua-5.2.2/lib/Win32/Release/vs2008/lua.lib']
-                l += ['extlibs/SPARK-1.5.5/lib/vc2008/static/SPARK.lib']
-                l += ['extlibs/curl-7.29.0/build/Win32/LIB Release/vs2008/libcurl.lib']
-            elif (vs2010):
-                l += ['extlibs/zlib-1.2.8/lib/Win32/Release/vs2010/zlib.lib']
-                l += ['extlibs/libpng-1.6.3/lib/Win32/Release/vs2010/libpng.lib']
-                l += ['extlibs/jpeg-9/lib/Win32/Release/vs2010/libjpeg.lib']
-                l += ['extlibs/freetype-2.5.0.1/custom/lib/Win32/Release/vs2010/freetype.lib']
-                l += ['extlibs/lua-5.2.2/lib/Win32/Release/vs2010/lua.lib']
-                l += ['extlibs/SPARK-1.5.5/lib/vc2010/static/SPARK.lib']
-                l += ['extlibs/curl-7.29.0/build/Win32/LIB Release/vs2010/libcurl.lib']
+        l += ['zlib.lib', 'libpng.lib', 'libjpeg.lib', 'freetype.lib', 'lua.lib', 'SPARK.lib', 'libcurl.lib']
     elif (android):
-        if (debug):
-            l += ['extlibs/libpng-1.6.3/lib/Android/Debug/vs2010/libpng.a']
-            l += ['extlibs/zlib-1.2.8/lib/Android/Debug/vs2010/zlib.a']
-            l += ['extlibs/jpeg-9/lib/Android/Debug/vs2010/libjpeg.a']
-            l += ['extlibs/freetype-2.5.0.1/custom/lib/Android/Debug/vs2010/freetype.a']
-            l += ['extlibs/lua-5.2.2/lib/Android/Debug/vs2010/lua.a']
-            l += ['extlibs/SPARK-1.5.5/lib/vc2010/static/SPARK_android_debug.a']
-            l += ['extlibs/curl-7.29.0/build/Android/LIB Debug/vs2010/libcurl.a']
-        elif (release):
-            l += ['extlibs/libpng-1.6.3/lib/Android/Release/vs2010/libpng.a']
-            l += ['extlibs/zlib-1.2.8/lib/Android/Release/vs2010/zlib.a']
-            l += ['extlibs/jpeg-9/lib/Android/Release/vs2010/libjpeg.a']
-            l += ['extlibs/freetype-2.5.0.1/custom/lib/Android/Release/vs2010/freetype.a']
-            l += ['extlibs/lua-5.2.2/lib/Android/Release/vs2010/lua.a']
-            l += ['extlibs/SPARK-1.5.5/lib/vc2010/static/SPARK_android.a']
-            l += ['extlibs/curl-7.29.0/build/Android/LIB Release/vs2010/libcurl.a']
+        l += ['zlib.a', 'libpng.a', 'libjpeg.a', 'freetype.a', 'lua.a', 'SPARK.a', 'libcurl.a']
     
     # irrKlang
     if (win32):
-        l += ['extlibs/irrKlang-1.4.0/lib/Win32-visualStudio/irrKlang.lib']
+        l += ['irrKlang.lib']
         
     # OpenAL
     if (win32):
-        l += ['extlibs/OpenAL/PC/libs/Win32/OpenAL32.lib']
+        l += ['OpenAL32.lib']
     elif (android):
-        l += ['extlibs/OpenAL/Android/libs/armeabi/libopenal.so']
-        l += ['extlibs/OpenAL/Android/libs/armeabi/libopenalwrapper.so']
+        l += ['libopenal.so']
+        l += ['libopenalwrapper.so']
         
     # MPQ
     if (win32):
-        if (vs2008):
-            if (debug):
-                l += ['extlibs/StormLib/lib/Win32/Debug/vs2008/StormLibDAD.lib']
-            elif (release):
-                l += ['extlibs/StormLib/lib/Win32/Release/vs2008/StormLibRAD.lib']
-        elif (vs2010):
-            if (debug):
-                l += ['extlibs/StormLib/lib/Win32/Debug/vs2010/StormLibDAD.lib']
-            elif (release):
-                l += ['extlibs/StormLib/lib/Win32/Release/vs2010/StormLibRAD.lib']
+        if (debug):
+            l += ['StormLibDAD.lib']
+        elif (release):
+            l += ['StormLibRAD.lib']
 
     return l
         

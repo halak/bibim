@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="config">
+      <UniqueIdentifier>{52e88d60-763b-42fc-aa26-9aaa4be5e977}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\extlibs\freetype-2.5.0.1\custom\freetype\config\ftmodule.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\extlibs\freetype-2.5.0.1\custom\freetype\config\ftoption.h">
+      <Filter>config</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\extlibs\freetype-2.5.0.1\custom\freetype-all.c" />
+  </ItemGroup>
+</Project>
