@@ -2268,6 +2268,22 @@
 					RelativePath="..\..\include\Bibim\Log.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\src\Diagnostics\Performance.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\Performance.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Diagnostics\Statistics.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\Statistics.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="FileSystem"

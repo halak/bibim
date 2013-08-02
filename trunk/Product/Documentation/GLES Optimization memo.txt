@@ -1,3 +1,0 @@
-
-Sound Encoding은 mod란 포맷으로 (PCI 형태 미디)
-GLSL lowp 라는 2바이트 실수 형이 있음
