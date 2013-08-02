@@ -1,0 +1,1 @@
+adb uninstall org.haptimap.offis.accessiblemap
