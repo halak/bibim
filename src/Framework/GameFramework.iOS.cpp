@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_IOS))
+
 #include <Bibim/GameFramework.iOS.h>
 #include <Bibim/Environment.h>
 #include <Bibim/FileStream.h>
@@ -56,3 +58,5 @@ namespace Bibim
         DrawFrame();
     }
 }
+
+#endif

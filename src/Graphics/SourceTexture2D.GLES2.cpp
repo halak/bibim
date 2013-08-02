@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_USE_OPENGLES2))
+
 #include <Bibim/SourceTexture2D.GLES2.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/GameAssetStorage.h>
@@ -111,3 +113,5 @@ namespace Bibim
         delete [] destination;
     }
 }
+
+#endif

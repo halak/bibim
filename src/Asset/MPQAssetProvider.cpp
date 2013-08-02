@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
+
 #include <Bibim/MPQAssetProvider.h>
 #include <Bibim/AssetLoadingTask.h>
 #include <Bibim/AssetStreamReader.h>
@@ -116,3 +118,5 @@ namespace Bibim
             return nullptr;
     }
 }
+
+#endif

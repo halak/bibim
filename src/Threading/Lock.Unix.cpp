@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_UNIX))
+
 #include <Bibim/Lock.Unix.h>
 
 namespace Bibim
@@ -29,3 +31,5 @@ namespace Bibim
     }
 
 }
+
+#endif

@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_ANDROID))
+
 #include <Bibim/Clipboard.Android.h>
 
 namespace Bibim
@@ -20,3 +22,5 @@ namespace Bibim
     {
     }
 }
+
+#endif

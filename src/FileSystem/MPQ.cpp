@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
+
 #include <Bibim/MPQ.h>
 #include <StormLib.h>
 
@@ -39,3 +41,5 @@ namespace Bibim
             return false;
     }
 }
+
+#endif

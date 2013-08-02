@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
+
 #include <Bibim/IME.Windows.h>
 #include <vector>
 
@@ -289,3 +291,5 @@ namespace Bibim
         }
     }
 }
+
+#endif

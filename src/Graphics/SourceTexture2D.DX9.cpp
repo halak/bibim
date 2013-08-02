@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_USE_DIRECTX9))
+
 #include <Bibim/SourceTexture2D.DX9.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/GameAssetStorage.h>
@@ -137,3 +139,5 @@ namespace Bibim
             thiz->SetStatus(CompletedStatus);
     }
 }
+
+#endif

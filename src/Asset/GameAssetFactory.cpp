@@ -8,7 +8,7 @@
 
 namespace Bibim
 {
-    struct Entry
+    struct GameAssetFactory::Entry
     {
         int ID;
         GameAssetFactory::CreateFunction Function;
@@ -18,27 +18,29 @@ namespace Bibim
               Function(function)
         {
         }
+
+        static std::vector<Entry> Items;
     };
 
-    static std::vector<Entry> Entries;
+    std::vector<GameAssetFactory::Entry> GameAssetFactory::Entry::Items;
 
-    static Entry* FindEntry(int id)
+    GameAssetFactory::Entry* GameAssetFactory::FindEntry(int id)
     {
-        BBAssertDebug(Entries.empty() == false);
+        BBAssertDebug(Entry::Items.empty() == false);
 
         int lower = 0;
-        int upper = static_cast<int>(Entries.size());
+        int upper = static_cast<int>(Entry::Items.size());
 
         while (upper - lower > 0)
         {
             const int index = lower + static_cast<int>((upper - lower) / 2);
 
-            if (id < Entries[index].ID)
+            if (id < Entry::Items[index].ID)
                 upper = index;
-            else if (id > Entries[index].ID)
+            else if (id > Entry::Items[index].ID)
                 lower = index;
             else
-                return &Entries[index];
+                return &Entry::Items[index];
         }
 
         return nullptr;
@@ -46,7 +48,7 @@ namespace Bibim
 
     void GameAssetFactory::AddEntry(int id, CreateFunction function)
     {
-        Entries.push_back(Entry(id, function));
+        Entry::Items.push_back(Entry(id, function));
     }
 
     void GameAssetFactory::SortEntries()
@@ -59,7 +61,7 @@ namespace Bibim
             }
         };
 
-        std::sort(Entries.begin(), Entries.end(), Compare::Do);
+        std::sort(Entry::Items.begin(), Entry::Items.end(), Compare::Do);
     }
 
     GameAsset* GameAssetFactory::Create(StreamReader& reader, GameAsset* existingInstance)

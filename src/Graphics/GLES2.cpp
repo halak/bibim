@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_USE_OPENGLES2))
+
 #include <Bibim/GLES2.h>
 #include <Bibim/Log.h>
 #include <Bibim/String.h>
@@ -13,3 +15,5 @@ namespace Bibim
         }
     }
 }
+
+#endif

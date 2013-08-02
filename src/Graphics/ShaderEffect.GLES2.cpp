@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_USE_OPENGLES2))
+
 #include <Bibim/ShaderEffect.GLES2.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/CheckedRelease.h>
@@ -219,3 +221,5 @@ namespace Bibim
         SetStatus(DirtyStatus);
     }
 }
+
+#endif

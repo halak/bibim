@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
+
 #include <Bibim/FileStream.Windows.h>
 #include <Bibim/Math.h>
 #include <Bibim/Numerics.h>
@@ -150,3 +152,5 @@ namespace Bibim
         return true;
     }
 }
+
+#endif

@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_IOS))
+
 #include <Bibim/Environment.iOS.h>
 
 namespace Bibim
@@ -23,3 +25,5 @@ namespace Bibim
         return PrivateInstance.appDataDirectoryBase + "/" + filename;
     }
 }
+
+#endif

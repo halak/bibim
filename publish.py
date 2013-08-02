@@ -343,6 +343,22 @@ def publish_library(environment, platform, target):
     #     if (item.startswith('extlibs')):  # 로컬에 있는 라이브러리만 복사합니다.
     #         copy2(item, library_directory)
 
+
+def merge_cpp(directory):
+    from datetime import datetime
+
+    lines = ['#include <zlib.h>']
+    lines.append('// Automatically generated in {0}'.format(datetime.now()))
+    lines.append('')
+    for module in MODULES:
+        for item in os.listdir(os.path.join(directory, module)):
+            if (file_ext(item) == 'cpp' and 'Irrklang' not in item):
+                lines.append('#include "{0}/{1}"'.format(module, item))
+
+    f = open(os.path.join(directory, 'Bibim-All.cpp'), 'w')
+    f.write('\n'.join(lines))
+    f.close()
+
             
 if (__name__ == '__main__'):
     # import sys
@@ -363,7 +379,7 @@ if (__name__ == '__main__'):
     
     # if (not header_only):
     print('publish libraries...')
-        
+      
     publish_library(ENVIRONMENT.VS2008, PLATFORM.WIN32, TARGET.DEBUG)
     publish_library(ENVIRONMENT.VS2008, PLATFORM.WIN32, TARGET.RELEASE)
 
@@ -371,3 +387,5 @@ if (__name__ == '__main__'):
     publish_library(ENVIRONMENT.VS2010, PLATFORM.WIN32,   TARGET.RELEASE)
     publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.DEBUG)
     publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.RELEASE)
+
+    # merge_cpp('src')

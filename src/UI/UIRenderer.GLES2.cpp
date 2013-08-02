@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_USE_OPENGLES2))
+
 #include <Bibim/UIRenderer.GLES2.h>
 #include <Bibim/Assert.h>
 #include <Bibim/BinaryReader.h>
@@ -256,3 +258,5 @@ namespace Bibim
         EndEffect(pixelMode);
     }
 }
+
+#endif

@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_UNIX))
+
 #include <Bibim/Clock.h>
 #include <sys/time.h>
 
@@ -44,3 +46,5 @@ namespace Bibim
         return static_cast<int>(UnixClock::StaticInstance.GetCurrentMilliSeconds());
     }
 }
+
+#endif

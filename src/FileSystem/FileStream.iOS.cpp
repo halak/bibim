@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_IOS))
+
 #include <Bibim/FileStream.iOS.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Environment.h>
@@ -156,3 +158,5 @@ namespace Bibim
         return true;
     }
 }
+
+#endif

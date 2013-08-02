@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
+
 #include <Bibim/Lock.Windows.h>
 
 namespace Bibim
@@ -27,5 +29,6 @@ namespace Bibim
     {
         return ::TryEnterCriticalSection(&cs) != FALSE;
     }
-
 }
+
+#endif

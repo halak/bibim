@@ -1,4 +1,6 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_USE_DIRECTX9))
+
 #include <Bibim/GraphicsDevice.DX9.h>
 #include <Bibim/Assert.h>
 #include <Bibim/CheckedRelease.h>
@@ -320,3 +322,5 @@ namespace Bibim
         ::ZeroMemory(&d3dCaps, sizeof(d3dCaps));
     }
 }
+
+#endif

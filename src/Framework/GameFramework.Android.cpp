@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_ANDROID))
+
 #include <Bibim/GameFramework.Android.h>
 #include <Bibim/Environment.h>
 #include <Bibim/FileStream.h>
@@ -332,3 +334,5 @@ static const String ToString(JNIEnv* env, jstring s)
     env->ReleaseStringUTFChars(s, buffer);
     return result;
 }
+
+#endif

@@ -1,6 +1,8 @@
 ﻿#include <Bibim/Config.h>
+#if (defined(BIBIM_PLATFORM_WINDOWS))
+
 #include <Bibim/Clock.h>
-#include <windows.h>
+#include <mmsystem.h>
 
 namespace Bibim
 {
@@ -71,3 +73,5 @@ namespace Bibim
         return static_cast<int>(WindowsClock::StaticInstance.GetCurrentMilliSeconds());
     }
 }
+
+#endif
