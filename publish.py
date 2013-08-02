@@ -1,4 +1,4 @@
-# -*- coding:utf-8 -*-
+ï»¿# -*- coding:utf-8 -*-
 import os
 
 MODULES = (
@@ -301,14 +301,14 @@ def publish_library(environment, platform, target):
     main_library_rel_directory = get_main_library_directory(environment, platform, target)
     main_library_abs_directory = '$(BIBIM_DIR){0}'.format(main_library_rel_directory)
     
-    # Ãß°¡ Æ÷ÇÔ µğ·ºÅÍ¸®¿Í ¶óÀÌºê·¯¸® µğ·ºÅÍ¸®¸¦ ±¸ÇÕ´Ï´Ù.
+    # ì¶”ê°€ í¬í•¨ ë””ë ‰í„°ë¦¬ì™€ ë¼ì´ë¸ŒëŸ¬ë¦¬ ë””ë ‰í„°ë¦¬ë¥¼ êµ¬í•©ë‹ˆë‹¤.
     include_directories = get_include_directories(environment, platform, target)
     include_directory = ';'.join(map(lambda o: '"{0}"'.format(o), include_directories))
     library_directories = [main_library_abs_directory]
     library_directories += get_library_directories(environment, platform, target)
     library_directory = ';'.join(map(lambda o: '"{0}"'.format(o), library_directories))
         
-    # ÀÇÁ¸ ¶óÀÌºê·¯¸®µé ¸ñ·ÏÀ» ±¸ÇÕ´Ï´Ù.
+    # ì˜ì¡´ ë¼ì´ë¸ŒëŸ¬ë¦¬ë“¤ ëª©ë¡ì„ êµ¬í•©ë‹ˆë‹¤.
     dependencies = get_dependencies(environment, platform, target)
     if (platform == PLATFORM.ANDROID):
         dependency_filenames = ';'.join(map(
@@ -321,7 +321,7 @@ def publish_library(environment, platform, target):
             dependencies
         ))
     
-    # È¯°æ¿¡ ¸Â´Â ÇÁ·ÎÆÛÆ¼ ½ÃÆ®¸¦ »ı¼ºÇØ¼­ ÀúÀåÇÕ´Ï´Ù.
+    # í™˜ê²½ì— ë§ëŠ” í”„ë¡œí¼í‹° ì‹œíŠ¸ë¥¼ ìƒì„±í•´ì„œ ì €ì¥í•©ë‹ˆë‹¤.
     if (environment == ENVIRONMENT.VS2008):
         element = make_visual_studio_2008_property_sheet(name,
                                                          include_directory,
@@ -336,11 +336,11 @@ def publish_library(environment, platform, target):
                                                          platform)
         save_xml('{0}.props'.format(os.path.join(main_library_rel_directory, name)), element)
  
-    # ÀÇÁ¸ ¶óÀÌºê·¯¸®µéÀ» Product Æú´õ·Î º¹»çÇÕ´Ï´Ù.
+    # ì˜ì¡´ ë¼ì´ë¸ŒëŸ¬ë¦¬ë“¤ì„ Product í´ë”ë¡œ ë³µì‚¬í•©ë‹ˆë‹¤.
     # library_directory = os.path.join(LIBRARY_DIR, library_relative_directory)
     # from shutil import copy2
     # for item in dependencies:
-    #     if (item.startswith('extlibs')):  # ·ÎÄÃ¿¡ ÀÖ´Â ¶óÀÌºê·¯¸®¸¸ º¹»çÇÕ´Ï´Ù.
+    #     if (item.startswith('extlibs')):  # ë¡œì»¬ì— ìˆëŠ” ë¼ì´ë¸ŒëŸ¬ë¦¬ë§Œ ë³µì‚¬í•©ë‹ˆë‹¤.
     #         copy2(item, library_directory)
 
 
