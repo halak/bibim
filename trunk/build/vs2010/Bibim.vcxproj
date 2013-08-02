@@ -1,0 +1,874 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Android">
+      <Configuration>Debug</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Android">
+      <Configuration>Release</Configuration>
+      <Platform>Android</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{96CD7385-7B7D-4469-A86D-B19D660C595E}</ProjectGuid>
+    <RootNamespace>BibimRuntimeVC10</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\lib\vs2010\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">obj\$(ProjectName)\$(Platform)\$(Configuration)\VC10\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\lib\vs2010\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">obj\$(ProjectName)\$(Platform)\$(Configuration)\VC10\</IntDir>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">.a</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">..\..\lib\vs2010\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Android'">..\..\lib\vs2010\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">obj\$(ProjectName)\$(Platform)\$(Configuration)\VC10\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Android'">obj\$(ProjectName)\$(Platform)\$(Configuration)\VC10\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(BIBIM_DIR)Product\Include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.0.1\custom;..\..\extlibs\freetype-2.5.0.1\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\OpenAL\PC\include;..\..\extlibs\SPARK-1.5.5\include;..\..\extlibs\StormLib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+    <Lib />
+    <Lib />
+    <Lib />
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(BIBIM_DIR)Product\Include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.0.1\custom;..\..\extlibs\freetype-2.5.0.1\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\OpenAL\PC\include;..\..\extlibs\SPARK-1.5.5\include;..\..\extlibs\StormLib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Lib />
+    <Lib />
+    <Lib />
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
+    <ClCompile>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <AdditionalIncludeDirectories>$(BIBIM_DIR)Product\Include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.0.1\custom;..\..\extlibs\freetype-2.5.0.1\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\OpenAL\Android\openal\include;..\..\extlibs\SPARK-1.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(BIBIM_DIR)Product\Include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.0.1\custom;..\..\extlibs\freetype-2.5.0.1\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\OpenAL\Android\openal\include;..\..\extlibs\SPARK-1.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\Asset\AssetLoadingTask.cpp" />
+    <ClCompile Include="..\..\src\Asset\AssetStreamReader.cpp" />
+    <ClCompile Include="..\..\src\Asset\FileAssetProvider.Default.cpp" />
+    <ClCompile Include="..\..\src\Asset\FileAssetProviderBase.cpp" />
+    <ClCompile Include="..\..\src\Asset\GameAsset.cpp" />
+    <ClCompile Include="..\..\src\Asset\GameAssetFactory.cpp" />
+    <ClCompile Include="..\..\src\Asset\GameAssetStorage.cpp" />
+    <ClCompile Include="..\..\src\Asset\AssetProvider.cpp" />
+    <ClCompile Include="..\..\src\Asset\MPQAssetProvider.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Asset\NetworkAssetProvider.cpp" />
+    <ClCompile Include="..\..\src\Audio\AudioDevice.AL.cpp" />
+    <ClCompile Include="..\..\src\Audio\BGM.AL.cpp" />
+    <ClCompile Include="..\..\src\Audio\SoundFX.AL.cpp" />
+    <ClCompile Include="..\..\src\Component\GameComponentFactory.cpp" />
+    <ClCompile Include="..\..\src\FileSystem\FileStream.Android.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\FileSystem\FileStream.iOS.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\FileSystem\Path.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Color.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Environment.Android.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Foundation\Environment.iOS.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Foundation\Profiler.cpp" />
+    <ClCompile Include="..\..\src\Framework\Clipboard.Android.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Framework\Clipboard.iOS.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Framework\Clipboard.Windows.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Framework\GameFramework.Android.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Framework\GameFramework.iOS.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Framework\GameFrameworkBase.cpp" />
+    <ClCompile Include="..\..\src\Framework\GameWindow.Mobile.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Framework\Lua.cpp" />
+    <ClCompile Include="..\..\src\Framework\Preferences.cpp" />
+    <ClCompile Include="..\..\src\Framework\StandardGame.cpp" />
+    <ClCompile Include="..\..\src\Framework\Startup.cpp" />
+    <ClCompile Include="..\..\src\Graphics\GLES2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\GraphicsDeviceBase.cpp" />
+    <ClCompile Include="..\..\src\Graphics\JPEGReader.cpp" />
+    <ClCompile Include="..\..\src\Input\IME.Mobile.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Input\IME.Windows.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Input\IMEBase.cpp" />
+    <ClCompile Include="..\..\src\Input\Key.cpp" />
+    <ClCompile Include="..\..\src\Input\Mouse.Mobile.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Net\HttpClient.Curl.cpp" />
+    <ClCompile Include="..\..\src\Net\HttpClientBase.cpp" />
+    <ClCompile Include="..\..\src\Net\IPEndPoint.cpp" />
+    <ClCompile Include="..\..\src\Net\NetworkStream.cpp" />
+    <ClCompile Include="..\..\src\Net\Socket.cpp" />
+    <ClCompile Include="..\..\src\Threading\Lock.Unix.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Threading\Thread.Unix.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Time\Clock.Unix.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Typography\Font.cpp" />
+    <ClCompile Include="..\..\src\Typography\FontCache.cpp" />
+    <ClCompile Include="..\..\src\Typography\FontLibrary.cpp" />
+    <ClCompile Include="..\..\src\Typography\FontString.cpp" />
+    <ClCompile Include="..\..\src\Typography\Glyph.cpp" />
+    <ClCompile Include="..\..\src\Typography\GlyphSurface.cpp" />
+    <ClCompile Include="..\..\src\Typography\GlyphTable.cpp" />
+    <ClCompile Include="..\..\src\Typography\TypingContext.cpp" />
+    <ClCompile Include="..\..\src\Component\CloningContext.cpp" />
+    <ClCompile Include="..\..\src\Component\ComponentStreamReader.cpp" />
+    <ClCompile Include="..\..\src\Component\GameComponent.cpp" />
+    <ClCompile Include="..\..\src\Module\GameModule.cpp" />
+    <ClCompile Include="..\..\src\Module\GameModuleFactory.cpp" />
+    <ClCompile Include="..\..\src\Module\GameModuleNode.cpp" />
+    <ClCompile Include="..\..\src\Module\GameModuleTree.cpp" />
+    <ClCompile Include="..\..\src\Animation\Sprite.cpp" />
+    <ClCompile Include="..\..\src\Animation\SpriteSet.cpp" />
+    <ClCompile Include="..\..\src\Animation\EvalBoard.cpp" />
+    <ClCompile Include="..\..\src\Animation\EvalConstants.cpp" />
+    <ClCompile Include="..\..\src\Animation\EvalContext.cpp" />
+    <ClCompile Include="..\..\src\Animation\Evals.cpp" />
+    <ClCompile Include="..\..\src\Animation\EvalTimeflow.cpp" />
+    <ClCompile Include="..\..\src\Animation\EvalUnitRandom.cpp" />
+    <ClCompile Include="..\..\src\Animation\Ease.cpp" />
+    <ClCompile Include="..\..\src\Animation\EasingCurves.cpp" />
+    <ClCompile Include="..\..\src\Animation\ElasticEasingCurves.cpp" />
+    <ClCompile Include="..\..\src\Animation\OscillationCurve.cpp" />
+    <ClCompile Include="..\..\src\Collision2D\AxisAlignedBoxShape2D.cpp" />
+    <ClCompile Include="..\..\src\Collision2D\BoxShape2D.cpp" />
+    <ClCompile Include="..\..\src\Collision2D\CollisionSpace2D.cpp" />
+    <ClCompile Include="..\..\src\Collision2D\IntersectShapes2D.cpp" />
+    <ClCompile Include="..\..\src\Collision2D\PointShape2D.cpp" />
+    <ClCompile Include="..\..\src\Collision2D\SegmentShape2D.cpp" />
+    <ClCompile Include="..\..\src\Collision2D\Shape2D.cpp" />
+    <ClCompile Include="..\..\src\Collision2D\SphereShape2D.cpp" />
+    <ClCompile Include="..\..\src\Collision2D\UserShape2D.cpp" />
+    <ClCompile Include="..\..\src\Diagnostics\CrashDump.cpp" />
+    <ClCompile Include="..\..\src\Diagnostics\FileLogger.cpp" />
+    <ClCompile Include="..\..\src\Diagnostics\Logger.cpp" />
+    <ClCompile Include="..\..\src\Diagnostics\SystemLogger.cpp" />
+    <ClCompile Include="..\..\src\Gameplay\BatchCommand.cpp" />
+    <ClCompile Include="..\..\src\Gameplay\Command.cpp" />
+    <ClCompile Include="..\..\src\Gameplay\CommandHistory.cpp" />
+    <ClCompile Include="..\..\src\Gameplay\CommandQueue.cpp" />
+    <ClCompile Include="..\..\src\Gameplay\RestorableCommand.cpp" />
+    <ClCompile Include="..\..\src\Gameplay\SpatialObject2D.cpp" />
+    <ClCompile Include="..\..\src\Gameplay\JumpPointPathFinder.cpp" />
+    <ClCompile Include="..\..\src\Gameplay\PathFinder.cpp" />
+    <ClCompile Include="..\..\src\Input\Keyboard.cpp" />
+    <ClCompile Include="..\..\src\Input\KeyboardState.cpp" />
+    <ClCompile Include="..\..\src\Input\Mouse.cpp" />
+    <ClCompile Include="..\..\src\Input\Mouse.Window.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Input\MouseState.cpp" />
+    <ClCompile Include="..\..\src\Scripting\Script.cpp" />
+    <ClCompile Include="..\..\src\Scripting\ScriptingContext.cpp" />
+    <ClCompile Include="..\..\src\Scripting\ScriptNativeFunctionTable.cpp" />
+    <ClCompile Include="..\..\src\Scripting\ScriptStack.cpp" />
+    <ClCompile Include="..\..\src\Scripting\ScriptThread.cpp" />
+    <ClCompile Include="..\..\src\Scripting\ScriptLibraryIO.cpp" />
+    <ClCompile Include="..\..\src\Time\AlarmClock.cpp" />
+    <ClCompile Include="..\..\src\Time\Clock.Windows.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Time\SubTimeline.cpp" />
+    <ClCompile Include="..\..\src\Time\Timeline.cpp" />
+    <ClCompile Include="..\..\src\Time\TimelineGameComponent.cpp" />
+    <ClCompile Include="..\..\src\Time\TimelineGameModule.cpp" />
+    <ClCompile Include="..\..\src\Time\UpdateableGameComponent.cpp" />
+    <ClCompile Include="..\..\src\Time\UpdateableGameModule.cpp" />
+    <ClCompile Include="..\..\src\UI\UIDomain.cpp" />
+    <ClCompile Include="..\..\src\UI\UIEditText.cpp" />
+    <ClCompile Include="..\..\src\UI\UIElement.cpp" />
+    <ClCompile Include="..\..\src\UI\UIEllipse.cpp" />
+    <ClCompile Include="..\..\src\UI\UILayout.cpp" />
+    <ClCompile Include="..\..\src\UI\UIRenderer.DX9.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\UI\UIRenderer.GLES2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\UI\UIRendererBase.cpp" />
+    <ClCompile Include="..\..\src\UI\UIRoundedRect.cpp" />
+    <ClCompile Include="..\..\src\UI\UIScrollablePanel.cpp" />
+    <ClCompile Include="..\..\src\UI\UIShape.cpp" />
+    <ClCompile Include="..\..\src\UI\UISimpleDomain.cpp" />
+    <ClCompile Include="..\..\src\UI\UIAppEventDispatcher.cpp" />
+    <ClCompile Include="..\..\src\UI\UIAsyncEventQueue.cpp" />
+    <ClCompile Include="..\..\src\UI\UIEventArgs.cpp" />
+    <ClCompile Include="..\..\src\UI\UIEventDispatcher.cpp" />
+    <ClCompile Include="..\..\src\UI\UIEventHandler.cpp" />
+    <ClCompile Include="..\..\src\UI\UIEventID.cpp" />
+    <ClCompile Include="..\..\src\UI\UIEventMap.cpp" />
+    <ClCompile Include="..\..\src\UI\UIFunctionEventHandler.cpp" />
+    <ClCompile Include="..\..\src\UI\UIFunctionTable.cpp" />
+    <ClCompile Include="..\..\src\UI\UIGamePadEventArgs.cpp" />
+    <ClCompile Include="..\..\src\UI\UIGamePadEventDispatcher.cpp" />
+    <ClCompile Include="..\..\src\UI\UIKeyboardEventArgs.cpp" />
+    <ClCompile Include="..\..\src\UI\UIKeyboardEventDispatcher.cpp" />
+    <ClCompile Include="..\..\src\UI\UIMouseButtonEventArgs.cpp" />
+    <ClCompile Include="..\..\src\UI\UIMouseEventArgs.cpp" />
+    <ClCompile Include="..\..\src\UI\UIMouseEventDispatcher.cpp" />
+    <ClCompile Include="..\..\src\UI\UIMouseWheelEventArgs.cpp" />
+    <ClCompile Include="..\..\src\UI\UISequentialEventHandler.cpp" />
+    <ClCompile Include="..\..\src\UI\UIEffectMap.cpp" />
+    <ClCompile Include="..\..\src\UI\UIEffectStack.cpp" />
+    <ClCompile Include="..\..\src\UI\UIAfterImageEffect.cpp" />
+    <ClCompile Include="..\..\src\UI\UIGeometryEffect.cpp" />
+    <ClCompile Include="..\..\src\UI\UISineCurveEffect.cpp" />
+    <ClCompile Include="..\..\src\UI\UITintEffect.cpp" />
+    <ClCompile Include="..\..\src\UI\UIBlendingEffect.cpp" />
+    <ClCompile Include="..\..\src\UI\UIColorMatrixEffect.cpp" />
+    <ClCompile Include="..\..\src\UI\UIMaskEffect.cpp" />
+    <ClCompile Include="..\..\src\UI\UIOpacityMaskEffect.cpp" />
+    <ClCompile Include="..\..\src\UI\UIPixelEffect.cpp" />
+    <ClCompile Include="..\..\src\UI\UIButton.cpp" />
+    <ClCompile Include="..\..\src\UI\UICheckBox.cpp" />
+    <ClCompile Include="..\..\src\UI\UIImage.cpp" />
+    <ClCompile Include="..\..\src\UI\UILabel.cpp" />
+    <ClCompile Include="..\..\src\UI\UIDocument.cpp" />
+    <ClCompile Include="..\..\src\UI\UIPanel.cpp" />
+    <ClCompile Include="..\..\src\UI\UIRadioButton.cpp" />
+    <ClCompile Include="..\..\src\UI\UIRect.cpp" />
+    <ClCompile Include="..\..\src\UI\UISpark.cpp" />
+    <ClCompile Include="..\..\src\UI\UISprite.cpp" />
+    <ClCompile Include="..\..\src\UI\UIVideo.cpp" />
+    <ClCompile Include="..\..\src\UI\UIVisual.cpp" />
+    <ClCompile Include="..\..\src\UI\UIWindow.cpp" />
+    <ClCompile Include="..\..\src\UI\UITransform.cpp" />
+    <ClCompile Include="..\..\src\UI\UITransform2D.cpp" />
+    <ClCompile Include="..\..\src\UI\UITransform3D.cpp" />
+    <ClCompile Include="..\..\src\UI\UIBoundsContext.cpp" />
+    <ClCompile Include="..\..\src\UI\UIDrawingContext.cpp" />
+    <ClCompile Include="..\..\src\UI\UIHandledDrawingContext.cpp" />
+    <ClCompile Include="..\..\src\UI\UIPickingContext.cpp" />
+    <ClCompile Include="..\..\src\UI\UIVisualVisitor.cpp" />
+    <ClCompile Include="..\..\src\Graphics\BitMask.cpp" />
+    <ClCompile Include="..\..\src\Graphics\GraphicsCapabilities.cpp" />
+    <ClCompile Include="..\..\src\Graphics\Image.cpp" />
+    <ClCompile Include="..\..\src\Graphics\ImageSet.cpp" />
+    <ClCompile Include="..\..\src\Graphics\PNGReader.cpp" />
+    <ClCompile Include="..\..\src\Graphics\ScreenshotPrinter.cpp" />
+    <ClCompile Include="..\..\src\Graphics\Window.cpp" />
+    <ClCompile Include="..\..\src\Graphics\DynamicTexture2D.DX9.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\GraphicsDevice.DX9.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\RenderTargetTexture2D.DX9.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\ShaderEffect.DX9.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\SourceTexture2D.DX9.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\Texture2D.DX9.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\DynamicTexture2D.GLES2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\GraphicsDevice.GLES2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\RenderTargetTexture2D.GLES2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\ShaderEffect.GLES2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\SourceTexture2D.GLES2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\Texture2D.GLES2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\FileSystem\FileStream.Windows.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\FileSystem\MPQ.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\FileSystem\MPQStream.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Framework\GameFramework.Windows.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Framework\GameWindow.Windows.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GFX\SparkParticleEngine.cpp" />
+    <ClCompile Include="..\..\src\Net\HttpClient.Windows.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Foundation\Any.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Matrix4.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Point2.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Point3.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Point4.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Rect.cpp" />
+    <ClCompile Include="..\..\src\Foundation\RectF.cpp" />
+    <ClCompile Include="..\..\src\Foundation\String.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Vector2.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Vector3.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Vector4.cpp" />
+    <ClCompile Include="..\..\src\Foundation\SequenceDictionary.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Log.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Geom2D.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Math.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Numerics.cpp" />
+    <ClCompile Include="..\..\src\Foundation\AnyStorage.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Memory.cpp" />
+    <ClCompile Include="..\..\src\Foundation\RectStorage.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Object.cpp" />
+    <ClCompile Include="..\..\src\Foundation\SharedObject.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Environment.Windows.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Threading\Lock.Windows.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Threading\ManualLocker.cpp" />
+    <ClCompile Include="..\..\src\Threading\Thread.Windows.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Foundation\BinaryReader.cpp" />
+    <ClCompile Include="..\..\src\Foundation\BinaryWriter.cpp" />
+    <ClCompile Include="..\..\src\Foundation\DumpStream.cpp" />
+    <ClCompile Include="..\..\src\Foundation\MemoryStream.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Stream.cpp" />
+    <ClCompile Include="..\..\extlibs\lua_tinker\lua_tinker.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\Bibim\AssetLoadingTask.h" />
+    <ClInclude Include="..\..\include\Bibim\AssetStreamReader.h" />
+    <ClInclude Include="..\..\include\Bibim\FileAssetProvider.Default.h" />
+    <ClInclude Include="..\..\include\Bibim\FileAssetProviderBase.h" />
+    <ClInclude Include="..\..\include\Bibim\GameAsset.h" />
+    <ClInclude Include="..\..\include\Bibim\GameAssetFactory.h" />
+    <ClInclude Include="..\..\include\Bibim\GameAssetStorage.h" />
+    <ClInclude Include="..\..\include\Bibim\AssetProvider.h" />
+    <ClInclude Include="..\..\include\Bibim\FileAssetProvider.h" />
+    <ClInclude Include="..\..\include\Bibim\MPQAssetProvider.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\NetworkAssetProvider.h" />
+    <ClInclude Include="..\..\include\Bibim\AudioDevice.AL.h" />
+    <ClInclude Include="..\..\include\Bibim\AudioDevice.h" />
+    <ClInclude Include="..\..\include\Bibim\BGM.AL.h" />
+    <ClInclude Include="..\..\include\Bibim\Profiler.h" />
+    <ClInclude Include="..\..\include\Bibim\SoundFX.AL.h" />
+    <ClInclude Include="..\..\include\Bibim\SoundFX.h" />
+    <ClInclude Include="..\..\include\Bibim\GameComponentFactory.h" />
+    <ClInclude Include="..\..\include\Bibim\CrashDump.h" />
+    <ClInclude Include="..\..\include\Bibim\FileStream.Android.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\FileStream.iOS.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Path.h" />
+    <ClInclude Include="..\..\include\Bibim\Config.h" />
+    <ClInclude Include="..\..\include\Bibim\Environment.Android.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Environment.iOS.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Clipboard.Android.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Clipboard.h" />
+    <ClInclude Include="..\..\include\Bibim\Clipboard.iOS.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Clipboard.Windows.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\GameFramework.Android.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\GameFramework.iOS.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\GameFrameworkBase.h" />
+    <ClInclude Include="..\..\include\Bibim\GameWindow.Mobile.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Lua.h" />
+    <ClInclude Include="..\..\include\Bibim\Preferences.h" />
+    <ClInclude Include="..\..\include\Bibim\StandardGame.EmbeddedFont.h" />
+    <ClInclude Include="..\..\include\Bibim\StandardGame.h" />
+    <ClInclude Include="..\..\include\Bibim\GraphicsDeviceBase.h" />
+    <ClInclude Include="..\..\include\Bibim\JPEGReader.h" />
+    <ClInclude Include="..\..\include\Bibim\IME.Mobile.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\IME.h" />
+    <ClInclude Include="..\..\include\Bibim\IME.Windows.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\IMEBase.h" />
+    <ClInclude Include="..\..\include\Bibim\HttpClient.Curl.h" />
+    <ClInclude Include="..\..\include\Bibim\HttpClientBase.h" />
+    <ClInclude Include="..\..\include\Bibim\IPEndPoint.h" />
+    <ClInclude Include="..\..\include\Bibim\NetworkStream.h" />
+    <ClInclude Include="..\..\include\Bibim\Socket.h" />
+    <ClInclude Include="..\..\include\Bibim\Lock.Unix.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Thread.Unix.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\ThreadBase.h" />
+    <ClInclude Include="..\..\include\Bibim\Font.h" />
+    <ClInclude Include="..\..\include\Bibim\FontCache.h" />
+    <ClInclude Include="..\..\include\Bibim\FontLibrary.h" />
+    <ClInclude Include="..\..\include\Bibim\FontString.h" />
+    <ClInclude Include="..\..\include\Bibim\Glyph.h" />
+    <ClInclude Include="..\..\include\Bibim\GlyphSurface.h" />
+    <ClInclude Include="..\..\include\Bibim\GlyphTable.h" />
+    <ClInclude Include="..\..\include\Bibim\TypingContext.h" />
+    <ClInclude Include="..\..\include\Bibim\CloningContext.h" />
+    <ClInclude Include="..\..\include\Bibim\ComponentStreamReader.h" />
+    <ClInclude Include="..\..\include\Bibim\GameComponent.h" />
+    <ClInclude Include="..\..\include\Bibim\GameModule.h" />
+    <ClInclude Include="..\..\include\Bibim\GameModuleFactory.h" />
+    <ClInclude Include="..\..\include\Bibim\GameModuleNode.h" />
+    <ClInclude Include="..\..\include\Bibim\GameModuleTree.h" />
+    <ClInclude Include="..\..\include\Bibim\Sprite.h" />
+    <ClInclude Include="..\..\include\Bibim\SpriteSet.h" />
+    <ClInclude Include="..\..\include\Bibim\EvalBinaryOperators.h" />
+    <ClInclude Include="..\..\include\Bibim\EvalBoard.h" />
+    <ClInclude Include="..\..\include\Bibim\EvalCaches.h" />
+    <ClInclude Include="..\..\include\Bibim\EvalConstants.h" />
+    <ClInclude Include="..\..\include\Bibim\EvalContext.h" />
+    <ClInclude Include="..\..\include\Bibim\EvalInterpolators.h" />
+    <ClInclude Include="..\..\include\Bibim\EvalRangedSequences.h" />
+    <ClInclude Include="..\..\include\Bibim\Evals.h" />
+    <ClInclude Include="..\..\include\Bibim\EvalSelectors.h" />
+    <ClInclude Include="..\..\include\Bibim\EvalSequenceBase.h" />
+    <ClInclude Include="..\..\include\Bibim\EvalSequences.h" />
+    <ClInclude Include="..\..\include\Bibim\EvalTimeflow.h" />
+    <ClInclude Include="..\..\include\Bibim\EvalUnaryOperators.h" />
+    <ClInclude Include="..\..\include\Bibim\EvalUnitRandom.h" />
+    <ClInclude Include="..\..\include\Bibim\EvalVariables.h" />
+    <ClInclude Include="..\..\include\Bibim\Sequences.h" />
+    <ClInclude Include="..\..\include\Bibim\Ease.h" />
+    <ClInclude Include="..\..\include\Bibim\EasingCurves.h" />
+    <ClInclude Include="..\..\include\Bibim\ElasticEasingCurves.h" />
+    <ClInclude Include="..\..\include\Bibim\OscillationCurve.h" />
+    <ClInclude Include="..\..\include\Bibim\AxisAlignedBoxShape2D.h" />
+    <ClInclude Include="..\..\include\Bibim\BoxShape2D.h" />
+    <ClInclude Include="..\..\include\Bibim\CollisionSpace2D.h" />
+    <ClInclude Include="..\..\include\Bibim\IntersectShapes2D.h" />
+    <ClInclude Include="..\..\include\Bibim\PointShape2D.h" />
+    <ClInclude Include="..\..\include\Bibim\RaycastReport2D.h" />
+    <ClInclude Include="..\..\include\Bibim\SegmentShape2D.h" />
+    <ClInclude Include="..\..\include\Bibim\Shape2D.h" />
+    <ClInclude Include="..\..\include\Bibim\SphereShape2D.h" />
+    <ClInclude Include="..\..\include\Bibim\UserShape2D.h" />
+    <ClInclude Include="..\..\include\Bibim\FileLogger.h" />
+    <ClInclude Include="..\..\include\Bibim\Logger.h" />
+    <ClInclude Include="..\..\include\Bibim\SystemLogger.h" />
+    <ClInclude Include="..\..\include\Bibim\BatchCommand.h" />
+    <ClInclude Include="..\..\include\Bibim\Command.h" />
+    <ClInclude Include="..\..\include\Bibim\CommandHistory.h" />
+    <ClInclude Include="..\..\include\Bibim\CommandQueue.h" />
+    <ClInclude Include="..\..\include\Bibim\RestorableCommand.h" />
+    <ClInclude Include="..\..\include\Bibim\SpatialObject2D.h" />
+    <ClInclude Include="..\..\include\Bibim\JumpPointPathFinder.h" />
+    <ClInclude Include="..\..\include\Bibim\PathFinder.h" />
+    <ClInclude Include="..\..\include\Bibim\Key.h" />
+    <ClInclude Include="..\..\include\Bibim\Keyboard.h" />
+    <ClInclude Include="..\..\include\Bibim\KeyboardState.h" />
+    <ClInclude Include="..\..\include\Bibim\Mouse.h" />
+    <ClInclude Include="..\..\include\Bibim\MouseState.h" />
+    <ClInclude Include="..\..\include\Bibim\Script.h" />
+    <ClInclude Include="..\..\include\Bibim\ScriptingContext.h" />
+    <ClInclude Include="..\..\include\Bibim\ScriptNativeFunctionTable.h" />
+    <ClInclude Include="..\..\include\Bibim\ScriptStack.h" />
+    <ClInclude Include="..\..\include\Bibim\ScriptThread.h" />
+    <ClInclude Include="..\..\include\Bibim\ScriptLibraryIO.h" />
+    <ClInclude Include="..\..\include\Bibim\AlarmClock.h" />
+    <ClInclude Include="..\..\include\Bibim\Clock.h" />
+    <ClInclude Include="..\..\include\Bibim\IUpdateable.h" />
+    <ClInclude Include="..\..\include\Bibim\SubTimeline.h" />
+    <ClInclude Include="..\..\include\Bibim\Timeline.h" />
+    <ClInclude Include="..\..\include\Bibim\TimelineGameComponent.h" />
+    <ClInclude Include="..\..\include\Bibim\TimelineGameModule.h" />
+    <ClInclude Include="..\..\include\Bibim\UpdateableGameComponent.h" />
+    <ClInclude Include="..\..\include\Bibim\UpdateableGameModule.h" />
+    <ClInclude Include="..\..\include\Bibim\Startup.h" />
+    <ClInclude Include="..\..\include\Bibim\UI.h" />
+    <ClInclude Include="..\..\include\Bibim\UIDomain.h" />
+    <ClInclude Include="..\..\include\Bibim\UIEditText.h" />
+    <ClInclude Include="..\..\include\Bibim\UIElement.h" />
+    <ClInclude Include="..\..\include\Bibim\UIEllipse.h" />
+    <ClInclude Include="..\..\include\Bibim\UILayout.h" />
+    <ClInclude Include="..\..\include\Bibim\UIRenderer.DX9.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\UIRenderer.GLES2.h" />
+    <ClInclude Include="..\..\include\Bibim\UIRenderer.h" />
+    <ClInclude Include="..\..\include\Bibim\UIRendererBase.h" />
+    <ClInclude Include="..\..\include\Bibim\UIRoundedRect.h" />
+    <ClInclude Include="..\..\include\Bibim\UIScrollablePanel.h" />
+    <ClInclude Include="..\..\include\Bibim\UIShape.h" />
+    <ClInclude Include="..\..\include\Bibim\UISimpleDomain.h" />
+    <ClInclude Include="..\..\include\Bibim\UIAppEventDispatcher.h" />
+    <ClInclude Include="..\..\include\Bibim\UIAsyncEventQueue.h" />
+    <ClInclude Include="..\..\include\Bibim\UIEventArgs.h" />
+    <ClInclude Include="..\..\include\Bibim\UIEventDispatcher.h" />
+    <ClInclude Include="..\..\include\Bibim\UIEventHandler.h" />
+    <ClInclude Include="..\..\include\Bibim\UIEventID.h" />
+    <ClInclude Include="..\..\include\Bibim\UIEventMap.h" />
+    <ClInclude Include="..\..\include\Bibim\UIFunctionEventHandler.h" />
+    <ClInclude Include="..\..\include\Bibim\UIFunctionTable.h" />
+    <ClInclude Include="..\..\include\Bibim\UIGamePadEventArgs.h" />
+    <ClInclude Include="..\..\include\Bibim\UIGamePadEventDispatcher.h" />
+    <ClInclude Include="..\..\include\Bibim\UIKeyboardEventArgs.h" />
+    <ClInclude Include="..\..\include\Bibim\UIKeyboardEventDispatcher.h" />
+    <ClInclude Include="..\..\include\Bibim\UIMouseButtonEventArgs.h" />
+    <ClInclude Include="..\..\include\Bibim\UIMouseEventArgs.h" />
+    <ClInclude Include="..\..\include\Bibim\UIMouseEventDispatcher.h" />
+    <ClInclude Include="..\..\include\Bibim\UIMouseWheelEventArgs.h" />
+    <ClInclude Include="..\..\include\Bibim\UISequentialEventHandler.h" />
+    <ClInclude Include="..\..\include\Bibim\UIEffectMap.h" />
+    <ClInclude Include="..\..\include\Bibim\UIEffectStack.h" />
+    <ClInclude Include="..\..\include\Bibim\UIAfterImageEffect.h" />
+    <ClInclude Include="..\..\include\Bibim\UIGeometryEffect.h" />
+    <ClInclude Include="..\..\include\Bibim\UISineCurveEffect.h" />
+    <ClInclude Include="..\..\include\Bibim\UITintEffect.h" />
+    <ClInclude Include="..\..\include\Bibim\UIBlendingEffect.h" />
+    <ClInclude Include="..\..\include\Bibim\UIColorMatrixEffect.h" />
+    <ClInclude Include="..\..\include\Bibim\UIMaskEffect.h" />
+    <ClInclude Include="..\..\include\Bibim\UIOpacityMaskEffect.h" />
+    <ClInclude Include="..\..\include\Bibim\UIPixelEffect.h" />
+    <ClInclude Include="..\..\include\Bibim\UIButton.h" />
+    <ClInclude Include="..\..\include\Bibim\UICheckBox.h" />
+    <ClInclude Include="..\..\include\Bibim\UIImage.h" />
+    <ClInclude Include="..\..\include\Bibim\UILabel.h" />
+    <ClInclude Include="..\..\include\Bibim\UIDocument.h" />
+    <ClInclude Include="..\..\include\Bibim\UIPanel.h" />
+    <ClInclude Include="..\..\include\Bibim\UIRadioButton.h" />
+    <ClInclude Include="..\..\include\Bibim\UIRect.h" />
+    <ClInclude Include="..\..\include\Bibim\UISpark.h" />
+    <ClInclude Include="..\..\include\Bibim\UISprite.h" />
+    <ClInclude Include="..\..\include\Bibim\UIVideo.h" />
+    <ClInclude Include="..\..\include\Bibim\UIVisual.h" />
+    <ClInclude Include="..\..\include\Bibim\UIWindow.h" />
+    <ClInclude Include="..\..\include\Bibim\UITransform.h" />
+    <ClInclude Include="..\..\include\Bibim\UITransform2D.h" />
+    <ClInclude Include="..\..\include\Bibim\UITransform3D.h" />
+    <ClInclude Include="..\..\include\Bibim\UIBoundsContext.h" />
+    <ClInclude Include="..\..\include\Bibim\UIDrawingContext.h" />
+    <ClInclude Include="..\..\include\Bibim\UIHandledDrawingContext.h" />
+    <ClInclude Include="..\..\include\Bibim\UIPickingContext.h" />
+    <ClInclude Include="..\..\include\Bibim\UIVisualVisitor.h" />
+    <ClInclude Include="..\..\include\Bibim\BitMask.h" />
+    <ClInclude Include="..\..\include\Bibim\BlendMode.h" />
+    <ClInclude Include="..\..\include\Bibim\DynamicTexture2D.h" />
+    <ClInclude Include="..\..\include\Bibim\GraphicsCapabilities.h" />
+    <ClInclude Include="..\..\include\Bibim\GraphicsDevice.h" />
+    <ClInclude Include="..\..\include\Bibim\Image.h" />
+    <ClInclude Include="..\..\include\Bibim\ImageSet.h" />
+    <ClInclude Include="..\..\include\Bibim\PNGReader.h" />
+    <ClInclude Include="..\..\include\Bibim\RenderTargetTexture2D.h" />
+    <ClInclude Include="..\..\include\Bibim\ScreenshotPrinter.h" />
+    <ClInclude Include="..\..\include\Bibim\ShaderEffect.h" />
+    <ClInclude Include="..\..\include\Bibim\SourceTexture2D.h" />
+    <ClInclude Include="..\..\include\Bibim\Texture2D.h" />
+    <ClInclude Include="..\..\include\Bibim\Window.h" />
+    <ClInclude Include="..\..\include\Bibim\DynamicTexture2D.DX9.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\GraphicsDevice.DX9.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\RenderTargetTexture2D.DX9.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\ShaderEffect.DX9.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\SourceTexture2D.DX9.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Texture2D.DX9.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\DynamicTexture2D.GLES2.h" />
+    <ClInclude Include="..\..\include\Bibim\GLES2.h" />
+    <ClInclude Include="..\..\include\Bibim\GraphicsDevice.GLES2.h" />
+    <ClInclude Include="..\..\include\Bibim\RenderTargetTexture2D.GLES2.h" />
+    <ClInclude Include="..\..\include\Bibim\ShaderEffect.GLES2.h" />
+    <ClInclude Include="..\..\include\Bibim\SourceTexture2D.GLES2.h" />
+    <ClInclude Include="..\..\include\Bibim\Texture2D.GLES2.h" />
+    <ClInclude Include="..\..\include\Bibim\FileStream.h" />
+    <ClInclude Include="..\..\include\Bibim\FileStream.Windows.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\MPQ.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\MPQStream.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\GameFramework.h" />
+    <ClInclude Include="..\..\include\Bibim\GameFramework.Windows.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\GameWindow.h" />
+    <ClInclude Include="..\..\include\Bibim\GameWindow.Windows.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\SparkParticleEngine.h" />
+    <ClInclude Include="..\..\include\Bibim\HttpClient.h" />
+    <ClInclude Include="..\..\include\Bibim\HttpClient.Windows.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Any.h" />
+    <ClInclude Include="..\..\include\Bibim\Color.h" />
+    <ClInclude Include="..\..\include\Bibim\Matrix4.h" />
+    <ClInclude Include="..\..\include\Bibim\NullPointer.h" />
+    <ClInclude Include="..\..\include\Bibim\Point2.h" />
+    <ClInclude Include="..\..\include\Bibim\Point3.h" />
+    <ClInclude Include="..\..\include\Bibim\Point4.h" />
+    <ClInclude Include="..\..\include\Bibim\Rect.h" />
+    <ClInclude Include="..\..\include\Bibim\RectF.h" />
+    <ClInclude Include="..\..\include\Bibim\String.h" />
+    <ClInclude Include="..\..\include\Bibim\Vector2.h" />
+    <ClInclude Include="..\..\include\Bibim\Vector3.h" />
+    <ClInclude Include="..\..\include\Bibim\Vector4.h" />
+    <ClInclude Include="..\..\include\Bibim\SequenceDictionary.h" />
+    <ClInclude Include="..\..\include\Bibim\Assert.h" />
+    <ClInclude Include="..\..\include\Bibim\Log.h" />
+    <ClInclude Include="..\..\include\Bibim\Geom2D.h" />
+    <ClInclude Include="..\..\include\Bibim\Math.h" />
+    <ClInclude Include="..\..\include\Bibim\Numerics.h" />
+    <ClInclude Include="..\..\include\Bibim\AnyStorage.h" />
+    <ClInclude Include="..\..\include\Bibim\Atomic.h" />
+    <ClInclude Include="..\..\include\Bibim\CheckedRelease.h" />
+    <ClInclude Include="..\..\include\Bibim\Delete.h" />
+    <ClInclude Include="..\..\include\Bibim\Listeners.h" />
+    <ClInclude Include="..\..\include\Bibim\Memory.h" />
+    <ClInclude Include="..\..\include\Bibim\RectStorage.h" />
+    <ClInclude Include="..\..\include\Bibim\Object.h" />
+    <ClInclude Include="..\..\include\Bibim\PointerCasts.h" />
+    <ClInclude Include="..\..\include\Bibim\SharedObject.h" />
+    <ClInclude Include="..\..\include\Bibim\SharedPointer.h" />
+    <ClInclude Include="..\..\include\Bibim\Environment.h" />
+    <ClInclude Include="..\..\include\Bibim\Environment.Windows.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\AutoLocker.h" />
+    <ClInclude Include="..\..\include\Bibim\Lock.h" />
+    <ClInclude Include="..\..\include\Bibim\Lock.Windows.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\ManualLocker.h" />
+    <ClInclude Include="..\..\include\Bibim\Thread.h" />
+    <ClInclude Include="..\..\include\Bibim\Thread.Windows.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Android'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\BinaryReader.h" />
+    <ClInclude Include="..\..\include\Bibim\BinaryWriter.h" />
+    <ClInclude Include="..\..\include\Bibim\DumpStream.h" />
+    <ClInclude Include="..\..\include\Bibim\MemoryStream.h" />
+    <ClInclude Include="..\..\include\Bibim\Stream.h" />
+    <ClInclude Include="..\..\extlibs\lua_tinker\lua_tinker.h" />
+    <ClInclude Include="..\..\include\Bibim\All.h" />
+    <ClInclude Include="..\..\include\Bibim\Foundation.h" />
+    <ClInclude Include="..\..\include\Bibim\FWD.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\include\Bibim\BGM.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,9 @@
+﻿<Application x:Class="Bibim.Bab.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml" xmlns:my="clr-namespace:System;assembly=mscorlib" ShutdownMode="OnExplicitShutdown"
+             xmlns:Properties="clr-namespace:Bibim.Bab.Properties">
+    <Application.Resources>
+        <Properties:Settings x:Key="Settings" />
+  </Application.Resources>
+</Application>

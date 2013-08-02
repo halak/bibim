@@ -1,0 +1,58 @@
+;==============================================================================
+; Bibim Engine
+;------------------------------------------------------------------------------
+
+;------------------------------------------------------------------------------
+;  Bibim::SharedPointer
+;  std::tr1::shared_ptr<T> Âü°í
+;------------------------------------------------------------------------------
+Bibim::SharedPointer<*>{
+	preview
+	(
+		#if ($e.pointee == 0)
+		(
+			"null"
+		)
+		#else
+		(
+			#(
+                $e.pointee,
+                " ",
+				*$e.pointee,
+				" [",
+				$e.pointee->referenceCount,
+				#if ($e.pointee->referenceCount == 1) (" ref") #else (" refs"),
+				"]"
+			)
+		)
+	)
+	children
+	(
+		#if ($e.pointee == 0)
+		(
+			#array(expr: 0, size: 0)
+		)
+		#else 
+		(
+			#(
+				#([ptr] : $e.pointee),
+				#([actual members] : [$e,!])
+			)
+		)
+	)
+}
+
+Bibim::String{
+    preview
+    (
+        [$e.buffer.pointee->s]
+    )
+    children
+    (
+        #(
+            #([length] : $e.buffer.pointee->length),
+            #([hash] : [$e.buffer.pointee->hashCode,x])
+        )
+    )
+}
+;==============================================================================
