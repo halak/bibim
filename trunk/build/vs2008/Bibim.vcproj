@@ -2193,6 +2193,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\IO\ForkStream.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\ForkStream.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\IO\MemoryStream.cpp"
 					>
 				</File>
@@ -2266,14 +2274,6 @@
 				</File>
 				<File
 					RelativePath="..\..\include\Bibim\CrashDump.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Diagnostics\Diagnostics.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\Diagnostics.h"
 					>
 				</File>
 				<File

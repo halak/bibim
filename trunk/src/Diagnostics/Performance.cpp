@@ -1,13 +1,19 @@
 #include <Bibim/Config.h>
 #include <Bibim/Performance.h>
+#include <Bibim/BinaryWriter.h>
+#include <Bibim/Diagnostics.h>
 #include <Bibim/Stream.h>
 
 namespace Bibim
 {
-    StreamPtr Performance::stream;
-
-    void Performance::SetStream(Stream* value)
+    void Performance::Report(const Sample& sample)
     {
-        stream = value;
+        /*
+        BinaryWriter::WriteTo(stream, static_cast<int>(Diagnostics::PerformanceProtocolID));
+        BinaryWriter::WriteTo(stream, sample.Function);
+        BinaryWriter::WriteTo(stream, sample.Filename);
+        BinaryWriter::WriteTo(stream, sample.Line);
+        BinaryWriter::WriteTo(stream, static_cast<int>(sample.EndTime - sample.StartTime));
+        */
     }
 }

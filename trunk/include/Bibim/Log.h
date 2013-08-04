@@ -11,11 +11,14 @@ namespace Bibim
     {
         BBThisIsStaticClass(Log);
         public:
-            enum Level
+            class Listener
             {
-                ErrorLevel,
-                WarningLevel,
-                InformationLevel,
+                public:
+                    virtual ~Listener() { }
+
+                    virtual void Error(const char* category, const char* message) = 0;
+                    virtual void Warning(const char* category, const char* message) = 0;
+                    virtual void Information(const char* category, const char* message) = 0;
             };
 
         public:
@@ -30,12 +33,12 @@ namespace Bibim
             static inline void Warning(const char* category, const String& message);
             static inline void Information(const char* category, const String& message);
 
-            static inline void Error(const char* category, const char* message);
-            static inline void Warning(const char* category, const char* message);
-            static inline void Information(const char* category, const char* message);
+            static void Error(const char* category, const char* message);
+            static void Warning(const char* category, const char* message);
+            static void Information(const char* category, const char* message);
 
-        private:
-            static void Write(Level level, const char* category, const char* message);
+            static void Add(Listener* item);
+            static void Remove(Listener* item);
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,21 +86,6 @@ namespace Bibim
     void Log::Information(const char* category, const String& message)
     {
         Information(category, message.CStr());
-    }
-
-    void Log::Error(const char* category, const char* message)
-    {
-        Write(ErrorLevel, category, message);
-    }
-
-    void Log::Warning(const char* category, const char* message)
-    {
-        Write(WarningLevel, category, message);
-    }
-
-    void Log::Information(const char* category, const char* message)
-    {
-        Write(InformationLevel, category, message);
     }
 }
 

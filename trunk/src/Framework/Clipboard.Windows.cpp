@@ -13,7 +13,7 @@ namespace Bibim
     Clipboard::~Clipboard()
     {
     }
-                
+
     String Clipboard::GetText() const
     {
         if (::OpenClipboard(nullptr))

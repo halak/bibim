@@ -31,6 +31,8 @@ namespace Bibim
     {
         GetWindow()->AddResizeEventListener(this);
         GetGraphicsDevice()->AddRestoreEventListener(this);
+
+        dashboard = new Dashboard();
     }
 
     StandardGame::StandardGame(Point2 windowSize, Point2 contentSize)
@@ -44,18 +46,20 @@ namespace Bibim
     {
         GetWindow()->AddResizeEventListener(this);
         GetGraphicsDevice()->AddRestoreEventListener(this);
+
+        dashboard = new Dashboard();
     }
 
     StandardGame::~StandardGame()
     {
-        GetGraphicsDevice()->RemoveRestoreEventListener(this);
-        GetWindow()->RemoveResizeEventListener(this);
-
         if (dashboard)
         {
             delete dashboard;
             dashboard = nullptr;
         }
+
+        GetGraphicsDevice()->RemoveRestoreEventListener(this);
+        GetWindow()->RemoveResizeEventListener(this);
     }
     
     void StandardGame::Initialize(const String& gameName,
@@ -64,8 +68,6 @@ namespace Bibim
                                   bool windowMoveToScreenCenter)
     {
         // Log::Add(this);
-
-        dashboard = new Dashboard();
 
         if (windowMoveToScreenCenter)
             GetWindow()->MoveToScreenCenter();
@@ -95,13 +97,7 @@ namespace Bibim
         GetModules()->GetRoot()->AttachChild(sfx);
 
         fontLibrary = new FontLibrary(GetGraphicsDevice());
-
-        debugFont = new Font(fontLibrary);
-        debugFont->SetFace(EMBEDDED_FONT_DATA,
-                           sizeof(EMBEDDED_FONT_DATA) / sizeof(EMBEDDED_FONT_DATA[0]));
-        debugFont->SetColor(Color::White);
         GetModules()->GetRoot()->AttachChild(fontLibrary);
-
 
         storage = new GameAssetStorage(GetModules());
         GameModuleNode* storageNode = GetModules()->GetRoot()->AttachChild(storage);
@@ -185,6 +181,8 @@ namespace Bibim
         clipboard = new Clipboard();
         GetModules()->GetRoot()->AttachChild(clipboard);
 
+        dashboard->Initialize(this->GetModules());
+
         GameFramework::Initialize();
     }
 
@@ -195,8 +193,8 @@ namespace Bibim
 
     void StandardGame::Finalize()
     {
+        dashboard->Finalize();
         bgm->SetMute(true);
-        debugFont.Reset();
         GetMainTimeline()->Clear();
         uiDomain->GetRoot()->RemoveAllChildren();
         GameFramework::Finalize();
@@ -231,68 +229,23 @@ namespace Bibim
         return fullName;
     }
 
+    void StandardGame::Update(float dt, int timestamp)
+    {
+        BBPerfFunc();
+        GameFramework::Update(dt, timestamp);
+    }
+
     void StandardGame::Draw()
     {
+        BBPerfFunc();
+
         if (clearColor.A > 0)
             GetGraphicsDevice()->Clear(clearColor);
 
         UIHandledDrawingContext context(uiRenderer, dashboard);
         context.Draw(uiDomain->GetRoot());
 
-        String debugText = String::Empty;
-
-        /*
-        if (GetDebugMode() != NoDebugMode)
-        {
-            debugText.Append(String::CFormat("FPS: %.1f\n", GetFPS()));
-
-            if (UIVisual* lastTarget = mouseEventDispatcher->GetLastTarget())
-                debugText.Append(String::CFormat("Picked: %s\n", GetFullName(lastTarget).CStr()));
-        }
-        */
-
-        if (recentLog.IsEmpty() == false)
-        {
-            if (debugText.IsEmpty() == false)
-                debugText.Append("------------------------------\n");
-
-            debugText.Append(recentLog);
-        }
-
-        if (debugText.IsEmpty() == false)
-        {
-            static const Point2 POSITION = Point2(10, 15);
-
-            const Point2 windowSize = GetWindow()->GetSize();
-            RectF bounds = RectF(POSITION.X,
-                                 POSITION.Y,
-                                 windowSize.X - (POSITION.X * 2),
-                                 windowSize.Y - (POSITION.Y * 2));
-
-            DrawDebugText(context, bounds, debugText);
-        }
-
         GameFramework::Draw();
-    }
-
-    void StandardGame::DrawDebugText(UIDrawingContext& context, RectF bounds, const String& text)
-    {        
-        const Color oldColor = debugFont->GetColor();
-        debugFont->SetColor(Color(0, 0, 0));
-        bounds.X -= 1.0f;
-        bounds.Y -= 1.0f;
-        context.DrawString(bounds, debugFont, text);
-        bounds.X += 2.0f;
-        context.DrawString(bounds, debugFont, text);
-        bounds.Y += 2.0f;
-        context.DrawString(bounds, debugFont, text);
-        bounds.X -= 2.0f;
-        context.DrawString(bounds, debugFont, text);
-        debugFont->SetColor(oldColor);
-        bounds.X += 1.0f;
-        bounds.Y -= 1.0f;
-
-        context.DrawString(bounds, debugFont, text);
     }
 
     void StandardGame::SetFullscreen(bool value)
@@ -326,60 +279,6 @@ namespace Bibim
 
         ReloadUI();
     }
-
-    //static const Color ErrorColor       = Color(237, 28, 36);
-    //static const Color WarningColor     = Color(255, 242, 0);
-    //static const Color InformationColor = Color(37, 177, 76);
-
-    //void StandardGame::Error(const char* category, const char* message)
-    //{
-    //    // OnLog(ErrorColor, category, message);
-    //}
-
-    //void StandardGame::Warning(const char* category, const char* message)
-    //{
-    //    // OnLog(WarningColor, category, message);
-    //}
-
-    //void StandardGame::Information(const char* /*category*/, const char* /*message*/)
-    //{
-    //    // OnLog(InformationColor, category, message);
-    //}
-
-    //void StandardGame::OnLog(Bibim::Color color, const char* /*category*/, const char* message)
-    //{
-    //    if (debugFont == nullptr)
-    //        return;
-
-    //    if (debugFont->GetColor() != color)
-    //    {
-    //        debugFont->SetColor(color);
-    //        recentLog = String::Empty;
-    //    }
-
-    //    recentLog += message;
-    //    recentLog += '\n';
-
-    //    int firstLineBreakIndex = -1;
-    //    int lineCount = 0;
-    //    const int length = recentLog.GetLength();
-    //    for (int i = 0; i < length; i++)
-    //    {
-    //        if (recentLog[i] == '\n')
-    //        {
-    //            if (firstLineBreakIndex == -1)
-    //                firstLineBreakIndex = i;
-
-    //            lineCount++;
-
-    //            if (lineCount > 30)
-    //            {
-    //                recentLog = recentLog.Substring(firstLineBreakIndex + 1);
-    //                break;
-    //            }
-    //        }
-    //    }
-    //}
 
     void StandardGame::MatchContentToWindow()
     {
@@ -443,11 +342,6 @@ namespace Bibim
         ReloadScripts();
     }
 
-    void StandardGame::SetRecentLog(const String& value)
-    {
-        recentLog = value;
-    }
-
     void StandardGame::OnWindowResized(Window* window)
     {
         BBAssert(GetWindow() == window);
@@ -485,11 +379,6 @@ namespace Bibim
         else if (keyboard.Contains(Key::Alt) && keyboard.Contains(Key::Enter))
         {
             GetGraphicsDevice()->SetFullscreen(!GetGraphicsDevice()->GetFullscreen());
-            return true;
-        }
-        else if (keyboard.Contains(Key::Delete))
-        {
-            recentLog = String::Empty;
             return true;
         }
         else
