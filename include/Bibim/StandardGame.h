@@ -77,6 +77,7 @@ namespace Bibim
             virtual void Finalize();
             virtual void Update(float dt, int timestamp);
             virtual void Draw();
+            virtual void EndDraw();
             void DrawDebugText(UIDrawingContext& context, RectF bounds, const String& text);
 
         protected:

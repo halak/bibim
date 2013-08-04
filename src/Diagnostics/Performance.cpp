@@ -1,19 +1,48 @@
 #include <Bibim/Config.h>
 #include <Bibim/Performance.h>
-#include <Bibim/BinaryWriter.h>
-#include <Bibim/Diagnostics.h>
-#include <Bibim/Stream.h>
+#include <Bibim/Assert.h>
+#include <Bibim/Clock.h>
 
 namespace Bibim
 {
-    void Performance::Report(const Sample& sample)
+    static Performance::SampleCollection PerformanceSamples;
+    static int PerformanceDepth = 0;
+    static int PerformanceCurrent = -1;
+
+    void Performance::Reset()
     {
-        /*
-        BinaryWriter::WriteTo(stream, static_cast<int>(Diagnostics::PerformanceProtocolID));
-        BinaryWriter::WriteTo(stream, sample.Function);
-        BinaryWriter::WriteTo(stream, sample.Filename);
-        BinaryWriter::WriteTo(stream, sample.Line);
-        BinaryWriter::WriteTo(stream, static_cast<int>(sample.EndTime - sample.StartTime));
-        */
+        if (PerformanceSamples.capacity() < 256)
+            PerformanceSamples.reserve(256);
+
+        PerformanceSamples.clear();
+        PerformanceDepth = 0;
+        PerformanceCurrent = -1;
+    }
+
+    const Performance::SampleCollection& Performance::GetSamples()
+    {
+        return PerformanceSamples;
+    }
+
+    void Performance::Open(const char* function, const char* filename, int line)
+    {
+        PerformanceSamples.push_back(Sample(PerformanceCurrent,
+                                            PerformanceDepth,
+                                            function,
+                                            filename,
+                                            line));
+        PerformanceDepth++;
+        PerformanceCurrent = PerformanceSamples.size() - 1;
+        PerformanceSamples.back().StartTime = Clock::GetCurrentMicroSeconds();
+    }
+
+    void Performance::Close()
+    {
+        BBAssertDebug(PerformanceSamples.empty() == false);
+
+        Sample& sample = PerformanceSamples.back();
+        sample.EndTime = Clock::GetCurrentMicroSeconds();
+        PerformanceDepth--;
+        PerformanceCurrent = sample.Parent;
     }
 }

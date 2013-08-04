@@ -37,10 +37,18 @@ namespace Bibim
             void __Construct__();
             void __Construct__(lua_tinker::table t);
 
-            static SPK::Group*    CreateParticleGroup(lua_tinker::table t);
-            static SPK::Emitter*  CreateParticleEmitter(lua_tinker::table t, int& outInitialParticles);
+            SPK::Group*    CreateParticleGroup(lua_tinker::table t);
+            SPK::Emitter*  CreateParticleEmitter(lua_tinker::table t, SPK::Group* group, int& outInitialParticles);
             static SPK::Modifier* CreateParticleModifier(lua_tinker::table t);
             static SPK::Zone*     CreateParticleZone(lua_tinker::table t);
+
+            struct Burst
+            {
+                float Time;
+                int Count;
+                SPK::Group* Group;
+                SPK::Emitter* Emitter;
+            };
 
             struct MinMax
             {
@@ -70,6 +78,9 @@ namespace Bibim
         private:
             SPK::System* particleSystem;
             std::vector<ImagePtr> imagePalette;
+            std::vector<Burst> burstTable;
+            int lastBurstIndex;
+            float burstTime;
             Timeline* timeline;
             Vector2 contentSize;
             Updater updater;

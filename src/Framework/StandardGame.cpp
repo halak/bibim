@@ -200,37 +200,11 @@ namespace Bibim
         GameFramework::Finalize();
     }
 
-    static String GetFullName(UIVisual* target)
-    {
-        if (target->GetParent() == nullptr && target->GetName().IsEmpty())
-            return "<root>";
-
-        String fullName = String::Empty;
-
-        for (; target; target = target->GetParent())
-        {
-            String name = String::Empty;
-            if (target->GetName().IsEmpty())
-            {
-                if (target->GetParent())
-                    name = String::CFormat("[%d]", target->GetParent()->GetChildIndex(target));
-                else
-                    continue;
-            }
-            else
-                name = target->GetName();
-
-            if (fullName.IsEmpty())
-                fullName = name;
-            else
-                fullName = name + "." + fullName;
-        }
-
-        return fullName;
-    }
-
     void StandardGame::Update(float dt, int timestamp)
     {
+        if (dashboard)
+            dashboard->BeginFrame();
+
         BBPerfFunc();
         GameFramework::Update(dt, timestamp);
     }
@@ -246,6 +220,14 @@ namespace Bibim
         context.Draw(uiDomain->GetRoot());
 
         GameFramework::Draw();
+    }
+
+    void StandardGame::EndDraw()
+    {
+        GameFramework::EndDraw();
+
+        if (dashboard)
+            dashboard->EndFrame();
     }
 
     void StandardGame::SetFullscreen(bool value)
@@ -1044,7 +1026,6 @@ namespace Bibim
             }
 
             lua_tinker::push(L, current);
-
             return 1;
         }
 
