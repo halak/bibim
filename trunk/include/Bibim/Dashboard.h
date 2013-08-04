@@ -24,6 +24,9 @@ namespace Bibim
             void Initialize(GameModuleTree* modules);
             void Finalize();
 
+            void BeginFrame();
+            void EndFrame();
+
         protected:
             virtual void OnBegan(UIHandledDrawingContext& context, UIVisual* target);
             virtual void OnEnded(UIHandledDrawingContext& context, UIVisual* target);

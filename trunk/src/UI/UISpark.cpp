@@ -179,6 +179,23 @@ namespace Bibim
         if (particleSystem == nullptr || isUpdateable == false)
             return;
 
+        const float oldBurstTime = burstTime;
+        const float newBurstTime = burstTime + dt;
+        
+        for (; lastBurstIndex < static_cast<int>(burstTable.size()); )
+        {
+            const Burst& burst = burstTable[lastBurstIndex];
+            if (oldBurstTime <= burst.Time && burst.Time < newBurstTime)
+            {
+                burst.Group->addParticles(burst.Count, burst.Emitter);
+                lastBurstIndex++;
+            }
+            else
+                break;
+        }
+        
+        burstTime = newBurstTime;
+        
         const bool enabledAABBComputing = (GetWidthMode()  == ContentSize) || 
                                           (GetHeightMode() == ContentSize);
 
@@ -277,6 +294,17 @@ namespace Bibim
             for (int i = 1; i <= numberOfImages; i++)
                 imagePalette.push_back(images.get<Image*>(i));
         }
+
+        struct SortByTime
+        {
+            bool operator () (const Burst& a, const Burst& b) const
+            {
+                return a.Time < b.Time;
+            }
+        };
+        std::sort(burstTable.begin(), burstTable.end(), SortByTime());
+        lastBurstIndex = 0;
+        burstTime = 0.0f;
     }
 
     Group* UISpark::CreateParticleGroup(lua_tinker::table t)
@@ -592,13 +620,24 @@ namespace Bibim
             for (int i = 1; i <= numberOfEmitters; i++)
             {
                 int initialParticles = 0;
-                if (Emitter* emitter = CreateParticleEmitter(emitters.get<lua_tinker::table>(i), initialParticles))
+                if (Emitter* emitter = CreateParticleEmitter(emitters.get<lua_tinker::table>(i), group, initialParticles))
                 {
                     group->addEmitter(emitter);
 
                     if (initialParticles > 0)
                         group->addParticles(initialParticles, emitter);
                 }
+            }
+        }
+        else if (t.type("Emitter") == LUA_TTABLE)
+        {
+            int initialParticles = 0;
+            if (Emitter* emitter = CreateParticleEmitter(t.get<lua_tinker::table>("Emitter"), group, initialParticles))
+            {
+                group->addEmitter(emitter);
+            
+                if (initialParticles > 0)
+                    group->addParticles(initialParticles, emitter);
             }
         }
 
@@ -688,7 +727,7 @@ namespace Bibim
         return group;
     }
 
-    Emitter* UISpark::CreateParticleEmitter(lua_tinker::table t, int& outInitialParticles)
+    Emitter* UISpark::CreateParticleEmitter(lua_tinker::table t, SPK::Group* group, int& outInitialParticles)
     {
         Emitter* emitter = nullptr;
 
@@ -755,6 +794,26 @@ namespace Bibim
             emitter->setForce(force.Min, force.Max);
 
         outInitialParticles = t.get<int>("InitialParticles");
+
+        if (t.type("Bursts") == LUA_TTABLE)
+        {
+            Burst newItem;
+            newItem.Group = group;
+            newItem.Emitter = emitter;
+
+            lua_tinker::table bursts = t.get<lua_tinker::table>("Bursts");
+            lua_tinker::table::enumerator en = bursts.enumerate();
+            while (en.next())
+            {
+                if (en.key_type() != LUA_TNUMBER ||
+                    en.value_type() != LUA_TNUMBER)
+                    continue;
+
+                newItem.Time = en.key<float>();
+                newItem.Count = en.value<int>();
+                burstTable.push_back(newItem);
+            }
+        }
 
         return emitter;
     }

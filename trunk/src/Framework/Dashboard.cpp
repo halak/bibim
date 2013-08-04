@@ -7,6 +7,7 @@
 #include <Bibim/GameModuleTree.h>
 #include <Bibim/Math.h>
 #include <Bibim/NetworkStream.h>
+#include <Bibim/Performance.h>
 #include <Bibim/Socket.h>
 #include <Bibim/UIPanel.h>
 #include <Bibim/UIVisual.h>
@@ -59,6 +60,21 @@ namespace Bibim
     void Dashboard::Finalize()
     {
         font.Reset();
+    }
+    
+    void Dashboard::BeginFrame()
+    {
+        Performance::Reset();
+    }
+
+    void Dashboard::EndFrame()
+    {
+        typedef Performance::SampleCollection SampleCollection;
+        const SampleCollection& samples = Performance::GetSamples();
+
+        for (SampleCollection::const_iterator it = samples.begin(); it != samples.end(); it++)
+        {
+        }
     }
 
     void Dashboard::TryConnect()
@@ -125,7 +141,7 @@ namespace Bibim
 
                 context.DrawString(bounds, bounds, item.Text);
 
-                const float height = item.Text.GetSize().Y;
+                const float height = font->Measure(item.Text, bounds.Width).Size.Y;
                 bounds.Y += height;
                 bounds.Height -= height;
             }

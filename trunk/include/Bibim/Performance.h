@@ -3,7 +3,7 @@
 #define __BIBIM_PERFORMANCE_H__
 
 #include <Bibim/FWD.h>
-#include <Bibim/Clock.h>
+#include <vector>
 
 namespace Bibim
 {
@@ -19,6 +19,8 @@ namespace Bibim
         public:
             struct Sample
             {
+                int Parent;
+                int Depth;
                 const char* Function;
                 const char* Filename;
                 int Line;
@@ -26,11 +28,18 @@ namespace Bibim
                 int64 EndTime;
 
                 inline Sample();
-                inline Sample(const char* function, const char* filename, int line, int64 start);
+                inline Sample(int parent, int depth, const char* function, const char* filename, int line);
                 inline Sample(const Sample& original);
             };
+            typedef std::vector<Sample> SampleCollection;
 
-            static void Report(const Sample& sample);
+            static void Reset();
+            static const SampleCollection& GetSamples();
+
+        private:
+            static void Open(const char* function, const char* filename, int line);
+            static void Close();
+            friend class PerformanceAutoSampler;
     };
 
     class PerformanceAutoSampler
@@ -39,15 +48,13 @@ namespace Bibim
         public:
             inline PerformanceAutoSampler(const char* function, const char* filename, int line);
             inline ~PerformanceAutoSampler();
-
-        private:
-            Performance::Sample sample;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     Performance::Sample::Sample()
-        : Function(nullptr),
+        : Parent(-1),
+          Function(nullptr),
           Filename(nullptr),
           Line(0),
           StartTime(0),
@@ -55,17 +62,21 @@ namespace Bibim
     {
     }
 
-    Performance::Sample::Sample(const char* function, const char* filename, int line, int64 startTime)
-        : Function(function),
+    Performance::Sample::Sample(int parent, int depth, const char* function, const char* filename, int line)
+        : Parent(parent),
+          Depth(depth),
+          Function(function),
           Filename(filename),
           Line(line),
-          StartTime(startTime),
-          EndTime(startTime)
+          StartTime(0),
+          EndTime(0)
     {
     }
 
     Performance::Sample::Sample(const Sample& original)
-        : Function(original.Function),
+        : Parent(original.Parent),
+          Depth(original.Depth),
+          Function(original.Function),
           Filename(original.Filename),
           Line(original.Line),
           StartTime(original.StartTime),
@@ -76,14 +87,13 @@ namespace Bibim
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     PerformanceAutoSampler::PerformanceAutoSampler(const char* function, const char* filename, int line)
-        : sample(function, filename, line, Clock::GetCurrentMicroSeconds())
     {
+        Performance::Open(function, filename, line);
     }
 
     PerformanceAutoSampler::~PerformanceAutoSampler()
     {
-        sample.EndTime = Clock::GetCurrentMicroSeconds();
-        Performance::Report(sample);
+        Performance::Close();
     }
 }
 
