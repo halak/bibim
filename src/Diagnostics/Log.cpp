@@ -1,25 +1,47 @@
 ﻿#include <Bibim/Config.h>
 #include <Bibim/Log.h>
-#include <Bibim/BinaryWriter.h>
-#include <Bibim/Diagnostics.h>
-#include <Bibim/Stream.h>
+#include <algorithm>
+#include <vector>
 
 namespace Bibim
 {
-    void Log::Write(Level level, const char* category, const char* message)
+    static std::vector<Log::Listener*> LogListeners;
+
+    void Log::Error(const char* category, const char* message)
     {
-        Stream* stream = Diagnostics::GetStream();
-        if (stream == nullptr)
-            return;
+        for (std::vector<Listener*>::const_iterator it = LogListeners.begin(); it != LogListeners.end(); it++)
+            (*it)->Error(category, message);
+    }
 
-        if (category == nullptr)
-            category = "";
-        if (message == nullptr)
-            message = "";
+    void Log::Warning(const char* category, const char* message)
+    {
+        for (std::vector<Listener*>::const_iterator it = LogListeners.begin(); it != LogListeners.end(); it++)
+            (*it)->Warning(category, message);
+    }
 
-        BinaryWriter::WriteTo(stream, static_cast<int>(Diagnostics::LogProtocolID));
-        BinaryWriter::WriteTo(stream, static_cast<byte>(level));
-        BinaryWriter::WriteTo(stream, category);
-        BinaryWriter::WriteTo(stream, message);
+    void Log::Information(const char* category, const char* message)
+    {
+        for (std::vector<Listener*>::const_iterator it = LogListeners.begin(); it != LogListeners.end(); it++)
+            (*it)->Information(category, message);
+    }
+
+    void Log::Add(Listener* item)
+    {
+        if (item)
+        {
+            // Concurrency issue
+            LogListeners.push_back(item);
+        }
+    }
+
+    void Log::Remove(Listener* item)
+    {
+        if (item)
+        {
+            // Concurrency issue
+            std::vector<Listener*>::iterator it = std::find(LogListeners.begin(), LogListeners.end(), item);
+            if (it != LogListeners.end())
+                LogListeners.erase(it);
+        }
     }
 }

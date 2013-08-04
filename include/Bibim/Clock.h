@@ -11,7 +11,8 @@ namespace Bibim
         BBThisIsStaticClass(Clock);
         public:
             static float GetCurrent();
-            static int  GetCurrentMilliSeconds();
+            static int GetCurrentMilliSeconds();
+            static int64 GetCurrentMicroSeconds();
     };
 }
 

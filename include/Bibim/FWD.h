@@ -45,8 +45,8 @@ namespace Bibim
             class BinaryWriter;
             BBForwardDeclareSmartPointerClass(Stream);
                 BBForwardDeclareSmartPointerClass(DumpStream);
+                BBForwardDeclareSmartPointerClass(ForkStream);
                 BBForwardDeclareSmartPointerClass(MemoryStream);
-                BBForwardDeclareSmartPointerClass(Win32Stream);
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Mathematics
         ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -14,6 +14,7 @@ namespace Bibim
         __int64 StartTime;
         double Frequency;
         double FrequencyMilliSeconds;
+        double FrequencyMicroSeconds;
         bool IsHighResolution;
 
         WindowsClock()
@@ -27,12 +28,14 @@ namespace Bibim
                 StartTime = startTimeInteger.QuadPart;
                 Frequency = 1.0 / static_cast<double>(frequencyInteger.QuadPart);
                 FrequencyMilliSeconds = Frequency * 1000.0;
+                FrequencyMicroSeconds = Frequency * 1000000.0;
                 IsHighResolution = true;
             }
             else
             {
                 Frequency = 0.0;
                 FrequencyMilliSeconds = 0.0;
+                FrequencyMicroSeconds = 0.0;
                 IsHighResolution = false;
             }
         }
@@ -60,6 +63,18 @@ namespace Bibim
             else
                 return static_cast<__int64>(timeGetTime());
         }
+
+        __int64 GetCurrentMicroSeconds()
+        {
+            if (IsHighResolution)
+            {
+                LARGE_INTEGER countInteger;
+                QueryPerformanceCounter(&countInteger);
+                return static_cast<__int64>(static_cast<double>(countInteger.QuadPart - StartTime) * FrequencyMicroSeconds);
+            }
+            else
+                return static_cast<__int64>(timeGetTime() * 1000);
+        }
     };
 
     WindowsClock WindowsClock::StaticInstance;
@@ -72,6 +87,11 @@ namespace Bibim
     int Clock::GetCurrentMilliSeconds()
     {
         return static_cast<int>(WindowsClock::StaticInstance.GetCurrentMilliSeconds());
+    }
+
+    int64 Clock::GetCurrentMicroSeconds()
+    {
+        return WindowsClock::StaticInstance.GetCurrentMicroSeconds();
     }
 }
 

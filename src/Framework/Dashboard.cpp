@@ -1,7 +1,10 @@
 #include <Bibim/Config.h>
 #include <Bibim/Dashboard.h>
-#include <Bibim/Diagnostics.h>
+#include <Bibim/StandardGame.EmbeddedFont.h>
 #include <Bibim/Clock.h>
+#include <Bibim/Font.h>
+#include <Bibim/FontLibrary.h>
+#include <Bibim/GameModuleTree.h>
 #include <Bibim/Math.h>
 #include <Bibim/NetworkStream.h>
 #include <Bibim/Socket.h>
@@ -12,18 +15,19 @@ namespace Bibim
 {
     Dashboard::Dashboard()
     {
+        Log::Add(this);
         Construct(IPEndPoint(IPEndPoint::Localhost, 51893));
     }
 
     Dashboard::Dashboard(IPEndPoint endPoint)
     {
+        Log::Add(this);
         Construct(endPoint);
     }
 
     Dashboard::~Dashboard()
     {
-        if (Diagnostics::GetStream() == socketStream)
-            Diagnostics::SetStream(nullptr);
+        Log::Remove(this);
     }
 
     void Dashboard::Construct(IPEndPoint endPoint)
@@ -36,8 +40,25 @@ namespace Bibim
         if (socket->IsConnected())
         {
             socketStream = new NetworkStream(socket);
-            Diagnostics::SetStream(socketStream);
         }
+    }
+
+    void Dashboard::Initialize(GameModuleTree* modules)
+    {
+        BBAssert(modules);
+
+        if (FontLibrary* fontLibrary = modules->FindModule<FontLibrary>())
+        {
+            font = new Font(fontLibrary);
+            font->SetFace(EMBEDDED_FONT_DATA,
+                          sizeof(EMBEDDED_FONT_DATA) / sizeof(EMBEDDED_FONT_DATA[0]));
+            font->SetColor(Color::White);
+        }
+    }
+
+    void Dashboard::Finalize()
+    {
+        font.Reset();
     }
 
     void Dashboard::TryConnect()
@@ -48,7 +69,6 @@ namespace Bibim
         if (socket->TryConnect())
         {
             socketStream = new NetworkStream(socket);
-            Diagnostics::SetStream(socketStream);
         }
     }
 
@@ -75,6 +95,42 @@ namespace Bibim
             context.DrawDebugRect(bounds, outerColor);
         }
 
+        if (notifications.empty() == false)
+        {
+            static const Vector2 MARGIN = Vector2(10.0f, 15.0f);
+
+            RectF bounds = context.GetCurrentBounds();
+            bounds.X += MARGIN.X;
+            bounds.Y += MARGIN.Y;
+            bounds.Width  -= MARGIN.X * 2.0f;
+            bounds.Height -= MARGIN.Y;
+            for (NotificationCollection::const_iterator it = notifications.begin(); it != notifications.end(); it++)
+            {
+                const Notification& item = (*it);
+
+                const Color oldColor = font->GetColor();
+                font->SetColor(Color(0, 0, 0));
+                bounds.X -= 1.0f;
+                bounds.Y -= 1.0f;
+                context.DrawString(bounds, bounds, item.Text);
+                bounds.X += 2.0f;
+                context.DrawString(bounds, bounds, item.Text);
+                bounds.Y += 2.0f;
+                context.DrawString(bounds, bounds, item.Text);
+                bounds.X -= 2.0f;
+                context.DrawString(bounds, bounds, item.Text);
+                font->SetColor(item.Color);
+                bounds.X += 1.0f;
+                bounds.Y -= 1.0f;
+
+                context.DrawString(bounds, bounds, item.Text);
+
+                const float height = item.Text.GetSize().Y;
+                bounds.Y += height;
+                bounds.Height -= height;
+            }
+        }
+
         TryConnect();
 
         if (socketStream && socketStream->CanRead())
@@ -92,6 +148,7 @@ namespace Bibim
             }
             */
         }
+
     }
 
     void Dashboard::OnVisualBegan(UIHandledDrawingContext& context)
@@ -105,6 +162,39 @@ namespace Bibim
             selectedVisualBounds = context.GetCurrentBounds();
             selectedVisualClippedBounds = context.GetCurrentClippedBounds();
         }
+    }
+
+    void Dashboard::Error(const char* category, const char* message)
+    {
+        AddLogNotification(Color(237, 28, 36), category, message);
+    }
+
+    void Dashboard::Warning(const char* category, const char* message)
+    {
+        AddLogNotification(Color(255, 242, 0), category, message);
+    }
+
+    void Dashboard::Information(const char* category, const char* message)
+    {
+        // AddLogNotification(Color(37, 177, 76), category, message);
+    }
+
+    void Dashboard::AddLogNotification(Color color, const char* category, const char* message)
+    {
+        if (font == nullptr)
+            return;
+
+        if (notifications.size() >= 40)
+            notifications.pop_front();
+
+        Notification n;
+        n.Color = color;
+        if (category && category[0] != '\0')
+            n.Text = FontString(font, String::CFormat("[%s] %s", category, message));
+        else
+            n.Text = FontString(font, message);
+
+        notifications.push_back(n);
     }
 
     void Dashboard::Jsonify(std::ostringstream& o, UIVisual* visual)

@@ -8,7 +8,7 @@ static Bibim::int64 GetTimeOfDay()
 {
     struct timeval tv;
     gettimeofday(&tv, NULL);
-    return (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+    return (tv.tv_sec * 1000000) + tv.tv_usec;
 }
 
 namespace Bibim
@@ -23,12 +23,12 @@ namespace Bibim
             startTime = GetTimeOfDay();
         }
 
-        double GetCurrent()
+        double GetCurrent() const
         {
-            return static_cast<double>(GetCurrentMilliSeconds()) * 0.001;
+            return static_cast<double>(GetTimeOfDay() - startTime) * 0.001;
         }
 
-        int64 GetCurrentMilliSeconds()
+        int64 GetCurrentMicroSeconds() const
         {
             return GetTimeOfDay() - startTime;
         }
@@ -43,7 +43,12 @@ namespace Bibim
 
     int Clock::GetCurrentMilliSeconds()
     {
-        return static_cast<int>(UnixClock::StaticInstance.GetCurrentMilliSeconds());
+        return static_cast<int>(UnixClock::StaticInstance.GetCurrentMicroSeconds() / 1000);
+    }
+
+    int64 Clock::GetCurrentMicroSeconds()
+    {
+        return UnixClock::StaticInstance.GetCurrentMicroSeconds();
     }
 }
 

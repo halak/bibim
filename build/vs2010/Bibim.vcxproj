@@ -133,6 +133,7 @@
     <ClCompile Include="..\..\src\Framework\Clipboard.Android.cpp" />
     <ClCompile Include="..\..\src\Framework\Clipboard.iOS.cpp" />
     <ClCompile Include="..\..\src\Framework\Clipboard.Windows.cpp" />
+    <ClCompile Include="..\..\src\Framework\Dashboard.cpp" />
     <ClCompile Include="..\..\src\Framework\GameFramework.Android.cpp" />
     <ClCompile Include="..\..\src\Framework\GameFramework.iOS.cpp" />
     <ClCompile Include="..\..\src\Framework\GameFrameworkBase.cpp" />
@@ -341,6 +342,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\Bibim\AssetLoadingTask.h" />
     <ClInclude Include="..\..\include\Bibim\AssetStreamReader.h" />
+    <ClInclude Include="..\..\include\Bibim\Dashboard.h" />
     <ClInclude Include="..\..\include\Bibim\FileAssetProvider.Default.h" />
     <ClInclude Include="..\..\include\Bibim\FileAssetProviderBase.h" />
     <ClInclude Include="..\..\include\Bibim\GameAsset.h" />

@@ -75,13 +75,13 @@ namespace Bibim
             virtual BGM* CreateBGM(AudioDevice* audioDevice);
 
             virtual void Finalize();
+            virtual void Update(float dt, int timestamp);
             virtual void Draw();
             void DrawDebugText(UIDrawingContext& context, RectF bounds, const String& text);
 
         protected:
             void MatchContentToWindow();
             void ReloadUI();
-            void SetRecentLog(const String& value);
 
             virtual void ReloadScripts() = 0;
             virtual bool OnKeyDown(const UIEventArgs& args);
@@ -91,12 +91,6 @@ namespace Bibim
             virtual void OnGraphicsDeviceRestore(GraphicsDeviceBase* g);
             
             static bool KeyDownHandler(const UIEventArgs& args, void* userData);
-
-            //Log::Listener
-            //virtual void Error(const char* category, const char* message);
-            //virtual void Warning(const char* category, const char* message);
-            //virtual void Information(const char* category, const char* message);
-            //void OnLog(Color color, const char* category, const char* message);
 
         private:
             Point2 windowSize;
@@ -123,8 +117,6 @@ namespace Bibim
             SoundFX* sfx;
             LuaBase* lua;
             Clipboard* clipboard;
-            String  recentLog;
-            FontPtr debugFont;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

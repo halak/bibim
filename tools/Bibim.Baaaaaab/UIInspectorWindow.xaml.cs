@@ -520,6 +520,16 @@ namespace Bibim.Bab
                         Trace.WriteLine(string.Format("[{0}] {1} / {2}", level, category, message));
                     });
                     break;
+                case 11001:
+                    string function = serverStreamReader.ReadBibimString();
+                    string filename = serverStreamReader.ReadBibimString();
+                    int line = serverStreamReader.ReadInt32();
+                    int elapsedMicroSeconds = serverStreamReader.ReadInt32();
+                    postprocess = new Action(() =>
+                    {
+                        Trace.WriteLine(string.Format("{0}({3}ms)\t\t{1}({2})", function, filename, line, ((double)elapsedMicroSeconds) / 1000.0));
+                    });
+                    break;
                 case UIDataPacketID:
                     string jsonString = serverStreamReader.ReadBibimString();
 
