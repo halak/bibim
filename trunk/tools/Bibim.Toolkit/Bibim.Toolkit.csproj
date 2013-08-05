@@ -301,6 +301,7 @@
     <Compile Include="Asset\Pipeline\NetworkGameAssetServer.cs" />
     <Compile Include="Asset\Pipeline\Recipes\CompileLuaScript.cs" />
     <Compile Include="Asset\Pipeline\Recipes\LoadStreamingAsset.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\Utility.cs" />
     <Compile Include="Asset\StreamingGameAsset.cs" />
     <Compile Include="Asset\StreamingGameAssetWriter.cs" />
     <Compile Include="ClassIDAttribute.cs" />

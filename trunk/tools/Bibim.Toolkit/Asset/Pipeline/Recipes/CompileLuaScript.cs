@@ -38,36 +38,10 @@ namespace Bibim.Asset.Pipeline.Recipes
             context.AddDependency(input);
 
             string output = Path.GetTempFileName();
-            string args = string.Format("-o \"{1}\" \"{0}\"", input, output);
-
-            ProcessStartInfo start = new ProcessStartInfo(@"Plugin\luac52.exe", args)
-            {
-                CreateNoWindow = true,
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-            };
-            Process process = Process.Start(start);
-            process.WaitForExit();
-
-            string compileMessage = process.StandardOutput.ReadToEnd();
-            string compileErrorMessage = process.StandardError.ReadToEnd();
-
-            if (string.IsNullOrEmpty(compileErrorMessage))
-            {
-                byte[] buffer = null;
-                using (var fs = new FileStream(output, FileMode.Open, FileAccess.Read))
-                {
-                    BinaryReader reader = new BinaryReader(fs);
-                    buffer = reader.ReadBytes((int)fs.Length);
-                }
-
-                return new StreamingGameAsset(buffer);
-            }
-            else
-            {
-                throw new InvalidDataException(string.Format("Compile failure.\n{0}\n{1}\n{2}", compileMessage, compileErrorMessage, args));
-            }
+            var convertedData = Utility.ConvertUsingExternalTool(@"Plugin\luac52.exe",
+                                                                 args: string.Format("-o \"{1}\" \"{0}\"", input, output),
+                                                                 output: output);
+            return new StreamingGameAsset(convertedData);
         }
     }
 }
