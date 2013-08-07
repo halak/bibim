@@ -47,7 +47,7 @@ namespace Bibim
 
             struct Notification
             {
-                Color Color;
+                Color TextColor;
                 FontString Text;
             };
             typedef std::deque<Notification> NotificationCollection;

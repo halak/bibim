@@ -311,7 +311,7 @@ namespace Bibim
                 luaL_checktype(L, SLICES, LUA_TNUMBER);
                 luaL_checktype(L, FUNCTION, LUA_TFUNCTION);
 
-                const int slices = lua_tointeger(L, SLICES);
+                const size_t slices = static_cast<size_t>(lua_tointeger(L, SLICES));
 
                 if (slices <= 1)
                     return 0;
@@ -322,7 +322,7 @@ namespace Bibim
 
                 float totalLength = 0.0f;
                 Vector2 lastPoint = GetPoint::Do(L, 2);
-                for (int i = 3; i <= count - 1; i++)
+                for (size_t i = 3; i <= count - 1; i++)
                 {
                     const Vector2 currentPoint = GetPoint::Do(L, i);
                     totalLength += Vector2::GetDistance(lastPoint, currentPoint);
@@ -331,14 +331,14 @@ namespace Bibim
 
                 const float sliceLength = totalLength / static_cast<float>(slices - 1);
 
-                int index = 4;
+                size_t index = 4;
                 Vector2 a = GetPoint::Do(L, 1);
                 Vector2 b = GetPoint::Do(L, 2);
                 Vector2 c = GetPoint::Do(L, 3);
                 Vector2 d = GetPoint::Do(L, 4);
                 float distanceBToC = Vector2::GetDistance(b, c);
                 float currentDistance = 0.0f;
-                for (int i = 0; i < slices; i++)
+                for (size_t i = 0; i < slices; i++)
                 {
                     const float t = currentDistance / distanceBToC;
                     const Vector2 v = Math::CatmullRom(a, b, c, d, t);

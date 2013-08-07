@@ -14,6 +14,9 @@
 #   include <unistd.h>
 #endif
 
+#pragma warning(push)
+#pragma warning(disable:4127)
+
 namespace Bibim
 {
     Socket::Socket(IPEndPoint endPoint)
@@ -132,7 +135,7 @@ namespace Bibim
     {
         struct sockaddr_in addr = { 0, };
         addr.sin_family = AF_INET;
-        addr.sin_port = htons(endPoint.GetPort());
+        addr.sin_port = htons(static_cast<u_short>(endPoint.GetPort()));
         addr.sin_addr.s_addr = endPoint.GetAddress();
         const int result = connect(handle, reinterpret_cast<const sockaddr*>(&addr), sizeof(addr));
         if (result == 0)
@@ -241,3 +244,5 @@ namespace Bibim
         return select(2, &test, nullptr, nullptr, &timeout) > 0;
     }
 }
+
+#pragma warning(pop)

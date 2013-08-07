@@ -12,7 +12,7 @@ namespace Bibim
 
     int Geom2D::GetPointAxisAlignedBoxDistanceSquared(Point2 p, Point2 min, Point2 max)
     {
-        int result = 0.0f;
+        int result = 0;
 
         BBAssert(!((p.X < min.X && p.X > max.X) || (p.Y < min.Y && p.Y > max.Y)));
 
@@ -379,8 +379,8 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    bool Geom2D::SweepSphereSegment(Vector2 center, float radius, Vector2 direction, float length,
-                                    Vector2 start, Vector2 end, float& outDistance)
+    bool Geom2D::SweepSphereSegment(Vector2 /*center*/, float /*radius*/, Vector2 /*direction*/, float /*length*/,
+                                    Vector2 /*start*/, Vector2 /*end*/, float& /*outDistance*/)
     {
         return false;
     }

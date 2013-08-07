@@ -27,13 +27,23 @@ namespace Bibim
 
     String IPEndPoint::GetAddressString() const
     {
-        const in_addr address = { GetAddress() };
+        in_addr address;
+#       if defined(BIBIM_PLATFORM_WINDOWS)
+        address.S_un.S_addr = GetAddress();
+#       else
+        address.s_addr = GetAddress();
+#       endif
         return String(inet_ntoa(address));
     }
 
     String IPEndPoint::ToString() const
     {
-        const in_addr address = { GetAddress() };
+        in_addr address;
+#       if defined(BIBIM_PLATFORM_WINDOWS)
+        address.S_un.S_addr = GetAddress();
+#       else
+        address.s_addr = GetAddress();
+#       endif
         return String::CFormat("%s:%d", address, GetPort());
     }
 

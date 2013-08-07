@@ -74,8 +74,6 @@ namespace Bibim
         wideCharacters.reserve(text.GetLength());
         utf8::utf8to16(&text.CStr()[0], &text.CStr()[text.GetLength()], std::back_inserter(wideCharacters));
         
-        int lineCount = 1;
-        float lineWidth = 0.0f;
         class Measurer
         {
             public:

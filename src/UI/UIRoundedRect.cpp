@@ -27,13 +27,15 @@ namespace Bibim
     {
     }
 
-    void UIRoundedRect::FillShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& bounds, Color color)
+    void UIRoundedRect::FillShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& /*bounds*/, Color color)
     {
+        // TODO: CLIPPING
         context.FillRoundedRect(clippedBounds, leftTop, rightTop, leftBottom, rightBottom, color);
     }
 
-    void UIRoundedRect::DrawShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& bounds, Color color)
+    void UIRoundedRect::DrawShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& /*bounds*/, Color color)
     {
+        // TODO: CLIPPING
         context.DrawRoundedRect(clippedBounds, leftTop, rightTop, leftBottom, rightBottom, color);
     }
 
