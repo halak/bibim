@@ -1,5 +1,7 @@
 #include <Bibim/Config.h>
 #include <Bibim/Dashboard.h>
+#include <Bibim/BinaryReader.h>
+#include <Bibim/BinaryWriter.h>
 #include <Bibim/StandardGame.EmbeddedFont.h>
 #include <Bibim/Clock.h>
 #include <Bibim/Font.h>
@@ -151,18 +153,22 @@ namespace Bibim
 
         if (socketStream && socketStream->CanRead())
         {
-            /*
+            static const int UIDataPacketID = 44523;
             static const int UIVisualSelectedPacketID = 44524;
+            static const int UISynchronize = 44525;
 
-            BinaryReader reader(queryStream);
-            const int packetID = reader.ReadInt();
+            const int packetID = BinaryReader::ReadIntFrom(socketStream);
             switch (packetID)
             {
                 case UIVisualSelectedPacketID:
-                    selectedVisual = reinterpret_cast<void*>(reader.ReadLongInt());
+                    selectedVisual = reinterpret_cast<void*>(BinaryReader::ReadLongIntFrom(socketStream));
+                    break;
+                case UISynchronize:
+                    Jsonify(stringstream, target);
+                    BinaryWriter::WriteTo(socketStream, UIDataPacketID);
+                    BinaryWriter::WriteTo(socketStream, stringstream.str().c_str());
                     break;
             }
-            */
         }
 
     }

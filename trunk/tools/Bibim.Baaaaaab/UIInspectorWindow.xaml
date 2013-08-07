@@ -8,8 +8,9 @@
         Width="354"
         Height="{Binding Source={StaticResource Settings}, Path=Default.UIInspectorWindowHeight}" Icon="/Bibim.Baaaaaab;component/Inspector.ico">
     <Grid>
-        <TreeView Margin="12,41,12,12" Name="treeView" SelectedItemChanged="OnTreeViewSelectedItemChanged" />
+        <TreeView Margin="12,70,12,12" Name="treeView" SelectedItemChanged="OnTreeViewSelectedItemChanged" />
         <Button Content="Find" Height="23" Margin="0,12,12,0" Name="buttonFind" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="buttonFind_Click" />
         <my:PlaceholderTextBox Height="23" Margin="12,12,93,0" x:Name="textBoxFind" VerticalAlignment="Top" PlaceholderText="Enter the UIVisual name to find" TextChanged="textBoxFind_TextChanged" KeyDown="textBoxFind_KeyDown" />
+        <Button Content="Synchronize" Height="23" Margin="12,41,12,0" Name="buttonSynchronize" VerticalAlignment="Top" IsEnabled="False" Click="buttonSynchronize_Click"></Button>
     </Grid>
 </Window>

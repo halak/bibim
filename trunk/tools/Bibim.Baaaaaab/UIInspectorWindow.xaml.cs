@@ -31,6 +31,7 @@ namespace Bibim.Bab
     {
         private const uint UIDataPacketID = 44523;
         private const uint UIVisualSelectedPacketID = 44524;
+        private const uint UISynchronize = 44525;
 
         private static Uri GetEmbeddedResourceUri(string path)
         {
@@ -475,6 +476,8 @@ namespace Bibim.Bab
             serverSocket.Listen(100);
 
             serverSocket.BeginAccept(new AsyncCallback(OnConnected), null);
+
+            Dispatcher.Invoke(new Action(() => { buttonSynchronize.IsEnabled = false; }));
         }
 
         private void OnConnected(IAsyncResult result)
@@ -487,6 +490,8 @@ namespace Bibim.Bab
                 serverStreamReader = new BinaryReader(serverStream);
                 serverStreamWriter = new BinaryWriter(serverStream);
                 serverStream.BeginRead(serverBuffer, 0, 4, new AsyncCallback(OnPacketReceived), null);
+
+                Dispatcher.Invoke(new Action(() => { buttonSynchronize.IsEnabled = true; }));
             }
             else
                 Ready();
@@ -593,6 +598,14 @@ namespace Bibim.Bab
         {
             SelectNextTreeViewItemByText(textBoxFind.Text);
             e.Handled = true;
+        }
+
+        private void buttonSynchronize_Click(object sender, RoutedEventArgs e)
+        {
+            if (serverStreamWriter != null)
+            {
+                serverStreamWriter.Write(UISynchronize);
+            }
         }
 
         private void textBoxFind_KeyDown(object sender, KeyEventArgs e)
