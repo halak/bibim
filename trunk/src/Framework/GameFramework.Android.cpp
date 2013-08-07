@@ -59,13 +59,9 @@ namespace Bibim
     }
 }
 
-/*
-Game* g = nullptr;
-
-#define  LOG_TAG    "Hotblood-JNI"
-#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
-#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
-*/
+#define  ANDROID_LOG_TAG    "Hotblood-JNI"
+#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,ANDROID_LOG_TAG,__VA_ARGS__)
+#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,ANDROID_LOG_TAG,__VA_ARGS__)
 
 extern "C" {
     JNIEXPORT void JNICALL Java_org_bibim_android_JNI_init(JNIEnv* env, jclass clazz,
@@ -118,6 +114,7 @@ JNIEXPORT void JNICALL Java_org_bibim_android_JNI_init(JNIEnv* env, jclass clazz
     }
     else
     {
+        LOGI("Reinitialize (%d,%d)", width, height);
         GameFramework::SingletonInstance->GetWindow()->SetSize(Point2(width, height));
         GameFramework::SingletonInstance->GetWindow()->RaiseResizedEvent();
     }
