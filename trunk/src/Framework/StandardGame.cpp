@@ -63,7 +63,7 @@ namespace Bibim
     }
     
     void StandardGame::Initialize(const String& gameName,
-                                  const String& version,
+                                  const String& /*version*/,
                                   StandardGame::LuaBase* lua,
                                   bool windowMoveToScreenCenter)
     {
@@ -670,7 +670,7 @@ namespace Bibim
             if (game == nullptr)
                 return 0;
 
-            lua_pushnumber(L, time(NULL));
+            lua_pushnumber(L, static_cast<lua_Number>(time(NULL)));
             return 1;
         }
 

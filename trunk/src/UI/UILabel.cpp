@@ -75,8 +75,9 @@ namespace Bibim
         if (GetFont() == nullptr || GetText().IsEmpty())
             return;
 
-        UpdateFontString();
-        context.DrawString(fontString);
+        // UpdateFontString();
+        // context.DrawString(fontString);
+        context.DrawString(FontString(GetFont(), GetText()));
     }
 
     void UILabel::UpdateFontString()

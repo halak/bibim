@@ -533,7 +533,7 @@ namespace Bibim
         }
     }
 
-    GameAsset* UIDocument::StyleSheet::Create(StreamReader& reader, GameAsset* existingInstance)
+    GameAsset* UIDocument::StyleSheet::Create(StreamReader& /*reader*/, GameAsset* existingInstance)
     {
         StyleSheet* result = nullptr;
         

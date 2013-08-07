@@ -297,12 +297,12 @@ namespace Bibim
 
         struct SortByTime
         {
-            bool operator () (const Burst& a, const Burst& b) const
+            static bool Do(const Burst& a, const Burst& b)
             {
                 return a.Time < b.Time;
             }
         };
-        std::sort(burstTable.begin(), burstTable.end(), SortByTime());
+        std::sort(burstTable.begin(), burstTable.end(), &SortByTime::Do);
         lastBurstIndex = 0;
         burstTime = 0.0f;
     }

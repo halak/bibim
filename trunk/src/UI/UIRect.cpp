@@ -14,12 +14,12 @@ namespace Bibim
     {
     }
 
-    void UIRect::FillShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& bounds, Color color)
+    void UIRect::FillShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& /*bounds*/, Color color)
     {
         context.FillRect(clippedBounds, color);
     }
 
-    void UIRect::DrawShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& bounds, Color color)
+    void UIRect::DrawShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& /*bounds*/, Color color)
     {
         context.DrawRect(clippedBounds, color);
     }

@@ -90,7 +90,7 @@ namespace Bibim
         }
     }
 
-    void Dashboard::OnBegan(UIHandledDrawingContext& context, UIVisual* target)
+    void Dashboard::OnBegan(UIHandledDrawingContext& /*context*/, UIVisual* /*target*/)
     {
         selectedVisualBounds = RectF::Empty;
         selectedVisualClippedBounds = RectF::Empty;
@@ -137,7 +137,7 @@ namespace Bibim
                 context.DrawString(bounds, bounds, item.Text);
                 bounds.X -= 2.0f;
                 context.DrawString(bounds, bounds, item.Text);
-                font->SetColor(item.Color);
+                font->SetColor(item.TextColor);
                 bounds.X += 1.0f;
                 bounds.Y -= 1.0f;
 
@@ -173,7 +173,7 @@ namespace Bibim
 
     }
 
-    void Dashboard::OnVisualBegan(UIHandledDrawingContext& context)
+    void Dashboard::OnVisualBegan(UIHandledDrawingContext& /*context*/)
     {
     }
 
@@ -196,7 +196,7 @@ namespace Bibim
         AddLogNotification(Color(255, 242, 0), category, message);
     }
 
-    void Dashboard::Information(const char* category, const char* message)
+    void Dashboard::Information(const char* /*category*/, const char* /*message*/)
     {
         // AddLogNotification(Color(37, 177, 76), category, message);
     }
@@ -210,7 +210,7 @@ namespace Bibim
             notifications.pop_front();
 
         Notification n;
-        n.Color = color;
+        n.TextColor = color;
         if (category && category[0] != '\0')
             n.Text = FontString(font, String::CFormat("[%s] %s", category, message));
         else

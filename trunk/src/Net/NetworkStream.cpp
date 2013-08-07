@@ -29,7 +29,7 @@ namespace Bibim
     {
     }
 
-    int NetworkStream::Seek(int offset, SeekOrigin origin)
+    int NetworkStream::Seek(int /*offset*/, SeekOrigin /*origin*/)
     {
         return 0;
     }

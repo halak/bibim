@@ -71,6 +71,8 @@
       <AdditionalIncludeDirectories>..\..\include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.0.1\custom;..\..\extlibs\freetype-2.5.0.1\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\OpenAL\PC\include;..\..\extlibs\SPARK-1.5.5\include;..\..\extlibs\StormLib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <Optimization>Disabled</Optimization>
+      <WarningLevel>Level4</WarningLevel>
     </ClCompile>
     <Lib />
     <Lib />
@@ -85,6 +87,7 @@
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..\include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.0.1\custom;..\..\extlibs\freetype-2.5.0.1\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\OpenAL\PC\include;..\..\extlibs\SPARK-1.5.5\include;..\..\extlibs\StormLib\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level4</WarningLevel>
     </ClCompile>
     <Lib />
     <Lib />
