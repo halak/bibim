@@ -90,11 +90,6 @@ namespace Bibim
         }
     }
 
-    void UIAfterImageEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color)
-    {
-        Base::DrawQuad(renderer, p, color);
-    }
-
     void UIAfterImageEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color, Vector2* uv,  Texture2D* texture)
     {
         if (active && currentAfterImage->SkippedFrames > skippedFrames)
@@ -103,52 +98,12 @@ namespace Bibim
         Base::DrawQuad(renderer, p, color, uv, texture);
     }
 
-    void UIAfterImageEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color, Vector2* uv1, Texture2D* texture1, Vector2* uv2, Texture2D* texture2)
-    {
-        Base::DrawQuad(renderer, p, color, uv1, texture1, uv2, texture2);
-    }
-
     void UIAfterImageEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, Texture2D* texture)
     {
         if (active && currentAfterImage->SkippedFrames > skippedFrames)
             currentAfterImage->Frames.push_back(Frame(currentTransform, p, color, clippingRect, texture));
 
         Base::DrawQuad(renderer, p, color, clippingRect, texture);
-    }
-
-    void UIAfterImageEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, Texture2D* texture1, Vector2* uv2, Texture2D* texture2)
-    {
-        Base::DrawQuad(renderer, p, color, clippingRect, texture1, uv2, texture2);
-    }
-
-    void UIAfterImageEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color* c)
-    {
-        Base::DrawQuad(renderer, p, c);
-    }
-
-    void UIAfterImageEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color* c, Vector2* uv,  Texture2D* texture)
-    {
-        Base::DrawQuad(renderer, p, c, uv, texture);
-    }
-
-    void UIAfterImageEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color* c, Vector2* uv1, Texture2D* texture1, Vector2* uv2, Texture2D* texture2)
-    {
-        Base::DrawQuad(renderer, p, c, uv1, texture1, uv2, texture2);
-    }
-
-    void UIAfterImageEffect::DrawQuad(UIRenderer* renderer, Vector3* p, Color color)
-    {
-        Base::DrawQuad(renderer, p, color);
-    }
-
-    void UIAfterImageEffect::DrawQuad(UIRenderer* renderer, Vector3* p, Color color, Vector2* uv,  Texture2D* texture)
-    {
-        Base::DrawQuad(renderer, p, color, uv, texture);
-    }
-
-    void UIAfterImageEffect::DrawQuad(UIRenderer* renderer, Vector3* p, Color color, Vector2* uv1, Texture2D* texture1, Vector2* uv2, Texture2D* texture2)
-    {
-        Base::DrawQuad(renderer, p, color, uv1, texture1, uv2, texture2);
     }
 
     void UIAfterImageEffect::OnRead(ComponentStreamReader& reader)

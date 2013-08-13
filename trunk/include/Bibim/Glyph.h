@@ -3,7 +3,7 @@
 #define __BIBIM_GLYPH_H__
 
 #include <Bibim/FWD.h>
-#include <Bibim/Rect.h>
+#include <Bibim/GlyphSurface.h>
 #include <Bibim/Vector2.h>
 
 namespace Bibim
@@ -18,11 +18,11 @@ namespace Bibim
             inline Vector2 GetBitmapSize() const;
             inline GlyphSurface* GetSurface() const;
             inline Texture2D* GetTexture() const;
-            inline Rect GetClippingRect() const;
+            inline GlyphSurface::Slot GetSlot() const;
 
         private:
             Glyph(int code, Vector2 advance);
-            Glyph(int code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, GlyphSurface* surface, Rect clippingRect);
+            Glyph(int code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, GlyphSurface* surface, GlyphSurface::Slot slot);
             ~Glyph();
 
         private:
@@ -31,8 +31,7 @@ namespace Bibim
             Vector2 bitmapOffset;
             Vector2 bitmapSize;
             GlyphSurface* surface;
-            Texture2DPtr texture;
-            Rect clippingRect;
+            GlyphSurface::Slot slot;
 
             friend class GlyphTable;
     };
@@ -66,12 +65,12 @@ namespace Bibim
 
     Texture2D* Glyph::GetTexture() const
     {
-        return texture;
+        return surface ? surface->GetTexture() : nullptr;
     }
 
-    Rect Glyph::GetClippingRect() const
+    GlyphSurface::Slot Glyph::GetSlot() const
     {
-        return clippingRect;
+        return slot;
     }
 }
 

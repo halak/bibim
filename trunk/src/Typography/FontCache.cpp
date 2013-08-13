@@ -4,6 +4,7 @@
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/FontLibrary.h>
 #include <Bibim/FileStream.h>
+#include <Bibim/Math.h>
 #include <Bibim/Memory.h>
 #include <Bibim/MemoryStream.h>
 #include <Bibim/Numerics.h>
@@ -331,10 +332,10 @@ namespace Bibim
         descender  /= parameters.Scale;
         lineHeight /= parameters.Scale;
 
-        regularGlyphTable = new GlyphTable(library->GetGraphicsDevice());
+        regularGlyphTable = new GlyphTable();
 
         if (stroker)
-            strokedGlyphTable = new GlyphTable(library->GetGraphicsDevice());
+            strokedGlyphTable = new GlyphTable();
 
         if (parameters.ShadowSize == 1)
         {
@@ -344,11 +345,13 @@ namespace Bibim
                 shadowGlyphTable = regularGlyphTable;
         }
         else if (parameters.ShadowSize > 1)
-            shadowGlyphTable = new GlyphTable(library->GetGraphicsDevice());
+            shadowGlyphTable = new GlyphTable();
     }
 
     FontCache::~FontCache()
     {
+        Clear();
+
         if (parameters.ShadowSize > 1)
             delete shadowGlyphTable;
         else if (parameters.ShadowSize == 1)
@@ -390,20 +393,22 @@ namespace Bibim
                     if (const Glyph* strokedGlyph = strokedGlyphTable->Find(' '))
                     {
                         const Vector2 advance = strokedGlyph->GetAdvance();
-                        strokedGlyphTable->Add('\t',
-                                               Vector2(advance.X * TabSize, advance.Y),
-                                               Vector2::Zero,
-                                               Vector2::Zero,
-                                               nullptr, 0, 0, 0);
+                        Add(strokedGlyphTable,
+                            '\t',
+                            Vector2(advance.X * TabSize, advance.Y),
+                            Vector2::Zero,
+                            Vector2::Zero,
+                            nullptr, 0, 0, 0);
                     }
                 }
 
                 const Vector2 advance = regularGlyph->GetAdvance();
-                return regularGlyphTable->Add('\t',
-                                              Vector2(advance.X * TabSize, advance.Y),
-                                              Vector2::Zero,
-                                              Vector2::Zero,
-                                              nullptr, 0, 0, 0);
+                return Add(regularGlyphTable,
+                           '\t',
+                           Vector2(advance.X * TabSize, advance.Y),
+                           Vector2::Zero,
+                           Vector2::Zero,
+                           nullptr, 0, 0, 0);
             }
 
             struct SelectFace
@@ -522,12 +527,13 @@ namespace Bibim
                     const Vector2 advance = Vector2(F16D16ToFloat(strokedGlyph->advance.x), F16D16ToFloat(strokedGlyph->advance.y));
                     const Vector2 bitmapOffset = Vector2(static_cast<float>(strokedGlyphBitmap->left), unscaledAscender - static_cast<float>(strokedGlyphBitmap->top));
                     const Vector2 bitmapSize   = Vector2(glyphBitmap.Bitmap->width, glyphBitmap.Bitmap->rows);
-                    strokedGlyphTable->Add(code,
-                                           advance / parameters.Scale, bitmapOffset / parameters.Scale, bitmapSize / parameters.Scale,
-                                           glyphBitmap.Bitmap->buffer,
-                                           glyphBitmap.Bitmap->width,
-                                           glyphBitmap.Bitmap->rows,
-                                           glyphBitmap.Bitmap->pitch);
+                    Add(strokedGlyphTable,
+                        code,
+                        advance / parameters.Scale, bitmapOffset / parameters.Scale, bitmapSize / parameters.Scale,
+                        glyphBitmap.Bitmap->buffer,
+                        glyphBitmap.Bitmap->width,
+                        glyphBitmap.Bitmap->rows,
+                        glyphBitmap.Bitmap->pitch);
                 }
                 FT_Done_Glyph(strokedGlyph);
             }
@@ -545,12 +551,13 @@ namespace Bibim
             const Vector2 bitmapOffset = Vector2(static_cast<float>(renderedGlyph->bitmap_left), unscaledAscender - static_cast<float>(renderedGlyph->bitmap_top));
             const Vector2 bitmapSize   = Vector2(glyphBitmap.Bitmap->width, glyphBitmap.Bitmap->rows);
 
-            return regularGlyphTable->Add(code,
-                                          advance / parameters.Scale, bitmapOffset / parameters.Scale, bitmapSize / parameters.Scale,
-                                          glyphBitmap.Bitmap->buffer,
-                                          glyphBitmap.Bitmap->width,
-                                          glyphBitmap.Bitmap->rows,
-                                          glyphBitmap.Bitmap->pitch);
+            return Add(regularGlyphTable,
+                       code,
+                       advance / parameters.Scale, bitmapOffset / parameters.Scale, bitmapSize / parameters.Scale,
+                       glyphBitmap.Bitmap->buffer,
+                       glyphBitmap.Bitmap->width,
+                       glyphBitmap.Bitmap->rows,
+                       glyphBitmap.Bitmap->pitch);
         }
     }
 
@@ -562,5 +569,74 @@ namespace Bibim
             strokedGlyphTable->Clear();
         if (shadowGlyphTable)
             shadowGlyphTable->Clear();
+
+        SurfaceCollection deletingSurfaces;
+        deletingSurfaces.swap(surfaces);
+
+        for (SurfaceCollection::iterator it = deletingSurfaces.begin(); it != deletingSurfaces.end(); it++)
+            delete (*it);
+    }
+
+    const Glyph* FontCache::Add(GlyphTable* glyphTable, int code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, const void* buffer, int width, int height, int pitch)
+    {
+        std::pair<GlyphSurface*, GlyphSurface::Slot> allocated = AllocateSurface(buffer, width, height, pitch);
+        if (allocated.first)
+            return glyphTable->Add(code, advance, bitmapOffset, bitmapSize, allocated.first, allocated.second);
+        else
+            return glyphTable->Add(code, advance);
+    }
+
+    std::pair<GlyphSurface*, GlyphSurface::Slot> FontCache::AllocateSurface(const void* buffer, int width, int height, int pitch)
+    {
+        if (buffer == nullptr || width <= 0 || height <= 0)
+            return std::pair<GlyphSurface*, GlyphSurface::Slot>(nullptr, GlyphSurface::Slot());
+
+        for (SurfaceCollection::iterator it = surfaces.begin(); it != surfaces.end(); ++it)
+        {
+            GlyphSurface::Slot allocated = (*it)->Allocate(buffer, width, height, pitch);
+            if (allocated.ClippingRect != Rect::Empty)
+                return std::pair<GlyphSurface*, GlyphSurface::Slot>(*it, allocated);
+        }
+
+        const Point2 surfaceSize = GetAdaptiveSurfaceSize(surfaces.size(), width, height);
+        BBAssert(surfaceSize != Point2::Zero);
+
+        GraphicsDevice* graphicsDevice = library->GetGraphicsDevice();
+        GlyphSurface* glyphSurface = new GlyphSurface(graphicsDevice, surfaceSize.X, surfaceSize.Y);
+        GlyphSurface::Slot allocated = glyphSurface->Allocate(buffer, width, height, pitch);
+        BBAssert(allocated.ClippingRect != Rect::Empty);
+
+        surfaces.push_back(glyphSurface);
+
+        return std::pair<GlyphSurface*, GlyphSurface::Slot>(glyphSurface, allocated);
+    }
+
+    Point2 FontCache::GetAdaptiveSurfaceSize(int numberOfExisting, int width, int height)
+    {
+        static const Point2 textureSizes[] =
+        {
+            Point2(128, 128),
+            Point2(256, 256),
+            Point2(256, 256),
+            Point2(512, 512),
+            Point2(512, 512),
+            Point2(1024, 512),
+            Point2(1024, 1024)
+        };
+        static const int lastTextureSizeIndex = sizeof(textureSizes) / sizeof(textureSizes[0]) - 1;
+
+        const int   index = Math::Min(numberOfExisting, lastTextureSizeIndex);
+        const Point2 selectedSize = textureSizes[index];
+        if (selectedSize.X >= width && selectedSize.Y >= height)
+            return selectedSize;
+        else
+        {
+            // 만약 할당하려는 텍스쳐의 크기가 글리프 크기보다 작으면,
+            // 다음 텍스쳐의 크기를 할당한다. 만약 최고 텍스쳐 크기보다 크다면 Point2::Zero를 반환한다. (예외 상황임)
+            if (numberOfExisting < lastTextureSizeIndex)
+                return GetAdaptiveSurfaceSize(numberOfExisting + 1, width, height);
+            else
+                return Point2::Zero;
+        }
     }
 }

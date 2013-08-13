@@ -5,6 +5,7 @@
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/CheckedRelease.h>
 #include <Bibim/GraphicsDevice.GLES2.h>
+#include <Bibim/GLES2.h>
 #include <Bibim/Log.h>
 #include <Bibim/Matrix4.h>
 #include <Bibim/Numerics.h>
@@ -14,7 +15,7 @@
 
 namespace Bibim
 {
-    ShaderEffect::Parameter::Parameter(ShaderEffect* effect, GLint location)
+    ShaderEffect::Parameter::Parameter(ShaderEffect* effect, int location)
         : effect(effect),
           location(location)
     {
@@ -124,7 +125,7 @@ namespace Bibim
         glShaderSource(handle, 1, &sourceCode, &length);
         glCompileShader(handle);
 
-        GLint status = 0;
+        int status = 0;
         glGetShaderiv(handle, GL_COMPILE_STATUS, &status);
         if (status == GL_FALSE)
         {
@@ -182,7 +183,7 @@ namespace Bibim
 
         glLinkProgram(programHandle);
 
-        GLint status = 0;
+        int status = 0;
         glGetProgramiv(programHandle, GL_LINK_STATUS, &status);
         if (status == GL_FALSE) 
         {
@@ -210,7 +211,7 @@ namespace Bibim
         return existingInstance;
     }
 
-    void ShaderEffect::OnGraphicsDeviceLost(GraphicsDeviceBase* g)
+    void ShaderEffect::OnGraphicsDeviceLost(GraphicsDeviceBase* /*g*/)
     {
         if (handle)
         {

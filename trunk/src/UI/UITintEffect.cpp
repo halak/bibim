@@ -82,6 +82,18 @@ namespace Bibim
         Base::DrawQuad(renderer, p, color, clippingRect, texture1, uv2, texture2);
     }
 
+    void UITintEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, int alphaChannel, Texture2D* texture)
+    {
+        color *= value;
+        Base::DrawQuad(renderer, p, color, clippingRect, alphaChannel, texture);
+    }
+
+    void UITintEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, int alphaChannel, Texture2D* texture1, Vector2* uv2, Texture2D* texture2)
+    {
+        color *= value;
+        Base::DrawQuad(renderer, p, color, clippingRect, alphaChannel, texture1, uv2, texture2);
+    }
+
     void UITintEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color* c)
     {
         c[0] *= value;

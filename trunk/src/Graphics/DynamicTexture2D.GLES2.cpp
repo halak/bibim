@@ -3,6 +3,7 @@
 
 #include <Bibim/DynamicTexture2D.GLES2.h>
 #include <Bibim/Assert.h>
+#include <Bibim/GLES2.h>
 #include <Bibim/GraphicsDevice.GLES2.h>
 #include <Bibim/Log.h>
 #include <Bibim/Math.h>

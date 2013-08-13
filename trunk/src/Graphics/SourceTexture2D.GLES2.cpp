@@ -4,6 +4,7 @@
 #include <Bibim/SourceTexture2D.GLES2.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/GameAssetStorage.h>
+#include <Bibim/GLES2.h>
 #include <Bibim/GraphicsDevice.GLES2.h>
 #include <Bibim/PNGReader.h>
 #include <Bibim/JPEGReader.h>

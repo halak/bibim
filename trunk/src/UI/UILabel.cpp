@@ -54,6 +54,7 @@ namespace Bibim
         {
             font = value;
             fontStringChanged = true;
+            fontRevision = -1;
         }
     }
 
@@ -75,9 +76,9 @@ namespace Bibim
         if (GetFont() == nullptr || GetText().IsEmpty())
             return;
 
-        // UpdateFontString();
-        // context.DrawString(fontString);
-        context.DrawString(FontString(GetFont(), GetText()));
+        UpdateFontString();
+        context.DrawString(fontString);
+        // context.DrawString(FontString(GetFont(), GetText()));
     }
 
     void UILabel::UpdateFontString()
@@ -95,6 +96,7 @@ namespace Bibim
         Base::OnRead(reader);
         font = static_cast<Font*>(reader.ReadAsset());
         text = reader.ReadString();
+        fontStringChanged = true;
     }
 
     void UILabel::OnCopy(const GameComponent* original, CloningContext& context)

@@ -32,6 +32,9 @@ namespace Bibim
             inline virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, Texture2D* texture);
             inline virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, Texture2D* texture1, Vector2* uv2, Texture2D* texture2);
 
+            inline virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, int alphaChannel, Texture2D* texture);
+            inline virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, int alphaChannel, Texture2D* texture1, Vector2* uv2, Texture2D* texture2);
+
             inline virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color* c);
             inline virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color* c, Vector2* uv,  Texture2D* texture);
             inline virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color* c, Vector2* uv1, Texture2D* texture1, Vector2* uv2, Texture2D* texture2);
@@ -102,6 +105,16 @@ namespace Bibim
     void UIGeometryEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, Texture2D* texture1, Vector2* uv2, Texture2D* texture2)
     {
         renderer->DrawQuad(p, color, clippingRect, texture1, uv2, texture2);
+    }
+
+    void UIGeometryEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, int alphaChannel, Texture2D* texture)
+    {
+        renderer->DrawQuad(p, color, clippingRect, alphaChannel, texture);
+    }
+
+    void UIGeometryEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, int alphaChannel, Texture2D* texture1, Vector2* uv2, Texture2D* texture2)
+    {
+        renderer->DrawQuad(p, color, clippingRect, alphaChannel, texture1, uv2, texture2);
     }
 
     void UIGeometryEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color* c)

@@ -4,9 +4,11 @@
 
 #include <Bibim/FWD.h>
 #include <Bibim/GameAsset.h>
+#include <Bibim/GlyphSurface.h>
 #include <Bibim/String.h>
 #include <vector>
 
+// Freetype2 Forward Declaration
 struct FT_FaceRec_;
 struct FT_StrokerRec_;
 typedef struct FT_FaceRec_*  FT_Face;
@@ -46,6 +48,9 @@ namespace Bibim
     {
         BBAssetClass(FontCache, GameAsset, 'F', 'N', 'T', 'C');
         public:
+            typedef std::vector<GlyphSurface*> SurfaceCollection;
+
+        public:
             virtual ~FontCache();
 
             const Glyph* GetGlyph(int code);
@@ -55,6 +60,7 @@ namespace Bibim
             inline float GetAscender() const;
             inline float GetDescender() const;
             inline float GetLineHeight() const;
+            inline const SurfaceCollection& GetSurfaces() const;
 
             inline const GlyphTable* GetRegularGlyphTable() const;
             inline const GlyphTable* GetStrokedGlyphTable() const;
@@ -64,6 +70,12 @@ namespace Bibim
             FontCache(FontLibrary* library, const FontCacheParameters& parameters);
 
             void Clear();
+
+            const Glyph* Add(GlyphTable* glyphTable, int code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, const void* buffer, int width, int height, int pitch);
+            
+            std::pair<GlyphSurface*, GlyphSurface::Slot> AllocateSurface(const void* buffer, int width, int height, int pitch);
+
+            static Point2 GetAdaptiveSurfaceSize(int numberOfExisting, int width, int height);
 
         private:
             FontLibrary* library;
@@ -81,6 +93,7 @@ namespace Bibim
             GlyphTable* regularGlyphTable;
             GlyphTable* strokedGlyphTable;
             GlyphTable* shadowGlyphTable;
+            SurfaceCollection surfaces;
 
             friend class FontLibrary;
     };
@@ -117,6 +130,11 @@ namespace Bibim
     float FontCache::GetLineHeight() const
     {
         return lineHeight;
+    }
+
+    const FontCache::SurfaceCollection& FontCache::GetSurfaces() const
+    {
+        return surfaces;
     }
 
     const GlyphTable* FontCache::GetRegularGlyphTable() const

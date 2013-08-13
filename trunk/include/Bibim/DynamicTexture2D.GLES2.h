@@ -49,7 +49,7 @@ namespace Bibim
 
             inline bool IsLocked() const;
 
-            virtual GLuint GetHandle();
+            virtual unsigned int GetHandle();
 
         private:
             std::vector<byte> surface;

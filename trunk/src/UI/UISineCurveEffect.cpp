@@ -418,36 +418,6 @@ namespace Bibim
         This::DrawQuad(renderer, p, color, uv, texture1, uv2, texture2);
     }
 
-    void UISineCurveEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color* c)
-    {
-        Base::DrawQuad(renderer, p, c);
-    }
-
-    void UISineCurveEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color* c, Vector2* uv,  Texture2D* texture)
-    {
-        Base::DrawQuad(renderer, p, c, uv, texture);
-    }
-
-    void UISineCurveEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color* c, Vector2* uv1, Texture2D* texture1, Vector2* uv2, Texture2D* texture2)
-    {
-        Base::DrawQuad(renderer, p, c, uv1, texture1, uv2, texture2);
-    }
-
-    void UISineCurveEffect::DrawQuad(UIRenderer* renderer, Vector3* p, Color color)
-    {
-        Base::DrawQuad(renderer, p, color);
-    }
-
-    void UISineCurveEffect::DrawQuad(UIRenderer* renderer, Vector3* p, Color color, Vector2* uv,  Texture2D* texture)
-    {
-        Base::DrawQuad(renderer, p, color, uv, texture);
-    }
-
-    void UISineCurveEffect::DrawQuad(UIRenderer* renderer, Vector3* p, Color color, Vector2* uv1, Texture2D* texture1, Vector2* uv2, Texture2D* texture2)
-    {
-        Base::DrawQuad(renderer, p, color, uv1, texture1, uv2, texture2);
-    }
-
     void UISineCurveEffect::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);

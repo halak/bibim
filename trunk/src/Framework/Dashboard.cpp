@@ -170,7 +170,6 @@ namespace Bibim
                     break;
             }
         }
-
     }
 
     void Dashboard::OnVisualBegan(UIHandledDrawingContext& /*context*/)
@@ -206,7 +205,7 @@ namespace Bibim
         if (font == nullptr)
             return;
 
-        if (notifications.size() >= 40)
+        if (notifications.size() >= 20)
             notifications.pop_front();
 
         Notification n;

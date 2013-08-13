@@ -16,6 +16,10 @@ namespace Bibim
     {
         GetWindow()->AddResizeEventListener(this);
         GetGraphicsDevice()->AddRestoreEventListener(this);
+
+#       if (defined(BIBIM_PLATFORM_WINDOWS))
+        dashboard = new Dashboard();
+#       endif
     }
 
     StandardGame::StandardGame(Point2 windowSize)
@@ -32,7 +36,9 @@ namespace Bibim
         GetWindow()->AddResizeEventListener(this);
         GetGraphicsDevice()->AddRestoreEventListener(this);
 
+#       if (defined(BIBIM_PLATFORM_WINDOWS))
         dashboard = new Dashboard();
+#       endif
     }
 
     StandardGame::StandardGame(Point2 windowSize, Point2 contentSize)
@@ -41,13 +47,16 @@ namespace Bibim
           contentSize(contentSize),
           fullscreen(false),
           clearColor(Color::Black),
+          dashboard(nullptr),
           storage(nullptr),
           uiDomain(nullptr)
     {
         GetWindow()->AddResizeEventListener(this);
         GetGraphicsDevice()->AddRestoreEventListener(this);
 
+#       if (defined(BIBIM_PLATFORM_WINDOWS))
         dashboard = new Dashboard();
+#       endif
     }
 
     StandardGame::~StandardGame()
@@ -181,7 +190,8 @@ namespace Bibim
         clipboard = new Clipboard();
         GetModules()->GetRoot()->AttachChild(clipboard);
 
-        dashboard->Initialize(this->GetModules());
+        if (dashboard)
+            dashboard->Initialize(this->GetModules());
 
         GameFramework::Initialize();
     }
@@ -193,7 +203,9 @@ namespace Bibim
 
     void StandardGame::Finalize()
     {
-        dashboard->Finalize();
+        if (dashboard)
+            dashboard->Finalize();
+
         bgm->SetMute(true);
         GetMainTimeline()->Clear();
         uiDomain->GetRoot()->RemoveAllChildren();

@@ -160,7 +160,7 @@ namespace Bibim
         }
 
         rapidjson::StringBuffer output;
-	    rapidjson::Writer<rapidjson::StringBuffer> writer(output);
+        rapidjson::Writer<rapidjson::StringBuffer> writer(output);
         document.Accept(writer);
 
         if (const char* s = output.GetString())
