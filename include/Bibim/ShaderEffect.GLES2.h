@@ -6,7 +6,6 @@
 #if (defined(BIBIM_USE_OPENGLES2))
 
 #include <Bibim/GameAsset.h>
-#include <Bibim/GLES2.h>
 #include <Bibim/GraphicsDeviceBase.h>
 
 namespace Bibim
@@ -30,11 +29,11 @@ namespace Bibim
                     void SetValue(Texture2D* value);
 
                 private:
-                    Parameter(ShaderEffect* effect, GLint location);
+                    Parameter(ShaderEffect* effect, int location);
 
                 private:
                     ShaderEffect* effect;
-                    GLint location;
+                    int location;
 
                     friend class ShaderEffect;
             };
@@ -46,32 +45,32 @@ namespace Bibim
                    Parameter* FindParameter(const char* name);
             inline Parameter* FindParameter(const String& name);
 
-            inline GLuint GetHandle() const;
-            inline GLuint GetPositionLocation() const;
-            inline GLuint GetColorLocation() const;
-            inline GLuint GetTexCoord1Location() const;
-            inline GLuint GetTexCoord2Location() const;
-            inline GLuint GetMainSamplerLocation() const;
-            inline GLuint GetMaskSamplerLocation() const;
-            inline GLuint GetMVPTransformLocation() const;
+            inline unsigned int GetHandle() const;
+            inline unsigned int GetPositionLocation() const;
+            inline unsigned int GetColorLocation() const;
+            inline unsigned int GetTexCoord1Location() const;
+            inline unsigned int GetTexCoord2Location() const;
+            inline unsigned int GetMainSamplerLocation() const;
+            inline unsigned int GetMaskSamplerLocation() const;
+            inline unsigned int GetMVPTransformLocation() const;
 
         private:
             ShaderEffect(GraphicsDevice* graphicsDevice);
 
-            void Setup(GLuint handle);
+            void Setup(unsigned int handle);
 
             virtual void OnGraphicsDeviceLost(GraphicsDeviceBase* g);
 
         private:
             GraphicsDevice* graphicsDevice;
-            GLuint handle;
-            GLuint positionLocation;
-            GLuint colorLocation;
-            GLuint texCoord1Location;
-            GLuint texCoord2Location;
-            GLuint mainSamplerLocation;
-            GLuint maskSamplerLocation;
-            GLuint mvpTransformLocation;
+            unsigned int handle;
+            unsigned int positionLocation;
+            unsigned int colorLocation;
+            unsigned int texCoord1Location;
+            unsigned int texCoord2Location;
+            unsigned int mainSamplerLocation;
+            unsigned int maskSamplerLocation;
+            unsigned int mvpTransformLocation;
     };
 
     typedef ShaderEffect::Parameter ShaderEffectParameter;
@@ -79,42 +78,42 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    GLuint ShaderEffect::GetHandle() const
+    unsigned int ShaderEffect::GetHandle() const
     {
         return handle;
     }
 
-    GLuint ShaderEffect::GetPositionLocation() const
+    unsigned int ShaderEffect::GetPositionLocation() const
     {
         return positionLocation;
     }
 
-    GLuint ShaderEffect::GetColorLocation() const
+    unsigned int ShaderEffect::GetColorLocation() const
     {
         return colorLocation;
     }
 
-    GLuint ShaderEffect::GetTexCoord1Location() const
+    unsigned int ShaderEffect::GetTexCoord1Location() const
     {
         return texCoord1Location;
     }
 
-    GLuint ShaderEffect::GetTexCoord2Location() const
+    unsigned int ShaderEffect::GetTexCoord2Location() const
     {
         return texCoord2Location;
     }
 
-    GLuint ShaderEffect::GetMainSamplerLocation() const
+    unsigned int ShaderEffect::GetMainSamplerLocation() const
     {
         return mainSamplerLocation;
     }
 
-    GLuint ShaderEffect::GetMaskSamplerLocation() const
+    unsigned int ShaderEffect::GetMaskSamplerLocation() const
     {
         return maskSamplerLocation;
     }
 
-    GLuint ShaderEffect::GetMVPTransformLocation() const
+    unsigned int ShaderEffect::GetMVPTransformLocation() const
     {
         return mvpTransformLocation;
     }

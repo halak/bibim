@@ -9,7 +9,6 @@
 #include <Bibim/Color.h>
 #include <Bibim/GraphicsCapabilities.h>
 #include <Bibim/Rect.h>
-#include <Bibim/GLES2.h>
 #include <Bibim/Window.h>
 #include <vector>
 
@@ -45,9 +44,9 @@ namespace Bibim
 
         private:
 #           if (defined(BIBIM_PLATFORM_WINDOWS))
-            EGLDisplay eglDisplay;
-            EGLSurface eglSurface;
-            EGLContext eglContext;
+            void* eglDisplay;
+            void* eglSurface;
+            void* eglContext;
 #           endif
 
             GraphicsCapabilities capabilities;

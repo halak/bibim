@@ -53,9 +53,9 @@ namespace Bibim.Asset
         {
             string name = Storage.FindName(asset);
             if (string.IsNullOrEmpty(name) == false)
-                this.WriteBibimString(name);
+                this.WriteURI(name);
             else
-                this.WriteBibimString(string.Empty);
+                this.WriteURI(string.Empty);
         }
         #endregion
     }

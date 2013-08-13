@@ -2,6 +2,7 @@
 #if (defined(BIBIM_USE_OPENGLES2))
 
 #include <Bibim/Texture2D.GLES2.h>
+#include <Bibim/GLES2.h>
 #include <Bibim/GraphicsDevice.GLES2.h>
 
 namespace Bibim
@@ -40,7 +41,7 @@ namespace Bibim
             graphicsDevice->RemoveLostEventListener(this);
     }
 
-    void Texture2D::Setup(GLuint handle, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat)
+    void Texture2D::Setup(unsigned int handle, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat)
     {
         if (this->handle)
             glDeleteTextures(1, &this->handle);
@@ -52,12 +53,12 @@ namespace Bibim
         this->pixelFormat = pixelFormat;
     }
 
-    GLuint Texture2D::GetHandle()
+    unsigned int Texture2D::GetHandle()
     {
         return handle;
     }
 
-    void Texture2D::OnGraphicsDeviceLost(GraphicsDeviceBase* g)
+    void Texture2D::OnGraphicsDeviceLost(GraphicsDeviceBase* /*g*/)
     {
         if (handle)
         {
@@ -76,12 +77,14 @@ namespace Bibim
                 return 4;
             case A8Pixels:
                 return 1;
+            case A8A8A8A8Pixels:
+                return 4;
             default:
                 return 0;
         }
     }
 
-    GLint Texture2D::GetGLESPixelFormat(PixelFormat value)
+    int Texture2D::GetGLESPixelFormat(PixelFormat value)
     {
         switch (value)
         {
@@ -89,6 +92,8 @@ namespace Bibim
                 return GL_RGBA;
             case A8Pixels:
                 return GL_ALPHA;
+            case A8A8A8A8Pixels:
+                return GL_RGBA;
             default:
                 return GL_RGBA;
         }

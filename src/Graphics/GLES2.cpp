@@ -7,6 +7,11 @@
 
 namespace Bibim
 {
+#   if (defined(BIBIM_PLATFORM_WINDOWS) && defined(BIBIM_COMPILER_MSVC))
+#       pragma comment(lib, "libEGL.lib")
+#       pragma comment(lib, "libGLESv2.lib")
+#   endif
+
     void GLES2::CheckLastError(const char* op)
     {
         for (GLint error = glGetError(); error; error = glGetError())

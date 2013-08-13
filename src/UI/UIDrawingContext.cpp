@@ -524,10 +524,10 @@ namespace Bibim
 
                     const float tw = 1.0f / static_cast<float>(glyph->GetTexture()->GetWidth());
                     const float th = 1.0f / static_cast<float>(glyph->GetTexture()->GetHeight());
-                    RectF clippingRect = RectF(glyph->GetClippingRect().X,
-                                               glyph->GetClippingRect().Y,
-                                               glyph->GetClippingRect().Width,
-                                               glyph->GetClippingRect().Height);
+                    RectF clippingRect = RectF(glyph->GetSlot().ClippingRect.X,
+                                               glyph->GetSlot().ClippingRect.Y,
+                                               glyph->GetSlot().ClippingRect.Width,
+                                               glyph->GetSlot().ClippingRect.Height);
                     clippingRect.X *= tw;
                     clippingRect.Y *= th;
                     clippingRect.Width  *= tw;
@@ -547,9 +547,9 @@ namespace Bibim
                     };
 
                     if (geomEffect)
-                        geomEffect->DrawQuad(renderer, points, color, clippingRect, glyph->GetTexture());
+                        geomEffect->DrawQuad(renderer, points, color, clippingRect, glyph->GetSlot().Depth, glyph->GetTexture());
                     else
-                        renderer->DrawQuad(points, color, clippingRect, glyph->GetTexture());
+                        renderer->DrawQuad(points, color, clippingRect, glyph->GetSlot().Depth, glyph->GetTexture());
                 }
             }
         };

@@ -8,6 +8,7 @@
 #include <Bibim/CheckedRelease.h>
 #include <Bibim/Color.h>
 #include <Bibim/GameAssetStorage.h>
+#include <Bibim/GLES2.h>
 #include <Bibim/GraphicsDevice.GLES2.h>
 #include <Bibim/Math.h>
 #include <Bibim/Memory.h>
@@ -179,10 +180,15 @@ namespace Bibim
 
         glVertexAttribPointer(effect->GetColorLocation(), 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(Vertex), colors);
         glEnableVertexAttribArray(effect->GetColorLocation());
-
-        if (mode == ColorTextureOnlyMode || mode == AlphaTextureOnlyMode || mode == MaskedColorTextureMode || mode == MaskedAlphaTextureMode)
+		
+        if (mode == ColorTextureOnlyMode || mode == MaskedColorTextureMode)
         {
             glVertexAttribPointer(effect->GetTexCoord1Location(), 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), texCoords1);
+            glEnableVertexAttribArray(effect->GetTexCoord1Location());
+        }
+        else if (mode == AlphaTextureOnlyMode || mode == MaskedAlphaTextureMode)
+        {
+            glVertexAttribPointer(effect->GetTexCoord1Location(), 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), texCoords1);
             glEnableVertexAttribArray(effect->GetTexCoord1Location());
         }
 
@@ -241,7 +247,7 @@ namespace Bibim
         glBlendFunc(srcBlend, dstBlend);
     }
 
-    void UIRenderer::DrawArraysActually(GLenum primitiveType, PixelMode pixelMode, int numberOfVertices, Texture2D* texture, Texture2D* mask)
+    void UIRenderer::DrawArraysActually(unsigned int primitiveType, PixelMode pixelMode, int numberOfVertices, Texture2D* texture, Texture2D* mask)
     {
         BeginEffect(pixelMode);
         glActiveTexture(GL_TEXTURE0);

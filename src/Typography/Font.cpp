@@ -57,6 +57,8 @@ namespace Bibim
           parameters(*parametersPointer),
           cache(original.cache)
     {
+        if (library)
+            library->Add(this);
     }
 
     Font::~Font()

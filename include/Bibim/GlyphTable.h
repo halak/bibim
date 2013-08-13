@@ -3,6 +3,7 @@
 #define __BIBIM_GLYPHTABLE_H__
 
 #include <Bibim/FWD.h>
+#include <Bibim/GlyphSurface.h>
 #include <Bibim/Point2.h>
 #include <Bibim/Vector2.h>
 #include <map>
@@ -14,31 +15,26 @@ namespace Bibim
     {
         public:
             typedef std::map<int, const Glyph*> GlyphDictionary;
-            typedef std::vector<GlyphSurface*> SurfaceCollection;
 
         public:
-            GlyphTable(GraphicsDevice* graphicsDevice);
+            GlyphTable();
             ~GlyphTable();
 
-            const Glyph* Add(int code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, const void* buffer, int width, int height, int pitch);
+            const Glyph* Add(int code, Vector2 advance);
+            const Glyph* Add(int code, Vector2 advance, Vector2 bitmapOffset, Vector2 bitmapSize, GlyphSurface* surface, GlyphSurface::Slot slot);
 
             bool Remove(int code);
-
             void Clear();
 
             const Glyph* Find(int code) const;
 
             inline const GlyphDictionary& GetGlyphs() const;
-            inline const SurfaceCollection& GetSurfaces() const;
 
         private:
-            std::pair<GlyphSurface*, Rect> AllocateSurface(const void* buffer, int width, int height, int pitch);
-            static Point2 GetAdaptiveSurfaceSize(int numberOfExisting, int width, int height);
+            inline const Glyph* Add(int code, const Glyph* glyph);
 
         private:
-            GraphicsDevice* graphicsDevice;
             GlyphDictionary glyphs;
-            SurfaceCollection surfaces;
 
         private:
             GlyphTable(const GlyphTable&);
@@ -50,11 +46,6 @@ namespace Bibim
     const GlyphTable::GlyphDictionary& GlyphTable::GetGlyphs() const
     {
         return glyphs;
-    }
-
-    const GlyphTable::SurfaceCollection& GlyphTable::GetSurfaces() const
-    {
-        return surfaces;
     }
 }
 

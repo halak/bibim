@@ -46,18 +46,20 @@ namespace Bibim
     UIRenderer::UIRenderer()
         : Base(0x00000000),
           d3dStateBlock(nullptr),
-          d3dLine(nullptr),
           vb(nullptr),
-          ib(nullptr)
+          ib(nullptr),
+          d3dVertexDeclaration(nullptr),
+          d3dLine(nullptr)
     {
     }
 
     UIRenderer::UIRenderer(GraphicsDevice* graphicsDevice, GameAssetStorage* storage, const String& shaderEffectDirectory)
         : Base(0x00000000, graphicsDevice, storage, shaderEffectDirectory),
           d3dStateBlock(nullptr),
-          d3dLine(nullptr),
           vb(nullptr),
-          ib(nullptr)
+          ib(nullptr),
+          d3dVertexDeclaration(nullptr),
+          d3dLine(nullptr)
     {
         if (GetGraphicsDevice())
             GetGraphicsDevice()->AddLostEventListener(this);
@@ -66,9 +68,10 @@ namespace Bibim
     UIRenderer::~UIRenderer()
     {
         CheckedRelease(d3dStateBlock);
-        CheckedRelease(d3dLine);
         CheckedRelease(vb);
         CheckedRelease(ib);
+        CheckedRelease(d3dVertexDeclaration);
+        CheckedRelease(d3dLine);
 
         if (GetGraphicsDevice())
             GetGraphicsDevice()->RemoveLostEventListener(this);
@@ -77,6 +80,20 @@ namespace Bibim
     void UIRenderer::Begin()
     {
         IDirect3DDevice9* d3dDevice = GetGraphicsDevice()->GetD3DDevice();
+
+        if (d3dVertexDeclaration == nullptr)
+        {
+            const D3DVERTEXELEMENT9 ve[] = 
+            {
+                { 0, 0,  D3DDECLTYPE_FLOAT3,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+                { 0, 12, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,    0 },
+                { 0, 16, D3DDECLTYPE_FLOAT3,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+                { 0, 28, D3DDECLTYPE_FLOAT2,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
+                D3DDECL_END()
+            };
+
+            d3dDevice->CreateVertexDeclaration(ve, &d3dVertexDeclaration);
+        }
 
         if (d3dLine == nullptr)
         {
@@ -146,7 +163,7 @@ namespace Bibim
         CheckedSetSamplerState(d3dDevice, 1, D3DSAMP_SRGBTEXTURE, 0);
         // d3dDevice->EndStateBlock(&d3dStateBlock);
 
-        d3dDevice->SetFVF(VertexFVF);
+        d3dDevice->SetVertexDeclaration(d3dVertexDeclaration);
 
         Base::Begin();
     }
@@ -331,7 +348,7 @@ namespace Bibim
 
         const int ibSize = numberOfIndices * sizeof(WORD);
         IDirect3DDevice9* d3dDevice = GetGraphicsDevice()->GetD3DDevice();
-        result = d3dDevice->CreateVertexBuffer(vbSize, D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY, VertexFVF, D3DPOOL_DEFAULT, &vb, nullptr);
+        result = d3dDevice->CreateVertexBuffer(vbSize, D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY, 0, D3DPOOL_DEFAULT, &vb, nullptr);
         result = d3dDevice->CreateIndexBuffer(ibSize, D3DUSAGE_WRITEONLY, D3DFMT_INDEX16, D3DPOOL_DEFAULT, &ib, nullptr);
         if (result == D3D_OK)
         {

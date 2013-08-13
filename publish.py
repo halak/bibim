@@ -374,7 +374,7 @@ def merge_headers(directory):
     lines.append('// Automatically generated in {0}'.format(datetime.now()))
     lines.append('')
     for item in os.listdir(directory):
-        if (file_ext(item) == 'h' and 'Irrklang' not in item):
+        if (file_ext(item) == 'h' and 'Irrklang' not in item and item != 'GLES2.h'):
             lines.append('#include "{0}"'.format(item))
     lines.append('')
     lines.append('#endif')

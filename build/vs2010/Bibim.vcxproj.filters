@@ -1650,6 +1650,8 @@
     <ClInclude Include="..\..\include\Bibim\Dashboard.h">
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\BGM.h" />
+    <ClInclude Include="..\..\include\Bibim\BGM.h">
+      <Filter>03. Game\Audio</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

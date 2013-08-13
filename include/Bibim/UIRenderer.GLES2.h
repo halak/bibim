@@ -7,7 +7,6 @@
 
 #include <Bibim/UIRendererBase.h>
 #include <Bibim/BlendMode.h>
-#include <Bibim/GLES2.h>
 #include <Bibim/Rect.h>
 #include <Bibim/RectF.h>
 #include <Bibim/String.h>
@@ -46,10 +45,10 @@ namespace Bibim
             virtual void OnTransformChanged(const Matrix4& newValue);
             virtual void OnBlendModeChanged(BlendMode newValue);
 
-            inline void DrawArrays(GLenum primitiveType, int numberOfVertices);
-            inline void DrawArrays(GLenum primitiveType, int numberOfVertices, Texture2D* texture);
-            inline void DrawArrays(GLenum primitiveType, int numberOfVertices, Texture2D* texture, Texture2D* mask);
-            void DrawArraysActually(GLenum primitiveType, PixelMode pixelMode, int numberOfVertices, Texture2D* texture, Texture2D* mask);
+            inline void DrawArrays(unsigned int primitiveType, int numberOfVertices);
+            inline void DrawArrays(unsigned int primitiveType, int numberOfVertices, Texture2D* texture);
+            inline void DrawArrays(unsigned int primitiveType, int numberOfVertices, Texture2D* texture, Texture2D* mask);
+            void DrawArraysActually(unsigned int primitiveType, PixelMode pixelMode, int numberOfVertices, Texture2D* texture, Texture2D* mask);
 
         private:
             Matrix4 mvpTransform;
@@ -61,17 +60,17 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    void UIRenderer::DrawArrays(GLenum primitiveType, int numberOfVertices)
+    void UIRenderer::DrawArrays(unsigned int primitiveType, int numberOfVertices)
     {
         DrawArraysActually(primitiveType, ColorOnlyMode, numberOfVertices, nullptr, nullptr);
     }
 
-    void UIRenderer::DrawArrays(GLenum primitiveType, int numberOfVertices, Texture2D* texture)
+    void UIRenderer::DrawArrays(unsigned int primitiveType, int numberOfVertices, Texture2D* texture)
     {
         DrawArraysActually(primitiveType, ColorTextureOnlyMode, numberOfVertices, texture, nullptr);
     }
 
-    void UIRenderer::DrawArrays(GLenum primitiveType, int numberOfVertices, Texture2D* texture, Texture2D* mask)
+    void UIRenderer::DrawArrays(unsigned int primitiveType, int numberOfVertices, Texture2D* texture, Texture2D* mask)
     {
         DrawArraysActually(primitiveType, MaskedColorTextureMode, numberOfVertices, texture, mask);
     }

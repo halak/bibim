@@ -99,7 +99,6 @@
 #include "GameWindow.Mobile.h"
 #include "GameWindow.Windows.h"
 #include "Geom2D.h"
-#include "GLES2.h"
 #include "Glyph.h"
 #include "GlyphSurface.h"
 #include "GlyphTable.h"

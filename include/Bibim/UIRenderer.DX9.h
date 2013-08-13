@@ -60,9 +60,8 @@ namespace Bibim
             IDirect3DStateBlock9* d3dStateBlock;
             IDirect3DVertexBuffer9* vb;
             IDirect3DIndexBuffer9*  ib;
+            IDirect3DVertexDeclaration9* d3dVertexDeclaration;
             ID3DXLine* d3dLine;
-
-            static const DWORD VertexFVF = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX2;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

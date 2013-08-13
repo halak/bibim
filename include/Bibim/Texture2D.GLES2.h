@@ -6,7 +6,6 @@
 #if (defined(BIBIM_USE_OPENGLES2))
 
 #include <Bibim/GameAsset.h>
-#include <Bibim/GLES2.h>
 #include <Bibim/GraphicsDevice.h>
 #include <Bibim/Rect.h>
 
@@ -20,6 +19,7 @@ namespace Bibim
                 UnknownPixels,
                 A8R8G8B8Pixels,
                 A8Pixels,
+                A8A8A8A8Pixels,
             };
 
         public:
@@ -33,18 +33,18 @@ namespace Bibim
             inline int GetSurfaceHeight() const;
             inline PixelFormat GetPixelFormat() const;
 
-            virtual GLuint GetHandle();
+            virtual unsigned int GetHandle();
 
         protected:
             Texture2D(GraphicsDevice* graphicsDevice);
             Texture2D(GraphicsDevice* graphicsDevice, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
 
-            void Setup(GLuint handle, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
+            void Setup(unsigned int handle, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
 
             virtual void OnGraphicsDeviceLost(GraphicsDeviceBase* g);
 
             static int GetBytesPerPixel(PixelFormat value);
-            static GLint GetGLESPixelFormat(PixelFormat value);
+            static int GetGLESPixelFormat(PixelFormat value);
 
         private:
             GraphicsDevice* graphicsDevice;
@@ -53,7 +53,7 @@ namespace Bibim
             int surfaceWidth;
             int surfaceHeight;
             PixelFormat pixelFormat;
-            GLuint handle;
+            unsigned int handle;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
