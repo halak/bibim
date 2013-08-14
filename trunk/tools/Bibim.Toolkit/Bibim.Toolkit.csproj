@@ -51,33 +51,6 @@
     <Reference Include="LitJson">
       <HintPath>..\References\litjson-0.5.0\bin\LitJson.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Xact, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Video, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Avatar, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Net, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Microsoft.Xna.Framework.Storage, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
-      <Private>False</Private>
-    </Reference>
     <Reference Include="mscorlib">
       <Private>False</Private>
     </Reference>
@@ -307,8 +280,6 @@
     <Compile Include="ClassIDAttribute.cs" />
     <Compile Include="Collections\Generic\ReadOnlyDictionary.cs" />
     <Compile Include="FOURCC.cs" />
-    <Compile Include="Framework\GameFramework.cs" />
-    <Compile Include="Framework\GameWindow.cs" />
     <Compile Include="GameComponent.cs" />
     <Compile Include="GameModule.cs" />
     <Compile Include="GameModuleFactory.cs" />
@@ -371,6 +342,12 @@
     <Compile Include="Json\Serialization\DictionaryExtension.cs" />
     <Compile Include="Json\Serialization\JsonSerializer.cs" />
     <Compile Include="MathExtension.cs" />
+    <Compile Include="Microsoft\Xna\Framework\Color.cs" />
+    <Compile Include="Microsoft\Xna\Framework\Point.cs" />
+    <Compile Include="Microsoft\Xna\Framework\Rectangle.cs" />
+    <Compile Include="Microsoft\Xna\Framework\Vector2.cs" />
+    <Compile Include="Microsoft\Xna\Framework\Vector3.cs" />
+    <Compile Include="Microsoft\Xna\Framework\Vector4.cs" />
     <Compile Include="Point2.cs" />
     <Compile Include="Point3.cs" />
     <Compile Include="Point4.cs" />
@@ -510,6 +487,7 @@
     <Folder Include="Collision2D\" />
     <Folder Include="Diagnostics\" />
     <Folder Include="FileSystem\" />
+    <Folder Include="Framework\" />
     <Folder Include="Gameplay\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
