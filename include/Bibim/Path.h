@@ -16,6 +16,7 @@ namespace Bibim
             static inline String Combine(const String& a, const String& b, const String& c, const String& d);
             static String Combine(const String& a, const String& b, const String& c, const String& d, const String& e);
             static String GetDirectory(const String& path);
+            static String GetFileNameWithoutExtension(const String& path);
             static bool IsAbsolutePath(const String& path);
     };
 

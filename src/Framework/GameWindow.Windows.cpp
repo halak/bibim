@@ -3,11 +3,14 @@
 
 #include <Bibim/GameWindow.Windows.h>
 #include <Bibim/Log.h>
+#include <Bibim/Math.h>
 
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
 #include <windows.h>
+#include <shellapi.h>
+#include <algorithm>
 #include <vector>
 
 namespace Bibim
@@ -29,6 +32,7 @@ namespace Bibim
     GameWindow::~GameWindow()
     {
         Close();
+        BBAssert(dropFileEventListeners.empty());
     }
 
     void GameWindow::MoveToScreenCenter()
@@ -174,6 +178,40 @@ namespace Bibim
         return nullptr;
     }
 
+    void GameWindow::AddDropFileEventListener(DropFileEventListener* listener)
+    {
+        std::vector<DropFileEventListener*>::iterator it = std::find(dropFileEventListeners.begin(),
+                                                                     dropFileEventListeners.end(),
+                                                                     listener);
+        if (it == dropFileEventListeners.end())
+        {
+            if (dropFileEventListeners.empty() && handle)
+                ::DragAcceptFiles(static_cast<HWND>(handle), TRUE);
+
+            dropFileEventListeners.push_back(listener);
+        }
+    }
+
+    void GameWindow::RemoveDropFileEventListener(DropFileEventListener* listener)
+    {
+        std::vector<DropFileEventListener*>::iterator it = std::find(dropFileEventListeners.begin(),
+                                                                     dropFileEventListeners.end(),
+                                                                     listener);
+        if (it != dropFileEventListeners.end())
+        {
+            dropFileEventListeners.erase(it);
+
+            if (dropFileEventListeners.empty() && handle)
+                ::DragAcceptFiles(static_cast<HWND>(handle), FALSE);
+        }
+    }
+
+    void GameWindow::RaiseDropFileEvent(const char* filename)
+    {
+        for (std::vector<DropFileEventListener*>::iterator it = dropFileEventListeners.begin(); it != dropFileEventListeners.end(); it++)
+            (*it)->OnWindowFileDropped(this, filename);
+    }
+
     void GameWindow::OnCreated()
     {
     }
@@ -216,6 +254,8 @@ namespace Bibim
         handle = static_cast<void*>(::CreateWindowEx(0x00000000, ClassName, "", WS_OVERLAPPEDWINDOW,
                                                      CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
                                                      nullptr, nullptr, GetModuleHandle(nullptr), this));
+
+        ::DragAcceptFiles(static_cast<HWND>(handle), !dropFileEventListeners.empty());
     }
 
     static const char* INSTANCE_NAME = "inst";
@@ -332,6 +372,27 @@ namespace Bibim
                             o->RaiseResizedEvent();
                         }
                     }
+                }
+                return 0;
+            case WM_DROPFILES:
+                {
+                    HDROP dropHandle = reinterpret_cast<HDROP>(wParam);
+                    const int count = static_cast<int>(::DragQueryFile(dropHandle, 0xFFFFFFFF, nullptr, 0));
+
+                    int maxLength = 0;
+                    for (int i = 0; i < count; i++)
+                        maxLength = Math::Max(maxLength, static_cast<int>(::DragQueryFile(dropHandle, i, nullptr, 0)));
+
+                    std::vector<char> filename(maxLength);
+
+                    GameWindow* o = GetGameWindow(windowHandle);
+                    for (int i = 0; i < count; i++)
+                    {
+                        ::DragQueryFile(dropHandle, i, &filename[0], maxLength);
+                        o->RaiseDropFileEvent(&filename[0]);
+                    }
+
+                    ::DragFinish(dropHandle);
                 }
                 return 0;
             case WM_CREATE:

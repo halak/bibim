@@ -88,6 +88,14 @@ namespace Bibim
         return nullptr;
     }
 
+    void GameWindow::AddDropFileEventListener(DropFileEventListener* /*listener*/)
+    {
+    }
+
+    void GameWindow::RemoveDropFileEventListener(DropFileEventListener* /*listener*/)
+    {
+    }
+
     void GameWindow::OnCreated()
     {
     }

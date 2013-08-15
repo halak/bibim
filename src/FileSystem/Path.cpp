@@ -37,7 +37,29 @@ namespace Bibim
         if (directoryIndex == -1)
             directoryIndex = path.ReverseFind('\\');
         
-        return path.Substring(0, directoryIndex);
+        if (directoryIndex != -1)
+            return path.Substring(0, directoryIndex);
+        else
+            return String::Empty;
+    }
+
+    String Path::GetFileNameWithoutExtension(const String& path)
+    {
+        int directoryIndex = path.ReverseFind('/');
+        if (directoryIndex == -1)
+            directoryIndex = path.ReverseFind('\\');
+
+        int extensionIndex = path.ReverseFind('.');
+        if (extensionIndex < directoryIndex)
+            extensionIndex = -1;
+
+        if (extensionIndex != -1)
+        {
+            directoryIndex++;
+            return path.Substring(directoryIndex, extensionIndex - directoryIndex);
+        }
+        else
+            return path.Substring(directoryIndex + 1);
     }
 
     bool Path::IsAbsolutePath(const String& path)

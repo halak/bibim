@@ -12,6 +12,16 @@ namespace Bibim
 {
     class GameWindow : public Window
     {
+        BBModuleClass(GameWindow, Window, 'G', 'W', 'I', 'N');
+        public:
+            class DropFileEventListener
+            {
+                public:
+                    virtual ~DropFileEventListener() { }
+
+                    virtual void OnWindowFileDropped(Window* window, const char* filename) = 0;
+            };
+
         public:
             GameWindow();
 
@@ -39,6 +49,12 @@ namespace Bibim
             virtual void* GetHandle() const;
             virtual void* GetDisplayHandle() const;
 
+            void AddDropFileEventListener(DropFileEventListener* listener);
+            void RemoveDropFileEventListener(DropFileEventListener* listener);
+
+        public:
+            void RaiseDropFileEvent(const char* filename);
+
         protected:
             virtual ~GameWindow();
 
@@ -59,6 +75,8 @@ namespace Bibim
             Point2 size;
             bool visible;
             bool isUserSizing;
+
+            std::vector<DropFileEventListener*> dropFileEventListeners;
 
             struct Internal;
     };

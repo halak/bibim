@@ -26,7 +26,7 @@ namespace Bibim.Asset.Pipeline
         public GameAssetKitchen(GameAssetStorage storage)
         {
             Storage = storage;
-            LoadEmbeddedRecipes();
+            LoadBuiltinRecipes();
         }
         #endregion
 
@@ -86,13 +86,13 @@ namespace Bibim.Asset.Pipeline
             {
                 var data = JsonSerializer.DeserializeData(fs) as Dictionary<string, object>;
                 if (data != null)
-                    recipe = CreateEmbeddedRecipe(absolutePath, data);
+                    recipe = CreateBuiltinRecipe(absolutePath, data);
 
                 if (recipe != null)
                     return recipe;
             }
 
-            recipe = FindEmbeddedRecipe(absolutePath);
+            recipe = FindBuiltinRecipe(absolutePath);
             if (recipe != null)
                 return recipe;
             else

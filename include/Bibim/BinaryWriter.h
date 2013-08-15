@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __BIBIM_STREAMWRITER_H__
-#define __BIBIM_STREAMWRITER_H__
+#ifndef __BIBIM_BINARYWRITER_H__
+#define __BIBIM_BINARYWRITER_H__
 
 #include <Bibim/FWD.h>
 #include <Bibim/Color.h>
