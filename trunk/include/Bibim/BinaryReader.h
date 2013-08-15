@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __BIBIM_STREAMREADER_H__
-#define __BIBIM_STREAMREADER_H__
+#ifndef __BIBIM_BINARYREADER_H__
+#define __BIBIM_BINARYREADER_H__
 
 #include <Bibim/FWD.h>
 #include <Bibim/Color.h>

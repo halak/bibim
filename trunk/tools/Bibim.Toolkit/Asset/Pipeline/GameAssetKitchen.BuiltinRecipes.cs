@@ -10,20 +10,20 @@ namespace Bibim.Asset.Pipeline
 	public sealed partial class GameAssetKitchen
 	{
         private List<string> extensionPriorities;
-        private Dictionary<string, GameAssetRecipe> embeddedRecipes;
+        private Dictionary<string, GameAssetRecipe> builtinRecipes;
 
-        private GameAssetRecipe FindEmbeddedRecipe(string path)
+        private GameAssetRecipe FindBuiltinRecipe(string path)
         {
             string firstExtension = GuessFirstExtension(path);
 
             GameAssetRecipe recipe = null;
-            if (embeddedRecipes.TryGetValue(firstExtension, out recipe))
+            if (builtinRecipes.TryGetValue(firstExtension, out recipe))
                 return recipe;
             else
                 return null;
         }
 
-        private GameAssetRecipe CreateEmbeddedRecipe(string path, Dictionary<string, object> data)
+        private GameAssetRecipe CreateBuiltinRecipe(string path, Dictionary<string, object> data)
         {
             string firstExtension = GuessFirstExtension(path).ToLower();
             string usage = (data.Get<string>("usage") ?? string.Empty).ToLower();
@@ -64,6 +64,8 @@ namespace Bibim.Asset.Pipeline
                         data.Get<string>("base") ?? "UI.glsl",
                         data.Get<string>("defines") ?? string.Empty
                     );
+                case "hex":
+                    return CreateHexRecipe(data.Get<string>("data") ?? string.Empty);
             }
 
             string read = data.Get<string>("read");
@@ -91,14 +93,14 @@ namespace Bibim.Asset.Pipeline
             return extensions[0];
         }
 
-        private void LoadEmbeddedRecipes()
+        private void LoadBuiltinRecipes()
         {
             extensionPriorities = new List<string>()
             {
                 "png", "jpg", "psd", "lua", "ttf",
             };
 
-            embeddedRecipes = new Dictionary<string, GameAssetRecipe>()
+            builtinRecipes = new Dictionary<string, GameAssetRecipe>()
             {
                 { "lua", CreateLuaRecipe() },
                 { "ttf", CreateStreamingAssetRecipe("ttf") },
@@ -127,6 +129,11 @@ namespace Bibim.Asset.Pipeline
         private static GameAssetRecipe CreateStreamingAssetRecipe(string extension)
         {
             return Wrap(new LoadStreamingAsset(string.Format("$(AssetName).{0}", extension)));
+        }
+
+        private static GameAssetRecipe CreateHexRecipe(string data)
+        {
+            return Wrap(new CompileHexData(data));
         }
 
         private static GameAssetRecipe CreateTextureRecipe(bool forceOpaque = false)
