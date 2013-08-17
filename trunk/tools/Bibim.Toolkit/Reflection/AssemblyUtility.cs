@@ -22,6 +22,9 @@ namespace Bibim.Reflection
 
             foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
+                if (assembly.IsDynamic)
+                    continue;
+
                 foreach (Type item in assembly.GetExportedTypes())
                 {
                     if (creatableOnly && item.IsAbstract)
