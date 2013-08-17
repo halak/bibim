@@ -22,24 +22,27 @@ namespace Bibim.Reflection
 
             foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                if (assembly.IsDynamic)
-                    continue;
-
-                foreach (Type item in assembly.GetExportedTypes())
+                try
                 {
-                    if (creatableOnly && item.IsAbstract)
-                        continue;
-
-                    if (item.IsClass &&
-                        item.IsPublic &&
-                        item.IsSubclassOf(baseClass))
+                    foreach (Type item in assembly.GetExportedTypes())
                     {
-                        if (emptyConstructorOnly &&
-                            item.GetConstructor(emptyTypes) == null)
+                        if (creatableOnly && item.IsAbstract)
                             continue;
 
-                        result.Add(item);
+                        if (item.IsClass &&
+                            item.IsPublic &&
+                            item.IsSubclassOf(baseClass))
+                        {
+                            if (emptyConstructorOnly &&
+                                item.GetConstructor(emptyTypes) == null)
+                                continue;
+
+                            result.Add(item);
+                        }
                     }
+                }
+                catch (Exception)
+                {
                 }
             }
 
