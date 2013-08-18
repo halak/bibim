@@ -110,9 +110,6 @@ namespace Bibim.Bab.Consoles
                 {
                     switch (command.ToLower())
                     {
-                        case "clear":
-                        case "cls":
-                            break;
                         case "exit":
                             closed = true;
                             break;

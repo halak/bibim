@@ -114,6 +114,11 @@ namespace Bibim.Bab
         #endregion
 
         #region Methods
+        public void ClearScreen()
+        {
+            listBoxLogs.Items.Clear();
+        }
+
         private void OnProgramEnded()
         {
             textBoxCommand.IsEnabled = false;
@@ -160,8 +165,8 @@ namespace Bibim.Bab
             textBoxCommand.Focus();
 
             realtimeConsoleCommands = new SortedSet<string>();
-            //foreach (string item in Settings.Default.ConsoleCommands)
-            //    realtimeConsoleCommands.Add(item);
+            foreach (string item in Settings.Default.ConsoleCommands)
+                realtimeConsoleCommands.Add(item);
 
             consoleCommandACM = new AutoCompleteManager(textBoxCommand);
             consoleCommandACM.DataProvider = new SimpleStaticDataProvider(realtimeConsoleCommands);
@@ -178,6 +183,14 @@ namespace Bibim.Bab
                 realtimeConsoleCommands.Add(command);
             }
 
+            switch (command.ToLower())
+            {
+                case "clear":
+                case "cls":
+                    ClearScreen();
+                    break;
+            }
+
             CommandQueue.Enqueue(command);
             textBoxCommand.Focus();
             textBoxCommand.Text = string.Empty;
@@ -185,7 +198,7 @@ namespace Bibim.Bab
 
         private void buttonClear_Click(object sender, RoutedEventArgs e)
         {
-            listBoxLogs.Items.Clear();
+            ClearScreen();
         }
 
         private void listBoxLogs_KeyDown(object sender, KeyEventArgs e)

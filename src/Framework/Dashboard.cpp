@@ -17,12 +17,14 @@
 namespace Bibim
 {
     Dashboard::Dashboard()
+        : fontRevision(-1)
     {
         Log::Add(this);
         Construct(IPEndPoint(IPEndPoint::Localhost, 51893));
     }
 
     Dashboard::Dashboard(IPEndPoint endPoint)
+        : fontRevision(-1)
     {
         Log::Add(this);
         Construct(endPoint);
@@ -115,6 +117,16 @@ namespace Bibim
 
         if (notifications.empty() == false)
         {
+            if (fontRevision != font->GetRevision())
+            {
+                fontRevision = font->GetRevision();
+                for (NotificationCollection::iterator it = notifications.begin(); it != notifications.end(); it++)
+                {
+                    FontString& text = (*it).Text;
+                    text = FontString(text.GetFont(), text.GetText());
+                }
+            }
+
             static const Vector2 MARGIN = Vector2(10.0f, 15.0f);
 
             RectF bounds = context.GetCurrentBounds();
