@@ -162,15 +162,16 @@ namespace Bibim.Bab
 
         private void consoleWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            textBoxCommand.Focus();
-
             realtimeConsoleCommands = new SortedSet<string>();
+            /*
             foreach (string item in Settings.Default.ConsoleCommands)
                 realtimeConsoleCommands.Add(item);
-
+            */
             consoleCommandACM = new AutoCompleteManager(textBoxCommand);
             consoleCommandACM.DataProvider = new SimpleStaticDataProvider(realtimeConsoleCommands);
             consoleCommandACM.AutoAppend = true;
+
+            textBoxCommand.Focus();
         }
 
         private void buttonCommand_Click(object sender, RoutedEventArgs e)
