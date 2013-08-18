@@ -21,23 +21,29 @@ namespace Bibim.Scripting
 
             foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                foreach (Type item in assembly.GetExportedTypes())
+                try
                 {
-                    if (item.IsDefined(typeof(ScriptNativeLibraryAttribute), false) == false)
-                        continue;
-
-                    foreach (MethodInfo method in item.GetMethods())
+                    foreach (Type item in assembly.GetExportedTypes())
                     {
-                        if (method.IsDefined(typeof(ScriptNativeFunctionAttribute), false) == false)
+                        if (item.IsDefined(typeof(ScriptNativeLibraryAttribute), false) == false)
                             continue;
 
-                        Debug.Assert(method.IsStatic);
-                        Debug.Assert(method.ReturnType == typeof(void));
-                        Debug.Assert(method.GetParameters().Length == 1);
-                        Debug.Assert(method.GetParameters()[0].ParameterType == typeof(ScriptingContext));
+                        foreach (MethodInfo method in item.GetMethods())
+                        {
+                            if (method.IsDefined(typeof(ScriptNativeFunctionAttribute), false) == false)
+                                continue;
 
-                        functions.Add(method.Name, (ScriptNativeFunction)Delegate.CreateDelegate(typeof(ScriptNativeFunction), method));
+                            Debug.Assert(method.IsStatic);
+                            Debug.Assert(method.ReturnType == typeof(void));
+                            Debug.Assert(method.GetParameters().Length == 1);
+                            Debug.Assert(method.GetParameters()[0].ParameterType == typeof(ScriptingContext));
+
+                            functions.Add(method.Name, (ScriptNativeFunction)Delegate.CreateDelegate(typeof(ScriptNativeFunction), method));
+                        }
                     }
+                }
+                catch (Exception)
+                {
                 }
             }
         }

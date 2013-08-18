@@ -863,13 +863,19 @@ namespace Bibim.Json.Serialization
                 {
                     foreach (var item in AppDomain.CurrentDomain.GetAssemblies())
                     {
-                        foreach (var t in item.GetExportedTypes())
+                        try
                         {
-                            if (t.FullName == fullName || t.AssemblyQualifiedName == fullName)
+                            foreach (var t in item.GetExportedTypes())
                             {
-                                nameTypeDictionary.Add(fullName, t);
-                                return t;
+                                if (t.FullName == fullName || t.AssemblyQualifiedName == fullName)
+                                {
+                                    nameTypeDictionary.Add(fullName, t);
+                                    return t;
+                                }
                             }
+                        }
+                        catch (Exception)
+                        {
                         }
                     }
                 }
