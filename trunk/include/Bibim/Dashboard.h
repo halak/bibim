@@ -57,6 +57,7 @@ namespace Bibim
             StreamPtr socketStream;
 
             FontPtr font;
+            int fontRevision;
             NotificationCollection notifications;
 
             std::ostringstream stringstream;
