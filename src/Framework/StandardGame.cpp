@@ -365,11 +365,6 @@ namespace Bibim
             ReloadUI();
             return true;
         }
-        else if (keyboard.Contains(Key::F3))
-        {
-            Log::Error("HELLO HELLO HELLO");
-            return true;
-        }
         else if (keyboard.Contains(Key::Alt) && keyboard.Contains(Key::Enter))
         {
             GetGraphicsDevice()->SetFullscreen(!GetGraphicsDevice()->GetFullscreen());
