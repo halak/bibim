@@ -47,6 +47,14 @@ namespace Bibim
                 Collasped,
             };
 
+            class DestructionListener
+            {
+                public:
+                    virtual ~DestructionListener() { }
+
+                    virtual void OnVisualDestruected(UIVisual* visual) = 0;
+            };
+
         public:
             UIVisual();
             virtual ~UIVisual();
@@ -135,6 +143,9 @@ namespace Bibim
             inline bool GetFocusable() const;
             inline void SetFocusable(bool value);
 
+            inline bool GetDraggable() const;
+            inline void SetDraggable(bool value);
+
             inline UIEventMap* GetEventMap() const;
             void SetEventMap(UIEventMap* value);
 
@@ -172,6 +183,8 @@ namespace Bibim
 
             virtual void OnFocused();
             virtual void OnBlured();
+            virtual void OnDragBegan();
+            virtual void OnDragEnded();
             virtual void OnParentChanged(UIPanel* old);
 
             virtual bool OnKeyDown(const UIKeyboardEventArgs& args);
@@ -195,6 +208,7 @@ namespace Bibim
             inline void SetBounds(float x, float y, float width, float height);
 
             void Focus(UIDomain* value);
+            void Drag(UIDomain* value);
             void SetParent(UIPanel* value);
 
             void RaiseKeyDownEvent(const UIKeyboardEventArgs& args);
@@ -219,6 +233,7 @@ namespace Bibim
         private:
             static const byte PICKALBE_BITFIELD  = (1<<0);
             static const byte FOCUSABLE_BITFIELD = (1<<1);
+            static const byte DRAGGABLE_BITFIELD = (1<<2);
             static const byte DEFAULT_FLAGS = PICKALBE_BITFIELD;
 
         private:
@@ -498,6 +513,19 @@ namespace Bibim
             flags |= FOCUSABLE_BITFIELD;
         else
             flags &= ~FOCUSABLE_BITFIELD;
+    }
+
+    bool UIVisual::GetDraggable() const
+    {
+        return (flags & DRAGGABLE_BITFIELD) != 0x00;
+    }
+
+    void UIVisual::SetDraggable(bool value)
+    {
+        if (value)
+            flags |= DRAGGABLE_BITFIELD;
+        else
+            flags &= ~DRAGGABLE_BITFIELD;
     }
 
     UIEventMap* UIVisual::GetEventMap() const

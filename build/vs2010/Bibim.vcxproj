@@ -232,6 +232,7 @@
     <ClCompile Include="..\..\src\UI\UIElement.cpp" />
     <ClCompile Include="..\..\src\UI\UIEllipse.cpp" />
     <ClCompile Include="..\..\src\UI\UILayout.cpp" />
+    <ClCompile Include="..\..\src\UI\UILiveWindow.cpp" />
     <ClCompile Include="..\..\src\UI\UIRenderer.DX9.cpp" />
     <ClCompile Include="..\..\src\UI\UIRenderer.GLES2.cpp" />
     <ClCompile Include="..\..\src\UI\UIRendererBase.cpp" />
@@ -441,6 +442,7 @@
     <ClInclude Include="..\..\include\Bibim\SegmentShape2D.h" />
     <ClInclude Include="..\..\include\Bibim\Shape2D.h" />
     <ClInclude Include="..\..\include\Bibim\SphereShape2D.h" />
+    <ClInclude Include="..\..\include\Bibim\UILiveWindow.h" />
     <ClInclude Include="..\..\include\Bibim\UserShape2D.h" />
     <ClInclude Include="..\..\include\Bibim\BatchCommand.h" />
     <ClInclude Include="..\..\include\Bibim\Command.h" />

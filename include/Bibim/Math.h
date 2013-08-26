@@ -87,7 +87,9 @@ namespace Bibim
             static inline int     Clamp(int value, int min, int max);             ///< value를 [min, max] 범위에 맞춰 반환합니다.
             static inline longint Clamp(longint value, longint min, longint max); ///< value를 [min, max] 범위에 맞춰 반환합니다.
             static inline float   Clamp(float value, float min, float max);       ///< value를 [min, max] 범위에 맞춰 반환합니다.
+            static inline float   Clamp(float value);                             ///< value를 [0, 1] 범위에 맞춰 반환합니다.
             static inline double  Clamp(double value, double min, double max);    ///< value를 [min, max] 범위에 맞춰 반환합니다.
+            static inline double  Clamp(double value);                            ///< value를 [0, 1] 범위에 맞춰 반환합니다.
 
             static float  Mod(float a, float b);
             static double Mod(double a, double b);
@@ -326,9 +328,19 @@ namespace Bibim
         return value < min ? min : (value > max ? max : value);
     }
 
+    float Math::Clamp(float value)
+    {
+        return Clamp(value, 0.0f, 1.0f);
+    }
+
     double Math::Clamp(double value, double min, double max)
     {
         return value < min ? min : (value > max ? max : value);
+    }
+
+    double Math::Clamp(double value)
+    {
+        return Clamp(value, 0.0, 1.0);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

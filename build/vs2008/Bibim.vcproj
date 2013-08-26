@@ -889,10 +889,6 @@
 				Name="UI"
 				>
 				<File
-					RelativePath="..\..\include\Bibim\UI.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\UI\UIDomain.cpp"
 					>
 				</File>
@@ -1257,6 +1253,14 @@
 					</File>
 					<File
 						RelativePath="..\..\include\Bibim\UILabel.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\UI\UILiveWindow.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\include\Bibim\UILiveWindow.h"
 						>
 					</File>
 					<File
