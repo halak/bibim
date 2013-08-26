@@ -10,15 +10,13 @@ namespace Bibim
     BBImplementsComponent(UILiveWindow);
     
     UILiveWindow::UILiveWindow()
-        : layoutSnapTime(0.0f),
-          isLive(false)
+        : layoutSnapTime(0.0f)
     {
     }
 
     UILiveWindow::UILiveWindow(int childrenCapacity)
         : UIWindow(childrenCapacity),
-          layoutSnapTime(0.0f),
-          isLive(false)
+          layoutSnapTime(0.0f)
     {
     }
 
@@ -48,14 +46,11 @@ namespace Bibim
         }
 
         layoutSnapTime = Clock::GetCurrent();
-        isLive = true;
-
-        // TODO: sort layoutSnapshots
     }
     
     void UILiveWindow::OnDraw(UIDrawingContext& context)
     {
-        if (isLive == false)
+        if (layoutSnapshots.empty())
         {
             Base::OnDraw(context);
             return;
@@ -93,7 +88,7 @@ namespace Bibim
         }
  
         if (t >= 1.0f)
-            isLive = false;
+            layoutSnapshots.clear();
     }
 
     const UILiveWindow::LayoutSnapshot* UILiveWindow::FindLayoutSnapshot(UIVisual* item) const
