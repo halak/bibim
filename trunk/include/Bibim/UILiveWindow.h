@@ -37,7 +37,6 @@ namespace Bibim
         private:
             std::vector<LayoutSnapshot> layoutSnapshots;
             float layoutSnapTime;
-            bool isLive;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
