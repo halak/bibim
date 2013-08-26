@@ -390,6 +390,14 @@ namespace Bibim
     {
     }
 
+    void UIVisual::OnDragBegan()
+    {
+    }
+
+    void UIVisual::OnDragEnded()
+    {
+    }
+
     void UIVisual::OnParentChanged(UIPanel* /*old*/)
     {
     }

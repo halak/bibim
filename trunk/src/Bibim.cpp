@@ -1,4 +1,4 @@
-// Automatically generated in 2013-08-02 22:56:57.040000
+// Automatically generated in 2013-08-27 00:06:32.266000
 
 #include <zlib.h>
 #include "Animation/Ease.cpp"
@@ -76,6 +76,7 @@
 #include "Framework/Clipboard.Android.cpp"
 #include "Framework/Clipboard.iOS.cpp"
 #include "Framework/Clipboard.Windows.cpp"
+#include "Framework/Dashboard.cpp"
 #include "Framework/GameFramework.Android.cpp"
 #include "Framework/GameFramework.iOS.cpp"
 #include "Framework/GameFramework.Windows.cpp"
@@ -195,6 +196,7 @@
 #include "UI/UIKeyboardEventDispatcher.cpp"
 #include "UI/UILabel.cpp"
 #include "UI/UILayout.cpp"
+#include "UI/UILiveWindow.cpp"
 #include "UI/UIMaskEffect.cpp"
 #include "UI/UIMouseButtonEventArgs.cpp"
 #include "UI/UIMouseEventArgs.cpp"

@@ -828,6 +828,9 @@
     <ClCompile Include="..\..\src\Framework\Dashboard.cpp">
       <Filter>03. Game\Framework</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\UI\UILiveWindow.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Bibim\AssetLoadingTask.h">
@@ -1652,6 +1655,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\BGM.h">
       <Filter>03. Game\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\UILiveWindow.h">
+      <Filter>03. Game\UI\Visuals</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -293,6 +293,7 @@ namespace Bibim
                         BBForwardDeclareSmartPointerClass(UIDocument);
                         BBForwardDeclareSmartPointerClass(UIScrollablePanel);
                         BBForwardDeclareSmartPointerClass(UIWindow);
+                            BBForwardDeclareSmartPointerClass(UILiveWindow);
                     BBForwardDeclareSmartPointerClass(UISprite);
                     BBForwardDeclareSmartPointerClass(UIShape);
                         BBForwardDeclareSmartPointerClass(UIEllipse);

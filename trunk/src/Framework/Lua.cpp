@@ -740,6 +740,10 @@ namespace Bibim
             lua_tinker::class_def<UISpark>(L, "SetTimeline", &UISpark::SetTimeline);
             lua_tinker::class_def<UISpark>(L, "GetAutoRemove", &UISpark::GetAutoRemove);
             lua_tinker::class_def<UISpark>(L, "SetAutoRemove", &UISpark::SetAutoRemove);
+        lua_tinker::class_add<UILiveWindow>(L, "UILiveWindow");
+            lua_tinker::class_inh<UILiveWindow, UIWindow>(L);
+            lua_tinker::class_con<UILiveWindow>(L, lua_tinker::constructor<UILiveWindow>);
+            lua_tinker::class_def<UILiveWindow>(L, "SnapLayout", &UILiveWindow::SnapLayout);
 
         lua_tinker::class_add<UIGeometryEffect>(L, "UIGeometryEffect");
             lua_tinker::class_inh<UIGeometryEffect, UIElement>(L);
