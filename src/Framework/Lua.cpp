@@ -571,11 +571,14 @@ namespace Bibim
             lua_tinker::class_def<UIVisual>(L, "SetPickable", &UIVisual::SetPickable);
             lua_tinker::class_def<UIVisual>(L, "GetFocusable", &UIVisual::GetFocusable);
             lua_tinker::class_def<UIVisual>(L, "SetFocusable", &UIVisual::SetFocusable);
+            lua_tinker::class_def<UIVisual>(L, "GetDraggable", &UIVisual::GetDraggable);
+            lua_tinker::class_def<UIVisual>(L, "SetDraggable", &UIVisual::SetDraggable);
             lua_tinker::class_def<UIVisual>(L, "GetEventMap", &UIVisual::GetEventMap);
             lua_tinker::class_def<UIVisual>(L, "GetTransform", &UIVisual::GetTransform);
             lua_tinker::class_def<UIVisual>(L, "SetTransform", &UIVisual::SetTransform);
             lua_tinker::class_def<UIVisual>(L, "GetParent", &UIVisual::GetParent);
             lua_tinker::class_def<UIVisual>(L, "IsVisible", &UIVisual::IsVisible);
+            lua_tinker::class_def<UIVisual>(L, "IsDragging", &UIVisual::IsDragging);
             lua_tinker::class_def<UIVisual>(L, "IsPanel", &UIVisual::IsPanel);
             lua_tinker::class_def<UIVisual>(L, "IsWindow", &UIVisual::IsWindow);
         lua_tinker::class_add<UIImage>(L, "UIImage");

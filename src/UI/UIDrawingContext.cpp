@@ -884,10 +884,10 @@ namespace Bibim
                 for (int i = 0; i < count; i++, r += increment)
                 {
                     (*p++) = boundsCenter;
-                    (*p++) = Vector2(center.X + (radius * Math::Sin(r + increment)),
-                                     center.Y + (radius * Math::Cos(r + increment)));
                     (*p++) = Vector2(center.X + (radius * Math::Sin(r)),
                                      center.Y + (radius * Math::Cos(r)));
+                    (*p++) = Vector2(center.X + (radius * Math::Sin(r + increment)),
+                                     center.Y + (radius * Math::Cos(r + increment)));
                 }
 
                 return p;

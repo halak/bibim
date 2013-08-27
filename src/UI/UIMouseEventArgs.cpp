@@ -7,6 +7,7 @@ namespace Bibim
         : UIEventArgs(),
           dispatcher(nullptr),
           position(Point2::Zero),
+          movement(Point2::Zero),
           isLeftButtonPressed(false),
           isRightButtonPressed(false),
           isMiddleButtonPressed(false)
@@ -17,26 +18,29 @@ namespace Bibim
         : UIEventArgs(target),
           dispatcher(dispatcher),
           position(Point2::Zero),
+          movement(Point2::Zero),
           isLeftButtonPressed(false),
           isRightButtonPressed(false),
           isMiddleButtonPressed(false)
     {
     }
 
-    UIMouseEventArgs::UIMouseEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target, Point2 position)
+    UIMouseEventArgs::UIMouseEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target, Point2 position, Point2 movement)
         : UIEventArgs(target),
           dispatcher(dispatcher),
           position(position),
+          movement(movement),
           isLeftButtonPressed(false),
           isRightButtonPressed(false),
           isMiddleButtonPressed(false)
     {
     }
 
-    UIMouseEventArgs::UIMouseEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target, Point2 position, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed)
+    UIMouseEventArgs::UIMouseEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target, Point2 position, Point2 movement, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed)
         : UIEventArgs(target),
           dispatcher(dispatcher),
           position(position),
+          movement(movement),
           isLeftButtonPressed(isLeftButtonPressed),
           isRightButtonPressed(isRightButtonPressed),
           isMiddleButtonPressed(isMiddleButtonPressed)
@@ -47,6 +51,7 @@ namespace Bibim
         : UIEventArgs(original),
           dispatcher(original.dispatcher),
           position(original.position),
+          movement(original.movement),
           isLeftButtonPressed(original.isLeftButtonPressed),
           isRightButtonPressed(original.isRightButtonPressed),
           isMiddleButtonPressed(original.isMiddleButtonPressed)

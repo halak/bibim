@@ -57,7 +57,7 @@ namespace Bibim
 
         float offsetX = 0.0f;
         float offsetY = 0.0f;
-        switch (xMode)
+        switch (GetXMode())
         {
             case AbsolutePosition:
                 offsetX = x;
@@ -67,7 +67,7 @@ namespace Bibim
                 break;
         }
 
-        switch (yMode)
+        switch (GetYMode())
         {
             case AbsolutePosition:
                 offsetY = y;
@@ -77,7 +77,7 @@ namespace Bibim
                 break;
         }
 
-        switch (widthMode)
+        switch (GetWidthMode())
         {
             case AbsoluteSize:
                 result.Width = width;
@@ -93,7 +93,7 @@ namespace Bibim
                 break;
         }
 
-        switch (heightMode)
+        switch (GetHeightMode())
         {
             case AbsoluteSize:
                 result.Height = height;
@@ -109,7 +109,7 @@ namespace Bibim
                 break;
         }
 
-        switch (anchorPoint)
+        switch (GetAnchorPoint())
         {
             case LeftTop:
                 result.X = bounds.GetLeft() + offsetX;
@@ -344,6 +344,7 @@ namespace Bibim
         zOrder = reader.ReadByte();
         SetPickable(reader.ReadBool());
         SetFocusable(reader.ReadBool());
+        SetDraggable(reader.ReadBool());
         eventMap = static_cast<UIEventMap*>(reader.ReadComponent());
         effectMap = static_cast<UIEffectMap*>(reader.ReadComponent());
         transform = static_cast<UITransform*>(reader.ReadComponent());
@@ -390,11 +391,15 @@ namespace Bibim
     {
     }
 
-    void UIVisual::OnDragBegan()
+    void UIVisual::OnDragged()
     {
     }
 
-    void UIVisual::OnDragEnded()
+    void UIVisual::OnDragging()
+    {
+    }
+
+    void UIVisual::OnDropped()
     {
     }
 
@@ -425,9 +430,21 @@ namespace Bibim
     {
     }
 
-    bool UIVisual::OnMouseMove(const UIMouseEventArgs& /*args*/)
+    bool UIVisual::OnMouseMove(const UIMouseEventArgs& args)
     {
-        return false;
+        if (IsDragging())
+        {
+            if (GetXMode() == AbsolutePosition)
+                SetX(GetX() + static_cast<float>(args.GetMovementX()));
+            if (GetYMode() == AbsolutePosition)
+                SetY(GetY() + static_cast<float>(args.GetMovementY()));
+
+            RaiseDraggingEvent(UIEventArgs(this));
+
+            return true;
+        }
+        else
+            return false;
     }
 
     bool UIVisual::OnMouseClick(const UIMouseEventArgs& /*args*/)
@@ -435,14 +452,30 @@ namespace Bibim
         return false;
     }
 
-    bool UIVisual::OnMouseButtonDown(const UIMouseButtonEventArgs& /*args*/)
+    bool UIVisual::OnMouseButtonDown(const UIMouseButtonEventArgs& args)
     {
-        return false;
+        if (GetDraggable() &&
+            args.GetButtonCode() == Key::MouseLeftButton &&
+            (GetXMode() == AbsolutePosition || GetYMode() == AbsolutePosition))
+        {
+            SetDragging(true);
+            RaiseDraggedEvent(UIEventArgs(this));
+            return true;
+        }
+        else
+            return false;
     }
 
-    bool UIVisual::OnMouseButtonUp(const UIMouseButtonEventArgs& /*args*/)
+    bool UIVisual::OnMouseButtonUp(const UIMouseButtonEventArgs& args)
     {
-        return false;
+        if (GetDraggable() && IsDragging() && args.GetButtonCode() == Key::MouseLeftButton)
+        {
+            SetDragging(false);
+            RaiseDroppedEvent(UIEventArgs(this));
+            return true;
+        }
+        else
+            return false;
     }
 
     bool UIVisual::OnMouseButtonPressing(const UIMouseButtonEventArgs& /*args*/)
@@ -589,6 +622,27 @@ namespace Bibim
             eventMap->RaiseEvent(UIEventID::Blured, args);
     }
 
+    void UIVisual::RaiseDraggedEvent(const UIEventArgs& args)
+    {
+        OnDragged();
+        if (eventMap)
+            eventMap->RaiseEvent(UIEventID::Dragged, args);
+    }
+
+    void UIVisual::RaiseDraggingEvent(const UIEventArgs& args)
+    {
+        OnDragging();
+        if (eventMap)
+            eventMap->RaiseEvent(UIEventID::Dragging, args);
+    }
+
+    void UIVisual::RaiseDroppedEvent(const UIEventArgs& args)
+    {
+        OnDropped();
+        if (eventMap)
+            eventMap->RaiseEvent(UIEventID::Dropped, args);
+    }
+
 #   undef RaiseRoutedEvent
 
     UIVisual::PositionMode UIVisual::ConvertFromStringToPositionMode(const char* value)
@@ -666,7 +720,7 @@ namespace Bibim
              if (value == nullptr)                                  return Visible;
         else if (String::EqualsCharsIgnoreCase(value, "Visible"))   return Visible;
         else if (String::EqualsCharsIgnoreCase(value, "Invisible")) return Invisible;
-        else if (String::EqualsCharsIgnoreCase(value, "Collapsed")) return Collasped;
+        else if (String::EqualsCharsIgnoreCase(value, "Collapsed")) return Collapsed;
         else                                                        return Visible;
     }
 
@@ -676,7 +730,7 @@ namespace Bibim
         {
             case Visible:   return "Visible";
             case Invisible: return "Invisible";
-            case Collasped: return "Collapsed";
+            case Collapsed: return "Collapsed";
             default:        return "Visible";
         }
     }

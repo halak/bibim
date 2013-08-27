@@ -44,7 +44,7 @@ namespace Bibim
             {
                 Visible,
                 Invisible,
-                Collasped,
+                Collapsed,
             };
 
             class DestructionListener
@@ -159,6 +159,7 @@ namespace Bibim
 
             inline bool IsVisible() const;
             inline bool IsFocused() const;
+            inline bool IsDragging() const;
             virtual bool IsPanel() const;
             virtual bool IsWindow() const;
 
@@ -183,8 +184,9 @@ namespace Bibim
 
             virtual void OnFocused();
             virtual void OnBlured();
-            virtual void OnDragBegan();
-            virtual void OnDragEnded();
+            virtual void OnDragged();
+            virtual void OnDragging();
+            virtual void OnDropped();
             virtual void OnParentChanged(UIPanel* old);
 
             virtual bool OnKeyDown(const UIKeyboardEventArgs& args);
@@ -206,9 +208,11 @@ namespace Bibim
 
         private:
             inline void SetBounds(float x, float y, float width, float height);
+            inline bool GetFlag(byte bit) const;
+            inline void SetFlag(byte bit, bool value);
 
+            inline void SetDragging(bool value);
             void Focus(UIDomain* value);
-            void Drag(UIDomain* value);
             void SetParent(UIPanel* value);
 
             void RaiseKeyDownEvent(const UIKeyboardEventArgs& args);
@@ -229,11 +233,15 @@ namespace Bibim
             void RaiseGamePadThumbstickEvent(const UIGamePadEventArgs& args);
             void RaiseFocusedEvent(const UIEventArgs& args);
             void RaiseBluredEvent(const UIEventArgs& args);
+            void RaiseDraggedEvent(const UIEventArgs& args);
+            void RaiseDraggingEvent(const UIEventArgs& args);
+            void RaiseDroppedEvent(const UIEventArgs& args);
 
         private:
             static const byte PICKALBE_BITFIELD  = (1<<0);
             static const byte FOCUSABLE_BITFIELD = (1<<1);
             static const byte DRAGGABLE_BITFIELD = (1<<2);
+            static const byte DRAGGING_BITFIELD  = (1<<3);
             static const byte DEFAULT_FLAGS = PICKALBE_BITFIELD;
 
         private:
@@ -276,7 +284,7 @@ namespace Bibim
 
     void UIVisual::Hide()
     {
-        SetVisibility(Collasped);
+        SetVisibility(Collapsed);
     }
 
     void UIVisual::SetBounds(float x, float y, float width, float height)
@@ -489,43 +497,47 @@ namespace Bibim
         return static_cast<int>(zOrder);
     }
 
+    bool UIVisual::GetFlag(byte bit) const
+    {
+        return (flags & bit) != 0x00;
+    }
+
+    void UIVisual::SetFlag(byte bit, bool value)
+    {
+        if (value)
+            flags |= bit;
+        else
+            flags &= ~bit;
+    }
+
     bool UIVisual::GetPickable() const
     {
-        return (flags & PICKALBE_BITFIELD) != 0x00;
+        return GetFlag(PICKALBE_BITFIELD);
     }
 
     void UIVisual::SetPickable(bool value)
     {
-        if (value)
-            flags |= PICKALBE_BITFIELD;
-        else
-            flags &= ~PICKALBE_BITFIELD;
+        SetFlag(PICKALBE_BITFIELD, value);
     }
 
     bool UIVisual::GetFocusable() const
     {
-        return (flags & FOCUSABLE_BITFIELD) != 0x00;
+        return GetFlag(FOCUSABLE_BITFIELD);
     }
 
     void UIVisual::SetFocusable(bool value)
     {
-        if (value)
-            flags |= FOCUSABLE_BITFIELD;
-        else
-            flags &= ~FOCUSABLE_BITFIELD;
+        SetFlag(FOCUSABLE_BITFIELD, value);
     }
 
     bool UIVisual::GetDraggable() const
     {
-        return (flags & DRAGGABLE_BITFIELD) != 0x00;
+        return GetFlag(DRAGGABLE_BITFIELD);
     }
 
     void UIVisual::SetDraggable(bool value)
     {
-        if (value)
-            flags |= DRAGGABLE_BITFIELD;
-        else
-            flags &= ~DRAGGABLE_BITFIELD;
+        SetFlag(DRAGGABLE_BITFIELD, value);
     }
 
     UIEventMap* UIVisual::GetEventMap() const
@@ -556,6 +568,16 @@ namespace Bibim
     bool UIVisual::IsFocused() const
     {
         return focuser != nullptr;
+    }
+
+    bool UIVisual::IsDragging() const
+    {
+        return GetFlag(DRAGGING_BITFIELD);
+    }
+
+    void UIVisual::SetDragging(bool value)
+    {
+        SetFlag(DRAGGING_BITFIELD, value);
     }
 
     void UIVisual::SetXYModeByChars(const char* xMode, const char* yMode)

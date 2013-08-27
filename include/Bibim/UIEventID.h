@@ -31,7 +31,10 @@ namespace Bibim
                 GamePadThumbstickType = 16,
                 FocusedType = 17,
                 BluredType = 18,
-                ApplicationType = 19,
+                DraggedType = 19,
+                DraggingType = 20,
+                DroppedType = 21,
+                ApplicationType = 40,
             };
 
             static const UIEventID Unknown;
@@ -53,6 +56,9 @@ namespace Bibim
             static const UIEventID GamePadThumbstick;
             static const UIEventID Focused;
             static const UIEventID Blured;
+            static const UIEventID Dragged;
+            static const UIEventID Dragging;
+            static const UIEventID Dropped;
 
         public:
             inline UIEventID();

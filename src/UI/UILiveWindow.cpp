@@ -34,6 +34,8 @@ namespace Bibim
         for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
         {
             const UIVisual* child = (*it);
+            if (child->IsDragging())
+                continue;
 
             LayoutSnapshot item;
             item.Child = child;
