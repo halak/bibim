@@ -98,6 +98,7 @@ namespace Bibim
         const UIMouseEventArgs baseArgs = UIMouseEventArgs(this,
                                                            targetVisual,
                                                            mouseState.Position,
+                                                           mouseState.Position - lastMouseState.Position,
                                                            mouseState.IsLeftButtonPressed,
                                                            mouseState.IsRightButtonPressed,
                                                            mouseState.IsMiddleButtonPressed);

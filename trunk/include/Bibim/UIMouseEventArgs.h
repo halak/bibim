@@ -14,8 +14,8 @@ namespace Bibim
         public:
             UIMouseEventArgs();
             UIMouseEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target);
-            UIMouseEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target, Point2 position);
-            UIMouseEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target, Point2 position, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed);
+            UIMouseEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target, Point2 position, Point2 movement);
+            UIMouseEventArgs(UIMouseEventDispatcher* dispatcher, UIVisual* target, Point2 position, Point2 movement, bool isLeftButtonPressed, bool isRightButtonPressed, bool isMiddleButtonPressed);
             UIMouseEventArgs(const UIMouseEventArgs& original);
             virtual ~UIMouseEventArgs();
 
@@ -25,8 +25,11 @@ namespace Bibim
 
             inline UIMouseEventDispatcher* GetDispatcher() const;
             inline Point2 GetPosition() const;
+            inline Point2 GetMovement() const;
             inline int GetPositionX() const;
             inline int GetPositionY() const;
+            inline int GetMovementX() const;
+            inline int GetMovementY() const;
             inline bool IsLeftButtonPressed() const;
             inline bool IsRightButtonPressed() const;
             inline bool IsMiddleButtonPressed() const;
@@ -34,6 +37,7 @@ namespace Bibim
         private:
             UIMouseEventDispatcher* dispatcher;
             Point2 position;
+            Point2 movement;
             bool isLeftButtonPressed;
             bool isRightButtonPressed;
             bool isMiddleButtonPressed;
@@ -51,6 +55,11 @@ namespace Bibim
         return position;
     }
 
+    Point2 UIMouseEventArgs::GetMovement() const
+    {
+        return movement;
+    }
+
     int UIMouseEventArgs::GetPositionX() const
     {
         return position.X;
@@ -59,6 +68,16 @@ namespace Bibim
     int UIMouseEventArgs::GetPositionY() const
     {
         return position.Y;
+    }
+
+    int UIMouseEventArgs::GetMovementX() const
+    {
+        return movement.X;
+    }
+
+    int UIMouseEventArgs::GetMovementY() const
+    {
+        return movement.Y;
     }
 
     bool UIMouseEventArgs::IsLeftButtonPressed() const

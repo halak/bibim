@@ -169,6 +169,12 @@ namespace Bibim.UI.Visuals
             set;
         }
 
+        public bool IsDraggable
+        {
+            get;
+            set;
+        }
+
         public UIEventMap EventMap
         {
             get;
@@ -217,6 +223,7 @@ namespace Bibim.UI.Visuals
             zOrder = 128;
             IsPickable = true;
             IsFocusable = false;
+            IsDraggable = false;
         }
         #endregion
 

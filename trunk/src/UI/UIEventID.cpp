@@ -24,6 +24,9 @@ namespace Bibim
         "GamePadThumbstick",
         "Focused",
         "Blured",
+        "Dragged",
+        "Dragging",
+        "Dropped",
    };
 
     const UIEventID UIEventID::Unknown(UnknownType);
@@ -45,6 +48,9 @@ namespace Bibim
     const UIEventID UIEventID::GamePadThumbstick(GamePadThumbstickType);
     const UIEventID UIEventID::Focused(FocusedType);
     const UIEventID UIEventID::Blured(BluredType);
+    const UIEventID UIEventID::Dragged(DraggedType);
+    const UIEventID UIEventID::Dragging(DraggingType);
+    const UIEventID UIEventID::Dropped(DroppedType);
 
     const String& UIEventID::ConvertFromTypeToName(Type type)
     {

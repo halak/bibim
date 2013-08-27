@@ -6,7 +6,7 @@
 namespace Bibim
 {
     UIShape::UIShape()
-        : fillColor(0, 0, 0),
+        : fillColor(0, 0, 0, 0),
           lineColor(0, 0, 0, 0)
     {
     }

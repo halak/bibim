@@ -14,12 +14,12 @@ namespace Bibim
     {
     }
 
-    void UIEllipse::FillShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& bounds, Color color)
+    void UIEllipse::FillShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& /*bounds*/, Color color)
     {
         context.FillEllipse(clippedBounds, color);
     }
 
-    void UIEllipse::DrawShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& bounds, Color color)
+    void UIEllipse::DrawShape(UIDrawingContext& context, const RectF& clippedBounds, const RectF& /*bounds*/, Color color)
     {
         context.DrawEllipse(clippedBounds, color);
     }
