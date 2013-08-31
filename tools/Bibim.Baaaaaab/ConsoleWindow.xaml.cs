@@ -163,10 +163,10 @@ namespace Bibim.Bab
         private void consoleWindow_Loaded(object sender, RoutedEventArgs e)
         {
             realtimeConsoleCommands = new SortedSet<string>();
-            /*
-            foreach (string item in Settings.Default.ConsoleCommands)
+            
+            foreach (string item in Settings.Default.ConsoleCommandList.Split(';'))
                 realtimeConsoleCommands.Add(item);
-            */
+
             consoleCommandACM = new AutoCompleteManager(textBoxCommand);
             consoleCommandACM.DataProvider = new SimpleStaticDataProvider(realtimeConsoleCommands);
             consoleCommandACM.AutoAppend = true;
@@ -180,7 +180,10 @@ namespace Bibim.Bab
 
             if (realtimeConsoleCommands.Contains(command) == false)
             {
-                Settings.Default.ConsoleCommands.Add(command);
+                var list = new List<string>(Settings.Default.ConsoleCommandList.Split(';'));
+                list.Add(command);
+                Settings.Default.ConsoleCommandList = string.Join(";", list);
+                Settings.Default.Save();
                 realtimeConsoleCommands.Add(command);
             }
 

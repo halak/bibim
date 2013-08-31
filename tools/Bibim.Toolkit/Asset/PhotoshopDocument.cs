@@ -76,24 +76,24 @@ namespace Bibim.Asset
 
         #region Constructors
         public PhotoshopDocument(string path)
-            : this(path, false, false, false)
+            : this(path, false, false, false, false)
         {
         }
 
         public PhotoshopDocument(Stream stream)
-            : this(stream, false, false, false)
+            : this(stream, false, false, false, false)
         {
         }
 
-        public PhotoshopDocument(string path, bool ignoreImageResources, bool ignoreLayers, bool ignoreMergedBitmap)
+        public PhotoshopDocument(string path, bool ignoreImageResources, bool ignoreLayers, bool ignoreLayerBitmaps, bool ignoreMergedBitmap)
         {
             using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
-                Load(fs, ignoreImageResources, ignoreLayers, ignoreMergedBitmap);
+                Load(fs, ignoreImageResources, ignoreLayers, ignoreLayerBitmaps, ignoreMergedBitmap);
         }
 
-        public PhotoshopDocument(Stream stream, bool ignoreImageResources, bool ignoreLayers, bool ignoreMergedBitmap)
+        public PhotoshopDocument(Stream stream, bool ignoreImageResources, bool ignoreLayers, bool ignoreLayerBitmaps, bool ignoreMergedBitmap)
         {
-            Load(stream, ignoreImageResources, ignoreLayers, ignoreMergedBitmap);
+            Load(stream, ignoreImageResources, ignoreLayers, ignoreLayerBitmaps, ignoreMergedBitmap);
         }
         #endregion
 
@@ -151,7 +151,7 @@ namespace Bibim.Asset
                 item.Scale(scaleX, scaleY);
         }
 
-        private void Load(Stream stream, bool ignoreImageResources, bool ignoreLayers, bool ignoreMergedBitmap)
+        private void Load(Stream stream, bool ignoreImageResources, bool ignoreLayers, bool ignoreLayerBitmaps, bool ignoreMergedBitmap)
         {
             Reader reader = new Reader(stream);
 
@@ -269,7 +269,10 @@ namespace Bibim.Asset
                             #region Layer들의 Pixel 정보를 읽어옵니다.
                             foreach (Layer layer in layers)
                             {
-                                layer.ReadPixelData(bitsPerPixel, reader);
+                                if (ignoreLayerBitmaps == false)
+                                    layer.ReadPixelData(bitsPerPixel, reader);
+                                else
+                                    layer.SkipPixelData(bitsPerPixel, reader);
                             }
                             #endregion
 
