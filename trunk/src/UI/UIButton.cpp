@@ -36,6 +36,8 @@ namespace Bibim
 
             if (field)
                 Add(field);
+
+            UpdateLayout();
         }
     }
 

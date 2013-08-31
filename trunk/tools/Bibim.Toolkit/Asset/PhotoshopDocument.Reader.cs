@@ -126,6 +126,46 @@ namespace Bibim.Asset
 
                 return result;
             }
+
+            public void SkipRawPixelData(int width, int height, int bitsPerPixel)
+            {
+                switch (bitsPerPixel)
+                {
+                    case 1:
+                    case 8:
+                        BaseStream.Position += width * height;
+                        break;
+                    case 16:
+                        BaseStream.Position += width * height * 2;
+                        break;
+                    default:
+                        throw new Exception();
+                }
+            }
+
+            public void SkipRLECompressedPixelData(int width, int height, int bitsPerPixel)
+            {
+                int max = width * height;
+                for (int i = 0; i < max; )
+                {
+                    int length = (int)ReadByte();
+                    if (length < 128)
+                    {
+                        length++;
+                        i += length;
+
+                        BaseStream.Position += length;
+                    }
+                    else if (length > 128)
+                    {
+                        length ^= 0x0FF;
+                        length += 2;
+                        i += length;
+                        BaseStream.Position++;
+                    }
+                    // length == 128, 아무것도 안 합니다.
+                }
+            }
             #endregion
 
             #region ReadAdaptiveBytes

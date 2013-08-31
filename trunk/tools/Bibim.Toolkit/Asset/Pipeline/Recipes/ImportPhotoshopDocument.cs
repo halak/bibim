@@ -65,7 +65,7 @@ namespace Bibim.Asset.Pipeline.Recipes
         {
             using (var stream = Input.Cook(context))
             {
-                var document = new PhotoshopDocument(stream, IgnoreImageResources, IgnoreLayers, IgnoreMergedBitmap);
+                var document = new PhotoshopDocument(stream, IgnoreImageResources, IgnoreLayers, false, IgnoreMergedBitmap);
                 if (Scale != 1.0)
                     document.Scale(Scale, Scale);
                 

@@ -98,6 +98,32 @@ namespace Bibim.Asset
                 }
             }
 
+            public void SkipPixelData(int width, int height, int bitsPerPixel, Reader reader)
+            {
+                Width = width;
+                Height = height;
+                BitsPerPixel = bitsPerPixel;
+
+                Compression compression = (Compression)reader.ReadInt16();
+
+                if (Width == 0 || Height == 0)
+                    return;
+
+                switch (compression)
+                {
+                    case Compression.RawData:
+                        reader.SkipRawPixelData(Width, Height, BitsPerPixel);
+                        break;
+                    case Compression.RLECompression:
+                        // 행별로 열의 길이가 기록되어 있습니다만 무시합니다.
+                        reader.BaseStream.Position += (long)height * 2;
+                        reader.SkipRLECompressedPixelData(Width, Height, BitsPerPixel);
+                        break;
+                    default:
+                        throw new Exception(string.Format("{0} 로 저장된 PSD는 읽어올 수 없습니다. (프로그래머에게 연락하세요)", compression));
+                }
+            }
+
             public byte GetPixel(int x, int y)
             {
                 return Bitmap[x + (y * Width)];
@@ -163,6 +189,12 @@ namespace Bibim.Asset
             {
                 Channel = channel;
                 Channel.ReadPixelData(Rectangle.Width, Rectangle.Height, bitsPerPixel, reader);
+            }
+
+            public void SkipPixelData(Channel channel, int bitsPerPixel, Reader reader)
+            {
+                Channel = channel;
+                Channel.SkipPixelData(Rectangle.Width, Rectangle.Height, bitsPerPixel, reader);
             }
             #endregion
         }
@@ -561,6 +593,20 @@ namespace Bibim.Asset
                 {
                     Mask.ReadPixelData(sortedChannels[ChannelID.UserSppliedLayerMask], bitsPerPixel, reader);
                 }
+            }
+
+            internal void SkipPixelData(int bitsPerPixel, Reader reader)
+            {
+                foreach (Channel channel in Channels)
+                {
+                    if (channel.ID == ChannelID.UserSppliedLayerMask || channel.ID == ChannelID.UserSppliedVectorMask)
+                        continue;
+
+                    channel.SkipPixelData(Rectangle.Width, Rectangle.Height, bitsPerPixel, reader);
+                }
+
+                if (Mask != null)
+                    Mask.SkipPixelData(sortedChannels[ChannelID.UserSppliedLayerMask], bitsPerPixel, reader);
             }
 
             private void ReadAdditionalInfo(Reader reader, long extraDataEndPosition)
