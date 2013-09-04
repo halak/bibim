@@ -1204,7 +1204,8 @@ namespace Bibim
             {
                 lua_pushvalue(L, 2);
                 lua_tinker::push(L, static_cast<UIVisual*>(*it));
-                lua_call(L, 1, 0);
+                lua_tinker::push(L, it - children.begin());
+                lua_call(L, 2, 0);
             }
 
             return 0;

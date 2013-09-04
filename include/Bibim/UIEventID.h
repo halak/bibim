@@ -34,7 +34,7 @@ namespace Bibim
                 DraggedType = 19,
                 DraggingType = 20,
                 DroppedType = 21,
-                ApplicationType = 40,
+                ApplicationType = 22,
             };
 
             static const UIEventID Unknown;

@@ -452,6 +452,30 @@ namespace Bibim.Asset.Pipeline.Recipes
                 bitmap = new Bitmap(1, 1);
                 bitmap.SetPixel(0, 0, solidColor);
             }
+            else if (IsTopDownRepeated(bitmap))
+            {
+                var oldBitmap = bitmap;
+
+                int w = bitmap.Width;
+                bitmap = new Bitmap(w, 1);
+                for (int i = 0; i < w; i++)
+                    bitmap.SetPixel(i, 0, oldBitmap.GetPixel(i, 0));
+            }
+            else if (IsLeftRightRepeated(bitmap))
+            {
+                var oldBitmap = bitmap;
+
+                int h = bitmap.Height;
+                bitmap = new Bitmap(1, h);
+                for (int i = 0; i < h; i++)
+                    bitmap.SetPixel(0, i, oldBitmap.GetPixel(0, i));
+            }
+
+            if (bitmap.Width >= 1024 || bitmap.Height >= 1024)
+            {
+                int i = 0;
+                i = i * i;
+            }
 
             UIImage image = new UIImage();
             image.AnchorPoint = anchor;
@@ -647,6 +671,46 @@ namespace Bibim.Asset.Pipeline.Recipes
                 for (int x = 0; x < w; x++)
                 {
                     if (source.GetPixel(x, y) != firstColor)
+                        return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static bool IsTopDownRepeated(Bitmap source)
+        {
+            if (source.Height == 1)
+                return true;
+
+            int w = source.Width;
+            int h = source.Height;
+            for (int x = 0; x < w; x++)
+            {
+                var c = source.GetPixel(x, 0);
+                for (int y = 1; y < h; y++)
+                {
+                    if (c != source.GetPixel(x, y))
+                        return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static bool IsLeftRightRepeated(Bitmap source)
+        {
+            if (source.Width == 1)
+                return true;
+
+            int w = source.Width;
+            int h = source.Height;
+            for (int y = 0; y < h; y++)
+            {
+                var c = source.GetPixel(0, y);
+                for (int x = 1; x < w; x++)
+                {
+                    if (c != source.GetPixel(x, y))
                         return false;
                 }
             }

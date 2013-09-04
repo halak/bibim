@@ -13,6 +13,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -456,6 +457,17 @@ namespace Bibim.Bab
             base.OnClosed(e);
         }
 
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.S)
+            {
+                buttonSynchronize_Click(this, e);
+                e.Handled = true;
+            }
+
+            base.OnKeyDown(e);
+        }
+
         private void Ready()
         {
             if (serverSocket != null)
@@ -597,6 +609,7 @@ namespace Bibim.Bab
         private void buttonFind_Click(object sender, RoutedEventArgs e)
         {
             SelectNextTreeViewItemByText(textBoxFind.Text);
+            Animate(buttonFind);
             e.Handled = true;
         }
 
@@ -605,6 +618,8 @@ namespace Bibim.Bab
             if (serverStreamWriter != null)
             {
                 serverStreamWriter.Write(UISynchronize);
+                Animate(buttonSynchronize);
+                e.Handled = true;
             }
         }
 
@@ -613,8 +628,37 @@ namespace Bibim.Bab
             if (e.Key == Key.Enter)
             {
                 SelectNextTreeViewItemByText(textBoxFind.Text);
+                Animate(buttonFind);
                 e.Handled = true;
             }
+        }
+
+        private void Animate(UIElement element)
+        {
+            if (element.RenderTransform is ScaleTransform == false)
+            {
+                element.RenderTransform = new ScaleTransform(1.0, 1.0);
+                element.RenderTransformOrigin = new Point(0.5, 0.5);
+            }
+
+            var xAnim = new DoubleAnimation()
+            {
+                From = 1.0,
+                To = 1.05,
+                Duration = new Duration(TimeSpan.FromSeconds(0.1)),
+                AutoReverse = true,
+                EasingFunction = new PowerEase(),
+            };
+            var yAnim = xAnim.Clone();
+
+            var sb = new Storyboard();
+            sb.Children.Add(xAnim);
+            sb.Children.Add(yAnim);
+            Storyboard.SetTarget(xAnim, element);
+            Storyboard.SetTargetProperty(xAnim, new PropertyPath("RenderTransform.(ScaleTransform.ScaleX)"));
+            Storyboard.SetTarget(yAnim, element);
+            Storyboard.SetTargetProperty(yAnim, new PropertyPath("RenderTransform.(ScaleTransform.ScaleY)"));
+            sb.Begin(this);
         }
 
         private class AtValueConverter : IValueConverter
