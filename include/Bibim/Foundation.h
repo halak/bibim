@@ -22,9 +22,9 @@ namespace Bibim
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     // FOURCC
 #   define BBMakeFOURCC(a, b, c, d) ((static_cast<int>(a) << 24) | \
-                                         (static_cast<int>(b) << 16) | \
-                                         (static_cast<int>(c) << 8) | \
-                                         (static_cast<int>(d) << 0))
+                                     (static_cast<int>(b) << 16) | \
+                                     (static_cast<int>(c) << 8) | \
+                                     (static_cast<int>(d) << 0))
 #   define BBFOURCCFirst(fourcc)    static_cast<char>((fourcc & 0xFF000000) >> 24)
 #   define BBFOURCCSecond(fourcc)   static_cast<char>((fourcc & 0x00FF0000) >> 16)
 #   define BBFOURCCThird(fourcc)    static_cast<char>((fourcc & 0x0000FF00) >> 8)
