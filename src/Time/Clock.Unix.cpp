@@ -25,7 +25,7 @@ namespace Bibim
 
         double GetCurrent() const
         {
-            return static_cast<double>(GetTimeOfDay() - startTime) * 0.001;
+            return static_cast<double>(GetTimeOfDay() - startTime) * 0.000001;
         }
 
         int64 GetCurrentMicroSeconds() const
