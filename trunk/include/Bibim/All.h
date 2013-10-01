@@ -157,6 +157,7 @@
 #include "PointerCasts.h"
 #include "PointShape2D.h"
 #include "Preferences.h"
+#include "Random.h"
 #include "RaycastReport2D.h"
 #include "Rect.h"
 #include "RectF.h"

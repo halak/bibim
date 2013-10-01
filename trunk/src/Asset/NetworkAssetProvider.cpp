@@ -155,6 +155,10 @@ namespace Bibim
 
             outStream = stream;
 
+            int count = 0;
+            while (!stream->CanRead() && count++ < 10)
+                Sleep(1);
+
             return true;
         }
         else
