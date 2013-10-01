@@ -57,7 +57,7 @@ namespace Bibim.Bab
             resources = new ResourceDictionary();
             resources.Source = new Uri("ConsoleResources.xaml", UriKind.Relative);
 
-            listener = new TraceListener(listBoxLogs);
+            listener = new TraceListener(this, listBoxLogs);
             Trace.Listeners.Add(listener);
 
             string classname = App.CommandLineArgs["class"];
@@ -244,14 +244,16 @@ namespace Bibim.Bab
             #endregion
 
             #region Fields
+            private Window window;
             private ListBox listBox;
             private bool newLine;
             private Dictionary<string, Font> categoryFonts;
             #endregion
 
             #region Constructor
-            public TraceListener(ListBox listBox)
+            public TraceListener(Window window, ListBox listBox)
             {
+                this.window = window;
                 this.listBox = listBox;
                 this.newLine = true;
                 this.categoryFonts = new Dictionary<string, Font>(8, StringComparer.CurrentCultureIgnoreCase);
@@ -373,6 +375,12 @@ namespace Bibim.Bab
                         item.Tag = text;
                     else
                         item.Tag = (string)item.Tag + text;
+
+                    window.Activate();
+                    window.Topmost = true;
+                    window.Topmost = false;
+                    window.Focus();
+                    System.Media.SystemSounds.Exclamation.Play();
                 }
                 else
                     AppendText(item, panel, o.ToString(), category);
