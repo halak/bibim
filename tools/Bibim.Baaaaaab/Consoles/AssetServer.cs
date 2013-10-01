@@ -24,7 +24,7 @@ namespace Bibim.Bab.Consoles
     [Alias("assetsvr")]
     public static class AssetServer
     {
-        static void Run([Alias("pipe")] string pipeName)
+        static void Run()
         {
             //using (var fs = new FileStream("Hello.xml", FileMode.Create, FileAccess.Write))
             //    GameAssetRecipe.Serialize(fs, new GameAssetRecipe()
@@ -52,7 +52,7 @@ namespace Bibim.Bab.Consoles
             Trace.WriteLine("================================");
             Trace.WriteLine("Halak Bibim Asset Server");
             Trace.WriteLine("================================");
-            Trace.WriteLine(string.Format("Ready : {0}", pipeName));
+            Trace.WriteLine(string.Format("Listen Port: {0}", NetworkAssetProvider.DefaultPort));
 
             var modules = new GameModuleTree();
             var assetStorage = new GameAssetStorage();

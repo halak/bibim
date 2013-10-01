@@ -18,7 +18,7 @@ namespace Bibim
         GetGraphicsDevice()->AddRestoreEventListener(this);
 
 #       if (defined(BIBIM_PLATFORM_WINDOWS))
-        dashboard = new Dashboard();
+        dashboard = new Dashboard(this);
 #       endif
     }
 
@@ -37,7 +37,7 @@ namespace Bibim
         GetGraphicsDevice()->AddRestoreEventListener(this);
 
 #       if (defined(BIBIM_PLATFORM_WINDOWS))
-        dashboard = new Dashboard();
+        dashboard = new Dashboard(this);
 #       endif
     }
 
@@ -55,17 +55,13 @@ namespace Bibim
         GetGraphicsDevice()->AddRestoreEventListener(this);
 
 #       if (defined(BIBIM_PLATFORM_WINDOWS))
-        dashboard = new Dashboard();
+        dashboard = new Dashboard(this);
 #       endif
     }
 
     StandardGame::~StandardGame()
     {
-        if (dashboard)
-        {
-            delete dashboard;
-            dashboard = nullptr;
-        }
+        delete dashboard;
 
         GetGraphicsDevice()->RemoveRestoreEventListener(this);
         GetWindow()->RemoveResizeEventListener(this);

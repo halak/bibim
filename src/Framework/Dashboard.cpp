@@ -6,6 +6,7 @@
 #include <Bibim/Clock.h>
 #include <Bibim/Font.h>
 #include <Bibim/FontLibrary.h>
+#include <Bibim/GameFramework.h>
 #include <Bibim/GameModuleTree.h>
 #include <Bibim/Math.h>
 #include <Bibim/NetworkStream.h>
@@ -16,15 +17,17 @@
 
 namespace Bibim
 {
-    Dashboard::Dashboard()
-        : fontRevision(-1)
+    Dashboard::Dashboard(GameFramework* framework)
+        : framework(framework),
+          fontRevision(-1)
     {
         Log::Add(this);
         Construct(IPEndPoint(IPEndPoint::Localhost, 51893));
     }
 
-    Dashboard::Dashboard(IPEndPoint endPoint)
-        : fontRevision(-1)
+    Dashboard::Dashboard(GameFramework* framework, IPEndPoint endPoint)
+        : framework(framework),
+          fontRevision(-1)
     {
         Log::Add(this);
         Construct(endPoint);
@@ -115,6 +118,19 @@ namespace Bibim
             context.DrawDebugRect(bounds, outerColor);
         }
 
+        static const Vector2 MARGIN = Vector2(10.0f, 15.0f);
+
+        RectF bounds = context.GetCurrentBounds();
+        bounds.X += MARGIN.X;
+        bounds.Y += MARGIN.Y;
+        bounds.Width  -= MARGIN.X * 2.0f;
+        bounds.Height -= MARGIN.Y;
+
+        DrawString(context, bounds, FontString(font, String::CFormat("FPS: %.1f", framework->GetFPS())), Color::White);
+
+        bounds.Y -= font->GetLineHeight();
+        bounds.Height -= font->GetLineHeight();
+
         if (notifications.empty() == false)
         {
             if (fontRevision != font->GetRevision())
@@ -127,33 +143,11 @@ namespace Bibim
                 }
             }
 
-            static const Vector2 MARGIN = Vector2(10.0f, 15.0f);
-
-            RectF bounds = context.GetCurrentBounds();
-            bounds.X += MARGIN.X;
-            bounds.Y += MARGIN.Y;
-            bounds.Width  -= MARGIN.X * 2.0f;
-            bounds.Height -= MARGIN.Y;
             for (NotificationCollection::const_iterator it = notifications.begin(); it != notifications.end(); it++)
             {
                 const Notification& item = (*it);
 
-                const Color oldColor = font->GetColor();
-                font->SetColor(Color(0, 0, 0));
-                bounds.X -= 1.0f;
-                bounds.Y -= 1.0f;
-                context.DrawString(bounds, bounds, item.Text);
-                bounds.X += 2.0f;
-                context.DrawString(bounds, bounds, item.Text);
-                bounds.Y += 2.0f;
-                context.DrawString(bounds, bounds, item.Text);
-                bounds.X -= 2.0f;
-                context.DrawString(bounds, bounds, item.Text);
-                font->SetColor(item.TextColor);
-                bounds.X += 1.0f;
-                bounds.Y -= 1.0f;
-
-                context.DrawString(bounds, bounds, item.Text);
+                DrawString(context, bounds, item.Text, item.TextColor);
 
                 const float height = font->Measure(item.Text, bounds.Width).Size.Y;
                 bounds.Y += height;
@@ -228,6 +222,26 @@ namespace Bibim
             n.Text = FontString(font, message);
 
         notifications.push_back(n);
+    }
+
+    void Dashboard::DrawString(UIHandledDrawingContext& context, RectF bounds, const FontString& text, Color color)
+    {
+        const Color oldColor = text.GetFont()->GetColor();
+        text.GetFont()->SetColor(Color(0, 0, 0));
+        bounds.X -= 1.0f;
+        bounds.Y -= 1.0f;
+        context.DrawString(bounds, bounds, text);
+        bounds.X += 2.0f;
+        context.DrawString(bounds, bounds, text);
+        bounds.Y += 2.0f;
+        context.DrawString(bounds, bounds, text);
+        bounds.X -= 2.0f;
+        context.DrawString(bounds, bounds, text);
+        text.GetFont()->SetColor(color);
+        bounds.X += 1.0f;
+        bounds.Y -= 1.0f;
+
+        context.DrawString(bounds, bounds, text);
     }
 
     void Dashboard::Jsonify(std::ostringstream& o, UIVisual* visual)

@@ -2042,6 +2042,14 @@
 					RelativePath="..\..\include\Bibim\Numerics.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\src\Foundation\Random.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\Random.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="Utility"

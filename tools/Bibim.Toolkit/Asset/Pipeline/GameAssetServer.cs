@@ -73,12 +73,12 @@ namespace Bibim.Asset.Pipeline
         #region Methods
         public void Precook(string directory, string assetPath)
         {
-            BeginCook(directory, assetPath, null, null);
+            BeginCook("SELF", directory, assetPath, null, null);
         }
 
         public void Precook(string directory, string assetPath, Action<byte[], int, int> callback, Action fallback)
         {
-            BeginCook(directory, assetPath, callback, fallback);
+            BeginCook("SELF", directory, assetPath, callback, fallback);
         }
 
         protected override void OnStatusChanged(GameModuleStatus old)
@@ -108,7 +108,7 @@ namespace Bibim.Asset.Pipeline
             }
         }
 
-        protected void BeginCook(string directory, string assetPath, Action<byte[], int, int> callback, Action fallback)
+        protected void BeginCook(string clientName, string directory, string assetPath, Action<byte[], int, int> callback, Action fallback)
         {
             string binaryAbsolutePath = Path.ChangeExtension(Path.Combine(directory, assetPath), GameAsset.BinaryFileExtension);
 
@@ -121,6 +121,8 @@ namespace Bibim.Asset.Pipeline
 
             if (hasCache)
             {
+                Trace.WriteLine(string.Format(":[{0}] Cache > {1}", clientName, assetPath));
+
                 if (callback != null)
                     callback(cache.Buffer, 0, cache.Buffer.Length);
 
@@ -132,8 +134,6 @@ namespace Bibim.Asset.Pipeline
                               {
                                   try
                                   {
-                                      Trace.WriteLine(string.Format("start cooking. {0}", assetPath));
-
                                       string recipePath = Path.ChangeExtension(assetPath, GameAsset.TextFileExtension);
                                       GameAssetKitchen.CookingReport report = kitchen.Cook(directory, recipePath);
                                       if (report.Asset != null)
@@ -170,7 +170,7 @@ namespace Bibim.Asset.Pipeline
 
                                           WriteCacheFile(binaryAbsolutePath, cacheBuffer);
 
-                                          Trace.TraceInformation("Asset cooking succeed. {0}", assetPath);
+                                          Trace.TraceInformation(":[{0}] Asset cooking succeed > {1}", clientName, assetPath);
 
                                           foreach (string item in dependencies)
                                           {
@@ -189,7 +189,7 @@ namespace Bibim.Asset.Pipeline
                                       }
                                       else
                                       {
-                                          Trace.TraceError("AssetRecipe not found. {0}", assetPath);
+                                          Trace.TraceError(":[{0}] AssetRecipe not found > {1}", clientName, assetPath);
 
                                           if (fallback != null)
                                               fallback();

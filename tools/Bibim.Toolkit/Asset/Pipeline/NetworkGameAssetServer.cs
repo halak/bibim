@@ -18,6 +18,13 @@ namespace Bibim.Asset.Pipeline
         private Socket serverSocket;
         #endregion
 
+        #region Properties
+        public EndPoint ListenEndPoint
+        {
+            get { return serverSocket.LocalEndPoint; }
+        }
+        #endregion
+
         #region Constructor
         public NetworkGameAssetServer()
             : this(null, NetworkAssetProvider.DefaultPort)
@@ -70,9 +77,8 @@ namespace Bibim.Asset.Pipeline
                 string assetName = reader.ReadBibimString();
                 reader.Dispose();
 
-                Trace.TraceInformation(string.Format("[{0}] {1}", clientName, assetName));
-
-                BeginCook(workingDirectory,
+                BeginCook(clientName,
+                          workingDirectory,
                           assetName,
                           (buffer, index, count) => SendAssetData(clientSocket, buffer, index, count),
                           () => SendAssetData(clientSocket, null, 0, 0) );

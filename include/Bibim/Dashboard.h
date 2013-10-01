@@ -17,8 +17,8 @@ namespace Bibim
                       public Log::Listener
     {
         public:
-            Dashboard();
-            Dashboard(IPEndPoint endPoint);
+            Dashboard(GameFramework* framework);
+            Dashboard(GameFramework* framework, IPEndPoint endPoint);
             ~Dashboard();
 
             void Initialize(GameModuleTree* modules);
@@ -43,6 +43,8 @@ namespace Bibim
 
             void AddLogNotification(Color color, const char* category, const char* message);
 
+            static void DrawString(UIHandledDrawingContext& context, RectF bounds, const FontString& text, Color color);
+
             static void Jsonify(std::ostringstream& o, UIVisual* visual);
 
             struct Notification
@@ -53,6 +55,8 @@ namespace Bibim
             typedef std::deque<Notification> NotificationCollection;
 
         private:
+            GameFramework* framework;
+
             SocketPtr socket;
             StreamPtr socketStream;
 

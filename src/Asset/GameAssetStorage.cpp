@@ -32,9 +32,7 @@ namespace Bibim
         for (ProviderCollection::const_iterator it = providers.begin(); it != providers.end(); it++)
         {
             if (Stream* stream = (*it)->Open(name))
-            {
                 return stream;
-            }
         }
 
         return nullptr;
