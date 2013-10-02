@@ -831,6 +831,9 @@
     <ClCompile Include="..\..\src\UI\UILiveWindow.cpp">
       <Filter>03. Game\UI\Visuals</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Foundation\Random.cpp">
+      <Filter>01. Foundation\Mathematics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Bibim\AssetLoadingTask.h">
@@ -1658,6 +1661,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\UILiveWindow.h">
       <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Random.h">
+      <Filter>01. Foundation\Mathematics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
