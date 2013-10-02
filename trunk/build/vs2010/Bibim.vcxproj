@@ -131,6 +131,7 @@
     <ClCompile Include="..\..\src\Foundation\Color.cpp" />
     <ClCompile Include="..\..\src\Foundation\Environment.Android.cpp" />
     <ClCompile Include="..\..\src\Foundation\Environment.iOS.cpp" />
+    <ClCompile Include="..\..\src\Foundation\Random.cpp" />
     <ClCompile Include="..\..\src\Framework\Clipboard.Android.cpp" />
     <ClCompile Include="..\..\src\Framework\Clipboard.iOS.cpp" />
     <ClCompile Include="..\..\src\Framework\Clipboard.Windows.cpp" />
@@ -359,6 +360,7 @@
     <ClInclude Include="..\..\include\Bibim\BGM.h" />
     <ClInclude Include="..\..\include\Bibim\BGM.AL.h" />
     <ClInclude Include="..\..\include\Bibim\Performance.h" />
+    <ClInclude Include="..\..\include\Bibim\Random.h" />
     <ClInclude Include="..\..\include\Bibim\SoundFX.AL.h" />
     <ClInclude Include="..\..\include\Bibim\SoundFX.h" />
     <ClInclude Include="..\..\include\Bibim\GameComponentFactory.h" />
