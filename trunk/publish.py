@@ -194,8 +194,8 @@ def save_xml(filename, element):
     import xml.etree.ElementTree as ET
     xml_text = ET.tostring(element, 'utf-8')
     
-    f = open(filename, 'w')
-    f.write('<?xml version="1.0" encoding="utf-8"?>\n')
+    f = open(filename, 'wb')
+    f.write('<?xml version="1.0" encoding="utf-8"?>\n'.encode('utf-8'))
     f.write(xml_text)
     f.close()
     
@@ -385,23 +385,6 @@ def merge_headers(directory):
 
             
 if (__name__ == '__main__'):
-    # import sys
-    # header_only = (len(sys.argv) >= 2 and sys.argv[1] == 'header-only')
-    
-    # print('publish headers...')
-
-    # for module in MODULES:
-    #     copy_headers(module)
-    # copy_references_header('extlibs/lua-5.2.2/src/lua.h')
-    # copy_references_header('extlibs/lua-5.2.2/src/lauxlib.h')
-    # copy_references_header('extlibs/lua-5.2.2/src/luaconf.h')
-    # copy_references_header('extlibs/lua-5.2.2/src/lualib.h')
-    # copy_references_header('extlibs/lua_tinker/lua_tinker.h')
-    
-    # copy_references_header('ObjectiveC/Bibim/Bibim/BibimAppDelegate.h')
-    # copy_references_header('ObjectiveC/Bibim/Bibim/BibimViewController.h')
-    
-    # if (not header_only):
     print('publish libraries...')
 
     publish_library(ENVIRONMENT.VS2008, PLATFORM.WIN32, TARGET.DEBUG)

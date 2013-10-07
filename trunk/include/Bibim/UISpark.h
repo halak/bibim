@@ -21,6 +21,11 @@ namespace Bibim
             UISpark(lua_tinker::table t);
             virtual ~UISpark();
 
+            void Load(lua_tinker::table t);
+
+            inline Spark* GetSource() const;
+            void SetSource(Spark* value);
+
             inline Timeline* GetTimeline() const;
             void SetTimeline(Timeline* value);
 
@@ -76,6 +81,7 @@ namespace Bibim
             };
 
         private:
+            SparkPtr source;
             SPK::System* particleSystem;
             std::vector<ImagePtr> imagePalette;
             std::vector<Burst> burstTable;
@@ -89,6 +95,11 @@ namespace Bibim
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Spark* UISpark::GetSource() const
+    {
+        return source;
+    }
 
     Timeline* UISpark::GetTimeline() const
     {

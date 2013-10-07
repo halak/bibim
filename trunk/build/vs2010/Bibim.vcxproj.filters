@@ -834,6 +834,12 @@
     <ClCompile Include="..\..\src\Foundation\Random.cpp">
       <Filter>01. Foundation\Mathematics</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Animation\Spark.cpp">
+      <Filter>03. Game\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Animation\SparkSet.cpp">
+      <Filter>03. Game\Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Bibim\AssetLoadingTask.h">
@@ -1664,6 +1670,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Random.h">
       <Filter>01. Foundation\Mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\SparkSet.h">
+      <Filter>03. Game\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Spark.h">
+      <Filter>03. Game\Animation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

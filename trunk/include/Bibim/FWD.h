@@ -85,6 +85,8 @@ namespace Bibim
         // Animation
             BBForwardDeclareSmartPointerClass(Sprite);
             BBForwardDeclareSmartPointerClass(SpriteSet);
+            BBForwardDeclareSmartPointerClass(Spark);
+            BBForwardDeclareSmartPointerClass(SparkSet);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Evaluation
                 BBForwardDeclareSmartPointerClass(EvalBase);

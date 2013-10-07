@@ -21,6 +21,8 @@ namespace Bibim
             Dashboard(GameFramework* framework, IPEndPoint endPoint);
             ~Dashboard();
 
+            void RemoveAllNotifications();
+
             void Initialize(GameModuleTree* modules);
             void Finalize();
 

@@ -436,6 +436,13 @@ namespace Bibim
         lua_tinker::class_add<SpriteSet>(L, "SpriteSet");
             lua_tinker::class_inh<SpriteSet, GameAsset>(L);
             lua_tinker::class_def<SpriteSet>(L, "Find", &SpriteSet::Find);
+        lua_tinker::class_add<Spark>(L, "Spark");
+            lua_tinker::class_inh<Spark, GameAsset>(L);
+            lua_tinker::class_def<Spark>(L, "GetDescriptor", &Spark::GetDescriptor);
+            lua_tinker::class_def<Spark>(L, "GetImages", &Spark::GetImages);
+        lua_tinker::class_add<SparkSet>(L, "SparkSet");
+            lua_tinker::class_inh<SparkSet, GameAsset>(L);
+            lua_tinker::class_def<SparkSet>(L, "Find", &SparkSet::Find);
         lua_tinker::class_add<Font>(L, "Font");
             lua_tinker::class_inh<Font, GameAsset>(L);
             lua_tinker::class_def<Font>(L, "Clone", &Font::Clone);
@@ -739,6 +746,9 @@ namespace Bibim
         lua_tinker::class_add<UISpark>(L, "UISpark");
             lua_tinker::class_inh<UISpark, UIVisual>(L);
             lua_tinker::class_con<UISpark>(L, lua_tinker::constructor<UISpark, lua_tinker::table>);
+            lua_tinker::class_def<UISpark>(L, "Load", &UISpark::Load);
+            lua_tinker::class_def<UISpark>(L, "GetSource", &UISpark::GetSource);
+            lua_tinker::class_def<UISpark>(L, "SetSource", &UISpark::SetSource);
             lua_tinker::class_def<UISpark>(L, "GetTimeline", &UISpark::GetTimeline);
             lua_tinker::class_def<UISpark>(L, "SetTimeline", &UISpark::SetTimeline);
             lua_tinker::class_def<UISpark>(L, "GetAutoRemove", &UISpark::GetAutoRemove);

@@ -40,6 +40,9 @@
     <Reference Include="FreeImageNET">
       <HintPath>..\References\FreeImageNET.dll</HintPath>
     </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\References\DotNetZipLib\zip-v1.9\Release\Ionic.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="LitJson">
       <HintPath>..\References\litjson-0.5.0\bin\LitJson.dll</HintPath>
     </Reference>
@@ -266,6 +269,9 @@
     <Compile Include="Asset\Pipeline\NetworkGameAssetServer.cs" />
     <Compile Include="Asset\Pipeline\Recipes\CompileHexData.cs" />
     <Compile Include="Asset\Pipeline\Recipes\CompileLuaScript.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\ExportSparkSet.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\ExportTemplate.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\ImportTimelineFX.cs" />
     <Compile Include="Asset\Pipeline\Recipes\LoadStreamingAsset.cs" />
     <Compile Include="Asset\Pipeline\Recipes\Utility.cs" />
     <Compile Include="Asset\StreamingGameAsset.cs" />
@@ -303,7 +309,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DesignResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Design\PluginManager.cs" />
     <Compile Include="Graphics\BitmapSheet.cs" />
     <Compile Include="Graphics\BitMask.cs" />
     <Compile Include="Graphics\BitMaskWriter.cs" />
@@ -327,6 +332,10 @@
     <Compile Include="Graphics\SourceTexture2D.cs" />
     <Compile Include="Graphics\SourceTexture2DWriter.cs" />
     <Compile Include="Graphics\SourceTexture2DCookingTag.cs" />
+    <Compile Include="Animation\Spark.cs" />
+    <Compile Include="Animation\SparkSet.cs" />
+    <Compile Include="Animation\SparkSetWriter.cs" />
+    <Compile Include="Animation\SparkWriter.cs" />
     <Compile Include="Graphics\Texture2D.cs" />
     <Compile Include="Graphics\Window.cs" />
     <Compile Include="Input\IME.cs" />
@@ -461,6 +470,7 @@
     <Compile Include="UI\Visuals\UIVideo.cs" />
     <Compile Include="UI\Visuals\UIVisual.cs" />
     <Compile Include="UI\Visuals\UIWindow.cs" />
+    <Compile Include="Xml\XmlExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DesignResources.resx">
@@ -478,6 +488,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Collision2D\" />
+    <Folder Include="Design\" />
     <Folder Include="Diagnostics\" />
     <Folder Include="FileSystem\" />
     <Folder Include="Framework\" />

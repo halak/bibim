@@ -405,6 +405,22 @@
 				Name="Animation"
 				>
 				<File
+					RelativePath="..\..\src\Animation\Spark.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\Spark.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Animation\SparkSet.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\SparkSet.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\Animation\Sprite.cpp"
 					>
 				</File>

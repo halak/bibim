@@ -30,6 +30,8 @@ namespace Bibim
         GameAssetFactory::AddEntry<ImageSet>();
         GameAssetFactory::AddEntry<Sprite>();
         GameAssetFactory::AddEntry<SpriteSet>();
+        GameAssetFactory::AddEntry<Spark>();
+        GameAssetFactory::AddEntry<SparkSet>();
         GameAssetFactory::AddEntry<Script>();
         GameAssetFactory::AddEntry<BitMask>();
         GameAssetFactory::AddEntry<SourceTexture2D>();

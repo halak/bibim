@@ -38,6 +38,11 @@ namespace Bibim
         Log::Remove(this);
     }
 
+    void Dashboard::RemoveAllNotifications()
+    {
+        notifications.clear();
+    }
+
     void Dashboard::Construct(IPEndPoint endPoint)
     {
         socket = new Socket(endPoint);

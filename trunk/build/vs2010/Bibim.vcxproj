@@ -108,6 +108,8 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\Animation\Spark.cpp" />
+    <ClCompile Include="..\..\src\Animation\SparkSet.cpp" />
     <ClCompile Include="..\..\src\Asset\AssetLoadingTask.cpp" />
     <ClCompile Include="..\..\src\Asset\AssetStreamReader.cpp" />
     <ClCompile Include="..\..\src\Asset\FileAssetProvider.Default.cpp" />
@@ -381,6 +383,8 @@
     <ClInclude Include="..\..\include\Bibim\GameWindow.Mobile.h" />
     <ClInclude Include="..\..\include\Bibim\Lua.h" />
     <ClInclude Include="..\..\include\Bibim\Preferences.h" />
+    <ClInclude Include="..\..\include\Bibim\Spark.h" />
+    <ClInclude Include="..\..\include\Bibim\SparkSet.h" />
     <ClInclude Include="..\..\include\Bibim\StandardGame.EmbeddedFont.h" />
     <ClInclude Include="..\..\include\Bibim\StandardGame.h" />
     <ClInclude Include="..\..\include\Bibim\GraphicsDeviceBase.h" />
