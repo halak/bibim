@@ -1,4 +1,4 @@
-// Automatically generated in 2013-08-27 00:06:32.266000
+// Automatically generated in 2013-10-06 10:41:36.296627
 
 #include <zlib.h>
 #include "Animation/Ease.cpp"
@@ -11,6 +11,8 @@
 #include "Animation/EvalTimeflow.cpp"
 #include "Animation/EvalUnitRandom.cpp"
 #include "Animation/OscillationCurve.cpp"
+#include "Animation/Spark.cpp"
+#include "Animation/SparkSet.cpp"
 #include "Animation/Sprite.cpp"
 #include "Animation/SpriteSet.cpp"
 #include "Asset/AssetLoadingTask.cpp"
@@ -64,6 +66,7 @@
 #include "Foundation/Point2.cpp"
 #include "Foundation/Point3.cpp"
 #include "Foundation/Point4.cpp"
+#include "Foundation/Random.cpp"
 #include "Foundation/Rect.cpp"
 #include "Foundation/RectF.cpp"
 #include "Foundation/RectStorage.cpp"

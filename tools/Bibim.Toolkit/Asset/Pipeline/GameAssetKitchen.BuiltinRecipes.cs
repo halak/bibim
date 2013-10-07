@@ -54,6 +54,8 @@ namespace Bibim.Asset.Pipeline
                     return CreatePSDImageSetRecipe(data.Get<string>("source") ?? "$(AssetName).psd");
                 case "spriteset":
                     return CreatePSDSpriteSetRecipe(data.Get<string>("source") ?? "$(AssetName).psd");
+                case "sparkset":
+                    return CreateSparkSetRecipe(data.Get<string>("source") ?? "$(AssetName).eff");
                 case "hlsl":
                     return CreateCompileHLSLShaderEffect(
                         data.Get<string>("base") ?? "UI.fx",
@@ -97,7 +99,7 @@ namespace Bibim.Asset.Pipeline
         {
             extensionPriorities = new List<string>()
             {
-                "png", "jpg", "psd", "lua", "ttf",
+                "png", "jpg", "psd", "lua", "ttf", "eff",
             };
 
             builtinRecipes = new Dictionary<string, GameAssetRecipe>()
@@ -107,6 +109,7 @@ namespace Bibim.Asset.Pipeline
                 { "png", CreateTextureRecipe() },
                 { "jpg", CreateTextureRecipe(true) },
                 { "psd", CreatePSDToUIRecipe() },
+                { "eff", CreateSparkSetRecipe() },
             };
         }
 
@@ -228,7 +231,7 @@ namespace Bibim.Asset.Pipeline
             });
         }
 
-        private GameAssetRecipe CreateDirectoryImageSetRecipe(string input, System.Drawing.Size uniformSize)
+        private static GameAssetRecipe CreateDirectoryImageSetRecipe(string input, System.Drawing.Size uniformSize)
         {
             return Wrap(new ExportImageSet()
             {
@@ -243,7 +246,7 @@ namespace Bibim.Asset.Pipeline
             });
         }
 
-        private GameAssetRecipe CreatePSDImageSetRecipe(string input)
+        private static GameAssetRecipe CreatePSDImageSetRecipe(string input)
         {
             return Wrap(new ExportImageSet()
             {
@@ -266,7 +269,7 @@ namespace Bibim.Asset.Pipeline
             });
         }
 
-        private GameAssetRecipe CreatePSDSpriteSetRecipe(string input)
+        private static GameAssetRecipe CreatePSDSpriteSetRecipe(string input)
         {
             return Wrap(new ExportSpriteSet()
             {
@@ -282,6 +285,20 @@ namespace Bibim.Asset.Pipeline
                         IgnoreLayers = false,
                         IgnoreMergedBitmap = true,
                     },
+                },
+                BitmapSheetSize = new System.Drawing.Size(1024, 1024),
+                BitmapSheetClusterSize = new System.Drawing.Size(16, 16),
+                TextureOutput = "gen\\$(AssetName)_TEXTURE{0}",
+            });
+        }
+
+        private static GameAssetRecipe CreateSparkSetRecipe(string source = "$(AssetName).eff")
+        {
+            return Wrap(new ExportSparkSet()
+            {
+                Input = new ImportTimelineFX()
+                {
+                    Input = source
                 },
                 BitmapSheetSize = new System.Drawing.Size(1024, 1024),
                 BitmapSheetClusterSize = new System.Drawing.Size(16, 16),

@@ -81,6 +81,8 @@ namespace Bibim
             void DrawDebugText(UIDrawingContext& context, RectF bounds, const String& text);
 
         protected:
+            inline Dashboard* GetDashboard() const;
+
             void MatchContentToWindow();
             void ReloadUI();
 
@@ -205,6 +207,11 @@ namespace Bibim
     Clipboard* StandardGame::GetClipboard() const
     {
         return clipboard;
+    }
+
+    Dashboard* StandardGame::GetDashboard() const
+    {
+        return dashboard;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

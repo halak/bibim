@@ -33,6 +33,14 @@ namespace Bibim.Graphics
         #endregion
 
         #region Methods
+        public Image Find(string name)
+        {
+            Image value;
+            if (images.TryGetValue(name, out value))
+                return value;
+            else
+                return null;
+        }
         #endregion
     }
 }

@@ -13,6 +13,11 @@ namespace Bibim.Graphics
         public override void Write(AssetStreamWriter writer, ImageSet asset)
         {
             writer.Write(asset.ClassID);
+            WriteBody(writer, asset);
+        }
+
+        public static void WriteBody(AssetStreamWriter writer, ImageSet asset)
+        {
             writer.Write((short)asset.Images.Count);
             foreach (var item in asset.Images)
             {

@@ -5,6 +5,7 @@
 #include <Bibim/Image.h>
 #include <Bibim/Math.h>
 #include <Bibim/Numerics.h>
+#include <Bibim/Spark.h>
 #include <Bibim/Timeline.h>
 #include <Bibim/UIDrawingContext.h>
 #include <Bibim/UIPickingContext.h>
@@ -150,6 +151,54 @@ namespace Bibim
         SPKFactory::getInstance().destroy(particleSystem);
     }
 
+    void UISpark::Load(lua_tinker::table t)
+    {
+        if (particleSystem)
+            SPKFactory::getInstance().destroy(particleSystem);
+
+        particleSystem = System::create();
+
+        const int count = t.len();
+        if (count > 0)
+        {
+            for (int i = 1; i <= count; i++)
+            {
+                if (Group* group = CreateParticleGroup(t.get<lua_tinker::table>(i)))
+                    particleSystem->addGroup(group);
+            }
+        }
+        else
+        {
+            if (Group* group = CreateParticleGroup(t))
+                particleSystem->addGroup(group);
+        }
+
+        if (t.type("Images") == LUA_TTABLE)
+        {
+            lua_tinker::table images = t.get<lua_tinker::table>("Images");
+            const int numberOfImages = images.len();
+            for (int i = 1; i <= numberOfImages; i++)
+                imagePalette.push_back(images.get<Image*>(i));
+        }
+
+        struct SortByTime
+        {
+            static bool Do(const Burst& a, const Burst& b)
+            {
+                return a.Time < b.Time;
+            }
+        };
+        std::sort(burstTable.begin(), burstTable.end(), &SortByTime::Do);
+        lastBurstIndex = 0;
+        burstTime = 0.0f;
+    }
+
+    void UISpark::SetSource(Spark* value)
+    {
+        if (source != value)
+            source = value;
+    }
+
     void UISpark::SetTimeline(Timeline* value)
     {
         if (timeline != value)
@@ -270,41 +319,7 @@ namespace Bibim
     {
         __Construct__();
 
-        particleSystem = System::create();
-
-        const int count = t.len();
-        if (count > 0)
-        {
-            for (int i = 1; i <= count; i++)
-            {
-                if (Group* group = CreateParticleGroup(t.get<lua_tinker::table>(i)))
-                    particleSystem->addGroup(group);
-            }
-        }
-        else
-        {
-            if (Group* group = CreateParticleGroup(t))
-                particleSystem->addGroup(group);
-        }
-
-        if (t.type("Images") == LUA_TTABLE)
-        {
-            lua_tinker::table images = t.get<lua_tinker::table>("Images");
-            const int numberOfImages = images.len();
-            for (int i = 1; i <= numberOfImages; i++)
-                imagePalette.push_back(images.get<Image*>(i));
-        }
-
-        struct SortByTime
-        {
-            static bool Do(const Burst& a, const Burst& b)
-            {
-                return a.Time < b.Time;
-            }
-        };
-        std::sort(burstTable.begin(), burstTable.end(), &SortByTime::Do);
-        lastBurstIndex = 0;
-        burstTime = 0.0f;
+        Load(t);
     }
 
     Group* UISpark::CreateParticleGroup(lua_tinker::table t)
@@ -898,6 +913,7 @@ namespace Bibim
         {
             modifier->setLocalToSystem(true);
 
+            bool triggerSetup = true;
             if (const char* trigger = t.get<const char*>("Trigger"))
             {
                 const int availableTriggers = modifier->getAvailableTriggers();
@@ -922,6 +938,18 @@ namespace Bibim
                     modifier->setTrigger(ENTER_ZONE);
                 else if ((availableTriggers & EXIT_ZONE) && Exit.EqualsIgnoreCase(trigger, triggerLength))
                     modifier->setTrigger(EXIT_ZONE);
+                else
+                    triggerSetup = false;
+            }
+            else
+                triggerSetup = false;
+
+            if (triggerSetup == false)
+            {
+                if (t.has("Zone"))
+                    modifier->setTrigger(INSIDE_ZONE);
+                else
+                    modifier->setTrigger(ALWAYS);
             }
 
             if (modifier->getTrigger() != ALWAYS)
@@ -966,10 +994,10 @@ namespace Bibim
         {
             const float x = t.get<float>(1);
             const float y = t.get<float>(2);
-            const float halfWidth  = t.get<float>(3) * 0.5f;
-            const float halfHeight = t.get<float>(4) * 0.5f;
-            return AABox::create(Vector3D(x + halfWidth, y + halfHeight),
-                                 Vector3D(halfWidth, halfHeight, 0.0f));
+            const float w = t.get<float>(3);
+            const float h = t.get<float>(4);
+            return AABox::create(Vector3D(x + (w * 0.5f), y + (h * 0.5f)),
+                                 Vector3D(w, h, 0.0f));
         }
 
         if (t.has("Radius"))

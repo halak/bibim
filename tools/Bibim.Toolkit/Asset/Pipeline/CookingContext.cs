@@ -78,6 +78,11 @@ namespace Bibim.Asset.Pipeline
         #endregion
 
         #region Constructors
+        public CookingContext()
+            : this(null, null, null, null, null, null)
+        {
+        }
+
         public CookingContext(GameAssetKitchen kitchen, string baseDirectory, string recipePath, GameAssetRecipe recipe)
             : this(kitchen, kitchen.Storage, null, baseDirectory, recipePath, recipe)
         {
@@ -96,14 +101,14 @@ namespace Bibim.Asset.Pipeline
             this.Kitchen = kitchen;
             this.Storage = storage;
             this.Parent = parent;
-            this.baseDirectory = baseDirectory;
-            this.directory = directory;
+            this.baseDirectory = baseDirectory ?? string.Empty;
+            this.directory = directory ?? string.Empty;
             this.variables = new Dictionary<string, string>(variableCapacity);
             this.expandableVariables = new Dictionary<string, string>(variableCapacity);
             this.readonlyVariables = new ReadOnlyDictionary<string, string>(this.variables);
 
             this.dependencies = new SortedSet<string>();
-            this.CanHotload = recipe.CanHotload;
+            this.CanHotload = recipe != null ? recipe.CanHotload : false;
 
             SetVariable("Directory", directory);
             SetVariable("Path", recipePath);

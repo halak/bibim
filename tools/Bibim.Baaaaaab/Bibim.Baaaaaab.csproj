@@ -129,6 +129,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="References\Controls\WpfPropertyGrid.cs" />
+    <Compile Include="TestBed.cs" />
     <Compile Include="UIInspectorWindow.xaml.cs">
       <DependentUpon>UIInspectorWindow.xaml</DependentUpon>
     </Compile>

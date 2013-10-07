@@ -14,67 +14,27 @@ using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace Bibim.Asset.Pipeline.Recipes
 {
-    public sealed class ExportImageSet : CookingNode<ImageSet>
+    public sealed class ExportImageSet : ExportTemplate<ImageSet>
     {
-        #region Fields
-        private string textureOutput;
-        #endregion
-
-        #region Properties
-        public CookingNode<ImageSet> Input
-        {
-            get;
-            set;
-        }
-
-        public Size BitmapSheetSize
-        {
-            get;
-            set;
-        }
-
-        public Size BitmapSheetClusterSize
-        {
-            get;
-            set;
-        }
-
-        public string TextureOutput
-        {
-            get { return textureOutput; }
-            set
-            {
-                textureOutput = value ?? string.Empty;
-            }
-        }
-        #endregion
-
         #region Constructors
         public ExportImageSet()
-            : this(null)
+            : base()
         {
         }
 
         public ExportImageSet(CookingNode<ImageSet> input)
+            : base(input)
         {
-            Input = input;
-            BitmapSheetSize = new Size(1024, 1024);
-            BitmapSheetClusterSize = new Size(16, 16);
-            textureOutput = "$(AssetName)_TEX{0}";
         }
         #endregion
 
-        public override ImageSet Cook(CookingContext context)
+        protected override void Export(CookingContext context, ImageSet input)
         {
-            if (BitmapSheetSize.IsEmpty)
-                throw new InvalidOperationException("BitmapSheetSize is empty.");
-            if (string.IsNullOrEmpty(TextureOutput))
-                throw new InvalidOperationException("TextureOutput is null.");
-            if (TextureOutput.Contains("{0}") == false)
-                throw new InvalidOperationException("TextureOutput not exists {0}.");
+            Export(context, input, BitmapSheetSize, BitmapSheetClusterSize, TextureOutput);
+        }
 
-            ImageSet input = Input.Cook(context);
-
+        public static void Export(CookingContext context, ImageSet input, Size bitmapSheetSize, Size bitmapSheetClusterSize, string textureOutput)
+        {
             var imageBitmaps = new Dictionary<Bitmap, List<Image>>();
             foreach (var item in input.Images)
             {
@@ -92,8 +52,8 @@ namespace Bibim.Asset.Pipeline.Recipes
             }
 
             using (var bitmapSheet = BitmapSheet.Create(imageBitmaps.Keys,
-                                                        BitmapSheetSize.Width, BitmapSheetSize.Height,
-                                                        BitmapSheetClusterSize.Width, BitmapSheetClusterSize.Height,
+                                                        bitmapSheetSize.Width, bitmapSheetSize.Height,
+                                                        bitmapSheetClusterSize.Width, bitmapSheetClusterSize.Height,
                                                         BitmapSheet.Options.PowerOfTwoSize | BitmapSheet.Options.RotatableMerging))
             {
                 SaveTextureAssets(context, bitmapSheet, textureOutput, (source, textureURI, clippingRectangle, appliedTransform) =>
@@ -110,8 +70,6 @@ namespace Bibim.Asset.Pipeline.Recipes
                     }
                 });
             }
-
-            return input;
         }
 
         public static void SaveTextureAssets(CookingContext context, BitmapSheet bitmapSheet, string textureOutput, Action<Bitmap, string, Rectangle, Image.Transform> f)

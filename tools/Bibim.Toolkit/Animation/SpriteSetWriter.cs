@@ -8,7 +8,7 @@ using Bibim.IO;
 namespace Bibim.Animation
 {
     [GameAssetWriter(typeof(SpriteSet))]
-    public sealed class ImageSetWriter : GameAssetWriter<SpriteSet>
+    public sealed class SpriteSetWriter : GameAssetWriter<SpriteSet>
     {
         public override void Write(AssetStreamWriter writer, SpriteSet asset)
         {

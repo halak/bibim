@@ -7,7 +7,7 @@ namespace Bibim.Asset.Pipeline.Recipes
 {
     public sealed class CompileGLSLShaderEffect : CompileShaderEffect
     {
-        #region
+        #region Static Fields
         private static readonly string Separator = "//////////";
         #endregion
 
