@@ -18,16 +18,64 @@ using namespace SPK;
 
 namespace Bibim
 {
-    class SparkRenderer : public SPK::Renderer
+    class ParticleBirthHandler
     {
         public:
-            virtual ~SparkRenderer() { }
+            virtual ~ParticleBirthHandler() { }
+
+            virtual void HandleBirth(Particle& particle) = 0;
+    };
+
+    typedef std::vector<ParticleBirthHandler*> ParticleBirthHandlers;
+
+    class ColorRandomizer : public ParticleBirthHandler
+    {
+        public:
+            ColorRandomizer(std::vector<Vector3>& colors);
+            virtual ~ColorRandomizer() { }
+
+            virtual void HandleBirth(Particle& particle);
+
+        private:
+            std::vector<Vector3> randomColors;
+    };
+
+    class AngleAligner : public ParticleBirthHandler
+    {
+        public:
+            AngleAligner(float offset);
+            virtual ~AngleAligner() { }
+
+            virtual void HandleBirth(Particle& particle);
+
+        private:
+            float offset;
+    };
+
+    class SparkRenderer : public SPK::Renderer
+    {
+        SPK_IMPLEMENT_REGISTERABLE(SparkRenderer)
+        public:
+            virtual ~SparkRenderer();
+
+            static SparkRenderer* create()
+            {
+                SparkRenderer* obj = new SparkRenderer();
+                registerObject(obj);
+                return obj;
+            }
 
             // 원래 SPK::Renderer의 순수 가상 함수는 모두 무시합니다.
             virtual void setBlending(BlendingMode /*blendMode*/) { }
             virtual void render(const Group& /*group*/) { }
 
-            virtual void Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette) = 0;
+            virtual void Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette);
+
+            void MoveBirthHandlers(ParticleBirthHandlers& value);
+            static void CustomBirthCallback(Particle& particle);
+
+        private:
+            ParticleBirthHandlers birthHandlers;
     };
 
     class DirectionalRenderer : public SparkRenderer
@@ -378,6 +426,20 @@ namespace Bibim
                         break;
                 }
             }
+
+            void Unset(int flags)
+            {
+                const int unflags = ~flags;
+                Enable &= unflags;
+                Mutable &= unflags;
+                Random &= unflags;
+                Interpolated &= unflags;
+            }
+
+            void Unset(ModelParamFlag flags)
+            {
+                Unset(static_cast<int>(flags));
+            }
         };
 
         struct SetModelParams
@@ -601,6 +663,12 @@ namespace Bibim
                 break;
         }
 
+        if (t.has("RandomColors"))
+        {
+            modelFlags.Unset(FLAG_RED | FLAG_GREEN | FLAG_BLUE);
+            modelFlags.Enable |= FLAG_RED | FLAG_GREEN | FLAG_BLUE;
+        }
+
         Model* model = Model::create(modelFlags.Enable | modelFlags.Mutable | modelFlags.Random | modelFlags.Interpolated,
                                      modelFlags.Mutable,
                                      modelFlags.Random,
@@ -627,6 +695,7 @@ namespace Bibim
             capacity = t.get<int>("Capacity");
 
         Group* group = Group::create(model, capacity);
+        ParticleBirthHandlers birthHandlers;
 
         if (t.type("Emitters") == LUA_TTABLE)
         {
@@ -684,13 +753,39 @@ namespace Bibim
         if (t.has("Friction"))
             group->setFriction(t.get<float>("Friction"));
 
+        if (t.has("RandomColors"))
+        {
+            lua_tinker::table randomColors = t.get<lua_tinker::table>("RandomColors");
+            const int count = randomColors.len();
+            std::vector<Vector3> colors;
+            colors.reserve(count);
+            for (int i = 1; i <= count; i++)
+            {
+                if (randomColors.type(i) != LUA_TTABLE)
+                    continue;
+
+                lua_tinker::table item = randomColors.get<lua_tinker::table>(i);
+                colors.push_back(Vector3(item.get<float>(1), 
+                                         item.get<float>(2),
+                                         item.get<float>(3)));
+            }
+
+            birthHandlers.push_back(new ColorRandomizer(colors));
+        }
+
         if (angleAxisCount == 0)
         {
             if (const char* angle = t.get<const char*>("Angle"))
             {
                 static const String Direction = "Direction";
+                static const String Emission = "Emission";
                 if (Direction.EqualsIgnoreCase(angle))
                     group->setRenderer(DirectionalRenderer::create());
+                else if (Emission.EqualsIgnoreCase(angle))
+                {
+                    const float offset = t.get<float>("AngleOffset");
+                    birthHandlers.push_back(new AngleAligner(offset));
+                }
             }
         }
         else if (angleAxisCount > 0)
@@ -739,6 +834,15 @@ namespace Bibim
             }
         }
 
+        if (birthHandlers.empty() == false)
+        {
+            if (group->getRenderer() == nullptr)
+                group->setRenderer(SparkRenderer::create());
+
+            static_cast<SparkRenderer*>(group->getRenderer())->MoveBirthHandlers(birthHandlers);
+            group->setCustomBirth(&SparkRenderer::CustomBirthCallback);
+        }
+
         return group;
     }
 
@@ -775,15 +879,15 @@ namespace Bibim
                 }
                 break;
             case LUA_TTABLE:
-                {
+                { 
                     lua_tinker::table dir = t.get<lua_tinker::table>("Direction");
                     
                     const Vector3D direction = Vector3D(dir.get<float>(1),
                                                         dir.get<float>(2));
 
-                    MinMax angles(t, "Angles");
-                    if (angles.IsValid)
-                        emitter = SphericEmitter::create(direction, angles.Min, angles.Max);
+                    const float angle = dir.get<float>("Angle");
+                    if (angle != 0.0f)
+                        emitter = SphericEmitter::create(direction, 0.0f, angle);
                     else
                         emitter = StraightEmitter::create(direction);
                 }
@@ -1144,6 +1248,41 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    SparkRenderer::~SparkRenderer()
+    {
+        for (ParticleBirthHandlers::const_iterator it = birthHandlers.begin(); it != birthHandlers.end(); it++)
+            delete *it;
+    }
+
+    void SparkRenderer::Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette)
+    {
+        BEGIN_DRAW_PARTICLE(group, p);
+        {
+            context.DrawUnclipped(PARTICLE_POSITION(p),
+                                  PARTICLE_ANGLE(p),
+                                  PARTICLE_SIZE(p),
+                                  PARTICLE_IMAGE(p),
+                                  PARTICLE_COLOR(p));
+        }
+        END_DRAW_PARTICLE();
+    }
+
+    void SparkRenderer::MoveBirthHandlers(ParticleBirthHandlers& value)
+    {
+        birthHandlers.swap(value);
+    }
+
+    void SparkRenderer::CustomBirthCallback(Particle& particle)
+    {
+        SparkRenderer* renderer = static_cast<SparkRenderer*>(particle.getGroup()->getRenderer());
+        ParticleBirthHandlers& handlers = renderer->birthHandlers;
+        for (ParticleBirthHandlers::const_iterator it = handlers.begin(); it != handlers.end(); it++)
+            (*it)->HandleBirth(particle);
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     void DirectionalRenderer::Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette)
     {
         BEGIN_DRAW_PARTICLE(group, p);
@@ -1160,7 +1299,7 @@ namespace Bibim
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     RandomAngleAxisRenderer::RandomAngleAxisRenderer()
-    {
+   {
         if (AxesReady == false)
         {
             AxesReady = true;
@@ -1232,5 +1371,33 @@ namespace Bibim
                                   PARTICLE_COLOR(p));
         }
         END_DRAW_PARTICLE();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ColorRandomizer::ColorRandomizer(std::vector<Vector3>& colors)
+    {
+        this->randomColors.swap(colors);
+    }
+
+    void ColorRandomizer::HandleBirth(Particle& particle)
+    {
+        const int index = Math::Random(0, static_cast<int>(randomColors.size() - 1));
+        particle.setParamCurrentValue(PARAM_RED, randomColors[index].X);
+        particle.setParamCurrentValue(PARAM_GREEN, randomColors[index].Y);
+        particle.setParamCurrentValue(PARAM_BLUE, randomColors[index].Z);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    AngleAligner::AngleAligner(float offset)
+        : offset(offset)
+    {
+    }
+
+    void AngleAligner::HandleBirth(Particle& particle)
+    {
+        const float angle = Math::Atan2(particle.velocity().y, particle.velocity().x);
+        particle.setParamCurrentValue(PARAM_ANGLE, angle + offset);
     }
 }

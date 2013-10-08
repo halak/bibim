@@ -92,7 +92,7 @@ namespace Bibim
     Vector2 UISprite::GetContentSize()
     {
         if (const Sprite::Keyframe* kf = GetCurrentFrame())
-            return Vector2(kf->Width, kf->Height);
+            return Vector2(kf->GetWidth(), kf->GetHeight());
         else
             return Vector2::Zero;
     }

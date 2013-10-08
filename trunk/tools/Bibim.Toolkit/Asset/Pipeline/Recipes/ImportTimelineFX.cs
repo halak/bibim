@@ -15,12 +15,140 @@ using GDIRectangle = System.Drawing.Rectangle;
 using GDIGraphics = System.Drawing.Graphics;
 using GDIImage = System.Drawing.Image;
 using Dict = System.Collections.Generic.Dictionary<object, object>;
-using Graph = System.Collections.Generic.List<System.Tuple<float, float>>;
 
 namespace Bibim.Asset.Pipeline.Recipes
 {
     public sealed class ImportTimelineFX : CookingNode<SparkSet>
     {
+        #region Keyframe (Nested Struct)
+        private struct Keyframe
+        {
+            public float Time;
+            public float Value;
+
+            public Keyframe(float time, float value)
+            {
+                Time = time;
+                Value = value;
+            }
+        }
+        #endregion
+
+        #region Graph (Nested class)
+        private class Graph : List<Keyframe>
+        {
+            #region Properties
+            public new Keyframe this[int index]
+            {
+                get { return base[index]; }
+                set { base[index] = value; }
+            }
+
+            public float this[float time]
+            {
+                get
+                {
+                    if (Count == 0)
+                        return 0.0f;
+                    if (time <= this[0].Time)
+                        return this[0].Value;
+                    if (time >= this[Count - 1].Time)
+                        return this[Count - 1].Value;
+
+                    float priorTime = this[0].Time;
+                    for (int i = 1; i < Count; i++)
+                    {
+                        float nextTime = this[i].Time;
+                        if (priorTime <= time && time < nextTime)
+                        {
+                            float t = (time - priorTime) / (nextTime - priorTime);
+                            return MathExtension.Lerp(this[i - 1].Value, this[i].Value, t);
+                        }
+
+                        priorTime = nextTime;
+                    }
+
+                    return 0.0f;
+                }
+            }
+            #endregion
+
+            #region Constructors
+            public Graph()
+            {
+            }
+
+            public Graph(int capacity)
+                : base(capacity)
+            {
+            }
+
+            public Graph(IEnumerable<Keyframe> collection)
+                : base(collection)
+            {
+            }
+            #endregion
+
+            #region Methods
+            public void Transform(Func<float, float> f)
+            {
+                if (f == null)
+                    return;
+
+                for (int i = 0; i < Count; i++)
+                    this[i] = new Keyframe(this[i].Time, f(this[i].Value));
+            }
+
+            public static Graph Merge(Graph left, Graph right, Func<float, float, float> merge)
+            {
+                if (IsEmpty(left) && IsEmpty(right))
+                    return new Graph();
+                else if (IsEmpty(left))
+                    return new Graph(right);
+                else if (IsEmpty(right))
+                    return new Graph(left);
+
+                var result = new Graph(left.Count + right.Count);
+
+                var leftIndex = 0;
+                var rightIndex = 0;
+                while (leftIndex < left.Count && rightIndex < right.Count)
+                {
+                    var leftTime = leftIndex < left.Count ? left[leftIndex].Time : float.PositiveInfinity;
+                    var rightTime = rightIndex < right.Count ? right[rightIndex].Time : float.PositiveInfinity;
+
+                    if (AlmostEquals(leftTime, rightTime))
+                    {
+                        var value = merge(left[leftIndex].Value, right[rightIndex].Value);
+                        result.Add(new Keyframe(leftTime, value));
+                        leftIndex++;
+                        rightIndex++;
+                    }
+                    else if (leftTime < rightTime)
+                    {
+                        var value = merge(left[leftIndex].Value, right[leftTime]);
+                        result.Add(new Keyframe(leftTime, value));
+                        leftIndex++;
+                    }
+                    else // if (leftTime > rightTime)
+                    {
+                        var value = merge(left[rightTime], right[rightIndex].Value);
+                        result.Add(new Keyframe(rightTime, value));
+                        rightIndex++;
+                    }
+                }
+
+                return result;
+            }
+
+            private static bool IsEmpty(Graph value)
+            {
+                return value == null || value.Count == 0;
+            }
+            #endregion
+        }
+        #endregion
+
         #region Properties
         public string Input
         {
@@ -154,7 +282,7 @@ namespace Bibim.Asset.Pipeline.Recipes
 
                 if (frames == 1)
                 {
-                    sparks.Images.Images.Add(index.ToString(), new Image(string.Empty, Rectangle.Empty)
+                    sparks.Images.Images.Add(string.Format("{0}-0", index), new Image(string.Empty, Rectangle.Empty)
                     {
                         Tag = new ImageCookingTag(bitmap)
                     });
@@ -182,9 +310,11 @@ namespace Bibim.Asset.Pipeline.Recipes
 
         private static void ReadEffects(SparkSet sparks, XDocument doc)
         {
+            var usedImages = new List<string>();
+
             foreach (var effectElement in doc.Descendants("EFFECT"))
             {
-                Dict spark = new Dict();
+                var spark = new Dict();
 
                 var effect = new
                 {
@@ -211,13 +341,13 @@ namespace Bibim.Asset.Pipeline.Recipes
                     GlobalSpeed = ReadGraph(effectElement.Elements("VELOCITY")),
                     GlobalWeight = ReadGraph(effectElement.Elements("WEIGHT")),
                     GlobalSpin = ReadGraph(effectElement.Elements("SPIN")),
-                    GlobalAlpha = ReadGraph(effectElement.Elements("ALPHA")), //----------//
+                    GlobalAlpha = ReadGraph(effectElement.Elements("ALPHA")),
                     GlobalStretch = ReadGraph(effectElement.Elements("STRETCH")), //----------//
-                    EffectEmissionRange = ReadGraph(effectElement.Elements("EMISSIONRANGE")), //----------//
-                    EffectEmissionAngle = ReadGraph(effectElement.Elements("EMISSIONANGLE")), //----------//
-                    AreaWidth = ReadGraph(effectElement.Elements("AREA_WIDTH")), //----------//
-                    AreaHeight = ReadGraph(effectElement.Elements("AREA_HEIGHT")), //----------//
-                    EffectAngle = ReadGraph(effectElement.Elements("ANGLE")), //----------//
+                    EmissionRange = ReadGraph(effectElement.Elements("EMISSIONRANGE")),
+                    EmissionAngle = ReadGraph(effectElement.Elements("EMISSIONANGLE")),
+                    AreaWidth = ReadGraph(effectElement.Elements("AREA_WIDTH")),
+                    AreaHeight = ReadGraph(effectElement.Elements("AREA_HEIGHT")),
+                    EffectAngle = ReadGraph(effectElement.Elements("ANGLE")), // NOTE: 에디터에서 바꿔봐도 변화가 없음
                 };
 
                 var groupIndex = 1;
@@ -228,7 +358,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                         // HandleX = (int)emitterElement.Attribute("HANDLE_X"),
                         // HandleY = (int)emitterElement.Attribute("HANDLE_Y"),
                         // BlendMode = (int)emitterElement.Attribute("BLENDMODE"),
-                        IsRelative = (bool)emitterElement.Attribute("RELATIVE"), //----------//
+                        IsRelative = (bool)emitterElement.Attribute("RELATIVE"),
                         IsRandomColor = (bool)emitterElement.Attribute("RANDOM_COLOR"), //----------//
                         IsSingleParticle = (bool)emitterElement.Attribute("SINGLE_PARTICLE"), //----------//
                         // Layer = (int)emitterElement.Attribute("LAYER"),
@@ -239,11 +369,11 @@ namespace Bibim.Asset.Pipeline.Recipes
                         RandomStartFrame = (int)emitterElement.Attribute("RANDOM_START_FRAME"), //----------//
                         IsAnimateForwardDirection = (bool)emitterElement.Attribute("ANIMATION_DIRECTION"), //----------//
                         IsUniform = (bool)emitterElement.Attribute("UNIFORM"), //----------//
-                        AngleType = (AngleType)(int)emitterElement.Attribute("ANGLE_TYPE"), //----------//
-                        AngleOffset = (int)emitterElement.Attribute("ANGLE_OFFSET"), //----------//
-                        IsLockAngle = (bool)emitterElement.Attribute("LOCK_ANGLE"), //----------//
-                        IsAngleRelative = (bool)emitterElement.Attribute("ANGLE_RELATIVE"), //----------//
-                        IsEffectEmissionUsed = (bool)emitterElement.Attribute("USE_EFFECT_EMISSION"), //----------//
+                        AngleType = (AngleType)(int)emitterElement.Attribute("ANGLE_TYPE"),
+                        AngleOffset = (int)emitterElement.Attribute("ANGLE_OFFSET"),
+                        IsLockAngle = (bool)emitterElement.Attribute("LOCK_ANGLE"),
+                        IsAngleRelative = (bool)emitterElement.Attribute("ANGLE_RELATIVE"),
+                        IsEffectEmissionUsed = (bool)emitterElement.Attribute("USE_EFFECT_EMISSION"),
                         ColorRepeat = (int)emitterElement.Attribute("COLOR_REPEAT"), //----------//
                         AlphaRepeat = (int)emitterElement.Attribute("ALPHA_REPEAT"), //----------//
                         IsOneShot = (bool)emitterElement.Attribute("ONE_SHOT"), //----------//
@@ -269,7 +399,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                         AlphaOvertime = ReadGraph(emitterElement.Elements("ALPHA_OVERTIME")),
                         SpeedOvertime = ReadGraph(emitterElement.Elements("VELOCITY_OVERTIME")),
                         WeightOvertime = ReadGraph(emitterElement.Elements("WEIGHT_OVERTIME")),
-                        ScaleXOvertime = ReadGraph(emitterElement.  Elements("SCALE_X_OVERTIME")),
+                        ScaleXOvertime = ReadGraph(emitterElement.Elements("SCALE_X_OVERTIME")),
                         ScaleYOvertime = ReadGraph(emitterElement.Elements("SCALE_Y_OVERTIME")),
                         SpinOvertime = ReadGraph(emitterElement.Elements("SPIN_OVERTIME")),
                         RedOvertime = ReadGraph(emitterElement.Elements("RED_OVERTIME")),
@@ -280,52 +410,177 @@ namespace Bibim.Asset.Pipeline.Recipes
                         // FrameRateOvertime = ReadGraph(emitterElement.Elements("FRAMERATE_OVERTIME")),
                         StretchOvertime = ReadGraph(emitterElement.Elements("STRETCH_OVERTIME")), //----------//
                         SpeedAdjuster = ReadGraph(emitterElement.Elements("GLOBAL_VELOCITY")), //----------//
+                        EmissionRange = ReadGraph(effectElement.Elements("EMISSIONRANGE")),
+                        EmissionAngle = ReadGraph(effectElement.Elements("EMISSIONANGLE")),
                     };
 
                     var groupEmitter = new Dict()
                     {
-                        { "Flow", 100 }, //SingleGraphToValue(emitter.Amount, emitter.AmountVariation, null, effect.GlobalAmount) },
-                        { "Force", SingleGraphToValue(emitter.BaseSpeed, emitter.SpeedVariation, emitter.SpeedOvertime, effect.GlobalSpeed) },
+                        { "Flow", FloatToValue(emitter.Amount, null/*emitter.AmountVariation*/, null, effect.GlobalAmount) },
+                        { "Force", FloatToValue(emitter.BaseSpeed, emitter.SpeedVariation, emitter.SpeedOvertime, effect.GlobalSpeed) },
                     };
 
                     switch (effect.Type)
                     {
                         case EffectType.Point:
+                            groupEmitter["Zone"] = LuaArray(0, 0);
+                            break;
                         case EffectType.Area:
+                            {
+                                if (GetSingleValueOrNull(effect.AreaWidth).HasValue == false ||
+                                    GetSingleValueOrNull(effect.AreaHeight).HasValue == false)
+                                    Trace.TraceWarning("Effect Area Width/Height의 그래프는 지원하지 않습니다.");
+
+                                var width = GetFirstValue(effect.AreaWidth);
+                                var height = GetFirstValue(effect.AreaHeight);
+                                groupEmitter["Zone"] = LuaArray(-width / 2.0f, -height / 2.0f, width, height);
+                            }
+                            break;
                         case EffectType.Line:
+                            {
+                                if (GetSingleValueOrNull(effect.AreaWidth).HasValue == false)
+                                    Trace.TraceWarning("Effect Area Width/Height의 그래프는 지원하지 않습니다.");
+
+                                var length = GetFirstValue(effect.AreaWidth);
+                                groupEmitter["Zone"] = LuaArray(-length / 2.0f, -1.0f, length, 2.0f);
+                            }
+                            break;
                         case EffectType.Ring:
+                            {
+                                if (GetSingleValueOrNull(effect.AreaWidth).HasValue == false ||
+                                    GetSingleValueOrNull(effect.AreaHeight).HasValue == false)
+                                    Trace.TraceWarning("Effect Area Width/Height의 그래프는 지원하지 않습니다.");
+
+                                var width = GetFirstValue(effect.AreaWidth);
+                                var height = GetFirstValue(effect.AreaHeight);
+                                var radius = Math.Max(width, height);
+                                groupEmitter["Zone"] = new Dict() { { 1, 0 }, { 2, 0 }, { "Radius", MinMax(radius - 1.0f, radius) } };
+                            }
                             // effect.GridX;
                             // effect.GridY;
-                            groupEmitter["Zone"] = new Dict() { { 1, 0 }, { 2, 0 } };
                             break;
+                    }
+
+                    {
+                        var emissionAngle = (emitter.IsEffectEmissionUsed) ? effect.EmissionAngle : emitter.EmissionAngle;
+                        var emissionRange = (emitter.IsEffectEmissionUsed) ? effect.EmissionRange : emitter.EmissionRange;
+                        if (GetSingleValueOrNull(emissionAngle).HasValue == false ||
+                            GetSingleValueOrNull(emissionRange).HasValue == false)
+                            Trace.TraceWarning("Emission Angle/Range의 그래프는 지원하지 않습니다.");
+                        double emissionAngleValue = MathExtension.DegreeToRadian((double)GetFirstValue(emissionAngle));
+                        double emissionRangeValue = MathExtension.DegreeToRadian((double)GetFirstValue(emissionRange));
+                        double directionX = +Math.Sin(emissionAngleValue);
+                        double directionY = -Math.Cos(emissionAngleValue);
+                        if (AlmostEquals(emissionRangeValue, 0.0))
+                            groupEmitter["Direction"] = new Dict() { { 1, directionX }, { 2, directionY } };
+                        else
+                            groupEmitter["Direction"] = new Dict() { { 1, directionX }, { 2, directionY }, { "Angle", emissionRangeValue * 2 } };
                     }
 
                     var group = new Dict()
                     {
-                        { "Red", ColorGraphToValue(emitter.RedOvertime) },
-                        { "Green", ColorGraphToValue(emitter.GreenOvertime) },
-                        { "Blue", ColorGraphToValue(emitter.BlueOvertime) },
-                        { "Lifetime", SingleGraphToValue(emitter.Life, emitter.LifeVariation, null, effect.GlobalLife) },
-                        { "Opacity", SingleGraphToValue(null, null, emitter.AlphaOvertime, effect.GlobalAlpha) },
-                        { "SizeX", SingleGraphToValue(emitter.BaseSizeX, emitter.SizeXVariation, emitter.ScaleXOvertime, effect.GlobalSizeX) },
-                        { "SizeY", SingleGraphToValue(emitter.BaseSizeY, emitter.SizeYVariation, emitter.ScaleYOvertime, effect.GlobalSizeY) },
-                        { "Mass", SingleGraphToValue(emitter.BaseWeight, emitter.WeightVariation, emitter.WeightOvertime, effect.GlobalWeight) },
-                        { "AngularSpeed", SingleGraphToValue(emitter.BaseSpin, emitter.SpinVariation, emitter.SpinOvertime, effect.GlobalSpin) },
-                        { "Angle", "Direction" },
-                        { "Image", 0 }, //----------//
+                        { "Gravity", LuaArray(0.0f, 980.0f) },
+                        { "Lifetime", FloatGraphToValue(emitter.Life, emitter.LifeVariation, null, effect.GlobalLife, (x) => x / 1000.0f) },
+                        { "Opacity", FloatGraphToValue(new Graph() { new Keyframe(0.0f, 1.0f) }, null, emitter.AlphaOvertime, effect.GlobalAlpha) },
+                        { "Mass", FloatGraphToValue(emitter.BaseWeight, emitter.WeightVariation, emitter.WeightOvertime, effect.GlobalWeight, (x)=>x / 1000.0f) },
+                        { "AngularSpeed", FloatGraphToValue(emitter.BaseSpin, emitter.SpinVariation, emitter.SpinOvertime, effect.GlobalSpin) },
+                        { "Stretch", FloatGraphToValue(new Graph() { new Keyframe(0.0f, 1.0f) }, null, emitter.StretchOvertime, effect.GlobalStretch) },
                         { "Emitter", groupEmitter },
                     };
+
+                    if (emitter.IsRandomColor)
+                    {
+                        var randomColors = new Dict();
+                        var index = 1;
+                        for (float t = 0.0f; t <= 1.0f; t += 0.02f)
+                        {
+                            randomColors[index++] = LuaArray(emitter.RedOvertime[t] / 255.0f,
+                                                             emitter.GreenOvertime[t] / 255.0f,
+                                                             emitter.BlueOvertime[t] / 255.0f);
+                        }
+                        group["RandomColors"] = randomColors;
+                    }
+                    else
+                    {
+                        group["Red"] = ColorGraphToValue(emitter.RedOvertime);
+                        group["Green"] = ColorGraphToValue(emitter.GreenOvertime);
+                        group["Blue"] = ColorGraphToValue(emitter.BlueOvertime);
+                    }
+
+                    if (effect.IsUniform == false || emitter.IsUniform == false)
+                        Trace.TraceWarning("가로/세로 크기가 분리된 그래프는 지원하지 않습니다.");
+
+                    var image = sparks.Images.Find(string.Format("{0}-{1}", emitter.ShapeIndex, 0));
+                    var imageWidth = (float)((ImageCookingTag)image.Tag).Bitmap.Width;
+                    group["Size"] = FloatGraphToValue(emitter.BaseSizeX, emitter.SizeXVariation, emitter.ScaleXOvertime, effect.GlobalSizeX, (x) => x / imageWidth);
+
+                    // { "SizeX", FloatGraphToValue(emitter.BaseSizeX, emitter.SizeXVariation, emitter.ScaleXOvertime, effect.GlobalSizeX) },
+                    // { "SizeY", FloatGraphToValue(emitter.BaseSizeY, emitter.SizeYVariation, emitter.ScaleYOvertime, effect.GlobalSizeY) },
+
+                    int existsImageIndex = usedImages.IndexOf(string.Format("{0}-0", emitter.ShapeIndex));
+                    if (existsImageIndex == -1)
+                    {
+                        existsImageIndex = usedImages.Count;
+
+                        for (int i = 0; ; i++)
+                        {
+                            string key = string.Format("{0}-{1}", emitter.ShapeIndex, i);
+                            if (sparks.Images.Find(key) != null)
+                                usedImages.Add(key);
+                            else
+                                break;
+                        }
+                    }
+
+                    int existsImageCount = usedImages.FindIndex(existsImageIndex + 1, (x) => !x.StartsWith(emitter.ShapeIndex.ToString()));
+                    if (existsImageCount != -1)
+                        existsImageCount = existsImageCount - existsImageIndex + 1;
+                    else
+                        existsImageCount = usedImages.Count - existsImageIndex;
+
+                    if (existsImageCount == 1)
+                        group["Image"] = existsImageIndex;
+                    else
+                        group["Image"] = MinMax(existsImageIndex, existsImageIndex + existsImageCount - 1);
+
+                    if (emitter.IsLockAngle)
+                        group["Angle"] = "Direction";
+                    else
+                    {
+                        var angleOffset = MathExtension.DegreeToRadian(emitter.AngleOffset);
+                        switch (emitter.AngleType)
+                        {
+                            case AngleType.Align:
+                                // emitter.AngleOffset에 따라 Normal 각도 + Offset이 되어야합니다.
+                                groupEmitter["Angle"] = "Emission";
+                                groupEmitter["AngleOffset"] = angleOffset;
+                                break;
+                            case AngleType.Random:
+                                // 방출 방향에서 무작위 회전일지도 모릅니다. (어차피 눈치 채기는 힘들겠지만..)
+                                groupEmitter["Angle"] = MinMax(0.0f, angleOffset);
+                                break;
+                            case AngleType.Specify:
+                                groupEmitter["Angle"] = angleOffset;
+                                break;
+                        }
+                    }
+
+                    // TODO
+                    group["IsRelativePosition"] = emitter.IsRelative;
+                    group["IsRelativeAngle"] = emitter.IsAngleRelative;
+
                     spark[groupIndex++] = group;
                 }
 
-                spark["Images"] = new Dict()
-                {
-                    { 1, sparks.Images.Images.First().Key },
-                };
+                var images = new Dict();
+                for (int i = 0; i < usedImages.Count; i++)
+                    images[i + 1] = usedImages[i];
+                spark["Images"] = images;
+
 
                 spark["Extra"] = new Dict()
                 {
-                    { "Length", ((float)effect.Length) * 0.01f },
+                    { "Length", effect.Length / 1000.0f },
                 };
 
                 sparks.Sparks.Add(effect.Name, new Spark(ToLuaTable(spark, 4)));
@@ -337,105 +592,167 @@ namespace Bibim.Asset.Pipeline.Recipes
             return Math.Abs(a - b) < float.Epsilon;
         }
 
-        private static bool IsDefaultValue(Graph graph, float value = 1.0f)
+        private static bool AlmostEquals(double a, double b)
         {
-            return (
-                (graph.Count == 0) ||
-                (graph.Count == 1 && AlmostEquals(graph[0].Item2, value))
-            );
+            return Math.Abs(a - b) < double.Epsilon;
         }
 
-        private static object SingleGraphToValue(Graph baseValue, Graph variation, Graph overtime, Graph global)
+        private static float GetFirstValue(Graph graph, float defaultValue = 0.0f)
         {
-            try
+            if (graph != null && graph.Count > 0)
+                return graph[0].Value;
+            else
+                return defaultValue;
+        }
+
+        private static float? GetSingleValueOrNull(Graph graph, float defaultValue = 0.0f)
+        {
+            if (graph == null || graph.Count == 0)
+                return defaultValue; // 그래프가 비어있을 경우
+            else if (graph.Count == 1)
+                return graph[0].Value;
+            else
+                return null; // 그래프에 여러 값이 있을 경우
+        }
+
+        private static object FloatGraphToValue(Graph baseGraph, Graph variationGraph, Graph overtimeGraph, Graph globalGraph, Func<float, float> transform = null)
+        {
+            var singleBase = GetSingleValueOrNull(baseGraph);
+            var singleVariation = GetSingleValueOrNull(variationGraph, 0.0f);
+            var singleOvertime = GetSingleValueOrNull(overtimeGraph, 1.0f);
+            var singleGlobal = GetSingleValueOrNull(globalGraph, 1.0f);
+
+            var emitterChangedByTime = !(singleBase.HasValue && singleVariation.HasValue && singleGlobal.HasValue);
+            var particleChangedByTime = singleOvertime.HasValue == false;
+
+            if (emitterChangedByTime && particleChangedByTime)
             {
-                if (baseValue.Count == 1 && variation.Count <= 1 && global.Count <= 1 && (overtime == null || overtime.Count <= 1))
-                {
-                    // 가장 흔한 경우
-
-                    float minValue = baseValue[0].Item2;
-                    float maxValue = minValue;
-
-                    if (variation.Count == 1 && AlmostEquals(variation[0].Item2, 0.0f) == false)
-                    {
-                        minValue -= variation[0].Item2;
-                        maxValue += variation[0].Item2;
-                    }
-
-                    if (overtime != null && overtime.Count == 1 && AlmostEquals(overtime[0].Item2, 1.0f) == false)
-                    {
-                        minValue *= overtime[0].Item2;
-                        maxValue *= overtime[0].Item2;
-                    }
-
-                    if (global.Count == 1 && AlmostEquals(global[0].Item2, 1.0f) == false)
-                    {
-                        minValue *= global[0].Item2;
-                        maxValue *= global[0].Item2;
-                    }
-
-                    if (AlmostEquals(minValue, maxValue))
-                        return minValue;
-                    else
-                        return string.Format("{0}~{1}", minValue, maxValue);
-                }
+                // Emitter와 Particle 모두 시간에 따라 고유 값이 바뀌는 구조
+                // Spark Particle Engine 구조상 구현이 불가능합니다.
+                Trace.TraceWarning("Base/Variation/Global와 Overtime이 동시에 그래프 구조를 가질 순 없습니다.");
+                return null;
             }
-            catch (Exception)
+            else if (emitterChangedByTime && particleChangedByTime == false)
             {
+                // Emitter들은 시간에 따라 고유 값이 바뀌고 Particle들은 방출된 이후 고유 값을 유지하는 구조.
+                return FloatGraphToValue(baseGraph, variationGraph, singleOvertime.Value, globalGraph, transform);
+            }
+            else if (emitterChangedByTime == false && particleChangedByTime)
+            {
+                // Emitter들은 고유 값을 유지하고 Particle들은 방출된 이후 고유 값이 바뀌는 구조.
+                return FloatGraphToValue(singleBase.Value, singleVariation.Value, overtimeGraph, singleGlobal.Value, transform);
+            }
+            else
+            {
+                Trace.Assert(emitterChangedByTime == false && particleChangedByTime == false);
+                // Emitter와 Particle 모두 고유 값을 유지하는 구조.
+                return FloatToValue(singleBase.Value, singleVariation.Value, singleOvertime.Value, singleGlobal.Value, transform);
+            }
+        }
+
+        private static object FloatGraphToValue(float baseValue, float variation, Graph overtime, float global, Func<float, float> transform = null)
+        {
+            var d = new Dict(overtime.Count + 1) { { "XAxis", "Lifetime" } };
+
+            foreach (var item in overtime)
+                d[item.Time] = FloatToValue(baseValue, variation, item.Value, global, transform);
+
+            return d;
+        }
+
+        private static object FloatGraphToValue(Graph baseValue, Graph variation, float overtime, Graph global, Func<float, float> transform = null)
+        {
+            Graph min = new Graph(baseValue);
+            Graph max = new Graph(baseValue);
+
+            min = Graph.Merge(min, variation, (a, b) => a - b);
+            max = Graph.Merge(max, variation, (a, b) => a + b);
+            min = Graph.Merge(min, global, (a, b) => a * b);
+            max = Graph.Merge(max, global, (a, b) => a * b);
+            min.Transform((x) => transform(x * overtime));
+            max.Transform((x) => transform(x * overtime));
+
+            var d = new Dict(min.Count + 1) { { "XAxis", "Lifetime" } };
+
+            for (int i = 0; i < min.Count; i++)
+            {
+                var time = min[i].Time;
+                var minValue = min[i].Value;
+                var maxValue = max[i].Value;
+                if (AlmostEquals(minValue, maxValue))
+                    d[time] = minValue;
+                else
+                    d[time] = MinMax(minValue, maxValue);
             }
 
-            return 1.0f;
+            return d;
+        }
+
+        /// <summary>
+        /// 그래프를 변환할 때 단일 값, 범위 값으로 강제하고 싶을 때 사용하면 됩니다.
+        /// </summary>
+        /// <param name="baseValue"></param>
+        /// <param name="variation"></param>
+        /// <param name="overtime"></param>
+        /// <param name="global"></param>
+        /// <returns></returns>
+        private static object FloatToValue(Graph baseValue, Graph variation, Graph overtime, Graph global, Func<float, float> transform = null)
+        {
+            return FloatToValue(GetFirstValue(baseValue), GetFirstValue(variation, 0.0f), GetFirstValue(overtime, 1.0f), GetFirstValue(global, 1.0f), transform);
+        }
+
+        private static object FloatToValue(float baseValue, float variation = 0.0f, float overtime = 1.0f, float global = 1.0f, Func<float, float> transform = null)
+        {
+            if (transform == null)
+                transform = (x) => x;
+
+            if (AlmostEquals(variation, 0.0f))
+                return transform(baseValue) * overtime * global;
+            else
+            {
+                float min = transform(baseValue);
+                float max = min;
+
+                min -= transform(variation);
+                max += transform(variation);
+
+                min *= overtime * global;
+                max *= overtime * global;
+
+                return MinMax(min, max);
+            }
         }
 
         private static object ColorGraphToValue(Graph graph)
         {
-            if (IsDefaultValue(graph, 255.0f) == false)
-                return ToValue(graph, (x) => x / 255.0f);
-            else
+            var singleValue = GetSingleValueOrNull(graph, 255.0f);
+            if (singleValue.HasValue && AlmostEquals(singleValue.Value, 255.0f))
                 return null;
+            else
+                return FloatGraphToValue(new Graph() { new Keyframe(0.0f, 1.0f) }, null, graph, null, (x) => x / 255.0f);
         }
 
-        private static object ToValue(Graph graph, Func<float, float> transform = null)
+        private static string MinMax(object min, object max)
         {
-            transform = transform ?? ((x) => x);
-
-            if (graph.Count == 0)
-                return null;
-            else if (graph.Count == 1)
-                return transform(graph[0].Item2);
-            else
-            {
-                var d = new Dict(graph.Count + 1) {
-                    { "XAxis", "Lifetime" },
-                };
-
-                foreach (var item in graph)
-                {
-                    var time = item.Item1;
-                    var value = item.Item2;
-                    d[time] = transform(value);
-                }
-
-                return d;
-            }
+            return string.Format("{0}~{1}", min, max);
         }
 
         private static Graph ReadGraph(IEnumerable<XElement> elements)
         {
-            var data = new List<Tuple<float, float>>(elements.Count());
+            var data = new Graph(elements.Count());
             foreach (var item in elements)
             {
                 float time = (float)item.Attribute("FRAME");
                 float value = (float)item.Attribute("VALUE");
-                data.Add(Tuple.Create(time, value));
+                data.Add(new Keyframe(time, value));
             }
-            data.Sort((a, b) => a.Item1.CompareTo(b.Item1));
+            data.Sort((a, b) => a.Time.CompareTo(b.Time));
 
-            if (data.Count == 2 && AlmostEquals(data[0].Item2, data[1].Item2))
+            if (data.Count == 2 && AlmostEquals(data[0].Value, data[1].Value))
                 data.RemoveAt(1);
 
             if (data.Count == 1)
-                data[0] = Tuple.Create(0.0f, data[0].Item2);
+                data[0] = new Keyframe(0.0f, data[0].Value);
 
             return data;
         }
@@ -451,6 +768,16 @@ namespace Bibim.Asset.Pipeline.Recipes
                 .Replace(' ', '-');
         }
 
+        private static Dict LuaArray(params object[] args)
+        {
+            var d = new Dict(args.Length);
+            var i = 1;
+            foreach (var item in args)
+                d[i++] = item;
+
+            return d;
+        }
+
         private static string ToLuaTable(Dict dict, int indent = 0)
         {
             var sb = new StringBuilder();
@@ -461,7 +788,8 @@ namespace Bibim.Asset.Pipeline.Recipes
         private static void Stringify(StringBuilder sb, Dict dict, int indent = 0, int depth = 1)
         {
             var indentation = new string(' ', indent * depth);
-            var crlf = (indent > 0) ? "\n" : "";
+            var prettyPrint = indent > 0;
+            var crlf = prettyPrint ? "\n" : "";
 
             sb.Append('{');
             sb.Append(crlf);
@@ -492,7 +820,11 @@ namespace Bibim.Asset.Pipeline.Recipes
                     sb.Append(']');
                 }
 
-                sb.Append(" = ");
+                if (prettyPrint)
+                    sb.Append(" = ");
+                else
+                    sb.Append('=');
+
                 stringify(item.Value);
                 sb.Append(',');
                 sb.Append(crlf);

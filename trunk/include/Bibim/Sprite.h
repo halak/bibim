@@ -23,13 +23,14 @@ namespace Bibim
                 Rect ClippingRect;
                 RectF NormalizedClippingRect;
                 Image::Transform AppliedTransform;
-                int Width;
-                int Height;
                 Texture2DPtr Texture;
                 Vector2 Origin;
                 float StartTime;
                 float EndTime;
                 float Duration;
+
+                inline int GetWidth() const;
+                inline int GetHeight() const;
 
                 static const Keyframe Empty;
             };
@@ -90,6 +91,18 @@ namespace Bibim
     void Sprite::SetBlendMode(BlendMode value)
     {
         blendMode = value;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    int Sprite::Keyframe::GetWidth() const
+    {
+        return AppliedTransform == Image::Identity ? ClippingRect.Width : ClippingRect.Height;
+    }
+
+    int Sprite::Keyframe::GetHeight() const
+    {
+        return AppliedTransform == Image::Identity ? ClippingRect.Height : ClippingRect.Width;
     }
 }
 

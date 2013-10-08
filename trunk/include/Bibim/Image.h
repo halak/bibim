@@ -40,7 +40,6 @@ namespace Bibim
 
         public:
             static Image* Create(ComponentStreamReader& reader);
-            static void  CalculateSize(int& outWidth, int& outHeight, const Rect& clippingRect, Transform transform);
             static RectF CalculateNormalizedRect(const Rect& clippingRect, Texture2D* texture);
 
         private:
@@ -48,13 +47,11 @@ namespace Bibim
             Image(const String& textureURI, const Rect& clippingRect, Transform appliedTransform, Texture2D* texture);
 
         private:
-            String textureURI;
+            Texture2DPtr texture;
             Rect clippingRect;
             RectF normalizedClippingRect;
             Transform appliedTransform;
-            int width;
-            int height;
-            Texture2DPtr texture;
+            String textureURI;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,12 +78,12 @@ namespace Bibim
 
     int Image::GetWidth() const
     {
-        return width;
+        return appliedTransform == Identity ? clippingRect.Width : clippingRect.Height;
     }
 
     int Image::GetHeight() const
     {
-        return height;
+        return appliedTransform == Identity ? clippingRect.Height : clippingRect.Width;
     }
 
     Texture2D* Image::GetTexture() const
