@@ -63,7 +63,6 @@ namespace Bibim
             kf.Duration = reader.ReadFloat();
             kf.EndTime = kf.StartTime + kf.Duration;
             kf.Texture = static_cast<Texture2D*>(reader.GetStorage()->Load(kf.TextureURI));
-            Image::CalculateSize(kf.Width, kf.Height, kf.ClippingRect, kf.AppliedTransform);
             kf.NormalizedClippingRect = Image::CalculateNormalizedRect(kf.ClippingRect, kf.Texture);
 
             totalDuration += kf.Duration;

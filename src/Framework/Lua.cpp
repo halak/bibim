@@ -336,7 +336,7 @@ namespace Bibim
                 Vector2 b = GetPoint::Do(L, 2);
                 Vector2 c = GetPoint::Do(L, 3);
                 Vector2 d = GetPoint::Do(L, 4);
-                float distanceBToC = Vector2::GetDistance(b, c);
+                float distanceBToC = Math::Max(Vector2::GetDistance(b, c), 1.0f);
                 float currentDistance = 0.0f;
                 for (size_t i = 0; i < slices; i++)
                 {

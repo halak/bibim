@@ -6,6 +6,21 @@ namespace Bibim
 {
     public static class MathExtension
     {
+        public static double DegreeToRadian(int angle)
+        {
+            return DegreeToRadian((double)angle);
+        }
+
+        public static double DegreeToRadian(double angle)
+        {
+            return angle / 180.0 * Math.PI;
+        }
+
+        public static double RadianToDegree(double angle)
+        {
+            return angle / Math.PI * 180.0;
+        }
+
         public static byte Lerp(byte value1, byte value2, float amount)
         {
             return (byte)Lerp((int)value1, (int)value2, amount);
@@ -32,6 +47,16 @@ namespace Bibim
         }
 
         public static int Clamp(int value, int min, int max)
+        {
+            return value < min ? min : (max < value ? max : value);
+        }
+
+        public static float Clamp(float value, float min, float max)
+        {
+            return value < min ? min : (max < value ? max : value);
+        }
+
+        public static double Clamp(double value, double min, double max)
         {
             return value < min ? min : (max < value ? max : value);
         }

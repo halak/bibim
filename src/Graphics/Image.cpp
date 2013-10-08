@@ -15,26 +15,20 @@ namespace Bibim
     Image::Image(const String& textureURI, const Rect& clippingRect)
         : textureURI(textureURI),
           clippingRect(clippingRect),
-          appliedTransform(Identity),
-          width(clippingRect.Width),
-          height(clippingRect.Height)
+          appliedTransform(Identity)
     {
     }
 
     Image::Image(Texture2D* texture)
         : clippingRect(0, 0, texture->GetWidth(), texture->GetHeight()),
-          appliedTransform(Identity),
-          width(clippingRect.Width),
-          height(clippingRect.Height)
+          appliedTransform(Identity)
     {
         Setup(texture);
     }
 
     Image::Image(Texture2D* texture, const Rect& clippingRect)
         : clippingRect(clippingRect),
-          appliedTransform(Identity),
-          width(clippingRect.Width),
-          height(clippingRect.Height)
+          appliedTransform(Identity)
     {
         Setup(texture);
     }
@@ -43,11 +37,8 @@ namespace Bibim
         : textureURI(textureURI),
           clippingRect(clippingRect),
           appliedTransform(appliedTransform),
-          width(0),
-          height(0),
           texture(texture)
     {
-        CalculateSize(width, height, clippingRect, appliedTransform);
         Setup(texture);
     }
 
@@ -69,21 +60,6 @@ namespace Bibim
 
         normalizedClippingRect = CalculateNormalizedRect(clippingRect, texture);
         SetStatus(texture ? CompletedStatus : FaultStatus);
-    }
-
-    void Image::CalculateSize(int& outWidth, int& outHeight, const Rect& clippingRect, Transform transform)
-    {
-        switch (transform)
-        {
-            case Identity:
-                outWidth = clippingRect.Width;
-                outHeight = clippingRect.Height;
-                break;
-            case RotateCW90:
-                outWidth = clippingRect.Height;
-                outHeight = clippingRect.Width;
-                break;
-        }
     }
 
     RectF Image::CalculateNormalizedRect(const Rect& clippingRect, Texture2D* texture)
