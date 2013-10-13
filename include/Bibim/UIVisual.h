@@ -25,6 +25,7 @@ namespace Bibim
                 RelativeSize,
                 ContentSize,
                 AdjustiveSize,
+                ContentAdjustiveSize,
             };
 
             enum AnchorPoint
@@ -59,7 +60,7 @@ namespace Bibim
             UIVisual();
             virtual ~UIVisual();
 
-            RectF ComputeBounds(UIVisualVisitor& context);
+            RectF ComputeBounds(RectF bounds);
 
             inline void Show();
             inline void Hide();

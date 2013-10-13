@@ -110,7 +110,7 @@ namespace Bibim
         BBAssertDebug(content->GetParent() == this); // 이기 때문에 content->ComputeBounds에서 올바른 값을 반환할 수 있습니다.
 
         const RectF bounds = context.GetCurrentBounds();
-        const RectF contentBounds = content->ComputeBounds(context);
+        const RectF contentBounds = content->ComputeBounds(context.GetCurrentBounds());
 
         const float cx = Math::Clamp(contentBounds.X - bounds.X, -Math::Max(contentBounds.Width  - bounds.Width, 0.0f),  0.0f);
         const float cy = Math::Clamp(contentBounds.Y - bounds.Y, -Math::Max(contentBounds.Height - bounds.Height, 0.0f), 0.0f);

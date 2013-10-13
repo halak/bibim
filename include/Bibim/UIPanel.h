@@ -27,6 +27,8 @@ namespace Bibim
             UIVisual* FindChildByChars(const char* name, bool searchAllChildren) const;
             UIVisual* FindChildByChars(const char* name, int length, bool searchAllChildren) const;
 
+            virtual Vector2 GetContentSize();
+
             int GetChildIndex(UIVisual* item) const;
             inline UIVisual* GetChildAt(int index) const;
             inline int GetNumberOfChildren() const;
