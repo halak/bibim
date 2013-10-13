@@ -25,6 +25,7 @@ namespace Bibim
             void DrawUnclipped(Vector2 position, float rotation, Image* image, Color color);
             void DrawUnclipped(Vector2 position, float rotation, float scale, Image* image, Color color);
             void DrawUnclipped(Vector2 position, float rotation, Vector3 rotationAxis, float scale, Image* image, Color color);
+            void DrawUnclipped(Vector2 position, float rotation, Vector2 rotationCenter, Vector2 scale, Image* image, Color color);
 
             inline void DrawString(Vector2 position, Font* font, const String& text);
             inline void DrawString(Vector2 position, const FontString& fontString);

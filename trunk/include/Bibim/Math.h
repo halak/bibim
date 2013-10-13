@@ -133,6 +133,7 @@ namespace Bibim
 
             static Vector2 CatmullRom(Vector2 a, Vector2 b, Vector2 c, Vector2 d, float t);
 
+            static bool    Random();
             static int     Random(int a, int b);
             static float   Random(float a, float b);
             static Vector2 Random(Vector2 a, Vector2 b);

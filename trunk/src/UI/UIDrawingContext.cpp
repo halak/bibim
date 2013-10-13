@@ -474,6 +474,65 @@ namespace Bibim
             renderer->DrawQuad(points, color, uv, image->GetTexture());
     }
 
+    void UIDrawingContext::DrawUnclipped(Vector2 position, float rotation, Vector2 rotationCenter, Vector2 scale, Image* image, Color color)
+    {
+        BBAssertDebug(image && image->GetTexture() && renderer);
+        if (image->GetStatus() != GameAsset::CompletedStatus ||
+            image->GetTexture()->GetStatus() != GameAsset::CompletedStatus)
+            return;
+
+        const Vector2 size = Vector2(static_cast<float>(image->GetClippingRect().Width) * scale.X,
+                                     static_cast<float>(image->GetClippingRect().Height) * scale.Y);
+        rotationCenter.X *= size.X;
+        rotationCenter.Y *= size.Y; 
+
+        Vector2 points[] =
+        {
+            Vector2(0.0f   - rotationCenter.X, 0.0f   - rotationCenter.Y),
+            Vector2(size.X - rotationCenter.X, 0.0f   - rotationCenter.Y),
+            Vector2(0.0f   - rotationCenter.X, size.Y - rotationCenter.Y),
+            Vector2(size.X - rotationCenter.X, size.Y - rotationCenter.Y),
+        };
+        if (rotation != 0.0f)
+        {
+            const float sin = Math::Sin(rotation);
+            const float cos = Math::Cos(rotation);
+            
+            points[0].Rotate(sin, cos);
+            points[1].Rotate(sin, cos);
+            points[2].Rotate(sin, cos);
+            points[3].Rotate(sin, cos);
+        }
+        points[0] += position;
+        points[1] += position;
+        points[2] += position;
+        points[3] += position;
+
+        const RectF clippingRect = image->GetNormalizedClippingRect();
+        Vector2 uv[4];
+        switch (image->GetAppliedTransform())
+        {
+            case Image::Identity:
+                uv[0] = Vector2(clippingRect.GetLeft(), clippingRect.GetTop());
+                uv[1] = Vector2(clippingRect.GetRight(), clippingRect.GetTop());
+                uv[2] = Vector2(clippingRect.GetLeft(), clippingRect.GetBottom());
+                uv[3] = Vector2(clippingRect.GetRight(), clippingRect.GetBottom());
+                break;
+            case Image::RotateCW90:
+                uv[0] = Vector2(clippingRect.GetRight(), clippingRect.GetTop());
+                uv[1] = Vector2(clippingRect.GetRight(), clippingRect.GetBottom());
+                uv[2] = Vector2(clippingRect.GetLeft(), clippingRect.GetTop());
+                uv[3] = Vector2(clippingRect.GetLeft(), clippingRect.GetBottom());
+                break;
+        }
+
+        color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
+        if (currentGeomEffect)
+            currentGeomEffect->DrawQuad(renderer, points, color, uv, image->GetTexture());
+        else
+            renderer->DrawQuad(points, color, uv, image->GetTexture());
+    }
+
     void UIDrawingContext::DrawString(RectF bounds, Font* font, const String& text)
     {
         static const RectF BigRect = RectF(-10000.0f, -10000.0f, 20000.0f, 20000.0f);
