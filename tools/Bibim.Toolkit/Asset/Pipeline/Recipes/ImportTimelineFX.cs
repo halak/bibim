@@ -347,7 +347,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                     EmissionAngle = ReadGraph(effectElement.Elements("EMISSIONANGLE")),
                     AreaWidth = ReadGraph(effectElement.Elements("AREA_WIDTH")),
                     AreaHeight = ReadGraph(effectElement.Elements("AREA_HEIGHT")),
-                    EffectAngle = ReadGraph(effectElement.Elements("ANGLE")), // NOTE: 에디터에서 바꿔봐도 변화가 없음
+                    EffectAngle = ReadGraph(effectElement.Elements("ANGLE")), //----------//
                 };
 
                 var groupIndex = 1;
@@ -355,11 +355,11 @@ namespace Bibim.Asset.Pipeline.Recipes
                 {
                     var emitter = new
                     {
-                        // HandleX = (int)emitterElement.Attribute("HANDLE_X"),
-                        // HandleY = (int)emitterElement.Attribute("HANDLE_Y"),
+                        HandleX = (int)emitterElement.Attribute("HANDLE_X"),
+                        HandleY = (int)emitterElement.Attribute("HANDLE_Y"),
                         // BlendMode = (int)emitterElement.Attribute("BLENDMODE"),
                         IsRelative = (bool)emitterElement.Attribute("RELATIVE"),
-                        IsRandomColor = (bool)emitterElement.Attribute("RANDOM_COLOR"), //----------//
+                        IsRandomColor = (bool)emitterElement.Attribute("RANDOM_COLOR"),
                         IsSingleParticle = (bool)emitterElement.Attribute("SINGLE_PARTICLE"), //----------//
                         // Layer = (int)emitterElement.Attribute("LAYER"),
                         // Name = (string)emitterElement.Attribute("NAME"),
@@ -368,16 +368,16 @@ namespace Bibim.Asset.Pipeline.Recipes
                         Frame = (int)emitterElement.Attribute("FRAME"), //----------//
                         RandomStartFrame = (int)emitterElement.Attribute("RANDOM_START_FRAME"), //----------//
                         IsAnimateForwardDirection = (bool)emitterElement.Attribute("ANIMATION_DIRECTION"), //----------//
-                        IsUniform = (bool)emitterElement.Attribute("UNIFORM"), //----------//
+                        IsUniform = (bool)emitterElement.Attribute("UNIFORM"),
                         AngleType = (AngleType)(int)emitterElement.Attribute("ANGLE_TYPE"),
                         AngleOffset = (int)emitterElement.Attribute("ANGLE_OFFSET"),
                         IsLockAngle = (bool)emitterElement.Attribute("LOCK_ANGLE"),
                         IsAngleRelative = (bool)emitterElement.Attribute("ANGLE_RELATIVE"),
                         IsEffectEmissionUsed = (bool)emitterElement.Attribute("USE_EFFECT_EMISSION"),
-                        ColorRepeat = (int)emitterElement.Attribute("COLOR_REPEAT"), //----------//
-                        AlphaRepeat = (int)emitterElement.Attribute("ALPHA_REPEAT"), //----------//
+                        ColorRepeat = (int)emitterElement.Attribute("COLOR_REPEAT"),
+                        AlphaRepeat = (int)emitterElement.Attribute("ALPHA_REPEAT"),
                         IsOneShot = (bool)emitterElement.Attribute("ONE_SHOT"), //----------//
-                        // IsHandleCentered = (bool)emitterElement.Attribute("HANDLE_CENTERED"),
+                        IsHandleCentered = (bool)emitterElement.Attribute("HANDLE_CENTERED"),
                         // IsGroupParticles = (bool)emitterElement.Attribute("GROUP_PARTICLES"),
                         ShapeIndex = int.Parse(emitterElement.Element("SHAPE_INDEX").Value),
 
@@ -479,14 +479,25 @@ namespace Bibim.Asset.Pipeline.Recipes
 
                     var group = new Dict()
                     {
-                        { "Gravity", LuaArray(0.0f, 980.0f) },
                         { "Lifetime", FloatGraphToValue(emitter.Life, emitter.LifeVariation, null, effect.GlobalLife, (x) => x / 1000.0f) },
                         { "Opacity", FloatGraphToValue(new Graph() { new Keyframe(0.0f, 1.0f) }, null, emitter.AlphaOvertime, effect.GlobalAlpha) },
-                        { "Mass", FloatGraphToValue(emitter.BaseWeight, emitter.WeightVariation, emitter.WeightOvertime, effect.GlobalWeight, (x)=>x / 1000.0f) },
                         { "AngularSpeed", FloatGraphToValue(emitter.BaseSpin, emitter.SpinVariation, emitter.SpinOvertime, effect.GlobalSpin) },
                         { "Stretch", FloatGraphToValue(new Graph() { new Keyframe(0.0f, 1.0f) }, null, emitter.StretchOvertime, effect.GlobalStretch) },
+                        { "MotionRandomness", FloatGraphToValue(emitter.Direction, emitter.DirectionVariation, emitter.DirectionVariationOvertime, null) },
                         { "Emitter", groupEmitter },
                     };
+
+                    var mass = FloatGraphToValue(emitter.BaseWeight, emitter.WeightVariation, emitter.WeightOvertime, effect.GlobalWeight, (x) => x / 1000.0f);
+                    if (IsValidMass(mass))
+                    {
+                        group["Mass"] = mass;
+                        group["Gravity"] = LuaArray(0.0f, 980.0f);
+                    }
+
+                    if (emitter.ColorRepeat > 0)
+                        Trace.TraceWarning("Color 반복은 지원하지 않습니다.");
+                    if (emitter.AlphaRepeat> 0)
+                        Trace.TraceWarning("Alpha 반복은 지원하지 않습니다.");
 
                     if (emitter.IsRandomColor)
                     {
@@ -511,11 +522,19 @@ namespace Bibim.Asset.Pipeline.Recipes
                         Trace.TraceWarning("가로/세로 크기가 분리된 그래프는 지원하지 않습니다.");
 
                     var image = sparks.Images.Find(string.Format("{0}-{1}", emitter.ShapeIndex, 0));
-                    var imageWidth = (float)((ImageCookingTag)image.Tag).Bitmap.Width;
-                    group["Size"] = FloatGraphToValue(emitter.BaseSizeX, emitter.SizeXVariation, emitter.ScaleXOvertime, effect.GlobalSizeX, (x) => x / imageWidth);
+                    var imageWidth = ((ImageCookingTag)image.Tag).Bitmap.Width;
+                    var imageHeight = ((ImageCookingTag)image.Tag).Bitmap.Height;
+                    group["Size"] = FloatGraphToValue(emitter.BaseSizeX, emitter.SizeXVariation, emitter.ScaleXOvertime, effect.GlobalSizeX, (x) => x / (float)imageWidth);
+                    
+                    if (emitter.IsUniform == false)
+                        group["SizeVertical"] = FloatGraphToValue(emitter.BaseSizeY, emitter.SizeYVariation, emitter.ScaleYOvertime, effect.GlobalSizeY, (x) => x / (float)imageHeight);
 
-                    // { "SizeX", FloatGraphToValue(emitter.BaseSizeX, emitter.SizeXVariation, emitter.ScaleXOvertime, effect.GlobalSizeX) },
-                    // { "SizeY", FloatGraphToValue(emitter.BaseSizeY, emitter.SizeYVariation, emitter.ScaleYOvertime, effect.GlobalSizeY) },
+                    if ((emitter.IsHandleCentered == false) &&
+                        (imageWidth / 2 != emitter.HandleX || imageHeight / 2 != emitter.HandleY))
+                    {
+                        group["RotationCenter"] = LuaArray((float)emitter.HandleY / (float)imageWidth,
+                                                           (float)emitter.HandleY / (float)imageHeight);
+                    }
 
                     int existsImageIndex = usedImages.IndexOf(string.Format("{0}-0", emitter.ShapeIndex));
                     if (existsImageIndex == -1)
@@ -551,16 +570,15 @@ namespace Bibim.Asset.Pipeline.Recipes
                         switch (emitter.AngleType)
                         {
                             case AngleType.Align:
-                                // emitter.AngleOffset에 따라 Normal 각도 + Offset이 되어야합니다.
-                                groupEmitter["Angle"] = "Emission";
-                                groupEmitter["AngleOffset"] = angleOffset;
+                                group["Angle"] = "Emission";
+                                group["AngleOffset"] = angleOffset;
                                 break;
                             case AngleType.Random:
                                 // 방출 방향에서 무작위 회전일지도 모릅니다. (어차피 눈치 채기는 힘들겠지만..)
-                                groupEmitter["Angle"] = MinMax(0.0f, angleOffset);
+                                group["Angle"] = MinMax(0.0f, angleOffset);
                                 break;
                             case AngleType.Specify:
-                                groupEmitter["Angle"] = angleOffset;
+                                group["Angle"] = angleOffset;
                                 break;
                         }
                     }
@@ -595,6 +613,19 @@ namespace Bibim.Asset.Pipeline.Recipes
         private static bool AlmostEquals(double a, double b)
         {
             return Math.Abs(a - b) < double.Epsilon;
+        }
+
+        private static bool IsValidMass(object mass)
+        {
+            if (mass == null)
+                return false;
+
+            if (mass is float)
+                return ((float)mass) > 0.0f;
+            else if (mass is double)
+                return ((double)mass) > 0.0;
+
+            return true;
         }
 
         private static float GetFirstValue(Graph graph, float defaultValue = 0.0f)
@@ -762,8 +793,8 @@ namespace Bibim.Asset.Pipeline.Recipes
             return element
                 .Ancestors("FOLDER")
                 .Aggregate(
-                    (string)element.Attribute("NAME"), 
-                    (name, item) => (string)item.Attribute("NAME") + "/" + name
+                    ((string)element.Attribute("NAME")).Trim(),
+                    (name, item) => (string)item.Attribute("NAME") + "/" + name.Trim()
                 )
                 .Replace(' ', '-');
         }

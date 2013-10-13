@@ -56,6 +56,7 @@ namespace Bibim
     {
         SPK_IMPLEMENT_REGISTERABLE(SparkRenderer)
         public:
+            SparkRenderer() { }
             virtual ~SparkRenderer();
 
             static SparkRenderer* create()
@@ -126,12 +127,13 @@ namespace Bibim
     {
         SPK_IMPLEMENT_REGISTERABLE(SingleAngleAxisRenderer)
         public:
-            SingleAngleAxisRenderer(Vector3 axis);
+            SingleAngleAxisRenderer() { }
             virtual ~SingleAngleAxisRenderer() { }
 
             static SingleAngleAxisRenderer* create(Vector3 axis)
             {
-                SingleAngleAxisRenderer* obj = new SingleAngleAxisRenderer(axis);
+                SingleAngleAxisRenderer* obj = new SingleAngleAxisRenderer();
+                obj->axis = axis;
                 registerObject(obj);
                 return obj;
             }
@@ -146,12 +148,13 @@ namespace Bibim
     {
         SPK_IMPLEMENT_REGISTERABLE(MultipleAngleAxisRenderer)
         public:
-            MultipleAngleAxisRenderer(std::vector<Vector3>& axes);
+            MultipleAngleAxisRenderer() { }
             virtual ~MultipleAngleAxisRenderer() { }
 
             static MultipleAngleAxisRenderer* create(std::vector<Vector3>& axes)
             {
-                MultipleAngleAxisRenderer* obj = new MultipleAngleAxisRenderer(axes);
+                MultipleAngleAxisRenderer* obj = new MultipleAngleAxisRenderer();
+                obj->axes.swap(axes);
                 registerObject(obj);
                 return obj;
             }
@@ -160,6 +163,33 @@ namespace Bibim
 
         private:
             std::vector<Vector3> axes;
+    };
+
+    class TimelineFXRenderer : public SparkRenderer
+    {
+        SPK_IMPLEMENT_REGISTERABLE(TimelineFXRenderer)
+        public:
+            TimelineFXRenderer() { }
+            virtual ~TimelineFXRenderer() { }
+
+            static TimelineFXRenderer* create(Vector2 origin, bool angleFromDirectionEnabled, bool nonUniformSizeEnabled, bool stretchEnabled)
+            {
+                TimelineFXRenderer* obj = new TimelineFXRenderer();
+                obj->origin = origin;
+                obj->angleFromDirectionEnabled = angleFromDirectionEnabled;
+                obj->nonUniformSizeEnabled = nonUniformSizeEnabled;
+                obj->stretchEnabled = stretchEnabled;
+                registerObject(obj);
+                return obj;
+            }
+
+            virtual void Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette);
+
+        private:
+            Vector2 origin;
+            bool angleFromDirectionEnabled;
+            bool nonUniformSizeEnabled;
+            bool stretchEnabled;
     };
 
 #   define BEGIN_DRAW_PARTICLE(group, particle) \
@@ -178,6 +208,11 @@ namespace Bibim
                                                       particle.getParamCurrentValue(PARAM_ALPHA)))
 #   define PARTICLE_ANGLE(particle)     particle.getParamCurrentValue(PARAM_ANGLE)
 #   define PARTICLE_SIZE(particle)      particle.getParamCurrentValue(PARAM_SIZE)
+
+    static const ModelParam PARAM_ANGLEAXIS = PARAM_CUSTOM_0;
+    static const ModelParam PARAM_SIZEY = PARAM_CUSTOM_0;
+    static const ModelParam PARAM_STRETCH = PARAM_CUSTOM_1;
+    static const ModelParam PARAM_MOTION_RANDOMNESS = PARAM_CUSTOM_2;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -663,6 +698,28 @@ namespace Bibim
                 break;
         }
 
+        bool sizeVerticalEnabled = false;
+        if (t.has("SizeVertical") && ((modelFlags.Enable & static_cast<int>(FLAG_CUSTOM_0)) == 0))
+        {
+            // AngleAxis가 활성화 되어 있으면 안됩니다.
+            sizeVerticalEnabled = true;
+            modelFlags.Set(t, "SizeVertical", FLAG_CUSTOM_0);
+        }
+
+        bool stretchEnabled = false;
+        if (t.has("Stretch"))
+        {
+            stretchEnabled = true;
+            modelFlags.Set(t, "Stretch", FLAG_CUSTOM_1);
+        }
+
+        bool motionRandomnessEnabled = false;
+        if (t.has("MotionRandomness"))
+        {
+            motionRandomnessEnabled = true;
+            modelFlags.Set(t, "MotionRandomness", FLAG_CUSTOM_2);
+        }
+
         if (t.has("RandomColors"))
         {
             modelFlags.Unset(FLAG_RED | FLAG_GREEN | FLAG_BLUE);
@@ -684,7 +741,14 @@ namespace Bibim
         SetModelParams::Do(model, t, "Image", PARAM_TEXTURE_INDEX);
 
         if (angleAxisCount > 1)
-            model->setParam(PARAM_CUSTOM_0, 0, static_cast<float>(angleAxisCount) - 0.01f);
+            model->setParam(PARAM_ANGLEAXIS, 0, static_cast<float>(angleAxisCount) - 0.01f);
+
+        if (sizeVerticalEnabled)
+            SetModelParams::Do(model, t, "SizeVertical", PARAM_SIZEY);
+        if (stretchEnabled)
+            SetModelParams::Do(model, t, "Stretch", PARAM_STRETCH);
+        if (motionRandomnessEnabled)
+            SetModelParams::Do(model, t, "MotionRandomness", PARAM_MOTION_RANDOMNESS);
 
         MinMax lifetime(t, "Lifetime");
         if (lifetime.IsValid)
@@ -773,19 +837,36 @@ namespace Bibim
             birthHandlers.push_back(new ColorRandomizer(colors));
         }
 
-        if (angleAxisCount == 0)
+        if (const char* angle = t.get<const char*>("Angle"))
+        {
+            static const String Emission = "Emission";
+            if (Emission.EqualsIgnoreCase(angle))
+            {
+                const float offset = t.get<float>("AngleOffset");
+                birthHandlers.push_back(new AngleAligner(offset));
+            }
+        }
+
+        if (sizeVerticalEnabled || stretchEnabled)
+        {
+            bool angleFromDirectionEnabled = false;
+            if (const char* angle = t.get<const char*>("Angle"))
+            {
+                static const String Direction = "Direction";
+                angleFromDirectionEnabled = Direction.EqualsIgnoreCase(angle);
+            }
+            group->setRenderer(TimelineFXRenderer::create(Vector2(0.5f, 0.5f),
+                                                          angleFromDirectionEnabled,
+                                                          sizeVerticalEnabled,
+                                                          stretchEnabled));
+        }
+        else if (angleAxisCount == 0)
         {
             if (const char* angle = t.get<const char*>("Angle"))
             {
                 static const String Direction = "Direction";
-                static const String Emission = "Emission";
                 if (Direction.EqualsIgnoreCase(angle))
                     group->setRenderer(DirectionalRenderer::create());
-                else if (Emission.EqualsIgnoreCase(angle))
-                {
-                    const float offset = t.get<float>("AngleOffset");
-                    birthHandlers.push_back(new AngleAligner(offset));
-                }
             }
         }
         else if (angleAxisCount > 0)
@@ -842,6 +923,9 @@ namespace Bibim
             static_cast<SparkRenderer*>(group->getRenderer())->MoveBirthHandlers(birthHandlers);
             group->setCustomBirth(&SparkRenderer::CustomBirthCallback);
         }
+
+        if (motionRandomnessEnabled)
+            group->setCustomUpdate(&UpdateMotionRandomness);
 
         return group;
     }
@@ -1119,6 +1203,18 @@ namespace Bibim
         return Point::create(position);
     }
 
+    bool UISpark::UpdateMotionRandomness(SPK::Particle& particle, float dt)
+    {
+        const float motionRandomness = particle.getParamCurrentValue(PARAM_MOTION_RANDOMNESS);
+        if (motionRandomness != 0.0f)
+        {
+            particle.velocity().x += Math::Random(-2000.0f, +2000.0f) * motionRandomness * dt;
+            particle.velocity().y += Math::Random(-2000.0f, +2000.0f) * motionRandomness * dt;
+        }
+
+        return false;
+    }
+
     void UISpark::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
@@ -1248,6 +1344,34 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    ColorRandomizer::ColorRandomizer(std::vector<Vector3>& colors)
+    {
+        this->randomColors.swap(colors);
+    }
+
+    void ColorRandomizer::HandleBirth(Particle& particle)
+    {
+        const int index = Math::Random(0, static_cast<int>(randomColors.size() - 1));
+        particle.setParamCurrentValue(PARAM_RED, randomColors[index].X);
+        particle.setParamCurrentValue(PARAM_GREEN, randomColors[index].Y);
+        particle.setParamCurrentValue(PARAM_BLUE, randomColors[index].Z);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    AngleAligner::AngleAligner(float offset)
+        : offset(offset)
+    {
+    }
+
+    void AngleAligner::HandleBirth(Particle& particle)
+    {
+        const float angle = Math::Atan2(particle.velocity().y, particle.velocity().x);
+        particle.setParamCurrentValue(PARAM_ANGLE, angle + offset);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     SparkRenderer::~SparkRenderer()
     {
         for (ParticleBirthHandlers::const_iterator it = birthHandlers.begin(); it != birthHandlers.end(); it++)
@@ -1323,7 +1447,7 @@ namespace Bibim
         {
             context.DrawUnclipped(PARTICLE_POSITION(p),
                                   PARTICLE_ANGLE(p),
-                                  Axes[static_cast<int>(p.getParamCurrentValue(PARAM_CUSTOM_0))],
+                                  Axes[static_cast<int>(p.getParamCurrentValue(PARAM_ANGLEAXIS))],
                                   PARTICLE_SIZE(p),
                                   PARTICLE_IMAGE(p),
                                   PARTICLE_COLOR(p));
@@ -1332,11 +1456,6 @@ namespace Bibim
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    SingleAngleAxisRenderer::SingleAngleAxisRenderer(Vector3 axis)
-        : axis(axis)
-    {
-    }
 
     void SingleAngleAxisRenderer::Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette)
     {
@@ -1354,18 +1473,13 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    MultipleAngleAxisRenderer::MultipleAngleAxisRenderer(std::vector<Vector3>& axes)
-    {
-        this->axes.swap(axes);
-    }
-
     void MultipleAngleAxisRenderer::Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette)
     {
         BEGIN_DRAW_PARTICLE(group, p);
         {
             context.DrawUnclipped(PARTICLE_POSITION(p),
                                   PARTICLE_ANGLE(p),
-                                  axes[static_cast<int>(p.getParamCurrentValue(PARAM_CUSTOM_0))],
+                                  axes[static_cast<int>(p.getParamCurrentValue(PARAM_ANGLEAXIS))],
                                   PARTICLE_SIZE(p),
                                   PARTICLE_IMAGE(p),
                                   PARTICLE_COLOR(p));
@@ -1375,29 +1489,38 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ColorRandomizer::ColorRandomizer(std::vector<Vector3>& colors)
+    void TimelineFXRenderer::Draw(UIDrawingContext& context, const Group& group, const std::vector<ImagePtr>& imagePalette)
     {
-        this->randomColors.swap(colors);
+        float angle = 0.0f;
+        float scaleX = 0.0f;
+        float scaleY = 0.0f;
+
+        BEGIN_DRAW_PARTICLE(group, p);
+        {
+            angle = angleFromDirectionEnabled ? Math::Atan2(p.velocity().y, p.velocity().x) : p.getParamCurrentValue(PARAM_ANGLE);
+            scaleX = PARTICLE_SIZE(p);
+            scaleY = nonUniformSizeEnabled ? p.getParamCurrentValue(PARAM_SIZEY) : scaleX;
+            if (stretchEnabled)
+            {
+                scaleX *= (Math::Sqrt(p.velocity().getSqrNorm()) / 100.0f) * 
+                          (p.getParamCurrentValue(PARAM_STRETCH));
+            }
+
+            context.DrawUnclipped(PARTICLE_POSITION(p),
+                                  angle,
+                                  origin,
+                                  Vector2(scaleX, scaleY),
+                                  PARTICLE_IMAGE(p),
+                                  PARTICLE_COLOR(p));
+        }
+        END_DRAW_PARTICLE();
     }
 
-    void ColorRandomizer::HandleBirth(Particle& particle)
-    {
-        const int index = Math::Random(0, static_cast<int>(randomColors.size() - 1));
-        particle.setParamCurrentValue(PARAM_RED, randomColors[index].X);
-        particle.setParamCurrentValue(PARAM_GREEN, randomColors[index].Y);
-        particle.setParamCurrentValue(PARAM_BLUE, randomColors[index].Z);
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    AngleAligner::AngleAligner(float offset)
-        : offset(offset)
-    {
-    }
-
-    void AngleAligner::HandleBirth(Particle& particle)
-    {
-        const float angle = Math::Atan2(particle.velocity().y, particle.velocity().x);
-        particle.setParamCurrentValue(PARAM_ANGLE, angle + offset);
-    }
+#   undef BEGIN_DRAW_PARTICLE
+#   undef END_DRAW_PARTICLE
+#   undef PARTICLE_POSITION
+#   undef PARTICLE_IMAGE
+#   undef PARTICLE_COLOR
+#   undef PARTICLE_ANGLE
+#   undef PARTICLE_SIZE
 }

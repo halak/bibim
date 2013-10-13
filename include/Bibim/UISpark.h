@@ -9,7 +9,7 @@
 #include <Bibim/Timeline.h>
 #include <vector>
 
-namespace SPK { class System; class Group; class Emitter; class Modifier; class Zone; };
+namespace SPK { class System; class Group; class Emitter; class Modifier; class Zone; class Particle; };
 
 namespace Bibim
 {
@@ -46,6 +46,8 @@ namespace Bibim
             SPK::Emitter*  CreateParticleEmitter(lua_tinker::table t, SPK::Group* group, int& outInitialParticles);
             static SPK::Modifier* CreateParticleModifier(lua_tinker::table t);
             static SPK::Zone*     CreateParticleZone(lua_tinker::table t);
+
+            static bool UpdateMotionRandomness(SPK::Particle& particle, float dt);
 
             struct Burst
             {

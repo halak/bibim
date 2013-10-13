@@ -357,7 +357,7 @@ namespace Bibim
                         b = c;
                         c = d;
                         d = GetPoint::Do(L, ++index);
-                        distanceBToC = Vector2::GetDistance(b, c);
+                        distanceBToC = Math::Max(Vector2::GetDistance(b, c), 1.0f);
                     }
                 }
 

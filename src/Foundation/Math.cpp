@@ -112,6 +112,11 @@ namespace Bibim
                 );
     }
 
+    bool Math::Random()
+    {
+        return std::rand() % 2 != 0;
+    }
+
     int Math::Random(int a, int b)
     {
         return static_cast<int>(Random(static_cast<float>(a), static_cast<float>(b)));
