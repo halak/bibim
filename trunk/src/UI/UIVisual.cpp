@@ -49,10 +49,15 @@ namespace Bibim
         }
     }
 
-    RectF UIVisual::ComputeBounds(UIVisualVisitor& context)
+    RectF UIVisual::ComputeBounds(RectF bounds)
     {
-        const RectF bounds = context.GetCurrentBounds();
-        const Vector2 contentSize = (widthMode == ContentSize || heightMode == ContentSize) ? GetContentSize() : Vector2::Zero;
+        const Vector2 contentSize = (widthMode == ContentSize || 
+                                     widthMode == ContentAdjustiveSize ||
+                                     heightMode == ContentSize ||
+                                     heightMode == ContentAdjustiveSize) ? 
+                                        GetContentSize()
+                                     :
+                                        Vector2::Zero;
         RectF result = RectF::Empty;
 
         float offsetX = 0.0f;
@@ -91,6 +96,9 @@ namespace Bibim
             case AdjustiveSize:
                 result.Width = bounds.Width + width;
                 break;
+            case ContentAdjustiveSize:
+                result.Width = contentSize.X + width;
+                break;
         }
 
         switch (GetHeightMode())
@@ -106,6 +114,9 @@ namespace Bibim
                 break;
             case AdjustiveSize:
                 result.Height = bounds.Height + height;
+                break;
+            case ContentAdjustiveSize:
+                result.Height = contentSize.Y + height;
                 break;
         }
 
@@ -665,21 +676,23 @@ namespace Bibim
 
     UIVisual::SizeMode UIVisual::ConvertFromStringToSizeMode(const char* value)
     {
-             if (value == nullptr)                            return ContentSize;
-        else if (String::EqualsCharsIgnoreCase(value, "ABS")) return AbsoluteSize;
-        else if (String::EqualsCharsIgnoreCase(value, "REL")) return RelativeSize;
-        else if (String::EqualsCharsIgnoreCase(value, "ADJ")) return AdjustiveSize;
-        else                                                  return ContentSize;
+             if (value == nullptr)                                   return ContentSize;
+        else if (String::EqualsCharsIgnoreCase(value, "ABS"))        return AbsoluteSize;
+        else if (String::EqualsCharsIgnoreCase(value, "REL"))        return RelativeSize;
+        else if (String::EqualsCharsIgnoreCase(value, "ADJ"))        return AdjustiveSize;
+        else if (String::EqualsCharsIgnoreCase(value, "CONTENTADJ")) return ContentAdjustiveSize;
+        else                                                         return ContentSize;
     }
 
     const char* UIVisual::ConvertFromSizeModeToString(SizeMode value)
     {
         switch (value)
         {
-            case AbsoluteSize:  return "ABS";
-            case RelativeSize:  return "REL";
-            case AdjustiveSize: return "ADJ";
-            default:            return "CONTENT";
+            case AbsoluteSize:         return "ABS";
+            case RelativeSize:         return "REL";
+            case AdjustiveSize:        return "ADJ";
+            case ContentAdjustiveSize: return "CONTENTADJ";
+            default:                   return "CONTENT";
         }
     }
 

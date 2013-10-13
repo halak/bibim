@@ -130,7 +130,7 @@ namespace Bibim
 
     void UIVisualVisitor::Ready(UIVisual* target)
     {
-        currentBounds = target->ComputeBounds(*this);
+        currentBounds = target->ComputeBounds(GetCurrentBounds());
         currentClippedBounds = currentBounds;
     }
 
@@ -154,7 +154,7 @@ namespace Bibim
         const Matrix4 oldParentTransform = parentTransform;
         const Matrix4 oldParentTransformInv = parentTransformInv;
 
-        const RectF bounds = target->ComputeBounds(*this);
+        const RectF bounds = target->ComputeBounds(GetCurrentBounds());
 
         currentVisual = target;
         currentOpacity *= target->GetOpacity();

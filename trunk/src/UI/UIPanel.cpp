@@ -104,6 +104,16 @@ namespace Bibim
         return nullptr;
     }
 
+    Vector2 UIPanel::GetContentSize()
+    {
+        RectF mergedBounds = RectF::Empty;
+
+        for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+            mergedBounds = RectF::Union(mergedBounds, (*it)->ComputeBounds(RectF::Empty));
+
+        return Vector2(mergedBounds.GetRight(), mergedBounds.GetBottom());
+    }
+
     int UIPanel::GetChildIndex(UIVisual* item) const
     {
         if (item == nullptr || item->GetParent() != this)

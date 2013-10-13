@@ -316,7 +316,19 @@ namespace Bibim
                         else
                             return String::CFormat("C%d%%", static_cast<int>(value * 100.0f));
                     case UIVisual::AdjustiveSize:
-                        return String::CFormat("parent+%d", static_cast<int>(value));
+                        if (value > 0)
+                            return String::CFormat("parent+%d", static_cast<int>(value));
+                        else if (value < 0)
+                            return String::CFormat("parent%d", static_cast<int>(value));
+                        else
+                            return String::CFormat("100%%");
+                    case UIVisual::ContentAdjustiveSize:
+                        if (value > 0)
+                            return String::CFormat("content+%d", static_cast<int>(value));
+                        else if (value < 0)
+                            return String::CFormat("content%d", static_cast<int>(value));
+                        else
+                            return String::CFormat("auto");
                     default:
                         return "Unknown";
                 }
@@ -326,7 +338,7 @@ namespace Bibim
             {
                 const String x = Humanize(visual->GetX(), visual->GetXMode());
                 const String y = Humanize(visual->GetY(), visual->GetYMode());
-                const String width = Humanize(visual->GetWidth(), visual->GetHeightMode());
+                const String width = Humanize(visual->GetWidth(), visual->GetWidthMode());
                 const String height = Humanize(visual->GetHeight(), visual->GetHeightMode());
 
                 sout << "{";
