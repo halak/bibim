@@ -109,7 +109,11 @@ namespace Bibim
         RectF mergedBounds = RectF::Empty;
 
         for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
-            mergedBounds = RectF::Union(mergedBounds, (*it)->ComputeBounds(RectF::Empty));
+        {
+            UIVisual* item = (*it);
+            if (item->IsVisible())
+                mergedBounds = RectF::Union(mergedBounds, item->ComputeBounds(RectF::Empty));
+        }
 
         return Vector2(mergedBounds.GetRight(), mergedBounds.GetBottom());
     }
