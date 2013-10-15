@@ -40,7 +40,8 @@ namespace Bibim
 
     void UIImage::SetTexture(Texture2D* value)
     {
-        source = new Image(value);
+        if (value)
+            source = new Image(value);
     }
 
     Vector2 UIImage::GetContentSize()
