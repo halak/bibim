@@ -481,9 +481,8 @@ namespace Bibim.Asset.Pipeline.Recipes
                     {
                         { "Lifetime", FloatGraphToValue(emitter.Life, emitter.LifeVariation, null, effect.GlobalLife, (x) => x / 1000.0f) },
                         { "Opacity", FloatGraphToValue(new Graph() { new Keyframe(0.0f, 1.0f) }, null, emitter.AlphaOvertime, effect.GlobalAlpha) },
-                        { "AngularSpeed", FloatGraphToValue(emitter.BaseSpin, emitter.SpinVariation, emitter.SpinOvertime, effect.GlobalSpin) },
+                        { "Spin", FloatGraphToValue(emitter.BaseSpin, emitter.SpinVariation, emitter.SpinOvertime, effect.GlobalSpin) },
                         { "Stretch", FloatGraphToValue(new Graph() { new Keyframe(0.0f, 1.0f) }, null, emitter.StretchOvertime, effect.GlobalStretch) },
-                        { "MotionRandomness", FloatGraphToValue(emitter.Direction, emitter.DirectionVariation, emitter.DirectionVariationOvertime, null) },
                         { "Emitter", groupEmitter },
                     };
 

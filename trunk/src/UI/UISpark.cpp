@@ -212,7 +212,6 @@ namespace Bibim
     static const ModelParam PARAM_ANGLEAXIS = PARAM_CUSTOM_0;
     static const ModelParam PARAM_SIZEY = PARAM_CUSTOM_0;
     static const ModelParam PARAM_STRETCH = PARAM_CUSTOM_1;
-    static const ModelParam PARAM_MOTION_RANDOMNESS = PARAM_CUSTOM_2;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -661,7 +660,7 @@ namespace Bibim
         modelFlags.Set(t, "Size", FLAG_SIZE);
         modelFlags.Set(t, "Mass", FLAG_MASS);
         modelFlags.Set(t, "Angle", FLAG_ANGLE);
-        modelFlags.Set(t, "AngularSpeed", FLAG_ROTATION_SPEED);
+        modelFlags.Set(t, "Spin", FLAG_ROTATION_SPEED);
         modelFlags.Set(t, "Image", FLAG_TEXTURE_INDEX);
 
         int angleAxisCount = 0;
@@ -713,13 +712,6 @@ namespace Bibim
             modelFlags.Set(t, "Stretch", FLAG_CUSTOM_1);
         }
 
-        bool motionRandomnessEnabled = false;
-        if (t.has("MotionRandomness"))
-        {
-            motionRandomnessEnabled = true;
-            modelFlags.Set(t, "MotionRandomness", FLAG_CUSTOM_2);
-        }
-
         if (t.has("RandomColors"))
         {
             modelFlags.Unset(FLAG_RED | FLAG_GREEN | FLAG_BLUE);
@@ -737,7 +729,7 @@ namespace Bibim
         SetModelParams::Do(model, t, "Size", PARAM_SIZE);
         SetModelParams::Do(model, t, "Mass", PARAM_MASS);
         SetModelParams::Do(model, t, "Angle", PARAM_ANGLE);
-        SetModelParams::Do(model, t, "AngularSpeed", PARAM_ROTATION_SPEED);
+        SetModelParams::Do(model, t, "Spin", PARAM_ROTATION_SPEED);
         SetModelParams::Do(model, t, "Image", PARAM_TEXTURE_INDEX);
 
         if (angleAxisCount > 1)
@@ -747,8 +739,6 @@ namespace Bibim
             SetModelParams::Do(model, t, "SizeVertical", PARAM_SIZEY);
         if (stretchEnabled)
             SetModelParams::Do(model, t, "Stretch", PARAM_STRETCH);
-        if (motionRandomnessEnabled)
-            SetModelParams::Do(model, t, "MotionRandomness", PARAM_MOTION_RANDOMNESS);
 
         MinMax lifetime(t, "Lifetime");
         if (lifetime.IsValid)
@@ -847,15 +837,23 @@ namespace Bibim
             }
         }
 
-        if (sizeVerticalEnabled || stretchEnabled)
+        if (sizeVerticalEnabled || stretchEnabled || t.has("Origin"))
         {
+            Vector2 origin = Vector2(0.5f, 0.5f);
+            if (t.has("Origin"))
+            {
+                lua_tinker::table originData = t.get<lua_tinker::table>("Origin");
+                origin.X = originData.get<float>(1);
+                origin.Y = originData.get<float>(2);
+            }
+
             bool angleFromDirectionEnabled = false;
             if (const char* angle = t.get<const char*>("Angle"))
             {
                 static const String Direction = "Direction";
                 angleFromDirectionEnabled = Direction.EqualsIgnoreCase(angle);
             }
-            group->setRenderer(TimelineFXRenderer::create(Vector2(0.5f, 0.5f),
+            group->setRenderer(TimelineFXRenderer::create(origin,
                                                           angleFromDirectionEnabled,
                                                           sizeVerticalEnabled,
                                                           stretchEnabled));
@@ -923,9 +921,6 @@ namespace Bibim
             static_cast<SparkRenderer*>(group->getRenderer())->MoveBirthHandlers(birthHandlers);
             group->setCustomBirth(&SparkRenderer::CustomBirthCallback);
         }
-
-        if (motionRandomnessEnabled)
-            group->setCustomUpdate(&UpdateMotionRandomness);
 
         return group;
     }
@@ -1201,18 +1196,6 @@ namespace Bibim
         }
 
         return Point::create(position);
-    }
-
-    bool UISpark::UpdateMotionRandomness(SPK::Particle& particle, float dt)
-    {
-        const float motionRandomness = particle.getParamCurrentValue(PARAM_MOTION_RANDOMNESS);
-        if (motionRandomness != 0.0f)
-        {
-            particle.velocity().x += Math::Random(-2000.0f, +2000.0f) * motionRandomness * dt;
-            particle.velocity().y += Math::Random(-2000.0f, +2000.0f) * motionRandomness * dt;
-        }
-
-        return false;
     }
 
     void UISpark::OnRead(ComponentStreamReader& reader)
@@ -1500,11 +1483,14 @@ namespace Bibim
             angle = angleFromDirectionEnabled ? Math::Atan2(p.velocity().y, p.velocity().x) : p.getParamCurrentValue(PARAM_ANGLE);
             scaleX = PARTICLE_SIZE(p);
             scaleY = nonUniformSizeEnabled ? p.getParamCurrentValue(PARAM_SIZEY) : scaleX;
+            
+            /*
             if (stretchEnabled)
             {
                 scaleX *= (Math::Sqrt(p.velocity().getSqrNorm()) / 100.0f) * 
                           (p.getParamCurrentValue(PARAM_STRETCH));
             }
+            */
 
             context.DrawUnclipped(PARTICLE_POSITION(p),
                                   angle,
