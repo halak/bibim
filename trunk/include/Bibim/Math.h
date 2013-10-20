@@ -28,6 +28,9 @@ namespace Bibim
             static const float PiOver4; ///< \f$\frac{pi}{4}\f$
             static const float TwoPi;   ///< \f$2\pi\f$
 
+            static inline float ToRadian(float degree);
+            static inline float ToDegree(float radian);
+
             /// 입력한 값의 제곱근을 반환합니다. \f$sqrt(x)\f$
             static float Sqrt(float value);
             /// x를 y만큼 제곱하여 반환합니다. \f$x^y\f$
@@ -141,6 +144,18 @@ namespace Bibim
             static Vector4 Random(Vector4 a, Vector4 b);
             static Color   Random(Color a, Color b);
     };
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+    float Math::ToRadian(float degree)
+    {
+        return degree / 180.0f * Math::Pi;
+    }
+
+    float Math::ToDegree(float radian)
+    {
+        return radian / Math::Pi * 180.0f;
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -265,6 +265,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\Typography\FontFace.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\FontFace.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\Typography\FontLibrary.cpp"
 					>
 				</File>
@@ -404,22 +412,6 @@
 			<Filter
 				Name="Animation"
 				>
-				<File
-					RelativePath="..\..\src\Animation\Spark.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\Spark.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Animation\SparkSet.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\SparkSet.h"
-					>
-				</File>
 				<File
 					RelativePath="..\..\src\Animation\Sprite.cpp"
 					>
@@ -1143,6 +1135,22 @@
 							>
 						</File>
 						<File
+							RelativePath="..\..\src\UI\UIForceGridEffect.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\include\Bibim\UIForceGridEffect.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\src\UI\UIForceGridEffect.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\include\Bibim\UIForceGridEffect.h"
+							>
+						</File>
+						<File
 							RelativePath="..\..\src\UI\UIGeometryEffect.cpp"
 							>
 						</File>
@@ -1221,6 +1229,14 @@
 					</File>
 					<File
 						RelativePath="..\..\include\Bibim\UIButton.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\UI\UICCParticleSystem.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\include\Bibim\UICCParticleSystem.h"
 						>
 					</File>
 					<File
@@ -1895,11 +1911,51 @@
 				Name="GFX"
 				>
 				<File
+					RelativePath="..\..\src\GFX\CCParticleEmitter.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\CCParticleEmitter.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\GFX\CCParticleSystem.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\CCParticleSystem.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\GFX\CCParticleSystemSet.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\CCParticleSystemSet.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\GFX\Spark.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\Spark.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\GFX\SparkParticleEngine.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\include\Bibim\SparkParticleEngine.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\GFX\SparkSet.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\SparkSet.h"
 					>
 				</File>
 			</Filter>

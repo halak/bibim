@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using Bibim.Animation;
+using Bibim.GFX;
 using Bibim.UI;
 using Bibim.UI.Visuals;
 using Image = Bibim.Graphics.Image;

@@ -1,4 +1,4 @@
-// Automatically generated in 2013-10-06 10:41:36.296627
+// Automatically generated in 2013-10-20 23:47:21.855598
 
 #include <zlib.h>
 #include "Animation/Ease.cpp"
@@ -11,8 +11,6 @@
 #include "Animation/EvalTimeflow.cpp"
 #include "Animation/EvalUnitRandom.cpp"
 #include "Animation/OscillationCurve.cpp"
-#include "Animation/Spark.cpp"
-#include "Animation/SparkSet.cpp"
 #include "Animation/Sprite.cpp"
 #include "Animation/SpriteSet.cpp"
 #include "Asset/AssetLoadingTask.cpp"
@@ -98,7 +96,12 @@
 #include "Gameplay/PathFinder.cpp"
 #include "Gameplay/RestorableCommand.cpp"
 #include "Gameplay/SpatialObject2D.cpp"
+#include "GFX/CCParticleEmitter.cpp"
+#include "GFX/CCParticleSystem.cpp"
+#include "GFX/CCParticleSystemSet.cpp"
+#include "GFX/Spark.cpp"
 #include "GFX/SparkParticleEngine.cpp"
+#include "GFX/SparkSet.cpp"
 #include "Graphics/BitMask.cpp"
 #include "Graphics/DynamicTexture2D.DX9.cpp"
 #include "Graphics/DynamicTexture2D.GLES2.cpp"
@@ -161,6 +164,7 @@
 #include "Time/UpdateableGameModule.cpp"
 #include "Typography/Font.cpp"
 #include "Typography/FontCache.cpp"
+#include "Typography/FontFace.cpp"
 #include "Typography/FontLibrary.cpp"
 #include "Typography/FontString.cpp"
 #include "Typography/Glyph.cpp"
@@ -173,6 +177,7 @@
 #include "UI/UIBlendingEffect.cpp"
 #include "UI/UIBoundsContext.cpp"
 #include "UI/UIButton.cpp"
+#include "UI/UICCParticleSystem.cpp"
 #include "UI/UICheckBox.cpp"
 #include "UI/UIColorMatrixEffect.cpp"
 #include "UI/UIDocument.cpp"
@@ -188,6 +193,7 @@
 #include "UI/UIEventHandler.cpp"
 #include "UI/UIEventID.cpp"
 #include "UI/UIEventMap.cpp"
+#include "UI/UIForceGridEffect.cpp"
 #include "UI/UIFunctionEventHandler.cpp"
 #include "UI/UIFunctionTable.cpp"
 #include "UI/UIGamePadEventArgs.cpp"

@@ -20,6 +20,8 @@ namespace Bibim
         inline Vector4(const Vector3& original, float w);
         inline Vector4(const Vector4& original);
 
+        inline Vector4 Multiply(Vector4 right) const;
+
         inline Vector4  operator + () const;
         inline Vector4  operator - () const;
 
@@ -72,6 +74,11 @@ namespace Bibim
     Vector4::Vector4(const Vector4& original)
         : X(original.X), Y(original.Y), Z(original.Z), W(original.W)
     {
+    }
+
+    Vector4 Vector4::Multiply(Vector4 right) const
+    {
+        return Vector4(X * right.X, Y * right.Y, Z * right.Z, W * right.W);
     }
 
     Vector4 Vector4::operator + () const

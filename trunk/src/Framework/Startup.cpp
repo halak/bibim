@@ -28,6 +28,8 @@ namespace Bibim
 
         GameAssetFactory::AddEntry<Image>();
         GameAssetFactory::AddEntry<ImageSet>();
+        GameAssetFactory::AddEntry<CCParticleSystem>();
+        GameAssetFactory::AddEntry<CCParticleSystemSet>();
         GameAssetFactory::AddEntry<Sprite>();
         GameAssetFactory::AddEntry<SpriteSet>();
         GameAssetFactory::AddEntry<Spark>();

@@ -834,11 +834,32 @@
     <ClCompile Include="..\..\src\Foundation\Random.cpp">
       <Filter>01. Foundation\Mathematics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Animation\Spark.cpp">
-      <Filter>03. Game\Animation</Filter>
+    <ClCompile Include="..\..\src\Typography\FontFace.cpp">
+      <Filter>03. Game\Typography</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Animation\SparkSet.cpp">
-      <Filter>03. Game\Animation</Filter>
+    <ClCompile Include="..\..\src\GFX\Spark.cpp">
+      <Filter>03. Game\GFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GFX\SparkSet.cpp">
+      <Filter>03. Game\GFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GFX\CCParticleEmitter.cpp">
+      <Filter>03. Game\GFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GFX\CCParticleSystem.cpp">
+      <Filter>03. Game\GFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GFX\CCParticleSystemSet.cpp">
+      <Filter>03. Game\GFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\UI\UICCParticleSystem.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\UI\UIForceGridEffect.cpp">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\UI\UIForceGridEffect.cpp">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1671,11 +1692,32 @@
     <ClInclude Include="..\..\include\Bibim\Random.h">
       <Filter>01. Foundation\Mathematics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\SparkSet.h">
-      <Filter>03. Game\Animation</Filter>
+    <ClInclude Include="..\..\include\Bibim\FontFace.h">
+      <Filter>03. Game\Typography</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Spark.h">
-      <Filter>03. Game\Animation</Filter>
+      <Filter>03. Game\GFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\SparkSet.h">
+      <Filter>03. Game\GFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\CCParticleEmitter.h">
+      <Filter>03. Game\GFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\CCParticleSystem.h">
+      <Filter>03. Game\GFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\CCParticleSystemSet.h">
+      <Filter>03. Game\GFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\UICCParticleSystem.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\UIForceGridEffect.h">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\UIForceGridEffect.h">
+      <Filter>03. Game\UI\Effects\Geometry</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

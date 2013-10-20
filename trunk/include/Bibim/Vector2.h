@@ -17,6 +17,7 @@ namespace Bibim
         inline Vector2(const Vector2& original);
         
         inline float Dot(Vector2 right) const;
+        inline Vector2 Multiply(Vector2 right) const;
 
         float Normalize();
         void Rotate(float rotation);
@@ -84,6 +85,11 @@ namespace Bibim
     float Vector2::Dot(Vector2 right) const
     {
         return (X * right.X) + (Y * right.Y);
+    }
+
+    Vector2 Vector2::Multiply(Vector2 right) const
+    {
+        return Vector2(X * right.X, Y * right.Y);
     }
 
     Vector2 Vector2::operator + () const

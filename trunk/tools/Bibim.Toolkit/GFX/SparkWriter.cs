@@ -5,7 +5,7 @@ using Bibim.Asset;
 using Bibim.Asset.Pipeline;
 using Bibim.IO;
 
-namespace Bibim.Animation
+namespace Bibim.GFX
 {
     [GameAssetWriter(typeof(Spark))]
     public sealed class SparkWriter : GameAssetWriter<Spark>
