@@ -810,6 +810,8 @@ namespace Bibim
             lua_tinker::class_def<UIForceGridEffect>(L, "ApplyImplosiveForce3D", &UIForceGridEffect::ApplyImplosiveForce3D);
             lua_tinker::class_def<UIForceGridEffect>(L, "ApplyExplosiveForce2D", &UIForceGridEffect::ApplyExplosiveForce2D);
             lua_tinker::class_def<UIForceGridEffect>(L, "ApplyExplosiveForce3D", &UIForceGridEffect::ApplyExplosiveForce3D);
+            lua_tinker::class_def<UIForceGridEffect>(L, "GetFrameSpeed", &UIForceGridEffect::GetFrameSpeed);
+            lua_tinker::class_def<UIForceGridEffect>(L, "SetFrameSpeed", &UIForceGridEffect::SetFrameSpeed);
 
         lua_tinker::class_add<UIPixelEffect>(L, "UIPixelEffect");
             lua_tinker::class_inh<UIPixelEffect, UIElement>(L);
