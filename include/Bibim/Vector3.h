@@ -21,6 +21,7 @@ namespace Bibim
 
         inline float   Dot(Vector3 right) const;
         inline Vector3 Cross(Vector3 right) const;
+        inline Vector3 Multiply(Vector3 right) const;
 
         float Normalize();
         void Rotate(Vector3 axis, float rotation);
@@ -95,6 +96,11 @@ namespace Bibim
         return Vector3(Y * right.Z - Z * right.Y,
                        Z * right.X - X * right.Z,
                        X * right.Y - Y * right.X);
+    }
+
+    Vector3 Vector3::Multiply(Vector3 right) const
+    {
+        return Vector3(X * right.X, Y * right.Y, Z * right.Z);
     }
 
     Vector3 Vector3::operator + () const

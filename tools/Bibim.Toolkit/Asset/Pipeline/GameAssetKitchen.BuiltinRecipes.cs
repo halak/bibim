@@ -56,6 +56,8 @@ namespace Bibim.Asset.Pipeline
                     return CreatePSDSpriteSetRecipe(data.Get<string>("source") ?? "$(AssetName).psd");
                 case "sparkset":
                     return CreateSparkSetRecipe(data.Get<string>("source") ?? "$(AssetName).eff");
+                case "dirparticle":
+                    return CreateDirectoryParticleSystemSetRecipe(data.Get<string>("source") ?? "$(AssetName)");
                 case "hlsl":
                     return CreateCompileHLSLShaderEffect(
                         data.Get<string>("base") ?? "UI.fx",
@@ -239,6 +241,20 @@ namespace Bibim.Asset.Pipeline
                 {
                     Input = input,
                     UniformSize = uniformSize,
+                },
+                BitmapSheetSize = new System.Drawing.Size(1024, 1024),
+                BitmapSheetClusterSize = new System.Drawing.Size(16, 16),
+                TextureOutput = "gen\\$(AssetName)_TEXTURE{0}",
+            });
+        }
+
+        private static GameAssetRecipe CreateDirectoryParticleSystemSetRecipe(string input)
+        {
+            return Wrap(new ExportParticleSystemSet()
+            {
+                Input = new DirectoryToParticleSystemSet()
+                {
+                    Input = input,
                 },
                 BitmapSheetSize = new System.Drawing.Size(1024, 1024),
                 BitmapSheetClusterSize = new System.Drawing.Size(16, 16),

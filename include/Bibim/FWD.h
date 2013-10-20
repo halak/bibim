@@ -85,8 +85,6 @@ namespace Bibim
         // Animation
             BBForwardDeclareSmartPointerClass(Sprite);
             BBForwardDeclareSmartPointerClass(SpriteSet);
-            BBForwardDeclareSmartPointerClass(Spark);
-            BBForwardDeclareSmartPointerClass(SparkSet);
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Evaluation
                 BBForwardDeclareSmartPointerClass(EvalBase);
@@ -166,7 +164,12 @@ namespace Bibim
             BBForwardDeclareSmartPointerClass(SpatialObject2D);
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // GFX
+            class CCParticleEmitter;
+            BBForwardDeclareSmartPointerClass(CCParticleSystem);
+            BBForwardDeclareSmartPointerClass(CCParticleSystemSet);
             class SparkParticleEngine;
+            BBForwardDeclareSmartPointerClass(Spark);
+            BBForwardDeclareSmartPointerClass(SparkSet);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Graphics
@@ -303,6 +306,7 @@ namespace Bibim
                         BBForwardDeclareSmartPointerClass(UIRect);
                         BBForwardDeclareSmartPointerClass(UIRoundedRect);
                     BBForwardDeclareSmartPointerClass(UIVideo);
+                    BBForwardDeclareSmartPointerClass(UICCParticleSystem);
                     BBForwardDeclareSmartPointerClass(UISpark);
 }
 

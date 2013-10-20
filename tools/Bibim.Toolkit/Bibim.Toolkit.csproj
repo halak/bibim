@@ -269,6 +269,8 @@
     <Compile Include="Asset\Pipeline\NetworkGameAssetServer.cs" />
     <Compile Include="Asset\Pipeline\Recipes\CompileHexData.cs" />
     <Compile Include="Asset\Pipeline\Recipes\CompileLuaScript.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\DirectoryToParticleSystemSet.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\ExportParticleSystemSet.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ExportSparkSet.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ExportTemplate.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ImportTimelineFX.cs" />
@@ -285,6 +287,10 @@
     <Compile Include="GameModuleNode.cs" />
     <Compile Include="GameModuleStatus.cs" />
     <Compile Include="GameModuleTree.cs" />
+    <Compile Include="GFX\ParticleSystem.cs" />
+    <Compile Include="GFX\ParticleSystemSet.cs" />
+    <Compile Include="GFX\ParticleSystemSetWriter.cs" />
+    <Compile Include="GFX\ParticleSystemWriter.cs" />
     <Compile Include="Graphics\BitmapExtension.cs" />
     <Compile Include="Asset\Pipeline\Recipes\BitmapToMaskTexture2D.cs" />
     <Compile Include="Asset\Pipeline\Recipes\CompileGLSLShaderEffect.cs" />
@@ -332,10 +338,10 @@
     <Compile Include="Graphics\SourceTexture2D.cs" />
     <Compile Include="Graphics\SourceTexture2DWriter.cs" />
     <Compile Include="Graphics\SourceTexture2DCookingTag.cs" />
-    <Compile Include="Animation\Spark.cs" />
-    <Compile Include="Animation\SparkSet.cs" />
-    <Compile Include="Animation\SparkSetWriter.cs" />
-    <Compile Include="Animation\SparkWriter.cs" />
+    <Compile Include="GFX\Spark.cs" />
+    <Compile Include="GFX\SparkSet.cs" />
+    <Compile Include="GFX\SparkSetWriter.cs" />
+    <Compile Include="GFX\SparkWriter.cs" />
     <Compile Include="Graphics\Texture2D.cs" />
     <Compile Include="Graphics\Window.cs" />
     <Compile Include="Input\IME.cs" />

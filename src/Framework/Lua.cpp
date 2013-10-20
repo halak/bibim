@@ -41,6 +41,7 @@ namespace Bibim
     void Lua::LoadLibraries()
     {
         luaL_requiref(state, "", &luaopen_base, 1);
+        luaL_requiref(state, LUA_COLIBNAME,  &luaopen_coroutine, 1);
         luaL_requiref(state, LUA_TABLIBNAME,  &luaopen_table, 1);
         luaL_requiref(state, LUA_STRLIBNAME,  &luaopen_string, 1);
         luaL_requiref(state, LUA_MATHLIBNAME, &luaopen_math, 1);
@@ -436,6 +437,11 @@ namespace Bibim
         lua_tinker::class_add<SpriteSet>(L, "SpriteSet");
             lua_tinker::class_inh<SpriteSet, GameAsset>(L);
             lua_tinker::class_def<SpriteSet>(L, "Find", &SpriteSet::Find);
+        lua_tinker::class_add<CCParticleSystem>(L, "CCParticleSystem");
+            lua_tinker::class_inh<CCParticleSystem, GameAsset>(L);
+        lua_tinker::class_add<CCParticleSystemSet>(L, "CCParticleSystemSet");
+            lua_tinker::class_inh<CCParticleSystemSet, GameAsset>(L);
+            lua_tinker::class_def<CCParticleSystemSet>(L, "Find", &CCParticleSystemSet::Find);
         lua_tinker::class_add<Spark>(L, "Spark");
             lua_tinker::class_inh<Spark, GameAsset>(L);
             lua_tinker::class_def<Spark>(L, "GetDescriptor", &Spark::GetDescriptor);
@@ -753,6 +759,13 @@ namespace Bibim
             lua_tinker::class_def<UISpark>(L, "SetTimeline", &UISpark::SetTimeline);
             lua_tinker::class_def<UISpark>(L, "GetAutoRemove", &UISpark::GetAutoRemove);
             lua_tinker::class_def<UISpark>(L, "SetAutoRemove", &UISpark::SetAutoRemove);
+        lua_tinker::class_add<UICCParticleSystem>(L, "UICCParticleSystem");
+            lua_tinker::class_inh<UICCParticleSystem, UIVisual>(L);
+            lua_tinker::class_con<UICCParticleSystem>(L, lua_tinker::constructor<UICCParticleSystem>);
+            lua_tinker::class_def<UICCParticleSystem>(L, "GetSource", &UICCParticleSystem::GetSource);
+            lua_tinker::class_def<UICCParticleSystem>(L, "SetSource", &UICCParticleSystem::SetSource);
+            lua_tinker::class_def<UICCParticleSystem>(L, "GetTimeline", &UICCParticleSystem::GetTimeline);
+            lua_tinker::class_def<UICCParticleSystem>(L, "SetTimeline", &UICCParticleSystem::SetTimeline);
         lua_tinker::class_add<UILiveWindow>(L, "UILiveWindow");
             lua_tinker::class_inh<UILiveWindow, UIWindow>(L);
             lua_tinker::class_con<UILiveWindow>(L, lua_tinker::constructor<UILiveWindow>);
@@ -785,6 +798,18 @@ namespace Bibim
             lua_tinker::class_def<UIAfterImageEffect>(L, "SetTotalFrames", &UIAfterImageEffect::SetTotalFrames);
             lua_tinker::class_def<UIAfterImageEffect>(L, "GetActive", &UIAfterImageEffect::GetActive);
             lua_tinker::class_def<UIAfterImageEffect>(L, "SetActive", &UIAfterImageEffect::SetActive);
+        lua_tinker::class_add<UIForceGridEffect>(L, "UIForceGridEffect");
+            lua_tinker::class_inh<UIForceGridEffect, UIGeometryEffect>(L);
+            lua_tinker::class_con<UIForceGridEffect>(L, lua_tinker::constructor<UIForceGridEffect>);
+            lua_tinker::class_def<UIForceGridEffect>(L, "Initialize", &UIForceGridEffect::InitializeXY);
+            lua_tinker::class_def<UIForceGridEffect>(L, "GetTimeline", &UIForceGridEffect::GetTimeline);
+            lua_tinker::class_def<UIForceGridEffect>(L, "SetTimeline", &UIForceGridEffect::SetTimeline);
+            lua_tinker::class_def<UIForceGridEffect>(L, "ApplyDirectedForce2D", &UIForceGridEffect::ApplyDirectedForce2D);
+            //lua_tinker::class_def<UIForceGridEffect>(L, "ApplyDirectedForce3D", &UIForceGridEffect::ApplyDirectedForce3D);
+            lua_tinker::class_def<UIForceGridEffect>(L, "ApplyImplosiveForce2D", &UIForceGridEffect::ApplyImplosiveForce2D);
+            lua_tinker::class_def<UIForceGridEffect>(L, "ApplyImplosiveForce3D", &UIForceGridEffect::ApplyImplosiveForce3D);
+            lua_tinker::class_def<UIForceGridEffect>(L, "ApplyExplosiveForce2D", &UIForceGridEffect::ApplyExplosiveForce2D);
+            lua_tinker::class_def<UIForceGridEffect>(L, "ApplyExplosiveForce3D", &UIForceGridEffect::ApplyExplosiveForce3D);
 
         lua_tinker::class_add<UIPixelEffect>(L, "UIPixelEffect");
             lua_tinker::class_inh<UIPixelEffect, UIElement>(L);

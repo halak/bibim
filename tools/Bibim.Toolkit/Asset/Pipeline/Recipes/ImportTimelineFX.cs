@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
-using Bibim.Animation;
+using Bibim.GFX;
 using Bibim.Graphics;
 using Ionic.Zip;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;

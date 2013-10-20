@@ -5,7 +5,7 @@ using System.Text;
 using Bibim.Asset;
 using Bibim.Graphics;
 
-namespace Bibim.Animation
+namespace Bibim.GFX
 {
     [ClassID('S', 'P', 'K', 'S')]
     public sealed class SparkSet : GameAsset

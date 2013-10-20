@@ -1,8 +1,8 @@
 #pragma once
-#ifndef BIBIM_ALL_6B086DA4_EBC9_48FD_B081_9547E6BD5FCA_H__
-#define BIBIM_ALL_6B086DA4_EBC9_48FD_B081_9547E6BD5FCA_H__
+#ifndef BIBIM_ALL_54DC6450_1EBB_4E53_BC7D_81DBD56C3E3C_H__
+#define BIBIM_ALL_54DC6450_1EBB_4E53_BC7D_81DBD56C3E3C_H__
 
-// Automatically generated in 2013-10-06 10:41:36.572643
+// Automatically generated in 2013-10-20 23:47:21.884600
 
 #include "AlarmClock.h"
 #include "All.h"
@@ -25,6 +25,9 @@
 #include "BitMask.h"
 #include "BlendMode.h"
 #include "BoxShape2D.h"
+#include "CCParticleEmitter.h"
+#include "CCParticleSystem.h"
+#include "CCParticleSystemSet.h"
 #include "CheckedRelease.h"
 #include "Clipboard.Android.h"
 #include "Clipboard.h"
@@ -77,6 +80,7 @@
 #include "FileStream.Windows.h"
 #include "Font.h"
 #include "FontCache.h"
+#include "FontFace.h"
 #include "FontLibrary.h"
 #include "FontString.h"
 #include "ForkStream.h"
@@ -218,6 +222,7 @@
 #include "UIBlendingEffect.h"
 #include "UIBoundsContext.h"
 #include "UIButton.h"
+#include "UICCParticleSystem.h"
 #include "UICheckBox.h"
 #include "UIColorMatrixEffect.h"
 #include "UIDocument.h"
@@ -233,6 +238,7 @@
 #include "UIEventHandler.h"
 #include "UIEventID.h"
 #include "UIEventMap.h"
+#include "UIForceGridEffect.h"
 #include "UIFunctionEventHandler.h"
 #include "UIFunctionTable.h"
 #include "UIGamePadEventArgs.h"

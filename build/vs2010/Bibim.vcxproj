@@ -108,8 +108,6 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\Animation\Spark.cpp" />
-    <ClCompile Include="..\..\src\Animation\SparkSet.cpp" />
     <ClCompile Include="..\..\src\Asset\AssetLoadingTask.cpp" />
     <ClCompile Include="..\..\src\Asset\AssetStreamReader.cpp" />
     <ClCompile Include="..\..\src\Asset\FileAssetProvider.Default.cpp" />
@@ -146,6 +144,11 @@
     <ClCompile Include="..\..\src\Framework\Preferences.cpp" />
     <ClCompile Include="..\..\src\Framework\StandardGame.cpp" />
     <ClCompile Include="..\..\src\Framework\Startup.cpp" />
+    <ClCompile Include="..\..\src\GFX\CCParticleEmitter.cpp" />
+    <ClCompile Include="..\..\src\GFX\CCParticleSystem.cpp" />
+    <ClCompile Include="..\..\src\GFX\CCParticleSystemSet.cpp" />
+    <ClCompile Include="..\..\src\GFX\Spark.cpp" />
+    <ClCompile Include="..\..\src\GFX\SparkSet.cpp" />
     <ClCompile Include="..\..\src\Graphics\GLES2.cpp" />
     <ClCompile Include="..\..\src\Graphics\GraphicsDeviceBase.cpp" />
     <ClCompile Include="..\..\src\Graphics\JPEGReader.cpp" />
@@ -169,6 +172,7 @@
     <ClCompile Include="..\..\src\Time\Clock.Unix.cpp" />
     <ClCompile Include="..\..\src\Typography\Font.cpp" />
     <ClCompile Include="..\..\src\Typography\FontCache.cpp" />
+    <ClCompile Include="..\..\src\Typography\FontFace.cpp" />
     <ClCompile Include="..\..\src\Typography\FontLibrary.cpp" />
     <ClCompile Include="..\..\src\Typography\FontString.cpp" />
     <ClCompile Include="..\..\src\Typography\Glyph.cpp" />
@@ -230,10 +234,12 @@
     <ClCompile Include="..\..\src\Time\TimelineGameModule.cpp" />
     <ClCompile Include="..\..\src\Time\UpdateableGameComponent.cpp" />
     <ClCompile Include="..\..\src\Time\UpdateableGameModule.cpp" />
+    <ClCompile Include="..\..\src\UI\UICCParticleSystem.cpp" />
     <ClCompile Include="..\..\src\UI\UIDomain.cpp" />
     <ClCompile Include="..\..\src\UI\UIEditText.cpp" />
     <ClCompile Include="..\..\src\UI\UIElement.cpp" />
     <ClCompile Include="..\..\src\UI\UIEllipse.cpp" />
+    <ClCompile Include="..\..\src\UI\UIForceGridEffect.cpp" />
     <ClCompile Include="..\..\src\UI\UILayout.cpp" />
     <ClCompile Include="..\..\src\UI\UILiveWindow.cpp" />
     <ClCompile Include="..\..\src\UI\UIRenderer.DX9.cpp" />
@@ -347,9 +353,13 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\Bibim\AssetLoadingTask.h" />
     <ClInclude Include="..\..\include\Bibim\AssetStreamReader.h" />
+    <ClInclude Include="..\..\include\Bibim\CCParticleEmitter.h" />
+    <ClInclude Include="..\..\include\Bibim\CCParticleSystem.h" />
+    <ClInclude Include="..\..\include\Bibim\CCParticleSystemSet.h" />
     <ClInclude Include="..\..\include\Bibim\Dashboard.h" />
     <ClInclude Include="..\..\include\Bibim\FileAssetProvider.Default.h" />
     <ClInclude Include="..\..\include\Bibim\FileAssetProviderBase.h" />
+    <ClInclude Include="..\..\include\Bibim\FontFace.h" />
     <ClInclude Include="..\..\include\Bibim\GameAsset.h" />
     <ClInclude Include="..\..\include\Bibim\GameAssetFactory.h" />
     <ClInclude Include="..\..\include\Bibim\GameAssetStorage.h" />
@@ -448,6 +458,7 @@
     <ClInclude Include="..\..\include\Bibim\SegmentShape2D.h" />
     <ClInclude Include="..\..\include\Bibim\Shape2D.h" />
     <ClInclude Include="..\..\include\Bibim\SphereShape2D.h" />
+    <ClInclude Include="..\..\include\Bibim\UICCParticleSystem.h" />
     <ClInclude Include="..\..\include\Bibim\UILiveWindow.h" />
     <ClInclude Include="..\..\include\Bibim\UserShape2D.h" />
     <ClInclude Include="..\..\include\Bibim\BatchCommand.h" />

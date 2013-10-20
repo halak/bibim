@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Bibim.Asset;
 
-namespace Bibim.Animation
+namespace Bibim.GFX
 {
     [ClassID('A', 'S', 'P', 'K')]
     public sealed class Spark : GameAsset
