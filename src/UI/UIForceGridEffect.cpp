@@ -9,21 +9,28 @@ namespace Bibim
     BBImplementsComponent(UIForceGridEffect);
 
     const float UIForceGridEffect::DefaultDampingValue = 0.98f;
-    const float UIForceGridEffect::TargetLengthFactor = 0.95f;
-    const float UIForceGridEffect::PerspectiveProjectionFactor = 2000.0f;
+    const float UIForceGridEffect::DefaultTargetLengthFactor = 0.95f;
+    const float UIForceGridEffect::DefaultPerspectiveProjectionFactor = 2000.0f;
+    const float UIForceGridEffect::HighSpeedFixedFrameTime = 1.0f / 60.0f;
+    const float UIForceGridEffect::LowSpeedFixedFrameTime = 1.0f / 30.0f;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     UIForceGridEffect::UIForceGridEffect()
         : timeline(nullptr),
           springsTimeline(nullptr),
-          pointMassTimeline(nullptr)
+          pointMassTimeline(nullptr),
+          frameTime(0.0f),
+          frameSpeed(High)
     {
+        updater.o = this;
     }
 
     UIForceGridEffect::UIForceGridEffect(Rect size, Vector2 spacing)
         : timeline(nullptr),
           springsTimeline(nullptr),
-          pointMassTimeline(nullptr)
+          pointMassTimeline(nullptr),
+          frameTime(0.0f),
+          frameSpeed(High)
     {
         Initialize(size, spacing);
     }
@@ -43,7 +50,6 @@ namespace Bibim
             it->resize(numRows);
 
         // these fixed points will be used to anchor the grid to fixed positions on the screen
-        std::vector<std::vector<PointMass> > fixedPoints;
         fixedPoints.resize(numColumns);
         for (std::vector<std::vector<PointMass> >::iterator it = fixedPoints.begin(); it != fixedPoints.end(); it++)
             it->resize(numRows);
@@ -68,17 +74,17 @@ namespace Bibim
             for (int x = 0; x < numColumns; x++)
             {
                 if (x == 0 || y == 0 || x == numColumns - 1 || y == numRows - 1)	// anchor the border of the grid
-                    springs.push_back(Spring(fixedPoints[x][y], points[x][y], 0.1f, 0.1f));
+                    springs.push_back(Spring(&fixedPoints[x][y], &(points[x][y]), 0.1f, 0.1f));
                 else if (x % 3 == 0 && y % 3 == 0)									// loosely anchor 1/9th of the point masses
-                    springs.push_back(Spring(fixedPoints[x][y], points[x][y], 0.002f, 0.02f));
+                    springs.push_back(Spring(&fixedPoints[x][y], &(points[x][y]), 0.002f, 0.02f));
 
                 const float stiffness = 0.28f;
                 const float damping = 0.06f;
 
                 if (x > 0)
-                    springs.push_back(Spring(points[x - 1][y], points[x][y], stiffness, damping));
+                    springs.push_back(Spring(&(points[x - 1][y]), &(points[x][y]), stiffness, damping));
                 if (y > 0)
-                    springs.push_back(Spring(points[x][y - 1], points[x][y], stiffness, damping));
+                    springs.push_back(Spring(&(points[x][y - 1]), &(points[x][y]), stiffness, damping));
             }
         }
 
@@ -127,6 +133,11 @@ namespace Bibim
             if (timeline)
                 timeline->Add(&updater);
         }
+    }
+
+    void UIForceGridEffect::SetFrameSpeed(FrameSpeed value)
+    {
+        frameSpeed = value;
     }
 
     void UIForceGridEffect::ApplyDirectedForce2D(float forceX, float forceY, float positionX, float positionY, float radius)
@@ -302,8 +313,8 @@ namespace Bibim
         {
             basePointUV[S0] = basePointUV[S1];
             basePointUV[E0] = basePointUV[E1];
-            basePointUV[S1] = Math::Lerp(uv[S0], uv[S1], static_cast<float>(y) / static_cast<float>(rowCount));
-            basePointUV[E1] = Math::Lerp(uv[E0], uv[E1], static_cast<float>(y) / static_cast<float>(rowCount));
+            basePointUV[S1] = Math::Lerp(uv[S0], uv[S1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
+            basePointUV[E1] = Math::Lerp(uv[E0], uv[E1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
 
             np[E0] = TranslateCoordinate(points[0][y - 1].position, screenSize, p);
             np[E1] = TranslateCoordinate(points[0][y].position, screenSize, p);
@@ -319,8 +330,8 @@ namespace Bibim
 
                 nuv[S0] = nuv[E0];
                 nuv[S1] = nuv[E1];
-                nuv[E0] = Math::Lerp(basePointUV[S0], basePointUV[E0], static_cast<float>(x) / static_cast<float>(colCount));
-                nuv[E1] = Math::Lerp(basePointUV[S1], basePointUV[E1], static_cast<float>(x) / static_cast<float>(colCount));
+                nuv[E0] = Math::Lerp(basePointUV[S0], basePointUV[E0], static_cast<float>(x) / static_cast<float>(colCount - 1));
+                nuv[E1] = Math::Lerp(basePointUV[S1], basePointUV[E1], static_cast<float>(x) / static_cast<float>(colCount - 1));
 
                 Base::DrawQuad(renderer, np, color, nuv, texture);
             }
@@ -361,13 +372,13 @@ namespace Bibim
         {
             basePointUV1[S0] = basePointUV1[S1];
             basePointUV1[E0] = basePointUV1[E1];
-            basePointUV1[S1] = Math::Lerp(uv1[S0], uv1[S1], static_cast<float>(y) / static_cast<float>(rowCount));
-            basePointUV1[E1] = Math::Lerp(uv1[E0], uv1[E1], static_cast<float>(y) / static_cast<float>(rowCount));
+            basePointUV1[S1] = Math::Lerp(uv1[S0], uv1[S1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
+            basePointUV1[E1] = Math::Lerp(uv1[E0], uv1[E1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
 
             basePointUV2[S0] = basePointUV2[S1];
             basePointUV2[E0] = basePointUV2[E1];
-            basePointUV2[S1] = Math::Lerp(uv2[S0], uv2[S1], static_cast<float>(y) / static_cast<float>(rowCount));
-            basePointUV2[E1] = Math::Lerp(uv2[E0], uv2[E1], static_cast<float>(y) / static_cast<float>(rowCount));
+            basePointUV2[S1] = Math::Lerp(uv2[S0], uv2[S1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
+            basePointUV2[E1] = Math::Lerp(uv2[E0], uv2[E1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
 
             np[E0] = TranslateCoordinate(points[0][y - 1].position, screenSize, p);
             np[E1] = TranslateCoordinate(points[0][y].position, screenSize, p);
@@ -385,13 +396,13 @@ namespace Bibim
 
                 nuv1[S0] = nuv1[E0];
                 nuv1[S1] = nuv1[E1];
-                nuv1[E0] = Math::Lerp(basePointUV1[S0], basePointUV1[E0], static_cast<float>(x) / static_cast<float>(colCount));
-                nuv1[E1] = Math::Lerp(basePointUV1[S1], basePointUV1[E1], static_cast<float>(x) / static_cast<float>(colCount));
+                nuv1[E0] = Math::Lerp(basePointUV1[S0], basePointUV1[E0], static_cast<float>(x) / static_cast<float>(colCount - 1));
+                nuv1[E1] = Math::Lerp(basePointUV1[S1], basePointUV1[E1], static_cast<float>(x) / static_cast<float>(colCount - 1));
 
                 nuv2[S0] = nuv2[E0];
                 nuv2[S1] = nuv2[E1];
-                nuv2[E0] = Math::Lerp(basePointUV2[S0], basePointUV2[E0], static_cast<float>(x) / static_cast<float>(colCount));
-                nuv2[E1] = Math::Lerp(basePointUV2[S1], basePointUV2[E1], static_cast<float>(x) / static_cast<float>(colCount));
+                nuv2[E0] = Math::Lerp(basePointUV2[S0], basePointUV2[E0], static_cast<float>(x) / static_cast<float>(colCount - 1));
+                nuv2[E1] = Math::Lerp(basePointUV2[S1], basePointUV2[E1], static_cast<float>(x) / static_cast<float>(colCount - 1));
 
                 Base::DrawQuad(renderer, np, color, nuv1, texture1, nuv2, texture2);
             }
@@ -437,15 +448,45 @@ namespace Bibim
     
     void UIForceGridEffect::OnStep(float dt, int timestamp)
     {
-        springsTimeline->Update(dt, timestamp);
-        pointMassTimeline->Update(dt, timestamp);
+        frameTime += dt;
+
+        float fixedFrameTime = frameSpeed == High ? HighSpeedFixedFrameTime : LowSpeedFixedFrameTime;
+
+        while(frameTime > fixedFrameTime)
+        {
+            if(springsTimeline)
+                springsTimeline->Update(dt, timestamp);
+
+            if(pointMassTimeline)
+                pointMassTimeline->Update(dt, timestamp);
+
+            frameTime -= fixedFrameTime;
+        }
     }
 
     Vector2 UIForceGridEffect::PerspectiveVector(Vector3 v, Point2 screenSize)
     {
         // do a perspective projection
-        float factor = (v.Z + PerspectiveProjectionFactor) / PerspectiveProjectionFactor;
+        float factor = (v.Z + DefaultPerspectiveProjectionFactor) / DefaultPerspectiveProjectionFactor;
         return (Vector2(v.X, v.Y) - Vector2(screenSize.X, screenSize.Y) / 2.0f) * factor + Vector2(screenSize.X, screenSize.Y) / 2.0f;
+    }
+
+    UIForceGridEffect::FrameSpeed UIForceGridEffect::ConvertFromStringToFrameSpeed(const char* value)
+    {
+             if (value == nullptr)                             return High;
+        else if (String::EqualsCharsIgnoreCase(value, "High")) return High;
+        else if (String::EqualsCharsIgnoreCase(value, "Low"))  return Low;
+        else                                                   return High;
+    }
+
+    const char* UIForceGridEffect::ConvertFromFrameSpeedToString(FrameSpeed value)
+    {
+        switch (value)
+        {
+            case High: return "High";
+            case Low:  return "Low";
+            default:   return "High";
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -472,10 +513,11 @@ namespace Bibim
     {
     }
 
-    void UIForceGridEffect::PointMass::Update(float dt, int /*timestamp*/)
+    void UIForceGridEffect::PointMass::Update(float /*dt*/, int /*timestamp*/)
     {
+        // 고정 프레임이므로 dt 도 사용하지 않습니다.
+
         velocity += acceleration;
-        //position += velocity * dt;
         position += velocity;
         acceleration = Vector3::Zero;
 
@@ -498,22 +540,24 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    UIForceGridEffect::Spring::Spring(PointMass end1, PointMass end2, float stiffness, float damping)
+    UIForceGridEffect::Spring::Spring(PointMass* end1, PointMass* end2, float stiffness, float damping)
         : end1(end1),
           end2(end2),
           stiffness(stiffness),
           damping(damping)
     {
-        targetLength = Vector3::GetDistance(end1.position, end2.position) * TargetLengthFactor;
+        targetLength = Vector3::GetDistance(end1->position, end2->position) * DefaultTargetLengthFactor;
     }
 
     UIForceGridEffect::Spring::~Spring()
     {
     }
 
-    void UIForceGridEffect::Spring::Update(float dt, int /*timestamp*/)
+    void UIForceGridEffect::Spring::Update(float /*dt*/, int /*timestamp*/)
     {
-        Vector3 x = end1.position - end2.position;
+        // 고정 프레임이므로, dt 도 사용하지 않습니다.
+
+        Vector3 x = end1->position - end2->position;
 
         float length = x.GetLength();
         // these springs can only pull, not push
@@ -521,11 +565,11 @@ namespace Bibim
             return;
 
         x = (x / length) * (length - targetLength);
-        Vector3 dv = end2.velocity - end1.velocity;
+        Vector3 dv = end2->velocity - end1->velocity;
         Vector3 force = stiffness * x - dv * damping;
 
-        end1.ApplyForce(-force);
-        end2.ApplyForce(force);
+        end1->ApplyForce(-force);
+        end2->ApplyForce(force);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

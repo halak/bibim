@@ -15,20 +15,31 @@ namespace Bibim
         BBComponentClass(UIForceGridEffect, UIGeometryEffect, 'U', 'F', 'G', 'E');
 
         static const float DefaultDampingValue;
-        static const float TargetLengthFactor;
-        static const float PerspectiveProjectionFactor;
+        static const float DefaultTargetLengthFactor;
+        static const float DefaultPerspectiveProjectionFactor;
+        static const float HighSpeedFixedFrameTime;
+        static const float LowSpeedFixedFrameTime;
+
+        public:
+            enum FrameSpeed
+            {
+                High,
+                Low,
+            };
 
         public:
             UIForceGridEffect();
             UIForceGridEffect(Rect size, Vector2 spacing);
             virtual ~UIForceGridEffect();
 
-            //void InitializeXY(int x, int y, int width, int height, float spacingX, float spacingY);
             void InitializeXY(int width, int height, float spacingX, float spacingY);
             void Initialize(Rect size, Vector2 spacing);
                         
             inline Timeline* GetTimeline() const;
             void SetTimeline(Timeline* value);
+
+            inline FrameSpeed GetFrameSpeed() const;
+            void SetFrameSpeed(FrameSpeed value);
 
             void ApplyDirectedForce2D(float forceX, float forceY, float positionX, float positionY, float radius);
             //void ApplyDirectedForce3D(float forceX, float forceY, float forceZ, float positionX, float positionY, float positionZ, float radius);
@@ -54,6 +65,10 @@ namespace Bibim
             // NOT IMPLEMENTED
             // virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, int alphaChannel, Texture2D* texture);
             // virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, int alphaChannel, Texture2D* texture1, Vector2* uv2, Texture2D* texture2);
+
+        public:
+            static FrameSpeed ConvertFromStringToFrameSpeed(const char* value);
+            static const char* ConvertFromFrameSpeedToString(FrameSpeed value);                
 
         protected:
             void OnStep(float dt, int timestamp);
@@ -87,14 +102,14 @@ namespace Bibim
             struct Spring : public IUpdateable
             {
                 public :
-                    Spring(PointMass end1, PointMass end2, float stiffness, float damping);
+                    Spring(PointMass* end1, PointMass* end2, float stiffness, float damping);
                     virtual ~Spring();
 
                     virtual void Update(float dt, int timestamp);
 
                 public:
-                    PointMass end1;
-                    PointMass end2;
+                    PointMass* end1;
+                    PointMass* end2;
                     float targetLength;
                     float stiffness;
                     float damping;
@@ -121,6 +136,9 @@ namespace Bibim
             Vector2 spacing;
             std::vector<Spring> springs;
             std::vector<std::vector<PointMass> > points;
+            std::vector<std::vector<PointMass> > fixedPoints;
+            float frameTime;
+            FrameSpeed frameSpeed;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -129,6 +147,15 @@ namespace Bibim
     {
         return timeline;
     }
+
+    UIForceGridEffect::FrameSpeed UIForceGridEffect::GetFrameSpeed() const
+    {
+        return frameSpeed;
+    }
 }
+
+BBBindLuaEnum(Bibim::UIForceGridEffect::FrameSpeed,
+              Bibim::UIForceGridEffect::ConvertFromStringToFrameSpeed,
+              Bibim::UIForceGridEffect::ConvertFromFrameSpeedToString);
 
 #endif

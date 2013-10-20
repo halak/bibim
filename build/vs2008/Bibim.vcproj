@@ -1143,14 +1143,6 @@
 							>
 						</File>
 						<File
-							RelativePath="..\..\src\UI\UIForceGridEffect.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\include\Bibim\UIForceGridEffect.h"
-							>
-						</File>
-						<File
 							RelativePath="..\..\src\UI\UIGeometryEffect.cpp"
 							>
 						</File>
