@@ -33,6 +33,7 @@ namespace Bibim
         instance->maxRadius = reader.ReadFloat();
         instance->maxRadiusVariance = reader.ReadFloat();
         instance->minRadius = reader.ReadFloat();
+        instance->minRadiusVariance = reader.ReadFloat();
         instance->particleLifespan = reader.ReadFloat();
         instance->particleLifespanVariance = reader.ReadFloat();
         instance->radialAccelVariance = reader.ReadFloat();

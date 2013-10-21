@@ -77,6 +77,7 @@ namespace Bibim.Asset.Pipeline.Recipes
                     MaxRadius = f("maxRadius"),
                     MaxRadiusVariance = f("maxRadiusVariance"),
                     MinRadius = f("minRadius"),
+                    MinRadiusVariance = f("minRadiusVariance"),
                     ParticleLifespan = f("particleLifespan"),
                     ParticleLifespanVariance = f("particleLifespanVariance"),
                     RadialAccelVariance = f("radialAccelVariance"),
@@ -97,6 +98,8 @@ namespace Bibim.Asset.Pipeline.Recipes
                     TangentialAccelVariance = f("tangentialAccelVariance"),
                     TangentialAcceleration = f("tangentialAcceleration"),
                 };
+
+                system.Gravity = new Vector2(system.Gravity.X, -system.Gravity.Y);
 
                 var textureImageData = (string)o["textureImageData"];
                 using (var stream = new MemoryStream(Convert.FromBase64String(textureImageData)))

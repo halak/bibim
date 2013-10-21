@@ -36,6 +36,11 @@ namespace Microsoft.Xna.Framework
             return new Vector2(Bibim.MathExtension.Lerp(a.X, b.X, t),
                                Bibim.MathExtension.Lerp(a.Y, b.Y, t));
         }
+        
+        public static Vector2 operator -(Vector2 operand)
+        {
+            return new Vector2(-operand.X, -operand.Y);
+        }
 
         public static bool operator ==(Vector2 lhs, Vector2 rhs)
         {
