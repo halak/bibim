@@ -36,6 +36,7 @@ namespace Bibim.GFX
         public float MaxRadius { get; set; }
         public float MaxRadiusVariance { get; set; }
         public float MinRadius { get; set; }
+        public float MinRadiusVariance { get; set; }
         public float ParticleLifespan { get; set; }
         public float ParticleLifespanVariance { get; set; }
         public float RadialAccelVariance { get; set; }

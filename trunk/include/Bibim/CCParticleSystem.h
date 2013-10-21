@@ -42,6 +42,7 @@ namespace Bibim
             inline float GetMaxRadius() const { return maxRadius; }
             inline float GetMaxRadiusVariance() const { return maxRadiusVariance; }
             inline float GetMinRadius() const { return minRadius; }
+            inline float GetMinRadiusVariance() const { return minRadiusVariance; }
             inline float GetParticleLifespan() const { return particleLifespan; }
             inline float GetParticleLifespanVariance() const { return particleLifespanVariance; }
             inline float GetRadialAccelVariance() const { return radialAccelVariance; }
@@ -82,6 +83,7 @@ namespace Bibim
             float maxRadius;
             float maxRadiusVariance;
             float minRadius;
+            float minRadiusVariance;
             float particleLifespan;
             float particleLifespanVariance;
             float radialAccelVariance;

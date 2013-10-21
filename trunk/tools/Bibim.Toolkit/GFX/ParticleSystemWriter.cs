@@ -36,6 +36,7 @@ namespace Bibim.GFX
             writer.Write(asset.MaxRadius);
             writer.Write(asset.MaxRadiusVariance);
             writer.Write(asset.MinRadius);
+            writer.Write(asset.MinRadiusVariance);
             writer.Write(asset.ParticleLifespan);
             writer.Write(asset.ParticleLifespanVariance);
             writer.Write(asset.RadialAccelVariance);

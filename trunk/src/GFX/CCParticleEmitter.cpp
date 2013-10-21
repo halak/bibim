@@ -24,12 +24,6 @@ namespace Bibim
     {
         isActive = true;
         elapsedTime = 0.0f;
-        
-        //for (m_uParticleIdx = 0; m_uParticleIdx < m_uParticleCount; ++m_uParticleIdx)
-        //{
-        //    tCCParticle *p = &m_pParticles[m_uParticleIdx];
-        //    p->timeToLive = 0;
-        //}
     }
 
     void CCParticleEmitter::Stop()
@@ -91,24 +85,24 @@ namespace Bibim
                     {
                         radial = p->pos;
                         radial.Normalize();
+                        tangential.X = +radial.Y;
+                        tangential.Y = -radial.X;
+                        radial *= p->modeA.radialAccel;
+                        tangential *= p->modeA.tangentialAccel;
+                        p->modeA.dir += (radial + tangential + gravity) * dt;
                     }
                     else
-                        radial = Vector2::Zero;
+                        p->modeA.dir += gravity * dt;
 
-                    tangential.X = -radial.Y;
-                    tangential.Y = +radial.X;
-                    radial *= p->modeA.radialAccel;
-                    tangential *= p->modeA.tangentialAccel;
-                    p->modeA.dir += (radial + tangential + gravity) * dt;
                     p->pos += p->modeA.dir * dt;
                 }
-                else 
+                else
                 {
                     p->modeB.angle += p->modeB.degreesPerSecond * dt;
                     p->modeB.radius += p->modeB.deltaRadius * dt;
 
-                    p->pos.X = -Math::Cos(p->modeB.angle) * p->modeB.radius;
-                    p->pos.Y = -Math::Sin(p->modeB.angle) * p->modeB.radius;
+                    p->pos.X = Math::Sin(p->modeB.angle) * p->modeB.radius;
+                    p->pos.Y = Math::Cos(p->modeB.angle) * p->modeB.radius;
                 }
 
                 p->color += p->deltaColor * dt;
@@ -213,8 +207,8 @@ namespace Bibim
         else
             p->deltaSize = (GenerateGTE0(system->GetFinishParticleSize(), system->GetFinishParticleSizeVariance()) - p->size) / p->timeToLive;
 
-        p->rotation = Generate(system->GetStartParticleRotation(), system->GetStartParticleRotationVariance());
-        p->deltaRotation = (Generate(system->GetFinishParticleRotation(), system->GetFinishParticleRotationVariance()) - p->rotation) / p->timeToLive;
+        p->rotation = Math::ToRadian(Generate(system->GetStartParticleRotation(), system->GetStartParticleRotationVariance()));
+        p->deltaRotation = (Math::ToRadian(Generate(system->GetFinishParticleRotation(), system->GetFinishParticleRotationVariance()) - p->rotation)) / p->timeToLive;
 
         // position
         /*
@@ -232,12 +226,12 @@ namespace Bibim
         if (system->GetMode() == CCParticleSystem::GravityMode) 
         {
             const float speed = Generate(system->GetSpeed(), system->GetSpeedVariance());
-            p->modeA.dir = Vector2(Math::Cos(angle), Math::Sin(angle)) * speed;
+            p->modeA.dir = Vector2(Math::Sin(angle), Math::Cos(angle)) * speed;
             p->modeA.radialAccel = Generate(system->GetRadialAcceleration(), system->GetRadialAccelVariance());
             p->modeA.tangentialAccel = Generate(system->GetTangentialAcceleration(), system->GetTangentialAccelVariance());
 
             if (system->GetRotationIsDirection())
-                p->rotation = angle;
+                p->rotation = -angle;
         }
         else // if (system->GetMode() == CCParticleSystem::RadiusMode)
         {
@@ -245,7 +239,7 @@ namespace Bibim
             if (system->GetMinRadius() == -1.0f)
                 p->modeB.deltaRadius = 0.0f;
             else
-                p->modeB.deltaRadius = (system->GetMinRadius() - p->modeB.radius) / p->timeToLive;
+                p->modeB.deltaRadius = (Generate(system->GetMinRadius(), system->GetMinRadiusVariance()) - p->modeB.radius) / p->timeToLive;
 
             p->modeB.angle = angle;
             p->modeB.degreesPerSecond = Math::ToRadian(Generate(system->GetSpin(), system->GetSpinVariance()));
