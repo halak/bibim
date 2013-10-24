@@ -98,11 +98,11 @@ namespace Bibim
                 }
                 else
                 {
-                    p->modeB.angle += p->modeB.degreesPerSecond * dt;
+                    p->modeB.angle -= p->modeB.degreesPerSecond * dt;
                     p->modeB.radius += p->modeB.deltaRadius * dt;
 
-                    p->pos.X = Math::Sin(p->modeB.angle) * p->modeB.radius;
-                    p->pos.Y = Math::Cos(p->modeB.angle) * p->modeB.radius;
+                    p->pos.X = Math::Cos(p->modeB.angle) * p->modeB.radius;
+                    p->pos.Y = Math::Sin(p->modeB.angle) * p->modeB.radius;
                 }
 
                 p->color += p->deltaColor * dt;
@@ -226,12 +226,12 @@ namespace Bibim
         if (system->GetMode() == CCParticleSystem::GravityMode) 
         {
             const float speed = Generate(system->GetSpeed(), system->GetSpeedVariance());
-            p->modeA.dir = Vector2(Math::Sin(angle), Math::Cos(angle)) * speed;
+            p->modeA.dir = Vector2(Math::Cos(angle), Math::Sin(angle)) * speed;
             p->modeA.radialAccel = Generate(system->GetRadialAcceleration(), system->GetRadialAccelVariance());
             p->modeA.tangentialAccel = Generate(system->GetTangentialAcceleration(), system->GetTangentialAccelVariance());
 
             if (system->GetRotationIsDirection())
-                p->rotation = -angle;
+                p->rotation = angle;
         }
         else // if (system->GetMode() == CCParticleSystem::RadiusMode)
         {
