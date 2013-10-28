@@ -174,11 +174,11 @@ def get_dependencies(environment, platform, target):
         l += ['irrKlang.lib']
         
     # OpenAL
-    if (win32):
-        l += ['OpenAL32.lib']
-    elif (android):
-        l += ['libopenal.so']
-        l += ['libopenalwrapper.so']
+    # if (win32):
+    #     l += ['OpenAL32.lib']
+    # elif (android):
+    #     l += ['libopenal.so']
+    #     l += ['libopenalwrapper.so']
         
     # MPQ
     if (win32):
