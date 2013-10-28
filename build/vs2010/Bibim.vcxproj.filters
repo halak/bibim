@@ -1,6 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="01. Foundation">
+      <UniqueIdentifier>{e43b18ad-76cd-4b08-9179-de59f108fe18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Foundation\%28Fundamental%29">
+      <UniqueIdentifier>{40c89324-5c49-46ec-86d7-3651baa3d7d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Foundation\Container">
+      <UniqueIdentifier>{574a1284-02b1-473b-bf3f-3eed2b3f45ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Foundation\Diagnostics">
+      <UniqueIdentifier>{30909e91-ad06-46c1-992d-88149eb76b8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Foundation\Mathematics">
+      <UniqueIdentifier>{5deb2265-0a2b-4ee4-8b7e-7323a35e9813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Foundation\Utility">
+      <UniqueIdentifier>{84ee35e4-01e1-4345-9a55-7977288c0804}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Foundation\%28Object%29">
+      <UniqueIdentifier>{f9baa7f8-3fb0-443a-834e-dcf0b2408d04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. System">
+      <UniqueIdentifier>{84521930-0e12-4c0f-9ccb-da7d42c3801a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. System\Threading">
+      <UniqueIdentifier>{86922ee0-eec2-49e0-9c95-87e02955e1f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. System\IO">
+      <UniqueIdentifier>{a634bf3d-d236-4e96-9b41-7e272fa578ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. References">
+      <UniqueIdentifier>{79a147ac-c7b5-4fdd-bd1c-deacd938216e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. System\Net">
+      <UniqueIdentifier>{03178203-36f5-4ec9-8623-2df14bba62b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. System\Diagnostics">
+      <UniqueIdentifier>{4b8779e4-c559-4953-9692-856a5ced9e34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. System\FileSystem">
+      <UniqueIdentifier>{6a664566-dbce-4983-82e9-6d59d9fe6ad0}</UniqueIdentifier>
+    </Filter>
     <Filter Include="03. Game">
       <UniqueIdentifier>{10e5b491-cb30-450a-922e-258ee494dd75}</UniqueIdentifier>
     </Filter>
@@ -52,6 +94,9 @@
     <Filter Include="03. Game\UI\Transforms">
       <UniqueIdentifier>{1bb36dcc-84d2-450e-858c-c02b816b1e11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Game\UI\Visitors">
+      <UniqueIdentifier>{b6559376-a07f-4aa8-b57e-148201ac87c1}</UniqueIdentifier>
+    </Filter>
     <Filter Include="03. Game\Graphics">
       <UniqueIdentifier>{d9a96df2-01f7-40a4-84a9-952e41e0bac8}</UniqueIdentifier>
     </Filter>
@@ -67,53 +112,17 @@
     <Filter Include="03. Game\Audio">
       <UniqueIdentifier>{37357b59-e319-4fc2-8083-58d13e2fa1e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Game\Audio\AL">
+      <UniqueIdentifier>{6e638c8f-c22a-46b8-9eb5-0776ec4c30a5}</UniqueIdentifier>
+    </Filter>
     <Filter Include="03. Game\GFX">
       <UniqueIdentifier>{a8b6ad1f-36bd-469b-aec0-ecfd22d02913}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Foundation">
-      <UniqueIdentifier>{e43b18ad-76cd-4b08-9179-de59f108fe18}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Foundation\%28Fundamental%29">
-      <UniqueIdentifier>{40c89324-5c49-46ec-86d7-3651baa3d7d7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Foundation\Container">
-      <UniqueIdentifier>{574a1284-02b1-473b-bf3f-3eed2b3f45ad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Foundation\Diagnostics">
-      <UniqueIdentifier>{30909e91-ad06-46c1-992d-88149eb76b8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Foundation\Mathematics">
-      <UniqueIdentifier>{5deb2265-0a2b-4ee4-8b7e-7323a35e9813}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Foundation\Utility">
-      <UniqueIdentifier>{84ee35e4-01e1-4345-9a55-7977288c0804}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Foundation\%28Object%29">
-      <UniqueIdentifier>{f9baa7f8-3fb0-443a-834e-dcf0b2408d04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. System">
-      <UniqueIdentifier>{84521930-0e12-4c0f-9ccb-da7d42c3801a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. System\Threading">
-      <UniqueIdentifier>{86922ee0-eec2-49e0-9c95-87e02955e1f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. System\IO">
-      <UniqueIdentifier>{a634bf3d-d236-4e96-9b41-7e272fa578ff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. References">
-      <UniqueIdentifier>{79a147ac-c7b5-4fdd-bd1c-deacd938216e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. Game\UI\Visitors">
-      <UniqueIdentifier>{b6559376-a07f-4aa8-b57e-148201ac87c1}</UniqueIdentifier>
     </Filter>
     <Filter Include="03. Game\Input">
       <UniqueIdentifier>{f3afc6cb-aad7-4cfa-95e3-15b58fd9be8c}</UniqueIdentifier>
     </Filter>
     <Filter Include="03. Game\Time">
       <UniqueIdentifier>{21bbd110-21c3-4700-8a44-0abb0939d704}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="03. Game\Audio\AL">
-      <UniqueIdentifier>{6e638c8f-c22a-46b8-9eb5-0776ec4c30a5}</UniqueIdentifier>
     </Filter>
     <Filter Include="03. Game\Typography">
       <UniqueIdentifier>{030e8e09-1ae6-4d40-8868-7237e7cdf477}</UniqueIdentifier>
@@ -123,15 +132,6 @@
     </Filter>
     <Filter Include="03. Game\Gameplay\PathFinder">
       <UniqueIdentifier>{bdbbcae6-f432-4be3-b67c-d9fe0929ace0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. System\Net">
-      <UniqueIdentifier>{03178203-36f5-4ec9-8623-2df14bba62b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. System\Diagnostics">
-      <UniqueIdentifier>{4b8779e4-c559-4953-9692-856a5ced9e34}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. System\FileSystem">
-      <UniqueIdentifier>{6a664566-dbce-4983-82e9-6d59d9fe6ad0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
