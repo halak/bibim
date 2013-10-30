@@ -59,6 +59,7 @@ namespace Bibim
             inline HttpClient* GetHttpClient() const;
             inline UIDomain* GetUIDomain() const;
             inline UIAsyncEventQueue* GetAsyncEventQueue() const;
+            inline UIAppEventDispatcher* GetAppEventDispatcher() const;
             inline LuaBase* GetLua() const;
             inline Clipboard* GetClipboard() const;
 
@@ -114,6 +115,7 @@ namespace Bibim
             UIRenderer* uiRenderer;
             UIFunctionTable* uiFunctions;
             UIAsyncEventQueue* asyncEventQueue;
+            UIAppEventDispatcher* appEventDispatcher;
             UIMouseEventDispatcher* mouseEventDispatcher;
             ScreenshotPrinter* screenshotPrinter;
             BGM* bgm;
@@ -197,6 +199,11 @@ namespace Bibim
     UIAsyncEventQueue* StandardGame::GetAsyncEventQueue() const
     {
         return asyncEventQueue;
+    }
+
+    UIAppEventDispatcher* StandardGame::GetAppEventDispatcher() const
+    {
+        return appEventDispatcher;
     }
 
     StandardGame::LuaBase* StandardGame::GetLua() const

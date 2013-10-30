@@ -73,9 +73,9 @@ namespace Bibim
         {
             for (int x = 0; x < numColumns; x++)
             {
-                if (x == 0 || y == 0 || x == numColumns - 1 || y == numRows - 1)	// anchor the border of the grid
+                if (x == 0 || y == 0 || x == numColumns - 1 || y == numRows - 1)    // anchor the border of the grid
                     springs.push_back(Spring(&fixedPoints[x][y], &(points[x][y]), 0.1f, 0.1f));
-                else if (x % 3 == 0 && y % 3 == 0)									// loosely anchor 1/9th of the point masses
+                else if (x % 3 == 0 && y % 3 == 0)                                    // loosely anchor 1/9th of the point masses
                     springs.push_back(Spring(&fixedPoints[x][y], &(points[x][y]), 0.002f, 0.02f));
 
                 const float stiffness = 0.28f;

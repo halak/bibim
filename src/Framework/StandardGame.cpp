@@ -154,16 +154,19 @@ namespace Bibim
             uiRenderer = new UIRenderer(GetGraphicsDevice(), storage, "Asset/Shader");
             UIKeyboardEventDispatcher* ked = new UIKeyboardEventDispatcher(uiDomain, keyboard);
             UIMouseEventDispatcher*    med = new UIMouseEventDispatcher(uiDomain, mouse, uiRenderer, true);
+            UIAppEventDispatcher*      aed = new UIAppEventDispatcher();
             asyncEventQueue = new UIAsyncEventQueue();
             uiDomainNode->AttachChild(uiRenderer);
             uiDomainNode->AttachChild(ked);
             uiDomainNode->AttachChild(med);
+            uiDomainNode->AttachChild(aed);
             uiDomainNode->AttachChild(asyncEventQueue);
 
             ked->SetTimeline(GetMainTimeline());
             med->SetTimeline(GetMainTimeline());
             asyncEventQueue->SetTimeline(GetMainTimeline());
 
+            appEventDispatcher = aed;
             mouseEventDispatcher = med;
         }
         uiFunctions = new UIFunctionTable();
@@ -1240,6 +1243,7 @@ namespace Bibim
             {
                 visual->SetEventMap(new UIEventMap());
                 visual->GetEventMap()->SetAsyncEventQueue(game->GetAsyncEventQueue());
+                visual->GetEventMap()->SetEventDispatcher(game->GetAppEventDispatcher());
             }
 
             UIEventHandler* handler = new UIScriptEventHandler(game->GetLua(), callbackIndex);

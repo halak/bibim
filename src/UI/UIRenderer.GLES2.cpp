@@ -180,7 +180,7 @@ namespace Bibim
 
         glVertexAttribPointer(effect->GetColorLocation(), 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(Vertex), colors);
         glEnableVertexAttribArray(effect->GetColorLocation());
-		
+        
         if (mode == ColorTextureOnlyMode || mode == MaskedColorTextureMode)
         {
             glVertexAttribPointer(effect->GetTexCoord1Location(), 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), texCoords1);
