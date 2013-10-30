@@ -1,7 +1,9 @@
 #include <Bibim/Config.h>
-#include <Bibim/BGM.AL.h>
+#if (defined(BIBIM_PLATFORM_IOS))
+
+#include <Bibim/BGM.iOS.h>
 #include <Bibim/Assert.h>
-#include <Bibim/AudioDevice.AL.h>
+#include <Bibim/AudioDevice.iOS.h>
 #include <Bibim/Math.h>
 
 namespace Bibim
@@ -196,3 +198,5 @@ namespace Bibim
         }
     }
 }
+
+#endif

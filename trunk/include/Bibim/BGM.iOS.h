@@ -1,8 +1,10 @@
 ﻿#pragma once
-#ifndef __BIBIM_BGM_AL_H__
-#define __BIBIM_BGM_AL_H__
+#ifndef __BIBIM_BGM_IOS_H__
+#define __BIBIM_BGM_IOS_H__
 
 #include <Bibim/FWD.h>
+#if (defined(BIBIM_PLATFORM_IOS))
+
 #include <Bibim/TimelineGameModule.h>
 #include <Bibim/String.h>
 #include <vector>
@@ -85,4 +87,5 @@ namespace Bibim
     }
 }
 
+#endif
 #endif

@@ -68,7 +68,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.0.1\custom;..\..\extlibs\freetype-2.5.0.1\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\OpenAL\PC\include;..\..\extlibs\SPARK-1.5.5\include;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.0.1\custom;..\..\extlibs\freetype-2.5.0.1\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\irrKlang-1.4.0\include;..\..\extlibs\SPARK-1.5.5\include;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <Optimization>Disabled</Optimization>
@@ -85,7 +85,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>..\..\include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.0.1\custom;..\..\extlibs\freetype-2.5.0.1\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\OpenAL\PC\include;..\..\extlibs\SPARK-1.5.5\include;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.0.1\custom;..\..\extlibs\freetype-2.5.0.1\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\irrKlang-1.4.0\include;..\..\extlibs\SPARK-1.5.5\include;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel>Level4</WarningLevel>
     </ClCompile>
@@ -118,9 +118,15 @@
     <ClCompile Include="..\..\src\Asset\AssetProvider.cpp" />
     <ClCompile Include="..\..\src\Asset\MPQAssetProvider.cpp" />
     <ClCompile Include="..\..\src\Asset\NetworkAssetProvider.cpp" />
-    <ClCompile Include="..\..\src\Audio\AudioDevice.AL.cpp" />
-    <ClCompile Include="..\..\src\Audio\BGM.AL.cpp" />
-    <ClCompile Include="..\..\src\Audio\SoundFX.AL.cpp" />
+    <ClCompile Include="..\..\src\Audio\AudioDevice.Android.cpp" />
+    <ClCompile Include="..\..\src\Audio\AudioDevice.iOS.cpp" />
+    <ClCompile Include="..\..\src\Audio\AudioDevice.PC.cpp" />
+    <ClCompile Include="..\..\src\Audio\BGM.Android.cpp" />
+    <ClCompile Include="..\..\src\Audio\BGM.iOS.cpp" />
+    <ClCompile Include="..\..\src\Audio\BGM.PC.cpp" />
+    <ClCompile Include="..\..\src\Audio\SoundFX.Android.cpp" />
+    <ClCompile Include="..\..\src\Audio\SoundFX.iOS.cpp" />
+    <ClCompile Include="..\..\src\Audio\SoundFX.PC.cpp" />
     <ClCompile Include="..\..\src\Component\GameComponentFactory.cpp" />
     <ClCompile Include="..\..\src\Diagnostics\Log.cpp" />
     <ClCompile Include="..\..\src\Diagnostics\Performance.cpp" />
@@ -353,6 +359,12 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\Bibim\AssetLoadingTask.h" />
     <ClInclude Include="..\..\include\Bibim\AssetStreamReader.h" />
+    <ClInclude Include="..\..\include\Bibim\AudioDevice.Android.h" />
+    <ClInclude Include="..\..\include\Bibim\AudioDevice.iOS.h" />
+    <ClInclude Include="..\..\include\Bibim\AudioDevice.PC.h" />
+    <ClInclude Include="..\..\include\Bibim\BGM.Android.h" />
+    <ClInclude Include="..\..\include\Bibim\BGM.iOS.h" />
+    <ClInclude Include="..\..\include\Bibim\BGM.PC.h" />
     <ClInclude Include="..\..\include\Bibim\CCParticleEmitter.h" />
     <ClInclude Include="..\..\include\Bibim\CCParticleSystem.h" />
     <ClInclude Include="..\..\include\Bibim\CCParticleSystemSet.h" />
@@ -367,13 +379,11 @@
     <ClInclude Include="..\..\include\Bibim\FileAssetProvider.h" />
     <ClInclude Include="..\..\include\Bibim\MPQAssetProvider.h" />
     <ClInclude Include="..\..\include\Bibim\NetworkAssetProvider.h" />
-    <ClInclude Include="..\..\include\Bibim\AudioDevice.AL.h" />
     <ClInclude Include="..\..\include\Bibim\AudioDevice.h" />
     <ClInclude Include="..\..\include\Bibim\BGM.h" />
-    <ClInclude Include="..\..\include\Bibim\BGM.AL.h" />
     <ClInclude Include="..\..\include\Bibim\Performance.h" />
     <ClInclude Include="..\..\include\Bibim\Random.h" />
-    <ClInclude Include="..\..\include\Bibim\SoundFX.AL.h" />
+    <ClInclude Include="..\..\include\Bibim\SoundFX.Android.h" />
     <ClInclude Include="..\..\include\Bibim\SoundFX.h" />
     <ClInclude Include="..\..\include\Bibim\GameComponentFactory.h" />
     <ClInclude Include="..\..\include\Bibim\CrashDump.h" />
@@ -393,6 +403,8 @@
     <ClInclude Include="..\..\include\Bibim\GameWindow.Mobile.h" />
     <ClInclude Include="..\..\include\Bibim\Lua.h" />
     <ClInclude Include="..\..\include\Bibim\Preferences.h" />
+    <ClInclude Include="..\..\include\Bibim\SoundFX.iOS.h" />
+    <ClInclude Include="..\..\include\Bibim\SoundFX.PC.h" />
     <ClInclude Include="..\..\include\Bibim\Spark.h" />
     <ClInclude Include="..\..\include\Bibim\SparkSet.h" />
     <ClInclude Include="..\..\include\Bibim\StandardGame.EmbeddedFont.h" />

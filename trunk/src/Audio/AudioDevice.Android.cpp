@@ -1,14 +1,9 @@
 #include <Bibim/Config.h>
-#include <Bibim/AudioDevice.AL.h>
+#if (defined(BIBIM_PLATFORM_ANDROID))
+
+#include <Bibim/AudioDevice.Android.h>
 #include <Bibim/Assert.h>
 #include <Bibim/Log.h>
-#if (defined(BIBIM_PLATFORM_WINDOWS))
-#include <al.h>
-#include <alc.h>
-#else
-#include <AL/al.h>
-#include <AL/alc.h>
-#endif
 
 namespace Bibim
 {
@@ -82,3 +77,5 @@ namespace Bibim
         return 0.0f;
     }
 }
+
+#endif
