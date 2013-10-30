@@ -19,7 +19,7 @@
 #endif
 
 #if (defined(BIBIM_PLATFORM_WINDOWS) || defined(BIBIM_PLATFORM_LINUX) || defined(BIBIM_PLATFORM_MACOSX))
-#	 define BIBIM_PLATFORM_PC
+#    define BIBIM_PLATFORM_PC
 #endif
 
 #if (defined(DEBUG) || defined(_DEBUG))
