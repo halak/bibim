@@ -112,9 +112,6 @@
     <Filter Include="03. Game\Audio">
       <UniqueIdentifier>{37357b59-e319-4fc2-8083-58d13e2fa1e0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="03. Game\Audio\AL">
-      <UniqueIdentifier>{6e638c8f-c22a-46b8-9eb5-0776ec4c30a5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Game\GFX">
       <UniqueIdentifier>{a8b6ad1f-36bd-469b-aec0-ecfd22d02913}</UniqueIdentifier>
     </Filter>
@@ -132,6 +129,15 @@
     </Filter>
     <Filter Include="03. Game\Gameplay\PathFinder">
       <UniqueIdentifier>{bdbbcae6-f432-4be3-b67c-d9fe0929ace0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Audio\PC">
+      <UniqueIdentifier>{6e638c8f-c22a-46b8-9eb5-0776ec4c30a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Audio\Android">
+      <UniqueIdentifier>{059bee72-bcfa-42fa-9fbc-023bc48e540c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Audio\iOS">
+      <UniqueIdentifier>{c4272c2b-cceb-4b67-add5-4ec2c0ed7e3c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -729,15 +735,6 @@
     <ClCompile Include="..\..\src\Component\GameComponentFactory.cpp">
       <Filter>03. Game\%28Component%29</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Audio\AudioDevice.AL.cpp">
-      <Filter>03. Game\Audio\AL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Audio\BGM.AL.cpp">
-      <Filter>03. Game\Audio\AL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Audio\SoundFX.AL.cpp">
-      <Filter>03. Game\Audio\AL</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Framework\GameWindow.Mobile.cpp">
       <Filter>03. Game\Framework</Filter>
     </ClCompile>
@@ -860,6 +857,33 @@
     </ClCompile>
     <ClCompile Include="..\..\src\UI\UIForceGridEffect.cpp">
       <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Audio\AudioDevice.PC.cpp">
+      <Filter>03. Game\Audio\PC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Audio\BGM.PC.cpp">
+      <Filter>03. Game\Audio\PC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Audio\SoundFX.PC.cpp">
+      <Filter>03. Game\Audio\PC</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Audio\AudioDevice.Android.cpp">
+      <Filter>03. Game\Audio\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Audio\BGM.Android.cpp">
+      <Filter>03. Game\Audio\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Audio\SoundFX.Android.cpp">
+      <Filter>03. Game\Audio\Android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Audio\AudioDevice.iOS.cpp">
+      <Filter>03. Game\Audio\iOS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Audio\BGM.iOS.cpp">
+      <Filter>03. Game\Audio\iOS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Audio\SoundFX.iOS.cpp">
+      <Filter>03. Game\Audio\iOS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1607,15 +1631,6 @@
     <ClInclude Include="..\..\include\Bibim\GameComponentFactory.h">
       <Filter>03. Game\%28Component%29</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\AudioDevice.AL.h">
-      <Filter>03. Game\Audio\AL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\BGM.AL.h">
-      <Filter>03. Game\Audio\AL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\SoundFX.AL.h">
-      <Filter>03. Game\Audio\AL</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\Bibim\GameWindow.Mobile.h">
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
@@ -1718,6 +1733,33 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\UIForceGridEffect.h">
       <Filter>03. Game\UI\Effects\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\AudioDevice.PC.h">
+      <Filter>03. Game\Audio\PC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\BGM.PC.h">
+      <Filter>03. Game\Audio\PC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\SoundFX.PC.h">
+      <Filter>03. Game\Audio\PC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\AudioDevice.Android.h">
+      <Filter>03. Game\Audio\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\AudioDevice.iOS.h">
+      <Filter>03. Game\Audio\iOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\SoundFX.Android.h">
+      <Filter>03. Game\Audio\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\SoundFX.iOS.h">
+      <Filter>03. Game\Audio\iOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\BGM.Android.h">
+      <Filter>03. Game\Audio\Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\BGM.iOS.h">
+      <Filter>03. Game\Audio\iOS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;..\..\include&quot;;&quot;$(DXSDK_DIR)Include&quot;;&quot;..\..\extlibs\lua-5.2.2\src&quot;;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;&quot;..\..\extlibs\zlib-1.2.8&quot;;&quot;..\..\extlibs\libpng-1.6.3&quot;;&quot;..\..\extlibs\jpeg-9&quot;;&quot;..\..\extlibs\freetype-2.5.0.1\custom&quot;;&quot;..\..\extlibs\freetype-2.5.0.1\include&quot;;&quot;..\..\extlibs\curl-7.29.0\include&quot;;..\..\extlibs\rapidjson\include;&quot;..\..\extlibs\irrKlang-1.4.0\include&quot;;..\..\extlibs\OpenAL\PC\include;&quot;..\..\extlibs\SPARK-1.5.5\include&quot;;..\..\extlibs\StormLib\src"
+				AdditionalIncludeDirectories="..\..\include;&quot;$(DXSDK_DIR)Include&quot;;&quot;..\..\extlibs\lua-5.2.2\src&quot;;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;&quot;..\..\extlibs\zlib-1.2.8&quot;;&quot;..\..\extlibs\libpng-1.6.3&quot;;&quot;..\..\extlibs\jpeg-9&quot;;&quot;..\..\extlibs\freetype-2.5.0.1\custom&quot;;&quot;..\..\extlibs\freetype-2.5.0.1\include&quot;;&quot;..\..\extlibs\curl-7.29.0\include&quot;;..\..\extlibs\rapidjson\include;&quot;..\..\extlibs\irrKlang-1.4.0\include&quot;;&quot;..\..\extlibs\SPARK-1.5.5\include&quot;;..\..\extlibs\StormLib\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -108,7 +108,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;..\..\include&quot;;&quot;$(DXSDK_DIR)Include&quot;;&quot;..\..\extlibs\lua-5.2.2\src&quot;;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;&quot;..\..\extlibs\zlib-1.2.8&quot;;&quot;..\..\extlibs\libpng-1.6.3&quot;;&quot;..\..\extlibs\jpeg-9&quot;;&quot;..\..\extlibs\freetype-2.5.0.1\custom&quot;;&quot;..\..\extlibs\freetype-2.5.0.1\include&quot;;&quot;..\..\extlibs\curl-7.29.0\include&quot;;..\..\extlibs\rapidjson\include;&quot;..\..\extlibs\irrKlang-1.4.0\include&quot;;..\..\extlibs\OpenAL\PC\include;&quot;..\..\extlibs\SPARK-1.5.5\include&quot;;..\..\extlibs\StormLib\src"
+				AdditionalIncludeDirectories="..\..\include;&quot;$(DXSDK_DIR)Include&quot;;&quot;..\..\extlibs\lua-5.2.2\src&quot;;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;&quot;..\..\extlibs\zlib-1.2.8&quot;;&quot;..\..\extlibs\libpng-1.6.3&quot;;&quot;..\..\extlibs\jpeg-9&quot;;&quot;..\..\extlibs\freetype-2.5.0.1\custom&quot;;&quot;..\..\extlibs\freetype-2.5.0.1\include&quot;;&quot;..\..\extlibs\curl-7.29.0\include&quot;;..\..\extlibs\rapidjson\include;&quot;..\..\extlibs\irrKlang-1.4.0\include&quot;;&quot;..\..\extlibs\SPARK-1.5.5\include&quot;;..\..\extlibs\StormLib\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -1871,30 +1871,86 @@
 					>
 				</File>
 				<Filter
-					Name="AL"
+					Name="PC"
 					>
 					<File
-						RelativePath="..\..\src\Audio\AudioDevice.AL.cpp"
+						RelativePath="..\..\src\Audio\AudioDevice.PC.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\include\Bibim\AudioDevice.AL.h"
+						RelativePath="..\..\include\Bibim\AudioDevice.PC.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\src\Audio\BGM.AL.cpp"
+						RelativePath="..\..\src\Audio\BGM.PC.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\include\Bibim\BGM.AL.h"
+						RelativePath="..\..\include\Bibim\BGM.PC.h"
 						>
 					</File>
 					<File
-						RelativePath="..\..\src\Audio\SoundFX.AL.cpp"
+						RelativePath="..\..\src\Audio\SoundFX.PC.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\include\Bibim\SoundFX.AL.h"
+						RelativePath="..\..\include\Bibim\SoundFX.PC.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="iOS"
+					>
+					<File
+						RelativePath="..\..\src\Audio\AudioDevice.iOS.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\include\Bibim\AudioDevice.iOS.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\Audio\BGM.iOS.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\include\Bibim\BGM.iOS.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\Audio\SoundFX.iOS.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\include\Bibim\SoundFX.iOS.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Android"
+					>
+					<File
+						RelativePath="..\..\src\Audio\AudioDevice.Android.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\include\Bibim\AudioDevice.Android.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\Audio\BGM.Android.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\include\Bibim\BGM.Android.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\src\Audio\SoundFX.Android.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\include\Bibim\SoundFX.Android.h"
 						>
 					</File>
 				</Filter>

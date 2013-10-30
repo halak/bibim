@@ -1,8 +1,10 @@
 #include <Bibim/Config.h>
-#include <Bibim/BGM.Irrklang.h>
+#if (defined(BIBIM_PLATFORM_PC))
+
+#include <Bibim/BGM.PC.h>
 #include <Bibim/Assert.h>
 #include <Bibim/AutoLocker.h>
-#include <Bibim/AudioDevice.Irrklang.h>
+#include <Bibim/AudioDevice.PC.h>
 #include <Bibim/Math.h>
 #include <irrklang.h>
 using namespace irrklang;
@@ -291,3 +293,5 @@ namespace Bibim
         bgm->bgmRewindTime = u.asFloat;
     }
 }
+
+#endif

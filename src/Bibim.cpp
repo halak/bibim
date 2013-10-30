@@ -1,4 +1,4 @@
-// Automatically generated in 2013-10-28 15:25:30.725119
+// Automatically generated in 2013-10-30 16:23:56.110732
 
 #include <zlib.h>
 #include "Animation/Ease.cpp"
@@ -23,9 +23,15 @@
 #include "Asset/GameAssetStorage.cpp"
 #include "Asset/MPQAssetProvider.cpp"
 #include "Asset/NetworkAssetProvider.cpp"
-#include "Audio/AudioDevice.AL.cpp"
-#include "Audio/BGM.AL.cpp"
-#include "Audio/SoundFX.AL.cpp"
+#include "Audio/AudioDevice.Android.cpp"
+#include "Audio/AudioDevice.iOS.cpp"
+#include "Audio/AudioDevice.PC.cpp"
+#include "Audio/BGM.Android.cpp"
+#include "Audio/BGM.iOS.cpp"
+#include "Audio/BGM.PC.cpp"
+#include "Audio/SoundFX.Android.cpp"
+#include "Audio/SoundFX.iOS.cpp"
+#include "Audio/SoundFX.PC.cpp"
 #include "Collision2D/AxisAlignedBoxShape2D.cpp"
 #include "Collision2D/BoxShape2D.cpp"
 #include "Collision2D/CollisionSpace2D.cpp"

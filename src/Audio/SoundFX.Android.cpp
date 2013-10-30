@@ -1,17 +1,12 @@
 #include <Bibim/Config.h>
-#include <Bibim/SoundFX.AL.h>
+#if (defined(BIBIM_PLATFORM_ANDROID))
+
+#include <Bibim/SoundFX.Android.h>
 #include <Bibim/Assert.h>
-#include <Bibim/AudioDevice.AL.h>
+#include <Bibim/AudioDevice.Android.h>
 #include <Bibim/AutoLocker.h>
 #include <Bibim/Log.h>
 #include <Bibim/Math.h>
-#if (defined(BIBIM_PLATFORM_WINDOWS))
-#include <al.h>
-#include <alc.h>
-#else
-#include <AL/al.h>
-#include <AL/alc.h>
-#endif
 
 namespace Bibim
 {
@@ -285,3 +280,5 @@ namespace Bibim
         }
     }
 }
+
+#endif

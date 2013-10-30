@@ -353,7 +353,7 @@ def merge_sources(directory):
     lines.append('#include <zlib.h>')
     for module in MODULES:
         for item in os.listdir(os.path.join(directory, module)):
-            if (file_ext(item) == 'cpp' and 'Irrklang' not in item):
+            if (file_ext(item) == 'cpp'):
                 lines.append('#include "{0}/{1}"'.format(module, item))
 
     f = open(os.path.join(directory, 'Bibim.cpp'), 'w')
@@ -374,7 +374,7 @@ def merge_headers(directory):
     lines.append('// Automatically generated in {0}'.format(datetime.now()))
     lines.append('')
     for item in os.listdir(directory):
-        if (file_ext(item) == 'h' and 'Irrklang' not in item and item != 'GLES2.h'):
+        if (file_ext(item) == 'h' and item != 'GLES2.h'):
             lines.append('#include "{0}"'.format(item))
     lines.append('')
     lines.append('#endif')

@@ -1,8 +1,8 @@
 #pragma once
-#ifndef BIBIM_ALL_24F0526E_4123_49CE_B958_F4B37BFBDE77_H__
-#define BIBIM_ALL_24F0526E_4123_49CE_B958_F4B37BFBDE77_H__
+#ifndef BIBIM_ALL_96FA0181_E56B_4C7E_B629_39057C64CC73_H__
+#define BIBIM_ALL_96FA0181_E56B_4C7E_B629_39057C64CC73_H__
 
-// Automatically generated in 2013-10-28 15:25:30.771121
+// Automatically generated in 2013-10-30 16:23:56.164735
 
 #include "AlarmClock.h"
 #include "All.h"
@@ -13,13 +13,17 @@
 #include "AssetProvider.h"
 #include "AssetStreamReader.h"
 #include "Atomic.h"
-#include "AudioDevice.AL.h"
+#include "AudioDevice.Android.h"
 #include "AudioDevice.h"
+#include "AudioDevice.iOS.h"
+#include "AudioDevice.PC.h"
 #include "AutoLocker.h"
 #include "AxisAlignedBoxShape2D.h"
 #include "BatchCommand.h"
-#include "BGM.AL.h"
+#include "BGM.Android.h"
 #include "BGM.h"
+#include "BGM.iOS.h"
+#include "BGM.PC.h"
 #include "BinaryReader.h"
 #include "BinaryWriter.h"
 #include "BitMask.h"
@@ -186,8 +190,10 @@
 #include "SharedObject.h"
 #include "SharedPointer.h"
 #include "Socket.h"
-#include "SoundFX.AL.h"
+#include "SoundFX.Android.h"
 #include "SoundFX.h"
+#include "SoundFX.iOS.h"
+#include "SoundFX.PC.h"
 #include "SourceTexture2D.DX9.h"
 #include "SourceTexture2D.GLES2.h"
 #include "SourceTexture2D.h"

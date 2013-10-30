@@ -1,31 +1,21 @@
 #include <Bibim/Config.h>
-#include <Bibim/SoundFX.Irrklang.h>
+#if (defined(BIBIM_PLATFORM_IOS))
+
+#include <Bibim/SoundFX.iOS.h>
 #include <Bibim/Assert.h>
-#include <Bibim/AudioDevice.Irrklang.h>
+#include <Bibim/AudioDevice.iOS.h>
 #include <Bibim/AutoLocker.h>
+#include <Bibim/Log.h>
 #include <Bibim/Math.h>
-#include <irrklang.h>
-using namespace irrklang;
 
 namespace Bibim
 {
-    class SoundFX::EventListener : public irrklang::ISoundStopEventReceiver
-    {
-        public:
-            EventListener(SoundFX* sfx);
-
-            virtual void OnSoundStopped(irrklang::ISound* sound, irrklang::E_STOP_EVENT_CAUSE reason, void* userData);
-
-        private:
-            SoundFX* sfx;
-    };
-
     SoundFX::SoundFX()
         : audioDevice(nullptr),
           volume(1.0f),
           mute(false)
     {
-        eventListener = new EventListener(this);
+        // eventListener = new EventListener(this);
     }
 
     SoundFX::SoundFX(AudioDevice* audioDevice)
@@ -33,13 +23,13 @@ namespace Bibim
           volume(1.0f),
           mute(false)
     {
-        eventListener = new EventListener(this);
+        // eventListener = new EventListener(this);
     }
 
     SoundFX::~SoundFX()
     {
         DropAllSounds();
-        delete eventListener;
+        // delete eventListener;
     }
 
     void SoundFX::Update(float /*dt*/, int timestamp)
@@ -70,6 +60,36 @@ namespace Bibim
             items = &sounds.back();
         }
 
+        /*
+        ALenum e;
+
+        ALuint buffer[2];
+        alGenBuffers(2, buffer);
+        e = alGetError();
+        Log::Information(String::CFormat("%d", (int)e));
+
+        byte data[22050];
+        for (int i = 0; i < sizeof(data); i++)
+            data[i] = (byte)((Math::Sin(i / 22050.0 * 3.14159 * 2.0) * 128.0) + 127.0);
+        alBufferData(buffer[0], AL_FORMAT_MONO8, data, sizeof(data), 22050);
+        e = alGetError();
+        Log::Information(String::CFormat("%d", (int)e));
+
+        ALuint source;
+        alGenSources(1, &source);
+        e = alGetError();
+        Log::Information(String::CFormat("%d", (int)e));
+        alSourcei(source, AL_BUFFER, buffer[0]);
+        alSourcef(source, AL_PITCH, 1.0f);
+        alSourcef(source, AL_GAIN, 1.0f);
+
+        alSourcePlay(source);
+        e = alGetError();
+        Log::Information(String::CFormat("%d", (int)e));
+        e = e;
+        */
+
+        /*
         ISoundEngine* engine = audioDevice->GetEngine();
         ISound* sound = engine->play2D(name.CStr(), false, true);
         if (mute)
@@ -79,6 +99,7 @@ namespace Bibim
         sound->setSoundStopEventReceiver(eventListener, reinterpret_cast<void*>(group));
         sound->setIsPaused(false);
         items->push_back(sound);
+        */
     }
 
     void SoundFX::Stop()
@@ -93,9 +114,11 @@ namespace Bibim
             SoundCollection& items = (*itDict);
             for (SoundCollection::iterator it = items.begin(); it != items.end(); it++)
             {
+                /*
                 (*it)->setSoundStopEventReceiver(nullptr);
                 (*it)->stop();
                 (*it)->drop();
+                */
             }
         }
     }
@@ -109,9 +132,11 @@ namespace Bibim
 
             for (SoundCollection::iterator it = temporaryItems.begin(); it != temporaryItems.end(); it++)
             {
+                /*
                 (*it)->setSoundStopEventReceiver(nullptr);
                 (*it)->stop();
                 (*it)->drop();
+                */
             }
         }
     }
@@ -149,6 +174,7 @@ namespace Bibim
 
     void SoundFX::UpdateVolumes()
     {
+        /*
         if (mute)
         {
             for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); itDict++)
@@ -167,6 +193,7 @@ namespace Bibim
                     (*it)->setVolume(volume);
             }
         }
+        */
     }
 
     SoundFX::SoundCollection* SoundFX::FindSounds(int group)
@@ -193,24 +220,28 @@ namespace Bibim
 
     void SoundFX::SetInPauseAllSounds(bool value)
     {
+        /*
         for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); itDict++)
         {
             SoundCollection& items = (*itDict);
             for (SoundCollection::iterator it = items.begin(); it != items.end(); it++)
                 (*it)->setIsPaused(value);
         }
+        */
     }
 
     void SoundFX::SetInPauseAllSounds(int group, bool value)
     {
+        /*
         if (SoundCollection* items = FindSounds(group))
         {
             for (SoundCollection::iterator it = items->begin(); it != items->end(); it++)
                 (*it)->setIsPaused(value);
         }
+        */
     }
 
-    void SoundFX::DropSound(int group, irrklang::ISound* sound)
+    void SoundFX::DropSound(int group, uint sound)
     {
         if (SoundCollection* items = FindSounds(group))
         {
@@ -218,8 +249,10 @@ namespace Bibim
             {
                 if ((*it) == sound)
                 {
+                    /*
                     (*it)->setSoundStopEventReceiver(nullptr);
                     (*it)->drop();
+                    */
                     items->erase(it);
                     break;
                 }
@@ -239,26 +272,13 @@ namespace Bibim
             SoundCollection& items = (*itDict);
             for (SoundCollection::iterator it = items.begin(); it != items.end(); it++)
             {
+                /*
                 (*it)->setSoundStopEventReceiver(nullptr);
                 (*it)->drop();
+                */
             }
         }
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    SoundFX::EventListener::EventListener(SoundFX* sfx)
-        : sfx(sfx)
-    {
-    }
-
-    void SoundFX::EventListener::OnSoundStopped(ISound* sound, E_STOP_EVENT_CAUSE reason, void* userData)
-    {
-        if (reason != irrklang::ESEC_SOUND_FINISHED_PLAYING)
-            return;
-
-        const int group = reinterpret_cast<int>(userData);
-        AutoLocker locker(sfx->stoppedSoundsLock);
-        sfx->stoppedSounds.push_back(std::pair<int, irrklang::ISound*>(group, sound));
-    }
 }
+
+#endif
