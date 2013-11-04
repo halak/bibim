@@ -20,6 +20,16 @@ namespace Bibim
         mask = value;
     }
 
+    Texture2D* UIMaskEffect::GetMaskTexture() const
+    {
+        return mask->GetTexture();
+    }
+
+    void UIMaskEffect::SetMaskTexture(Texture2D* value)
+    {
+        mask = new Image(value);
+    }
+
     void UIMaskEffect::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
