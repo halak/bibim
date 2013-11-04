@@ -834,6 +834,8 @@ namespace Bibim
             lua_tinker::class_inh<UIMaskEffect, UIPixelEffect>(L);
             lua_tinker::class_def<UIMaskEffect>(L, "GetMask", &UIMaskEffect::GetMask);
             lua_tinker::class_def<UIMaskEffect>(L, "SetMask", &UIMaskEffect::SetMask);
+            lua_tinker::class_def<UIMaskEffect>(L, "GetMaskTexture", &UIMaskEffect::GetMaskTexture);
+            lua_tinker::class_def<UIMaskEffect>(L, "SetMaskTexture", &UIMaskEffect::SetMaskTexture);
         lua_tinker::class_add<UIOpacityMaskEffect>(L, "UIOpacityMaskEffect");
             lua_tinker::class_inh<UIOpacityMaskEffect, UIMaskEffect>(L);
             lua_tinker::class_con<UIOpacityMaskEffect>(L, lua_tinker::constructor<UIOpacityMaskEffect>);

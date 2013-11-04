@@ -32,6 +32,9 @@ namespace Bibim
             inline Image* GetMask() const;
             void SetMask(Image* value);
 
+            Texture2D* GetMaskTexture() const;
+            void SetMaskTexture(Texture2D* value);
+
         protected:
             UIMaskEffect(bool isFixedFunctionImplemented, bool isShaderFunctionImplemented, Image* mask);
 

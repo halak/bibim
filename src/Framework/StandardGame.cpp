@@ -152,14 +152,14 @@ namespace Bibim
             MatchContentToWindow();
 
             uiRenderer = new UIRenderer(GetGraphicsDevice(), storage, "Asset/Shader");
+            UIAppEventDispatcher*      aed = new UIAppEventDispatcher();
             UIKeyboardEventDispatcher* ked = new UIKeyboardEventDispatcher(uiDomain, keyboard);
             UIMouseEventDispatcher*    med = new UIMouseEventDispatcher(uiDomain, mouse, uiRenderer, true);
-            UIAppEventDispatcher*      aed = new UIAppEventDispatcher();
             asyncEventQueue = new UIAsyncEventQueue();
             uiDomainNode->AttachChild(uiRenderer);
+            uiDomainNode->AttachChild(aed);
             uiDomainNode->AttachChild(ked);
             uiDomainNode->AttachChild(med);
-            uiDomainNode->AttachChild(aed);
             uiDomainNode->AttachChild(asyncEventQueue);
 
             ked->SetTimeline(GetMainTimeline());
@@ -207,6 +207,7 @@ namespace Bibim
 
         bgm->SetMute(true);
         GetMainTimeline()->Clear();
+        lua->GC();
         uiDomain->GetRoot()->RemoveAllChildren();
         GameFramework::Finalize();
     }

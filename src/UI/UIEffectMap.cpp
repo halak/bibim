@@ -66,7 +66,7 @@ namespace Bibim
     {
         for (PixelEffectCollection::const_iterator it = pixelEffects.begin(); it != pixelEffects.end(); it++)
         {
-            if ((*it)->GetName() == name)
+            if ((*it) && (*it)->GetName() == name)
                 return (*it);
         }
 

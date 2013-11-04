@@ -10,6 +10,14 @@ namespace Bibim
 
     UIAppEventDispatcher::~UIAppEventDispatcher()
     {
+        SubscriptionMap table;
+        table.swap(subscriptionTable);
+
+        for (SubscriptionMap::const_iterator it = table.begin(); it != table.end(); it++)
+        {
+            BBAssert((*it).second->GetEventDispatcher() == this);
+            (*it).second->SetEventDispatcher(nullptr);
+        }
     }
 
     void UIAppEventDispatcher::RaiseEvent(const UIEventID& id, const UIEventArgs& args) const
