@@ -15,6 +15,9 @@ namespace Bibim
             UICCParticleSystem();
             virtual ~UICCParticleSystem();
 
+            float GetGlobalAngle() const;
+            void  SetGlobalAngle(float value);
+
             inline CCParticleSystem* GetSource() const;
             void SetSource(CCParticleSystem* value);
 
@@ -41,6 +44,7 @@ namespace Bibim
             };
 
         private:
+            float globalAngle;
             CCParticleSystemPtr source;
             CCParticleEmitter* emitter;
             Timeline* timeline;

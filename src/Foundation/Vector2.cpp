@@ -43,9 +43,9 @@ namespace Bibim
         return Math::Sqrt((X * X) + (Y * Y));
     }
 
-    float Vector2::GetLengthSquared() const
+    float Vector2::ToRadian() const
     {
-        return (X * X) + (Y * Y);
+        return Math::Atan2(Y, X);
     }
 
     float Vector2::GetDistance(Vector2 a, Vector2 b)

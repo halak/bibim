@@ -11,7 +11,8 @@ namespace Bibim
     BBImplementsComponent(UICCParticleSystem);
 
     UICCParticleSystem::UICCParticleSystem()
-        : emitter(nullptr),
+        : globalAngle(0.0f),
+          emitter(nullptr),
           source(nullptr),
           timeline(nullptr)
     {
@@ -26,6 +27,19 @@ namespace Bibim
         SetSource(nullptr);
     }
 
+    float UICCParticleSystem::GetGlobalAngle() const
+    {
+        return globalAngle;
+    }
+
+    void UICCParticleSystem::SetGlobalAngle(float value)
+    {
+        globalAngle = value;
+
+        if (emitter)
+            emitter->SetGlobalAngle(globalAngle);
+    }
+
     void UICCParticleSystem::SetSource(CCParticleSystem* value)
     {
         if (source != value)
@@ -35,7 +49,10 @@ namespace Bibim
             delete emitter;
 
             if (source)
+            {
                 emitter = new CCParticleEmitter(source);
+                emitter->SetGlobalAngle(globalAngle);
+            }
             else
                 emitter = nullptr;
         }

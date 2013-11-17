@@ -762,6 +762,8 @@ namespace Bibim
         lua_tinker::class_add<UICCParticleSystem>(L, "UICCParticleSystem");
             lua_tinker::class_inh<UICCParticleSystem, UIVisual>(L);
             lua_tinker::class_con<UICCParticleSystem>(L, lua_tinker::constructor<UICCParticleSystem>);
+            lua_tinker::class_def<UICCParticleSystem>(L, "GetGlobalAngle", &UICCParticleSystem::GetGlobalAngle);
+            lua_tinker::class_def<UICCParticleSystem>(L, "SetGlobalAngle", &UICCParticleSystem::SetGlobalAngle);
             lua_tinker::class_def<UICCParticleSystem>(L, "GetSource", &UICCParticleSystem::GetSource);
             lua_tinker::class_def<UICCParticleSystem>(L, "SetSource", &UICCParticleSystem::SetSource);
             lua_tinker::class_def<UICCParticleSystem>(L, "GetTimeline", &UICCParticleSystem::GetTimeline);
