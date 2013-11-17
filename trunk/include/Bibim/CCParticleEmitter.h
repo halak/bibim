@@ -52,6 +52,8 @@
 
                 bool Update(float dt, int timestamp);
 
+                inline float GetGlobalAngle() const;
+                inline void  SetGlobalAngle(float value);
                 inline const CCParticle* GetParticles() const;
                 inline int GetNumberOfParticles() const;
 
@@ -66,6 +68,7 @@
 
             private:
                 CCParticleSystem* system;
+                float globalAngle;
                 float elapsedTime;
                 std::vector<CCParticle> particles;
                 float emitCounter;
@@ -73,6 +76,16 @@
                 int particleCount;
                 bool isActive;
         };
+
+        float CCParticleEmitter::GetGlobalAngle() const
+        {
+            return globalAngle;
+        }
+
+        void CCParticleEmitter::SetGlobalAngle(float value)
+        {
+            globalAngle = value;
+        }
 
         const CCParticle* CCParticleEmitter::GetParticles() const
         {

@@ -24,7 +24,9 @@ namespace Bibim
         void Rotate(float sin, float cos);
         void Reflect(Vector2 normal);
         float GetLength() const;
-        float GetLengthSquared() const;
+        inline float GetLengthSquared() const;
+
+        float ToRadian() const;
 
         inline Vector2  operator + () const;
         inline Vector2  operator - () const;
@@ -90,6 +92,11 @@ namespace Bibim
     Vector2 Vector2::Multiply(Vector2 right) const
     {
         return Vector2(X * right.X, Y * right.Y);
+    }
+
+    float Vector2::GetLengthSquared() const
+    {
+        return (X * X) + (Y * Y);
     }
 
     Vector2 Vector2::operator + () const

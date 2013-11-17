@@ -7,6 +7,7 @@ namespace Bibim
 {
     CCParticleEmitter::CCParticleEmitter(CCParticleSystem* system)
         : system(system),
+          globalAngle(0.0f),
           elapsedTime(0.0f),
           emitCounter(0.0f),
           particleIndex(0),
@@ -222,7 +223,7 @@ namespace Bibim
         }
         */
 
-        const float angle = -Math::ToRadian(Generate(system->GetAngle(), system->GetAngleVariance()));
+        const float angle = globalAngle - Math::ToRadian(Generate(system->GetAngle(), system->GetAngleVariance()));
         if (system->GetMode() == CCParticleSystem::GravityMode) 
         {
             const float speed = Generate(system->GetSpeed(), system->GetSpeedVariance());
