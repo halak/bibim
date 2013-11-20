@@ -54,12 +54,15 @@ namespace Bibim
 
     int Geom2D::GetPointSegmentDistanceSquared(Point2 p, Point2 a, Point2 b)
     {
+        return static_cast<int>(GetPointSegmentDistanceSquared(Vector2(p.X, p.Y), Vector2(a.X, a.Y), Vector2(b.X, b.Y)));
+        /*
+        TODO: FIND BUG
         const Point2 ab = b - a;
         const Point2 ap = p - a;
         const Point2 bp = p - b;
         const int e = ab.Dot(ap);
 
-        if (e > 0.0f)
+        if (e > 0)
         {
             const int f = ab.Dot(ab);
             if (e >= f)
@@ -69,6 +72,7 @@ namespace Bibim
         }
         else
             return ap.Dot(ap);
+        */
     }
 
     float Geom2D::GetPointSegmentDistanceSquared(Vector2 p, Vector2 a, Vector2 b)
