@@ -13,9 +13,9 @@ namespace Bibim
     {
         BBThisIsNoncopyableClass(UIVisualVisitor);
         public:
-            explicit UIVisualVisitor(bool visibleOnly);
-            UIVisualVisitor(Point2 size, const Matrix4& viewTransform, const Matrix4& projectionTransform, bool visibleOnly);
-            UIVisualVisitor(Point2 size, const Matrix4& viewTransform, const Matrix4& viewTransformInv, const Matrix4& projectionTransform, bool visibleOnly);
+            explicit UIVisualVisitor(Point2 screenSize, bool visibleOnly);
+            UIVisualVisitor(Point2 screenSize, const Matrix4& viewTransform, const Matrix4& projectionTransform, bool visibleOnly);
+            UIVisualVisitor(Point2 screenSize, const Matrix4& viewTransform, const Matrix4& viewTransformInv, const Matrix4& projectionTransform, bool visibleOnly);
             virtual ~UIVisualVisitor();
 
             Vector2 Project(Vector2 point) const;

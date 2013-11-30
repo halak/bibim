@@ -24,9 +24,9 @@ namespace Bibim
     {
         BBAssert(id.GetType() == UIEventID::ApplicationType);
 
-        SubscriptionMap::const_iterator itBegin = subscriptionTable.lower_bound(id);
-        SubscriptionMap::const_iterator itEnd = subscriptionTable.upper_bound(id);
-        for (SubscriptionMap::const_iterator it = itBegin; it != itEnd; it++)
+        SubscriptionMap::const_iterator begin = subscriptionTable.lower_bound(id);
+        SubscriptionMap::const_iterator end = subscriptionTable.upper_bound(id);
+        for (SubscriptionMap::const_iterator it = begin; it != end; it++)
             (*it).second->RaiseEvent(id, args);
     }
     
@@ -35,20 +35,20 @@ namespace Bibim
         // 이 함수를 호출하는 UIEventMap에서 중복된 UIEventID는 구독을 요청하지 않는다.
         // 하지만 Bug가 있을 수 있으니 Debug Build에서는 확인을 해본다.
 
-        SubscriptionMap::iterator itBegin = subscriptionTable.lower_bound(id);
+        SubscriptionMap::iterator begin = subscriptionTable.lower_bound(id);
 
 #       if (defined(BIBIM_DEBUG))
-            if (itBegin != subscriptionTable.end())
+            if (begin != subscriptionTable.end())
             {
-                SubscriptionMap::iterator itEnd = subscriptionTable.upper_bound(id);
-                for (SubscriptionMap::const_iterator it = itBegin; it != itEnd; it++)
+                SubscriptionMap::iterator end = subscriptionTable.upper_bound(id);
+                for (SubscriptionMap::const_iterator it = begin; it != end; it++)
                 {
-                    BBAssertDebug((*it).second == subscriber);
+                    BBAssertDebug((*it).second != subscriber);
                 }
             }
 #       endif
 
-        subscriptionTable.insert(itBegin, SubscriptionMap::value_type(id, subscriber));
+        subscriptionTable.insert(begin, SubscriptionMap::value_type(id, subscriber));
     }
 
     void UIAppEventDispatcher::Unsubscribe(UIEventMap* subscriber, const UIEventID& id)

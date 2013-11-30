@@ -4,6 +4,7 @@
 
 #include <Bibim/FWD.h>
 #include <Bibim/UIVisualVisitor.h>
+#include <Bibim/Point2.h>
 #include <vector>
 
 namespace Bibim
@@ -11,7 +12,7 @@ namespace Bibim
     class UIBoundsContext : public UIVisualVisitor
     {
         public:
-            UIBoundsContext();
+            UIBoundsContext(Point2 screenSize);
             virtual ~UIBoundsContext();
 
             RectF Compute(UIVisual* target);

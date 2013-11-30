@@ -18,7 +18,8 @@ namespace Bibim
             void SetSource(Image* value);
 
             Texture2D* GetTexture() const;
-            void SetTexture(Texture2D* value);
+            inline void SetTexture(Texture2D* value);
+            void SetTexture(Texture2D* texture, Rect clippingRect);
 
             inline bool GetHorizontalFlip() const;
             inline void SetHorizontalFlip(bool value);
@@ -30,6 +31,8 @@ namespace Bibim
             inline void SetMask(BitMask* value);
 
             virtual Vector2 GetContentSize();
+
+            inline void SetTextureXYWH(Texture2D* texture, int x, int y, int width, int height);
 
         protected:
             virtual void OnDraw(UIDrawingContext& context);
@@ -47,6 +50,11 @@ namespace Bibim
     Image* UIImage::GetSource() const
     {
         return source;
+    }
+
+    void UIImage::SetTexture(Texture2D* value)
+    {
+        SetTexture(value, Rect::Empty);
     }
 
     bool UIImage::GetHorizontalFlip() const
@@ -77,6 +85,11 @@ namespace Bibim
     void UIImage::SetMask(BitMask* value)
     {
         mask = value;
+    }
+
+    void UIImage::SetTextureXYWH(Texture2D* texture, int x, int y, int width, int height)
+    {
+        SetTexture(texture, Rect(x, y, width, height));
     }
 }
 

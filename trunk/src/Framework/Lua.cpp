@@ -600,7 +600,7 @@ namespace Bibim
             lua_tinker::class_def<UIImage>(L, "GetSource", &UIImage::GetSource);
             lua_tinker::class_def<UIImage>(L, "SetSource", &UIImage::SetSource);
             lua_tinker::class_def<UIImage>(L, "GetTexture", &UIImage::GetTexture);
-            lua_tinker::class_def<UIImage>(L, "SetTexture", &UIImage::SetTexture);
+            lua_tinker::class_def<UIImage>(L, "SetTexture", &UIImage::SetTextureXYWH);
             lua_tinker::class_def<UIImage>(L, "GetHorizontalFlip", &UIImage::GetHorizontalFlip);
             lua_tinker::class_def<UIImage>(L, "SetHorizontalFlip", &UIImage::SetHorizontalFlip);
             lua_tinker::class_def<UIImage>(L, "GetVerticalFlip", &UIImage::GetVerticalFlip);
