@@ -10,13 +10,12 @@
 namespace Bibim
 {
     static const float BigFloat = 10000.0f;
-    static const RectF BigRect = RectF(0.0f, 0.0f, 480.0f, 800.0f);
 
-    UIVisualVisitor::UIVisualVisitor(bool visibleOnly)
+    UIVisualVisitor::UIVisualVisitor(Point2 screenSize, bool visibleOnly)
         : visibleOnly(visibleOnly),
           currentOpacity(1.0f),
-          currentBounds(BigRect),
-          currentClippedBounds(BigRect),
+          currentBounds(0, 0, screenSize.X, screenSize.Y),
+          currentClippedBounds(0, 0, screenSize.X, screenSize.Y),
           currentTransform(Matrix4::Identity),
           currentTransformInv(Matrix4::Identity),
           parentTransform(Matrix4::Identity),

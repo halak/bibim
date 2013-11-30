@@ -1300,7 +1300,7 @@ namespace Bibim
 
             if (UIVisual* v = lua_tinker::read<UIVisual*>(L, 1))
             {
-                UIBoundsContext context;
+                UIBoundsContext context(game->GetGraphicsDevice()->GetViewportSize());
                 const RectF bounds = context.Compute(v);
                 lua_tinker::push(L, bounds.X);
                 lua_tinker::push(L, bounds.Y);
@@ -1365,7 +1365,7 @@ namespace Bibim
             if (v == nullptr)
                 return 0;
             
-            UIBoundsContext context;
+            UIBoundsContext context(game->GetGraphicsDevice()->GetViewportSize());
             const RectF bounds = context.Compute(v);
 
             GraphicsDevice* g = game->GetGraphicsDevice();

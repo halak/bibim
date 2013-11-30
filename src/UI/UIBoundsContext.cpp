@@ -5,8 +5,8 @@
 
 namespace Bibim
 {
-    UIBoundsContext::UIBoundsContext()
-        : UIVisualVisitor(false),
+    UIBoundsContext::UIBoundsContext(Point2 screenSize)
+        : UIVisualVisitor(screenSize, false),
           index(-1)
     {
     }

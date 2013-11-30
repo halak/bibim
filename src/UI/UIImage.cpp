@@ -38,10 +38,15 @@ namespace Bibim
             return nullptr;
     }
 
-    void UIImage::SetTexture(Texture2D* value)
+    void UIImage::SetTexture(Texture2D* texture, const Rect clippingRect)
     {
-        if (value)
-            source = new Image(value);
+        if (texture)
+        {
+            if (clippingRect.Width > 0 && clippingRect.Height > 0)
+                source = new Image(texture, clippingRect);
+            else
+                source = new Image(texture);
+        }
     }
 
     Vector2 UIImage::GetContentSize()
