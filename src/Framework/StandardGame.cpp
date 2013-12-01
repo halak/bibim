@@ -63,6 +63,7 @@ namespace Bibim
     {
         delete dashboard;
 
+        GetLua()->GC();
         GetGraphicsDevice()->RemoveRestoreEventListener(this);
         GetWindow()->RemoveResizeEventListener(this);
     }

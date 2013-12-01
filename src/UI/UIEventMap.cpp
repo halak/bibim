@@ -21,8 +21,7 @@ namespace Bibim
         appEventHandlers.clear();
         delayedAppEventHandlers.clear();
 
-        if (eventDispatcher)
-            eventDispatcher->UnsubscribeAll(this);
+        SetEventDispatcher(nullptr);
     }
 
     bool UIEventMap::RaiseEvent(const UIEventID& id, const UIEventArgs& args)
@@ -251,12 +250,16 @@ namespace Bibim
         if (eventDispatcher != value)
         {
             if (eventDispatcher)
+            {
                 eventDispatcher->UnsubscribeAll(this);
+                eventDispatcher->Unregister(this);
+            }
 
             eventDispatcher = value;
 
             if (eventDispatcher)
             {
+                eventDispatcher->Register(this);
                 for( HandlerDictionary::const_iterator it = appEventHandlers.begin(); it != appEventHandlers.end(); ++it )
                     eventDispatcher->Subscribe(this, (*it).first);
                 for( HandlerDictionary::const_iterator it = delayedAppEventHandlers.begin(); it != delayedAppEventHandlers.end(); ++it )
