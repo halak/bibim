@@ -13,10 +13,13 @@ namespace Bibim
         SubscriptionMap table;
         table.swap(subscriptionTable);
 
-        for (SubscriptionMap::const_iterator it = table.begin(); it != table.end(); it++)
+        UIEventMapSet set;
+        set.swap(instances);
+
+        for (UIEventMapSet::const_iterator it = set.begin(); it != set.end(); it++)
         {
-            BBAssert((*it).second->GetEventDispatcher() == this);
-            (*it).second->SetEventDispatcher(nullptr);
+            BBAssert((*it)->GetEventDispatcher() == this);
+            (*it)->SetEventDispatcher(nullptr);
         }
     }
 
@@ -32,8 +35,8 @@ namespace Bibim
     
     void UIAppEventDispatcher::Subscribe(UIEventMap* subscriber, const UIEventID& id)
     {
-        // 이 함수를 호출하는 UIEventMap에서 중복된 UIEventID는 구독을 요청하지 않는다.
-        // 하지만 Bug가 있을 수 있으니 Debug Build에서는 확인을 해본다.
+        // 이 함수를 호출하는 UIEventMap에서 중복된 UIEventID는 구독을 요청하지 않습니다.
+        // 하지만 Bug가 있을 수 있으니 Debug Build에서는 확인을 해봅니다.
 
         SubscriptionMap::iterator begin = subscriptionTable.lower_bound(id);
 
@@ -76,5 +79,16 @@ namespace Bibim
             else
                 it++;
         }
+    }
+
+    void UIAppEventDispatcher::Register(UIEventMap* o)
+    {
+        BBAssertDebug(instances.find(o) == instances.end());
+        instances.insert(o);
+    }
+
+    void UIAppEventDispatcher::Unregister(UIEventMap* o)
+    {
+        instances.erase(o);
     }
 }

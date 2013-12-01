@@ -6,6 +6,7 @@
 #include <Bibim/UIEventDispatcher.h>
 #include <Bibim/UIEventID.h>
 #include <map>
+#include <set>
 
 namespace Bibim
 {
@@ -14,6 +15,7 @@ namespace Bibim
         BBModuleClass(UIAppEventDispatcher, UIEventDispatcher, 'U', 'I', 'A', 'P');
         public:
             typedef std::multimap<UIEventID, UIEventMap*> SubscriptionMap;
+            typedef std::set<UIEventMap*> UIEventMapSet;
 
         public:
             UIAppEventDispatcher();
@@ -27,8 +29,12 @@ namespace Bibim
             void Unsubscribe(UIEventMap* subscriber, const UIEventID& id);
             void UnsubscribeAll(UIEventMap* subscriber);
 
+            void Register(UIEventMap* o);
+            void Unregister(UIEventMap* o);
+
         private:
             SubscriptionMap subscriptionTable;
+            UIEventMapSet instances;
     };
 }
 
