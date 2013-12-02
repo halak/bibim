@@ -231,14 +231,29 @@ namespace Bibim
         }
     }
 
-    Vector2 UIForceGridEffect::TranslateCoordinate(Vector3 pos, Point2 screenSize, Vector2* p)
+    //Vector2 UIForceGridEffect::TranslateCoordinate(Vector3 pos, Point2 screenSize, Vector2* p)
+    //{
+    //    static const int S0 = 0;
+    //    static const int S1 = 2;
+    //    static const int E0 = 1;
+    //    static const int E1 = 3;
+
+    //    Vector2 pV = PerspectiveVector(pos, screenSize);
+    //    float xRate = (pV.X - size.GetLeft()) / size.Width;
+    //    float yRate = (pV.Y - size.GetTop()) / size.Height;
+    //    Vector2 topPoint = Math::Lerp(p[S0], p[E0], xRate);
+    //    Vector2 bottomPoint = Math::Lerp(p[S1], p[E1], xRate);
+    //    return Math::Lerp(topPoint, bottomPoint, yRate);
+    //}
+
+    Vector2 UIForceGridEffect::TranslateCoordinate(Vector3 pos, Vector2* p)
     {
         static const int S0 = 0;
-        static const int S1 = 1;
-        static const int E0 = 2;
+        static const int S1 = 2;
+        static const int E0 = 1;
         static const int E1 = 3;
 
-        Vector2 pV = PerspectiveVector(pos, screenSize);
+        Vector2 pV = Vector2(pos.X, pos.Y);
         float xRate = (pV.X - size.GetLeft()) / size.Width;
         float yRate = (pV.Y - size.GetTop()) / size.Height;
         Vector2 topPoint = Math::Lerp(p[S0], p[E0], xRate);
@@ -249,8 +264,8 @@ namespace Bibim
     void UIForceGridEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color)
     {
         static const int S0 = 0;
-        static const int S1 = 1;
-        static const int E0 = 2;
+        static const int S1 = 2;
+        static const int E0 = 1;
         static const int E1 = 3;
 
         if(points.size() == 0)
@@ -268,15 +283,15 @@ namespace Bibim
 
         for (int y = 1; y < rowCount; y++)
         {
-            np[E0] = TranslateCoordinate(points[0][y - 1].position, screenSize, p);
-            np[E1] = TranslateCoordinate(points[0][y].position, screenSize, p);
+            np[E0] = TranslateCoordinate(points[0][y - 1].position, p);
+            np[E1] = TranslateCoordinate(points[0][y].position, p);
 
             for (int x = 1; x < colCount; x++)
             {
                 np[S0] = np[E0];
                 np[S1] = np[E1];
-                np[E0] = TranslateCoordinate(points[x][y - 1].position, screenSize, p);
-                np[E1] = TranslateCoordinate(points[x][y].position, screenSize, p);
+                np[E0] = TranslateCoordinate(points[x][y - 1].position, p);
+                np[E1] = TranslateCoordinate(points[x][y].position, p);
 
                 Base::DrawQuad(renderer, np, color);
             }
@@ -286,8 +301,8 @@ namespace Bibim
     void UIForceGridEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color, Vector2* uv,  Texture2D* texture)
     {
         static const int S0 = 0;
-        static const int S1 = 1;
-        static const int E0 = 2;
+        static const int S1 = 2;
+        static const int E0 = 1;
         static const int E1 = 3;
 
         if(points.size() == 0)
@@ -316,8 +331,8 @@ namespace Bibim
             basePointUV[S1] = Math::Lerp(uv[S0], uv[S1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
             basePointUV[E1] = Math::Lerp(uv[E0], uv[E1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
 
-            np[E0] = TranslateCoordinate(points[0][y - 1].position, screenSize, p);
-            np[E1] = TranslateCoordinate(points[0][y].position, screenSize, p);
+            np[E0] = TranslateCoordinate(points[0][y - 1].position, p);
+            np[E1] = TranslateCoordinate(points[0][y].position, p);
             nuv[E0] = basePointUV[S0];
             nuv[E1] = basePointUV[S1];
 
@@ -325,8 +340,8 @@ namespace Bibim
             {
                 np[S0] = np[E0];
                 np[S1] = np[E1];
-                np[E0] = TranslateCoordinate(points[x][y - 1].position, screenSize, p);
-                np[E1] = TranslateCoordinate(points[x][y].position, screenSize, p);
+                np[E0] = TranslateCoordinate(points[x][y - 1].position, p);
+                np[E1] = TranslateCoordinate(points[x][y].position, p);
 
                 nuv[S0] = nuv[E0];
                 nuv[S1] = nuv[E1];
@@ -341,8 +356,8 @@ namespace Bibim
     void UIForceGridEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color, Vector2* uv1, Texture2D* texture1, Vector2* uv2, Texture2D* texture2)
     {
         static const int S0 = 0;
-        static const int S1 = 1;
-        static const int E0 = 2;
+        static const int S1 = 2;
+        static const int E0 = 1;
         static const int E1 = 3;
 
         if(points.size() == 0)
@@ -380,8 +395,8 @@ namespace Bibim
             basePointUV2[S1] = Math::Lerp(uv2[S0], uv2[S1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
             basePointUV2[E1] = Math::Lerp(uv2[E0], uv2[E1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
 
-            np[E0] = TranslateCoordinate(points[0][y - 1].position, screenSize, p);
-            np[E1] = TranslateCoordinate(points[0][y].position, screenSize, p);
+            np[E0] = TranslateCoordinate(points[0][y - 1].position, p);
+            np[E1] = TranslateCoordinate(points[0][y].position, p);
             nuv1[E0] = basePointUV1[S0];
             nuv1[E1] = basePointUV1[S1];
             nuv2[E0] = basePointUV2[S0];
@@ -391,8 +406,8 @@ namespace Bibim
             {
                 np[S0] = np[E0];
                 np[S1] = np[E1];
-                np[E0] = TranslateCoordinate(points[x][y - 1].position, screenSize, p);
-                np[E1] = TranslateCoordinate(points[x][y].position, screenSize, p);
+                np[E0] = TranslateCoordinate(points[x][y - 1].position, p);
+                np[E1] = TranslateCoordinate(points[x][y].position, p);
 
                 nuv1[S0] = nuv1[E0];
                 nuv1[S1] = nuv1[E1];
@@ -464,12 +479,12 @@ namespace Bibim
         }
     }
 
-    Vector2 UIForceGridEffect::PerspectiveVector(Vector3 v, Point2 screenSize)
-    {
-        // do a perspective projection
-        float factor = (v.Z + DefaultPerspectiveProjectionFactor) / DefaultPerspectiveProjectionFactor;
-        return (Vector2(v.X, v.Y) - Vector2(screenSize.X, screenSize.Y) / 2.0f) * factor + Vector2(screenSize.X, screenSize.Y) / 2.0f;
-    }
+    //Vector2 UIForceGridEffect::PerspectiveVector(Vector3 v, Point2 screenSize)
+    //{
+    //    // do a perspective projection
+    //    float factor = (v.Z + DefaultPerspectiveProjectionFactor) / DefaultPerspectiveProjectionFactor;
+    //    return (Vector2(v.X, v.Y) - Vector2(screenSize.X, screenSize.Y) / 2.0f) * factor + Vector2(screenSize.X, screenSize.Y) / 2.0f;
+    //}
 
     UIForceGridEffect::FrameSpeed UIForceGridEffect::ConvertFromStringToFrameSpeed(const char* value)
     {

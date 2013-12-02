@@ -74,8 +74,9 @@ namespace Bibim
             void OnStep(float dt, int timestamp);
 
         private:
-            Vector2 TranslateCoordinate(Vector3 pos, Point2 screenSize, Vector2* p);
-            static Vector2 PerspectiveVector(Vector3 v, Point2 screenSize);
+            //Vector2 TranslateCoordinate(Vector3 pos, Point2 screenSize, Vector2* p);
+            Vector2 TranslateCoordinate(Vector3 pos, Vector2* p);
+            //static Vector2 PerspectiveVector(Vector3 v, Point2 screenSize);
 
             class PointMass : public IUpdateable
             {
