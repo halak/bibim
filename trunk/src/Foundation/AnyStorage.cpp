@@ -1,5 +1,6 @@
 ﻿#include <Bibim/Config.h>
 #include <Bibim/AnyStorage.h>
+#include <Bibim/Algorithm.h>
 #include <algorithm>
 
 namespace Bibim
@@ -20,10 +21,7 @@ namespace Bibim
     void AnyStorage::RemoveReference(AnyStorage* item)
     {
         AnyStoragePtr temporaryItem = item;
-
-        StorageCollection::iterator it = std::find(references.begin(), references.end(), item);
-        if (it != references.end())
-            references.erase(it);
+        Container::Remove(references, item);
     }
 
     void AnyStorage::RemoveAllReferences()

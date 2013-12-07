@@ -316,7 +316,10 @@ namespace Bibim
         shape->Build(v);
 
         if (v.data.empty() == false)
+        {
+            v.data.push_back(v.data[0]);
             DrawLines(static_cast<int>(v.data.size()), &v.data[0], color);
+        }
     }
 
     void UIDrawingContext::DrawUnclipped(Vector2 position, Texture2D* texture)

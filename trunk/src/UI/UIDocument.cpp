@@ -2,7 +2,6 @@
 #include <Bibim/UIDocument.h>
 #include <Bibim/Assert.h>
 #include <Bibim/AssetStreamReader.h>
-#include <Bibim/BitMask.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Font.h>
 #include <Bibim/Glyph.h>

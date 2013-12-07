@@ -4,6 +4,7 @@
 
 #include <Bibim/FWD.h>
 #include <Bibim/UIVisual.h>
+#include <Bibim/BitMask.h>
 
 namespace Bibim
 {

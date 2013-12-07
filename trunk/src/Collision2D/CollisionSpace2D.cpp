@@ -195,7 +195,7 @@ namespace Bibim
     void CollisionSpace2D::SetNumberOfGroups(int numberOfGroups)
     {
         std::vector<ShapeCollection> newShapes;
-        std::vector<BooleanCollection>  newCollisionRelationships;
+        std::vector<BooleanCollection> newCollisionRelationships;
 
         // 새로운 공간을 잡습니다.
         newShapes.resize(numberOfGroups);

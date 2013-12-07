@@ -162,7 +162,91 @@ namespace Bibim
         }
     }
 
-    String Any::CastString() const
+    Point2 Any::CastPoint2() const
+    {
+        switch (type)
+        {
+            case Int2Type:
+                {
+                    const SixteenBytes* data = static_cast<const SixteenBytes*>(value.POINTER);
+                    return Point2(data->INT4[0], data->INT4[1]);
+                }
+            default:
+                return Point2::Zero;
+        }
+    }
+
+    Point3 Any::CastPoint3() const
+    {
+        switch (type)
+        {
+            case Int3Type:
+                {
+                    const SixteenBytes* data = static_cast<const SixteenBytes*>(value.POINTER);
+                    return Point3(data->INT4[0], data->INT4[1], data->INT4[2]);
+                }
+            default:
+                return Point3::Zero;
+        }
+    }
+
+    Point4 Any::CastPoint4() const
+    {
+        switch (type)
+        {
+            case Int4Type:
+                {
+                    const SixteenBytes* data = static_cast<const SixteenBytes*>(value.POINTER);
+                    return Point4(data->INT4[0], data->INT4[1], data->INT4[2], data->INT4[3]);
+                }
+            default:
+                return Point4::Zero;
+        }
+    }
+
+    Vector2 Any::CastVector2() const
+    {
+        switch (type)
+        {
+            case Float2Type:
+                {
+                    const SixteenBytes* data = static_cast<const SixteenBytes*>(value.POINTER);
+                    return Vector2(data->FLOAT4[0], data->FLOAT4[1]);
+                }
+            default:
+                return Vector2::Zero;
+        }
+    }
+
+    Vector3 Any::CastVector3() const
+    {
+        switch (type)
+        {
+            case Float3Type:
+                {
+                    const SixteenBytes* data = static_cast<const SixteenBytes*>(value.POINTER);
+                    return Vector3(data->FLOAT4[0], data->FLOAT4[1], data->FLOAT4[2]);
+                }
+            default:
+                return Vector3::Zero;
+        }
+    }
+
+    Vector4 Any::CastVector4() const
+    {
+        switch (type)
+        {
+            case Float4Type:
+                {
+                    const SixteenBytes* data = static_cast<const SixteenBytes*>(value.POINTER);
+                    return Vector4(data->FLOAT4[0], data->FLOAT4[1], data->FLOAT4[2], data->FLOAT4[3]);
+                }
+            default:
+                return Vector4::Zero;
+        }
+    }
+
+    const String& Any::CastString() const
     {
         switch (type)
         {

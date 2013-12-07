@@ -2175,6 +2175,10 @@
 				Name="Utility"
 				>
 				<File
+					RelativePath="..\..\include\Bibim\Algorithm.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\Foundation\AnyStorage.cpp"
 					>
 				</File>
@@ -2240,6 +2244,26 @@
 				</File>
 				<File
 					RelativePath="..\..\include\Bibim\SharedPointer.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="RTTI"
+				>
+				<File
+					RelativePath="..\..\src\Foundation\Class.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\Class.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Foundation\ClassHierarchy.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\ClassHierarchy.h"
 					>
 				</File>
 			</Filter>

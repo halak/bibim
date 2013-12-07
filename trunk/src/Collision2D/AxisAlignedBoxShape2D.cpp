@@ -28,7 +28,7 @@ namespace Bibim
         if (GetMin() != value)
         {
             min = value;
-            revision = 0;
+            revision = -1;
         }
     }
 
@@ -37,7 +37,7 @@ namespace Bibim
         if (GetMax() != value)
         {
             max = value;
-            revision = 0;
+            revision = -1;
         }
     }
 

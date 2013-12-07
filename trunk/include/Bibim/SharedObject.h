@@ -83,8 +83,8 @@ namespace Bibim
             long referenceCount;
 
             template <typename T> friend class SharedPointer;
-            template<typename T> friend struct lua_tinker::val2user;
-            template<typename T> friend struct lua_tinker::ptr2user;
+            template <typename T> friend struct lua_tinker::val2user;
+            template <typename T> friend struct lua_tinker::ptr2user;
 
         private:
             SharedObject& operator = (const SharedObject&);

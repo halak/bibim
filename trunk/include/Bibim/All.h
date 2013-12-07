@@ -1,10 +1,11 @@
 #pragma once
-#ifndef BIBIM_ALL_96FA0181_E56B_4C7E_B629_39057C64CC73_H__
-#define BIBIM_ALL_96FA0181_E56B_4C7E_B629_39057C64CC73_H__
+#ifndef BIBIM_ALL_9DF3E066_00E5_47FF_9F03_600D9100C82D_H__
+#define BIBIM_ALL_9DF3E066_00E5_47FF_9F03_600D9100C82D_H__
 
-// Automatically generated in 2013-10-30 16:23:56.164735
+// Automatically generated in 2013-12-07 16:15:14.178534
 
 #include "AlarmClock.h"
+#include "Algorithm.h"
 #include "All.h"
 #include "Any.h"
 #include "AnyStorage.h"
@@ -33,6 +34,8 @@
 #include "CCParticleSystem.h"
 #include "CCParticleSystemSet.h"
 #include "CheckedRelease.h"
+#include "Class.h"
+#include "ClassHierarchy.h"
 #include "Clipboard.Android.h"
 #include "Clipboard.h"
 #include "Clipboard.iOS.h"
