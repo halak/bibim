@@ -1,7 +1,6 @@
 ﻿#include <Bibim/Config.h>
 #include <Bibim/UIImage.h>
 #include <Bibim/Assert.h>
-#include <Bibim/BitMask.h>
 #include <Bibim/Color.h>
 #include <Bibim/ComponentStreamReader.h>
 #include <Bibim/Image.h>

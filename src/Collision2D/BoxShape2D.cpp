@@ -18,7 +18,7 @@ namespace Bibim
           rotatedUp(Vector2::Zero),
           scaledExtension(Vector2::Zero),
           p0(Vector2::Zero), p1(Vector2::Zero), p2(Vector2::Zero), p3(Vector2::Zero),
-          revision(0)
+          revision(-1)
     {
     }
 
@@ -34,7 +34,7 @@ namespace Bibim
         if (GetOrientation() != value)
         {
             orientation = value;
-            revision = 0;
+            revision = -1;
         }
     }
    
@@ -44,7 +44,7 @@ namespace Bibim
         if (GetExtension() != value)
         {
             extension = value;
-            revision = 0;
+            revision = -1;
         }
     }
 

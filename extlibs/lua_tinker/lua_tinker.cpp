@@ -15,6 +15,7 @@ extern "C"
 
 #include "lua_tinker.h"
 #include <memory.h>
+#include <Bibim/Numerics.h>
 
 
 /*---------------------------------------------------------------------------*/ 
@@ -434,6 +435,34 @@ Bibim::String lua_tinker::read(lua_State *L, int index)
     return Bibim::String(lua_tostring(L, index));
 }
 
+template<>
+Bibim::Any lua_tinker::read(lua_State *L, int index)
+{
+    switch (lua_type(L, index))
+    {
+        case LUA_TNIL:
+            return Bibim::Any::Void;
+        case LUA_TBOOLEAN:
+            return Bibim::Any(lua_toboolean(L, index) ? true : false);
+        case LUA_TLIGHTUSERDATA:
+            return Bibim::Any::Void;
+        case LUA_TNUMBER:
+            return Bibim::Any(static_cast<float>(lua_tonumber(L, index)));
+        case LUA_TSTRING:
+            return Bibim::Any(Bibim::String(lua_tostring(L, index)));
+        case LUA_TTABLE:
+            return Bibim::Any::Void;
+        case LUA_TFUNCTION:
+            return Bibim::Any::Void;
+        case LUA_TUSERDATA:
+            return Bibim::Any::Void;
+        case LUA_TTHREAD:
+            return Bibim::Any::Void; 
+        default:
+            return Bibim::Any::Void;
+    }
+}
+
 
 /*---------------------------------------------------------------------------*/ 
 /* push                                                                      */ 
@@ -548,6 +577,44 @@ template<>
 void lua_tinker::push(lua_State *L, const Bibim::String& ret)
 {
     lua_pushstring(L, ret.CStr());
+}
+
+template<>
+void lua_tinker::push(lua_State *L, const Bibim::Any& ret)
+{
+    switch (ret.GetType())
+    {
+        case Bibim::Any::VoidType:
+            lua_pushnil(L);
+            break;
+        case Bibim::Any::BoolType:
+            push(L, ret.CastBool());
+            break;
+        case Bibim::Any::IntType:
+            push(L, ret.CastInt());
+            break;
+        case Bibim::Any::LongIntType:
+            push(L, ret.CastLongInt());
+            break;
+        case Bibim::Any::FloatType:
+            push(L, ret.CastFloat());
+            break;
+        case Bibim::Any::ColorType:
+        case Bibim::Any::Int2Type:
+        case Bibim::Any::Int3Type:
+        case Bibim::Any::Int4Type:
+        case Bibim::Any::Float2Type:
+        case Bibim::Any::Float3Type:
+        case Bibim::Any::Float4Type:
+            lua_pushnil(L);
+            break;
+        case Bibim::Any::StringType:
+            push(L, ret.CastString());
+            break;
+        case Bibim::Any::SharedObjectType:
+            lua_pushnil(L);
+            break;
+    }
 }
 
 template<>
@@ -757,6 +824,44 @@ int lua_tinker::push_for_return(lua_State *L, const Bibim::String& ret)
 {
     lua_pushstring(L, ret.CStr());
     return 1;
+}
+
+template<>
+int lua_tinker::push_for_return(lua_State *L, const Bibim::Any& ret)
+{
+    switch (ret.GetType())
+    {
+        case Bibim::Any::VoidType:
+            return 0;
+        case Bibim::Any::BoolType:
+            return push_for_return(L, ret.CastBool());
+        case Bibim::Any::IntType:
+            return push_for_return(L, ret.CastInt());
+        case Bibim::Any::LongIntType:
+            return push_for_return(L, ret.CastLongInt());
+        case Bibim::Any::FloatType:
+            return push_for_return(L, ret.CastFloat());
+        case Bibim::Any::ColorType:
+            return push_for_return(L, ret.CastColor());
+        case Bibim::Any::Int2Type:
+            return push_for_return(L, ret.CastPoint2());
+        case Bibim::Any::Int3Type:
+            return push_for_return(L, ret.CastPoint3());
+        case Bibim::Any::Int4Type:
+            return push_for_return(L, ret.CastPoint4());
+        case Bibim::Any::Float2Type:
+            return push_for_return(L, ret.CastVector2());
+        case Bibim::Any::Float3Type:
+            return push_for_return(L, ret.CastVector3());
+        case Bibim::Any::Float4Type:
+            return push_for_return(L, ret.CastVector4());
+        case Bibim::Any::StringType:
+            return push_for_return(L, ret.CastString());
+        case Bibim::Any::SharedObjectType:
+            return push_for_return(L, ret.CastSharedObject());
+        default:
+            return 0;
+    }
 }
 
 /*---------------------------------------------------------------------------*/ 

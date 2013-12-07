@@ -1,6 +1,5 @@
 ﻿#include <Bibim/Config.h>
 #include <Bibim/UIHandledDrawingContext.h>
-#include <Bibim/BitMask.h>
 #include <Bibim/Color.h>
 #include <Bibim/Math.h>
 #include <Bibim/UIVisual.h>

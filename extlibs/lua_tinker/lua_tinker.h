@@ -10,6 +10,7 @@
 #define _LUA_TINKER_H_
 
 #include <new>
+#include <Bibim/Any.h>
 #include <Bibim/Color.h>
 #include <Bibim/Point2.h>
 #include <Bibim/Point3.h>
@@ -296,6 +297,7 @@ namespace lua_tinker
     template<> unsigned long long read(lua_State *L, int index);
     template<> table              read(lua_State *L, int index);
     template<> Bibim::String      read(lua_State *L, int index);
+    template<> Bibim::Any         read(lua_State *L, int index);
 
     // push a value to lua stack 
     template<typename T>  
@@ -319,6 +321,7 @@ namespace lua_tinker
     template<> void push(lua_State *L, unsigned long long ret);
     template<> void push(lua_State *L, table ret);
     template<> void push(lua_State *L, const Bibim::String& ret);
+    template<> void push(lua_State *L, const Bibim::Any& ret);
 
     template<typename T>  
     int push_for_return(lua_State *L, T ret) { type2lua<T>(L, ret); return 1; }
@@ -351,6 +354,7 @@ namespace lua_tinker
     template<> int push_for_return(lua_State *L, Bibim::Vector3 ret);
     template<> int push_for_return(lua_State *L, Bibim::Vector4 ret);
     template<> int push_for_return(lua_State *L, const Bibim::String& ret);
+    template<> int push_for_return(lua_State *L, const Bibim::Any& ret);
 
     // pop a value from lua stack
     template<typename T>  

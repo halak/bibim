@@ -98,8 +98,20 @@ namespace Bibim
                 float CastFloat() const;
                 /// 보관된 값을 Color형으로 변환하여 반환합니다.
                 Color CastColor() const;
+                /// 보관된 값을 Point2형으로 변환하여 반환합니다.
+                Point2 CastPoint2() const;
+                /// 보관된 값을 Point3형으로 변환하여 반환합니다.
+                Point3 CastPoint3() const;
+                /// 보관된 값을 Point4형으로 변환하여 반환합니다.
+                Point4 CastPoint4() const;
+                /// 보관된 값을 Vector2형으로 변환하여 반환합니다.
+                Vector2 CastVector2() const;
+                /// 보관된 값을 Vector3형으로 변환하여 반환합니다.
+                Vector3 CastVector3() const;
+                /// 보관된 값을 Vector4형으로 변환하여 반환합니다.
+                Vector4 CastVector4() const;
                 /// 보관된 값을 String형으로 변환하여 반환합니다.
-                String CastString() const;
+                const String& CastString() const;
                 /// 보관된 값을 SharedObject형으로 변환하여 반환합니다.
                 SharedObject* CastSharedObject() const;
                 /// 보관된 값을 LightObject형으로 변환하여 반환합니다.

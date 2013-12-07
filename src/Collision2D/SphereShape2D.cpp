@@ -34,7 +34,7 @@ namespace Bibim
         {
             radius = value;
             radiusSquared = radius * radius;
-            revision = 0;
+            revision = -1;
         }
     }
 

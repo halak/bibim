@@ -33,7 +33,7 @@ namespace Bibim
         if (GetDirection() != value)
         {
             direction = value;
-            revision = 0;
+            revision = -1;
         }
     }
 
@@ -44,7 +44,7 @@ namespace Bibim
         if (GetFrontLength() != value)
         {
             frontLength = value;
-            revision = 0;
+            revision = -1;
         }
     }
 
@@ -55,7 +55,7 @@ namespace Bibim
         if (GetBackLength() != value)
         {
             backLength = value;
-            revision = 0;
+            revision = -1;
         }
     }
 
