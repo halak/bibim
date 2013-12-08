@@ -25,7 +25,7 @@ namespace Bibim
         updater.o = this;
     }
 
-    UIForceGridEffect::UIForceGridEffect(Rect size, Vector2 spacing)
+    UIForceGridEffect::UIForceGridEffect(const Rect size, const Vector2 spacing)
         : timeline(nullptr),
           springsTimeline(nullptr),
           pointMassTimeline(nullptr),
@@ -40,32 +40,34 @@ namespace Bibim
         Initialize(Rect(0, 0, width, height), Vector2(spacingX, spacingY));
     }
 
-    void UIForceGridEffect::Initialize(Rect size, Vector2 spacing)
+    void UIForceGridEffect::Initialize(const Rect size, const Vector2 spacing)
     {
-        int numColumns = (int)(size.Width / spacing.X) + 1;
-        int numRows = (int)(size.Height / spacing.Y) + 1;
+        const int numColumns = (int)(size.Width / spacing.X) + 1;
+        const int numRows = (int)(size.Height / spacing.Y) + 1;
 
         points.resize(numColumns);
-        for (std::vector<std::vector<PointMass> >::iterator it = points.begin(); it != points.end(); it++)
+        for (PointMassGridCollection::iterator it = points.begin(); it != points.end(); it++)
             it->resize(numRows);
 
         // these fixed points will be used to anchor the grid to fixed positions on the screen
         fixedPoints.resize(numColumns);
-        for (std::vector<std::vector<PointMass> >::iterator it = fixedPoints.begin(); it != fixedPoints.end(); it++)
+        for (PointMassGridCollection::iterator it = fixedPoints.begin(); it != fixedPoints.end(); it++)
             it->resize(numRows);
 
         // create the point masses
-        int column = 0, row = 0;
-        for (float y = static_cast<float>(size.GetTop()); y <= size.GetBottom(); y += spacing.Y)
+        const float sx = spacing.X;
+        const float sy = spacing.Y;
+        int row = 0;
+
+        for (float y = static_cast<float>(size.GetTop()); y <= size.GetBottom(); y += sy, row++)
         {
-            for (float x = static_cast<float>(size.GetLeft()); x <= size.GetRight(); x += spacing.X)
+            int column = 0;
+
+            for (float x = static_cast<float>(size.GetLeft()); x <= size.GetRight(); x += sx, column++)
             {
                 points[column][row] = PointMass(Vector3(x, y, 0.0f), 1.0f);
                 fixedPoints[column][row] = PointMass(Vector3(x, y, 0.0f), 0.0f);
-                column++;
             }
-            row++;
-            column = 0;
         }
 
         // link the point masses with springs
@@ -90,16 +92,16 @@ namespace Bibim
 
         springsTimeline = new Timeline();
 
-        for (std::vector<Spring>::iterator it = springs.begin(); it != springs.end(); it++)
+        for (SpringCollection::iterator it = springs.begin(); it != springs.end(); it++)
         {
             springsTimeline->Add(&(*it));
         }
 
         pointMassTimeline = new Timeline();
 
-        for (std::vector<std::vector<PointMass> >::iterator it0 = points.begin(); it0 != points.end(); it0++)
+        for (PointMassGridCollection::iterator it0 = points.begin(); it0 != points.end(); it0++)
         {
-            for (std::vector<PointMass>::iterator it1 = it0->begin(); it1 != it0->end(); it1++)
+            for (PointMassLineCollection::iterator it1 = it0->begin(); it1 != it0->end(); it1++)
             {
                 pointMassTimeline->Add(&(*it1));
             }
@@ -114,11 +116,8 @@ namespace Bibim
     {
         SetTimeline(nullptr);
 
-        if (springsTimeline)
-            delete springsTimeline;
-
-        if (pointMassTimeline)
-            delete pointMassTimeline;
+        delete springsTimeline;
+        delete pointMassTimeline;
     }
 
     void UIForceGridEffect::SetTimeline(Timeline* value)
@@ -177,11 +176,13 @@ namespace Bibim
 
     void UIForceGridEffect::ApplyDirectedForce(Vector3 force, Vector3 position, float radius)
     {
-        for (std::vector<std::vector<PointMass> >::iterator it0 = points.begin(); it0 != points.end(); it0++)
+        float radiusSquared = radius * radius;
+
+        for (PointMassGridCollection::iterator it0 = points.begin(); it0 != points.end(); it0++)
         {
-            for (std::vector<PointMass>::iterator it1 = it0->begin(); it1 != it0->end(); it1++)
+            for (PointMassLineCollection::iterator it1 = it0->begin(); it1 != it0->end(); it1++)
             {
-                if(Vector3::GetDistanceSquared(position, it1->position) < radius * radius)
+                if(Vector3::GetDistanceSquared(position, it1->position) < radiusSquared)
                     it1->ApplyForce(10.0f * force / (10.0f * Vector3::GetDistance(position, it1->position)));
             }
         }
@@ -194,13 +195,15 @@ namespace Bibim
 
     void UIForceGridEffect::ApplyImplosiveForce(float force, Vector3 position, float radius)
     {
-        for (std::vector<std::vector<PointMass> >::iterator it0 = points.begin(); it0 != points.end(); it0++)
+        float radiusSqaured = radius * radius;
+
+        for (PointMassGridCollection::iterator it0 = points.begin(); it0 != points.end(); it0++)
         {
-            for (std::vector<PointMass>::iterator it1 = it0->begin(); it1 != it0->end(); it1++)
+            for (PointMassLineCollection::iterator it1 = it0->begin(); it1 != it0->end(); it1++)
             {
                 float dist2 = Vector3::GetDistanceSquared(position, it1->position);
 
-                if (dist2 < radius * radius)
+                if (dist2 < radiusSquared)
                 {
                     it1->ApplyForce(10.0f * force * (it1->position - position) / (100.0f + dist2));
                     it1->IncreaseDamping(0.6f);
@@ -216,13 +219,15 @@ namespace Bibim
 
     void UIForceGridEffect::ApplyExplosiveForce(float force, Vector3 position, float radius)
     {
-        for (std::vector<std::vector<PointMass> >::iterator it0 = points.begin(); it0 != points.end(); it0++)
+        float radiusSqaured = radius * radius;
+
+        for (PointMassGridCollection::iterator it0 = points.begin(); it0 != points.end(); it0++)
         {
-            for (std::vector<PointMass>::iterator it1 = it0->begin(); it1 != it0->end(); it1++)
+            for (PointMassLineCollection::iterator it1 = it0->begin(); it1 != it0->end(); it1++)
             {
                 float dist2 = Vector3::GetDistanceSquared(position, it1->position);
 
-                if (dist2 < radius * radius)
+                if (dist2 < radiusSqaured)
                 {
                     it1->ApplyForce(100.0f * force * (it1->position - position) / (10000.0f + dist2));
                     it1->IncreaseDamping(0.6f);
@@ -243,6 +248,7 @@ namespace Bibim
     //    float yRate = (pV.Y - size.GetTop()) / size.Height;
     //    Vector2 topPoint = Math::Lerp(p[S0], p[E0], xRate);
     //    Vector2 bottomPoint = Math::Lerp(p[S1], p[E1], xRate);
+
     //    return Math::Lerp(topPoint, bottomPoint, yRate);
     //}
 
@@ -258,6 +264,7 @@ namespace Bibim
         float yRate = (pV.Y - size.GetTop()) / size.Height;
         Vector2 topPoint = Math::Lerp(p[S0], p[E0], xRate);
         Vector2 bottomPoint = Math::Lerp(p[S1], p[E1], xRate);
+
         return Math::Lerp(topPoint, bottomPoint, yRate);
     }
 
@@ -268,14 +275,14 @@ namespace Bibim
         static const int E0 = 1;
         static const int E1 = 3;
 
-        if(points.size() == 0)
+        if(points.empty())
         {
             Base::DrawQuad(renderer, p, color);
             return;
         }
 
-        int colCount = points.size();
-        int rowCount = points[0].size();
+        const int colCount = points.size();
+        const int rowCount = points[0].size();
 
         Point2 screenSize = renderer->GetGraphicsDevice()->GetScreenSize();
 
@@ -305,14 +312,14 @@ namespace Bibim
         static const int E0 = 1;
         static const int E1 = 3;
 
-        if(points.size() == 0)
+        if(points.empty())
         {
             Base::DrawQuad(renderer, p, color, uv, texture);
             return;
         }
 
-        int colCount = points.size();
-        int rowCount = points[0].size();
+        const int colCount = points.size();
+        const int rowCount = points[0].size();
 
         Point2 screenSize = renderer->GetGraphicsDevice()->GetScreenSize();
 
@@ -360,14 +367,14 @@ namespace Bibim
         static const int E0 = 1;
         static const int E1 = 3;
 
-        if(points.size() == 0)
+        if(points.empty())
         {
             Base::DrawQuad(renderer, p, color, uv1, texture1, uv2, texture2);
             return;
         }
 
-        int colCount = points.size();
-        int rowCount = points[0].size();
+        const int colCount = points.size();
+        const int rowCount = points[0].size();
 
         Point2 screenSize = renderer->GetGraphicsDevice()->GetScreenSize();
 
