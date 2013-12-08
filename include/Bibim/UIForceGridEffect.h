@@ -29,11 +29,11 @@ namespace Bibim
 
         public:
             UIForceGridEffect();
-            UIForceGridEffect(Rect size, Vector2 spacing);
+            UIForceGridEffect(const Rect size, const Vector2 spacing);
             virtual ~UIForceGridEffect();
 
             void InitializeXY(int width, int height, float spacingX, float spacingY);
-            void Initialize(Rect size, Vector2 spacing);
+            void Initialize(const Rect size, const Vector2 spacing);
                         
             inline Timeline* GetTimeline() const;
             void SetTimeline(Timeline* value);
@@ -74,10 +74,6 @@ namespace Bibim
             void OnStep(float dt, int timestamp);
 
         private:
-            //Vector2 TranslateCoordinate(Vector3 pos, Point2 screenSize, Vector2* p);
-            Vector2 TranslateCoordinate(Vector3 pos, Vector2* p);
-            //static Vector2 PerspectiveVector(Vector3 v, Point2 screenSize);
-
             class PointMass : public IUpdateable
             {
                 public:
@@ -129,15 +125,24 @@ namespace Bibim
             };
 
         private:
+            typedef std::vector<Spring> SpringCollection;
+            typedef std::vector<PointMass> PointMassLineCollection;
+            typedef std::vector<PointMassLineCollection> PointMassGridCollection;
+
+            //Vector2 TranslateCoordinate(Vector3 pos, Point2 screenSize, Vector2* p);
+            Vector2 TranslateCoordinate(Vector3 pos, Vector2* p);
+            //static Vector2 PerspectiveVector(Vector3 v, Point2 screenSize);
+
+        private:
             Timeline* timeline;
             Timeline* springsTimeline;
             Timeline* pointMassTimeline;
             Updater updater;
             Rect size;
             Vector2 spacing;
-            std::vector<Spring> springs;
-            std::vector<std::vector<PointMass> > points;
-            std::vector<std::vector<PointMass> > fixedPoints;
+            SpringCollection springs;
+            PointMassGridCollection points;
+            PointMassGridCollection fixedPoints;
             float frameTime;
             FrameSpeed frameSpeed;
     };

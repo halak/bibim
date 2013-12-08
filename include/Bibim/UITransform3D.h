@@ -1,6 +1,6 @@
 ﻿#pragma once
-#ifndef __BIBIM_UITransform3D_H__
-#define __BIBIM_UITransform3D_H__
+#ifndef __BIBIM_UITRANSFORM3D_H__
+#define __BIBIM_UITRANSFORM3D_H__
 
 #include <Bibim/FWD.h>
 #include <Bibim/UITransform.h>
