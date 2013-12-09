@@ -116,7 +116,9 @@ namespace Bibim
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
+        globalAngle = o->globalAngle;
         SetSource(o->source);
+        SetTimeline(o->timeline);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
