@@ -91,7 +91,7 @@ namespace Bibim
         if (name.IsEmpty() || asset == nullptr)
             return;
 
-        BBAssertDebug(FindName(asset) == String::Empty);
+        // BBAssertDebug(FindName(asset) == String::Empty);
 
         AssetTable::iterator it = assets.find(name);
         if (it != assets.end())

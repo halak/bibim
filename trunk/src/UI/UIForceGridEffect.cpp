@@ -195,8 +195,7 @@ namespace Bibim
 
     void UIForceGridEffect::ApplyImplosiveForce(float force, Vector3 position, float radius)
     {
-        float radiusSqaured = radius * radius;
-
+        const float radiusSquared = radius * radius;
         for (PointMassGridCollection::iterator it0 = points.begin(); it0 != points.end(); it0++)
         {
             for (PointMassLineCollection::iterator it1 = it0->begin(); it1 != it0->end(); it1++)

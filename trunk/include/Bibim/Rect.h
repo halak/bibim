@@ -16,6 +16,7 @@ namespace Bibim
 
         inline Rect();
         inline Rect(int x, int y, int width, int height);
+        inline Rect(float x, float y, float width, float height);
         inline Rect(Point2 leftTop, Point2 rightBottom);
         inline Rect(const Rect& original);
 
@@ -60,6 +61,11 @@ namespace Bibim
 
     Rect::Rect(int x, int y, int width, int height)
         : X(x), Y(y), Width(width), Height(height)
+    {
+    }
+
+    Rect::Rect(float x, float y, float width, float height)
+        : X(static_cast<int>(x)), Y(static_cast<int>(y)), Width(static_cast<int>(width)), Height(static_cast<int>(height))
     {
     }
 
