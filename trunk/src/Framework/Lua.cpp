@@ -47,6 +47,8 @@ namespace Bibim
         luaL_requiref(state, LUA_MATHLIBNAME, &luaopen_math, 1);
         luaL_requiref(state, LUA_DBLIBNAME,   &luaopen_debug, 1);
 
+        lua_tinker::init(state);
+
         struct AdditionalStringLibrary
         {
             static int StartsWith(lua_State* L)
