@@ -41,23 +41,83 @@ static int tostring_s64(lua_State *L)
 /*---------------------------------------------------------------------------*/ 
 static int eq_s64(lua_State *L)
 {
-    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(long long)) == 0);
+    const long long a = lua_tinker::read<long long>(L, 1);
+    const long long b = lua_tinker::read<long long>(L, 2);
+    lua_pushboolean(L, a == b ? 1 : 0);
     return 1;
 }
 
 /*---------------------------------------------------------------------------*/ 
 static int lt_s64(lua_State *L)
 {
-    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(long long)) < 0);
+    const long long a = lua_tinker::read<long long>(L, 1);
+    const long long b = lua_tinker::read<long long>(L, 2);
+    lua_pushboolean(L, a < b ? 1 : 0);
     return 1;
 }
 
 /*---------------------------------------------------------------------------*/ 
 static int le_s64(lua_State *L)
 {
-    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(long long)) <= 0);
+    const long long a = lua_tinker::read<long long>(L, 1);
+    const long long b = lua_tinker::read<long long>(L, 2);
+    lua_pushboolean(L, a <= b ? 1 : 0);
     return 1;
 }
+
+/*---------------------------------------------------------------------------*/ 
+static int add_s64(lua_State *L)
+{
+    const long long a = lua_tinker::read<long long>(L, 1);
+    const long long b = lua_tinker::read<long long>(L, 2);
+    lua_tinker::push(L, a + b);
+    return 1;
+}
+
+/*---------------------------------------------------------------------------*/
+static int sub_s64(lua_State *L)
+{
+    const long long a = lua_tinker::read<long long>(L, 1);
+    const long long b = lua_tinker::read<long long>(L, 2);
+    lua_tinker::push(L, a - b);
+    return 1;
+}
+
+/*---------------------------------------------------------------------------*/ 
+static int mul_s64(lua_State *L)
+{
+    const long long a = lua_tinker::read<long long>(L, 1);
+    const long long b = lua_tinker::read<long long>(L, 2);
+    lua_tinker::push(L, a * b);
+    return 1;
+}
+
+/*---------------------------------------------------------------------------*/
+static int div_s64(lua_State *L)
+{
+    const long long a = lua_tinker::read<long long>(L, 1);
+    const long long b = lua_tinker::read<long long>(L, 2);
+    lua_tinker::push(L, a / b);
+    return 1;
+}
+
+/*---------------------------------------------------------------------------*/ 
+static int mod_s64(lua_State *L)
+{
+    const long long a = lua_tinker::read<long long>(L, 1);
+    const long long b = lua_tinker::read<long long>(L, 2);
+    lua_tinker::push(L, a % b);
+    return 1;
+}
+
+/*---------------------------------------------------------------------------*/
+static int unm_s64(lua_State *L)
+{
+    const long long a = lua_tinker::read<long long>(L, 1);
+    lua_tinker::push(L, -a);
+    return 1;
+}
+
 
 /*---------------------------------------------------------------------------*/ 
 void lua_tinker::init_s64(lua_State *L)
@@ -85,6 +145,30 @@ void lua_tinker::init_s64(lua_State *L)
     lua_pushcclosure(L, le_s64, 0);
     lua_rawset(L, -3);    
 
+    lua_pushstring(L, "__add");
+    lua_pushcclosure(L, add_s64, 0);
+    lua_rawset(L, -3);    
+
+    lua_pushstring(L, "__sub");
+    lua_pushcclosure(L, sub_s64, 0);
+    lua_rawset(L, -3);
+
+    lua_pushstring(L, "__mul");
+    lua_pushcclosure(L, mul_s64, 0);
+    lua_rawset(L, -3);
+
+    lua_pushstring(L, "__div");
+    lua_pushcclosure(L, div_s64, 0);
+    lua_rawset(L, -3);
+
+    lua_pushstring(L, "__mod");
+    lua_pushcclosure(L, mod_s64, 0);
+    lua_rawset(L, -3);
+
+    lua_pushstring(L, "__unm");
+    lua_pushcclosure(L, unm_s64, 0);
+    lua_rawset(L, -3);
+
     lua_setglobal(L, name);
 }
 
@@ -102,23 +186,75 @@ static int tostring_u64(lua_State *L)
 /*---------------------------------------------------------------------------*/ 
 static int eq_u64(lua_State *L)
 {
-    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(unsigned long long)) == 0);
+    const unsigned long long a = lua_tinker::read<unsigned long long>(L, 1);
+    const unsigned long long b = lua_tinker::read<unsigned long long>(L, 2);
+    lua_pushboolean(L, a == b ? 1 : 0);
     return 1;
 }
 
 /*---------------------------------------------------------------------------*/ 
 static int lt_u64(lua_State *L)
 {
-    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(unsigned long long)) < 0);
+    const unsigned long long a = lua_tinker::read<unsigned long long>(L, 1);
+    const unsigned long long b = lua_tinker::read<unsigned long long>(L, 2);
+    lua_pushboolean(L, a < b ? 1 : 0);
     return 1;
 }
 
 /*---------------------------------------------------------------------------*/ 
 static int le_u64(lua_State *L)
 {
-    lua_pushboolean(L, memcmp(lua_topointer(L, 1), lua_topointer(L, 2), sizeof(unsigned long long)) <= 0);
+    const unsigned long long a = lua_tinker::read<unsigned long long>(L, 1);
+    const unsigned long long b = lua_tinker::read<unsigned long long>(L, 2);
+    lua_pushboolean(L, a <= b ? 1 : 0);
     return 1;
 }
+
+/*---------------------------------------------------------------------------*/ 
+static int add_u64(lua_State *L)
+{
+    const unsigned long long a = lua_tinker::read<unsigned long long>(L, 1);
+    const unsigned long long b = lua_tinker::read<unsigned long long>(L, 2);
+    lua_tinker::push(L, a + b);
+    return 1;
+}
+
+/*---------------------------------------------------------------------------*/
+static int sub_u64(lua_State *L)
+{
+    const unsigned long long a = lua_tinker::read<unsigned long long>(L, 1);
+    const unsigned long long b = lua_tinker::read<unsigned long long>(L, 2);
+    lua_tinker::push(L, a - b);
+    return 1;
+}
+
+/*---------------------------------------------------------------------------*/ 
+static int mul_u64(lua_State *L)
+{
+    const unsigned long long a = lua_tinker::read<unsigned long long>(L, 1);
+    const unsigned long long b = lua_tinker::read<unsigned long long>(L, 2);
+    lua_tinker::push(L, a * b);
+    return 1;
+}
+
+/*---------------------------------------------------------------------------*/
+static int div_u64(lua_State *L)
+{
+    const unsigned long long a = lua_tinker::read<unsigned long long>(L, 1);
+    const unsigned long long b = lua_tinker::read<unsigned long long>(L, 2);
+    lua_tinker::push(L, a / b);
+    return 1;
+}
+
+/*---------------------------------------------------------------------------*/ 
+static int mod_u64(lua_State *L)
+{
+    const unsigned long long a = lua_tinker::read<unsigned long long>(L, 1);
+    const unsigned long long b = lua_tinker::read<unsigned long long>(L, 2);
+    lua_tinker::push(L, a % b);
+    return 1;
+}
+
 
 /*---------------------------------------------------------------------------*/ 
 void lua_tinker::init_u64(lua_State *L)
@@ -144,6 +280,26 @@ void lua_tinker::init_u64(lua_State *L)
 
     lua_pushstring(L, "__le");
     lua_pushcclosure(L, le_u64, 0);
+    lua_rawset(L, -3);    
+
+    lua_pushstring(L, "__add");
+    lua_pushcclosure(L, add_u64, 0);
+    lua_rawset(L, -3);    
+
+    lua_pushstring(L, "__sub");
+    lua_pushcclosure(L, sub_u64, 0);
+    lua_rawset(L, -3);    
+
+    lua_pushstring(L, "__mul");
+    lua_pushcclosure(L, mul_u64, 0);
+    lua_rawset(L, -3);    
+
+    lua_pushstring(L, "__div");
+    lua_pushcclosure(L, div_u64, 0);
+    lua_rawset(L, -3);    
+
+    lua_pushstring(L, "__mod");
+    lua_pushcclosure(L, mod_u64, 0);
     lua_rawset(L, -3);    
 
     lua_setglobal(L, name);
