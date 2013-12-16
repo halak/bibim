@@ -58,6 +58,14 @@ namespace lua_tinker
             struct enum2lua<enumname> { static void invoke(lua_State *L, enumname val) { lua_pushstring(L, toString(val)); } }; \
         }
 
+#define BBBindLuaSerializableStruct2(structtype, _1, _2) \
+    template<> inline int lua_tinker::push_for_return(lua_State *L, structtype ret) \
+    { \
+        lua_tinker::push(L, ret._1); \
+        lua_tinker::push(L, ret._2); \
+        return 2; \
+    }
+
 namespace Bibim
 {
     class SharedObject;
