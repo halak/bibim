@@ -6,16 +6,16 @@
 
 namespace Bibim
 {
-    class Class;
+    class ClassInfo;
     class ClassHierarchy
     {
         public:
-            static const Class* Find(int id);
+            static const ClassInfo* Find(int id);
 
         private:
-            static void Add(const Class* item);
+            static void Add(const ClassInfo* item);
 
-            friend class Class;
+            friend class ClassInfo;
     };
 }
 

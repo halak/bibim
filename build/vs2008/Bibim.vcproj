@@ -2251,19 +2251,19 @@
 				Name="RTTI"
 				>
 				<File
-					RelativePath="..\..\src\Foundation\Class.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\Class.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\Foundation\ClassHierarchy.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\include\Bibim\ClassHierarchy.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Foundation\ClassInfo.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\ClassInfo.h"
 					>
 				</File>
 			</Filter>

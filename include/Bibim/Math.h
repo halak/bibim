@@ -27,6 +27,7 @@ namespace Bibim
             static const float PiOver2; ///< \f$\frac{pi}{2}\f$
             static const float PiOver4; ///< \f$\frac{pi}{4}\f$
             static const float TwoPi;   ///< \f$2\pi\f$
+            static const float InvSqrt2; ///< \f$1\sqrt(2)\f$
 
             static inline float ToRadian(float degree);
             static inline float ToDegree(float radian);

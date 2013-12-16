@@ -17,21 +17,8 @@ extern "C"
 
 namespace Bibim
 {
-#   define BBAbstractAssetClass(classname, parent)      private: \
-                                                            typedef classname This; \
-                                                            typedef parent Base; \
-                                                        protected: \
-                                                            virtual void to_lua(lua_State *L) { type2lua(L, this); } \
-                                                        private:
-#   define BBAssetClass(classname, parent, a, b, c, d)  private: \
-                                                            typedef classname This; \
-                                                            typedef parent Base; \
-                                                        public: \
-                                                            static const int ClassID = BBMakeFOURCC(a, b, c, d); \
-                                                            virtual int GetClassID() const { return ClassID; } \
-                                                        protected: \
-                                                            virtual void to_lua(lua_State *L) { type2lua(L, this); } \
-                                                        private:
+#   define BBAbstractAssetClass(classname, parent)     BBAbstractObjectClass(classname, parent);
+#   define BBAssetClass(classname, parent, a, b, c, d) BBObjectClass(classname, parent, a, b, c, d);
 #   define BBSerializableAssetClass(classname, parent, a, b, c, d)  BBAssetClass(classname, parent, a, b, c, d); \
                                                                     public: \
                                                                         static Bibim::GameAsset* Create(Bibim::AssetStreamReader& reader, Bibim::GameAsset* existingInstance); \

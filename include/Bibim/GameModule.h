@@ -5,18 +5,20 @@
 #include <Bibim/FWD.h>
 #include <Bibim/Object.h>
 
+extern "C" 
+{
+#   include <lua.h>
+}
+#pragma warning(push)
+#pragma warning(disable:4996)
+#pragma warning(disable:4100)
+#include <lua_tinker.h>
+#pragma warning(pop)
+
 namespace Bibim
 {
-#   define BBAbstractModuleClass(classname, parent) private: \
-                                                        typedef classname This; \
-                                                        typedef parent Base;
-#   define BBModuleClass(classname, parent, a, b, c, d) private: \
-                                                            typedef classname This; \
-                                                            typedef parent Base; \
-                                                        public: \
-                                                            static const int ClassID = BBMakeFOURCC(a, b, c, d); \
-                                                            virtual int GetClassID() const { return ClassID; } \
-                                                        private:
+#   define BBAbstractModuleClass(classname, parent)     BBAbstractObjectClass(classname, parent);
+#   define BBModuleClass(classname, parent, a, b, c, d) BBObjectClass(classname, parent, a, b, c, d);
 
     /// Game이란 Program을 구성하는 요소의 기반 class.
     class GameModule : public Object

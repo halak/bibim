@@ -18,19 +18,17 @@ extern "C"
 
 namespace Bibim
 {
-#   define BBAbstractComponentClass(classname, parent)      private: \
-                                                                typedef classname This; \
-                                                                typedef parent Base; \
-                                                            protected: \
-                                                                virtual void OnRead(Bibim::ComponentStreamReader& reader); \
-                                                                virtual void OnCopy(const Bibim::GameComponent* original, Bibim::CloningContext& context); \
-                                                                virtual void to_lua(lua_State *L) { lua_tinker::type2lua(L, this); } \
-                                                            private:
+#   define BBAbstractComponentClass(classname, parent)     BBAbstractObjectClass(classname, parent) \
+                                                           protected: \
+                                                               virtual void OnRead(Bibim::ComponentStreamReader& reader); \
+                                                               virtual void OnCopy(const Bibim::GameComponent* original, Bibim::CloningContext& context); \
+                                                           private:
 
-#   define BBComponentClass(classname, parent, a, b, c, d)  BBAbstractComponentClass(classname, parent); \
+#   define BBComponentClass(classname, parent, a, b, c, d) BBObjectClass(classname, parent, a, b, c, d) \
+                                                           protected: \
+                                                               virtual void OnRead(Bibim::ComponentStreamReader& reader); \
+                                                               virtual void OnCopy(const Bibim::GameComponent* original, Bibim::CloningContext& context); \
                                                             public: \
-                                                                static const int ClassID = BBMakeFOURCC(a, b, c, d); \
-                                                                virtual int GetClassID() const { return ClassID; } \
                                                                 virtual classname* Clone() const; \
                                                             protected: \
                                                                 virtual classname* Clone(Bibim::CloningContext& context) const; \

@@ -11,7 +11,7 @@ namespace Bibim
         BBThisIsStaticClass(Container);
         public:
             template <typename T>
-            static inline bool Contains(const std::vector<SharedPointer<T> >& container, T* item)
+            static inline bool Contains(const std::vector<SharedPointer<T> >& container, const T* item)
             {
                 for (std::vector<SharedPointer<T> >::const_iterator it = container.begin(); it != container.end(); it++)
                 {
@@ -23,7 +23,7 @@ namespace Bibim
             }
 
             template <typename T>
-            static inline bool Remove(std::vector<SharedPointer<T> >& container, T* item)
+            static inline bool Remove(std::vector<SharedPointer<T> >& container, const T* item)
             {
                 for (std::vector<SharedPointer<T> >::iterator it = container.begin(); it != container.end(); it++)
                 {
