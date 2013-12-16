@@ -5,6 +5,7 @@
 #include <Bibim/CCParticleSystem.h>
 #include <Bibim/Timeline.h>
 #include <Bibim/UIDrawingContext.h>
+#include <Bibim/UIWindow.h>
 
 namespace Bibim
 {
@@ -83,7 +84,14 @@ namespace Bibim
     void UICCParticleSystem::OnStep(float dt, int timestamp)
     {
         if (emitter)
-            emitter->Update(dt, timestamp);
+        {
+            if (emitter->Update(dt, timestamp) == false)
+            {
+                UIPanel* parent = GetParent();
+                if (parent && parent->IsWindow())
+                    static_cast<UIWindow*>(parent)->RemoveChild(this);
+            }
+        }
     }
 
     void UICCParticleSystem::OnDraw(UIDrawingContext& context)

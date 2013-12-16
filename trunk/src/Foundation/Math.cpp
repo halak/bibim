@@ -13,6 +13,7 @@ namespace Bibim
     const float Math::PiOver2 = 1.5708f;
     const float Math::PiOver4 = 0.785398f;
     const float Math::TwoPi = 6.28319f;
+    const float Math::InvSqrt2 = 0.707106781186f;
 
     float Math::Sqrt(float value)
     {

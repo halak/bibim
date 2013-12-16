@@ -34,7 +34,7 @@
 #include "CCParticleSystem.h"
 #include "CCParticleSystemSet.h"
 #include "CheckedRelease.h"
-#include "Class.h"
+#include "ClassInfo.h"
 #include "ClassHierarchy.h"
 #include "Clipboard.Android.h"
 #include "Clipboard.h"

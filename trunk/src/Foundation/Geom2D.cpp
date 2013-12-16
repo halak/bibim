@@ -452,17 +452,16 @@ namespace Bibim
         // 각 모서리에 Raycast를 수행합니다. (원과의 Raycast가 됩니다.)
         if (outside)
         {
-            static const float InvSqrt2 = 0.707106781186f;
             const struct
             {
                 Vector2 Normal;
                 Vector2 Center;
             } data[] = {
                 // outside가 true일 경우에는 nd가 +1이기 때문에 구지 곱해주지 않습니다.
-                { Vector2(-InvSqrt2, -InvSqrt2), Vector2(left,  top)    },
-                { Vector2(-InvSqrt2, +InvSqrt2), Vector2(left,  bottom) },
-                { Vector2(+InvSqrt2, -InvSqrt2), Vector2(right, top)    },
-                { Vector2(+InvSqrt2, +InvSqrt2), Vector2(right, bottom) },
+                { Vector2(-Math::InvSqrt2, -Math::InvSqrt2), Vector2(left,  top)    },
+                { Vector2(-Math::InvSqrt2, +Math::InvSqrt2), Vector2(left,  bottom) },
+                { Vector2(+Math::InvSqrt2, -Math::InvSqrt2), Vector2(right, top)    },
+                { Vector2(+Math::InvSqrt2, +Math::InvSqrt2), Vector2(right, bottom) },
             };
 
             for (int i = 0; i < sizeof(data) / sizeof(data[0]); i++)
