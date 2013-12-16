@@ -1,8 +1,8 @@
 #pragma once
-#ifndef BIBIM_ALL_9DF3E066_00E5_47FF_9F03_600D9100C82D_H__
-#define BIBIM_ALL_9DF3E066_00E5_47FF_9F03_600D9100C82D_H__
+#ifndef BIBIM_ALL_494CB21E_DB05_466F_8BCD_6C3234B0E165_H__
+#define BIBIM_ALL_494CB21E_DB05_466F_8BCD_6C3234B0E165_H__
 
-// Automatically generated in 2013-12-07 16:15:14.178534
+// Automatically generated in 2013-12-16 23:18:01.887237
 
 #include "AlarmClock.h"
 #include "Algorithm.h"
@@ -34,8 +34,8 @@
 #include "CCParticleSystem.h"
 #include "CCParticleSystemSet.h"
 #include "CheckedRelease.h"
-#include "ClassInfo.h"
 #include "ClassHierarchy.h"
+#include "ClassInfo.h"
 #include "Clipboard.Android.h"
 #include "Clipboard.h"
 #include "Clipboard.iOS.h"
@@ -284,6 +284,7 @@
 #include "UISpark.h"
 #include "UISprite.h"
 #include "UITintEffect.h"
+#include "UITrail.h"
 #include "UITransform.h"
 #include "UITransform2D.h"
 #include "UITransform3D.h"

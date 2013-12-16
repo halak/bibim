@@ -1,4 +1,4 @@
-// Automatically generated in 2013-12-07 16:15:14.152532
+// Automatically generated in 2013-12-16 23:18:01.832234
 
 #include <zlib.h>
 #include "Animation/Ease.cpp"
@@ -57,8 +57,8 @@
 #include "FileSystem/Path.cpp"
 #include "Foundation/Any.cpp"
 #include "Foundation/AnyStorage.cpp"
-#include "Foundation/Class.cpp"
 #include "Foundation/ClassHierarchy.cpp"
+#include "Foundation/ClassInfo.cpp"
 #include "Foundation/Color.cpp"
 #include "Foundation/Environment.Android.cpp"
 #include "Foundation/Environment.iOS.cpp"
@@ -237,6 +237,7 @@
 #include "UI/UISpark.cpp"
 #include "UI/UISprite.cpp"
 #include "UI/UITintEffect.cpp"
+#include "UI/UITrail.cpp"
 #include "UI/UITransform.cpp"
 #include "UI/UITransform2D.cpp"
 #include "UI/UITransform3D.cpp"

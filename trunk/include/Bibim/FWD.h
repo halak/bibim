@@ -305,6 +305,7 @@ namespace Bibim
                         BBForwardDeclareSmartPointerClass(UIEllipse);
                         BBForwardDeclareSmartPointerClass(UIRect);
                         BBForwardDeclareSmartPointerClass(UIRoundedRect);
+                    BBForwardDeclareSmartPointerClass(UITrail);
                     BBForwardDeclareSmartPointerClass(UIVideo);
                     BBForwardDeclareSmartPointerClass(UICCParticleSystem);
                     BBForwardDeclareSmartPointerClass(UISpark);

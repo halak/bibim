@@ -1352,6 +1352,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\src\UI\UITrail.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\include\Bibim\UITrail.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\src\UI\UIVideo.cpp"
 						>
 					</File>
