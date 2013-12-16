@@ -68,6 +68,8 @@ namespace Bibim
                 renderer->DrawQuad(item.positions, item.color, item.uv, item.texture);
             }
 
+            renderer->Setup(currentTransform);
+
             while (static_cast<int>(currentAfterImage->Frames.size()) > totalFrames)
                 currentAfterImage->Frames.pop_front();
 

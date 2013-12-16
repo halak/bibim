@@ -751,6 +751,9 @@ namespace Bibim
             lua_tinker::class_def<UIDocument::StyleSheet>(L, "AddDecoration", &UIDocument::StyleSheet::AddDecoration);
             lua_tinker::class_def<UIDocument::StyleSheet>(L, "RemoveContent", &UIDocument::StyleSheet::RemoveContent);
             lua_tinker::class_def<UIDocument::StyleSheet>(L, "RemoveDecoration", &UIDocument::StyleSheet::RemoveDecoration);
+        lua_tinker::class_add<UITrail>(L, "UITrail");
+            lua_tinker::class_inh<UITrail, UIVisual>(L);
+            lua_tinker::class_con<UITrail>(L, lua_tinker::constructor<UITrail>);
         lua_tinker::class_add<UISpark>(L, "UISpark");
             lua_tinker::class_inh<UISpark, UIVisual>(L);
             lua_tinker::class_con<UISpark>(L, lua_tinker::constructor<UISpark, lua_tinker::table>);
