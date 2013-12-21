@@ -73,14 +73,16 @@ namespace Bibim
         }
 
         ISoundEngine* engine = audioDevice->GetEngine();
-        ISound* sound = engine->play2D(name.CStr(), false, true);
-        if (mute)
-            sound->setVolume(0.0f);
-        else
-            sound->setVolume(volume);
-        sound->setSoundStopEventReceiver(eventListener, reinterpret_cast<void*>(group));
-        sound->setIsPaused(false);
-        items->push_back(sound);
+        if (ISound* sound = engine->play2D(name.CStr(), false, true))
+        {
+            if (mute)
+                sound->setVolume(0.0f);
+            else
+                sound->setVolume(volume);
+            sound->setSoundStopEventReceiver(eventListener, reinterpret_cast<void*>(group));
+            sound->setIsPaused(false);
+            items->push_back(sound);
+        }
     }
 
     void SoundFX::Stop()
