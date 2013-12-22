@@ -41,6 +41,9 @@ namespace Bibim.Asset.Pipeline
         {
             serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
             {
+                SendTimeout = 30000,
+                SendBufferSize = 1024 * 1024,
+                ReceiveTimeout = 30000,
                 NoDelay = true
             };
             serverSocket.Bind(new IPEndPoint(IPAddress.Any, port));
@@ -65,6 +68,10 @@ namespace Bibim.Asset.Pipeline
             }
 
             var clientSocket = serverSocket.EndAccept(result);
+            clientSocket.SendTimeout = 30000;
+            clientSocket.SendBufferSize = 1024 * 1024;            
+            clientSocket.ReceiveTimeout = 30000;
+            clientSocket.ReceiveBufferSize = 1024 * 1024;
 
             Ready();
 
