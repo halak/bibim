@@ -139,6 +139,9 @@
     <Filter Include="03. Game\Audio\iOS">
       <UniqueIdentifier>{c4272c2b-cceb-4b67-add5-4ec2c0ed7e3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Foundation\RTTI">
+      <UniqueIdentifier>{4d5ec9d1-4d53-48d3-b5c1-10379e6f7495}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Asset\AssetLoadingTask.cpp">
@@ -884,6 +887,15 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Audio\SoundFX.iOS.cpp">
       <Filter>03. Game\Audio\iOS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\UI\UITrail.cpp">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Foundation\ClassHierarchy.cpp">
+      <Filter>01. Foundation\RTTI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Foundation\ClassInfo.cpp">
+      <Filter>01. Foundation\RTTI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1760,6 +1772,15 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\BGM.iOS.h">
       <Filter>03. Game\Audio\iOS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\UITrail.h">
+      <Filter>03. Game\UI\Visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\ClassHierarchy.h">
+      <Filter>01. Foundation\RTTI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\ClassInfo.h">
+      <Filter>01. Foundation\RTTI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

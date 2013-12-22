@@ -185,9 +185,9 @@ namespace Bibim
             else
             { 
                 // TODO: ERROR Ã³¸®
-                /*
-                const int x = WSAGetLastError();
-#define XXX(val) if (x == val) { Log::Information(#val); }
+                const int error = WSAGetLastError();
+
+#define XXX(val) if (error == val) { Log::Information(#val); }
                 XXX(WSANOTINITIALISED);
                 XXX(WSAENETDOWN);
                 XXX(WSAEFAULT);
@@ -204,8 +204,9 @@ namespace Bibim
                 XXX(WSAECONNABORTED);
                 XXX(WSAETIMEDOUT);
                 XXX(WSAECONNRESET);
-#undef XXX*/
-                break;
+#undef XXX
+                if (error != WSAECONNRESET) // http://blog.naver.com/kkyrin/140046569067
+                    break;
             }
         }
 

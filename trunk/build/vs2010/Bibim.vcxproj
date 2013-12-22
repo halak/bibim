@@ -134,6 +134,8 @@
     <ClCompile Include="..\..\src\FileSystem\FileStream.Android.cpp" />
     <ClCompile Include="..\..\src\FileSystem\FileStream.iOS.cpp" />
     <ClCompile Include="..\..\src\FileSystem\Path.cpp" />
+    <ClCompile Include="..\..\src\Foundation\ClassHierarchy.cpp" />
+    <ClCompile Include="..\..\src\Foundation\ClassInfo.cpp" />
     <ClCompile Include="..\..\src\Foundation\Color.cpp" />
     <ClCompile Include="..\..\src\Foundation\Environment.Android.cpp" />
     <ClCompile Include="..\..\src\Foundation\Environment.iOS.cpp" />
@@ -294,6 +296,7 @@
     <ClCompile Include="..\..\src\UI\UIRect.cpp" />
     <ClCompile Include="..\..\src\UI\UISpark.cpp" />
     <ClCompile Include="..\..\src\UI\UISprite.cpp" />
+    <ClCompile Include="..\..\src\UI\UITrail.cpp" />
     <ClCompile Include="..\..\src\UI\UIVideo.cpp" />
     <ClCompile Include="..\..\src\UI\UIVisual.cpp" />
     <ClCompile Include="..\..\src\UI\UIWindow.cpp" />
@@ -368,6 +371,8 @@
     <ClInclude Include="..\..\include\Bibim\CCParticleEmitter.h" />
     <ClInclude Include="..\..\include\Bibim\CCParticleSystem.h" />
     <ClInclude Include="..\..\include\Bibim\CCParticleSystemSet.h" />
+    <ClInclude Include="..\..\include\Bibim\ClassHierarchy.h" />
+    <ClInclude Include="..\..\include\Bibim\ClassInfo.h" />
     <ClInclude Include="..\..\include\Bibim\Dashboard.h" />
     <ClInclude Include="..\..\include\Bibim\FileAssetProvider.Default.h" />
     <ClInclude Include="..\..\include\Bibim\FileAssetProviderBase.h" />
@@ -473,6 +478,7 @@
     <ClInclude Include="..\..\include\Bibim\UICCParticleSystem.h" />
     <ClInclude Include="..\..\include\Bibim\UIForceGridEffect.h" />
     <ClInclude Include="..\..\include\Bibim\UILiveWindow.h" />
+    <ClInclude Include="..\..\include\Bibim\UITrail.h" />
     <ClInclude Include="..\..\include\Bibim\UserShape2D.h" />
     <ClInclude Include="..\..\include\Bibim\BatchCommand.h" />
     <ClInclude Include="..\..\include\Bibim\Command.h" />

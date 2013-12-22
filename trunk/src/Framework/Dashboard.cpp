@@ -206,9 +206,17 @@ namespace Bibim
         AddLogNotification(Color(255, 242, 0), category, message);
     }
 
-    void Dashboard::Information(const char* /*category*/, const char* /*message*/)
+    void Dashboard::Information(const char* category, const char* message)
     {
-        // AddLogNotification(Color(37, 177, 76), category, message);
+#       if (defined(BIBIM_PLATFORM_WINDOWS))
+        /*
+        ::OutputDebugString("[");
+        ::OutputDebugString(category);
+        ::OutputDebugString("] ");
+        ::OutputDebugString(message);
+        ::OutputDebugString("\n");
+        */
+#       endif
     }
 
     void Dashboard::AddLogNotification(Color color, const char* category, const char* message)
