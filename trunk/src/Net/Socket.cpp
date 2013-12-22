@@ -205,8 +205,7 @@ namespace Bibim
                 XXX(WSAETIMEDOUT);
                 XXX(WSAECONNRESET);
 #undef XXX
-                if (error != WSAECONNRESET) // http://blog.naver.com/kkyrin/140046569067
-                    break;
+                break;
             }
         }
 

@@ -204,6 +204,13 @@ namespace Bibim
     void Dashboard::Warning(const char* category, const char* message)
     {
         AddLogNotification(Color(255, 242, 0), category, message);
+#       if (defined(BIBIM_PLATFORM_WINDOWS))
+        ::OutputDebugString("[");
+        ::OutputDebugString(category);
+        ::OutputDebugString("] ");
+        ::OutputDebugString(message);
+        ::OutputDebugString("\n");
+#       endif
     }
 
     void Dashboard::Information(const char* category, const char* message)
