@@ -5,7 +5,7 @@
  * better applied to curl conditions, and to make it not use globals, pollute
  * name space and more.
  *
- * Copyright (c) 1995, 1996, 1997, 1998, 1999 Kungliga Tekniska Högskolan
+ * Copyright (c) 1995, 1996, 1997, 1998, 1999 Kungliga Tekniska H?skolan
  * (Royal Institute of Technology, Stockholm, Sweden).
  * Copyright (c) 2004 - 2011 Daniel Stenberg
  * All rights reserved.

@@ -19,7 +19,15 @@ namespace Bibim.Graphics
                 if (File.Exists(item) == false)
                     continue;
 
-                bitmap = new Bitmap(item);
+                try
+                {
+                    bitmap = new Bitmap(item);
+                }
+                catch (ArgumentException)
+                {
+                    continue;
+                }
+
                 if (bitmap != null)
                     return bitmap.ResizeAndDispose(bitmap.Width, bitmap.Height);
             }

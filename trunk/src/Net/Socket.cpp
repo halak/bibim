@@ -185,6 +185,7 @@ namespace Bibim
             else
             { 
                 // TODO: ERROR Ã³¸®
+#if (defined(BIBIM_PLATFORM_WINDOWS))
                 const int error = WSAGetLastError();
 
 #define XXX(val) if (error == val) { Log::Information(#val); }
@@ -205,6 +206,7 @@ namespace Bibim
                 XXX(WSAETIMEDOUT);
                 XXX(WSAECONNRESET);
 #undef XXX
+#endif
                 break;
             }
         }

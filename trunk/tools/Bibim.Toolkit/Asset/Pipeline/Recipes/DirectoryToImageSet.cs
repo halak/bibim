@@ -59,6 +59,8 @@ namespace Bibim.Asset.Pipeline.Recipes
             {
                 string name = Path.GetFileNameWithoutExtension(item);
                 Bitmap bitmap = BitmapExtension.CreateOne(item);
+                if (bitmap == null)
+                    continue;
 
                 if (UniformSize.IsEmpty == false)
                     bitmap = bitmap.ResizeAndDispose(UniformSize.Width, UniformSize.Height);
