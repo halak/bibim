@@ -4,7 +4,8 @@
 
 #include <Bibim/FWD.h>
 #include <Bibim/UIVisual.h>
-#include <Bibim/IUpdateable.h>
+#include <deque>
+#include <vector>
 
 namespace Bibim
 {
@@ -15,53 +16,52 @@ namespace Bibim
             UITrail();
             virtual ~UITrail();
 
-            float GetGlobalAngle() const;
-            void  SetGlobalAngle(float value);
+            void Clear();
 
-            inline CCParticleSystem* GetSource() const;
-            void SetSource(CCParticleSystem* value);
+            inline float GetThickness() const;
+            void SetThickness(float value);
 
-            inline Timeline* GetTimeline() const;
-            void SetTimeline(Timeline* value);
+            inline int GetTrails() const;
+            void SetTrails(int value);
+
+            inline Texture2D* GetSource() const;
+            void SetSource(Texture2D* value);
 
             virtual Vector2 GetContentSize();
 
         protected:
-                    void OnStep(float dt, int timestamp);
             virtual void OnDraw(UIDrawingContext& context);
 
         private:
-            class Updater : public IUpdateable
-            {
-                public:
-                    Updater();
-                    virtual ~Updater();
-
-                    virtual void Update(float dt, int timestamp);
-
-                public:
-                    UITrail* o;
-            };
-
-        private:
-            float globalAngle;
-            CCParticleSystemPtr source;
-            CCParticleEmitter* emitter;
-            Timeline* timeline;
-            Updater updater;
+            float thickness;
+            int numberOfTrails;
+            Texture2DPtr source;
+            std::deque<Vector2> trails;
+            std::deque<Vector2> lines1;
+            std::deque<Vector2> lines2;
+            std::vector<Vector2> triangles;
+            std::vector<Vector2> triangleUVs;
+            std::vector<Color> triangleColors;
+            float trailLength;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    CCParticleSystem* UITrail::GetSource() const
+    float UITrail::GetThickness() const
+    {
+        return thickness;
+    }
+
+    int UITrail::GetTrails() const
+    {
+        return numberOfTrails;
+    }
+
+    Texture2D* UITrail::GetSource() const
     {
         return source;
     }
 
-    Timeline* UITrail::GetTimeline() const
-    {
-        return timeline;
-    }
 }
 
 #endif

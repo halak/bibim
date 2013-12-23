@@ -1383,6 +1383,35 @@ namespace Bibim
             return 1;
         }
 
+        static int CopyVisual(lua_State* L)
+        {
+            UIVisual* target = lua_tinker::read<UIVisual*>(L, 1);
+            if (target == nullptr)
+                return 0;
+
+            UIVisual* source = lua_tinker::read<UIVisual*>(L, 2);
+            if (source == nullptr)
+                return 0;
+
+            target->SetName(source->GetName());
+            target->SetXY(source->GetX(), source->GetY());
+            target->SetXYMode(source->GetXMode(), source->GetYMode());
+            target->SetSize(source->GetWidth(), source->GetHeight());
+            target->SetSizeMode(source->GetWidthMode(), source->GetHeightMode());
+            target->SetOrigin(source->GetOrigin());
+            target->SetAnchorPoint(source->GetAnchorPoint());
+            target->SetOpacity(source->GetOpacity());
+            target->SetVisibility(source->GetVisibility());
+            target->SetZOrder(source->GetZOrder());
+            target->SetPickable(source->GetPickable());
+            target->SetFocusable(source->GetFocusable());
+            target->SetDraggable(source->GetDraggable());
+            target->SetEffectMap(source->GetEffectMap()->Clone());
+            target->SetTransform(static_cast<UITransform*>(source->GetTransform()->Clone()));
+
+            return 0;
+        }
+
         static int ChangeBGM(lua_State* L)
         {
             StandardGame* game = GetGame(L);
@@ -1867,6 +1896,7 @@ namespace Bibim
             { "on", &On },
             { "off", &Off },
             { "capture", &Capture },
+            { "copyvisual", &CopyVisual },
             { NULL, NULL}  /* sentinel */
         };
 

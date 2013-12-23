@@ -35,6 +35,7 @@ namespace Bibim
             inline const RectF& GetCurrentClippedBounds() const;
             inline const UIGeometryEffect* GetCurrentGeometryEffect() const;
             inline const Matrix4& GetCurrentTransform() const;
+            inline const Matrix4& GetCurrentTransformInv() const;
 
             inline const Matrix4& GetViewTransform() const;
             inline const Matrix4& GetProjectionTransform() const;
@@ -102,6 +103,11 @@ namespace Bibim
     const Matrix4& UIVisualVisitor::GetCurrentTransform() const
     {
         return currentTransform;
+    }
+
+    const Matrix4& UIVisualVisitor::GetCurrentTransformInv() const
+    {
+        return currentTransformInv;
     }
 
     const Matrix4& UIVisualVisitor::GetViewTransform() const

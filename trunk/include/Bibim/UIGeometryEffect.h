@@ -24,6 +24,7 @@ namespace Bibim
             inline virtual void DrawDebugLines(UIRenderer* renderer, int count, Vector2* p, Color* c);
 
             inline virtual void DrawTriangles(UIRenderer* renderer, int count, Vector2* p, Color color);
+            inline virtual void DrawTriangles(UIRenderer* renderer, int count, Vector2* p, Vector2* uv, Color* color, Texture2D* texture);
 
             inline virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color);
             inline virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, Vector2* uv,  Texture2D* texture);
@@ -80,6 +81,11 @@ namespace Bibim
     void UIGeometryEffect::DrawTriangles(UIRenderer* renderer, int count, Vector2* p, Color color)
     {
         renderer->DrawTriangles(count, p, color);
+    }
+
+    void UIGeometryEffect::DrawTriangles(UIRenderer* renderer, int count, Vector2* p, Vector2* uv, Color* color, Texture2D* texture)
+    {
+        renderer->DrawTriangles(count, p, uv, color, texture);
     }
 
     void UIGeometryEffect::DrawQuad(UIRenderer* renderer, Vector2* p, Color color)

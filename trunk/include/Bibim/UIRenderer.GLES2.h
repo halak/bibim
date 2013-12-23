@@ -33,6 +33,7 @@ namespace Bibim
             void DrawDebugLines(int count, const Vector2* p, const Color* c);
 
             void DrawTriangles(int count, const Vector2* p, Color color);
+            void DrawTriangles(int count, const Vector2* p, const Vector2* uv, const Color* color, Texture2D* texture);
 
         private:
             virtual Vertex* LockVB(int size);
