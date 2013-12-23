@@ -754,6 +754,12 @@ namespace Bibim
         lua_tinker::class_add<UITrail>(L, "UITrail");
             lua_tinker::class_inh<UITrail, UIVisual>(L);
             lua_tinker::class_con<UITrail>(L, lua_tinker::constructor<UITrail>);
+            lua_tinker::class_def<UITrail>(L, "GetThickness", &UITrail::GetThickness);
+            lua_tinker::class_def<UITrail>(L, "SetThickness", &UITrail::SetThickness);
+            lua_tinker::class_def<UITrail>(L, "GetTrails", &UITrail::GetTrails);
+            lua_tinker::class_def<UITrail>(L, "SetTrails", &UITrail::SetTrails);
+            lua_tinker::class_def<UITrail>(L, "GetSource", &UITrail::GetSource);
+            lua_tinker::class_def<UITrail>(L, "SetSource", &UITrail::SetSource);
         lua_tinker::class_add<UISpark>(L, "UISpark");
             lua_tinker::class_inh<UISpark, UIVisual>(L);
             lua_tinker::class_con<UISpark>(L, lua_tinker::constructor<UISpark, lua_tinker::table>);
@@ -855,6 +861,9 @@ namespace Bibim
 
         lua_tinker::class_add<UITransform>(L, "UITransform");
             lua_tinker::class_inh<UITransform, UIElement>(L);
+        lua_tinker::class_add<UIInverseTransform>(L, "UIInverseTransform");
+            lua_tinker::class_inh<UIInverseTransform, UITransform>(L);
+            lua_tinker::class_con<UIInverseTransform>(L, lua_tinker::constructor<UIInverseTransform>);
         lua_tinker::class_add<UITransform2D>(L, "UITransform2D");
             lua_tinker::class_inh<UITransform2D, UITransform>(L);
             lua_tinker::class_con<UITransform2D>(L, lua_tinker::constructor<UITransform2D>);

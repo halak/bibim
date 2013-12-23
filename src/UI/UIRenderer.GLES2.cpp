@@ -119,6 +119,27 @@ namespace Bibim
         DrawArrays(GL_TRIANGLES, count);
     }
 
+    void UIRenderer::DrawTriangles(int count, const Vector2* p, const Vector2* uv, const Color* color, Texture2D* texture)
+    {
+        if (count == 0)
+            return;
+        BBAssert(count > 0 && p && uv && color && texture);
+
+        Flush();
+
+        count -= (count % 3);
+
+        for (int i = 0; i < count; i++)
+            vb[i] = Vertex(p[i], color[i].ToARGB(), uv[i]);
+
+        glActiveTexture(GL_TEXTURE0);
+        if (texture)
+            glBindTexture(GL_TEXTURE_2D, texture->GetHandle());
+        else
+            glBindTexture(GL_TEXTURE_2D, 0);
+        DrawArrays(GL_TRIANGLES, count);
+    }
+
     void UIRenderer::DrawQuads(Texture2D* texture, Texture2D* mask, int vertexStart, int /*numberOfVertices*/, int numberOfQuads)
     {   
         glActiveTexture(GL_TEXTURE0);

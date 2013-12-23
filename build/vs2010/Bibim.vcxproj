@@ -248,6 +248,7 @@
     <ClCompile Include="..\..\src\UI\UIElement.cpp" />
     <ClCompile Include="..\..\src\UI\UIEllipse.cpp" />
     <ClCompile Include="..\..\src\UI\UIForceGridEffect.cpp" />
+    <ClCompile Include="..\..\src\UI\UIInverseTransform.cpp" />
     <ClCompile Include="..\..\src\UI\UILayout.cpp" />
     <ClCompile Include="..\..\src\UI\UILiveWindow.cpp" />
     <ClCompile Include="..\..\src\UI\UIRenderer.DX9.cpp" />
@@ -477,6 +478,7 @@
     <ClInclude Include="..\..\include\Bibim\SphereShape2D.h" />
     <ClInclude Include="..\..\include\Bibim\UICCParticleSystem.h" />
     <ClInclude Include="..\..\include\Bibim\UIForceGridEffect.h" />
+    <ClInclude Include="..\..\include\Bibim\UIInverseTransform.h" />
     <ClInclude Include="..\..\include\Bibim\UILiveWindow.h" />
     <ClInclude Include="..\..\include\Bibim\UITrail.h" />
     <ClInclude Include="..\..\include\Bibim\UserShape2D.h" />

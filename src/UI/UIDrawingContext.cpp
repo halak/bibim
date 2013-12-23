@@ -1015,6 +1015,18 @@ namespace Bibim
             renderer->DrawTriangles(count, p, color);
     }
 
+    void UIDrawingContext::FillTriangles(int count, Vector2* p, Vector2* uv, Color* color, Texture2D* texture)
+    {
+        const float opacity = GetCurrentOpacity();
+        for (int i = 0; i < count; i++)
+            color[i].A = static_cast<byte>(static_cast<float>(color[i].A) * opacity);
+
+        if (currentGeomEffect)
+            currentGeomEffect->DrawTriangles(renderer, count, p, uv, color, texture);
+        else
+            renderer->DrawTriangles(count, p, uv, color, texture);
+    }
+
     void UIDrawingContext::OnBegan(UIVisual* /*target*/)
     {
     }

@@ -1,4 +1,4 @@
-// Automatically generated in 2013-12-16 23:18:01.832234
+// Automatically generated in 2013-12-23 19:06:46.270495
 
 #include <zlib.h>
 #include "Animation/Ease.cpp"
@@ -209,6 +209,7 @@
 #include "UI/UIGeometryEffect.cpp"
 #include "UI/UIHandledDrawingContext.cpp"
 #include "UI/UIImage.cpp"
+#include "UI/UIInverseTransform.cpp"
 #include "UI/UIKeyboardEventArgs.cpp"
 #include "UI/UIKeyboardEventDispatcher.cpp"
 #include "UI/UILabel.cpp"

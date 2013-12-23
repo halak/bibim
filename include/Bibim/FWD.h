@@ -277,6 +277,7 @@ namespace Bibim
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             // Transforms
                 BBForwardDeclareSmartPointerClass(UITransform);
+                    BBForwardDeclareSmartPointerClass(UIInverseTransform);
                     BBForwardDeclareSmartPointerClass(UITransform2D);
                     BBForwardDeclareSmartPointerClass(UITransform3D);
             ////////////////////////////////////////////////////////////////////////////////////////////////////

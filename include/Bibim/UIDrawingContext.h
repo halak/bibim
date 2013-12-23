@@ -53,6 +53,7 @@ namespace Bibim
             void FillRoundedRect(RectF bounds, float radius, Color color);
             void FillRoundedRect(RectF bounds, float leftTopRadius, float rightTopRadius, float leftBottomRadius, float rightBottomRadius, Color color);
             void FillTriangles(int count, Vector2* p, Color color);
+            void FillTriangles(int count, Vector2* p, Vector2* uv, Color* color, Texture2D* texture);
 
             inline UIRenderer* GetRenderer() const;
 

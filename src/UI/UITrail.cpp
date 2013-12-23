@@ -1,147 +1,167 @@
 #include <Bibim/Config.h>
 #include <Bibim/UITrail.h>
 #include <Bibim/ComponentStreamReader.h>
-#include <Bibim/CCParticleEmitter.h>
-#include <Bibim/CCParticleSystem.h>
-#include <Bibim/Timeline.h>
+#include <Bibim/Math.h>
 #include <Bibim/UIDrawingContext.h>
-#include <Bibim/UIWindow.h>
+#include <Bibim/Texture2D.h>
 
 namespace Bibim
 {
     BBImplementsComponent(UITrail);
 
     UITrail::UITrail()
-        : globalAngle(0.0f),
-          emitter(nullptr),
-          source(nullptr),
-          timeline(nullptr)
+        : thickness(16.0f),
+          numberOfTrails(10)
     {
-        updater.o = this;
         SetSize(1.0f, 1.0f);
         SetSizeMode(ContentSize, ContentSize);
+
+        Clear();
     }
 
     UITrail::~UITrail()
     {
-        SetTimeline(nullptr);
-        SetSource(nullptr);
     }
 
-    float UITrail::GetGlobalAngle() const
+    void UITrail::Clear()
     {
-        return globalAngle;
-    }
+        trails.clear();
+        lines1.clear();
+        lines2.clear();
+        triangles.clear();
+        triangleUVs.clear();
+        triangleColors.clear();
+        trailLength = 0.0f;
 
-    void UITrail::SetGlobalAngle(float value)
-    {
-        globalAngle = value;
-
-        if (emitter)
-            emitter->SetGlobalAngle(globalAngle);
-    }
-
-    void UITrail::SetSource(CCParticleSystem* value)
-    {
-        if (source != value)
+        triangleColors.resize((numberOfTrails - 1) * 6);
+        const int count = static_cast<int>(triangleColors.size());
+        int i = 0;
+        for (; i < count / 2; i += 6)
         {
-            source = value;
+            const float t = static_cast<float>(i) / static_cast<float>(count / 2);
+            const byte opacity = static_cast<byte>(255.0f * t);
 
-            delete emitter;
+            triangleColors[i + 0] = Color(255, 255, 255, opacity);
+            triangleColors[i + 1] = Color(255, 255, 255, opacity);
+            triangleColors[i + 2] = Color(255, 255, 255, opacity);
+            triangleColors[i + 3] = Color(255, 255, 255, opacity);
+            triangleColors[i + 4] = Color(255, 255, 255, opacity);
+            triangleColors[i + 5] = Color(255, 255, 255, opacity);
+        }
 
-            if (source)
-            {
-                emitter = new CCParticleEmitter(source);
-                emitter->SetGlobalAngle(globalAngle);
-            }
-            else
-                emitter = nullptr;
+        for (; i < count; i += 6)
+        {
+            triangleColors[i + 0] = Color::White;
+            triangleColors[i + 1] = Color::White;
+            triangleColors[i + 2] = Color::White;
+            triangleColors[i + 3] = Color::White;
+            triangleColors[i + 4] = Color::White;
+            triangleColors[i + 5] = Color::White;
         }
     }
 
-    void UITrail::SetTimeline(Timeline* value)
+    void UITrail::SetThickness(float value)
     {
-        if (timeline != value)
-        {
-            if (timeline)
-                timeline->Remove(&updater);
+        thickness = Math::Max(value, 0.0f);
+    }
 
-            timeline = value;
+    void UITrail::SetTrails(int value)
+    {
+        numberOfTrails = Math::Max(value, 3);
+        Clear();
+    }
 
-            if (timeline)
-                timeline->Add(&updater);
-        }
+    void UITrail::SetSource(Texture2D* value)
+    {
+        source = value;
     }
 
     Vector2 UITrail::GetContentSize()
     {
-        if (source)
-            return Vector2(16.0f, 16.0f);
-        else
-            return Vector2::Zero;
-    }
-
-    void UITrail::OnStep(float dt, int timestamp)
-    {
-        if (emitter)
-        {
-            if (emitter->Update(dt, timestamp) == false)
-            {
-                UIPanel* parent = GetParent();
-                if (parent && parent->IsWindow())
-                    static_cast<UIWindow*>(parent)->RemoveChild(this);
-            }
-        }
+        return Vector2(thickness, thickness);
     }
 
     void UITrail::OnDraw(UIDrawingContext& context)
     {
         UIVisual::OnDraw(context);
 
-        if (emitter == nullptr)
-            return;
+        const Vector2 current = context.GetCurrentBounds().GetCenterPoint();
 
-        const Vector2 centerPoint = context.GetCurrentBounds().GetCenterPoint();
+        trails.push_back(current);
 
-        const CCParticle* particles = emitter->GetParticles();
-        const int count = emitter->GetNumberOfParticles();
-        Image* image = source->GetImage();
-
-        for (int i = 0; i < count; i++)
+        if (trails.size() >= 2)
         {
-            const CCParticle& p = particles[i];
-            context.DrawUnclipped(centerPoint + p.pos, p.rotation, p.size, image, Color(p.color));
+            const float oldTrailLength = trailLength;
+            const Vector2 previous = trails[trails.size() - 2];
+            Vector2 direction = current - previous;
+            trailLength += direction.Normalize();
+            direction = Vector2(-direction.Y, direction.X);
+
+            const float halfThickness = GetThickness() * 0.5f;
+
+            if (trails.size() == 2)
+            {
+                lines1.push_back(previous + direction * halfThickness);
+                lines2.push_back(previous - direction * halfThickness);
+            }
+
+            lines1.push_back(current + direction * halfThickness);
+            lines2.push_back(current - direction * halfThickness);
+
+            if (lines1.size() >= 2)
+            {
+                triangles.push_back(lines1[lines1.size() - 2]);
+                triangles.push_back(lines2[lines2.size() - 1]);
+                triangles.push_back(lines1[lines1.size() - 1]);
+
+                triangles.push_back(lines1[lines1.size() - 2]);
+                triangles.push_back(lines2[lines2.size() - 2]);
+                triangles.push_back(lines2[lines2.size() - 1]);
+
+                const float ox = oldTrailLength; // old x
+                const float nx = trailLength; // new x
+
+                triangleUVs.push_back(Vector2(0.0f, ox));
+                triangleUVs.push_back(Vector2(1.0f, nx));
+                triangleUVs.push_back(Vector2(0.0f, nx));
+
+                triangleUVs.push_back(Vector2(0.0f, ox));
+                triangleUVs.push_back(Vector2(1.0f, ox));
+                triangleUVs.push_back(Vector2(1.0f, nx));
+            }
+        }
+
+        while (trails.size() > numberOfTrails)
+        {
+            trails.pop_front();
+            lines1.pop_front();
+            lines2.pop_front();
+
+            triangles.erase(triangles.begin(), triangles.begin() + 6);
+            triangleUVs.erase(triangleUVs.begin(), triangleUVs.begin() + 6);
+        }
+
+        if (triangles.size() > 0)
+        {
+            context.FillTriangles(static_cast<int>(triangles.size()),
+                                  &triangles[0],
+                                  &triangleUVs[0],
+                                  &triangleColors[0],
+                                  source);
         }
     }
 
     void UITrail::OnRead(ComponentStreamReader& reader)
     {
         Base::OnRead(reader);
-        SetSource(static_cast<CCParticleSystem*>(reader.ReadAsset()));
     }
 
     void UITrail::OnCopy(const GameComponent* original, CloningContext& context)
     {
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
-        globalAngle = o->globalAngle;
-        SetSource(o->source);
-        SetTimeline(o->timeline);
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    UITrail::Updater::Updater()
-        : o(nullptr)
-    {
-    }
-
-    UITrail::Updater::~Updater()
-    {
-    }
-
-    void UITrail::Updater::Update(float dt, int timestamp)
-    {
-        o->OnStep(dt, timestamp);
+        thickness = o->thickness;
+        trails = o->trails;
+        triangles = o->triangles;
     }
 }

@@ -144,8 +144,8 @@ namespace Bibim
         CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_COLOROP, D3DTOP_DISABLE);
         CheckedSetTextureStageState(d3dDevice, 1, D3DTSS_TEXCOORDINDEX, 1);
 
-        CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_ADDRESSU, D3DTADDRESS_CLAMP);
-        CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_ADDRESSV, D3DTADDRESS_CLAMP);
+        CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_ADDRESSU, D3DTADDRESS_WRAP);
+        CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_ADDRESSV, D3DTADDRESS_WRAP);
         CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
         CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
         CheckedSetSamplerState(d3dDevice, 0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
@@ -264,6 +264,26 @@ namespace Bibim
         vb->Unlock();
 
         DrawPrimitives(D3DPT_TRIANGLELIST, numberOfTriangles);
+    }
+
+    void UIRenderer::DrawTriangles(int count, const Vector2* p, const Vector2* uv, const Color* color, Texture2D* texture)
+    {
+        if (count == 0)
+            return;
+        BBAssert(count > 0 && p && uv && color && texture);
+
+        Flush();
+
+        count -= (count % 3);
+
+        const int numberOfTriangles = static_cast<int>(count / 3);
+        Vertex* v = nullptr;
+        vb->Lock(0, sizeof(Vertex) * count, reinterpret_cast<void**>(&v), D3DLOCK_DISCARD);
+        for (int i = 0; i < count; i++)
+            v[i] = Vertex(p[i], color[i].ToARGB(), uv[i]);
+        vb->Unlock();
+
+        DrawPrimitives(D3DPT_TRIANGLELIST, numberOfTriangles, texture);
     }
 
     void UIRenderer::BeginAlphaTextureMode()

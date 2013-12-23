@@ -1388,6 +1388,14 @@
 					Name="Transforms"
 					>
 					<File
+						RelativePath="..\..\src\UI\UIInverseTransform.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\include\Bibim\UIInverseTransform.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\src\UI\UITransform.cpp"
 						>
 					</File>
