@@ -31,6 +31,7 @@ namespace Bibim
         triangles.clear();
         triangleUVs.clear();
         triangleColors.clear();
+        lastDirection = Vector2::Zero;
         trailLength = 0.0f;
 
         triangleColors.resize((numberOfTrails - 1) * 6);
@@ -97,45 +98,38 @@ namespace Bibim
             const Vector2 previous = trails[trails.size() - 2];
             Vector2 direction = current - previous;
             trailLength += direction.Normalize();
-            const Vector2 normal = Vector2(-direction.Y, direction.X);
-            
-            Vector2 oldDirection = direction;
-            if (trails.size() >= 3)
-            {
-                oldDirection = previous - trails[trails.size() - 3];
-                oldDirection.Normalize();
-            }
 
+            if (lastDirection != Vector2::Zero)
+            {
+                float current = lastDirection.ToRadian();
+                float desired = direction.ToRadian();
+
+                float delta = Math::TwoPi * 4.0f * (1.0f/60.0f);
+
+                float d;
+                if (Math::Abs(desired - current) < Math::Pi)
+                    d = (desired - current) / Math::Abs(desired - current);
+                else
+                    d = (current - desired) / Math::Abs(desired - current);
+
+                if (Math::Abs(desired - current) > delta)
+                    current += d * delta;
+                else
+                    current = desired;
+
+                lastDirection = Vector2::UnitX;
+                lastDirection.Rotate(current);
+            }
+            else
+                lastDirection = direction;
+
+            const Vector2 normal = Vector2(-lastDirection.Y, lastDirection.X);
             const float halfThickness = GetThickness() * 0.5f;
 
             if (trails.size() == 2)
             {
                 lines1.push_back(previous + normal * halfThickness);
                 lines2.push_back(previous - normal * halfThickness);
-            }
-
-            const float dot = normal.Dot(oldDirection);
-            if (Math::Equals(dot, 0.0f) == false)
-            {
-                const Vector2 oldNormal = Vector2(-oldDirection.Y, oldDirection.X);
-
-                Vector2 halfNormal = Math::Lerp(oldNormal, normal, 0.5f);
-                halfNormal.Normalize();
-
-                if (dot < 0.0f)
-                {
-                    lines1[lines1.size() - 1] = previous + halfNormal * halfThickness;
-                    lines2[lines2.size() - 1] = previous - halfNormal * halfThickness;
-                }
-                else if (dot > 0.0f)
-                {
-                    lines1[lines1.size() - 1] = previous + halfNormal * halfThickness;
-                    lines2[lines2.size() - 1] = previous - halfNormal * halfThickness;
-                }
-
-                triangles[triangles.size() - 1] = lines2[lines2.size() - 1];
-                triangles[triangles.size() - 4] = lines1[lines1.size() - 1];
-                triangles[triangles.size() - 5] = lines2[lines2.size() - 1];
             }
 
             lines1.push_back(current + normal * halfThickness);

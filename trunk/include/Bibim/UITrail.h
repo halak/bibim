@@ -42,6 +42,7 @@ namespace Bibim
             std::vector<Vector2> triangles;
             std::vector<Vector2> triangleUVs;
             std::vector<Color> triangleColors;
+            Vector2 lastDirection;
             float trailLength;
     };
 
