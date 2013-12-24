@@ -87,7 +87,9 @@ namespace Bibim
 
         const Vector2 current = context.GetCurrentBounds().GetCenterPoint();
 
-        trails.push_back(current);
+        if (trails.empty() || trails.back() != current)
+        {
+            trails.push_back(current);
 
         if (trails.size() >= 2)
         {
@@ -95,18 +97,49 @@ namespace Bibim
             const Vector2 previous = trails[trails.size() - 2];
             Vector2 direction = current - previous;
             trailLength += direction.Normalize();
-            direction = Vector2(-direction.Y, direction.X);
+            const Vector2 normal = Vector2(-direction.Y, direction.X);
+            
+            Vector2 oldDirection = direction;
+            if (trails.size() >= 3)
+            {
+                oldDirection = previous - trails[trails.size() - 3];
+                oldDirection.Normalize();
+            }
 
             const float halfThickness = GetThickness() * 0.5f;
 
             if (trails.size() == 2)
             {
-                lines1.push_back(previous + direction * halfThickness);
-                lines2.push_back(previous - direction * halfThickness);
+                lines1.push_back(previous + normal * halfThickness);
+                lines2.push_back(previous - normal * halfThickness);
             }
 
-            lines1.push_back(current + direction * halfThickness);
-            lines2.push_back(current - direction * halfThickness);
+            const float dot = normal.Dot(oldDirection);
+            if (Math::Equals(dot, 0.0f) == false)
+            {
+                const Vector2 oldNormal = Vector2(-oldDirection.Y, oldDirection.X);
+
+                Vector2 halfNormal = Math::Lerp(oldNormal, normal, 0.5f);
+                halfNormal.Normalize();
+
+                if (dot < 0.0f)
+                {
+                    lines1[lines1.size() - 1] = previous + halfNormal * halfThickness;
+                    lines2[lines2.size() - 1] = previous - halfNormal * halfThickness;
+                }
+                else if (dot > 0.0f)
+                {
+                    lines1[lines1.size() - 1] = previous + halfNormal * halfThickness;
+                    lines2[lines2.size() - 1] = previous - halfNormal * halfThickness;
+                }
+
+                triangles[triangles.size() - 1] = lines2[lines2.size() - 1];
+                triangles[triangles.size() - 4] = lines1[lines1.size() - 1];
+                triangles[triangles.size() - 5] = lines2[lines2.size() - 1];
+            }
+
+            lines1.push_back(current + normal * halfThickness);
+            lines2.push_back(current - normal * halfThickness);
 
             if (lines1.size() >= 2)
             {
@@ -129,6 +162,7 @@ namespace Bibim
                 triangleUVs.push_back(Vector2(1.0f, ox));
                 triangleUVs.push_back(Vector2(1.0f, nx));
             }
+        }
         }
 
         while (trails.size() > numberOfTrails)
