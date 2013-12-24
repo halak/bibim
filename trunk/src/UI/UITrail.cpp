@@ -105,15 +105,16 @@ namespace Bibim
                 float desired = direction.ToRadian();
 
                 float delta = Math::TwoPi * 4.0f * (1.0f/60.0f);
-
-                float d;
-                if (Math::Abs(desired - current) < Math::Pi)
-                    d = (desired - current) / Math::Abs(desired - current);
-                else
-                    d = (current - desired) / Math::Abs(desired - current);
-
                 if (Math::Abs(desired - current) > delta)
+                {
+                    float d;
+                    if (Math::Abs(desired - current) < Math::Pi)
+                        d = (desired - current) / Math::Abs(desired - current);
+                    else
+                        d = (current - desired) / Math::Abs(desired - current);
+
                     current += d * delta;
+                }
                 else
                     current = desired;
 
