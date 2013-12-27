@@ -275,6 +275,16 @@ namespace Bibim
         ReloadUI();
     }
 
+    void StandardGame::CollectGarbage()
+    {
+        if (GetLua())
+            GetLua()->GC();
+        if (GetAssetStorage())
+            GetAssetStorage()->CollectGarbage();
+        if (fontLibrary)
+            fontLibrary->CollectGarbage();
+    }
+
     void StandardGame::MatchContentToWindow()
     {
         if (GetUIDomain() == nullptr)
@@ -495,6 +505,17 @@ namespace Bibim
                 return 0;
 
             game->Restart();
+
+            return 0;
+        }
+
+        static int _CollectGarbage(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            game->CollectGarbage();
 
             return 0;
         }
@@ -1858,6 +1879,7 @@ namespace Bibim
         const struct luaL_Reg thLib [] = {
             { "title", &SetTitle },
             { "restart", &RestartGame },
+            { "gc", &_CollectGarbage },
             { "exit", &ExitGame },
             { "load", &LoadAsset },
             { "preload", &PreloadAsset },

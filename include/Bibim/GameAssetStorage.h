@@ -52,6 +52,8 @@ namespace Bibim
 
             void Reset();
 
+            void CollectGarbage();
+
             const String& FindName(GameAsset* value) const;
 
             inline GameModuleTree* GetModules() const;

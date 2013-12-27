@@ -23,6 +23,8 @@ namespace Bibim
             FontLibrary(GraphicsDevice* graphicsDevice);
             virtual ~FontLibrary();
 
+            void CollectGarbage();
+
             inline GraphicsDevice* GetGraphicsDevice() const;
             inline GameAssetStorage* GetAssetStorage() const;
             inline void SetAssetStorage(GameAssetStorage* value);
