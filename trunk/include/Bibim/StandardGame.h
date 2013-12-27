@@ -40,6 +40,7 @@ namespace Bibim
             virtual ~StandardGame();
 
             void Restart();
+            void CollectGarbage();
 
             inline bool GetFullscreen() const;
             void SetFullscreen(bool value);

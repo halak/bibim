@@ -30,6 +30,10 @@ namespace Bibim
             GetGraphicsDevice()->RemoveLostEventListener(this);
     }
 
+    void FontLibrary::CollectGarbage()
+    {
+    }
+
     FontCache* FontLibrary::GetCache(const FontCacheParameters& parameters)
     {
         const unsigned int hashCode = parameters.GetHashCode();
