@@ -32,6 +32,13 @@ namespace Bibim
 
     void FontLibrary::CollectGarbage()
     {
+        for (CacheCollection::iterator it = caches.begin(); it != caches.end();)
+        {
+            if ((*it).second.GetReferenceCount() == 1)
+                it = caches.erase(it);
+            else
+                it++;
+        }
     }
 
     FontCache* FontLibrary::GetCache(const FontCacheParameters& parameters)

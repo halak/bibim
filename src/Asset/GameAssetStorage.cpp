@@ -141,6 +141,13 @@ namespace Bibim
 
     void GameAssetStorage::CollectGarbage()
     {
+        for (AssetTable::const_iterator it = assets.begin(); it != assets.end();)
+        {
+            if ((*it).second.GetReferenceCount() == 1)
+                it = assets.erase(it);
+            else
+                it++;
+        }
     }
 
     const String& GameAssetStorage::FindName(GameAsset* value) const
