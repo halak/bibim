@@ -8,6 +8,8 @@ namespace Bibim
     CCParticleEmitter::CCParticleEmitter(CCParticleSystem* system)
         : system(system),
           globalAngle(0.0f),
+          positionMode(Global),
+          position(Vector2::Zero),
           elapsedTime(0.0f),
           emitCounter(0.0f),
           particleIndex(0),
@@ -189,6 +191,7 @@ namespace Bibim
         CCParticle* p = &particles[particleCount];
         p->timeToLive = GenerateGTE0(system->GetParticleLifespan(), system->GetParticleLifespanVariance());
         p->pos = Generate(system->GetSourcePosition(), system->GetSourcePositionVariance());
+        p->startPos = position;
 
         const Vector4 start = Vector4(Math::Clamp(system->GetStartColor().X + system->GetStartColorVariance().X * Math::Random(-1.0f, +1.0f)),
                                       Math::Clamp(system->GetStartColor().Y + system->GetStartColorVariance().Y * Math::Random(-1.0f, +1.0f)),
@@ -249,5 +252,23 @@ namespace Bibim
         particleCount++;
 
         return true;
+    }
+
+    CCParticleEmitter::PositionMode CCParticleEmitter::ConvertFromStringToPositionMode(const char* value)
+    {
+             if (value == nullptr)                                return Global;
+        else if (String::EqualsCharsIgnoreCase(value, "GLOBAL"))  return Global;
+        else if (String::EqualsCharsIgnoreCase(value, "LOCAL"))   return Local;
+        else                                                      return Global;
+    }
+
+    const char* CCParticleEmitter::ConvertFromPositionModeToString(PositionMode value)
+    {
+        switch (value)
+        {
+            case Global: return "GLOBAL";
+            case Local:  return "LOCAL";
+            default:     return "GLOBAL";
+        }
     }
 }

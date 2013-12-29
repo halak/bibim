@@ -5,6 +5,7 @@
 #include <Bibim/FWD.h>
 #include <Bibim/UIVisual.h>
 #include <Bibim/IUpdateable.h>
+#include <BIbim/CCParticleEmitter.h>
 
 namespace Bibim
 {
@@ -17,6 +18,9 @@ namespace Bibim
 
             float GetGlobalAngle() const;
             void  SetGlobalAngle(float value);
+
+            CCParticleEmitter::PositionMode GetPositionMode() const;
+            void  SetPositionMode(CCParticleEmitter::PositionMode value);
 
             inline CCParticleSystem* GetSource() const;
             void SetSource(CCParticleSystem* value);
@@ -45,10 +49,12 @@ namespace Bibim
 
         private:
             float globalAngle;
+            CCParticleEmitter::PositionMode positionMode;
             CCParticleSystemPtr source;
             CCParticleEmitter* emitter;
             Timeline* timeline;
             Updater updater;
+            bool updateStarted;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

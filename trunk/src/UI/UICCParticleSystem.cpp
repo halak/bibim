@@ -13,9 +13,11 @@ namespace Bibim
 
     UICCParticleSystem::UICCParticleSystem()
         : globalAngle(0.0f),
+          positionMode(CCParticleEmitter::Global),
           emitter(nullptr),
           source(nullptr),
-          timeline(nullptr)
+          timeline(nullptr),
+          updateStarted(false)
     {
         updater.o = this;
         SetSize(1.0f, 1.0f);
@@ -41,6 +43,19 @@ namespace Bibim
             emitter->SetGlobalAngle(globalAngle);
     }
 
+    CCParticleEmitter::PositionMode UICCParticleSystem::GetPositionMode() const
+    {
+        return positionMode;
+    }
+
+    void UICCParticleSystem::SetPositionMode(CCParticleEmitter::PositionMode value)
+    {
+        positionMode = value;
+
+        if (emitter)
+            emitter->SetPositionMode(positionMode);
+    }
+
     void UICCParticleSystem::SetSource(CCParticleSystem* value)
     {
         if (source != value)
@@ -53,6 +68,8 @@ namespace Bibim
             {
                 emitter = new CCParticleEmitter(source);
                 emitter->SetGlobalAngle(globalAngle);
+                emitter->SetPositionMode(positionMode);
+                updateStarted = false;
             }
             else
                 emitter = nullptr;
@@ -83,7 +100,7 @@ namespace Bibim
 
     void UICCParticleSystem::OnStep(float dt, int timestamp)
     {
-        if (emitter)
+        if (emitter && updateStarted)
         {
             if (emitter->Update(dt, timestamp) == false)
             {
@@ -96,22 +113,41 @@ namespace Bibim
 
     void UICCParticleSystem::OnDraw(UIDrawingContext& context)
     {
-        UIVisual::OnDraw(context);
+        Base::OnDraw(context);
 
         if (emitter == nullptr)
             return;
 
-        const Vector2 centerPoint = context.GetCurrentBounds().GetCenterPoint();
+        const Vector2 origin = context.GetCurrentBounds().GetCenterPoint();
 
         const CCParticle* particles = emitter->GetParticles();
         const int count = emitter->GetNumberOfParticles();
         Image* image = source->GetImage();
 
-        for (int i = 0; i < count; i++)
+        switch (emitter->GetPositionMode())
         {
-            const CCParticle& p = particles[i];
-            context.DrawUnclipped(centerPoint + p.pos, p.rotation, p.size, image, Color(p.color));
+            case CCParticleEmitter::Global:
+                {
+                    for (int i = 0; i < count; i++)
+                    {
+                        const CCParticle& p = particles[i];
+                        context.DrawUnclipped(origin + p.pos - (origin - p.startPos), p.rotation, p.size, image, Color(p.color));
+                    }
+                }
+                break;
+            case CCParticleEmitter::Local:
+                {
+                    for (int i = 0; i < count; i++)
+                    {
+                        const CCParticle& p = particles[i];
+                        context.DrawUnclipped(origin + p.pos, p.rotation, p.size, image, Color(p.color));
+                    }
+                }
+                break;
         }
+
+        emitter->SetPosition(origin);
+        updateStarted = true;
     }
 
     void UICCParticleSystem::OnRead(ComponentStreamReader& reader)
@@ -125,6 +161,7 @@ namespace Bibim
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
         globalAngle = o->globalAngle;
+        positionMode = o->positionMode;
         SetSource(o->source);
         SetTimeline(o->timeline);
     }
