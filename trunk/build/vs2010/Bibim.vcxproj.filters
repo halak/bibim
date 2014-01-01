@@ -528,7 +528,7 @@
     <ClCompile Include="..\..\src\Graphics\ImageSet.cpp">
       <Filter>03. Game\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Graphics\PNGReader.cpp">
+    <ClCompile Include="..\..\src\Graphics\PNG.cpp">
       <Filter>03. Game\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Graphics\ScreenshotPrinter.cpp">
@@ -783,7 +783,7 @@
     <ClCompile Include="..\..\src\Net\Socket.cpp">
       <Filter>02. System\Net</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Graphics\JPEGReader.cpp">
+    <ClCompile Include="..\..\src\Graphics\JPEG.cpp">
       <Filter>03. Game\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Asset\NetworkAssetProvider.cpp">
@@ -1343,7 +1343,7 @@
     <ClInclude Include="..\..\include\Bibim\ImageSet.h">
       <Filter>03. Game\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\PNGReader.h">
+    <ClInclude Include="..\..\include\Bibim\PNG.h">
       <Filter>03. Game\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\RenderTargetTexture2D.h">
@@ -1686,7 +1686,7 @@
     <ClInclude Include="..\..\include\Bibim\Socket.h">
       <Filter>02. System\Net</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\JPEGReader.h">
+    <ClInclude Include="..\..\include\Bibim\JPEG.h">
       <Filter>03. Game\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\NetworkAssetProvider.h">

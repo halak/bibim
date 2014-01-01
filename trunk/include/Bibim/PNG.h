@@ -1,14 +1,14 @@
 #pragma once
-#ifndef __BIBIM_JPEGREADER_H__
-#define __BIBIM_JPEGREADER_H__
+#ifndef __BIBIM_PNG_H__
+#define __BIBIM_PNG_H__
 
 #include <Bibim/FWD.h>
 
 namespace Bibim
 {
-    class JPEGReader
+    class PNG
     {
-        BBThisIsStaticClass(JPEGReader);
+        BBThisIsStaticClass(PNG);
         public:
             static bool Read(AssetStreamReader& reader,
                              byte* destination,
