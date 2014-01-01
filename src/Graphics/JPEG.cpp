@@ -1,5 +1,5 @@
 #include <Bibim/Config.h>
-#include <Bibim/JPEGReader.h>
+#include <Bibim/JPEG.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/GameAsset.h>
 #include <Bibim/Memory.h>
@@ -61,10 +61,10 @@ namespace Bibim
     {
     }
 
-    bool JPEGReader::Read(AssetStreamReader& reader,
-                          byte* destination,
-                          int destinationPitch,
-                          bool swapRedBlue)
+    bool JPEG::Read(AssetStreamReader& reader,
+                    byte* destination,
+                    int destinationPitch,
+                    bool swapRedBlue)
     {
         const int RED  = swapRedBlue ? 2 : 0;
         const int BLUE = swapRedBlue ? 0 : 2;

@@ -1,5 +1,5 @@
 #include <Bibim/Config.h>
-#include <Bibim/PNGReader.h>
+#include <Bibim/PNG.h>
 #include <Bibim/AssetStreamReader.h>
 #include <Bibim/GameAsset.h>
 #include <png.h>
@@ -15,10 +15,10 @@ namespace Bibim
             png_error(pngReader, "Read Error");
     }
 
-    bool PNGReader::Read(AssetStreamReader& reader,
-                         byte* destination,
-                         int destinationPitch,
-                         bool swapRedBlue)
+    bool PNG::Read(AssetStreamReader& reader,
+                   byte* destination,
+                   int destinationPitch,
+                   bool swapRedBlue)
     {
         byte signature[8];
         reader.Read(signature, sizeof(signature) / sizeof(signature[0]));

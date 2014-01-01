@@ -159,7 +159,7 @@
     <ClCompile Include="..\..\src\GFX\SparkSet.cpp" />
     <ClCompile Include="..\..\src\Graphics\GLES2.cpp" />
     <ClCompile Include="..\..\src\Graphics\GraphicsDeviceBase.cpp" />
-    <ClCompile Include="..\..\src\Graphics\JPEGReader.cpp" />
+    <ClCompile Include="..\..\src\Graphics\JPEG.cpp" />
     <ClCompile Include="..\..\src\Input\IME.Mobile.cpp" />
     <ClCompile Include="..\..\src\Input\IME.Windows.cpp" />
     <ClCompile Include="..\..\src\Input\IMEBase.cpp" />
@@ -313,7 +313,7 @@
     <ClCompile Include="..\..\src\Graphics\GraphicsCapabilities.cpp" />
     <ClCompile Include="..\..\src\Graphics\Image.cpp" />
     <ClCompile Include="..\..\src\Graphics\ImageSet.cpp" />
-    <ClCompile Include="..\..\src\Graphics\PNGReader.cpp" />
+    <ClCompile Include="..\..\src\Graphics\PNG.cpp" />
     <ClCompile Include="..\..\src\Graphics\ScreenshotPrinter.cpp" />
     <ClCompile Include="..\..\src\Graphics\Window.cpp" />
     <ClCompile Include="..\..\src\Graphics\DynamicTexture2D.DX9.cpp" />
@@ -416,7 +416,7 @@
     <ClInclude Include="..\..\include\Bibim\StandardGame.EmbeddedFont.h" />
     <ClInclude Include="..\..\include\Bibim\StandardGame.h" />
     <ClInclude Include="..\..\include\Bibim\GraphicsDeviceBase.h" />
-    <ClInclude Include="..\..\include\Bibim\JPEGReader.h" />
+    <ClInclude Include="..\..\include\Bibim\JPEG.h" />
     <ClInclude Include="..\..\include\Bibim\IME.Mobile.h" />
     <ClInclude Include="..\..\include\Bibim\IME.h" />
     <ClInclude Include="..\..\include\Bibim\IME.Windows.h" />
@@ -581,7 +581,7 @@
     <ClInclude Include="..\..\include\Bibim\GraphicsDevice.h" />
     <ClInclude Include="..\..\include\Bibim\Image.h" />
     <ClInclude Include="..\..\include\Bibim\ImageSet.h" />
-    <ClInclude Include="..\..\include\Bibim\PNGReader.h" />
+    <ClInclude Include="..\..\include\Bibim\PNG.h" />
     <ClInclude Include="..\..\include\Bibim\RenderTargetTexture2D.h" />
     <ClInclude Include="..\..\include\Bibim\ScreenshotPrinter.h" />
     <ClInclude Include="..\..\include\Bibim\ShaderEffect.h" />

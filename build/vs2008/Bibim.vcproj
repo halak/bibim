@@ -1521,19 +1521,19 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Graphics\JPEGReader.cpp"
+					RelativePath="..\..\src\Graphics\JPEG.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\Bibim\JPEGReader.h"
+					RelativePath="..\..\include\Bibim\JPEG.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Graphics\PNGReader.cpp"
+					RelativePath="..\..\src\Graphics\PNG.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\include\Bibim\PNGReader.h"
+					RelativePath="..\..\include\Bibim\PNG.h"
 					>
 				</File>
 				<File

@@ -6,8 +6,8 @@
 #include <Bibim/GameAssetStorage.h>
 #include <Bibim/GLES2.h>
 #include <Bibim/GraphicsDevice.GLES2.h>
-#include <Bibim/PNGReader.h>
-#include <Bibim/JPEGReader.h>
+#include <Bibim/PNG.h>
+#include <Bibim/JPEG.h>
 #include <Bibim/Stream.h>
 #include <Bibim/Log.h>
 #include <Bibim/Numerics.h>
@@ -53,8 +53,8 @@ namespace Bibim
         enum Compression
         {
             Raw,
-            PNG,
-            JPEG,
+            PNGCompression,
+            JPEGCompression,
         };
 
         const int pitch = reader.ReadInt();
@@ -78,12 +78,12 @@ namespace Bibim
                     destination += destinationPitch;
                 }
                 break;
-            case PNG:
-                if (PNGReader::Read(reader, destination, destinationPitch, false) == false)
+            case PNGCompression:
+                if (PNG::Read(reader, destination, destinationPitch, false) == false)
                     thiz->SetStatus(FaultStatus);
                 break;
-            case JPEG:
-                if (JPEGReader::Read(reader, destination, destinationPitch, false) == false)
+            case JPEGCompression:
+                if (JPEG::Read(reader, destination, destinationPitch, false) == false)
                     thiz->SetStatus(FaultStatus);
                 break;
         }
