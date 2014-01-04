@@ -2029,11 +2029,26 @@ namespace Bibim
                 Lua::DoBuffer(data, size, path);
 
                 BBStackFree(data);
+
+                return;
             }
-            else
-                Log::Error("Lua", String::CFormat("Couldn't open lua file. (%s)", path.CStr()));
         }
-        else
-            Log::Error("Lua", String::CFormat("Couldn't open lua file. (%s)", path.CStr()));
+
+        stream = new FileStream(path, FileStream::ReadOnly);
+        if (stream && stream->CanRead())
+        {
+            BinaryReader reader(stream);
+            const int size = stream->GetLength();
+            byte* data = BBStackAlloc(byte, size);
+            reader.Read(data, size);
+
+            Lua::DoBuffer(data, size, path);
+
+            BBStackFree(data);
+
+            return;
+        }
+
+        Log::Error("Lua", String::CFormat("Couldn't open lua file. (%s)", path.CStr()));
     }
 }   
