@@ -37,6 +37,10 @@ namespace Bibim
         inline void SetRight(int value);
         inline void SetBottom(int value);
 
+        inline void Inflate(int all);
+        inline void Inflate(int horizontal, int vertical);
+        inline void Inflate(int left, int top, int right, int bottom);
+
         inline bool Contains(Point2 p) const;
 
         inline bool IsEmpty() const;
@@ -161,6 +165,24 @@ namespace Bibim
     void Rect::SetBottom(int value)
     {
         Height = value - Y;
+    }
+
+    void Rect::Inflate(int all)
+    {
+        Inflate(all, all, all, all);
+    }
+
+    void Rect::Inflate(int horizontal, int vertical)
+    {
+        Inflate(horizontal, vertical, horizontal, vertical);
+    }
+
+    void Rect::Inflate(int left, int top, int right, int bottom)
+    {
+        X -= left;
+        Y -= top;
+        Width += left + right;
+        Height += top + bottom;
     }
 
     bool Rect::Contains(Point2 p) const
