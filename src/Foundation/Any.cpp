@@ -437,33 +437,40 @@ namespace Bibim
             case ColorType:
                 return BinaryReader::ToColor(buffer);
             case Int2Type:
-                // todo
-                break;
-            case Int3Type:
-                // todo
-                break;
-            case Int4Type:
-                // todo
-                break;
-            case Float2Type:
                 BBStaticAssert(sizeof(int) == 4);
+                return Point2(BinaryReader::ToInt(buffer + 0),
+                              BinaryReader::ToInt(buffer + 4));
+            case Int3Type:
+                BBStaticAssert(sizeof(int) == 4);
+                return Point3(BinaryReader::ToInt(buffer + 0),
+                              BinaryReader::ToInt(buffer + 4),
+                              BinaryReader::ToInt(buffer + 8));
+            case Int4Type:
+                BBStaticAssert(sizeof(int) == 4);
+                return Point4(BinaryReader::ToInt(buffer + 0),
+                              BinaryReader::ToInt(buffer + 4),
+                              BinaryReader::ToInt(buffer + 8),
+                              BinaryReader::ToInt(buffer + 12));
+            case Float2Type:
+                BBStaticAssert(sizeof(float) == 4);
                 return Vector2(BinaryReader::ToFloat(buffer + 0),
                                BinaryReader::ToFloat(buffer + 4));
             case Float3Type:
-                // todo
-                break;
+                BBStaticAssert(sizeof(float) == 4);
+                return Vector3(BinaryReader::ToFloat(buffer + 0),
+                               BinaryReader::ToFloat(buffer + 4),
+                               BinaryReader::ToFloat(buffer + 8));
             case Float4Type:
-                // todo
-                break;
+                BBStaticAssert(sizeof(float) == 4);
+                return Vector4(BinaryReader::ToFloat(buffer + 0),
+                               BinaryReader::ToFloat(buffer + 4),
+                               BinaryReader::ToFloat(buffer + 8),
+                               BinaryReader::ToFloat(buffer + 12));
             case StringType:
                 // todo
                 break;
             case SharedObjectType:
-                // todo
-                break;
             case LightObjectType:
-                // todo
-                break;
             default:
                 return Any::Void;
         }
@@ -496,24 +503,38 @@ namespace Bibim
                 BBStaticAssert(sizeof(int) == 4);
                 BinaryWriter::From(buffer + 0, value.value.INT2[0]);
                 BinaryWriter::From(buffer + 4, value.value.INT2[1]);
-                return sizeof(value.value.INT2[0]) + sizeof(value.value.INT2[1]);
+                return sizeof(int) * 2;
             case Int3Type:
-                // todo
-                break;
+                BBStaticAssert(sizeof(int) == 4);
+                BinaryWriter::From(buffer + 0, value.value.INT2[0]);
+                BinaryWriter::From(buffer + 4, value.value.INT2[1]);
+                BinaryWriter::From(buffer + 8, value.value.INT2[2]);
+                return sizeof(int) * 3;
             case Int4Type:
-                // todo
-                break;
+                BBStaticAssert(sizeof(int) == 4);
+                BinaryWriter::From(buffer + 0, value.value.INT2[0]);
+                BinaryWriter::From(buffer + 4, value.value.INT2[1]);
+                BinaryWriter::From(buffer + 8, value.value.INT2[2]);
+                BinaryWriter::From(buffer + 12, value.value.INT2[3]);
+                return sizeof(int) * 4;
             case Float2Type:
                 BBStaticAssert(sizeof(float) == 4);
                 BinaryWriter::From(buffer + 0, value.value.FLOAT2[0]);
                 BinaryWriter::From(buffer + 4, value.value.FLOAT2[1]);
-                return sizeof(value.value.FLOAT2[0]) + sizeof(value.value.FLOAT2[1]);
+                return sizeof(float) * 2;
             case Float3Type:
-                // todo
-                break;
+                BBStaticAssert(sizeof(float) == 4);
+                BinaryWriter::From(buffer + 0, value.value.FLOAT2[0]);
+                BinaryWriter::From(buffer + 4, value.value.FLOAT2[1]);
+                BinaryWriter::From(buffer + 8, value.value.FLOAT2[2]);
+                return sizeof(float) * 3;
             case Float4Type:
-                // todo
-                break;
+                BBStaticAssert(sizeof(float) == 4);
+                BinaryWriter::From(buffer + 0, value.value.FLOAT2[0]);
+                BinaryWriter::From(buffer + 4, value.value.FLOAT2[1]);
+                BinaryWriter::From(buffer + 8, value.value.FLOAT2[2]);
+                BinaryWriter::From(buffer + 12, value.value.FLOAT2[3]);
+                return sizeof(float) * 4;
             case StringType:
                 // todo
                 break;
