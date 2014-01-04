@@ -779,6 +779,8 @@ namespace Bibim
             lua_tinker::class_def<UICCParticleSystem>(L, "SetSource", &UICCParticleSystem::SetSource);
             lua_tinker::class_def<UICCParticleSystem>(L, "GetTimeline", &UICCParticleSystem::GetTimeline);
             lua_tinker::class_def<UICCParticleSystem>(L, "SetTimeline", &UICCParticleSystem::SetTimeline);
+            lua_tinker::class_def<UICCParticleSystem>(L, "GetPositionMode", &UICCParticleSystem::GetPositionMode);
+            lua_tinker::class_def<UICCParticleSystem>(L, "SetPositionMode", &UICCParticleSystem::SetPositionMode);
         lua_tinker::class_add<UILiveWindow>(L, "UILiveWindow");
             lua_tinker::class_inh<UILiveWindow, UIWindow>(L);
             lua_tinker::class_con<UILiveWindow>(L, lua_tinker::constructor<UILiveWindow>);
