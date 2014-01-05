@@ -51,6 +51,7 @@ namespace Bibim
             /// 입력한 높이와 밑변의 길이를 이용하여 arc-tangent 값을 계산한 후 반환합니다. \f$atan(\frac{y}{x})\f$
             static inline float Atan2(Vector2 xy);
             static float Exp(float value);
+            static float Floor(float value);
 
             static inline short   Abs(short value);   ///< 입력한 값의 절대값을 반환합니다.
             static inline int     Abs(int value);     ///< 입력한 값의 절대값을 반환합니다.
