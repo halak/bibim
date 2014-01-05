@@ -324,6 +324,10 @@ namespace Bibim
                     return 0;
                 }
                 break;
+            case WM_SYSKEYUP:
+                if (wParam == VK_MENU)
+                    return 0;
+                break;
             case WM_COMMAND:
                 {
                     const int commandID = HIWORD(wParam);
