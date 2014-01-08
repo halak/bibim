@@ -935,7 +935,7 @@ int lua_tinker::push_for_return(lua_State *L, Bibim::Rect ret)
     lua_pushinteger(L, ret.Y);
     lua_pushinteger(L, ret.Width);
     lua_pushinteger(L, ret.Height);
-    return 3;
+    return 4;
 }
 
 template<>
