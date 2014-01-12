@@ -28,6 +28,7 @@ namespace Bibim
                     virtual ~LuaBase();
 
                     void Load(const String& path);
+                    void LoadFromFileSystem(const String& path);
 
                     inline StandardGame* GetGame() const;
 

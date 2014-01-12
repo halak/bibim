@@ -60,8 +60,8 @@ namespace Bibim
     void AxisAlignedBoxShape2D::UpdateParameters()
     {
         revision  = GetSpatialRevision();
-        scaledMin = GetMin() * GetScale();
-        scaledMax = GetMax() * GetScale();
+        scaledMin = GetPosition() + (GetMin() * GetScale());
+        scaledMax = GetPosition() + (GetMax() * GetScale());
     }
 
     bool AxisAlignedBoxShape2D::Raycast(Vector2 origin, Vector2 direction, float length, RaycastReport2D& outReport, IRaycastCallback2D* callback)
@@ -114,5 +114,4 @@ namespace Bibim
         scaledMax = o->scaledMax;
         revision = o->revision;
     }
-
 }
