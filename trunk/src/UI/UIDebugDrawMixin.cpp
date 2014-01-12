@@ -51,7 +51,7 @@ namespace Bibim
 
     template <typename T> void UIDebugDrawMixin::Flush(UIDrawingContext& context, float dt, std::vector<T>& geometries)
     {
-        for (std::vector<T>::iterator it = geometries.begin(); it != geometries.end();)
+        for (typename std::vector<T>::iterator it = geometries.begin(); it != geometries.end();)
         {
             T& o = (*it);
 

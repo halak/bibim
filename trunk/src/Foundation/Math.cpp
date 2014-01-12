@@ -57,7 +57,7 @@ namespace Bibim
 
     float Math::Floor(float value)
     {
-        return std::floorf(value);
+        return std::floor(value);
     }
 
     float Math::Exp(float value)
