@@ -160,7 +160,7 @@ namespace Bibim
         }
         }
 
-        while (trails.size() > numberOfTrails)
+        while (static_cast<int>(trails.size()) > numberOfTrails)
         {
             trails.pop_front();
             lines1.pop_front();
@@ -172,10 +172,11 @@ namespace Bibim
 
         if (triangles.size() > 0)
         {
+            triangleColorsTemporary = triangleColors;
             context.FillTriangles(static_cast<int>(triangles.size()),
                                   &triangles[0],
                                   &triangleUVs[0],
-                                  &triangleColors[0],
+                                  &triangleColorsTemporary[0],
                                   source);
         }
     }

@@ -900,6 +900,9 @@
     <ClCompile Include="..\..\src\UI\UIInverseTransform.cpp">
       <Filter>03. Game\UI\Transforms</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\UI\UIDebugDrawMixin.cpp">
+      <Filter>03. Game\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Bibim\AssetLoadingTask.h">
@@ -1787,6 +1790,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\UIInverseTransform.h">
       <Filter>03. Game\UI\Transforms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\UIDebugDrawMixin.h">
+      <Filter>03. Game\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

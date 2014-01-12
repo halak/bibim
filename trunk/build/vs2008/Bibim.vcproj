@@ -897,6 +897,14 @@
 				Name="UI"
 				>
 				<File
+					RelativePath="..\..\src\UI\UIDebugDrawMixin.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\UIDebugDrawMixin.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\UI\UIDomain.cpp"
 					>
 				</File>

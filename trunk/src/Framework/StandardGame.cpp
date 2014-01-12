@@ -2034,7 +2034,12 @@ namespace Bibim
             }
         }
 
-        stream = new FileStream(path, FileStream::ReadOnly);
+        Log::Error("Lua", String::CFormat("Couldn't open lua file. (%s)", path.CStr()));
+    }
+
+    void StandardGame::LuaBase::LoadFromFileSystem(const String& path)
+    {
+        StreamPtr stream = new FileStream(path, FileStream::ReadOnly);
         if (stream && stream->CanRead())
         {
             BinaryReader reader(stream);
@@ -2048,7 +2053,5 @@ namespace Bibim
 
             return;
         }
-
-        Log::Error("Lua", String::CFormat("Couldn't open lua file. (%s)", path.CStr()));
     }
 }   

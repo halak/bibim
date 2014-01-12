@@ -243,6 +243,7 @@
     <ClCompile Include="..\..\src\Time\UpdateableGameComponent.cpp" />
     <ClCompile Include="..\..\src\Time\UpdateableGameModule.cpp" />
     <ClCompile Include="..\..\src\UI\UICCParticleSystem.cpp" />
+    <ClCompile Include="..\..\src\UI\UIDebugDrawMixin.cpp" />
     <ClCompile Include="..\..\src\UI\UIDomain.cpp" />
     <ClCompile Include="..\..\src\UI\UIEditText.cpp" />
     <ClCompile Include="..\..\src\UI\UIElement.cpp" />
@@ -477,6 +478,7 @@
     <ClInclude Include="..\..\include\Bibim\Shape2D.h" />
     <ClInclude Include="..\..\include\Bibim\SphereShape2D.h" />
     <ClInclude Include="..\..\include\Bibim\UICCParticleSystem.h" />
+    <ClInclude Include="..\..\include\Bibim\UIDebugDrawMixin.h" />
     <ClInclude Include="..\..\include\Bibim\UIForceGridEffect.h" />
     <ClInclude Include="..\..\include\Bibim\UIInverseTransform.h" />
     <ClInclude Include="..\..\include\Bibim\UILiveWindow.h" />
