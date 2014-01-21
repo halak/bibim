@@ -100,6 +100,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.0.1\custom;..\..\extlibs\freetype-2.5.0.1\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\OpenAL\Android\openal\include;..\..\extlibs\SPARK-1.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
@@ -129,8 +130,10 @@
     <ClCompile Include="..\..\src\Audio\SoundFX.PC.cpp" />
     <ClCompile Include="..\..\src\Component\GameComponentFactory.cpp" />
     <ClCompile Include="..\..\src\Diagnostics\Log.cpp" />
+    <ClCompile Include="..\..\src\Diagnostics\Logger.cpp" />
     <ClCompile Include="..\..\src\Diagnostics\Performance.cpp" />
     <ClCompile Include="..\..\src\Diagnostics\Statistics.cpp" />
+    <ClCompile Include="..\..\src\Diagnostics\SystemLogger.cpp" />
     <ClCompile Include="..\..\src\FileSystem\FileStream.Android.cpp" />
     <ClCompile Include="..\..\src\FileSystem\FileStream.iOS.cpp" />
     <ClCompile Include="..\..\src\FileSystem\Path.cpp" />
@@ -384,6 +387,7 @@
     <ClInclude Include="..\..\include\Bibim\GameAssetStorage.h" />
     <ClInclude Include="..\..\include\Bibim\AssetProvider.h" />
     <ClInclude Include="..\..\include\Bibim\FileAssetProvider.h" />
+    <ClInclude Include="..\..\include\Bibim\Logger.h" />
     <ClInclude Include="..\..\include\Bibim\MPQAssetProvider.h" />
     <ClInclude Include="..\..\include\Bibim\NetworkAssetProvider.h" />
     <ClInclude Include="..\..\include\Bibim\AudioDevice.h" />
@@ -429,6 +433,7 @@
     <ClInclude Include="..\..\include\Bibim\Socket.h" />
     <ClInclude Include="..\..\include\Bibim\Lock.Unix.h" />
     <ClInclude Include="..\..\include\Bibim\Statistics.h" />
+    <ClInclude Include="..\..\include\Bibim\SystemLogger.h" />
     <ClInclude Include="..\..\include\Bibim\Thread.Unix.h" />
     <ClInclude Include="..\..\include\Bibim\ThreadBase.h" />
     <ClInclude Include="..\..\include\Bibim\Font.h" />

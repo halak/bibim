@@ -903,6 +903,12 @@
     <ClCompile Include="..\..\src\UI\UIDebugDrawMixin.cpp">
       <Filter>03. Game\UI</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Diagnostics\SystemLogger.cpp">
+      <Filter>02. System\Diagnostics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Diagnostics\Logger.cpp">
+      <Filter>02. System\Diagnostics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Bibim\AssetLoadingTask.h">
@@ -1793,6 +1799,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\UIDebugDrawMixin.h">
       <Filter>03. Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\SystemLogger.h">
+      <Filter>02. System\Diagnostics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Logger.h">
+      <Filter>02. System\Diagnostics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

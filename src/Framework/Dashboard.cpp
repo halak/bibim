@@ -45,6 +45,7 @@ namespace Bibim
 
     void Dashboard::Construct(IPEndPoint endPoint)
     {
+#       if (defined(BIBIM_PLATFORM_WINDOWS))
         socket = new Socket(endPoint);
         socket->TryConnect();
         stringstream << std::boolalpha;
@@ -54,6 +55,7 @@ namespace Bibim
         {
             socketStream = new NetworkStream(socket);
         }
+#       endif
     }
 
     void Dashboard::Initialize(GameModuleTree* modules)
@@ -91,7 +93,8 @@ namespace Bibim
 
     void Dashboard::TryConnect()
     {
-        if (socket->IsConnected())
+        if (socket == nullptr ||
+            socket->IsConnected())
             return;
 
         if (socket->TryConnect())
@@ -204,26 +207,10 @@ namespace Bibim
     void Dashboard::Warning(const char* category, const char* message)
     {
         AddLogNotification(Color(255, 242, 0), category, message);
-#       if (defined(BIBIM_PLATFORM_WINDOWS))
-        ::OutputDebugString("[");
-        ::OutputDebugString(category);
-        ::OutputDebugString("] ");
-        ::OutputDebugString(message);
-        ::OutputDebugString("\n");
-#       endif
     }
 
-    void Dashboard::Information(const char* category, const char* message)
+    void Dashboard::Information(const char* /*category*/, const char* /*message*/)
     {
-#       if (defined(BIBIM_PLATFORM_WINDOWS))
-        /*
-        ::OutputDebugString("[");
-        ::OutputDebugString(category);
-        ::OutputDebugString("] ");
-        ::OutputDebugString(message);
-        ::OutputDebugString("\n");
-        */
-#       endif
     }
 
     void Dashboard::AddLogNotification(Color color, const char* category, const char* message)

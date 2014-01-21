@@ -17,7 +17,7 @@ namespace Bibim
         GetWindow()->AddResizeEventListener(this);
         GetGraphicsDevice()->AddRestoreEventListener(this);
 
-#       if (defined(BIBIM_PLATFORM_WINDOWS))
+#       if (defined(BIBIM_DEBUG))
         dashboard = new Dashboard(this);
 #       endif
     }
@@ -36,7 +36,7 @@ namespace Bibim
         GetWindow()->AddResizeEventListener(this);
         GetGraphicsDevice()->AddRestoreEventListener(this);
 
-#       if (defined(BIBIM_PLATFORM_WINDOWS))
+#       if (defined(BIBIM_DEBUG))
         dashboard = new Dashboard(this);
 #       endif
     }
@@ -54,7 +54,7 @@ namespace Bibim
         GetWindow()->AddResizeEventListener(this);
         GetGraphicsDevice()->AddRestoreEventListener(this);
 
-#       if (defined(BIBIM_PLATFORM_WINDOWS))
+#       if (defined(BIBIM_DEBUG))
         dashboard = new Dashboard(this);
 #       endif
     }
@@ -74,6 +74,10 @@ namespace Bibim
                                   bool windowMoveToScreenCenter)
     {
         // Log::Add(this);
+
+#       if (defined(BIBIM_DEBUG))
+        GetModules()->GetRoot()->AttachChild(new SystemLogger(gameName));
+#       endif
 
         if (windowMoveToScreenCenter)
             GetWindow()->MoveToScreenCenter();
