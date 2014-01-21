@@ -1,8 +1,8 @@
 #pragma once
-#ifndef BIBIM_ALL_8E7BFC0B_C4BB_4BD5_9736_956F73BC61C5_H__
-#define BIBIM_ALL_8E7BFC0B_C4BB_4BD5_9736_956F73BC61C5_H__
+#ifndef BIBIM_ALL_54C86C55_D98D_4B31_98F3_456D28D13DD1_H__
+#define BIBIM_ALL_54C86C55_D98D_4B31_98F3_456D28D13DD1_H__
 
-// Automatically generated in 2013-12-23 19:06:46.334499
+// Automatically generated in 2014-01-21 21:07:24.159673
 
 #include "AlarmClock.h"
 #include "Algorithm.h"
@@ -141,6 +141,7 @@
 #include "Lock.Unix.h"
 #include "Lock.Windows.h"
 #include "Log.h"
+#include "Logger.h"
 #include "Lua.h"
 #include "ManualLocker.h"
 #include "Math.h"
@@ -214,6 +215,7 @@
 #include "Stream.h"
 #include "String.h"
 #include "SubTimeline.h"
+#include "SystemLogger.h"
 #include "Texture2D.DX9.h"
 #include "Texture2D.GLES2.h"
 #include "Texture2D.h"
@@ -234,6 +236,7 @@
 #include "UICCParticleSystem.h"
 #include "UICheckBox.h"
 #include "UIColorMatrixEffect.h"
+#include "UIDebugDrawMixin.h"
 #include "UIDocument.h"
 #include "UIDomain.h"
 #include "UIDrawingContext.h"

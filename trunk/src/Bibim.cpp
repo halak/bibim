@@ -1,4 +1,4 @@
-// Automatically generated in 2013-12-23 19:06:46.270495
+// Automatically generated in 2014-01-21 21:07:24.141672
 
 #include <zlib.h>
 #include "Animation/Ease.cpp"
@@ -47,8 +47,10 @@
 #include "Component/GameComponentFactory.cpp"
 #include "Diagnostics/CrashDump.cpp"
 #include "Diagnostics/Log.cpp"
+#include "Diagnostics/Logger.cpp"
 #include "Diagnostics/Performance.cpp"
 #include "Diagnostics/Statistics.cpp"
+#include "Diagnostics/SystemLogger.cpp"
 #include "FileSystem/FileStream.Android.cpp"
 #include "FileSystem/FileStream.iOS.cpp"
 #include "FileSystem/FileStream.Windows.cpp"
@@ -120,8 +122,8 @@
 #include "Graphics/GraphicsDeviceBase.cpp"
 #include "Graphics/Image.cpp"
 #include "Graphics/ImageSet.cpp"
-#include "Graphics/JPEGReader.cpp"
-#include "Graphics/PNGReader.cpp"
+#include "Graphics/JPEG.cpp"
+#include "Graphics/PNG.cpp"
 #include "Graphics/RenderTargetTexture2D.DX9.cpp"
 #include "Graphics/RenderTargetTexture2D.GLES2.cpp"
 #include "Graphics/ScreenshotPrinter.cpp"
@@ -188,6 +190,7 @@
 #include "UI/UICCParticleSystem.cpp"
 #include "UI/UICheckBox.cpp"
 #include "UI/UIColorMatrixEffect.cpp"
+#include "UI/UIDebugDrawMixin.cpp"
 #include "UI/UIDocument.cpp"
 #include "UI/UIDomain.cpp"
 #include "UI/UIDrawingContext.cpp"
