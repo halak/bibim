@@ -219,7 +219,8 @@ def get_main_library_directory(environment, platform, target):
 def make_visual_studio_2008_property_sheet(name, 
                                            include_directories,
                                            library_directories,
-                                           depdendencies):
+                                           depdendencies,
+                                           target):
                                      
     import xml.etree.ElementTree as ET
     root = ET.Element('VisualStudioPropertySheet', {
@@ -247,7 +248,8 @@ def make_visual_studio_2010_property_sheet(name,
                                            include_directories,
                                            library_directories,
                                            depdendencies,
-                                           platform=None):
+                                           target,
+                                           platform):
     
     import xml.etree.ElementTree as ET
     root = ET.Element('Project', {
@@ -275,6 +277,10 @@ def make_visual_studio_2010_property_sheet(name,
         include_directories.replace('/', '\\') + ';%(AdditionalIncludeDirectories)'
     ))
     cl_compile.append(ETElementWithText('WarningLevel', 'Level4'))
+
+    if (target == TARGET.DEBUG and platform == PLATFORM.ANDROID):
+        cl_compile.append(ETElementWithText('PreprocessorDefinitions', '_DEBUG'))
+
     item_definition_group.append(cl_compile)
     link = ET.Element('Link')
     link.append(ETElementWithText(
@@ -326,13 +332,15 @@ def publish_library(environment, platform, target):
         element = make_visual_studio_2008_property_sheet(name,
                                                          include_directory,
                                                          library_directory,
-                                                         dependency_filenames)
+                                                         dependency_filenames,
+                                                         target)
         save_xml('{0}.vsprops'.format(os.path.join(main_library_rel_directory, name)), element)
     elif (environment == ENVIRONMENT.VS2010):
         element = make_visual_studio_2010_property_sheet(name,
                                                          include_directory,
                                                          library_directory,
                                                          dependency_filenames,
+                                                         target,
                                                          platform)
         save_xml('{0}.props'.format(os.path.join(main_library_rel_directory, name)), element)
  
