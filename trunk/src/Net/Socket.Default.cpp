@@ -1,4 +1,6 @@
 #include <Bibim/Config.h>
+#if (!defined(BIBIM_PLATFORM_EMSCRIPTEN))
+
 #include <Bibim/Socket.h>
 #include <Bibim/Log.h>
 #include <Bibim/Thread.h>
@@ -248,3 +250,4 @@ namespace Bibim
 }
 
 #pragma warning(pop)
+#endif

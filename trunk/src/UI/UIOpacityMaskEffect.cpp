@@ -79,7 +79,6 @@ namespace Bibim
 
     void UIOpacityMaskEffect::SetLength(float value)
     {
-        value = value;
         if (length != value)
         {
             length = value;

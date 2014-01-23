@@ -247,8 +247,8 @@ namespace Bibim
         text.GetFont()->SetColor(color);
         bounds.X += 1.0f;
         bounds.Y -= 1.0f;
-
         context.DrawString(bounds, bounds, text);
+        text.GetFont()->SetColor(oldColor);
     }
 
     void Dashboard::Jsonify(std::ostringstream& o, UIVisual* visual)

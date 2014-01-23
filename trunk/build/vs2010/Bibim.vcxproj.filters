@@ -4,9 +4,6 @@
     <Filter Include="01. Foundation">
       <UniqueIdentifier>{e43b18ad-76cd-4b08-9179-de59f108fe18}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Foundation\%28Fundamental%29">
-      <UniqueIdentifier>{40c89324-5c49-46ec-86d7-3651baa3d7d7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Foundation\Container">
       <UniqueIdentifier>{574a1284-02b1-473b-bf3f-3eed2b3f45ad}</UniqueIdentifier>
     </Filter>
@@ -36,9 +33,6 @@
     </Filter>
     <Filter Include="02. System\Net">
       <UniqueIdentifier>{03178203-36f5-4ec9-8623-2df14bba62b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. System\Diagnostics">
-      <UniqueIdentifier>{4b8779e4-c559-4953-9692-856a5ced9e34}</UniqueIdentifier>
     </Filter>
     <Filter Include="02. System\FileSystem">
       <UniqueIdentifier>{6a664566-dbce-4983-82e9-6d59d9fe6ad0}</UniqueIdentifier>
@@ -141,6 +135,15 @@
     </Filter>
     <Filter Include="01. Foundation\RTTI">
       <UniqueIdentifier>{4d5ec9d1-4d53-48d3-b5c1-10379e6f7495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. System\Diagnostics">
+      <UniqueIdentifier>{4b8779e4-c559-4953-9692-856a5ced9e34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Foundation\%28Fundamental%29">
+      <UniqueIdentifier>{40c89324-5c49-46ec-86d7-3651baa3d7d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Game\Audio\Emscripten">
+      <UniqueIdentifier>{cad63928-a017-4bf0-af6b-f0b4e9c55c8a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -780,9 +783,6 @@
     <ClCompile Include="..\..\src\Net\NetworkStream.cpp">
       <Filter>02. System\Net</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Net\Socket.cpp">
-      <Filter>02. System\Net</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Graphics\JPEG.cpp">
       <Filter>03. Game\Graphics</Filter>
     </ClCompile>
@@ -908,6 +908,33 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Diagnostics\Logger.cpp">
       <Filter>02. System\Diagnostics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\FileSystem\FileStream.Emscripten.cpp">
+      <Filter>02. System\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Foundation\Environment.Emscripten.cpp">
+      <Filter>02. System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Framework\Clipboard.Emscripten.cpp">
+      <Filter>03. Game\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Framework\GameFramework.Emscripten.cpp">
+      <Filter>03. Game\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Audio\BGM.Emscripten.cpp">
+      <Filter>03. Game\Audio\Emscripten</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Audio\SoundFX.Emscripten.cpp">
+      <Filter>03. Game\Audio\Emscripten</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Audio\AudioDevice.Emscripten.cpp">
+      <Filter>03. Game\Audio\Emscripten</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Net\HttpClient.Emscripten.cpp">
+      <Filter>02. System\Net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Net\Socket.Default.cpp">
+      <Filter>02. System\Net</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1805,6 +1832,36 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Logger.h">
       <Filter>02. System\Diagnostics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\FileStream.Emscripten.h">
+      <Filter>02. System\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Environment.Emscripten.h">
+      <Filter>02. System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\GameFramework.Emscripten.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Clipboard.Emscripten.h">
+      <Filter>03. Game\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\AudioDevice.Emscripten.h">
+      <Filter>03. Game\Audio\Emscripten</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\BGM.Emscripten.h">
+      <Filter>03. Game\Audio\Emscripten</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\SoundFX.Emscripten.h">
+      <Filter>03. Game\Audio\Emscripten</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\HttpClient.Emscripten.h">
+      <Filter>02. System\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Socket.Default.h">
+      <Filter>02. System\Net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\Socket.Null.h">
+      <Filter>02. System\Net</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

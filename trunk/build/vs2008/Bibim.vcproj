@@ -2439,7 +2439,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Net\Socket.cpp"
+					RelativePath="..\..\src\Net\Socket.Default.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\Socket.Default.h"
 					>
 				</File>
 				<File

@@ -27,7 +27,6 @@ namespace Bibim
             int slotIndex;
             bool isFixedFunctionImplemented;
             bool isShaderFunctionImplemented;
-            bool reserved[2];
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

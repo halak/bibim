@@ -5,5 +5,6 @@
 #include <Bibim/BGM.PC.h>
 #include <Bibim/BGM.Android.h>
 #include <Bibim/BGM.iOS.h>
+#include <Bibim/BGM.Emscripten.h>
 
 #endif

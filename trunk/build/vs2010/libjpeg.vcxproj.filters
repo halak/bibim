@@ -55,7 +55,6 @@
     <ClCompile Include="..\..\extlibs\jpeg-9\jidctint.c" />
     <ClCompile Include="..\..\extlibs\jpeg-9\jmemansi.c" />
     <ClCompile Include="..\..\extlibs\jpeg-9\jmemmgr.c" />
-    <ClCompile Include="..\..\extlibs\jpeg-9\jpegtran.c" />
     <ClCompile Include="..\..\extlibs\jpeg-9\jquant1.c" />
     <ClCompile Include="..\..\extlibs\jpeg-9\jquant2.c" />
     <ClCompile Include="..\..\extlibs\jpeg-9\jutils.c" />

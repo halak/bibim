@@ -480,6 +480,8 @@ namespace Bibim
 
     int Any::WriteToBytes(byte* buffer, const Any& value)
     {
+        const SixteenBytes* sixteenBytes = static_cast<const SixteenBytes*>(value.value.POINTER);
+
         switch (value.type)
         {
             case VoidType:
@@ -506,16 +508,16 @@ namespace Bibim
                 return sizeof(int) * 2;
             case Int3Type:
                 BBStaticAssert(sizeof(int) == 4);
-                BinaryWriter::From(buffer + 0, value.value.INT2[0]);
-                BinaryWriter::From(buffer + 4, value.value.INT2[1]);
-                BinaryWriter::From(buffer + 8, value.value.INT2[2]);
+                BinaryWriter::From(buffer + 0, sixteenBytes->INT4[0]);
+                BinaryWriter::From(buffer + 4, sixteenBytes->INT4[1]);
+                BinaryWriter::From(buffer + 8, sixteenBytes->INT4[2]);
                 return sizeof(int) * 3;
             case Int4Type:
                 BBStaticAssert(sizeof(int) == 4);
-                BinaryWriter::From(buffer + 0, value.value.INT2[0]);
-                BinaryWriter::From(buffer + 4, value.value.INT2[1]);
-                BinaryWriter::From(buffer + 8, value.value.INT2[2]);
-                BinaryWriter::From(buffer + 12, value.value.INT2[3]);
+                BinaryWriter::From(buffer + 0, sixteenBytes->INT4[0]);
+                BinaryWriter::From(buffer + 4, sixteenBytes->INT4[1]);
+                BinaryWriter::From(buffer + 8, sixteenBytes->INT4[2]);
+                BinaryWriter::From(buffer + 12, sixteenBytes->INT4[3]);
                 return sizeof(int) * 4;
             case Float2Type:
                 BBStaticAssert(sizeof(float) == 4);
@@ -524,16 +526,16 @@ namespace Bibim
                 return sizeof(float) * 2;
             case Float3Type:
                 BBStaticAssert(sizeof(float) == 4);
-                BinaryWriter::From(buffer + 0, value.value.FLOAT2[0]);
-                BinaryWriter::From(buffer + 4, value.value.FLOAT2[1]);
-                BinaryWriter::From(buffer + 8, value.value.FLOAT2[2]);
+                BinaryWriter::From(buffer + 0, sixteenBytes->FLOAT4[0]);
+                BinaryWriter::From(buffer + 4, sixteenBytes->FLOAT4[1]);
+                BinaryWriter::From(buffer + 8, sixteenBytes->FLOAT4[2]);
                 return sizeof(float) * 3;
             case Float4Type:
                 BBStaticAssert(sizeof(float) == 4);
-                BinaryWriter::From(buffer + 0, value.value.FLOAT2[0]);
-                BinaryWriter::From(buffer + 4, value.value.FLOAT2[1]);
-                BinaryWriter::From(buffer + 8, value.value.FLOAT2[2]);
-                BinaryWriter::From(buffer + 12, value.value.FLOAT2[3]);
+                BinaryWriter::From(buffer + 0, sixteenBytes->FLOAT4[0]);
+                BinaryWriter::From(buffer + 4, sixteenBytes->FLOAT4[1]);
+                BinaryWriter::From(buffer + 8, sixteenBytes->FLOAT4[2]);
+                BinaryWriter::From(buffer + 12, sixteenBytes->FLOAT4[3]);
                 return sizeof(float) * 4;
             case StringType:
                 // todo

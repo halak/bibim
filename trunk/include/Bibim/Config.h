@@ -8,10 +8,17 @@
 #elif (defined(ANDROID))
 #    define BIBIM_PLATFORM_UNIX
 #    define BIBIM_PLATFORM_ANDROID
+#    define BIBIM_PLATFORM_MOBILE
 #    define BIBIM_USE_OPENGLES2
 #elif (defined(__APPLE__))
 #    define BIBIM_PLATFORM_UNIX
 #    define BIBIM_PLATFORM_IOS
+#    define BIBIM_PLATFORM_MOBILE
+#    define BIBIM_USE_OPENGLES2
+#elif (defined(EMSCRIPTEN))
+#    define BIBIM_PLATFORM_UNIX
+#    define BIBIM_PLATFORM_EMSCRIPTEN
+#    define BIBIM_PLATFORM_MOBILE
 #    define BIBIM_USE_OPENGLES2
 #else
 #    error "UNKNOWN PLATFORM"
@@ -37,7 +44,7 @@
 #    define BIBIM_COMPILER_GCC
 #endif
 
-#if (__cplusplus >= 201103L || (defined(_MSC_VER) && _MSC_VER  >= 1600))
+#if (__cplusplus >= 201103L || (defined(_MSC_VER) && _MSC_VER >= 1600) || defined(BIBIM_PLATFORM_EMSCRIPTEN))
 #    define BIBIM_CPLUSPLUS_0X
 #endif
 

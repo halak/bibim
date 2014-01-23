@@ -70,10 +70,10 @@ namespace Bibim
             StandardGame(Point2 windowSize);
             StandardGame(Point2 windowSize, Point2 contentSize);
 
-            void Initialize(const String& gameName,
-                            const String& version,
-                            StandardGame::LuaBase* lua,
-                            bool windowMoveToScreenCenter = true);
+            void Start(const String& gameName,
+                       const String& version,
+                       StandardGame::LuaBase* lua,
+                       bool windowMoveToScreenCenter = true);
 
             virtual BGM* CreateBGM(AudioDevice* audioDevice);
 

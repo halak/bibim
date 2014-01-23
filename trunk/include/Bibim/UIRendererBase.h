@@ -38,7 +38,6 @@ namespace Bibim
                 private:
                     int shaderEffectNameHint;
                     bool isMaskEffector;
-                    bool reserved[2];
             };
             typedef SharedPointer<Effector> EffectorPtr;
 
@@ -327,8 +326,8 @@ namespace Bibim
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     UIRendererBase::QuadSet::QuadSet()
-        : StartIndex(0),
-          Count(0),
+        : Count(0),
+          StartIndex(0),
           Capacity(0)
     {
     }
