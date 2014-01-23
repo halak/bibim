@@ -5,5 +5,6 @@
 #include <Bibim/AudioDevice.PC.h>
 #include <Bibim/AudioDevice.Android.h>
 #include <Bibim/AudioDevice.iOS.h>
+#include <Bibim/AudioDevice.Emscripten.h>
 
 #endif

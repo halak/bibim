@@ -52,7 +52,6 @@ namespace Bibim
             std::vector<LostEventListener*> lostEventListeners;
             std::vector<RestoreEventListener*> restoreEventListeners;
             bool isReset;
-            bool __padding__[3];
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

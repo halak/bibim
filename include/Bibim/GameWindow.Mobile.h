@@ -1,9 +1,9 @@
 #pragma once
-#ifndef __BIBIM_GAMEWINDOW_ANDROID_H__
-#define __BIBIM_GAMEWINDOW_ANDROID_H__
+#ifndef __BIBIM_GAMEWINDOW_MOBILE_H__
+#define __BIBIM_GAMEWINDOW_MOBILE_H__
 
 #include <Bibim/FWD.h>
-#if (defined(BIBIM_PLATFORM_ANDROID) || defined(BIBIM_PLATFORM_IOS))
+#if (defined(BIBIM_PLATFORM_MOBILE))
 
 #include <Bibim/Window.h>
 #include <Bibim/String.h>

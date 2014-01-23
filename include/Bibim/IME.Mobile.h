@@ -1,9 +1,9 @@
 #pragma once
-#ifndef __BIBIM_IME_ANDROID_H__
-#define __BIBIM_IME_ANDROID_H__
+#ifndef __BIBIM_IME_EMSCRIPTEN_H__
+#define __BIBIM_IME_EMSCRIPTEN_H__
 
 #include <Bibim/FWD.h>
-#if (defined(BIBIM_PLATFORM_ANDROID) || defined(BIBIM_PLATFORM_IOS))
+#if (defined(BIBIM_PLATFORM_MOBILE))
 
 #include <Bibim/IMEBase.h>
 #include <queue>

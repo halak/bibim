@@ -24,57 +24,14 @@ MODULES = (
     'UI',
 )
 
-# PRODUCT_DIR = '../../Product/'
-# INCLUDE_DIR = os.path.join(PRODUCT_DIR, 'Include')
-# LIBRARY_DIR = os.path.join(PRODUCT_DIR, 'Lib')
-
-# PRODUCT_ABS_DIR = '$(BIBIM_DIR)Product/'
-# INCLUDE_ABS_DIR = os.path.join(PRODUCT_ABS_DIR, 'Include')
-# LIBRARY_ABS_DIR = os.path.join(PRODUCT_ABS_DIR, 'Lib')
-
-
 def file_ext(filename):
     return os.path.splitext(filename)[1][1:]
-
-
-# def copy_headers(module_name):
-#     from shutil import copy2, copystat
-#     src = './Cplusplus/{0}/Bibim/'.format(module_name)
-#     dst = os.path.join(INCLUDE_DIR, 'Bibim')
-#     names = os.listdir(src)
-
-#     errors = []
-#     for name in names:
-#         if (file_ext(name) not in ('h',)):
-#             continue
-
-#         srcname = os.path.join(src, name)
-#         dstname = os.path.join(dst, name)
-#         try:
-#             copy2(srcname, dstname)
-#         except (IOError, os.error) as why:
-#             errors.append((srcname, dstname, str(why)))
-#         except Error as err:
-#             errors.extend(err.args[0])
-#     try:
-#         copystat(src, dst)
-#     except WindowsError:
-#         pass
-#     except OSError as why:
-#         errors.extend((src, dst, str(why)))
-#     if errors:
-#         raise Error(errors)
-        
-
-# def copy_references_header(src):
-#     from shutil import copy2
-#     copy2(src, INCLUDE_DIR)
-
 
 class PLATFORM:
     WIN32 = 1
     ANDROID = 2
     IOS = 3
+    EMSCRIPTEN = 4
 
     @staticmethod
     def to_string(code):
@@ -84,6 +41,8 @@ class PLATFORM:
             return 'Android'
         elif (code == PLATFORM.IOS):
             return 'iOS'
+        elif (code == PLATFORM.EMSCRIPTEN):
+            return 'Emscripten'
         else:
             return None
 
@@ -118,7 +77,7 @@ class ENVIRONMENT:
     
 def get_include_directories(environment, platform, target):
     l = []
-    l += ['$(BIBIM_DIR)\include']
+    l += ['$(BIBIM_DIR)include']
 
     if (platform == PLATFORM.WIN32):
         l += ['$(DXSDK_DIR)Include']
@@ -139,6 +98,7 @@ def get_dependencies(environment, platform, target):
     win32 = platform == PLATFORM.WIN32
     android = platform == PLATFORM.ANDROID
     ios = platform == PLATFORM.IOS
+    emscripten = platform == PLATFORM.EMSCRIPTEN
     debug = target == TARGET.DEBUG
     release = target == TARGET.RELEASE
     vs2008 = environment == ENVIRONMENT.VS2008
@@ -149,6 +109,8 @@ def get_dependencies(environment, platform, target):
         l += ['Bibim.lib']
     elif (android):
         l += ['Bibim.a']
+    elif (emscripten):
+        l += ['Bibim.bc']
     
     # Platform
     if (win32):
@@ -168,6 +130,8 @@ def get_dependencies(environment, platform, target):
         l += ['libpng.lib', 'libjpeg.lib', 'freetype.lib', 'lua.lib', 'SPARK.lib', 'libcurl.lib', 'zlib.lib']
     elif (android):
         l += ['libpng.a', 'libjpeg.a', 'freetype.a', 'lua.a', 'SPARK.a', 'libcurl.a', 'zlib.a']
+    elif (emscripten):
+        l += ['libpng.bc', 'libjpeg.bc', 'freetype.bc', 'lua.bc', 'SPARK.bc', 'zlib.bc']
     
     # irrKlang
     if (win32):
@@ -291,7 +255,7 @@ def make_visual_studio_2010_property_sheet(name,
         'AdditionalLibraryDirectories',
         library_directories.replace('/', '\\') + ';%(AdditionalLibraryDirectories)'
     ))
-    if (platform and platform == PLATFORM.ANDROID):
+    if (platform == PLATFORM.ANDROID):
         link.append(ETElementWithText(
             'AdditionalOptions',
             '-lGLESv2 -landroid %(AdditionalOptions)'
@@ -316,7 +280,7 @@ def publish_library(environment, platform, target):
         
     # 의존 라이브러리들 목록을 구합니다.
     dependencies = get_dependencies(environment, platform, target)
-    if (platform == PLATFORM.ANDROID):
+    if (platform == PLATFORM.ANDROID or platform == PLATFORM.EMSCRIPTEN):
         dependency_filenames = ';'.join(map(
             lambda o: os.path.join(main_library_abs_directory, os.path.basename(o)),
             dependencies
@@ -343,13 +307,6 @@ def publish_library(environment, platform, target):
                                                          target,
                                                          platform)
         save_xml('{0}.props'.format(os.path.join(main_library_rel_directory, name)), element)
- 
-    # 의존 라이브러리들을 Product 폴더로 복사합니다.
-    # library_directory = os.path.join(LIBRARY_DIR, library_relative_directory)
-    # from shutil import copy2
-    # for item in dependencies:
-    #     if (item.startswith('extlibs')):  # 로컬에 있는 라이브러리만 복사합니다.
-    #         copy2(item, library_directory)
 
 
 def merge_sources(directory):
@@ -402,6 +359,9 @@ if (__name__ == '__main__'):
     publish_library(ENVIRONMENT.VS2010, PLATFORM.WIN32,   TARGET.RELEASE)
     publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.DEBUG)
     publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.RELEASE)
+
+    publish_library(ENVIRONMENT.VS2010, PLATFORM.EMSCRIPTEN, TARGET.DEBUG)
+    publish_library(ENVIRONMENT.VS2010, PLATFORM.EMSCRIPTEN, TARGET.RELEASE)
 
     merge_sources('src')
     

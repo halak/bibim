@@ -20,11 +20,11 @@ namespace Bibim
 
     Font::Font()
         : library(nullptr),
+          shadowOffset(Vector2::Zero),
+          spacing(1.0f),
           color(Color(0, 0, 0, 255)),
           strokeColor(Color(0, 0, 0, 255)),
           shadowColor(Color(0, 0, 255)),
-          shadowOffset(Vector2::Zero),
-          spacing(1.0f),
           parametersPointer(new FontCacheParameters()),
           parameters(*parametersPointer),
           cache(nullptr)
@@ -33,11 +33,11 @@ namespace Bibim
 
     Font::Font(FontLibrary* library)
         : library(library),
+          shadowOffset(Vector2::Zero),
+          spacing(1.0f),
           color(Color(0, 0, 0, 255)),
           strokeColor(Color(0, 0, 0, 255)),
           shadowColor(Color(0, 0, 255)),
-          shadowOffset(Vector2::Zero),
-          spacing(1.0f),
           parametersPointer(new FontCacheParameters()),
           parameters(*parametersPointer),
           cache(nullptr)
@@ -48,11 +48,11 @@ namespace Bibim
 
     Font::Font(const Font& original)
         : library(original.library),
+          shadowOffset(original.shadowOffset),
+          spacing(1.0f),
           color(original.color),
           strokeColor(original.strokeColor),
           shadowColor(original.shadowColor),
-          shadowOffset(original.shadowOffset),
-          spacing(original.spacing),
           parametersPointer(new FontCacheParameters(original.parameters)),
           parameters(*parametersPointer),
           cache(original.cache)

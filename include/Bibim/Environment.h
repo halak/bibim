@@ -5,5 +5,6 @@
 #include <Bibim/Environment.Windows.h>
 #include <Bibim/Environment.Android.h>
 #include <Bibim/Environment.iOS.h>
+#include <Bibim/Environment.Emscripten.h>
 
 #endif

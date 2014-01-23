@@ -70,6 +70,9 @@ namespace Bibim
             case RelativePosition:
                 offsetX = x * bounds.Width;
                 break;
+            case UndefinedPosition:
+                // DO NOTHING
+                break;
         }
 
         switch (GetYMode())
@@ -79,6 +82,9 @@ namespace Bibim
                 break;
             case RelativePosition:
                 offsetY = y * bounds.Height;
+                break;
+            case UndefinedPosition:
+                // DO NOTHING
                 break;
         }
 

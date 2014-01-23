@@ -226,46 +226,46 @@ namespace Bibim
     }
 
     Color::Color()
-        : R(0), G(0), B(0), A(0)
+        : A(0), R(0), G(0), B(0)
     {
     }
 
     Color::Color(int r, int g, int b)
-        : R(Clamp(r)), G(Clamp(g)), B(Clamp(b)), A(255)
+        : A(255), R(Clamp(r)), G(Clamp(g)), B(Clamp(b))
     {
     }
 
     Color::Color(int r, int g, int b, int a)
-        : R(Clamp(r)), G(Clamp(g)), B(Clamp(b)), A(Clamp(a))
+        : A(Clamp(a)), R(Clamp(r)), G(Clamp(g)), B(Clamp(b))
     {
     }
 
     Color::Color(unsigned long argb)
-        : R(static_cast<byte>((argb & 0x00FF0000) >> 16)),
+        : A(static_cast<byte>((argb & 0xFF000000) >> 24)),
+          R(static_cast<byte>((argb & 0x00FF0000) >> 16)),
           G(static_cast<byte>((argb & 0x0000FF00) >> 8)),
-          B(static_cast<byte>((argb & 0x000000FF) >> 0)),
-          A(static_cast<byte>((argb & 0xFF000000) >> 24))
+          B(static_cast<byte>((argb & 0x000000FF) >> 0))
     {
     }
 
     Color::Color(Vector3 rgb)
-        : R(Clamp(rgb.X * 255.0f)),
+        : A(255),
+          R(Clamp(rgb.X * 255.0f)),
           G(Clamp(rgb.Y * 255.0f)),
-          B(Clamp(rgb.Z * 255.0f)),
-          A(255)
+          B(Clamp(rgb.Z * 255.0f))
     {
     }
 
     Color::Color(Vector4 rgba)
-        : R(Clamp(rgba.X * 255.0f)),
+        : A(Clamp(rgba.W * 255.0f)),
+          R(Clamp(rgba.X * 255.0f)),
           G(Clamp(rgba.Y * 255.0f)),
-          B(Clamp(rgba.Z * 255.0f)),
-          A(Clamp(rgba.W * 255.0f))
+          B(Clamp(rgba.Z * 255.0f))
     {
     }
 
     Color::Color(const Color& original)
-        : R(original.R), G(original.G), B(original.B), A(original.A)
+        : A(original.A), R(original.R), G(original.G), B(original.B)
     {
     }
 
@@ -317,73 +317,73 @@ namespace Bibim
 
     Color& Color::operator = (const Color& right)
     {
+        A = right.A;
         R = right.R;
         G = right.G;
         B = right.B;
-        A = right.A;
         return *this;
     }
 
     Color& Color::operator += (Color right)
     {
+        A = Add(A, right.A);
         R = Add(R, right.R);
         G = Add(G, right.G);
         B = Add(B, right.B);
-        A = Add(A, right.A);
         return *this;
     }
 
     Color& Color::operator -= (Color right)
     {
+        A = Subtract(A, right.A);
         R = Subtract(R, right.R);
         G = Subtract(G, right.G);
         B = Subtract(B, right.B);
-        A = Subtract(A, right.A);
         return *this;
     }
 
     Color& Color::operator *= (Color right)
     {
+        A = Clamp(static_cast<float>(A) * right.GetA());
         R = Clamp(static_cast<float>(R) * right.GetR());
         G = Clamp(static_cast<float>(G) * right.GetG());
         B = Clamp(static_cast<float>(B) * right.GetB());
-        A = Clamp(static_cast<float>(A) * right.GetA());
         return *this;
     }
 
     Color& Color::operator *= (float right)
     {
+        A = Clamp(static_cast<float>(A) * right);
         R = Clamp(static_cast<float>(R) * right);
         G = Clamp(static_cast<float>(G) * right);
         B = Clamp(static_cast<float>(B) * right);
-        A = Clamp(static_cast<float>(A) * right);
         return *this;
     }
 
     Color& Color::operator *= (Vector4 right)
     {
+        A = Clamp(static_cast<float>(A) * right.W);
         R = Clamp(static_cast<float>(R) * right.X);
         G = Clamp(static_cast<float>(G) * right.Y);
         B = Clamp(static_cast<float>(B) * right.Z);
-        A = Clamp(static_cast<float>(A) * right.W);
         return *this;
     }
 
     Color& Color::operator /= (Color right)
     {
+        A = Clamp(static_cast<float>(A) / right.GetA());
         R = Clamp(static_cast<float>(R) / right.GetR());
         G = Clamp(static_cast<float>(G) / right.GetG());
         B = Clamp(static_cast<float>(B) / right.GetB());
-        A = Clamp(static_cast<float>(A) / right.GetA());
         return *this;
     }
 
     Color& Color::operator /= (float right)
     {
+        A = Clamp(static_cast<float>(A) / right);
         R = Clamp(static_cast<float>(R) / right);
         G = Clamp(static_cast<float>(G) / right);
         B = Clamp(static_cast<float>(B) / right);
-        A = Clamp(static_cast<float>(A) / right);
         return *this;
     }
 

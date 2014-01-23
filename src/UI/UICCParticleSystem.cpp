@@ -14,8 +14,8 @@ namespace Bibim
     UICCParticleSystem::UICCParticleSystem()
         : globalAngle(0.0f),
           positionMode(CCParticleEmitter::Global),
-          emitter(nullptr),
           source(nullptr),
+          emitter(nullptr),
           timeline(nullptr),
           updateStarted(false)
     {

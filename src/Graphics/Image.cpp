@@ -13,9 +13,9 @@ namespace Bibim
     }
 
     Image::Image(const String& textureURI, const Rect& clippingRect)
-        : textureURI(textureURI),
-          clippingRect(clippingRect),
-          appliedTransform(Identity)
+        : clippingRect(clippingRect),
+          appliedTransform(Identity),
+          textureURI(textureURI)
     {
     }
 
@@ -34,10 +34,10 @@ namespace Bibim
     }
 
     Image::Image(const String& textureURI, const Rect& clippingRect, Transform appliedTransform, Texture2D* texture)
-        : textureURI(textureURI),
+        : texture(texture),
           clippingRect(clippingRect),
           appliedTransform(appliedTransform),
-          texture(texture)
+          textureURI(textureURI)
     {
         Setup(texture);
     }

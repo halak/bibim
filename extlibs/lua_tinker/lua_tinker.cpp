@@ -555,10 +555,8 @@ bool lua_tinker::read(lua_State *L, int index)
 }
 
 template<>
-void lua_tinker::read(lua_State *L, int index)
+void lua_tinker::read(lua_State */*L*/, int /*index*/)
 {
-    L = L; // unused
-    index = index; // unused
     return;                                            
 }
 
@@ -768,6 +766,7 @@ void lua_tinker::push(lua_State *L, const Bibim::Any& ret)
             push(L, ret.CastString());
             break;
         case Bibim::Any::SharedObjectType:
+        case Bibim::Any::LightObjectType:
             lua_pushnil(L);
             break;
     }

@@ -68,10 +68,10 @@ namespace Bibim
         GetWindow()->RemoveResizeEventListener(this);
     }
     
-    void StandardGame::Initialize(const String& gameName,
-                                  const String& /*version*/,
-                                  StandardGame::LuaBase* lua,
-                                  bool windowMoveToScreenCenter)
+    void StandardGame::Start(const String& gameName,
+                             const String& /*version*/,
+                             StandardGame::LuaBase* lua,
+                             bool windowMoveToScreenCenter)
     {
         // Log::Add(this);
 

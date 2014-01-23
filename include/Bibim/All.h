@@ -1,8 +1,8 @@
 #pragma once
-#ifndef BIBIM_ALL_0BF88EA9_FD25_4522_A02C_81B259900A09_H__
-#define BIBIM_ALL_0BF88EA9_FD25_4522_A02C_81B259900A09_H__
+#ifndef BIBIM_ALL_3BC246C5_7B59_4E21_99B7_D2015FF6BFD0_H__
+#define BIBIM_ALL_3BC246C5_7B59_4E21_99B7_D2015FF6BFD0_H__
 
-// Automatically generated in 2014-01-21 21:55:14.522848
+// Automatically generated in 2014-01-23 18:18:22.879000
 
 #include "AlarmClock.h"
 #include "Algorithm.h"
@@ -15,6 +15,7 @@
 #include "AssetStreamReader.h"
 #include "Atomic.h"
 #include "AudioDevice.Android.h"
+#include "AudioDevice.Emscripten.h"
 #include "AudioDevice.h"
 #include "AudioDevice.iOS.h"
 #include "AudioDevice.PC.h"
@@ -22,6 +23,7 @@
 #include "AxisAlignedBoxShape2D.h"
 #include "BatchCommand.h"
 #include "BGM.Android.h"
+#include "BGM.Emscripten.h"
 #include "BGM.h"
 #include "BGM.iOS.h"
 #include "BGM.PC.h"
@@ -37,6 +39,7 @@
 #include "ClassHierarchy.h"
 #include "ClassInfo.h"
 #include "Clipboard.Android.h"
+#include "Clipboard.Emscripten.h"
 #include "Clipboard.h"
 #include "Clipboard.iOS.h"
 #include "Clipboard.Windows.h"
@@ -60,6 +63,7 @@
 #include "EasingCurves.h"
 #include "ElasticEasingCurves.h"
 #include "Environment.Android.h"
+#include "Environment.Emscripten.h"
 #include "Environment.h"
 #include "Environment.iOS.h"
 #include "Environment.Windows.h"
@@ -82,6 +86,7 @@
 #include "FileAssetProvider.h"
 #include "FileAssetProviderBase.h"
 #include "FileStream.Android.h"
+#include "FileStream.Emscripten.h"
 #include "FileStream.h"
 #include "FileStream.iOS.h"
 #include "FileStream.Windows.h"
@@ -99,6 +104,7 @@
 #include "GameComponent.h"
 #include "GameComponentFactory.h"
 #include "GameFramework.Android.h"
+#include "GameFramework.Emscripten.h"
 #include "GameFramework.h"
 #include "GameFramework.iOS.h"
 #include "GameFramework.Windows.h"
@@ -120,6 +126,7 @@
 #include "GraphicsDevice.h"
 #include "GraphicsDeviceBase.h"
 #include "HttpClient.Curl.h"
+#include "HttpClient.Emscripten.h"
 #include "HttpClient.h"
 #include "HttpClientBase.h"
 #include "Image.h"
@@ -193,8 +200,11 @@
 #include "Shape2D.h"
 #include "SharedObject.h"
 #include "SharedPointer.h"
+#include "Socket.Default.h"
 #include "Socket.h"
+#include "Socket.Null.h"
 #include "SoundFX.Android.h"
+#include "SoundFX.Emscripten.h"
 #include "SoundFX.h"
 #include "SoundFX.iOS.h"
 #include "SoundFX.PC.h"

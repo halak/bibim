@@ -283,8 +283,6 @@ namespace Bibim
         const int colCount = points.size();
         const int rowCount = points[0].size();
 
-        Point2 screenSize = renderer->GetGraphicsDevice()->GetScreenSize();
-
         Vector2 np[4];
 
         for (int y = 1; y < rowCount; y++)
@@ -319,8 +317,6 @@ namespace Bibim
 
         const int colCount = points.size();
         const int rowCount = points[0].size();
-
-        Point2 screenSize = renderer->GetGraphicsDevice()->GetScreenSize();
 
         Vector2 np[4];
         Vector2 nuv[4];
@@ -374,8 +370,6 @@ namespace Bibim
 
         const int colCount = points.size();
         const int rowCount = points[0].size();
-
-        Point2 screenSize = renderer->GetGraphicsDevice()->GetScreenSize();
 
         Vector2 np[4];
         Vector2 nuv1[4];

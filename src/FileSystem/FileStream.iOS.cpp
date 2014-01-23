@@ -11,19 +11,6 @@
 
 namespace Bibim
 {
-    static bool IsAbsolutePath(const String& path)
-    {
-        if (path.GetLength() >= 2)
-        {
-            const char* s = path.CStr();
-            return (s[0] == '/' ||
-                    s[1] == ':' ||
-                    s[2] == ':');
-        }
-
-        return false;
-    }
-
     FileStream::FileStream(const String& path, AccessMode accessMode)
         : handle(nullptr),
           canRead(false),
