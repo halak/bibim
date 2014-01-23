@@ -32,7 +32,7 @@ namespace Bibim
         if (handle)
             return;
 
-        pthread_create(&handle, nullptr, Internal::Procedure, this);
+        // pthread_create(&handle, nullptr, &Internal::Procedure, this);
     }
 
     void Thread::Join()

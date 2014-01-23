@@ -10,13 +10,14 @@
 #include <Bibim/RenderTargetTexture2D.GLES2.h>
 #include <Bibim/Window.h>
 #include <algorithm>
+#include <emscripten.h>
 
 namespace Bibim
 {
     GraphicsDevice::GraphicsDevice()
         : fullscreen(false)
     {
-#       if (defined(BIBIM_PLATFORM_WINDOWS))
+#       if (defined(BIBIM_USE_EGL))
         eglDisplay = nullptr;
         eglSurface = nullptr;
         eglContext = nullptr;
@@ -61,7 +62,7 @@ namespace Bibim
 
     void GraphicsDevice::Present()
     {
-#       if (defined(BIBIM_PLATFORM_WINDOWS))
+#       if (defined(BIBIM_USE_EGL))
         eglSwapBuffers(eglDisplay, eglSurface);
 #       endif
     }
@@ -91,12 +92,15 @@ namespace Bibim
 
     void GraphicsDevice::Initialize()
     {
-#       if (defined(BIBIM_PLATFORM_WINDOWS))
+#       if (defined(BIBIM_USE_EGL))
         BBAssert(GetWindow());
 
         Window* window = GetWindow();
 
-        EGLNativeDisplayType nativeDisplay = static_cast<EGLNativeDisplayType>(window->GetDisplayHandle());
+        EGLNativeDisplayType nativeDisplay = (EGLNativeDisplayType)window->GetDisplayHandle();
+        if (nativeDisplay == 0)
+            nativeDisplay = EGL_DEFAULT_DISPLAY;
+
         eglDisplay = eglGetDisplay(nativeDisplay);
         if (eglDisplay == EGL_NO_DISPLAY)
         {
@@ -125,7 +129,17 @@ namespace Bibim
 
 
         // Obtain the first configuration with a depth buffer
-        EGLint attrs[] = { EGL_DEPTH_SIZE, 16, EGL_NONE };
+        EGLint attrs[] =
+        {
+            EGL_RED_SIZE,        8,
+            EGL_GREEN_SIZE,      8,
+            EGL_BLUE_SIZE,       8,
+            EGL_ALPHA_SIZE,      8,
+            EGL_DEPTH_SIZE,      16,
+            EGL_SURFACE_TYPE,    EGL_WINDOW_BIT,
+            EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+            EGL_NONE
+        };
         EGLint numberOfConfigs = 0;
         EGLConfig eglConfig = 0;
         if (!eglChooseConfig(eglDisplay, attrs, &eglConfig, 1, &numberOfConfigs))
@@ -145,27 +159,18 @@ namespace Bibim
             return;
         }
 
-
-        EGLNativeWindowType nativeWindow = static_cast<EGLNativeWindowType>(window->GetHandle());
-        if (nativeWindow == nullptr)
+        EGLNativeWindowType nativeWindow = (EGLNativeWindowType)window->GetHandle();
+#       if (defined(BIBIM_PLATFORM_WINDOWS))
+        if (nativeWindow == 0)
         {
             // "Could not create window"
             // CloseNativeDisplay(nativeDisplay);
             return;
         }
+#       endif
 
-
-        eglSurface = eglCreateWindowSurface(eglDisplay, eglConfig, nativeWindow, NULL);
-        if (eglSurface == EGL_NO_SURFACE)
-        {
-            // "Could not create EGL surface"
-            // DestroyNativeWin(nativeDisplay, nativeWin);
-            // CloseNativeDisplay(nativeDisplay);
-            return;
-        }
-
-
-        eglContext = eglCreateContext(eglDisplay, eglConfig, EGL_NO_CONTEXT, NULL);
+        const EGLint contextAttrs[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
+        eglContext = eglCreateContext(eglDisplay, eglConfig, EGL_NO_CONTEXT, contextAttrs);
         if (eglContext == EGL_NO_CONTEXT)
         {
             // "Could not create EGL context"
@@ -174,6 +179,15 @@ namespace Bibim
             return;
         }
 
+        const EGLint surfaceAttrs[] = { EGL_RENDER_BUFFER, EGL_BACK_BUFFER, EGL_NONE };
+        eglSurface = eglCreateWindowSurface(eglDisplay, eglConfig, nativeWindow, surfaceAttrs);
+        if (eglSurface == EGL_NO_SURFACE)
+        {
+            // "Could not create EGL surface"
+            // DestroyNativeWin(nativeDisplay, nativeWin);
+            // CloseNativeDisplay(nativeDisplay);
+            return;
+        }
 
         if(!eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext))
         {
@@ -198,7 +212,7 @@ namespace Bibim
     {
         Base::Finalize();
 
-#       if (defined(BIBIM_PLATFORM_WINDOWS))
+#       if (defined(BIBIM_USE_EGL))
         eglMakeCurrent(EGL_NO_DISPLAY, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
         if (eglDisplay)
         {

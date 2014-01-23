@@ -1,5 +1,5 @@
 #include <Bibim/Config.h>
-#if (defined(BIBIM_PLATFORM_ANDROID) || defined(BIBIM_PLATFORM_IOS))
+#if (defined(BIBIM_PLATFORM_MOBILE))
 
 #include <Bibim/GameWindow.Mobile.h>
 

@@ -14,6 +14,10 @@
 
 namespace Bibim
 {
+#   if (defined(BIBIM_PLATFORM_WINDOWS) || defined(BIBIM_PLATFORM_EMSCRIPTEN))
+#       define BIBIM_USE_EGL
+#   endif
+
     class GraphicsDevice : public GraphicsDeviceBase
     {
         BBModuleClass(GraphicsDevice, GraphicsDeviceBase, 'G', 'R', 'P', 'D');
@@ -43,7 +47,7 @@ namespace Bibim
             virtual void Finalize();
 
         private:
-#           if (defined(BIBIM_PLATFORM_WINDOWS))
+#           if (defined(BIBIM_USE_EGL))
             void* eglDisplay;
             void* eglSurface;
             void* eglContext;
