@@ -16,8 +16,6 @@ namespace Bibim
             virtual ~GameFramework();
 
             void init();
-            void update();
-            void draw();
 
             inline IME* GetIME() const;
 
@@ -33,6 +31,7 @@ namespace Bibim
         public:
             static GameFramework* Create();
             static GameFramework* SingletonInstance;
+            static void DoStep();
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
