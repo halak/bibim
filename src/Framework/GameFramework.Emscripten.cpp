@@ -51,8 +51,6 @@ namespace Bibim
 
     void GameFramework::DoStep()
     {
-        EM_ASM(console.log("STEP"));
-
         if (GameFramework::SingletonInstance == nullptr)
         {
             int width;
@@ -61,15 +59,11 @@ namespace Bibim
             emscripten_get_canvas_size(&width, &height, &fullscreen);
 
             if (width <= 0 && height <= 0)
-            {
-                EM_ASM(console.log("RETURN"));
                 return;
-            }
 
             GameFramework::SingletonInstance = GameFramework::Create();
             GameFramework::SingletonInstance->GetWindow()->SetSize(Point2(width, height));
             GameFramework::SingletonInstance->init();
-            EM_ASM(console.log("INIT"));
         }
 
         GameFramework::SingletonInstance->StepFrame();
@@ -80,8 +74,6 @@ int main(int argc, const char** argv)
 {
     // Environment::Setup(ToString(env, localeName), ToString(env, workingDirectory));
     // FileStream::SetAndroidAssetManager(AAssetManager_fromJava(env, assetManager));
-
-    EM_ASM(console.log("HELLO"));
 
     emscripten_set_main_loop(&GameFramework::DoStep, 60, false);
 }
