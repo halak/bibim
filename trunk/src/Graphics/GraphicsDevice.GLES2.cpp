@@ -10,7 +10,6 @@
 #include <Bibim/RenderTargetTexture2D.GLES2.h>
 #include <Bibim/Window.h>
 #include <algorithm>
-#include <emscripten.h>
 
 namespace Bibim
 {
@@ -179,8 +178,8 @@ namespace Bibim
             return;
         }
 
-        const EGLint surfaceAttrs[] = { EGL_RENDER_BUFFER, EGL_BACK_BUFFER, EGL_NONE };
-        eglSurface = eglCreateWindowSurface(eglDisplay, eglConfig, nativeWindow, surfaceAttrs);
+        //const EGLint surfaceAttrs[] = { EGL_RENDER_BUFFER, EGL_BACK_BUFFER, EGL_NONE };
+        eglSurface = eglCreateWindowSurface(eglDisplay, eglConfig, nativeWindow, NULL);
         if (eglSurface == EGL_NO_SURFACE)
         {
             // "Could not create EGL surface"

@@ -48,7 +48,6 @@ namespace Bibim
 
         GLuint textureHandle = 0;
         GLint glesFormat = GetGLESPixelFormat(pixelFormat);
-        glActiveTexture(GL_TEXTURE0);
         glGenTextures(1, &textureHandle);
         glBindTexture(GL_TEXTURE_2D, textureHandle);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -110,7 +109,6 @@ namespace Bibim
         if (dirtyRect.IsEmpty() == false)
         {
             GLint glesFormat = GetGLESPixelFormat(GetPixelFormat());
-            glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, Base::GetHandle());
             glTexSubImage2D(GL_TEXTURE_2D,
                             0,

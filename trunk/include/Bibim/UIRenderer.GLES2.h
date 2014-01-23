@@ -55,6 +55,8 @@ namespace Bibim
             Matrix4 mvpTransform;
             std::vector<Vertex> vb;
             std::vector<ushort> ib;
+            unsigned int vbo;
+            unsigned int ibo;
 
             friend class UIOpacityMaskEffect;
     };

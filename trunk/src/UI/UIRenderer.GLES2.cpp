@@ -19,21 +19,36 @@
 namespace Bibim
 {
     UIRenderer::UIRenderer()
-        : Base(BBMakeFOURCC('O', 'G', 'L', '_'))
+        : Base(BBMakeFOURCC('O', 'G', 'L', '_')),
+          vbo(0),
+          ibo(0)
     {
     }
 
     UIRenderer::UIRenderer(GraphicsDevice* graphicsDevice, GameAssetStorage* storage, const String& shaderEffectDirectory)
-        : Base(BBMakeFOURCC('O', 'G', 'L', '_'), graphicsDevice, storage, shaderEffectDirectory)
+        : Base(BBMakeFOURCC('O', 'G', 'L', '_'), graphicsDevice, storage, shaderEffectDirectory),
+          vbo(0),
+          ibo(0)
     {
     }
 
     UIRenderer::~UIRenderer()
     {
+        if (ibo)
+            glDeleteBuffers(1, &ibo);
+        if (vbo)
+            glDeleteBuffers(1, &vbo);
     }
 
     void UIRenderer::Begin()
     {
+#       if (defined(BIBIM_PLATFORM_EMSCRIPTEN))
+        if (vbo == 0)
+            glGenBuffers(1, &vbo);
+        if (ibo == 0)
+            glGenBuffers(1, &ibo);
+#       endif
+
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_CULL_FACE);
@@ -154,10 +169,16 @@ namespace Bibim
         else
             glBindTexture(GL_TEXTURE_2D, 0);
 
-        glDrawElements(GL_TRIANGLES,
-                       numberOfQuads * IndicesPerQuad / TrianglesPerQuad,
-                       GL_UNSIGNED_SHORT,
-                       &ib[static_cast<int>(vertexStart / VerticesPerQuad) * IndicesPerQuad]);
+        const int count = numberOfQuads * IndicesPerQuad / TrianglesPerQuad;
+        const int index = static_cast<int>(vertexStart / VerticesPerQuad) * IndicesPerQuad;
+
+#       if (defined(BIBIM_PLATFORM_EMSCRIPTEN))
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+        glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, reinterpret_cast<const GLvoid*>(index * sizeof(ushort)));
+#       else
+        glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, &ib[index]);
+#       endif
         GLES2::CheckLastError("glDrawElements");
     }
 
@@ -175,6 +196,13 @@ namespace Bibim
             ib[i + 4] = v + 2;
             ib[i + 5] = v + 1;
         }
+
+        if (ibo)
+        {
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, ib.size() * sizeof(ushort), &ib[0], GL_STATIC_DRAW);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        }
     }
 
     void UIRenderer::OnEffectBegan(PixelMode mode, ShaderEffect* effect)
@@ -191,33 +219,51 @@ namespace Bibim
             glUniform1i(effect->GetMaskSamplerLocation(), 1);
 
         const Vertex* v = &vb[0];
-        const void* positions = &v->Position;
-        const void* colors = &v->Color;
-        const void* texCoords1 = &v->TexCoord1;
-        const void* texCoords2 = &v->TexCoord2;
+        const byte* first = reinterpret_cast<const byte*>(v);
+        const int position = reinterpret_cast<const byte*>(&v->Position) - first;
+        const int color = reinterpret_cast<const byte*>(&v->Color) - first;
+        const int texCoord1 = reinterpret_cast<const byte*>(&v->TexCoord1) - first;
+        const int texCoord2 = reinterpret_cast<const byte*>(&v->TexCoord2) - first;
 
-        glVertexAttribPointer(effect->GetPositionLocation(), 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), positions);
+        if (vbo)
+        {
+            glBindBuffer(GL_ARRAY_BUFFER, vbo);
+            glBufferData(GL_ARRAY_BUFFER, vb.size() * sizeof(Vertex), &vb[0], GL_DYNAMIC_DRAW);
+        }
+
+#       if (defined(BIBIM_PLATFORM_EMSCRIPTEN))
+#       define VB(offset) reinterpret_cast<const GLvoid*>(offset)
+#       else
+#       define VB(offset) (first + offset)
+#       endif
+
+        glVertexAttribPointer(effect->GetPositionLocation(), 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), VB(position));
         glEnableVertexAttribArray(effect->GetPositionLocation());
 
-        glVertexAttribPointer(effect->GetColorLocation(), 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(Vertex), colors);
+        glVertexAttribPointer(effect->GetColorLocation(), 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(Vertex), VB(color));
         glEnableVertexAttribArray(effect->GetColorLocation());
         
         if (mode == ColorTextureOnlyMode || mode == MaskedColorTextureMode)
         {
-            glVertexAttribPointer(effect->GetTexCoord1Location(), 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), texCoords1);
+            glVertexAttribPointer(effect->GetTexCoord1Location(), 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), VB(texCoord1));
             glEnableVertexAttribArray(effect->GetTexCoord1Location());
         }
         else if (mode == AlphaTextureOnlyMode || mode == MaskedAlphaTextureMode)
         {
-            glVertexAttribPointer(effect->GetTexCoord1Location(), 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), texCoords1);
+            glVertexAttribPointer(effect->GetTexCoord1Location(), 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), VB(texCoord1));
             glEnableVertexAttribArray(effect->GetTexCoord1Location());
         }
 
         if (mode == MaskedColorMode || mode == MaskedColorTextureMode || mode == MaskedAlphaTextureMode)
         {
-            glVertexAttribPointer(effect->GetTexCoord2Location(), 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), texCoords2);
+            glVertexAttribPointer(effect->GetTexCoord2Location(), 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), VB(texCoord2));
             glEnableVertexAttribArray(effect->GetTexCoord2Location());
         }
+
+        if (vbo)
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+#       undef VB
     }
 
     void UIRenderer::OnEffectEnded(PixelMode /*mode*/, ShaderEffect* /*effect*/)

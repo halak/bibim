@@ -72,10 +72,13 @@ namespace Bibim
         switch (compression)
         {
             case Raw:
-                for (int y = 0; y < height; y++)
                 {
-                    reader.Read(destination, pitch);
-                    destination += destinationPitch;
+                    byte* current = destination;
+                    for (int y = 0; y < height; y++)
+                    {
+                        reader.Read(current, pitch);
+                        current += destinationPitch;
+                    }
                 }
                 break;
             case PNGCompression:
@@ -89,8 +92,6 @@ namespace Bibim
         }
 
         GLuint textureHandle = 0;
-        glActiveTexture(GL_TEXTURE0);
-        GLES2::CheckLastError("glActiveTexture");
         glGenTextures(1, &textureHandle);
         GLES2::CheckLastError("glGenTextures");
         glBindTexture(GL_TEXTURE_2D, textureHandle);

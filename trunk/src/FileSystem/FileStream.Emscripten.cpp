@@ -28,13 +28,18 @@ namespace Bibim
             mode[0] = 'w';
 
         String absPath;
+        /*
         if (Path::IsAbsolutePath(path) == false)
         {
-            BBAssert(path.CStr()[0] != '/');
+            Log::Information("Path::IsAbsolutePath(path) == false");
+            Log::Information(Environment::GetWorkingDirectory());
+            // BBAssert(path.CStr()[0] != '/');
             absPath = Environment::GetWorkingDirectory() + path;
         }
-        else
+        else*/
             absPath = path;
+
+        //Log::Information(absPath);
 
         handle = std::fopen(absPath.CStr(), mode);
         if (handle == nullptr)
