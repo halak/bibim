@@ -990,7 +990,7 @@ namespace Bibim
                     BBAssert(lua_isfunction(L, -1));
                     UIEventArgsSerializer serializer(L);
                     args.Serialize(serializer);
-                    if(lua_pcall(L, serializer.Count, 1, errfunc) != 0)
+                    if (lua_pcall(L, serializer.Count, 1, errfunc) != 0)
                         lua_pop(L, 1);
 
                     const bool result = lua_tinker::pop<bool>(L);
@@ -1070,6 +1070,10 @@ namespace Bibim
                                 index = numberOfChildren + (index % numberOfChildren);
                             found = static_cast<UIPanel*>(current)->GetChildAt(index);
                         }
+                        break;
+                    case LUA_TTABLE:
+                    case LUA_TFUNCTION:
+                        Log::Warning("ui(...) : invalid paramters");
                         break;
                 }
 
