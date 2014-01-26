@@ -50,6 +50,8 @@ namespace Bibim.Asset.Pipeline
                 case "dirimageset":
                     return CreateDirectoryImageSetRecipe(data.Get<string>("source") ?? "$(AssetName)",
                                                          data.Get("uniformSize", System.Drawing.Size.Empty));
+                case "dirspriteset":
+                    return CreateDirectorySpriteSetRecipe(data.Get<string>("source") ?? "$(AssetName)");
                 case "imageset":
                     return CreatePSDImageSetRecipe(data.Get<string>("source") ?? "$(AssetName).psd");
                 case "spriteset":
@@ -241,6 +243,20 @@ namespace Bibim.Asset.Pipeline
                 {
                     Input = input,
                     UniformSize = uniformSize,
+                },
+                BitmapSheetSize = new System.Drawing.Size(1024, 1024),
+                BitmapSheetClusterSize = new System.Drawing.Size(16, 16),
+                TextureOutput = "gen\\$(AssetName)_TEXTURE{0}",
+            });
+        }
+
+        private static GameAssetRecipe CreateDirectorySpriteSetRecipe(string input)
+        {
+            return Wrap(new ExportSpriteSet()
+            {
+                Input = new DirectoryToSpriteSet()
+                {
+                    Input = input,
                 },
                 BitmapSheetSize = new System.Drawing.Size(1024, 1024),
                 BitmapSheetClusterSize = new System.Drawing.Size(16, 16),

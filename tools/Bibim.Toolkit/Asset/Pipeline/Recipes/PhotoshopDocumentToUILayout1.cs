@@ -13,7 +13,6 @@ using Bibim.UI.Effects;
 using Bibim.UI.Events;
 using Bibim.UI.Visuals;
 using Image = Bibim.Graphics.Image;
-using Rectangle = Microsoft.Xna.Framework.Rectangle;
 using GDIGraphics = System.Drawing.Graphics;
 using GDIColor = System.Drawing.Color;
 
@@ -177,15 +176,15 @@ namespace Bibim.Asset.Pipeline.Recipes
                     int horizontalBorder = leftBorder + rightBorder;
                     int verticalBorder = topBorder + bottomBorder;
 
-                    Bitmap leftTopImage = ClipBitmap(layer.Bitmap, new Rectangle(0, 0, leftBorder, topBorder));
-                    Bitmap rightTopImage = ClipBitmap(layer.Bitmap, new Rectangle(bw - rightBorder, 0, rightBorder, topBorder));
-                    Bitmap leftBottomImage = ClipBitmap(layer.Bitmap, new Rectangle(0, bh - bottomBorder, leftBorder, bottomBorder));
-                    Bitmap rightBottomImage = ClipBitmap(layer.Bitmap, new Rectangle(bw - rightBorder, bh - bottomBorder, rightBorder, bottomBorder));
-                    Bitmap leftImage = ClipBitmap(layer.Bitmap, new Rectangle(0, topBorder, leftBorder, bh - verticalBorder));
-                    Bitmap topImage = ClipBitmap(layer.Bitmap, new Rectangle(leftBorder, 0, bw - horizontalBorder, topBorder));
-                    Bitmap rightImage = ClipBitmap(layer.Bitmap, new Rectangle(bw - rightBorder, topBorder, rightBorder, bh - verticalBorder));
-                    Bitmap bottomImage = ClipBitmap(layer.Bitmap, new Rectangle(leftBorder, bh - bottomBorder, bw - horizontalBorder, bottomBorder));
-                    Bitmap centerImage = ClipBitmap(layer.Bitmap, new Rectangle(leftBorder, topBorder, Math.Max(bw - horizontalBorder, 1), Math.Max(bh - verticalBorder, 1)));
+                    Bitmap leftTopImage = layer.Bitmap.Clip(new Rectangle(0, 0, leftBorder, topBorder));
+                    Bitmap rightTopImage = layer.Bitmap.Clip(new Rectangle(bw - rightBorder, 0, rightBorder, topBorder));
+                    Bitmap leftBottomImage = layer.Bitmap.Clip(new Rectangle(0, bh - bottomBorder, leftBorder, bottomBorder));
+                    Bitmap rightBottomImage = layer.Bitmap.Clip(new Rectangle(bw - rightBorder, bh - bottomBorder, rightBorder, bottomBorder));
+                    Bitmap leftImage = layer.Bitmap.Clip(new Rectangle(0, topBorder, leftBorder, bh - verticalBorder));
+                    Bitmap topImage = layer.Bitmap.Clip(new Rectangle(leftBorder, 0, bw - horizontalBorder, topBorder));
+                    Bitmap rightImage = layer.Bitmap.Clip(new Rectangle(bw - rightBorder, topBorder, rightBorder, bh - verticalBorder));
+                    Bitmap bottomImage = layer.Bitmap.Clip(new Rectangle(leftBorder, bh - bottomBorder, bw - horizontalBorder, bottomBorder));
+                    Bitmap centerImage = layer.Bitmap.Clip(new Rectangle(leftBorder, topBorder, Math.Max(bw - horizontalBorder, 1), Math.Max(bh - verticalBorder, 1)));
 
                     var images = new List<UIImage>(9);
                     images.Add(CreateNinePatchPart(leftTopImage, UIAnchorPoint.LeftTop, new Vector2(0.0f, 0.0f), 0, 0, leftBorder, topBorder, UISizeMode.Absolute, UISizeMode.Absolute));
@@ -642,23 +641,6 @@ namespace Bibim.Asset.Pipeline.Recipes
             }
 
             return new BitMask(width, height, pitch, buffer);
-        }
-
-        public static Bitmap ClipBitmap(Bitmap source, Rectangle rectangle)
-        {
-            if (rectangle.Width <= 0 || rectangle.Height <= 0)
-                return null;
-
-            var result = new Bitmap(rectangle.Width, rectangle.Height);
-            using (var g = GDIGraphics.FromImage(result))
-            {
-                g.DrawImage(source,
-                            new System.Drawing.Rectangle(0, 0, result.Width, result.Height),
-                            new System.Drawing.Rectangle(rectangle.X, rectangle.Y, rectangle.Width, rectangle.Height),
-                            GraphicsUnit.Pixel);
-            }
-
-            return result;
         }
 
         private static bool IsSingleColor(Bitmap source)

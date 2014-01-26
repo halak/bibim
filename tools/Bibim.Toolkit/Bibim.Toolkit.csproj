@@ -270,6 +270,7 @@
     <Compile Include="Asset\Pipeline\Recipes\CompileHexData.cs" />
     <Compile Include="Asset\Pipeline\Recipes\CompileLuaScript.cs" />
     <Compile Include="Asset\Pipeline\Recipes\DirectoryToParticleSystemSet.cs" />
+    <Compile Include="Asset\Pipeline\Recipes\DirectoryToSpriteSet.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ExportParticleSystemSet.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ExportSparkSet.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ExportTemplate.cs" />
@@ -352,7 +353,6 @@
     <Compile Include="MathExtension.cs" />
     <Compile Include="Microsoft\Xna\Framework\Color.cs" />
     <Compile Include="Microsoft\Xna\Framework\Point.cs" />
-    <Compile Include="Microsoft\Xna\Framework\Rectangle.cs" />
     <Compile Include="Microsoft\Xna\Framework\Vector2.cs" />
     <Compile Include="Microsoft\Xna\Framework\Vector3.cs" />
     <Compile Include="Microsoft\Xna\Framework\Vector4.cs" />

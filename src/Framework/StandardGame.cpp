@@ -795,6 +795,38 @@ namespace Bibim
             return 0;
         }
 
+        static int TimeScale(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            AlarmClock* alarmClock = game->GetAlarmClock();
+            if (alarmClock == nullptr)
+            {
+                Log::Error("Lua haven't AlarmClock. AlarmClock required.");
+                return 0;
+            }
+
+            int group = AlarmClock::DefaultGroup;
+            if (lua_isnumber(L, 1))
+                group = static_cast<int>(lua_tointeger(L, 1));
+
+            if (lua_isnil(L, 2))
+            {
+                // get
+                lua_pushnumber(L, alarmClock->GetScale(group));
+                return 1;
+            }
+            else
+            {
+                // set
+                const float scale = static_cast<float>(lua_tonumber(L, 2));
+                alarmClock->SetScale(group, scale);
+                return 0;
+            }
+        }
+
         static int GetLuaObject(lua_State* L)
         {
             StandardGame* game = GetGame(L);
@@ -1894,6 +1926,7 @@ namespace Bibim
             { "alarm", &AddAlarm },
             { "canceltimeout", &CancelAlarm },
             { "cancelalarm", &CancelAlarm },
+            { "timescale", &TimeScale },
             { "lua", &GetLuaObject },
             { "timeline", &GetTimeline },
             { "ime", &GetIMEObject },

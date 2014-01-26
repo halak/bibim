@@ -16,8 +16,6 @@ namespace Bibim
             UISprite();
             virtual ~UISprite();
 
-            void Update(float dt, int timestamp);
-
             const Sprite::Keyframe* GetCurrentFrame() const;
 
             inline Sprite* GetSource() const;
@@ -44,9 +42,12 @@ namespace Bibim
             virtual Vector2 GetContentSize();
 
         protected:
+                    void OnStep(float dt, int timestamp);
             virtual void OnDraw(UIDrawingContext& context);
 
         private:
+            void UpdateOrigin();
+
             class Updater : public IUpdateable
             {
                 public:

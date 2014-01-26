@@ -12,9 +12,10 @@ namespace Bibim
         // for cloning and deserialization
     }
 
-    Sprite::Sprite(KeyframeCollection& keyframes, float duration, BlendMode blendMode)
+    Sprite::Sprite(KeyframeCollection& keyframes, float duration, BlendMode blendMode, bool looped)
         : duration(duration),
-          blendMode(blendMode)
+          blendMode(blendMode),
+          looped(looped)
     {
         this->keyframes.swap(keyframes);
     }
@@ -48,6 +49,7 @@ namespace Bibim
     GameAsset* Sprite::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
     {
         const BlendMode blendMode = static_cast<BlendMode>(reader.ReadByte());
+        const bool looped = reader.ReadBool();
         const int numberOfKeyframes = static_cast<int>(reader.ReadShortInt());
         KeyframeCollection keyframes;
         keyframes.reserve(numberOfKeyframes);
@@ -69,6 +71,6 @@ namespace Bibim
             keyframes.push_back(kf);
         }
 
-        return new Sprite(keyframes, totalDuration, blendMode);
+        return new Sprite(keyframes, totalDuration, blendMode, looped);
     }
 }

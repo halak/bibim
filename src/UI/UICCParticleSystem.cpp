@@ -104,6 +104,7 @@ namespace Bibim
         {
             if (emitter->Update(dt, timestamp) == false)
             {
+                // Auto Detach
                 UIPanel* parent = GetParent();
                 if (parent && parent->IsWindow())
                     static_cast<UIWindow*>(parent)->RemoveChild(this);

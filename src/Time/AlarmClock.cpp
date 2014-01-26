@@ -29,8 +29,9 @@ namespace Bibim
     {
     }
 
-    AlarmClock::AlarmCounter::AlarmCounter(float tickTime, float alarmTime)
-        : RemainTickTime(tickTime),
+    AlarmClock::AlarmCounter::AlarmCounter(float scale, float tickTime, float alarmTime)
+        : Scale(scale),
+          RemainTickTime(tickTime),
           RemainAlarmTime(alarmTime)
     {
     }
@@ -45,6 +46,17 @@ namespace Bibim
         : Group(group),
           TickTime(tickTime),
           AlarmTime(alarmTime)
+    {
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    AlarmClock::Group::Group()
+    {
+    }
+
+    AlarmClock::Group::Group(int id, float scale)
+        : ID(id), Scale(scale)
     {
     }
 
@@ -75,30 +87,32 @@ namespace Bibim
             //BBAssertDebug(count == alarms.size());
             //BBAssertDebug(count == callbacks.size());
 
-            //AlarmCounter& item = alarmCounters[i];
+            AlarmCounter& item = alarmCounters[i];
+            if (item.Scale <= 0.0f)
+                continue;
 
-            if (alarmCounters[i].RemainTickTime >= 0.0f)
+            if (item.RemainTickTime >= 0.0f)
             {
-                alarmCounters[i].RemainTickTime -= dt;
-                if (alarmCounters[i].RemainTickTime <= 0.0f)
+                item.RemainTickTime -= dt * item.Scale;
+                if (item.RemainTickTime <= 0.0f)
                 {
                     if (callbacks[i])
                     {
-                        switch (callbacks[i]->OnTick(this, alarms[i].AlarmTime - alarmCounters[i].RemainAlarmTime, alarms[i].AlarmTime))
+                        switch (callbacks[i]->OnTick(this, alarms[i].AlarmTime - item.RemainAlarmTime, alarms[i].AlarmTime))
                         {
                             case Callback::Continue:
-                                alarmCounters[i].RemainTickTime = alarms[i].TickTime;
+                                item.RemainTickTime = alarms[i].TickTime;
                                 break;
                             case Callback::Stop:
                                 callbacks[i].Reset();
                                 needsGarbageCollection = true;
                                 break;
                             case Callback::StopTick:
-                                alarmCounters[i].RemainTickTime = InvalidTime;
+                                item.RemainTickTime = InvalidTime;
                                 break;
                             case Callback::Restart:
-                                alarmCounters[i].RemainTickTime = alarms[i].TickTime;
-                                alarmCounters[i].RemainAlarmTime = alarms[i].AlarmTime;
+                                item.RemainTickTime = alarms[i].TickTime;
+                                item.RemainAlarmTime = alarms[i].AlarmTime;
                                 break;
                         }
                     }
@@ -110,10 +124,10 @@ namespace Bibim
                 }
             }
 
-            if (alarmCounters[i].RemainAlarmTime >= 0.0f)
+            if (item.RemainAlarmTime >= 0.0f)
             {
-                alarmCounters[i].RemainAlarmTime -= dt;
-                if (alarmCounters[i].RemainAlarmTime <= 0.0f)
+                item.RemainAlarmTime -= dt * item.Scale;
+                if (item.RemainAlarmTime <= 0.0f)
                 {
                     if (callbacks[i])
                     {
@@ -126,8 +140,8 @@ namespace Bibim
                                 needsGarbageCollection = true;
                                 break;
                             case Callback::Restart:
-                                alarmCounters[i].RemainTickTime = alarms[i].TickTime;
-                                alarmCounters[i].RemainAlarmTime = alarms[i].AlarmTime;
+                                item.RemainTickTime = alarms[i].TickTime;
+                                item.RemainAlarmTime = alarms[i].AlarmTime;
                                 break;
                         }
                     }
@@ -169,7 +183,7 @@ namespace Bibim
 
         BBAssertDebug(std::find(callbacks.begin(), callbacks.end(), callback) == callbacks.end());
 
-        alarmCounters.push_back(AlarmCounter(tickTime, alaramTime));
+        alarmCounters.push_back(AlarmCounter(GetScale(group), tickTime, alaramTime));
         alarms.push_back(Alarm(group, tickTime, alaramTime));
         callbacks.push_back(callback);
     }
@@ -217,6 +231,19 @@ namespace Bibim
                 item->OnCancelled(this);
                 (*it).Reset();
             }
+        }
+    }
+
+    void AlarmClock::SetScale(int group, float value)
+    {
+        if (Group* g = FindGroup(group))
+            g->Scale = value;
+
+        const int count = static_cast<int>(alarms.size());
+        for (int i = 0; i < count; i++)
+        {
+            if (alarms[i].Group == group)
+                alarmCounters[i].Scale = value;
         }
     }
 }

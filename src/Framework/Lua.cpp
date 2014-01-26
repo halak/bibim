@@ -435,6 +435,8 @@ namespace Bibim
             lua_tinker::class_inh<ImageSet, GameAsset>(L);
             lua_tinker::class_def<ImageSet>(L, "Find", &ImageSet::Find);
         lua_tinker::class_add<Sprite>(L, "Sprite");
+        lua_tinker::class_def<Sprite>(L, "GetBlendMode", &Sprite::GetBlendMode);
+        lua_tinker::class_def<Sprite>(L, "SetBlendMode", &Sprite::SetBlendMode);
             lua_tinker::class_inh<Sprite, GameAsset>(L);
         lua_tinker::class_add<SpriteSet>(L, "SpriteSet");
             lua_tinker::class_inh<SpriteSet, GameAsset>(L);

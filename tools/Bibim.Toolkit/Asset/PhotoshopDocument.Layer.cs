@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Text;
+using Bibim.Graphics;
 using GDIGraphics = System.Drawing.Graphics;
 
 namespace Bibim.Asset
@@ -514,19 +515,19 @@ namespace Bibim.Asset
                                                                 clippedRectangle.Width,
                                                                 clippedRectangle.Height);
 
-                            var minimumSourceRectangle = GetMinimumRectangle(this.Bitmap, sourceRectangle);
+                            var trimmedRectangle = this.Bitmap.GetTrimmedRect(sourceRectangle);
 
-                            clippedRectangle.X += minimumSourceRectangle.X - sourceRectangle.X;
-                            clippedRectangle.Y += minimumSourceRectangle.Y - sourceRectangle.Y;
-                            clippedRectangle.Width = minimumSourceRectangle.Width;
-                            clippedRectangle.Height = minimumSourceRectangle.Height;
+                            clippedRectangle.X += trimmedRectangle.X - sourceRectangle.X;
+                            clippedRectangle.Y += trimmedRectangle.Y - sourceRectangle.Y;
+                            clippedRectangle.Width = trimmedRectangle.Width;
+                            clippedRectangle.Height = trimmedRectangle.Height;
 
                             var newBitmap = new Bitmap(clippedRectangle.Width, clippedRectangle.Height);
                             using (var g = GDIGraphics.FromImage(newBitmap))
                             {
                                 g.DrawImage(Bitmap,
                                             new Rectangle(0, 0, newBitmap.Width, newBitmap.Height),
-                                            minimumSourceRectangle,
+                                            trimmedRectangle,
                                             GraphicsUnit.Pixel);
                             }
 
@@ -749,69 +750,6 @@ namespace Bibim.Asset
                 return FullName;
             }
             #endregion
-        }
-        #endregion
-
-        #region
-        private static bool IsHorizontalLineTransparent(Bitmap bitmap, int x0, int x1, int y)
-        {
-            for (int x = x0; x < x1; x++)
-            {
-                if (bitmap.GetPixel(x, y).A != 0)
-                    return false;
-            }
-
-            return true;
-        }
-
-        private static bool IsVerticalLineTransparent(Bitmap bitmap, int y0, int y1, int x)
-        {
-            for (int y = y0; y < y1; y++)
-            {
-                if (bitmap.GetPixel(x, y).A != 0)
-                    return false;
-            }
-
-            return true;
-        }
-
-        public static Rectangle GetMinimumRectangle(Bitmap bitmap, Rectangle sourceRectangle)
-        {
-            int left = sourceRectangle.Left;
-            int top = sourceRectangle.Top;
-            int right = sourceRectangle.Right;
-            int bottom = sourceRectangle.Bottom;
-            bool changed = false;
-
-            do
-            {
-                changed = false;
-                while (IsHorizontalLineTransparent(bitmap, left, right, top))
-                {
-                    top++;
-                    changed = true;
-                }
-
-                while (IsHorizontalLineTransparent(bitmap, left, right, bottom - 1))
-                {
-                    bottom--;
-                    changed = true;
-                }
-
-                while (IsVerticalLineTransparent(bitmap, top, bottom, left))
-                {
-                    left++;
-                    changed = true;
-                }
-
-                while (IsVerticalLineTransparent(bitmap, top, bottom, right - 1))
-                {
-                    right--;
-                    changed = true;
-                }
-            } while (changed);
-
-            return new Rectangle(left, top, right - left, bottom - top);
         }
         #endregion
 

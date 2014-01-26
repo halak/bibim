@@ -714,6 +714,12 @@ namespace Bibim.Json.Serialization
             return DeserializeData(new JsonReader(s));
         }
 
+        public static object DeserializeDataFromFile(string path)
+        {
+            using (var se = new StreamReader(path, true))
+                return DeserializeData(new JsonReader(se));
+        }
+
         private static object DeserializeData(JsonReader reader)
         {
             while (reader.Read())

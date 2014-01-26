@@ -78,7 +78,6 @@ namespace Bibim.Asset.Pipeline
                 throw new FileNotFoundException("Recipe file not found.", absolutePath);
 
             recipe = JsonSerializer.Instance.Deserialize(absolutePath) as GameAssetRecipe;
-
             if (recipe != null && recipe.Cook != null)
                 return recipe;
 

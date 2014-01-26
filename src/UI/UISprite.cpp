@@ -3,9 +3,11 @@
 #include <Bibim/Assert.h>
 #include <Bibim/Color.h>
 #include <Bibim/ComponentStreamReader.h>
+#include <Bibim/Math.h>
 #include <Bibim/Sprite.h>
 #include <Bibim/Timeline.h>
 #include <Bibim/UIDrawingContext.h>
+#include <Bibim/UIWindow.h>
 #include <Bibim/UIPickingContext.h>
 
 namespace Bibim
@@ -30,15 +32,6 @@ namespace Bibim
     {
     }
 
-    void UISprite::Update(float dt, int /*timestamp*/)
-    {
-        if (source == nullptr)
-            return;
-
-        time += dt * speed;
-        frameIndex = source->GetKeyframeIndex(time, frameIndex);
-    }
-
     const Sprite::Keyframe* UISprite::GetCurrentFrame() const
     {
         return source ? source->GetKeyframeAt(frameIndex) : nullptr;
@@ -51,6 +44,7 @@ namespace Bibim
             source = value;
             time = 0.0f;
             frameIndex = 0;
+            UpdateOrigin();
         }
     }
 
@@ -97,6 +91,35 @@ namespace Bibim
             return Vector2::Zero;
     }
 
+    void UISprite::OnStep(float dt, int /*timestamp*/)
+    {
+        if (source == nullptr)
+            return;
+
+        // Auto Detach
+        if (source->GetLooped() == false && 
+            time == source->GetDuration())
+        {
+            UIPanel* parent = GetParent();
+            if (parent && parent->IsWindow())
+                static_cast<UIWindow*>(parent)->RemoveChild(this);
+        }
+
+        time += dt * speed;
+
+        if (source->GetLooped() == false)
+            time = Math::Min(time, source->GetDuration());
+
+        frameIndex = source->GetKeyframeIndex(time, frameIndex);
+        UpdateOrigin();
+    }
+
+    void UISprite::UpdateOrigin()
+    {
+        if (const Sprite::Keyframe* kf = GetCurrentFrame())
+            SetOrigin(Vector2(kf->Origin.X / kf->GetWidth(), kf->Origin.Y / kf->GetHeight()));
+    }
+
     void UISprite::OnDraw(UIDrawingContext& context)
     {
         UIVisual::OnDraw(context);
@@ -141,6 +164,6 @@ namespace Bibim
 
     void UISprite::Updater::Update(float dt, int timestamp)
     {
-        Owner->Update(dt, timestamp);
+        Owner->OnStep(dt, timestamp);
     }
 }
