@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Drawing;
 using Bibim.Asset;
 using Bibim.IO;
-using Microsoft.Xna.Framework;
 
 namespace Bibim.Animation
 {

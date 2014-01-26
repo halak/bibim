@@ -9,7 +9,6 @@ using System.Xml.Linq;
 using Bibim.GFX;
 using Bibim.Graphics;
 using Ionic.Zip;
-using Rectangle = Microsoft.Xna.Framework.Rectangle;
 using Image = Bibim.Graphics.Image;
 using GDIRectangle = System.Drawing.Rectangle;
 using GDIGraphics = System.Drawing.Graphics;

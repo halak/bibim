@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using Bibim.Graphics;
 
 namespace Bibim.Json.Serialization
 {
@@ -21,7 +22,7 @@ namespace Bibim.Json.Serialization
         {
             object valueObject = null;
             if (thiz.TryGetValue(key, out valueObject))
-                return (T)valueObject;
+                return (T)Convert.ChangeType(valueObject, typeof(T));
             else
                 return defaultValue;
         }
@@ -38,6 +39,23 @@ namespace Bibim.Json.Serialization
             }
             else
                 return System.Drawing.Size.Empty;
+        }
+
+        public static BlendMode Get(this Dictionary<string, object> thiz, string key, BlendMode defaultValue)
+        {
+            var blendModeObject = thiz.Get<string>(key);
+            BlendMode blendMode;
+            if (Enum.TryParse<BlendMode>(blendModeObject, out blendMode))
+                return blendMode;
+            else
+            {
+                switch (blendModeObject.ToUpper())
+                {
+                    case "NORMAL": return BlendMode.Normal;
+                    case "ADD": return BlendMode.Additive;
+                    default: return defaultValue;
+                }
+            }
         }
     }
 }

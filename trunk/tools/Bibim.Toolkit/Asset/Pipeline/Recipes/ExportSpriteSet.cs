@@ -11,7 +11,6 @@ using Bibim.Json.Serialization;
 using Bibim.UI;
 using Bibim.UI.Visuals;
 using Sprite = Bibim.Animation.Sprite;
-using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace Bibim.Asset.Pipeline.Recipes
 {

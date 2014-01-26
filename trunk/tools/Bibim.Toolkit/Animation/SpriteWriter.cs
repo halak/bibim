@@ -19,6 +19,7 @@ namespace Bibim.Animation
         public static void WriteBody(AssetStreamWriter writer, Sprite asset)
         {
             writer.Write((byte)asset.BlendMode);
+            writer.Write(asset.Loop);
             writer.Write((short)asset.Keyframes.Length);
             foreach (var item in asset.Keyframes)
             {

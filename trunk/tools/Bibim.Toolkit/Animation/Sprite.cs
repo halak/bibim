@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Drawing;
 using Microsoft.Xna.Framework;
 using Bibim.Asset;
 using Bibim.Graphics;
+using Image = Bibim.Graphics.Image;
 
 namespace Bibim.Animation
 {
@@ -33,6 +35,12 @@ namespace Bibim.Animation
         }
 
         public BlendMode BlendMode
+        {
+            get;
+            set;
+        }
+
+        public bool Loop
         {
             get;
             set;

@@ -8,7 +8,6 @@ using Bibim.Graphics;
 using Bibim.UI;
 using Bibim.UI.Visuals;
 using Image = Bibim.Graphics.Image;
-using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace Bibim.Asset.Pipeline.Recipes
 {

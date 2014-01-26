@@ -48,14 +48,17 @@ namespace Bibim
             inline float GetDuration() const;
             inline BlendMode GetBlendMode() const;
             inline void SetBlendMode(BlendMode value);
+            inline bool GetLooped() const;
+            inline void SetLooped(bool value);
 
         private:
-            Sprite(KeyframeCollection& keyframes, float duration, BlendMode blendMode);
+            Sprite(KeyframeCollection& keyframes, float duration, BlendMode blendMode, bool looped);
 
         private:
             KeyframeCollection keyframes;
             float duration;
             BlendMode blendMode;
+            bool looped;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,6 +94,16 @@ namespace Bibim
     void Sprite::SetBlendMode(BlendMode value)
     {
         blendMode = value;
+    }
+
+    bool Sprite::GetLooped() const
+    {
+        return looped;
+    }
+
+    void Sprite::SetLooped(bool value)
+    {
+        looped = value;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

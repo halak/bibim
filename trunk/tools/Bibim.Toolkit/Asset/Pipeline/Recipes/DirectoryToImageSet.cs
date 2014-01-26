@@ -11,7 +11,6 @@ using Bibim.UI.Effects;
 using Bibim.UI.Events;
 using Bibim.UI.Visuals;
 using Image = Bibim.Graphics.Image;
-using Rectangle = Microsoft.Xna.Framework.Rectangle;
 using GDIColor = System.Drawing.Color;
 
 namespace Bibim.Asset.Pipeline.Recipes
