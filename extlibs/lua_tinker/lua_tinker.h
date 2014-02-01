@@ -743,6 +743,28 @@ namespace lua_tinker
         lua_setglobal(L, name);
     }
 
+    // table function
+    template<typename F> 
+    void def(lua_State* L, const char* tablename, const char* name, F func)
+    {
+        lua_getglobal(L, tablename);
+        if (lua_istable(L, -1) == false)
+        {
+            lua_pop(L, 1);
+            lua_newtable(L);
+            lua_setglobal(L, tablename);
+            lua_getglobal(L, tablename);
+        }
+
+        luaL_checktype(L, -1, LUA_TTABLE);
+
+        lua_pushstring(L, name);
+
+        lua_pushlightuserdata(L, (void*)func);
+        push_functor(L, func);
+        lua_settable(L, -3);
+    }
+
     // global variable
     template<typename T>
     void set(lua_State* L, const char* name, T object)
