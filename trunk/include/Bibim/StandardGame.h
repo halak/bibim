@@ -43,6 +43,8 @@ namespace Bibim
             void Restart();
             void CollectGarbage();
 
+            void AddArchive(const String& name);
+
             inline bool GetFullscreen() const;
             void SetFullscreen(bool value);
 
@@ -56,6 +58,7 @@ namespace Bibim
             inline GameAssetStorage* GetAssetStorage() const;
             inline AlarmClock* GetAlarmClock() const;
             inline FontLibrary* GetFontLibrary() const;
+            AudioDevice* GetAudioDevice() const;
             inline BGM* GetBGM() const;
             inline SoundFX* GetSFX() const;
             inline HttpClient* GetHttpClient() const;
