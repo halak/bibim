@@ -84,8 +84,6 @@ namespace Bibim
 
         GameFramework::Initialize();
 
-        //MOBILE MPQPtr mainMPQ = new MPQ("Game.mpq");
-
         preferences = new Preferences(gameName);
         GetModules()->GetRoot()->AttachChild(preferences);
 
@@ -97,7 +95,6 @@ namespace Bibim
         GetModules()->GetRoot()->AttachChild(ime);
 
         AudioDevice* audioDevice = new AudioDevice();
-        //MOBILE audioDevice->AddArchive(mainMPQ);
         bgm = CreateBGM(audioDevice);
         sfx = new SoundFX(audioDevice);
         bgm->SetTimeline(GetMainTimeline());
@@ -118,9 +115,6 @@ namespace Bibim
                                                               gameName));
 #           endif
 
-            //MOBILE MPQAssetProvider*   map = new MPQAssetProvider(storage, mainMPQ);
-            //MOBILE storageNode->AttachChild(map);
-            
             storageNode->AttachChild(new FileAssetProvider(storage));
         }
 
@@ -287,6 +281,33 @@ namespace Bibim
             GetAssetStorage()->CollectGarbage();
         if (fontLibrary)
             fontLibrary->CollectGarbage();
+    }
+
+    void StandardGame::AddArchive(const String& name)
+    {
+#       if (defined(BIBIM_PLATFORM_PC))
+        GameAssetStorage* storage = GetAssetStorage();
+        if (GameModuleNode* storageNode = GetModules()->GetRoot()->FindChildNode(storage))
+        {
+            MPQPtr archive = new MPQ(name);
+            if (archive->GetHandle())
+            {
+                if (AudioDevice* audioDevice = GetAudioDevice())
+                    audioDevice->AddArchive(archive);
+
+                MPQAssetProvider* map = new MPQAssetProvider(storage, archive);
+                storageNode->AttachChild(map);
+            }
+        }
+#       endif
+    }
+
+    AudioDevice* StandardGame::GetAudioDevice() const
+    {
+        if (bgm)
+            return bgm->GetAudioDevice();
+        else
+            return nullptr;
     }
 
     void StandardGame::MatchContentToWindow()

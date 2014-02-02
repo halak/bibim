@@ -105,7 +105,13 @@ namespace Bibim
 
         BBStackFree(filename);
 
-        return stream;
+        if (stream->CanRead())
+            return stream;
+        else
+        {
+            StreamPtr streamPointer = stream;
+            return nullptr;
+        }
     }
 
     GameAsset* FileAssetProviderBase::LoadActually(GameAssetStorage* storage,
@@ -117,7 +123,7 @@ namespace Bibim
         BBAssertDebug(storage != nullptr);
 
         StreamPtr stream = OpenActually(directory, name);
-        if (stream->CanRead())
+        if (stream && stream->CanRead())
         {
             AssetStreamReader reader(name, stream, storage, isPriority);
             return GameAssetFactory::Create(reader, existingInstance);
