@@ -131,6 +131,11 @@ namespace Bibim
     {
         currentBounds = target->ComputeBounds(GetCurrentBounds());
         currentClippedBounds = currentBounds;
+
+        if (target->GetTransform())
+            rootTransform = target->GetTransform()->ComputeMatrix(*this);
+        else
+            rootTransform = Matrix4::Identity;
     }
 
     void UIVisualVisitor::Visit(UIVisual* target)

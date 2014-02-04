@@ -17,7 +17,8 @@ namespace Bibim
 
     const Matrix4& UIInverseTransform::ComputeMatrix(UIVisualVisitor& context)
     {
-        return context.GetCurrentTransformInv();
+        matrix = context.GetRootTransform() * context.GetCurrentTransformInv();
+        return matrix;
     }
 
     void UIInverseTransform::OnRead(ComponentStreamReader& reader)

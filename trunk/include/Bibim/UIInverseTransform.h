@@ -4,6 +4,7 @@
 
 #include <Bibim/FWD.h>
 #include <Bibim/UITransform.h>
+#include <Bibim/Matrix4.h>
 
 namespace Bibim
 {
@@ -15,6 +16,9 @@ namespace Bibim
             virtual ~UIInverseTransform();
 
             virtual const Matrix4& ComputeMatrix(UIVisualVisitor& context);
+
+        private:
+            Matrix4 matrix;
     };
 }
 
