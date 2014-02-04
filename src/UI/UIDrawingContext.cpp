@@ -8,7 +8,7 @@
 #include <Bibim/Image.h>
 #include <Bibim/Math.h>
 #include <Bibim/Shape2D.h>
-#include <Bibim/UIGeometryEffect.h>
+#include <Bibim/UIGeometryEffect.h> 
 #include <Bibim/UIEffectMap.h>
 #include <Bibim/UIEffectStack.h>
 #include <Bibim/UIRenderer.h>
@@ -33,6 +33,17 @@ namespace Bibim
 
     UIDrawingContext::UIDrawingContext(UIRenderer* renderer)
         : UIVisualVisitor(renderer->GetGraphicsDevice()->GetViewportSize(),
+                          renderer->GetViewTransform(),
+                          renderer->GetInversedViewTransform(),
+                          renderer->GetProjectionTransform(), true),
+          renderer(renderer),
+          isDrawing(false)
+    {
+        effectStack = new UIEffectStack(renderer->GetGraphicsDevice()->GetCapabilities().IsShaderSupported());
+    }
+
+    UIDrawingContext::UIDrawingContext(UIRenderer* renderer, Point2 size)
+        : UIVisualVisitor(size,
                           renderer->GetViewTransform(),
                           renderer->GetInversedViewTransform(),
                           renderer->GetProjectionTransform(), true),
@@ -312,7 +323,7 @@ namespace Bibim
                 std::vector<Vector2> data;
         };
 
-        VisibleVertices v(GetOrigin());
+        VisibleVertices v(GetOffset());
         shape->Build(v);
 
         if (v.data.empty() == false)

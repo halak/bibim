@@ -12,6 +12,7 @@ namespace Bibim
     {
         public:
             UIDrawingContext(UIRenderer* renderer);
+            UIDrawingContext(UIRenderer* renderer, Point2 size);
             virtual ~UIDrawingContext();
 
             void Draw(UIVisual* target);
@@ -56,14 +57,15 @@ namespace Bibim
             void FillTriangles(int count, Vector2* p, Vector2* uv, Color* color, Texture2D* texture);
 
             inline UIRenderer* GetRenderer() const;
+            inline Vector2 GetOffset() const;
+            inline float GetOffsetX() const;
+            inline float GetOffsetY() const;
 
         private:
             void Draw(const RectF& bounds, const RectF& clippedBounds, Image* image, Image* maskImage, bool horizontalFlip, bool verticalFlip);
 
         protected:
             inline void DrawChild(UIVisual* target);
-
-            inline Vector2 GetOrigin() const;
 
             virtual void OnBegan(UIVisual* target);
             virtual void OnEnded(UIVisual* target);
@@ -112,9 +114,19 @@ namespace Bibim
         Visit(target);
     }
 
-    Vector2 UIDrawingContext::GetOrigin() const
+    Vector2 UIDrawingContext::GetOffset() const
     {
         return Vector2(GetCurrentBounds().X, GetCurrentBounds().Y);
+    }
+
+    float UIDrawingContext::GetOffsetX() const
+    {
+        return GetCurrentBounds().X;
+    }
+
+    float UIDrawingContext::GetOffsetY() const
+    {
+        return GetCurrentBounds().Y;
     }
 
     UIRenderer* UIDrawingContext::GetRenderer() const
