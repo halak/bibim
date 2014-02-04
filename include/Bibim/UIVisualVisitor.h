@@ -39,6 +39,7 @@ namespace Bibim
 
             inline const Matrix4& GetViewTransform() const;
             inline const Matrix4& GetProjectionTransform() const;
+            inline const Matrix4& GetRootTransform() const;
 
         protected:
             void Ready(UIVisual* target);
@@ -66,6 +67,7 @@ namespace Bibim
             Matrix4 viewTransform;
             Matrix4 viewTransformInv;
             Matrix4 projectionTransform;
+            Matrix4 rootTransform;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,6 +120,11 @@ namespace Bibim
     const Matrix4& UIVisualVisitor::GetProjectionTransform() const
     {
         return projectionTransform;
+    }
+
+    const Matrix4& UIVisualVisitor::GetRootTransform() const
+    {
+        return rootTransform;
     }
 }
 
