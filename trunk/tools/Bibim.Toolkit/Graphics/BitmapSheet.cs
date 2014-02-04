@@ -139,7 +139,7 @@ namespace Bibim.Graphics
             });
 
             var items = new List<Tuple<int, Bitmap, Rectangle, Image.Transform>>();
-            int margin = 1;
+            int margin = 2;
             var textureAtlases = new List<RectangleStorage>();
             #region 각각의 Bitmap들을 어떤 큰 Bitmap에 배치할지 결정합니다. (선작업)
             foreach (Bitmap item in sortedInput)

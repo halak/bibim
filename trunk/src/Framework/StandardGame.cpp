@@ -1448,17 +1448,24 @@ namespace Bibim
             if (v == nullptr)
                 return 0;
             
-            UIBoundsContext context(game->GetGraphicsDevice()->GetViewportSize());
+            const Point2 viewportSize = game->GetGraphicsDevice()->GetViewportSize();
+            UIBoundsContext context(viewportSize);
             const RectF bounds = context.Compute(v);
 
             GraphicsDevice* g = game->GetGraphicsDevice();
             const int w = static_cast<int>(bounds.Width);
             const int h = static_cast<int>(bounds.Height);
             RenderTargetTexture2DPtr renderTarget = new RenderTargetTexture2D(g, w, h);
+            UITransformPtr oldTransform = v->GetTransform();
+            UITransform3DPtr newTransform = new UITransform3D();
+            newTransform->SetScale(Vector2(viewportSize.X / bounds.Width, viewportSize.Y / bounds.Height));
+            newTransform->SetScaleCenter(Vector2::Zero);
+            v->SetTransform(newTransform);
             g->BeginDraw(renderTarget);
-            UIDrawingContext drawingContext(uiRenderer);
+            UIDrawingContext drawingContext(uiRenderer, Point2(w, h));
             drawingContext.Draw(v);
             g->EndDraw(renderTarget);
+            v->SetTransform(oldTransform);
 
             lua_tinker::push(L, new Image(renderTarget));
 
