@@ -44,6 +44,7 @@ namespace Bibim
             void CollectGarbage();
 
             void AddArchive(const String& name);
+            void AddArchive(const String& name, int priority);
 
             inline bool GetFullscreen() const;
             void SetFullscreen(bool value);

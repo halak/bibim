@@ -6,12 +6,14 @@
 namespace Bibim
 {
     AssetProvider::AssetProvider()
-        : storage(nullptr)
+        : storage(nullptr),
+          priority(DefaultPriority)
     {
     }
 
     AssetProvider::AssetProvider(GameAssetStorage* storage)
-        : storage(storage)
+        : storage(storage),
+          priority(DefaultPriority)
     {
         if (storage)
             storage->Add(this);
@@ -34,6 +36,17 @@ namespace Bibim
 
             if (storage)
                 storage->Add(this);
+        }
+    }
+
+    void AssetProvider::SetPriority(int value)
+    {
+        if (priority != value)
+        {
+            priority = value;
+
+            if (storage)
+                storage->Reorder();
         }
     }
     

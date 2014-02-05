@@ -109,10 +109,12 @@ namespace Bibim
         storage = new GameAssetStorage(GetModules());
         GameModuleNode* storageNode = GetModules()->GetRoot()->AttachChild(storage);
         {
-#           if (defined(BIBIM_PLATFORM_WINDOWS))
-            storageNode->AttachChild(new NetworkAssetProvider(storage,
-                                                              IPEndPoint(IPEndPoint::Localhost, NetworkAssetProvider::DefaultPort),
-                                                              gameName));
+#           if (defined(BIBIM_PLATFORM_WINDOWS) && defined(BIBIM_DEBUG))
+            AssetProvider* nap = new NetworkAssetProvider(storage,
+                                                          IPEndPoint(IPEndPoint::Localhost, NetworkAssetProvider::DefaultPort),
+                                                          gameName);
+            nap->SetPriority(0);
+            storageNode->AttachChild(nap);
 #           endif
 
             storageNode->AttachChild(new FileAssetProvider(storage));
@@ -285,6 +287,11 @@ namespace Bibim
 
     void StandardGame::AddArchive(const String& name)
     {
+        AddArchive(name, AssetProvider::DefaultPriority);
+    }
+
+    void StandardGame::AddArchive(const String& name, int priority)
+    {
 #       if (defined(BIBIM_PLATFORM_PC))
         GameAssetStorage* storage = GetAssetStorage();
         if (GameModuleNode* storageNode = GetModules()->GetRoot()->FindChildNode(storage))
@@ -296,6 +303,7 @@ namespace Bibim
                     audioDevice->AddArchive(archive);
 
                 MPQAssetProvider* map = new MPQAssetProvider(storage, archive);
+                map->SetPriority(priority);
                 storageNode->AttachChild(map);
             }
         }

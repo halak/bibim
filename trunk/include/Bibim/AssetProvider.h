@@ -12,6 +12,9 @@ namespace Bibim
     {
         BBAbstractModuleClass(AssetProvider, GameModule);
         public:
+            static const int DefaultPriority = 100;
+
+        public:
             AssetProvider();
             AssetProvider(GameAssetStorage* storage);
             virtual ~AssetProvider();
@@ -23,12 +26,15 @@ namespace Bibim
 
             inline GameAssetStorage* GetStorage() const;
             void SetStorage(GameAssetStorage* value);
+            inline int GetPriority() const;
+            void SetPriority(int value);
 
         protected:
             void Add(AssetPreloadingTask* item);
 
         private:
             GameAssetStorage* storage;
+            int priority;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,6 +42,11 @@ namespace Bibim
     GameAssetStorage* AssetProvider::GetStorage() const
     {
         return storage;
+    }
+
+    int AssetProvider::GetPriority() const
+    {
+        return priority;
     }
 }
 
