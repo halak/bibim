@@ -191,6 +191,7 @@ namespace Bibim
         BBAssertDebug(std::find(providers.begin(), providers.end(), item) == providers.end());
 
         providers.push_back(item);
+        Reorder();
     }
 
     void GameAssetStorage::Remove(AssetProvider* item)
@@ -199,6 +200,19 @@ namespace Bibim
         BBAssertDebug(it != providers.end());
 
         providers.erase(it);
+    }
+
+    void GameAssetStorage::Reorder()
+    {
+        struct ComparePredicate
+        {
+            bool operator () (const AssetProvider* a, const AssetProvider* b) const
+            {
+                return a->GetPriority() < b->GetPriority();
+            }
+        };
+
+        std::sort(providers.begin(), providers.end(), ComparePredicate());
     }
 
     void GameAssetStorage::SetAsset(const String& name, GameAsset* asset)

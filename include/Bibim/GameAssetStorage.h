@@ -107,6 +107,7 @@ namespace Bibim
             void AddLast(AssetLoadingTask* item); // call in AssetStreamReader, AssetProvider
             void Add(AssetProvider* item); // call in AssetProvider
             void Remove(AssetProvider* item); // call in AssetProvider
+            void Reorder(); // call in AssetProvider
             void SetAsset(const String& name, GameAsset* asset); // call in AssetPreloadingTask
 
         private:
