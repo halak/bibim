@@ -70,6 +70,8 @@ namespace Bibim.Asset.Pipeline
                         data.Get<string>("base") ?? "UI.glsl",
                         data.Get<string>("defines") ?? string.Empty
                     );
+                case "lua":
+                    return CreateLuaRecipe(data.Get<string>("source") ?? "$(AssetName).lua");
                 case "hex":
                     return CreateHexRecipe(data.Get<string>("data") ?? string.Empty);
             }
@@ -128,9 +130,9 @@ namespace Bibim.Asset.Pipeline
             return ap.CompareTo(bp);
         }
 
-        private static GameAssetRecipe CreateLuaRecipe()
+        private static GameAssetRecipe CreateLuaRecipe(string source = "$(AssetName).lua")
         {
-            return Wrap(new CompileLuaScript("$(AssetName).lua"));
+            return Wrap(new CompileLuaScript(source));
         }
 
         private static GameAssetRecipe CreateStreamingAssetRecipe(string extension)
