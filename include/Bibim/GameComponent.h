@@ -9,6 +9,7 @@
 extern "C" 
 {
 #   include <lua.h>
+#   include <lauxlib.h>
 }
 #pragma warning(push)
 #pragma warning(disable:4996)
