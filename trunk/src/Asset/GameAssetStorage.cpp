@@ -202,17 +202,17 @@ namespace Bibim
         providers.erase(it);
     }
 
+    struct AssetProviderComparer
+    {
+        bool operator () (const AssetProvider* a, const AssetProvider* b) const
+        {
+            return a->GetPriority() < b->GetPriority();
+        }
+    };
+
     void GameAssetStorage::Reorder()
     {
-        struct ComparePredicate
-        {
-            bool operator () (const AssetProvider* a, const AssetProvider* b) const
-            {
-                return a->GetPriority() < b->GetPriority();
-            }
-        };
-
-        std::sort(providers.begin(), providers.end(), ComparePredicate());
+        std::sort(providers.begin(), providers.end(), AssetProviderComparer());
     }
 
     void GameAssetStorage::SetAsset(const String& name, GameAsset* asset)
