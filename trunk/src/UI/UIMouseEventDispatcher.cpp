@@ -88,11 +88,8 @@ namespace Bibim
             targetVisual = capturedVisual;
         else
         {
-            if (mouseState.IsVisible)
-            {
-                pickedVisual = Pick::Do(picker, rootWindow);
-                targetVisual = pickedVisual;
-            }
+            pickedVisual = Pick::Do(picker, rootWindow);
+            targetVisual = pickedVisual;
         }
 
         const UIMouseEventArgs baseArgs = UIMouseEventArgs(this,

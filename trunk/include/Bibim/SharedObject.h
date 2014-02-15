@@ -79,6 +79,7 @@ namespace Bibim
         protected:
             SharedObject();
             SharedObject(const SharedObject& original);
+            SharedObject& operator = (const SharedObject& right);
 
             template <typename To> SharedPointer<To> This();
             template <typename To, typename ThisType> SharedPointer<To> This(ThisType* thisInstance);
@@ -93,9 +94,6 @@ namespace Bibim
             template <typename T> friend class SharedPointer;
             template <typename T> friend struct lua_tinker::val2user;
             template <typename T> friend struct lua_tinker::ptr2user;
-
-        private:
-            SharedObject& operator = (const SharedObject&);
     };
 
     template <typename To> SharedPointer<To> SharedObject::This()
