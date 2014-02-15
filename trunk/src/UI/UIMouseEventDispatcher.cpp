@@ -67,7 +67,7 @@ namespace Bibim
         if (rootWindow == nullptr)
             return;
 
-        MouseState mouseState = device->GetState();
+        const MouseState& mouseState = device->GetState();
         UIPickingContext picker(renderer, Vector2(mouseState.Position.X, mouseState.Position.Y));
 
         struct Pick
@@ -81,7 +81,7 @@ namespace Bibim
             }
         };
 
-        UIVisual* pickedVisual = Pick::Do(picker, rootWindow);
+        UIVisual* pickedVisual = nullptr;
         UIVisual* targetVisual = nullptr;
 
         if (capturedVisual)
@@ -89,12 +89,11 @@ namespace Bibim
         else
         {
             if (mouseState.IsVisible)
+            {
+                pickedVisual = Pick::Do(picker, rootWindow);
                 targetVisual = pickedVisual;
+            }
         }
-
-        // TODO: 최적화
-        const Vector3 transformedMousePosition = Matrix4::Inversion(picker.GetRootTransform()).Transform(Vector3(mouseState.Position.X, mouseState.Position.Y, 0));
-        mouseState.Position = Point2(transformedMousePosition.X - picker.GetCurrentBounds().X, transformedMousePosition.Y - picker.GetCurrentBounds().Y);
 
         const UIMouseEventArgs baseArgs = UIMouseEventArgs(this,
                                                            targetVisual,
@@ -167,6 +166,9 @@ namespace Bibim
                     capturedVisual.Reset();
 
                     targetVisual->RaiseMouseButtonUpEvent(UIMouseButtonEventArgs(baseArgs, Key::MouseLeftButton));
+
+                    if (pickedVisual == nullptr)
+                        pickedVisual = Pick::Do(picker, rootWindow);
 
                     if (targetVisual == pickedVisual)
                         targetVisual->RaiseMouseClickEvent(baseArgs);
