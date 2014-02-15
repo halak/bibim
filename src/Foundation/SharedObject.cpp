@@ -14,6 +14,12 @@ namespace Bibim
     {
     }
 
+    SharedObject& SharedObject::operator = (const SharedObject& /*right*/)
+    {
+        referenceCount = 0;
+        return *this;
+    }
+
     SharedObject::~SharedObject()
     {
     }

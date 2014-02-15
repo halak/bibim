@@ -60,6 +60,8 @@ namespace Bibim
             virtual bool GetVisible() const = 0;
             virtual void SetVisible(bool value) = 0;
 
+            virtual bool IsForeground() const = 0;
+
             virtual void* GetHandle() const = 0;
             virtual void* GetDisplayHandle() const = 0;
 

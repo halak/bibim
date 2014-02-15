@@ -44,7 +44,7 @@ namespace Bibim
             bool GetFullscreenStyle() const;
             void SetFullscreenStyle(bool value);
 
-            bool IsForeground() const;
+            virtual bool IsForeground() const;
 
             virtual void* GetHandle() const;
             virtual void* GetDisplayHandle() const;
