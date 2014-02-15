@@ -1455,18 +1455,20 @@ namespace Bibim
             UIVisual* v = lua_tinker::read<UIVisual*>(L, 1);
             if (v == nullptr)
                 return 0;
+
+            int w = lua_tinker::read<int>(L, 2);
+            int h = lua_tinker::read<int>(L, 3);
+            if (w == 0)
+                w = static_cast<int>(v->GetWidth());
+            if (h == 0)
+                h = static_cast<int>(v->GetHeight());
             
             const Point2 viewportSize = game->GetGraphicsDevice()->GetViewportSize();
-            UIBoundsContext context(viewportSize);
-            const RectF bounds = context.Compute(v);
-
             GraphicsDevice* g = game->GetGraphicsDevice();
-            const int w = static_cast<int>(bounds.Width);
-            const int h = static_cast<int>(bounds.Height);
             RenderTargetTexture2DPtr renderTarget = new RenderTargetTexture2D(g, w, h);
             UITransformPtr oldTransform = v->GetTransform();
             UITransform3DPtr newTransform = new UITransform3D();
-            newTransform->SetScale(Vector2(viewportSize.X / bounds.Width, viewportSize.Y / bounds.Height));
+            newTransform->SetScale(Vector2(viewportSize.X / static_cast<float>(w), viewportSize.Y / static_cast<float>(h)));
             newTransform->SetScaleCenter(Vector2::Zero);
             v->SetTransform(newTransform);
             g->BeginDraw(renderTarget);

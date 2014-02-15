@@ -39,6 +39,13 @@ namespace Bibim
         if (index >= 0)
             Visit(targets[index--]);
         else
-            bounds = GetCurrentBounds();
+        {
+            const RectF current = GetCurrentBounds();
+            const Matrix4& transform = GetCurrentTransform();
+            const Vector3 lt = transform.Transform(Vector3(current.GetLeft(), current.GetTop(), 0.0f));
+            const Vector3 rb = transform.Transform(Vector3(current.GetRight(), current.GetBottom(), 0.0f));
+
+            bounds = RectF(Vector2(lt.X, lt.Y), Vector2(rb.X, rb.Y));
+        }
     }
 }
