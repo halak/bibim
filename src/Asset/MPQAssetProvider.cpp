@@ -94,7 +94,9 @@ namespace Bibim
         String::CopyChars(&filename[nl], ".ab");
         filename[totalLength - 1] = '\0';
 
-        Stream* stream = new MPQStream(mpq, filename);
+        Stream* stream = nullptr;
+        if (mpq->Has(filename))
+            stream = new MPQStream(mpq, filename);
 
         BBStackFree(filename);
 
@@ -108,10 +110,10 @@ namespace Bibim
     {
         BBAssertDebug(storage != nullptr);
 
-        StreamPtr assetStream = OpenActually(mpq, name);
-        if (assetStream->CanRead())
+        StreamPtr stream = OpenActually(mpq, name);
+        if (stream && stream->CanRead())
         {
-            AssetStreamReader reader(name, assetStream, storage, isPriority);
+            AssetStreamReader reader(name, stream, storage, isPriority);
             return GameAssetFactory::Create(reader);
         }
         else
