@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\extlibs\freetype-2.5.0.1\custom;..\..\extlibs\freetype-2.5.0.1\include"
+				AdditionalIncludeDirectories="&quot;..\..\extlibs\freetype-2.5.2\custom&quot;;&quot;..\..\extlibs\freetype-2.5.2\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;FT_DEBUG_LEVEL_ERROR;FT_DEBUG_LEVEL_TRACE;FT2_BUILD_LIBRARY;_CRT_SECURE_NO_DEPRECATE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\extlibs\freetype-2.5.0.1\custom;..\..\extlibs\freetype-2.5.0.1\include"
+				AdditionalIncludeDirectories="&quot;..\..\extlibs\freetype-2.5.2\custom&quot;;&quot;..\..\extlibs\freetype-2.5.2\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;FT2_BUILD_LIBRARY;_CRT_SECURE_NO_DEPRECATE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -149,16 +149,16 @@
 			Name="config"
 			>
 			<File
-				RelativePath="..\..\extlibs\freetype-2.5.0.1\custom\freetype\config\ftmodule.h"
+				RelativePath="..\..\extlibs\freetype-2.5.2\custom\config\ftmodule.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\extlibs\freetype-2.5.0.1\custom\freetype\config\ftoption.h"
+				RelativePath="..\..\extlibs\freetype-2.5.2\custom\config\ftoption.h"
 				>
 			</File>
 		</Filter>
 		<File
-			RelativePath="..\..\extlibs\freetype-2.5.0.1\custom\freetype-all.c"
+			RelativePath="..\..\extlibs\freetype-2.5.2\custom\freetype-all.c"
 			>
 		</File>
 	</Files>
