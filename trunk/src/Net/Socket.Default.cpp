@@ -180,13 +180,11 @@ namespace Bibim
                 index += received;
             else if (received == 0)
             {
-                // TODO: ERROR 贸府
-                Log::Information("gracefully closed");
+                // gracefully closed;
                 break;
             }
             else
-            { 
-                // TODO: ERROR 贸府
+            {
 #if (defined(BIBIM_PLATFORM_WINDOWS))
                 const int error = WSAGetLastError();
 

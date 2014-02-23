@@ -1,5 +1,6 @@
 ﻿#include <Bibim/Config.h>
 #include <Bibim/BinaryWriter.h>
+#include <Bibim/Log.h>
 #include <Bibim/Stream.h>
 
 namespace Bibim
@@ -23,9 +24,7 @@ namespace Bibim
         BBAssertDebug(stream != nullptr);
 
         if (stream->Write(&value, sizeof(T)) != sizeof(T))
-        {
-            // TODO: ERROR
-        }
+            Log::Error("BinaryWriter::WriteToTemplate Error");
     }
 
     void BinaryWriter::WriteTo(Stream* stream, bool value)

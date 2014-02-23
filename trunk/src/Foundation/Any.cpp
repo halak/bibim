@@ -467,15 +467,12 @@ namespace Bibim
                                BinaryReader::ToFloat(buffer + 8),
                                BinaryReader::ToFloat(buffer + 12));
             case StringType:
-                // todo
-                break;
             case SharedObjectType:
             case LightObjectType:
             default:
+                // EXCEPTION
                 return Any::Void;
         }
-
-        return Any::Void;
     }
 
     int Any::WriteToBytes(byte* buffer, const Any& value)
@@ -538,13 +535,9 @@ namespace Bibim
                 BinaryWriter::From(buffer + 12, sixteenBytes->FLOAT4[3]);
                 return sizeof(float) * 4;
             case StringType:
-                // todo
-                break;
             case SharedObjectType:
-                // todo
-                break;
             case LightObjectType:
-                // todo
+                // EXCEPTION
                 break;
         }
 
