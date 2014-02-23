@@ -39,6 +39,13 @@ namespace Bibim.UI.Visuals
         #endregion
 
         #region Constructors
+        public UIImage()
+        {
+            Width = 1.0f;
+            Height = 1.0f;
+            WidthMode = UISizeMode.Content;
+            HeightMode = UISizeMode.Content;
+        }
         #endregion
 
         #region Methods
