@@ -46,6 +46,8 @@ namespace Bibim
             Image();
             Image(const String& textureURI, const Rect& clippingRect, Transform appliedTransform, Texture2D* texture);
 
+            static Image* Create(BinaryReader& reader, GameAssetStorage* storage);
+
         private:
             Texture2DPtr texture;
             Rect clippingRect;

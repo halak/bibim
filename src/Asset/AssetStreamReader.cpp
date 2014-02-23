@@ -72,6 +72,14 @@ namespace Bibim
             return FindModuleByClassID(defaultModuleClassID);
     }
 
+    GameModule* AssetStreamReader::FindModuleByClassID(int classID)
+    {
+        if (modules)
+            return modules->GetRoot()->FindChildByClassID(classID);
+        else
+            return nullptr;
+    }
+
     GameAsset* AssetStreamReader::ReadAsset()
     {
         const String assetName = ReadString();
@@ -79,14 +87,6 @@ namespace Bibim
             return nullptr;
 
         return storage->Load(assetName);
-    }
-
-    GameModule* AssetStreamReader::FindModuleByClassID(int classID)
-    {
-        if (modules)
-            return modules->GetRoot()->FindChildByClassID(classID);
-        else
-            return nullptr;
     }
 
     AssetStreamReader& AssetStreamReader::operator = (const AssetStreamReader& right)

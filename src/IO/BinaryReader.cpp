@@ -1,5 +1,6 @@
 ﻿#include <Bibim/Config.h>
 #include <Bibim/BinaryReader.h>
+#include <Bibim/Log.h>
 #include <Bibim/Memory.h>
 #include <Bibim/Stream.h>
 
@@ -35,7 +36,7 @@ namespace Bibim
             return result;
         else
         {
-            // TODO: ERROR
+            Log::Error("BinaryWriter::ReadFromTemplate Error");
             return T();
         }
     }

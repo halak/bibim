@@ -77,24 +77,22 @@ namespace Bibim
             return RectF::Empty;
     }
 
-    // TODO: AssetStreamReader, ComponentStreamReader 통합
-
     GameAsset* Image::Create(StreamReader& reader, GameAsset* /*existingInstance*/)
     {
-        const String textureURI = reader.ReadString();
-        const Rect clippingRect = reader.ReadRect();
-        const Transform appliedTransform = static_cast<Transform>(reader.ReadByte());
-        Texture2D* texture = static_cast<Texture2D*>(reader.GetStorage()->Load(textureURI));
-
-        return new Image(textureURI, clippingRect, appliedTransform, texture);
+        return Image::Create(reader, reader.GetStorage());
     }
 
     Image* Image::Create(ComponentStreamReader& reader)
     {
+        return Image::Create(reader, reader.GetStorage());
+    }
+
+    Image* Image::Create(BinaryReader& reader, GameAssetStorage* storage)
+    {
         const String textureURI = reader.ReadString();
         const Rect clippingRect = reader.ReadRect();
         const Transform appliedTransform = static_cast<Transform>(reader.ReadByte());
-        Texture2D* texture = static_cast<Texture2D*>(reader.GetStorage()->Load(textureURI));
+        Texture2D* texture = static_cast<Texture2D*>(storage->Load(textureURI));
 
         return new Image(textureURI, clippingRect, appliedTransform, texture);
     }

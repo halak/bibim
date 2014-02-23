@@ -67,15 +67,6 @@ namespace Bibim
         FT_Library library = nullptr;
         FT_Init_FreeType(&library);
         ftLibrary = static_cast<void*>(library);
-
-        // TODO: 글꼴 폴더 / 기본 글꼴
-        // std::vector<char> windowsDirectory;
-        // windowsDirectory.resize(GetWindowsDirectory(nullptr, 0) + 1, '\0');
-        // GetWindowsDirectory(&windowsDirectory[0], windowsDirectory.size());
-        // osFontDirectory = &windowsDirectory[0];
-        // osFontDirectory += "/Fonts/";
-
-        // alternativeFace = osFontDirectory + "gulim.ttc";
     }
 
     void FontLibrary::Add(Font* font)

@@ -48,31 +48,11 @@ namespace Bibim
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // int Geom2D::GetPointSegmentDistanceSquared(Point2 p, Point2 a, Point2 b)
-    // float Geom2D::GetPointSegmentDistanceSquared(Vector2 p, Vector2 a, Vector2 b)
-    // 두 함수의 구현은 동일해야합니다.
-
     int Geom2D::GetPointSegmentDistanceSquared(Point2 p, Point2 a, Point2 b)
     {
+        // 내적 연산, 제곱 연산으로 int 값 overflow가 빈번하게 일어나서 부동소수점 함수를 거치도록 수정하였습니다.
+        // 이 함수를 최적화하고 싶을 때는 내적, 제곱 연산을 longint로 받아야합니다.
         return static_cast<int>(GetPointSegmentDistanceSquared(Vector2(p.X, p.Y), Vector2(a.X, a.Y), Vector2(b.X, b.Y)));
-        /*
-        TODO: FIND BUG
-        const Point2 ab = b - a;
-        const Point2 ap = p - a;
-        const Point2 bp = p - b;
-        const int e = ab.Dot(ap);
-
-        if (e > 0)
-        {
-            const int f = ab.Dot(ab);
-            if (e >= f)
-                return bp.Dot(bp);
-            else
-                return ap.Dot(ap) - e * e / f;
-        }
-        else
-            return ap.Dot(ap);
-        */
     }
 
     float Geom2D::GetPointSegmentDistanceSquared(Vector2 p, Vector2 a, Vector2 b)

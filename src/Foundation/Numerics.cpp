@@ -1,10 +1,9 @@
 ﻿#include <Bibim/Config.h>
 #include <Bibim/Numerics.h>
+#include <Bibim/Math.h>
 #include <float.h>
 #include <limits.h>
 #include <cstdlib>
-
-// TODO: 코드 정리 좀 해야합니다.
 
 namespace Bibim
 {
@@ -39,9 +38,9 @@ namespace Bibim
 
     const String& Bool::ToString(bool value)
     {
-        static const String YES = "YES";
-        static const String NO = "NO";
-        return value ? YES : NO;
+        static const String TRUE = "true";
+        static const String FALSE = "false";
+        return value ? TRUE : FALSE;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,16 +50,10 @@ namespace Bibim
 
     byte Byte::Parse(const char* s, int /*length*/)
     {
-        if (s == nullptr)
+        if (s)
+            return static_cast<byte>(Math::Clamp(std::atoi(s), static_cast<int>(Min), static_cast<int>(Max)));
+        else
             return 0;
-
-        const int result = std::atoi(s);
-        if (result < Min)
-            return Min;
-        if (result > Max)
-            return Max;
-
-        return static_cast<byte>(result);
     }
 
     String Byte::ToString(byte value)
@@ -75,16 +68,10 @@ namespace Bibim
 
     short ShortInt::Parse(const char* s, int /*length*/)
     {
-        if (s == nullptr)
+        if (s)
+            return static_cast<short>(Math::Clamp(std::atoi(s), static_cast<int>(Min), static_cast<int>(Max)));
+        else
             return 0;
-
-        const int result = std::atoi(s);
-        if (result < Min)
-            return Min;
-        if (result > Max)
-            return Max;
-
-        return static_cast<short>(result);
     }
 
     String ShortInt::ToString(short value)
@@ -107,28 +94,7 @@ namespace Bibim
 
     String Int::ToString(int value)
     {
-        static const int BUFFER_LENGTH = 16;
-
-        const bool isNegative = (value < 0);
-        if (isNegative)
-            value = -value;
-
-        char s[BUFFER_LENGTH];
-        s[BUFFER_LENGTH - 1] = '\0';
-
-        int index = BUFFER_LENGTH - 2;
-        do
-        {
-            s[index--] = "0123456789"[value % 10];
-            value /= 10;
-        } while (value > 0);
-
-        if (isNegative)
-            s[index] = '-';
-        else
-            index++;
-
-        return String(&s[index], 0, BUFFER_LENGTH - 1 - index);
+        return LongInt::ToString(static_cast<longint>(value));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
