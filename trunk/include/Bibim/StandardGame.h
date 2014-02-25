@@ -49,6 +49,8 @@ namespace Bibim
             inline bool GetFullscreen() const;
             void SetFullscreen(bool value);
 
+            inline Point2 GetContentSize() const;
+
             inline Color GetClearColor() const;
             inline void SetClearColor(Color value);
 
@@ -135,6 +137,11 @@ namespace Bibim
     bool StandardGame::GetFullscreen() const
     {
         return fullscreen;
+    }
+
+    Point2 StandardGame::GetContentSize() const
+    {
+        return contentSize;
     }
 
     Color StandardGame::GetClearColor() const

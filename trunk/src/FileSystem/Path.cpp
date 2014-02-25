@@ -15,7 +15,7 @@ namespace Bibim
                 continue;
 
             const bool startsWith = (s[0] == '/');
-            const bool endsWith = (result[result.GetLength() - 1] == '/');
+            const bool endsWith = (result.IsEmpty() == false) ? (result[result.GetLength() - 1] == '/') : false;
 
             if (startsWith && endsWith)
                 result.Append(&s.CStr()[1], s.GetLength() - 1);
