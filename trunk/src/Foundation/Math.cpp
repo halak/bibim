@@ -117,45 +117,4 @@ namespace Bibim
                     ((-a + (3.0f * b) - (3.0f * c) + d) * (t * t * t))
                 );
     }
-
-    bool Math::Random()
-    {
-        return std::rand() % 2 != 0;
-    }
-
-    int Math::Random(int a, int b)
-    {
-        return static_cast<int>(Random(static_cast<float>(a), static_cast<float>(b)));
-        // return a + (b - a) / 2;
-        //std::tr1::uniform_int<int> u(Math::Min(a, b), Math::Max(a, b));
-        //return u(globalRandomEngine);
-    }
-
-    float Math::Random(float a, float b)
-    {
-        const float t = static_cast<float>(std::rand()) / static_cast<float>(RAND_MAX);
-        return a + (b - a) * t;
-        //std::tr1::uniform_real<float> u(Math::Min(a, b), Math::Max(a, b));
-        //return u(globalRandomEngine);
-    }
-
-    Vector2 Math::Random(Vector2 a, Vector2 b)
-    {
-        return Vector2(Random(a.X, b.X), Random(a.Y, b.Y));
-    }
-
-    Vector3 Math::Random(Vector3 a, Vector3 b)
-    {
-        return Vector3(Random(a.X, b.X), Random(a.Y, b.Y), Random(a.Z, b.Z));
-    }
-
-    Vector4 Math::Random(Vector4 a, Vector4 b)
-    {
-        return Vector4(Random(a.X, b.X), Random(a.Y, b.Y), Random(a.Z, b.Z), Random(a.W, b.W));
-    }
-
-    Color Math::Random(Color a, Color b)
-    {
-        return Color(Random(a.R, b.R), Random(a.G, b.G), Random(a.B, b.B), Random(a.A, b.A));
-    }
 }
