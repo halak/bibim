@@ -11,7 +11,7 @@ public class JNI {
      
     public static native void handleMouseMove(int x, int y);
     public static native void handleMouseLeftButtonDown(int x, int y);
-    publ    puic static native void handleMouseLeftButtonUp(int x, int y);
+    public static native void handleMouseLeftButtonUp(int x, int y);
     public static native void handleMouseMiddleButtonDown(int x, int y);
     public static native void handleMouseMiddleButtonUp(int x, int y);
     public static native void handleMouseRightButtonDown(int x, int y);
@@ -20,7 +20,7 @@ public class JNI {
     public static native void handleKeyDown(int keyCode);
     public static native void handleKeyUp(int keyCode);
     
-blic static native void handleIMESubmit(int id, String text);
+    public static native void handleIMESubmit(int id, String text);
     public static native void handleIMECancel(int id);
     
     public static final int EDIT_TEXT_FORMAT_PLAIN = 0;
