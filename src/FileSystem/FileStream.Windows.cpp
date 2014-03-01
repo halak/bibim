@@ -14,7 +14,9 @@ namespace Bibim
           canRead(false),
           canWrite(false)
     {
-        BBAssert(path.Contains('\\') == false);
+        String p = path;
+        p.Replace('\\', '/');
+        //BBAssert(path.Contains('\\') == false);
 
         DWORD windowsAccessMode = 0x00000000;
         if (accessMode == ReadOnly)
@@ -28,17 +30,17 @@ namespace Bibim
         else if (windowsAccessMode & GENERIC_WRITE)
             windowsCreationDisposition = CREATE_ALWAYS;
 
-        handle = ::CreateFile(path.CStr(), windowsAccessMode, FILE_SHARE_READ,
+        handle = ::CreateFile(p.CStr(), windowsAccessMode, FILE_SHARE_READ,
                               nullptr, windowsCreationDisposition, FILE_ATTRIBUTE_NORMAL, nullptr);
         if (handle == INVALID_HANDLE_VALUE)
         {
             if (accessMode == WriteOnly)
             {
-                const String directory = Path::GetDirectory(path);
+                const String directory = Path::GetDirectory(p);
                 if (directory.IsEmpty() == false &&
                     ::CreateDirectory(directory.CStr(), nullptr))
                 {
-                    handle = ::CreateFile(path.CStr(),
+                    handle = ::CreateFile(p.CStr(),
                                           windowsAccessMode,
                                           FILE_SHARE_READ,
                                           nullptr,

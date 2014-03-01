@@ -97,6 +97,14 @@ namespace Bibim
             GamePadRightThumb = 0xFC,
             GamePadLeftShoulder = 0xFD,
             GamePadRightShoulder = 0xFE,
+
+            VolumeMute = 0xAD,
+            VolumeDown = 0xAE,
+            VolumeUp = 0xAF,
+
+            SystemHome = 0xAC,
+            SystemMenu = 0xA4,
+            SystemBack = 0xA6,
         };
 
         static const int Count = 256;

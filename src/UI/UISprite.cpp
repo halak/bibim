@@ -21,6 +21,7 @@ namespace Bibim
           frameIndex(0),
           horizontalFlip(false),
           verticalFlip(false),
+          autoRemove(true),
           timeline(nullptr)
     {
         SetSize(1.0f, 1.0f);
@@ -96,13 +97,15 @@ namespace Bibim
         if (source == nullptr)
             return;
 
-        // Auto Detach
         if (source->GetLooped() == false && 
             time == source->GetDuration())
         {
-            UIPanel* parent = GetParent();
-            if (parent && parent->IsWindow())
-                static_cast<UIWindow*>(parent)->RemoveChild(this);
+            if (GetAutoRemove())
+            {
+                UIPanel* parent = GetParent();
+                if (parent && parent->IsWindow())
+                    static_cast<UIWindow*>(parent)->RemoveChild(this);
+            }
         }
 
         time += dt * speed;
@@ -110,7 +113,16 @@ namespace Bibim
         if (source->GetLooped() == false)
             time = Math::Min(time, source->GetDuration());
 
-        frameIndex = source->GetKeyframeIndex(time, frameIndex);
+        if (time < source->GetDuration())
+        {
+            if (speed >= 0.0f)
+                frameIndex = source->GetKeyframeIndex(time, frameIndex);
+            else
+                frameIndex = source->GetKeyframeIndex(time);
+        }
+        else
+            frameIndex = source->GetKeyframes().size() - 1;
+
         UpdateOrigin();
     }
 
