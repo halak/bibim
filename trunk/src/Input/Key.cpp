@@ -70,6 +70,12 @@ namespace Bibim
         Delete,
         Home,
         End,
+        VolumeMute,
+        VolumeDown,
+        VolumeUp,
+        SystemHome,
+        SystemMenu,
+        SystemBack,
         None,
     };
 
@@ -180,6 +186,13 @@ namespace Bibim
         BBAddKeyEntry(GamePadRightThumb);
         BBAddKeyEntry(GamePadLeftShoulder);
         BBAddKeyEntry(GamePadRightShoulder);
+
+        BBAddKeyEntry(VolumeMute);
+        BBAddKeyEntry(VolumeDown);
+        BBAddKeyEntry(VolumeUp);
+        BBAddKeyEntry(SystemHome);
+        BBAddKeyEntry(SystemMenu);
+        BBAddKeyEntry(SystemBack);
 #       undef BBAddKeyEntry
 
         codeToStringMap = stringToCodeMap;

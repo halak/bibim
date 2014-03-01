@@ -211,8 +211,8 @@ static Key::Code ConvertKeyCode(int androidKeyCode)
         case AKEYCODE_UNKNOWN: return Key::None;
         case AKEYCODE_SOFT_LEFT: return Key::None;
         case AKEYCODE_SOFT_RIGHT: return Key::None;
-        case AKEYCODE_HOME: return Key::None;
-        case AKEYCODE_BACK: return Key::None;
+        case AKEYCODE_HOME: return Key::SystemHome;
+        case AKEYCODE_BACK: return Key::SystemBack;
         case AKEYCODE_CALL: return Key::None;
         case AKEYCODE_ENDCALL: return Key::None;
         case AKEYCODE_0: return Key::D0;
@@ -232,8 +232,8 @@ static Key::Code ConvertKeyCode(int androidKeyCode)
         case AKEYCODE_DPAD_LEFT: return Key::Left;
         case AKEYCODE_DPAD_RIGHT: return Key::Right;
         case AKEYCODE_DPAD_CENTER: return Key::None;
-        case AKEYCODE_VOLUME_UP: return Key::None;
-        case AKEYCODE_VOLUME_DOWN: return Key::None;
+        case AKEYCODE_VOLUME_UP: return Key::VolumeUp;
+        case AKEYCODE_VOLUME_DOWN: return Key::VolumeDown;
         case AKEYCODE_POWER: return Key::None;
         case AKEYCODE_CAMERA: return Key::None;
         case AKEYCODE_CLEAR: return Key::None;
@@ -290,7 +290,7 @@ static Key::Code ConvertKeyCode(int androidKeyCode)
         case AKEYCODE_HEADSETHOOK: return Key::None;
         case AKEYCODE_FOCUS: return Key::None;
         case AKEYCODE_PLUS: return Key::None;
-        case AKEYCODE_MENU: return Key::None;
+        case AKEYCODE_MENU: return Key::SystemMenu;
         case AKEYCODE_NOTIFICATION: return Key::None;
         case AKEYCODE_SEARCH: return Key::None;
         case AKEYCODE_MEDIA_PLAY_PAUSE: return Key::None;

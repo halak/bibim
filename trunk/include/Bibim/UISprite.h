@@ -36,6 +36,9 @@ namespace Bibim
             inline bool GetVerticalFlip() const;
             inline void SetVerticalFlip(bool value);
 
+            inline bool GetAutoRemove() const;
+            inline void SetAutoRemove(bool value);
+
             inline Timeline* GetTimeline() const;
             void SetTimeline(Timeline* value);
 
@@ -65,6 +68,7 @@ namespace Bibim
             int frameIndex;
             bool horizontalFlip;
             bool verticalFlip;
+            bool autoRemove;
             Timeline* timeline;
             Updater updater;
     };
@@ -109,6 +113,16 @@ namespace Bibim
     void UISprite::SetVerticalFlip(bool value)
     {
         verticalFlip = value;
+    }
+
+    bool UISprite::GetAutoRemove() const
+    {
+        return autoRemove;
+    }
+
+    void UISprite::SetAutoRemove(bool value)
+    {
+        autoRemove = value;
     }
 
     Timeline* UISprite::GetTimeline() const

@@ -625,6 +625,8 @@ namespace Bibim
             lua_tinker::class_def<UISprite>(L, "SetHorizontalFlip", &UISprite::SetHorizontalFlip);
             lua_tinker::class_def<UISprite>(L, "GetVerticalFlip", &UISprite::GetVerticalFlip);
             lua_tinker::class_def<UISprite>(L, "SetVerticalFlip", &UISprite::SetVerticalFlip);
+            lua_tinker::class_def<UISprite>(L, "GetAutoRemove", &UISprite::GetAutoRemove);
+            lua_tinker::class_def<UISprite>(L, "SetAutoRemove", &UISprite::SetAutoRemove);
             lua_tinker::class_def<UISprite>(L, "GetTimeline", &UISprite::GetTimeline);
             lua_tinker::class_def<UISprite>(L, "SetTimeline", &UISprite::SetTimeline);
         lua_tinker::class_add<UIPanel>(L, "UIPanel");

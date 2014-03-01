@@ -4,12 +4,12 @@ import android.app.Activity;
 import android.os.Bundle;
 
 public class BaseActivity extends Activity {
-	public static BaseActivity activity;
-	
+    public static BaseActivity activity;
+    
     private SurfaceView view;
     
     public SurfaceView getSurfaceView() {
-    	return view;
+        return view;
     }
 
     @Override
@@ -34,6 +34,6 @@ public class BaseActivity extends Activity {
     }
     
     protected SurfaceView createSurfaceView() {
-    	return new SurfaceView(getApplication());
+        return new SurfaceView(getApplication());
     }
 }

@@ -56,7 +56,7 @@ class SurfaceView extends GLSurfaceView {
         // Environment.getExternalStorageState()
         String workingDirectory = getContext().getExternalFilesDir(null).getAbsolutePath();
         if (workingDirectory.endsWith("/") == false)
-        	workingDirectory += "/";
+            workingDirectory += "/";
 
         /* Set the renderer responsible for frame rendering */
         setRenderer(new Renderer(getContext(), localeName, workingDirectory));
@@ -280,74 +280,74 @@ class SurfaceView extends GLSurfaceView {
         private int[] mValue = new int[1];
     }
     
-	@Override
-	public boolean onTouchEvent(final MotionEvent event) {
-		final int x = (int)event.getX();
-		final int y = (int)event.getY();
-		switch (event.getActionMasked()) {
-			case MotionEvent.ACTION_MOVE:
-		        this.queueEvent(new Runnable() {
-		            public void run() {
-		            	JNI.handleMouseMove(x, y);
-		            }
-		        });
-				return true;
-			case MotionEvent.ACTION_DOWN:
-		        this.queueEvent(new Runnable() {
-		            public void run() {
-		            	JNI.handleMouseLeftButtonDown(x, y);
-		            }
-		        });
-				return true;
-			case MotionEvent.ACTION_UP:
-		        this.queueEvent(new Runnable() {
-		            public void run() {
-		            	JNI.handleMouseLeftButtonUp(x, y);
-		            }
-		        });
-				return true;
-			default:
-				return super.onTouchEvent(event);
-		}
-	}
+    @Override
+    public boolean onTouchEvent(final MotionEvent event) {
+        final int x = (int)event.getX();
+        final int y = (int)event.getY();
+        switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_MOVE:
+                this.queueEvent(new Runnable() {
+                    public void run() {
+                        JNI.handleMouseMove(x, y);
+                    }
+                });
+                return true;
+            case MotionEvent.ACTION_DOWN:
+                this.queueEvent(new Runnable() {
+                    public void run() {
+                        JNI.handleMouseLeftButtonDown(x, y);
+                    }
+                });
+                return true;
+            case MotionEvent.ACTION_UP:
+                this.queueEvent(new Runnable() {
+                    public void run() {
+                        JNI.handleMouseLeftButtonUp(x, y);
+                    }
+                });
+                return true;
+            default:
+                return super.onTouchEvent(event);
+        }
+    }
     
-	@Override
-	public boolean onKeyDown(final int code, final KeyEvent event) {
+    @Override
+    public boolean onKeyDown(final int code, final KeyEvent event) {
         this.queueEvent(new Runnable() {
             public void run() {
                 JNI.handleKeyDown(code);
             }
         });
         return true;
-	}
+    }
     
-	@Override
-	public boolean onKeyUp(final int code, final KeyEvent event) {
+    @Override
+    public boolean onKeyUp(final int code, final KeyEvent event) {
         this.queueEvent(new Runnable() {
             public void run() {
                 JNI.handleKeyUp(code);
             }
         });
         return true;
-	}
+    }
 
     private static class Renderer implements GLSurfaceView.Renderer {
-    	private Context context;
-    	private String localeName;
-    	private String workingDirectory;
+        private Context context;
+        private String localeName;
+        private String workingDirectory;
         
         public Renderer(Context context, String localeName, String workingDirectory) {
-        	this.context = context;
+            this.context = context;
             this.localeName = localeName;
             this.workingDirectory = workingDirectory;
         }
         
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        	Log.i("BIBIM", String.format("onSurfaceCreated"));
+            Log.i("BIBIM", String.format("onSurfaceCreated"));
         }
         
         public void onSurfaceChanged(GL10 gl, int width, int height) {
-        	Log.i("BIBIM", String.format("onSurfaceChanged (%d, %d)", width, height));
+            Log.i("BIBIM", String.format("onSurfaceChanged (%d, %d)", width, height));
             JNI.init(context, width, height, localeName, workingDirectory, context.getAssets());
         }
         
