@@ -137,14 +137,6 @@ namespace Bibim
             static inline Color   Lerp(Color a, Color b, float t);
 
             static Vector2 CatmullRom(Vector2 a, Vector2 b, Vector2 c, Vector2 d, float t);
-
-            static bool    Random();
-            static int     Random(int a, int b);
-            static float   Random(float a, float b);
-            static Vector2 Random(Vector2 a, Vector2 b);
-            static Vector3 Random(Vector3 a, Vector3 b);
-            static Vector4 Random(Vector4 a, Vector4 b);
-            static Color   Random(Color a, Color b);
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

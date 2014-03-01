@@ -5,6 +5,7 @@
 #include <Bibim/Image.h>
 #include <Bibim/Math.h>
 #include <Bibim/Numerics.h>
+#include <Bibim/Random.h>
 #include <Bibim/Spark.h>
 #include <Bibim/Timeline.h>
 #include <Bibim/UIDrawingContext.h>
@@ -1334,7 +1335,7 @@ namespace Bibim
 
     void ColorRandomizer::HandleBirth(Particle& particle)
     {
-        const int index = Math::Random(0, static_cast<int>(randomColors.size() - 1));
+        const int index = Rand::Range(0, static_cast<int>(randomColors.size()));
         particle.setParamCurrentValue(PARAM_RED, randomColors[index].X);
         particle.setParamCurrentValue(PARAM_GREEN, randomColors[index].Y);
         particle.setParamCurrentValue(PARAM_BLUE, randomColors[index].Z);
@@ -1413,9 +1414,9 @@ namespace Bibim
 
             for (int i = 0; i < NumberOfAxes; i++)
             {
-                Axes[i] = Vector3(Math::Random(-100, 100),
-                                  Math::Random(-100, 100),
-                                  Math::Random(-100, 100));
+                Axes[i] = Vector3(Rand::Range(-100, 100),
+                                  Rand::Range(-100, 100),
+                                  Rand::Range(-100, 100));
                 if (Axes[i] != Vector3::Zero)
                     Axes[i].Normalize();
                 else

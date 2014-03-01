@@ -2,6 +2,7 @@
 #include <Bibim/CCParticleEmitter.h>
 #include <Bibim/CCParticleSystem.h>
 #include <Bibim/Math.h>
+#include <Bibim/Random.h>
 
 namespace Bibim
 {
@@ -161,7 +162,7 @@ namespace Bibim
 
     float CCParticleEmitter::Generate(float base, float variance)
     {
-        return base + variance * Math::Random(-1.0f, +1.0f);
+        return base + variance * Rand::Range(-1.0f, +1.0f);
     }
 
     float CCParticleEmitter::GenerateGTE0(float base, float variance)
@@ -193,14 +194,14 @@ namespace Bibim
         p->pos = Generate(system->GetSourcePosition(), system->GetSourcePositionVariance());
         p->startPos = position;
 
-        const Vector4 start = Vector4(Math::Clamp(system->GetStartColor().X + system->GetStartColorVariance().X * Math::Random(-1.0f, +1.0f)),
-                                      Math::Clamp(system->GetStartColor().Y + system->GetStartColorVariance().Y * Math::Random(-1.0f, +1.0f)),
-                                      Math::Clamp(system->GetStartColor().Z + system->GetStartColorVariance().Z * Math::Random(-1.0f, +1.0f)),
-                                      Math::Clamp(system->GetStartColor().W + system->GetStartColorVariance().W * Math::Random(-1.0f, +1.0f)));
-        const Vector4 end = Vector4(Math::Clamp(system->GetFinishColor().X + system->GetFinishColorVariance().X * Math::Random(-1.0f, +1.0f)),
-                                    Math::Clamp(system->GetFinishColor().Y + system->GetFinishColorVariance().Y * Math::Random(-1.0f, +1.0f)),
-                                    Math::Clamp(system->GetFinishColor().Z + system->GetFinishColorVariance().Z * Math::Random(-1.0f, +1.0f)),
-                                    Math::Clamp(system->GetFinishColor().W + system->GetFinishColorVariance().W * Math::Random(-1.0f, +1.0f)));
+        const Vector4 start = Vector4(Math::Clamp(system->GetStartColor().X + system->GetStartColorVariance().X * Rand::Range(-1.0f, +1.0f)),
+                                      Math::Clamp(system->GetStartColor().Y + system->GetStartColorVariance().Y * Rand::Range(-1.0f, +1.0f)),
+                                      Math::Clamp(system->GetStartColor().Z + system->GetStartColorVariance().Z * Rand::Range(-1.0f, +1.0f)),
+                                      Math::Clamp(system->GetStartColor().W + system->GetStartColorVariance().W * Rand::Range(-1.0f, +1.0f)));
+        const Vector4 end = Vector4(Math::Clamp(system->GetFinishColor().X + system->GetFinishColorVariance().X * Rand::Range(-1.0f, +1.0f)),
+                                    Math::Clamp(system->GetFinishColor().Y + system->GetFinishColorVariance().Y * Rand::Range(-1.0f, +1.0f)),
+                                    Math::Clamp(system->GetFinishColor().Z + system->GetFinishColorVariance().Z * Rand::Range(-1.0f, +1.0f)),
+                                    Math::Clamp(system->GetFinishColor().W + system->GetFinishColorVariance().W * Rand::Range(-1.0f, +1.0f)));
         p->color = start;
         p->deltaColor = (end - start) / p->timeToLive;
 

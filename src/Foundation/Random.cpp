@@ -3,6 +3,8 @@
 
 namespace Bibim
 {
+    Random Rand::Global;
+
     const double Random::FACT = 2.32830643653869628906e-10;
 
     #define MAT0POS(t,v) (v^(v>>t))
@@ -24,14 +26,14 @@ namespace Bibim
         : index(0)
     {
         for (int i = 0; i < sizeof(states) / sizeof(states[0]); i++)
-            states[i] = 0;
+            states[i] = i;
     }
 
     Random::Random(uint seed)
         : index(0)
     {
         for (int i = 0; i < sizeof(states) / sizeof(states[0]); i++)
-            states[i] = seed;
+            states[i] = seed + i;
     }
 
     Random::Random(const Random& original)
@@ -41,8 +43,7 @@ namespace Bibim
             states[i] = original.states[i];
     }
 
-    /*
-    unsigned int Random::Generate()
+    double Random::Next()
     {
         const uint z0 = VRm1;
         const uint z1 = MAT0NEG(-16,V0) ^ MAT0NEG (-15, VM1);
@@ -51,8 +52,48 @@ namespace Bibim
         newV0 = MAT0NEG(-2, z0) ^ MAT0NEG(-18, z1) ^ MAT3NEG(-28, z2) ^ MAT4NEG(-5, 0xda442d24U, newV1);
 
         index = (index + 15) & 0x0000000fU;
-        return 0; //return ((double) states[index]) * FACT;
-    }*/
+        return ((double) states[index]) * FACT;
+    }
+
+    bool Random::TrueOrFalse()
+    {
+        return Next() < 0.5;
+    }
+
+    int Random::Range(int a, int b)
+    {
+        return a + static_cast<int>(static_cast<double>(b - a) * Next());
+    }
+
+    float Random::Range(float a, float b)
+    {
+        return a + static_cast<float>(static_cast<double>(b - a) * Next());
+    }
+
+    double Random::Range(double a, double b)
+    {
+        return a + ((b - a) * Next());
+    }
+
+    Vector2 Random::Range(Vector2 a, Vector2 b)
+    {
+        return Vector2(Range(a.X, b.X), Range(a.Y, b.Y));
+    }
+
+    Vector3 Random::Range(Vector3 a, Vector3 b)
+    {
+        return Vector3(Range(a.X, b.X), Range(a.Y, b.Y), Range(a.Z, b.Z));
+    }
+
+    Vector4 Random::Range(Vector4 a, Vector4 b)
+    {
+        return Vector4(Range(a.X, b.X), Range(a.Y, b.Y), Range(a.Z, b.Z), Range(a.W, b.W));
+    }
+
+    Color Random::Range(Color a, Color b)
+    {
+        return Color(Range(a.R, b.R), Range(a.G, b.G), Range(a.B, b.B), Range(a.A, b.A));
+    }
 
     Random& Random::operator = (const Random& right)
     {
