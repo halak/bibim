@@ -74,17 +74,17 @@ namespace Bibim
             void OnStep(float dt, int timestamp);
 
         private:
-            class PointMass : public IUpdateable
+            class PointMass
             {
                 public:
                     PointMass();
                     PointMass(Vector3 position, float invMass);
-                    virtual ~PointMass();
+                    ~PointMass();
 
-                    virtual void Update(float dt, int timestamp);
+                    inline void Update();
 
-                    void ApplyForce(Vector3 force);
-                    void IncreaseDamping(float factor);
+                    inline void ApplyForce(Vector3 force);
+                    inline void IncreaseDamping(float factor);
 
                 public:
                     Vector3 position;
@@ -96,13 +96,13 @@ namespace Bibim
                     float damping;
             };
 
-            struct Spring : public IUpdateable
+            struct Spring
             {
-                public :
+                public:
                     Spring(PointMass* end1, PointMass* end2, float stiffness, float damping);
-                    virtual ~Spring();
+                    ~Spring();
 
-                    virtual void Update(float dt, int timestamp);
+                    inline void Update();
 
                 public:
                     PointMass* end1;
@@ -126,23 +126,24 @@ namespace Bibim
 
         private:
             typedef std::vector<Spring> SpringCollection;
-            typedef std::vector<PointMass> PointMassLineCollection;
-            typedef std::vector<PointMassLineCollection> PointMassGridCollection;
+            typedef std::vector<PointMass> PointMassGridCollection;
 
             //Vector2 TranslateCoordinate(Vector3 pos, Point2 screenSize, Vector2* p);
             Vector2 TranslateCoordinate(Vector3 pos, Vector2* p);
             //static Vector2 PerspectiveVector(Vector3 v, Point2 screenSize);
 
+            inline int GetPointIndex(int x, int y) const;
+
         private:
             Timeline* timeline;
-            Timeline* springsTimeline;
-            Timeline* pointMassTimeline;
             Updater updater;
             Rect size;
             Vector2 spacing;
             SpringCollection springs;
             PointMassGridCollection points;
             PointMassGridCollection fixedPoints;
+            int cols;
+            int rows;
             float frameTime;
             FrameSpeed frameSpeed;
     };
@@ -157,6 +158,11 @@ namespace Bibim
     UIForceGridEffect::FrameSpeed UIForceGridEffect::GetFrameSpeed() const
     {
         return frameSpeed;
+    }
+
+    int UIForceGridEffect::GetPointIndex(int x, int y) const
+    {
+        return x + (y * cols);
     }
 }
 
