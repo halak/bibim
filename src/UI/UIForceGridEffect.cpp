@@ -17,8 +17,8 @@ namespace Bibim
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     UIForceGridEffect::UIForceGridEffect()
         : timeline(nullptr),
-          springsTimeline(nullptr),
-          pointMassTimeline(nullptr),
+          cols(0),
+          rows(0),
           frameTime(0.0f),
           frameSpeed(High)
     {
@@ -27,8 +27,8 @@ namespace Bibim
 
     UIForceGridEffect::UIForceGridEffect(const Rect size, const Vector2 spacing)
         : timeline(nullptr),
-          springsTimeline(nullptr),
-          pointMassTimeline(nullptr),
+          cols(0),
+          rows(0),
           frameTime(0.0f),
           frameSpeed(High)
     {
@@ -42,68 +42,43 @@ namespace Bibim
 
     void UIForceGridEffect::Initialize(const Rect size, const Vector2 spacing)
     {
-        const int numColumns = (int)(size.Width / spacing.X) + 1;
-        const int numRows = (int)(size.Height / spacing.Y) + 1;
+        cols = (int)(size.Width / spacing.X) + 1;
+        rows = (int)(size.Height / spacing.Y) + 1;
 
-        points.resize(numColumns);
-        for (PointMassGridCollection::iterator it = points.begin(); it != points.end(); it++)
-            it->resize(numRows);
-
-        // these fixed points will be used to anchor the grid to fixed positions on the screen
-        fixedPoints.resize(numColumns);
-        for (PointMassGridCollection::iterator it = fixedPoints.begin(); it != fixedPoints.end(); it++)
-            it->resize(numRows);
+        points.resize(cols * rows);
+        fixedPoints.resize(cols * rows);
 
         // create the point masses
         const float sx = spacing.X;
         const float sy = spacing.Y;
-        int row = 0;
 
-        for (float y = static_cast<float>(size.GetTop()); y <= size.GetBottom(); y += sy, row++)
+        int index = 0;
+        for (float y = static_cast<float>(size.GetTop()); y <= size.GetBottom(); y += sy)
         {
-            int column = 0;
-
-            for (float x = static_cast<float>(size.GetLeft()); x <= size.GetRight(); x += sx, column++)
+            for (float x = static_cast<float>(size.GetLeft()); x <= size.GetRight(); x += sx, index++)
             {
-                points[column][row] = PointMass(Vector3(x, y, 0.0f), 1.0f);
-                fixedPoints[column][row] = PointMass(Vector3(x, y, 0.0f), 0.0f);
+                points[index]      = PointMass(Vector3(x, y, 0.0f), 1.0f);
+                fixedPoints[index] = PointMass(Vector3(x, y, 0.0f), 0.0f);
             }
         }
 
         // link the point masses with springs
-        for (int y = 0; y < numRows; y++)
+        for (int y = 0; y < rows; y++)
         {
-            for (int x = 0; x < numColumns; x++)
+            for (int x = 0; x < cols; x++)
             {
-                if (x == 0 || y == 0 || x == numColumns - 1 || y == numRows - 1)    // anchor the border of the grid
-                    springs.push_back(Spring(&fixedPoints[x][y], &(points[x][y]), 0.1f, 0.1f));
+                if (x == 0 || y == 0 || x == cols - 1 || y == rows - 1)    // anchor the border of the grid
+                    springs.push_back(Spring(&fixedPoints[GetPointIndex(x, y)], &(points[GetPointIndex(x, y)]), 0.1f, 0.1f));
                 else if (x % 3 == 0 && y % 3 == 0)                                    // loosely anchor 1/9th of the point masses
-                    springs.push_back(Spring(&fixedPoints[x][y], &(points[x][y]), 0.002f, 0.02f));
+                    springs.push_back(Spring(&fixedPoints[GetPointIndex(x, y)], &(points[GetPointIndex(x, y)]), 0.002f, 0.02f));
 
                 const float stiffness = 0.28f;
                 const float damping = 0.06f;
 
                 if (x > 0)
-                    springs.push_back(Spring(&(points[x - 1][y]), &(points[x][y]), stiffness, damping));
+                    springs.push_back(Spring(&(points[GetPointIndex(x - 1, y)]), &(points[GetPointIndex(x, y)]), stiffness, damping));
                 if (y > 0)
-                    springs.push_back(Spring(&(points[x][y - 1]), &(points[x][y]), stiffness, damping));
-            }
-        }
-
-        springsTimeline = new Timeline();
-
-        for (SpringCollection::iterator it = springs.begin(); it != springs.end(); it++)
-        {
-            springsTimeline->Add(&(*it));
-        }
-
-        pointMassTimeline = new Timeline();
-
-        for (PointMassGridCollection::iterator it0 = points.begin(); it0 != points.end(); it0++)
-        {
-            for (PointMassLineCollection::iterator it1 = it0->begin(); it1 != it0->end(); it1++)
-            {
-                pointMassTimeline->Add(&(*it1));
+                    springs.push_back(Spring(&(points[GetPointIndex(x, y - 1)]), &(points[GetPointIndex(x, y)]), stiffness, damping));
             }
         }
 
@@ -115,9 +90,6 @@ namespace Bibim
     UIForceGridEffect::~UIForceGridEffect()
     {
         SetTimeline(nullptr);
-
-        delete springsTimeline;
-        delete pointMassTimeline;
     }
 
     void UIForceGridEffect::SetTimeline(Timeline* value)
@@ -176,15 +148,11 @@ namespace Bibim
 
     void UIForceGridEffect::ApplyDirectedForce(Vector3 force, Vector3 position, float radius)
     {
-        float radiusSquared = radius * radius;
-
-        for (PointMassGridCollection::iterator it0 = points.begin(); it0 != points.end(); it0++)
+        const float radiusSquared = radius * radius;
+        for (PointMassGridCollection::iterator it = points.begin(); it != points.end(); it++)
         {
-            for (PointMassLineCollection::iterator it1 = it0->begin(); it1 != it0->end(); it1++)
-            {
-                if(Vector3::GetDistanceSquared(position, it1->position) < radiusSquared)
-                    it1->ApplyForce(10.0f * force / (10.0f * Vector3::GetDistance(position, it1->position)));
-            }
+            if (Vector3::GetDistanceSquared(position, (*it).position) < radiusSquared)
+                (*it).ApplyForce(10.0f * force / (10.0f * Vector3::GetDistance(position, (*it).position)));
         }
     }
 
@@ -195,17 +163,23 @@ namespace Bibim
 
     void UIForceGridEffect::ApplyImplosiveForce(float force, Vector3 position, float radius)
     {
-        const float radiusSquared = radius * radius;
-        for (PointMassGridCollection::iterator it0 = points.begin(); it0 != points.end(); it0++)
-        {
-            for (PointMassLineCollection::iterator it1 = it0->begin(); it1 != it0->end(); it1++)
-            {
-                float dist2 = Vector3::GetDistanceSquared(position, it1->position);
+        const Vector3 offset = points.front().position;
+        const int l = Math::Clamp(static_cast<int>((position.X - (radius * 3.0f) - offset.X) / spacing.X), 0, 0);
+        const int t = Math::Clamp(static_cast<int>((position.Y - (radius * 3.0f) - offset.Y) / spacing.Y), 0, 0);
+        const int r = Math::Clamp(static_cast<int>((position.X + (radius * 3.0f) - offset.X) / spacing.X), 0, cols);
+        const int b = Math::Clamp(static_cast<int>((position.Y + (radius * 3.0f) - offset.Y) / spacing.Y), 0, rows);
 
+        const float radiusSquared = radius * radius;
+        for (int y = t; y < b; y++)
+        {
+            for (int x = l; x < r; x++)
+            {
+                PointMass& point = points[GetPointIndex(x, y)];
+                const float dist2 = Vector3::GetDistanceSquared(position, point.position);
                 if (dist2 < radiusSquared)
                 {
-                    it1->ApplyForce(10.0f * force * (it1->position - position) / (100.0f + dist2));
-                    it1->IncreaseDamping(0.6f);
+                    point.ApplyForce(10.0f * force * (point.position - position) / (100.0f + dist2));
+                    point.IncreaseDamping(0.6f);
                 }
             }
         }
@@ -218,18 +192,23 @@ namespace Bibim
 
     void UIForceGridEffect::ApplyExplosiveForce(float force, Vector3 position, float radius)
     {
-        float radiusSqaured = radius * radius;
+        const Vector3 offset = points.front().position;
+        const int l = Math::Clamp(static_cast<int>((position.X - (radius * 3.0f) - offset.X) / spacing.X), 0, 0);
+        const int t = Math::Clamp(static_cast<int>((position.Y - (radius * 3.0f) - offset.Y) / spacing.Y), 0, 0);
+        const int r = Math::Clamp(static_cast<int>((position.X + (radius * 3.0f) - offset.X) / spacing.X), 0, cols);
+        const int b = Math::Clamp(static_cast<int>((position.Y + (radius * 3.0f) - offset.Y) / spacing.Y), 0, rows);
 
-        for (PointMassGridCollection::iterator it0 = points.begin(); it0 != points.end(); it0++)
+        const float radiusSquared = radius * radius;
+        for (int y = t; y < b; y++)
         {
-            for (PointMassLineCollection::iterator it1 = it0->begin(); it1 != it0->end(); it1++)
+            for (int x = l; x < r; x++)
             {
-                float dist2 = Vector3::GetDistanceSquared(position, it1->position);
-
-                if (dist2 < radiusSqaured)
+                PointMass& point = points[GetPointIndex(x, y)];
+                const float dist2 = Vector3::GetDistanceSquared(position, point.position);
+                if (dist2 < radiusSquared)
                 {
-                    it1->ApplyForce(100.0f * force * (it1->position - position) / (10000.0f + dist2));
-                    it1->IncreaseDamping(0.6f);
+                    point.ApplyForce(100.0f * force * (point.position - position) / (10000.0f + dist2));
+                    point.IncreaseDamping(0.6f);
                 }
             }
         }
@@ -274,28 +253,25 @@ namespace Bibim
         static const int E0 = 1;
         static const int E1 = 3;
 
-        if(points.empty())
+        if (points.empty())
         {
             Base::DrawQuad(renderer, p, color);
             return;
         }
 
-        const int colCount = points.size();
-        const int rowCount = points[0].size();
-
         Vector2 np[4];
 
-        for (int y = 1; y < rowCount; y++)
+        for (int y = 1; y < rows; y++)
         {
-            np[E0] = TranslateCoordinate(points[0][y - 1].position, p);
-            np[E1] = TranslateCoordinate(points[0][y].position, p);
+            np[E0] = TranslateCoordinate(points[GetPointIndex(0, y - 1)].position, p);
+            np[E1] = TranslateCoordinate(points[GetPointIndex(0, y)].position, p);
 
-            for (int x = 1; x < colCount; x++)
+            for (int x = 1; x < cols; x++)
             {
                 np[S0] = np[E0];
                 np[S1] = np[E1];
-                np[E0] = TranslateCoordinate(points[x][y - 1].position, p);
-                np[E1] = TranslateCoordinate(points[x][y].position, p);
+                np[E0] = TranslateCoordinate(points[GetPointIndex(x, y - 1)].position, p);
+                np[E1] = TranslateCoordinate(points[GetPointIndex(x, y)].position, p);
 
                 Base::DrawQuad(renderer, np, color);
             }
@@ -309,15 +285,11 @@ namespace Bibim
         static const int E0 = 1;
         static const int E1 = 3;
 
-        if(points.empty())
+        if (points.empty())
         {
             Base::DrawQuad(renderer, p, color, uv, texture);
             return;
         }
-
-        const int colCount = points.size();
-        const int rowCount = points[0].size();
-
         Vector2 np[4];
         Vector2 nuv[4];
 
@@ -326,29 +298,29 @@ namespace Bibim
         basePointUV[S1] = uv[S0];
         basePointUV[E1] = uv[E0];
 
-        for (int y = 1; y < rowCount; y++)
+        for (int y = 1; y < rows; y++)
         {
             basePointUV[S0] = basePointUV[S1];
             basePointUV[E0] = basePointUV[E1];
-            basePointUV[S1] = Math::Lerp(uv[S0], uv[S1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
-            basePointUV[E1] = Math::Lerp(uv[E0], uv[E1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
+            basePointUV[S1] = Math::Lerp(uv[S0], uv[S1], static_cast<float>(y) / static_cast<float>(rows - 1));
+            basePointUV[E1] = Math::Lerp(uv[E0], uv[E1], static_cast<float>(y) / static_cast<float>(rows - 1));
 
-            np[E0] = TranslateCoordinate(points[0][y - 1].position, p);
-            np[E1] = TranslateCoordinate(points[0][y].position, p);
+            np[E0] = TranslateCoordinate(points[GetPointIndex(0, y - 1)].position, p);
+            np[E1] = TranslateCoordinate(points[GetPointIndex(0, y)].position, p);
             nuv[E0] = basePointUV[S0];
             nuv[E1] = basePointUV[S1];
 
-            for (int x = 1; x < colCount; x++)
+            for (int x = 1; x < cols; x++)
             {
                 np[S0] = np[E0];
                 np[S1] = np[E1];
-                np[E0] = TranslateCoordinate(points[x][y - 1].position, p);
-                np[E1] = TranslateCoordinate(points[x][y].position, p);
+                np[E0] = TranslateCoordinate(points[GetPointIndex(x, y - 1)].position, p);
+                np[E1] = TranslateCoordinate(points[GetPointIndex(x, y)].position, p);
 
                 nuv[S0] = nuv[E0];
                 nuv[S1] = nuv[E1];
-                nuv[E0] = Math::Lerp(basePointUV[S0], basePointUV[E0], static_cast<float>(x) / static_cast<float>(colCount - 1));
-                nuv[E1] = Math::Lerp(basePointUV[S1], basePointUV[E1], static_cast<float>(x) / static_cast<float>(colCount - 1));
+                nuv[E0] = Math::Lerp(basePointUV[S0], basePointUV[E0], static_cast<float>(x) / static_cast<float>(cols - 1));
+                nuv[E1] = Math::Lerp(basePointUV[S1], basePointUV[E1], static_cast<float>(x) / static_cast<float>(cols - 1));
 
                 Base::DrawQuad(renderer, np, color, nuv, texture);
             }
@@ -362,14 +334,11 @@ namespace Bibim
         static const int E0 = 1;
         static const int E1 = 3;
 
-        if(points.empty())
+        if (points.empty())
         {
             Base::DrawQuad(renderer, p, color, uv1, texture1, uv2, texture2);
             return;
         }
-
-        const int colCount = points.size();
-        const int rowCount = points[0].size();
 
         Vector2 np[4];
         Vector2 nuv1[4];
@@ -383,41 +352,41 @@ namespace Bibim
         basePointUV2[S1] = uv2[S0];
         basePointUV2[E1] = uv2[E0];
 
-        for (int y = 1; y < rowCount; y++)
+        for (int y = 1; y < rows; y++)
         {
             basePointUV1[S0] = basePointUV1[S1];
             basePointUV1[E0] = basePointUV1[E1];
-            basePointUV1[S1] = Math::Lerp(uv1[S0], uv1[S1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
-            basePointUV1[E1] = Math::Lerp(uv1[E0], uv1[E1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
+            basePointUV1[S1] = Math::Lerp(uv1[S0], uv1[S1], static_cast<float>(y) / static_cast<float>(rows - 1));
+            basePointUV1[E1] = Math::Lerp(uv1[E0], uv1[E1], static_cast<float>(y) / static_cast<float>(rows - 1));
 
             basePointUV2[S0] = basePointUV2[S1];
             basePointUV2[E0] = basePointUV2[E1];
-            basePointUV2[S1] = Math::Lerp(uv2[S0], uv2[S1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
-            basePointUV2[E1] = Math::Lerp(uv2[E0], uv2[E1], static_cast<float>(y) / static_cast<float>(rowCount - 1));
+            basePointUV2[S1] = Math::Lerp(uv2[S0], uv2[S1], static_cast<float>(y) / static_cast<float>(rows - 1));
+            basePointUV2[E1] = Math::Lerp(uv2[E0], uv2[E1], static_cast<float>(y) / static_cast<float>(rows - 1));
 
-            np[E0] = TranslateCoordinate(points[0][y - 1].position, p);
-            np[E1] = TranslateCoordinate(points[0][y].position, p);
+            np[E0] = TranslateCoordinate(points[GetPointIndex(0, y - 1)].position, p);
+            np[E1] = TranslateCoordinate(points[GetPointIndex(0, y)].position, p);
             nuv1[E0] = basePointUV1[S0];
             nuv1[E1] = basePointUV1[S1];
             nuv2[E0] = basePointUV2[S0];
             nuv2[E1] = basePointUV2[S1];
 
-            for (int x = 1; x < colCount; x++)
+            for (int x = 1; x < cols; x++)
             {
                 np[S0] = np[E0];
                 np[S1] = np[E1];
-                np[E0] = TranslateCoordinate(points[x][y - 1].position, p);
-                np[E1] = TranslateCoordinate(points[x][y].position, p);
+                np[E0] = TranslateCoordinate(points[GetPointIndex(x, y - 1)].position, p);
+                np[E1] = TranslateCoordinate(points[GetPointIndex(x, y)].position, p);
 
                 nuv1[S0] = nuv1[E0];
                 nuv1[S1] = nuv1[E1];
-                nuv1[E0] = Math::Lerp(basePointUV1[S0], basePointUV1[E0], static_cast<float>(x) / static_cast<float>(colCount - 1));
-                nuv1[E1] = Math::Lerp(basePointUV1[S1], basePointUV1[E1], static_cast<float>(x) / static_cast<float>(colCount - 1));
+                nuv1[E0] = Math::Lerp(basePointUV1[S0], basePointUV1[E0], static_cast<float>(x) / static_cast<float>(cols - 1));
+                nuv1[E1] = Math::Lerp(basePointUV1[S1], basePointUV1[E1], static_cast<float>(x) / static_cast<float>(cols - 1));
 
                 nuv2[S0] = nuv2[E0];
                 nuv2[S1] = nuv2[E1];
-                nuv2[E0] = Math::Lerp(basePointUV2[S0], basePointUV2[E0], static_cast<float>(x) / static_cast<float>(colCount - 1));
-                nuv2[E1] = Math::Lerp(basePointUV2[S1], basePointUV2[E1], static_cast<float>(x) / static_cast<float>(colCount - 1));
+                nuv2[E0] = Math::Lerp(basePointUV2[S0], basePointUV2[E0], static_cast<float>(x) / static_cast<float>(cols - 1));
+                nuv2[E1] = Math::Lerp(basePointUV2[S1], basePointUV2[E1], static_cast<float>(x) / static_cast<float>(cols - 1));
 
                 Base::DrawQuad(renderer, np, color, nuv1, texture1, nuv2, texture2);
             }
@@ -461,19 +430,18 @@ namespace Bibim
         Initialize(o->size, o->spacing);
     }
     
-    void UIForceGridEffect::OnStep(float dt, int timestamp)
+    void UIForceGridEffect::OnStep(float dt, int /*timestamp*/)
     {
         frameTime += dt;
 
-        float fixedFrameTime = frameSpeed == High ? HighSpeedFixedFrameTime : LowSpeedFixedFrameTime;
+        const float fixedFrameTime = (frameSpeed == High) ? HighSpeedFixedFrameTime : LowSpeedFixedFrameTime;
 
-        while(frameTime > fixedFrameTime)
+        while (frameTime > fixedFrameTime)
         {
-            if(springsTimeline)
-                springsTimeline->Update(dt, timestamp);
-
-            if(pointMassTimeline)
-                pointMassTimeline->Update(dt, timestamp);
+            for (SpringCollection::iterator it = springs.begin(); it != springs.end(); it++)
+                (*it).Update();
+            for (PointMassGridCollection::iterator it = points.begin(); it != points.end(); it++)
+                (*it).Update();
 
             frameTime -= fixedFrameTime;
         }
@@ -528,7 +496,7 @@ namespace Bibim
     {
     }
 
-    void UIForceGridEffect::PointMass::Update(float /*dt*/, int /*timestamp*/)
+    void UIForceGridEffect::PointMass::Update()
     {
         // 고정 프레임이므로 dt 도 사용하지 않습니다.
 
@@ -568,20 +536,20 @@ namespace Bibim
     {
     }
 
-    void UIForceGridEffect::Spring::Update(float /*dt*/, int /*timestamp*/)
+    void UIForceGridEffect::Spring::Update()
     {
         // 고정 프레임이므로, dt 도 사용하지 않습니다.
 
-        Vector3 x = end1->position - end2->position;
+        Vector3 d = end1->position - end2->position;
 
-        float length = x.GetLength();
+        float length = d.GetLength();
         // these springs can only pull, not push
         if (length <= targetLength)
             return;
 
-        x = (x / length) * (length - targetLength);
-        Vector3 dv = end2->velocity - end1->velocity;
-        Vector3 force = stiffness * x - dv * damping;
+        d = (d / length) * (length - targetLength);
+        const Vector3 dv = end2->velocity - end1->velocity;
+        const Vector3 force = stiffness * d - dv * damping;
 
         end1->ApplyForce(-force);
         end2->ApplyForce(force);
