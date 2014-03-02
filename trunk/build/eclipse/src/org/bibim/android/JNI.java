@@ -52,4 +52,22 @@ public class JNI {
             }
         });
     }
+
+    public static void playBgm(final String path) {
+        BaseActivity.activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                BaseActivity.activity.getBgm().play(path);
+            }
+        });
+    }
+
+    public static void setBgmVolume(final float value) {
+        BaseActivity.activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                BaseActivity.activity.getBgm().setVolume(value);
+            }
+        });
+    }
 }

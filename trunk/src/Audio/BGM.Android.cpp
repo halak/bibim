@@ -5,6 +5,7 @@
 #include <Bibim/Assert.h>
 #include <Bibim/AudioDevice.Android.h>
 #include <Bibim/Math.h>
+#include <Bibim/GameFramework.h>
 
 namespace Bibim
 {
@@ -88,6 +89,7 @@ namespace Bibim
             else
                 aliveBGMVolume = 1.0f;
 
+            GameFramework::PlayBGM(name);
             //irrklang::ISoundEngine* engine = audioDevice->GetEngine();
             //aliveBGM = engine->play2D(name.CStr(), true, true, false, ESM_AUTO_DETECT, false);
 

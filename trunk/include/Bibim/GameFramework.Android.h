@@ -20,6 +20,9 @@ namespace Bibim
 
             inline IME* GetIME() const;
 
+            static void PlayBGM(const String& path);
+            static void SetBGMVolume(float value);
+
         protected:
             GameFramework();
             GameFramework(int width, int height);

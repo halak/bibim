@@ -4,6 +4,7 @@
 #include <Bibim/GameFramework.Android.h>
 #include <Bibim/Environment.h>
 #include <Bibim/FileStream.h>
+#include <Bibim/GameAssetStorage.h>
 #include <Bibim/GameFramework.h>
 #include <Bibim/GameModuleTree.h>
 #include <Bibim/GameModuleNode.h>
@@ -22,6 +23,7 @@ using namespace Bibim;
 namespace Bibim
 {
     GameFramework* GameFramework::SingletonInstance = nullptr;
+    JNIEnv* jniEnvironment = nullptr;
 
     GameFramework::GameFramework()
         : ime(nullptr)
@@ -57,9 +59,35 @@ namespace Bibim
     {
         StepFrame();
     }
+
+    void GameFramework::PlayBGM(const String& path)
+    {
+        Log::Information("PlayBGM", path.CStr());
+        JNIEnv* env = jniEnvironment;
+
+        jclass jni = env->FindClass("org/bibim/android/JNI");
+        static const char* sig = "(Ljava/lang/String;)V";
+        jmethodID playBgm = env->GetStaticMethodID(jni, "playBgm", sig);
+        
+        jstring jniPath = env->NewStringUTF(path.CStr());
+        env->CallStaticVoidMethod(jni, playBgm, jniPath);
+    }
+
+    void GameFramework::SetBGMVolume(float value)
+    {
+        Log::Information("SetBGMVolume", "SetBGMVolume");
+        JNIEnv* env = jniEnvironment;
+
+        jclass jni = env->FindClass("org/bibim/android/JNI");
+        static const char* sig = "(F)V";
+        jmethodID setBgmVolume = env->GetStaticMethodID(jni, "setBgmVolume", sig);
+        
+        jfloat jniValue = static_cast<jfloat>(value);
+        env->CallStaticVoidMethod(jni, setBgmVolume, jniValue);
+    }
 }
 
-#define  ANDROID_LOG_TAG    "Hotblood-JNI"
+#define  ANDROID_LOG_TAG    "Bibim-JNI"
 #define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,ANDROID_LOG_TAG,__VA_ARGS__)
 #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,ANDROID_LOG_TAG,__VA_ARGS__)
 
@@ -103,6 +131,8 @@ JNIEXPORT void JNICALL Java_org_bibim_android_JNI_init(JNIEnv* env, jclass clazz
                                                        jstring localeName, jstring workingDirectory,
                                                        jobject assetManager)
 {
+    jniEnvironment = env;
+
     Environment::Setup(ToString(env, localeName), ToString(env, workingDirectory));
     FileStream::SetAndroidAssetManager(AAssetManager_fromJava(env, assetManager));
 
@@ -115,6 +145,8 @@ JNIEXPORT void JNICALL Java_org_bibim_android_JNI_init(JNIEnv* env, jclass clazz
     else
     {
         LOGI("Reinitialize (%d,%d)", width, height);
+        if (GameAssetStorage* storage = GameFramework::SingletonInstance->GetModules()->FindModule<GameAssetStorage>())
+            storage->CollectGarbage();
         GameFramework::SingletonInstance->GetWindow()->SetSize(Point2(width, height));
         GameFramework::SingletonInstance->GetWindow()->RaiseResizedEvent();
     }
@@ -122,6 +154,7 @@ JNIEXPORT void JNICALL Java_org_bibim_android_JNI_init(JNIEnv* env, jclass clazz
 
 JNIEXPORT void JNICALL Java_org_bibim_android_JNI_step(JNIEnv* env, jclass clazz, jobject context)
 {
+    jniEnvironment = env;
     GameFramework::SingletonInstance->step();
 
     static int counter = 0;

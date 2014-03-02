@@ -7,9 +7,19 @@ public class BaseActivity extends Activity {
     public static BaseActivity activity;
     
     private SurfaceView view;
+    private BGM bgm;
+    private SoundFX sfx;
     
     public SurfaceView getSurfaceView() {
         return view;
+    }
+
+    public BGM getBgm() {
+        return bgm;
+    }
+
+    public SoundFX getSfx() {
+        return sfx;
     }
 
     @Override
@@ -19,18 +29,31 @@ public class BaseActivity extends Activity {
         activity = this;
         view = createSurfaceView();
         setContentView(view);
+        bgm = new BGM(getApplication());
+        sfx = new SoundFX();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         view.onPause();
+        bgm.pause();
+        sfx.pause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         view.onResume();
+        bgm.resume();
+        sfx.resume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        bgm.destroy();
+        sfx.destroy();
+        super.onDestroy();
     }
     
     protected SurfaceView createSurfaceView() {
