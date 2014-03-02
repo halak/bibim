@@ -318,7 +318,7 @@ class SurfaceView extends GLSurfaceView {
                 JNI.handleKeyDown(code);
             }
         });
-        return true;
+        return false;
     }
     
     @Override
@@ -328,7 +328,7 @@ class SurfaceView extends GLSurfaceView {
                 JNI.handleKeyUp(code);
             }
         });
-        return true;
+        return false;
     }
 
     private static class Renderer implements GLSurfaceView.Renderer {
