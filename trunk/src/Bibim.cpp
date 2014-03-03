@@ -1,4 +1,4 @@
-// Automatically generated in 2014-01-23 18:18:22.864000
+// Automatically generated in 2014-03-03 10:05:57.495465
 
 #include <zlib.h>
 #include "Animation/Ease.cpp"
@@ -116,9 +116,6 @@
 #include "GFX/CCParticleEmitter.cpp"
 #include "GFX/CCParticleSystem.cpp"
 #include "GFX/CCParticleSystemSet.cpp"
-#include "GFX/Spark.cpp"
-#include "GFX/SparkParticleEngine.cpp"
-#include "GFX/SparkSet.cpp"
 #include "Graphics/BitMask.cpp"
 #include "Graphics/DynamicTexture2D.DX9.cpp"
 #include "Graphics/DynamicTexture2D.GLES2.cpp"
@@ -246,7 +243,6 @@
 #include "UI/UIShape.cpp"
 #include "UI/UISimpleDomain.cpp"
 #include "UI/UISineCurveEffect.cpp"
-#include "UI/UISpark.cpp"
 #include "UI/UISprite.cpp"
 #include "UI/UITintEffect.cpp"
 #include "UI/UITrail.cpp"

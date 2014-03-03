@@ -125,13 +125,13 @@ def get_dependencies(environment, platform, target):
         elif (release):
             l += ['d3dx9.lib']
      
-    # ZLib & PNG & JPG & FreeType & Lua & SPARK & Curl
+    # ZLib & PNG & JPG & FreeType & Lua & Curl
     if (win32):
-        l += ['libpng.lib', 'libjpeg.lib', 'freetype.lib', 'lua.lib', 'SPARK.lib', 'libcurl.lib', 'zlib.lib']
+        l += ['libpng.lib', 'libjpeg.lib', 'freetype.lib', 'lua.lib', 'libcurl.lib', 'zlib.lib']
     elif (android):
-        l += ['libpng.a', 'libjpeg.a', 'freetype.a', 'lua.a', 'SPARK.a', 'libcurl.a', 'zlib.a']
+        l += ['libpng.a', 'libjpeg.a', 'freetype.a', 'lua.a', 'libcurl.a', 'zlib.a']
     elif (emscripten):
-        l += ['libpng.bc', 'libjpeg.bc', 'freetype.bc', 'lua.bc', 'SPARK.bc', 'zlib.bc']
+        l += ['libpng.bc', 'libjpeg.bc', 'freetype.bc', 'lua.bc', 'zlib.bc']
     
     # irrKlang
     if (win32):

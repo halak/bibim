@@ -272,9 +272,7 @@
     <Compile Include="Asset\Pipeline\Recipes\DirectoryToParticleSystemSet.cs" />
     <Compile Include="Asset\Pipeline\Recipes\DirectoryToSpriteSet.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ExportParticleSystemSet.cs" />
-    <Compile Include="Asset\Pipeline\Recipes\ExportSparkSet.cs" />
     <Compile Include="Asset\Pipeline\Recipes\ExportTemplate.cs" />
-    <Compile Include="Asset\Pipeline\Recipes\ImportTimelineFX.cs" />
     <Compile Include="Asset\Pipeline\Recipes\LoadStreamingAsset.cs" />
     <Compile Include="Asset\Pipeline\Recipes\Utility.cs" />
     <Compile Include="Asset\StreamingGameAsset.cs" />
@@ -339,10 +337,6 @@
     <Compile Include="Graphics\SourceTexture2D.cs" />
     <Compile Include="Graphics\SourceTexture2DWriter.cs" />
     <Compile Include="Graphics\SourceTexture2DCookingTag.cs" />
-    <Compile Include="GFX\Spark.cs" />
-    <Compile Include="GFX\SparkSet.cs" />
-    <Compile Include="GFX\SparkSetWriter.cs" />
-    <Compile Include="GFX\SparkWriter.cs" />
     <Compile Include="Graphics\Texture2D.cs" />
     <Compile Include="Graphics\Window.cs" />
     <Compile Include="Input\IME.cs" />
@@ -471,7 +465,6 @@
     <Compile Include="UI\Visuals\UIRoundedRect.cs" />
     <Compile Include="UI\Visuals\UIScrollablePanel.cs" />
     <Compile Include="UI\Visuals\UIShape.cs" />
-    <Compile Include="UI\Visuals\UISpark.cs" />
     <Compile Include="UI\Visuals\UISprite.cs" />
     <Compile Include="UI\Visuals\UIVideo.cs" />
     <Compile Include="UI\Visuals\UIVisual.cs" />

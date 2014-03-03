@@ -480,9 +480,6 @@
     <ClCompile Include="..\..\src\UI\UIRect.cpp">
       <Filter>03. Game\UI\Visuals</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\UI\UISpark.cpp">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\UI\UISprite.cpp">
       <Filter>03. Game\UI\Visuals</Filter>
     </ClCompile>
@@ -590,9 +587,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Framework\GameWindow.Windows.cpp">
       <Filter>03. Game\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\GFX\SparkParticleEngine.cpp">
-      <Filter>03. Game\GFX</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Foundation\Any.cpp">
       <Filter>01. Foundation\%28Fundamental%29</Filter>
@@ -836,12 +830,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Typography\FontFace.cpp">
       <Filter>03. Game\Typography</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\GFX\Spark.cpp">
-      <Filter>03. Game\GFX</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\GFX\SparkSet.cpp">
-      <Filter>03. Game\GFX</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\GFX\CCParticleEmitter.cpp">
       <Filter>03. Game\GFX</Filter>
@@ -1319,9 +1307,6 @@
     <ClInclude Include="..\..\include\Bibim\UIRect.h">
       <Filter>03. Game\UI\Visuals</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\UISpark.h">
-      <Filter>03. Game\UI\Visuals</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\Bibim\UISprite.h">
       <Filter>03. Game\UI\Visuals</Filter>
     </ClInclude>
@@ -1462,9 +1447,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\GameWindow.Windows.h">
       <Filter>03. Game\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\SparkParticleEngine.h">
-      <Filter>03. Game\GFX</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\HttpClient.h">
       <Filter>02. System\Net</Filter>
@@ -1760,12 +1742,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\FontFace.h">
       <Filter>03. Game\Typography</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\Spark.h">
-      <Filter>03. Game\GFX</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\SparkSet.h">
-      <Filter>03. Game\GFX</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\CCParticleEmitter.h">
       <Filter>03. Game\GFX</Filter>
