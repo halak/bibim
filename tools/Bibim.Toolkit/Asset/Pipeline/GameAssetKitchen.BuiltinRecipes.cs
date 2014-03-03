@@ -56,8 +56,6 @@ namespace Bibim.Asset.Pipeline
                     return CreatePSDImageSetRecipe(data.Get<string>("source") ?? "$(AssetName).psd");
                 case "spriteset":
                     return CreatePSDSpriteSetRecipe(data.Get<string>("source") ?? "$(AssetName).psd");
-                case "sparkset":
-                    return CreateSparkSetRecipe(data.Get<string>("source") ?? "$(AssetName).eff");
                 case "dirparticle":
                     return CreateDirectoryParticleSystemSetRecipe(data.Get<string>("source") ?? "$(AssetName)");
                 case "hlsl":
@@ -115,7 +113,6 @@ namespace Bibim.Asset.Pipeline
                 { "png", CreateTextureRecipe() },
                 { "jpg", CreateTextureRecipe(true) },
                 { "psd", CreatePSDToUIRecipe() },
-                { "eff", CreateSparkSetRecipe() },
             };
         }
 
@@ -319,20 +316,6 @@ namespace Bibim.Asset.Pipeline
                         IgnoreLayers = false,
                         IgnoreMergedBitmap = true,
                     },
-                },
-                BitmapSheetSize = new System.Drawing.Size(1024, 1024),
-                BitmapSheetClusterSize = new System.Drawing.Size(16, 16),
-                TextureOutput = "gen\\$(AssetName)_TEXTURE{0}",
-            });
-        }
-
-        private static GameAssetRecipe CreateSparkSetRecipe(string source = "$(AssetName).eff")
-        {
-            return Wrap(new ExportSparkSet()
-            {
-                Input = new ImportTimelineFX()
-                {
-                    Input = source
                 },
                 BitmapSheetSize = new System.Drawing.Size(1024, 1024),
                 BitmapSheetClusterSize = new System.Drawing.Size(16, 16),

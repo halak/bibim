@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C++ Express 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bibim", "Bibim.vcxproj", "{96CD7385-7B7D-4469-A86D-B19D660C595E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SPARK", "SPARK.vcxproj", "{FDAD4231-7EB9-4810-AADA-F513BFC29BAE}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "zlib.vcxproj", "{F3501587-9462-4E61-BD50-5EE58B649BAB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lua", "lua.vcxproj", "{D788FC15-A425-454D-8AB7-B97DDD4A623F}"
@@ -43,20 +41,6 @@ Global
 		{96CD7385-7B7D-4469-A86D-B19D660C595E}.Release|Emscripten.Build.0 = Release|Emscripten
 		{96CD7385-7B7D-4469-A86D-B19D660C595E}.Release|Win32.ActiveCfg = Release|Win32
 		{96CD7385-7B7D-4469-A86D-B19D660C595E}.Release|Win32.Build.0 = Release|Win32
-		{FDAD4231-7EB9-4810-AADA-F513BFC29BAE}.Debug|Android.ActiveCfg = Debug|Android
-		{FDAD4231-7EB9-4810-AADA-F513BFC29BAE}.Debug|Android.Build.0 = Debug|Android
-		{FDAD4231-7EB9-4810-AADA-F513BFC29BAE}.Debug|Android.Deploy.0 = Debug|Android
-		{FDAD4231-7EB9-4810-AADA-F513BFC29BAE}.Debug|Emscripten.ActiveCfg = Debug|Emscripten
-		{FDAD4231-7EB9-4810-AADA-F513BFC29BAE}.Debug|Emscripten.Build.0 = Debug|Emscripten
-		{FDAD4231-7EB9-4810-AADA-F513BFC29BAE}.Debug|Win32.ActiveCfg = Debug|Win32
-		{FDAD4231-7EB9-4810-AADA-F513BFC29BAE}.Debug|Win32.Build.0 = Debug|Win32
-		{FDAD4231-7EB9-4810-AADA-F513BFC29BAE}.Release|Android.ActiveCfg = Release|Android
-		{FDAD4231-7EB9-4810-AADA-F513BFC29BAE}.Release|Android.Build.0 = Release|Android
-		{FDAD4231-7EB9-4810-AADA-F513BFC29BAE}.Release|Android.Deploy.0 = Release|Android
-		{FDAD4231-7EB9-4810-AADA-F513BFC29BAE}.Release|Emscripten.ActiveCfg = Release|Emscripten
-		{FDAD4231-7EB9-4810-AADA-F513BFC29BAE}.Release|Emscripten.Build.0 = Release|Emscripten
-		{FDAD4231-7EB9-4810-AADA-F513BFC29BAE}.Release|Win32.ActiveCfg = Release|Win32
-		{FDAD4231-7EB9-4810-AADA-F513BFC29BAE}.Release|Win32.Build.0 = Release|Win32
 		{F3501587-9462-4E61-BD50-5EE58B649BAB}.Debug|Android.ActiveCfg = Debug|Android
 		{F3501587-9462-4E61-BD50-5EE58B649BAB}.Debug|Android.Build.0 = Debug|Android
 		{F3501587-9462-4E61-BD50-5EE58B649BAB}.Debug|Android.Deploy.0 = Debug|Android

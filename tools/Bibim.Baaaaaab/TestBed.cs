@@ -11,12 +11,6 @@ namespace Bibim.Bab
     {
         public static void Main(string[] args)
         {
-            TimelineFX();
-        }
-
-        public static void TimelineFX()
-        {
-            (new ImportTimelineFX(@"E:\Works\Halak\TouhouBreak\Game\Asset\GFX\Hello.eff")).Cook(new CookingContext());
         }
     }
 }

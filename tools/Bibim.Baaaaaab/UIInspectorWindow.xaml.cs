@@ -372,7 +372,6 @@ namespace Bibim.Bab
                     typeof(UIRect),
                     typeof(UIRoundedRect),
                     typeof(UIScrollablePanel),
-                    typeof(UISpark),
                     typeof(UISprite),
                     typeof(UIVideo),
                     typeof(UIWindow),

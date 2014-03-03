@@ -92,7 +92,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\irrKlang-1.4.0\include;..\..\extlibs\SPARK-1.5.5\include;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\irrKlang-1.4.0\include;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <Optimization>Disabled</Optimization>
@@ -109,7 +109,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>..\..\include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\irrKlang-1.4.0\include;..\..\extlibs\SPARK-1.5.5\include;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\irrKlang-1.4.0\include;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel>Level4</WarningLevel>
     </ClCompile>
@@ -123,13 +123,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\OpenAL\Android\openal\include;..\..\extlibs\SPARK-1.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Emscripten'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\OpenAL\Android\openal\include;..\..\extlibs\SPARK-1.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
       <Warnings>AllWarnings</Warnings>
       <DisableWarnings>unknown-pragmas</DisableWarnings>
@@ -137,12 +137,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\OpenAL\Android\openal\include;..\..\extlibs\SPARK-1.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Emscripten'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\OpenAL\Android\openal\include;..\..\extlibs\SPARK-1.5.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.3;..\..\extlibs\jpeg-9;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Warnings>AllWarnings</Warnings>
       <DisableWarnings>unknown-pragmas</DisableWarnings>
     </ClCompile>
@@ -204,8 +204,6 @@
     <ClCompile Include="..\..\src\GFX\CCParticleEmitter.cpp" />
     <ClCompile Include="..\..\src\GFX\CCParticleSystem.cpp" />
     <ClCompile Include="..\..\src\GFX\CCParticleSystemSet.cpp" />
-    <ClCompile Include="..\..\src\GFX\Spark.cpp" />
-    <ClCompile Include="..\..\src\GFX\SparkSet.cpp" />
     <ClCompile Include="..\..\src\Graphics\GLES2.cpp" />
     <ClCompile Include="..\..\src\Graphics\GraphicsDeviceBase.cpp" />
     <ClCompile Include="..\..\src\Graphics\JPEG.cpp" />
@@ -346,7 +344,6 @@
     <ClCompile Include="..\..\src\UI\UIPanel.cpp" />
     <ClCompile Include="..\..\src\UI\UIRadioButton.cpp" />
     <ClCompile Include="..\..\src\UI\UIRect.cpp" />
-    <ClCompile Include="..\..\src\UI\UISpark.cpp" />
     <ClCompile Include="..\..\src\UI\UISprite.cpp" />
     <ClCompile Include="..\..\src\UI\UITrail.cpp" />
     <ClCompile Include="..\..\src\UI\UIVideo.cpp" />
@@ -384,7 +381,6 @@
     <ClCompile Include="..\..\src\FileSystem\MPQStream.cpp" />
     <ClCompile Include="..\..\src\Framework\GameFramework.Windows.cpp" />
     <ClCompile Include="..\..\src\Framework\GameWindow.Windows.cpp" />
-    <ClCompile Include="..\..\src\GFX\SparkParticleEngine.cpp" />
     <ClCompile Include="..\..\src\Foundation\Any.cpp" />
     <ClCompile Include="..\..\src\Foundation\Matrix4.cpp" />
     <ClCompile Include="..\..\src\Foundation\Point2.cpp" />
@@ -473,8 +469,6 @@
     <ClInclude Include="..\..\include\Bibim\Preferences.h" />
     <ClInclude Include="..\..\include\Bibim\SoundFX.iOS.h" />
     <ClInclude Include="..\..\include\Bibim\SoundFX.PC.h" />
-    <ClInclude Include="..\..\include\Bibim\Spark.h" />
-    <ClInclude Include="..\..\include\Bibim\SparkSet.h" />
     <ClInclude Include="..\..\include\Bibim\StandardGame.EmbeddedFont.h" />
     <ClInclude Include="..\..\include\Bibim\StandardGame.h" />
     <ClInclude Include="..\..\include\Bibim\GraphicsDeviceBase.h" />
@@ -625,7 +619,6 @@
     <ClInclude Include="..\..\include\Bibim\UIPanel.h" />
     <ClInclude Include="..\..\include\Bibim\UIRadioButton.h" />
     <ClInclude Include="..\..\include\Bibim\UIRect.h" />
-    <ClInclude Include="..\..\include\Bibim\UISpark.h" />
     <ClInclude Include="..\..\include\Bibim\UISprite.h" />
     <ClInclude Include="..\..\include\Bibim\UIVideo.h" />
     <ClInclude Include="..\..\include\Bibim\UIVisual.h" />
@@ -673,7 +666,6 @@
     <ClInclude Include="..\..\include\Bibim\GameFramework.Windows.h" />
     <ClInclude Include="..\..\include\Bibim\GameWindow.h" />
     <ClInclude Include="..\..\include\Bibim\GameWindow.Windows.h" />
-    <ClInclude Include="..\..\include\Bibim\SparkParticleEngine.h" />
     <ClInclude Include="..\..\include\Bibim\HttpClient.h" />
     <ClInclude Include="..\..\include\Bibim\Any.h" />
     <ClInclude Include="..\..\include\Bibim\Color.h" />

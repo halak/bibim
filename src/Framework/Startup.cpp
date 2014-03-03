@@ -32,8 +32,6 @@ namespace Bibim
         GameAssetFactory::AddEntry<CCParticleSystemSet>();
         GameAssetFactory::AddEntry<Sprite>();
         GameAssetFactory::AddEntry<SpriteSet>();
-        GameAssetFactory::AddEntry<Spark>();
-        GameAssetFactory::AddEntry<SparkSet>();
         GameAssetFactory::AddEntry<Script>();
         GameAssetFactory::AddEntry<BitMask>();
         GameAssetFactory::AddEntry<SourceTexture2D>();
@@ -250,7 +248,6 @@ namespace Bibim
         GameComponentFactory::AddEntry<UIImage>();
         GameComponentFactory::AddEntry<UISprite>();
         GameComponentFactory::AddEntry<UIVideo>();
-        GameComponentFactory::AddEntry<UISpark>();
         GameComponentFactory::AddEntry<UIRect>();
         GameComponentFactory::AddEntry<UIRoundedRect>();
         GameComponentFactory::AddEntry<UIEllipse>();

@@ -1,8 +1,8 @@
 #pragma once
-#ifndef BIBIM_ALL_3BC246C5_7B59_4E21_99B7_D2015FF6BFD0_H__
-#define BIBIM_ALL_3BC246C5_7B59_4E21_99B7_D2015FF6BFD0_H__
+#ifndef BIBIM_ALL_005AA197_A8EC_4EDE_A9CE_D3C5134B5585_H__
+#define BIBIM_ALL_005AA197_A8EC_4EDE_A9CE_D3C5134B5585_H__
 
-// Automatically generated in 2014-01-23 18:18:22.879000
+// Automatically generated in 2014-03-03 10:05:57.572470
 
 #include "AlarmClock.h"
 #include "Algorithm.h"
@@ -211,9 +211,6 @@
 #include "SourceTexture2D.DX9.h"
 #include "SourceTexture2D.GLES2.h"
 #include "SourceTexture2D.h"
-#include "Spark.h"
-#include "SparkParticleEngine.h"
-#include "SparkSet.h"
 #include "SpatialObject2D.h"
 #include "SphereShape2D.h"
 #include "Sprite.h"
@@ -295,7 +292,6 @@
 #include "UIShape.h"
 #include "UISimpleDomain.h"
 #include "UISineCurveEffect.h"
-#include "UISpark.h"
 #include "UISprite.h"
 #include "UITintEffect.h"
 #include "UITrail.h"

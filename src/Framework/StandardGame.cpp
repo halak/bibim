@@ -122,9 +122,6 @@ namespace Bibim
 
         fontLibrary->SetAssetStorage(storage);
 
-        SparkParticleEngine* spk = new SparkParticleEngine();
-        GetModules()->GetRoot()->AttachChild(spk);
-
         if (lua)
         {
             this->lua = lua;

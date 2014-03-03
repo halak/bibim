@@ -167,9 +167,6 @@ namespace Bibim
             class CCParticleEmitter;
             BBForwardDeclareSmartPointerClass(CCParticleSystem);
             BBForwardDeclareSmartPointerClass(CCParticleSystemSet);
-            class SparkParticleEngine;
-            BBForwardDeclareSmartPointerClass(Spark);
-            BBForwardDeclareSmartPointerClass(SparkSet);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Graphics
@@ -309,7 +306,6 @@ namespace Bibim
                     BBForwardDeclareSmartPointerClass(UITrail);
                     BBForwardDeclareSmartPointerClass(UIVideo);
                     BBForwardDeclareSmartPointerClass(UICCParticleSystem);
-                    BBForwardDeclareSmartPointerClass(UISpark);
 }
 
 #endif
