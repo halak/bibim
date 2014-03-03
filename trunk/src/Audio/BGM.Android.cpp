@@ -159,6 +159,7 @@ namespace Bibim
     {
         if (mute)
         {
+            GameFramework::SetBGMVolume(0.0f);
             //if (aliveBGM)
             //    aliveBGM->setVolume(0.0f);
 
@@ -167,6 +168,7 @@ namespace Bibim
         }
         else
         {
+            GameFramework::SetBGMVolume(volume * aliveBGMVolume);
             //if (aliveBGM)
             //    aliveBGM->setVolume(volume * aliveBGMVolume);
 
@@ -177,6 +179,7 @@ namespace Bibim
 
     void BGM::DropAliveBGM()
     {
+        GameFramework::SetBGMVolume(0.0f);
         /*
         if (aliveBGM)
         {

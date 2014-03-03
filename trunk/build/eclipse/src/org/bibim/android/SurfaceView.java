@@ -310,6 +310,12 @@ class SurfaceView extends GLSurfaceView {
                 return super.onTouchEvent(event);
         }
     }
+
+    private static boolean isVolumeKeyCode(int code) {
+        return code == KeyEvent.KEYCODE_VOLUME_DOWN ||
+               code == KeyEvent.KEYCODE_VOLUME_UP ||
+               code == KeyEvent.KEYCODE_VOLUME_MUTE;
+    }
     
     @Override
     public boolean onKeyDown(final int code, final KeyEvent event) {
@@ -318,7 +324,7 @@ class SurfaceView extends GLSurfaceView {
                 JNI.handleKeyDown(code);
             }
         });
-        return false;
+        return !isVolumeKeyCode(code);
     }
     
     @Override
@@ -328,7 +334,7 @@ class SurfaceView extends GLSurfaceView {
                 JNI.handleKeyUp(code);
             }
         });
-        return false;
+        return !isVolumeKeyCode(code);
     }
 
     private static class Renderer implements GLSurfaceView.Renderer {
