@@ -571,6 +571,7 @@ namespace Bibim
                            Color color,
                            Vector2 offset)
             {
+                renderer->BeginBatch();
                 while (context.MoveNext())
                 {
                     const Glyph* glyph = glyphs[context.GetGlyphIndex()];
@@ -624,12 +625,11 @@ namespace Bibim
                     else
                         renderer->DrawQuad(points, color, clippingRect, glyph->GetSlot().Depth, glyph->GetTexture());
                 }
+                renderer->EndBatch();
             }
         };
 
         TypingContext context(fontString, bounds.Width);
-
-        renderer->BeginBatch();
 
         if (fontString.GetFont()->GetShadowSize() > 0)
         {
@@ -650,8 +650,6 @@ namespace Bibim
         Color color = fontString.GetFont()->GetColor();
         color.A = static_cast<byte>(static_cast<float>(color.A) * GetCurrentOpacity());
         DrawGlyphs::Do(currentGeomEffect, context, renderer, bounds, clippedBounds, fontString.GetRegularGlyphs(), color, Vector2::Zero);
-
-        renderer->EndBatch();
     }
 
     void UIDrawingContext::DrawLine(Vector2 p0, Vector2 p1, Color color)
