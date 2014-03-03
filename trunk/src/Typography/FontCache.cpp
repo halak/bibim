@@ -615,7 +615,7 @@ namespace Bibim
     {
         static const Point2 textureSizes[] =
         {
-            Point2(128, 128),
+            Point2(256, 256),
             Point2(256, 256),
             Point2(256, 256),
             Point2(512, 512),
