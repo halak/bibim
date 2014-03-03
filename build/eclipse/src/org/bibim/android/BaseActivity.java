@@ -30,7 +30,7 @@ public class BaseActivity extends Activity {
         view = createSurfaceView();
         setContentView(view);
         bgm = new BGM(getApplication());
-        sfx = new SoundFX();
+        sfx = new SoundFX(getApplication());
     }
 
     @Override
