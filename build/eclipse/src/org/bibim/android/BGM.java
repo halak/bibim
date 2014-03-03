@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 
 public final class BGM {
@@ -30,7 +31,7 @@ public final class BGM {
                 player = new MediaPlayer();
                 player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
                 afd.close();
-
+                player.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 player.prepare();
                 player.setVolume(volume, volume);
                 player.setLooping(true);
