@@ -341,24 +341,36 @@ class SurfaceView extends GLSurfaceView {
         private Context context;
         private String localeName;
         private String workingDirectory;
+        private int width;
+        private int height;
         
         public Renderer(Context context, String localeName, String workingDirectory) {
             this.context = context;
             this.localeName = localeName;
             this.workingDirectory = workingDirectory;
+            this.width = -1;
+            this.height = -1;
         }
         
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+            this.width = -1;
+            this.height = -1;
             Log.i("BIBIM", String.format("onSurfaceCreated"));
         }
         
         public void onSurfaceChanged(GL10 gl, int width, int height) {
             Log.i("BIBIM", String.format("onSurfaceChanged (%d, %d)", width, height));
-            JNI.init(context, width, height, localeName, workingDirectory, context.getAssets());
+            if (this.width != width || this.height != height) {
+                JNI.init(context, width, height, localeName, workingDirectory, context.getAssets());
+            }
+            this.width = width;
+            this.height = height;
         }
         
         public void onDrawFrame(GL10 gl) {
-            JNI.step(context);
+            if (this.width > 0 && this.height > 0) {
+                JNI.step(context);
+            }
         }
     }
 }

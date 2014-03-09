@@ -14,10 +14,12 @@ namespace Bibim
 
     void GLES2::CheckLastError(const char* op)
     {
+        /*
         for (GLint error = glGetError(); error; error = glGetError())
         {
             Log::Error("GLES2", String::CFormat("after %s() glError (0x%x)\n", op, error).CStr());
         }
+        */
     }
 }
 
