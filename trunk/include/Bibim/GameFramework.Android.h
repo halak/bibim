@@ -22,6 +22,8 @@ namespace Bibim
 
             static void PlayBGM(const String& path);
             static void SetBGMVolume(float value);
+            static void PlaySFX(const String& path, int group);
+            static void SetSFXVolume(float value);
 
         protected:
             GameFramework();

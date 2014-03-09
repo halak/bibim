@@ -70,4 +70,22 @@ public class JNI {
             }
         });
     }
+
+    public static void playSfx(final String path, final int group) {
+        BaseActivity.activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                BaseActivity.activity.getSfx().play(path, group);
+            }
+        });
+    }
+
+    public static void setSfxVolume(final float value) {
+        BaseActivity.activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                BaseActivity.activity.getSfx().setVolume(value);
+            }
+        });
+    }
 }

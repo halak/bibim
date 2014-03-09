@@ -62,28 +62,51 @@ namespace Bibim
 
     void GameFramework::PlayBGM(const String& path)
     {
-        Log::Information("PlayBGM", path.CStr());
         JNIEnv* env = jniEnvironment;
 
         jclass jni = env->FindClass("org/bibim/android/JNI");
         static const char* sig = "(Ljava/lang/String;)V";
-        jmethodID playBgm = env->GetStaticMethodID(jni, "playBgm", sig);
+        jmethodID method = env->GetStaticMethodID(jni, "playBgm", sig);
         
         jstring jniPath = env->NewStringUTF(path.CStr());
-        env->CallStaticVoidMethod(jni, playBgm, jniPath);
+        env->CallStaticVoidMethod(jni, method, jniPath);
     }
 
     void GameFramework::SetBGMVolume(float value)
     {
-        Log::Information("SetBGMVolume", "SetBGMVolume");
         JNIEnv* env = jniEnvironment;
 
         jclass jni = env->FindClass("org/bibim/android/JNI");
         static const char* sig = "(F)V";
-        jmethodID setBgmVolume = env->GetStaticMethodID(jni, "setBgmVolume", sig);
+        jmethodID method = env->GetStaticMethodID(jni, "setBgmVolume", sig);
         
         jfloat jniValue = static_cast<jfloat>(value);
-        env->CallStaticVoidMethod(jni, setBgmVolume, jniValue);
+        env->CallStaticVoidMethod(jni, method, jniValue);
+    }
+    
+    void GameFramework::PlaySFX(const String& path, int group)
+    {
+        JNIEnv* env = jniEnvironment;
+
+        jclass jni = env->FindClass("org/bibim/android/JNI");
+        static const char* sig = "(Ljava/lang/String;I)V";
+        jmethodID method = env->GetStaticMethodID(jni, "playSfx", sig);
+        
+        jstring jniPath = env->NewStringUTF(path.CStr());
+        jint jniGroup = static_cast<int>(group);
+        env->CallStaticVoidMethod(jni, method, jniPath, jniGroup);
+    }
+
+    void GameFramework::SetSFXVolume(float value)
+    {
+        JNIEnv* env = jniEnvironment;
+
+        jclass jni = env->FindClass("org/bibim/android/JNI");
+        static const char* sig = "(F)V";
+        jmethodID method = env->GetStaticMethodID(jni, "setSfxVolume", sig);
+        
+        jfloat jniValue = static_cast<jfloat>(value);
+        env->CallStaticVoidMethod(jni, method, jniValue);
     }
 }
 
