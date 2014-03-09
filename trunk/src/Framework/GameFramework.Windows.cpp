@@ -24,9 +24,19 @@ namespace Bibim
     {
     }
 
+    /*
+    static int __cdecl BibimAllocHook(int, void*, size_t, int, long, const unsigned char*, int)
+    {
+        return 1; // 1 is TRUE
+    }
+    */
+
     void GameFramework::Construct(int width, int height)
     {
+        #if (defined(BIBIM_DEBUG))
+        // _CrtSetAllocHook(BibimAllocHook);
         _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+        #endif
 
         LPWSTR commandLine = ::GetCommandLineW();
         char utf8CommandLine[1024];
