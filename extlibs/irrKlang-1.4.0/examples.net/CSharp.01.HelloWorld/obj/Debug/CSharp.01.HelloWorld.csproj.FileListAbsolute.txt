@@ -1,0 +1,5 @@
+C:\sdks\irrKlang-1.4.0\bin\dotnet-1.1\CSharp.01.HelloWorld.exe
+C:\sdks\irrKlang-1.4.0\bin\dotnet-1.1\CSharp.01.HelloWorld.pdb
+C:\sdks\irrKlang-1.4.0\examples.net\CSharp.01.HelloWorld\obj\Debug\ResolveAssemblyReference.cache
+C:\sdks\irrKlang-1.4.0\examples.net\CSharp.01.HelloWorld\obj\Debug\CSharp.01.HelloWorld.exe
+C:\sdks\irrKlang-1.4.0\examples.net\CSharp.01.HelloWorld\obj\Debug\CSharp.01.HelloWorld.pdb

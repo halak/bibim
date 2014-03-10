@@ -1,0 +1,5 @@
+C:\sdks\irrKlang-1.4.0\examples.net\CSharp.02.3DSound\obj\Debug\ResolveAssemblyReference.cache
+C:\sdks\irrKlang-1.4.0\bin\dotnet-2.0\CSharp.02.3DSound.exe
+C:\sdks\irrKlang-1.4.0\bin\dotnet-2.0\CSharp.02.3DSound.pdb
+C:\sdks\irrKlang-1.4.0\examples.net\CSharp.02.3DSound\obj\Debug\CSharp.02.3DSound.exe
+C:\sdks\irrKlang-1.4.0\examples.net\CSharp.02.3DSound\obj\Debug\CSharp.02.3DSound.pdb
