@@ -44,7 +44,7 @@
       <HintPath>..\References\DotNetZipLib\zip-v1.9\Release\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="LitJson">
-      <HintPath>..\References\litjson-0.5.0\bin\LitJson.dll</HintPath>
+      <HintPath>..\References\litjson-0.7.0\bin\LitJson.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <Private>False</Private>

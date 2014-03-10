@@ -266,7 +266,6 @@
     <Resource Include="Resources\Classes\UIRect.png" />
     <Resource Include="Resources\Classes\UIRoundedRect.png" />
     <Resource Include="Resources\Classes\UIScrollablePanel.png" />
-    <Resource Include="Resources\Classes\UISpark.png" />
     <Resource Include="Resources\Classes\UISprite.png" />
     <Resource Include="Resources\Classes\UIVideo.png" />
     <Resource Include="Resources\Classes\UIWindow.png" />
