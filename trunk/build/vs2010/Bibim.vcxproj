@@ -92,7 +92,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.9;..\..\extlibs\jpeg-9a;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\irrKlang-1.4.0\include;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.3\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.9;..\..\extlibs\jpeg-9a;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\irrKlang-1.4.0\include;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <Optimization>Disabled</Optimization>
@@ -109,7 +109,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>..\..\include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.9;..\..\extlibs\jpeg-9a;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\irrKlang-1.4.0\include;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;$(DXSDK_DIR)Include;..\..\extlibs\lua-5.2.3\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.9;..\..\extlibs\jpeg-9a;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;..\..\extlibs\irrKlang-1.4.0\include;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel>Level4</WarningLevel>
     </ClCompile>
@@ -123,13 +123,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.9;..\..\extlibs\jpeg-9a;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.3\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.9;..\..\extlibs\jpeg-9a;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Emscripten'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.9;..\..\extlibs\jpeg-9a;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.3\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.9;..\..\extlibs\jpeg-9a;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
       <Warnings>AllWarnings</Warnings>
       <DisableWarnings>unknown-pragmas</DisableWarnings>
@@ -137,12 +137,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.9;..\..\extlibs\jpeg-9a;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.3\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.9;..\..\extlibs\jpeg-9a;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Emscripten'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.2\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.9;..\..\extlibs\jpeg-9a;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.3\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.9;..\..\extlibs\jpeg-9a;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Warnings>AllWarnings</Warnings>
       <DisableWarnings>unknown-pragmas</DisableWarnings>
     </ClCompile>
