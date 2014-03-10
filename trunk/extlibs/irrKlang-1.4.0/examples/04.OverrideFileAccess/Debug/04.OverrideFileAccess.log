@@ -1,0 +1,36 @@
+﻿Der Buildvorgang wurde am 01.06.2012 11:32:24 gestartet.
+     1>Projekt "C:\sdks\irrKlang-1.4.0\examples\04.OverrideFileAccess\04.OverrideFileAccess.vcxproj" auf Knoten "2", build Ziel(e).
+     1>InitializeBuildStatus:
+         "Debug\04.OverrideFileAccess.unsuccessfulbuild" wird erstellt, da "AlwaysCreate" angegeben wurde.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../../include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>c:\sdks\irrklang-1.4.0\examples\04.overridefileaccess\main.cpp(36): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234): Siehe Deklaration von 'fopen'
+     1>c:\sdks\irrklang-1.4.0\examples\04.overridefileaccess\main.cpp(60): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105): Siehe Deklaration von 'strcpy'
+     1>c:\sdks\irrklang-1.4.0\examples\04.overridefileaccess\main.cpp(142): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\conio.h(128): Siehe Deklaration von 'getch'
+     1>c:\sdks\irrklang-1.4.0\examples\04.overridefileaccess\main.cpp(151): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _getch. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\conio.h(128): Siehe Deklaration von 'getch'
+       ManifestResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\04.OverrideFileAccess.exe.embed.manifest.res" Debug\04.OverrideFileAccess_manifest.rc 
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(C:\sdks\irrKlang-1.4.0\examples\04.OverrideFileAccess\Debug\04.OverrideFileAccess.exe) entspricht nicht dem OutputFile-Eigenschaftswert (C:\sdks\irrKlang-1.4.0\bin\win32-visualstudio\04.OverrideFileAccess.exe) von Linker. Das Projekt wird daher möglicherweise nicht ordnungsgemäß erstellt. Damit dieses Problem behoben werden kann, müssen die Eigenschaftswerte für $(OutDir), $(TargetName) und $(TargetExt) dem in %(Link.OutputFile) angegebenen Wert entsprechen.
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"../../bin/win32-visualstudio/04.OverrideFileAccess.exe" /INCREMENTAL /NOLOGO /LIBPATH:"../../lib/win32-visualstudio" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\04.OverrideFileAccess.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"Debug\04.OverrideFileAccess.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Debug\04.OverrideFileAccess.lib" /MACHINE:X86 Debug\04.OverrideFileAccess.exe.embed.manifest.res
+         Debug\main.obj
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\04.OverrideFileAccess.exe.embed.manifest" /manifest Debug\04.OverrideFileAccess.exe.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\04.OverrideFileAccess.exe.embed.manifest.res" Debug\04.OverrideFileAccess_manifest.rc 
+       LinkEmbedManifest:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"../../bin/win32-visualstudio/04.OverrideFileAccess.exe" /INCREMENTAL /NOLOGO /LIBPATH:"../../lib/win32-visualstudio" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\04.OverrideFileAccess.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"Debug\04.OverrideFileAccess.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Debug\04.OverrideFileAccess.lib" /MACHINE:X86 Debug\04.OverrideFileAccess.exe.embed.manifest.res
+         Debug\main.obj
+         04.OverrideFileAccess.vcxproj -> C:\sdks\irrKlang-1.4.0\examples\04.OverrideFileAccess\Debug\04.OverrideFileAccess.exe
+       FinalizeBuildStatus:
+         Die Datei "Debug\04.OverrideFileAccess.unsuccessfulbuild" wird gelöscht.
+         Aktualisieren des Timestamps von "Debug\04.OverrideFileAccess.lastbuildstate".
+     1>Die Erstellung des Projekts "C:\sdks\irrKlang-1.4.0\examples\04.OverrideFileAccess\04.OverrideFileAccess.vcxproj" ist abgeschlossen, build Ziel(e).
+
+Das Erstellen war erfolgreich.
+
+Verstrichene Zeit 00:00:04.42

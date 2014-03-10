@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="CSharp.01.HelloWorld">
+</Property><Property Name="Projektmappendatei" Value="C:\sdks\irrKlang-1.4.0\examples.net\CSharp.01.HelloWorld\CSharp.01.HelloWorld.sln">
+</Property><Property Name="Date" Value="Freitag, 01. Juni 2012">
+</Property><Property Name="Time" Value="11:33">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="CSharp.01.HelloWorld.sln" Description="Datei wurde erfolgreich als &quot;C:\sdks\irrKlang-1.4.0\examples.net\CSharp.01.HelloWorld\Backup\CSharp.01.HelloWorld.sln&quot; gesichert">
+</Event><Event ErrorLevel="0" Project="CSharp.01.HelloWorld" Source="CSharp.01.HelloWorld.csproj" Description="Projektdatei erfolgreich gesichert als C:\sdks\irrKlang-1.4.0\examples.net\CSharp.01.HelloWorld\Backup\CSharp.01.HelloWorld.csproj">
+</Event><Event ErrorLevel="0" Project="CSharp.01.HelloWorld" Source="AssemblyInfo.cs" Description="Datei erfolgreich gesichert als C:\sdks\irrKlang-1.4.0\examples.net\CSharp.01.HelloWorld\Backup\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="CSharp.01.HelloWorld" Source="Class1.cs" Description="Datei erfolgreich gesichert als C:\sdks\irrKlang-1.4.0\examples.net\CSharp.01.HelloWorld\Backup\Class1.cs">
+</Event><Event ErrorLevel="0" Project="CSharp.01.HelloWorld" Source="App.ico" Description="Datei erfolgreich gesichert als C:\sdks\irrKlang-1.4.0\examples.net\CSharp.01.HelloWorld\Backup\App.ico">
+</Event><Event ErrorLevel="0" Project="CSharp.01.HelloWorld" Source="CSharp.01.HelloWorld.csproj" Description="Projekt erfolgreich konvertiert">
+</Event><Event ErrorLevel="3" Project="CSharp.01.HelloWorld" Source="CSharp.01.HelloWorld.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="CSharp.01.HelloWorld.sln" Description="Die Projektmappe wurde erfolgreich konvertiert.">
+</Event><Event ErrorLevel="3" Project="" Source="CSharp.01.HelloWorld.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="CSharp.01.HelloWorld" Source="CSharp.01.HelloWorld.csproj" Description="Überprüfung abgeschlossen: Upgrade der Projektdateien nicht erforderlich.">
+</Event></UpgradeLog>
