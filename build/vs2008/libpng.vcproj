@@ -146,67 +146,67 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\png.c"
+			RelativePath="..\..\extlibs\libpng-1.6.9\png.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\pngerror.c"
+			RelativePath="..\..\extlibs\libpng-1.6.9\pngerror.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\pngget.c"
+			RelativePath="..\..\extlibs\libpng-1.6.9\pngget.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\pnglibconf.h"
+			RelativePath="..\..\extlibs\libpng-1.6.9\pnglibconf.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\pngmem.c"
+			RelativePath="..\..\extlibs\libpng-1.6.9\pngmem.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\pngpread.c"
+			RelativePath="..\..\extlibs\libpng-1.6.9\pngpread.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\pngread.c"
+			RelativePath="..\..\extlibs\libpng-1.6.9\pngread.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\pngrio.c"
+			RelativePath="..\..\extlibs\libpng-1.6.9\pngrio.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\pngrtran.c"
+			RelativePath="..\..\extlibs\libpng-1.6.9\pngrtran.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\pngrutil.c"
+			RelativePath="..\..\extlibs\libpng-1.6.9\pngrutil.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\pngset.c"
+			RelativePath="..\..\extlibs\libpng-1.6.9\pngset.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\pngtrans.c"
+			RelativePath="..\..\extlibs\libpng-1.6.9\pngtrans.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\pngwio.c"
+			RelativePath="..\..\extlibs\libpng-1.6.9\pngwio.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\pngwrite.c"
+			RelativePath="..\..\extlibs\libpng-1.6.9\pngwrite.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\pngwtran.c"
+			RelativePath="..\..\extlibs\libpng-1.6.9\pngwtran.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\libpng-1.6.3\pngwutil.c"
+			RelativePath="..\..\extlibs\libpng-1.6.9\pngwutil.c"
 			>
 		</File>
 	</Files>

@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\include;&quot;$(DXSDK_DIR)Include&quot;;&quot;..\..\extlibs\lua-5.2.2\src&quot;;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;&quot;..\..\extlibs\zlib-1.2.8&quot;;&quot;..\..\extlibs\libpng-1.6.3&quot;;&quot;..\..\extlibs\jpeg-9&quot;;&quot;..\..\extlibs\freetype-2.5.2\custom&quot;;&quot;..\..\extlibs\freetype-2.5.2\include&quot;;&quot;..\..\extlibs\curl-7.29.0\include&quot;;..\..\extlibs\rapidjson\include;&quot;..\..\extlibs\irrKlang-1.4.0\include&quot;;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include"
+				AdditionalIncludeDirectories="..\..\include;&quot;$(DXSDK_DIR)Include&quot;;&quot;..\..\extlibs\lua-5.2.2\src&quot;;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;&quot;..\..\extlibs\zlib-1.2.8&quot;;&quot;..\..\extlibs\libpng-1.6.9&quot;;&quot;..\..\extlibs\jpeg-9a&quot;;&quot;..\..\extlibs\freetype-2.5.2\custom&quot;;&quot;..\..\extlibs\freetype-2.5.2\include&quot;;&quot;..\..\extlibs\curl-7.29.0\include&quot;;..\..\extlibs\rapidjson\include;&quot;..\..\extlibs\irrKlang-1.4.0\include&quot;;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -108,7 +108,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\include;&quot;$(DXSDK_DIR)Include&quot;;&quot;..\..\extlibs\lua-5.2.2\src&quot;;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;&quot;..\..\extlibs\zlib-1.2.8&quot;;&quot;..\..\extlibs\libpng-1.6.3&quot;;&quot;..\..\extlibs\jpeg-9&quot;;&quot;..\..\extlibs\freetype-2.5.2\custom&quot;;&quot;..\..\extlibs\freetype-2.5.2\include&quot;;&quot;..\..\extlibs\curl-7.29.0\include&quot;;..\..\extlibs\rapidjson\include;&quot;..\..\extlibs\irrKlang-1.4.0\include&quot;;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include"
+				AdditionalIncludeDirectories="..\..\include;&quot;$(DXSDK_DIR)Include&quot;;&quot;..\..\extlibs\lua-5.2.2\src&quot;;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;&quot;..\..\extlibs\zlib-1.2.8&quot;;&quot;..\..\extlibs\libpng-1.6.9&quot;;&quot;..\..\extlibs\jpeg-9a&quot;;&quot;..\..\extlibs\freetype-2.5.2\custom&quot;;&quot;..\..\extlibs\freetype-2.5.2\include&quot;;&quot;..\..\extlibs\curl-7.29.0\include&quot;;..\..\extlibs\rapidjson\include;&quot;..\..\extlibs\irrKlang-1.4.0\include&quot;;..\..\extlibs\StormLib\src;..\..\extlibs\gles_sdk\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"

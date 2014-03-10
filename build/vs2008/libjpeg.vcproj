@@ -144,227 +144,227 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jaricom.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jaricom.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jcapimin.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jcapimin.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jcapistd.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jcapistd.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jcarith.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jcarith.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jccoefct.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jccoefct.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jccolor.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jccolor.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jcdctmgr.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jcdctmgr.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jchuff.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jchuff.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jcinit.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jcinit.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jcmainct.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jcmainct.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jcmarker.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jcmarker.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jcmaster.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jcmaster.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jcomapi.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jcomapi.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jconfig.h"
+			RelativePath="..\..\extlibs\jpeg-9a\jconfig.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jcparam.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jcparam.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jcprepct.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jcprepct.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jcsample.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jcsample.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jctrans.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jctrans.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdapimin.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdapimin.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdapistd.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdapistd.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdarith.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdarith.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdatadst.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdatadst.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdatasrc.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdatasrc.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdcoefct.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdcoefct.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdcolor.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdcolor.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdct.h"
+			RelativePath="..\..\extlibs\jpeg-9a\jdct.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jddctmgr.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jddctmgr.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdhuff.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdhuff.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdinput.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdinput.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdmainct.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdmainct.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdmarker.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdmarker.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdmaster.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdmaster.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdmerge.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdmerge.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdpostct.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdpostct.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdsample.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdsample.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jdtrans.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jdtrans.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jerror.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jerror.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jerror.h"
+			RelativePath="..\..\extlibs\jpeg-9a\jerror.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jfdctflt.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jfdctflt.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jfdctfst.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jfdctfst.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jfdctint.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jfdctint.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jidctflt.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jidctflt.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jidctfst.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jidctfst.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jidctint.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jidctint.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jinclude.h"
+			RelativePath="..\..\extlibs\jpeg-9a\jinclude.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jmemansi.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jmemansi.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jmemmgr.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jmemmgr.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jmemsys.h"
+			RelativePath="..\..\extlibs\jpeg-9a\jmemsys.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jmorecfg.h"
+			RelativePath="..\..\extlibs\jpeg-9a\jmorecfg.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jpegint.h"
+			RelativePath="..\..\extlibs\jpeg-9a\jpegint.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jpeglib.h"
+			RelativePath="..\..\extlibs\jpeg-9a\jpeglib.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jpegtran.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jpegtran.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jquant1.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jquant1.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jquant2.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jquant2.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jutils.c"
+			RelativePath="..\..\extlibs\jpeg-9a\jutils.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\extlibs\jpeg-9\jversion.h"
+			RelativePath="..\..\extlibs\jpeg-9a\jversion.h"
 			>
 		</File>
 	</Files>
