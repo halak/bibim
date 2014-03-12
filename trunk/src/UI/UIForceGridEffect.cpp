@@ -25,7 +25,7 @@ namespace Bibim
         updater.o = this;
     }
 
-    UIForceGridEffect::UIForceGridEffect(const Rect size, const Vector2 spacing)
+    UIForceGridEffect::UIForceGridEffect(Rect size, Vector2 spacing)
         : timeline(nullptr),
           cols(0),
           rows(0),
@@ -40,7 +40,7 @@ namespace Bibim
         Initialize(Rect(0, 0, width, height), Vector2(spacingX, spacingY));
     }
 
-    void UIForceGridEffect::Initialize(const Rect size, const Vector2 spacing)
+    void UIForceGridEffect::Initialize(Rect size, Vector2 spacing)
     {
         cols = (int)(size.Width / spacing.X) + 1;
         rows = (int)(size.Height / spacing.Y) + 1;

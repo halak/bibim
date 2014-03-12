@@ -190,11 +190,8 @@ namespace Bibim
         const float A21 = Math::Abs(R21) + 0.0001f;
         const float A22 = Math::Abs(R22) + 0.0001f;
 
-        float r1 = 0.0f;
-        float r2 = 0.0f;
-
-        r1 = extension1.X;
-        r2 = extension2.X * A11 + extension2.Y * A12;
+        float r1 = extension1.X;
+        float r2 = extension2.X * A11 + extension2.Y * A12;
         if (Math::Abs(t.X) > r1 + r2)
             return false;
         r1 = extension1.Y;

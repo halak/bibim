@@ -54,6 +54,7 @@ namespace Bibim
 
     Performance::Sample::Sample()
         : Parent(-1),
+          Depth(0),
           Function(nullptr),
           Filename(nullptr),
           Line(0),
