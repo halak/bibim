@@ -55,7 +55,7 @@ namespace Bibim
             temporaryStoppedSounds.swap(stoppedSounds);
         }
 
-        for (StoppedSoundCollection::iterator it = temporaryStoppedSounds.begin(); it != temporaryStoppedSounds.end(); it++)
+        for (StoppedSoundCollection::iterator it = temporaryStoppedSounds.begin(); it != temporaryStoppedSounds.end(); ++it)
             DropSound((*it).first, (*it).second);
     }
 
@@ -92,10 +92,10 @@ namespace Bibim
         SoundDictionaryValues temporarySounds;
         temporarySounds.swap(sounds);
 
-        for (SoundDictionaryValues::iterator itDict = temporarySounds.begin(); itDict != temporarySounds.end(); itDict++)
+        for (SoundDictionaryValues::iterator itDict = temporarySounds.begin(); itDict != temporarySounds.end(); ++itDict)
         {
             SoundCollection& items = (*itDict);
-            for (SoundCollection::iterator it = items.begin(); it != items.end(); it++)
+            for (SoundCollection::iterator it = items.begin(); it != items.end(); ++it)
             {
                 (*it)->setSoundStopEventReceiver(nullptr);
                 (*it)->stop();
@@ -111,7 +111,7 @@ namespace Bibim
             SoundCollection temporaryItems;
             temporaryItems.swap(*items);
 
-            for (SoundCollection::iterator it = temporaryItems.begin(); it != temporaryItems.end(); it++)
+            for (SoundCollection::iterator it = temporaryItems.begin(); it != temporaryItems.end(); ++it)
             {
                 (*it)->setSoundStopEventReceiver(nullptr);
                 (*it)->stop();
@@ -155,19 +155,19 @@ namespace Bibim
     {
         if (mute)
         {
-            for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); itDict++)
+            for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); ++itDict)
             {
                 SoundCollection& items = (*itDict);
-                for (SoundCollection::iterator it = items.begin(); it != items.end(); it++)
+                for (SoundCollection::iterator it = items.begin(); it != items.end(); ++it)
                     (*it)->setVolume(0.0f);
             }
         }
         else
         {
-            for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); itDict++)
+            for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); ++itDict)
             {
                 SoundCollection& items = (*itDict);
-                for (SoundCollection::iterator it = items.begin(); it != items.end(); it++)
+                for (SoundCollection::iterator it = items.begin(); it != items.end(); ++it)
                     (*it)->setVolume(volume);
             }
         }
@@ -175,7 +175,7 @@ namespace Bibim
 
     SoundFX::SoundCollection* SoundFX::FindSounds(int group)
     {
-        for (SoundDictionaryKeys::iterator it = soundGroups.begin(); it != soundGroups.end(); it++)
+        for (SoundDictionaryKeys::iterator it = soundGroups.begin(); it != soundGroups.end(); ++it)
         {
             if ((*it) == group)
                 return &sounds[it - soundGroups.begin()];
@@ -186,7 +186,7 @@ namespace Bibim
 
     const SoundFX::SoundCollection* SoundFX::FindSounds(int group) const
     {
-        for (SoundDictionaryKeys::const_iterator it = soundGroups.begin(); it != soundGroups.end(); it++)
+        for (SoundDictionaryKeys::const_iterator it = soundGroups.begin(); it != soundGroups.end(); ++it)
         {
             if ((*it) == group)
                 return &sounds[it - soundGroups.begin()];
@@ -197,10 +197,10 @@ namespace Bibim
 
     void SoundFX::SetInPauseAllSounds(bool value)
     {
-        for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); itDict++)
+        for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); ++itDict)
         {
             SoundCollection& items = (*itDict);
-            for (SoundCollection::iterator it = items.begin(); it != items.end(); it++)
+            for (SoundCollection::iterator it = items.begin(); it != items.end(); ++it)
                 (*it)->setIsPaused(value);
         }
     }
@@ -209,7 +209,7 @@ namespace Bibim
     {
         if (SoundCollection* items = FindSounds(group))
         {
-            for (SoundCollection::iterator it = items->begin(); it != items->end(); it++)
+            for (SoundCollection::iterator it = items->begin(); it != items->end(); ++it)
                 (*it)->setIsPaused(value);
         }
     }
@@ -218,7 +218,7 @@ namespace Bibim
     {
         if (SoundCollection* items = FindSounds(group))
         {
-            for (SoundCollection::iterator it = items->begin(); it != items->end(); it++)
+            for (SoundCollection::iterator it = items->begin(); it != items->end(); ++it)
             {
                 if ((*it) == sound)
                 {
@@ -238,10 +238,10 @@ namespace Bibim
         SoundDictionaryValues temporarySounds;
         temporarySounds.swap(sounds);
 
-        for (SoundDictionaryValues::iterator itDict = temporarySounds.begin(); itDict != temporarySounds.end(); itDict++)
+        for (SoundDictionaryValues::iterator itDict = temporarySounds.begin(); itDict != temporarySounds.end(); ++itDict)
         {
             SoundCollection& items = (*itDict);
-            for (SoundCollection::iterator it = items.begin(); it != items.end(); it++)
+            for (SoundCollection::iterator it = items.begin(); it != items.end(); ++it)
             {
                 (*it)->setSoundStopEventReceiver(nullptr);
                 (*it)->drop();

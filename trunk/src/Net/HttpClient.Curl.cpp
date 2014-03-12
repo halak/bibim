@@ -82,7 +82,7 @@ namespace Bibim
         curl_httppost* form = nullptr;
         curl_httppost* lastPointer = nullptr;
         const std::vector<KeyValue>& params = request->GetParams();
-        for (std::vector<KeyValue>::const_iterator it = params.begin(); it != params.end(); it++)
+        for (std::vector<KeyValue>::const_iterator it = params.begin(); it != params.end(); ++it)
         {
             curl_formadd(&form, &lastPointer,
                          CURLFORM_PTRNAME, (*it).first.CStr(),

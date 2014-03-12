@@ -121,7 +121,7 @@ namespace Bibim
 
         if (tree)
         {
-            for (NodeCollection::reverse_iterator it = temporaryChildren.rbegin(); it != temporaryChildren.rend(); it++)
+            for (NodeCollection::reverse_iterator it = temporaryChildren.rbegin(); it != temporaryChildren.rend(); ++it)
             {
                 tree->OnNodeDetached(this, *it);
                 delete (*it);
@@ -129,7 +129,7 @@ namespace Bibim
         }
         else
         {
-            for (NodeCollection::reverse_iterator it = temporaryChildren.rbegin(); it != temporaryChildren.rend(); it++)
+            for (NodeCollection::reverse_iterator it = temporaryChildren.rbegin(); it != temporaryChildren.rend(); ++it)
                 delete (*it);
         }
     }
@@ -155,13 +155,13 @@ namespace Bibim
         if (id == GameModule::UnspecifiedID)
             return nullptr;
 
-        for (NodeCollection::const_iterator it = children.begin(); it != children.end(); it++)
+        for (NodeCollection::const_iterator it = children.begin(); it != children.end(); ++it)
         {
             if ((*it)->GetModule() && (*it)->GetModule()->GetID() == id)
                 return (*it);
         }
 
-        for (NodeCollection::const_iterator it = children.begin(); it != children.end(); it++)
+        for (NodeCollection::const_iterator it = children.begin(); it != children.end(); ++it)
         {
             if (GameModuleNode* foundNode = (*it)->FindChildNode(id))
                 return foundNode;
@@ -172,13 +172,13 @@ namespace Bibim
 
     GameModuleNode* GameModuleNode::FindChildNodeByClassID(int id) const
     {
-        for (NodeCollection::const_iterator it = children.begin(); it != children.end(); it++)
+        for (NodeCollection::const_iterator it = children.begin(); it != children.end(); ++it)
         {
             if ((*it)->GetModule() && (*it)->GetModule()->GetClassID() == id)
                 return (*it);
         }
 
-        for (NodeCollection::const_iterator it = children.begin(); it != children.end(); it++)
+        for (NodeCollection::const_iterator it = children.begin(); it != children.end(); ++it)
         {
             if (GameModuleNode* foundNode = (*it)->FindChildNodeByClassID(id))
                 return foundNode;
@@ -230,7 +230,7 @@ namespace Bibim
 
         if (alive && parent)
             parent->module->SetAlive(true);
-        for (NodeCollection::iterator it = children.begin(); it != children.end(); it++)
+        for (NodeCollection::iterator it = children.begin(); it != children.end(); ++it)
             (*it)->module->SetAlive(alive);
     }
 }

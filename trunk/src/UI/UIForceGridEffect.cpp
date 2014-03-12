@@ -149,7 +149,7 @@ namespace Bibim
     void UIForceGridEffect::ApplyDirectedForce(Vector3 force, Vector3 position, float radius)
     {
         const float radiusSquared = radius * radius;
-        for (PointMassGridCollection::iterator it = points.begin(); it != points.end(); it++)
+        for (PointMassGridCollection::iterator it = points.begin(); it != points.end(); ++it)
         {
             if (Vector3::GetDistanceSquared(position, (*it).position) < radiusSquared)
                 (*it).ApplyForce(10.0f * force / (10.0f * Vector3::GetDistance(position, (*it).position)));
@@ -438,9 +438,9 @@ namespace Bibim
 
         while (frameTime > fixedFrameTime)
         {
-            for (SpringCollection::iterator it = springs.begin(); it != springs.end(); it++)
+            for (SpringCollection::iterator it = springs.begin(); it != springs.end(); ++it)
                 (*it).Update();
-            for (PointMassGridCollection::iterator it = points.begin(); it != points.end(); it++)
+            for (PointMassGridCollection::iterator it = points.begin(); it != points.end(); ++it)
                 (*it).Update();
 
             frameTime -= fixedFrameTime;

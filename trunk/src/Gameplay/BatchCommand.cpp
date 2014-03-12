@@ -22,7 +22,7 @@ namespace Bibim
 
     void BatchCommand::Execute()
     {
-        for (CommandCollection::iterator it = commands.begin(); it != commands.end(); it++)
+        for (CommandCollection::iterator it = commands.begin(); it != commands.end(); ++it)
             (*it)->Execute();
     }
 
@@ -30,7 +30,7 @@ namespace Bibim
     {
         BBAssertDebug(CanUndo());
 
-        for (RestorableCommandCollection::reverse_iterator it = restorableCommands.rbegin(); it != restorableCommands.rend(); it++)
+        for (RestorableCommandCollection::reverse_iterator it = restorableCommands.rbegin(); it != restorableCommands.rend(); ++it)
             (*it)->Undo();
     }
 
@@ -38,7 +38,7 @@ namespace Bibim
     {
         BBAssertDebug(CanRedo());
 
-        for (RestorableCommandCollection::iterator it = restorableCommands.begin(); it != restorableCommands.end(); it++)
+        for (RestorableCommandCollection::iterator it = restorableCommands.begin(); it != restorableCommands.end(); ++it)
             (*it)->Redo();
     }
 
@@ -47,7 +47,7 @@ namespace Bibim
         if (commands.size() != restorableCommands.size())
             return false;
 
-        for (RestorableCommandCollection::const_reverse_iterator it = restorableCommands.rbegin(); it != restorableCommands.rend(); it++)
+        for (RestorableCommandCollection::const_reverse_iterator it = restorableCommands.rbegin(); it != restorableCommands.rend(); ++it)
         {
             if ((*it)->CanUndo() == false)
                 return false;
@@ -61,7 +61,7 @@ namespace Bibim
         if (commands.size() != restorableCommands.size())
             return false;
 
-        for (RestorableCommandCollection::const_iterator it = restorableCommands.begin(); it != restorableCommands.end(); it++)
+        for (RestorableCommandCollection::const_iterator it = restorableCommands.begin(); it != restorableCommands.end(); ++it)
         {
             if ((*it)->CanRedo() == false)
                 return false;
@@ -77,7 +77,7 @@ namespace Bibim
         DeleteAll(commands);
         commands = value;
 
-        for (CommandCollection::iterator it = commands.begin(); it != commands.end(); it++)
+        for (CommandCollection::iterator it = commands.begin(); it != commands.end(); ++it)
         {
             if ((*it)->IsRestorable())
                 restorableCommands.push_back(StaticCast<RestorableCommand>(*it));

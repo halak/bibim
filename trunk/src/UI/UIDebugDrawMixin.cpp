@@ -60,7 +60,7 @@ namespace Bibim
             o.time -= dt;
 
             if (o.time > 0.0f)
-                it++;
+                ++it;
             else
                 it = geometries.erase(it);
         }

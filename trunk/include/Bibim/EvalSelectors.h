@@ -41,7 +41,7 @@ namespace Bibim
                 if (condition)
                     condition->Start();
 
-                for (typename CaseCollection::const_iterator it = cases.begin(); it != cases.end(); it++)
+                for (typename CaseCollection::const_iterator it = cases.begin(); it != cases.end(); ++it)
                 {
                     if ((*it).Item)
                         (*it).Item->Start();
@@ -56,7 +56,7 @@ namespace Bibim
                 if (condition)
                     condition->Stop();
 
-                for (typename CaseCollection::const_iterator it = cases.begin(); it != cases.end(); it++)
+                for (typename CaseCollection::const_iterator it = cases.begin(); it != cases.end(); ++it)
                 {
                     if ((*it).Item)
                         (*it).Item->Stop();
@@ -71,7 +71,7 @@ namespace Bibim
                 if (condition)
                     condition->Reset();
 
-                for (typename CaseCollection::const_iterator it = cases.begin(); it != cases.end(); it++)
+                for (typename CaseCollection::const_iterator it = cases.begin(); it != cases.end(); ++it)
                 {
                     if ((*it).Item)
                         (*it).Item->Reset();
@@ -86,7 +86,7 @@ namespace Bibim
                 if (condition)
                 {
                     const float conditionValue = condition->Evaluate(context);
-                    for (typename CaseCollection::const_iterator it = cases.begin(); it != cases.end(); it++)
+                    for (typename CaseCollection::const_iterator it = cases.begin(); it != cases.end(); ++it)
                     {
                         const Case& item = (*it);
                         if (item.Min <= conditionValue && conditionValue <= item.Max)
@@ -195,7 +195,7 @@ namespace Bibim
         const This* o = static_cast<const This*>(original);
         condition = context.Clone(o->condition);
         cases.reserve(o->cases.size());
-        for (typename CaseCollection::const_iterator it = o->cases.begin(); it != o->cases.end(); it++)
+        for (typename CaseCollection::const_iterator it = o->cases.begin(); it != o->cases.end(); ++it)
         {
             const Case& item = (*it);
             cases.push_back(Case(item.Min, item.Max, context.Clone(item.Item)));

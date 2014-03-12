@@ -29,7 +29,7 @@ namespace Bibim
     int ForkStream::Write(const void* buffer, int size)
     {
         int writtenSize = 0;
-        for (StreamCollection::const_iterator it = streams.begin(); it != streams.end(); it++)
+        for (StreamCollection::const_iterator it = streams.begin(); it != streams.end(); ++it)
         {
             writtenSize = Math::Min((*it)->Write(buffer, size), writtenSize);
         }
@@ -39,7 +39,7 @@ namespace Bibim
 
     void ForkStream::Flush()
     {
-        for (StreamCollection::const_iterator it = streams.begin(); it != streams.end(); it++)
+        for (StreamCollection::const_iterator it = streams.begin(); it != streams.end(); ++it)
             (*it)->Flush();
     }
 
@@ -65,7 +65,7 @@ namespace Bibim
 
     bool ForkStream::CanWrite() const
     {
-        for (StreamCollection::const_iterator it = streams.begin(); it != streams.end(); it++)
+        for (StreamCollection::const_iterator it = streams.begin(); it != streams.end(); ++it)
         {
             if ((*it)->CanWrite() == false)
                 return false;

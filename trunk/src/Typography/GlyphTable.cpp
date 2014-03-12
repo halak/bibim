@@ -69,7 +69,7 @@ namespace Bibim
         GlyphDictionary deletingGlyphs;
         deletingGlyphs.swap(glyphs);
 
-        for (GlyphDictionary::iterator it = deletingGlyphs.begin(); it != deletingGlyphs.end(); it++)
+        for (GlyphDictionary::iterator it = deletingGlyphs.begin(); it != deletingGlyphs.end(); ++it)
             delete (*it).second;
     }
 

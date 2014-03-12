@@ -124,10 +124,10 @@ namespace Bibim
                 }
             }
 
-            for (VisualVector::const_iterator it = cachedLeaveVisuals.begin(); it != cachedLeaveVisuals.end(); it++)
+            for (VisualVector::const_iterator it = cachedLeaveVisuals.begin(); it != cachedLeaveVisuals.end(); ++it)
                 (*it)->RaiseMouseLeaveEvent(baseArgs);
 
-            for (VisualVector::const_iterator it = cachedEnterVisuals.begin(); it != cachedEnterVisuals.end(); it++)
+            for (VisualVector::const_iterator it = cachedEnterVisuals.begin(); it != cachedEnterVisuals.end(); ++it)
                 (*it)->RaiseMouseEnterEvent(baseArgs);
 
             if (focusWhenHover)

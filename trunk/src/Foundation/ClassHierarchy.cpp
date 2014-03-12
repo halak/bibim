@@ -9,7 +9,7 @@ namespace Bibim
 
     const ClassInfo* ClassHierarchy::Find(int id)
     {
-        for (std::vector<const ClassInfo*>::const_iterator it = registeredClasses.begin(); it != registeredClasses.end(); it++)
+        for (std::vector<const ClassInfo*>::const_iterator it = registeredClasses.begin(); it != registeredClasses.end(); ++it)
         {
             if ((*it)->GetID() == id)
                 return (*it);

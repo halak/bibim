@@ -246,7 +246,7 @@ namespace Bibim
 
             if (position.X + contentSize.X >= boundary)
             {
-                for (std::vector<UIVisual*>::const_iterator it = line.begin(); it != line.end(); it++)
+                for (std::vector<UIVisual*>::const_iterator it = line.begin(); it != line.end(); ++it)
                 {
                     if ((*it)->GetClassID() == UILabel::ClassID)
                     {
@@ -280,7 +280,7 @@ namespace Bibim
                 position.X = boundary;
         }
 
-        for (std::vector<UIVisual*>::const_iterator it = line.begin(); it != line.end(); it++)
+        for (std::vector<UIVisual*>::const_iterator it = line.begin(); it != line.end(); ++it)
         {
             if ((*it)->GetClassID() == UILabel::ClassID)
             {
@@ -393,7 +393,7 @@ namespace Bibim
         FontPtr currentFont = font;
 
         const PhraseCollection& phrases = text.GetPhrases();
-        for (PhraseCollection::const_iterator it = phrases.begin(); it != phrases.end(); it++)
+        for (PhraseCollection::const_iterator it = phrases.begin(); it != phrases.end(); ++it)
         {
             switch ((*it)->GetType())
             {

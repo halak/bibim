@@ -16,7 +16,7 @@ namespace Bibim
         UIEventMapSet set;
         set.swap(instances);
 
-        for (UIEventMapSet::const_iterator it = set.begin(); it != set.end(); it++)
+        for (UIEventMapSet::const_iterator it = set.begin(); it != set.end(); ++it)
         {
             BBAssert((*it)->GetEventDispatcher() == this);
             (*it)->SetEventDispatcher(nullptr);
@@ -29,7 +29,7 @@ namespace Bibim
 
         SubscriptionMap::const_iterator begin = subscriptionTable.lower_bound(id);
         SubscriptionMap::const_iterator end = subscriptionTable.upper_bound(id);
-        for (SubscriptionMap::const_iterator it = begin; it != end; it++)
+        for (SubscriptionMap::const_iterator it = begin; it != end; ++it)
             (*it).second->RaiseEvent(id, args);
     }
     
@@ -44,7 +44,7 @@ namespace Bibim
             if (begin != subscriptionTable.end())
             {
                 SubscriptionMap::iterator end = subscriptionTable.upper_bound(id);
-                for (SubscriptionMap::const_iterator it = begin; it != end; it++)
+                for (SubscriptionMap::const_iterator it = begin; it != end; ++it)
                 {
                     BBAssertDebug((*it).second != subscriber);
                 }
@@ -60,7 +60,7 @@ namespace Bibim
         BBAssertDebug(it != subscriptionTable.end());
 
         SubscriptionMap::iterator itEnd = subscriptionTable.upper_bound(id);
-        for(; it != itEnd; it++)
+        for(; it != itEnd; ++it)
         {
             if ((*it).second == subscriber)
             {
@@ -77,7 +77,7 @@ namespace Bibim
             if ((*it).second == subscriber)
                 subscriptionTable.erase(it++);
             else
-                it++;
+                ++it;
         }
     }
 

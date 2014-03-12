@@ -68,14 +68,14 @@ namespace Bibim
     void GraphicsDeviceBase::Initialize()
     {
         std::vector<RestoreEventListener*> temporaryListeners = restoreEventListeners;
-        for (std::vector<RestoreEventListener*>::const_iterator it = temporaryListeners.begin(); it != temporaryListeners.end(); it++)
+        for (std::vector<RestoreEventListener*>::const_iterator it = temporaryListeners.begin(); it != temporaryListeners.end(); ++it)
             (*it)->OnGraphicsDeviceRestore(this);
     }
 
     void GraphicsDeviceBase::Finalize()
     {
         std::vector<LostEventListener*> temporaryListeners = lostEventListeners;
-        for (std::vector<LostEventListener*>::const_reverse_iterator it = temporaryListeners.rbegin(); it != temporaryListeners.rend(); it++)
+        for (std::vector<LostEventListener*>::const_reverse_iterator it = temporaryListeners.rbegin(); it != temporaryListeners.rend(); ++it)
             (*it)->OnGraphicsDeviceLost(this);
     }
 

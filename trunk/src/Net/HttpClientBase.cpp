@@ -22,7 +22,7 @@ namespace Bibim
         ResponseCollection temporaryResponses;
         responses.swap(temporaryResponses);
 
-        for (ResponseCollection::const_iterator it = temporaryResponses.begin(); it != temporaryResponses.end(); it++)
+        for (ResponseCollection::const_iterator it = temporaryResponses.begin(); it != temporaryResponses.end(); ++it)
             delete (*it);
     }
 
@@ -36,7 +36,7 @@ namespace Bibim
                 progresses.swap(temporaryProgresses);
             }
 
-            for (std::vector<Progress>::const_iterator it = temporaryProgresses.begin(); it != temporaryProgresses.end(); it++)
+            for (std::vector<Progress>::const_iterator it = temporaryProgresses.begin(); it != temporaryProgresses.end(); ++it)
             {
                 const Progress& item = (*it);
                 item.callback->OnProgress(item.url, item.current, item.total);
@@ -51,7 +51,7 @@ namespace Bibim
                 responses.swap(temporaryResponses);
             }
 
-            for (ResponseCollection::const_iterator it = temporaryResponses.begin(); it != temporaryResponses.end(); it++)
+            for (ResponseCollection::const_iterator it = temporaryResponses.begin(); it != temporaryResponses.end(); ++it)
             {
                 (*it)->Invoke();
                 delete (*it);
@@ -69,7 +69,7 @@ namespace Bibim
     {
         std::vector<KeyValue> v;
         v.reserve(params.size());
-        for (std::vector<KeyValue>::const_iterator it = params.begin(); it != params.end(); it++)
+        for (std::vector<KeyValue>::const_iterator it = params.begin(); it != params.end(); ++it)
         {
             if ((*it).first.IsEmpty() == false)
                 v.push_back(*it);
@@ -80,7 +80,7 @@ namespace Bibim
     void HttpClientBase::GET(const String& url, const std::map<String, String>& params, Stream* outputStream, Callback* callback)
     {
         std::vector<KeyValue> v;
-        for (std::map<String, String>::const_iterator it = params.begin(); it != params.end(); it++)
+        for (std::map<String, String>::const_iterator it = params.begin(); it != params.end(); ++it)
         {
             if ((*it).first.IsEmpty() == false)
                 v.push_back(*it);
@@ -98,7 +98,7 @@ namespace Bibim
     {
         std::vector<KeyValue> v;
         v.reserve(params.size());
-        for (std::vector<KeyValue>::const_iterator it = params.begin(); it != params.end(); it++)
+        for (std::vector<KeyValue>::const_iterator it = params.begin(); it != params.end(); ++it)
         {
             if ((*it).first.IsEmpty() == false)
                 v.push_back(*it);
@@ -109,7 +109,7 @@ namespace Bibim
     void HttpClientBase::POST(const String& url, const std::map<String, String>& params, Stream* outputStream, Callback* callback)
     {
         std::vector<KeyValue> v;
-        for (std::map<String, String>::const_iterator it = params.begin(); it != params.end(); it++)
+        for (std::map<String, String>::const_iterator it = params.begin(); it != params.end(); ++it)
         {
             if ((*it).first.IsEmpty() == false)
                 v.push_back(*it);
@@ -140,7 +140,7 @@ namespace Bibim
             BBAutoLock(progressesLock);
 
             bool updated = false;
-            for (std::vector<Progress>::iterator it = progresses.begin(); it != progresses.end(); it++)
+            for (std::vector<Progress>::iterator it = progresses.begin(); it != progresses.end(); ++it)
             {
                 Progress& item = (*it);
                 if (item.url == progress.url &&
@@ -229,7 +229,7 @@ namespace Bibim
             requestQueue.swap(temporaryRequests);
         }
 
-        for (RequestQueue::iterator it = temporaryRequests.begin(); it != temporaryRequests.end(); it++)
+        for (RequestQueue::iterator it = temporaryRequests.begin(); it != temporaryRequests.end(); ++it)
             delete (*it);
     }
 

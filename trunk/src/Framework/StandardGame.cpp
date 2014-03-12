@@ -1128,7 +1128,7 @@ namespace Bibim
         {
             typedef UIPanel::VisualCollection VisualCollection;
             const VisualCollection& children = current->GetChildren();
-            for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+            for (VisualCollection::const_iterator it = children.begin(); it != children.end(); ++it)
             {
                 BBAssert(lua_isfunction(L, -1));
                 
@@ -1150,7 +1150,7 @@ namespace Bibim
         {
             typedef UIPanel::VisualCollection VisualCollection;
             const VisualCollection& children = current->GetChildren();
-            for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+            for (VisualCollection::const_iterator it = children.begin(); it != children.end(); ++it)
             {
                 const int classID = (*it)->GetClassID();
                 bool childrenSkipped = false;
@@ -1288,7 +1288,7 @@ namespace Bibim
 
             typedef UIPanel::VisualCollection VisualCollection;
             const VisualCollection& children = target->GetChildren();
-            for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+            for (VisualCollection::const_iterator it = children.begin(); it != children.end(); ++it)
             {
                 lua_pushvalue(L, 2);
                 lua_tinker::push(L, static_cast<UIVisual*>(*it));

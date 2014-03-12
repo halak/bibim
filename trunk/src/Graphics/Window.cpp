@@ -68,67 +68,67 @@ namespace Bibim
 
     void Window::RaiseResizedEvent()
     {
-        for (std::vector<ResizeEventListener*>::iterator it = resizeEventListeners.begin(); it != resizeEventListeners.end(); it++)
+        for (std::vector<ResizeEventListener*>::iterator it = resizeEventListeners.begin(); it != resizeEventListeners.end(); ++it)
             (*it)->OnWindowResized(this);
     }
 
     void Window::RaiseMouseMoveEvent(int x, int y)
     {
-        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); it++)
+        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); ++it)
             (*it)->OnMouseMove(this, x, y);
     }
 
     void Window::RaiseMouseLeftButtonDownEvent(int x, int y)
     {
-        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); it++)
+        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); ++it)
             (*it)->OnMouseLeftButtonDown(this, x, y);
     }
 
     void Window::RaiseMouseLeftButtonUpEvent(int x, int y)
     {
-        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); it++)
+        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); ++it)
             (*it)->OnMouseLeftButtonUp(this, x, y);
     }
 
     void Window::RaiseMouseMiddleButtonDownEvent(int x, int y)
     {
-        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); it++)
+        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); ++it)
             (*it)->OnMouseMiddleButtonDown(this, x, y);
     }
 
     void Window::RaiseMouseMiddleButtonUpEvent(int x, int y)
     {
-        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); it++)
+        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); ++it)
             (*it)->OnMouseMiddleButtonUp(this, x, y);
     }
 
     void Window::RaiseMouseRightButtonDownEvent(int x, int y)
     {
-        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); it++)
+        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); ++it)
             (*it)->OnMouseRightButtonDown(this, x, y);
     }
 
     void Window::RaiseMouseRightButtonUpEvent(int x, int y)
     {
-        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); it++)
+        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); ++it)
             (*it)->OnMouseRightButtonUp(this, x, y);
     }
 
     void Window::RaiseMouseWheelEvent(int value)
     {
-        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); it++)
+        for (std::vector<MouseEventListener*>::iterator it = mouseEventListeners.begin(); it != mouseEventListeners.end(); ++it)
             (*it)->OnMouseWheel(this, value);
     }
 
     void Window::RaiseKeyDownEvent(Key::Code code)
     {
-        for (std::vector<KeyboardEventListener*>::iterator it = keyboardEventListeners.begin(); it != keyboardEventListeners.end(); it++)
+        for (std::vector<KeyboardEventListener*>::iterator it = keyboardEventListeners.begin(); it != keyboardEventListeners.end(); ++it)
             (*it)->OnKeyDown(this, code);
     }
 
     void Window::RaiseKeyUpEvent(Key::Code code)
     {
-        for (std::vector<KeyboardEventListener*>::iterator it = keyboardEventListeners.begin(); it != keyboardEventListeners.end(); it++)
+        for (std::vector<KeyboardEventListener*>::iterator it = keyboardEventListeners.begin(); it != keyboardEventListeners.end(); ++it)
             (*it)->OnKeyUp(this, code);
     }
 }

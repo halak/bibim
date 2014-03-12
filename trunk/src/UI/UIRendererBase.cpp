@@ -112,7 +112,7 @@ namespace Bibim
                 }
                 
                 bool usingNormalEffectFile = true;
-                for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); it++)
+                for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); ++it)
                 {
                     const int nameHint = (*it)->GetShaderEffectNameHint();
                     if (nameHint != 0)
@@ -449,7 +449,7 @@ namespace Bibim
 
             if (effects[index])
             {
-                for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); it++)
+                for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); ++it)
                 {
                     (*it)->Setup(effects[index]);
                     (*it)->Begin(this);
@@ -460,7 +460,7 @@ namespace Bibim
         }
         else
         {
-            for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); it++)
+            for (std::vector<EffectorPtr>::const_iterator it = effectors.begin(); it != effectors.end(); ++it)
                 (*it)->Begin(this);
 
             if (mode == AlphaTextureOnlyMode || mode == MaskedAlphaTextureMode)
@@ -476,7 +476,7 @@ namespace Bibim
                 EndAlphaTextureMode();
         }
 
-        for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); it++)
+        for (std::vector<EffectorPtr>::const_reverse_iterator it = effectors.rbegin(); it != effectors.rend(); ++it)
             (*it)->End(this);
 
         if (GetGraphicsDevice()->GetCapabilities().IsShaderSupported())

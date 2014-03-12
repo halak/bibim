@@ -224,7 +224,7 @@ namespace Bibim
 
     void AlarmClock::CancelAll()
     {
-        for (CallbackCollection::iterator it = callbacks.begin(); it != callbacks.end(); it++)
+        for (CallbackCollection::iterator it = callbacks.begin(); it != callbacks.end(); ++it)
         {
             if (Callback* item = (*it))
             {

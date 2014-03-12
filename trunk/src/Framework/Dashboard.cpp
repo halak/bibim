@@ -86,7 +86,7 @@ namespace Bibim
         typedef Performance::SampleCollection SampleCollection;
         const SampleCollection& samples = Performance::GetSamples();
 
-        for (SampleCollection::const_iterator it = samples.begin(); it != samples.end(); it++)
+        for (SampleCollection::const_iterator it = samples.begin(); it != samples.end(); ++it)
         {
         }
     }
@@ -144,14 +144,14 @@ namespace Bibim
             if (fontRevision != font->GetRevision())
             {
                 fontRevision = font->GetRevision();
-                for (NotificationCollection::iterator it = notifications.begin(); it != notifications.end(); it++)
+                for (NotificationCollection::iterator it = notifications.begin(); it != notifications.end(); ++it)
                 {
                     FontString& text = (*it).Text;
                     text = FontString(text.GetFont(), text.GetText());
                 }
             }
 
-            for (NotificationCollection::const_iterator it = notifications.begin(); it != notifications.end(); it++)
+            for (NotificationCollection::const_iterator it = notifications.begin(); it != notifications.end(); ++it)
             {
                 const Notification& item = (*it);
 
@@ -366,7 +366,7 @@ namespace Bibim
                     sout << "\"children\": [";
                     typedef UIPanel::VisualCollection VisualCollection;
                     const VisualCollection& children = static_cast<const UIPanel*>(visual)->GetChildren();
-                    for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+                    for (VisualCollection::const_iterator it = children.begin(); it != children.end(); ++it)
                     {
                         Inner::Do(sout, *it);
 

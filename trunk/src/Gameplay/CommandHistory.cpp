@@ -89,7 +89,7 @@ namespace Bibim
         // Undo
         {
             int level = 0;
-            for (CommandCollection::reverse_iterator it = commands.rbegin(); it != commands.rend(); it++, level++)
+            for (CommandCollection::reverse_iterator it = commands.rbegin(); it != commands.rend(); ++it, ++level)
             {
                 if ((*it) == command)
                 {
@@ -102,7 +102,7 @@ namespace Bibim
         // Redo
         {
             int level = 1;
-            for (CommandCollection::iterator it = cancelledCommands.begin(); it != cancelledCommands.end(); it++, level++)
+            for (CommandCollection::iterator it = cancelledCommands.begin(); it != cancelledCommands.end(); ++it, ++level)
             {
                 if ((*it) == command)
                 {
@@ -118,7 +118,7 @@ namespace Bibim
         if (level <= 0)
             return true;
 
-        for (CommandCollection::const_reverse_iterator it = commands.rbegin(); it != commands.rend() && level > 0; it++, level--)
+        for (CommandCollection::const_reverse_iterator it = commands.rbegin(); it != commands.rend() && level > 0; ++it, --level)
         {
             if ((*it)->IsRestorable() && StaticCast<RestorableCommand>(*it)->CanUndo() == false)
                 return false;
@@ -132,7 +132,7 @@ namespace Bibim
         if (level <= 0)
             return true;
 
-        for (CommandCollection::const_iterator it = cancelledCommands.begin(); it != cancelledCommands.end() && level > 0; it++, level--)
+        for (CommandCollection::const_iterator it = cancelledCommands.begin(); it != cancelledCommands.end() && level > 0; ++it, --level)
         {
             if ((*it)->IsRestorable() && StaticCast<RestorableCommand>(*it)->CanRedo() == false)
                 return false;

@@ -72,7 +72,7 @@ namespace Bibim
 
                 typedef GameModuleNode::NodeCollection NodeCollection;
                 const NodeCollection& children = node->GetChildren();
-                for (NodeCollection::const_iterator it = children.begin(); it != children.end(); it++)
+                for (NodeCollection::const_iterator it = children.begin(); it != children.end(); ++it)
                     Do(tree, *it);
             }
         };
@@ -102,7 +102,7 @@ namespace Bibim
 
                 typedef GameModuleNode::NodeCollection NodeCollection;
                 const NodeCollection& children = node->GetChildren();
-                for (NodeCollection::const_iterator it = children.begin(); it != children.end(); it++)
+                for (NodeCollection::const_iterator it = children.begin(); it != children.end(); ++it)
                     Do(tree, *it);
             }
         };
