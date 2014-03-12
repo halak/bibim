@@ -29,11 +29,11 @@ namespace Bibim
 
         public:
             UIForceGridEffect();
-            UIForceGridEffect(const Rect size, const Vector2 spacing);
+            UIForceGridEffect(Rect size, Vector2 spacing);
             virtual ~UIForceGridEffect();
 
             void InitializeXY(int width, int height, float spacingX, float spacingY);
-            void Initialize(const Rect size, const Vector2 spacing);
+            void Initialize(Rect size, Vector2 spacing);
                         
             inline Timeline* GetTimeline() const;
             void SetTimeline(Timeline* value);

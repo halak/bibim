@@ -14,6 +14,7 @@ namespace Bibim
     };
 
     JumpPointPathFinder::JumpPointPathFinder()
+        : grid(nullptr)
     {
     }
 

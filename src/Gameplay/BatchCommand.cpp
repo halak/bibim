@@ -9,7 +9,7 @@ namespace Bibim
     {
     }
 
-    BatchCommand::BatchCommand(const CommandCollection commands)
+    BatchCommand::BatchCommand(const CommandCollection& commands)
     {
         SetCommands(commands);
     }

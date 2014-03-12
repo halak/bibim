@@ -16,7 +16,7 @@ namespace Bibim
 
         public:
             BatchCommand();
-            BatchCommand(const CommandCollection commands);
+            BatchCommand(const CommandCollection& commands);
             virtual ~BatchCommand();
 
             virtual void Execute();
