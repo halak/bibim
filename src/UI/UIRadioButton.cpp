@@ -23,7 +23,7 @@ namespace Bibim
             return;
 
         const UIPanel::VisualCollection& siblings = parent->GetChildren();
-        for (UIPanel::VisualCollection::const_iterator it = siblings.begin(); it != siblings.end(); it++)
+        for (UIPanel::VisualCollection::const_iterator it = siblings.begin(); it != siblings.end(); ++it)
         {
             UIVisual* item = (*it);
             if (item != this && item->GetClassID() == UIRadioButton::ClassID)

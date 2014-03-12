@@ -573,7 +573,7 @@ namespace Bibim
         SurfaceCollection deletingSurfaces;
         deletingSurfaces.swap(surfaces);
 
-        for (SurfaceCollection::iterator it = deletingSurfaces.begin(); it != deletingSurfaces.end(); it++)
+        for (SurfaceCollection::iterator it = deletingSurfaces.begin(); it != deletingSurfaces.end(); ++it)
             delete (*it);
     }
 

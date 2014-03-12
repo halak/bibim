@@ -31,7 +31,7 @@ namespace Bibim
         layoutSnapshots.clear();
         layoutSnapshots.reserve(children.size());
 
-        for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+        for (VisualCollection::const_iterator it = children.begin(); it != children.end(); ++it)
         {
             const UIVisual* child = (*it);
             if (child->IsDragging())
@@ -62,7 +62,7 @@ namespace Bibim
         const float t = Ease::InOutSinusoidal(Math::Clamp(time / 0.3f));
 
         const VisualCollection& children = GetChildren();
-        for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+        for (VisualCollection::const_iterator it = children.begin(); it != children.end(); ++it)
         {
             UIVisual* child = (*it);
             if (const UILiveWindow::LayoutSnapshot* snapshot = FindLayoutSnapshot(child))
@@ -95,7 +95,7 @@ namespace Bibim
 
     const UILiveWindow::LayoutSnapshot* UILiveWindow::FindLayoutSnapshot(UIVisual* item) const
     {
-        for (std::vector<LayoutSnapshot>::const_iterator it = layoutSnapshots.begin(); it != layoutSnapshots.end(); it++)
+        for (std::vector<LayoutSnapshot>::const_iterator it = layoutSnapshots.begin(); it != layoutSnapshots.end(); ++it)
         {
             if ((*it).Child == item)
                 return &(*it);

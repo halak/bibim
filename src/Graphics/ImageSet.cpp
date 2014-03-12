@@ -21,7 +21,7 @@ namespace Bibim
 
     Image* ImageSet::Find(const String& name) const
     {
-        for (ItemCollection::const_iterator it = items.begin(); it != items.end(); it++)
+        for (ItemCollection::const_iterator it = items.begin(); it != items.end(); ++it)
         {
             if ((*it).first == name)
                 return (*it).second;

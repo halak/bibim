@@ -106,7 +106,7 @@ namespace Bibim
         items.clear();
 
         typedef rapidjson::Document::ConstMemberIterator ConstMemberIterator;
-        for (ConstMemberIterator it = document.MemberBegin(); it != document.MemberEnd(); it++)
+        for (ConstMemberIterator it = document.MemberBegin(); it != document.MemberEnd(); ++it)
         {
             const String key = String((*it).name.GetString(), 0, (*it).name.GetStringLength());
             Any value = Any::Void;
@@ -141,7 +141,7 @@ namespace Bibim
 
         rapidjson::Document document;
         document.SetObject();
-        for (Dictionary::const_iterator it = items.begin(); it != items.end(); it++)
+        for (Dictionary::const_iterator it = items.begin(); it != items.end(); ++it)
         {
             const char* key = (*it).first.CStr();
             const Any& value = (*it).second;

@@ -24,7 +24,7 @@ namespace Bibim
         AfterImageDictionary temporaryAfterImages;
         temporaryAfterImages.swap(afterImages);
 
-        for (AfterImageDictionary::const_iterator it = temporaryAfterImages.begin(); it != temporaryAfterImages.end(); it++)
+        for (AfterImageDictionary::const_iterator it = temporaryAfterImages.begin(); it != temporaryAfterImages.end(); ++it)
             delete (*it).second;
     }
 
@@ -55,7 +55,7 @@ namespace Bibim
             const byte opacityDecrement = GetOpacityDecrement();
             UIRenderer* renderer = context.GetRenderer();
             std::deque<Frame>& frames = currentAfterImage->Frames;
-            for (std::deque<Frame>::iterator it = frames.begin(); it != frames.end(); it++)
+            for (std::deque<Frame>::iterator it = frames.begin(); it != frames.end(); ++it)
             {
                 Frame& item = (*it);
 

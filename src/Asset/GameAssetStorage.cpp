@@ -29,7 +29,7 @@ namespace Bibim
 
     Stream* GameAssetStorage::Open(const String& name)
     {
-        for (ProviderCollection::const_iterator it = providers.begin(); it != providers.end(); it++)
+        for (ProviderCollection::const_iterator it = providers.begin(); it != providers.end(); ++it)
         {
             if (Stream* stream = (*it)->Open(name))
                 return stream;
@@ -43,7 +43,7 @@ namespace Bibim
         AssetTable::iterator it = assets.find(name);
         if (it == assets.end())
         {
-            for (ProviderCollection::const_iterator it = providers.begin(); it != providers.end(); it++)
+            for (ProviderCollection::const_iterator it = providers.begin(); it != providers.end(); ++it)
             {
                 if ((*it)->Preload(name))
                 {
@@ -107,7 +107,7 @@ namespace Bibim
 
     void GameAssetStorage::Restore()
     {
-        for (AssetTable::const_iterator it = assets.begin(); it != assets.end(); it++)
+        for (AssetTable::const_iterator it = assets.begin(); it != assets.end(); ++it)
         {
             if ((*it).second && (*it).second->GetStatus() == GameAsset::DirtyStatus)
             {
@@ -116,7 +116,7 @@ namespace Bibim
                 asset->SetStatus(GameAsset::LoadingStatus);
 
                 bool restoring = false;
-                for (ProviderCollection::const_iterator it = providers.begin(); it != providers.end(); it++)
+                for (ProviderCollection::const_iterator it = providers.begin(); it != providers.end(); ++it)
                 {
                     if ((*it)->Restore(name, asset))
                     {
@@ -146,13 +146,13 @@ namespace Bibim
             if ((*it).second.GetReferenceCount() == 1)
                 assets.erase(it++);
             else
-                it++;
+                ++it;
         }
     }
 
     const String& GameAssetStorage::FindName(GameAsset* value) const
     {
-        for (AssetTable::const_iterator it = assets.begin(); it != assets.end(); it++)
+        for (AssetTable::const_iterator it = assets.begin(); it != assets.end(); ++it)
         {
             if ((*it).second == value)
                 return (*it).first;
@@ -167,7 +167,7 @@ namespace Bibim
 
     GameAsset* GameAssetStorage::LoadNew(const String& name)
     {
-        for (ProviderCollection::const_iterator it = providers.begin(); it != providers.end(); it++)
+        for (ProviderCollection::const_iterator it = providers.begin(); it != providers.end(); ++it)
         {
             if (GameAsset* asset = (*it)->Load(name))
                 return asset;
@@ -293,7 +293,7 @@ namespace Bibim
             taskQueue.swap(temporaryQueue);
         }
         
-        for (TaskQueue::const_iterator it = temporaryQueue.begin(); it != temporaryQueue.end(); it++)
+        for (TaskQueue::const_iterator it = temporaryQueue.begin(); it != temporaryQueue.end(); ++it)
             delete (*it);
     }
 
@@ -334,7 +334,7 @@ namespace Bibim
             BBAutoLock(taskQueueLock);
             BBAutoLock(currentTaskLock);
 
-            for (TaskQueue::const_iterator it = taskQueue.begin(); it != taskQueue.end(); it++)
+            for (TaskQueue::const_iterator it = taskQueue.begin(); it != taskQueue.end(); ++it)
                 totalBytes += (*it)->GetTotalBytes();
         }
     }

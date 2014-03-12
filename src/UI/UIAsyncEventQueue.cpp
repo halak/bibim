@@ -23,7 +23,7 @@ namespace Bibim
         ItemCollection temporaryItems;
         temporaryItems.swap(items);
 
-        for (ItemCollection::const_iterator it = temporaryItems.begin(); it != temporaryItems.end(); it++)
+        for (ItemCollection::const_iterator it = temporaryItems.begin(); it != temporaryItems.end(); ++it)
             (*it).first->Invoke(*(*it).second);
     }
    

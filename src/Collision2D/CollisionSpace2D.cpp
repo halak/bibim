@@ -68,7 +68,7 @@ namespace Bibim
 
         if (Shape2D::Intersect(shapeA, shapeB))
         {
-            for (Listeners<IEventListener>::Iterator it = listeners.Begin(); it != listeners.End(); it++)
+            for (Listeners<IEventListener>::Iterator it = listeners.Begin(); it != listeners.End(); ++it)
                 (*it)->OnIntersected(shapeA, shapeB, groupA, groupB);
         }
     }
@@ -200,7 +200,7 @@ namespace Bibim
         // 새로운 공간을 잡습니다.
         newShapes.resize(numberOfGroups);
         newCollisionRelationships.resize(numberOfGroups);
-        for (std::vector<BooleanCollection>::iterator it = newCollisionRelationships.begin(); it != newCollisionRelationships.end(); it++)
+        for (std::vector<BooleanCollection>::iterator it = newCollisionRelationships.begin(); it != newCollisionRelationships.end(); ++it)
             (*it).resize(numberOfGroups);
 
         // 기존 값을 새로운 공간에 대입합니다.

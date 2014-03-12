@@ -33,7 +33,7 @@ namespace Bibim
         }
 
         dt *= GetSpeed();
-        for (ItemCollection::iterator it = temporaryItems.begin(); it != temporaryItems.end(); it++)
+        for (ItemCollection::iterator it = temporaryItems.begin(); it != temporaryItems.end(); ++it)
         {
             if ((*it))
                 (*it)->Update(dt, timestamp);

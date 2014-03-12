@@ -70,7 +70,7 @@ namespace Bibim
 
         Point2Collection neighbors;
         FindNeighbors(node, neighbors);
-        for (Point2Collection::const_iterator it = neighbors.begin(); it != neighbors.end(); it++)
+        for (Point2Collection::const_iterator it = neighbors.begin(); it != neighbors.end(); ++it)
         {
             Point2 jumpPoint = Point2::Zero;
             if (Jump(Point2(x, y), *it, jumpPoint) == false)

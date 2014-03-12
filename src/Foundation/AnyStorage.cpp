@@ -35,7 +35,7 @@ namespace Bibim
         if (it != dictionary.end())
             return (*it).second;
 
-        for (StorageCollection::const_reverse_iterator it = references.rbegin(); it != references.rend(); it++)
+        for (StorageCollection::const_reverse_iterator it = references.rbegin(); it != references.rend(); ++it)
         {
             const Any& found = (*it)->GetValue(name);
             if (found != Any::Void)

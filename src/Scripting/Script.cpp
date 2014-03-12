@@ -22,7 +22,7 @@ namespace Bibim
 
     const Script::Function* Script::Find(const String& name) const
     {
-        for (FunctionTable::const_iterator it = functionTable.begin(); it != functionTable.end(); it++)
+        for (FunctionTable::const_iterator it = functionTable.begin(); it != functionTable.end(); ++it)
         {
             if ((*it).Name == name)
                 return &(*it);

@@ -208,7 +208,7 @@ namespace Bibim
 
     void GameWindow::RaiseDropFileEvent(const char* filename)
     {
-        for (std::vector<DropFileEventListener*>::iterator it = dropFileEventListeners.begin(); it != dropFileEventListeners.end(); it++)
+        for (std::vector<DropFileEventListener*>::iterator it = dropFileEventListeners.begin(); it != dropFileEventListeners.end(); ++it)
             (*it)->OnWindowFileDropped(this, filename);
     }
 

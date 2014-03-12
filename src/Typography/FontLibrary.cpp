@@ -37,14 +37,14 @@ namespace Bibim
             if ((*it).second.GetReferenceCount() == 1)
                 it = caches.erase(it);
             else
-                it++;
+                ++it;
         }
     }
 
     FontCache* FontLibrary::GetCache(const FontCacheParameters& parameters)
     {
         const unsigned int hashCode = parameters.GetHashCode();
-        for (CacheCollection::iterator it = caches.begin(); it != caches.end(); it++)
+        for (CacheCollection::iterator it = caches.begin(); it != caches.end(); ++it)
         {
             if ((*it).first == hashCode &&
                 (*it).second->GetParameters() == parameters)
@@ -58,7 +58,7 @@ namespace Bibim
     void FontLibrary::SetGlobalScale(float value)
     {
         globalScale = value;
-        for (FontCollection::iterator it = fonts.begin(); it != fonts.end(); it++)
+        for (FontCollection::iterator it = fonts.begin(); it != fonts.end(); ++it)
             (*it)->SetScale(value);
     }
 
@@ -84,10 +84,10 @@ namespace Bibim
     {
         BBAssert(GetGraphicsDevice() == g);
 
-        for (FontCollection::iterator it = fonts.begin(); it != fonts.end(); it++)
+        for (FontCollection::iterator it = fonts.begin(); it != fonts.end(); ++it)
             (*it)->IncreaseRevision();
         
-        for (CacheCollection::iterator it = caches.begin(); it != caches.end(); it++)
+        for (CacheCollection::iterator it = caches.begin(); it != caches.end(); ++it)
             (*it).second->Clear();
     }
 }

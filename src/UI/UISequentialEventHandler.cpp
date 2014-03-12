@@ -29,7 +29,7 @@ namespace Bibim
     bool UISequentialEventHandler::Invoke(const UIEventArgs& args)
     {
         bool result = false;
-        for (HandlerCollection::const_iterator it = handlers.begin(); it != handlers.end(); it++)
+        for (HandlerCollection::const_iterator it = handlers.begin(); it != handlers.end(); ++it)
         {
             if ((*it)->Invoke(args))
                 result = true;
@@ -93,7 +93,7 @@ namespace Bibim
     {
         handlers.clear();
         handlers.reserve(value.size());
-        for (HandlerCollection::const_iterator it = value.begin(); it != value.end(); it++)
+        for (HandlerCollection::const_iterator it = value.begin(); it != value.end(); ++it)
         {
             if (*it != nullptr)
                 handlers.push_back(*it);
@@ -127,7 +127,7 @@ namespace Bibim
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
         handlers.reserve(o->handlers.size());
-        for (HandlerCollection::const_iterator it = o->handlers.begin(); it != o->handlers.end(); it++)
+        for (HandlerCollection::const_iterator it = o->handlers.begin(); it != o->handlers.end(); ++it)
             handlers.push_back(context.Clone(*it));
     }
 }

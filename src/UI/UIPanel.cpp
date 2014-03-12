@@ -26,19 +26,19 @@ namespace Bibim
         VisualCollection removingChildren;
         removingChildren.swap(children);
 
-        for (VisualCollection::iterator it = removingChildren.begin(); it != removingChildren.end(); it++)
+        for (VisualCollection::iterator it = removingChildren.begin(); it != removingChildren.end(); ++it)
             (*it)->SetParent(nullptr);
     }
 
     void UIPanel::ShowChildren()
     {
-        for (VisualCollection::iterator it = children.begin(); it != children.end(); it++)
+        for (VisualCollection::iterator it = children.begin(); it != children.end(); ++it)
             (*it)->Show();
     }
 
     void UIPanel::HideChildren()
     {
-        for (VisualCollection::iterator it = children.begin(); it != children.end(); it++)
+        for (VisualCollection::iterator it = children.begin(); it != children.end(); ++it)
             (*it)->Hide();
     }
 
@@ -49,7 +49,7 @@ namespace Bibim
 
     UIVisual* UIPanel::FindChildByTag(int tag, bool searchAllChildren) const
     {
-        for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+        for (VisualCollection::const_iterator it = children.begin(); it != children.end(); ++it)
         {
             if ((*it)->GetTag() == tag)
                 return (*it);
@@ -57,7 +57,7 @@ namespace Bibim
 
         if (searchAllChildren)
         {
-            for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+            for (VisualCollection::const_iterator it = children.begin(); it != children.end(); ++it)
             {
                 if ((*it)->IsPanel())
                 {
@@ -83,7 +83,7 @@ namespace Bibim
         if (name == nullptr || length == 0)
             return nullptr;
 
-        for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+        for (VisualCollection::const_iterator it = children.begin(); it != children.end(); ++it)
         {
             if ((*it)->GetName().Equals(name, length))
                 return (*it);
@@ -91,7 +91,7 @@ namespace Bibim
 
         if (searchAllChildren)
         {
-            for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+            for (VisualCollection::const_iterator it = children.begin(); it != children.end(); ++it)
             {
                 if ((*it)->IsPanel())
                 {
@@ -108,7 +108,7 @@ namespace Bibim
     {
         RectF mergedBounds = RectF::Empty;
 
-        for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+        for (VisualCollection::const_iterator it = children.begin(); it != children.end(); ++it)
         {
             UIVisual* item = (*it);
             if (item->IsVisible())
@@ -231,7 +231,7 @@ namespace Bibim
         VisualCollection removingChildren;
         removingChildren.swap(children);
 
-        for (VisualCollection::iterator it = removingChildren.begin(); it != removingChildren.end(); it++)
+        for (VisualCollection::iterator it = removingChildren.begin(); it != removingChildren.end(); ++it)
             (*it)->SetParent(nullptr);
 
         OnChildrenRemoved(removingChildren);
@@ -246,7 +246,7 @@ namespace Bibim
 
     void UIPanel::DrawChildren(UIDrawingContext& context)
     {
-        for (VisualCollection::const_iterator it = children.begin(); it != children.end(); it++)
+        for (VisualCollection::const_iterator it = children.begin(); it != children.end(); ++it)
             context.DrawChild(*it);
     }
 
@@ -267,7 +267,7 @@ namespace Bibim
     {
         if (context.Contains(context.GetCurrentClippedBounds()))
         {
-            for (VisualCollection::const_reverse_iterator it = children.rbegin(); it != children.rend(); it++)
+            for (VisualCollection::const_reverse_iterator it = children.rbegin(); it != children.rend(); ++it)
             {
                 if (context.PickChild(*it))
                     return;
@@ -313,7 +313,7 @@ namespace Bibim
                 if (zOrder < next->GetZOrder())
                 {
                     (*it) = next;
-                    it--;
+                    --it;
                 }
                 else
                 {
@@ -340,7 +340,7 @@ namespace Bibim
                 if (zOrder > next->GetZOrder())
                 {
                     (*it) = next;
-                    it++;
+                    ++it;
                 }
                 else
                 {
@@ -371,7 +371,7 @@ namespace Bibim
             if (zOrder == next->GetZOrder())
             {
                 (*it) = next;
-                it++;
+                ++it;
             }
             else
             {
@@ -402,7 +402,7 @@ namespace Bibim
             if (zOrder == next->GetZOrder())
             {
                 (*it) = next;
-                it--;
+                --it;
             }
             else
             {
@@ -431,7 +431,7 @@ namespace Bibim
         Base::OnCopy(original, context);
         const This* o = static_cast<const This*>(original);
         children.reserve(o->children.size());
-        for (VisualCollection::const_iterator it = o->children.begin(); it != o->children.end(); it++)
+        for (VisualCollection::const_iterator it = o->children.begin(); it != o->children.end(); ++it)
             Insert(children.size(), context.Clone(*it));
     }
 }

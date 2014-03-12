@@ -64,7 +64,7 @@ namespace Bibim
 
     UIPixelEffect* UIEffectMap::FindPixelEffect(const String& name)
     {
-        for (PixelEffectCollection::const_iterator it = pixelEffects.begin(); it != pixelEffects.end(); it++)
+        for (PixelEffectCollection::const_iterator it = pixelEffects.begin(); it != pixelEffects.end(); ++it)
         {
             if ((*it) && (*it)->GetName() == name)
                 return (*it);
@@ -94,7 +94,7 @@ namespace Bibim
         const This* o = static_cast<const This*>(original);
         geomEffect = context.Clone(o->geomEffect);
         pixelEffects.reserve(o->pixelEffects.size());
-        for (PixelEffectCollection::const_iterator it = o->pixelEffects.begin(); it != o->pixelEffects.end(); it++)
+        for (PixelEffectCollection::const_iterator it = o->pixelEffects.begin(); it != o->pixelEffects.end(); ++it)
             pixelEffects.push_back(context.Clone(*it));
     }
 }

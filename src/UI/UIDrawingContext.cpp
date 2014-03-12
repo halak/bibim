@@ -314,7 +314,7 @@ namespace Bibim
                 virtual void Append(const std::vector<Vector2>& p)
                 { 
                     data.reserve(data.size() + p.size());
-                    for (std::vector<Vector2>::const_iterator it = p.begin(); it != p.end(); it++)
+                    for (std::vector<Vector2>::const_iterator it = p.begin(); it != p.end(); ++it)
                         data.push_back(origin + (*it));
                 }
 

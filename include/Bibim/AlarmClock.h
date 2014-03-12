@@ -102,7 +102,7 @@ namespace Bibim
 
     AlarmClock::Group* AlarmClock::FindGroup(int id)
     {
-        for (GroupCollection::iterator it = groups.begin(); it != groups.end(); it++)
+        for (GroupCollection::iterator it = groups.begin(); it != groups.end(); ++it)
         {
             if ((*it).ID == id)
                 return &(*it);
@@ -113,7 +113,7 @@ namespace Bibim
 
     const AlarmClock::Group* AlarmClock::FindGroup(int id) const
     {
-        for (GroupCollection::const_iterator it = groups.begin(); it != groups.end(); it++)
+        for (GroupCollection::const_iterator it = groups.begin(); it != groups.end(); ++it)
         {
             if ((*it).ID == id)
                 return &(*it);

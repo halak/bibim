@@ -129,7 +129,7 @@ namespace Bibim
             if (font->GetShadowSize() > 0)
             {
                 shadowGlyphs.reserve(wideCharacters.size());
-                for (std::vector<wchar_t>::const_iterator it = wideCharacters.begin(); it != wideCharacters.end(); it++)
+                for (std::vector<wchar_t>::const_iterator it = wideCharacters.begin(); it != wideCharacters.end(); ++it)
                 {
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
                     strokedGlyphs.push_back(font->GetStrokedGlyph(*it));
@@ -139,7 +139,7 @@ namespace Bibim
             }
             else
             {
-                for (std::vector<wchar_t>::const_iterator it = wideCharacters.begin(); it != wideCharacters.end(); it++)
+                for (std::vector<wchar_t>::const_iterator it = wideCharacters.begin(); it != wideCharacters.end(); ++it)
                 {
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
                     strokedGlyphs.push_back(font->GetStrokedGlyph(*it));
@@ -152,7 +152,7 @@ namespace Bibim
             if (font->GetShadowSize() > 0)
             {
                 shadowGlyphs.reserve(wideCharacters.size());
-                for (std::vector<wchar_t>::const_iterator it = wideCharacters.begin(); it != wideCharacters.end(); it++)
+                for (std::vector<wchar_t>::const_iterator it = wideCharacters.begin(); it != wideCharacters.end(); ++it)
                 {
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
                     shadowGlyphs.push_back(font->GetShadowGlyph(*it));
@@ -161,7 +161,7 @@ namespace Bibim
             }
             else
             {
-                for (std::vector<wchar_t>::const_iterator it = wideCharacters.begin(); it != wideCharacters.end(); it++)
+                for (std::vector<wchar_t>::const_iterator it = wideCharacters.begin(); it != wideCharacters.end(); ++it)
                 {
                     regularGlyphs.push_back(font->GetRegularGlyph(*it));
                     measurer.Step(*it, weights + regularGlyphs.back()->GetAdvance().X * spacing);

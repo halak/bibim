@@ -13,7 +13,7 @@ namespace Bibim
             template <typename T>
             static inline bool Contains(const std::vector<SharedPointer<T> >& container, const T* item)
             {
-                for (typename std::vector<SharedPointer<T> >::const_iterator it = container.begin(); it != container.end(); it++)
+                for (typename std::vector<SharedPointer<T> >::const_iterator it = container.begin(); it != container.end(); ++it)
                 {
                     if ((*it) == item)
                         return true;
@@ -25,7 +25,7 @@ namespace Bibim
             template <typename T>
             static inline bool Remove(std::vector<SharedPointer<T> >& container, const T* item)
             {
-                for (typename std::vector<SharedPointer<T> >::iterator it = container.begin(); it != container.end(); it++)
+                for (typename std::vector<SharedPointer<T> >::iterator it = container.begin(); it != container.end(); ++it)
                 {
                     if ((*it) == item)
                     {

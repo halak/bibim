@@ -58,7 +58,7 @@ namespace Bibim
                     it = deadBGMs.erase(it);
                 }
                 else
-                    it++;
+                    ++it;
             }
 
             UpdateVolumes();
@@ -160,7 +160,7 @@ namespace Bibim
             //if (aliveBGM)
             //    aliveBGM->setVolume(0.0f);
 
-            //for (std::vector<DeadBGM>::iterator it = deadBGMs.begin(); it != deadBGMs.end(); it++)
+            //for (std::vector<DeadBGM>::iterator it = deadBGMs.begin(); it != deadBGMs.end(); ++it)
             //    (*it).first->setVolume(0.0f);
         }
         else
@@ -168,7 +168,7 @@ namespace Bibim
             //if (aliveBGM)
             //    aliveBGM->setVolume(volume * aliveBGMVolume);
 
-            //for (std::vector<DeadBGM>::iterator it = deadBGMs.begin(); it != deadBGMs.end(); it++)
+            //for (std::vector<DeadBGM>::iterator it = deadBGMs.begin(); it != deadBGMs.end(); ++it)
             //    (*it).first->setVolume(volume * (*it).second);
         }
     }
@@ -189,7 +189,7 @@ namespace Bibim
     {
         std::vector<DeadBGM> temporaryDeadBGMs;
         temporaryDeadBGMs.swap(deadBGMs);
-        for (std::vector<DeadBGM>::iterator it = temporaryDeadBGMs.begin(); it != temporaryDeadBGMs.end(); it++)
+        for (std::vector<DeadBGM>::iterator it = temporaryDeadBGMs.begin(); it != temporaryDeadBGMs.end(); ++it)
         {
             /*
             (*it).first->setVolume(0.0f);

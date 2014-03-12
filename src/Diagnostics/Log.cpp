@@ -9,19 +9,19 @@ namespace Bibim
 
     void Log::Error(const char* category, const char* message)
     {
-        for (std::vector<Listener*>::const_iterator it = LogListeners.begin(); it != LogListeners.end(); it++)
+        for (std::vector<Listener*>::const_iterator it = LogListeners.begin(); it != LogListeners.end(); ++it)
             (*it)->Error(category, message);
     }
 
     void Log::Warning(const char* category, const char* message)
     {
-        for (std::vector<Listener*>::const_iterator it = LogListeners.begin(); it != LogListeners.end(); it++)
+        for (std::vector<Listener*>::const_iterator it = LogListeners.begin(); it != LogListeners.end(); ++it)
             (*it)->Warning(category, message);
     }
 
     void Log::Information(const char* category, const char* message)
     {
-        for (std::vector<Listener*>::const_iterator it = LogListeners.begin(); it != LogListeners.end(); it++)
+        for (std::vector<Listener*>::const_iterator it = LogListeners.begin(); it != LogListeners.end(); ++it)
             (*it)->Information(category, message);
     }
 

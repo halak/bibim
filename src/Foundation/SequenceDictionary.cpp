@@ -88,7 +88,7 @@ namespace Bibim
         {
             it = FindIterator(key);
 
-            for (/**/; it != items.end() && (*it).Key == key; it++)
+            for (/**/; it != items.end() && (*it).Key == key; ++it)
             {
                 if ((*it).Value == value)
                 {
@@ -103,7 +103,7 @@ namespace Bibim
         {
             it = FindIteratorSequentially(key);
 
-            for (/**/; it != items.end(); it++)
+            for (/**/; it != items.end(); ++it)
             {
                 if ((*it).Key == key && (*it).Value == value)
                 {
@@ -159,7 +159,7 @@ namespace Bibim
 
     SequenceDictionary::Container::iterator SequenceDictionary::FindIteratorSequentially(const String& key)
     {
-        for (Container::iterator it = items.begin(); it != items.end(); it++)
+        for (Container::iterator it = items.begin(); it != items.end(); ++it)
         {
             if ((*it).Key == key)
                 return it;
@@ -170,7 +170,7 @@ namespace Bibim
 
     SequenceDictionary::Container::const_iterator SequenceDictionary::FindIteratorSequentially(const String& key) const
     {
-        for (Container::const_iterator it = items.begin(); it != items.end(); it++)
+        for (Container::const_iterator it = items.begin(); it != items.end(); ++it)
         {
             if ((*it).Key == key)
                 return it;
