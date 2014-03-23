@@ -358,7 +358,8 @@ namespace Bibim
                 Property(sout, "visibility", UIVisual::ConvertFromVisibilityToString(visual->GetVisibility()));
                 Property(sout, "opacity", String::CFormat("%d%%", static_cast<int>(visual->GetOpacity() * 100.0f)));
                 Property(sout, "pickable", visual->GetPickable());
-                Property(sout, "focusable", visual->GetFocusable(), false);
+                Property(sout, "focusable", visual->GetFocusable());
+                Property(sout, "z", visual->GetZOrder(), false);
 
                 if (visual->IsPanel())
                 {
