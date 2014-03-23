@@ -317,12 +317,13 @@ namespace Bibim.Bab
         static object GenerateTooltip(Dictionary<string, object> o)
         {
             return string.Format(
-                "{0}: {1}\n{2}: {3}\n{4}: {5}\n{6}: {7}\n{8}: {9}",
+                "{0}: {1}\n{2}: {3}\n{4}: {5}\n{6}: {7}\n{8}: {9}\n{10}: {11}",
                 "위치", o["xy"],
                 "크기", o["size"],
                 "앵커", o["anchor"],
                 "원점", o["origin"],
-                "불투명도", o["opacity"]
+                "불투명도", o["opacity"],
+                "Z순서", o["z"]
             );
         }
 
