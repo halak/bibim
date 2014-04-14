@@ -60,10 +60,8 @@ namespace Bibim
     {
         UIVisual::OnDraw(context);
         
-        if (GetSource() == nullptr || GetSource()->GetTexture() == nullptr)
-            return;
-
-        context.Draw(GetSource(), GetHorizontalFlip(), GetVerticalFlip());
+        if (GetSource() && GetSource()->GetTexture())
+            context.Draw(GetSource(), GetHorizontalFlip(), GetVerticalFlip());
     }
 
     void UIImage::OnPick(UIPickingContext& context)
