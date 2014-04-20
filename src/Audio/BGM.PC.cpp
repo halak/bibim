@@ -129,6 +129,8 @@ namespace Bibim
                 aliveBGMVolume = 1.0f;
 
             irrklang::ISoundEngine* engine = audioDevice->GetEngine();
+            if (engine == nullptr)
+                return;
 
             const bool track = startTime > 0.0f;
             if (rewindTime > 0.0f)

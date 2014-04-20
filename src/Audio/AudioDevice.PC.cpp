@@ -92,8 +92,11 @@ namespace Bibim
 
     AudioDevice::~AudioDevice()
     {
-        engine->drop();
-        engine = nullptr;
+        if (engine)
+        {
+            engine->drop();
+            engine = nullptr;
+        }
     }
 
     void AudioDevice::AddArchive(MPQ* mpq)
