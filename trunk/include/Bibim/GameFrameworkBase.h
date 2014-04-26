@@ -14,7 +14,7 @@ namespace Bibim
         public:
             virtual ~GameFrameworkBase();
 
-            void Exit();
+            virtual void Exit();
 
             inline GameModuleTree* GetModules() const;
             inline GameWindow*     GetWindow() const;

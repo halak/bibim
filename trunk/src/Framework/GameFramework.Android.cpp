@@ -45,6 +45,19 @@ namespace Bibim
     {
         GameFrameworkBase::Construct(width, height, String::Empty);
     }
+
+    void GameFramework::Exit()
+    {
+        JNIEnv* env = jniEnvironment;
+
+        jclass jni = env->FindClass("org/bibim/android/JNI");
+        static const char* sig = "()V";
+        jmethodID method = env->GetStaticMethodID(jni, "exit", sig);
+        
+        env->CallStaticVoidMethod(jni, method);
+
+        GameFrameworkBase::Exit();
+    }
     
     void GameFramework::init()
     {

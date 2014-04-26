@@ -22,6 +22,10 @@ public class JNI {
     
     public static native void handleIMESubmit(int id, String text);
     public static native void handleIMECancel(int id);
+
+    public static void exit() {
+        BaseActivity.activity.finish();
+    }
     
     public static final int EDIT_TEXT_FORMAT_PLAIN = 0;
     public static final int EDIT_TEXT_FORMAT_NUMBER = 1;
