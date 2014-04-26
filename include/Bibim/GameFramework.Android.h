@@ -15,6 +15,8 @@ namespace Bibim
         public:
             virtual ~GameFramework();
 
+            virtual void Exit();
+
             void init();
             void step();
 
