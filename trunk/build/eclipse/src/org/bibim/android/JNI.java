@@ -24,7 +24,12 @@ public class JNI {
     public static native void handleIMECancel(int id);
 
     public static void exit() {
-        BaseActivity.activity.finish();
+        BaseActivity.activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                BaseActivity.activity.finish();
+            }
+        });        
     }
     
     public static final int EDIT_TEXT_FORMAT_PLAIN = 0;
