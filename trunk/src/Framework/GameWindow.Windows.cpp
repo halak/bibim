@@ -243,7 +243,7 @@ namespace Bibim
         windowClass.cbClsExtra = 0;
         windowClass.cbWndExtra = sizeof(this);
         windowClass.hInstance = GetModuleHandle(nullptr);
-        windowClass.hIcon = LoadIcon(nullptr, IDI_APPLICATION);
+        windowClass.hIcon = LoadIcon(windowClass.hInstance, IDI_APPLICATION);
         windowClass.hCursor = LoadCursor(nullptr, IDC_ARROW);
         windowClass.hbrBackground = static_cast<HBRUSH>(GetStockObject(BLACK_BRUSH));
         windowClass.lpszMenuName = nullptr;

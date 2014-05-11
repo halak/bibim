@@ -128,6 +128,7 @@ namespace Bibim
             ScreenshotPrinter* screenshotPrinter;
             BGM* bgm;
             SoundFX* sfx;
+            SoundFX* voice;
             LuaBase* lua;
             Clipboard* clipboard;
     };
