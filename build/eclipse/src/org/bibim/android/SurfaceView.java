@@ -63,6 +63,10 @@ class SurfaceView extends GLSurfaceView {
         
         this.setFocusableInTouchMode(true);
     }
+
+    public void destroy() {
+        JNI.cleanup(getContext());
+    }
     
     private static class ContextFactory implements GLSurfaceView.EGLContextFactory {
         private static int EGL_CONTEXT_CLIENT_VERSION = 0x3098;

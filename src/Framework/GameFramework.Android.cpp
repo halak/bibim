@@ -134,6 +134,7 @@ extern "C" {
                                                            jstring localeName, jstring workingDirectory,
                                                            jobject assetManager);
     JNIEXPORT void JNICALL Java_org_bibim_android_JNI_step(JNIEnv* env, jclass clazz, jobject context);
+    JNIEXPORT void JNICALL Java_org_bibim_android_JNI_cleanup(JNIEnv* env, jclass clazz, jobject context);
 
     JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleMouseMove(JNIEnv* env, jclass clazz, jint x, jint y);
     JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleMouseLeftButtonDown(JNIEnv* env, jclass clazz, jint x, jint y);
@@ -214,6 +215,12 @@ JNIEXPORT void JNICALL Java_org_bibim_android_JNI_step(JNIEnv* env, jclass clazz
             env->CallStaticVoidMethod(jni, edit, context, id, jniText, jniTitle, jniDesc, textFormat, maxLength);
         }
     }
+}
+
+JNIEXPORT void JNICALL Java_org_bibim_android_JNI_cleanup(JNIEnv* env, jclass clazz, jobject context)
+{
+    delete GameFramework::SingletonInstance;
+    GameFramework::SingletonInstance = nullptr;
 }
 
 JNIEXPORT void JNICALL Java_org_bibim_android_JNI_handleMouseMove(JNIEnv* env, jclass clazz, jint x, jint y)

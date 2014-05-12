@@ -8,6 +8,7 @@ import android.content.res.AssetManager;
 public class JNI {
     public static native void init(Context context, int width, int height, String localeName, String workingDirectory, AssetManager assets);
     public static native void step(Context context);
+    public static native void cleanup(Context context);
      
     public static native void handleMouseMove(int x, int y);
     public static native void handleMouseLeftButtonDown(int x, int y);
