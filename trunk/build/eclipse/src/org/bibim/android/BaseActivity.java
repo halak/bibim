@@ -53,6 +53,7 @@ public class BaseActivity extends Activity {
     protected void onDestroy() {
         bgm.destroy();
         sfx.destroy();
+        view.destroy();
         super.onDestroy();
     }
     
