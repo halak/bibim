@@ -9,14 +9,6 @@
 
 namespace Bibim
 {
-    const Vector4 UIRendererBase::Vertex::ComponentMasks[4] = 
-    {
-        Vector4(0.51f, 0.0f,  0.0f,  0.0f),
-        Vector4(0.0f,  0.51f, 0.0f,  0.0f),
-        Vector4(0.0f,  0.0f,  0.51f, 0.0f),
-        Vector4(0.0f,  0.0f,  0.0f,  0.51f),
-    };
-
     UIRendererBase::UIRendererBase(uint effectFileFormatHint)
         : graphicsDevice(nullptr),
           storage(nullptr),
