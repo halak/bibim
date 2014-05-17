@@ -240,13 +240,17 @@ namespace Bibim
         glVertexAttribPointer(effect->GetPositionLocation(), 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), VB(position));
         glEnableVertexAttribArray(effect->GetPositionLocation());
 
-        glVertexAttribPointer(effect->GetColorLocation(), 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), VB(color));
+        glVertexAttribPointer(effect->GetColorLocation(), 4, GL_UNSIGNED_BYTE, GL_FALSE, sizeof(Vertex), VB(color));
         glEnableVertexAttribArray(effect->GetColorLocation());
         
-        if (mode == ColorTextureOnlyMode || mode == MaskedColorTextureMode ||
-            mode == AlphaTextureOnlyMode || mode == MaskedAlphaTextureMode)
+        if (mode == ColorTextureOnlyMode || mode == MaskedColorTextureMode)
         {
             glVertexAttribPointer(effect->GetTexCoord1Location(), 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), VB(texCoord1));
+            glEnableVertexAttribArray(effect->GetTexCoord1Location());
+        }
+        else if (mode == AlphaTextureOnlyMode || mode == MaskedAlphaTextureMode)
+        {
+            glVertexAttribPointer(effect->GetTexCoord1Location(), 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), VB(texCoord1));
             glEnableVertexAttribArray(effect->GetTexCoord1Location());
         }
 
