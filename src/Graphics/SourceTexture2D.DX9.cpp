@@ -39,8 +39,12 @@ namespace Bibim
 
         if (existingInstance == nullptr)
             existingInstance = new SourceTexture2D(graphicsDevice, width, height, surfaceWidth, surfaceHeight, pixelFormat);
-        
+
         Read(static_cast<SourceTexture2D*>(existingInstance), reader);
+
+#if (defined(BIBIM_DEBUG))
+        static_cast<SourceTexture2D*>(existingInstance)->debugTag = reader.GetName();
+#endif
 
         return existingInstance;
     }
