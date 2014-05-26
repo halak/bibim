@@ -22,11 +22,6 @@ namespace Bibim
             SourceTexture2D(GraphicsDevice* graphicsDevice, int width, int height, int surfaceWidth, int surfaceHeight, PixelFormat pixelFormat);
 
             static void Read(SourceTexture2D* thiz, StreamReader& reader);
-
-        private:
-#if (defined(BIBIM_DEBUG))
-            String debugTag;
-#endif
     };
 }
 
