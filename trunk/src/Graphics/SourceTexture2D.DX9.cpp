@@ -42,10 +42,6 @@ namespace Bibim
 
         Read(static_cast<SourceTexture2D*>(existingInstance), reader);
 
-#if (defined(BIBIM_DEBUG))
-        static_cast<SourceTexture2D*>(existingInstance)->debugTag = reader.GetName();
-#endif
-
         return existingInstance;
     }
 
