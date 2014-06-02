@@ -434,6 +434,7 @@ namespace Bibim
             lua_tinker::class_def<Font>(L, "GetLineHeight", &Font::GetLineHeight);
         lua_tinker::class_add<UILayout>(L, "UILayout");
             lua_tinker::class_inh<UILayout, GameAsset>(L);
+            lua_tinker::class_con<UILayout>(L, lua_tinker::constructor<UILayout, UIWindow*>);
             lua_tinker::class_def<UILayout>(L, "GetRoot", &UILayout::GetRoot);
 
         lua_tinker::class_add<GameComponent>(L, "GameComponent");
