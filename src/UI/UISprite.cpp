@@ -110,7 +110,9 @@ namespace Bibim
 
         time += dt * speed;
 
-        if (source->GetLooped() == false)
+        if (source->GetLooped())
+            time = Math::Mod(time, source->GetDuration());
+        else
             time = Math::Min(time, source->GetDuration());
 
         if (time < source->GetDuration())
