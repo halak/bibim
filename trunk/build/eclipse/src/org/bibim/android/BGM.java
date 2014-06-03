@@ -44,10 +44,12 @@ public final class BGM {
     }
 
     public void setVolume(final float value) {
-        volume = value;
+        if (volume != value) {
+            volume = value;
 
-        if (player != null) {
-            player.setVolume(value, value);
+            if (player != null) {
+                player.setVolume(value, value);
+            }
         }
     }
 
