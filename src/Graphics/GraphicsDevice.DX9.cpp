@@ -205,8 +205,8 @@ namespace Bibim
             {
                 // REFACTORING
                 Finalize();
-                CheckedRelease(d3dDevice);
-                CheckedRelease(d3dObject);
+                //CheckedRelease(d3dDevice);
+                //CheckedRelease(d3dObject);
                 Initialize();
             }
         }

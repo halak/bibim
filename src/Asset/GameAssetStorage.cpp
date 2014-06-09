@@ -5,6 +5,7 @@
 #include <Bibim/AutoLocker.h>
 #include <Bibim/AssetLoadingTask.h>
 #include <Bibim/GameAsset.h>
+#include <Bibim/Stream.h>
 #include <algorithm>
 
 namespace Bibim
@@ -31,7 +32,8 @@ namespace Bibim
     {
         for (ProviderCollection::const_iterator it = providers.begin(); it != providers.end(); ++it)
         {
-            if (Stream* stream = (*it)->Open(name))
+            Stream* stream = (*it)->Open(name);
+            if (stream && stream->CanRead())
                 return stream;
         }
 
