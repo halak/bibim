@@ -61,9 +61,6 @@ namespace Bibim
             void DrawQuad(const Vector2* p, Color color, const RectF& clippingRect, Texture2D* texture);
             void DrawQuad(const Vector2* p, Color color, const RectF& clippingRect, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2);
 
-            void DrawQuad(const Vector2* p, Color color, const RectF& clippingRect, int alphaChannel, Texture2D* texture);
-            void DrawQuad(const Vector2* p, Color color, const RectF& clippingRect, int alphaChannel, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2);
-
             void DrawQuad(const Vector2* p, const Color* c);
             void DrawQuad(const Vector2* p, const Color* c, const Vector2* uv,  Texture2D* texture);
             void DrawQuad(const Vector2* p, const Color* c, const Vector2* uv1, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2);
@@ -117,9 +114,6 @@ namespace Bibim
                 inline Vertex(Vector2 position, unsigned long color);
                 inline Vertex(Vector2 position, unsigned long color, Vector2 texCoord1);
                 inline Vertex(Vector2 position, unsigned long color, Vector2 texCoord1, Vector2 texCoord2);
-
-                inline Vertex(Vector2 position, unsigned long color, Vector2 texCoord1, int component);
-                inline Vertex(Vector2 position, unsigned long color, Vector2 texCoord1, int component, Vector2 texCoord2);
 
                 inline Vertex(Vector3 position, unsigned long color);
                 inline Vertex(Vector3 position, unsigned long color, Vector2 texCoord1);
@@ -280,21 +274,6 @@ namespace Bibim
     }
 
     UIRendererBase::Vertex::Vertex(Vector2 position, unsigned long color, Vector2 texCoord1, Vector2 texCoord2)
-        : Position(position.X, position.Y, 0.0f),
-          Color(color),
-          TexCoord1(texCoord1),
-          TexCoord2(texCoord2)
-    {
-    }
-
-    UIRendererBase::Vertex::Vertex(Vector2 position, unsigned long color, Vector2 texCoord1, int /*component*/)
-        : Position(position, 0.0f),
-          Color(color),
-          TexCoord1(texCoord1)
-    {
-    }
-
-    UIRendererBase::Vertex::Vertex(Vector2 position, unsigned long color, Vector2 texCoord1, int /*component*/, Vector2 texCoord2)
         : Position(position.X, position.Y, 0.0f),
           Color(color),
           TexCoord1(texCoord1),

@@ -222,30 +222,6 @@ namespace Bibim
         v[3] = Vertex(p[3], argb, Vector2(clippingRect.GetRight(), clippingRect.GetBottom()), uv2[3]);
     }
 
-    void UIRendererBase::DrawQuad(const Vector2* p, Color color, const RectF& clippingRect, int alphaChannel, Texture2D* texture)
-    {
-        BBAssert(p && texture);
-
-        const unsigned long argb = color.ToARGB();
-        Vertex* v = Prepare(texture, nullptr);
-        v[0] = Vertex(p[0], argb, Vector2(clippingRect.GetLeft(),  clippingRect.GetTop()),    alphaChannel);
-        v[1] = Vertex(p[1], argb, Vector2(clippingRect.GetRight(), clippingRect.GetTop()),    alphaChannel);
-        v[2] = Vertex(p[2], argb, Vector2(clippingRect.GetLeft(),  clippingRect.GetBottom()), alphaChannel);
-        v[3] = Vertex(p[3], argb, Vector2(clippingRect.GetRight(), clippingRect.GetBottom()), alphaChannel);
-    }
-
-    void UIRendererBase::DrawQuad(const Vector2* p, Color color, const RectF& clippingRect, int alphaChannel, Texture2D* texture1, const Vector2* uv2, Texture2D* texture2)
-    {
-        BBAssert(p && texture1 && uv2 && texture2);
-
-        const unsigned long argb = color.ToARGB();
-        Vertex* v = Prepare(texture1, texture2);
-        v[0] = Vertex(p[0], argb, Vector2(clippingRect.GetLeft(),  clippingRect.GetTop()),    alphaChannel, uv2[0]);
-        v[1] = Vertex(p[1], argb, Vector2(clippingRect.GetRight(), clippingRect.GetTop()),    alphaChannel, uv2[1]);
-        v[2] = Vertex(p[2], argb, Vector2(clippingRect.GetLeft(),  clippingRect.GetBottom()), alphaChannel, uv2[2]);
-        v[3] = Vertex(p[3], argb, Vector2(clippingRect.GetRight(), clippingRect.GetBottom()), alphaChannel, uv2[3]);
-    }
-
     void UIRendererBase::DrawQuad(const Vector2* p, const Color* c)
     {
         BBAssert(p && c);

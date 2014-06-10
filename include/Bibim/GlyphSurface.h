@@ -14,11 +14,10 @@ namespace Bibim
         public:
             struct Slot
             {
-                int Depth;
                 Rect ClippingRect;
 
                 inline Slot();
-                inline Slot(int depth, Rect clippingRect);
+                inline explicit Slot(Rect clippingRect);
                 inline Slot(const Slot& original);
 
                 inline Slot& operator = (const Slot& right);
@@ -33,14 +32,11 @@ namespace Bibim
             inline Texture2D* GetTexture() const;
 
         private:
-            Slot Allocate(int depth, int component, const void* buffer, int width, int height, int pitch);
-
-        private:
             GlyphSurface(GraphicsDevice* graphicsDevice, int width, int height);
             ~GlyphSurface();
 
         private:
-            RectStorage storages[4];
+            RectStorage storage;
             DynamicTexture2DPtr texture;
 
             friend class FontCache;
@@ -56,33 +52,29 @@ namespace Bibim
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     GlyphSurface::Slot::Slot()
-        : Depth(0),
-          ClippingRect(Rect::Empty)
+        : ClippingRect(Rect::Empty)
     {
     }
 
-    GlyphSurface::Slot::Slot(int depth, Rect clippingRect)
-        : Depth(depth),
-          ClippingRect(clippingRect)
+    GlyphSurface::Slot::Slot(Rect clippingRect)
+        : ClippingRect(clippingRect)
     {
     }
 
     GlyphSurface::Slot::Slot(const Slot& original)
-        : Depth(original.Depth),
-          ClippingRect(original.ClippingRect)
+        : ClippingRect(original.ClippingRect)
     {
     }
 
     GlyphSurface::Slot& GlyphSurface::Slot::operator = (const Slot& right)
     {
-        Depth = right.Depth;
         ClippingRect = right.ClippingRect;
         return *this;
     }
 
     bool GlyphSurface::Slot::operator == (const Slot& right) const
     {
-        return Depth == right.Depth && ClippingRect == right.ClippingRect;
+        return ClippingRect == right.ClippingRect;
     }
 
     bool GlyphSurface::Slot::operator != (const Slot& right) const
