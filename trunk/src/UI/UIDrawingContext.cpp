@@ -621,9 +621,9 @@ namespace Bibim
                     };
 
                     if (geomEffect)
-                        geomEffect->DrawQuad(renderer, points, color, clippingRect, glyph->GetSlot().Depth, glyph->GetTexture());
+                        geomEffect->DrawQuad(renderer, points, color, clippingRect, glyph->GetTexture());
                     else
-                        renderer->DrawQuad(points, color, clippingRect, glyph->GetSlot().Depth, glyph->GetTexture());
+                        renderer->DrawQuad(points, color, clippingRect, glyph->GetTexture());
                 }
                 renderer->EndBatch();
             }

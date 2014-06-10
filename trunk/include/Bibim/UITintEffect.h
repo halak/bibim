@@ -35,9 +35,6 @@ namespace Bibim
             virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, Texture2D* texture);
             virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, Texture2D* texture1, Vector2* uv2, Texture2D* texture2);
 
-            virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, int alphaChannel, Texture2D* texture);
-            virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, int alphaChannel, Texture2D* texture1, Vector2* uv2, Texture2D* texture2);
-
             virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color* c);
             virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color* c, Vector2* uv,  Texture2D* texture);
             virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color* c, Vector2* uv1, Texture2D* texture1, Vector2* uv2, Texture2D* texture2);

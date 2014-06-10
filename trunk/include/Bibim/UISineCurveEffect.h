@@ -48,10 +48,6 @@ namespace Bibim
             virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, Texture2D* texture);
             virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, Texture2D* texture1, Vector2* uv2, Texture2D* texture2);
 
-            // NOT IMPLEMENTED
-            // virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, int alphaChannel, Texture2D* texture);
-            // virtual void DrawQuad(UIRenderer* renderer, Vector2* p, Color color, RectF clippingRect, int alphaChannel, Texture2D* texture1, Vector2* uv2, Texture2D* texture2);
-
         public:
             static Form ConvertFromStringToForm(const char* value);
             static const char* ConvertFromFormToString(Form value);
