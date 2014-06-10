@@ -49,9 +49,6 @@ namespace Bibim
             case Texture2D::A8Pixels:
                 d3dFormat = D3DFMT_A8;
                 break;
-            case Texture2D::A8A8A8A8Pixels:
-                d3dFormat = D3DFMT_A8R8G8B8;
-                break;
         }
 
         IDirect3DDevice9* d3dDevice = GetGraphicsDevice()->GetD3DDevice();

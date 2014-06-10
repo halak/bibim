@@ -83,9 +83,6 @@ namespace Bibim
             case A8Pixels:
                 d3dFormat = D3DFMT_A8;
                 break;
-            case A8A8A8A8Pixels:
-                d3dFormat = D3DFMT_A8R8G8B8;
-                break;
         }
 
         IDirect3DTexture9* d3dTexture = nullptr;

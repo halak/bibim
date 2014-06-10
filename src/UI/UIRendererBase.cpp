@@ -556,8 +556,7 @@ namespace Bibim
     {
         if (texture)
         {
-            if (texture->GetPixelFormat() == Texture2D::A8Pixels ||
-                texture->GetPixelFormat() == Texture2D::A8A8A8A8Pixels)
+            if (texture->GetPixelFormat() == Texture2D::A8Pixels)
             {
                 if (mask)
                     return MaskedAlphaTextureMode;

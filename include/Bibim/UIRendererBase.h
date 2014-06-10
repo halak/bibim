@@ -108,7 +108,7 @@ namespace Bibim
             {
                 Vector3 Position;
                 unsigned long Color;
-                Vector3 TexCoord1;
+                Vector2 TexCoord1;
                 Vector2 TexCoord2;
 
                 inline Vertex();
@@ -275,29 +275,29 @@ namespace Bibim
     UIRendererBase::Vertex::Vertex(Vector2 position, unsigned long color, Vector2 texCoord1)
         : Position(position, 0.0f),
           Color(color),
-          TexCoord1(texCoord1.X, texCoord1.Y, 3.1f)
+          TexCoord1(texCoord1)
     {
     }
 
     UIRendererBase::Vertex::Vertex(Vector2 position, unsigned long color, Vector2 texCoord1, Vector2 texCoord2)
         : Position(position.X, position.Y, 0.0f),
           Color(color),
-          TexCoord1(texCoord1.X, texCoord1.Y, 3.1f),
+          TexCoord1(texCoord1),
           TexCoord2(texCoord2)
     {
     }
 
-    UIRendererBase::Vertex::Vertex(Vector2 position, unsigned long color, Vector2 texCoord1, int component)
+    UIRendererBase::Vertex::Vertex(Vector2 position, unsigned long color, Vector2 texCoord1, int /*component*/)
         : Position(position, 0.0f),
           Color(color),
-          TexCoord1(texCoord1.X, texCoord1.Y, static_cast<float>(component) + 0.1f)
+          TexCoord1(texCoord1)
     {
     }
 
-    UIRendererBase::Vertex::Vertex(Vector2 position, unsigned long color, Vector2 texCoord1, int component, Vector2 texCoord2)
+    UIRendererBase::Vertex::Vertex(Vector2 position, unsigned long color, Vector2 texCoord1, int /*component*/, Vector2 texCoord2)
         : Position(position.X, position.Y, 0.0f),
           Color(color),
-          TexCoord1(texCoord1.X, texCoord1.Y, static_cast<float>(component) + 0.1f),
+          TexCoord1(texCoord1),
           TexCoord2(texCoord2)
     {
     }
@@ -311,14 +311,14 @@ namespace Bibim
     UIRendererBase::Vertex::Vertex(Vector3 position, unsigned long color, Vector2 texCoord1)
         : Position(position),
           Color(color),
-          TexCoord1(texCoord1.X, texCoord1.Y, 3.1f)
+          TexCoord1(texCoord1)
     {
     }
 
     UIRendererBase::Vertex::Vertex(Vector3 position, unsigned long color, Vector2 texCoord1, Vector2 texCoord2)
         : Position(position),
           Color(color),
-          TexCoord1(texCoord1.X, texCoord1.Y, 3.1f),
+          TexCoord1(texCoord1),
           TexCoord2(texCoord2)
     {
     }
