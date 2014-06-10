@@ -77,8 +77,6 @@ namespace Bibim
                 return 4;
             case A8Pixels:
                 return 1;
-            case A8A8A8A8Pixels:
-                return 4;
             default:
                 return 0;
         }
@@ -92,8 +90,6 @@ namespace Bibim
                 return GL_RGBA;
             case A8Pixels:
                 return GL_ALPHA;
-            case A8A8A8A8Pixels:
-                return GL_RGBA;
             default:
                 return GL_RGBA;
         }

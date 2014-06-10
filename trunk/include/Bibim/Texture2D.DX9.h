@@ -19,7 +19,6 @@ namespace Bibim
                 UnknownPixels,
                 A8R8G8B8Pixels,
                 A8Pixels,
-                A8A8A8A8Pixels
             };
 
         public:

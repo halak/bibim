@@ -6,7 +6,7 @@
 namespace Bibim
 {
     GlyphSurface::GlyphSurface(GraphicsDevice* graphicsDevice, int width, int height)
-        : texture(new DynamicTexture2D(graphicsDevice, width, height, Texture2D::A8A8A8A8Pixels))
+        : texture(new DynamicTexture2D(graphicsDevice, width, height, Texture2D::A8Pixels))
     {
         storages[0].Clear(width, height);
         storages[1].Clear(width, height);
@@ -20,33 +20,33 @@ namespace Bibim
 
     GlyphSurface::Slot GlyphSurface::Allocate(const void* buffer, int width, int height, int pitch)
     {
-        Slot slot;
+//        Slot slot;
+//
+//#       if (defined(BIBIM_USE_DIRECTX9))
+//        static const int RED   = 2;
+//        static const int GREEN = 1;
+//        static const int BLUE  = 0;
+//        static const int ALPHA = 3;
+//#       else
+//        static const int RED   = 0;
+//        static const int GREEN = 1;
+//        static const int BLUE  = 2;
+//        static const int ALPHA = 3;
+//#       endif
+//
+//        slot = Allocate(0, RED, buffer, width, height, pitch);
+//        if (slot.ClippingRect != Rect::Empty)
+//            return slot;
+//
+//        slot = Allocate(1, GREEN, buffer, width, height, pitch);
+//        if (slot.ClippingRect != Rect::Empty)
+//            return slot;
+//
+//        slot = Allocate(2, BLUE, buffer, width, height, pitch);
+//        if (slot.ClippingRect != Rect::Empty)
+//            return slot;
 
-#       if (defined(BIBIM_USE_DIRECTX9))
-        static const int RED   = 2;
-        static const int GREEN = 1;
-        static const int BLUE  = 0;
-        static const int ALPHA = 3;
-#       else
-        static const int RED   = 0;
-        static const int GREEN = 1;
-        static const int BLUE  = 2;
-        static const int ALPHA = 3;
-#       endif
-
-        slot = Allocate(0, RED, buffer, width, height, pitch);
-        if (slot.ClippingRect != Rect::Empty)
-            return slot;
-
-        slot = Allocate(1, GREEN, buffer, width, height, pitch);
-        if (slot.ClippingRect != Rect::Empty)
-            return slot;
-
-        slot = Allocate(2, BLUE, buffer, width, height, pitch);
-        if (slot.ClippingRect != Rect::Empty)
-            return slot;
-
-        return Allocate(3, ALPHA, buffer, width, height, pitch);
+        return Allocate(0, 0, buffer, width, height, pitch);
     }
 
     GlyphSurface::Slot GlyphSurface::Allocate(int depth, int component, const void* buffer, int width, int height, int pitch)
@@ -60,7 +60,7 @@ namespace Bibim
             DynamicTexture2D::LockedInfo lockedInfo;
             if (texture->Lock(lockedInfo, allocatedRect))
             {
-                static const int STRIDE = 4;
+                static const int STRIDE = 1;
 
                 // 비워둔 외곽을 투명한 Pixel로 채웁니다.
                 {

@@ -14,7 +14,6 @@ namespace Bibim.Graphics
             Unknown,
             A8R8G8B8,
             A8,
-            A8A8A8A8,
         }
         #endregion
 
