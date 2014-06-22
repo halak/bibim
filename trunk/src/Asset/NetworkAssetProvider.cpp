@@ -154,7 +154,7 @@ namespace Bibim
             outStream = stream;
 
             int count = 0;
-            while (!stream->CanRead() && count++ < 10)
+            while (!stream->CanRead() && count++ < 100)
                 Thread::Sleep(1);
 
             return true;

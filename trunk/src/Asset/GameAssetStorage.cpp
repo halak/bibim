@@ -35,6 +35,8 @@ namespace Bibim
             Stream* stream = (*it)->Open(name);
             if (stream && stream->CanRead())
                 return stream;
+            else
+                delete stream;
         }
 
         return nullptr;
