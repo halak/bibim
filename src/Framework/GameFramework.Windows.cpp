@@ -36,6 +36,7 @@ namespace Bibim
         #if (defined(BIBIM_DEBUG))
         // _CrtSetAllocHook(BibimAllocHook);
         _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+        // _CrtSetBreakAlloc(7050);
         #endif
 
         LPWSTR commandLine = ::GetCommandLineW();
