@@ -28,7 +28,7 @@ namespace Bibim
 
             virtual void Execute()
             {
-                if (GameAsset* result = MPQAssetProvider::LoadActually(GetStorage(), mpq, GetName(), true))
+                if (GameAsset* result = MPQAssetProvider::LoadActually(GetStorage(), mpq, GetName(), true, nullptr))
                     Register(result);
             }
 
@@ -72,12 +72,13 @@ namespace Bibim
     GameAsset* MPQAssetProvider::Load(const String& name)
     {
         BBAssertDebug(mpq != nullptr);
-        return LoadActually(GetStorage(), mpq, name, false);
+        return LoadActually(GetStorage(), mpq, name, false, nullptr);
     }
 
-    bool MPQAssetProvider::Restore(const String& /*name*/, GameAsset* /*asset*/)
+    bool MPQAssetProvider::Restore(const String& name, GameAsset* asset)
     {
-        return false;
+        BBAssertDebug(mpq != nullptr);
+        return LoadActually(GetStorage(), mpq, name, false, asset) == asset;
     }
 
     void MPQAssetProvider::SetMPQ(MPQ* value)
@@ -106,7 +107,8 @@ namespace Bibim
     GameAsset* MPQAssetProvider::LoadActually(GameAssetStorage* storage,
                                                MPQ* mpq,
                                                const String& name,
-                                               bool isPriority)
+                                               bool isPriority,
+                                               GameAsset* existingInstance)
     {
         BBAssertDebug(storage != nullptr);
 
@@ -114,7 +116,7 @@ namespace Bibim
         if (stream && stream->CanRead())
         {
             AssetStreamReader reader(name, stream, storage, isPriority);
-            return GameAssetFactory::Create(reader);
+            return GameAssetFactory::Create(reader, existingInstance);
         }
         else
             return nullptr;

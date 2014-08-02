@@ -30,7 +30,8 @@ namespace Bibim
             static GameAsset* LoadActually(GameAssetStorage* storage,
                                            MPQ* mpq,
                                            const String& name,
-                                           bool isPriority);
+                                           bool isPriority,
+                                           GameAsset* existingInstance);
 
         private:
             MPQPtr mpq;
