@@ -33,7 +33,7 @@ namespace Bibim
           aliveBGM(nullptr),
           aliveBGMVolume(0.0f),
           volume(1.0f),
-          crossfadeTime(1.0f),
+          crossfadeTime(0.5f),
           bgmRewindTime(0.0f),
           mute(false)
     {
@@ -45,7 +45,7 @@ namespace Bibim
           aliveBGM(nullptr),
           aliveBGMVolume(0.0f),
           volume(1.0f),
-          crossfadeTime(1.0f),
+          crossfadeTime(0.5f),
           bgmRewindTime(0.0f),
           mute(false)
     {
