@@ -94,8 +94,15 @@ namespace Bibim
 
     void GameFrameworkBase::StepFrame()
     {
+        //int64 a = Clock::GetCurrentMicroSeconds();
         UpdateFrame();
+        //int64 b = Clock::GetCurrentMicroSeconds();
         DrawFrame();
+        //int64 c = Clock::GetCurrentMicroSeconds();
+
+        //::OutputDebugString("--------------------------\n");
+        //::OutputDebugString(String::CFormat("Update: %.3f\n", static_cast<float>(b - a) * 0.001f).CStr());
+        //::OutputDebugString(String::CFormat("Draw: %.3f\n", static_cast<float>(c - b) * 0.001f).CStr());
     }
 
     void GameFrameworkBase::UpdateFrame()

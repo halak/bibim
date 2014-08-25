@@ -46,6 +46,7 @@ namespace Bibim
         luaL_requiref(state, LUA_STRLIBNAME,  &luaopen_string, 1);
         luaL_requiref(state, LUA_MATHLIBNAME, &luaopen_math, 1);
         luaL_requiref(state, LUA_DBLIBNAME,   &luaopen_debug, 1);
+        luaL_requiref(state, LUA_OSLIBNAME,   &luaopen_os, 1);
 
         lua_tinker::init(state);
 
@@ -340,6 +341,15 @@ namespace Bibim
 
         lua_newtable(state);
         lua_setglobal(state, "_CALLBACKS");
+
+        lua_getglobal(state, LUA_OSLIBNAME);
+        lua_pushnil(state); lua_setfield(state, -2, "execute");
+        lua_pushnil(state); lua_setfield(state, -2, "exit");
+        lua_pushnil(state); lua_setfield(state, -2, "remove");
+        lua_pushnil(state); lua_setfield(state, -2, "rename");
+        lua_pushnil(state); lua_setfield(state, -2, "setlocale");
+        lua_pushnil(state); lua_setfield(state, -2, "tmpname");
+        lua_pop(state, 1);
 
 #       if (defined(BIBIM_DEBUG))
         lua_tinker::set(state, "DEBUG", true);
