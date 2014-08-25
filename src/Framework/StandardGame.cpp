@@ -934,6 +934,33 @@ namespace Bibim
             return 1;
         }
 
+        static int WriteFile(lua_State* L)
+        {
+            StandardGame* game = GetGame(L);
+            if (game == nullptr)
+                return 0;
+
+            const char* appNameChars = lua_tostring(L, 1);
+            const char* filenameChars = lua_tostring(L, 2);
+            const char* contents = lua_tostring(L, 3);
+            if (appNameChars == nullptr || filenameChars == nullptr || contents == nullptr)
+                return 0;
+
+            const String appName = appNameChars;
+            const String filename = filenameChars;
+            if (appName.Contains(".."))
+                return 0;
+            if (filename.Contains(".."))
+                return 0;
+
+            const String path = Environment::GetAppDataPath(appName, filename);
+            FileStreamPtr stream = new FileStream(path, FileStream::WriteOnly);
+            stream->Write(contents, String::CharsLength(contents));
+            stream->Close();
+
+            return 0;
+        }
+
         class UIEventArgsSerializer : public UIEventArgs::Serializer
         {
             public:
@@ -1972,6 +1999,7 @@ namespace Bibim
             { "resetloadingstatus", &ResetLoadingStatus },
             { "loadingstatus", &LoadingStatus },
             { "commandline", &CommandLine },
+            { "writefile", &WriteFile },
             { NULL, NULL}  /* sentinel */
         };
 
