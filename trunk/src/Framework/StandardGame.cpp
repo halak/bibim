@@ -403,7 +403,9 @@ namespace Bibim
         const UIKeyboardEventArgs& keyboard = static_cast<const UIKeyboardEventArgs&>(args);
         if (keyboard.Contains(Key::F2))
         {
+#           if defined(BIBIM_DEBUG)
             ReloadUI();
+#           endif
             return true;
         }
         else if (keyboard.Contains(Key::Alt) && keyboard.Contains(Key::Enter))
