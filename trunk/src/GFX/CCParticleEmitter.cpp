@@ -54,7 +54,8 @@ namespace Bibim
 
             elapsedTime += dt;
 
-            if (system->GetDuration() != -1.0f && system->GetDuration() < elapsedTime)
+            if (system->IsLooped() == false &&
+                system->GetDuration() < elapsedTime)
                 Stop();
         }
 
@@ -152,7 +153,7 @@ namespace Bibim
 
                 particleCount--;
 
-                if (particleCount == 0)
+                if (particleCount == 0 && system->IsLooped() == false)
                     return false;
             }
         }

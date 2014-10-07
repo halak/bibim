@@ -124,7 +124,7 @@ namespace Bibim
         }
         else
         {
-            Update(currentTime - previousTime, timestamp++);
+            Update(Math::Min(elapsedTime, maxTimeInOneFrame), timestamp++);
         }
 
         timestamps.push_back(currentTime);
