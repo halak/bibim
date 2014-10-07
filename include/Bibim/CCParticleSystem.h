@@ -64,6 +64,7 @@ namespace Bibim
             inline float GetTangentialAcceleration() const { return tangentialAcceleration; }
             inline Image* GetImage() const { return image; }
             inline float GetEmissionRate() const { return emissionRate; }
+            inline bool IsLooped() const { return duration < 0.0f; }
 
         private:
             float angle;
