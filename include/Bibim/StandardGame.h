@@ -110,6 +110,7 @@ namespace Bibim
             bool fullscreen;
             char __padding__[3];
             Color clearColor;
+            Rect scissorRect;
             Dashboard* dashboard;
             Preferences* preferences;
             Keyboard* keyboard;
