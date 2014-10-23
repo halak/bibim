@@ -76,6 +76,20 @@ namespace Bibim
         }
     }
 
+    void GraphicsDevice::SetScissorRect()
+    {
+        if (Window* window = GetWindow())
+        {
+            const Point2 size = window->GetSize();
+            SetScissorRect(Rect(0, 0, size.X, size.Y));
+        }
+    }
+
+    void GraphicsDevice::SetScissorRect(Rect value)
+    {
+        glScissor(value.X, value.Y, value.Width, value.Height);
+    }
+
     Point2 GraphicsDevice::GetViewportSize() const
     {
         if (Window* window = GetWindow())
@@ -203,6 +217,7 @@ namespace Bibim
 
         const Point2 windowSize = GetWindow()->GetSize();
         glViewport(0, 0, windowSize.X, windowSize.Y);
+        glEnable(GL_SCISSOR_TEST);
 
         Base::Initialize();
     }

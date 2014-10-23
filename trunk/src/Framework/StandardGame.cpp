@@ -224,8 +224,12 @@ namespace Bibim
         BBPerfFunc();
 
         if (clearColor.A > 0)
+        {
+            GetGraphicsDevice()->SetScissorRect();
             GetGraphicsDevice()->Clear(clearColor);
+        }
 
+        GetGraphicsDevice()->SetScissorRect(scissorRect);
         UIHandledDrawingContext context(uiRenderer, dashboard);
         context.Draw(uiDomain->GetRoot());
 
@@ -361,6 +365,11 @@ namespace Bibim
 
         if (GetFontLibrary())
             GetFontLibrary()->SetGlobalScale(scale);
+
+        scissorRect.Width = static_cast<int>(rootWindow->GetWidth() * scale);
+        scissorRect.Height = static_cast<int>(rootWindow->GetHeight() * scale); 
+        scissorRect.X = (windowSize.X - scissorRect.Width) / 2;
+        scissorRect.Y = (windowSize.Y - scissorRect.Height) / 2;
     }
 
     void StandardGame::ReloadUI()

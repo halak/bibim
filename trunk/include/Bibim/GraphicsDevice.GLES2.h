@@ -37,6 +37,9 @@ namespace Bibim
             inline bool GetFullscreen() const;
             void SetFullscreen(bool value);
 
+            void SetScissorRect();
+            void SetScissorRect(Rect value);
+
             Point2 GetViewportSize() const;
             Point2 GetScreenSize() const;
 

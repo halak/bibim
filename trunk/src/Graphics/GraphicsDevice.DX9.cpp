@@ -101,6 +101,21 @@ namespace Bibim
         }
     }
 
+    void GraphicsDevice::SetScissorRect()
+    {
+        if (Window* window = GetWindow())
+        {
+            const Point2 size = window->GetSize();
+            SetScissorRect(Rect(0, 0, size.X, size.Y));
+        }
+    }
+
+    void GraphicsDevice::SetScissorRect(Rect value)
+    {
+        const RECT d3dRect = { value.GetLeft(), value.GetTop(), value.GetRight(), value.GetBottom() };
+        GetD3DDevice()->SetScissorRect(&d3dRect);
+    }
+
     Point2 GraphicsDevice::GetViewportSize() const
     {
         if (Window* window = GetWindow())
@@ -306,6 +321,8 @@ namespace Bibim
         result = d3dDevice->SetViewport(&vp);
         if (result != D3D_OK)
             Log::Warning("Graphics", "Set viewport failed.");
+
+        d3dDevice->SetRenderState(D3DRS_SCISSORTESTENABLE, TRUE);
 
         deviceLost = false;
 
