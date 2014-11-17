@@ -30,6 +30,9 @@ namespace Bibim
             inline void Resume();
             inline void Resume(int group);
 
+            inline bool IsPlaying() const { return false; }  // NOT IMPLEMENTED
+            inline bool IsPlaying(int group) const { return false; }  // NOT IMPLEMENTED
+
             inline AudioDevice* GetAudioDevice() const;
             void SetAudioDevice(AudioDevice* value);
 

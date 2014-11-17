@@ -122,6 +122,26 @@ namespace Bibim
         }
     }
 
+    bool SoundFX::IsPlaying() const
+    {
+        for (SoundDictionaryValues::const_iterator itDict = sounds.begin(); itDict != sounds.end(); ++itDict)
+        {
+            const SoundCollection& items = (*itDict);
+            if (items.empty() == false)
+                return true;
+        }
+
+        return false;
+    }
+
+    bool SoundFX::IsPlaying(int group) const
+    {
+        if (const SoundCollection* items = FindSounds(group))
+            return !items->empty();
+        else
+            return false;
+    }
+
     void SoundFX::SetAudioDevice(AudioDevice* value)
     {
         if (audioDevice != value)
