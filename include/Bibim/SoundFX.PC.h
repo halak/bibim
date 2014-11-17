@@ -32,6 +32,9 @@ namespace Bibim
             inline void Resume();
             inline void Resume(int group);
 
+            bool IsPlaying() const;
+            bool IsPlaying(int group) const;
+
             inline AudioDevice* GetAudioDevice() const;
             void SetAudioDevice(AudioDevice* value);
 
