@@ -615,13 +615,8 @@ namespace Bibim
     {
         static const Point2 textureSizes[] =
         {
-            Point2(256, 256),
-            Point2(256, 256),
-            Point2(256, 256),
             Point2(512, 512),
-            Point2(512, 512),
-            Point2(1024, 512),
-            Point2(1024, 1024)
+            Point2(1024, 1024),
         };
         static const int lastTextureSizeIndex = sizeof(textureSizes) / sizeof(textureSizes[0]) - 1;
 
