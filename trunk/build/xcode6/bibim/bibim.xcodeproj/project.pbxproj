@@ -813,145 +813,145 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8BE4C3A81A3C787A00F39521 /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = png.c; path = "../../../extlibs/libpng-1.6.9/png.c"; sourceTree = "<group>"; };
-		8BE4C3A91A3C787A00F39521 /* pngerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngerror.c; path = "../../../extlibs/libpng-1.6.9/pngerror.c"; sourceTree = "<group>"; };
-		8BE4C3AA1A3C787A00F39521 /* pngget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngget.c; path = "../../../extlibs/libpng-1.6.9/pngget.c"; sourceTree = "<group>"; };
-		8BE4C3AB1A3C787A00F39521 /* pngmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngmem.c; path = "../../../extlibs/libpng-1.6.9/pngmem.c"; sourceTree = "<group>"; };
-		8BE4C3AC1A3C787A00F39521 /* pngpread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngpread.c; path = "../../../extlibs/libpng-1.6.9/pngpread.c"; sourceTree = "<group>"; };
-		8BE4C3AD1A3C787A00F39521 /* pngread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngread.c; path = "../../../extlibs/libpng-1.6.9/pngread.c"; sourceTree = "<group>"; };
-		8BE4C3AE1A3C787A00F39521 /* pngrio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngrio.c; path = "../../../extlibs/libpng-1.6.9/pngrio.c"; sourceTree = "<group>"; };
-		8BE4C3AF1A3C787A00F39521 /* pngrtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngrtran.c; path = "../../../extlibs/libpng-1.6.9/pngrtran.c"; sourceTree = "<group>"; };
-		8BE4C3B01A3C787A00F39521 /* pngrutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngrutil.c; path = "../../../extlibs/libpng-1.6.9/pngrutil.c"; sourceTree = "<group>"; };
-		8BE4C3B11A3C787A00F39521 /* pngset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngset.c; path = "../../../extlibs/libpng-1.6.9/pngset.c"; sourceTree = "<group>"; };
-		8BE4C3B21A3C787A00F39521 /* pngtest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngtest.c; path = "../../../extlibs/libpng-1.6.9/pngtest.c"; sourceTree = "<group>"; };
-		8BE4C3B31A3C787A00F39521 /* pngtrans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngtrans.c; path = "../../../extlibs/libpng-1.6.9/pngtrans.c"; sourceTree = "<group>"; };
-		8BE4C3B41A3C787A00F39521 /* pngwio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwio.c; path = "../../../extlibs/libpng-1.6.9/pngwio.c"; sourceTree = "<group>"; };
-		8BE4C3B51A3C787A00F39521 /* pngwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwrite.c; path = "../../../extlibs/libpng-1.6.9/pngwrite.c"; sourceTree = "<group>"; };
-		8BE4C3B61A3C787A00F39521 /* pngwtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwtran.c; path = "../../../extlibs/libpng-1.6.9/pngwtran.c"; sourceTree = "<group>"; };
-		8BE4C3B71A3C787A00F39521 /* pngwutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwutil.c; path = "../../../extlibs/libpng-1.6.9/pngwutil.c"; sourceTree = "<group>"; };
-		8BE4C3C81A3C78BD00F39521 /* cdjpeg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cdjpeg.c; path = "../../../extlibs/jpeg-9a/cdjpeg.c"; sourceTree = "<group>"; };
-		8BE4C3C91A3C78BD00F39521 /* cjpeg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cjpeg.c; path = "../../../extlibs/jpeg-9a/cjpeg.c"; sourceTree = "<group>"; };
-		8BE4C3CA1A3C78BD00F39521 /* ckconfig.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ckconfig.c; path = "../../../extlibs/jpeg-9a/ckconfig.c"; sourceTree = "<group>"; };
-		8BE4C3CB1A3C78BD00F39521 /* djpeg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = djpeg.c; path = "../../../extlibs/jpeg-9a/djpeg.c"; sourceTree = "<group>"; };
-		8BE4C3CD1A3C78BD00F39521 /* jaricom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jaricom.c; path = "../../../extlibs/jpeg-9a/jaricom.c"; sourceTree = "<group>"; };
-		8BE4C3CE1A3C78BD00F39521 /* jcapimin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcapimin.c; path = "../../../extlibs/jpeg-9a/jcapimin.c"; sourceTree = "<group>"; };
-		8BE4C3CF1A3C78BD00F39521 /* jcapistd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcapistd.c; path = "../../../extlibs/jpeg-9a/jcapistd.c"; sourceTree = "<group>"; };
-		8BE4C3D01A3C78BD00F39521 /* jcarith.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcarith.c; path = "../../../extlibs/jpeg-9a/jcarith.c"; sourceTree = "<group>"; };
-		8BE4C3D11A3C78BD00F39521 /* jccoefct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jccoefct.c; path = "../../../extlibs/jpeg-9a/jccoefct.c"; sourceTree = "<group>"; };
-		8BE4C3D21A3C78BD00F39521 /* jccolor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jccolor.c; path = "../../../extlibs/jpeg-9a/jccolor.c"; sourceTree = "<group>"; };
-		8BE4C3D31A3C78BD00F39521 /* jcdctmgr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcdctmgr.c; path = "../../../extlibs/jpeg-9a/jcdctmgr.c"; sourceTree = "<group>"; };
-		8BE4C3D41A3C78BD00F39521 /* jchuff.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jchuff.c; path = "../../../extlibs/jpeg-9a/jchuff.c"; sourceTree = "<group>"; };
-		8BE4C3D51A3C78BD00F39521 /* jcinit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcinit.c; path = "../../../extlibs/jpeg-9a/jcinit.c"; sourceTree = "<group>"; };
-		8BE4C3D61A3C78BD00F39521 /* jcmainct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcmainct.c; path = "../../../extlibs/jpeg-9a/jcmainct.c"; sourceTree = "<group>"; };
-		8BE4C3D71A3C78BD00F39521 /* jcmarker.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcmarker.c; path = "../../../extlibs/jpeg-9a/jcmarker.c"; sourceTree = "<group>"; };
-		8BE4C3D81A3C78BD00F39521 /* jcmaster.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcmaster.c; path = "../../../extlibs/jpeg-9a/jcmaster.c"; sourceTree = "<group>"; };
-		8BE4C3D91A3C78BD00F39521 /* jcomapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcomapi.c; path = "../../../extlibs/jpeg-9a/jcomapi.c"; sourceTree = "<group>"; };
-		8BE4C3DA1A3C78BD00F39521 /* jcparam.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcparam.c; path = "../../../extlibs/jpeg-9a/jcparam.c"; sourceTree = "<group>"; };
-		8BE4C3DB1A3C78BD00F39521 /* jcprepct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcprepct.c; path = "../../../extlibs/jpeg-9a/jcprepct.c"; sourceTree = "<group>"; };
-		8BE4C3DC1A3C78BD00F39521 /* jcsample.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcsample.c; path = "../../../extlibs/jpeg-9a/jcsample.c"; sourceTree = "<group>"; };
-		8BE4C3DD1A3C78BD00F39521 /* jctrans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jctrans.c; path = "../../../extlibs/jpeg-9a/jctrans.c"; sourceTree = "<group>"; };
-		8BE4C3DE1A3C78BD00F39521 /* jdapimin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdapimin.c; path = "../../../extlibs/jpeg-9a/jdapimin.c"; sourceTree = "<group>"; };
-		8BE4C3DF1A3C78BD00F39521 /* jdapistd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdapistd.c; path = "../../../extlibs/jpeg-9a/jdapistd.c"; sourceTree = "<group>"; };
-		8BE4C3E01A3C78BD00F39521 /* jdarith.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdarith.c; path = "../../../extlibs/jpeg-9a/jdarith.c"; sourceTree = "<group>"; };
-		8BE4C3E11A3C78BD00F39521 /* jdatadst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdatadst.c; path = "../../../extlibs/jpeg-9a/jdatadst.c"; sourceTree = "<group>"; };
-		8BE4C3E21A3C78BD00F39521 /* jdatasrc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdatasrc.c; path = "../../../extlibs/jpeg-9a/jdatasrc.c"; sourceTree = "<group>"; };
-		8BE4C3E31A3C78BD00F39521 /* jdcoefct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdcoefct.c; path = "../../../extlibs/jpeg-9a/jdcoefct.c"; sourceTree = "<group>"; };
-		8BE4C3E41A3C78BD00F39521 /* jdcolor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdcolor.c; path = "../../../extlibs/jpeg-9a/jdcolor.c"; sourceTree = "<group>"; };
-		8BE4C3E51A3C78BD00F39521 /* jddctmgr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jddctmgr.c; path = "../../../extlibs/jpeg-9a/jddctmgr.c"; sourceTree = "<group>"; };
-		8BE4C3E61A3C78BD00F39521 /* jdhuff.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdhuff.c; path = "../../../extlibs/jpeg-9a/jdhuff.c"; sourceTree = "<group>"; };
-		8BE4C3E71A3C78BD00F39521 /* jdinput.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdinput.c; path = "../../../extlibs/jpeg-9a/jdinput.c"; sourceTree = "<group>"; };
-		8BE4C3E81A3C78BD00F39521 /* jdmainct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdmainct.c; path = "../../../extlibs/jpeg-9a/jdmainct.c"; sourceTree = "<group>"; };
-		8BE4C3E91A3C78BD00F39521 /* jdmarker.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdmarker.c; path = "../../../extlibs/jpeg-9a/jdmarker.c"; sourceTree = "<group>"; };
-		8BE4C3EA1A3C78BD00F39521 /* jdmaster.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdmaster.c; path = "../../../extlibs/jpeg-9a/jdmaster.c"; sourceTree = "<group>"; };
-		8BE4C3EB1A3C78BD00F39521 /* jdmerge.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdmerge.c; path = "../../../extlibs/jpeg-9a/jdmerge.c"; sourceTree = "<group>"; };
-		8BE4C3EC1A3C78BD00F39521 /* jdpostct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdpostct.c; path = "../../../extlibs/jpeg-9a/jdpostct.c"; sourceTree = "<group>"; };
-		8BE4C3ED1A3C78BD00F39521 /* jdsample.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdsample.c; path = "../../../extlibs/jpeg-9a/jdsample.c"; sourceTree = "<group>"; };
-		8BE4C3EE1A3C78BD00F39521 /* jdtrans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdtrans.c; path = "../../../extlibs/jpeg-9a/jdtrans.c"; sourceTree = "<group>"; };
-		8BE4C3EF1A3C78BD00F39521 /* jerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jerror.c; path = "../../../extlibs/jpeg-9a/jerror.c"; sourceTree = "<group>"; };
-		8BE4C3F01A3C78BD00F39521 /* jfdctflt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jfdctflt.c; path = "../../../extlibs/jpeg-9a/jfdctflt.c"; sourceTree = "<group>"; };
-		8BE4C3F11A3C78BD00F39521 /* jfdctfst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jfdctfst.c; path = "../../../extlibs/jpeg-9a/jfdctfst.c"; sourceTree = "<group>"; };
-		8BE4C3F21A3C78BD00F39521 /* jfdctint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jfdctint.c; path = "../../../extlibs/jpeg-9a/jfdctint.c"; sourceTree = "<group>"; };
-		8BE4C3F31A3C78BD00F39521 /* jidctflt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jidctflt.c; path = "../../../extlibs/jpeg-9a/jidctflt.c"; sourceTree = "<group>"; };
-		8BE4C3F41A3C78BD00F39521 /* jidctfst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jidctfst.c; path = "../../../extlibs/jpeg-9a/jidctfst.c"; sourceTree = "<group>"; };
-		8BE4C3F51A3C78BD00F39521 /* jidctint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jidctint.c; path = "../../../extlibs/jpeg-9a/jidctint.c"; sourceTree = "<group>"; };
-		8BE4C3F61A3C78BD00F39521 /* jmemansi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jmemansi.c; path = "../../../extlibs/jpeg-9a/jmemansi.c"; sourceTree = "<group>"; };
-		8BE4C3F91A3C78BD00F39521 /* jmemmgr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jmemmgr.c; path = "../../../extlibs/jpeg-9a/jmemmgr.c"; sourceTree = "<group>"; };
-		8BE4C3FB1A3C78BD00F39521 /* jmemnobs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jmemnobs.c; path = "../../../extlibs/jpeg-9a/jmemnobs.c"; sourceTree = "<group>"; };
-		8BE4C3FC1A3C78BD00F39521 /* jpegtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jpegtran.c; path = "../../../extlibs/jpeg-9a/jpegtran.c"; sourceTree = "<group>"; };
-		8BE4C3FD1A3C78BD00F39521 /* jquant1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jquant1.c; path = "../../../extlibs/jpeg-9a/jquant1.c"; sourceTree = "<group>"; };
-		8BE4C3FE1A3C78BD00F39521 /* jquant2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jquant2.c; path = "../../../extlibs/jpeg-9a/jquant2.c"; sourceTree = "<group>"; };
-		8BE4C3FF1A3C78BD00F39521 /* jutils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jutils.c; path = "../../../extlibs/jpeg-9a/jutils.c"; sourceTree = "<group>"; };
-		8BE4C4001A3C78BD00F39521 /* rdbmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdbmp.c; path = "../../../extlibs/jpeg-9a/rdbmp.c"; sourceTree = "<group>"; };
-		8BE4C4011A3C78BD00F39521 /* rdcolmap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdcolmap.c; path = "../../../extlibs/jpeg-9a/rdcolmap.c"; sourceTree = "<group>"; };
-		8BE4C4021A3C78BD00F39521 /* rdgif.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdgif.c; path = "../../../extlibs/jpeg-9a/rdgif.c"; sourceTree = "<group>"; };
-		8BE4C4031A3C78BD00F39521 /* rdjpgcom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdjpgcom.c; path = "../../../extlibs/jpeg-9a/rdjpgcom.c"; sourceTree = "<group>"; };
-		8BE4C4041A3C78BD00F39521 /* rdppm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdppm.c; path = "../../../extlibs/jpeg-9a/rdppm.c"; sourceTree = "<group>"; };
-		8BE4C4051A3C78BD00F39521 /* rdrle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdrle.c; path = "../../../extlibs/jpeg-9a/rdrle.c"; sourceTree = "<group>"; };
-		8BE4C4061A3C78BD00F39521 /* rdswitch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdswitch.c; path = "../../../extlibs/jpeg-9a/rdswitch.c"; sourceTree = "<group>"; };
-		8BE4C4071A3C78BD00F39521 /* rdtarga.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdtarga.c; path = "../../../extlibs/jpeg-9a/rdtarga.c"; sourceTree = "<group>"; };
-		8BE4C4081A3C78BD00F39521 /* transupp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = transupp.c; path = "../../../extlibs/jpeg-9a/transupp.c"; sourceTree = "<group>"; };
-		8BE4C4091A3C78BD00F39521 /* wrbmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wrbmp.c; path = "../../../extlibs/jpeg-9a/wrbmp.c"; sourceTree = "<group>"; };
-		8BE4C40A1A3C78BD00F39521 /* wrgif.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wrgif.c; path = "../../../extlibs/jpeg-9a/wrgif.c"; sourceTree = "<group>"; };
-		8BE4C40B1A3C78BD00F39521 /* wrjpgcom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wrjpgcom.c; path = "../../../extlibs/jpeg-9a/wrjpgcom.c"; sourceTree = "<group>"; };
-		8BE4C40C1A3C78BD00F39521 /* wrppm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wrppm.c; path = "../../../extlibs/jpeg-9a/wrppm.c"; sourceTree = "<group>"; };
-		8BE4C40D1A3C78BD00F39521 /* wrrle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wrrle.c; path = "../../../extlibs/jpeg-9a/wrrle.c"; sourceTree = "<group>"; };
-		8BE4C40E1A3C78BD00F39521 /* wrtarga.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wrtarga.c; path = "../../../extlibs/jpeg-9a/wrtarga.c"; sourceTree = "<group>"; };
-		8BE4C4561A3C790C00F39521 /* freetype-all.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "freetype-all.c"; path = "../../../extlibs/freetype-2.5.2/custom/freetype-all.c"; sourceTree = "<group>"; };
+		8BE4C3A81A3C787A00F39521 /* png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = png.c; path = "../../../extlibs/libpng-1.6.9/png.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3A91A3C787A00F39521 /* pngerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngerror.c; path = "../../../extlibs/libpng-1.6.9/pngerror.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3AA1A3C787A00F39521 /* pngget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngget.c; path = "../../../extlibs/libpng-1.6.9/pngget.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3AB1A3C787A00F39521 /* pngmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngmem.c; path = "../../../extlibs/libpng-1.6.9/pngmem.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3AC1A3C787A00F39521 /* pngpread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngpread.c; path = "../../../extlibs/libpng-1.6.9/pngpread.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3AD1A3C787A00F39521 /* pngread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngread.c; path = "../../../extlibs/libpng-1.6.9/pngread.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3AE1A3C787A00F39521 /* pngrio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngrio.c; path = "../../../extlibs/libpng-1.6.9/pngrio.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3AF1A3C787A00F39521 /* pngrtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngrtran.c; path = "../../../extlibs/libpng-1.6.9/pngrtran.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3B01A3C787A00F39521 /* pngrutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngrutil.c; path = "../../../extlibs/libpng-1.6.9/pngrutil.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3B11A3C787A00F39521 /* pngset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngset.c; path = "../../../extlibs/libpng-1.6.9/pngset.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3B21A3C787A00F39521 /* pngtest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngtest.c; path = "../../../extlibs/libpng-1.6.9/pngtest.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3B31A3C787A00F39521 /* pngtrans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngtrans.c; path = "../../../extlibs/libpng-1.6.9/pngtrans.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3B41A3C787A00F39521 /* pngwio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwio.c; path = "../../../extlibs/libpng-1.6.9/pngwio.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3B51A3C787A00F39521 /* pngwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwrite.c; path = "../../../extlibs/libpng-1.6.9/pngwrite.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3B61A3C787A00F39521 /* pngwtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwtran.c; path = "../../../extlibs/libpng-1.6.9/pngwtran.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3B71A3C787A00F39521 /* pngwutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pngwutil.c; path = "../../../extlibs/libpng-1.6.9/pngwutil.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3C81A3C78BD00F39521 /* cdjpeg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cdjpeg.c; path = "../../../extlibs/jpeg-9a/cdjpeg.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3C91A3C78BD00F39521 /* cjpeg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cjpeg.c; path = "../../../extlibs/jpeg-9a/cjpeg.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3CA1A3C78BD00F39521 /* ckconfig.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ckconfig.c; path = "../../../extlibs/jpeg-9a/ckconfig.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3CB1A3C78BD00F39521 /* djpeg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = djpeg.c; path = "../../../extlibs/jpeg-9a/djpeg.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3CD1A3C78BD00F39521 /* jaricom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jaricom.c; path = "../../../extlibs/jpeg-9a/jaricom.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3CE1A3C78BD00F39521 /* jcapimin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcapimin.c; path = "../../../extlibs/jpeg-9a/jcapimin.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3CF1A3C78BD00F39521 /* jcapistd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcapistd.c; path = "../../../extlibs/jpeg-9a/jcapistd.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3D01A3C78BD00F39521 /* jcarith.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcarith.c; path = "../../../extlibs/jpeg-9a/jcarith.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3D11A3C78BD00F39521 /* jccoefct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jccoefct.c; path = "../../../extlibs/jpeg-9a/jccoefct.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3D21A3C78BD00F39521 /* jccolor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jccolor.c; path = "../../../extlibs/jpeg-9a/jccolor.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3D31A3C78BD00F39521 /* jcdctmgr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcdctmgr.c; path = "../../../extlibs/jpeg-9a/jcdctmgr.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3D41A3C78BD00F39521 /* jchuff.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jchuff.c; path = "../../../extlibs/jpeg-9a/jchuff.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3D51A3C78BD00F39521 /* jcinit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcinit.c; path = "../../../extlibs/jpeg-9a/jcinit.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3D61A3C78BD00F39521 /* jcmainct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcmainct.c; path = "../../../extlibs/jpeg-9a/jcmainct.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3D71A3C78BD00F39521 /* jcmarker.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcmarker.c; path = "../../../extlibs/jpeg-9a/jcmarker.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3D81A3C78BD00F39521 /* jcmaster.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcmaster.c; path = "../../../extlibs/jpeg-9a/jcmaster.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3D91A3C78BD00F39521 /* jcomapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcomapi.c; path = "../../../extlibs/jpeg-9a/jcomapi.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3DA1A3C78BD00F39521 /* jcparam.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcparam.c; path = "../../../extlibs/jpeg-9a/jcparam.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3DB1A3C78BD00F39521 /* jcprepct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcprepct.c; path = "../../../extlibs/jpeg-9a/jcprepct.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3DC1A3C78BD00F39521 /* jcsample.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jcsample.c; path = "../../../extlibs/jpeg-9a/jcsample.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3DD1A3C78BD00F39521 /* jctrans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jctrans.c; path = "../../../extlibs/jpeg-9a/jctrans.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3DE1A3C78BD00F39521 /* jdapimin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdapimin.c; path = "../../../extlibs/jpeg-9a/jdapimin.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3DF1A3C78BD00F39521 /* jdapistd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdapistd.c; path = "../../../extlibs/jpeg-9a/jdapistd.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3E01A3C78BD00F39521 /* jdarith.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdarith.c; path = "../../../extlibs/jpeg-9a/jdarith.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3E11A3C78BD00F39521 /* jdatadst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdatadst.c; path = "../../../extlibs/jpeg-9a/jdatadst.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3E21A3C78BD00F39521 /* jdatasrc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdatasrc.c; path = "../../../extlibs/jpeg-9a/jdatasrc.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3E31A3C78BD00F39521 /* jdcoefct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdcoefct.c; path = "../../../extlibs/jpeg-9a/jdcoefct.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3E41A3C78BD00F39521 /* jdcolor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdcolor.c; path = "../../../extlibs/jpeg-9a/jdcolor.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3E51A3C78BD00F39521 /* jddctmgr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jddctmgr.c; path = "../../../extlibs/jpeg-9a/jddctmgr.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3E61A3C78BD00F39521 /* jdhuff.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdhuff.c; path = "../../../extlibs/jpeg-9a/jdhuff.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3E71A3C78BD00F39521 /* jdinput.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdinput.c; path = "../../../extlibs/jpeg-9a/jdinput.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3E81A3C78BD00F39521 /* jdmainct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdmainct.c; path = "../../../extlibs/jpeg-9a/jdmainct.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3E91A3C78BD00F39521 /* jdmarker.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdmarker.c; path = "../../../extlibs/jpeg-9a/jdmarker.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3EA1A3C78BD00F39521 /* jdmaster.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdmaster.c; path = "../../../extlibs/jpeg-9a/jdmaster.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3EB1A3C78BD00F39521 /* jdmerge.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdmerge.c; path = "../../../extlibs/jpeg-9a/jdmerge.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3EC1A3C78BD00F39521 /* jdpostct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdpostct.c; path = "../../../extlibs/jpeg-9a/jdpostct.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3ED1A3C78BD00F39521 /* jdsample.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdsample.c; path = "../../../extlibs/jpeg-9a/jdsample.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3EE1A3C78BD00F39521 /* jdtrans.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdtrans.c; path = "../../../extlibs/jpeg-9a/jdtrans.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3EF1A3C78BD00F39521 /* jerror.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jerror.c; path = "../../../extlibs/jpeg-9a/jerror.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3F01A3C78BD00F39521 /* jfdctflt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jfdctflt.c; path = "../../../extlibs/jpeg-9a/jfdctflt.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3F11A3C78BD00F39521 /* jfdctfst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jfdctfst.c; path = "../../../extlibs/jpeg-9a/jfdctfst.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3F21A3C78BD00F39521 /* jfdctint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jfdctint.c; path = "../../../extlibs/jpeg-9a/jfdctint.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3F31A3C78BD00F39521 /* jidctflt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jidctflt.c; path = "../../../extlibs/jpeg-9a/jidctflt.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3F41A3C78BD00F39521 /* jidctfst.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jidctfst.c; path = "../../../extlibs/jpeg-9a/jidctfst.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3F51A3C78BD00F39521 /* jidctint.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jidctint.c; path = "../../../extlibs/jpeg-9a/jidctint.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3F61A3C78BD00F39521 /* jmemansi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jmemansi.c; path = "../../../extlibs/jpeg-9a/jmemansi.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3F91A3C78BD00F39521 /* jmemmgr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jmemmgr.c; path = "../../../extlibs/jpeg-9a/jmemmgr.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3FB1A3C78BD00F39521 /* jmemnobs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jmemnobs.c; path = "../../../extlibs/jpeg-9a/jmemnobs.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3FC1A3C78BD00F39521 /* jpegtran.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jpegtran.c; path = "../../../extlibs/jpeg-9a/jpegtran.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3FD1A3C78BD00F39521 /* jquant1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jquant1.c; path = "../../../extlibs/jpeg-9a/jquant1.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3FE1A3C78BD00F39521 /* jquant2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jquant2.c; path = "../../../extlibs/jpeg-9a/jquant2.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C3FF1A3C78BD00F39521 /* jutils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jutils.c; path = "../../../extlibs/jpeg-9a/jutils.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C4001A3C78BD00F39521 /* rdbmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdbmp.c; path = "../../../extlibs/jpeg-9a/rdbmp.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C4011A3C78BD00F39521 /* rdcolmap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdcolmap.c; path = "../../../extlibs/jpeg-9a/rdcolmap.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C4021A3C78BD00F39521 /* rdgif.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdgif.c; path = "../../../extlibs/jpeg-9a/rdgif.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C4031A3C78BD00F39521 /* rdjpgcom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdjpgcom.c; path = "../../../extlibs/jpeg-9a/rdjpgcom.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C4041A3C78BD00F39521 /* rdppm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdppm.c; path = "../../../extlibs/jpeg-9a/rdppm.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C4051A3C78BD00F39521 /* rdrle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdrle.c; path = "../../../extlibs/jpeg-9a/rdrle.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C4061A3C78BD00F39521 /* rdswitch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdswitch.c; path = "../../../extlibs/jpeg-9a/rdswitch.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C4071A3C78BD00F39521 /* rdtarga.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rdtarga.c; path = "../../../extlibs/jpeg-9a/rdtarga.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C4081A3C78BD00F39521 /* transupp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = transupp.c; path = "../../../extlibs/jpeg-9a/transupp.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C4091A3C78BD00F39521 /* wrbmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wrbmp.c; path = "../../../extlibs/jpeg-9a/wrbmp.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C40A1A3C78BD00F39521 /* wrgif.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wrgif.c; path = "../../../extlibs/jpeg-9a/wrgif.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C40B1A3C78BD00F39521 /* wrjpgcom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wrjpgcom.c; path = "../../../extlibs/jpeg-9a/wrjpgcom.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C40C1A3C78BD00F39521 /* wrppm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wrppm.c; path = "../../../extlibs/jpeg-9a/wrppm.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C40D1A3C78BD00F39521 /* wrrle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wrrle.c; path = "../../../extlibs/jpeg-9a/wrrle.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C40E1A3C78BD00F39521 /* wrtarga.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wrtarga.c; path = "../../../extlibs/jpeg-9a/wrtarga.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C4561A3C790C00F39521 /* freetype-all.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "freetype-all.c"; path = "../../../extlibs/freetype-2.5.2/custom/freetype-all.c"; sourceTree = SOURCE_ROOT; };
 		8BE4C4861A3C7B2200F39521 /* libosx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libosx.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BE4C7631A3C7F6400F39521 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
 		8BE4C9171A3C804100F39521 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		8BE4C9191A3C804800F39521 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		8BE4C91B1A3C806400F39521 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		8BE4C9221A3C858300F39521 /* lapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lapi.c; path = "../../../extlibs/lua-5.2.3/src/lapi.c"; sourceTree = "<group>"; };
-		8BE4C9231A3C858300F39521 /* lauxlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lauxlib.c; path = "../../../extlibs/lua-5.2.3/src/lauxlib.c"; sourceTree = "<group>"; };
-		8BE4C9241A3C858300F39521 /* lbaselib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lbaselib.c; path = "../../../extlibs/lua-5.2.3/src/lbaselib.c"; sourceTree = "<group>"; };
-		8BE4C9251A3C858300F39521 /* lbitlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lbitlib.c; path = "../../../extlibs/lua-5.2.3/src/lbitlib.c"; sourceTree = "<group>"; };
-		8BE4C9261A3C858300F39521 /* lcode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lcode.c; path = "../../../extlibs/lua-5.2.3/src/lcode.c"; sourceTree = "<group>"; };
-		8BE4C9271A3C858300F39521 /* lcorolib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lcorolib.c; path = "../../../extlibs/lua-5.2.3/src/lcorolib.c"; sourceTree = "<group>"; };
-		8BE4C9281A3C858300F39521 /* lctype.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lctype.c; path = "../../../extlibs/lua-5.2.3/src/lctype.c"; sourceTree = "<group>"; };
-		8BE4C9291A3C858300F39521 /* ldblib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ldblib.c; path = "../../../extlibs/lua-5.2.3/src/ldblib.c"; sourceTree = "<group>"; };
-		8BE4C92A1A3C858300F39521 /* ldebug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ldebug.c; path = "../../../extlibs/lua-5.2.3/src/ldebug.c"; sourceTree = "<group>"; };
-		8BE4C92B1A3C858300F39521 /* ldo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ldo.c; path = "../../../extlibs/lua-5.2.3/src/ldo.c"; sourceTree = "<group>"; };
-		8BE4C92C1A3C858300F39521 /* ldump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ldump.c; path = "../../../extlibs/lua-5.2.3/src/ldump.c"; sourceTree = "<group>"; };
-		8BE4C92D1A3C858300F39521 /* lfunc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lfunc.c; path = "../../../extlibs/lua-5.2.3/src/lfunc.c"; sourceTree = "<group>"; };
-		8BE4C92E1A3C858300F39521 /* lgc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lgc.c; path = "../../../extlibs/lua-5.2.3/src/lgc.c"; sourceTree = "<group>"; };
-		8BE4C92F1A3C858300F39521 /* linit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = linit.c; path = "../../../extlibs/lua-5.2.3/src/linit.c"; sourceTree = "<group>"; };
-		8BE4C9301A3C858300F39521 /* liolib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = liolib.c; path = "../../../extlibs/lua-5.2.3/src/liolib.c"; sourceTree = "<group>"; };
-		8BE4C9311A3C858300F39521 /* llex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = llex.c; path = "../../../extlibs/lua-5.2.3/src/llex.c"; sourceTree = "<group>"; };
-		8BE4C9321A3C858300F39521 /* lmathlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lmathlib.c; path = "../../../extlibs/lua-5.2.3/src/lmathlib.c"; sourceTree = "<group>"; };
-		8BE4C9331A3C858300F39521 /* lmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lmem.c; path = "../../../extlibs/lua-5.2.3/src/lmem.c"; sourceTree = "<group>"; };
-		8BE4C9341A3C858300F39521 /* loadlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = loadlib.c; path = "../../../extlibs/lua-5.2.3/src/loadlib.c"; sourceTree = "<group>"; };
-		8BE4C9351A3C858300F39521 /* lobject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lobject.c; path = "../../../extlibs/lua-5.2.3/src/lobject.c"; sourceTree = "<group>"; };
-		8BE4C9361A3C858300F39521 /* lopcodes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lopcodes.c; path = "../../../extlibs/lua-5.2.3/src/lopcodes.c"; sourceTree = "<group>"; };
-		8BE4C9371A3C858300F39521 /* loslib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = loslib.c; path = "../../../extlibs/lua-5.2.3/src/loslib.c"; sourceTree = "<group>"; };
-		8BE4C9381A3C858300F39521 /* lparser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lparser.c; path = "../../../extlibs/lua-5.2.3/src/lparser.c"; sourceTree = "<group>"; };
-		8BE4C9391A3C858300F39521 /* lstate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lstate.c; path = "../../../extlibs/lua-5.2.3/src/lstate.c"; sourceTree = "<group>"; };
-		8BE4C93A1A3C858300F39521 /* lstring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lstring.c; path = "../../../extlibs/lua-5.2.3/src/lstring.c"; sourceTree = "<group>"; };
-		8BE4C93B1A3C858300F39521 /* lstrlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lstrlib.c; path = "../../../extlibs/lua-5.2.3/src/lstrlib.c"; sourceTree = "<group>"; };
-		8BE4C93C1A3C858300F39521 /* ltable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ltable.c; path = "../../../extlibs/lua-5.2.3/src/ltable.c"; sourceTree = "<group>"; };
-		8BE4C93D1A3C858300F39521 /* ltablib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ltablib.c; path = "../../../extlibs/lua-5.2.3/src/ltablib.c"; sourceTree = "<group>"; };
-		8BE4C93E1A3C858300F39521 /* ltm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ltm.c; path = "../../../extlibs/lua-5.2.3/src/ltm.c"; sourceTree = "<group>"; };
-		8BE4C93F1A3C858300F39521 /* lua.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lua.c; path = "../../../extlibs/lua-5.2.3/src/lua.c"; sourceTree = "<group>"; };
-		8BE4C9401A3C858300F39521 /* luac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = luac.c; path = "../../../extlibs/lua-5.2.3/src/luac.c"; sourceTree = "<group>"; };
-		8BE4C9411A3C858300F39521 /* lundump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lundump.c; path = "../../../extlibs/lua-5.2.3/src/lundump.c"; sourceTree = "<group>"; };
-		8BE4C9421A3C858300F39521 /* lvm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lvm.c; path = "../../../extlibs/lua-5.2.3/src/lvm.c"; sourceTree = "<group>"; };
-		8BE4C9431A3C858300F39521 /* lzio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lzio.c; path = "../../../extlibs/lua-5.2.3/src/lzio.c"; sourceTree = "<group>"; };
-		8BE4C9881A3C859500F39521 /* lua_tinker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lua_tinker.cpp; path = ../../../extlibs/lua_tinker/lua_tinker.cpp; sourceTree = "<group>"; };
-		8BE4C98B1A3C85A400F39521 /* adler32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = adler32.c; path = "../../../extlibs/zlib-1.2.8/adler32.c"; sourceTree = "<group>"; };
-		8BE4C98C1A3C85A400F39521 /* compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = compress.c; path = "../../../extlibs/zlib-1.2.8/compress.c"; sourceTree = "<group>"; };
-		8BE4C98D1A3C85A400F39521 /* crc32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = crc32.c; path = "../../../extlibs/zlib-1.2.8/crc32.c"; sourceTree = "<group>"; };
-		8BE4C98E1A3C85A400F39521 /* deflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = deflate.c; path = "../../../extlibs/zlib-1.2.8/deflate.c"; sourceTree = "<group>"; };
-		8BE4C98F1A3C85A400F39521 /* gzclose.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gzclose.c; path = "../../../extlibs/zlib-1.2.8/gzclose.c"; sourceTree = "<group>"; };
-		8BE4C9901A3C85A400F39521 /* gzlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gzlib.c; path = "../../../extlibs/zlib-1.2.8/gzlib.c"; sourceTree = "<group>"; };
-		8BE4C9911A3C85A400F39521 /* gzread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gzread.c; path = "../../../extlibs/zlib-1.2.8/gzread.c"; sourceTree = "<group>"; };
-		8BE4C9921A3C85A400F39521 /* gzwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gzwrite.c; path = "../../../extlibs/zlib-1.2.8/gzwrite.c"; sourceTree = "<group>"; };
-		8BE4C9931A3C85A400F39521 /* infback.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = infback.c; path = "../../../extlibs/zlib-1.2.8/infback.c"; sourceTree = "<group>"; };
-		8BE4C9941A3C85A400F39521 /* inffast.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = inffast.c; path = "../../../extlibs/zlib-1.2.8/inffast.c"; sourceTree = "<group>"; };
-		8BE4C9951A3C85A400F39521 /* inflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = inflate.c; path = "../../../extlibs/zlib-1.2.8/inflate.c"; sourceTree = "<group>"; };
-		8BE4C9961A3C85A400F39521 /* inftrees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = inftrees.c; path = "../../../extlibs/zlib-1.2.8/inftrees.c"; sourceTree = "<group>"; };
-		8BE4C9971A3C85A400F39521 /* trees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = trees.c; path = "../../../extlibs/zlib-1.2.8/trees.c"; sourceTree = "<group>"; };
-		8BE4C9981A3C85A400F39521 /* uncompr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = uncompr.c; path = "../../../extlibs/zlib-1.2.8/uncompr.c"; sourceTree = "<group>"; };
-		8BE4C9991A3C85A400F39521 /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zutil.c; path = "../../../extlibs/zlib-1.2.8/zutil.c"; sourceTree = "<group>"; };
+		8BE4C9221A3C858300F39521 /* lapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lapi.c; path = "../../../extlibs/lua-5.2.3/src/lapi.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9231A3C858300F39521 /* lauxlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lauxlib.c; path = "../../../extlibs/lua-5.2.3/src/lauxlib.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9241A3C858300F39521 /* lbaselib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lbaselib.c; path = "../../../extlibs/lua-5.2.3/src/lbaselib.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9251A3C858300F39521 /* lbitlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lbitlib.c; path = "../../../extlibs/lua-5.2.3/src/lbitlib.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9261A3C858300F39521 /* lcode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lcode.c; path = "../../../extlibs/lua-5.2.3/src/lcode.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9271A3C858300F39521 /* lcorolib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lcorolib.c; path = "../../../extlibs/lua-5.2.3/src/lcorolib.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9281A3C858300F39521 /* lctype.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lctype.c; path = "../../../extlibs/lua-5.2.3/src/lctype.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9291A3C858300F39521 /* ldblib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ldblib.c; path = "../../../extlibs/lua-5.2.3/src/ldblib.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C92A1A3C858300F39521 /* ldebug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ldebug.c; path = "../../../extlibs/lua-5.2.3/src/ldebug.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C92B1A3C858300F39521 /* ldo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ldo.c; path = "../../../extlibs/lua-5.2.3/src/ldo.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C92C1A3C858300F39521 /* ldump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ldump.c; path = "../../../extlibs/lua-5.2.3/src/ldump.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C92D1A3C858300F39521 /* lfunc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lfunc.c; path = "../../../extlibs/lua-5.2.3/src/lfunc.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C92E1A3C858300F39521 /* lgc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lgc.c; path = "../../../extlibs/lua-5.2.3/src/lgc.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C92F1A3C858300F39521 /* linit.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = linit.c; path = "../../../extlibs/lua-5.2.3/src/linit.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9301A3C858300F39521 /* liolib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = liolib.c; path = "../../../extlibs/lua-5.2.3/src/liolib.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9311A3C858300F39521 /* llex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = llex.c; path = "../../../extlibs/lua-5.2.3/src/llex.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9321A3C858300F39521 /* lmathlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lmathlib.c; path = "../../../extlibs/lua-5.2.3/src/lmathlib.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9331A3C858300F39521 /* lmem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lmem.c; path = "../../../extlibs/lua-5.2.3/src/lmem.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9341A3C858300F39521 /* loadlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = loadlib.c; path = "../../../extlibs/lua-5.2.3/src/loadlib.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9351A3C858300F39521 /* lobject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lobject.c; path = "../../../extlibs/lua-5.2.3/src/lobject.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9361A3C858300F39521 /* lopcodes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lopcodes.c; path = "../../../extlibs/lua-5.2.3/src/lopcodes.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9371A3C858300F39521 /* loslib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = loslib.c; path = "../../../extlibs/lua-5.2.3/src/loslib.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9381A3C858300F39521 /* lparser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lparser.c; path = "../../../extlibs/lua-5.2.3/src/lparser.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9391A3C858300F39521 /* lstate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lstate.c; path = "../../../extlibs/lua-5.2.3/src/lstate.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C93A1A3C858300F39521 /* lstring.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lstring.c; path = "../../../extlibs/lua-5.2.3/src/lstring.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C93B1A3C858300F39521 /* lstrlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lstrlib.c; path = "../../../extlibs/lua-5.2.3/src/lstrlib.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C93C1A3C858300F39521 /* ltable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ltable.c; path = "../../../extlibs/lua-5.2.3/src/ltable.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C93D1A3C858300F39521 /* ltablib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ltablib.c; path = "../../../extlibs/lua-5.2.3/src/ltablib.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C93E1A3C858300F39521 /* ltm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ltm.c; path = "../../../extlibs/lua-5.2.3/src/ltm.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C93F1A3C858300F39521 /* lua.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lua.c; path = "../../../extlibs/lua-5.2.3/src/lua.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9401A3C858300F39521 /* luac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = luac.c; path = "../../../extlibs/lua-5.2.3/src/luac.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9411A3C858300F39521 /* lundump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lundump.c; path = "../../../extlibs/lua-5.2.3/src/lundump.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9421A3C858300F39521 /* lvm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lvm.c; path = "../../../extlibs/lua-5.2.3/src/lvm.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9431A3C858300F39521 /* lzio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lzio.c; path = "../../../extlibs/lua-5.2.3/src/lzio.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9881A3C859500F39521 /* lua_tinker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lua_tinker.cpp; path = ../../../extlibs/lua_tinker/lua_tinker.cpp; sourceTree = SOURCE_ROOT; };
+		8BE4C98B1A3C85A400F39521 /* adler32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = adler32.c; path = "../../../extlibs/zlib-1.2.8/adler32.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C98C1A3C85A400F39521 /* compress.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = compress.c; path = "../../../extlibs/zlib-1.2.8/compress.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C98D1A3C85A400F39521 /* crc32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = crc32.c; path = "../../../extlibs/zlib-1.2.8/crc32.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C98E1A3C85A400F39521 /* deflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = deflate.c; path = "../../../extlibs/zlib-1.2.8/deflate.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C98F1A3C85A400F39521 /* gzclose.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gzclose.c; path = "../../../extlibs/zlib-1.2.8/gzclose.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9901A3C85A400F39521 /* gzlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gzlib.c; path = "../../../extlibs/zlib-1.2.8/gzlib.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9911A3C85A400F39521 /* gzread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gzread.c; path = "../../../extlibs/zlib-1.2.8/gzread.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9921A3C85A400F39521 /* gzwrite.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = gzwrite.c; path = "../../../extlibs/zlib-1.2.8/gzwrite.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9931A3C85A400F39521 /* infback.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = infback.c; path = "../../../extlibs/zlib-1.2.8/infback.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9941A3C85A400F39521 /* inffast.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = inffast.c; path = "../../../extlibs/zlib-1.2.8/inffast.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9951A3C85A400F39521 /* inflate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = inflate.c; path = "../../../extlibs/zlib-1.2.8/inflate.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9961A3C85A400F39521 /* inftrees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = inftrees.c; path = "../../../extlibs/zlib-1.2.8/inftrees.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9971A3C85A400F39521 /* trees.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = trees.c; path = "../../../extlibs/zlib-1.2.8/trees.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9981A3C85A400F39521 /* uncompr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = uncompr.c; path = "../../../extlibs/zlib-1.2.8/uncompr.c"; sourceTree = SOURCE_ROOT; };
+		8BE4C9991A3C85A400F39521 /* zutil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = zutil.c; path = "../../../extlibs/zlib-1.2.8/zutil.c"; sourceTree = SOURCE_ROOT; };
 		8BE4E96E1A3CA2BA00F39521 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/CoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		8BE4E9701A3CA2C800F39521 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		8BE4E9721A3CA39800F39521 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/System/Library/Frameworks/Carbon.framework; sourceTree = DEVELOPER_DIR; };
@@ -1928,9 +1928,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8BE4C4851A3C7B2200F39521 /* osx */ = {
+		8BE4C4851A3C7B2200F39521 /* Bibim-OSX */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8BE4C48E1A3C7B2200F39521 /* Build configuration list for PBXNativeTarget "osx" */;
+			buildConfigurationList = 8BE4C48E1A3C7B2200F39521 /* Build configuration list for PBXNativeTarget "Bibim-OSX" */;
 			buildPhases = (
 				8BE4C4821A3C7B2200F39521 /* Sources */,
 				8BE4C4831A3C7B2200F39521 /* Frameworks */,
@@ -1940,14 +1940,14 @@
 			);
 			dependencies = (
 			);
-			name = osx;
+			name = "Bibim-OSX";
 			productName = osx;
 			productReference = 8BE4C4861A3C7B2200F39521 /* libosx.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		8BEF10EF19BDCA5000173B56 /* ios */ = {
+		8BEF10EF19BDCA5000173B56 /* Bibim-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8BEF111319BDCA5000173B56 /* Build configuration list for PBXNativeTarget "ios" */;
+			buildConfigurationList = 8BEF111319BDCA5000173B56 /* Build configuration list for PBXNativeTarget "Bibim-iOS" */;
 			buildPhases = (
 				8BEF10EC19BDCA5000173B56 /* Sources */,
 				8BEF10ED19BDCA5000173B56 /* Frameworks */,
@@ -1957,7 +1957,7 @@
 			);
 			dependencies = (
 			);
-			name = ios;
+			name = "Bibim-iOS";
 			productName = bibim;
 			productReference = 8BEF10F019BDCA5000173B56 /* libbibim.a */;
 			productType = "com.apple.product-type.library.static";
@@ -1988,8 +1988,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8BEF10EF19BDCA5000173B56 /* ios */,
-				8BE4C4851A3C7B2200F39521 /* osx */,
+				8BEF10EF19BDCA5000173B56 /* Bibim-iOS */,
+				8BE4C4851A3C7B2200F39521 /* Bibim-OSX */,
 			);
 		};
 /* End PBXProject section */
@@ -3002,7 +3002,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8BE4C48E1A3C7B2200F39521 /* Build configuration list for PBXNativeTarget "osx" */ = {
+		8BE4C48E1A3C7B2200F39521 /* Build configuration list for PBXNativeTarget "Bibim-OSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8BE4C48F1A3C7B2200F39521 /* Debug */,
@@ -3020,7 +3020,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8BEF111319BDCA5000173B56 /* Build configuration list for PBXNativeTarget "ios" */ = {
+		8BEF111319BDCA5000173B56 /* Build configuration list for PBXNativeTarget "Bibim-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8BEF111419BDCA5000173B56 /* Debug */,

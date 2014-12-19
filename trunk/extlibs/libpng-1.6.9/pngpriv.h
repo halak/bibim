@@ -121,7 +121,7 @@
     * off.
     */
 #  if defined(__ARM_NEON__) && defined(PNG_ALIGNED_MEMORY_SUPPORTED)
-#     define PNG_ARM_NEON_OPT 2
+#     define PNG_ARM_NEON_OPT 0
 #  else
 #     define PNG_ARM_NEON_OPT 0
 #  endif
