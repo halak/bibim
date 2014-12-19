@@ -13,19 +13,19 @@ namespace Bibim
 #       define BBBreak() { }
 #   endif
 
-    /// Run-timeì— ì‹ì„ í‰ê°€í•˜ì—¬ ì‹ì´ ê±°ì§“ì¼ ê²½ìš° ì•Œë ¤ì¤ë‹ˆë‹¤.
+    /// Run-time¿¡ ½ÄÀ» Æò°¡ÇÏ¿© ½ÄÀÌ °ÅÁşÀÏ °æ¿ì ¾Ë·ÁÁİ´Ï´Ù.
 #   if (defined(BIBIM_PLATFORM_APPLE))
 #       define BBAssert(exp)  // DO NOTHING
 #   else
 #       define BBAssert(exp)  assert(exp)
 #   endif
 
-    /// Compile-timeì— ì‹ì„ í‰ê°€í•˜ì—¬ ì‹ì´ ê±°ì§“ì¼ ê²½ìš° ì•Œë ¤ì¤ë‹ˆë‹¤.
-    /// ê³ ì • ë°°ì—´ í¬ê¸°ë‚˜ ìƒìˆ˜ ê²€ì‚¬ë“±ì— ì´ìš©í•©ë‹ˆë‹¤.
+    /// Compile-time¿¡ ½ÄÀ» Æò°¡ÇÏ¿© ½ÄÀÌ °ÅÁşÀÏ °æ¿ì ¾Ë·ÁÁİ´Ï´Ù.
+    /// °íÁ¤ ¹è¿­ Å©±â³ª »ó¼ö °Ë»çµî¿¡ ÀÌ¿ëÇÕ´Ï´Ù.
 #   define BBStaticAssert(exp) { char StaticAssertion[(exp) ? 1 : 0]; StaticAssertion[0] = '\0'; }
 
 #   if (defined(BIBIM_DEBUG))
-        /// Debug ìƒíƒœì—ì„œë§Œ ì‘ë™í•˜ëŠ” ASSERT
+        /// Debug »óÅÂ¿¡¼­¸¸ ÀÛµ¿ÇÏ´Â ASSERT
 #       define BBAssertDebug(exp)  BBAssert(exp)
 #   else
 #       define BBAssertDebug(exp)
