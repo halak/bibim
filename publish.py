@@ -13,6 +13,7 @@ MODULES = (
     'Framework',
     'Gameplay',
     'GFX',
+    'IO',
     'Graphics',
     'Input',
     'Module',

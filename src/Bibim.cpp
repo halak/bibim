@@ -1,4 +1,4 @@
-// Automatically generated in 2014-12-19 17:27:15.915471
+// Automatically generated in 2014-12-19 22:43:02.761120
 
 #include <zlib.h>
 #include "Animation/Ease.cpp"
@@ -116,6 +116,12 @@
 #include "GFX/CCParticleEmitter.cpp"
 #include "GFX/CCParticleSystem.cpp"
 #include "GFX/CCParticleSystemSet.cpp"
+#include "IO/BinaryReader.cpp"
+#include "IO/BinaryWriter.cpp"
+#include "IO/DumpStream.cpp"
+#include "IO/ForkStream.cpp"
+#include "IO/MemoryStream.cpp"
+#include "IO/Stream.cpp"
 #include "Graphics/BitMask.cpp"
 #include "Graphics/DynamicTexture2D.DX9.cpp"
 #include "Graphics/DynamicTexture2D.GLES2.cpp"
