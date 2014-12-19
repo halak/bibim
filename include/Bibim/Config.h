@@ -12,9 +12,15 @@
 #    define BIBIM_USE_OPENGLES2
 #elif (defined(__APPLE__))
 #    define BIBIM_PLATFORM_UNIX
-#    define BIBIM_PLATFORM_IOS
-#    define BIBIM_PLATFORM_MOBILE
-#    define BIBIM_USE_OPENGLES2
+#    define BIBIM_PLATFORM_APPLE
+#    if (defined(__arm__))
+#        define BIBIM_PLATFORM_IOS
+#        define BIBIM_PLATFORM_MOBILE
+#        define BIBIM_USE_OPENGLES2
+#    else
+#        define BIBIM_PLATFORM_OSX
+#        define BIBIM_USE_OPENGL
+#    endif
 #elif (defined(EMSCRIPTEN))
 #    define BIBIM_PLATFORM_UNIX
 #    define BIBIM_PLATFORM_EMSCRIPTEN
@@ -25,7 +31,7 @@
 #    define BIBIM_PLATFORM_UNKNOWN
 #endif
 
-#if (defined(BIBIM_PLATFORM_WINDOWS) || defined(BIBIM_PLATFORM_LINUX) || defined(BIBIM_PLATFORM_MACOSX))
+#if (defined(BIBIM_PLATFORM_WINDOWS) || defined(BIBIM_PLATFORM_LINUX) || defined(BIBIM_PLATFORM_OSX))
 #    define BIBIM_PLATFORM_PC
 #endif
 

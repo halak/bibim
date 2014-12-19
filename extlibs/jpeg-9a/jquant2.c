@@ -265,9 +265,9 @@ typedef struct {
   INT32 volume;
   /* The number of nonzero histogram cells within this box */
   long colorcount;
-} halak_box;
+} __box__;  /* __box__의 이름은 원래 box였지만 MacOS의 함수와 충돌이 나서 수정하였음 */
 
-typedef halak_box * boxptr;
+typedef __box__ * boxptr;
 
 
 LOCAL(boxptr)
@@ -546,7 +546,7 @@ select_colors (j_decompress_ptr cinfo, int desired_colors)
 
   /* Allocate workspace for box list */
   boxlist = (boxptr) (*cinfo->mem->alloc_small)
-    ((j_common_ptr) cinfo, JPOOL_IMAGE, desired_colors * SIZEOF(halak_box));
+    ((j_common_ptr) cinfo, JPOOL_IMAGE, desired_colors * SIZEOF(__box__));
   /* Initialize one box containing whole space */
   numboxes = 1;
   boxlist[0].c0min = 0;
