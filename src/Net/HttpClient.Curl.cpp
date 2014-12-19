@@ -1,5 +1,5 @@
 #include <Bibim/Config.h>
-#if (defined(BIBIM_PLATFORM_WINDOWS) || defined(BIBIM_PLATFORM_ANDROID) || defined(BIBIM_PLATFORM_IOS))
+#if (defined(BIBIM_PLATFORM_WINDOWS) || defined(BIBIM_PLATFORM_ANDROID))
 
 #include <Bibim/HttpClient.Curl.h>
 #include <Bibim/Stream.h>

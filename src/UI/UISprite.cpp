@@ -123,7 +123,7 @@ namespace Bibim
                 frameIndex = source->GetKeyframeIndex(time);
         }
         else
-            frameIndex = source->GetKeyframes().size() - 1;
+            frameIndex = static_cast<int>(source->GetKeyframes().size()) - 1;
 
         UpdateOrigin();
     }
