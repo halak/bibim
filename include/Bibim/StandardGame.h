@@ -64,7 +64,6 @@ namespace Bibim
             AudioDevice* GetAudioDevice() const;
             inline BGM* GetBGM() const;
             inline SoundFX* GetSFX() const;
-            inline HttpClient* GetHttpClient() const;
             inline UIDomain* GetUIDomain() const;
             inline UIAsyncEventQueue* GetAsyncEventQueue() const;
             inline UIAppEventDispatcher* GetAppEventDispatcher() const;
@@ -119,7 +118,6 @@ namespace Bibim
             GameAssetStorage* storage;
             AlarmClock* alarmClock;
             FontLibrary* fontLibrary;
-            HttpClient* httpClient;
             UIDomain* uiDomain;
             UIRenderer* uiRenderer;
             UIFunctionTable* uiFunctions;
@@ -201,10 +199,6 @@ namespace Bibim
         return sfx;
     }
 
-    HttpClient* StandardGame::GetHttpClient() const
-    {
-        return httpClient;
-    }
 
     UIDomain* StandardGame::GetUIDomain() const
     {

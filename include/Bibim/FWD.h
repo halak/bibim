@@ -193,7 +193,6 @@ namespace Bibim
             struct MouseState;
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         // Net
-            class HttpClient;
             BBForwardDeclareSmartPointerClass(NetworkStream);
             BBForwardDeclareSmartPointerClass(Socket);
 

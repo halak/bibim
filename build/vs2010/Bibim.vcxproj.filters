@@ -678,12 +678,6 @@
     <ClCompile Include="..\..\src\Input\Key.cpp">
       <Filter>03. Game\Input</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Net\HttpClient.Curl.cpp">
-      <Filter>02. System\Net</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Net\HttpClientBase.cpp">
-      <Filter>02. System\Net</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Framework\GameFramework.Android.cpp">
       <Filter>03. Game\Framework</Filter>
     </ClCompile>
@@ -917,9 +911,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Audio\AudioDevice.Emscripten.cpp">
       <Filter>03. Game\Audio\Emscripten</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Net\HttpClient.Emscripten.cpp">
-      <Filter>02. System\Net</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Net\Socket.Default.cpp">
       <Filter>02. System\Net</Filter>
@@ -1448,9 +1439,6 @@
     <ClInclude Include="..\..\include\Bibim\GameWindow.Windows.h">
       <Filter>03. Game\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\HttpClient.h">
-      <Filter>02. System\Net</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Any.h">
       <Filter>01. Foundation\%28Fundamental%29</Filter>
     </ClInclude>
@@ -1600,12 +1588,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\SoundFX.h">
       <Filter>03. Game\Audio</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\HttpClient.Curl.h">
-      <Filter>02. System\Net</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\HttpClientBase.h">
-      <Filter>02. System\Net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\ThreadBase.h">
       <Filter>02. System\Threading</Filter>
@@ -1829,9 +1811,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\SoundFX.Emscripten.h">
       <Filter>03. Game\Audio\Emscripten</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\HttpClient.Emscripten.h">
-      <Filter>02. System\Net</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Socket.Default.h">
       <Filter>02. System\Net</Filter>

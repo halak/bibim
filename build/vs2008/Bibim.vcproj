@@ -2371,26 +2371,6 @@
 				Name="Net"
 				>
 				<File
-					RelativePath="..\..\src\Net\HttpClient.Curl.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\HttpClient.Curl.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\HttpClient.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Net\HttpClientBase.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\include\Bibim\HttpClientBase.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\Net\IPEndPoint.cpp"
 					>
 				</File>
