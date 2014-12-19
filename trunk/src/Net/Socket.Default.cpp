@@ -7,16 +7,20 @@
 
 #if defined(BIBIM_PLATFORM_WINDOWS)
 #   include <winsock2.h>
+#elif defined(BIBIM_PLATFORM_APPLE)
+#   include <sys/socket.h>
+#   include <sys/select.h>
+#   include <sys/filio.h>
+#   include <sys/ioctl.h>
+#   include <arpa/inet.h>
+#   include <unistd.h>
 #else
 #   include <sys/socket.h>
 #   include <sys/select.h>
-//#   include <asm/ioctls.h>
+#   include <asm/ioctls.h>
 #   include <arpa/inet.h>
-//#   include <linux/tcp.h>
+#   include <linux/tcp.h>
 #   include <unistd.h>
-
-#   include <sys/filio.h>  /**iOS**/
-#   include <sys/ioctl.h>  /**iOS**/
 #endif
 
 #pragma warning(push)

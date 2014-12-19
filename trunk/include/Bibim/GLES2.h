@@ -3,13 +3,9 @@
 #define __BIBIM_GLES2_H__
 
 #include <Bibim/Foundation.h>
-#if (defined(BIBIM_USE_OPENGLES2))
 
-#ifdef __APPLE__ && __MACH__
-#import <OpenGL/gl.h>
-#import <OpenGL/glext.h>
-#else
-#if (defined(BIBIM_PLATFORM_IOS))
+#if (defined(BIBIM_USE_OPENGLES2))
+#if (defined(BIBIM_PLATFORM_APPLE))
 #    import <OpenGLES/ES2/gl.h>
 #    import <OpenGLES/ES2/glext.h>
 #else
@@ -28,5 +24,4 @@ namespace Bibim
     };
 }
 
-#endif
 #endif

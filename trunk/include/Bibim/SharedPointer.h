@@ -4,7 +4,6 @@
 
 #include <Bibim/Foundation.h>
 #include <Bibim/SharedObject.h>
-#include <cstddef>
 
 namespace Bibim
 {
@@ -23,9 +22,10 @@ namespace Bibim
                     pointee->IncreaseReferenceCount();
             }
 #           if (defined(BIBIM_CPLUSPLUS_0X))
-            inline SharedPointer(std::nullptr_t c)
+            inline SharedPointer(std::nullptr_t n)
                 : pointee(0)
             {
+                n = n;
             }
 #           endif
             inline ~SharedPointer();

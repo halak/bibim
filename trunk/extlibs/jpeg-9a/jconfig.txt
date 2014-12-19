@@ -167,6 +167,5 @@ typedef unsigned char boolean;
  */
 #undef PROGRESS_REPORT
 
-#endif /* JPEG_CJPEG_DJPEG */
 
-//#define USE_MAC_MEMMGR
+#endif /* JPEG_CJPEG_DJPEG */
