@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>823C845E-B76A-4963-8409-1CEFF60AC0D3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>bibim</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D0FFEFC1-D250-4EF4-B467-DA0A3327AEC8</key>
+		<string>https://dev.naver.com/svn/bibim/trunk</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>build/bibim/bibim.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D0FFEFC1-D250-4EF4-B467-DA0A3327AEC8</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>D0FFEFC1-D250-4EF4-B467-DA0A3327AEC8</key>
+		<string>https://dev.naver.com/svn/bibim</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://dev.naver.com/svn/bibim/trunk/build/bibim/bibim.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D0FFEFC1-D250-4EF4-B467-DA0A3327AEC8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryBranchesRelativeLocationKey</key>
+			<string>branches</string>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlRepositoryTagsRelativeLocationKey</key>
+			<string>tags</string>
+			<key>IDESourceControlRepositoryTrunkRelativeLocationKey</key>
+			<string>trunk</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D0FFEFC1-D250-4EF4-B467-DA0A3327AEC8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Bibim</string>
+		</dict>
+	</array>
+</dict>
+</plist>
