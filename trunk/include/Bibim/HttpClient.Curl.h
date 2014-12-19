@@ -3,7 +3,7 @@
 #define __BIBIM_HTTPCLIENT_CURL_H__
 
 #include <Bibim/FWD.h>
-#if (defined(BIBIM_PLATFORM_WINDOWS) || defined(BIBIM_PLATFORM_ANDROID) || defined(BIBIM_PLATFORM_IOS))
+#if (defined(BIBIM_PLATFORM_WINDOWS) || defined(BIBIM_PLATFORM_ANDROID))
 
 #include <Bibim/HttpClientBase.h>
 

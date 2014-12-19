@@ -59,6 +59,11 @@ namespace Bibim
 }
 
 #if (defined(__APPLE__))
+#    include <cstddef>
+#    include <cstdlib>
+#    include <cstdio>
+#    include <string.h>
+#    include <strings.h>
 #    include <iostream>
 #endif
 

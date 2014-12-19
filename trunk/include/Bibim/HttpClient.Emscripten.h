@@ -3,7 +3,7 @@
 #define __BIBIM_HTTPCLIENT_EMSCRIPTEN_H__
 
 #include <Bibim/FWD.h>
-#if (defined(BIBIM_PLATFORM_EMSCRIPTEN))
+#if (defined(BIBIM_PLATFORM_EMSCRIPTEN) || defined(BIBIM_PLATFORM_IOS))
 
 #include <Bibim/HttpClientBase.h>
 

@@ -10,10 +10,13 @@
 #else
 #   include <sys/socket.h>
 #   include <sys/select.h>
-#   include <asm/ioctls.h>
+//#   include <asm/ioctls.h>
 #   include <arpa/inet.h>
-#   include <linux/tcp.h>
+//#   include <linux/tcp.h>
 #   include <unistd.h>
+
+#   include <sys/filio.h>  /**iOS**/
+#   include <sys/ioctl.h>  /**iOS**/
 #endif
 
 #pragma warning(push)
@@ -124,7 +127,7 @@ namespace Bibim
             const int value = 1;
             setsockopt(handle,
                        SOL_SOCKET,
-                       TCP_NODELAY,
+                       0,
                        reinterpret_cast<const char*>(&value),
                        sizeof(value));
             return true;
@@ -155,7 +158,8 @@ namespace Bibim
 #       if (defined(BIBIM_PLATFORM_WINDOWS))
             return ioctlsocket(handle, FIONBIO, &mode) == 0;
 #       else
-            return ioctl(handle, FIONBIO, &mode) == 0;
+            // return ioctl(handle, FIONBIO, &mode) == 0;
+            return true;
 #       endif
     }
 
