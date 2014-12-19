@@ -217,9 +217,6 @@
     <ClCompile Include="..\..\src\IO\DumpStream.cpp" />
     <ClCompile Include="..\..\src\IO\MemoryStream.cpp" />
     <ClCompile Include="..\..\src\IO\Stream.cpp" />
-    <ClCompile Include="..\..\src\Net\HttpClient.Curl.cpp" />
-    <ClCompile Include="..\..\src\Net\HttpClient.Emscripten.cpp" />
-    <ClCompile Include="..\..\src\Net\HttpClientBase.cpp" />
     <ClCompile Include="..\..\src\Net\IPEndPoint.cpp" />
     <ClCompile Include="..\..\src\Net\NetworkStream.cpp" />
     <ClCompile Include="..\..\src\Net\Socket.Default.cpp" />
@@ -436,7 +433,6 @@
     <ClInclude Include="..\..\include\Bibim\AssetProvider.h" />
     <ClInclude Include="..\..\include\Bibim\FileAssetProvider.h" />
     <ClInclude Include="..\..\include\Bibim\GameFramework.Emscripten.h" />
-    <ClInclude Include="..\..\include\Bibim\HttpClient.Emscripten.h" />
     <ClInclude Include="..\..\include\Bibim\Logger.h" />
     <ClInclude Include="..\..\include\Bibim\MPQAssetProvider.h" />
     <ClInclude Include="..\..\include\Bibim\NetworkAssetProvider.h" />
@@ -477,8 +473,6 @@
     <ClInclude Include="..\..\include\Bibim\IME.h" />
     <ClInclude Include="..\..\include\Bibim\IME.Windows.h" />
     <ClInclude Include="..\..\include\Bibim\IMEBase.h" />
-    <ClInclude Include="..\..\include\Bibim\HttpClient.Curl.h" />
-    <ClInclude Include="..\..\include\Bibim\HttpClientBase.h" />
     <ClInclude Include="..\..\include\Bibim\IPEndPoint.h" />
     <ClInclude Include="..\..\include\Bibim\NetworkStream.h" />
     <ClInclude Include="..\..\include\Bibim\Socket.h" />
@@ -666,7 +660,6 @@
     <ClInclude Include="..\..\include\Bibim\GameFramework.Windows.h" />
     <ClInclude Include="..\..\include\Bibim\GameWindow.h" />
     <ClInclude Include="..\..\include\Bibim\GameWindow.Windows.h" />
-    <ClInclude Include="..\..\include\Bibim\HttpClient.h" />
     <ClInclude Include="..\..\include\Bibim\Any.h" />
     <ClInclude Include="..\..\include\Bibim\Color.h" />
     <ClInclude Include="..\..\include\Bibim\Matrix4.h" />
