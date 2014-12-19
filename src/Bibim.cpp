@@ -1,4 +1,4 @@
-// Automatically generated in 2014-10-23 23:31:03.644089
+// Automatically generated in 2014-12-19 17:27:15.915471
 
 #include <zlib.h>
 #include "Animation/Ease.cpp"
@@ -152,9 +152,6 @@
 #include "Module/GameModuleFactory.cpp"
 #include "Module/GameModuleNode.cpp"
 #include "Module/GameModuleTree.cpp"
-#include "Net/HttpClient.Curl.cpp"
-#include "Net/HttpClient.Emscripten.cpp"
-#include "Net/HttpClientBase.cpp"
 #include "Net/IPEndPoint.cpp"
 #include "Net/NetworkStream.cpp"
 #include "Net/Socket.Default.cpp"
