@@ -156,6 +156,8 @@ namespace Bibim
                 case Any::StringType:
                     document.AddMember(key, value.CastString().CStr(), document.GetAllocator());
                     break;
+                default:
+                    break;
             }
         }
 
