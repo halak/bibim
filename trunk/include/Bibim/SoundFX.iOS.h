@@ -36,6 +36,9 @@ namespace Bibim
             inline AudioDevice* GetAudioDevice() const;
             void SetAudioDevice(AudioDevice* value);
 
+            inline void* GetProxy() const;
+            inline void SetProxy(void* value);
+
             inline float GetVolume() const;
             void SetVolume(float value);
 
@@ -58,6 +61,7 @@ namespace Bibim
 
         private:
             AudioDevice* audioDevice;
+            void* proxy;
             SoundDictionaryKeys   soundGroups;
             SoundDictionaryValues sounds;
             float volume;
@@ -92,6 +96,16 @@ namespace Bibim
     AudioDevice* SoundFX::GetAudioDevice() const
     {
         return audioDevice;
+    }
+
+    void* SoundFX::GetProxy() const
+    {
+        return proxy;
+    }
+
+    void SoundFX::SetProxy(void* value)
+    {
+        proxy = value;
     }
 
     float SoundFX::GetVolume() const

@@ -27,6 +27,9 @@ namespace Bibim
             inline AudioDevice* GetAudioDevice() const;
             void SetAudioDevice(AudioDevice* value);
 
+            inline void* GetProxy() const;
+            inline void SetProxy(void* value);
+
             inline float GetVolume() const;
             void SetVolume(float value);
 
@@ -50,6 +53,7 @@ namespace Bibim
 
         private:
             AudioDevice* audioDevice;
+            void* proxy;
             void* aliveBGM;
             float aliveBGMVolume;
             String aliveBGMName;
@@ -69,6 +73,16 @@ namespace Bibim
     AudioDevice* BGM::GetAudioDevice() const
     {
         return audioDevice;
+    }
+
+    void* BGM::GetProxy() const
+    {
+        return proxy;
+    }
+
+    void BGM::SetProxy(void* value)
+    {
+        proxy = value;
     }
 
     float BGM::GetVolume() const
