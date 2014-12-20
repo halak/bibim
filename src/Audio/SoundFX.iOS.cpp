@@ -52,13 +52,15 @@ namespace Bibim
         if (audioDevice == nullptr)
             return;
 
-        SoundCollection* items = FindSounds(group);
-        if (items == nullptr)
-        {
-            soundGroups.push_back(group);
-            sounds.push_back(SoundCollection());
-            items = &sounds.back();
-        }
+        // /GameFramework::PlaySFX(name, group);
+
+        //SoundCollection* items = FindSounds(group);
+        //if (items == nullptr)
+        //{
+        //    soundGroups.push_back(group);
+        //    sounds.push_back(SoundCollection());
+        //    items = &sounds.back();
+        //}
 
         /*
         ALenum e;
@@ -174,26 +176,26 @@ namespace Bibim
 
     void SoundFX::UpdateVolumes()
     {
-        /*
         if (mute)
         {
-            for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); ++itDict)
-            {
-                SoundCollection& items = (*itDict);
-                for (SoundCollection::iterator it = items.begin(); it != items.end(); ++it)
-                    (*it)->setVolume(0.0f);
-            }
+            //GameFramework::SetSFXVolume(0.0f);
+            //for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); ++itDict)
+            //{
+            //    SoundCollection& items = (*itDict);
+            //    for (SoundCollection::iterator it = items.begin(); it != items.end(); ++it)
+            //        (*it)->setVolume(0.0f);
+            //}
         }
         else
         {
-            for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); ++itDict)
-            {
-                SoundCollection& items = (*itDict);
-                for (SoundCollection::iterator it = items.begin(); it != items.end(); ++it)
-                    (*it)->setVolume(volume);
-            }
+            //GameFramework::SetSFXVolume(volume);
+            //for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); ++itDict)
+            //{
+            //    SoundCollection& items = (*itDict);
+            //    for (SoundCollection::iterator it = items.begin(); it != items.end(); ++it)
+            //        (*it)->setVolume(volume);
+            //}
         }
-        */
     }
 
     SoundFX::SoundCollection* SoundFX::FindSounds(int group)

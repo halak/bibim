@@ -19,10 +19,6 @@ namespace Bibim
 
             inline float GetDuration(const String& uri) const;
             float GetDurationByChars(const char* uri) const;
-
-        private:
-            void* device;
-            void* context;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
