@@ -7,6 +7,7 @@
 #include <Bibim/AutoLocker.h>
 #include <Bibim/Log.h>
 #include <Bibim/Math.h>
+#include "AudioBridge-ObjectiveC.h"
 
 namespace Bibim
 {
@@ -52,6 +53,7 @@ namespace Bibim
         if (audioDevice == nullptr)
             return;
 
+        BibimSFXPlay(proxy, name, group);
         // /GameFramework::PlaySFX(name, group);
 
         //SoundCollection* items = FindSounds(group);
@@ -178,6 +180,7 @@ namespace Bibim
     {
         if (mute)
         {
+            BibimSFXSetVolume(proxy, 0.0f);
             //GameFramework::SetSFXVolume(0.0f);
             //for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); ++itDict)
             //{
@@ -188,6 +191,7 @@ namespace Bibim
         }
         else
         {
+            BibimSFXSetVolume(proxy, volume);
             //GameFramework::SetSFXVolume(volume);
             //for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); ++itDict)
             //{
