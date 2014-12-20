@@ -38,9 +38,9 @@ namespace Bibim
 
     const String& Bool::ToString(bool value)
     {
-        static const String TRUE = "true";
-        static const String FALSE = "false";
-        return value ? TRUE : FALSE;
+        static const String TrueString = "true";
+        static const String FalseString = "false";
+        return value ? TrueString : FalseString;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

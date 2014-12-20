@@ -1116,10 +1116,6 @@ void lua_tinker::push_meta(lua_State* L, const char* name)
 /*---------------------------------------------------------------------------*/ 
 int lua_tinker::is(lua_State* L)
 {
-#   if (defined(BIBIM_DEBUG))
-        const int initialTop = lua_gettop(L);
-#   endif
-
     luaL_checkstring(L, 2);
 
     const char* testName = lua_tostring(L, 2);
@@ -1131,7 +1127,6 @@ int lua_tinker::is(lua_State* L)
         if (lua_istable(L, -1) == false)
         {
             lua_pop(L, i + 1); // __parent(s) + initial metatable
-            BBAssertDebug(initialTop == lua_gettop(L));
             lua_pushboolean(L, 0);
             return 1;
         }
@@ -1144,7 +1139,6 @@ int lua_tinker::is(lua_State* L)
             if (strcmp(testName, className) == 0)
             {
                 lua_pop(L, i + 1 + 1); // __parent(s) + class name + initial metatable
-                BBAssertDebug(initialTop == lua_gettop(L));
                 lua_pushboolean(L, 1);
                 return 1;
             }

@@ -158,8 +158,8 @@ namespace Bibim
 
     bool Socket::SetNonBlockingIOMode(bool value)
     {
-        unsigned long mode = value ? 1 : 0;
 #       if (defined(BIBIM_PLATFORM_WINDOWS))
+            unsigned long mode = value ? 1 : 0;
             return ioctlsocket(handle, FIONBIO, &mode) == 0;
 #       else
             // return ioctl(handle, FIONBIO, &mode) == 0;
