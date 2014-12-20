@@ -6,6 +6,7 @@
 #include <Bibim/AudioDevice.iOS.h>
 #include <Bibim/Math.h>
 #include <Bibim/GameFramework.h>
+#include "AudioBridge-ObjectiveC.h"
 
 namespace Bibim
 {
