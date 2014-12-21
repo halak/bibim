@@ -10,6 +10,8 @@
 
 namespace Bibim
 {
+    void* BGM::proxy = nullptr;
+
     BGM::BGM()
         : audioDevice(nullptr),
           aliveBGM(nullptr),
