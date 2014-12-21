@@ -4,8 +4,8 @@
 #include <Bibim/BGM.iOS.h>
 #include <Bibim/Assert.h>
 #include <Bibim/AudioDevice.iOS.h>
+#include <Bibim/Environment.h>
 #include <Bibim/Math.h>
-#include <Bibim/GameFramework.h>
 #include "AudioBridge-ObjectiveC.h"
 
 namespace Bibim
@@ -90,7 +90,7 @@ namespace Bibim
             else
                 aliveBGMVolume = 1.0f;
 
-            String path = name;
+            String path = Environment::GetWorkingDirectory() + name;
             if (path.EndsWith(".ogg"))
                 path = path.Substring(0, path.GetLength() - 4) + ".mp3";
             
