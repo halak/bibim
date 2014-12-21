@@ -53,7 +53,11 @@ namespace Bibim
         if (audioDevice == nullptr)
             return;
 
-        BibimSFXPlay(proxy, name, group);
+        String path = name;
+        if (path.EndsWith(".ogg"))
+            path = path.Substring(0, path.GetLength() - 4) + ".mp3";
+
+        BibimSFXPlay(proxy, path, group);
         // /GameFramework::PlaySFX(name, group);
 
         //SoundCollection* items = FindSounds(group);

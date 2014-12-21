@@ -90,6 +90,11 @@ namespace Bibim
             else
                 aliveBGMVolume = 1.0f;
 
+            String path = name;
+            if (path.EndsWith(".ogg"))
+                path = path.Substring(0, path.GetLength() - 4) + ".mp3";
+            
+            BibimBGMPlay(proxy, path.CStr());
             //GameFramework::PlayBGM(name);
             //irrklang::ISoundEngine* engine = audioDevice->GetEngine();
             //aliveBGM = engine->play2D(name.CStr(), true, true, false, ESM_AUTO_DETECT, false);
@@ -160,6 +165,7 @@ namespace Bibim
     {
         if (mute)
         {
+            BibimBGMSetVolume(proxy, 0.0f);
             //GameFramework::SetBGMVolume(0.0f);
             //if (aliveBGM)
             //    aliveBGM->setVolume(0.0f);
@@ -169,6 +175,7 @@ namespace Bibim
         }
         else
         {
+            BibimBGMSetVolume(proxy, volume * aliveBGMVolume);
             //GameFramework::SetBGMVolume(volume * aliveBGMVolume);
             //if (aliveBGM)
             //    aliveBGM->setVolume(volume * aliveBGMVolume);
