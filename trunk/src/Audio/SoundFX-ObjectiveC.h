@@ -3,7 +3,8 @@
 
 
 @interface BBSoundFX : NSObject<AVAudioPlayerDelegate> {
-    // NSMutableArray* voices;
+    float globalVolume;
+    NSMutableArray* sounds;
 }
 
 - (id)init;
