@@ -57,7 +57,7 @@ namespace Bibim
         if (path.EndsWith(".ogg"))
             path = path.Substring(0, path.GetLength() - 4) + ".mp3";
 
-        BibimSFXPlay(proxy, path, group);
+        BibimSoundFXPlay(proxy, path.CStr(), group);
         // /GameFramework::PlaySFX(name, group);
 
         //SoundCollection* items = FindSounds(group);
@@ -184,7 +184,7 @@ namespace Bibim
     {
         if (mute)
         {
-            BibimSFXSetVolume(proxy, 0.0f);
+            BibimSoundFXSetVolume(proxy, 0.0f);
             //GameFramework::SetSFXVolume(0.0f);
             //for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); ++itDict)
             //{
@@ -195,7 +195,7 @@ namespace Bibim
         }
         else
         {
-            BibimSFXSetVolume(proxy, volume);
+            BibimSoundFXSetVolume(proxy, volume);
             //GameFramework::SetSFXVolume(volume);
             //for (SoundDictionaryValues::iterator itDict = sounds.begin(); itDict != sounds.end(); ++itDict)
             //{

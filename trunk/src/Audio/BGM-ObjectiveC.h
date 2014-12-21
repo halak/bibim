@@ -2,7 +2,7 @@
 #import <AVFoundation/AVAudioPlayer.h>
 
 
-@interface BGM : NSObject<AVAudioPlayerDelegate> {
+@interface BBBGM : NSObject<AVAudioPlayerDelegate> {
     // NSMutableArray* voices;
 }
 
