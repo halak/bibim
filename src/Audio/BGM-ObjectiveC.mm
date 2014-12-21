@@ -3,16 +3,16 @@
 
 void BibimBGMPlay(void* proxy, const char* path)
 {
-    NSString* stringPath = [NSString initWithUTF8String: path];
-    [(id)proxy play:stringPath];
+    NSString* stringPath = [NSString stringWithUTF8String: path];
+    [(__bridge BBBGM*)proxy play:stringPath];
 }
 
 void BibimBGMSetVolume(void* proxy, float volume)
 {
-    [(id)proxy setVolume:[NSNumber numberWithFloat:volume]];
+    [(__bridge BBBGM*)proxy setVolume:[NSNumber numberWithFloat:volume]];
 }
 
-@implementation BGM
+@implementation BBBGM
 
 - (id)init
 {
@@ -39,6 +39,10 @@ void BibimBGMSetVolume(void* proxy, float volume)
 
 - (void)play:(NSString*)path
 {
+    NSURL* url = [NSURL fileURLWithPath : path];
+    AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error: NULL];
+    [player prepareToPlay];
+    [player play];
     // AVAudioPlayer * player = [voices objectAtIndex:playIndex];
     // [player setCurrentTime:0.0];
     // player.numberOfLoops = 0;

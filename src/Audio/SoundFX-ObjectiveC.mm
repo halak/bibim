@@ -3,16 +3,16 @@
 
 void BibimSoundFXPlay(void* proxy, const char* path, int group)
 {
-    NSString* stringPath = [NSString initWithUTF8String: path];
-    [(id)proxy play:stringPath group:[NSNumber numberWithInt:group]];
+    NSString* stringPath = [NSString stringWithUTF8String: path];
+    [(__bridge BBSoundFX*)proxy play:stringPath group:[NSNumber numberWithInt:group]];
 }
 
 void BibimSoundFXSetVolume(void* proxy, float volume)
 {
-    [(id)proxy setVolume:[NSNumber numberWithFloat:volume]];
+    [(__bridge BBSoundFX*)proxy setVolume:[NSNumber numberWithFloat:volume]];
 }
 
-@implementation SoundFX
+@implementation BBSoundFX
 
 - (id)init
 {

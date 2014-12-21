@@ -2,7 +2,7 @@
 #import <AVFoundation/AVAudioPlayer.h>
 
 
-@interface SoundFX : NSObject<AVAudioPlayerDelegate> {
+@interface BBSoundFX : NSObject<AVAudioPlayerDelegate> {
     // NSMutableArray* voices;
 }
 
