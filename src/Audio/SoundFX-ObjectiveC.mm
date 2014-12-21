@@ -20,6 +20,8 @@ void BibimSoundFXSetVolume(void* proxy, float volume)
 
     if(self) 
     {
+        sounds = [[NSMutableArray alloc] init];
+        globalVolume = 1.0f;
         // voices = [[NSMutableArray alloc] init];
         // NSURL *pathURL = [NSURL fileURLWithPath : path];
         
@@ -42,7 +44,10 @@ void BibimSoundFXSetVolume(void* proxy, float volume)
     NSURL* url = [NSURL fileURLWithPath : path];
     AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error: NULL];
     [player prepareToPlay];
+    [player setVolume:globalVolume];
     [player play];
+    [sounds addObject:player];
+    
 
     // AVAudioPlayer * player = [voices objectAtIndex:playIndex];
     // [player setCurrentTime:0.0];
@@ -54,11 +59,16 @@ void BibimSoundFXSetVolume(void* proxy, float volume)
 
 - (void)setVolume:(NSNumber *)volume
 {
+    globalVolume = [volume floatValue];
+    for (AVAudioPlayer* sound in sounds) {
+        [sound setVolume:globalVolume];
+    }
 }
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player
                        successfully:(BOOL)flag
 {
+    [sounds removeObject:player];
 }
 
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player

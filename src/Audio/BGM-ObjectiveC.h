@@ -3,7 +3,8 @@
 
 
 @interface BBBGM : NSObject<AVAudioPlayerDelegate> {
-    // NSMutableArray* voices;
+    float globalVolume;
+    AVAudioPlayer* current;
 }
 
 - (id)init;
