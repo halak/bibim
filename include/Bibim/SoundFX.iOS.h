@@ -36,14 +36,14 @@ namespace Bibim
             inline AudioDevice* GetAudioDevice() const;
             void SetAudioDevice(AudioDevice* value);
 
-            inline void* GetProxy() const;
-            inline void SetProxy(void* value);
-
             inline float GetVolume() const;
             void SetVolume(float value);
 
             inline bool GetMute() const;
             void SetMute(bool value);
+
+            static inline void* GetProxy() const;
+            static inline void SetProxy(void* value);
 
         private:
             typedef std::vector<uint>            SoundCollection;
@@ -61,7 +61,6 @@ namespace Bibim
 
         private:
             AudioDevice* audioDevice;
-            void* proxy;
             SoundDictionaryKeys   soundGroups;
             SoundDictionaryValues sounds;
             float volume;
@@ -69,6 +68,7 @@ namespace Bibim
             Lock stoppedSoundsLock;
             StoppedSoundCollection stoppedSounds;
             //EventListener* eventListener;
+            static void* proxy;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,16 +98,6 @@ namespace Bibim
         return audioDevice;
     }
 
-    void* SoundFX::GetProxy() const
-    {
-        return proxy;
-    }
-
-    void SoundFX::SetProxy(void* value)
-    {
-        proxy = value;
-    }
-
     float SoundFX::GetVolume() const
     {
         return volume;
@@ -116,6 +106,16 @@ namespace Bibim
     bool SoundFX::GetMute() const
     {
         return mute;
+    }
+
+    void* SoundFX::GetProxy() const
+    {
+        return proxy;
+    }
+
+    void SoundFX::SetProxy(void* value)
+    {
+        proxy = value;
     }
 }
 

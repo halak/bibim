@@ -27,9 +27,6 @@ namespace Bibim
             inline AudioDevice* GetAudioDevice() const;
             void SetAudioDevice(AudioDevice* value);
 
-            inline void* GetProxy() const;
-            inline void SetProxy(void* value);
-
             inline float GetVolume() const;
             void SetVolume(float value);
 
@@ -38,6 +35,9 @@ namespace Bibim
 
             inline float GetCrossfadeTime() const;
             void SetCrossfadeTime(float value);
+
+            static inline void* GetProxy() const;
+            static inline void SetProxy(void* value);
 
         protected:
             void Rewind() { }
@@ -53,7 +53,6 @@ namespace Bibim
 
         private:
             AudioDevice* audioDevice;
-            void* proxy;
             void* aliveBGM;
             float aliveBGMVolume;
             String aliveBGMName;
@@ -61,6 +60,8 @@ namespace Bibim
             float volume;
             float crossfadeTime;
             bool mute;
+
+            static void* proxy;
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,16 +74,6 @@ namespace Bibim
     AudioDevice* BGM::GetAudioDevice() const
     {
         return audioDevice;
-    }
-
-    void* BGM::GetProxy() const
-    {
-        return proxy;
-    }
-
-    void BGM::SetProxy(void* value)
-    {
-        proxy = value;
     }
 
     float BGM::GetVolume() const
@@ -98,6 +89,16 @@ namespace Bibim
     float BGM::GetCrossfadeTime() const
     {
         return crossfadeTime;
+    }
+
+    void* BGM::GetProxy() const
+    {
+        return proxy;
+    }
+
+    void BGM::SetProxy(void* value)
+    {
+        proxy = value;
     }
 }
 
