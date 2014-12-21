@@ -42,7 +42,7 @@ namespace Bibim
             inline bool GetMute() const;
             void SetMute(bool value);
 
-            static inline void* GetProxy() const;
+            static inline void* GetProxy();
             static inline void SetProxy(void* value);
 
         private:
@@ -108,7 +108,7 @@ namespace Bibim
         return mute;
     }
 
-    void* SoundFX::GetProxy() const
+    void* SoundFX::GetProxy()
     {
         return proxy;
     }
