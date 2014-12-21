@@ -36,7 +36,7 @@ namespace Bibim
             inline float GetCrossfadeTime() const;
             void SetCrossfadeTime(float value);
 
-            static inline void* GetProxy() const;
+            static inline void* GetProxy();
             static inline void SetProxy(void* value);
 
         protected:
@@ -91,7 +91,7 @@ namespace Bibim
         return crossfadeTime;
     }
 
-    void* BGM::GetProxy() const
+    void* BGM::GetProxy()
     {
         return proxy;
     }

@@ -12,7 +12,7 @@
 
 namespace Bibim
 {
-    void* BGM::proxy = nullptr;
+    void* SoundFX::proxy = nullptr;
 
     SoundFX::SoundFX()
         : audioDevice(nullptr),
