@@ -71,8 +71,4 @@ namespace Bibim
 #    include <malloc.h>
 #endif
 
-#if (defined(BIBIM_PLATFORM_EMSCRIPTEN))
-#    include <cstddef>
-#endif
-
 #endif

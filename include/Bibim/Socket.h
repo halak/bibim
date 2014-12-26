@@ -3,6 +3,5 @@
 #define __BIBIM_SOCKET_H__
 
 #include <Bibim/Socket.Default.h>
-#include <Bibim/Socket.Null.h>
 
 #endif

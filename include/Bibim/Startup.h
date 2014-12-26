@@ -25,7 +25,7 @@ namespace Bibim
             g.Run(); \
             return 0; \
         }
-#elif (defined(BIBIM_PLATFORM_ANDROID) || defined(BIBIM_PLATFORM_IOS) || defined(BIBIM_PLATFORM_EMSCRIPTEN))
+#elif (defined(BIBIM_PLATFORM_ANDROID) || defined(BIBIM_PLATFORM_IOS))
 #   define BBMain(gameClass) \
         Bibim::GameFramework* Bibim::GameFramework::Create() \
         { \

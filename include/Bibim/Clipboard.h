@@ -5,6 +5,5 @@
 #include <Bibim/Clipboard.Windows.h>
 #include <Bibim/Clipboard.Android.h>
 #include <Bibim/Clipboard.iOS.h>
-#include <Bibim/Clipboard.Emscripten.h>
 
 #endif

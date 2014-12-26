@@ -8,8 +8,6 @@
 #   include <windows.h>
 #elif (defined(BIBIM_PLATFORM_ANDROID))
 #   include <android/log.h>
-#elif (defined(BIBIM_PLATFORM_EMSCRIPTEN))
-#   include <emscripten.h>
 #endif
 
 namespace Bibim
@@ -43,20 +41,6 @@ namespace Bibim
                     }
                 }
             };
-#       elif (defined(BIBIM_PLATFORM_EMSCRIPTEN))
-            struct HeadToLogFlags
-            {
-                static int Do(const char* head)
-                {
-                    switch (head[1])
-                    {
-                        case 'E': return EM_LOG_ERROR | EM_LOG_DEMANGLE | EM_LOG_FUNC_PARAMS;
-                        case 'W': return EM_LOG_WARN  | EM_LOG_DEMANGLE | EM_LOG_FUNC_PARAMS;
-                        case 'I': return EM_LOG_CONSOLE;
-                        default:  return EM_LOG_CONSOLE;
-                    }
-                }
-            };
 #       endif
 
         if (category)
@@ -83,8 +67,6 @@ namespace Bibim
                 BBStackFree(full);
 #           elif (defined(BIBIM_PLATFORM_ANDROID))
                 __android_log_print(HeadToLogPriority::Do(head), category, message);
-#           elif (defined(BIBIM_PLATFORM_EMSCRIPTEN))
-                emscripten_log(HeadToLogFlags::Do(head), "[%s] %s", category, message);
 #           endif
         }
         else
@@ -106,8 +88,6 @@ namespace Bibim
                 BBStackFree(full);
 #           elif (defined(BIBIM_PLATFORM_ANDROID))
                 __android_log_print(HeadToLogPriority::Do(head), GetName().CStr(), message);
-#           elif (defined(BIBIM_PLATFORM_EMSCRIPTEN))
-                emscripten_log(HeadToLogFlags::Do(head), message);
 #           endif
         }
     }
