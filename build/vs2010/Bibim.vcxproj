@@ -5,10 +5,6 @@
       <Configuration>Debug</Configuration>
       <Platform>Android</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|Emscripten">
-      <Configuration>Debug</Configuration>
-      <Platform>Emscripten</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
@@ -16,10 +12,6 @@
     <ProjectConfiguration Include="Release|Android">
       <Configuration>Release</Configuration>
       <Platform>Android</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Emscripten">
-      <Configuration>Release</Configuration>
-      <Platform>Emscripten</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
@@ -44,13 +36,7 @@
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
     <ConfigurationType>StaticLibrary</ConfigurationType>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Emscripten'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-  </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Emscripten'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -65,13 +51,7 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Emscripten'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Emscripten'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -82,13 +62,9 @@
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\lib\vs2010\$(Platform)\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">..\..\lib\vs2010\$(Platform)\$(Configuration)\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Emscripten'">..\..\lib\vs2010\$(Platform)\$(Configuration)\</OutDir>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Android'">..\..\lib\vs2010\$(Platform)\$(Configuration)\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Emscripten'">..\..\lib\vs2010\$(Platform)\$(Configuration)\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Emscripten'">obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Android'">obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Emscripten'">obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -127,24 +103,9 @@
       <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Emscripten'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.3\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.9;..\..\extlibs\jpeg-9a;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
-      <Warnings>AllWarnings</Warnings>
-      <DisableWarnings>unknown-pragmas</DisableWarnings>
-    </ClCompile>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.3\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.9;..\..\extlibs\jpeg-9a;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Emscripten'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>..\..\include;..\..\extlibs\lua-5.2.3\src;..\..\extlibs\lua_tinker;..\..\extlibs\utf8_v2_3_4\source;..\..\extlibs\zlib-1.2.8;..\..\extlibs\libpng-1.6.9;..\..\extlibs\jpeg-9a;..\..\extlibs\freetype-2.5.2\custom;..\..\extlibs\freetype-2.5.2\include;..\..\extlibs\curl-7.29.0\include;..\..\extlibs\rapidjson\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <Warnings>AllWarnings</Warnings>
-      <DisableWarnings>unknown-pragmas</DisableWarnings>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -159,15 +120,12 @@
     <ClCompile Include="..\..\src\Asset\MPQAssetProvider.cpp" />
     <ClCompile Include="..\..\src\Asset\NetworkAssetProvider.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioDevice.Android.cpp" />
-    <ClCompile Include="..\..\src\Audio\AudioDevice.Emscripten.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioDevice.iOS.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioDevice.PC.cpp" />
     <ClCompile Include="..\..\src\Audio\BGM.Android.cpp" />
-    <ClCompile Include="..\..\src\Audio\BGM.Emscripten.cpp" />
     <ClCompile Include="..\..\src\Audio\BGM.iOS.cpp" />
     <ClCompile Include="..\..\src\Audio\BGM.PC.cpp" />
     <ClCompile Include="..\..\src\Audio\SoundFX.Android.cpp" />
-    <ClCompile Include="..\..\src\Audio\SoundFX.Emscripten.cpp" />
     <ClCompile Include="..\..\src\Audio\SoundFX.iOS.cpp" />
     <ClCompile Include="..\..\src\Audio\SoundFX.PC.cpp" />
     <ClCompile Include="..\..\src\Component\GameComponentFactory.cpp" />
@@ -177,23 +135,19 @@
     <ClCompile Include="..\..\src\Diagnostics\Statistics.cpp" />
     <ClCompile Include="..\..\src\Diagnostics\SystemLogger.cpp" />
     <ClCompile Include="..\..\src\FileSystem\FileStream.Android.cpp" />
-    <ClCompile Include="..\..\src\FileSystem\FileStream.Emscripten.cpp" />
     <ClCompile Include="..\..\src\FileSystem\FileStream.iOS.cpp" />
     <ClCompile Include="..\..\src\FileSystem\Path.cpp" />
     <ClCompile Include="..\..\src\Foundation\ClassHierarchy.cpp" />
     <ClCompile Include="..\..\src\Foundation\ClassInfo.cpp" />
     <ClCompile Include="..\..\src\Foundation\Color.cpp" />
     <ClCompile Include="..\..\src\Foundation\Environment.Android.cpp" />
-    <ClCompile Include="..\..\src\Foundation\Environment.Emscripten.cpp" />
     <ClCompile Include="..\..\src\Foundation\Environment.iOS.cpp" />
     <ClCompile Include="..\..\src\Foundation\Random.cpp" />
     <ClCompile Include="..\..\src\Framework\Clipboard.Android.cpp" />
-    <ClCompile Include="..\..\src\Framework\Clipboard.Emscripten.cpp" />
     <ClCompile Include="..\..\src\Framework\Clipboard.iOS.cpp" />
     <ClCompile Include="..\..\src\Framework\Clipboard.Windows.cpp" />
     <ClCompile Include="..\..\src\Framework\Dashboard.cpp" />
     <ClCompile Include="..\..\src\Framework\GameFramework.Android.cpp" />
-    <ClCompile Include="..\..\src\Framework\GameFramework.Emscripten.cpp" />
     <ClCompile Include="..\..\src\Framework\GameFramework.iOS.cpp" />
     <ClCompile Include="..\..\src\Framework\GameFrameworkBase.cpp" />
     <ClCompile Include="..\..\src\Framework\GameWindow.Mobile.cpp" />
@@ -408,11 +362,9 @@
     <ClInclude Include="..\..\include\Bibim\AssetLoadingTask.h" />
     <ClInclude Include="..\..\include\Bibim\AssetStreamReader.h" />
     <ClInclude Include="..\..\include\Bibim\AudioDevice.Android.h" />
-    <ClInclude Include="..\..\include\Bibim\AudioDevice.Emscripten.h" />
     <ClInclude Include="..\..\include\Bibim\AudioDevice.iOS.h" />
     <ClInclude Include="..\..\include\Bibim\AudioDevice.PC.h" />
     <ClInclude Include="..\..\include\Bibim\BGM.Android.h" />
-    <ClInclude Include="..\..\include\Bibim\BGM.Emscripten.h" />
     <ClInclude Include="..\..\include\Bibim\BGM.iOS.h" />
     <ClInclude Include="..\..\include\Bibim\BGM.PC.h" />
     <ClInclude Include="..\..\include\Bibim\CCParticleEmitter.h" />
@@ -420,19 +372,15 @@
     <ClInclude Include="..\..\include\Bibim\CCParticleSystemSet.h" />
     <ClInclude Include="..\..\include\Bibim\ClassHierarchy.h" />
     <ClInclude Include="..\..\include\Bibim\ClassInfo.h" />
-    <ClInclude Include="..\..\include\Bibim\Clipboard.Emscripten.h" />
     <ClInclude Include="..\..\include\Bibim\Dashboard.h" />
-    <ClInclude Include="..\..\include\Bibim\Environment.Emscripten.h" />
     <ClInclude Include="..\..\include\Bibim\FileAssetProvider.Default.h" />
     <ClInclude Include="..\..\include\Bibim\FileAssetProviderBase.h" />
-    <ClInclude Include="..\..\include\Bibim\FileStream.Emscripten.h" />
     <ClInclude Include="..\..\include\Bibim\FontFace.h" />
     <ClInclude Include="..\..\include\Bibim\GameAsset.h" />
     <ClInclude Include="..\..\include\Bibim\GameAssetFactory.h" />
     <ClInclude Include="..\..\include\Bibim\GameAssetStorage.h" />
     <ClInclude Include="..\..\include\Bibim\AssetProvider.h" />
     <ClInclude Include="..\..\include\Bibim\FileAssetProvider.h" />
-    <ClInclude Include="..\..\include\Bibim\GameFramework.Emscripten.h" />
     <ClInclude Include="..\..\include\Bibim\Logger.h" />
     <ClInclude Include="..\..\include\Bibim\MPQAssetProvider.h" />
     <ClInclude Include="..\..\include\Bibim\NetworkAssetProvider.h" />
@@ -443,7 +391,6 @@
     <ClInclude Include="..\..\include\Bibim\Socket.Default.h" />
     <ClInclude Include="..\..\include\Bibim\Socket.Null.h" />
     <ClInclude Include="..\..\include\Bibim\SoundFX.Android.h" />
-    <ClInclude Include="..\..\include\Bibim\SoundFX.Emscripten.h" />
     <ClInclude Include="..\..\include\Bibim\SoundFX.h" />
     <ClInclude Include="..\..\include\Bibim\GameComponentFactory.h" />
     <ClInclude Include="..\..\include\Bibim\CrashDump.h" />
