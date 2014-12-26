@@ -5,6 +5,5 @@
 #include <Bibim/SoundFX.PC.h>
 #include <Bibim/SoundFX.Android.h>
 #include <Bibim/SoundFX.iOS.h>
-#include <Bibim/SoundFX.Emscripten.h>
 
 #endif

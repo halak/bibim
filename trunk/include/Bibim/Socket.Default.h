@@ -3,8 +3,6 @@
 #define __BIBIM_SOCKET_DEFAULT_H__
 
 #include <Bibim/FWD.h>
-#if (!defined(BIBIM_PLATFORM_EMSCRIPTEN))
-
 #include <Bibim/SharedObject.h>
 #include <Bibim/IPEndPoint.h>
 
@@ -61,5 +59,4 @@ namespace Bibim
     }
 }
 
-#endif
 #endif

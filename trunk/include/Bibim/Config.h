@@ -21,11 +21,6 @@
 #        define BIBIM_PLATFORM_OSX
 #        define BIBIM_USE_OPENGL
 #    endif
-#elif (defined(EMSCRIPTEN))
-#    define BIBIM_PLATFORM_UNIX
-#    define BIBIM_PLATFORM_EMSCRIPTEN
-#    define BIBIM_PLATFORM_MOBILE
-#    define BIBIM_USE_OPENGLES2
 #else
 #    error "UNKNOWN PLATFORM"
 #    define BIBIM_PLATFORM_UNKNOWN
@@ -50,7 +45,7 @@
 #    define BIBIM_COMPILER_GCC
 #endif
 
-#if (__cplusplus >= 201103L || (defined(_MSC_VER) && _MSC_VER >= 1600) || defined(BIBIM_PLATFORM_EMSCRIPTEN))
+#if (__cplusplus >= 201103L || (defined(_MSC_VER) && _MSC_VER >= 1600))
 #    define BIBIM_CPLUSPLUS_0X
 #endif
 

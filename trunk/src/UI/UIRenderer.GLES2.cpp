@@ -42,13 +42,6 @@ namespace Bibim
 
     void UIRenderer::Begin()
     {
-#       if (defined(BIBIM_PLATFORM_EMSCRIPTEN))
-        if (vbo == 0)
-            glGenBuffers(1, &vbo);
-        if (ibo == 0)
-            glGenBuffers(1, &ibo);
-#       endif
-
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_CULL_FACE);
@@ -171,13 +164,7 @@ namespace Bibim
         const int count = numberOfQuads * IndicesPerQuad / TrianglesPerQuad;
         const int index = static_cast<int>(vertexStart / VerticesPerQuad) * IndicesPerQuad;
 
-#       if (defined(BIBIM_PLATFORM_EMSCRIPTEN))
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-        glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, reinterpret_cast<const GLvoid*>(index * sizeof(ushort)));
-#       else
         glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, &ib[index]);
-#       endif
         GLES2::CheckLastError("glDrawElements");
     }
 
@@ -230,11 +217,7 @@ namespace Bibim
             glBufferData(GL_ARRAY_BUFFER, vb.size() * sizeof(Vertex), &vb[0], GL_DYNAMIC_DRAW);
         }
 
-#       if (defined(BIBIM_PLATFORM_EMSCRIPTEN))
-#       define VB(offset) reinterpret_cast<const GLvoid*>(offset)
-#       else
 #       define VB(offset) (first + offset)
-#       endif
 
         glVertexAttribPointer(effect->GetPositionLocation(), 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), VB(position));
         glEnableVertexAttribArray(effect->GetPositionLocation());

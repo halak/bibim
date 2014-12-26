@@ -14,7 +14,7 @@
 
 namespace Bibim
 {
-#   if (defined(BIBIM_PLATFORM_WINDOWS) || defined(BIBIM_PLATFORM_EMSCRIPTEN))
+#   if (defined(BIBIM_PLATFORM_WINDOWS))
 #       define BIBIM_USE_EGL
 #   endif
 

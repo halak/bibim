@@ -891,27 +891,6 @@
     <ClCompile Include="..\..\src\Diagnostics\Logger.cpp">
       <Filter>02. System\Diagnostics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\FileSystem\FileStream.Emscripten.cpp">
-      <Filter>02. System\FileSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Foundation\Environment.Emscripten.cpp">
-      <Filter>02. System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Framework\Clipboard.Emscripten.cpp">
-      <Filter>03. Game\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Framework\GameFramework.Emscripten.cpp">
-      <Filter>03. Game\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Audio\BGM.Emscripten.cpp">
-      <Filter>03. Game\Audio\Emscripten</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Audio\SoundFX.Emscripten.cpp">
-      <Filter>03. Game\Audio\Emscripten</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Audio\AudioDevice.Emscripten.cpp">
-      <Filter>03. Game\Audio\Emscripten</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Net\Socket.Default.cpp">
       <Filter>02. System\Net</Filter>
     </ClCompile>
@@ -1791,31 +1770,7 @@
     <ClInclude Include="..\..\include\Bibim\Logger.h">
       <Filter>02. System\Diagnostics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\FileStream.Emscripten.h">
-      <Filter>02. System\FileSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\Environment.Emscripten.h">
-      <Filter>02. System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\GameFramework.Emscripten.h">
-      <Filter>03. Game\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\Clipboard.Emscripten.h">
-      <Filter>03. Game\Framework</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\AudioDevice.Emscripten.h">
-      <Filter>03. Game\Audio\Emscripten</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\BGM.Emscripten.h">
-      <Filter>03. Game\Audio\Emscripten</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\SoundFX.Emscripten.h">
-      <Filter>03. Game\Audio\Emscripten</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Socket.Default.h">
-      <Filter>02. System\Net</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Bibim\Socket.Null.h">
       <Filter>02. System\Net</Filter>
     </ClInclude>
   </ItemGroup>

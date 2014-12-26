@@ -5,6 +5,5 @@
 #include <Bibim/GameFramework.Windows.h>
 #include <Bibim/GameFramework.Android.h>
 #include <Bibim/GameFramework.iOS.h>
-#include <Bibim/GameFramework.Emscripten.h>
 
 #endif
