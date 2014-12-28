@@ -13,14 +13,9 @@
 #elif (defined(__APPLE__))
 #    define BIBIM_PLATFORM_UNIX
 #    define BIBIM_PLATFORM_APPLE
-#    if (defined(__arm__))
-#        define BIBIM_PLATFORM_IOS
-#        define BIBIM_PLATFORM_MOBILE
-#        define BIBIM_USE_OPENGLES2
-#    else
-#        define BIBIM_PLATFORM_OSX
-#        define BIBIM_USE_OPENGL
-#    endif
+#    define BIBIM_PLATFORM_IOS
+#    define BIBIM_PLATFORM_MOBILE
+#    define BIBIM_USE_OPENGLES2
 #else
 #    error "UNKNOWN PLATFORM"
 #    define BIBIM_PLATFORM_UNKNOWN
