@@ -1845,12 +1845,30 @@ namespace Bibim
             const int size = reader.ReadInt();
             if (size > 0)
             {
-                byte* data = BBStackAlloc(byte, size);
-                reader.Read(data, size);
+				const int byteCodeSize = reader.ReadInt();
+				const int textCodeSize = reader.ReadInt();
 
-                Lua::DoBuffer(data, size, path);
+#				if (defined(BIBIM_32BIT))
+					const int codeSize = byteCodeSize;
+					byte* data = BBStackAlloc(byte, codeSize);
+					reader.Read(data, codeSize);
 
-                BBStackFree(data);
+					Lua::DoBuffer(data, codeSize, path);
+
+					BBStackFree(data);
+#				else
+					stream->Seek(byteCodeSize, Stream::FromCurrent);  // Skip 32bit Byte Code
+
+					const int codeSize = textCodeSize;
+					byte* data = BBStackAlloc(byte, codeSize);
+					reader.Read(data, codeSize);
+					for (int i = 0; i < codeSize; i++
+						data[i] ^= 0xA8;
+
+					Lua::DoBuffer(data, codeSize, path);
+
+					BBStackFree(data);
+#				endif
 
                 return;
             }
@@ -1876,4 +1894,4 @@ namespace Bibim
             return;
         }
     }
-}   
+}
