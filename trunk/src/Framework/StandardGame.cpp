@@ -1108,7 +1108,7 @@ namespace Bibim
                             if (name == nullptr)
                                 continue;
 
-                            found = static_cast<UIPanel*>(current)->FindChildByChars(name, length, true);
+                            found = static_cast<UIPanel*>(current)->FindChildByChars(name, static_cast<int>(length), true);
                         }
                         break;
                     case LUA_TUSERDATA:
@@ -1122,7 +1122,7 @@ namespace Bibim
                             const UIPanel* currentPanel = static_cast<UIPanel*>(current);
                             const int numberOfChildren = currentPanel->GetNumberOfChildren();
                             BBAssertDebug(numberOfChildren > 0);
-                            int index = lua_tointeger(L, i);
+                            int index = lua_tointeger(L, static_cast<int>(i));
                             if (index >= 0)
                                 index %= numberOfChildren;
                             else

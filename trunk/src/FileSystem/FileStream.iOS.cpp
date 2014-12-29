@@ -124,7 +124,7 @@ namespace Bibim
 
         const int current = static_cast<int>(std::ftell(handle));
         std::fseek(handle, 0, SEEK_END);
-        const int length = std::ftell(handle);
+        const int length = static_cast<int>(std::ftell(handle));
         std::fseek(handle, current, SEEK_SET);
 
         return length;

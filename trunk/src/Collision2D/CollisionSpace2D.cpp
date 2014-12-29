@@ -145,9 +145,9 @@ namespace Bibim
                 if ((*itShape) == shape)
                 {
                     if (outGroup)
-                        (*outGroup) = std::distance(shapes.begin(), itGroup);
+                        (*outGroup) = static_cast<int>(std::distance(shapes.begin(), itGroup));
                     if (outIndex)
-                        (*outIndex) = std::distance(shapeGroup.begin(), itShape);
+                        (*outIndex) = static_cast<int>(std::distance(shapeGroup.begin(), itShape));
 
                     return true;
                 }
