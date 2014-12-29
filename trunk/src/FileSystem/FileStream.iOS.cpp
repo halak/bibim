@@ -97,10 +97,10 @@ namespace Bibim
                 seekOrigin = SEEK_SET;
                 break;
             case FromEnd:
-                seekOrigin = SEEK_CUR;
+                seekOrigin = SEEK_END;
                 break;
             case FromCurrent:
-                seekOrigin = SEEK_END;
+                seekOrigin = SEEK_CUR;
                 break;
         }
 
