@@ -1862,7 +1862,7 @@ namespace Bibim
 					const int codeSize = textCodeSize;
 					byte* data = BBStackAlloc(byte, codeSize);
 					reader.Read(data, codeSize);
-					for (int i = 0; i < codeSize; i++
+					for (int i = 0; i < codeSize; i++)
 						data[i] ^= 0xA8;
 
 					Lua::DoBuffer(data, codeSize, path);
