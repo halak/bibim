@@ -40,6 +40,12 @@
 #    define BIBIM_COMPILER_GCC
 #endif
 
+#if (defined(WIN64) || defined(__x86_64__) || defined(__arm64__))
+#	 define BIBIM_64BIT
+#else
+# 	 define BIBIM_32BIT
+#endif
+
 #if (__cplusplus >= 201103L || (defined(_MSC_VER) && _MSC_VER >= 1600))
 #    define BIBIM_CPLUSPLUS_0X
 #endif
