@@ -39,10 +39,10 @@ namespace Bibim.Asset.Pipeline.Recipes
 
             string output = Path.GetTempFileName();
             var byteCode = Utility.ConvertUsingExternalTool(
-                @"Plugin\luac52.exe",
+                path: @"Plugin\luac52.exe",
                 args: string.Format("-o \"{1}\" \"{0}\"", input, output),
                 output: output);
-            var textCode = File.ReadAllBytes(input);
+            var textCode = Encoding.UTF8.GetBytes(File.ReadAllText(input) + "\n");
             for (int i = 0; i < textCode.Length; i++)
                 textCode[i] ^= 0xA8;
 
