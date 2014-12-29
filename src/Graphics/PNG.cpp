@@ -11,7 +11,7 @@ namespace Bibim
     static void ReadPNGData(png_structp pngReader, png_bytep data, png_size_t length)
     {
         AssetStreamReader* reader = ((AssetStreamReader*)pngReader->io_ptr);
-        if (reader->Read(data, length) == nullptr)
+        if (reader->Read(data, static_cast<int>(length)) == nullptr)
             png_error(pngReader, "Read Error");
     }
 

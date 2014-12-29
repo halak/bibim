@@ -272,7 +272,7 @@ namespace Bibim
                 Vector2 lastPoint = GetPoint::Do(L, 2);
                 for (size_t i = 3; i <= count - 1; i++)
                 {
-                    const Vector2 currentPoint = GetPoint::Do(L, i);
+                    const Vector2 currentPoint = GetPoint::Do(L, static_cast<int>(i));
                     totalLength += Vector2::GetDistance(lastPoint, currentPoint);
                     lastPoint = currentPoint;
                 }

@@ -64,7 +64,7 @@ namespace Bibim
         ItemCollection::iterator it = std::find(items.begin(), items.end(), item);
         if (it != items.end())
         {
-            const int index = std::distance(items.begin(), it);
+            const int index = static_cast<int>(std::distance(items.begin(), it));
             items.erase(it);
             objects.erase(objects.begin() + index);
             

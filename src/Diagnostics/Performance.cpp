@@ -32,7 +32,7 @@ namespace Bibim
                                             filename,
                                             line));
         PerformanceDepth++;
-        PerformanceCurrent = PerformanceSamples.size() - 1;
+        PerformanceCurrent = static_cast<int>(PerformanceSamples.size()) - 1;
         PerformanceSamples.back().StartTime = Clock::GetCurrentMicroSeconds();
     }
 

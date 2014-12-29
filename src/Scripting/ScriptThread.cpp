@@ -102,7 +102,7 @@ namespace Bibim
 
     ScriptThread::ScriptThread(Script* script)
         : script(script),
-          stream(MemoryStream::NewReadableStream(&script->GetBuffer()[0], script->GetBuffer().size())),
+          stream(MemoryStream::NewReadableStream(&script->GetBuffer()[0], static_cast<int>(script->GetBuffer().size()))),
           state(Stopped),
           nativeFunctionDepth(0),
           suspendedFunction(nullptr),
@@ -113,7 +113,7 @@ namespace Bibim
     ScriptThread::ScriptThread(Script* script, int stackSize)
         : script(script),
           stack(stackSize),
-          stream(MemoryStream::NewReadableStream(&script->GetBuffer()[0], script->GetBuffer().size())),
+          stream(MemoryStream::NewReadableStream(&script->GetBuffer()[0], static_cast<int>(script->GetBuffer().size()))),
           state(Stopped),
           nativeFunctionDepth(0),
           suspendedFunction(nullptr),
@@ -286,7 +286,7 @@ namespace Bibim
             if (function->ReturnTypes.size() > 0)
                 result = Any::ReadFromBytes(stack.Peek(), function->ReturnTypes[0]);
 
-            stack.Pop(function->ReturnTypes.size());
+            stack.Pop(static_cast<int>(function->ReturnTypes.size()));
 
             state = Stopped;
             return result;

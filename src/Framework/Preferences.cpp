@@ -180,10 +180,10 @@ namespace Bibim
 
         std::vector<char> buffer;
         buffer.resize(stream->GetLength());
-        stream->Read(&buffer[0], buffer.size());
+        stream->Read(&buffer[0], static_cast<int>(buffer.size()));
         stream->Close();
 
-        return String(&buffer[0], 0, buffer.size());
+        return String(&buffer[0], 0, static_cast<int>(buffer.size()));
     }
 
     void Preferences::Save(const String& document)

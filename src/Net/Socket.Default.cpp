@@ -168,7 +168,7 @@ namespace Bibim
     int Socket::Send(const void* buffer, int size)
     {
         if (status == Connected)
-            return send(handle, static_cast<const char*>(buffer), size, 0);
+            return send(handle, static_cast<const char*>(buffer), static_cast<int>(size), 0);
         else
             return 0;
     }
@@ -181,7 +181,7 @@ namespace Bibim
         int index = 0;
         while (index < size)
         {
-            const int received = recv(handle, static_cast<char*>(buffer) + index, size - index, 0);
+            const int received = recv(handle, static_cast<char*>(buffer) + index, static_cast<int>(size - index), 0);
             if (received > 0)
                 index += received;
             else if (received == 0)
