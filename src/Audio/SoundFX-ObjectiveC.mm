@@ -46,6 +46,7 @@ void BibimSoundFXSetVolume(void* proxy, float volume)
     if (player) {
         [player prepareToPlay];
         [player setVolume:globalVolume];
+        [player setDelegate:self];
         [player play];
         [sounds addObject:player];
     }
