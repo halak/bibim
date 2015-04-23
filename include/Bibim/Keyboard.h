@@ -49,7 +49,7 @@ namespace Bibim
     {
         const int index = static_cast<int>(static_cast<int>(code) / (sizeof(int) * 8));
         const int bit   = static_cast<int>(static_cast<int>(code) % (sizeof(int) * 8));
-        return allowedKeys[index] & (0x80000000 >> bit) ? true : false;;
+        return (allowedKeys[index] & (0x80000000 >> bit)) != 0;
     }
 
     void Keyboard::SetAllowKey(Key::Code code, bool allow)
