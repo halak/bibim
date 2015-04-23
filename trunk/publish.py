@@ -91,8 +91,10 @@ def get_include_directories(environment, platform, target):
     
 def get_library_directories(environment, platform, target):
     l = []
+
     if platform == PLATFORM.WIN32:
         l += ['$(DXSDK_DIR)Lib/x86']
+        l += ['$(BIBIM_DIR)extlibs/irrKlang-1.4.0/lib/Win32-visualStudio']
     
     return l    
 
