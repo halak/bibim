@@ -130,11 +130,11 @@ def get_dependencies(environment, platform, target):
         elif release:
             l += ['d3dx9.lib']
      
-    # ZLib & PNG & JPG & FreeType & Lua & Curl
+    # ZLib & PNG & JPG & FreeType & Lua
     if win32:
-        l += ['libpng.lib', 'libjpeg.lib', 'freetype.lib', 'lua.lib', 'libcurl.lib', 'zlib.lib']
+        l += ['libpng.lib', 'libjpeg.lib', 'freetype.lib', 'lua.lib', 'zlib.lib']
     elif android:
-        l += ['libpng.a', 'libjpeg.a', 'freetype.a', 'lua.a', 'libcurl.a', 'zlib.a']
+        l += ['libpng.a', 'libjpeg.a', 'freetype.a', 'lua.a', 'zlib.a']
     elif emscripten:
         l += ['libpng.bc', 'libjpeg.bc', 'freetype.bc', 'lua.bc', 'zlib.bc']
     
@@ -201,7 +201,7 @@ def make_visual_studio_2008_property_sheet(name,
     root.append(ET.Element('Tool', {
         'Name': 'VCCLCompilerTool',
         'AdditionalIncludeDirectories': include_directories.replace('/', '\\'),
-        'PreprocessorDefinitions': 'CURL_STATICLIB',
+        'PreprocessorDefinitions': '',
         'WarningLevel': '4',
     }))
     root.append(ET.Element('Tool', {
