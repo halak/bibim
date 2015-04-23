@@ -54,7 +54,7 @@ namespace Bibim
     {
         const int index = static_cast<int>(static_cast<int>(code) / (sizeof(int) * 8));
         const int bit   = static_cast<int>(static_cast<int>(code) % (sizeof(int) * 8));
-        return Keys[index] & (0x80000000 >> bit) ? true : false;
+        return (Keys[index] & (0x80000000 >> bit)) != 0;
     }
 
     bool KeyboardState::IsReleased(Key::Code code) const
