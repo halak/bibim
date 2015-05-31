@@ -25,6 +25,7 @@ namespace Bibim
             struct Rect;
             struct RectF;
             class String;
+            struct DateTime;
             struct Vector2;
             struct Vector3;
             struct Vector4;
