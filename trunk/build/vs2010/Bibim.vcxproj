@@ -340,6 +340,7 @@
     <ClCompile Include="..\..\src\Foundation\Rect.cpp" />
     <ClCompile Include="..\..\src\Foundation\RectF.cpp" />
     <ClCompile Include="..\..\src\Foundation\String.cpp" />
+    <ClCompile Include="..\..\src\Foundation\DateTime.cpp" />
     <ClCompile Include="..\..\src\Foundation\Vector2.cpp" />
     <ClCompile Include="..\..\src\Foundation\Vector3.cpp" />
     <ClCompile Include="..\..\src\Foundation\Vector4.cpp" />
@@ -616,6 +617,7 @@
     <ClInclude Include="..\..\include\Bibim\Rect.h" />
     <ClInclude Include="..\..\include\Bibim\RectF.h" />
     <ClInclude Include="..\..\include\Bibim\String.h" />
+    <ClInclude Include="..\..\include\Bibim\DateTime.h" />
     <ClInclude Include="..\..\include\Bibim\Vector2.h" />
     <ClInclude Include="..\..\include\Bibim\Vector3.h" />
     <ClInclude Include="..\..\include\Bibim\Vector4.h" />

@@ -2083,6 +2083,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\Foundation\DateTime.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\include\Bibim\DateTime.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\Foundation\Vector2.cpp"
 					>
 				</File>

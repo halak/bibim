@@ -612,6 +612,9 @@
     <ClCompile Include="..\..\src\Foundation\String.cpp">
       <Filter>01. Foundation\%28Fundamental%29</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Foundation\DateTime.cpp">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\Foundation\Vector2.cpp">
       <Filter>01. Foundation\%28Fundamental%29</Filter>
     </ClCompile>
@@ -1446,6 +1449,9 @@
       <Filter>01. Foundation\%28Fundamental%29</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\String.h">
+      <Filter>01. Foundation\%28Fundamental%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Bibim\DateTime.h">
       <Filter>01. Foundation\%28Fundamental%29</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Bibim\Vector2.h">

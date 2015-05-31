@@ -1,4 +1,4 @@
-// Automatically generated in 2015-04-23 16:49:15.477320
+// Automatically generated in 2015-06-01 01:45:40.450819
 
 #include <zlib.h>
 #include "Animation/Ease.cpp"
@@ -62,6 +62,7 @@
 #include "Foundation/ClassHierarchy.cpp"
 #include "Foundation/ClassInfo.cpp"
 #include "Foundation/Color.cpp"
+#include "Foundation/DateTime.cpp"
 #include "Foundation/Environment.Android.cpp"
 #include "Foundation/Environment.iOS.cpp"
 #include "Foundation/Environment.Windows.cpp"

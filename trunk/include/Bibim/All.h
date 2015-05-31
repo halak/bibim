@@ -1,8 +1,8 @@
 #pragma once
-#ifndef BIBIM_ALL_FFDD4319_84D5_4E0F_8945_EE86468FF287_H__
-#define BIBIM_ALL_FFDD4319_84D5_4E0F_8945_EE86468FF287_H__
+#ifndef BIBIM_ALL_D4694B92_390E_4DDD_AEF5_6B27FA53F468_H__
+#define BIBIM_ALL_D4694B92_390E_4DDD_AEF5_6B27FA53F468_H__
 
-// Automatically generated in 2015-04-23 16:49:15.496334
+// Automatically generated in 2015-06-01 01:45:40.528941
 
 #include "AlarmClock.h"
 #include "Algorithm.h"
@@ -51,6 +51,7 @@
 #include "Config.h"
 #include "CrashDump.h"
 #include "Dashboard.h"
+#include "DateTime.h"
 #include "Delete.h"
 #include "DumpStream.h"
 #include "DynamicTexture2D.DX9.h"
