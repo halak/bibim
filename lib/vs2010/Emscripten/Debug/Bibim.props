@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"><PropertyGroup><_ProjectFileVersion_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion_ProjectFileVersion></PropertyGroup><ItemDefinitionGroup><ClCompile><AdditionalIncludeDirectories>"$(BIBIM_DIR)include";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories><WarningLevel>Level4</WarningLevel></ClCompile><Link><AdditionalDependencies>$(BIBIM_DIR)lib\vs2010\Emscripten\Debug\Bibim.bc;$(BIBIM_DIR)lib\vs2010\Emscripten\Debug\libpng.bc;$(BIBIM_DIR)lib\vs2010\Emscripten\Debug\libjpeg.bc;$(BIBIM_DIR)lib\vs2010\Emscripten\Debug\freetype.bc;$(BIBIM_DIR)lib\vs2010\Emscripten\Debug\lua.bc;$(BIBIM_DIR)lib\vs2010\Emscripten\Debug\zlib.bc;%(AdditionalDependencies)</AdditionalDependencies><AdditionalLibraryDirectories>"$(BIBIM_DIR)lib\vs2010\Emscripten\Debug";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories></Link></ItemDefinitionGroup></Project>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <_ProjectFileVersion_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion_ProjectFileVersion>
+    </PropertyGroup>
+    <ItemDefinitionGroup>
+        <ClCompile>
+            <AdditionalIncludeDirectories>"$(BIBIM_DIR)include";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+            <WarningLevel>Level4</WarningLevel>
+        </ClCompile>
+        <Link>
+            <AdditionalDependencies>$(BIBIM_DIR)lib\vs2010\Emscripten\Debug\Bibim.bc;$(BIBIM_DIR)lib\vs2010\Emscripten\Debug\libpng.bc;$(BIBIM_DIR)lib\vs2010\Emscripten\Debug\libjpeg.bc;$(BIBIM_DIR)lib\vs2010\Emscripten\Debug\freetype.bc;$(BIBIM_DIR)lib\vs2010\Emscripten\Debug\lua.bc;$(BIBIM_DIR)lib\vs2010\Emscripten\Debug\zlib.bc;%(AdditionalDependencies)</AdditionalDependencies>
+            <AdditionalLibraryDirectories>"$(BIBIM_DIR)lib\vs2010\Emscripten\Debug";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+        </Link>
+    </ItemDefinitionGroup>
+</Project>

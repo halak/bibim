@@ -9,8 +9,8 @@
             <WarningLevel>Level4</WarningLevel>
         </ClCompile>
         <Link>
-            <AdditionalDependencies>Bibim.lib;winmm.lib;ws2_32.lib;d3d9.lib;d3dx9d.lib;libpng.lib;libjpeg.lib;freetype.lib;lua.lib;zlib.lib;irrKlang.lib;StormLibDAD.lib;%(AdditionalDependencies)</AdditionalDependencies>
-            <AdditionalLibraryDirectories>"$(BIBIM_DIR)lib\vs2013\Win32\Debug";"$(DXSDK_DIR)Lib\x86";"$(BIBIM_DIR)extlibs\irrKlang-1.4.0\lib\Win32-visualStudio";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+            <AdditionalDependencies>Bibim.lib;winmm.lib;ws2_32.lib;d3d9.lib;d3dx9.lib;libpng.lib;libjpeg.lib;freetype.lib;lua.lib;zlib.lib;irrKlang.lib;StormLibRAD.lib;%(AdditionalDependencies)</AdditionalDependencies>
+            <AdditionalLibraryDirectories>"$(BIBIM_DIR)lib\vs2017\Win32\Release";"$(DXSDK_DIR)Lib\x86";"$(BIBIM_DIR)extlibs\irrKlang-1.4.0\lib\Win32-visualStudio";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
         </Link>
     </ItemDefinitionGroup>
 </Project>

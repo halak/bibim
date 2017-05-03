@@ -7,11 +7,10 @@
         <ClCompile>
             <AdditionalIncludeDirectories>"$(BIBIM_DIR)include";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
             <WarningLevel>Level4</WarningLevel>
-            <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
         </ClCompile>
         <Link>
-            <AdditionalDependencies>$(BIBIM_DIR)lib\vs2013\Android\Debug\Bibim.a;$(BIBIM_DIR)lib\vs2013\Android\Debug\libpng.a;$(BIBIM_DIR)lib\vs2013\Android\Debug\libjpeg.a;$(BIBIM_DIR)lib\vs2013\Android\Debug\freetype.a;$(BIBIM_DIR)lib\vs2013\Android\Debug\lua.a;$(BIBIM_DIR)lib\vs2013\Android\Debug\zlib.a;%(AdditionalDependencies)</AdditionalDependencies>
-            <AdditionalLibraryDirectories>"$(BIBIM_DIR)lib\vs2013\Android\Debug";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+            <AdditionalDependencies>$(BIBIM_DIR)lib\vs2017\Android\Release\Bibim.a;$(BIBIM_DIR)lib\vs2017\Android\Release\libpng.a;$(BIBIM_DIR)lib\vs2017\Android\Release\libjpeg.a;$(BIBIM_DIR)lib\vs2017\Android\Release\freetype.a;$(BIBIM_DIR)lib\vs2017\Android\Release\lua.a;$(BIBIM_DIR)lib\vs2017\Android\Release\zlib.a;%(AdditionalDependencies)</AdditionalDependencies>
+            <AdditionalLibraryDirectories>"$(BIBIM_DIR)lib\vs2017\Android\Release";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
             <AdditionalOptions>-lGLESv2 -landroid %(AdditionalOptions)</AdditionalOptions>
         </Link>
     </ItemDefinitionGroup>

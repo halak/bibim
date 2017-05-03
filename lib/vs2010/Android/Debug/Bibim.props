@@ -1,2 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"><PropertyGroup><_ProjectFileVersion_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion_ProjectFileVersion></PropertyGroup><ItemDefinitionGroup><ClCompile><AdditionalIncludeDirectories>"$(BIBIM_DIR)include";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories><WarningLevel>Level4</WarningLevel><PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions></ClCompile><Link><AdditionalDependencies>$(BIBIM_DIR)lib\vs2010\Android\Debug\Bibim.a;$(BIBIM_DIR)lib\vs2010\Android\Debug\libpng.a;$(BIBIM_DIR)lib\vs2010\Android\Debug\libjpeg.a;$(BIBIM_DIR)lib\vs2010\Android\Debug\freetype.a;$(BIBIM_DIR)lib\vs2010\Android\Debug\lua.a;$(BIBIM_DIR)lib\vs2010\Android\Debug\zlib.a;%(AdditionalDependencies)</AdditionalDependencies><AdditionalLibraryDirectories>"$(BIBIM_DIR)lib\vs2010\Android\Debug";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories><AdditionalOptions>-lGLESv2 -landroid %(AdditionalOptions)</AdditionalOptions></Link></ItemDefinitionGroup></Project>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <_ProjectFileVersion_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion_ProjectFileVersion>
+    </PropertyGroup>
+    <ItemDefinitionGroup>
+        <ClCompile>
+            <AdditionalIncludeDirectories>"$(BIBIM_DIR)include";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+            <WarningLevel>Level4</WarningLevel>
+            <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
+        </ClCompile>
+        <Link>
+            <AdditionalDependencies>$(BIBIM_DIR)lib\vs2010\Android\Debug\Bibim.a;$(BIBIM_DIR)lib\vs2010\Android\Debug\libpng.a;$(BIBIM_DIR)lib\vs2010\Android\Debug\libjpeg.a;$(BIBIM_DIR)lib\vs2010\Android\Debug\freetype.a;$(BIBIM_DIR)lib\vs2010\Android\Debug\lua.a;$(BIBIM_DIR)lib\vs2010\Android\Debug\zlib.a;%(AdditionalDependencies)</AdditionalDependencies>
+            <AdditionalLibraryDirectories>"$(BIBIM_DIR)lib\vs2010\Android\Debug";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+            <AdditionalOptions>-lGLESv2 -landroid %(AdditionalOptions)</AdditionalOptions>
+        </Link>
+    </ItemDefinitionGroup>
+</Project>

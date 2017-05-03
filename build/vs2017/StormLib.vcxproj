@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CE2232F9-EA50-4F59-825C-C1DA27AC73E5}</ProjectGuid>
+    <RootNamespace>StormLib</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\lib\vs2017\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\lib\vs2017\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\extlibs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;__SYS_ZLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)DAD$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>..\..\extlibs\zlib-1.2.8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;__SYS_ZLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)RAD$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\extlibs\StormLib\src\adpcm\adpcm.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\bzip2\blocksort.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\bzip2\bzlib.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\bzip2\compress.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\bzip2\crctable.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\bzip2\decompress.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\bzip2\huffman.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\bzip2\randtable.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\huffman\huff.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\jenkins\lookup3.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\hashes\hash_memory.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\hashes\md5.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\hashes\sha1.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\math\ltm_desc.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\math\multi.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\math\rand_prime.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\misc\base64_decode.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\misc\crypt_argchk.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\misc\crypt_find_hash.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\misc\crypt_find_prng.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\misc\crypt_hash_descriptor.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\misc\crypt_hash_is_valid.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\misc\crypt_libc.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\misc\crypt_ltc_mp_descriptor.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\misc\crypt_prng_descriptor.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\misc\crypt_prng_is_valid.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\misc\crypt_register_hash.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\misc\crypt_register_prng.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\misc\zeromem.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_decode_bit_string.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_decode_boolean.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_decode_choice.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_decode_ia5_string.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_decode_integer.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_decode_object_identifier.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_decode_octet_string.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_decode_printable_string.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_decode_sequence_ex.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_decode_sequence_flexi.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_decode_sequence_multi.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_decode_short_integer.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_decode_utctime.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_decode_utf8_string.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_length_bit_string.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_length_boolean.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_length_ia5_string.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_length_integer.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_length_object_identifier.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_length_octet_string.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_length_printable_string.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_length_sequence.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_length_short_integer.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_length_utctime.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_length_utf8_string.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\asn1\der_sequence_free.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\ecc\ltc_ecc_map.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\ecc\ltc_ecc_mul2add.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\ecc\ltc_ecc_mulmod.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\ecc\ltc_ecc_points.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\ecc\ltc_ecc_projective_add_point.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\ecc\ltc_ecc_projective_dbl_point.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\pkcs1\pkcs_1_mgf1.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\pkcs1\pkcs_1_oaep_decode.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\pkcs1\pkcs_1_pss_decode.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\pkcs1\pkcs_1_v1_5_decode.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\rsa\rsa_exptmod.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\rsa\rsa_free.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\rsa\rsa_import.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\rsa\rsa_make_key.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\rsa\rsa_verify_hash.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtomcrypt\src\pk\rsa\rsa_verify_simple.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_fast_mp_invmod.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_fast_mp_montgomery_reduce.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_fast_s_mp_mul_digs.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_fast_s_mp_mul_high_digs.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_fast_s_mp_sqr.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_2expt.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_abs.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_add.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_add_d.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_addmod.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_and.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_clamp.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_clear.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_clear_multi.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_cmp.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_cmp_d.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_cmp_mag.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_cnt_lsb.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_copy.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_count_bits.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_div.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_div_2.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_div_2d.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_div_3.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_div_d.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_dr_is_modulus.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_dr_reduce.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_dr_setup.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_exch.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_expt_d.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_exptmod.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_exptmod_fast.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_exteuclid.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_fread.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_fwrite.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_gcd.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_get_int.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_grow.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_init.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_init_copy.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_init_multi.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_init_set.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_init_set_int.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_init_size.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_invmod.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_invmod_slow.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_is_square.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_jacobi.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_karatsuba_mul.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_karatsuba_sqr.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_lcm.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_lshd.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_mod.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_mod_2d.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_mod_d.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_montgomery_calc_normalization.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_montgomery_reduce.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_montgomery_setup.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_mul.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_mul_2.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_mul_2d.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_mul_d.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_mulmod.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_n_root.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_neg.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_or.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_prime_fermat.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_prime_is_divisible.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_prime_is_prime.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_prime_miller_rabin.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_prime_next_prime.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_prime_rabin_miller_trials.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_prime_random_ex.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_radix_size.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_radix_smap.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_rand.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_read_radix.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_read_signed_bin.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_read_unsigned_bin.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_reduce.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_reduce_2k.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_reduce_2k_l.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_reduce_2k_setup.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_reduce_2k_setup_l.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_reduce_is_2k.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_reduce_is_2k_l.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_reduce_setup.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_rshd.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_set.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_set_int.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_shrink.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_signed_bin_size.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_sqr.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_sqrmod.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_sqrt.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_sub.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_sub_d.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_submod.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_to_signed_bin.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_to_signed_bin_n.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_to_unsigned_bin.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_to_unsigned_bin_n.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_toom_mul.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_toom_sqr.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_toradix.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_toradix_n.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_unsigned_bin_size.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_xor.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_mp_zero.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_prime_tab.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_reverse.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_s_mp_add.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_s_mp_exptmod.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_s_mp_mul_digs.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_s_mp_mul_high_digs.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_s_mp_sqr.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bn_s_mp_sub.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\libtommath\bncore.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\lzma\C\LzFind.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\lzma\C\LzFindMt.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\lzma\C\LzmaDec.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\lzma\C\LzmaEnc.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\lzma\C\Threads.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\pklib\crc32.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\pklib\explode.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\pklib\implode.c" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\sparse\sparse.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\FileStream.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SBaseCommon.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SBaseDumpData.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SBaseFileTable.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SCompression.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SFileAddFile.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SFileAttributes.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SFileCompactArchive.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SFileCreateArchive.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SFileExtractFile.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SFileFindFile.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SFileListFile.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SFileOpenArchive.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SFileOpenFileEx.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SFilePatchArchives.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SFileReadFile.cpp" />
+    <ClCompile Include="..\..\extlibs\StormLib\src\SFileVerify.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\extlibs\StormLib\src\adpcm\adpcm.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\bzip2\bzlib.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\bzip2\bzlib_private.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\huffman\huff.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\jenkins\lookup.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtomcrypt\src\headers\tomcrypt.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtomcrypt\src\headers\tomcrypt_argchk.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtomcrypt\src\headers\tomcrypt_cfg.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtomcrypt\src\headers\tomcrypt_cipher.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtomcrypt\src\headers\tomcrypt_custom.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtomcrypt\src\headers\tomcrypt_hash.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtomcrypt\src\headers\tomcrypt_mac.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtomcrypt\src\headers\tomcrypt_macros.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtomcrypt\src\headers\tomcrypt_math.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtomcrypt\src\headers\tomcrypt_misc.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtomcrypt\src\headers\tomcrypt_pk.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtomcrypt\src\headers\tomcrypt_pkcs.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtomcrypt\src\headers\tomcrypt_prng.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtommath\tommath.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtommath\tommath_class.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\libtommath\tommath_superclass.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\lzma\C\LzFind.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\lzma\C\LzFindMt.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\lzma\C\LzHash.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\lzma\C\LzmaDec.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\lzma\C\LzmaEnc.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\lzma\C\Threads.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\lzma\C\Types.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\pklib\pklib.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\sparse\sparse.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\FileStream.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\StormCommon.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\StormLib.h" />
+    <ClInclude Include="..\..\extlibs\StormLib\src\StormPort.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
