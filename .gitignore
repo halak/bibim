@@ -3,3 +3,5 @@
 build/**/obj/
 lib/**/*.pdb
 lib/**/*.lib
+tools/**/obj
+tools/**/bin
