@@ -1,6 +1,7 @@
 *.suo
 .vs/
 build/**/obj/
+build/**/*.user
 lib/**/*.pdb
 lib/**/*.lib
 tools/**/obj
