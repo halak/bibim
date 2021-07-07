@@ -66,6 +66,8 @@ class ENVIRONMENT:
     VS2008 = 1
     VS2010 = 2
     VS2013 = 3
+    VS2017 = 4
+    VS2019 = 5
 
     @staticmethod
     def to_string(code):
@@ -75,6 +77,10 @@ class ENVIRONMENT:
             return 'vs2010'
         elif code == ENVIRONMENT.VS2013:
             return 'vs2013'
+        elif code == ENVIRONMENT.VS2017:
+            return 'vs2017'
+        elif code == ENVIRONMENT.VS2019:
+            return 'vs2019'
         else:
             return None
     
@@ -110,6 +116,8 @@ def get_dependencies(environment, platform, target):
     vs2008 = environment == ENVIRONMENT.VS2008
     vs2010 = environment == ENVIRONMENT.VS2010
     vs2013 = environment == ENVIRONMENT.VS2013
+    vs2017 = environment == ENVIRONMENT.VS2017
+    vs2019 = environment == ENVIRONMENT.VS2019
 
     # BIBIM
     if win32:
@@ -306,7 +314,7 @@ def publish_library(environment, platform, target):
                                                          dependency_filenames,
                                                          target)
         save_xml('{0}.vsprops'.format(os.path.join(main_library_rel_directory, name)), element)
-    elif environment == ENVIRONMENT.VS2010 or environment == ENVIRONMENT.VS2013:
+    else:
         element = make_visual_studio_2010_property_sheet(name,
                                                          include_directory,
                                                          library_directory,
@@ -359,22 +367,22 @@ def merge_headers(directory):
 if __name__ == '__main__':
     print('publish libraries...')
 
-    publish_library(ENVIRONMENT.VS2008, PLATFORM.WIN32, TARGET.DEBUG)
-    publish_library(ENVIRONMENT.VS2008, PLATFORM.WIN32, TARGET.RELEASE)
+    # publish_library(ENVIRONMENT.VS2008, PLATFORM.WIN32, TARGET.DEBUG)
+    # publish_library(ENVIRONMENT.VS2008, PLATFORM.WIN32, TARGET.RELEASE)
 
-    publish_library(ENVIRONMENT.VS2010, PLATFORM.WIN32,   TARGET.DEBUG)
-    publish_library(ENVIRONMENT.VS2010, PLATFORM.WIN32,   TARGET.RELEASE)
-    publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.DEBUG)
-    publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.RELEASE)
+    # publish_library(ENVIRONMENT.VS2010, PLATFORM.WIN32,   TARGET.DEBUG)
+    # publish_library(ENVIRONMENT.VS2010, PLATFORM.WIN32,   TARGET.RELEASE)
+    # publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.DEBUG)
+    # publish_library(ENVIRONMENT.VS2010, PLATFORM.ANDROID, TARGET.RELEASE)
 
-    publish_library(ENVIRONMENT.VS2013, PLATFORM.WIN32,   TARGET.DEBUG)
-    publish_library(ENVIRONMENT.VS2013, PLATFORM.WIN32,   TARGET.RELEASE)
-    publish_library(ENVIRONMENT.VS2013, PLATFORM.ANDROID, TARGET.DEBUG)
-    publish_library(ENVIRONMENT.VS2013, PLATFORM.ANDROID, TARGET.RELEASE)
+    # publish_library(ENVIRONMENT.VS2013, PLATFORM.WIN32,   TARGET.DEBUG)
+    # publish_library(ENVIRONMENT.VS2013, PLATFORM.WIN32,   TARGET.RELEASE)
+    # publish_library(ENVIRONMENT.VS2013, PLATFORM.ANDROID, TARGET.DEBUG)
+    # publish_library(ENVIRONMENT.VS2013, PLATFORM.ANDROID, TARGET.RELEASE)
 
-    # publish_library(ENVIRONMENT.VS2010, PLATFORM.EMSCRIPTEN, TARGET.DEBUG)
-    # publish_library(ENVIRONMENT.VS2010, PLATFORM.EMSCRIPTEN, TARGET.RELEASE)
+    publish_library(ENVIRONMENT.VS2019, PLATFORM.WIN32, TARGET.DEBUG)
+    publish_library(ENVIRONMENT.VS2019, PLATFORM.WIN32, TARGET.RELEASE)
 
     merge_sources('src')
     
-    merge_headers('include/Bibim');
+    merge_headers('include/Bibim')
